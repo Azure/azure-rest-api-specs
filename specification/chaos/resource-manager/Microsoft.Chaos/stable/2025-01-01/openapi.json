@@ -328,7 +328,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosTargetType"
+              "$ref": "#/definitions/TargetType"
             }
           },
           "default": {
@@ -440,7 +440,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosCapabilityType"
+              "$ref": "#/definitions/CapabilityType"
             }
           },
           "default": {
@@ -544,7 +544,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosExperiment"
+              "$ref": "#/definitions/Experiment"
             }
           },
           "default": {
@@ -591,7 +591,7 @@
             "description": "Experiment resource to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChaosExperiment"
+              "$ref": "#/definitions/Experiment"
             }
           }
         ],
@@ -599,13 +599,13 @@
           "200": {
             "description": "Resource 'Experiment' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosExperiment"
+              "$ref": "#/definitions/Experiment"
             }
           },
           "201": {
             "description": "Resource 'Experiment' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosExperiment"
+              "$ref": "#/definitions/Experiment"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -675,7 +675,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosExperiment"
+              "$ref": "#/definitions/Experiment"
             }
           },
           "202": {
@@ -861,7 +861,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosExperimentExecution"
+              "$ref": "#/definitions/ExperimentExecution"
             }
           },
           "default": {
@@ -1013,7 +1013,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosTarget"
+              "$ref": "#/definitions/Target"
             }
           },
           "default": {
@@ -1059,7 +1059,7 @@
             "description": "Target resource to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChaosTarget"
+              "$ref": "#/definitions/Target"
             }
           }
         ],
@@ -1067,13 +1067,13 @@
           "200": {
             "description": "Resource 'Target' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosTarget"
+              "$ref": "#/definitions/Target"
             }
           },
           "201": {
             "description": "Resource 'Target' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosTarget"
+              "$ref": "#/definitions/Target"
             }
           },
           "default": {
@@ -1230,7 +1230,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosCapability"
+              "$ref": "#/definitions/Capability"
             }
           },
           "default": {
@@ -1284,7 +1284,7 @@
             "description": "Capability resource to be created or updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChaosCapability"
+              "$ref": "#/definitions/Capability"
             }
           }
         ],
@@ -1292,13 +1292,13 @@
           "200": {
             "description": "Resource 'Capability' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosCapability"
+              "$ref": "#/definitions/Capability"
             }
           },
           "201": {
             "description": "Resource 'Capability' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosCapability"
+              "$ref": "#/definitions/Capability"
             }
           },
           "default": {
@@ -1444,6 +1444,21 @@
         }
       }
     },
+    "Capability": {
+      "type": "object",
+      "description": "Model that represents a Capability resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityProperties",
+          "description": "The properties of a capability resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "CapabilityListResult": {
       "type": "object",
       "description": "Model that represents a list of Capability resources and a link for pagination.",
@@ -1452,7 +1467,7 @@
           "type": "array",
           "description": "The Capability items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosCapability"
+            "$ref": "#/definitions/Capability"
           }
         },
         "nextLink": {
@@ -1503,6 +1518,21 @@
         }
       }
     },
+    "CapabilityType": {
+      "type": "object",
+      "description": "Model that represents a Capability Type resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityTypeProperties",
+          "description": "The properties of the capability type resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "CapabilityTypeListResult": {
       "type": "object",
       "description": "Model that represents a list of Capability Type resources and a link for pagination.",
@@ -1511,7 +1541,7 @@
           "type": "array",
           "description": "The CapabilityType items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosCapabilityType"
+            "$ref": "#/definitions/CapabilityType"
           }
         },
         "nextLink": {
@@ -1604,58 +1634,6 @@
         }
       }
     },
-    "ChaosCapability": {
-      "type": "object",
-      "description": "Model that represents a Capability resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CapabilityProperties",
-          "description": "The properties of a capability resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ChaosCapabilityType": {
-      "type": "object",
-      "description": "Model that represents a Capability Type resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CapabilityTypeProperties",
-          "description": "The properties of the capability type resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ChaosExperiment": {
-      "type": "object",
-      "description": "Model that represents a Experiment resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExperimentProperties",
-          "description": "The properties of the experiment resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "ChaosExperimentAction": {
       "type": "object",
       "description": "Model that represents the base action model. 9 total per experiment.",
@@ -1701,21 +1679,6 @@
         "actions"
       ]
     },
-    "ChaosExperimentExecution": {
-      "type": "object",
-      "description": "Model that represents the execution of an Experiment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExperimentExecutionProperties",
-          "description": "The properties of experiment execution status."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ChaosExperimentStep": {
       "type": "object",
       "description": "Model that represents a step in the Experiment resource.",
@@ -1739,22 +1702,6 @@
       "required": [
         "name",
         "branches"
-      ]
-    },
-    "ChaosTarget": {
-      "type": "object",
-      "description": "Model that represents a Target resource.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The properties of the target resource.",
-          "additionalProperties": {}
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "ChaosTargetFilter": {
@@ -1874,24 +1821,6 @@
         }
       }
     },
-    "ChaosTargetType": {
-      "type": "object",
-      "description": "Model that represents a Target Type resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TargetTypeProperties",
-          "description": "The properties of the target type resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ContinuousAction": {
       "type": "object",
       "description": "Model that represents a continuous action.",
@@ -1980,6 +1909,28 @@
       ],
       "x-ms-discriminator-value": "discrete"
     },
+    "Experiment": {
+      "type": "object",
+      "description": "Model that represents a Experiment resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentProperties",
+          "description": "The properties of the experiment resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "ExperimentActionType": {
       "type": "string",
       "description": "Enum union of Chaos experiment action types.",
@@ -2006,6 +1957,21 @@
           }
         ]
       }
+    },
+    "ExperimentExecution": {
+      "type": "object",
+      "description": "Model that represents the execution of an Experiment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentExecutionProperties",
+          "description": "The properties of experiment execution status."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ExperimentExecutionActionTargetDetailsError": {
       "type": "object",
@@ -2134,7 +2100,7 @@
           "type": "array",
           "description": "The ExperimentExecution items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosExperimentExecution"
+            "$ref": "#/definitions/ExperimentExecution"
           }
         },
         "nextLink": {
@@ -2183,7 +2149,7 @@
           "type": "array",
           "description": "The Experiment items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosExperiment"
+            "$ref": "#/definitions/Experiment"
           }
         },
         "nextLink": {
@@ -2424,6 +2390,22 @@
         }
       }
     },
+    "Target": {
+      "type": "object",
+      "description": "Model that represents a Target resource.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of the target resource.",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "TargetListResult": {
       "type": "object",
       "description": "Model that represents a list of Target resources and a link for pagination.",
@@ -2432,7 +2414,7 @@
           "type": "array",
           "description": "The Target items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosTarget"
+            "$ref": "#/definitions/Target"
           }
         },
         "nextLink": {
@@ -2482,6 +2464,24 @@
         ]
       }
     },
+    "TargetType": {
+      "type": "object",
+      "description": "Model that represents a Target Type resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TargetTypeProperties",
+          "description": "The properties of the target type resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "TargetTypeListResult": {
       "type": "object",
       "description": "Model that represents a list of Target Type resources and a link for pagination.",
@@ -2490,7 +2490,7 @@
           "type": "array",
           "description": "The TargetType items on this page",
           "items": {
-            "$ref": "#/definitions/ChaosTargetType"
+            "$ref": "#/definitions/TargetType"
           }
         },
         "nextLink": {
