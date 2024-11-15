@@ -885,7 +885,16 @@
           "format": "date-time",
           "description": "The timestamp of the error occurence"
         },
-        "azureOperationName": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the error occurence"
+        },
+        "azureOperationId": {
+          "type": "string",
+          "description": "The compute operationid of the Start/Deallocate/Hibernate request"
+        },
+        "crpOperationId": {
           "type": "string",
           "description": "The compute operationid of the Start/Deallocate/Hibernate request"
         }
@@ -1216,6 +1225,10 @@
           "type": "string",
           "description": "Timezone for the operation"
         },
+        "timeZone": {
+          "type": "string",
+          "description": "Timezone for the operation"
+        },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
           "description": "Operation level errors if they exist"
@@ -1331,7 +1344,16 @@
           "format": "date-time",
           "description": "The deadline for the operation"
         },
+        "deadLine": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
         "timezone": {
+          "type": "string",
+          "description": "The timezone for the operation"
+        },
+        "timeZone": {
           "type": "string",
           "description": "The timezone for the operation"
         },
@@ -1368,8 +1390,6 @@
         }
       },
       "required": [
-        "deadline",
-        "timezone",
         "deadlineType"
       ]
     },
