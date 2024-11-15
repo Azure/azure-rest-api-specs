@@ -7,10 +7,26 @@
  * @returns {Promise<{owner: string, repo: string, issue_number: number, run_id: number }>}
  */
 async function extractInputs(github, context, core) {
-  core.info(`extractInputs(${context.eventName}, ${context.payload.action})`)
+  core.info(`extractInputs(${context.eventName}, ${context.payload.action})`);
 
   // Add support for more event types as needed
-  if (
+  if (context.eventName === "pull_request") {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+        context.payload
+      );
+
+    const inputs = {
+      owner: payload.repository.owner.login,
+      repo: payload.repository.name,
+      issue_number: payload.number,
+      run_id: NaN
+    };
+  
+    core.info(`inputs: ${JSON.stringify(inputs)}`);
+  
+    return inputs;
+  } else if (
     context.eventName === "workflow_run" &&
     context.payload.action === "completed"
   ) {
@@ -33,22 +49,23 @@ async function extractInputs(github, context, core) {
       // Owner and repo for the PR head (may differ from target for fork PRs)
       const head_owner = payload.workflow_run.head_repository.owner.login;
       const head_repo = payload.workflow_run.head_repository.name;
+      const head_sha = payload.workflow_run.head_sha;
 
-      let commit_sha = process.env.COMMIT_SHA || payload.workflow_run.head_sha;
-
-      core.info(`listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${commit_sha})`);
+      core.info(
+        `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
+      );
       const { data: pullRequests } =
         await github.rest.repos.listPullRequestsAssociatedWithCommit({
           owner: head_owner,
           repo: head_repo,
-          commit_sha: commit_sha,
+          commit_sha: head_sha,
         });
 
       if (pullRequests.length === 1) {
         issue_number = pullRequests[0].number;
       } else {
         throw new Error(
-          `Unexpected number of pull requests associated with commit '${commit_sha}'. Expected: '1'. Actual '${pullRequests.length}'.`,
+          `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual '${pullRequests.length}'.`,
         );
       }
     }
