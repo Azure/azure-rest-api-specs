@@ -12,6 +12,9 @@ inputs:
   run_id:
     description: The unique identifier of the workflow run.
     required: false
+  issue_number:
+    description: The number that identifies the issue.
+    required: false
 
 runs:
   using: composite
@@ -23,6 +26,7 @@ runs:
         OWNER: ${{ inputs.owner }}
         REPO: ${{ inputs.repo }}
         RUN_ID: ${{ inputs.run_id }}
+        ISSUE_NUMBER: ${{ inputs.issue_number }}
       with:
         script: |
           const action = require('./.github/actions/get-keyvalue-artifacts/action.js')
