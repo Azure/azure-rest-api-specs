@@ -356,10 +356,22 @@
       "description": "Policy run status of an account in a Blob Management cycle.",
       "properties": {
         "completionStatus": {
+          "description": "Policy status can be Completed/CompletedWithError/Incomplete.",
           "type": "string",
-          "description": "Policy status can be Completed/CompletedWithError/Incomplete."
+          "enum": [
+            "Completed",
+            "CompletedWithError",
+            "Incomplete"
+          ],
+          "x-ms-enum": {
+            "name": "StorageLifecycleCompletionStatus",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "completionStatus"
+      ]
     },
     "StorageBlobTierChangedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event.",

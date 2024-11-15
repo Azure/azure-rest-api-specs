@@ -214,7 +214,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Policy run status of an account in a Blob Management cycle. */
   model StorageLifecyclePolicyRunSummary {
     /** Policy status can be Completed/CompletedWithError/Incomplete. */
-    completionStatus?: string;
+    completionStatus: StorageLifecycleCompletionStatus;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event. */
@@ -366,6 +366,20 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The summary report blob url for a storage task */
     summaryReportBlobUrl: url;
+  }
+
+  /** The status for a LCM policy. */
+  union StorageLifecycleCompletionStatus {
+    /** Completed */
+    "Completed",
+
+    /** CompletedWithError */
+    "CompletedWithError",
+
+    /** Incomplete */
+    "Incomplete",
+
+    string,
   }
 
   /** The status for a storage task. */

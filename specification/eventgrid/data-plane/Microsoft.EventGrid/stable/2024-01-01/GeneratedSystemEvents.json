@@ -8642,6 +8642,36 @@
         "storageDiagnostics"
       ]
     },
+    "StorageLifecycleCompletionStatus": {
+      "type": "string",
+      "description": "The status for a LCM policy.",
+      "enum": [
+        "Completed",
+        "CompletedWithError",
+        "Incomplete"
+      ],
+      "x-ms-enum": {
+        "name": "StorageLifecycleCompletionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "CompletedWithError",
+            "value": "CompletedWithError",
+            "description": "CompletedWithError"
+          },
+          {
+            "name": "Incomplete",
+            "value": "Incomplete",
+            "description": "Incomplete"
+          }
+        ]
+      }
+    },
     "StorageLifecyclePolicyActionSummaryDetail": {
       "type": "object",
       "description": "Execution statistics of a specific policy action in a Blob Management cycle.",
@@ -8704,10 +8734,13 @@
       "description": "Policy run status of an account in a Blob Management cycle.",
       "properties": {
         "completionStatus": {
-          "type": "string",
+          "$ref": "#/definitions/StorageLifecycleCompletionStatus",
           "description": "Policy status can be Completed/CompletedWithError/Incomplete."
         }
-      }
+      },
+      "required": [
+        "completionStatus"
+      ]
     },
     "StorageTaskAssignmentCompletedEventData": {
       "type": "object",
