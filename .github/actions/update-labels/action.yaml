@@ -1,5 +1,5 @@
-name: Get KeyValue Artifacts
-description: Sets env vars corresponding to keys and values encoded in artifact names
+name: Update Labels
+description: Adds or removes label to set state matching value
 
 # If any inputs are not set, we will attempt to extract them from the event context
 inputs:
@@ -9,25 +9,25 @@ inputs:
   repo:
     description: The name of the repository without the .git extension. The name is not case sensitive.
     required: false
-  run_id:
-    description: The unique identifier of the workflow run.
-    required: false
   issue_number:
-    description: The number that identifies the issue.
+    description: Updates labels from all completed workflows associated with head commit of issue.
+    required: false
+  run_id:
+    description: Updates labels from a single completed workflow.
     required: false
 
 runs:
   using: composite
 
   steps:
-    - name: Get KeyValue Artifacts
+    - name: Set Label
       uses: actions/github-script@v7
       env:
         OWNER: ${{ inputs.owner }}
         REPO: ${{ inputs.repo }}
-        RUN_ID: ${{ inputs.run_id }}
         ISSUE_NUMBER: ${{ inputs.issue_number }}
+        RUN_ID: ${{ inputs.run_id }}
       with:
         script: |
-          const action = require('./.github/actions/get-keyvalue-artifacts/action.js')
+          const action = require('./.github/actions/update-labels/action.js')
           await action({ github, context, core });

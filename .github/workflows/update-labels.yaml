@@ -39,29 +39,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      # May be set by get-keyvalue-artifacts.  Setting to null here avoids warning in VS Code.
-      spec-lifecycle-resource-manager:
-
     steps:
     - uses: actions/checkout@v4
       with:
         sparse-checkout: |
           .github
 
-    - name: Get KeyValue artifacts
-      uses: ./.github/actions/get-keyvalue-artifacts
+    - name: Update Labels
+      uses: ./.github/actions/update-labels
       with:
         owner: ${{ inputs.owner }}
         repo: ${{ inputs.repo }}
         issue_number: ${{ inputs.issue_number }}
         run_id: ${{ inputs.run_id }}
-
-    - name: Set Label "brownfield"
-      uses: ./.github/actions/set-label
-      with:
-        name: brownfield
-        value: ${{ env.spec-lifecycle-resource-manager == 'brownfield' }}
-        owner: ${{ inputs.owner }}
-        repo: ${{ inputs.repo }}
-        issue_number: ${{ inputs.issue_number }}

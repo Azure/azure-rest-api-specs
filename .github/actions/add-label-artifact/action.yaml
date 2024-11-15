@@ -1,5 +1,5 @@
 name: Add Label Artifact
-description: Uploads an empty artifact named `label-${name}=${value}`
+description: Uploads an empty artifact named `label-${name}=${value}`, that's consumed by update-labels.yaml
 
 inputs:
   name:
@@ -13,8 +13,6 @@ runs:
   using: composite
 
   steps:
-    # When possible, it's best to upload an empty file with all information in the artifact name, so consumers
-    # can query the information without needing to download files to disk.
     - name: Create empty file to upload artifact
       run: "> $RUNNER_TEMP/empty.txt"
       shell: bash
