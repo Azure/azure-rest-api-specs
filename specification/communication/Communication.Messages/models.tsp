@@ -44,6 +44,14 @@ union CommunicationMessageKind {
   template: "template",
 
   @added(Versions.c2024_11_15_Preview)
+  @doc("Sticker message type.")
+  sticker: "sticker",
+
+  @added(Versions.c2024_11_15_Preview)
+  @doc("Reaction message type.")
+  reaction: "reaction",
+
+  @added(Versions.c2024_11_15_Preview)
   @doc("Interactive message type.")
   interactive: "interactive",
 }
@@ -245,6 +253,28 @@ model VideoNotificationContent extends NotificationContent {
 model AudioNotificationContent extends NotificationContent {
   @doc("Message notification type is audio.")
   kind: CommunicationMessageKind.audio;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2024_11_15_Preview)
+@doc("A request to send a Reaction notification.")
+model ReactionNotificationContent extends NotificationContent {
+  @doc("Message notification type is reaction.")
+  kind: CommunicationMessageKind.reaction;
+
+  @doc("emoji content like \\uD83D\\uDE00.")
+  emoji: string;
+
+  @doc("ID of the previous message you want to reply to.")
+  messageId: string;
+}
+
+@added(Versions.c2024_11_15_Preview)
+@doc("A request to send a Sticker notification.")
+model StickerNotificationContent extends NotificationContent {
+  @doc("Message notification type is sticker.")
+  kind: CommunicationMessageKind.sticker;
 
   ...MediaNotificationContentBase;
 }
