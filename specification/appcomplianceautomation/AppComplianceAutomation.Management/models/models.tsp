@@ -528,6 +528,7 @@ union InputType {
 /**
  * Specify the application environment of the report.
  */
+@added(Versions.v2024_12_15_preview)
 union AppEnvironment {
   @doc("The application environment of the report is Production.")
   Production: "Production",
