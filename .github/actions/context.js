@@ -1,6 +1,9 @@
 // @ts-check
 
 /**
+ * Extracts inputs from context based on event name and properties.
+ * run_id is only defined for "workflow_run:completed" events.
+ * 
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
