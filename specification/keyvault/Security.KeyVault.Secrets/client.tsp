@@ -8,6 +8,8 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
+@@usage(DeletionRecoveryLevel, Usage.output);
+
 @@clientName(SecretProperties, "SecretP", "go");
 @@clientName(DeletedSecretBundle, "DeletedSecret", "go");
 @@clientName(DeletedSecretItem, "DeletedSecretProperties", "go");

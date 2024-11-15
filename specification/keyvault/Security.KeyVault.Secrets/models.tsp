@@ -33,7 +33,7 @@ union DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  Recoverable_Purgeable: "Recoverable+Purgeable",
+  RecoverablePurgeable: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -50,7 +50,7 @@ union DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  Recoverable_ProtectedSubscription: "Recoverable+ProtectedSubscription",
+  RecoverableProtectedSubscription: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -59,7 +59,7 @@ union DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  CustomizedRecoverable_Purgeable: "CustomizedRecoverable+Purgeable",
+  CustomizedRecoverablePurgeable: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -78,7 +78,7 @@ union DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  CustomizedRecoverable_ProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
+  CustomizedRecoverableProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
