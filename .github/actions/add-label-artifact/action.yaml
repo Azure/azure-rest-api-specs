@@ -1,12 +1,12 @@
-name: Upload KeyValue Artifact
-description: Uploads an empty artifact with the specified key and value encoded in the name
+name: Add Label Artifact
+description: Uploads an empty artifact named `label-${name}=${value}`
 
 inputs:
-  key:
-    description: Key
+  name:
+    description: Name
     required: true
   value:
-    description: Value
+    description: Value ("true" or "false")
     required: true
 
 runs:
@@ -25,7 +25,7 @@ runs:
     # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
     - uses: actions/upload-artifact@v4
       with:
-        name: ${{ inputs.key }}=${{ inputs.value }}
+        name: label-${{ inputs.name }}=${{ inputs.value }}
         path: ${{ runner.temp }}/empty.txt
         if-no-files-found: error
         overwrite: true
