@@ -1275,7 +1275,7 @@
     },
     "/info": {
       "get": {
-        "operationId": "MiscellaneousOperations_GetResourceInfo",
+        "operationId": "MiscellaneousOperations_GetResourceDetails",
         "description": "Return information about the current resource.",
         "parameters": [
           {
@@ -2109,7 +2109,7 @@
           "type": "array",
           "description": "Extracted documents.",
           "items": {
-            "$ref": "#/definitions/Document"
+            "$ref": "#/definitions/AnalyzedDocument"
           },
           "x-ms-identifiers": []
         },
@@ -2117,7 +2117,7 @@
           "type": "array",
           "description": "List of warnings encountered.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/DocumentIntelligenceWarning"
           },
           "x-ms-identifiers": []
         }
@@ -2128,6 +2128,53 @@
         "stringIndexType",
         "content",
         "pages"
+      ]
+    },
+    "AnalyzedDocument": {
+      "type": "object",
+      "description": "An object describing the location and semantic content of a document.",
+      "properties": {
+        "docType": {
+          "type": "string",
+          "description": "Document type.",
+          "minLength": 2,
+          "maxLength": 64
+        },
+        "boundingRegions": {
+          "type": "array",
+          "description": "Bounding regions covering the document.",
+          "items": {
+            "$ref": "#/definitions/BoundingRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "spans": {
+          "type": "array",
+          "description": "Location of the document in the reading order concatenated content.",
+          "items": {
+            "$ref": "#/definitions/DocumentSpan"
+          },
+          "x-ms-identifiers": []
+        },
+        "fields": {
+          "type": "object",
+          "description": "Dictionary of named field values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DocumentField"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence of correctly extracting the document.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "docType",
+        "spans",
+        "confidence"
       ]
     },
     "AuthorizeClassifierCopyRequest": {
@@ -2558,53 +2605,6 @@
         "limit"
       ]
     },
-    "Document": {
-      "type": "object",
-      "description": "An object describing the location and semantic content of a document.",
-      "properties": {
-        "docType": {
-          "type": "string",
-          "description": "Document type.",
-          "minLength": 2,
-          "maxLength": 64
-        },
-        "boundingRegions": {
-          "type": "array",
-          "description": "Bounding regions covering the document.",
-          "items": {
-            "$ref": "#/definitions/BoundingRegion"
-          },
-          "x-ms-identifiers": []
-        },
-        "spans": {
-          "type": "array",
-          "description": "Location of the document in the reading order concatenated content.",
-          "items": {
-            "$ref": "#/definitions/DocumentSpan"
-          },
-          "x-ms-identifiers": []
-        },
-        "fields": {
-          "type": "object",
-          "description": "Dictionary of named field values.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DocumentField"
-          }
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence of correctly extracting the document.",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "docType",
-        "spans",
-        "confidence"
-      ]
-    },
     "DocumentAnalysisFeature": {
       "type": "string",
       "description": "Document analysis features to enable.",
@@ -2960,7 +2960,7 @@
           "type": "array",
           "description": "List of warnings encountered while building the classifier.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/DocumentIntelligenceWarning"
           },
           "x-ms-identifiers": []
         }
@@ -3297,6 +3297,54 @@
         "spans"
       ]
     },
+    "DocumentFontStyle": {
+      "type": "string",
+      "description": "Font style.",
+      "enum": [
+        "normal",
+        "italic"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentFontStyle",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "normal",
+            "value": "normal",
+            "description": "Characters are represented normally."
+          },
+          {
+            "name": "italic",
+            "value": "italic",
+            "description": "Characters are visually slanted to the right."
+          }
+        ]
+      }
+    },
+    "DocumentFontWeight": {
+      "type": "string",
+      "description": "Font weight.",
+      "enum": [
+        "normal",
+        "bold"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentFontWeight",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "normal",
+            "value": "normal",
+            "description": "Characters are represented normally."
+          },
+          {
+            "name": "bold",
+            "value": "bold",
+            "description": "Characters are represented with thicker strokes."
+          }
+        ]
+      }
+    },
     "DocumentFootnote": {
       "type": "object",
       "description": "A footnote object describing a table or figure.",
@@ -3591,6 +3639,28 @@
         "customDocumentModels"
       ]
     },
+    "DocumentIntelligenceWarning": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of warning codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the warning."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "DocumentKeyValueElement": {
       "type": "object",
       "description": "An object representing the field key or value in a key-value pair.",
@@ -3864,7 +3934,7 @@
           "type": "array",
           "description": "List of warnings encountered while building the model.",
           "items": {
-            "$ref": "#/definitions/Warning"
+            "$ref": "#/definitions/DocumentIntelligenceWarning"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -4142,11 +4212,11 @@
           "description": "Visually most similar font from among the set of supported font families, with\nfallback fonts following CSS convention (ex. 'Arial, sans-serif')."
         },
         "fontStyle": {
-          "$ref": "#/definitions/FontStyle",
+          "$ref": "#/definitions/DocumentFontStyle",
           "description": "Font style."
         },
         "fontWeight": {
-          "$ref": "#/definitions/FontWeight",
+          "$ref": "#/definitions/DocumentFontWeight",
           "description": "Font weight."
         },
         "color": {
@@ -4440,54 +4510,6 @@
         "confidence"
       ]
     },
-    "FontStyle": {
-      "type": "string",
-      "description": "Font style.",
-      "enum": [
-        "normal",
-        "italic"
-      ],
-      "x-ms-enum": {
-        "name": "FontStyle",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "normal",
-            "value": "normal",
-            "description": "Characters are represented normally."
-          },
-          {
-            "name": "italic",
-            "value": "italic",
-            "description": "Characters are visually slanted to the right."
-          }
-        ]
-      }
-    },
-    "FontWeight": {
-      "type": "string",
-      "description": "Font weight.",
-      "enum": [
-        "normal",
-        "bold"
-      ],
-      "x-ms-enum": {
-        "name": "FontWeight",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "normal",
-            "value": "normal",
-            "description": "Characters are represented normally."
-          },
-          {
-            "name": "bold",
-            "value": "bold",
-            "description": "Characters are represented with thicker strokes."
-          }
-        ]
-      }
-    },
     "LengthUnit": {
       "type": "string",
       "description": "The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
@@ -4766,28 +4788,6 @@
           }
         ]
       }
-    },
-    "Warning": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of warning codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the warning."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     }
   },
   "parameters": {

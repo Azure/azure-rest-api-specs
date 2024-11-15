@@ -445,7 +445,7 @@ interface MiscellaneousOperations {
   @doc("Return information about the current resource.")
   @route("/info")
   @get
-  getResourceInfo is DocumentIntelligenceOperation<
+  getResourceDetails is DocumentIntelligenceOperation<
     {},
     DocumentIntelligenceResourceDetails
   >;

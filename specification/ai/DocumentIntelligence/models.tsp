@@ -190,14 +190,14 @@ union DocumentTableCellKind {
 }
 
 @doc("Font style.")
-union FontStyle {
+union DocumentFontStyle {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are visually slanted to the right.") "italic",
 }
 
 @doc("Font weight.")
-union FontWeight {
+union DocumentFontWeight {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are represented with thicker strokes.") "bold",
@@ -442,7 +442,7 @@ model DocumentIntelligenceInnerError {
 }
 
 @doc("The error object.")
-model Warning {
+model DocumentIntelligenceWarning {
   @doc("One of a server-defined set of warning codes.")
   code: string;
 
@@ -575,10 +575,10 @@ model AnalyzeResult {
   languages?: DocumentLanguage[];
 
   @doc("Extracted documents.")
-  documents?: Document[];
+  documents?: AnalyzedDocument[];
 
   @doc("List of warnings encountered.")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Content and layout elements extracted from a page from the input.")
@@ -966,10 +966,10 @@ model DocumentStyle {
   similarFontFamily?: string;
 
   @doc("Font style.")
-  fontStyle?: FontStyle;
+  fontStyle?: DocumentFontStyle;
 
   @doc("Font weight.")
-  fontWeight?: FontWeight;
+  fontWeight?: DocumentFontWeight;
 
   @doc("Foreground color in #rrggbb hexadecimal format.")
   @pattern("^#[0-9a-f]{6}$")
@@ -1009,7 +1009,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-model Document {
+model AnalyzedDocument {
   @doc("Document type.")
   @minLength(2)
   @maxLength(64)
@@ -1416,7 +1416,7 @@ model DocumentModelDetails {
 
   @doc("List of warnings encountered while building the model.")
   @visibility("read")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 
   @doc("Number of V100-equivalent GPU hours consumed for model training.")
   @visibility("read")
@@ -1551,7 +1551,7 @@ model DocumentClassifierDetails {
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
   @doc("List of warnings encountered while building the classifier.")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Document classification parameters.")

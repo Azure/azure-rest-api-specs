@@ -54,7 +54,7 @@ interface DocumentIntelligenceAdministrationClient {
   deleteModel is DocumentModels.deleteModel;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getResourceInfo is MiscellaneousOperations.getResourceInfo;
+  getResourceDetails is MiscellaneousOperations.getResourceDetails;
   getOperation is MiscellaneousOperations.getOperation;
   listOperations is MiscellaneousOperations.listOperations;
 
@@ -127,8 +127,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(ContentSourceKind.azureBlobFileList, "BlobFileList", "csharp");
 @@clientName(ContentSourceKind.url, "Uri", "csharp");
 @@clientName(ModelCopyAuthorization.expirationDateTime, "ExpiresOn", "csharp");
-@@clientName(Document, "AnalyzedDocument", "csharp");
-@@clientName(Document.docType, "DocumentType", "csharp");
+@@clientName(AnalyzedDocument.docType, "DocumentType", "csharp");
 @@clientName(DocumentAnalysisFeature.styleFont, "FontStyling", "csharp");
 @@clientName(DocumentBarcodeKind.EAN13, "Ean13", "csharp");
 @@clientName(DocumentBarcodeKind.EAN8, "Ean8", "csharp");
@@ -166,9 +165,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentModelDetails.docTypes, "DocumentTypes", "csharp");
 @@clientName(DocumentModelDetails.expirationDateTime, "ExpiresOn", "csharp");
 @@clientName(DocumentModelDetails.modifiedDateTime, "ModifiedOn", "csharp");
-@@clientName(DocumentIntelligenceError, "DocumentIntelligenceError", "csharp");
-@@clientName(FontStyle, "DocumentFontStyle", "csharp");
-@@clientName(FontWeight, "DocumentFontWeight", "csharp");
 // https://github.com/Azure/typespec-azure/issues/417
 @@clientName(DocumentIntelligenceInnerError.innererror,
   "InnerErrorObject",
@@ -182,7 +178,6 @@ interface DocumentIntelligenceAdministrationClient {
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(Warning, "DocumentIntelligenceWarning", "csharp");
 
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");
 @@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");
