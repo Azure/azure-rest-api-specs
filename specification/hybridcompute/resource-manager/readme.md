@@ -82,7 +82,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-11-10'
+```yaml $(tag) == 'package-preview-2024-11'
 input-file:
   - Microsoft.HybridCompute/preview/2024-11-10-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2024-11-10-preview/privateLinkScopes.json
