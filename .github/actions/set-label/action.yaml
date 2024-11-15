@@ -18,9 +18,6 @@ inputs:
   issue_number:
     description: The number that identifies the issue.
     required: false
-  commit_sha:
-    description: The SHA of the commit associated with the pull request.
-    required: false
 
 runs:
   using: composite
@@ -34,7 +31,6 @@ runs:
         OWNER: ${{ inputs.owner }}
         REPO: ${{ inputs.repo }}
         ISSUE_NUMBER: ${{ inputs.issue_number }}
-        COMMIT_SHA: ${{ inputs.commit_sha }}
       with:
         script: |
           const action = require('./.github/actions/set-label/action.js')
