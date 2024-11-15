@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Traffic Service",
-    "version": "1.0",
+    "version": "2025-04-01",
     "description": "Azure Maps Traffic REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -57,7 +57,7 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "1.0",
+      "default": "2025-04-01",
       "x-ms-parameter-location": "client"
     },
     "TileFormat": {
@@ -118,7 +118,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -165,10 +165,10 @@
             "$ref": "#/parameters/RasterVectorZoom"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/yTileIndex"
           },
           {
             "name": "thickness",
@@ -203,7 +203,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/responses/default"
           }
         }
       }
@@ -220,13 +220,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ResponseFormat"
           },
           {
             "name": "style",
@@ -310,7 +310,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/responses/default"
           }
         }
       }
@@ -327,7 +327,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -374,10 +374,10 @@
             "$ref": "#/parameters/RasterVectorZoom"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/xTileIndex"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/xTileIndex"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/yTileIndex"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/yTileIndex"
           },
           {
             "name": "t",
@@ -410,7 +410,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/responses/default"
           }
         }
       }
@@ -427,13 +427,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ResponseFormat"
           },
           {
             "name": "style",
@@ -576,7 +576,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/responses/default"
           }
         }
       }
@@ -593,18 +593,18 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ResponseFormat"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/parameters/ResponseFormat"
           },
           {
             "name": "boundingbox",
             "in": "query",
-            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). When this endpoint is called directly, all values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 180° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 180° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
+            "description": "Bounding box of the map viewport in [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) projection. The `boundingbox` is represented by two value pairs describing it's corners (first pair for lower left corner and second for upper right). When this endpoint is called directly, all values should be separated by commas (e.g., _minY,minX,maxY,maxX_). The maximum size of the bounding box that can be passed is dependent on the requested zoom level. The width and height cannot exceed 4092 pixels when rendered on the given zoom level.<br><br>NOTE: Bounding boxes that cross the 2025-04-01° meridian require special treatment. For such boxes, the eastern _maxX_ value will be negative, and thus less than the _minX_ value west of the 2025-04-01° meridian. To address that, the value 40075016.6855874 should be added to the true _maxX_ value before it is passed in the request.",
             "required": true,
             "type": "array",
             "collectionFormat": "csv",
@@ -665,7 +665,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2025-04-01/common.json#/responses/default"
           }
         }
       }
@@ -726,7 +726,7 @@
                   "x-ms-client-name": "coordinates",
                   "readOnly": true,
                   "items": {
-                    "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair"
+                    "$ref": "../../../Common/preview/2025-04-01/common.json#/definitions/LatLongPair"
                   }
                 }
               }
@@ -1089,3 +1089,4 @@
     }
   }
 }
+
