@@ -109,20 +109,18 @@ model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The deadline for the operation")
-  deadline: offsetDateTime;
+  deadline?: offsetDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The deadline for the operation")
   deadLine?: offsetDateTime;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The timezone for the operation")
-  timezone: string;
+  timezone?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The timezone for the operation")
   timeZone?: string;
 
@@ -192,7 +190,6 @@ model ResourceOperationDetails {
   timezone?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Timezone for the operation")
   timeZone?: string;
 
@@ -236,16 +233,14 @@ model OperationErrorDetails {
   timestamp?: offsetDateTime;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The timestamp of the error occurence")
   timeStamp?: offsetDateTime;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
-  azureOperationName?: string;
+  azureOperationId?: string;
 
   @added(Microsoft.ComputeSchedule.Versions.`2024-08-15-preview`)
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("The compute operationid of the Start/Deallocate/Hibernate request")
   crpOperationId?: string;
 }
