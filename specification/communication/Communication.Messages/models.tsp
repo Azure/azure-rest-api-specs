@@ -408,7 +408,7 @@ model ListOptionRow {
   title: string;
 
   @doc("Description of the row option.")
-  rows: string;
+  description: string;
 }
 
 @added(Versions.c2024_11_15_Preview)
