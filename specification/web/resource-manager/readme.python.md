@@ -32,6 +32,7 @@ batch:
 ```yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2024-04 and python
