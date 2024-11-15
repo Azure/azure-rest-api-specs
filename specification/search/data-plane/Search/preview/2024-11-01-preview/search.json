@@ -2766,8 +2766,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/LookupDocument"
             }
           },
           "default": {
@@ -8150,6 +8149,11 @@
       "required": [
         "value"
       ]
+    },
+    "LookupDocument": {
+      "type": "object",
+      "description": "A document retrieved via a document lookup operation.",
+      "additionalProperties": {}
     },
     "LuceneStandardAnalyzer": {
       "type": "object",
