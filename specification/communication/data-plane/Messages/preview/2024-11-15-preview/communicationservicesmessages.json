@@ -681,18 +681,18 @@
           "type": "string",
           "description": "Title of the list content."
         },
-        "options": {
+        "sections": {
           "type": "array",
-          "description": "Options for list content.",
+          "description": "Sections for list content.",
           "items": {
-            "$ref": "#/definitions/ListOption"
+            "$ref": "#/definitions/ListSection"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "title",
-        "options"
+        "sections"
       ],
       "allOf": [
         {
@@ -701,48 +701,48 @@
       ],
       "x-ms-discriminator-value": "list"
     },
-    "ListOption": {
+    "ListItem": {
       "type": "object",
-      "description": "The List option content.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the sub section of list."
-        },
-        "rows": {
-          "type": "array",
-          "description": "Rows of subsection of the list content.",
-          "items": {
-            "$ref": "#/definitions/ListOptionRow"
-          }
-        }
-      },
-      "required": [
-        "title",
-        "rows"
-      ]
-    },
-    "ListOptionRow": {
-      "type": "object",
-      "description": "The List option row content.",
+      "description": "The List item content.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id of the row option."
+          "description": "Id of the List Item."
         },
         "title": {
           "type": "string",
-          "description": "Title of the row option."
+          "description": "Title of the List Item."
         },
         "description": {
           "type": "string",
-          "description": "Description of the row option."
+          "description": "Description of the List Item."
         }
       },
       "required": [
         "id",
         "title",
         "description"
+      ]
+    },
+    "ListSection": {
+      "type": "object",
+      "description": "The List section content.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the List section."
+        },
+        "values": {
+          "type": "array",
+          "description": "List of values for List section.",
+          "items": {
+            "$ref": "#/definitions/ListItem"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "values"
       ]
     },
     "MediaNotificationContent": {

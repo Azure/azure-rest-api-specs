@@ -384,30 +384,30 @@ model ListContent extends MessageContent {
   @doc("Title of the list content.")
   title: string;
 
-  @doc("Options for list content.")
-  options: ListOption[];
+  @doc("Sections for list content.")
+  sections: ListSection[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The List option content.")
-model ListOption {
-  @doc("Title of the sub section of list.")
+@doc("The List section content.")
+model ListSection {
+  @doc("Title of the List section.")
   title: string;
 
-  @doc("Rows of subsection of the list content.")
-  rows: ListOptionRow[];
+  @doc("List of values for List section.")
+  values: ListItem[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The List option row content.")
-model ListOptionRow {
-  @doc("Id of the row option.")
+@doc("The List item content.")
+model ListItem {
+  @doc("Id of the List Item.")
   id: string;
 
-  @doc("Title of the row option.")
+  @doc("Title of the List Item.")
   title: string;
 
-  @doc("Description of the row option.")
+  @doc("Description of the List Item.")
   description: string;
 }
 
