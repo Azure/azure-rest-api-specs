@@ -1,3 +1,7 @@
+output-dir: "{project-root}/"
+parameters:
+  "service-dir":
+    default: "sdk/neonpostgres"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -10,3 +14,27 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/neon.json"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    package-dir: "Azure.ResourceManager.NeonPostgres"
+    namespace: "Azure.ResourceManager.NeonPostgres"
+    model-namespace: false
+    generate-sample-project: false
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-neonpostgres"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/neonpostgres"
+    package-dir: "armneonpostgres"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
