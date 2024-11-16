@@ -16,7 +16,6 @@ namespace Microsoft.Chaos;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to add location to proxy resource."
-@extensionResource
 model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   ...ResourceNameParameter<
     Resource = Target,
@@ -32,22 +31,30 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   location?: azureLocation;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "Does not expose subscription-scoped list, linting error."
 @armResourceOperations
+@route("/")
 interface Targets {
   /**
    * Get a Target resource that extends a tracked regional resource.
    */
-  get is ArmResourceRead<Target>;
+  get is ArmResourceRead<Target, Parameters = ExtensionResourcePathParameters>;
 
   /**
    * Create or update a Target resource that extends a tracked regional resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Target,
+    Parameters = ExtensionResourcePathParameters
+  >;
 
   /**
    * Delete a Target resource that extends a tracked regional resource.
    */
-  delete is ArmResourceDeleteSync<Target>;
+  delete is ArmResourceDeleteSync<
+    Target,
+    Parameters = ExtensionResourcePathParameters
+  >;
 
   /**
    * Get a list of Target resources that extend a tracked regional resource.
@@ -60,6 +67,8 @@ interface Targets {
        */
       @query("continuationToken")
       continuationToken?: string;
+
+      ...ExtensionResourcePathParameters;
     },
     Response = TargetListResult
   >;

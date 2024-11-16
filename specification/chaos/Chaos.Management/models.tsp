@@ -87,6 +87,23 @@ model PostActionResponse {
 }
 
 /**
+ * Params model for extension resources
+ */
+model ExtensionResourcePathParameters {
+  @doc("Name of schema group.")
+  @path
+  parentProviderNamespace: string;
+
+  @doc("Name of schema group.")
+  @path
+  parentResourceType: string;
+
+  @doc("Name of schema group.")
+  @path
+  parentResourceName: string;
+}
+
+/**
  * Model that represents a list of Capability resources and a link for pagination.
  */
 model CapabilityListResult is Azure.Core.Page<Capability>;
