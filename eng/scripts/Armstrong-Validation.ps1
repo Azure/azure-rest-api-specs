@@ -2,31 +2,16 @@
 param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
+
   [Parameter(Position = 1)]
   [string] $TargetCommitish = "HEAD"
 )
 Set-StrictMode -Version 3
 
+. $PSScriptRoot/../common/scripts/Invoke-GitHubAPI.ps1
 . $PSScriptRoot/../common/scripts/logging.ps1
 . $PSScriptRoot/ChangedFiles-Functions.ps1
-
-function Get-Suppression {
-  param (
-    [string]$fileInSpecFolder
-  )
-
-  # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
-  # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = npx get-suppressions ArmstrongValidation $fileInSpecFolder | ConvertFrom-Json -NoEnumerate -AsHashtable
-
-  if ($LASTEXITCODE -ne 0) {
-      LogError "Failure running 'npm exec get-suppressions'"
-      LogJobFailure
-      exit 1
-  }
-
-  return $suppressions ? $suppressions[0] : $null
-}
+. $PSScriptRoot/Suppressions-Functions.ps1
 
 function Get-ChangedTerraformFiles($changedFiles = (Get-ChangedFiles)) {
   $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
@@ -98,23 +83,44 @@ function Validate-Terraform-Error($repoPath, $filePath) {
   return $result
 }
 
-# Check if the repository and target branch are the ones that need to do API Testing
-$repositoryName = [Environment]::GetEnvironmentVariable("BUILD_REPOSITORY_NAME", [EnvironmentVariableTarget]::Process)
-$targetBranchName = [Environment]::GetEnvironmentVariable("SYSTEM_PULLREQUEST_TARGETBRANCH", [EnvironmentVariableTarget]::Process)
-LogInfo "Repository: $repositoryName"
-LogInfo "Target branch: $targetBranchName"
-if ($repositoryName -eq "Azure/azure-rest-api-specs" -and $targetBranchName -eq "ms-zhenhua/armstrong-validation") {
-  $apiTestingError = "API Testing Warning:"
-  $apiTestingError += "`n    The Pull Request against main branch may need to provide API Testing results. Please follow https://github.com/Azure/armstrong/blob/main/docs/guidance-for-api-test.md to complete the API Testing"
-  # Though it is a warning, we still log it as error because warning log won't be shown in GitHub
-  LogError $apiTestingError
+function Get-AddedSwaggerFiles() {
+  $addedFiles = git -c core.quotepath=off diff --name-status --diff-filter=d $BaseCommitish $TargetCommitish | Where-Object { $_ -match 'A\s' } | ForEach-Object { $_.Substring(2).Trim() }
+  $addedSwaggerFiles = $addedFiles.Where({ 
+    $_.EndsWith(".json")
+  })
+    
+  return $addedSwaggerFiles
 }
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
-
-$terraformErrors = @()
-
 $filesToCheck = (Get-ChangedTerraformFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+
+# Check whether new swagger files have Armstrong Configurations
+$addedFiles = Get-AddedSwaggerFiles
+foreach ($file in $addedFiles) {
+  $directory = Split-Path -Path $file -Parent
+  $filePath = Join-Path $repoPath $file
+  LogInfo $filePath
+  $suppression = Get-Suppression ArmstrongValidation $filePath
+  if ($suppression) {
+    $reason = $suppression["reason"] ?? "<no reason specified>"
+    LogInfo "$file suppressed Armstrong Test: $reason"
+    continue
+  }
+
+  $terraformFiles = $filesToCheck.Where({ 
+    # since `git diff` returns paths with `/`, use the following code to match the `main.tf`
+    $_.StartsWith($directory)
+  })
+
+  if ($terraformFiles.Count -eq 0) {
+    LogError "The new swagger file $file does not have Armstrong Configurations"
+    exit 1
+  }
+}
+
+# Check Armstrong Configurations
+$terraformErrors = @()
 
 if (!$filesToCheck) {
   LogInfo "No Terraform files found to check"
@@ -123,24 +129,23 @@ else {
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $fullPath = (Join-Path $repoPath $file)
+    $filePath = (Join-Path $repoPath $file)
 
-    $suppression = Get-Suppression $fullPath
+    $suppression = Get-Suppression ArmstrongValidation $filePath
     if ($suppression) {
       $reason = $suppression["reason"] ?? "<no reason specified>"
 
-      LogInfo "  Suppressed: $reason"
-      # Skip further checks, to avoid potential errors on files already suppressed
+      LogInfo "$file suppressed Armstrong configuration validation: $reason"
       continue
     }
 
     try {
       Ensure-Armstrong-Installed
-      LogInfo "  Validating errors from Terraform file: $fullPath"
-      $terraformErrors += (Validate-Terraform-Error $repoPath $fullPath)
+      LogInfo "  Validating errors from Terraform file: $filePath"
+      $terraformErrors += (Validate-Terraform-Error $repoPath $filePath)
     }
     catch {
-      $terraformErrors += "  failed to validate errors from Terraform file: $file`n    $_"
+      $terraformErrors += "failed to validate errors from Terraform file $file : $_"
     }
   }
 }
@@ -148,9 +153,60 @@ else {
 if ($terraformErrors.Count -gt 0) {
   $errorString = "Armstrong Validation failed for some files. To fix, address the following errors. For false positive errors, please follow https://eng.ms/docs/products/azure-developer-experience/design/specs-pr-guides/pr-suppressions to suppress 'ArmstrongValidation'`n"
   $errorString += $terraformErrors -join "`n"
-  LogError $errorString
+  LogInfo $errorString
+  exit 1
+}
 
-  LogJobFailure
+# Check the Armstrong Test Result
+$repositoryId = [Environment]::GetEnvironmentVariable("GITHUB_REPOSITORY", [EnvironmentVariableTarget]::Process)
+LogInfo "Repository ID: $repositoryId"
+$repoOwner = $repositoryId.Split("/")[0]
+$repoName = $repositoryId.Split("/")[1]
+LogInfo "Repository Owner: $repoOwner"
+LogInfo "Repository Name: $repoName"
+$pullRequestNumber = [Environment]::GetEnvironmentVariable("GH_PR_NUMBER", [EnvironmentVariableTarget]::Process)
+$authToken = [Environment]::GetEnvironmentVariable("GH_TOKEN", [EnvironmentVariableTarget]::Process)
+LogInfo "Repository ID: $repositoryId"
+LogInfo "Pull Request Number: $pullRequestNumber"
+
+$hasArmstrongTestResult = $false
+try {
+  $response = Get-GitHubIssueComments -RepoOwner $repoOwner -RepoName $repoName -IssueNumber $pullRequestNumber -AuthToken $AuthToken
+  for ($i = $response.Length - 1; $i -ge 0; $i--) {
+    $responseObject = $response[$i]
+    if ($responseObject.body.Contains("API TEST ERROR REPORT")) {
+      LogInfo $responseObject.body
+      $hasArmstrongTestResult = $true
+
+      if ($responseObject.body.Contains("Approved-Suppression")) {
+        LogInfo "The API TEST ERROR REPORT is tagged Approved-Suppression"
+        continue
+      }
+
+      if ($responseObject.body.Contains("**message**:")) {
+        LogError "Please fix all errors in API TEST ERROR REPORT: $($responseObject.html_url)"
+      }
+
+      $coverages = [regex]::Matches($responseObject.body, '(\d+(\.\d+)?)(?=%)')
+      # Output the matches
+      foreach ($coverage in $coverages) {
+        if ($coverage.Value + "%" -ne "100.0%") {
+          LogError "Properties of some APIs are not 100% covered in API TEST ERROR REPORT: $($responseObject.html_url)"
+        }
+      }
+
+      LogInfo "Armstrong Test result is submitted in PR comments: $($responseObject.html_url)"
+      break
+    }
+  }
+}
+catch { 
+  LogError "Failed with exception: $_"
+  exit 1
+}
+
+if (!$hasArmstrongTestResult) {
+  LogError "Armstrong Test result is not submitted in PR comments."
   exit 1
 }
 

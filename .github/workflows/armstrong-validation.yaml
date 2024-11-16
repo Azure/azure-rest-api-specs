@@ -1,7 +1,16 @@
 name: Armstrong Validation
 
-on: pull_request
-
+on: 
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - ready_for_review
+      - labeled
+      - unlabeled
+      - synchronize
+  
 jobs:
   armstrong-validation:
     name: Armstrong Validation
@@ -25,7 +34,7 @@ jobs:
 
     - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
-  
+
     - name: Armstrong Validation
       run: |
         # Keep processing when errors are written. Nonzero exit will mark the 
@@ -33,3 +42,6 @@ jobs:
         
         ./eng/scripts/Armstrong-Validation.ps1 -Verbose
       shell: pwsh
+      env:
+          GH_PR_NUMBER: ${{ github.event.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
