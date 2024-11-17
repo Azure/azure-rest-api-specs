@@ -630,11 +630,11 @@ input-file:
 directive:
   - from: metricBaselines_API.json
     where: $.parameters
-    transform: delete $["MetricNamespaceParameter"]
+    transform:  if ($["MetricNamespaceParameter"]) { delete $["MetricNamespaceParameter"] }
     reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
   - from: metricBaselines_API.json
     where: $.parameters
-    transform: delete $["MetricNamesParameter"]
+    transform: if ($["MetricNamesParameter"]) { delete $["MetricNamesParameter"] }
     reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
 ```
 
