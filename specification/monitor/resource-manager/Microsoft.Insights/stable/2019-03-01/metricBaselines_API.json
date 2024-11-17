@@ -57,10 +57,7 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/MetricNamesParameter"
-          },
-          {
-            "$ref": "#/parameters/MetricNamespaceParameter"
+            "$ref": "#/parameters/MetricNameParameter"
           },
           {
             "$ref": "#/parameters/TimespanParameter"
@@ -422,20 +419,12 @@
       "description": "The interval (i.e. timegrain) of the query.",
       "x-ms-parameter-location": "method"
     },
-    "MetricNamesParameter": {
-      "name": "metricNames",
+    "MetricNameParameter": {
+      "name": "metricName",
       "in": "query",
       "required": false,
       "type": "string",
       "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
-      "x-ms-parameter-location": "method"
-    },
-    "MetricNamespaceParameter": {
-      "name": "metricNamespace",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
