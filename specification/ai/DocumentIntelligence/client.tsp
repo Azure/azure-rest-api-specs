@@ -88,6 +88,8 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentClassifierDetails.docTypes, "documentTypes", "java");
 @@clientName(DocumentClassifierDetails.expirationDateTime, "expiresOn", "java");
 @@clientName(DocumentClassifierDetails.modifiedDateTime, "modifiedOn", "java");
+@@clientName(DocumentIntelligenceOperationDetails.createdDateTime, "createdOn", "java");
+@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime, "lastUpdatedOn", "java");
 
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsContent",
