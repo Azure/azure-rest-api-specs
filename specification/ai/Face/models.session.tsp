@@ -363,7 +363,7 @@ model LivenessSessionCommonData {
 @doc("Session result of detect liveness.")
 @resource("detectLiveness-sessions")
 model LivenessSession is LivenessSessionCommonData {
-  results: LivenesSessionResults;
+  results: LivenessSessionResults;
 }
 
 @added(Versions.v1_2)
@@ -374,7 +374,7 @@ model LivenessWithVerifySession is LivenessSessionCommonData {
 }
 
 @added(Versions.v1_2)
-model LivenesSessionResults {
+model LivenessSessionResults {
   attempts: LivenessSessionAttempt[];
 }
 

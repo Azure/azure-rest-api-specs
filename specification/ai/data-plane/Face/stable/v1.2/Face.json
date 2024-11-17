@@ -6310,21 +6310,6 @@
         "persistedFaceId"
       ]
     },
-    "LivenesSessionResults": {
-      "type": "object",
-      "properties": {
-        "attempts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LivenessSessionAttempt"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "attempts"
-      ]
-    },
     "LivenessColorDecisionTarget": {
       "type": "object",
       "properties": {
@@ -6486,7 +6471,7 @@
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
         "results": {
-          "$ref": "#/definitions/LivenesSessionResults"
+          "$ref": "#/definitions/LivenessSessionResults"
         }
       },
       "required": [
@@ -6516,6 +6501,21 @@
       "required": [
         "attemptId",
         "attemptStatus"
+      ]
+    },
+    "LivenessSessionResults": {
+      "type": "object",
+      "properties": {
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivenessSessionAttempt"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "attempts"
       ]
     },
     "LivenessWithVerifyOutputs": {
