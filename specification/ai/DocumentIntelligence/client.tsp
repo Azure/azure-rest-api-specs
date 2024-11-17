@@ -82,8 +82,8 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentModelDetails.expirationDateTime, "expiresOn", "java");
 @@clientName(DocumentModelDetails.modifiedDateTime, "modifiedOn", "java");
 @@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "java");
-@@clientName(CopyAuthorization.expirationDateTime, "expiresOn", "java");
-@@clientName(Document.docType, "documentType", "java");
+@@clientName(ModelCopyAuthorization.expirationDateTime, "expiresOn", "java");
+@@clientName(AnalyzedDocument.docType, "documentType", "java");
 @@clientName(DocumentClassifierDetails.createdDateTime, "createdOn", "java");
 @@clientName(DocumentClassifierDetails.docTypes, "documentTypes", "java");
 @@clientName(DocumentClassifierDetails.expirationDateTime, "expiresOn", "java");
