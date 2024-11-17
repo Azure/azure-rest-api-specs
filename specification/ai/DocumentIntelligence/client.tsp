@@ -69,6 +69,26 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@clientName(AuthorizeClassifierCopyRequest, "AuthorizeClassifierCopyOptions", "java");
+@@clientName(BuildDocumentClassifierRequest, "BuildDocumentClassifierOptions", "java");
+@@clientName(BuildDocumentClassifierRequest.docTypes, "DocumentTypes", "java");
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
+@@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "java");
+@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "java");
+@@clientName(AnalyzeBatchDocumentsRequest, "AnalyzeBatchDocumentsOptions", "java");
+@@clientName(DocumentModelDetails.createdDateTime, "createdOn", "java");
+@@clientName(DocumentModelDetails.docTypes, "documentTypes", "java");
+@@clientName(DocumentModelDetails.expirationDateTime, "expiresOn", "java");
+@@clientName(DocumentModelDetails.modifiedDateTime, "modifiedOn", "java");
+@@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "java");
+@@clientName(CopyAuthorization.expirationDateTime, "expiresOn", "java");
+@@clientName(Document.docType, "documentType", "java");
+@@clientName(DocumentClassifierDetails.createdDateTime, "createdOn", "java");
+@@clientName(DocumentClassifierDetails.docTypes, "documentTypes", "java");
+@@clientName(DocumentClassifierDetails.expirationDateTime, "expiresOn", "java");
+@@clientName(DocumentClassifierDetails.modifiedDateTime, "modifiedOn", "java");
+
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsContent",
   "csharp"
