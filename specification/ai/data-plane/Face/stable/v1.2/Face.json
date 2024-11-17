@@ -5081,6 +5081,7 @@
     },
     "AttemptStatus": {
       "type": "string",
+      "description": "The status of the liveness classification attempt.",
       "enum": [
         "Success",
         "Failed",
@@ -6312,6 +6313,7 @@
     },
     "LivenessColorDecisionTarget": {
       "type": "object",
+      "description": "The target from color image used for liveness classification.",
       "properties": {
         "faceRectangle": {
           "$ref": "#/definitions/FaceRectangle",
@@ -6354,9 +6356,11 @@
     },
     "LivenessDecisionTargets": {
       "type": "object",
+      "description": "The targets used for liveness classification.",
       "properties": {
         "color": {
-          "$ref": "#/definitions/LivenessColorDecisionTarget"
+          "$ref": "#/definitions/LivenessColorDecisionTarget",
+          "description": "The target from color image used for liveness classification."
         }
       },
       "required": [
@@ -6365,6 +6369,7 @@
     },
     "LivenessError": {
       "type": "object",
+      "description": "The error of the liveness classification.",
       "properties": {
         "code": {
           "type": "string",
@@ -6375,7 +6380,8 @@
           "description": "The error message."
         },
         "targets": {
-          "$ref": "#/definitions/LivenessDecisionTargets"
+          "$ref": "#/definitions/LivenessDecisionTargets",
+          "description": "Targets used for liveness classification."
         }
       },
       "required": [
@@ -6427,13 +6433,15 @@
     },
     "LivenessResult": {
       "type": "object",
+      "description": "The results of the liveness classification.",
       "properties": {
         "livenessDecision": {
           "$ref": "#/definitions/LivenessDecision",
           "description": "The liveness classification for the target face."
         },
         "targets": {
-          "$ref": "#/definitions/LivenessDecisionTargets"
+          "$ref": "#/definitions/LivenessDecisionTargets",
+          "description": "Targets used for liveness classification."
         },
         "digest": {
           "type": "string",
@@ -6471,7 +6479,8 @@
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
         "results": {
-          "$ref": "#/definitions/LivenessSessionResults"
+          "$ref": "#/definitions/LivenessSessionResults",
+          "description": "The results of the liveness session."
         }
       },
       "required": [
@@ -6483,19 +6492,24 @@
     },
     "LivenessSessionAttempt": {
       "type": "object",
+      "description": "The liveness session attempt.",
       "properties": {
         "attemptId": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The attempt ID, start from 1."
         },
         "attemptStatus": {
-          "$ref": "#/definitions/AttemptStatus"
+          "$ref": "#/definitions/AttemptStatus",
+          "description": "The status of the attempt."
         },
         "result": {
-          "$ref": "#/definitions/LivenessResult"
+          "$ref": "#/definitions/LivenessResult",
+          "description": "The result of the liveness call, will be null if there is error."
         },
         "error": {
-          "$ref": "#/definitions/LivenessError"
+          "$ref": "#/definitions/LivenessError",
+          "description": "The error of the liveness call, will be null if there is result."
         }
       },
       "required": [
@@ -6505,9 +6519,11 @@
     },
     "LivenessSessionResults": {
       "type": "object",
+      "description": "The results of the liveness session.",
       "properties": {
         "attempts": {
           "type": "array",
+          "description": "The attempts data of underlying liveness call with the session.",
           "items": {
             "$ref": "#/definitions/LivenessSessionAttempt"
           },
@@ -6541,6 +6557,7 @@
     },
     "LivenessWithVerifyReference": {
       "type": "object",
+      "description": "The detail of face for verification.",
       "properties": {
         "referenceType": {
           "$ref": "#/definitions/ImageType",
@@ -6563,13 +6580,15 @@
     },
     "LivenessWithVerifyResult": {
       "type": "object",
+      "description": "The results of the liveness with verify call.",
       "properties": {
         "livenessDecision": {
           "$ref": "#/definitions/LivenessDecision",
           "description": "The liveness classification for the target face."
         },
         "targets": {
-          "$ref": "#/definitions/LivenessDecisionTargets"
+          "$ref": "#/definitions/LivenessDecisionTargets",
+          "description": "Targets used for liveness classification."
         },
         "digest": {
           "type": "string",
@@ -6615,7 +6634,8 @@
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
         "results": {
-          "$ref": "#/definitions/LivenessWithVerifySessionResults"
+          "$ref": "#/definitions/LivenessWithVerifySessionResults",
+          "description": "The results of the liveness with verify session."
         }
       },
       "required": [
@@ -6627,19 +6647,24 @@
     },
     "LivenessWithVerifySessionAttempt": {
       "type": "object",
+      "description": "The liveness with verify session attempt.",
       "properties": {
         "attemptId": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The attempt ID, start from 1."
         },
         "attemptStatus": {
-          "$ref": "#/definitions/AttemptStatus"
+          "$ref": "#/definitions/AttemptStatus",
+          "description": "The status of the attempt."
         },
         "result": {
-          "$ref": "#/definitions/LivenessWithVerifyResult"
+          "$ref": "#/definitions/LivenessWithVerifyResult",
+          "description": "The result of the liveness with verify call, will be null if there is error."
         },
         "error": {
-          "$ref": "#/definitions/LivenessError"
+          "$ref": "#/definitions/LivenessError",
+          "description": "The error of the liveness with verify call, will be null if there is result."
         }
       },
       "required": [
@@ -6649,9 +6674,11 @@
     },
     "LivenessWithVerifySessionResults": {
       "type": "object",
+      "description": "The results of the liveness with verify session.",
       "properties": {
         "verifyReferences": {
           "type": "array",
+          "description": "The references used for face verification.",
           "items": {
             "$ref": "#/definitions/LivenessWithVerifyReference"
           },
@@ -6659,6 +6686,7 @@
         },
         "attempts": {
           "type": "array",
+          "description": "The attempts data of underlying liveness with verify call with the session.",
           "items": {
             "$ref": "#/definitions/LivenessWithVerifySessionAttempt"
           },

@@ -363,6 +363,7 @@ model LivenessSessionCommonData {
 @doc("Session result of detect liveness.")
 @resource("detectLiveness-sessions")
 model LivenessSession is LivenessSessionCommonData {
+  @doc("The results of the liveness session.")
   results: LivenessSessionResults;
 }
 
@@ -370,30 +371,61 @@ model LivenessSession is LivenessSessionCommonData {
 @doc("Session result of detect liveness with verify.")
 @resource("detectLivenessWithVerify-sessions")
 model LivenessWithVerifySession is LivenessSessionCommonData {
+  @doc("The results of the liveness with verify session.")
   results: LivenessWithVerifySessionResults;
 }
 
 @added(Versions.v1_2)
+@doc("The results of the liveness session.")
 model LivenessSessionResults {
+  @doc("The attempts data of underlying liveness call with the session.")
   attempts: LivenessSessionAttempt[];
 }
 
 @added(Versions.v1_2)
+@doc("The results of the liveness with verify session.")
 model LivenessWithVerifySessionResults {
+  @doc("The references used for face verification.")
   verifyReferences: LivenessWithVerifyReference[];
 
+  @doc("The attempts data of underlying liveness with verify call with the session.")
   attempts: LivenessWithVerifySessionAttempt[];
 }
 
 @added(Versions.v1_2)
+@doc("The liveness session attempt.")
 model LivenessSessionAttempt {
+  @doc("The attempt ID, start from 1.")
   attemptId: int32;
+
+  @doc("The status of the attempt.")
   attemptStatus: AttemptStatus;
+
+  @doc("The result of the liveness call, will be null if there is error.")
   result?: LivenessResult;
+
+  @doc("The error of the liveness call, will be null if there is result.")
   error?: LivenessError;
 }
 
 @added(Versions.v1_2)
+@doc("The liveness with verify session attempt.")
+model LivenessWithVerifySessionAttempt {
+  @doc("The attempt ID, start from 1.")
+  attemptId: int32;
+
+  @doc("The status of the attempt.")
+  attemptStatus: AttemptStatus;
+
+  @doc("The result of the liveness with verify call, will be null if there is error.")
+  result?: LivenessWithVerifyResult;
+
+  @doc("The error of the liveness with verify call, will be null if there is result.")
+  error?: LivenessError;
+}
+
+@added(Versions.v1_2)
+@doc("The detail of face for verification.")
 model LivenessWithVerifyReference {
   @doc("The image type which contains the face rectangle where the liveness classification was made on.")
   referenceType: ImageType;
@@ -406,14 +438,7 @@ model LivenessWithVerifyReference {
 }
 
 @added(Versions.v1_2)
-model LivenessWithVerifySessionAttempt {
-  attemptId: int32;
-  attemptStatus: AttemptStatus;
-  result?: LivenessWithVerifyResult;
-  error?: LivenessError;
-}
-
-@added(Versions.v1_2)
+@doc("The status of the liveness classification attempt.")
 union AttemptStatus {
   string,
 
@@ -428,10 +453,12 @@ union AttemptStatus {
 }
 
 @added(Versions.v1_2)
+@doc("The results of the liveness classification.")
 model LivenessResult {
   @doc("The liveness classification for the target face.")
   livenessDecision?: LivenessDecision;
 
+  @doc("Targets used for liveness classification.")
   targets: LivenessDecisionTargets;
 
   @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
@@ -442,6 +469,7 @@ model LivenessResult {
 }
 
 @added(Versions.v1_2)
+@doc("The results of the liveness with verify call.")
 model LivenessWithVerifyResult {
   ...LivenessResult;
 
@@ -453,6 +481,7 @@ model LivenessWithVerifyResult {
 }
 
 @added(Versions.v1_2)
+@doc("The error of the liveness classification.")
 model LivenessError {
   @doc("The error code.")
   code: string;
@@ -460,15 +489,19 @@ model LivenessError {
   @doc("The error message.")
   message: string;
 
+  @doc("Targets used for liveness classification.")
   targets: LivenessDecisionTargets;
 }
 
 @added(Versions.v1_2)
+@doc("The targets used for liveness classification.")
 model LivenessDecisionTargets {
+  @doc("The target from color image used for liveness classification.")
   color: LivenessColorDecisionTarget;
 }
 
 @added(Versions.v1_2)
+@doc("The target from color image used for liveness classification.")
 model LivenessColorDecisionTarget {
   @doc("The face region where the liveness classification was made on.")
   faceRectangle: FaceRectangle;
