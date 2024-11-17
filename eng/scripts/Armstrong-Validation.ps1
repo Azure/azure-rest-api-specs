@@ -96,8 +96,9 @@ $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $filesToCheck = (Get-ChangedTerraformFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
 
 # Check whether new swagger files have Armstrong Configurations
-$addedFiles = Get-AddedSwaggerFiles
-foreach ($file in $addedFiles) {
+$addedSwaggerFiles = Get-AddedSwaggerFiles
+$swaggerFilesToBeTest = @()
+foreach ($file in $addedSwaggerFiles) {
   $directory = Split-Path -Path $file -Parent
   $filePath = Join-Path $repoPath $file
   LogInfo $filePath
@@ -107,6 +108,8 @@ foreach ($file in $addedFiles) {
     LogInfo "$file suppressed Armstrong Test: $reason"
     continue
   }
+
+  $swaggerFilesToBeTest += $file
 
   $terraformFiles = $filesToCheck.Where({ 
     # since `git diff` returns paths with `/`, use the following code to match the `main.tf`
@@ -158,56 +161,60 @@ if ($terraformErrors.Count -gt 0) {
 }
 
 # Check the Armstrong Test Result
-$repositoryId = [Environment]::GetEnvironmentVariable("GITHUB_REPOSITORY", [EnvironmentVariableTarget]::Process)
-LogInfo "Repository ID: $repositoryId"
-$repoOwner = $repositoryId.Split("/")[0]
-$repoName = $repositoryId.Split("/")[1]
-LogInfo "Repository Owner: $repoOwner"
-LogInfo "Repository Name: $repoName"
-$pullRequestNumber = [Environment]::GetEnvironmentVariable("GH_PR_NUMBER", [EnvironmentVariableTarget]::Process)
-$authToken = [Environment]::GetEnvironmentVariable("GH_TOKEN", [EnvironmentVariableTarget]::Process)
-LogInfo "Repository ID: $repositoryId"
-LogInfo "Pull Request Number: $pullRequestNumber"
+if ($swaggerFilesToBeTest.Count -ne 0) {
+  $repositoryId = [Environment]::GetEnvironmentVariable("GITHUB_REPOSITORY", [EnvironmentVariableTarget]::Process)
+  LogInfo "Repository ID: $repositoryId"
+  $repoOwner = $repositoryId.Split("/")[0]
+  $repoName = $repositoryId.Split("/")[1]
+  LogInfo "Repository Owner: $repoOwner"
+  LogInfo "Repository Name: $repoName"
+  $pullRequestNumber = [Environment]::GetEnvironmentVariable("GH_PR_NUMBER", [EnvironmentVariableTarget]::Process)
+  $authToken = [Environment]::GetEnvironmentVariable("GH_TOKEN", [EnvironmentVariableTarget]::Process)
+  LogInfo "Repository ID: $repositoryId"
+  LogInfo "Pull Request Number: $pullRequestNumber"
 
-$hasArmstrongTestResult = $false
-try {
-  $response = Get-GitHubIssueComments -RepoOwner $repoOwner -RepoName $repoName -IssueNumber $pullRequestNumber -AuthToken $AuthToken
-  for ($i = $response.Length - 1; $i -ge 0; $i--) {
-    $responseObject = $response[$i]
-    if ($responseObject.body.Contains("API TEST ERROR REPORT")) {
-      LogInfo $responseObject.body
-      $hasArmstrongTestResult = $true
+  $hasArmstrongTestResult = $false
+  try {
+    $response = Get-GitHubIssueComments -RepoOwner $repoOwner -RepoName $repoName -IssueNumber $pullRequestNumber -AuthToken $AuthToken
+    for ($i = $response.Length - 1; $i -ge 0; $i--) {
+      $responseObject = $response[$i]
 
-      if ($responseObject.body.Contains("Approved-Suppression")) {
+      if ($responseObject.body.Contains("API TEST ERROR REPORT Approved-Suppression")) {
+        $hasArmstrongTestResult = $true
         LogInfo "The API TEST ERROR REPORT is tagged Approved-Suppression"
-        continue
+        break
       }
 
-      if ($responseObject.body.Contains("**message**:")) {
-        LogError "Please fix all errors in API TEST ERROR REPORT: $($responseObject.html_url)"
-      }
+      if ($responseObject.body.Contains("API TEST ERROR REPORT")) {
+        LogInfo $responseObject.body
+        $hasArmstrongTestResult = $true
 
-      $coverages = [regex]::Matches($responseObject.body, '(\d+(\.\d+)?)(?=%)')
-      # Output the matches
-      foreach ($coverage in $coverages) {
-        if ($coverage.Value + "%" -ne "100.0%") {
-          LogError "Properties of some APIs are not 100% covered in API TEST ERROR REPORT: $($responseObject.html_url)"
+        if ($responseObject.body.Contains("**message**:")) {
+          LogError "Please fix all errors in API TEST ERROR REPORT: $($responseObject.html_url)"
         }
-      }
 
-      LogInfo "Armstrong Test result is submitted in PR comments: $($responseObject.html_url)"
-      break
+        $coverages = [regex]::Matches($responseObject.body, '(\d+(\.\d+)?)(?=%)')
+        # Output the matches
+        foreach ($coverage in $coverages) {
+          if ($coverage.Value + "%" -ne "100.0%") {
+            LogError "Properties of some APIs are not 100% covered in API TEST ERROR REPORT: $($responseObject.html_url)"
+          }
+        }
+
+        LogInfo "Armstrong Test result is submitted in PR comments: $($responseObject.html_url)"
+        break
+      }
     }
   }
-}
-catch { 
-  LogError "Failed with exception: $_"
-  exit 1
-}
+  catch { 
+    LogError "Failed with exception: $_"
+    exit 1
+  }
 
-if (!$hasArmstrongTestResult) {
-  LogError "Armstrong Test result is not submitted in PR comments."
-  exit 1
+  if (!$hasArmstrongTestResult) {
+    LogError "Armstrong Test result is not submitted in PR comments."
+    exit 1
+  }
 }
 
 exit 0
