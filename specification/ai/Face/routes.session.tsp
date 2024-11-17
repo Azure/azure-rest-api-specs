@@ -87,35 +87,133 @@ op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Mod
   FaceErrorResponse
 >;
 
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, FaceErrorResponse>;
+
 interface LivenessSessionOperations {
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "createLivenessSession")
+  @doc(CreateLivenessSessionDescription)
+  @summary(CreateLivenessSessionSummary)
+  @returnsDoc(SessionCreationSuccess)
+  createLivenessSessionBeforeV1_2 is FaceResourceCreateWithServiceProvidedName<
+    LivenessSessionBeforeV1_2,
+    BodyParameter<CreateLivenessSessionContent>,
+    CreateLivenessSessionResult
+  >;
+
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "deleteLivenessSession")
+  @summary(DeleteSessionSummary)
+  @doc(DeleteSessionDescription)
+  @returnsDoc(SuccessfullyDeletedSession)
+  deleteLivenessSessionBeforeV1_2 is FaceResourceDeleteOperation<LivenessSessionBeforeV1_2>;
+
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "getLivenessSessionResult")
+  @doc(GetLivenessSessionResultDescription)
+  getLivenessSessionResultBeforeV1_2 is FaceResourceReadOperation<LivenessSessionBeforeV1_2>;
+
+  @removed(Versions.v1_2)
+  @doc(ListSessionDescription)
+  @summary(ListLivenessSessionsSummary)
+  getLivenessSessions is FaceResourceListOperation<
+  LivenessSessionBeforeV1_2,
+    LivenessSessionItem
+  >;
+
+  @removed(Versions.v1_2)
+  @doc(ListSessionAuditEntriesDescription)
+  getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSessionBeforeV1_2>;
+
+  #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "createLivenessWithVerifySessionWithVerifyImage")
+  @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
+  @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
+  @returnsDoc(SessionCreationSuccess)
+  @sharedRoute
+  createLivenessWithVerifySessionWithVerifyImageBeforeV1_2 is FaceResourceCreateWithServiceProvidedName<
+    LivenessWithVerifySessionBeforeV1_2,
+    CreateLivenessWithVerifySessionRequest,
+    CreateLivenessWithVerifySessionResult
+  >;
+
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "createLivenessWithVerifySession")
+  @doc(CreateLivenessWithVerifySessionDescription)
+  @summary(CreateLivenessWithVerifySessionSummary)
+  @returnsDoc(SessionCreationSuccess)
+  @sharedRoute
+  createLivenessWithVerifySessionBeforeV1_2 is FaceResourceCreateWithServiceProvidedName<
+    LivenessWithVerifySessionBeforeV1_2,
+    BodyParameter<CreateLivenessWithVerifySessionJsonContent>,
+    CreateLivenessWithVerifySessionResult
+  >;
+
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "deleteLivenessWithVerifySession")
+  @summary(DeleteSessionSummary)
+  @doc(DeleteSessionDescription)
+  @returnsDoc(SuccessfullyDeletedSession)
+  deleteLivenessWithVerifySessionBeforeV1_2 is FaceResourceDeleteOperation<LivenessWithVerifySessionBeforeV1_2>;
+
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "getLivenessWithVerifySessionResult")
+  @doc(GetLivenessWithVerifySessionResultDescription)
+  getLivenessWithVerifySessionResultBeforeV1_2 is FaceResourceReadOperation<LivenessWithVerifySessionBeforeV1_2>;
+
+  @removed(Versions.v1_2)
+  @summary(ListLivenessWithVerifySessionsSummary)
+  @doc(ListSessionDescription)
+  getLivenessWithVerifySessions is FaceResourceListOperation<
+    LivenessWithVerifySessionBeforeV1_2,
+    LivenessSessionItem
+  >;
+
+  @removed(Versions.v1_2)
+  @doc(ListSessionAuditEntriesDescription)
+  getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySessionBeforeV1_2>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Does not fit in resource operation pattern."
+  @added(Versions.v1_2_preview_1)
+  @removed(Versions.v1_2)
+  @renamedFrom(Versions.v1_2, "getSessionImage")
+  @doc(GetSessionImageDescription)
+  @get
+  @route("session/sessionImages/{sessionImageId}")
+  getSessionImageBeforeV1_2 is Azure.Core.RpcOperation<
+    {
+      @doc("The request ID of the image to be retrieved")
+      @path
+      sessionImageId: string;
+    },
+    SessionImageStream,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_2)
   @doc(CreateLivenessSessionDescription)
   @summary(CreateLivenessSessionSummary)
   @returnsDoc(SessionCreationSuccess)
   createLivenessSession is FaceResourceCreateWithServiceProvidedName<
     LivenessSession,
     BodyParameter<CreateLivenessSessionContent>,
-    CreateLivenessSessionResult
+    LivenessSession
   >;
 
+  @added(Versions.v1_2)
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
   @returnsDoc(SuccessfullyDeletedSession)
-  deleteLivenessSession is FaceResourceDeleteOperation<LivenessSession>;
+  deleteLivenessSession is Operations.ResourceDelete<LivenessSession>;
 
+  @added(Versions.v1_2)
   @doc(GetLivenessSessionResultDescription)
-  getLivenessSessionResult is FaceResourceReadOperation<LivenessSession>;
-
-  @doc(ListSessionDescription)
-  @summary(ListLivenessSessionsSummary)
-  getLivenessSessions is FaceResourceListOperation<
-    LivenessSession,
-    LivenessSessionItem
-  >;
-
-  @doc(ListSessionAuditEntriesDescription)
-  getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
+  getLivenessSessionResult is Operations.ResourceRead<LivenessSession>;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
+  @added(Versions.v1_2)
   @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
   @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
   @returnsDoc(SessionCreationSuccess)
@@ -123,9 +221,10 @@ interface LivenessSessionOperations {
   createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
     CreateLivenessWithVerifySessionRequest,
-    CreateLivenessWithVerifySessionResult
+    LivenessWithVerifySession
   >;
 
+  @added(Versions.v1_2)
   @doc(CreateLivenessWithVerifySessionDescription)
   @summary(CreateLivenessWithVerifySessionSummary)
   @returnsDoc(SessionCreationSuccess)
@@ -133,32 +232,24 @@ interface LivenessSessionOperations {
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
     BodyParameter<CreateLivenessWithVerifySessionJsonContent>,
-    CreateLivenessWithVerifySessionResult
+    LivenessWithVerifySession
   >;
 
+  @added(Versions.v1_2)
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
   @returnsDoc(SuccessfullyDeletedSession)
-  deleteLivenessWithVerifySession is FaceResourceDeleteOperation<LivenessWithVerifySession>;
+  deleteLivenessWithVerifySession is Operations.ResourceDelete<LivenessWithVerifySession>;
 
+  @added(Versions.v1_2)
   @doc(GetLivenessWithVerifySessionResultDescription)
-  getLivenessWithVerifySessionResult is FaceResourceReadOperation<LivenessWithVerifySession>;
-
-  @summary(ListLivenessWithVerifySessionsSummary)
-  @doc(ListSessionDescription)
-  getLivenessWithVerifySessions is FaceResourceListOperation<
-    LivenessWithVerifySession,
-    LivenessSessionItem
-  >;
-
-  @doc(ListSessionAuditEntriesDescription)
-  getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
+  getLivenessWithVerifySessionResult is Operations.ResourceRead<LivenessWithVerifySession>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Does not fit in resource operation pattern."
-  @added(Versions.v1_2_preview_1)
+  @added(Versions.v1_2)
   @doc(GetSessionImageDescription)
   @get
-  @route("session/sessionImages/{sessionImageId}")
+  @route("sessionImages/{sessionImageId}")
   getSessionImage is Azure.Core.RpcOperation<
     {
       @doc("The request ID of the image to be retrieved")

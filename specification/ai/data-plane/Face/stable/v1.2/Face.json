@@ -346,60 +346,7 @@
         }
       }
     },
-    "/detectLiveness/singleModal/sessions": {
-      "get": {
-        "operationId": "LivenessSessionOperations_GetLivenessSessions",
-        "summary": "Lists sessions for /detectLiveness/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
-        "parameters": [
-          {
-            "name": "start",
-            "in": "query",
-            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1000,
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LivenessSessionItem"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/FaceErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get LivenessSessions": {
-            "$ref": "./examples/LivenessSessionOperations_GetLivenessSessions.json"
-          }
-        }
-      },
+    "/detectLiveness-sessions": {
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessSession",
         "summary": "Create a new detect liveness session.",
@@ -419,7 +366,7 @@
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionResult"
+              "$ref": "#/definitions/LivenessSession"
             }
           },
           "default": {
@@ -442,7 +389,7 @@
         }
       }
     },
-    "/detectLiveness/singleModal/sessions/{sessionId}": {
+    "/detectLiveness-sessions/{sessionId}": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessSessionResult",
         "description": "Get session result of detectLiveness/singleModal call.",
@@ -495,8 +442,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "204": {
+            "description": "Successfully deleted session and all correlated data."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -518,121 +465,7 @@
         }
       }
     },
-    "/detectLiveness/singleModal/sessions/{sessionId}/audit": {
-      "get": {
-        "operationId": "LivenessSessionOperations_GetLivenessSessionAuditEntries",
-        "description": "Gets session requests and response body for the session.",
-        "parameters": [
-          {
-            "name": "sessionId",
-            "in": "path",
-            "description": "The unique ID to reference this session.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1000,
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LivenessSessionAuditEntry"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/FaceErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get LivenessSession Audit Entries": {
-            "$ref": "./examples/LivenessSessionOperations_GetLivenessSessionAuditEntries.json"
-          }
-        }
-      }
-    },
-    "/detectLivenessWithVerify/singleModal/sessions": {
-      "get": {
-        "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessions",
-        "summary": "Lists sessions for /detectLivenessWithVerify/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
-        "parameters": [
-          {
-            "name": "start",
-            "in": "query",
-            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1000,
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LivenessSessionItem"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/FaceErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get LivenessWithVerify Sessions": {
-            "$ref": "./examples/LivenessSessionOperations_GetLivenessWithVerifySessions.json"
-          }
-        }
-      },
+    "/detectLivenessWithVerify-sessions": {
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySessionWithVerifyImage",
         "summary": "Create a new liveness session with verify. Provide the verify image during session creation.",
@@ -660,7 +493,7 @@
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/CreateLivenessWithVerifySessionResult"
+              "$ref": "#/definitions/LivenessWithVerifySession"
             }
           },
           "default": {
@@ -683,7 +516,7 @@
         }
       }
     },
-    "/detectLivenessWithVerify/singleModal/sessions/{sessionId}": {
+    "/detectLivenessWithVerify-sessions/{sessionId}": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionResult",
         "description": "Get session result of detectLivenessWithVerify/singleModal call.",
@@ -736,8 +569,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
+          "204": {
+            "description": "Successfully deleted session and all correlated data."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -755,67 +588,6 @@
         "x-ms-examples": {
           "Delete LivenessWithVerify Session": {
             "$ref": "./examples/LivenessSessionOperations_DeleteLivenessWithVerifySession.json"
-          }
-        }
-      }
-    },
-    "/detectLivenessWithVerify/singleModal/sessions/{sessionId}/audit": {
-      "get": {
-        "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionAuditEntries",
-        "description": "Gets session requests and response body for the session.",
-        "parameters": [
-          {
-            "name": "sessionId",
-            "in": "path",
-            "description": "The unique ID to reference this session.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1000,
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LivenessSessionAuditEntry"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/FaceErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get LivenessWithVerify Session Audit Entries": {
-            "$ref": "./examples/LivenessSessionOperations_GetLivenessWithVerifySessionAuditEntries.json"
           }
         }
       }
@@ -3703,7 +3475,7 @@
         }
       }
     },
-    "/session/sessionImages/{sessionImageId}": {
+    "/sessionImages/{sessionImageId}": {
       "get": {
         "operationId": "LivenessSessionOperations_GetSessionImage",
         "description": "Get session image stored during the liveness session.",
@@ -4323,7 +4095,7 @@
         }
       }
     },
-    "/detectLivenessWithVerify/singleModal/sessions?_overload=createLivenessWithVerifySession": {
+    "/detectLivenessWithVerify-sessions?_overload=createLivenessWithVerifySession": {
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
         "summary": "Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.",
@@ -4343,7 +4115,7 @@
           "200": {
             "description": "A successful call create a session for a client device and provide an authorization token for use by the client application for a limited purpose and time.",
             "schema": {
-              "$ref": "#/definitions/CreateLivenessWithVerifySessionResult"
+              "$ref": "#/definitions/LivenessWithVerifySession"
             }
           },
           "default": {
@@ -5307,62 +5079,76 @@
         "persistedFaceId"
       ]
     },
-    "AuditLivenessResponseInfo": {
-      "type": "object",
-      "description": "Audit entry for a response in the session.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/LivenessResponseBody",
-          "description": "The response body. The schema of this field will depend on the request.url and request.method used by the client."
-        },
-        "statusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code returned to the client."
-        },
-        "latencyInMilliseconds": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The server measured latency for this request in milliseconds."
-        }
-      },
-      "required": [
-        "body",
-        "statusCode",
-        "latencyInMilliseconds"
-      ]
+    "AttemptStatus": {
+      "type": "string",
+      "enum": [
+        "Success",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AttemptStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The attempt is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The attempt is failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The attempt is canceled."
+          }
+        ]
+      }
     },
-    "AuditRequestInfo": {
-      "type": "object",
-      "description": "Audit entry for a request in the session.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "The relative URL and query of the liveness request."
-        },
-        "method": {
-          "type": "string",
-          "description": "The HTTP method of the request (i.e., GET, POST, DELETE)."
-        },
-        "contentLength": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The length of the request body in bytes."
-        },
-        "contentType": {
-          "type": "string",
-          "description": "The content type of the request."
-        },
-        "userAgent": {
-          "type": "string",
-          "description": "The user agent used to submit the request."
-        }
-      },
-      "required": [
-        "url",
-        "method",
-        "contentType"
-      ]
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
     },
     "Azure.Core.uuid": {
       "type": "string",
@@ -5485,10 +5271,6 @@
           "$ref": "#/definitions/LivenessOperationMode",
           "description": "Type of liveness mode the client should follow."
         },
-        "sendResultsToClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
-        },
         "deviceCorrelationIdSetInClient": {
           "type": "boolean",
           "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
@@ -5497,7 +5279,7 @@
           "type": "boolean",
           "description": "Whether or not store the session image."
         },
-        "livenessSingleModalModel": {
+        "livenessModelVersion": {
           "$ref": "#/definitions/LivenessModel",
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
@@ -5518,24 +5300,6 @@
         "livenessOperationMode"
       ]
     },
-    "CreateLivenessSessionResult": {
-      "type": "object",
-      "description": "Response of liveness session creation.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
-        },
-        "authToken": {
-          "type": "string",
-          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
-        }
-      },
-      "required": [
-        "sessionId",
-        "authToken"
-      ]
-    },
     "CreateLivenessWithVerifySessionJsonContent": {
       "type": "object",
       "description": "Request for creating liveness with verify session.",
@@ -5543,10 +5307,6 @@
         "livenessOperationMode": {
           "$ref": "#/definitions/LivenessOperationMode",
           "description": "Type of liveness mode the client should follow."
-        },
-        "sendResultsToClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
         },
         "deviceCorrelationIdSetInClient": {
           "type": "boolean",
@@ -5556,7 +5316,7 @@
           "type": "boolean",
           "description": "Whether or not store the session image."
         },
-        "livenessSingleModalModel": {
+        "livenessModelVersion": {
           "$ref": "#/definitions/LivenessModel",
           "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
@@ -5605,28 +5365,6 @@
       "required": [
         "Parameters",
         "VerifyImage"
-      ]
-    },
-    "CreateLivenessWithVerifySessionResult": {
-      "type": "object",
-      "description": "Response of liveness session with verify creation with verify image provided.",
-      "properties": {
-        "sessionId": {
-          "type": "string",
-          "description": "The unique session ID of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding Session DELETE operation."
-        },
-        "authToken": {
-          "type": "string",
-          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
-        },
-        "verifyImage": {
-          "$ref": "#/definitions/LivenessWithVerifyImage",
-          "description": "The detail of face for verification."
-        }
-      },
-      "required": [
-        "sessionId",
-        "authToken"
       ]
     },
     "CreatePersonResult": {
@@ -6079,36 +5817,6 @@
         "width",
         "height"
       ]
-    },
-    "FaceSessionStatus": {
-      "type": "string",
-      "description": "The current status of the session.",
-      "enum": [
-        "NotStarted",
-        "Started",
-        "ResultAvailable"
-      ],
-      "x-ms-enum": {
-        "name": "FaceSessionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Session has not started."
-          },
-          {
-            "name": "Started",
-            "value": "Started",
-            "description": "Session has started."
-          },
-          {
-            "name": "ResultAvailable",
-            "value": "ResultAvailable",
-            "description": "Session has available result."
-          }
-        ]
-      }
     },
     "FaceUserData": {
       "type": "object",
@@ -6602,6 +6310,33 @@
         "persistedFaceId"
       ]
     },
+    "LivenesSessionResults": {
+      "type": "object",
+      "properties": {
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivenessSessionAttempt"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "attempts"
+      ]
+    },
+    "LivenessColorDecisionTarget": {
+      "type": "object",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle",
+          "description": "The face region where the liveness classification was made on."
+        }
+      },
+      "required": [
+        "faceRectangle"
+      ]
+    },
     "LivenessDecision": {
       "type": "string",
       "description": "The outcome of the liveness classification.",
@@ -6632,33 +6367,36 @@
         ]
       }
     },
-    "LivenessDecisionTarget": {
+    "LivenessDecisionTargets": {
       "type": "object",
-      "description": "The liveness classification for target face.",
       "properties": {
-        "faceRectangle": {
-          "$ref": "#/definitions/FaceRectangle",
-          "description": "The face region where the liveness classification was made on."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The file name which contains the face rectangle where the liveness classification was made on."
-        },
-        "timeOffsetWithinFile": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time offset within the file of the frame which contains the face rectangle where the liveness classification was made on."
-        },
-        "imageType": {
-          "$ref": "#/definitions/ImageType",
-          "description": "The image type which contains the face rectangle where the liveness classification was made on."
+        "color": {
+          "$ref": "#/definitions/LivenessColorDecisionTarget"
         }
       },
       "required": [
-        "faceRectangle",
-        "fileName",
-        "timeOffsetWithinFile",
-        "imageType"
+        "color"
+      ]
+    },
+    "LivenessError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "targets": {
+          "$ref": "#/definitions/LivenessDecisionTargets"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "targets"
       ]
     },
     "LivenessModel": {
@@ -6702,118 +6440,15 @@
         ]
       }
     },
-    "LivenessResponseBody": {
+    "LivenessResult": {
       "type": "object",
-      "description": "The response body of detect liveness API call.",
       "properties": {
         "livenessDecision": {
           "$ref": "#/definitions/LivenessDecision",
           "description": "The liveness classification for the target face."
         },
-        "target": {
-          "$ref": "#/definitions/LivenessDecisionTarget",
-          "description": "Specific targets used for liveness classification."
-        },
-        "modelVersionUsed": {
-          "$ref": "#/definitions/LivenessModel",
-          "description": "The model version used for liveness classification."
-        },
-        "verifyResult": {
-          "$ref": "#/definitions/LivenessWithVerifyOutputs",
-          "description": "The face verification output. Only available when the request is liveness with verify."
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
-    },
-    "LivenessSession": {
-      "type": "object",
-      "description": "Session result of detect liveness.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID to reference this session.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was created."
-        },
-        "sessionStartDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was started by the client."
-        },
-        "sessionExpired": {
-          "type": "boolean",
-          "description": "Whether or not the session is expired."
-        },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
-        },
-        "status": {
-          "$ref": "#/definitions/FaceSessionStatus",
-          "description": "The current status of the session."
-        },
-        "result": {
-          "$ref": "#/definitions/LivenessSessionAuditEntry",
-          "description": "The latest session audit result only populated if status == 'ResultAvailable'."
-        }
-      },
-      "required": [
-        "id",
-        "createdDateTime",
-        "sessionExpired",
-        "status"
-      ]
-    },
-    "LivenessSessionAuditEntry": {
-      "type": "object",
-      "description": "Audit entry for a request in session.",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The unique id to refer to this audit request. Use this id with the 'start' query parameter to continue on to the next page of audit results."
-        },
-        "sessionId": {
-          "type": "string",
-          "description": "The unique sessionId of the created session. It will expire 48 hours after it was created or may be deleted sooner using the corresponding session DELETE operation."
-        },
-        "requestId": {
-          "type": "string",
-          "description": "The unique requestId that is returned by the service to the client in the 'apim-request-id' header."
-        },
-        "clientRequestId": {
-          "type": "string",
-          "description": "The unique clientRequestId that is sent by the client in the 'client-request-id' header."
-        },
-        "receivedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The UTC DateTime that the request was received."
-        },
-        "request": {
-          "$ref": "#/definitions/AuditRequestInfo",
-          "description": "The request of this entry."
-        },
-        "response": {
-          "$ref": "#/definitions/AuditLivenessResponseInfo",
-          "description": "The response of this entry."
+        "targets": {
+          "$ref": "#/definitions/LivenessDecisionTargets"
         },
         "digest": {
           "type": "string",
@@ -6822,91 +6457,71 @@
         "sessionImageId": {
           "type": "string",
           "description": "The image ID of the session request."
-        },
-        "verifyImageHash": {
-          "type": "string",
-          "description": "The sha256 hash of the verify-image in the request."
         }
       },
       "required": [
-        "id",
-        "sessionId",
-        "requestId",
-        "clientRequestId",
-        "receivedDateTime",
-        "request",
-        "response",
+        "targets",
         "digest"
       ]
     },
-    "LivenessSessionItem": {
+    "LivenessSession": {
       "type": "object",
-      "description": "Session data returned for enumeration.",
+      "description": "Session result of detect liveness.",
       "properties": {
-        "id": {
+        "sessionId": {
           "type": "string",
           "description": "The unique ID to reference this session.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "authToken": {
           "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was created."
+          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
         },
-        "sessionStartDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was started by the client."
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the session."
         },
-        "sessionExpired": {
-          "type": "boolean",
-          "description": "Whether or not the session is expired."
+        "modelVersion": {
+          "$ref": "#/definitions/LivenessModel",
+          "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
+        "results": {
+          "$ref": "#/definitions/LivenesSessionResults"
         }
       },
       "required": [
-        "id",
-        "createdDateTime",
-        "sessionExpired"
+        "sessionId",
+        "authToken",
+        "status",
+        "results"
       ]
     },
-    "LivenessWithVerifyImage": {
+    "LivenessSessionAttempt": {
       "type": "object",
-      "description": "The detail of face for verification.",
       "properties": {
-        "faceRectangle": {
-          "$ref": "#/definitions/FaceRectangle",
-          "description": "The face region where the comparison image's classification was made."
+        "attemptId": {
+          "type": "integer",
+          "format": "int32"
         },
-        "qualityForRecognition": {
-          "$ref": "#/definitions/QualityForRecognition",
-          "description": "Quality of face image for recognition."
+        "attemptStatus": {
+          "$ref": "#/definitions/AttemptStatus"
+        },
+        "result": {
+          "$ref": "#/definitions/LivenessResult"
+        },
+        "error": {
+          "$ref": "#/definitions/LivenessError"
         }
       },
       "required": [
-        "faceRectangle",
-        "qualityForRecognition"
+        "attemptId",
+        "attemptStatus"
       ]
     },
     "LivenessWithVerifyOutputs": {
       "type": "object",
       "description": "The face verification output.",
       "properties": {
-        "verifyImage": {
-          "$ref": "#/definitions/LivenessWithVerifyImage",
-          "description": "The detail of face for verification."
-        },
         "matchConfidence": {
           "type": "number",
           "format": "float",
@@ -6920,60 +6535,139 @@
         }
       },
       "required": [
-        "verifyImage",
         "matchConfidence",
         "isIdentical"
+      ]
+    },
+    "LivenessWithVerifyReference": {
+      "type": "object",
+      "properties": {
+        "referenceType": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The image type which contains the face rectangle where the liveness classification was made on."
+        },
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle",
+          "description": "The face region where the comparison image's classification was made."
+        },
+        "qualityForRecognition": {
+          "$ref": "#/definitions/QualityForRecognition",
+          "description": "Quality of face image for recognition."
+        }
+      },
+      "required": [
+        "referenceType",
+        "faceRectangle",
+        "qualityForRecognition"
+      ]
+    },
+    "LivenessWithVerifyResult": {
+      "type": "object",
+      "properties": {
+        "livenessDecision": {
+          "$ref": "#/definitions/LivenessDecision",
+          "description": "The liveness classification for the target face."
+        },
+        "targets": {
+          "$ref": "#/definitions/LivenessDecisionTargets"
+        },
+        "digest": {
+          "type": "string",
+          "description": "The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution."
+        },
+        "sessionImageId": {
+          "type": "string",
+          "description": "The image ID of the session request."
+        },
+        "verifyResult": {
+          "$ref": "#/definitions/LivenessWithVerifyOutputs",
+          "description": "The face verification output. Only available when the request is liveness with verify."
+        },
+        "verifyImageHash": {
+          "type": "string",
+          "description": "The sha256 hash of the verify-image in the request."
+        }
+      },
+      "required": [
+        "targets",
+        "digest"
       ]
     },
     "LivenessWithVerifySession": {
       "type": "object",
       "description": "Session result of detect liveness with verify.",
       "properties": {
-        "id": {
+        "sessionId": {
           "type": "string",
           "description": "The unique ID to reference this session.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "authToken": {
           "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was created."
-        },
-        "sessionStartDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DateTime when this session was started by the client."
-        },
-        "sessionExpired": {
-          "type": "boolean",
-          "description": "Whether or not the session is expired."
-        },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
+          "description": "Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable."
         },
         "status": {
-          "$ref": "#/definitions/FaceSessionStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The current status of the session."
         },
-        "result": {
-          "$ref": "#/definitions/LivenessSessionAuditEntry",
-          "description": "The latest session audit result only populated if status == 'ResultAvailable'."
+        "modelVersion": {
+          "$ref": "#/definitions/LivenessModel",
+          "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
+        },
+        "results": {
+          "$ref": "#/definitions/LivenessWithVerifySessionResults"
         }
       },
       "required": [
-        "id",
-        "createdDateTime",
-        "sessionExpired",
-        "status"
+        "sessionId",
+        "authToken",
+        "status",
+        "results"
+      ]
+    },
+    "LivenessWithVerifySessionAttempt": {
+      "type": "object",
+      "properties": {
+        "attemptId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attemptStatus": {
+          "$ref": "#/definitions/AttemptStatus"
+        },
+        "result": {
+          "$ref": "#/definitions/LivenessWithVerifyResult"
+        },
+        "error": {
+          "$ref": "#/definitions/LivenessError"
+        }
+      },
+      "required": [
+        "attemptId",
+        "attemptStatus"
+      ]
+    },
+    "LivenessWithVerifySessionResults": {
+      "type": "object",
+      "properties": {
+        "verifyReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivenessWithVerifyReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivenessWithVerifySessionAttempt"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "verifyReferences",
+        "attempts"
       ]
     },
     "MaskProperties": {

@@ -25,6 +25,7 @@ model CreateLivenessSessionContent {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
+  @removed(Versions.v1_2)
   @doc("Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented.")
   sendResultsToClient?: boolean;
 
@@ -36,8 +37,9 @@ model CreateLivenessSessionContent {
   enableSessionImage?: boolean;
 
   @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  @renamedFrom(Versions.v1_2, "livenessSingleModalModel")
   @added(Versions.v1_2_preview_1)
-  livenessSingleModalModel?: LivenessModel;
+  livenessModelVersion?: LivenessModel;
 
   ...LivenessSessionData;
 }
@@ -96,15 +98,19 @@ model LivenessSessionDetails {
   result?: LivenessSessionAuditEntry;
 }
 
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "LivenessSession")
 @doc("Session result of detect liveness.")
 @resource("detectLiveness/singleModal/sessions")
-model LivenessSession is LivenessSessionItem {
+model LivenessSessionBeforeV1_2 is LivenessSessionItem {
   ...LivenessSessionDetails;
 }
 
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "LivenessWithVerifySession")
 @doc("Session result of detect liveness with verify.")
 @resource("detectLivenessWithVerify/singleModal/sessions")
-model LivenessWithVerifySession is LivenessSessionItem {
+model LivenessWithVerifySessionBeforeV1_2 is LivenessSessionItem {
   ...LivenessSessionDetails;
 }
 
@@ -166,7 +172,7 @@ union ImageType {
 }
 
 @doc("The liveness classification for target face.")
-model LivenessDecisionTarget {
+model LivenessOutputsTarget {
   @doc("The face region where the liveness classification was made on.")
   faceRectangle: FaceRectangle;
 
@@ -206,6 +212,7 @@ model LivenessWithVerifyImage {
 
 @doc("The face verification output.")
 model LivenessWithVerifyOutputs {
+  @removed(Versions.v1_2)
   @doc("The detail of face for verification.")
   verifyImage: LivenessWithVerifyImage;
 
@@ -226,7 +233,7 @@ model LivenessResponseBody extends Record<unknown> {
   livenessDecision?: LivenessDecision;
 
   @doc("Specific targets used for liveness classification.")
-  target?: LivenessDecisionTarget;
+  target?: LivenessOutputsTarget;
 
   @doc("The model version used for liveness classification.")
   modelVersionUsed?: LivenessModel;
@@ -332,4 +339,137 @@ model SessionImageStream {
   @doc("The image to be analyzed")
   @body
   imageContent: bytes;
+}
+
+@added(Versions.v1_2)
+@doc("Common liveness session data.")
+model LivenessSessionCommonData {
+  @doc("The unique ID to reference this session.")
+  @key
+  @visibility("read")
+  sessionId: string;
+
+  @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
+  authToken: string;
+
+  @doc("The current status of the session.")
+  status: Foundations.OperationState;
+
+  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  modelVersion?: LivenessModel;
+}
+
+@added(Versions.v1_2)
+@doc("Session result of detect liveness.")
+@resource("detectLiveness-sessions")
+model LivenessSession is LivenessSessionCommonData {
+  results: LivenesSessionResults;
+}
+
+@added(Versions.v1_2)
+@doc("Session result of detect liveness with verify.")
+@resource("detectLivenessWithVerify-sessions")
+model LivenessWithVerifySession is LivenessSessionCommonData {
+  results: LivenessWithVerifySessionResults;
+}
+
+@added(Versions.v1_2)
+model LivenesSessionResults {
+  attempts: LivenessSessionAttempt[];
+}
+
+@added(Versions.v1_2)
+model LivenessWithVerifySessionResults {
+  verifyReferences: LivenessWithVerifyReference[];
+
+  attempts: LivenessWithVerifySessionAttempt[];
+}
+
+@added(Versions.v1_2)
+model LivenessSessionAttempt {
+  attemptId: int32;
+  attemptStatus: AttemptStatus;
+  result?: LivenessResult;
+  error?: LivenessError;
+}
+
+@added(Versions.v1_2)
+model LivenessWithVerifyReference {
+  @doc("The image type which contains the face rectangle where the liveness classification was made on.")
+  referenceType: ImageType;
+
+  @doc("The face region where the comparison image's classification was made.")
+  faceRectangle: FaceRectangle;
+
+  @doc("Quality of face image for recognition.")
+  qualityForRecognition: QualityForRecognition;
+}
+
+@added(Versions.v1_2)
+model LivenessWithVerifySessionAttempt {
+  attemptId: int32;
+  attemptStatus: AttemptStatus;
+  result?: LivenessWithVerifyResult;
+  error?: LivenessError;
+}
+
+@added(Versions.v1_2)
+union AttemptStatus {
+  string,
+
+  @doc("The attempt is successful.")
+  "Success",
+
+  @doc("The attempt is failed.")
+  "Failed",
+
+  @doc("The attempt is canceled.")
+  "Canceled",
+}
+
+@added(Versions.v1_2)
+model LivenessResult {
+  @doc("The liveness classification for the target face.")
+  livenessDecision?: LivenessDecision;
+
+  targets: LivenessDecisionTargets;
+
+  @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
+  digest: string;
+
+  @doc("The image ID of the session request.")
+  sessionImageId?: string;
+}
+
+@added(Versions.v1_2)
+model LivenessWithVerifyResult {
+  ...LivenessResult;
+
+  @doc("The face verification output. Only available when the request is liveness with verify.")
+  verifyResult?: LivenessWithVerifyOutputs;
+
+  @doc("The sha256 hash of the verify-image in the request.")
+  verifyImageHash?: string;
+}
+
+@added(Versions.v1_2)
+model LivenessError {
+  @doc("The error code.")
+  code: string;
+
+  @doc("The error message.")
+  message: string;
+
+  targets: LivenessDecisionTargets;
+}
+
+@added(Versions.v1_2)
+model LivenessDecisionTargets {
+  color: LivenessColorDecisionTarget;
+}
+
+@added(Versions.v1_2)
+model LivenessColorDecisionTarget {
+  @doc("The face region where the liveness classification was made on.")
+  faceRectangle: FaceRectangle;
 }
