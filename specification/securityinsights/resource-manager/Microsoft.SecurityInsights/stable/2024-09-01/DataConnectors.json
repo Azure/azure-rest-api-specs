@@ -879,7 +879,8 @@
       "properties": {
         "apiKey": {
           "type": "string",
-          "description": "API Key for the user secret key credential"
+          "description": "API Key for the user secret key credential",
+          "x-secret": true
         },
         "apiKeyName": {
           "type": "string",
@@ -939,7 +940,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password"
+          "description": "The password",
+          "x-secret": true
         }
       },
       "required": [
@@ -1053,7 +1055,8 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-secret": true
         },
         "queryParameters": {
           "description": "The custom query parameter we want to add once we send request to token endpoint.",
@@ -1106,11 +1109,13 @@
       "properties": {
         "authorizationCode": {
           "type": "string",
-          "description": "The user's authorization code."
+          "description": "The user's authorization code.",
+          "x-secret": true
         },
         "clientSecret": {
           "type": "string",
-          "description": "The Application (client) secret that the OAuth provider assigned to your app."
+          "description": "The Application (client) secret that the OAuth provider assigned to your app.",
+          "x-secret": true
         },
         "clientId": {
           "type": "string",
@@ -1128,6 +1133,7 @@
         },
         "redirectUri": {
           "type": "string",
+          "format": "uri",
           "description": "The Application redirect url that the user config in the OAuth provider."
         },
         "grantType": {
@@ -1242,7 +1248,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The password attribute name."
+          "description": "The password attribute name.",
+          "x-secret": true
         },
         "queryParameters": {
           "type": "object",
@@ -1299,7 +1306,7 @@
           "type": "string"
         },
         "successStatusValue": {
-          "description": "The the status value.",
+          "description": "The status value.",
           "type": "string",
           "x-nullable": true
         },
@@ -1308,8 +1315,9 @@
           "type": "boolean"
         },
         "compressionAlgo": {
-          "description": "The compression algorithm.",
-          "type": "string"
+          "description": "The compression algorithm. For Example: 'gzip', 'multi-gzip', 'deflate'.",
+          "type": "string",
+          "default": "gzip"
         },
         "format": {
           "description": "The response format. possible values are json,csv,xml",
@@ -1331,12 +1339,12 @@
           "x-nullable": true
         },
         "convertChildPropertiesToArray": {
-          "description": "The a value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.",
+          "description": "The value indicating whether the response isn't an array of events / logs.  By setting this flag to true it means the remote server will response with an object which each property has as a value an array of events / logs.",
           "type": "boolean",
           "x-nullable": true
         },
         "csvEscape": {
-          "description": "Th character used to escape characters in CSV.",
+          "description": "The character used to escape characters in CSV.",
           "type": "string",
           "x-nullable": true,
           "default": "\"",
