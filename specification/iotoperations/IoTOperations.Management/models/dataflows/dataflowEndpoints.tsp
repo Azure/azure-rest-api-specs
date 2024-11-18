@@ -33,27 +33,28 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
 }
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
+@discriminator("endpointType")
 model DataflowEndpointProperties {
   @doc("Endpoint Type.")
   endpointType: EndpointType;
 
   @doc("Azure Data Explorer endpoint.")
-  dataExplorerSettings?: DataflowEndpointDataExplorer;
+  dataExplorerSettings?: DataflowEndpointDataExplorerSettings;
 
   @doc("Azure Data Lake endpoint.")
-  dataLakeStorageSettings?: DataflowEndpointDataLakeStorage;
+  dataLakeStorageSettings?: DataflowEndpointDataLakeStorageSettings;
 
   @doc("Microsoft Fabric endpoint.")
-  fabricOneLakeSettings?: DataflowEndpointFabricOneLake;
+  fabricOneLakeSettings?: DataflowEndpointFabricOneLakeSettings;
 
   @doc("Kafka endpoint.")
-  kafkaSettings?: DataflowEndpointKafka;
+  kafkaSettings?: DataflowEndpointKafkaSettings;
 
   @doc("Local persistent volume endpoint.")
-  localStorageSettings?: DataflowEndpointLocalStorage;
+  localStorageSettings?: DataflowEndpointLocalStorageSettings;
 
   @doc("Broker endpoint.")
-  mqttSettings?: DataflowEndpointMqtt;
+  mqttSettings?: DataflowEndpointMqttSettings;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -84,7 +85,7 @@ union EndpointType {
 }
 
 @doc("Azure Data Explorer endpoint properties")
-model DataflowEndpointDataExplorer {
+model DataflowEndpointDataExplorerSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointDataExplorerAuthentication;
 
@@ -113,7 +114,7 @@ union DataExplorerAuthMethod {
 }
 
 @doc("Azure Data Lake endpoint properties")
-model DataflowEndpointDataLakeStorage {
+model DataflowEndpointDataLakeStorageSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointDataLakeStorageAuthentication;
 
@@ -145,7 +146,7 @@ union DataLakeStorageAuthMethod {
 }
 
 @doc("Microsoft Fabric endpoint properties")
-model DataflowEndpointFabricOneLake {
+model DataflowEndpointFabricOneLakeSettings {
   @doc("Authentication configuration. NOTE - only one authentication property is allowed per entry.")
   authentication: DataflowEndpointFabricOneLakeAuthentication;
 
@@ -198,7 +199,7 @@ union DataflowEndpointFabricPathType {
 }
 
 @doc("Kafka endpoint properties")
-model DataflowEndpointKafka {
+model DataflowEndpointKafkaSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointKafkaAuthentication;
 
@@ -322,13 +323,13 @@ union DataflowEndpointKafkaPartitionStrategy {
 }
 
 @doc("Local persistent volume endpoint properties")
-model DataflowEndpointLocalStorage {
+model DataflowEndpointLocalStorageSettings {
   @doc("Persistent volume claim name.")
   persistentVolumeClaimRef: string;
 }
 
 @doc("Broker endpoint properties")
-model DataflowEndpointMqtt {
+model DataflowEndpointMqttSettings {
   @doc("authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed")
   authentication: DataflowEndpointMqttAuthentication;
 

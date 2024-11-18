@@ -1,5 +1,10 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -26,6 +31,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
+@lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
