@@ -44,6 +44,15 @@ input-file:
   - preview/1.0/traffic.json
 ```
 
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - preview/2025-04-01/traffic.json
+```
+
 # Code Generation
 
 ## Python
