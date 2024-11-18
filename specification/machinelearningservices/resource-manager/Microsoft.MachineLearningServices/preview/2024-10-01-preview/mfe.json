@@ -21,7 +21,11 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the target subscription."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -64,6 +68,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           }
         ],
         "responses": {
@@ -76,7 +83,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/UsageAndQuotaProperties"
+              "$ref": "#/definitions/UsageAndQuotaPropertiesArmPaginatedResult"
             }
           }
         },
@@ -84,6 +91,9 @@
           "List MaaS PTU usage and quota.": {
             "$ref": "./examples/PTUQuota/list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14287,6 +14297,7 @@
       "additionalProperties": false
     },
     "AvailableQuota": {
+      "description": "The number of available quota.",
       "type": "object",
       "properties": {
         "total": {
@@ -22102,6 +22113,7 @@
       "additionalProperties": false
     },
     "ModelUsageDetails": {
+      "description": "Model usage details.",
       "type": "object",
       "properties": {
         "defaultQuotaUsage": {
@@ -26935,6 +26947,7 @@
       "additionalProperties": false
     },
     "UsageAndQuotaDetails": {
+      "description": "Usage and quota details.",
       "type": "object",
       "properties": {
         "quota": {
@@ -26961,6 +26974,7 @@
       "additionalProperties": false
     },
     "UsageAndQuotaProperties": {
+      "description": "Usage and quota properties.",
       "type": "object",
       "properties": {
         "modelCollectionToProperties": {
@@ -26971,6 +26985,24 @@
             "x-nullable": true
           },
           "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UsageAndQuotaPropertiesArmPaginatedResult": {
+      "description": "A paginated list of UsageAndQuotaProperties entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of UsageAndQuotaProperties objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type UsageAndQuotaProperties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageAndQuotaProperties"
+          }
         }
       },
       "additionalProperties": false
