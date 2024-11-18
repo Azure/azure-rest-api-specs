@@ -149,13 +149,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{id}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatuses_Get",
         "tags": [
           "OperationStatuses"
         ],
-        "description": "Get the status of an operation.",
+        "description": "Returns the current status of an async operation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -167,11 +167,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier for the operationStatus resource",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -179,12 +175,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
