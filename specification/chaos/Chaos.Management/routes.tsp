@@ -14,5 +14,5 @@ namespace Microsoft.Chaos;
 @armResourceOperations
 interface OperationStatuses {
   @doc("Get the status of an operation.")
-  get is ArmResourceRead<Azure.ResourceManager.ArmOperationStatus>;
+  get is ArmResourceRead<OperationStatus>;
 }

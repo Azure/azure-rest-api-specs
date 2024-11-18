@@ -2,19 +2,20 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Autorest;
 
 namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@parentResource(Azure.ResourceManager.ArmOperationStatus,
-  ArmLocationResource<"Subscription">
-);
+@parentResource(ArmLocationResource<"Subscription">)
+model OperationStatus is Azure.ResourceManager.ArmOperationStatus;
 
 alias ParentResourceParameters = {
   @doc("The parent resource provider namespace.")
