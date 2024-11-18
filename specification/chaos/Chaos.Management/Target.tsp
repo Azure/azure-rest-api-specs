@@ -25,11 +25,11 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
     NamePattern = "^[a-zA-Z0-9_\\-\\.]+$"
   >;
 
-  /**
-   * Azure resource location.
-   */
-  @visibility("read")
-  location?: string;
+  // /**
+  //  * Azure resource location.
+  //  */
+  // @visibility("read")
+  // location?: string;
 }
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
