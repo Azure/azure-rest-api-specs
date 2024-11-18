@@ -3,7 +3,7 @@ description: Uses specified Node version and runs npm commands to set up the env
 
 inputs:
   node-version:
-    description: 'Node version to use'
+    description: "Node version to use"
     default: 20.x
 
 runs:
@@ -16,7 +16,7 @@ runs:
 
     - run: |
         echo "::group::npm ci"
-        npm ci
+        npm i --no-package-lock --force
         echo "::endgroup::"
       shell: bash
 
