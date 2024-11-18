@@ -10,5 +10,8 @@ suppressions:
         - Method `ServerEndpointCreateParameters.__init__` parameter `tier_files_older_than_days` changed default value from `None` to `int`
         - Method `ServerEndpointCreateParameters.__init__` parameter `volume_free_space_percent` changed default value from `None` to `int`
         - Method `ServerEndpointUpdateParameters.__init__` parameter `local_cache_mode` changed default value from `None` to `str`
-        - Model `StorageSyncApiError` deleted or renamed its instance variable `inner_error`
-        
+        - Model `StorageSyncApiError` deleted or renamed its instance variable `inner_error`     
+  azure-sdk-for-js:
+    - package: "@azure/arm-storagesync"
+      breaking-changes:
+        - Interface StorageSyncApiError no longer has parameter innerError
