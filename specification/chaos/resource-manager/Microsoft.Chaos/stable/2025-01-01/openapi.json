@@ -169,10 +169,9 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The name of the OperationStatus",
+            "description": "The unique identifier for the operationStatus resource",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2592,57 +2591,46 @@
       "type": "object",
       "description": "Chaos Studio async operation status resource.",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "properties": {
-            "status": {
-              "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-              "description": "The operation status"
-            },
-            "id": {
-              "type": "string",
-              "description": "The unique identifier for the operationStatus resource"
-            },
-            "name": {
-              "type": "string",
-              "description": "The name of the  operationStatus resource",
-              "readOnly": true
-            },
-            "startTime": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Operation start time",
-              "readOnly": true
-            },
-            "endTime": {
-              "type": "string",
-              "format": "date-time",
-              "description": "Operation complete time",
-              "readOnly": true
-            },
-            "percentComplete": {
-              "type": "number",
-              "format": "double",
-              "description": "The progress made toward completing the operation",
-              "readOnly": true
-            },
-            "error": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-              "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-              "readOnly": true
-            }
-          },
-          "required": [
-            "status",
-            "id"
-          ]
+        "status": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The operation status"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the operationStatus resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the  operationStatus resource",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation complete time",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made toward completing the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
+      "required": [
+        "status",
+        "id"
       ]
     },
     "PostActionResponse": {

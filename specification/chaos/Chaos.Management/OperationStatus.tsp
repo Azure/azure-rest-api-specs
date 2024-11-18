@@ -15,14 +15,7 @@ namespace Microsoft.Chaos;
  * Chaos Studio async operation status resource.
  */
 @parentResource(ArmLocationResource<"Subscription">)
-model OperationStatus
-  is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.ArmOperationStatus> {
-  ...ResourceNameParameter<
-    Resource = OperationStatus,
-    KeyName = "id",
-    SegmentName = "operationStatuses"
-  >;
-}
+model OperationStatus is Azure.ResourceManager.ArmOperationStatus;
 
 @armResourceOperations
 interface OperationStatuses {
