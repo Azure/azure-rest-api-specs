@@ -15,6 +15,7 @@ import "./Experiment.tsp";
 import "./ExperimentExecution.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

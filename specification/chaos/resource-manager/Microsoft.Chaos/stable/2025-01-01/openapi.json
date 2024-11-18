@@ -60,6 +60,9 @@
     },
     {
       "name": "ExperimentExecutions"
+    },
+    {
+      "name": "OperationStatuses"
     }
   ],
   "paths": {
@@ -144,6 +147,51 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationstatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatuses_Get",
+        "tags": [
+          "OperationStatuses"
+        ],
+        "description": "Get the status of an operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation id name.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -1610,9 +1658,105 @@
         }
       }
     },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BranchStatus": {
       "type": "object",
@@ -2472,6 +2616,55 @@
           }
         }
       }
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "The current status of an async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the operation status.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The operation id name.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Provisioning state of the resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The id of the resource."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation, in RFC3339 format."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation, in RFC3339 format."
+        },
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Operation Error message."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status"
+      ]
     },
     "PostActionResponse": {
       "type": "object",

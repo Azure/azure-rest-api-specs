@@ -653,39 +653,40 @@ model ExperimentExecutionActionTargetDetailsError {
   message?: string;
 }
 
-/**
- * The status of operation.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model OperationStatus extends ErrorResponse {
-  /**
-   * The operation Id.
-   */
-  id?: string;
-
-  /**
-   * The operation name.
-   */
-  name?: string;
-
-  /**
-   * The start time of the operation.
-   */
+@doc("The current status of an async operation.")
+@resource("operationstatuses")
+@parentResource(ArmLocationResource<"Subscription">)
+model OperationStatus {
+  @doc("Fully qualified ID for the operation status.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  id: string;
+
+  @doc("The operation id name.")
+  @maxLength(36)
+  @minLength(36)
+  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
+  @key("operationId")
+  @visibility("read")
+  name: Azure.Core.uuid;
+
+  @doc("Provisioning state of the resource.")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("The id of the resource.")
+  resourceId?: string;
+
+  @doc("The start time of the operation, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  /**
-   * The end time of the operation.
-   */
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @doc("The end time of the operation, in RFC3339 format.")
   endTime?: utcDateTime;
 
-  /**
-   * The status of the operation.
-   */
-  status?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
+  @doc("Custom operation properties, populated only for a successful operation.")
+  properties?: unknown;
+
+  @doc("Operation Error message.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 /**
