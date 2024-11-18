@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-09-01-preview",
+    "api-version": "2024-10-01-preview",
     "resourceGroupName": "test-rg",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "virtualHardDiskName": "test-vhd",
@@ -11,9 +11,7 @@
       },
       "location": "West US2",
       "properties": {
-        "createFromLocal": true,
-        "osType": "Windows",
-        "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container"
+        "diskSizeGB": 32
       }
     }
   },
@@ -36,9 +34,6 @@
           "hyperVGeneration": "V2",
           "logicalSectorBytes": 512,
           "physicalSectorBytes": 512,
-          "createFromLocal": true,
-          "osType": "Windows",
-          "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
           "provisioningState": "Accepted"
         }
       }
@@ -61,14 +56,11 @@
           "hyperVGeneration": "V2",
           "logicalSectorBytes": 512,
           "physicalSectorBytes": 512,
-          "createFromLocal": true,
-          "osType": "Windows",
-          "containerId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/test-storage-container",
           "provisioningState": "Succeeded"
         }
       }
     }
   },
   "operationId": "VirtualHardDisks_CreateOrUpdate",
-  "title": "CreateVirtualHardDiskFromLocal"
+  "title": "PutVirtualHardDisk"
 }
