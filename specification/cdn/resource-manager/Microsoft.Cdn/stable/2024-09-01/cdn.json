@@ -5665,7 +5665,7 @@
           "$ref": "#/definitions/DeepCreatedOriginProperties"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": false
     },
     "DeepCreatedOriginProperties": {
       "description": "Properties of the origin created on the CDN endpoint.",
@@ -5741,7 +5741,7 @@
           "readOnly": true
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": false
     },
     "DeepCreatedOriginGroup": {
       "description": "The origin group for CDN content which is added when creating a CDN endpoint. Traffic is sent to the origins within the origin group based on origin health.",
@@ -5759,7 +5759,7 @@
           "$ref": "#/definitions/DeepCreatedOriginGroupProperties"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": false
     },
     "DeepCreatedOriginGroupProperties": {
       "description": "Properties of the origin group created on the CDN endpoint.",
@@ -5794,7 +5794,7 @@
           "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
         }
       },
-      "x-ms-azure-resource": true
+      "x-ms-azure-resource": false
     },
     "ResourceReference": {
       "properties": {
@@ -7324,68 +7324,9 @@
       "type": "object",
       "properties": {
         "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
         }
       }
-    },
-    "ErrorDetail": {
-      "description": "The error detail.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "x-ms-identifiers": [],
-          "description": "The error additional info."
-        }
-      }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     },
     "CdnMigrationToAfdParameters": {
       "type": "object",
