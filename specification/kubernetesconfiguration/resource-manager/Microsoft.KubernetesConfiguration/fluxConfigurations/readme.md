@@ -40,6 +40,22 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 ``` yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/fluxconfiguration.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: fluxconfiguration.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: AvoidAdditionalProperties
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
 ```
 
 # Code Generation
