@@ -13,12 +13,46 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
+  # "@azure-tools/typespec-csharp":
+  #   flavor: azure
+  #   package-dir: "Azure.ResourceManager.SapVirtualInstances"
+  #   clear-output-folder: true
+  #   model-namespace: false
+  #   namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-workloadssapvirtualinstance"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-workloadssapvirtualinstance"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-workloadssapvirtualinstance"
     package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/workloadssapvirtualinstance"
+    package-dir: "azure-resourcemanager-workloadssapvirtualinstance"
+    namespace: "com.azure.resourcemanager.workloadssapvirtualinstance"
+    service-name: "Workloads Sap Virtual Instance"
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/workloadssapvirtualinstance"
+    package-dir: "armworkloadssapvirtualinstance"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
