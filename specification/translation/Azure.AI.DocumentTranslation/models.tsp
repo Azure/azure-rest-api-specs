@@ -23,6 +23,21 @@ model DocumentTranslateResult {
   @header
   contentType: "application/octet-stream";
 
+  @header("x-metered-usage")
+  @doc("Specifies consumption (the number of characters for which the user will be charged) for the translation job request")
+  @added(Versions.v2024_11_01_preview)
+  meteredUsage: int32;
+
+  @header("total-image-scans-succeeded")
+  @doc("Specifies the number of successful image translations within a document translation job")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded: int32;
+
+  @header("total-image-scans-failed")
+  @doc("Specifies the number of failed image translations within a document translation job")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed: int32;
+
   @doc("Request response, response is a translated document.")
   @body
   document: bytes;
@@ -125,6 +140,17 @@ union Status {
 model StartTranslationDetails {
   @doc("The input list of documents or folders containing documents")
   inputs: BatchRequest[];
+
+  @doc("The batch operation options")
+  @added(Versions.v2024_11_01_preview)
+  options?: BatchOptions;
+}
+
+@doc("Translation batch request options")
+@added(Versions.v2024_11_01_preview)
+model BatchOptions {
+  @doc("Translation text within an image option")
+  translateTextWithinImage?: boolean = false;
 }
 
 @doc("Definition for the input batch translation request")
@@ -356,6 +382,14 @@ model StatusSummary {
 
   @doc("Total characters charged by the API")
   totalCharacterCharged: int64;
+
+  @doc("Total image scans charged by the API")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
+
+  @doc("Total image scans failed")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed?: int32;
 }
 
 @doc("Document Status Response")
@@ -395,6 +429,14 @@ model DocumentStatus {
 
   @doc("Character charged by the API")
   characterCharged?: int32;
+
+  @doc("Total image scans charged by the API")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
+
+  @doc("Total image scans failed")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed?: int32;
 }
 
 @doc("Documents Status Response")
@@ -476,6 +518,11 @@ model DocumentTranslateBody {
   @doc("Document Translate Request Content")
   @body
   body: DocumentTranslateContent;
+
+  @doc("Optional boolean parameter to translate text within an image in the document")
+  @query("translateTextWithinImage")
+  @added(Versions.v2024_11_01_preview)
+  translateTextWithinImage?: boolean;
 }
 
 @doc("Start Translation Request Body")
