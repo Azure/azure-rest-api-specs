@@ -3806,7 +3806,14 @@
         },
         "softDeletedArtifactType": {
           "type": "string",
-          "description": "artifact type of the soft-deleted resource"
+          "description": "artifact type of the soft-deleted resource",
+          "enum": [
+            "Images"
+          ],
+          "x-ms-enum" : {
+            "name": "SoftDeletedArtifactTypes",
+            "modelAsString": true
+          }
         },
         "softDeletedTime": {
           "type": "string",
