@@ -40,6 +40,10 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 ``` yaml $(tag) == 'package-preview-2024-11'
 input-file:
   - preview/2024-11-01-preview/extensionTypes.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensionTypes.json
+    reason: Operations API is implemented as a separate service.
 ```
 
 ---

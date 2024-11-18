@@ -40,6 +40,16 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 ``` yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract, 202 operations return Azure-Async-Operation header.
 ```
 
 ---
