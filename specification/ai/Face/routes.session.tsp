@@ -21,7 +21,7 @@ alias LivenessSessionWithVerifyDescription = """
   *
     * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
-
+  
   > [!NOTE]
   >
   > *
@@ -38,7 +38,7 @@ alias CreateLivenessSessionDescription = """
   *
     * Ability to call /detectLiveness/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
-
+  
   > [!NOTE]
   > Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.
   """;
@@ -87,7 +87,10 @@ op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Mod
   FaceErrorResponse
 >;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, FaceErrorResponse>;
+alias Operations = Azure.Core.ResourceOperations<
+  ServiceTraits,
+  FaceErrorResponse
+>;
 
 interface LivenessSessionOperations {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
@@ -120,7 +123,7 @@ interface LivenessSessionOperations {
   @doc(ListSessionDescription)
   @summary(ListLivenessSessionsSummary)
   getLivenessSessions is FaceResourceListOperation<
-  LivenessSessionBeforeV1_2,
+    LivenessSessionBeforeV1_2,
     LivenessSessionItem
   >;
 
