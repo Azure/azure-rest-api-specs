@@ -94,6 +94,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentIntelligenceOperationDetails.createdDateTime, "createdOn", "java");
 @@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime, "lastUpdatedOn", "java");
 @@clientName(ClassifierCopyAuthorization.expirationDateTime, "expiresOn", "java");
+@@clientName(StringIndexType.utf16CodeUnit, "utf_16CodeUnit", "java");
 
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsContent",
