@@ -20,7 +20,7 @@ model DeidentificationContent {
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Customization parameters to override default service behaviors.")
-  customizations?: CustomizationOptions;
+  customizations?: DeidentificationCustomizationOptions;
 }
 
 @doc("Response body for de-identification operation.")
@@ -33,6 +33,6 @@ model DeidentificationResult {
 }
 
 @doc("Customizations options to override default service behaviors for synchronous usage.")
-model CustomizationOptions {
+model DeidentificationCustomizationOptions {
   ...SharedCustomizationOptions;
 }

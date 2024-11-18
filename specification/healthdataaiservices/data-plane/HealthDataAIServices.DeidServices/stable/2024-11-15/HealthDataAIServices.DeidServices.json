@@ -588,23 +588,6 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "CustomizationOptions": {
-      "type": "object",
-      "description": "Customizations options to override default service behaviors for synchronous usage.",
-      "properties": {
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
-        },
-        "surrogateLocale": {
-          "type": "string",
-          "description": "Locale in which the output surrogates are written.",
-          "default": "en-US"
-        }
-      }
-    },
     "DeidentificationContent": {
       "type": "object",
       "description": "Request body for de-identification operation.",
@@ -646,13 +629,30 @@
           }
         },
         "customizations": {
-          "$ref": "#/definitions/CustomizationOptions",
+          "$ref": "#/definitions/DeidentificationCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         }
       },
       "required": [
         "inputText"
       ]
+    },
+    "DeidentificationCustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors for synchronous usage.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
+        }
+      }
     },
     "DeidentificationDocumentDetails": {
       "type": "object",
@@ -759,7 +759,7 @@
           "description": "Target location to store output of operation."
         },
         "customizations": {
-          "$ref": "#/definitions/JobCustomizationOptions",
+          "$ref": "#/definitions/DeidentificationJobCustomizationOptions",
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
@@ -804,6 +804,23 @@
         "lastUpdatedAt",
         "createdAt"
       ]
+    },
+    "DeidentificationJobCustomizationOptions": {
+      "type": "object",
+      "description": "Customizations options to override default service behaviors for job usage.",
+      "properties": {
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when Operation is Redact.",
+          "minLength": 1,
+          "maxLength": 16
+        },
+        "surrogateLocale": {
+          "type": "string",
+          "description": "Locale in which the output surrogates are written.",
+          "default": "en-US"
+        }
+      }
     },
     "DeidentificationJobStatus": {
       "type": "string",
@@ -902,23 +919,6 @@
         "taggerResult": {
           "$ref": "#/definitions/PhiTaggerResult",
           "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
-        }
-      }
-    },
-    "JobCustomizationOptions": {
-      "type": "object",
-      "description": "Customizations options to override default service behaviors for job usage.",
-      "properties": {
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
-        },
-        "surrogateLocale": {
-          "type": "string",
-          "description": "Locale in which the output surrogates are written.",
-          "default": "en-US"
         }
       }
     },
