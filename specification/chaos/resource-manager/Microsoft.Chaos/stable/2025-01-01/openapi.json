@@ -22,18 +22,19 @@
   ],
   "security": [
     {
-      "OAuth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
@@ -420,21 +421,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "continuationToken",
@@ -490,21 +497,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -556,21 +569,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -637,21 +656,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -705,21 +730,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "continuationToken",
@@ -783,21 +814,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -857,21 +894,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -946,21 +989,27 @@
             "in": "path",
             "description": "The parent resource provider namespace.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceType",
             "in": "path",
             "description": "The parent resource type.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "parentResourceName",
             "in": "path",
             "description": "The parent resource name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "targetName",
@@ -2478,8 +2527,8 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
-          "description": "Updatable managed service identity"
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -2519,29 +2568,6 @@
         "key",
         "value"
       ]
-    },
-    "ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The template for adding optional properties.",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
-            "x-nullable": true
-          }
-        }
-      }
     },
     "OperationStatus": {
       "type": "object",

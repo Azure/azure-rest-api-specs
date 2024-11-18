@@ -18,14 +18,20 @@ alias ParentResourceParameters = {
   @doc("The parent resource provider namespace.")
   @path
   @segment("providers")
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   parentProviderNamespace: string;
 
   @doc("The parent resource type.")
   @path
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   parentResourceType: string;
 
   @doc("The parent resource name.")
   @path
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   parentResourceName: string;
 };
 
@@ -390,8 +396,7 @@ model ExperimentUpdate {
    */
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /** Updatable managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**
