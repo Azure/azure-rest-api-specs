@@ -44,12 +44,21 @@ suppressions:
   - code: OperationsAPIImplementation
     from: extensions.json
     reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
   - code: DeleteResponseCodes
     from: extensions.json
-    reason: Existing service contract, force delete does synchronous delete and returns 200.
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
   - code: LroLocationHeader
     from: extensions.json
-    reason: Existing service contract, 202 operations return Azure-Async-Operation header.
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
 ```
 
 ---

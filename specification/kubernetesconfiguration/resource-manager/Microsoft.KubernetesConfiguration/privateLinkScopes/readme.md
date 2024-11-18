@@ -40,6 +40,19 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 ``` yaml $(tag) == 'package-preview-2024-11'
 input-file:
   - preview/2024-11-01-preview/privateLinkScopes.json  
+suppressions:
+  - code: OperationsAPIImplementation
+    from: privateLinkScopes.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
 ```
 
 # Code Generation
