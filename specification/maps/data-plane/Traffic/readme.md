@@ -54,7 +54,7 @@ input-file:
 
 suppressions:
   - code: OperationIdNounVerb
-    reason: False alarm. The OperationId used here "Traffic_GetTrafficIncidentDetail" has already been in the NOUN_VERB format.
+    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Traffic' should not appear after the underscore.
 ```
 
 # Code Generation
