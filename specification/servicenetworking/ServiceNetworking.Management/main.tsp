@@ -119,7 +119,7 @@ model SecurityPolicyProperties {
 
   /** Ip Access Policy of the Traffic Controller Security Policy* */
   @added(Versions.v2024_11_01_preview)
-  ipAccessPolicy?: IpAccessPolicy;
+  ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
   /** Provisioning State of Traffic Controller SecurityPolicy Resource */
   @visibility("read")
@@ -146,7 +146,7 @@ model WafPolicy {
 
 /** Ip Access Policy */
 @added(Versions.v2024_11_01_preview)
-model IpAccessPolicy {
+model IpAccessRulesPolicy {
   /** Ip Access Policy Rules List */
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: IpAccessRule[];
