@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-04-01'
 input-file:
-  - Traffic/stable/2025-04-01/traffic.json
+  - Traffic/preview/2025-04-01/traffic.json
 ```
 
 ### Tag: package-stable-2023-06-01
