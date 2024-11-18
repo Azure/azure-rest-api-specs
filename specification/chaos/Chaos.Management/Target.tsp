@@ -29,7 +29,7 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
    * Azure resource location.
    */
   @visibility("read")
-  location?: azureLocation;
+  location?: string;
 }
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
