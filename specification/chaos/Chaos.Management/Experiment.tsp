@@ -40,13 +40,7 @@ interface Experiments {
   /**
    * The operation to update an experiment.
    */
-  update is ArmCustomPatchAsync<
-    Experiment,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Experiment,
-      ExperimentProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**
    * Delete a Experiment resource.
