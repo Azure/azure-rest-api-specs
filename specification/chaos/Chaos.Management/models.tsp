@@ -12,6 +12,21 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+alias ParentResourceParameters = {
+  @doc("The parent resource provider namespace.")
+  @path
+  @segment("providers")
+  parentProviderNamespace: string;
+
+  @doc("The parent resource type.")
+  @path
+  parentResourceType: string;
+
+  @doc("The parent resource name.")
+  @path
+  parentResourceName: string;
+};
+
 /**
  * Current provisioning state for a given Azure Chaos resource.
  */

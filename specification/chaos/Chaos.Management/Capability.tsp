@@ -7,6 +7,7 @@ import "./Target.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -24,33 +25,42 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
   >;
 }
 
+alias CapabilityParentResourceParameters = BaseParameters<Capability> &
+  ParentResourceParameters;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "Incorrect linting error."
 @armResourceOperations
 interface Capabilities {
   /**
    * Get a Capability resource that extends a Target resource.
    */
-  get is ArmResourceRead<Capability>;
+  get is ArmResourceRead<Capability, CapabilityParentResourceParameters>;
 
   /**
    * Create or update a Capability resource that extends a Target resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Capability>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Capability,
+    CapabilityParentResourceParameters
+  >;
 
   /**
    * Delete a Capability that extends a Target resource.
    */
-  delete is ArmResourceDeleteSync<Capability>;
+  delete is ArmResourceDeleteSync<
+    Capability,
+    CapabilityParentResourceParameters
+  >;
 
   /**
    * Get a list of Capability resources that extend a Target resource..
    */
   list is ArmResourceListByParent<
     Capability,
-    Parameters = {
-      /**
-       * String that sets the continuation token.
-       */
+    {
+      ...CapabilityParentResourceParameters;
+
+      @doc("String that sets the continuation token.")
       @query("continuationToken")
       continuationToken?: string;
     },

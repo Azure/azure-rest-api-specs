@@ -32,21 +32,6 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   location?: azureLocation;
 }
 
-alias ParentResourceParameters = {
-  @doc("The parent resource provider namespace.")
-  @path
-  @segment("providers")
-  parentProviderNamespace: string;
-
-  @doc("The parent resource type.")
-  @path
-  parentResourceType: string;
-
-  @doc("The parent resource name.")
-  @path
-  parentResourceName: string;
-};
-
 alias TargetParentResourceParameters = BaseParameters<Target> &
   ParentResourceParameters;
 
