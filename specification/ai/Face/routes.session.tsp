@@ -90,6 +90,7 @@ op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Mod
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits, FaceErrorResponse>;
 
 interface LivenessSessionOperations {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "createLivenessSession")
   @doc(CreateLivenessSessionDescription)
@@ -101,6 +102,7 @@ interface LivenessSessionOperations {
     CreateLivenessSessionResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "deleteLivenessSession")
   @summary(DeleteSessionSummary)
@@ -108,6 +110,7 @@ interface LivenessSessionOperations {
   @returnsDoc(SuccessfullyDeletedSession)
   deleteLivenessSessionBeforeV1_2 is FaceResourceDeleteOperation<LivenessSessionBeforeV1_2>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "getLivenessSessionResult")
   @doc(GetLivenessSessionResultDescription)
@@ -125,6 +128,7 @@ interface LivenessSessionOperations {
   @doc(ListSessionAuditEntriesDescription)
   getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSessionBeforeV1_2>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "createLivenessWithVerifySessionWithVerifyImage")
@@ -138,6 +142,7 @@ interface LivenessSessionOperations {
     CreateLivenessWithVerifySessionResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "createLivenessWithVerifySession")
   @doc(CreateLivenessWithVerifySessionDescription)
@@ -150,6 +155,7 @@ interface LivenessSessionOperations {
     CreateLivenessWithVerifySessionResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "deleteLivenessWithVerifySession")
   @summary(DeleteSessionSummary)
@@ -157,6 +163,7 @@ interface LivenessSessionOperations {
   @returnsDoc(SuccessfullyDeletedSession)
   deleteLivenessWithVerifySessionBeforeV1_2 is FaceResourceDeleteOperation<LivenessWithVerifySessionBeforeV1_2>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   @removed(Versions.v1_2)
   @renamedFrom(Versions.v1_2, "getLivenessWithVerifySessionResult")
   @doc(GetLivenessWithVerifySessionResultDescription)
@@ -174,6 +181,7 @@ interface LivenessSessionOperations {
   @doc(ListSessionAuditEntriesDescription)
   getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySessionBeforeV1_2>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Does not fit in resource operation pattern."
   @added(Versions.v1_2_preview_1)
   @removed(Versions.v1_2)

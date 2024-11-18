@@ -98,6 +98,7 @@ model LivenessSessionDetails {
   result?: LivenessSessionAuditEntry;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
 @removed(Versions.v1_2)
 @renamedFrom(Versions.v1_2, "LivenessSession")
 @doc("Session result of detect liveness.")
@@ -106,6 +107,7 @@ model LivenessSessionBeforeV1_2 is LivenessSessionItem {
   ...LivenessSessionDetails;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
 @removed(Versions.v1_2)
 @renamedFrom(Versions.v1_2, "LivenessWithVerifySession")
 @doc("Session result of detect liveness with verify.")
