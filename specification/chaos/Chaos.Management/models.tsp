@@ -92,6 +92,14 @@ model PostActionResponse {
 model ExtensionResourcePathParameters {
   @doc("Name of schema group.")
   @path
+  subscriptionId: string;
+
+  @doc("Name of schema group.")
+  @path
+  resourceGroupName: string;
+
+  @doc("Name of schema group.")
+  @path
   parentProviderNamespace: string;
 
   @doc("Name of schema group.")

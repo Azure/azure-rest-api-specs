@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
@@ -31,44 +32,56 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   location?: azureLocation;
 }
 
+alias ParentResourceParameters = {
+  @doc("The parent resource provider namespace.")
+  @path
+  @segment("providers")
+  parentProviderNamespace: string;
+
+  @doc("The parent resource type.")
+  @path
+  parentResourceType: string;
+
+  @doc("The parent resource name.")
+  @path
+  parentResourceName: string;
+};
+
+alias TargetParentResourceParameters = BaseParameters<Target> &
+  ParentResourceParameters;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "Does not expose subscription-scoped list, linting error."
 @armResourceOperations
-@route("/")
 interface Targets {
   /**
    * Get a Target resource that extends a tracked regional resource.
    */
-  get is ArmResourceRead<Target, Parameters = ExtensionResourcePathParameters>;
+  get is ArmResourceRead<Target, TargetParentResourceParameters>;
 
   /**
    * Create or update a Target resource that extends a tracked regional resource.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Target,
-    Parameters = ExtensionResourcePathParameters
+    TargetParentResourceParameters
   >;
 
   /**
    * Delete a Target resource that extends a tracked regional resource.
    */
-  delete is ArmResourceDeleteSync<
-    Target,
-    Parameters = ExtensionResourcePathParameters
-  >;
+  delete is ArmResourceDeleteSync<Target, TargetParentResourceParameters>;
 
   /**
    * Get a list of Target resources that extend a tracked regional resource.
    */
   list is ArmResourceListByParent<
     Target,
-    Parameters = {
-      /**
-       * String that sets the continuation token.
-       */
+    {
+      ...TargetParentResourceParameters;
+
+      @doc("String that sets the continuation token.")
       @query("continuationToken")
       continuationToken?: string;
-
-      ...ExtensionResourcePathParameters;
     },
     Response = TargetListResult
   >;

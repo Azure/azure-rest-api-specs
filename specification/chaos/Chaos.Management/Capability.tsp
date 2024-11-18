@@ -24,6 +24,7 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "Incorrect linting error."
 @armResourceOperations
 interface Capabilities {
   /**
