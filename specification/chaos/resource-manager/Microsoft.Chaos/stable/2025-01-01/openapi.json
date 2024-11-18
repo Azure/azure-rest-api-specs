@@ -2517,8 +2517,12 @@
     },
     "ExperimentUpdate": {
       "type": "object",
-      "description": "Describes an experiment update.",
+      "description": "The type used for update operations of the Experiment.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -2526,9 +2530,32 @@
             "type": "string"
           }
         },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+        "properties": {
+          "$ref": "#/definitions/ExperimentUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ExperimentUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Experiment.",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "description": "List of steps.",
+          "items": {
+            "$ref": "#/definitions/ChaosExperimentStep"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "selectors": {
+          "type": "array",
+          "description": "List of selectors.",
+          "items": {
+            "$ref": "#/definitions/ChaosTargetSelector"
+          }
         }
       }
     },

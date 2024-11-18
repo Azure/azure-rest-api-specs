@@ -373,9 +373,6 @@ model ChaosTargetSelector {
   filter?: ChaosTargetFilter;
 }
 
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
-
 /**
  * Model that represents available filter types that can be applied to a targets list.
  */
@@ -385,18 +382,6 @@ model ChaosTargetFilter {
    * Chaos target filter discriminator type
    */
   type: FilterType;
-}
-
-/**
- * Describes an experiment update.
- */
-model ExperimentUpdate {
-  /**
-   * The tags of the experiment resource.
-   */
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**
