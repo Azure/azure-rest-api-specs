@@ -38,7 +38,7 @@ interface OperationStatuses {
 
     ...LocationParameter,
     ...Foundations.OperationIdParameter,
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
 @@segment(OperationStatuses.get::parameters.operationId, "operationStatuses");

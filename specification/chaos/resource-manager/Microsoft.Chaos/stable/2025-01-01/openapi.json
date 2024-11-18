@@ -91,6 +91,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists all Chaos Studio operations.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -175,6 +180,12 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
