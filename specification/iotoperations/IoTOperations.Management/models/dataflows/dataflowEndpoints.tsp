@@ -32,29 +32,59 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
   extendedLocation: ExtendedLocation;
 }
 
+@doc("Azure Data Explorer endpoint.")
+model DataExplorerEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.DataExplorer;
+  @doc("Azure Data Explorer endpoint.")
+  dataExplorerSettings: DataflowEndpointDataExplorerSettings;
+}
+
+@doc("Azure Data Lake endpoint.")
+model DataLakeStorageEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.DataLakeStorage;
+  @doc("Azure Data Lake endpoint.")
+  dataLakeStorageSettings: DataflowEndpointDataLakeStorageSettings;
+}
+
+@doc("Microsoft Fabric endpoint.")
+model FabricOneLakeEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.FabricOneLake;
+  @doc("Microsoft Fabric endpoint.")
+  fabricOneLakeSettings: DataflowEndpointFabricOneLakeSettings;
+}
+
+@doc("Kafka endpoint.")
+model KafkaEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.Kafka;
+  @doc("Kafka endpoint.")
+  kafkaSettings: DataflowEndpointKafkaSettings;
+}
+
+@doc("Local persistent volume endpoint.")
+model LocalStorageEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.LocalStorage;
+  @doc("Local persistent volume endpoint.")
+  localStorageSettings: DataflowEndpointLocalStorageSettings;
+}
+
+@doc("Broker endpoint.")
+model MqttEndpoint extends DataflowEndpointProperties{
+  @doc("Endpoint Type.")
+  endpointType: EndpointType.Mqtt;
+  @doc("Broker endpoint.")
+  mqttSettings: DataflowEndpointMqttSettings;
+}
+
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 @discriminator("endpointType")
 model DataflowEndpointProperties {
   @doc("Endpoint Type.")
   endpointType: EndpointType;
-
-  @doc("Azure Data Explorer endpoint.")
-  dataExplorerSettings?: DataflowEndpointDataExplorerSettings;
-
-  @doc("Azure Data Lake endpoint.")
-  dataLakeStorageSettings?: DataflowEndpointDataLakeStorageSettings;
-
-  @doc("Microsoft Fabric endpoint.")
-  fabricOneLakeSettings?: DataflowEndpointFabricOneLakeSettings;
-
-  @doc("Kafka endpoint.")
-  kafkaSettings?: DataflowEndpointKafkaSettings;
-
-  @doc("Local persistent volume endpoint.")
-  localStorageSettings?: DataflowEndpointLocalStorageSettings;
-
-  @doc("Broker endpoint.")
-  mqttSettings?: DataflowEndpointMqttSettings;
 
   @visibility("read")
   @doc("The status of the last operation.")

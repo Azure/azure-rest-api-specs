@@ -3633,6 +3633,25 @@
       "$ref": "#/definitions/ManagedIdentityMethod",
       "x-nullable": false
     },
+    "DataExplorerEndpoint": {
+      "type": "object",
+      "description": "Azure Data Explorer endpoint.",
+      "properties": {
+        "dataExplorerSettings": {
+          "$ref": "#/definitions/DataflowEndpointDataExplorerSettings",
+          "description": "Azure Data Explorer endpoint."
+        }
+      },
+      "required": [
+        "dataExplorerSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DataExplorer"
+    },
     "DataLakeStorageAuthMethod": {
       "type": "string",
       "description": "DataflowEndpoint Data Lake Storage Authentication Method properties",
@@ -3662,6 +3681,25 @@
           }
         ]
       }
+    },
+    "DataLakeStorageEndpoint": {
+      "type": "object",
+      "description": "Azure Data Lake endpoint.",
+      "properties": {
+        "dataLakeStorageSettings": {
+          "$ref": "#/definitions/DataflowEndpointDataLakeStorageSettings",
+          "description": "Azure Data Lake endpoint."
+        }
+      },
+      "required": [
+        "dataLakeStorageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DataLakeStorage"
     },
     "DataflowBuiltInTransformationDataset": {
       "type": "object",
@@ -3983,7 +4021,28 @@
         "secretRef"
       ]
     },
-    "DataflowEndpointDataExplorer": {
+    "DataflowEndpointDataExplorerAuthentication": {
+      "type": "object",
+      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/DataExplorerAuthMethod",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "DataflowEndpointDataExplorerSettings": {
       "type": "object",
       "description": "Azure Data Explorer endpoint properties",
       "properties": {
@@ -4008,50 +4067,6 @@
       "required": [
         "authentication",
         "database",
-        "host"
-      ]
-    },
-    "DataflowEndpointDataExplorerAuthentication": {
-      "type": "object",
-      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/DataExplorerAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointDataLakeStorage": {
-      "type": "object",
-      "description": "Azure Data Lake endpoint properties",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointDataLakeStorageAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
-        "host": {
-          "type": "string",
-          "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
-          "pattern": ".+\\.blob\\.core\\.windows\\.net"
-        },
-        "batching": {
-          "$ref": "#/definitions/BatchingConfiguration",
-          "description": "Azure Data Lake endpoint batching configuration."
-        }
-      },
-      "required": [
-        "authentication",
         "host"
       ]
     },
@@ -4080,36 +4095,26 @@
         "method"
       ]
     },
-    "DataflowEndpointFabricOneLake": {
+    "DataflowEndpointDataLakeStorageSettings": {
       "type": "object",
-      "description": "Microsoft Fabric endpoint properties",
+      "description": "Azure Data Lake endpoint properties",
       "properties": {
         "authentication": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLakeAuthentication",
-          "description": "Authentication configuration. NOTE - only one authentication property is allowed per entry."
-        },
-        "names": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLakeNames",
-          "description": "Names of the workspace and lakehouse."
-        },
-        "oneLakePathType": {
-          "$ref": "#/definitions/DataflowEndpointFabricPathType",
-          "description": "Type of location of the data in the workspace. Can be either tables or files."
+          "$ref": "#/definitions/DataflowEndpointDataLakeStorageAuthentication",
+          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
         },
         "host": {
           "type": "string",
-          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.",
-          "pattern": ".+\\.fabric\\.microsoft\\.com"
+          "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
+          "pattern": ".+\\.blob\\.core\\.windows\\.net"
         },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
-          "description": "Batching configuration."
+          "description": "Azure Data Lake endpoint batching configuration."
         }
       },
       "required": [
         "authentication",
-        "names",
-        "oneLakePathType",
         "host"
       ]
     },
@@ -4152,6 +4157,39 @@
         "workspaceName"
       ]
     },
+    "DataflowEndpointFabricOneLakeSettings": {
+      "type": "object",
+      "description": "Microsoft Fabric endpoint properties",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataflowEndpointFabricOneLakeAuthentication",
+          "description": "Authentication configuration. NOTE - only one authentication property is allowed per entry."
+        },
+        "names": {
+          "$ref": "#/definitions/DataflowEndpointFabricOneLakeNames",
+          "description": "Names of the workspace and lakehouse."
+        },
+        "oneLakePathType": {
+          "$ref": "#/definitions/DataflowEndpointFabricPathType",
+          "description": "Type of location of the data in the workspace. Can be either tables or files."
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.",
+          "pattern": ".+\\.fabric\\.microsoft\\.com"
+        },
+        "batching": {
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Batching configuration."
+        }
+      },
+      "required": [
+        "authentication",
+        "names",
+        "oneLakePathType",
+        "host"
+      ]
+    },
     "DataflowEndpointFabricPathType": {
       "type": "string",
       "description": "DataflowEndpoint Fabric Path Type properties",
@@ -4175,170 +4213,6 @@
           }
         ]
       }
-    },
-    "DataflowEndpointKafka": {
-      "type": "object",
-      "description": "Kafka endpoint properties",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointKafkaAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
-        "consumerGroupId": {
-          "type": "string",
-          "description": "Consumer group ID."
-        },
-        "host": {
-          "type": "string",
-          "description": "Kafka endpoint host."
-        },
-        "batching": {
-          "$ref": "#/definitions/DataflowEndpointKafkaBatching",
-          "description": "Batching configuration."
-        },
-        "copyMqttProperties": {
-          "type": "string",
-          "description": "Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled is equivalent to False."
-              }
-            ]
-          }
-        },
-        "compression": {
-          "type": "string",
-          "description": "Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.",
-          "default": "None",
-          "enum": [
-            "None",
-            "Gzip",
-            "Snappy",
-            "Lz4"
-          ],
-          "x-ms-enum": {
-            "name": "DataflowEndpointKafkaCompression",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "None",
-                "description": "NONE Option"
-              },
-              {
-                "name": "Gzip",
-                "value": "Gzip",
-                "description": "Gzip Option"
-              },
-              {
-                "name": "Snappy",
-                "value": "Snappy",
-                "description": "SNAPPY Option"
-              },
-              {
-                "name": "Lz4",
-                "value": "Lz4",
-                "description": "LZ4 Option"
-              }
-            ]
-          }
-        },
-        "kafkaAcks": {
-          "type": "string",
-          "description": "Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.",
-          "default": "All",
-          "enum": [
-            "Zero",
-            "One",
-            "All"
-          ],
-          "x-ms-enum": {
-            "name": "DataflowEndpointKafkaAcks",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Zero",
-                "value": "Zero",
-                "description": "ZERO Option"
-              },
-              {
-                "name": "One",
-                "value": "One",
-                "description": "ONE Option"
-              },
-              {
-                "name": "All",
-                "value": "All",
-                "description": "ALL Option"
-              }
-            ]
-          }
-        },
-        "partitionStrategy": {
-          "type": "string",
-          "description": "Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.",
-          "default": "Default",
-          "enum": [
-            "Default",
-            "Static",
-            "Topic",
-            "Property"
-          ],
-          "x-ms-enum": {
-            "name": "DataflowEndpointKafkaPartitionStrategy",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Default",
-                "value": "Default",
-                "description": "Default: Assigns messages to random partitions, using a round-robin algorithm."
-              },
-              {
-                "name": "Static",
-                "value": "Static",
-                "description": "Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow."
-              },
-              {
-                "name": "Topic",
-                "value": "Topic",
-                "description": "TOPIC Option"
-              },
-              {
-                "name": "Property",
-                "value": "Property",
-                "description": "PROPERTY Option"
-              }
-            ]
-          }
-        },
-        "tls": {
-          "$ref": "#/definitions/TlsProperties",
-          "description": "TLS configuration."
-        },
-        "cloudEventAttributes": {
-          "$ref": "#/definitions/CloudEventAttributeType",
-          "description": "Cloud event mapping config."
-        }
-      },
-      "required": [
-        "authentication",
-        "host"
-      ]
     },
     "DataflowEndpointKafkaAcks": {
       "type": "string",
@@ -4526,7 +4400,171 @@
         ]
       }
     },
-    "DataflowEndpointLocalStorage": {
+    "DataflowEndpointKafkaSettings": {
+      "type": "object",
+      "description": "Kafka endpoint properties",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataflowEndpointKafkaAuthentication",
+          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
+        },
+        "consumerGroupId": {
+          "type": "string",
+          "description": "Consumer group ID."
+        },
+        "host": {
+          "type": "string",
+          "description": "Kafka endpoint host."
+        },
+        "batching": {
+          "$ref": "#/definitions/DataflowEndpointKafkaBatching",
+          "description": "Batching configuration."
+        },
+        "copyMqttProperties": {
+          "type": "string",
+          "description": "Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled is equivalent to True"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled is equivalent to False."
+              }
+            ]
+          }
+        },
+        "compression": {
+          "type": "string",
+          "description": "Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.",
+          "default": "None",
+          "enum": [
+            "None",
+            "Gzip",
+            "Snappy",
+            "Lz4"
+          ],
+          "x-ms-enum": {
+            "name": "DataflowEndpointKafkaCompression",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "NONE Option"
+              },
+              {
+                "name": "Gzip",
+                "value": "Gzip",
+                "description": "Gzip Option"
+              },
+              {
+                "name": "Snappy",
+                "value": "Snappy",
+                "description": "SNAPPY Option"
+              },
+              {
+                "name": "Lz4",
+                "value": "Lz4",
+                "description": "LZ4 Option"
+              }
+            ]
+          }
+        },
+        "kafkaAcks": {
+          "type": "string",
+          "description": "Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.",
+          "default": "All",
+          "enum": [
+            "Zero",
+            "One",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "DataflowEndpointKafkaAcks",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Zero",
+                "value": "Zero",
+                "description": "ZERO Option"
+              },
+              {
+                "name": "One",
+                "value": "One",
+                "description": "ONE Option"
+              },
+              {
+                "name": "All",
+                "value": "All",
+                "description": "ALL Option"
+              }
+            ]
+          }
+        },
+        "partitionStrategy": {
+          "type": "string",
+          "description": "Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "Static",
+            "Topic",
+            "Property"
+          ],
+          "x-ms-enum": {
+            "name": "DataflowEndpointKafkaPartitionStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default: Assigns messages to random partitions, using a round-robin algorithm."
+              },
+              {
+                "name": "Static",
+                "value": "Static",
+                "description": "Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow."
+              },
+              {
+                "name": "Topic",
+                "value": "Topic",
+                "description": "TOPIC Option"
+              },
+              {
+                "name": "Property",
+                "value": "Property",
+                "description": "PROPERTY Option"
+              }
+            ]
+          }
+        },
+        "tls": {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "TLS configuration."
+        },
+        "cloudEventAttributes": {
+          "$ref": "#/definitions/CloudEventAttributeType",
+          "description": "Cloud event mapping config."
+        }
+      },
+      "required": [
+        "authentication",
+        "host"
+      ]
+    },
+    "DataflowEndpointLocalStorageSettings": {
       "type": "object",
       "description": "Local persistent volume endpoint properties",
       "properties": {
@@ -4539,7 +4577,36 @@
         "persistentVolumeClaimRef"
       ]
     },
-    "DataflowEndpointMqtt": {
+    "DataflowEndpointMqttAuthentication": {
+      "type": "object",
+      "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/MqttAuthMethod",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        },
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
+          "description": "Kubernetes service account token authentication. Default audience if not set is aio-internal"
+        },
+        "x509CertificateSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "DataflowEndpointMqttSettings": {
       "type": "object",
       "description": "Broker endpoint properties",
       "properties": {
@@ -4646,35 +4713,6 @@
         "authentication"
       ]
     },
-    "DataflowEndpointMqttAuthentication": {
-      "type": "object",
-      "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/MqttAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
-        "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
-          "description": "Kubernetes service account token authentication. Default audience if not set is aio-internal"
-        },
-        "x509CertificateSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
     "DataflowEndpointProperties": {
       "type": "object",
       "description": "DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
@@ -4683,36 +4721,13 @@
           "$ref": "#/definitions/EndpointType",
           "description": "Endpoint Type."
         },
-        "dataExplorerSettings": {
-          "$ref": "#/definitions/DataflowEndpointDataExplorer",
-          "description": "Azure Data Explorer endpoint."
-        },
-        "dataLakeStorageSettings": {
-          "$ref": "#/definitions/DataflowEndpointDataLakeStorage",
-          "description": "Azure Data Lake endpoint."
-        },
-        "fabricOneLakeSettings": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLake",
-          "description": "Microsoft Fabric endpoint."
-        },
-        "kafkaSettings": {
-          "$ref": "#/definitions/DataflowEndpointKafka",
-          "description": "Kafka endpoint."
-        },
-        "localStorageSettings": {
-          "$ref": "#/definitions/DataflowEndpointLocalStorage",
-          "description": "Local persistent volume endpoint."
-        },
-        "mqttSettings": {
-          "$ref": "#/definitions/DataflowEndpointMqtt",
-          "description": "Broker endpoint."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
       },
+      "discriminator": "endpointType",
       "required": [
         "endpointType"
       ]
@@ -5169,6 +5184,25 @@
       "$ref": "#/definitions/ManagedIdentityMethod",
       "x-nullable": false
     },
+    "FabricOneLakeEndpoint": {
+      "type": "object",
+      "description": "Microsoft Fabric endpoint.",
+      "properties": {
+        "fabricOneLakeSettings": {
+          "$ref": "#/definitions/DataflowEndpointFabricOneLakeSettings",
+          "description": "Microsoft Fabric endpoint."
+        }
+      },
+      "required": [
+        "fabricOneLakeSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "FabricOneLake"
+    },
     "FilterType": {
       "type": "string",
       "description": "Filter Type properties",
@@ -5379,6 +5413,25 @@
         ]
       }
     },
+    "KafkaEndpoint": {
+      "type": "object",
+      "description": "Kafka endpoint.",
+      "properties": {
+        "kafkaSettings": {
+          "$ref": "#/definitions/DataflowEndpointKafkaSettings",
+          "description": "Kafka endpoint."
+        }
+      },
+      "required": [
+        "kafkaSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Kafka"
+    },
     "KubernetesReference": {
       "type": "object",
       "description": "Kubernetes reference",
@@ -5487,6 +5540,25 @@
         "name"
       ]
     },
+    "LocalStorageEndpoint": {
+      "type": "object",
+      "description": "Local persistent volume endpoint.",
+      "properties": {
+        "localStorageSettings": {
+          "$ref": "#/definitions/DataflowEndpointLocalStorageSettings",
+          "description": "Local persistent volume endpoint."
+        }
+      },
+      "required": [
+        "localStorageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "LocalStorage"
+    },
     "ManagedIdentity": {
       "type": "object",
       "description": "System and Use Assigned Managed Identity properties",
@@ -5594,6 +5666,25 @@
           }
         ]
       }
+    },
+    "MqttEndpoint": {
+      "type": "object",
+      "description": "Broker endpoint.",
+      "properties": {
+        "mqttSettings": {
+          "$ref": "#/definitions/DataflowEndpointMqttSettings",
+          "description": "Broker endpoint."
+        }
+      },
+      "required": [
+        "mqttSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowEndpointProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Mqtt"
     },
     "MqttRetainType": {
       "type": "string",
