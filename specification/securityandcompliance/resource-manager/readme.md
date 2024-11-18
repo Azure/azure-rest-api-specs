@@ -78,7 +78,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
-### Go
+## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
