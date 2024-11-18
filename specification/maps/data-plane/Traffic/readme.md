@@ -51,6 +51,10 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 ``` yaml $(tag) == 'package-2025-04-01'
 input-file:
   - preview/2025-04-01/traffic.json
+
+suppressions:
+  - code: OperationIdNounVerb
+    reason: False alarm. The OperationId used here "Traffic_GetTrafficIncidentDetail" has already been in the NOUN_VERB format.
 ```
 
 # Code Generation
