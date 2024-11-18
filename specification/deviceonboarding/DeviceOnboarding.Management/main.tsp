@@ -3,6 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./discoveryServices.tsp";
+import "./ownershipVoucherPublicKeys.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,15 +21,27 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.DeviceOnboarding;
 
-/** Onboarding Service API versions */
+/** Services API versions */
 enum Versions {
+  @doc("Microsoft.DeviceOnboarding Resource Provider management API version 2024-11-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-11-01-preview`,
+  v2024_11_01_preview: "2024-11-01-preview",
+
+  @doc("Microsoft.DeviceOnboarding Resource Provider management API version 2024-12-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_12_01_preview: "2024-12-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Resource create or update operation completed successfully.")
+model ResourceUpdatedResponse<T> is ArmResponse<T>;
+
+// ------------------------------------------------------------------
+// Section 1: Onboarding Service
+// ------------------------------------------------------------------
 // Root-level tracked resource: provisioning resource
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
@@ -48,7 +63,7 @@ model OnboardingService
 model OnboardingServiceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @visibility("read")
   @doc("The onboarding service device endpoints.")
@@ -92,9 +107,6 @@ union PublicNetworkAccessOptions {
   Disabled: "Disabled",
 }
 
-@doc("Resource create or update operation completed successfully.")
-model ResourceUpdatedResponse<T> is ArmResponse<T>;
-
 @armResourceOperations
 interface OnboardingServices {
   get is ArmResourceRead<OnboardingService>;
@@ -108,10 +120,12 @@ interface OnboardingServices {
   listBySubscription is ArmListBySubscription<OnboardingService>;
 }
 
-// Child resource: provisioning policy
+// ------------------------------------------------------------------
+// Section 3: Policy Service (Child resource: onboarding policy)
+// ------------------------------------------------------------------
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
-@doc("A provisioning policy resource.")
+@doc("An onboarding policy resource.")
 @parentResource(OnboardingService)
 model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
@@ -135,7 +149,7 @@ model PolicyProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("The bootstrap authentication rule.")
   bootstrapAuthentication: BootstrapAuthenticationRule;
@@ -175,7 +189,6 @@ model SelectedIdentity {
   resourceId?: SelectedIdentityResourceId;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$")
 scalar SelectedIdentityResourceId
   extends armResourceIdentifier<[
     {
@@ -200,6 +213,10 @@ union OnboardingResourceType {
 
   @doc("Azure device registry device. Microsoft.DeviceRegistry/devices")
   DeviceRegistryDevice: "Microsoft.DeviceRegistry/devices",
+
+  @doc("Azure device registry namespace device. Microsoft.DeviceRegistry/namespaces/devices")
+  @added(Versions.v2024_12_01_preview)
+  DeviceRegistryNamespaceDevice: "Microsoft.DeviceRegistry/namespaces/devices",
 
   @doc("Arc enabled device. Microsoft.HybridCompute/machines")
   HybridComputeMachine: "Microsoft.HybridCompute/machines",
@@ -228,9 +245,42 @@ model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
   resourceMetadata?: ResourceMetadata; // for customer to label the devices
 }
 
-@doc("Details of the OnboardingService Discovery Policy.")
-model DiscoveryPolicyResourceDetails extends PolicyResourceDetails {
-  @doc("The policy resource type for device registry devices.")
+@doc("Details of the OnboardingService Device Registry Namespace Policy.")
+@added(Versions.v2024_12_01_preview)
+model DeviceRegistryNamespacePolicyResourceDetails
+  extends PolicyResourceDetails {
+  @doc("The policy resource type for device registry namespace devices.")
+  type: OnboardingResourceType.DeviceRegistryNamespaceDevice;
+
+  @doc("The just-in-time connection properties for device registry namespace devices.")
+  jitProperties?: DeviceRegistryNamespaceDeviceJitProperties;
+
+  @doc("Identity information.")
+  operationalIdentityInfo?: IdentityInfo;
+
+  @doc("Resource metadata.")
+  resourceMetadata?: ResourceMetadata; // for customer to label the devices
+}
+
+@doc("The just-in-time connection properties for device registry namespace devices.")
+@added(Versions.v2024_12_01_preview)
+model DeviceRegistryNamespaceDeviceJitProperties {
+  @doc("Resource id of the device registry namespace, required for device type Microsoft.DeviceRegistry/namespaces/devices")
+  namespaceResourceId: DeviceRegistryNamespaceResourceId;
+}
+
+@added(Versions.v2024_12_01_preview)
+scalar DeviceRegistryNamespaceResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces",
+    }
+  ]>;
+
+@doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
+@renamedFrom(Versions.v2024_12_01_preview, "DiscoveryPolicyResourceDetails")
+model HybridComputePolicyResourceDetails extends PolicyResourceDetails {
+  @doc("The policy resource type for hybrid compute machines.")
   type: OnboardingResourceType.HybridComputeMachine;
 }
 
@@ -241,27 +291,89 @@ union BootstrapAuthenticationType {
   @doc("The X509 authentication type.")
   X509: "X509",
 
+  @added(Versions.v2024_11_01_preview)
+  @removed(Versions.v2024_12_01_preview)
   @doc("The discovery authentication type.")
   Discovery: "Discovery",
-  // PM: how does user understand this auth type & the device behavior/requirements
-  // TODO name confirmation with PMs
 
-  // @doc("The FDO authentication type.")
-  // FDO,
+  @added(Versions.v2024_12_01_preview)
+  @doc("The FDO authentication type.")
+  FDO: "FDO",
 }
 
-// @doc("The FDO-based authentication rule for bootstrapping.")
-// model FDOBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
-//   @doc("The type of authentication rule.")
-//   type: BootstrapAuthenticationType.FDO;
+@doc("The FDO-based authentication rule for bootstrapping.")
+@added(Versions.v2024_12_01_preview)
+model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
+  @doc("The type of authentication rule.")
+  type: BootstrapAuthenticationType.FDO;
 
-//   @visibility("read")
-//   publicKey?: bytes;
+  @visibility("read")
+  @doc("Per policy public key(s) to extend ownership voucher to the customer.")
+  publicKeys?: FdoPublicKeys;
 
-//   @doc("OV storage link")
-//   ovStorage?: string;
-//   // TODO: Determine if this is required field and can customers update this once created?
-// }
+  @doc("Ownership Voucher storage")
+  ownershipVoucherStorage?: OwnershipVoucherStorage;
+
+  @doc("Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com")
+  rendezvousEndpoint?: url;
+}
+
+@doc("Owner public keys to extend ownership voucher to the customer.")
+@added(Versions.v2024_12_01_preview)
+model FdoPublicKeys {
+  @doc("Public key as x5C with encryption type SECP256R1.")
+  @visibility("read")
+  secp256R1?: FdoPublicKey;
+
+  // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
+}
+
+@doc("Owner public key model")
+@added(Versions.v2024_12_01_preview)
+model FdoPublicKey {
+  @doc("x5Chain representation of the public key.")
+  @visibility("read")
+  default?: bytes[];
+  // status: boolean; // To be added later.
+}
+
+@doc("Generic Ownership Voucher Storage type.")
+@added(Versions.v2024_12_01_preview)
+@discriminator("ownershipVoucherStorageType")
+model OwnershipVoucherStorage {
+  @doc("The Ownership Voucher Storage type.")
+  ownershipVoucherStorageType: OwnershipVoucherStorageType;
+}
+
+@doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
+@added(Versions.v2024_12_01_preview)
+model StorageAccountOwnershipVoucherStorage extends OwnershipVoucherStorage {
+  @doc("The Ownership Voucher Storage type.")
+  ownershipVoucherStorageType: OwnershipVoucherStorageType.AzureBlobStorage;
+
+  @doc("The storage resource id")
+  resourceId: StorageAccountResourceId;
+
+  @doc("Endpoint URL for the storage container. e.g: https://contoso.blob.core.windows.net/mycontainer")
+  containerUri: url;
+}
+
+@added(Versions.v2024_12_01_preview)
+scalar StorageAccountResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts",
+    }
+  ]>;
+
+@doc("The Ownership Voucher Storage Type.")
+@added(Versions.v2024_12_01_preview)
+union OwnershipVoucherStorageType {
+  string,
+
+  @doc("The Storage Account Ownership Voucher Storage type.")
+  AzureBlobStorage: "Microsoft.Storage/storageAccounts",
+}
 
 @doc("The authentication rule for bootstrap.")
 @discriminator("type")
@@ -298,6 +410,8 @@ model X509BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   secondaryCertificate?: X509Certificate;
 }
 
+@added(Versions.v2024_11_01_preview)
+@removed(Versions.v2024_12_01_preview)
 @doc("The Discovery-based authentication rule for bootstrapping.")
 model DiscoveryBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
@@ -374,7 +488,6 @@ model AllocationEndpoint {
   hostName: string;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+)$")
 scalar AllocationEndpointResourceId
   extends armResourceIdentifier<[
     {
@@ -569,7 +682,19 @@ model ResourceMetadata {
   customAttributes?: Record<unknown>;
 }
 
-/** Patch Models */
+@armResourceOperations
+interface Policies {
+  get is ArmResourceRead<Policy>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
+  delete is ArmResourceDeleteWithoutOkAsync<Policy>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<Policy, PolicyPatch>;
+  listByParent is ArmResourceListByParent<Policy>;
+}
+
+// ------------------------------------------------------------------
+// Section 3.1: Policy Service Patch Models
+// ------------------------------------------------------------------
 @doc("Onboarding policy model for patch.")
 model PolicyPatch {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -589,7 +714,7 @@ model PolicyPatchProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @doc("The bootstrap authentication rule.")
   bootstrapAuthentication?: PatchBootstrapAuthenticationRule;
@@ -631,13 +756,6 @@ model PatchX509BootstrapAuthenticationRule
   secondaryCertificate?: PatchX509Certificate;
 }
 
-@doc("The Discovery-based authentication rule for bootstrapping.")
-model PatchDiscoveryBootstrapAuthenticationRule
-  extends PatchBootstrapAuthenticationRule {
-  @doc("The type of authentication rule.")
-  type: BootstrapAuthenticationType.Discovery;
-}
-
 @doc("X509 Certificate.")
 model PatchX509Certificate {
   @doc("The certificate.")
@@ -659,6 +777,55 @@ model PatchSelectedIdentity {
 
   @doc("Resource id of the UserAssigned identity.")
   resourceId?: SelectedIdentityResourceId;
+}
+
+@added(Versions.v2024_11_01_preview)
+@removed(Versions.v2024_12_01_preview)
+@doc("The Discovery-based authentication rule for bootstrapping.")
+model PatchDiscoveryBootstrapAuthenticationRule
+  extends PatchBootstrapAuthenticationRule {
+  @doc("The type of authentication rule.")
+  type: BootstrapAuthenticationType.Discovery;
+}
+
+@doc("The FDO-based authentication rule for bootstrapping.")
+@added(Versions.v2024_12_01_preview)
+model PatchFdoBootstrapAuthenticationRule
+  extends PatchBootstrapAuthenticationRule {
+  @doc("The type of authentication rule.")
+  type: BootstrapAuthenticationType.FDO;
+
+  @visibility("read")
+  @doc("Per policy public keys to represent this policy")
+  publicKeys?: FdoPublicKeys;
+
+  @doc("Ownership Voucher storage link")
+  ownershipVoucherStorage?: OwnershipVoucherStorage;
+
+  @doc("Endpoint for the rendezvous service, e.g. https://contoso-rv1.contoso.com")
+  rendezvousEndpoint?: url;
+}
+
+@doc("Generic Ownership Voucher Storage type.")
+@added(Versions.v2024_12_01_preview)
+@discriminator("ownershipVoucherStorageType")
+model PatchOwnershipVoucherStorage {
+  @doc("The Ownership Voucher Storage type.")
+  ownershipVoucherStorageType: OwnershipVoucherStorageType;
+}
+
+@doc("Storage Account Ownership Voucher Storage. Policy MI is used to access this storage")
+@added(Versions.v2024_12_01_preview)
+model PatchStorageAccountOwnershipVoucherStorage
+  extends PatchOwnershipVoucherStorage {
+  @doc("The Ownership Voucher Storage type.")
+  ownershipVoucherStorageType: OwnershipVoucherStorageType.AzureBlobStorage;
+
+  @doc("The storage resource id")
+  resourceId?: StorageAccountResourceId;
+
+  @doc("Endpoint URI for the storage account") // TODO: determine correct example here
+  containerUri?: url;
 }
 
 @doc("The rule for Just-in-time connection.")
@@ -700,9 +867,31 @@ model PatchDeviceRegistryPolicyResourceDetails
   resourceMetadata?: ResourceMetadata; // for customer to label the devices
 }
 
-@doc("Details of the OnboardingService Discovery Policy.")
-model PatchDiscoveryPolicyResourceDetails extends PolicyPatchResourceDetails {
-  @doc("The policy resource type for device registry devices.")
+@doc("Details of the OnboardingService Device Registry Namespace Policy.")
+@added(Versions.v2024_12_01_preview)
+model PatchDeviceRegistryNamespacePolicyResourceDetails
+  extends PolicyPatchResourceDetails {
+  @doc("The policy resource type for device registry namespace devices.")
+  type: OnboardingResourceType.DeviceRegistryNamespaceDevice;
+
+  @doc("The just-in-time connection properties for device registry namespace devices.")
+  jitProperties?: DeviceRegistryNamespaceDeviceJitProperties;
+
+  @doc("Identity information.")
+  operationalIdentityInfo?: IdentityInfo;
+
+  @doc("Resource metadata.")
+  resourceMetadata?: ResourceMetadata; // for customer to label the devices
+}
+
+@doc("Details of the OnboardingService Hybrid Compute Machines Policy.")
+@renamedFrom(
+  Versions.v2024_12_01_preview,
+  "PatchDiscoveryPolicyResourceDetails"
+)
+model PatchHybridComputePolicyResourceDetails
+  extends PolicyPatchResourceDetails {
+  @doc("The policy resource type for hybrid compute machines.")
   type: OnboardingResourceType.HybridComputeMachine;
 }
 
@@ -742,18 +931,9 @@ model PatchAllocationEndpoint {
 
 // End Patch Models
 
-@armResourceOperations
-interface Policies {
-  get is ArmResourceRead<Policy>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
-  delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  @parameterVisibility
-  update is ArmCustomPatchAsync<Policy, PolicyPatch>;
-  listByParent is ArmResourceListByParent<Policy>;
-}
-
-// Extension resource: device state
-
+// ------------------------------------------------------------------
+// Section 4: Extension resource: device state
+// ------------------------------------------------------------------
 @singleton
 @doc("The provisioning state of a device.")
 model DeviceState
@@ -766,7 +946,6 @@ model DeviceState
   name: string;
 }
 
-@pattern("^/subscriptions/(.+?)/resourceGroups/(.+?)/providers/(.+?)/onboardingServices/(.+?)/policies/(.+)$")
 scalar PolicyResourceId
   extends armResourceIdentifier<[
     {
@@ -794,12 +973,12 @@ model DeviceStateProperties {
   @pattern("^([a-z0-9-._:]{0,127}[a-z0-9-])$")
   registrationId: string;
 
+  @doc("Indicates if the device is enabled for discovery")
+  discoveryEnabled?: DiscoveryOptions;
+
   @visibility("read", "create", "update")
   @doc("Onboarding status of the resource this DeviceState extends")
   onboardingStatus: OnboardingStatus;
-
-  @doc("Indicates if the device is enabled for discovery")
-  discoveryEnabled?: DiscoveryOptions;
 
   @doc("The onboarding policy resource id")
   policyResourceId: PolicyResourceId;
@@ -811,11 +990,12 @@ model DeviceStateProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
-  // @visibility("read")
-  // @doc("TTL until the device can be discovered.")
-  // discoverableUntilDate?: string;
+  @added(Versions.v2024_12_01_preview)
+  @visibility("read")
+  @doc("Indicates the maximum date and time by which a device can be onboarded, in utcDateTime format")
+  onboardUntilDate?: utcDateTime;
 }
 
 @doc("Options for enabling or disabling devices for discovery.")
@@ -843,6 +1023,13 @@ union OnboardingStatus {
   Failed: "Failed",
 }
 
+@doc("The properties passed in the prepareForOnboarding POST request.")
+@added(Versions.v2024_12_01_preview)
+model PrepareForOnboardingProperties {
+  @doc("Desired maximum duration by which a device can be onboarded")
+  ttl: duration; // TODO, determine min/max enforcement, correct format here
+}
+
 @armResourceOperations
 interface DeviceStates {
   get is ArmResourceRead<DeviceState>;
@@ -850,4 +1037,9 @@ interface DeviceStates {
   delete is ArmResourceDeleteSync<DeviceState>;
   update is ArmResourcePatchSync<DeviceState, DeviceStateProperties>;
   listByParent is ArmResourceListByParent<DeviceState>;
+  @added(Versions.v2024_12_01_preview)
+  prepareForOnboarding is ArmResourceActionNoResponseContentAsync<
+    DeviceState,
+    PrepareForOnboardingProperties
+  >; // TODO: revisit error response body after private RP testing if needed
 }
