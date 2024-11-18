@@ -67,7 +67,7 @@ union MessageActionBindingKind {
   whatsAppButton: "whatsAppButton",
 
   @doc("The WhatsApp Url action binding kind.")
-  whatsAppQuickAction: "whatsAppQuickAction",
+  whatsAppUrlAction: "whatsAppUrlAction",
 }
 
 @doc("The InteractiveMessage action kind.")
@@ -372,12 +372,13 @@ model UrlContent extends MessageContent {
   @doc("Title of the url content.")
   title: string;
 
-  ...MediaMessageContent;
+  @doc("The url in the content.")
+  url: url;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The message content of type List information.")
-model ListContent extends MessageContent {
+model ActionSetContent extends MessageContent {
   @doc("Message content kind is list.")
   kind: MessageContentKind.list;
 
@@ -385,22 +386,22 @@ model ListContent extends MessageContent {
   title: string;
 
   @doc("Sections for list content.")
-  sections: ListSection[];
+  actionSet: ActionSet[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The List section content.")
-model ListSection {
+@doc("The Action Set content.")
+model ActionSet {
   @doc("Title of the List section.")
   title: string;
 
   @doc("List of values for List section.")
-  values: ListItem[];
+  items: ActionSetItem[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The List item content.")
-model ListItem {
+@doc("The Action set item in the content.")
+model ActionSetItem {
   @doc("Id of the List Item.")
   id: string;
 
@@ -415,7 +416,7 @@ model ListItem {
 @doc("The message content of type media.")
 model MediaMessageContent {
   @doc("MediaUri of the media content.")
-  mediaUri: string;
+  mediaUri: url;
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -445,9 +446,9 @@ model WhatsAppButtonActionBindings extends ActionBindings {
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
-model WhatsAppQuickActionBindings extends ActionBindings {
+model WhatsAppUrlActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
-  actionBindingKind: MessageActionBindingKind.whatsAppQuickAction;
+  actionBindingKind: MessageActionBindingKind.whatsAppUrlAction;
 }
 
 @doc("A request to send a template notification.")

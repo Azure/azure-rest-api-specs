@@ -338,6 +338,78 @@
         "actions"
       ]
     },
+    "ActionSet": {
+      "type": "object",
+      "description": "The Action Set content.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the List section."
+        },
+        "items": {
+          "type": "array",
+          "description": "List of values for List section.",
+          "items": {
+            "$ref": "#/definitions/ActionSetItem"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "items"
+      ]
+    },
+    "ActionSetContent": {
+      "type": "object",
+      "description": "The message content of type List information.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the list content."
+        },
+        "actionSet": {
+          "type": "array",
+          "description": "Sections for list content.",
+          "items": {
+            "$ref": "#/definitions/ActionSet"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "title",
+        "actionSet"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "list"
+    },
+    "ActionSetItem": {
+      "type": "object",
+      "description": "The Action set item in the content.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the List Item."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the List Item."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the List Item."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description"
+      ]
+    },
     "AudioNotificationContent": {
       "type": "object",
       "description": "A request to send an audio notification.",
@@ -544,6 +616,7 @@
       "properties": {
         "mediaUri": {
           "type": "string",
+          "format": "uri",
           "description": "MediaUri of the media content."
         }
       },
@@ -591,6 +664,7 @@
       "properties": {
         "mediaUri": {
           "type": "string",
+          "format": "uri",
           "description": "MediaUri of the media content."
         }
       },
@@ -673,78 +747,6 @@
       ],
       "x-ms-discriminator-value": "interactive"
     },
-    "ListContent": {
-      "type": "object",
-      "description": "The message content of type List information.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the list content."
-        },
-        "sections": {
-          "type": "array",
-          "description": "Sections for list content.",
-          "items": {
-            "$ref": "#/definitions/ListSection"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "title",
-        "sections"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageContent"
-        }
-      ],
-      "x-ms-discriminator-value": "list"
-    },
-    "ListItem": {
-      "type": "object",
-      "description": "The List item content.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the List Item."
-        },
-        "title": {
-          "type": "string",
-          "description": "Title of the List Item."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the List Item."
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "description"
-      ]
-    },
-    "ListSection": {
-      "type": "object",
-      "description": "The List section content.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the List section."
-        },
-        "values": {
-          "type": "array",
-          "description": "List of values for List section.",
-          "items": {
-            "$ref": "#/definitions/ListItem"
-          }
-        }
-      },
-      "required": [
-        "title",
-        "values"
-      ]
-    },
     "MediaNotificationContent": {
       "type": "object",
       "description": "@deprecated A request to send an image notification.",
@@ -775,7 +777,7 @@
       "enum": [
         "whatsAppList",
         "whatsAppButton",
-        "whatsAppQuickAction"
+        "whatsAppUrlAction"
       ],
       "x-ms-enum": {
         "name": "MessageActionBindingKind",
@@ -792,8 +794,8 @@
             "description": "The WhatsApp Button action binding kind."
           },
           {
-            "name": "whatsAppQuickAction",
-            "value": "whatsAppQuickAction",
+            "name": "whatsAppUrlAction",
+            "value": "whatsAppUrlAction",
             "description": "The WhatsApp Url action binding kind."
           }
         ]
@@ -1412,14 +1414,15 @@
           "type": "string",
           "description": "Title of the url content."
         },
-        "mediaUri": {
+        "url": {
           "type": "string",
-          "description": "MediaUri of the media content."
+          "format": "uri",
+          "description": "The url in the content."
         }
       },
       "required": [
         "title",
-        "mediaUri"
+        "url"
       ],
       "allOf": [
         {
@@ -1434,6 +1437,7 @@
       "properties": {
         "mediaUri": {
           "type": "string",
+          "format": "uri",
           "description": "MediaUri of the media content."
         }
       },
@@ -1605,7 +1609,7 @@
       ],
       "x-ms-discriminator-value": "whatsApp"
     },
-    "WhatsAppQuickActionBindings": {
+    "WhatsAppUrlActionBindings": {
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
       "allOf": [
@@ -1613,7 +1617,7 @@
           "$ref": "#/definitions/ActionBindings"
         }
       ],
-      "x-ms-discriminator-value": "whatsAppQuickAction"
+      "x-ms-discriminator-value": "whatsAppUrlAction"
     }
   },
   "parameters": {
