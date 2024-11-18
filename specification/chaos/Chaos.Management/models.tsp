@@ -14,9 +14,6 @@ namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@parentResource(ArmLocationResource<"Subscription">)
-model OperationStatus is Azure.ResourceManager.ArmOperationStatus;
-
 alias ParentResourceParameters = {
   @doc("The parent resource provider namespace.")
   @path

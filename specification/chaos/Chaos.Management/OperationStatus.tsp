@@ -11,6 +11,19 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
+/**
+ * Chaos Studio async operation status resource.
+ */
+@parentResource(ArmLocationResource<"Subscription">)
+model OperationStatus
+  is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.ArmOperationStatus> {
+  ...ResourceNameParameter<
+    Resource = OperationStatus,
+    KeyName = "id",
+    SegmentName = "operationStatuses"
+  >;
+}
+
 @armResourceOperations
 interface OperationStatuses {
   @doc("Get the status of an operation.")
