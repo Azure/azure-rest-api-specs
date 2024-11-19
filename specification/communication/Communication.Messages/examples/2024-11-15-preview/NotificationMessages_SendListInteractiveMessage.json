@@ -24,45 +24,43 @@
           "kind": "text"
         },
         "actionBindings": {
-          "actionBindingKind": "whatsAppList",
-          "actions": [
-            {
-              "actionSet": [
-                {
-                  "title": "I want it ASAP!",
-                  "items": [
-                    {
-                      "id": "priority_express",
-                      "title": "Priority Mail Express",
-                      "description": "Next Day to 2 Days"
-                    },
-                    {
-                      "id": "priority_mail",
-                      "title": "Priority Mail",
-                      "description": "1–3 Days"
-                    }
-                  ]
-                },
-                {
-                  "title": "I can wait a bit",
-                  "items": [
-                    {
-                      "id": "usps_ground_advantage",
-                      "title": "USPS Ground Advantage",
-                      "description": "2–5 Days"
-                    },
-                    {
-                      "id": "media_mail",
-                      "title": "Media Mail",
-                      "description": "2–8 Days"
-                    }
-                  ]
-                }
-              ],
-              "kind": "list",
-              "title": "Shipping Options"
-            }
-          ]
+          "actionBindingKind": "whatsAppListAction",
+          "action": {
+            "title": "Shipping Options",
+            "actionSet": [
+              {
+                "title": "I want it ASAP!",
+                "actionSetItems": [
+                  {
+                    "id": "priority_express",
+                    "title": "Priority Mail Express",
+                    "description": "Next Day to 2 Days"
+                  },
+                  {
+                    "id": "priority_mail",
+                    "title": "Priority Mail",
+                    "description": "1–3 Days"
+                  }
+                ]
+              },
+              {
+                "title": "I can wait a bit",
+                "actionSetItems": [
+                  {
+                    "id": "usps_ground_advantage",
+                    "title": "USPS Ground Advantage",
+                    "description": "2–5 Days"
+                  },
+                  {
+                    "id": "media_mail",
+                    "title": "Media Mail",
+                    "description": "2–8 Days"
+                  }
+                ]
+              }
+            ],
+            "kind": "actionSet"
+          }
         }
       }
     },

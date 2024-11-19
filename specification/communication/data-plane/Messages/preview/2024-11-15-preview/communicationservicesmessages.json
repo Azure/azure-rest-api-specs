@@ -323,19 +323,15 @@
           "$ref": "#/definitions/MessageActionBindingKind",
           "description": "Kind of MessageActionBinding."
         },
-        "actions": {
-          "type": "array",
-          "description": "List of actions for Interactive message.",
-          "items": {
-            "$ref": "#/definitions/MessageContent"
-          },
-          "x-ms-identifiers": []
+        "action": {
+          "$ref": "#/definitions/MessageContent",
+          "description": "List of actions for Interactive message."
         }
       },
       "discriminator": "actionBindingKind",
       "required": [
         "actionBindingKind",
-        "actions"
+        "action"
       ]
     },
     "ActionSet": {
@@ -344,11 +340,11 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "Title of the List section."
+          "description": "Title of the section."
         },
         "items": {
           "type": "array",
-          "description": "List of values for List section.",
+          "description": "List of values for section.",
           "items": {
             "$ref": "#/definitions/ActionSetItem"
           }
@@ -361,15 +357,15 @@
     },
     "ActionSetContent": {
       "type": "object",
-      "description": "The message content of type List information.",
+      "description": "The message content of type ActionSet information.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "Title of the list content."
+          "description": "Title of the actionSet content."
         },
         "actionSet": {
           "type": "array",
-          "description": "Sections for list content.",
+          "description": "Sections for actionSet content.",
           "items": {
             "$ref": "#/definitions/ActionSet"
           },
@@ -385,7 +381,7 @@
           "$ref": "#/definitions/MessageContent"
         }
       ],
-      "x-ms-discriminator-value": "list"
+      "x-ms-discriminator-value": "actionSet"
     },
     "ActionSetItem": {
       "type": "object",
@@ -393,15 +389,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id of the List Item."
+          "description": "Id of the Item."
         },
         "title": {
           "type": "string",
-          "description": "Title of the List Item."
+          "description": "Title of the Item."
         },
         "description": {
           "type": "string",
-          "description": "Description of the List Item."
+          "description": "Description of the Item."
         }
       },
       "required": [
@@ -512,13 +508,29 @@
       "required": [
         "id",
         "title"
+      ]
+    },
+    "ButtonSetContent": {
+      "type": "object",
+      "description": "The message content of type Button information.",
+      "properties": {
+        "buttons": {
+          "type": "array",
+          "description": "Unique Id of the button content.",
+          "items": {
+            "$ref": "#/definitions/ButtonContent"
+          }
+        }
+      },
+      "required": [
+        "buttons"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/MessageContent"
         }
       ],
-      "x-ms-discriminator-value": "button"
+      "x-ms-discriminator-value": "buttonSet"
     },
     "CommunicationMessageKind": {
       "type": "string",
@@ -775,8 +787,8 @@
       "type": "string",
       "description": "The Message action binding Kind like WhatsAppList.",
       "enum": [
-        "whatsAppList",
-        "whatsAppButton",
+        "whatsAppListAction",
+        "whatsAppButtonAction",
         "whatsAppUrlAction"
       ],
       "x-ms-enum": {
@@ -784,13 +796,13 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "whatsAppList",
-            "value": "whatsAppList",
+            "name": "whatsAppListAction",
+            "value": "whatsAppListAction",
             "description": "The WhatsApp List action binding kind."
           },
           {
-            "name": "whatsAppButton",
-            "value": "whatsAppButton",
+            "name": "whatsAppButtonAction",
+            "value": "whatsAppButtonAction",
             "description": "The WhatsApp Button action binding kind."
           },
           {
@@ -823,8 +835,8 @@
         "image",
         "video",
         "document",
-        "list",
-        "button",
+        "actionSet",
+        "buttonSet",
         "url"
       ],
       "x-ms-enum": {
@@ -852,13 +864,13 @@
             "description": "The document action type."
           },
           {
-            "name": "list",
-            "value": "list",
+            "name": "actionSet",
+            "value": "actionSet",
             "description": "The List action type."
           },
           {
-            "name": "button",
-            "value": "button",
+            "name": "buttonSet",
+            "value": "buttonSet",
             "description": "The Button action type."
           },
           {
@@ -1483,7 +1495,7 @@
           "$ref": "#/definitions/ActionBindings"
         }
       ],
-      "x-ms-discriminator-value": "whatsAppButton"
+      "x-ms-discriminator-value": "whatsAppButtonAction"
     },
     "WhatsAppListActionBindings": {
       "type": "object",
@@ -1493,7 +1505,7 @@
           "$ref": "#/definitions/ActionBindings"
         }
       ],
-      "x-ms-discriminator-value": "whatsAppList"
+      "x-ms-discriminator-value": "whatsAppListAction"
     },
     "WhatsAppMessageButtonSubType": {
       "type": "string",

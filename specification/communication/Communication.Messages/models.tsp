@@ -61,10 +61,10 @@ union MessageActionBindingKind {
   string,
 
   @doc("The WhatsApp List action binding kind.")
-  whatsAppList: "whatsAppList",
+  whatsAppListAction: "whatsAppListAction",
 
   @doc("The WhatsApp Button action binding kind.")
-  whatsAppButton: "whatsAppButton",
+  whatsAppButtonAction: "whatsAppButtonAction",
 
   @doc("The WhatsApp Url action binding kind.")
   whatsAppUrlAction: "whatsAppUrlAction",
@@ -87,10 +87,10 @@ union MessageContentKind {
   document: "document",
 
   @doc("The List action type.")
-  list: "list",
+  actionSet: "actionSet",
 
   @doc("The Button action type.")
-  button: "button",
+  buttonSet: "buttonSet",
 
   @doc("The Url action type.")
   url: "url",
@@ -352,15 +352,22 @@ model VideoMessageContent extends MessageContent {
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The message content of type Button information.")
-model ButtonContent extends MessageContent {
-  @doc("Message content kind is Button.")
-  kind: MessageContentKind.button;
-
+model ButtonContent {
   @doc("Unique Id of the button content.")
   id: string;
 
   @doc("Title of the button content.")
   title: string;
+}
+
+@added(Versions.c2024_11_15_Preview)
+@doc("The message content of type Button information.")
+model ButtonSetContent extends MessageContent {
+  @doc("Message content kind is Button.")
+  kind: MessageContentKind.buttonSet;
+
+  @doc("Unique Id of the button content.")
+  buttons: ButtonContent[];
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -377,38 +384,38 @@ model UrlContent extends MessageContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The message content of type List information.")
+@doc("The message content of type ActionSet information.")
 model ActionSetContent extends MessageContent {
-  @doc("Message content kind is list.")
-  kind: MessageContentKind.list;
+  @doc("Message content kind is actionSet.")
+  kind: MessageContentKind.actionSet;
 
-  @doc("Title of the list content.")
+  @doc("Title of the actionSet content.")
   title: string;
 
-  @doc("Sections for list content.")
+  @doc("Sections for actionSet content.")
   actionSet: ActionSet[];
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The Action Set content.")
 model ActionSet {
-  @doc("Title of the List section.")
+  @doc("Title of the section.")
   title: string;
 
-  @doc("List of values for List section.")
+  @doc("List of values for section.")
   items: ActionSetItem[];
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The Action set item in the content.")
 model ActionSetItem {
-  @doc("Id of the List Item.")
+  @doc("Id of the Item.")
   id: string;
 
-  @doc("Title of the List Item.")
+  @doc("Title of the Item.")
   title: string;
 
-  @doc("Description of the List Item.")
+  @doc("Description of the Item.")
   description: string;
 }
 
@@ -427,21 +434,21 @@ model ActionBindings {
   actionBindingKind: MessageActionBindingKind;
 
   @doc("List of actions for Interactive message.")
-  actions: MessageContent[];
+  action: MessageContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppListActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
-  actionBindingKind: MessageActionBindingKind.whatsAppList;
+  actionBindingKind: MessageActionBindingKind.whatsAppListAction;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppButtonActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsApp.")
-  actionBindingKind: MessageActionBindingKind.whatsAppButton;
+  actionBindingKind: MessageActionBindingKind.whatsAppButtonAction;
 }
 
 @added(Versions.c2024_11_15_Preview)
