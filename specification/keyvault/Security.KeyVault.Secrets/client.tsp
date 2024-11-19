@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(KeyVault, "Client", "go");
-@@clientName(KeyVault, "Secret", "Java");
+@@clientName(KeyVault, "Secret", "java");
 
 using KeyVault;
 
