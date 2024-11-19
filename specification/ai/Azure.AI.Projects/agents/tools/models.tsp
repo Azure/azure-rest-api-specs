@@ -100,6 +100,23 @@ model FileSearchToolDefinitionDetails {
   rankingOptions?: FileSearchRankingOptions
 }
 
+@doc("The input definition information for a azure function tool as used to configure an agent.")
+model AzureFunctionToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("The definition of the concrete function that the function tool should call.")
+  function: FunctionDefinition;
+
+  @doc("Input storage queue.")
+  @encodedName("application/json", "input_binding")
+  InputBinding: AzureStorageQueueBinding
+
+  @doc("Output storage queue.")
+  @encodedName("application/json", "output_binding")
+  OutputBinding: AzureStorageQueueBinding
+}
+
 /**
  * Ranking options for file search.
  */
@@ -434,4 +451,32 @@ model ToolConnection {
    */
   @encodedName("application/json", "connection_id")
   connectionId: string;
+}
+
+// Azure function bindings
+@doc("The Azure function binding")
+model AzureFunctionBinding{
+  @doc("The type of binding")
+  type: string
+}
+
+@doc("The definition of input or output queue for Azure function.")
+model AzureStorageQueueBinding(AzureFunctionBinding) {
+    @doc("The type of binding")
+    type: "storage_queue"
+
+    @doc("Storage queue.")
+    @encodedName("application/json", storage_queue)
+    StorageQueue: AzureFunctionStorageQueue
+}
+
+@doc("The structure for keeping storage queue name and URI.")
+model AzureFunctionStorageQueue {
+  @doc("The URI of an Azure function storage queue.")
+  @encodedName("application/json", "queue_service_uri")
+  StorageQueueUri: string
+
+  @doc("The name of an Azure function storage queue.")
+  @encodedName("application/json", "name")
+  StorageQueueName: string
 }
