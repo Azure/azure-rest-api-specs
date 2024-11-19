@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations;
+namespace Microsoft.IoTOperations.Dataflows;
 
 /** ******************* */
 /**

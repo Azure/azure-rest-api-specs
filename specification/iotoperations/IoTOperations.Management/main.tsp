@@ -22,6 +22,7 @@ using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Microsoft.IoTOperations.Dataflows;
+using Microsoft.IoTOperations.Brokers;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
@@ -66,28 +67,28 @@ interface Broker {
 // /instances/brokers/listeners resource Operations
 @armResourceOperations
 interface BrokerListener {
-  get is ArmResourceRead<BrokerListenerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
+  get is ArmResourceRead<ListenerResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ListenerResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<ListenerResource>;
+  listByResourceGroup is ArmResourceListByParent<ListenerResource>;
 }
 
 // /instances/brokers/authentications resource Operations
 @armResourceOperations
 interface BrokerAuthentication {
-  get is ArmResourceRead<BrokerAuthenticationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
+  get is ArmResourceRead<AuthenticationResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AuthenticationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AuthenticationResource>;
+  listByResourceGroup is ArmResourceListByParent<AuthenticationResource>;
 }
 
 // /instances/brokers/authorizations resource Operations
 @armResourceOperations
 interface BrokerAuthorization {
-  get is ArmResourceRead<BrokerAuthorizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
+  get is ArmResourceRead<AuthorizationResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<AuthorizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<AuthorizationResource>;
+  listByResourceGroup is ArmResourceListByParent<AuthorizationResource>;
 }
 // /instances/dataflowProfiles resource Operations
 @armResourceOperations
