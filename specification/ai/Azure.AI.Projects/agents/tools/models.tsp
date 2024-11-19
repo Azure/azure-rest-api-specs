@@ -138,7 +138,8 @@ model FunctionDefinition {
   parameters: unknown;
 }
 
-model AzureFunctionDefinition()
+@doc("The definition of Azure function.")
+model AzureFunctionDefinition {
 
   @doc("The definition of azure function and its parameters.")
   @encodedName("application/json", "function")
@@ -151,7 +152,7 @@ model AzureFunctionDefinition()
   @doc("Output storage queue.")
   @encodedName("application/json", "output_binding")
   OutputBinding: AzureStorageQueueBinding;
-
+}
 //
 // Required tool calls -- provided on a run and represent tools that need outputs submitted for the run to continue
 //
