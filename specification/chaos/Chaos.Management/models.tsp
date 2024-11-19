@@ -284,8 +284,9 @@ model ExperimentUpdate {
   @doc("Resource tags")
   tags?: Record<string>;
 
+  #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
   @doc("Managed identity to be updated.")
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  identity?: UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>;
 }
 
 /**
