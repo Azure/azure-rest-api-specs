@@ -33,15 +33,6 @@ security-scopes:
   - "https://deid.azure.com/.default"
 ```
 
-### Tag: package-2024-07-12-preview
-
-These settings apply only when `--tag=package-2024-07-12-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-07-12-preview'
-input-file:
-  - preview/2024-07-12-preview/HealthDataAIServices.DeidServices.json
-```
-
 ### Tag: package-2024-11-15
 
 These settings apply only when `--tag=package-2024-11-15` is specified on the command line.
