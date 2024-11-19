@@ -6084,7 +6084,10 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId",
+        "isEventPublished"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6127,7 +6130,14 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "distance",
+        "geometryId",
+        "nearestLat",
+        "nearestLon"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
