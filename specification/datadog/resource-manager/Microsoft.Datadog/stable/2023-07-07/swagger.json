@@ -19,7 +19,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra ID OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -495,7 +495,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2021-03-01 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2023-07-07 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1949,7 +1949,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU.",
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'Linked'.",
           "type": "string"
         }
       }
@@ -1970,7 +1970,8 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
-      }
+      },
+      "readOnly": true
     },
     "MonitoringStatus": {
       "description": "Flag specifying if the resource monitoring is enabled or disabled.",
@@ -2001,7 +2002,7 @@
       "readOnly": true
     },
     "DatadogOrganizationProperties": {
-      "description": "Datadog organization properties",
+      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
       "type": "object",
       "properties": {
         "name": {
@@ -2067,13 +2068,13 @@
           ]
         },
         "cspm": {
-          "description": "The configuration which describes the state of cloud security posture management",
+          "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
           "type": "boolean"
         }
       }
     },
     "UserInfo": {
-      "description": "User info",
+      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
       "type": "object",
       "properties": {
         "name": {
@@ -2142,7 +2143,7 @@
         "UserAssigned"
       ],
       "type": "string",
-      "description": "Identity type",
+      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
@@ -2237,7 +2238,7 @@
           "$ref": "#/definitions/MonitoringStatus"
         },
         "cspm": {
-          "description": "The new cspm value of the monitor resource.",
+          "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
           "type": "boolean"
         }
       }
