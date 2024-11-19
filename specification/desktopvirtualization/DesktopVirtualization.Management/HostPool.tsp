@@ -32,18 +32,18 @@ interface HostPools {
 /**
 * Get a host pool.
 */
-get is ArmResourceRead<HostPool>
+get is ArmResourceRead<HostPool>;
 
 /**
 * Create or update a host pool.
 */
-createOrUpdate is ArmResourceCreateOrReplaceSync<HostPool>
+createOrUpdate is ArmResourceCreateOrReplaceSync<HostPool>;
 
 /**
 * Update a host pool.
 */
 @parameterVisibility()
-update is ArmCustomPatchSync<HostPool,HostPoolPatch>
+update is ArmCustomPatchSync<HostPool,HostPoolPatch>;
 
 /**
 * Remove a host pool.
@@ -54,7 +54,7 @@ delete is ArmResourceDeleteSync<HostPool,Parameters = {
 */
 @query("force")
 "force"?: boolean
-    }>
+    }>;
 
 /**
 * List hostPools.
@@ -75,7 +75,7 @@ listByResourceGroup is ArmResourceListByParent<HostPool,Parameters = {
 */
 @query("initialSkip")
 "initialSkip"?: int32
-    },Response = HostPoolList>
+    },Response = HostPoolList>;
 
 /**
 * List hostPools in subscription.
@@ -96,7 +96,7 @@ list is ArmListBySubscription<HostPool,Parameters = {
 */
 @query("initialSkip")
 "initialSkip"?: int32
-    },Response = HostPoolList>
+    },Response = HostPoolList>;
 
 /**
 * Operation to list the RegistrationTokens associated with the HostPool
@@ -128,15 +128,16 @@ listByHostPool is ArmResourceActionSync<HostPool,void,ScalingPlanList,Parameters
 */
 @query("initialSkip")
 "initialSkip"?: int32
-    }>
+    }>;
 
 /**
 * Expands and Lists MSIX packages in an Image, given the Image Path.
 */
-expand is ArmResourceActionSync<HostPool,MsixImageURI,ExpandMsixImageList>
+expand is ArmResourceActionSync<HostPool,MsixImageURI,ExpandMsixImageList>;
 
 /**
 * Gets information from a package given the path to the package.
+* TODO: Probably need to not use keyword 'import' here.
 */
 import is ArmResourceActionSync<HostPool,ImportPackageInfoRequest,AppAttachPackageList>
 
