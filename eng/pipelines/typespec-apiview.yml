@@ -26,11 +26,11 @@ jobs:
 
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
-      New-SwaggerAPIViewTokens `
+      New-TypeSpecAPIViewTokens `
         -TempDirectory "$(Agent.TempDirectory)" `
         -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
         -APIViewArtifactsDirectoryName ${{ parameters.APIViewArtifactsDirectoryName }} 
-    displayName: Generate Swagger APIView Tokens
+    displayName: Generate TypeSpec APIView Tokens
 
   - task: PublishPipelineArtifact@1
     inputs:
