@@ -40,6 +40,22 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 ``` yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/kubernetesconfiguration.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: kubernetesconfiguration.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: kubernetesconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: kubernetesconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code:  ProvisioningStateValidation
+    from: kubernetesconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: AvoidAdditionalProperties
+    from: kubernetesconfiguration.json
+    reason: Existing service contract needs to be backward compatible.  
 ```
 
 
