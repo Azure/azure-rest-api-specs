@@ -108,7 +108,6 @@ the 'createdOn' property.
   updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   attributes: Record<string>;
 }
 
