@@ -40,12 +40,12 @@ union JsonWebKeyType {
   /**
    * Octet sequence (used to represent symmetric keys)
    */
-  OCT: "oct",
+  oct: "oct",
 
   /**
    * Octet sequence (used to represent symmetric keys) which is stored the HSM.
    */
-  OCT_HSM: "oct-HSM",
+  oct_HSM: "oct-HSM",
 }
 
 /**
