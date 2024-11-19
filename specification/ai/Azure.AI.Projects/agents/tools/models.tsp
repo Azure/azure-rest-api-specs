@@ -107,15 +107,7 @@ model AzureFunctionToolDefinition extends ToolDefinition {
 
   @doc("The definition of the concrete function that the function tool should call.")
   @encodedName("application/json", "azure_function")
-  AzureFunction: FunctionDefinition;
-
-  @doc("Input storage queue.")
-  @encodedName("application/json", "input_binding")
-  InputBinding: AzureStorageQueueBinding;
-
-  @doc("Output storage queue.")
-  @encodedName("application/json", "output_binding")
-  OutputBinding: AzureStorageQueueBinding;
+  AzureFunction: AzureFunctionDefinition;
 }
 
 /**
@@ -145,6 +137,20 @@ model FunctionDefinition {
   @doc("The parameters the functions accepts, described as a JSON Schema object.")
   parameters: unknown;
 }
+
+model AzureFunctionDefinition()
+
+  @doc("The definition of azure function and its parameters.")
+  @encodedName("application/json", "function")
+  Function: FunctionDefinition;
+
+  @doc("Input storage queue.")
+  @encodedName("application/json", "input_binding")
+  InputBinding: AzureStorageQueueBinding;
+
+  @doc("Output storage queue.")
+  @encodedName("application/json", "output_binding")
+  OutputBinding: AzureStorageQueueBinding;
 
 //
 // Required tool calls -- provided on a run and represent tools that need outputs submitted for the run to continue
