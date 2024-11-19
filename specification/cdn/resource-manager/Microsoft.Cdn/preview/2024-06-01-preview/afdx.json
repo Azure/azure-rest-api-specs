@@ -7102,8 +7102,7 @@
             "Microsoft.Cdn/profiles/originGroups",
             "Microsoft.Cdn/profiles/originGroups/origins",
             "Microsoft.Cdn/profiles/ruleSets",
-            "Microsoft.Cdn/profiles/ruleSets/rules",
-            "Microsoft.Cdn/profiles/securityPolicies"
+            "Microsoft.Cdn/profiles/ruleSets/rules"
           ],
           "x-ms-enum": {
             "name": "PreviewSupportedResourceType",
@@ -7212,24 +7211,6 @@
         }
       }
     },
-    "DeploymentVersionSecurityPolicyChange": {
-      "type": "object",
-      "description": "Deployment change of the security policy under the profile",
-      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/securityPolicies",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentVersionChange"
-        }
-      ],
-      "properties": {
-        "previousProperties": {
-          "$ref": "#/definitions/SecurityPolicyProperties"
-        },
-        "currentProperties": {
-          "$ref": "#/definitions/SecurityPolicyProperties"
-        }
-      }
-    },
     "CompareDeploymentVersionsParameter": {
       "type": "object",
       "description": "compare deployment versions request parameter",
@@ -7265,25 +7246,24 @@
       "type": "object",
       "properties": {
         "preview": {
-          "$ref": "#/definitions/DeploymentStageStatus",
-          "readOnly": true,
-          "description": "Deployment status of preview stage."
-        },
-        "production": {
-          "$ref": "#/definitions/DeploymentStageStatus",
-          "readOnly": true,
-          "description": "Deployment status of production stage."
-        }
-      }
-    },
-    "DeploymentStageStatus": {
-      "type": "object",
-      "description": "The deployment status of the deployment version under the profile",
-      "properties": {
-        "rolloutStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "The provisioning state of a resource.",
+          "description": "Deployment status of preview stage.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentRolloutStatus",
+            "modelAsString": true
+          }
+        },
+        "production": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Deployment status of production stage.",
           "enum": [
             "NotStarted",
             "InProgress",
