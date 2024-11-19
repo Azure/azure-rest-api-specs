@@ -57,7 +57,7 @@ model TriggersNotificationEventFilter {
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event filter when the event type is TestRunEnded.")
+@doc("The notification event filter when the event type is TestRunEnded and scope is Tests.")
 model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for test run ended event.")
   kind: NotificationEventType.TestRunEnded;
@@ -67,14 +67,30 @@ model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event filter when the event type is TestRunStarted.")
+@doc("The notification event filter when the event type is TestRunStarted and scope is Tests.")
 model TestRunStartedNotificationEventFilter
   extends TestsNotificationEventFilter {
   @doc("Event type for test run started event.")
   kind: NotificationEventType.TestRunStarted;
+}
+
+@added(APIVersions.v2024_11_01_preview)
+@doc("The notification event filter when the event type is TestRunEnded and scope is Triggers.")
+model TriggerTestRunEndedNotificationEventFilter
+  extends TriggersNotificationEventFilter {
+  @doc("Event type for test run ended event.")
+  kind: NotificationEventType.TestRunEnded;
 
   @doc("Event filtering condition.")
-  condition?: TestRunStartedEventFilterCondition;
+  condition?: TestRunEndedEventFilterCondition;
+}
+
+@added(APIVersions.v2024_11_01_preview)
+@doc("The notification event filter when the event type is TestRunStarted and scope is Trigegrs.")
+model TriggerTestRunStartedNotificationEventFilter
+  extends TriggersNotificationEventFilter {
+  @doc("Event type for test run started event.")
+  kind: NotificationEventType.TestRunStarted;
 }
 
 @added(APIVersions.v2024_11_01_preview)
@@ -101,16 +117,6 @@ model TestRunEndedEventFilterCondition {
 
   @doc("The test run results to send notification for.")
   testRunResults?: PFTestResult[];
-
-  @doc("The types of entities that created the test run to send notification for.")
-  createdByTypes?: CreateByTypes[];
-}
-
-@added(APIVersions.v2024_11_01_preview)
-@doc("TestRunStarted Event condition.")
-model TestRunStartedEventFilterCondition {
-  @doc("The creator types to send notification for.")
-  createdByTypes?: string[];
 }
 
 @added(APIVersions.v2024_11_01_preview)

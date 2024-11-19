@@ -5946,19 +5946,12 @@
           "items": {
             "$ref": "#/definitions/PFTestResult"
           }
-        },
-        "createdByTypes": {
-          "type": "array",
-          "description": "The types of entities that created the test run to send notification for.",
-          "items": {
-            "$ref": "#/definitions/CreateByTypes"
-          }
         }
       }
     },
     "TestRunEndedNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event filter when the event type is TestRunEnded.",
+      "description": "The notification event filter when the event type is TestRunEnded and scope is Tests.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunEndedEventFilterCondition",
@@ -5974,7 +5967,7 @@
     },
     "TestRunEndedNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event filter when the event type is TestRunEnded.",
+      "description": "The notification event filter when the event type is TestRunEnded and scope is Tests.",
       "properties": {
         "condition": {
           "$ref": "#/definitions/TestRunEndedEventFilterCondition",
@@ -6125,28 +6118,9 @@
         }
       }
     },
-    "TestRunStartedEventFilterCondition": {
-      "type": "object",
-      "description": "TestRunStarted Event condition.",
-      "properties": {
-        "createdByTypes": {
-          "type": "array",
-          "description": "The creator types to send notification for.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "TestRunStartedNotificationEventFilter": {
       "type": "object",
-      "description": "The notification event filter when the event type is TestRunStarted.",
-      "properties": {
-        "condition": {
-          "$ref": "#/definitions/TestRunStartedEventFilterCondition",
-          "description": "Event filtering condition."
-        }
-      },
+      "description": "The notification event filter when the event type is TestRunStarted and scope is Tests.",
       "allOf": [
         {
           "$ref": "#/definitions/TestsNotificationEventFilter"
@@ -6156,13 +6130,7 @@
     },
     "TestRunStartedNotificationEventFilterCreateOrUpdate": {
       "type": "object",
-      "description": "The notification event filter when the event type is TestRunStarted.",
-      "properties": {
-        "condition": {
-          "$ref": "#/definitions/TestRunStartedEventFilterCondition",
-          "description": "Event filtering condition."
-        }
-      },
+      "description": "The notification event filter when the event type is TestRunStarted and scope is Tests.",
       "allOf": [
         {
           "$ref": "#/definitions/TestsNotificationEventFilterCreateOrUpdate"
@@ -6668,6 +6636,58 @@
           }
         ]
       }
+    },
+    "TriggerTestRunEndedNotificationEventFilter": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TestRunEnded and scope is Triggers.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunEndedEventFilterCondition",
+          "description": "Event filtering condition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunEnded"
+    },
+    "TriggerTestRunEndedNotificationEventFilterCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TestRunEnded and scope is Triggers.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/TestRunEndedEventFilterCondition",
+          "description": "Event filtering condition."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunEnded"
+    },
+    "TriggerTestRunStartedNotificationEventFilter": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TestRunStarted and scope is Trigegrs.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunStarted"
+    },
+    "TriggerTestRunStartedNotificationEventFilterCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TestRunStarted and scope is Trigegrs.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "TestRunStarted"
     },
     "TriggerType": {
       "type": "string",
