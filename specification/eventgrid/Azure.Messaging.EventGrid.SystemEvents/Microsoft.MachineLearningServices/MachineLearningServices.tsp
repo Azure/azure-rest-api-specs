@@ -13,11 +13,11 @@ model MachineLearningServicesModelRegisteredEventData {
 
   /** The tags of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelTags?: Record<unknown>;
+  modelTags: Record<unknown>;
 
   /** The properties of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
-  modelProperties?: Record<unknown>;
+  modelProperties: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
