@@ -48,9 +48,32 @@ model PlannedQuotaResourceProperties {
   @doc("Skip unsupported silently")
   skipUnsupportedSilently?: boolean;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: PlannedQuotaProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  fulfilledPlan?: FulfilledPlan;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  alternatives?: {};
+}
+
+@added(Versions.v2024_06_24_preview)
+@doc("Fulfilled Plan details after fulfilling the quota of the plan.")
+model FulfilledPlan {
+  @doc("Same as the \"arm\" node in the plan for the corresponding Subscription.")
+  arm?: {};
+
+  @doc("Same as the \"rdfe\" node in the plan for the corresponding Subscription.")
+  rdfe?: {};
+
+  @doc("Indicates whether AZ is enabled.")
+  isAzEnabled?: boolean;
 }
 
 @doc("plannedQuota Property Binding")
