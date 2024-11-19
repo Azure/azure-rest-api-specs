@@ -463,7 +463,9 @@ model ToolConnection {
 
 // Azure function bindings
 @doc("The Azure function binding")
+@discriminator("type")
 model AzureFunctionBinding {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of binding")
   type: string;
 }
