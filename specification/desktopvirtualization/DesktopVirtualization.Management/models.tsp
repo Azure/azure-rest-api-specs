@@ -924,7 +924,8 @@ model ApplicationGroupProperties {
  * The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ResourceModelWithAllowedPropertySet extends TrackedResource {
+model ResourceModelWithAllowedPropertySet
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */

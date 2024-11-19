@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -16,6 +17,7 @@ namespace Microsoft.DesktopVirtualization;
  * The Private Endpoint Connection resource.
  */
 @parentResource(HostPool)
+@parentResource(Workspace)
 model PrivateEndpointConnectionWithSystemData
   is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
@@ -31,22 +33,64 @@ interface PrivateEndpointConnectionWithSystemDataOperationGroup {
   /**
    * Get a private endpoint connection.
    */
-  getByHostPool is ArmResourceRead<PrivateEndpointConnectionWithSystemData>;
+  get is ArmResourceRead<PrivateEndpointConnectionWithSystemData>;
 
   /**
    * Approve or reject a private endpoint connection.
    */
-  updateByHostPool is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionWithSystemData>;
+  update is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionWithSystemData>;
 
   /**
    * Remove a connection.
    */
-  deleteByHostPool is ArmResourceDeleteSync<PrivateEndpointConnectionWithSystemData>;
+  delete is ArmResourceDeleteSync<PrivateEndpointConnectionWithSystemData>;
 
   /**
    * List private endpoint connections associated with hostpool.
    */
-  listByHostPool is ArmResourceListByParent<
+  list is ArmResourceListByParent<
+    PrivateEndpointConnectionWithSystemData,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    },
+    Response = PrivateEndpointConnectionListResultWithSystemData
+  >;
+
+  /**
+   * Get a private endpoint connection.
+   */
+  getByWorkspace is ArmResourceRead<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * Approve or reject a private endpoint connection.
+   */
+  updateByWorkspace is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * Remove a connection.
+   */
+  deleteByWorkspace is ArmResourceDeleteSync<PrivateEndpointConnectionWithSystemData>;
+
+  /**
+   * List private endpoint connections associated with workspace.
+   */
+  listByWorkspace is ArmResourceListByParent<
     PrivateEndpointConnectionWithSystemData,
     Parameters = {
       /**
