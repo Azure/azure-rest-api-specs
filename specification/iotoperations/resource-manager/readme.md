@@ -34,16 +34,16 @@ directive:
     where: $.definitions.AuthenticatorMethodX509Attributes.properties.attributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.PrincipalDefinition.properties.attributes.items
+    where: $.definitions["Brokers.PrincipalDefinition"].properties.attributes.items
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimResourceRequirements.properties.limits
+    where: $.definitions["Brokers.VolumeClaimResourceRequirements"].properties.limits
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimResourceRequirements.properties.requests
+    where: $.definitions["Brokers.VolumeClaimResourceRequirements"].properties.requests
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimSpecSelector.properties.matchLabels
+    where: $.definitions["Brokers.VolumeClaimSpecSelector"].properties.matchLabels
     reason: User defined properties that are not subject to any validations.
   - suppress: BodyTopLevelProperties
     reason: Temporary suppression due to failing pipeline.
