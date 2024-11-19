@@ -17,6 +17,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceVersionId: int64;
   }
 
