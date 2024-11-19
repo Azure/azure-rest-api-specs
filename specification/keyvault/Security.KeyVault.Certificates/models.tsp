@@ -1073,6 +1073,7 @@ model CertificateRestoreParameters {
 /**
  * A list of certificates that have been deleted in this vault.
  */
+@pagedResult
 model DeletedCertificateListResult {
   /**
    * A response message containing a list of deleted certificates in the vault along with a link to the next page of
