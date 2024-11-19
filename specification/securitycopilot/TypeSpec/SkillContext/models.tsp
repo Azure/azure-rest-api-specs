@@ -171,7 +171,7 @@ model SkillImageSource {
 enum OutputComponentType {
   GptOutput,
   Text,
-  Image
+  Image,
 }
 
 enum SkillOutputComponentAction {
