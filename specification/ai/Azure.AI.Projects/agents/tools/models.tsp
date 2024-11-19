@@ -106,7 +106,8 @@ model AzureFunctionToolDefinition extends ToolDefinition {
   type: "azure_function";
 
   @doc("The definition of the concrete function that the function tool should call.")
-  function: FunctionDefinition;
+  @encodedName("application/json", "azure_function")
+  AzureFunction: FunctionDefinition;
 
   @doc("Input storage queue.")
   @encodedName("application/json", "input_binding")
