@@ -15,9 +15,14 @@ namespace Microsoft.AzureCis;
 
 @doc("SharedConfigValuesResource properties")
 model SharedConfigValuesResourceProperties {
-  @doc("The array of config values needs to be published or consumed.")
-  @extension("x-ms-identifiers", [])
-  sharedValues: Array<SharedValue>;
+  @doc("The unique name in CloudSprout whose value needs to be published or consumed.")
+  moniker: string;
+
+  @doc("Moniker value to be published.")
+  value?: string;
+
+  @doc("Scope of Moniker value. Optional.")
+  scope?: Scope;
 
   @doc("CloudSprout environment to publish or consume the value to. Optional.")
   cloudSproutEnv?: string;
@@ -39,25 +44,16 @@ model SharedConfigValuesResource
   name: string;
 }
 
-@doc("The config whose value needs to be published or consumed.")
-model SharedValue {
-  @doc("The unique name in CloudSprout whose value needs to be published or consumed.")
-  moniker: string;
-
-  @doc("Moniker value to be published.")
-  value?: string;
-
-  @doc("Scope of Moniker value. Optional.")
-  scope?: Scope;
-}
-
 @doc("GeoScope. Optional.")
 model Scope {
-  @doc("GeoType. The valid value is Cloud.")
+  @doc("GeoType. The valid values are Cloud, Geography, Region.")
   geoType: string;
 
   @doc("The GeoValue for the specified GeoType. If GeoType is Cloud, GeoValue is the applicable cloud name for the Moniker value.")
   geoValue: string;
+
+  @doc("EnvType. The valid value are Prod, PPE, Test, Dev.")
+  envType: string;
 }
 
 @armResourceOperations
