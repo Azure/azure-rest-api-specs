@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationName": "testmigration",
+    "parameters": {
+      "properties": {
+        "sourceDbServerResourceId": "testsource:5432@pguser",
+        "dbsToMigrate": [
+          "db1",
+          "db2",
+          "db3",
+          "db4"
+        ],
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "xxxxxxxx",
+            "targetServerPassword": "xxxxxxxx"
+          }
+        },
+        "migrationMode": "Offline",
+        "overwriteDbsInTarget": "True",
+        "migrationOption": "ValidateAndMigrate",
+        "sslMode": "Prefer",
+        "sourceType": "OnPremises"
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "ValidationInProgress"
+            }
+          },
+          "sourceDbServerResourceId": "testsource:5432@pguser",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "False",
+          "migrationOption": "ValidateAndMigrate",
+          "sslMode": "Prefer",
+          "sourceType": "OnPremises"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "InProgress",
+            "error": "",
+            "currentSubStateDetails": {
+              "currentSubState": "ValidationInProgress"
+            }
+          },
+          "sourceDbServerResourceId": "testsource:5432@pguser",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2021-05-06T16:05:58.895Z",
+          "startDataMigration": "False",
+          "triggerCutover": "False",
+          "migrateRoles": "False",
+          "migrationOption": "ValidateAndMigrate",
+          "sslMode": "Prefer",
+          "sourceType": "OnPremises"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}
