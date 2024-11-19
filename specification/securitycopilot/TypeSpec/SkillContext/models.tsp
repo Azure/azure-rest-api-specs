@@ -148,9 +148,30 @@ model SkillStructuredOutput {
   components: Array<SkillOutputComponent>;
 }
 
-model SkillOutputComponent {
+model SkillOutputComponent extends OutputComponent{
   action: SkillOutputComponentAction;
   includeInEvalResultAsRawComponent: boolean;
+}
+
+model OutputComponent {
+  name: string;
+  content: string;
+  description: string;
+  type: OutputComponentType;
+}
+
+model SkillImageSource {
+  displayName: string;
+  imageFileType: string;
+  description: string;
+  imageBase64: string;
+  imageThumbnailBase64: string;
+}
+
+enum OutputComponentType {
+  GptOutput,
+  Text,
+  Image
 }
 
 enum SkillOutputComponentAction {
