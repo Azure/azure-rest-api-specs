@@ -11,7 +11,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/kubernetesconfiguration/armkubernetesconfiguration/extensions
+module-name: sdk/resourcemanager/kubernetesconfiguration/armkubernetesconfiguration
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -24,5 +24,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-preview-2024-11-01' && $(go)
 namespace: kubernetesconfigurationextensiontypes
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-11-01-preview/extensiontypes
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-11-01-preview/$(namespace)
 ```

@@ -11,7 +11,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/kubernetesconfiguration/sourcecontrolconfiguration
+module-name: sdk/resourcemanager/kubernetesconfiguration/armkubernetesconfiguration
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -23,6 +23,6 @@ These settings apply only when `--tag=package-2024-11 --go` is specified on the 
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2024-11' && $(go)
-namespace: kubernetesconfiguration
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-11-01/sourcecontrolconfiguration
+namespace: kubernetesconfigurationsourcecontrol
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-11-01/$(namespace)
 ```
