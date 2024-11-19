@@ -2084,8 +2084,7 @@
       "required": [
         "id",
         "type"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "ChaosTargetSimpleFilter": {
       "type": "object",
@@ -2491,36 +2490,17 @@
     },
     "ExperimentUpdate": {
       "type": "object",
-      "description": "Describes an experiment update.",
+      "description": "The type used for update operations of the Experiment.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "identity": {
-          "type": "object",
-          "description": "The identity of the experiment resource.",
-          "properties": {
-            "type": {
-              "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-              "description": "The type of managed identity assigned to this resource."
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "description": "The identities assigned to this resource by the user.",
-              "additionalProperties": {
-                "allOf": [
-                  {
-                    "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-                  }
-                ],
-                "type": "object",
-                "x-nullable": true
-              }
-            }
           }
         }
       }

@@ -371,8 +371,6 @@ model ChaosExperimentAction {
  */
 @discriminator("type")
 model ChaosTargetSelector {
-  ...Record<unknown>;
-
   /**
    * String of the selector ID.
    */
