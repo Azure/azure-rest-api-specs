@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-04-01-preview",
+    "api-version": "2024-11-15-preview",
     "endpoint": "https://resourcename.communication.azure.com",
     "targetPhoneNumber": "+14251234567",
     "sipConfiguration": {
@@ -12,23 +12,38 @@
       "trunks": {
         "seattle.contoso.com": {
           "sipSignalingPort": 5011,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         },
         "us1.contoso.com": {
           "sipSignalingPort": 5012,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         },
         "us2.contoso.com": {
           "sipSignalingPort": 5013,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         },
         "russia.contoso.com": {
           "sipSignalingPort": 5014,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         },
         "global.contoso.com": {
           "sipSignalingPort": 5015,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         }
       },
       "routes": [
@@ -63,7 +78,8 @@
           "numberPattern": "^\\+\\d+$",
           "trunks": [
             "global.contoso.com"
-          ]
+          ],
+          "callerIdOverride": "+1234567890"
         }
       ]
     }
@@ -96,7 +112,8 @@
             "numberPattern": "^\\+\\d+$",
             "trunks": [
               "global.contoso.com"
-            ]
+            ],
+            "callerIdOverride": "+1234567890"
           }
         ]
       }

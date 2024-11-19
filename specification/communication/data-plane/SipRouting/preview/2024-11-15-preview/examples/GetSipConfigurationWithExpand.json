@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-04-01-preview",
+    "api-version": "2024-11-15-preview",
     "endpoint": "https://resourcename.communication.azure.com",
     "expand": "trunks/health"
   },
@@ -20,6 +20,9 @@
           "vendor.xyz.biz": {
             "sipSignalingPort": 5061,
             "enabled": true,
+            "stepOutOfSignaling": false,
+            "privacyHeader": "None",
+            "ipAddressVersion": "IPv4",
             "health": {
               "tls": {
                 "status": "unknown"
@@ -35,6 +38,9 @@
           "vendor.abc.biz": {
             "sipSignalingPort": 5061,
             "enabled": true,
+            "stepOutOfSignaling": false,
+            "privacyHeader": "ID",
+            "ipAddressVersion": "IPv6",
             "health": {
               "tls": {
                 "status": "certExpiring"
@@ -60,7 +66,8 @@
             "numberPattern": "^\\+?\\d+$",
             "trunks": [
               "vendor.xyz.biz"
-            ]
+            ],
+            "callerIdOverride": "+1234567890"
           }
         ]
       }

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-04-01-preview",
+    "api-version": "2024-11-15-preview",
     "domains": {
       "xyz.biz": {
         "type": "Custom"
@@ -18,7 +18,10 @@
       "trunks": {
         "vendor.xyz.biz": {
           "sipSignalingPort": 5061,
-          "enabled": true
+          "enabled": true,
+          "stepOutOfSignaling": false,
+          "privacyHeader": "None",
+          "ipAddressVersion": "IPv4"
         }
       },
       "routes": [
@@ -28,7 +31,8 @@
           "numberPattern": "^\\+?\\d+$",
           "trunks": [
             "vendor.xyz.biz"
-          ]
+          ],
+          "callerIdOverride": "+1234567890"
         }
       ]
     },
@@ -49,7 +53,10 @@
         "trunks": {
           "vendor.xyz.biz": {
             "sipSignalingPort": 5061,
-            "enabled": true
+            "enabled": true,
+            "stepOutOfSignaling": false,
+            "privacyHeader": "None",
+            "ipAddressVersion": "IPv4"
           }
         },
         "routes": [
@@ -59,7 +66,8 @@
             "numberPattern": "^\\+?\\d+$",
             "trunks": [
               "vendor.xyz.biz"
-            ]
+            ],
+            "callerIdOverride": "+1234567890"
           }
         ]
       }

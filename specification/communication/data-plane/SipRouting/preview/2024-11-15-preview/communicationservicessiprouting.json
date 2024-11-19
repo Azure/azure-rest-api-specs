@@ -6,7 +6,7 @@
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
-    "version": "2023-04-01-preview"
+    "version": "2024-11-15-preview"
   },
   "paths": {
     "/sip": {
@@ -167,7 +167,10 @@
       "description": "Represents a SIP trunk for routing calls. See RFC 4904. Can be expanded with additional data.",
       "required": [
         "sipSignalingPort",
-        "enabled"
+        "enabled",
+        "stepOutOfSignaling",
+        "privacyHeader",
+        "ipAddressVersion"
       ],
       "type": "object",
       "properties": {
@@ -185,6 +188,18 @@
           "type": "object",
           "readOnly": true,
           "$ref": "#/definitions/Health"
+        },
+        "stepOutOfSignaling": {
+          "type": "boolean",
+          "description": "StepOutOfSignaling enabled flag."
+        },
+        "privacyHeader": {
+          "$ref": "#/definitions/PrivacyHeader",
+          "description": "SIP Privacy header."
+        },
+        "ipAddressVersion": {
+          "$ref": "#/definitions/IpAddressVersion",
+          "description": "IP address version used by the trunk."
         }
       }
     },
@@ -365,6 +380,18 @@
         "enabled": {
           "description": "Enabled flag",
           "$ref": "#/definitions/Enabled"
+        },
+        "stepOutOfSignaling": {
+          "type": "boolean",
+          "description": "StepOutOfSignaling enabled flag."
+        },
+        "privacyHeader": {
+          "$ref": "#/definitions/PrivacyHeader",
+          "description": "SIP Privacy header."
+        },
+        "ipAddressVersion": {
+          "$ref": "#/definitions/IpAddressVersion",
+          "description": "IP address version used by the trunk."
         }
       }
     },
@@ -398,7 +425,35 @@
           "items": {
             "type": "string"
           }
+        },
+        "callerIdOverride": {
+          "type": "string",
+          "description": "Gets or sets caller ID override of the route."
         }
+      }
+    },
+    "IpAddressVersion": {
+      "type": "string",
+      "description": "IP address version.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressVersion",
+        "modelAsString": true
+      }
+    },
+    "PrivacyHeader": {
+      "type": "string",
+      "description": "SIP privacy header value.",
+      "enum": [
+        "ID",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "PrivacyHeader",
+        "modelAsString": true
       }
     },
     "Enabled": {
