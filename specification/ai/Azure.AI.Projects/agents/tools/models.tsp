@@ -462,17 +462,17 @@ model ToolConnection {
 }
 
 // Azure function bindings
-@doc("The Azure function binding")
 @discriminator("type")
+@doc("The Azure function binding")
 model AzureFunctionBinding {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  @doc("The type of binding")
+  @doc("The type of binding.")
   type: string;
 }
 
 @doc("The definition of input or output queue for Azure function.")
 model AzureStorageQueueBinding extends AzureFunctionBinding {
-    @doc("The type of binding")
+    @doc("The type of binding, which is always 'storage_queue'.")
     type: "storage_queue";
 
     @doc("Storage queue.")
