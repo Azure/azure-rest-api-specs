@@ -466,7 +466,7 @@ model AzureStorageQueueBinding extends AzureFunctionBinding {
     type: "storage_queue";
 
     @doc("Storage queue.")
-    @encodedName("application/json", storage_queue)
+    @encodedName("application/json", "storage_queue")
     StorageQueue: AzureFunctionStorageQueue;
 }
 
