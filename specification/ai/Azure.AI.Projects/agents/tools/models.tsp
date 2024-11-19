@@ -110,11 +110,11 @@ model AzureFunctionToolDefinition extends ToolDefinition {
 
   @doc("Input storage queue.")
   @encodedName("application/json", "input_binding")
-  InputBinding: AzureStorageQueueBinding
+  InputBinding: AzureStorageQueueBinding;
 
   @doc("Output storage queue.")
   @encodedName("application/json", "output_binding")
-  OutputBinding: AzureStorageQueueBinding
+  OutputBinding: AzureStorageQueueBinding;
 }
 
 /**
@@ -457,26 +457,26 @@ model ToolConnection {
 @doc("The Azure function binding")
 model AzureFunctionBinding{
   @doc("The type of binding")
-  type: string
+  type: string;
 }
 
 @doc("The definition of input or output queue for Azure function.")
 model AzureStorageQueueBinding(AzureFunctionBinding) {
     @doc("The type of binding")
-    type: "storage_queue"
+    type: "storage_queue";
 
     @doc("Storage queue.")
     @encodedName("application/json", storage_queue)
-    StorageQueue: AzureFunctionStorageQueue
+    StorageQueue: AzureFunctionStorageQueue;
 }
 
 @doc("The structure for keeping storage queue name and URI.")
 model AzureFunctionStorageQueue {
   @doc("The URI of an Azure function storage queue.")
   @encodedName("application/json", "queue_service_uri")
-  StorageQueueUri: string
+  StorageQueueUri: string;
 
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "name")
-  StorageQueueName: string
+  StorageQueueName: string;
 }
