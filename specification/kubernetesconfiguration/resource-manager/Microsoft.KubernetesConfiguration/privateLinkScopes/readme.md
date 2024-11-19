@@ -53,6 +53,18 @@ suppressions:
   - code: LroLocationHeader
     from: privateLinkScopes.json
     reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: XmsPageableForListCalls
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PutResponseCodes
+    from: privateLinkScopes.json
+    reason: Existing service contract needs to be backward compatible. 
 ```
 
 # Code Generation
