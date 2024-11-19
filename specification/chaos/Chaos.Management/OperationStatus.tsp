@@ -12,17 +12,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Chaos;
 
 /**
- * Chaos Studio async operation status resource.
+ * Chaos Studio async operation status resource operations.
  */
-@parentResource(ArmLocationResource<"Subscription">)
-model OperationStatus is Azure.ResourceManager.ArmOperationStatus;
-
-// @armResourceOperations
-// interface OperationStatuses {
-//   @doc("Get the status of an operation.")
-//   get is ArmResourceRead<OperationStatus>;
-// }
-
 @armResourceOperations
 interface OperationStatuses {
   @doc("Returns the current status of an async operation.")
@@ -38,7 +29,7 @@ interface OperationStatuses {
 
     ...LocationParameter,
     ...Foundations.OperationIdParameter,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 }
 
 @@segment(OperationStatuses.get::parameters.operationId, "operationStatuses");

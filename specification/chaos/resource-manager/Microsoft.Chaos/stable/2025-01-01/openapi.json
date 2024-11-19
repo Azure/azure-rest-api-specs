@@ -179,7 +179,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -1707,37 +1707,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
     "BranchStatus": {
       "type": "object",
       "description": "Model that represents the a list of actions and action statuses.",
@@ -2591,52 +2560,6 @@
       "required": [
         "key",
         "value"
-      ]
-    },
-    "OperationStatus": {
-      "type": "object",
-      "description": "Chaos Studio async operation status resource.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The operation status"
-        },
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the operationStatus resource"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the  operationStatus resource",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation start time",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Operation complete time",
-          "readOnly": true
-        },
-        "percentComplete": {
-          "type": "number",
-          "format": "double",
-          "description": "The progress made toward completing the operation",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status",
-        "id"
       ]
     },
     "PostActionResponse": {
