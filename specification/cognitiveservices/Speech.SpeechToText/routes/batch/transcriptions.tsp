@@ -16,6 +16,7 @@ using Azure.Core;
 namespace Azure.Speech.SpeechToText.Batch;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 @post
 @route("/transcriptions:submit")
 @doc("Submits a new transcription job.")
@@ -36,6 +37,7 @@ op submitTranscription(
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 @get
 @route("/transcriptions")
 @doc("Gets a list of transcriptions for the authenticated subscription.")
@@ -64,6 +66,7 @@ op getTranscriptions(
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 @get
 @route("/transcriptions/{id}")
 @doc("Gets the transcription identified by the given ID.")
@@ -83,6 +86,7 @@ op getTranscription(
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 @patch
 @route("/transcriptions/{id}")
 @doc("Updates the mutable details of the transcription identified by its ID.")
@@ -109,6 +113,7 @@ op patchTranscription(
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 @delete
 @route("/transcriptions/{id}")
 @doc("Deletes the specified transcription task.")

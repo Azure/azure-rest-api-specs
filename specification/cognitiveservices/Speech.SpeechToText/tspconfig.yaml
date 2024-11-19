@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/SpeechToText"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -5,4 +8,6 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
+    # Intentionally not overwriting the data-plane spec files & gitignoring the output of this emitter
+    # since this specification is only intended for generating the SDK for now
     azure-resource-provider-folder: "data-plane"

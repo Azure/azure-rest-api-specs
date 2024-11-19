@@ -49,6 +49,7 @@ model Transcription {
   customProperties?: Record<string>;
 
   @doc("The project refernce of the object")
+  @removed(ServiceApiVersions.V20241115)
   project?: EntityReference;
 
   @visibility("read")
@@ -253,15 +254,16 @@ model TranscribeResult {
   @typeChangedFrom(ServiceApiVersions.V20241115, "int64")
   durationMilliseconds: int32;
 
-  @doc("The combined transcription results for each channel.")
-  combinedPhrases: Array<CombinedPhrases>;
+  @doc("The full transcript for each channel.")
+  combinedPhrases: Array<ChannelCombinedPhrases>;
 
   @doc("The transcription results segmented into phrases.")
   phrases: Array<Phrase>;
 }
 
-@doc("CombinedPhrases")
-model CombinedPhrases {
+@doc("The full transcript per channel.")
+@renamedFrom(ServiceApiVersions.V20241115, "CombinedPhrases")
+model ChannelCombinedPhrases {
   @doc("The 0-based channel index. Only present if channel separation is enabled.")
   channel?: int32;
 
@@ -273,7 +275,7 @@ model Phrase {
   @doc("The 0-based channel index. Only present if channel separation is enabled.")
   channel?: int32;
 
-  @doc("The speaker number. Only present if speaker diarization is enabled.")
+  @doc("A unique integer number that is assigned to each speaker detected in the audio without particular order. Only present if speaker diarization is enabled.")
   speaker?: int32;
 
   @renamedFrom(ServiceApiVersions.V20241115, "offset")
@@ -641,6 +643,27 @@ union DetailedErrorCode {
 
   @doc("Expired ModelCopyAuthorization.")
   ModelCopyAuthorizationExpired: "ModelCopyAuthorizationExpired",
+
+  @doc("Language Identification did not recognize any language.")
+  NoLanguageIdentified: "NoLanguageIdentified",
+
+  @doc("Language Identification recognized multiple languages. No dominant language could be determined.")
+  MultipleLanguagesIdentified: "MultipleLanguagesIdentified",
+
+  @doc("The format of input audio is not supported.")
+  InvalidAudioFormat: "InvalidAudioFormat",
+
+  @doc("There is a mismatch between audio channels in the data, in the configuration, or the requirements of the application.")
+  BadChannelConfiguration: "BadChannelConfiguration",
+
+  @doc("The selection of channels in the transcription request is not supported (e.g., neither 0 nor 1 have been selected.)")
+  InvalidChannelSpecification: "InvalidChannelSpecification",
+
+  @doc("The audio file is longer than the maximum allowed duration.")
+  AudioLengthLimitExceeded: "AudioLengthLimitExceeded",
+
+  @doc("The audio file is empty.")
+  EmptyAudioFile: "EmptyAudioFile",
 
   string,
 }

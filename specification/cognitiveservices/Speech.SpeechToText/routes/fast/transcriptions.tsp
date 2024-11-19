@@ -16,6 +16,7 @@ using Azure.Core;
 namespace Azure.Speech.SpeechToText.Fast;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
 #suppress "@azure-tools/typespec-azure-core/byos" "Support streaming input files"
 @post
 @route("/transcriptions:transcribe")
@@ -31,7 +32,8 @@ op transcribeTranscription(
   @doc("Metadata for a fast transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.")
   definition?: TranscribeDefinition,
 
-  @doc("The audio as a stream of bytes.") audio: bytes,
+  @doc("The content of the audio file to be transcribed. The audio file must be shorter than 2 hours in audio duration and smaller than 250 MB in size.")
+  audio: bytes,
 ): {
   @statusCode statusCode: 200;
   @body transcription: TranscribeResult;
