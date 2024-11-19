@@ -21,11 +21,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the target subscription."
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -49,6 +45,9 @@
           "Get available MaaS PTU quota.": {
             "$ref": "./examples/PTUQuota/getAvailable.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -27002,7 +27001,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UsageAndQuotaProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": false
