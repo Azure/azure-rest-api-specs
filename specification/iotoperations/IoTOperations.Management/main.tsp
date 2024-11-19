@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
+using Microsoft.IoTOperations.Dataflows;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace

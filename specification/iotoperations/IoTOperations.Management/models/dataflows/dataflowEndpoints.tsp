@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations;
+namespace Microsoft.IoTOperations.Dataflows;
 
 /** ******************* */
 /**
@@ -37,7 +37,7 @@ model DataExplorerEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.DataExplorer;
   @doc("Azure Data Explorer endpoint.")
-  dataExplorerSettings: DataflowEndpointDataExplorerSettings;
+  dataExplorerSettings: DataExplorerSettings;
 }
 
 @doc("Azure Data Lake endpoint.")
@@ -45,7 +45,7 @@ model DataLakeStorageEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.DataLakeStorage;
   @doc("Azure Data Lake endpoint.")
-  dataLakeStorageSettings: DataflowEndpointDataLakeStorageSettings;
+  dataLakeStorageSettings: DataLakeStorageSettings;
 }
 
 @doc("Microsoft Fabric endpoint.")
@@ -53,7 +53,7 @@ model FabricOneLakeEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.FabricOneLake;
   @doc("Microsoft Fabric endpoint.")
-  fabricOneLakeSettings: DataflowEndpointFabricOneLakeSettings;
+  fabricOneLakeSettings: FabricOneLakeSettings;
 }
 
 @doc("Kafka endpoint.")
@@ -61,7 +61,7 @@ model KafkaEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.Kafka;
   @doc("Kafka endpoint.")
-  kafkaSettings: DataflowEndpointKafkaSettings;
+  kafkaSettings: KafkaSettings;
 }
 
 @doc("Local persistent volume endpoint.")
@@ -69,7 +69,7 @@ model LocalStorageEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.LocalStorage;
   @doc("Local persistent volume endpoint.")
-  localStorageSettings: DataflowEndpointLocalStorageSettings;
+  localStorageSettings: LocalStorageSettings;
 }
 
 @doc("Broker endpoint.")
@@ -77,7 +77,7 @@ model MqttEndpoint extends DataflowEndpointProperties{
   @doc("Endpoint Type.")
   endpointType: EndpointType.Mqtt;
   @doc("Broker endpoint.")
-  mqttSettings: DataflowEndpointMqttSettings;
+  mqttSettings: MqttSettings;
 }
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
@@ -115,7 +115,7 @@ union EndpointType {
 }
 
 @doc("Azure Data Explorer endpoint properties")
-model DataflowEndpointDataExplorerSettings {
+model DataExplorerSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointDataExplorerAuthentication;
 
@@ -144,7 +144,7 @@ union DataExplorerAuthMethod {
 }
 
 @doc("Azure Data Lake endpoint properties")
-model DataflowEndpointDataLakeStorageSettings {
+model DataLakeStorageSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointDataLakeStorageAuthentication;
 
@@ -176,7 +176,7 @@ union DataLakeStorageAuthMethod {
 }
 
 @doc("Microsoft Fabric endpoint properties")
-model DataflowEndpointFabricOneLakeSettings {
+model FabricOneLakeSettings {
   @doc("Authentication configuration. NOTE - only one authentication property is allowed per entry.")
   authentication: DataflowEndpointFabricOneLakeAuthentication;
 
@@ -229,7 +229,7 @@ union DataflowEndpointFabricPathType {
 }
 
 @doc("Kafka endpoint properties")
-model DataflowEndpointKafkaSettings {
+model KafkaSettings {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointKafkaAuthentication;
 
@@ -353,13 +353,13 @@ union DataflowEndpointKafkaPartitionStrategy {
 }
 
 @doc("Local persistent volume endpoint properties")
-model DataflowEndpointLocalStorageSettings {
+model LocalStorageSettings {
   @doc("Persistent volume claim name.")
   persistentVolumeClaimRef: string;
 }
 
 @doc("Broker endpoint properties")
-model DataflowEndpointMqttSettings {
+model MqttSettings {
   @doc("authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed")
   authentication: DataflowEndpointMqttAuthentication;
 
