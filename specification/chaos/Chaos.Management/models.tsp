@@ -279,18 +279,13 @@ model ExperimentListResult is Azure.Core.Page<Experiment>;
 /**
  * Describes an experiment update.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The original resource does not have a provisioningState property."
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The original resource does not have a 'tags' property."
 model ExperimentUpdate {
-  /**
-   * The tags of the experiment resource.
-   */
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Resource tags")
+  tags?: Record<string>;
 
-  /**
-   * The identity of the experiment resource.
-   */
-  identity?: OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
+  @doc("Managed identity to be updated.")
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 /**

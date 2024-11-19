@@ -15,7 +15,7 @@ namespace Microsoft.Chaos;
  * Model that represents a Experiment resource.
  */
 model Experiment
-  is Azure.ResourceManager.TrackedResource<ExperimentProperties, false> {
+  is Azure.ResourceManager.TrackedResource<ExperimentProperties, true> {
   ...ResourceNameParameter<
     Resource = Experiment,
     KeyName = "experimentName",
@@ -40,10 +40,7 @@ interface Experiments {
   /**
    * The operation to update an experiment.
    */
-  update is ArmCustomPatchAsync<
-    Experiment,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<Experiment, {}>
-  >;
+  update is ArmCustomPatchAsync<Experiment, ExperimentUpdate>;
 
   /**
    * Delete a Experiment resource.

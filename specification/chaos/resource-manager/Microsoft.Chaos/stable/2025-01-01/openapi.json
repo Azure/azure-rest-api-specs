@@ -2216,9 +2216,6 @@
           "description": "The managed service identities assigned to this resource."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -2490,18 +2487,18 @@
     },
     "ExperimentUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Experiment.",
+      "description": "Describes an experiment update.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed identity to be updated."
         }
       }
     },
