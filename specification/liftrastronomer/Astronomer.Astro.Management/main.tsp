@@ -154,7 +154,7 @@ interface Organizations {
 @doc("Request model for get users API")
 model GetUsersRequest {
   @doc("parameters to filter results")
-  searchParamsDictionary?: Record<string>;
+  searchParamsDictionary?: unknown;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -212,7 +212,7 @@ model User {
   roles: Role[];
 
   @doc("User metadata")
-  metadataUser? : Record<string>;
+  metadataUser? : unknown;
 
 
 }
@@ -240,7 +240,7 @@ model Role {
 @doc("Request model for get roles API")
 model GetRolesRequest {
   @doc("parameters to filter results")
-  searchParamsDictionary?: Record<string>;
+  searchParamsDictionary?: unknown;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -261,7 +261,7 @@ model GetRolesSuccessResponse {
 @doc("Request model for get resources API")
 model GetResourcesRequest {
   @doc("parameters to filter results")
-  searchParamsDictionary?: Record<string>;
+  searchParamsDictionary?: unknown;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -303,7 +303,7 @@ model ManageRolesModel {
   roles : Role[];
 
   @doc("Additional properties to assign roles")
-  additionalProperties?: Record<string>;
+  additionalProperties?: unknown;
 }
 
 @added(Versions.v2024_11_01_preview)
@@ -314,7 +314,7 @@ model RemoveUserRequest {
   principal : User;
 
   @doc("Additional properties for deleting user")
-  additionalProperties?: Record<string>;
+  additionalProperties?: unknown;
 }
 
 
