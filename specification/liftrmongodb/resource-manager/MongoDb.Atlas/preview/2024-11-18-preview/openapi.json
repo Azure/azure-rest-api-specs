@@ -78,6 +78,12 @@
           },
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -117,6 +123,12 @@
         "x-ms-examples": {
           "Organizations_ListBySubscription_MaximumSet": {
             "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Organizations_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -159,6 +171,12 @@
         "x-ms-examples": {
           "Organizations_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Organizations_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -210,6 +228,9 @@
         },
         "x-ms-examples": {
           "Organizations_Get_MaximumSet": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
+          },
+          "Organizations_Get_MaximumSet_Gen": {
             "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           }
         }
@@ -284,12 +305,71 @@
         "x-ms-examples": {
           "Organizations_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Organizations_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Organizations_Update",
+        "tags": [
+          "Organizations"
+        ],
+        "description": "Update a OrganizationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Organization resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrganizationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OrganizationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "Organizations_Delete",
@@ -346,6 +426,9 @@
         "x-ms-examples": {
           "Organizations_Delete_MaximumSet": {
             "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          },
+          "Organizations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -356,6 +439,29 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -596,7 +702,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         }
       }
