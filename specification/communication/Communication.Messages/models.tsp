@@ -52,11 +52,11 @@ union CommunicationMessageKind {
   reaction: "reaction",
 
   @added(Versions.c2024_11_15_Preview)
-  @doc("Interactive message type.")
+  @doc("Interactive Actionable message type.")
   interactive: "interactive",
 }
 
-@doc("The Message action binding Kind like WhatsAppList.")
+@doc("The Kind of interactive message channel action binding like WhatsAppListAction.")
 union MessageActionBindingKind {
   string,
 
@@ -70,29 +70,29 @@ union MessageActionBindingKind {
   whatsAppUrlAction: "whatsAppUrlAction",
 }
 
-@doc("The InteractiveMessage action kind.")
+@doc("The kind of Interactive message content.")
 union MessageContentKind {
   string,
 
-  @doc("The text action type.")
+  @doc("The text content type.")
   text: "text",
 
-  @doc("The image action type.")
+  @doc("The image content type.")
   image: "image",
 
-  @doc("The video action type.")
+  @doc("The video content type.")
   video: "video",
 
-  @doc("The document action type.")
+  @doc("The document content type.")
   document: "document",
 
-  @doc("The List action type.")
+  @doc("The ActionSet content type.")
   actionSet: "actionSet",
 
-  @doc("The Button action type.")
+  @doc("The ButtonSet content type.")
   buttonSet: "buttonSet",
 
-  @doc("The Url action type.")
+  @doc("The Url content type.")
   url: "url",
 }
 
@@ -285,20 +285,20 @@ model InteractiveNotificationContent extends NotificationContent {
   @doc("Message notification type is Interactive.")
   kind: CommunicationMessageKind.interactive;
 
-  @doc("The interactiveMessage object used to create interactive messages.")
+  @doc("The interactive message content.")
   interactiveMessage: InteractiveMessage;
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The InteractiveMessage object used to create interactive messages.")
+@doc("The Interactive message content to which user can read and respond.")
 model InteractiveMessage {
   @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
   header?: MessageContent;
 
-  @doc("Gets or Sets Message body text. Emojis, markdown, and links are supported.")
+  @doc("Gets or Sets Message body content. Emojis, markdown, and links are supported.")
   body: TextMessageContent;
 
-  @doc("Gets or Sets Message footer text. Emojis, markdown, and links are supported.")
+  @doc("Gets or Sets Message footer content. Emojis, markdown, and links are supported.")
   footer?: TextMessageContent;
 
   @doc("The binding object to get or set Action which describes options user have to respond to message.")
@@ -342,7 +342,7 @@ model ImageMessageContent extends MessageContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The message content of type image information.")
+@doc("The message content of type video information.")
 model VideoMessageContent extends MessageContent {
   @doc("Message content kind is video.")
   kind: MessageContentKind.video;
@@ -361,7 +361,7 @@ model ButtonContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The message content of type Button information.")
+@doc("The message content of type ButtonSet/ List of buttons information.")
 model ButtonSetContent extends MessageContent {
   @doc("Message content kind is Button.")
   kind: MessageContentKind.buttonSet;
@@ -384,7 +384,7 @@ model UrlContent extends MessageContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The message content of type ActionSet information.")
+@doc("The action content of type ActionSet.")
 model ActionSetContent extends MessageContent {
   @doc("Message content kind is actionSet.")
   kind: MessageContentKind.actionSet;
@@ -392,17 +392,17 @@ model ActionSetContent extends MessageContent {
   @doc("Title of the actionSet content.")
   title: string;
 
-  @doc("Sections for actionSet content.")
+  @doc("Set or group of actions.")
   actionSet: ActionSet[];
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The Action Set content.")
 model ActionSet {
-  @doc("Title of the section.")
+  @doc("Title of the ActionSet.")
   title: string;
 
-  @doc("List of values for section.")
+  @doc("Array of items in ActionSet.")
   items: ActionSetItem[];
 }
 
@@ -420,7 +420,7 @@ model ActionSetItem {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The message content of type media.")
+@doc("The media content.")
 model MediaMessageContent {
   @doc("MediaUri of the media content.")
   mediaUri: url;
@@ -430,31 +430,31 @@ model MediaMessageContent {
 @discriminator("actionBindingKind")
 @doc("Binding actions to the interactive message.")
 model ActionBindings {
-  @doc("Kind of MessageActionBinding.")
+  @doc("Kind of the MessageActionBinding.")
   actionBindingKind: MessageActionBindingKind;
 
-  @doc("List of actions for Interactive message.")
+  @doc("Action content of Interactive message.")
   action: MessageContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("WhatsApp Binding actions to the interactive message.")
+@doc("WhatsApp List Binding actions to the interactive message.")
 model WhatsAppListActionBindings extends ActionBindings {
-  @doc("Message action binding type is WhatsApp.")
+  @doc("Message action binding type is WhatsAppListAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppListAction;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppButtonActionBindings extends ActionBindings {
-  @doc("Message action binding type is WhatsApp.")
+  @doc("Message action binding type is WhatsAppButtonAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppButtonAction;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppUrlActionBindings extends ActionBindings {
-  @doc("Message action binding type is WhatsApp.")
+  @doc("Message action binding type is WhatsAppUrlAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppUrlAction;
 }
 

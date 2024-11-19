@@ -321,11 +321,11 @@
       "properties": {
         "actionBindingKind": {
           "$ref": "#/definitions/MessageActionBindingKind",
-          "description": "Kind of MessageActionBinding."
+          "description": "Kind of the MessageActionBinding."
         },
         "action": {
           "$ref": "#/definitions/MessageContent",
-          "description": "List of actions for Interactive message."
+          "description": "Action content of Interactive message."
         }
       },
       "discriminator": "actionBindingKind",
@@ -340,11 +340,11 @@
       "properties": {
         "title": {
           "type": "string",
-          "description": "Title of the section."
+          "description": "Title of the ActionSet."
         },
         "items": {
           "type": "array",
-          "description": "List of values for section.",
+          "description": "Array of items in ActionSet.",
           "items": {
             "$ref": "#/definitions/ActionSetItem"
           }
@@ -357,7 +357,7 @@
     },
     "ActionSetContent": {
       "type": "object",
-      "description": "The message content of type ActionSet information.",
+      "description": "The action content of type ActionSet.",
       "properties": {
         "title": {
           "type": "string",
@@ -365,7 +365,7 @@
         },
         "actionSet": {
           "type": "array",
-          "description": "Sections for actionSet content.",
+          "description": "Set or group of actions.",
           "items": {
             "$ref": "#/definitions/ActionSet"
           },
@@ -512,7 +512,7 @@
     },
     "ButtonSetContent": {
       "type": "object",
-      "description": "The message content of type Button information.",
+      "description": "The message content of type ButtonSet/ List of buttons information.",
       "properties": {
         "buttons": {
           "type": "array",
@@ -599,7 +599,7 @@
           {
             "name": "interactive",
             "value": "interactive",
-            "description": "Interactive message type."
+            "description": "Interactive Actionable message type."
           }
         ]
       }
@@ -716,7 +716,7 @@
     },
     "InteractiveMessage": {
       "type": "object",
-      "description": "The InteractiveMessage object used to create interactive messages.",
+      "description": "The Interactive message content to which user can read and respond.",
       "properties": {
         "header": {
           "$ref": "#/definitions/MessageContent",
@@ -724,11 +724,11 @@
         },
         "body": {
           "$ref": "#/definitions/TextMessageContent",
-          "description": "Gets or Sets Message body text. Emojis, markdown, and links are supported."
+          "description": "Gets or Sets Message body content. Emojis, markdown, and links are supported."
         },
         "footer": {
           "$ref": "#/definitions/TextMessageContent",
-          "description": "Gets or Sets Message footer text. Emojis, markdown, and links are supported."
+          "description": "Gets or Sets Message footer content. Emojis, markdown, and links are supported."
         },
         "actionBindings": {
           "$ref": "#/definitions/ActionBindings",
@@ -746,7 +746,7 @@
       "properties": {
         "interactiveMessage": {
           "$ref": "#/definitions/InteractiveMessage",
-          "description": "The interactiveMessage object used to create interactive messages."
+          "description": "The interactive message content."
         }
       },
       "required": [
@@ -785,7 +785,7 @@
     },
     "MessageActionBindingKind": {
       "type": "string",
-      "description": "The Message action binding Kind like WhatsAppList.",
+      "description": "The Kind of interactive message channel action binding like WhatsAppListAction.",
       "enum": [
         "whatsAppListAction",
         "whatsAppButtonAction",
@@ -829,7 +829,7 @@
     },
     "MessageContentKind": {
       "type": "string",
-      "description": "The InteractiveMessage action kind.",
+      "description": "The kind of Interactive message content.",
       "enum": [
         "text",
         "image",
@@ -846,37 +846,37 @@
           {
             "name": "text",
             "value": "text",
-            "description": "The text action type."
+            "description": "The text content type."
           },
           {
             "name": "image",
             "value": "image",
-            "description": "The image action type."
+            "description": "The image content type."
           },
           {
             "name": "video",
             "value": "video",
-            "description": "The video action type."
+            "description": "The video content type."
           },
           {
             "name": "document",
             "value": "document",
-            "description": "The document action type."
+            "description": "The document content type."
           },
           {
             "name": "actionSet",
             "value": "actionSet",
-            "description": "The List action type."
+            "description": "The ActionSet content type."
           },
           {
             "name": "buttonSet",
             "value": "buttonSet",
-            "description": "The Button action type."
+            "description": "The ButtonSet content type."
           },
           {
             "name": "url",
             "value": "url",
-            "description": "The Url action type."
+            "description": "The Url content type."
           }
         ]
       }
@@ -1445,7 +1445,7 @@
     },
     "VideoMessageContent": {
       "type": "object",
-      "description": "The message content of type image information.",
+      "description": "The message content of type video information.",
       "properties": {
         "mediaUri": {
           "type": "string",
@@ -1499,7 +1499,7 @@
     },
     "WhatsAppListActionBindings": {
       "type": "object",
-      "description": "WhatsApp Binding actions to the interactive message.",
+      "description": "WhatsApp List Binding actions to the interactive message.",
       "allOf": [
         {
           "$ref": "#/definitions/ActionBindings"
