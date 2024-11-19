@@ -57,13 +57,13 @@ across all ARN system topic delete events
 */
 model ResourceNotificationsResourceDeletedDetails {
   /** id of the resource for which the event is being emitted */
-  id?: string;
+  id: string;
 
   /** name of the resource for which the event is being emitted */
-  name?: string;
+  name: string;
 
   /** the type of the resource for which the event is being emitted */
-  type?: string;
+  type: string;
 }
 
 /**
