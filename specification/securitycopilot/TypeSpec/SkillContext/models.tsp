@@ -156,7 +156,7 @@ model SkillOutputComponent extends OutputComponent{
 model OutputComponent {
   name: string;
   content: string;
-  description: string;
+  description?: string;
   type: OutputComponentType;
 }
 
