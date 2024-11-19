@@ -31,7 +31,7 @@ directive:
     where: $.definitions.AuthenticatorMethodX509.properties.authorizationAttributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.AuthenticatorMethodX509Attributes.properties.attributes
+    where: $.definitions.BrokerAuthenticatorMethodX509Attributes.properties.attributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
     where: $.definitions["Brokers.PrincipalDefinition"].properties.attributes.items
