@@ -455,13 +455,13 @@ model ToolConnection {
 
 // Azure function bindings
 @doc("The Azure function binding")
-model AzureFunctionBinding{
+model AzureFunctionBinding {
   @doc("The type of binding")
   type: string;
 }
 
 @doc("The definition of input or output queue for Azure function.")
-model AzureStorageQueueBinding(AzureFunctionBinding) {
+model AzureStorageQueueBinding extends AzureFunctionBinding {
     @doc("The type of binding")
     type: "storage_queue";
 
