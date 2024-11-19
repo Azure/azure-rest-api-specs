@@ -2093,17 +2093,18 @@
     "NspLoggingConfiguration": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the NSP logging configuration. Accepts 'instance' as name."
-        },
         "properties": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/NspLoggingConfigurationProperties",
           "description": "Properties of the NSP logging configuration."
         }
       },
-      "description": "The NSP logging configuration"
+      "description": "The NSP logging configuration",
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "NspLoggingConfigurationProperties": {
       "type": "object",
@@ -2114,6 +2115,10 @@
             "type": "string"
           },
           "description": "The log categories to enable in the NSP logging configuration."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the NSP logging configuration."
         }
       },
       "description": "The NSP logging configuration properties."
