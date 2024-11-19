@@ -659,11 +659,13 @@
           "properties": {
             "autoUpgradeMinorVersion": {
               "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
-              "type": "boolean"
+              "type": "boolean",
+              "default": true
             },
             "releaseTrain": {
               "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
-              "type": "string"
+              "type": "string",
+              "default": "Stable"
             },
             "version": {
               "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",

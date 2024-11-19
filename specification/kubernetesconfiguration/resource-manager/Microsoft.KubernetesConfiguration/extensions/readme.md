@@ -61,7 +61,10 @@ suppressions:
     reason: Existing service contract needs to be backward compatible.
   - code: PatchResponseCodes
     from: extensions.json
-    reason: Existing service contract needs to be backward compatible.    
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
 ```
 
 ---
