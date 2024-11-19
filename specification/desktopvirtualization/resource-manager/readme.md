@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2024-09` is specified on the comma
 ```yaml $(tag) == 'package-2024-09'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2024-09-10/desktopvirtualization.json
-tag: package-preview-2024-08
 ```
 
 
