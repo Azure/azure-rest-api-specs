@@ -33,11 +33,11 @@ model MachineLearningServicesModelDeployedEventData {
 
   /** The tags of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service tags is type any"
-  serviceTags?: Record<unknown>;
+  serviceTags: Record<unknown>;
 
   /** The properties of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service properties is type any"
-  serviceProperties?: Record<unknown>;
+  serviceProperties: Record<unknown>;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
@@ -81,15 +81,14 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
   targetDatasetId: string;
 
   /** The coefficient result that triggered the event. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   driftCoefficient: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
-  startTime: utcDateTime;
+  startTime?: utcDateTime;
 
   /** The end time of the target dataset time series that resulted in drift detection. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
-  endTime: utcDateTime;
+  endTime?: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
