@@ -886,6 +886,171 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/transitiontocmk": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_TransitionToCmk",
+        "summary": "Transition volumes encryption from PMK to CMK.",
+        "description": "Transitions all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The required parameters to perform encryption transition.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/encryptionTransitionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_MigrateEncryptionKey": {
+            "$ref": "examples/Accounts_TransitionEncryptionKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/getKeyVaultStatus": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_GetChangeKeyVaultInformation",
+        "summary": "Get information about how volumes under NetApp account are encrypted.",
+        "description": "Contains data from encryption.keyVaultProperties as well as information about which private endpoint is used by each encryption sibling set. Response from this endpoint can be modified and used as request body for POST request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_GetChangeKeyVaultInformation": {
+            "$ref": "examples/Accounts_GetChangeKeyVaultInformation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/changeKeyVault": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_ChangeKeyVault",
+        "summary": "Change Key Vault/Managed HSM that is used for encryption of volumes under NetApp account.",
+        "description": "Affects existing volumes that are encrypted with Key Vault/Managed HSM, and new volumes. Supports HSM to Key Vault, Key Vault to HSM, HSM to HSM and Key Vault to Key Vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The required parameters to perform encryption migration.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/changeKeyVault"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_ChangeKeyVault": {
+            "$ref": "examples/Accounts_ChangeKeyVault.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
       "get": {
         "summary": "Describe all Capacity Pools",
@@ -6894,6 +7059,9 @@
         "coolAccessRetrievalPolicy": {
           "$ref": "#/definitions/coolAccessRetrievalPolicy"
         },
+        "coolAccessTieringPolicy": {
+          "$ref": "#/definitions/coolAccessTieringPolicy"
+        },
         "unixPermissions": {
           "type": "string",
           "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
@@ -7531,6 +7699,9 @@
         },
         "coolAccessRetrievalPolicy": {
           "$ref": "#/definitions/coolAccessRetrievalPolicy"
+        },
+        "coolAccessTieringPolicy": {
+          "$ref": "#/definitions/coolAccessTieringPolicy"
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
@@ -9143,6 +9314,44 @@
         "modelAsString": false
       }
     },
+    "encryptionTransitionRequest": {
+      "description": "Encryption transition request",
+      "type": "object",
+      "required": [
+        "virtualNetworkId",
+        "privateEndpointId"
+      ],
+      "properties": {
+        "virtualNetworkId": {
+          "title": "virtualNetworkId",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          },
+          "description": "Identifier for the virtual network",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "privateEndpointId": {
+          "title": "privateEndpointId",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          },
+          "description": "Identifier of the private endpoint to reach the Azure Key Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+        }
+      }
+    },
     "coolAccessRetrievalPolicy": {
       "type": "string",
       "description": "coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are: \n Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.\n OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.\n Never - No client-driven data is pulled from cool tier to standard storage.",
@@ -9152,7 +9361,19 @@
         "Never"
       ],
       "x-ms-enum": {
-        "name": "coolAccessRetrievalPolicy",
+        "name": "RetrievalPolicy",
+        "modelAsString": true
+      }
+    },
+    "coolAccessTieringPolicy": {
+      "type": "string",
+      "description": "coolAccessTieringPolicy determines which cold data blocks are moved to cool tier. The possible values for this field are: Auto - Moves cold user data blocks in both the Snapshot copies and the active file system to the cool tier tier. This policy is the default. SnapshotOnly - Moves user data blocks of the Volume Snapshot copies that are not associated with the active file system to the cool tier.",
+      "enum": [
+        "Auto",
+        "SnapshotOnly"
+      ],
+      "x-ms-enum": {
+        "name": "coolAccessTieringPolicy",
         "modelAsString": true
       }
     },
@@ -9648,6 +9869,73 @@
           },
           "description": "The ResourceId of the Backup Vault",
           "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
+        }
+      }
+    },
+    "changeKeyVault": {
+      "description": "Change key vault request",
+      "type": "object",
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "keyVaultPrivateEndpoints"
+      ],
+      "properties": {
+        "keyVaultUri": {
+          "title": "keyVaultUri",
+          "description": "The URI of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "https://my-key-vault.managedhsm.azure.net"
+        },
+        "keyName": {
+          "title": "keyName",
+          "description": "The name of the key that should be used for encryption.",
+          "type": "string",
+          "example": "rsaKeyName"
+        },
+        "keyVaultResourceId": {
+          "title": "keyVaultResourceId",
+          "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "keyVaultPrivateEndpoints": {
+          "title": "keyVaultPrivateEndpoints",
+          "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyVaultPrivateEndpoint"
+          },
+          "x-ms-identifiers": [
+            "virtualNetworkId"
+          ]
+        }
+      }
+    },
+    "keyVaultPrivateEndpoint": {
+      "title": "keyVaultPrivateEndpoint",
+      "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
+      "type": "object",
+      "properties": {
+        "virtualNetworkId": {
+          "title": "virtualNetworkId",
+          "type": "string",
+          "description": "Identifier for the virtual network id",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "privateEndpointId": {
+          "title": "privateEndpointId",
+          "type": "string",
+          "description": "Identifier of the private endpoint to reach the Azure Key Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
         }
       }
     }
