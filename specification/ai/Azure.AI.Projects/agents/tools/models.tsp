@@ -485,6 +485,6 @@ model AzureFunctionStorageQueue {
   StorageQueueUri: string;
 
   @doc("The name of an Azure function storage queue.")
-  @encodedName("application/json", "name")
-  StorageQueueName: string;
+  @encodedName("application/json", "queue_name")
+  QueueName: string;
 }
