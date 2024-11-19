@@ -25,13 +25,13 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.BrokerAuthenticatorMethodCustom.properties.headers
+    where: $.definitions.AuthenticatorMethodCustom.properties.headers
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.BrokerAuthenticatorMethodX509.properties.authorizationAttributes
+    where: $.definitions.AuthenticatorMethodX509.properties.authorizationAttributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.BrokerAuthenticatorMethodX509Attributes.properties.attributes
+    where: $.definitions.AuthenticatorMethodX509Attributes.properties.attributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
     where: $.definitions.PrincipalDefinition.properties.attributes.items
