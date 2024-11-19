@@ -142,6 +142,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/common.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/ContainerServiceEventResources.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 - Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
 ```
