@@ -22,8 +22,11 @@ options:
     "package-dir": "azure-keyvault-certificates"
     "package-name": "azure-keyvault-certificates"
     "output-path": "."
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
+  "@azure-tools/typespec-java":
+    flavor: azure
+    "package-dir": "azure-security-keyvault-certificates"
+    "namespace": "com.azure.security.keyvault.certificates.implementation"
+    "customization-class": "swagger/src/main/java/CertificatesCustomizations.java"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
