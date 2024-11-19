@@ -276,6 +276,10 @@ model CapabilityTypePropertiesRuntimeProperties {
  */
 model ExperimentListResult is Azure.Core.Page<Experiment>;
 
+#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
+
 /**
  * Describes an experiment update.
  */
@@ -284,9 +288,8 @@ model ExperimentUpdate {
   @doc("Resource tags")
   tags?: Record<string>;
 
-  #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
   @doc("Managed identity to be updated.")
-  identity?: UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>;
+  identity?: ManagedServiceIdentityUpdate;
 }
 
 /**

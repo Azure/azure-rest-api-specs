@@ -2497,27 +2497,8 @@
           }
         },
         "identity": {
-          "type": "object",
-          "description": "Managed identity to be updated.",
-          "properties": {
-            "type": {
-              "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-              "description": "The type of managed identity assigned to this resource."
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "description": "The identities assigned to this resource by the user.",
-              "additionalProperties": {
-                "allOf": [
-                  {
-                    "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-                  }
-                ],
-                "type": "object",
-                "x-nullable": true
-              }
-            }
-          }
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "description": "Managed identity to be updated."
         }
       }
     },
@@ -2557,6 +2538,29 @@
         "key",
         "value"
       ]
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
     },
     "PostActionResponse": {
       "type": "object",
