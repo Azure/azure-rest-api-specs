@@ -59,6 +59,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: extensions.json
     reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.    
 ```
 
 ---

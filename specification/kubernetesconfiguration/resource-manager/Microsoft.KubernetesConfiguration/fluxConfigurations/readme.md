@@ -56,6 +56,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: fluxconfiguration.json
     reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
 ```
 
 # Code Generation
