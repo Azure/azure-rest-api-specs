@@ -74,7 +74,7 @@ interface EvidenceResources {
    * Create or Update an evidence a specified report
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_CreateOrUpdate")
+  @operationId("Evidences_CreateOrUpdate")
   createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<
     EvidenceResource,
     {
@@ -87,7 +87,7 @@ interface EvidenceResources {
    * Delete an existent evidence from a specified report
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @operationId("Evidence_Delete")
+  @operationId("Evidences_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
