@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(KeyVault, "Certificate", "Java");
+@@clientName(KeyVault, "Certificate", "java");
