@@ -111,3 +111,11 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: astronomer.json
+```

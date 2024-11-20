@@ -231,7 +231,7 @@ model Role {
   @doc("Role type")
   type?: string;
 
-  @doc("description")
+  @doc("description of role")
   description?: string;
 
   @doc("scope")
@@ -307,8 +307,8 @@ model ManageRolesModel {
   @doc("Role object array")
   roles : Role[];
 
-  @doc("Additional properties to assign roles")
-  additionalProperties?: Record<string>;
+  @doc("Additional data to assign roles")
+  additionalData?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
@@ -319,8 +319,8 @@ model RemoveUserRequest {
   @doc("User object")
   principal : User;
 
-  @doc("Additional properties for deleting user")
-  additionalProperties?: Record<string>;
+  @doc("Additional data for deleting user")
+  additionalData?: Record<string>;
 }
 
 
