@@ -10,4 +10,4 @@ using Microsoft.Chaos;
 @@clientName(TargetType, "ChaosTargetType");
 @@clientName(Capability, "ChaosCapability");
 @@clientName(CapabilityType, "ChaosCapabilityType");
-@@clientName(ExperimentExecutions.getExecutionDetails, "ExperimentExecutions.executionDetails");
+@@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
