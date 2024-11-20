@@ -135,6 +135,14 @@ model ExtensionResourcePathParameters {
 }
 
 /**
+ * Target resource properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync-only PUT/PATCH/DELETE"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "existing API"
+model TargetProperties is Record<unknown>;
+
+/**
  * Model that represents a list of Capability resources and a link for pagination.
  */
 model CapabilityListResult is Azure.Core.Page<Capability>;

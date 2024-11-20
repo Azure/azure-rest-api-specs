@@ -11,3 +11,4 @@ using Microsoft.Chaos;
 @@clientName(Capability, "ChaosCapability");
 @@clientName(CapabilityType, "ChaosCapabilityType");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
+@@clientName(Targets.createOrUpdate::parameters.resource, "target");
