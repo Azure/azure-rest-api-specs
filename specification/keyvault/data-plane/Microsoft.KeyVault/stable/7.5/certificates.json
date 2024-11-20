@@ -1082,6 +1082,9 @@
           "GetDeletedCertificates": {
             "$ref": "./examples/GetDeletedCertificates-example.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1950,7 +1953,7 @@
             "description": "Denotes a vault state in which deletion is an irreversible operation, without\nthe possibility for recovery. This level corresponds to no protection being\navailable against a Delete operation; the data is irretrievably lost upon\naccepting a Delete operation at the entity level or higher (vault, resource\ngroup, subscription etc.)"
           },
           {
-            "name": "Recoverable_Purgeable",
+            "name": "RecoverablePurgeable",
             "value": "Recoverable+Purgeable",
             "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval (90 days),\nunless a Purge operation is requested, or the subscription is cancelled. System\nwil permanently delete it after 90 days, if not recovered"
           },
@@ -1960,12 +1963,12 @@
             "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval(90 days) and\nwhile the subscription is still available. System wil permanently delete it\nafter 90 days, if not recovered"
           },
           {
-            "name": "Recoverable_ProtectedSubscription",
+            "name": "RecoverableProtectedSubscription",
             "value": "Recoverable+ProtectedSubscription",
             "description": "Denotes a vault and subscription state in which deletion is recoverable within\nretention interval (90 days), immediate and permanent deletion (i.e. purge) is\nnot permitted, and in which the subscription itself  cannot be permanently\ncanceled. System wil permanently delete it after 90 days, if not recovered"
           },
           {
-            "name": "CustomizedRecoverable_Purgeable",
+            "name": "CustomizedRecoverablePurgeable",
             "value": "CustomizedRecoverable+Purgeable",
             "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays\n< 90). This level guarantees the recoverability of the deleted entity during\nthe retention interval, unless a Purge operation is requested, or the\nsubscription is cancelled."
           },
@@ -1975,7 +1978,7 @@
             "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge when 7<=\nSoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the\ndeleted entity during the retention interval and while the subscription is\nstill available."
           },
           {
-            "name": "CustomizedRecoverable_ProtectedSubscription",
+            "name": "CustomizedRecoverableProtectedSubscription",
             "value": "CustomizedRecoverable+ProtectedSubscription",
             "description": "Denotes a vault and subscription state in which deletion is recoverable,\nimmediate and permanent deletion (i.e. purge) is not permitted, and in which\nthe subscription itself cannot be permanently canceled when 7<=\nSoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the\ndeleted entity during the retention interval, and also reflects the fact that\nthe subscription itself cannot be cancelled."
           }

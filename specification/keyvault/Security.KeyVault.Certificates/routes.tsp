@@ -615,6 +615,7 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
  * soft-delete enabled vaults.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
