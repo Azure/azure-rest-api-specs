@@ -101,25 +101,18 @@ model OrganizationResource
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-/**
- * The type used for update operations of the Organization Resource.
- */
-model OrganizationResourceUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** Updatable managed service identity */
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     OrganizationResource,
-    OrganizationResourceUpdate
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      OrganizationResource,
+      OrganizationProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
