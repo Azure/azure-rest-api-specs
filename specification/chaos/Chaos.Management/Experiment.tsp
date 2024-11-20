@@ -15,7 +15,7 @@ namespace Microsoft.Chaos;
  * Model that represents a Experiment resource.
  */
 model Experiment
-  is Azure.ResourceManager.TrackedResource<ExperimentProperties, true> {
+  is Azure.ResourceManager.TrackedResource<ExperimentProperties, false> {
   ...ResourceNameParameter<
     Resource = Experiment,
     KeyName = "experimentName",
