@@ -153,8 +153,9 @@ interface Organizations {
 @added(Versions.v2024_11_01_preview)
 @doc("Request model for get users API")
 model GetUsersRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   @doc("parameters to filter results")
-  searchParamsDictionary?: unknown;
+  searchParamsDictionary?: Record<string>;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -184,6 +185,7 @@ model GetUsersSuccessResponse {
   
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 @added(Versions.v2024_11_01_preview)
 @doc("User object")
 model User {
@@ -212,7 +214,7 @@ model User {
   roles: Role[];
 
   @doc("User metadata")
-  metadataUser? : unknown;
+  metadataUser? : Record<string>;
 
 
 }
@@ -236,11 +238,12 @@ model Role {
   scope?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 @added(Versions.v2024_11_01_preview)
 @doc("Request model for get roles API")
 model GetRolesRequest {
   @doc("parameters to filter results")
-  searchParamsDictionary?: unknown;
+  searchParamsDictionary?: Record<string>;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -257,11 +260,12 @@ model GetRolesSuccessResponse {
 
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 @added(Versions.v2024_11_01_preview)
 @doc("Request model for get resources API")
 model GetResourcesRequest {
   @doc("parameters to filter results")
-  searchParamsDictionary?: unknown;
+  searchParamsDictionary?: Record<string>;
 
   @doc("page details")
   pageInfo?: PageInfo;
@@ -292,6 +296,7 @@ model PartnerResource {
 
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly." 
 @added(Versions.v2024_11_01_preview)
 @doc("Request model for manage roles API")
 model ManageRolesModel {
@@ -303,9 +308,10 @@ model ManageRolesModel {
   roles : Role[];
 
   @doc("Additional properties to assign roles")
-  additionalProperties?: unknown;
+  additionalProperties?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
 @added(Versions.v2024_11_01_preview)
 @doc("Request model for manage roles API")
 model RemoveUserRequest {
@@ -314,7 +320,7 @@ model RemoveUserRequest {
   principal : User;
 
   @doc("Additional properties for deleting user")
-  additionalProperties?: unknown;
+  additionalProperties?: Record<string>;
 }
 
 

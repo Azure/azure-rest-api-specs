@@ -801,7 +801,11 @@
       "description": "Request model for get resources API",
       "properties": {
         "searchParamsDictionary": {
-          "description": "parameters to filter results"
+          "type": "object",
+          "description": "parameters to filter results",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "pageInfo": {
           "$ref": "#/definitions/PageInfo",
@@ -834,7 +838,11 @@
       "description": "Request model for get roles API",
       "properties": {
         "searchParamsDictionary": {
-          "description": "parameters to filter results"
+          "type": "object",
+          "description": "parameters to filter results",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "pageInfo": {
           "$ref": "#/definitions/PageInfo",
@@ -867,7 +875,11 @@
       "description": "Request model for get users API",
       "properties": {
         "searchParamsDictionary": {
-          "description": "parameters to filter results"
+          "type": "object",
+          "description": "parameters to filter results",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "pageInfo": {
           "$ref": "#/definitions/PageInfo",
@@ -1317,7 +1329,11 @@
           }
         },
         "additionalProperties": {
-          "description": "Additional properties to assign roles"
+          "type": "object",
+          "description": "Additional properties to assign roles",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1460,7 +1476,11 @@
           "description": "User object"
         },
         "additionalProperties": {
-          "description": "Additional properties for deleting user"
+          "type": "object",
+          "description": "Additional properties for deleting user",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1536,7 +1556,11 @@
           }
         },
         "metadataUser": {
-          "description": "User metadata"
+          "type": "object",
+          "description": "User metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
