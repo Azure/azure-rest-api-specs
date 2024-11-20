@@ -401,7 +401,7 @@ model LivenessSessionAttempt {
   attemptId: int32;
 
   @doc("The status of the attempt.")
-  attemptStatus: AttemptStatus;
+  attemptStatus: Foundations.OperationState;
 
   @doc("The result of the liveness call, will be null if there is error.")
   result?: LivenessResult;
@@ -417,7 +417,7 @@ model LivenessWithVerifySessionAttempt {
   attemptId: int32;
 
   @doc("The status of the attempt.")
-  attemptStatus: AttemptStatus;
+  attemptStatus: Foundations.OperationState;
 
   @doc("The result of the liveness with verify call, will be null if there is error.")
   result?: LivenessWithVerifyResult;
@@ -437,21 +437,6 @@ model LivenessWithVerifyReference {
 
   @doc("Quality of face image for recognition.")
   qualityForRecognition: QualityForRecognition;
-}
-
-@added(Versions.v1_2)
-@doc("The status of the liveness classification attempt.")
-union AttemptStatus {
-  string,
-
-  @doc("The attempt is successful.")
-  "Success",
-
-  @doc("The attempt is failed.")
-  "Failed",
-
-  @doc("The attempt is canceled.")
-  "Canceled",
 }
 
 @added(Versions.v1_2)

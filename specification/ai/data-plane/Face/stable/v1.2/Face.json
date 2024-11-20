@@ -5079,36 +5079,6 @@
         "persistedFaceId"
       ]
     },
-    "AttemptStatus": {
-      "type": "string",
-      "description": "The status of the liveness classification attempt.",
-      "enum": [
-        "Success",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "AttemptStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Success",
-            "value": "Success",
-            "description": "The attempt is successful."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The attempt is failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The attempt is canceled."
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.OperationState": {
       "type": "string",
       "description": "Enum describing allowed operation states.",
@@ -6500,7 +6470,7 @@
           "description": "The attempt ID, start from 1."
         },
         "attemptStatus": {
-          "$ref": "#/definitions/AttemptStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The status of the attempt."
         },
         "result": {
@@ -6655,7 +6625,7 @@
           "description": "The attempt ID, start from 1."
         },
         "attemptStatus": {
-          "$ref": "#/definitions/AttemptStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The status of the attempt."
         },
         "result": {
