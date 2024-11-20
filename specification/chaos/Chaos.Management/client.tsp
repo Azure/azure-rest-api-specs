@@ -12,3 +12,16 @@ using Microsoft.Chaos;
 @@clientName(CapabilityType, "ChaosCapabilityType");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(Targets.createOrUpdate::parameters.resource, "target");
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Experiment.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ExperimentExecution.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Target.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(TargetType.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Capability.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(CapabilityType.properties);
