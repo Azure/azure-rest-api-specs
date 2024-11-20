@@ -2005,13 +2005,30 @@
           "x-ms-client-name": "password",
           "description": "The gateway settings user password."
         },
-        "entraUsers": {
+        "restAuthMsEntra.users": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "List of Entra user emails for gateway access."
+          "items": {
+            "type": "object",
+            "properties": {
+              "objectId": {
+                "type": "string",
+                "description": "The ObjectID of the Entra user or client ID of the enterprise applications."
+              },
+              "displayName": {
+                "type": "string",
+                "description": "The display name of the Entra user."
+              },
+              "UPN": {
+                "type": "string",
+                "description": "The User Principal Name(UPN) of the Entra user. It may be empty in certain cases, such as for enterprise applications"
+              }
+            },
+            "description": "Entra user deatils for gateway access."
+          },
+          "description": "List of Entra users for gateway access."
         }
       },
-      "description": "The update gateway settings request parameters. Plz note either basic or entraUsers should be selected at a time."
+      "description": "The update gateway settings request parameters. Plz note either basic or entra user should be provided at a time."
     },
     "GatewaySettings": {
       "type": "object",
@@ -2034,12 +2051,27 @@
           "description": "The gateway settings user password.",
           "readOnly": true
         },
-        "entraUsers": {
+        "restAuthMsEntra.users": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "objectId": {
+                "type": "string",
+                "description": "The ObjectID of the Entra user or client ID of the enterprise applications."
+              },
+              "displayName": {
+                "type": "string",
+                "description": "The display name of the Entra user."
+              },
+              "UPN": {
+                "type": "string",
+                "description": "The User Principal Name(UPN) of the Entra user. It may be empty in certain cases, such as for enterprise applications"
+              }
+            },
+            "description": "Entra user deatils for gateway access."
           },
-          "description": "List of Entra user emails for gateway access."
+          "description": "List of Entra users for gateway access."
         }
       },
       "description": "Gateway settings."
