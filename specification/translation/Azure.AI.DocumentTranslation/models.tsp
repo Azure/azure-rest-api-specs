@@ -23,6 +23,21 @@ model DocumentTranslateResult {
   @header
   contentType: "application/octet-stream";
 
+  @header("x-metered-usage")
+  @doc("Specifies consumption (the number of characters for which the user will be charged) for the translation job request")
+  @added(Versions.v2024_11_01_preview)
+  meteredUsage: int32;
+
+  @header("total-image-scans-succeeded")
+  @doc("Specifies the number of successful image translations within a document translation job")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded: int32;
+
+  @header("total-image-scans-failed")
+  @doc("Specifies the number of failed image translations within a document translation job")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed: int32;
+
   @doc("Request response, response is a translated document.")
   @body
   document: bytes;
@@ -125,6 +140,17 @@ union Status {
 model StartTranslationDetails {
   @doc("The input list of documents or folders containing documents")
   inputs: BatchRequest[];
+
+  @doc("The batch operation options")
+  @added(Versions.v2024_11_01_preview)
+  options?: BatchOptions;
+}
+
+@doc("Translation batch request options")
+@added(Versions.v2024_11_01_preview)
+model BatchOptions {
+  @doc("Translation text within an image option")
+  translateTextWithinImage?: boolean = false;
 }
 
 @doc("Definition for the input batch translation request")
@@ -356,6 +382,14 @@ model StatusSummary {
 
   @doc("Total characters charged by the API")
   totalCharacterCharged: int64;
+
+  @doc("Total image scans charged by the API")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
+
+  @doc("Total image scans failed")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed?: int32;
 }
 
 @doc("Document Status Response")
@@ -395,6 +429,14 @@ model DocumentStatus {
 
   @doc("Character charged by the API")
   characterCharged?: int32;
+
+  @doc("Total image scans charged by the API")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansSucceeded?: int32;
+
+  @doc("Total image scans failed")
+  @added(Versions.v2024_11_01_preview)
+  totalImageScansFailed?: int32;
 }
 
 @doc("Documents Status Response")
@@ -476,6 +518,11 @@ model DocumentTranslateBody {
   @doc("Document Translate Request Content")
   @body
   body: DocumentTranslateContent;
+
+  @doc("Optional boolean parameter to translate text within an image in the document")
+  @query("translateTextWithinImage")
+  @added(Versions.v2024_11_01_preview)
+  translateTextWithinImage?: boolean;
 }
 
 @doc("Start Translation Request Body")
@@ -483,4 +530,158 @@ model StartTranslationBody {
   @doc("Translation job submission batch request")
   @body
   body: StartTranslationDetails;
+}
+
+@doc("Get Translations Status options")
+model GetTranslationsStatusOptions {
+  @doc("""
+    top indicates the total number of records the user wants to be returned across
+    all pages.
+                
+    Clients MAY use top and skip query parameters to
+    specify a number of results to return and an offset into the collection.
+    When
+    both top and skip are given by a client, the server SHOULD first apply skip
+    and then top on the collection.
+                
+    Note: If the server can't honor
+    top and/or skip, the server MUST return an error to the client informing
+    about it instead of just ignoring the query options.
+    """)
+  @maxValue(2147483647)
+  @query("top")
+  top?: int32;
+
+  @doc("""
+    skip indicates the number of records to skip from the list of records held by
+    the server based on the sorting method specified.  By default, we sort by
+    descending start time.
+                
+    Clients MAY use top and skip query
+    parameters to specify a number of results to return and an offset into the
+    collection.
+    When both top and skip are given by a client, the server SHOULD
+    first apply skip and then top on the collection.
+                
+    Note: If the
+    server can't honor top and/or skip, the server MUST return an error to the
+    client informing about it instead of just ignoring the query options.
+    """)
+  @maxValue(2147483647)
+  @query("skip")
+  skip?: int32;
+
+  @doc("""
+    maxpagesize is the maximum items returned in a page.  If more items are
+    requested via top (or top is not specified and there are more items to be
+    returned), @nextLink will contain the link to the next page.
+                
+    
+    Clients MAY request server-driven paging with a specific page size by
+    specifying a maxpagesize preference. The server SHOULD honor this preference
+    if the specified page size is smaller than the server's default page size.
+    """)
+  @maxValue(100)
+  @minValue(1)
+  @query("maxpagesize")
+  maxpagesize?: int32 = 50;
+
+  @doc("Ids to use in filtering")
+  @query("ids")
+  ids?: uuid[];
+
+  @doc("Statuses to use in filtering")
+  @query("statuses")
+  statuses?: string[];
+
+  @doc("the start datetime to get items after")
+  @query("createdDateTimeUtcStart")
+  createdDateTimeUtcStart?: utcDateTime;
+
+  @doc("the end datetime to get items before")
+  @query("createdDateTimeUtcEnd")
+  createdDateTimeUtcEnd?: utcDateTime;
+
+  @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
+  @query("orderby")
+  orderby?: string[];
+}
+
+@doc("Get Documents Status options")
+model GetDocumentsStatusOptions {
+  @doc("Format - uuid.  The operation id")
+  @path
+  id: uuid;
+
+  @doc("""
+    top indicates the total number of records the user wants to be returned across
+    all pages.
+                
+    Clients MAY use top and skip query parameters to
+    specify a number of results to return and an offset into the collection.
+    When
+    both top and skip are given by a client, the server SHOULD first apply skip
+    and then top on the collection.
+                
+    Note: If the server can't honor
+    top and/or skip, the server MUST return an error to the client informing
+    about it instead of just ignoring the query options.
+    """)
+  @maxValue(2147483647)
+  @query("top")
+  top?: int32;
+
+  @doc("""
+    skip indicates the number of records to skip from the list of records held by
+    the server based on the sorting method specified.  By default, we sort by
+    descending start time.
+                
+    Clients MAY use top and skip query
+    parameters to specify a number of results to return and an offset into the
+    collection.
+    When both top and skip are given by a client, the server SHOULD
+    first apply skip and then top on the collection.
+                
+    Note: If the
+    server can't honor top and/or skip, the server MUST return an error to the
+    client informing about it instead of just ignoring the query options.
+    """)
+  @maxValue(2147483647)
+  @query("skip")
+  skip?: int32;
+
+  @doc("""
+    maxpagesize is the maximum items returned in a page.  If more items are
+    requested via top (or top is not specified and there are more items to be
+    returned), @nextLink will contain the link to the next page.
+                
+    
+    Clients MAY request server-driven paging with a specific page size by
+    specifying a maxpagesize preference. The server SHOULD honor this preference
+    if the specified page size is smaller than the server's default page size.
+    """)
+  @maxValue(100)
+  @minValue(1)
+  @query("maxpagesize")
+  maxpagesize?: int32 = 50;
+
+  @doc("Ids to use in filtering")
+  @query("ids")
+  ids?: uuid[];
+
+  @doc("Statuses to use in filtering")
+  @query("statuses")
+  statuses?: string[];
+
+  @doc("the start datetime to get items after")
+  @query("createdDateTimeUtcStart")
+  createdDateTimeUtcStart?: utcDateTime;
+
+  @doc("the end datetime to get items before")
+  @query("createdDateTimeUtcEnd")
+  createdDateTimeUtcEnd?: utcDateTime;
+
+  @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
+  @query("orderby")
+  orderby?: string[];
 }

@@ -8,7 +8,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
+@TypeSpec.Versioning.useDependency(
+  DocumentTranslation.Versions.v2024_11_01_preview
+)
 namespace ClientCustomizations;
 
 @client({
@@ -50,6 +52,14 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
+@@clientName(DocumentTranslation.GetTranslationsStatusOptions.ids,
+  "translationIds"
+);
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp, java"
@@ -73,6 +83,10 @@ interface SingleDocumentTranslationClient {
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getTranslationsStatus, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getDocumentsStatus, false, "java");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,

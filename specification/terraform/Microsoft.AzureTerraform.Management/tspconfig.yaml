@@ -16,12 +16,40 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/terraform"
+    package-dir: "armterraform"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-terraform"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.terraform"
+    service-name: "Azure Terraform"
+    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-terraform"
     package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-terraform"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-terraform"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

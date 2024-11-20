@@ -3,7 +3,8 @@
     "resourceGroupName": "TestResourceGroup",
     "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
     "api-version": "2024-05-01",
-    "$filter": "atScope()"
+    "$filter": "atScope()",
+    "$expand": "LatestDefinitionVersion, EffectiveDefinitionVersion"
   },
   "responses": {
     "200": {
@@ -28,6 +29,8 @@
               },
               "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
               "definitionVersion": "1.*.*",
+              "latestDefinitionVersion": "1.0.0",
+              "effectiveDefinitionVersion": "1.0.0",
               "parameters": {
                 "allowedSkus": {
                   "value": "Standard_A1"
@@ -46,6 +49,8 @@
               "description": "Ensure a given tag key and value are present on all resources",
               "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/TagKeyValue",
               "definitionVersion": "1.*.*",
+              "latestDefinitionVersion": "1.0.0",
+              "effectiveDefinitionVersion": "1.0.0",
               "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/TestResourceGroup",
               "notScopes": []
             }

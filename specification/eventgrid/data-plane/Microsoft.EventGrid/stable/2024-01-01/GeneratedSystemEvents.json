@@ -7641,6 +7641,15 @@
         }
       }
     },
+    "ResourceNotificationsContainerServiceEventResourcesScheduledEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
+        }
+      ]
+    },
     "ResourceNotificationsHealthResourcesAnnotatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
@@ -8642,6 +8651,36 @@
         "storageDiagnostics"
       ]
     },
+    "StorageLifecycleCompletionStatus": {
+      "type": "string",
+      "description": "The status for a LCM policy.",
+      "enum": [
+        "Completed",
+        "CompletedWithError",
+        "Incomplete"
+      ],
+      "x-ms-enum": {
+        "name": "StorageLifecycleCompletionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "CompletedWithError",
+            "value": "CompletedWithError",
+            "description": "CompletedWithError"
+          },
+          {
+            "name": "Incomplete",
+            "value": "Incomplete",
+            "description": "Incomplete"
+          }
+        ]
+      }
+    },
     "StorageLifecyclePolicyActionSummaryDetail": {
       "type": "object",
       "description": "Execution statistics of a specific policy action in a Blob Management cycle.",
@@ -8670,6 +8709,10 @@
           "type": "string",
           "description": "The time the policy task was scheduled."
         },
+        "policyRunSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyRunSummary",
+          "description": "Policy execution summary which shows the completion status of a LCM run\""
+        },
         "deleteSummary": {
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail",
           "description": "Execution statistics of a specific policy action in a Blob Management cycle."
@@ -8688,10 +8731,24 @@
         }
       },
       "required": [
+        "policyRunSummary",
         "deleteSummary",
         "tierToCoolSummary",
         "tierToArchiveSummary",
         "tierToColdSummary"
+      ]
+    },
+    "StorageLifecyclePolicyRunSummary": {
+      "type": "object",
+      "description": "Policy run status of an account in a Blob Management cycle.",
+      "properties": {
+        "completionStatus": {
+          "$ref": "#/definitions/StorageLifecycleCompletionStatus",
+          "description": "Policy status can be Completed/CompletedWithError/Incomplete."
+        }
+      },
+      "required": [
+        "completionStatus"
       ]
     },
     "StorageTaskAssignmentCompletedEventData": {

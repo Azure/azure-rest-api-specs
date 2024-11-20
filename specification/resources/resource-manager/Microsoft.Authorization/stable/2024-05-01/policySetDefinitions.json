@@ -164,6 +164,9 @@
             "description": "The name of the policy set definition to get."
           },
           {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -204,6 +207,9 @@
             "type": "string",
             "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
             "description": "The name of the policy set definition to get."
+          },
+          {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -249,6 +255,9 @@
             "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
           },
           {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
+          },
+          {
             "$ref": "#/parameters/TopParameter"
           }
         ],
@@ -290,6 +299,9 @@
           },
           {
             "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -444,6 +456,9 @@
             "description": "The name of the policy set definition to get."
           },
           {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -485,6 +500,9 @@
           },
           {
             "$ref": "#/parameters/PolicySetDefinitionsFilterParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicySetDefinitionsExpandParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -602,6 +620,16 @@
           "type": "string",
           "description": "The version of the policy definition to use."
         },
+        "latestDefinitionVersion": {
+          "type": "string",
+          "description": "The latest version of the policy definition available. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "effectiveDefinitionVersion": {
+          "type": "string",
+          "description": "The effective version of the policy definition in use. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
         "parameters": {
           "description": "The parameter values for the referenced policy rule. The keys are the parameter names.",
           "$ref": "./policyAssignments.json#/definitions/ParameterValues"
@@ -718,6 +746,14 @@
       "type": "string",
       "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
       "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "PolicySetDefinitionsExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
       "x-ms-parameter-location": "method"
     },
     "TopParameter": {
