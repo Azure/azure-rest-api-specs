@@ -16,6 +16,7 @@ using OpenAPI;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset definition.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
   @doc("Discovered Asset name parameter.")
@@ -35,6 +36,7 @@ model DiscoveredAsset is TrackedResource<DiscoveredAssetProperties> {
 }
 
 @doc("Defines the discovered asset properties.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredAssetProperties {
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must provide asset endpoint profile name.")
@@ -94,6 +96,7 @@ model DiscoveredAssetProperties {
 }
 
 @doc("Defines the dataset properties.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredDataset {
   @doc("Name of the dataset.")
@@ -111,6 +114,7 @@ model DiscoveredDataset {
 }
 
 @doc("Defines the data point properties.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredDataPoint {
   @doc("The name of the data point.")
@@ -127,6 +131,7 @@ model DiscoveredDataPoint {
 }
 
 @doc("Defines the event properties.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredEvent {
   @doc("The name of the event.")
@@ -146,6 +151,7 @@ model DiscoveredEvent {
 }
 
 @armResourceOperations
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 interface DiscoveredAssets {
   get is ArmResourceRead<DiscoveredAsset>;

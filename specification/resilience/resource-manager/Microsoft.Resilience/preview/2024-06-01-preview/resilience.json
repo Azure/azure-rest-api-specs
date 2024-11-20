@@ -300,7 +300,7 @@
         },
         "resilienceProfiles": {
           "type": "array",
-          "description": "Resilience evaluation for the resource and its dependencies.",
+          "description": "Resilience evaluation for the resource and all its related resources.",
           "items": {
             "$ref": "#/definitions/ResourceResilienceProfile"
           },
@@ -436,7 +436,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Location of the resource being evaluated."
+          "description": "Location of the resource being evaluated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "zones": {
           "type": "array",
