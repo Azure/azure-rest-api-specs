@@ -193,7 +193,10 @@ model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
 /**
  * Model that represents the Capability Type properties model.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource."
+/**
+ * Model that represents the Capability Type properties model.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Resource is not created/modified by user"
 model CapabilityTypeProperties {
   /**
    * String of the Publisher that this Capability Type extends.
@@ -242,19 +245,16 @@ model CapabilityTypeProperties {
   /**
    * Control plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacActions?: string[];
 
   /**
    * Data plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacDataActions?: string[];
 
   /**
    * Runtime properties of this Capability Type.
    */
-  @visibility("read")
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 
