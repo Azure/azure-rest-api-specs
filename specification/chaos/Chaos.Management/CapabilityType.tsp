@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Chaos;
 /**
@@ -23,6 +24,12 @@ model CapabilityType
     SegmentName = "capabilityTypes",
     NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
   >;
+
+  /**
+   * Azure location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property implementation."
+  location: azureLocation;
 }
 
 @armResourceOperations

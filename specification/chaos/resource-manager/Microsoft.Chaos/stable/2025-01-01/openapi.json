@@ -1707,6 +1707,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "BranchStatus": {
       "type": "object",
       "description": "Model that represents the a list of actions and action statuses.",
@@ -1806,11 +1810,6 @@
           "description": "String of the URN for this Capability Type.",
           "maxLength": 2048,
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Capability resource provisioning state. Not currently implemented.",
-          "readOnly": true
         }
       }
     },
@@ -1822,8 +1821,15 @@
           "$ref": "#/definitions/CapabilityTypeProperties",
           "description": "The properties of the capability type resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure location of the resource."
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1890,11 +1896,6 @@
         "kind": {
           "type": "string",
           "description": "String of the kind of this Capability Type.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Capability type resource provisioning state. Not currently implemented.",
           "readOnly": true
         },
         "azureRbacActions": {
@@ -2694,8 +2695,15 @@
           "description": "The properties of the target resource.",
           "additionalProperties": {},
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure location of the resource."
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -2768,10 +2776,15 @@
           "$ref": "#/definitions/TargetTypeProperties",
           "description": "The properties of the target type resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure location of the resource."
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "location"
       ],
       "allOf": [
         {
@@ -2826,11 +2839,6 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Target type resource provisioning state. Not currently implemented.",
           "readOnly": true
         }
       }

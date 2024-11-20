@@ -142,6 +142,7 @@ model CapabilityListResult is Azure.Core.Page<Capability>;
 /**
  * Model that represents the Capability properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Currently synchronous-only for PUT/PATCH/DELETE."
 model CapabilityProperties {
   /**
    * String of the Publisher that this Capability extends.
@@ -174,12 +175,6 @@ model CapabilityProperties {
   @visibility("read")
   @maxLength(2048)
   urn?: string;
-
-  /**
-   * Capability resource provisioning state. Not currently implemented.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -190,6 +185,7 @@ model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
 /**
  * Model that represents the Capability Type properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource."
 model CapabilityTypeProperties {
   /**
    * String of the Publisher that this Capability Type extends.
@@ -234,12 +230,6 @@ model CapabilityTypeProperties {
    */
   @visibility("read")
   kind?: string;
-
-  /**
-   * Capability type resource provisioning state. Not currently implemented.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 
   /**
    * Control plane actions necessary to execute capability type.
@@ -703,6 +693,7 @@ model TargetTypeListResult is Azure.Core.Page<TargetType>;
 /**
  * Model that represents the base Target Type properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource."
 model TargetTypeProperties {
   /**
    * Localized string of the display name.
@@ -728,12 +719,6 @@ model TargetTypeProperties {
    */
   @visibility("read")
   resourceTypes?: string[];
-
-  /**
-   * Target type resource provisioning state. Not currently implemented.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
