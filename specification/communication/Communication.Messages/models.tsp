@@ -451,8 +451,6 @@ model WhatsAppListActionBindings extends ActionBindings {
 model WhatsAppButtonActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppButtonAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppButtonAction;
-
-  action: ButtonSetContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
