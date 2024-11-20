@@ -108,6 +108,12 @@
           },
           "Get a RestApiPoller data connector": {
             "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
+          },
+          "Get a PremiumMicrosoftDefenderForThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetPremiumMicrosoftDefenderForThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -155,6 +161,12 @@
           },
           "Creates or updates an Threat Intelligence Platform data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a MicrosoftThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreatePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -207,6 +219,12 @@
         "x-ms-examples": {
           "Delete an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/DeleteOfficeDataConnetor.json"
+          },
+          "Delete an MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
+          },
+          "Deletes a PremiumMicrosoftDefenderForThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/DeletePremiumMicrosoftDefenderForThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -1383,6 +1401,8 @@
         "AzureSecurityCenter",
         "MicrosoftCloudAppSecurity",
         "ThreatIntelligence",
+        "MicrosoftThreatIntelligence",
+        "PremiumMicrosoftDefenderForThreatIntelligence",
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
@@ -1405,6 +1425,12 @@
           },
           {
             "value": "ThreatIntelligence"
+          },
+          {
+            "value": "MicrosoftThreatIntelligence"
+          },
+          {
+            "value": "PremiumMicrosoftDefenderForThreatIntelligence"
           },
           {
             "value": "Office365"
@@ -1614,6 +1640,132 @@
           "description": "The available data types for the connector."
         }
       },
+      "type": "object"
+    },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence data connector.",
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
+        }
+      },
+      "type": "object",
+      "required": [
+        "microsoftEmergingThreatFeed"
+      ]
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
+      "type": "object"
+    },
+    "PremiumMicrosoftDefenderForThreatIntelligence": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorProperties",
+          "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PremiumMicrosoftDefenderForThreatIntelligence"
+    },
+    "PremiumMdtiDataConnectorDataTypes": {
+      "description": "The available data types for Premium Microsoft Defender for Threat Intelligence data connector.",
+      "properties": {
+        "connector": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Premium Microsoft Defender for Threat Intelligence data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "connector"
+      ]
+    },
+    "PremiumMdtiDataConnectorProperties": {
+      "description": "Premium Microsoft Defender for Threat Intelligence data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "properties": {
+        "lookbackPeriod": {
+          "description": "The lookback period for the feed to be imported. The date-time to begin importing the feed from, for example: 2024-01-01T00:00:00.000Z.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "requiredSKUsPresent": {
+          "description": "The flag to indicate whether the tenant has the premium SKU required to access this connector.",
+          "type": "boolean"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/PremiumMdtiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "required": [
+        "dataTypes",
+        "lookbackPeriod"
+      ],
       "type": "object"
     },
     "OfficeDataConnector": {
