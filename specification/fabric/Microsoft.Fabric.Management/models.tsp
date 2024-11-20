@@ -168,3 +168,12 @@ model CapacityNameParameter {
   @path
   capacityName: string;
 }
+
+@doc("An object that represents usage and quota details for existing resources")
+model RpUsageAndQuotaDetailsForExistingResource {
+  @doc("The current consumption value")
+  currentValue: int32;
+
+  @doc("The quota limit")
+  limit: int32;
+}
