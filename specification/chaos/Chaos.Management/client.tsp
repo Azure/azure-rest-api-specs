@@ -10,6 +10,12 @@ using Microsoft.Chaos;
 @@clientName(TargetType, "ChaosTargetType");
 @@clientName(Capability, "ChaosCapability");
 @@clientName(CapabilityType, "ChaosCapabilityType");
+@@clientName(TargetReference, "ChaosTargetReference");
+@@clientName(ProvisioningState, "ChaosProvisioningState");
+@@clientName(KeyValuePair, "ChaosKeyValuePair");
+@@clientName(StepStatus, "ChaosExperimentRunStepStatus");
+@@clientName(BranchStatus, "ChaosExperimentRunBranchStatus");
+@@clientName(ActionStatus, "ChaosExperimentRunActionStatus");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(Targets.createOrUpdate::parameters.resource, "target");
 
@@ -25,3 +31,5 @@ using Microsoft.Chaos;
 @@flattenProperty(Capability.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(CapabilityType.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ExperimentExecutionDetails.properties);
