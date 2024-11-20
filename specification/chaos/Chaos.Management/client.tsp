@@ -17,6 +17,8 @@ using Microsoft.Chaos;
 @@clientName(BranchStatus, "ChaosExperimentRunBranchStatus");
 @@clientName(ActionStatus, "ChaosExperimentRunActionStatus");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
+@@clientName(Experiments.start, "StartExperiment");
+@@clientName(Experiments.cancel, "CancelExperiment");
 @@clientName(Targets.createOrUpdate::parameters.resource, "target");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
