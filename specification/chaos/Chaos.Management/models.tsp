@@ -95,7 +95,7 @@ union ExperimentActionType {
 /**
  * Model that represents the post action response.
  */
-model PostActionResponse {
+model PostActionResult {
   /**
    * The name of the resource.
    */

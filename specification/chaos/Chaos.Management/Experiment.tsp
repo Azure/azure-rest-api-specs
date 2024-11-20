@@ -92,12 +92,12 @@ interface Experiments {
   /**
    * Cancel a running Experiment resource.
    */
-  cancel is ArmResourceActionAsync<Experiment, void, PostActionResponse>;
+  cancel is ArmResourceActionAsync<Experiment, void, PostActionResult>;
 
   /**
    * Start a Experiment resource.
    */
-  start is ArmResourceActionAsync<Experiment, void, PostActionResponse>;
+  start is ArmResourceActionAsync<Experiment, void, PostActionResult>;
 }
 
 @@minLength(Experiment.name, 1);
