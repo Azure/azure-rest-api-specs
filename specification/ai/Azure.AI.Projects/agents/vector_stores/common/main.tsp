@@ -105,7 +105,7 @@ model VectorStoreDataSource {
   @encodedName("application/json", "uri")
   assetIdentifier: string;
 
-  /** The asset type **/
+  /** The asset type */
   @encodedName("application/json", "type")
   assetType: VectorStoreDataSourceAssetType;
 }
