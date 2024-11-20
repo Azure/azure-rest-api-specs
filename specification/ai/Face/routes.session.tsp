@@ -134,12 +134,11 @@ interface LivenessSessionOperations {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for redefine path for operation."
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
   @removed(Versions.v1_2)
-  @renamedFrom(Versions.v1_2, "createLivenessWithVerifySessionWithVerifyImage")
   @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
   @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
   @returnsDoc(SessionCreationSuccess)
   @sharedRoute
-  createLivenessWithVerifySessionWithVerifyImageBeforeV1_2 is FaceResourceCreateWithServiceProvidedName<
+  createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySessionBeforeV1_2,
     CreateLivenessWithVerifySessionRequest,
     CreateLivenessWithVerifySessionResult
@@ -228,21 +227,9 @@ interface LivenessSessionOperations {
   @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
   @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
   @returnsDoc(SessionCreationSuccess)
-  @sharedRoute
-  createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
-    LivenessWithVerifySession,
-    CreateLivenessWithVerifySessionRequest,
-    LivenessWithVerifySession
-  >;
-
-  @added(Versions.v1_2)
-  @doc(CreateLivenessWithVerifySessionDescription)
-  @summary(CreateLivenessWithVerifySessionSummary)
-  @returnsDoc(SessionCreationSuccess)
-  @sharedRoute
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
-    BodyParameter<CreateLivenessWithVerifySessionJsonContent>,
+    CreateLivenessWithVerifySessionRequest,
     LivenessWithVerifySession
   >;
 
