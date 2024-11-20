@@ -8,6 +8,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/lagacy.tsp";
+import "../Common/operations.tsp";
 import "./models.tsp";
 import "./Disk.tsp";
 import "./DiskAccess.tsp";
@@ -15,6 +17,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./DiskEncryptionSet.tsp";
 import "./DiskRestorePoint.tsp";
 import "./Snapshot.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

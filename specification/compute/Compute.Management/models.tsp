@@ -1401,6 +1401,11 @@ model ComputeOperationValueDisplay {
  */
 model ListUsagesResult is Azure.Core.Page<Usage>;
 
+@@doc(ListUsagesResult.value, "The list of compute resource usages.");
+@@doc(ListUsagesResult.nextLink,
+  "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+);
+
 /**
  * Describes Compute Resource Usage.
  */
@@ -1494,6 +1499,13 @@ model VirtualMachineSize {
  */
 model VirtualMachineScaleSetListResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
+
+@@doc(VirtualMachineScaleSetListResult.value,
+  "The list of virtual machine scale sets."
+);
+@@doc(VirtualMachineScaleSetListResult.nextLink,
+  "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
+);
 
 /**
  * Describes the properties of a Virtual Machine Scale Set.
@@ -2005,7 +2017,9 @@ model AdditionalUnattendContent {
   content?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+/**
+ * The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
 union ComponentNames {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -3334,6 +3348,12 @@ model Resource {
 model VirtualMachineScaleSetListWithLinkResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
+@@doc(VirtualMachineScaleSetListWithLinkResult.value,
+  "The list of virtual machine scale sets."
+);
+@@doc(VirtualMachineScaleSetListWithLinkResult.nextLink,
+  "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
+);
 /**
  * Describes a Virtual Machine Scale Set.
  */
@@ -3870,6 +3890,13 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
 model VirtualMachineScaleSetExtensionListResult
   is Azure.Core.Page<VirtualMachineScaleSetExtension>;
 
+@@doc(VirtualMachineScaleSetExtensionListResult.value,
+  "The list of VM scale set extensions."
+);
+@@doc(VirtualMachineScaleSetExtensionListResult.nextLink,
+  "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
+);
+
 /**
  * Describes a Virtual Machine Scale Set Extension.
  */
@@ -4042,6 +4069,13 @@ model OrchestrationServiceSummary {
  */
 model VirtualMachineScaleSetListOSUpgradeHistory
   is Azure.Core.Page<UpgradeOperationHistoricalStatusInfo>;
+
+@@doc(VirtualMachineScaleSetListOSUpgradeHistory.value,
+  "The list of OS upgrades performed on the virtual machine scale set."
+);
+@@doc(VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
+  "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
+);
 
 /**
  * Virtual Machine Scale Set OS Upgrade History operation response.
@@ -4320,6 +4354,13 @@ model OrchestrationServiceStateInput {
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
+@@doc(VirtualMachineScaleSetListSkusResult.value,
+  "The list of skus available for the virtual machine scale set."
+);
+@@doc(VirtualMachineScaleSetListSkusResult.nextLink,
+  "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
+);
+
 /**
  * Describes an available virtual machine scale set sku.
  */
@@ -4377,6 +4418,13 @@ model VirtualMachineScaleSetSkuCapacity {
  */
 model VirtualMachineScaleSetVMListResult
   is Azure.Core.Page<VirtualMachineScaleSetVM>;
+
+@@doc(VirtualMachineScaleSetVMListResult.value,
+  "The list of virtual machine scale sets VMs."
+);
+@@doc(VirtualMachineScaleSetVMListResult.nextLink,
+  "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs."
+);
 
 /**
  * Describes the properties of a virtual machine scale set virtual machine.
@@ -5665,6 +5713,10 @@ model RetrieveBootDiagnosticsDataResult {
  */
 model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
+@@doc(VirtualMachineListResult.value, "The list of virtual machines.");
+@@doc(VirtualMachineListResult.nextLink,
+  "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
+);
 /**
  * Describes the properties of a Virtual Machine.
  */
@@ -6725,6 +6777,11 @@ model VirtualMachineExtensionImageProperties {
  */
 model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 
+@@doc(AvailabilitySetListResult.value, "The list of availability sets.");
+@@doc(AvailabilitySetListResult.nextLink,
+  "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+);
+
 /**
  * The instance view of a resource.
  */
@@ -6786,6 +6843,13 @@ model AvailabilitySetUpdate extends UpdateResource {
  */
 model ProximityPlacementGroupListResult
   is Azure.Core.Page<ProximityPlacementGroup>;
+
+@@doc(ProximityPlacementGroupListResult.value,
+  "The list of proximity placement groups."
+);
+@@doc(ProximityPlacementGroupListResult.nextLink,
+  "The URI to fetch the next page of proximity placement groups."
+);
 
 /**
  * Describes the properties of a Proximity Placement Group.
@@ -6855,6 +6919,11 @@ model ProximityPlacementGroupUpdate extends UpdateResource {}
  * The List Dedicated Host Group with resource group response.
  */
 model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
+
+@@doc(DedicatedHostGroupListResult.value, "The list of dedicated host groups.");
+@@doc(DedicatedHostGroupListResult.nextLink,
+  "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
+);
 
 /**
  * Dedicated Host Group Properties.
@@ -6992,6 +7061,11 @@ model DedicatedHostGroupUpdate extends UpdateResource {
  */
 model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
 
+@@doc(DedicatedHostListResult.value, "The list of dedicated hosts.");
+@@doc(DedicatedHostListResult.nextLink,
+  "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+);
+
 /**
  * Properties of the dedicated host.
  */
@@ -7085,6 +7159,11 @@ model DedicatedHostSizeListResult {
  */
 model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
+@@doc(SshPublicKeysGroupListResult.value, "The list of SSH public keys.");
+@@doc(SshPublicKeysGroupListResult.nextLink,
+  "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
+);
+
 /**
  * Properties of the SSH public key.
  */
@@ -7143,6 +7222,11 @@ model SshPublicKeyGenerateKeyPairResult {
  * The List Image operation response.
  */
 model ImageListResult is Azure.Core.Page<Image>;
+
+@@doc(ImageListResult.value, "The list of Images");
+@@doc(ImageListResult.nextLink,
+  "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
+);
 
 /**
  * Describes the properties of an Image.
@@ -7668,6 +7752,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 model CapacityReservationGroupListResult
   is Azure.Core.Page<CapacityReservationGroup>;
 
+@@doc(CapacityReservationGroupListResult.value,
+  "The list of capacity reservation groups."
+);
+@@doc(CapacityReservationGroupListResult.nextLink,
+  "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
+);
 /**
  * capacity reservation group Properties.
  */
@@ -7785,6 +7875,13 @@ model CapacityReservationGroupUpdate extends UpdateResource {
  * The list capacity reservation operation response.
  */
 model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
+
+@@doc(CapacityReservationListResult.value,
+  "The list of capacity reservations."
+);
+@@doc(CapacityReservationListResult.nextLink,
+  "The URI to fetch the next page of capacity reservations. Call ListNext() with this URI to fetch the next page of capacity reservations."
+);
 
 /**
  * Properties of the Capacity reservation.
@@ -7941,6 +8038,11 @@ model ThrottledRequestsInput extends LogAnalyticsInputBase {}
  */
 model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 
+@@doc(RunCommandListResult.value, "The list of virtual machine run commands.");
+@@doc(RunCommandListResult.nextLink,
+  "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
+);
+
 /**
  * Describes the properties of a Run Command metadata.
  */
@@ -8019,6 +8121,11 @@ model RunCommandParameterDefinition {
  */
 model VirtualMachineRunCommandsListResult
   is Azure.Core.Page<VirtualMachineRunCommand>;
+
+@@doc(VirtualMachineRunCommandsListResult.value, "The list of run commands.");
+@@doc(VirtualMachineRunCommandsListResult.nextLink,
+  "The uri to fetch the next page of run commands."
+);
 
 /**
  * Describes the properties of a Virtual Machine run command.

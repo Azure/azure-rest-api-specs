@@ -24,6 +24,7 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   /**
    * A relative URI containing the ID of the VM that has the disk attached.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   @visibility("read")
   managedBy?: string;
 
@@ -49,7 +50,8 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
   /**
    * The extended location where the disk will be created. Extended location cannot be changed.
    */
-  ...ExtendedLocationProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -57,14 +59,14 @@ interface Disks {
   /**
    * Gets information about a disk.
    */
-  get is ArmResourceRead<Disk>;
+  get is ComputeResourceRead<Disk>;
 
   /**
    * Creates or updates a disk.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Disk,
     Response = ArmResourceCreatedResponse<Disk> | ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse & {
       @bodyRoot _: Disk;
@@ -76,7 +78,7 @@ interface Disks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     Disk,
     DiskUpdate,
     Response = ArmResponse<Disk> | (ArmAcceptedLroResponse & {
@@ -90,27 +92,29 @@ interface Disks {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Disk>;
+  delete is ComputeResourceDeleteAsync<Disk>;
 
   /**
    * Lists all the disks under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Disk, Response = DiskList>;
+  listByResourceGroup is ComputeResourceListByParent<Disk, Response = DiskList>;
 
   /**
    * Lists all the disks under a subscription.
    */
-  list is ArmListBySubscription<Disk, Response = DiskList>;
+  list is ComputeListBySubscription<Disk, Response = DiskList>;
 
   /**
    * Grants access to a disk.
    */
-  grantAccess is ArmResourceActionAsync<Disk, GrantAccessData, AccessUri>;
+  @action("beginGetAccess")
+  grantAccess is ComputeResourceActionAsync<Disk, GrantAccessData, AccessUri>;
 
   /**
    * Revokes access to a disk.
    */
-  revokeAccess is ArmResourceActionAsync<Disk, void, OkResponse>;
+  @action("endGetAccess")
+  revokeAccess is ComputeResourceActionAsync<Disk, void, OkResponse>;
 }
 
 @@doc(Disk.name,

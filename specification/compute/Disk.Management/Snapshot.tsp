@@ -24,6 +24,7 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   /**
    * Unused. Always Null.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   @visibility("read")
   managedBy?: string;
 
@@ -36,7 +37,8 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
   /**
    * The extended location where the snapshot will be created. Extended location cannot be changed.
    */
-  ...ExtendedLocationProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -44,14 +46,14 @@ interface Snapshots {
   /**
    * Gets information about a snapshot.
    */
-  get is ArmResourceRead<Snapshot>;
+  get is ComputeResourceRead<Snapshot>;
 
   /**
    * Creates or updates a snapshot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Snapshot,
     Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
       @bodyRoot _: Snapshot;
@@ -63,10 +65,10 @@ interface Snapshots {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     Snapshot,
     SnapshotUpdate,
-    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
       @bodyRoot _: Snapshot;
     })
   >;
@@ -77,12 +79,12 @@ interface Snapshots {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<Snapshot>;
+  delete is ComputeResourceDeleteAsync<Snapshot>;
 
   /**
    * Lists snapshots under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     Snapshot,
     Response = SnapshotList
   >;
@@ -90,17 +92,21 @@ interface Snapshots {
   /**
    * Lists snapshots under a subscription.
    */
-  list is ArmListBySubscription<Snapshot, Response = SnapshotList>;
+  list is ComputeListBySubscription<Snapshot, Response = SnapshotList>;
 
   /**
    * Grants access to a snapshot.
    */
-  grantAccess is ArmResourceActionAsync<Snapshot, GrantAccessData, AccessUri>;
+  grantAccess is ComputeResourceActionAsync<
+    Snapshot,
+    GrantAccessData,
+    AccessUri
+  >;
 
   /**
    * Revokes access to a snapshot.
    */
-  revokeAccess is ArmResourceActionAsync<Snapshot, void, OkResponse>;
+  revokeAccess is ComputeResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
 @@doc(Snapshot.name,

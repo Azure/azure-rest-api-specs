@@ -23,18 +23,37 @@ model DiskRestorePoint
   >;
 }
 
-/**
- * The name of the restore point collection that the disk restore point belongs.
- */
-model RestorePointCollectionNameParameter
-  is Azure.ResourceManager.ProxyResource<DiskRestorePointProperties> {
-  ...ResourceNameParameter<
-    Resource = RestorePointCollectionNameParameter,
-    KeyName = "restorePointCollectionName",
-    SegmentName = "restorePointCollections",
-    NamePattern = ""
-  >;
-}
+alias VMRestorePointPath = {
+  ...Azure.ResourceManager.Legacy.BasePath;
+
+  /**
+   * The name of the restore point collection that the disk restore point belongs.
+   */
+  @path
+  @segment("restorePointCollections")
+  restorePointCollectionName: string;
+
+  /**
+   * The name of the vm restore point that the disk disk restore point belongs.
+   */
+  @path
+  @segment("restorePoints")
+  vmRestorePointName: string;
+};
+
+@armResourceOperations
+interface DiskRestorePointsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      VMRestorePointPath,
+      KeysOf<{
+        ...ResourceNameParameter<
+          DiskRestorePoint,
+          SegmentName = "diskRestorePoints",
+          KeyName = "diskRestorePointName",
+          NamePattern = ""
+        >,
+      }>
+    > {}
 
 @armResourceOperations
 interface DiskRestorePoints {
@@ -43,72 +62,26 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskRestorePoint_Get")
-  get is ArmResourceRead<
-    RestorePointCollectionNameParameter,
-    Parameters = {
-      /**
-       * The name of the vm restore point that the disk disk restore point belongs.
-       */
-      @path
-      @segment("restorePoints")
-      vmRestorePointName: string;
-
-      /**
-       * The name of the disk restore point created.
-       */
-      @path
-      @segment("diskRestorePoints")
-      diskRestorePointName: string;
-    }
-  >;
+  get is DiskRestorePointsOps.Read<DiskRestorePoint>;
 
   /**
    * Lists diskRestorePoints under a vmRestorePoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskRestorePoint_ListByRestorePoint")
-  listByRestorePoint is ArmResourceListByParent<
+  listByRestorePoint is DiskRestorePointsOps.List<
     DiskRestorePoint,
-    Response = DiskRestorePointList,
-    Parameters = {
-      /**
-       * The name of the restore point collection that the disk restore point belongs.
-       */
-      @path
-      @segment("restorePointCollections")
-      restorePointCollectionName: string;
-
-      /**
-       * The name of the vm restore point that the disk disk restore point belongs.
-       */
-      @path
-      @segment("restorePoints")
-      vmRestorePointName: string;
-    }
+    Response = ArmResponse<DiskRestorePoint[]>
   >;
 
   /** Grants access to a diskRestorePoint. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskRestorePoint_GrantAccess")
-  grantAccess is ArmResourceActionAsync<
-    RestorePointCollectionNameParameter,
+  @action("beginGetAccess")
+  grantAccess is DiskRestorePointsOps.ActionAsync<
+    DiskRestorePoint,
     GrantAccessData,
-    AccessUri,
-    Parameters = {
-      /**
-       * The name of the vm restore point that the disk disk restore point belongs.
-       */
-      @path
-      @segment("restorePoints")
-      vmRestorePointName: string;
-
-      /**
-       * The name of the disk restore point created.
-       */
-      @path
-      @segment("diskRestorePoints")
-      diskRestorePointName: string;
-    }
+    AccessUri
   >;
 
   /**
@@ -116,25 +89,11 @@ interface DiskRestorePoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskRestorePoint_RevokeAccess")
-  revokeAccess is ArmResourceActionAsync<
-    RestorePointCollectionNameParameter,
+  @action("endGetAccess")
+  revokeAccess is DiskRestorePointsOps.ActionAsync<
+    DiskRestorePoint,
     void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The name of the vm restore point that the disk disk restore point belongs.
-       */
-      @path
-      @segment("restorePoints")
-      vmRestorePointName: string;
-
-      /**
-       * The name of the disk restore point created.
-       */
-      @path
-      @segment("diskRestorePoints")
-      diskRestorePointName: string;
-    }
+    OkResponse
   >;
 }
 
@@ -144,7 +103,4 @@ interface DiskRestorePoints {
 );
 @@doc(DiskRestorePoints.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
-);
-@@doc(RestorePointCollectionNameParameter.name,
-  "The name of the restore point collection that the disk restore point belongs."
 );

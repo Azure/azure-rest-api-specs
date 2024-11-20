@@ -25,6 +25,7 @@ model DiskAccess
   /**
    * The extended location where the disk access will be created. Extended location cannot be changed.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   extendedLocation?: ExtendedLocation;
 }
 
@@ -33,16 +34,16 @@ interface DiskAccesses {
   /**
    * Gets information about a disk access resource.
    */
-  get is ArmResourceRead<DiskAccess>;
+  get is ComputeResourceRead<DiskAccess>;
 
   /**
    * Creates or updates a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskAccess,
-    Response = ArmResourceCreatedResponse<DiskAccess> | ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse & {
       @bodyRoot _: DiskAccess;
     })
   >;
@@ -52,7 +53,7 @@ interface DiskAccesses {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     DiskAccess,
     DiskAccessUpdate,
     Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse & {
@@ -66,12 +67,12 @@ interface DiskAccesses {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DiskAccess>;
+  delete is ComputeResourceDeleteAsync<DiskAccess>;
 
   /**
    * Lists all the disk access resources under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     DiskAccess,
     Response = DiskAccessList
   >;
@@ -79,13 +80,13 @@ interface DiskAccesses {
   /**
    * Lists all the disk access resources under a subscription.
    */
-  list is ArmListBySubscription<DiskAccess, Response = DiskAccessList>;
+  list is ComputeListBySubscription<DiskAccess, Response = DiskAccessList>;
 
   /**
    * Gets the private link resources possible under disk access resource
    */
   @get
-  getPrivateLinkResources is ArmResourceActionSync<
+  getPrivateLinkResources is ComputeResourceActionSync<
     DiskAccess,
     void,
     PrivateLinkResourceListResult

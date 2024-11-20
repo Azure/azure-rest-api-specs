@@ -27,6 +27,7 @@ model PrivateEndpointConnection
   /**
    * private endpoint connection Id
    */
+  #suppress "azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   //FIXME: Review string vs Azure.Core.armResourceIdentifier in V3 reference
   id?: Azure.Core.armResourceIdentifier;
@@ -34,6 +35,7 @@ model PrivateEndpointConnection
   /**
    * private endpoint connection type
    */
+  #suppress "azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility("read")
   type?: string;
 }
@@ -46,7 +48,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the operation"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_GetAPrivateEndpointConnection")
-  getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
+  getAPrivateEndpointConnection is ComputeResourceRead<PrivateEndpointConnection>;
 
   /**
    * Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.
@@ -56,7 +58,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
-  updateAPrivateEndpointConnection is ArmResourceCreateOrReplaceAsync<
+  updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
       @bodyRoot _: PrivateEndpointConnection;
@@ -72,14 +74,14 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @operationId("DiskAccesses_DeleteAPrivateEndpointConnection")
-  deleteAPrivateEndpointConnection is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+  deleteAPrivateEndpointConnection is ComputeResourceDeleteAsync<PrivateEndpointConnection>;
 
   /**
    * List information about private endpoint connections under a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
-  listPrivateEndpointConnections is ArmResourceListByParent<
+  listPrivateEndpointConnections is ComputeResourceListByParent<
     PrivateEndpointConnection,
     Response = PrivateEndpointConnectionListResult
   >;

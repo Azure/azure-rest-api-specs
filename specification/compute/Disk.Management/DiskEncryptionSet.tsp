@@ -25,6 +25,7 @@ model DiskEncryptionSet
   /**
    * The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Compatibality"
   identity?: EncryptionSetIdentity;
 }
 
@@ -33,16 +34,16 @@ interface DiskEncryptionSets {
   /**
    * Gets information about a disk encryption set.
    */
-  get is ArmResourceRead<DiskEncryptionSet>;
+  get is ComputeResourceRead<DiskEncryptionSet>;
 
   /**
    * Creates or updates a disk encryption set
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
-    Response = ArmResourceCreatedResponse<DiskEncryptionSet> | ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
       @bodyRoot _: DiskEncryptionSet;
     })
   >;
@@ -52,7 +53,7 @@ interface DiskEncryptionSets {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  update is ComputeCustomPatchAsync<
     DiskEncryptionSet,
     DiskEncryptionSetUpdate,
     Response = ArmResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse & {
@@ -66,12 +67,12 @@ interface DiskEncryptionSets {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is ArmResourceDeleteAsync<DiskEncryptionSet>;
+  delete is ComputeResourceDeleteAsync<DiskEncryptionSet>;
 
   /**
    * Lists all the disk encryption sets under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ComputeResourceListByParent<
     DiskEncryptionSet,
     Response = DiskEncryptionSetList
   >;
@@ -79,7 +80,7 @@ interface DiskEncryptionSets {
   /**
    * Lists all the disk encryption sets under a subscription.
    */
-  list is ArmListBySubscription<
+  list is ComputeListBySubscription<
     DiskEncryptionSet,
     Response = DiskEncryptionSetList
   >;
@@ -87,8 +88,10 @@ interface DiskEncryptionSets {
   /**
    * Lists all resources that are encrypted with this disk encryption set.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb"
   @get
-  listAssociatedResources is ArmResourceActionSync<
+  @action("associatedResources")
+  listAssociatedResources is ComputeResourceActionSync<
     DiskEncryptionSet,
     void,
     ResourceUriList
