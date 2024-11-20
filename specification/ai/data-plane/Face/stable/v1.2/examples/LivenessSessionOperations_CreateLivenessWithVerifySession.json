@@ -3,12 +3,8 @@
   "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
   "parameters": {
     "apiVersion": "v1.2",
-    "body": {
-      "livenessOperationMode": "Passive",
-      "deviceCorrelationIdSetInClient": true,
-      "deviceCorrelationId": "your_device_correlation_id",
-      "authTokenTimeToLiveInSeconds": 60
-    }
+    "Parameters": "{\"livenessOperationMode\": \"Passive\", \"deviceCorrelationIdSetInClient\": true, \"deviceCorrelationId\": \"your_device_correlation_id\", \"authTokenTimeToLiveInSeconds\": 60}",
+    "VerifyImage": "<your-image-bytes-here>"
   },
   "responses": {
     "200": {
@@ -19,7 +15,18 @@
         "modelVersion": "2024-11-15",
         "results": {
           "attempts": [],
-          "verifyReferences": []
+          "verifyReferences": [
+            {
+              "referenceType": "image",
+              "faceRectangle": {
+                "top": 316,
+                "left": 131,
+                "width": 498,
+                "height": 677
+              },
+              "qualityForRecognition": "high"
+            }
+          ]
         }
       }
     }
