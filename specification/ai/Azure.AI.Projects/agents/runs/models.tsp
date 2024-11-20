@@ -199,7 +199,7 @@ model CreateRunOptions {
   /** Adds additional messages to the thread before creating the run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "additional_messages")
-  additionalMessages?: ThreadMessage[] | null;
+  additionalMessages?: ThreadMessageOptions[] | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools that the agent should use to run the thread.")
