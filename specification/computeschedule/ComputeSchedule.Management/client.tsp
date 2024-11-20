@@ -6,8 +6,6 @@ using Microsoft.ComputeSchedule;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmt", "python");
 
-@@clientName(OperationErrorDetails.timeStamp, "errorDetailsTimeStamp", "java");
-
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
   "csharp"
