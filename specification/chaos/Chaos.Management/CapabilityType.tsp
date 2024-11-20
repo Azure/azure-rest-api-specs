@@ -29,7 +29,7 @@ model CapabilityType
    * Azure location of the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property implementation."
-  location: azureLocation;
+  location?: azureLocation;
 }
 
 @armResourceOperations
