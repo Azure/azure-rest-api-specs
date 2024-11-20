@@ -242,13 +242,11 @@ model CapabilityTypeProperties {
   /**
    * Control plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacActions?: string[];
 
   /**
    * Data plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacDataActions?: string[];
 
   /**
