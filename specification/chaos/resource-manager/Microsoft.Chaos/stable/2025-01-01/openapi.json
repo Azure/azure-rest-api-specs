@@ -2349,6 +2349,28 @@
       "type": "object",
       "description": "Model that represents the extended properties of an experiment execution.",
       "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the execution.",
+          "readOnly": true
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the start date time.",
+          "readOnly": true
+        },
+        "stoppedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "String that represents the stop date time.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Experiment execution resource provisioning state. Not currently implemented.",
+          "readOnly": true
+        },
         "failureReason": {
           "type": "string",
           "description": "The reason why the execution failed.",
@@ -2365,12 +2387,7 @@
           "description": "The information of the experiment run.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExperimentExecutionProperties"
-        }
-      ]
+      }
     },
     "ExperimentExecutionDetailsPropertiesRunInformation": {
       "type": "object",

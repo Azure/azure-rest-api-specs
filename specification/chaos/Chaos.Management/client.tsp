@@ -11,6 +11,7 @@ using Microsoft.Chaos;
 @@clientName(Capability, "ChaosCapability");
 @@clientName(CapabilityType, "ChaosCapabilityType");
 @@clientName(TargetReference, "ChaosTargetReference");
+@@clientName(TargetReferenceType, "ChaosTargetReferenceType");
 @@clientName(ProvisioningState, "ChaosProvisioningState");
 @@clientName(KeyValuePair, "ChaosKeyValuePair");
 @@clientName(StepStatus, "ChaosExperimentRunStepStatus");

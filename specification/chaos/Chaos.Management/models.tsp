@@ -420,14 +420,12 @@ model ExperimentExecutionProperties {
    * String that represents the start date time.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stoppedAt?: utcDateTime;
 
   /**
@@ -469,9 +467,31 @@ model ExperimentExecutionDetails {
 /**
  * Model that represents the extended properties of an experiment execution.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ExperimentExecutionDetailsProperties
-  extends ExperimentExecutionProperties {
+model ExperimentExecutionDetailsProperties {
+  /**
+   * The status of the execution.
+   */
+  @visibility("read")
+  status?: string;
+
+  /**
+   * String that represents the start date time.
+   */
+  @visibility("read")
+  startedAt?: utcDateTime;
+
+  /**
+   * String that represents the stop date time.
+   */
+  @visibility("read")
+  stoppedAt?: utcDateTime;
+
+  /**
+   * Experiment execution resource provisioning state. Not currently implemented.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
   /**
    * The reason why the execution failed.
    */
@@ -482,7 +502,6 @@ model ExperimentExecutionDetailsProperties
    * String that represents the last action date time.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastActionAt?: utcDateTime;
 
   /**
