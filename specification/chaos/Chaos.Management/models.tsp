@@ -279,10 +279,12 @@ model ExperimentListResult is Azure.Core.Page<Experiment>;
 model ExperimentUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
+  @visibility("read", "create", "update")
   tags?: Record<string>;
 
-  @doc("Managed identity to be updated.")
-  identity?: OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  @doc("Resource managed identity")
+  @visibility("read", "create", "update")
+  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**

@@ -1707,6 +1707,16 @@
         }
       }
     },
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "BranchStatus": {
       "type": "object",
       "description": "Model that represents the a list of actions and action statuses.",
@@ -2508,30 +2518,21 @@
           "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "identity": {
-          "type": "object",
-          "description": "Managed identity to be updated.",
-          "properties": {
-            "type": {
-              "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-              "description": "The type of managed identity assigned to this resource."
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "description": "The identities assigned to this resource by the user.",
-              "additionalProperties": {
-                "allOf": [
-                  {
-                    "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-                  }
-                ],
-                "type": "object",
-                "x-nullable": true
-              }
-            }
-          }
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
+          "description": "Resource managed identity",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
