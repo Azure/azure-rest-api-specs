@@ -945,6 +945,53 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:interruptAudioAndAnnounce": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Plays audio to participants in the call.",
+        "description": "Plays audio to participants in the call.",
+        "operationId": "CallMedia_InterruptAudioAndAnnounce",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "interruptRequest",
+            "in": "body",
+            "description": "play request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterruptAudioAndAnnounceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the interrupt audio request and will begin processing it. You will receive either PlayCompleted or PlayFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_InterruptAudioAndAnnounce": {
+            "$ref": "./examples/CallMedia_InterruptAudioAndAnnounce.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/dialogs/{dialogId}": {
       "put": {
         "tags": [
@@ -1643,10 +1690,6 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
-        },
-        "startInConferenceMode": {
-          "description": "If passed true, the call will start in an escalated state. (i.e. GroupCall)",
-          "type": "boolean"
         }
       }
     },
@@ -1839,10 +1882,6 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
-        },
-        "startInConferenceMode": {
-          "description": "If passed true, the call will start in an escalated state. (i.e. GroupCall)",
-          "type": "boolean"
         }
       }
     },
@@ -2038,6 +2077,10 @@
         },
         "interruptCallMediaOperation": {
           "description": "If set play can barge into other existing queued-up/currently-processing requests.",
+          "type": "boolean"
+        },
+        "interruptHoldAudio": {
+          "description": "If set, hold audio will be interrupted, then this request will be played, and then the hold audio will be resumed.",
           "type": "boolean"
         }
       }
@@ -2414,6 +2457,30 @@
       "properties": {
         "operationContext": {
           "description": "The operation context provided by client.",
+          "type": "string"
+        }
+      }
+    },
+    "InterruptAudioAndAnnounceRequest": {
+      "required": [
+        "playSources",
+        "playTo"
+      ],
+      "type": "object",
+      "properties": {
+        "playSources": {
+          "description": "The source of the audio to be played.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
+        },
+        "playTo": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
           "type": "string"
         }
       }
@@ -3331,6 +3398,159 @@
         }
       }
     },
+    "PlayStarted": {
+      "description": "Play started event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Gets or sets call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Gets or sets server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Gets or sets correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Gets or sets contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "PlayResumed": {
+      "description": "Play started event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Gets or sets call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Gets or sets server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Gets or sets correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Gets or sets contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "PlayPaused": {
+      "description": "Play started event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Gets or sets call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Gets or sets server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Gets or sets correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Gets or sets used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Gets or sets contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "HoldAudioPaused": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "HoldAudioResumed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "HoldAudioCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
     "RecognitionType": {
       "description": "Determines the sub-type of the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
       "enum": [
@@ -4120,6 +4340,31 @@
       }
     },
     "HoldFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "HoldAudioStarted": {
       "type": "object",
       "properties": {
         "callConnectionId": {
