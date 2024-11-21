@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.Authoring.AnalyzeText;
+namespace Language.Text.Authoring;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
