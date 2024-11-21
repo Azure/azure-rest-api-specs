@@ -3,9 +3,9 @@ Param (
   [Parameter(Mandatory=$True)]
   [array] $ArtifactList,
   [Parameter(Mandatory=$True)]
-  [string] $ArtifactPath,  
+  [string] $ArtifactPath,
   [Parameter(Mandatory=$True)]
-  [string] $APIKey,  
+  [string] $APIKey,
   [string] $SourceBranch,
   [string] $DefaultBranch,
   [string] $RepoName,
@@ -51,7 +51,7 @@ function Upload-SourceArtifact($filePath, $apiLabel, $releaseStatus, $packageVer
     $versionContent.Headers.ContentDisposition = $versionParam
     $multipartContent.Add($versionContent)
     Write-Host "Request param, packageVersion: $packageVersion"
-    
+
     $releaseTagParam = [System.Net.Http.Headers.ContentDispositionHeaderValue]::new("form-data")
     $releaseTagParam.Name = "setReleaseTag"
     $releaseTagParamContent = [System.Net.Http.StringContent]::new($MarkPackageAsShipped)
@@ -96,7 +96,7 @@ function Upload-ReviewTokenFile($packageName, $apiLabel, $releaseStatus, $review
     $fileName = Split-Path -Leaf $filePath
     Write-Host "OriginalFile name: $fileName"
 
-    $params = "buildId=${BuildId}&artifactName=${ArtifactName}&originalFilePath=${fileName}&reviewFilePath=${reviewFileName}"    
+    $params = "buildId=${BuildId}&artifactName=${ArtifactName}&originalFilePath=${fileName}&reviewFilePath=${reviewFileName}"
     $params += "&label=${apiLabel}&repoName=${RepoName}&packageName=${packageName}&project=internal&packageVersion=${packageVersion}"
     if($MarkPackageAsShipped) {
         $params += "&setReleaseTag=true"
@@ -143,7 +143,7 @@ function Get-APITokenFileName($packageName)
 
 function Submit-APIReview($packageInfo, $packagePath, $packageArtifactName)
 {
-    $packageName = $packageInfo.Name    
+    $packageName = $packageInfo.Name
     $apiLabel = "Source Branch:${SourceBranch}"
 
     # Get generated review token file if present
@@ -206,7 +206,7 @@ function ProcessPackage($packageName)
                 Write-Host "Version info is not available for package $packageName, because version '$(pkgInfo.Version)' is invalid. Please check if the version follows Azure SDK package versioning guidelines."
                 return 1
             }
-            
+
             Write-Host "Version: $($version)"
             Write-Host "SDK Type: $($pkgInfo.SdkType)"
             Write-Host "Release Status: $($pkgInfo.ReleaseStatus)"
@@ -224,10 +224,10 @@ function ProcessPackage($packageName)
                 {
                     if ($respCode -eq '500')
                     {
-                        Write-Host "Failed to mark package ${packageName} as released. Please reach out to Azure SDK engineering systems on teams channel."   
+                        Write-Host "Failed to mark package ${packageName} as released. Please reach out to Azure SDK engineering systems on teams channel."
                         return 1
                     }
-                    Write-Host "Package ${packageName} is marked as released."   
+                    Write-Host "Package ${packageName} is marked as released."
                     return 0
                 }
 
@@ -250,7 +250,7 @@ function ProcessPackage($packageName)
                 elseif ($version.IsPrerelease)
                 {
                     # Check if package name is approved. Preview version cannot be released without package name approval
-                    if (!$pkgNameStatus.IsApproved) 
+                    if (!$pkgNameStatus.IsApproved)
                     {
                         if (IsApiviewStatusCheckRequired $pkgInfo)
                         {
@@ -259,11 +259,11 @@ function ProcessPackage($packageName)
                         }
                         else{
                             Write-Host "Package name is not approved for package $($packageName), however it is not required for this package type so it can still be released without API review approval."
-                        }                        
+                        }
                     }
                     # Ignore API review status for prerelease version
                     Write-Host "Package version is not GA. Ignoring API view approval status"
-                }                
+                }
                 else
                 {
                     # Return error code if status code is 201 for new data plane package
@@ -312,22 +312,26 @@ if ($PackageName)
 {
     Write-Host "Processing $($PackageName)"
     $result = ProcessPackage -packageName $PackageName
-    $responses[$PackageName] = $result 
+    $responses[$PackageName] = $result
 }
 else
 {
-    # process all packages in the artifact
-    foreach ($artifact in $ArtifactList)
-    {
-        Write-Host "Processing $($artifact.name)"
-        $result = ProcessPackage -packageName $artifact.name
-        $responses[$artifact.name] = $result
+    $propFiles = Get-ChildItem -Path $ConfigFileDir -Recurse -Filter "*.json"
+    $artifactPackages = $ArtifactList | ForEach-Object { $_["name"] }
+
+    foreach($propFile in $propFiles) {
+        if ($artifactPackages -contains $propFile.Name.Replace(".json", ""))
+        {
+            Write-Host "Processing $($artifact.name)"
+            $result = ProcessPackage -packageName $artifact.name
+            $responses[$artifact.name] = $result
+        }
     }
 }
 
 $exitCode = 0
 foreach($pkg in $responses.keys)
-{    
+{
     if ($responses[$pkg] -eq 1)
     {
         Write-Host "API changes are not approved for $($pkg)"
