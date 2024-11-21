@@ -7,8 +7,8 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.kubernetesconfiguration.flux
-package-name: azure-mgmt-kubernetesconfiguration-flux
+namespace: azure.mgmt.kubernetesconfiguration.fluxconfigurations
+package-name: azure-mgmt-kubernetesconfiguration-fluxconfigurations
 no-namespace-folders: true
 package-version: 1.1.0
 clear-output-folder: true
@@ -19,6 +19,6 @@ clear-output-folder: true
 These settings apply only when `--tag=package-2024-11 --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-11'
-namespace: azure.mgmt.kubernetesconfiguration.flux.v2024_11_01
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/flux/v2024_11_01
+namespace: azure.mgmt.kubernetesconfiguration.fluxconfigurations.v2024_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-fluxconfigurations/azure/mgmt/v2024_11_01
 ```

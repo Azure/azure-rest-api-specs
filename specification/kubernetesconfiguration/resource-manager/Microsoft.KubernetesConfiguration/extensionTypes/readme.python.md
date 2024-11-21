@@ -20,5 +20,5 @@ These settings apply only when `--tag=package-preview-2024-11-01 --python` is sp
 
 ``` yaml $(tag) == 'package-preview-2024-11-01'
 namespace: azure.mgmt.kubernetesconfiguration.extensiontypes.v2024_11_01_preview
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/extensiontypes/v2024_11_01_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-extensiontypes/azure/mgmt/v2024_11_01_preview
 ```

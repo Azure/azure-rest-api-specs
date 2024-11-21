@@ -20,6 +20,6 @@ These settings apply only when `--tag=package-preview-2024-11-only --python` is 
 
 ``` yaml $(tag) == 'package-preview-2024-11-only'
 namespace: azure.mgmt.kubernetesconfiguration.privatelinkscopes.v2024_11_01_preview
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/privatelinkscopes/v2024_04_01_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-privatelinkscopes/azure/mgmt/v2024_04_01_preview
 ```
 
