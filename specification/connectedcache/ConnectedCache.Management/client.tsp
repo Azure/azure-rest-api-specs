@@ -4,3 +4,4 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.ConnectedCache, "ConnectedCacheMgmt", "python");
+@@clientName(Microsoft.ConnectedCache, "ConnectedCacheManagementClient", "java");
