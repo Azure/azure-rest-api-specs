@@ -320,7 +320,7 @@ else
     $artifactPackages = $ArtifactList | ForEach-Object { $_["name"] }
 
     foreach($propFile in $propFiles) {
-        $artifact = Get-Content $propFile.FullName | ConvertFrom-Json
+        $artifact = Get-Content $propFile.FullName -Raw | ConvertFrom-Json -AsHashtable
         if ($artifactPackages -contains $propFile.Name.Replace(".json", ""))
         {
             Write-Host "Processing $($artifact.ArtifactName)"
