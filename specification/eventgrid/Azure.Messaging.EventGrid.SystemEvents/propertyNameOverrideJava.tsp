@@ -272,69 +272,17 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
+@@clientName(CommunicationIdentifierModelKind, 
+  "CommunicationIdentifierKind",
+  "java"
+);
 
+@@clientName(MicrosoftTeamsAppIdentifierModel,
+  "MicrosoftTeamsAppIdentifier",
+  "java"
+);
 
-
-/*
-
-Remaining diffs explained:
-
-Resource(Action|Delete|Write)(Cancel|Failure|Success)EventData:
-These had a bunch of customization in v1 due to changing return types from Strings to actual types.
-In those cases new methods were added that included "Resource", like getHttpRequest->getResourceHttpRequest..
-In v2, I think we can just leave the methods as they are and not include "Resource".
-
-Setters are removed as now these are properly immutable.
-
-Overridden getters from base methods for optional fields are showing up. This is a bug, probably.
-
-Several instances of Map<String, Object> moving to Map<String, BinaryData> based on recent codegen changes.
-determination:
-I think this is a good change we should keep.
-
-DeviceTwinInfo:
-float getVersion->Double getVersion, same for getCloudTodeviceMessageCount
-these were defined as number in swagger, float32 in TSP
-determination:
-Given that Double is what we use for a float32, let's just keep this.
-
-
-Handful of things went from `object` to `Map<String,Object>` due to moving from being a `object` in Swagger to `Record<unknown>` in TSP
- - need to check these manually to see what the ux is.
- - DeviceTelemtryEventProperties.getBody
- - MachineLearningServicesModelDeployedEventData.getServiceProperties, getServiceTags
- - MachineLearningServicesModelRegisteredEventData.getModelProperties, getModelTags
- - MachineLearningServicesRunCompletedEventData.getRunProperties, getRunTags
- - MachineLearningServicesRunStatusChangedEventData.getRunProperites, getRunTags
- - StorageAsyncOperationInitiatedEventData.getStorageDiagnostics
- - StorageBlobCreatedEventData.getStorageDiagnostics
- - StorageBlobDeletedEventData.getStorageDiagnostics
- - StorageBlobRenamedEventData.getStorageDiagnostics
- - StorageBlobTierChangedEventData.getStorageDiagnostics
- - StorageDirectoryCreatedEventData.getStorageDiagnostics
- - StorageDirectoryDeletedEventData.getStorageDiagnostics
- - StorageDirectoryRenamedEventData.getStorageDiagnostics
-
- Determination:
- These all wind up correct. In all cases the payload example has a key/value of some sort.
- Users will have to modify existing code to handle this by either knowing what key they want
- or by iterating them. We could go back to bundle everything into a top level object representing 
- the whole json, but I think that is overkill.
-
-
-AcsCommunicationIdentifierKind - now is CommunicationIdentifierModelKind
-AcsMicrosoftTeamsAppIdentifier - now is MicrosoftTeamsAppIdentifierModel
-
-Determination: I think these are fine but I am willing to change them.
-
-
-Healthcare FHIR events:
-Lots of method name changes due to moving where "Fhir" is in the name or simply omitting it.
-
-Determination: Keeping these. It's harmless and they aren't really any better or worse.
-.NET did keep this customization, but that is due largely I think to their desire to 
-use type forwarders.
-
-
-*/
-
+@@clientName(AcsMessageEventData.receivedTimeStamp,
+  "receivedTimestamp",
+  "java"
+);
