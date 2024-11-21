@@ -75,6 +75,15 @@ directive:
     where: "$.definitions.querySelector"
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where: $.definitions.ExperimentUpdate.properties.identity.properties.userAssignedIdentities.additionalProperties
+    reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/1163)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.          
 ```
 
 ### Tag: package-preview-2024-03
@@ -465,27 +474,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: TopLevelResourcesListBySubscription
-    where: $.definitions.target
-    from: targets.json
-    reason: |-
-      We have the top level resource list by subscription operation here: https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
-
-      this is a false positive I believe.
-  - suppress: TopLevelResourcesListBySubscription
-    where: $.definitions.target
-    from: targets.json
-    reason: |-
-      we defined the toplevelresourcelistbysubscription here:
-
-      https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.Operation.properties.isDataAction
-    from: types.json
-    reason: We are consuming the type model declaration from "common". I don't think our service is responsible for updating this error... Plz push back otherwise.
-```
