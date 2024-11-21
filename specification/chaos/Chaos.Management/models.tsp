@@ -284,7 +284,7 @@ model ExperimentUpdate {
 
   @doc("Resource managed identity")
   @visibility("read", "create", "update")
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
