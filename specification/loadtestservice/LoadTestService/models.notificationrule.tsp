@@ -33,8 +33,8 @@ union NotificationEventType {
   @doc("Test run started event. This event would occur when a new test run is triggered.")
   TestRunStarted: "TestRunStarted",
 
-  @doc("Trigger ended event. This event would occur when a trigger ends.")
-  TriggerEnded: "TriggerEnded",
+  @doc("Trigger completed event. This event would occur when a trigger completes.")
+  TriggerCompleted: "TriggerCompleted",
 
   @doc("Trigger disabled event. This event would occur when a trigger is disabled.")
   TriggerDisabled: "TriggerDisabled",
@@ -94,11 +94,11 @@ model TriggerTestRunStartedNotificationEventFilter
 }
 
 @added(APIVersions.v2024_11_01_preview)
-@doc("The notification event filter when the event type is TriggerEnded.")
-model TriggerEndedNotificationEventFilter
+@doc("The notification event filter when the event type is TriggerCompleted.")
+model TriggerCompletedNotificationEventFilter
   extends TriggersNotificationEventFilter {
   @doc("Event type for trigger ended event.")
-  kind: NotificationEventType.TriggerEnded;
+  kind: NotificationEventType.TriggerCompleted;
 }
 
 @added(APIVersions.v2024_11_01_preview)

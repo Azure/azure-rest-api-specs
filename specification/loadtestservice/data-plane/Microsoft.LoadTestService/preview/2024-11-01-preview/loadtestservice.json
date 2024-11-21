@@ -3629,7 +3629,7 @@
       "enum": [
         "TestRunEnded",
         "TestRunStarted",
-        "TriggerEnded",
+        "TriggerCompleted",
         "TriggerDisabled"
       ],
       "x-ms-enum": {
@@ -3647,9 +3647,9 @@
             "description": "Test run started event. This event would occur when a new test run is triggered."
           },
           {
-            "name": "TriggerEnded",
-            "value": "TriggerEnded",
-            "description": "Trigger ended event. This event would occur when a trigger ends."
+            "name": "TriggerCompleted",
+            "value": "TriggerCompleted",
+            "description": "Trigger completed event. This event would occur when a trigger completes."
           },
           {
             "name": "TriggerDisabled",
@@ -6532,6 +6532,26 @@
         "kind"
       ]
     },
+    "TriggerCompletedNotificationEventFilter": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TriggerCompleted.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilter"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerCompleted"
+    },
+    "TriggerCompletedNotificationEventFilterCreateOrUpdate": {
+      "type": "object",
+      "description": "The notification event filter when the event type is TriggerCompleted.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "TriggerCompleted"
+    },
     "TriggerCreateOrUpdate": {
       "type": "object",
       "description": "Trigger model.",
@@ -6580,26 +6600,6 @@
         }
       ],
       "x-ms-discriminator-value": "TriggerDisabled"
-    },
-    "TriggerEndedNotificationEventFilter": {
-      "type": "object",
-      "description": "The notification event filter when the event type is TriggerEnded.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TriggersNotificationEventFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "TriggerEnded"
-    },
-    "TriggerEndedNotificationEventFilterCreateOrUpdate": {
-      "type": "object",
-      "description": "The notification event filter when the event type is TriggerEnded.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TriggersNotificationEventFilterCreateOrUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "TriggerEnded"
     },
     "TriggerState": {
       "type": "string",
