@@ -250,13 +250,13 @@ model CapabilityTypeProperties {
    * Runtime properties of this Capability Type.
    */
   @visibility("read")
-  runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
+  runtimeProperties?: CapabilityTypeRuntimeProperties;
 }
 
 /**
  * Runtime properties of this Capability Type.
  */
-model CapabilityTypePropertiesRuntimeProperties {
+model CapabilityTypeRuntimeProperties {
   /**
    * String of the kind of the resource's action type (continuous or discrete).
    */

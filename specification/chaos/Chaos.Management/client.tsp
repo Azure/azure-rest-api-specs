@@ -21,6 +21,9 @@ using Microsoft.Chaos;
 @@clientName(ContinuousAction, "ChaosContinuousAction");
 @@clientName(DiscreteAction, "ChaosDiscreteAction");
 @@clientName(DelayAction, "ChaosDelayAction");
+@@clientName(CapabilityTypeRuntimeProperties,
+  "ChaosCapabilityMetadataRuntimeProperties"
+);
 @@clientName(TargetReference.type, "ReferenceType");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(Experiments.start, "StartExperiment");
