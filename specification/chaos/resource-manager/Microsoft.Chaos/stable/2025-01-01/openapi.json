@@ -1893,7 +1893,11 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "azureRbacDataActions": {
           "type": "array",
@@ -1901,12 +1905,20 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "runtimeProperties": {
           "$ref": "#/definitions/CapabilityTypePropertiesRuntimeProperties",
           "description": "Runtime properties of this Capability Type.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
