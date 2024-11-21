@@ -237,19 +237,19 @@ model CapabilityTypeProperties {
   /**
    * Control plane actions necessary to execute capability type.
    */
-  @visibility("read", "create", "update")
+  @visibility("read")
   azureRbacActions?: string[];
 
   /**
    * Data plane actions necessary to execute capability type.
    */
-  @visibility("read", "create", "update")
+  @visibility("read")
   azureRbacDataActions?: string[];
 
   /**
    * Runtime properties of this Capability Type.
    */
-  @visibility("read", "create", "update")
+  @visibility("read")
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 
