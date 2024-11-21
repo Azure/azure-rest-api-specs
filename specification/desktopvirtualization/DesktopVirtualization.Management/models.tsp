@@ -2251,10 +2251,16 @@ model RegistrationTokenMinimal {
 }
 
 /**
- * List of private endpoint connection associated with the specified storage account
+ * List of private endpoint connection associated with the specified HostPool
  */
-model PrivateEndpointConnectionListResultWithSystemData
-  is Azure.Core.Page<PrivateEndpointConnectionWithSystemData>;
+model PrivateEndpointConnectionOnHostPoolListResultWithSystemData
+  is Azure.Core.Page<PrivateEndpointConnectionOnHostPoolWithSystemData>;
+
+/**
+ * List of private endpoint connection associated with the specified Workspace
+ */
+model PrivateEndpointConnectionOnWorkspaceListResultWithSystemData
+  is Azure.Core.Page<PrivateEndpointConnectionOnHostPoolWithSystemData>;
 
 /**
  * A list of private link resources

@@ -16,13 +16,13 @@ import "./ScalingPlan.tsp";
 import "./Workspace.tsp";
 import "./Application.tsp";
 import "./Desktop.tsp";
-import "./PrivateEndpointConnectionWithSystemData.tsp";
+import "./PrivateEndpointConnectionWithSystemDataHostPool.tsp";
+import "./PrivateEndpointConnectionWithSystemDataWorkspace.tsp";
 import "./SessionHost.tsp";
 import "./UserSession.tsp";
 import "./ScalingPlanPersonalSchedule.tsp";
 import "./ScalingPlanPooledSchedule.tsp";
 import "./MsixPackage.tsp";
-import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
