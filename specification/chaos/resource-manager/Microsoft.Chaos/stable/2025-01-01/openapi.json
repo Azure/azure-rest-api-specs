@@ -2705,8 +2705,9 @@
       "description": "Model that represents a Target resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TargetProperties",
+          "type": "object",
           "description": "The properties of the target resource.",
+          "additionalProperties": {},
           "x-ms-client-flatten": true
         },
         "location": {
@@ -2740,11 +2741,6 @@
       "required": [
         "value"
       ]
-    },
-    "TargetProperties": {
-      "type": "object",
-      "description": "Target resource properties",
-      "additionalProperties": {}
     },
     "TargetReference": {
       "type": "object",
