@@ -1055,7 +1055,7 @@
           },
           {
             "name": "x-ms-client-transaction-id",
-            "description": "Optional. Default is “Empty”. If the value is set it will set Blob metadata on file create or rename. Max length- 36. Valid only when Hierarchical Namespace is enabled for the account.",
+            "description": "Optional. Default is “Empty”. If the value is set it will set Blob metadata on file create or rename. If the request times out for client, this value can be fetched using Get Properties call to confirm if the timed out request had succeeded or not at service end. Max length- 36. Valid only when Hierarchical Namespace is enabled for the account.",
             "in": "header",
             "required": false,
             "type": "string"
