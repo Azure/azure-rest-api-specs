@@ -39,7 +39,6 @@ These settings apply only when `--tag=package-2024-09` is specified on the comma
 input-file:
   - stable/2024-09-01/SAPVirtualInstance.json
   - ../common-types/v1/commonTypes.json
-  - ../operations/stable/2024-09-01/operations.json
 suppressions:
   - code: BodyTopLevelProperties
     from: SAPVirtualInstance.json
