@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
 @@clientName(Experiment, "ChaosExperiment");
+@@clientName(ExperimentUpdate, "ChaosExperimentUpdate");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution");
 @@clientName(Target, "ChaosTarget");
 @@clientName(TargetType, "ChaosTargetType");
