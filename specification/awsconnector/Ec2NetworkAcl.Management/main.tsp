@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- Ec2NetworkAcls ----------------------------------------------
@@ -100,7 +100,7 @@ model Tag {
 interface Ec2NetworkAcls {
   get is ArmResourceRead<Ec2NetworkAcl>;
   @doc("Create a Ec2NetworkAcl. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2NetworkAcl>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2NetworkAcl>;
   update is ArmCustomPatchAsync<
     Ec2NetworkAcl,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2NetworkAcl>

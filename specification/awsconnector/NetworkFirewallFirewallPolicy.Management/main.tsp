@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- NetworkFirewallFirewallPolicies ----------------------------------------------
@@ -169,10 +169,21 @@ model RuleVariablesModel {
 @doc("Definition of StatefulEngineOptions")
 model StatefulEngineOptions {
   @doc("Property ruleOrder")
-  ruleOrder?: string;
+  ruleOrder?: StatefulEngineOptionsRuleOrder;
 
   @doc("Property streamExceptionPolicy")
-  streamExceptionPolicy?: string;
+  streamExceptionPolicy?: StatefulEngineOptionsStreamExceptionPolicy;
+}
+
+@doc("StatefulEngineOptionsRuleOrder enum")
+union StatefulEngineOptionsRuleOrder {
+  @doc("StatefulEngineOptionsRuleOrder enum DEFAULT_ACTION_ORDER")
+  DEFAULT_ACTION_ORDER: "DEFAULT_ACTION_ORDER",
+
+  @doc("StatefulEngineOptionsRuleOrder enum STRICT_ORDER")
+  STRICT_ORDER: "STRICT_ORDER",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -189,6 +200,20 @@ model StatefulRuleGroupReference {
 
   @doc("A resource ARN.")
   resourceArn?: string;
+}
+
+@doc("StatefulEngineOptionsStreamExceptionPolicy enum")
+union StatefulEngineOptionsStreamExceptionPolicy {
+  @doc("StatefulEngineOptionsStreamExceptionPolicy enum CONTINUE")
+  CONTINUE: "CONTINUE",
+
+  @doc("StatefulEngineOptionsStreamExceptionPolicy enum DROP")
+  DROP: "DROP",
+
+  @doc("StatefulEngineOptionsStreamExceptionPolicy enum REJECT")
+  REJECT: "REJECT",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -235,7 +260,15 @@ model IPSet {
 @doc("Definition of StatefulRuleGroupOverride")
 model StatefulRuleGroupOverride {
   @doc("Property action")
-  action?: string;
+  action?: StatefulRuleGroupOverrideAction;
+}
+
+@doc("StatefulRuleGroupOverrideAction enum")
+union StatefulRuleGroupOverrideAction {
+  @doc("StatefulRuleGroupOverrideAction enum DROP_TO_ALERT")
+  DROP_TO_ALERT: "DROP_TO_ALERT",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -274,7 +307,7 @@ model Dimension {
 interface NetworkFirewallFirewallPolicies {
   get is ArmResourceRead<NetworkFirewallFirewallPolicy>;
   @doc("Create a NetworkFirewallFirewallPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<NetworkFirewallFirewallPolicy>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NetworkFirewallFirewallPolicy>;
   update is ArmCustomPatchAsync<
     NetworkFirewallFirewallPolicy,
     Azure.ResourceManager.Foundations.TagsUpdateModel<NetworkFirewallFirewallPolicy>
