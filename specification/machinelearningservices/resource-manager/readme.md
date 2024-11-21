@@ -231,6 +231,7 @@ suppressions:
     reason: There is a similar usage in existing jobs.
     where:
       - $.definitions["FineTuningJob"].properties["outputs"]
+      - $.definitions["Registry"].properties["syndicatedRegistries"]
   - code: GuidUsage
     reason: valid usage of UUID format since it is in the AAD objectId
     where:
