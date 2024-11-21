@@ -4,8 +4,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
+@@clientName(CapabilityType, "CapabilityMetadata");
+@@clientName(CapabilityTypes, "CapabilityMetadata");
+@@clientName(TargetType, "TargetMetadata");
+@@clientName(TargetTypes, "TargetMetadata");
+@@clientName(ExperimentExecution, "ChaosExperimentExecution");
 @@clientName(Experiment, "ChaosExperiment");
-@@clientName(ExperimentUpdate, "ChaosExperimentUpdate");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution");
 @@clientName(Target, "ChaosTarget");
 @@clientName(TargetType, "ChaosTargetType");
