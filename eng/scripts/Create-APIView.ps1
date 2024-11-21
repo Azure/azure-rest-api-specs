@@ -19,13 +19,19 @@ function Get-SwaggerReadMeFile {
     )
     
     $currentPath = Resolve-Path $SwaggerFile
-    
+
     while ($currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
-        $currentPath = [System.IO.Path]::GetDirectoryName($currentPath)
-        $readmeFile = Get-ChildItem -Path $currentPath -Filter "readme.md" -File -ErrorAction SilentlyContinue
-        if ($readmeFile -and $readmeFile.Name -eq "readme.md") {
-            return $readmeFile.FullName
-        }
+      $currentPath = [System.IO.Path]::GetDirectoryName($currentPath)
+      $currentFilePath = [System.IO.Path]::GetFileName($currentPath)
+
+      if ($currentFilePath -eq "specification") {
+        break
+      }
+
+      $readmeFile = Get-ChildItem -Path $currentPath -Filter "readme.md" -File -ErrorAction SilentlyContinue
+      if ($readmeFile -and $readmeFile.Name -eq "readme.md") {
+          return $readmeFile.FullName
+      }
     }
 
     return $null
@@ -111,15 +117,17 @@ function Invoke-SwaggerAPIViewParser {
       LogGroupEnd
 
       $generatedAPIViewTokenFile = Get-ChildItem -File | Select-Object -First 1
-      $readMeTag = $generatedAPIViewTokenFile.BaseName
 
-      LogSuccess " Generated '$Type' APIView Token File using file, '$readMeFile' and tag '$readMeTag'"
+      if (Test-Path -Path $generatedAPIViewTokenFile) {
+        $readMeTag = $generatedAPIViewTokenFile.BaseName
 
-      $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
-      LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
-      Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
-
-      return $readMeTag
+        LogSuccess " Generated '$Type' APIView Token File using file, '$readMeFile' and tag '$readMeTag'"
+  
+        $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
+        LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
+        Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
+        return $readMeTag
+      }
     } catch {
       LogError " Failed to generate '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'"
       throw
@@ -183,12 +191,12 @@ function New-SwaggerAPIViewTokens {
   $changedSwaggerFiles | ForEach-Object {
     $readmeFile = Get-SwaggerReadMeFile -swaggerFile $_
     if ($readmeFile) {
-        $swaggerReadMeFiles.Add($readmeFile) | Out-Null
+      $swaggerReadMeFiles.Add($readmeFile) | Out-Null
     }
   }
 
   LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
-  $readmeFile | ForEach-Object {
+  $swaggerReadMeFiles | ForEach-Object {
     LogInfo " - $_"
   }
   LogGroupEnd
