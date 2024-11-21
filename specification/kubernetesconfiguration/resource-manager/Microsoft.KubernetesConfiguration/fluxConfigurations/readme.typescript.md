@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-kubernetesconfiguration-flux"
-  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
-  override-client-name: FluxConfigurationClient
+  package-name: "@azure/arm-kubernetesconfiguration-fluxconfigurations"
+  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration-fluxconfigurations"
+  override-client-name: FluxConfigurationsClient
   generate-metadata: true
 ```

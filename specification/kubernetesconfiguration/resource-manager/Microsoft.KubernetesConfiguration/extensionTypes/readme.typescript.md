@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-kubernetesconfiguration-extensiontypes"
-  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
-  override-client-name: ExtensionsClient
+  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration-extensiontypes"
+  override-client-name: ExtensionTypesClient
   generate-metadata: true
 ```
