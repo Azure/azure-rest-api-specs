@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./PortalExtension.tsp";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -52,7 +53,13 @@ interface PortalExtensionVersions {
   /**
    * Deletes the portal extension.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ExtensionVersion>;
+  @useFinalStateVia("azure-async-operation")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExtensionVersion,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader &
+      ArmLroLocationHeader
+  >;
 
   /**
    * Gets all the portal extension versions within a resource group.

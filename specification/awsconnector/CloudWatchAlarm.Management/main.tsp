@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- CloudWatchAlarms ----------------------------------------------
@@ -135,7 +135,7 @@ model AwsCloudWatchAlarmProperties {
   tags?: Tag[];
 
   @doc("The value to compare with the specified statistic.")
-  threshold?: int32;
+  threshold?: float32;
 
   @doc("In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm.")
   thresholdMetricId?: string;
@@ -242,7 +242,7 @@ model Metric {
 interface CloudWatchAlarms {
   get is ArmResourceRead<CloudWatchAlarm>;
   @doc("Create a CloudWatchAlarm. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudWatchAlarm>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<CloudWatchAlarm>;
   update is ArmCustomPatchAsync<
     CloudWatchAlarm,
     Azure.ResourceManager.Foundations.TagsUpdateModel<CloudWatchAlarm>

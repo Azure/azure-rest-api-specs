@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- LogsMetricFilters ----------------------------------------------
@@ -215,7 +215,7 @@ model Dimension {
 interface LogsMetricFilters {
   get is ArmResourceRead<LogsMetricFilter>;
   @doc("Create a LogsMetricFilter. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LogsMetricFilter>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<LogsMetricFilter>;
   update is ArmCustomPatchAsync<
     LogsMetricFilter,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsMetricFilter>

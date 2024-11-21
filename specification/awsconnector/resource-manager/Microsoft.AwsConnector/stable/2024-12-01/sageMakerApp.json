@@ -1,0 +1,1038 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SageMakerApps"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/sageMakerApps": {
+      "get": {
+        "operationId": "SageMakerApps_ListBySubscription",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "List SageMakerApp resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerAppListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_ListBySubscription": {
+            "$ref": "./examples/SageMakerApps_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sageMakerApps": {
+      "get": {
+        "operationId": "SageMakerApps_ListByResourceGroup",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "List SageMakerApp resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerAppListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_ListByResourceGroup": {
+            "$ref": "./examples/SageMakerApps_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sageMakerApps/{name}": {
+      "get": {
+        "operationId": "SageMakerApps_Get",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "Get a SageMakerApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerApp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_Get": {
+            "$ref": "./examples/SageMakerApps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SageMakerApps_CreateOrReplace",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "Create a SageMakerApp. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SageMakerApp"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SageMakerApp' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SageMakerApp"
+            }
+          },
+          "201": {
+            "description": "Resource 'SageMakerApp' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SageMakerApp"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_CreateOrReplace": {
+            "$ref": "./examples/SageMakerApps_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SageMakerApps_Update",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "Update a SageMakerApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SageMakerAppTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SageMakerApp"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_Update": {
+            "$ref": "./examples/SageMakerApps_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SageMakerApps_Delete",
+        "tags": [
+          "SageMakerApps"
+        ],
+        "description": "Delete a SageMakerApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SageMakerApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SageMakerApps_Delete": {
+            "$ref": "./examples/SageMakerApps_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AppType": {
+      "type": "string",
+      "description": "AppType enum",
+      "enum": [
+        "Canvas",
+        "JupyterServer",
+        "KernelGateway",
+        "RSessionGateway",
+        "RStudioServerPro"
+      ],
+      "x-ms-enum": {
+        "name": "AppType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Canvas",
+            "value": "Canvas",
+            "description": "AppType enum Canvas"
+          },
+          {
+            "name": "JupyterServer",
+            "value": "JupyterServer",
+            "description": "AppType enum JupyterServer"
+          },
+          {
+            "name": "KernelGateway",
+            "value": "KernelGateway",
+            "description": "AppType enum KernelGateway"
+          },
+          {
+            "name": "RSessionGateway",
+            "value": "RSessionGateway",
+            "description": "AppType enum RSessionGateway"
+          },
+          {
+            "name": "RStudioServerPro",
+            "value": "RStudioServerPro",
+            "description": "AppType enum RStudioServerPro"
+          }
+        ]
+      }
+    },
+    "AwsSageMakerAppProperties": {
+      "type": "object",
+      "description": "Definition of awsSageMakerApp",
+      "properties": {
+        "appArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the app."
+        },
+        "appName": {
+          "type": "string",
+          "description": "The name of the app."
+        },
+        "appType": {
+          "$ref": "#/definitions/AppType",
+          "description": "The type of app."
+        },
+        "domainId": {
+          "type": "string",
+          "description": "The domain ID."
+        },
+        "resourceSpec": {
+          "$ref": "#/definitions/ResourceSpec",
+          "description": "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of tags to apply to the app.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "userProfileName": {
+          "type": "string",
+          "description": "The user profile name."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResourceSpec": {
+      "type": "object",
+      "description": "Definition of ResourceSpec",
+      "properties": {
+        "instanceType": {
+          "$ref": "#/definitions/ResourceSpecInstanceType",
+          "description": "The instance type that the image version runs on."
+        },
+        "sageMakerImageArn": {
+          "type": "string",
+          "description": "The ARN of the SageMaker image that the image version belongs to."
+        },
+        "sageMakerImageVersionArn": {
+          "type": "string",
+          "description": "The ARN of the image version created on the instance."
+        }
+      }
+    },
+    "ResourceSpecInstanceType": {
+      "type": "string",
+      "description": "ResourceSpecInstanceType enum",
+      "enum": [
+        "ml.c5.12xlarge",
+        "ml.c5.18xlarge",
+        "ml.c5.24xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.large",
+        "ml.c5.xlarge",
+        "ml.g4dn.12xlarge",
+        "ml.g4dn.16xlarge",
+        "ml.g4dn.2xlarge",
+        "ml.g4dn.4xlarge",
+        "ml.g4dn.8xlarge",
+        "ml.g4dn.xlarge",
+        "ml.g5.12xlarge",
+        "ml.g5.16xlarge",
+        "ml.g5.24xlarge",
+        "ml.g5.2xlarge",
+        "ml.g5.48xlarge",
+        "ml.g5.4xlarge",
+        "ml.g5.8xlarge",
+        "ml.g5.xlarge",
+        "ml.geospatial.interactive",
+        "ml.m5.12xlarge",
+        "ml.m5.16xlarge",
+        "ml.m5.24xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.8xlarge",
+        "ml.m5.large",
+        "ml.m5.xlarge",
+        "ml.m5d.12xlarge",
+        "ml.m5d.16xlarge",
+        "ml.m5d.24xlarge",
+        "ml.m5d.2xlarge",
+        "ml.m5d.4xlarge",
+        "ml.m5d.8xlarge",
+        "ml.m5d.large",
+        "ml.m5d.xlarge",
+        "ml.p3.16xlarge",
+        "ml.p3.2xlarge",
+        "ml.p3.8xlarge",
+        "ml.p3dn.24xlarge",
+        "ml.p4d.24xlarge",
+        "ml.p4de.24xlarge",
+        "ml.r5.12xlarge",
+        "ml.r5.16xlarge",
+        "ml.r5.24xlarge",
+        "ml.r5.2xlarge",
+        "ml.r5.4xlarge",
+        "ml.r5.8xlarge",
+        "ml.r5.large",
+        "ml.r5.xlarge",
+        "ml.t3.2xlarge",
+        "ml.t3.large",
+        "ml.t3.medium",
+        "ml.t3.micro",
+        "ml.t3.small",
+        "ml.t3.xlarge",
+        "ml.trn1.2xlarge",
+        "ml.trn1.32xlarge",
+        "ml.trn1n.32xlarge",
+        "system"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceSpecInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MlC512xlarge",
+            "value": "ml.c5.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.12xlarge"
+          },
+          {
+            "name": "MlC518xlarge",
+            "value": "ml.c5.18xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.18xlarge"
+          },
+          {
+            "name": "MlC524xlarge",
+            "value": "ml.c5.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.24xlarge"
+          },
+          {
+            "name": "MlC52xlarge",
+            "value": "ml.c5.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.2xlarge"
+          },
+          {
+            "name": "MlC54xlarge",
+            "value": "ml.c5.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.4xlarge"
+          },
+          {
+            "name": "MlC59xlarge",
+            "value": "ml.c5.9xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.9xlarge"
+          },
+          {
+            "name": "MlC5Large",
+            "value": "ml.c5.large",
+            "description": "ResourceSpecInstanceType enum ml.c5.large"
+          },
+          {
+            "name": "MlC5Xlarge",
+            "value": "ml.c5.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.c5.xlarge"
+          },
+          {
+            "name": "MlG4dn12xlarge",
+            "value": "ml.g4dn.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.12xlarge"
+          },
+          {
+            "name": "MlG4dn16xlarge",
+            "value": "ml.g4dn.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.16xlarge"
+          },
+          {
+            "name": "MlG4dn2xlarge",
+            "value": "ml.g4dn.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.2xlarge"
+          },
+          {
+            "name": "MlG4dn4xlarge",
+            "value": "ml.g4dn.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.4xlarge"
+          },
+          {
+            "name": "MlG4dn8xlarge",
+            "value": "ml.g4dn.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.8xlarge"
+          },
+          {
+            "name": "MlG4dnXlarge",
+            "value": "ml.g4dn.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g4dn.xlarge"
+          },
+          {
+            "name": "MlG512xlarge",
+            "value": "ml.g5.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.12xlarge"
+          },
+          {
+            "name": "MlG516xlarge",
+            "value": "ml.g5.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.16xlarge"
+          },
+          {
+            "name": "MlG524xlarge",
+            "value": "ml.g5.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.24xlarge"
+          },
+          {
+            "name": "MlG52xlarge",
+            "value": "ml.g5.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.2xlarge"
+          },
+          {
+            "name": "MlG548xlarge",
+            "value": "ml.g5.48xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.48xlarge"
+          },
+          {
+            "name": "MlG54xlarge",
+            "value": "ml.g5.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.4xlarge"
+          },
+          {
+            "name": "MlG58xlarge",
+            "value": "ml.g5.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.8xlarge"
+          },
+          {
+            "name": "MlG5Xlarge",
+            "value": "ml.g5.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.g5.xlarge"
+          },
+          {
+            "name": "MlGeospatialInteractive",
+            "value": "ml.geospatial.interactive",
+            "description": "ResourceSpecInstanceType enum ml.geospatial.interactive"
+          },
+          {
+            "name": "MlM512xlarge",
+            "value": "ml.m5.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.12xlarge"
+          },
+          {
+            "name": "MlM516xlarge",
+            "value": "ml.m5.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.16xlarge"
+          },
+          {
+            "name": "MlM524xlarge",
+            "value": "ml.m5.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.24xlarge"
+          },
+          {
+            "name": "MlM52xlarge",
+            "value": "ml.m5.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.2xlarge"
+          },
+          {
+            "name": "MlM54xlarge",
+            "value": "ml.m5.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.4xlarge"
+          },
+          {
+            "name": "MlM58xlarge",
+            "value": "ml.m5.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.8xlarge"
+          },
+          {
+            "name": "MlM5Large",
+            "value": "ml.m5.large",
+            "description": "ResourceSpecInstanceType enum ml.m5.large"
+          },
+          {
+            "name": "MlM5Xlarge",
+            "value": "ml.m5.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5.xlarge"
+          },
+          {
+            "name": "MlM5d12xlarge",
+            "value": "ml.m5d.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.12xlarge"
+          },
+          {
+            "name": "MlM5d16xlarge",
+            "value": "ml.m5d.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.16xlarge"
+          },
+          {
+            "name": "MlM5d24xlarge",
+            "value": "ml.m5d.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.24xlarge"
+          },
+          {
+            "name": "MlM5d2xlarge",
+            "value": "ml.m5d.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.2xlarge"
+          },
+          {
+            "name": "MlM5d4xlarge",
+            "value": "ml.m5d.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.4xlarge"
+          },
+          {
+            "name": "MlM5d8xlarge",
+            "value": "ml.m5d.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.8xlarge"
+          },
+          {
+            "name": "MlM5dLarge",
+            "value": "ml.m5d.large",
+            "description": "ResourceSpecInstanceType enum ml.m5d.large"
+          },
+          {
+            "name": "MlM5dXlarge",
+            "value": "ml.m5d.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.m5d.xlarge"
+          },
+          {
+            "name": "MlP316xlarge",
+            "value": "ml.p3.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p3.16xlarge"
+          },
+          {
+            "name": "MlP32xlarge",
+            "value": "ml.p3.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p3.2xlarge"
+          },
+          {
+            "name": "MlP38xlarge",
+            "value": "ml.p3.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p3.8xlarge"
+          },
+          {
+            "name": "MlP3dn24xlarge",
+            "value": "ml.p3dn.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p3dn.24xlarge"
+          },
+          {
+            "name": "MlP4d24xlarge",
+            "value": "ml.p4d.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p4d.24xlarge"
+          },
+          {
+            "name": "MlP4de24xlarge",
+            "value": "ml.p4de.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.p4de.24xlarge"
+          },
+          {
+            "name": "MlR512xlarge",
+            "value": "ml.r5.12xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.12xlarge"
+          },
+          {
+            "name": "MlR516xlarge",
+            "value": "ml.r5.16xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.16xlarge"
+          },
+          {
+            "name": "MlR524xlarge",
+            "value": "ml.r5.24xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.24xlarge"
+          },
+          {
+            "name": "MlR52xlarge",
+            "value": "ml.r5.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.2xlarge"
+          },
+          {
+            "name": "MlR54xlarge",
+            "value": "ml.r5.4xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.4xlarge"
+          },
+          {
+            "name": "MlR58xlarge",
+            "value": "ml.r5.8xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.8xlarge"
+          },
+          {
+            "name": "MlR5Large",
+            "value": "ml.r5.large",
+            "description": "ResourceSpecInstanceType enum ml.r5.large"
+          },
+          {
+            "name": "MlR5Xlarge",
+            "value": "ml.r5.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.r5.xlarge"
+          },
+          {
+            "name": "MlT32xlarge",
+            "value": "ml.t3.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.t3.2xlarge"
+          },
+          {
+            "name": "MlT3Large",
+            "value": "ml.t3.large",
+            "description": "ResourceSpecInstanceType enum ml.t3.large"
+          },
+          {
+            "name": "MlT3Medium",
+            "value": "ml.t3.medium",
+            "description": "ResourceSpecInstanceType enum ml.t3.medium"
+          },
+          {
+            "name": "MlT3Micro",
+            "value": "ml.t3.micro",
+            "description": "ResourceSpecInstanceType enum ml.t3.micro"
+          },
+          {
+            "name": "MlT3Small",
+            "value": "ml.t3.small",
+            "description": "ResourceSpecInstanceType enum ml.t3.small"
+          },
+          {
+            "name": "MlT3Xlarge",
+            "value": "ml.t3.xlarge",
+            "description": "ResourceSpecInstanceType enum ml.t3.xlarge"
+          },
+          {
+            "name": "MlTrn12xlarge",
+            "value": "ml.trn1.2xlarge",
+            "description": "ResourceSpecInstanceType enum ml.trn1.2xlarge"
+          },
+          {
+            "name": "MlTrn132xlarge",
+            "value": "ml.trn1.32xlarge",
+            "description": "ResourceSpecInstanceType enum ml.trn1.32xlarge"
+          },
+          {
+            "name": "MlTrn1n32xlarge",
+            "value": "ml.trn1n.32xlarge",
+            "description": "ResourceSpecInstanceType enum ml.trn1n.32xlarge"
+          },
+          {
+            "name": "system",
+            "value": "system",
+            "description": "ResourceSpecInstanceType enum system"
+          }
+        ]
+      }
+    },
+    "SageMakerApp": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SageMakerAppProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SageMakerAppListResult": {
+      "type": "object",
+      "description": "The response of a SageMakerApp list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SageMakerApp items on this page",
+          "items": {
+            "$ref": "#/definitions/SageMakerApp"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SageMakerAppProperties": {
+      "type": "object",
+      "description": "Definition of SageMakerApp",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsSageMakerAppProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SageMakerAppTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SageMakerApp resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
