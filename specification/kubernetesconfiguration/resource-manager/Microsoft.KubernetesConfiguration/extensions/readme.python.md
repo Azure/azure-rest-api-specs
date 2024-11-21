@@ -20,5 +20,5 @@ These settings apply only when `--tag=package-2024-11 --python` is specified on 
 
 ``` yaml $(tag) == 'package-2024-11'
 namespace: azure.mgmt.kubernetesconfiguration.extensions.v2024_11_01
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/extensions/v2024_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-extensions/azure/mgmt/v2024_11_01
 ```

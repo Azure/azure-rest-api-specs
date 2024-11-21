@@ -18,7 +18,7 @@ clear-output-folder: true
 
 These settings apply only when `--tag=package-2024-11 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2024-11'
 namespace: azure.mgmt.kubernetesconfiguration.operations.v2024_11_01
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/operations/v2024_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-operations/azure/mgmt/v2024_11_01
 ```

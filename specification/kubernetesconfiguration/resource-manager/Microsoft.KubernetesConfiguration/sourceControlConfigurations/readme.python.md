@@ -7,12 +7,11 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.kubernetesconfiguration.sourcecontrolconfiguration
-package-name: azure-mgmt-kubernetesconfiguration-sourcecontrolconfiguration
+namespace: azure.mgmt.kubernetesconfiguration.sourcecontrolconfigurations
+package-name: azure-mgmt-kubernetesconfiguration-sourcecontrolconfigurations
 no-namespace-folders: true
 package-version: 1.1.0
 clear-output-folder: true
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/sourcecontrolconfiguration/
 perform-load: false
 ```
 
@@ -22,6 +21,6 @@ These settings apply only when `--tag=package-2024-11 --python` is specified on 
 
 ``` yaml $(tag) == 'package-2024-11'
 namespace: azure.mgmt.kubernetesconfiguration.sourcecontrolconfiguration.v2024_11_01
-output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/sourcecontrolconfiguration/v2024_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration-sourcecontrolconfigurations/azure/mgmt/v2024_11_01
 ```
 
