@@ -301,6 +301,7 @@ union CloudNativeType {
 
 //------------------- Shared -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "will move to a more structured model when stable/GA"
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
@@ -308,6 +309,7 @@ model SolutionSettings is Record<string>;
 //---------------------------------------------- Operations ----------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
 interface GenerateAwsTemplate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"

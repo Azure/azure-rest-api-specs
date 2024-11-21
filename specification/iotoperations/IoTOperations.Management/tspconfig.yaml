@@ -20,6 +20,28 @@ options:
     namespace: "com.azure.resourcemanager.iotoperations"
     service-name: "IoT Operations"
     flavor: "azure"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-iotoperations"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-iotoperations"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/iotoperations"
+    package-dir: "armiotoperations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

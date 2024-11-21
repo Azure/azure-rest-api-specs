@@ -12,7 +12,7 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-    emit-lro-options: "none"
+    emit-lro-options: "all"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
@@ -36,12 +36,13 @@ options:
     namespace: com.azure.ai.translation.document
     partial-update: true
     generate-tests: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "TranslationError,InnerTranslationError,TranslationErrorCode"
     flavor: azure
-    stream-style-serialization: false
     generate-sample-project: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-document-rest"
-    generateMetadata: false
+    generateMetadata: true
     generateTest: false
     packageDetails:
       name: "@azure-rest/ai-translation-document"
