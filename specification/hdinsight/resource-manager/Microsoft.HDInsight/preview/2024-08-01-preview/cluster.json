@@ -3,7 +3,7 @@
   "info": {
     "title": "HDInsightManagementClient",
     "description": "The HDInsight Management Client.",
-    "version": "2025-01-15-preview"
+    "version": "2024-08-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -2004,17 +2004,9 @@
           "type": "string",
           "x-ms-client-name": "password",
           "description": "The gateway settings user password."
-        },
-        "restAuthMsEntra.Users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MsEntraUserInfo",
-            "description": "Details of an Entra user for gateway access."
-          },
-          "description": "List of Entra users for gateway access."
         }
       },
-      "description": "The update gateway settings request parameters. Note either basic or entra user should be provided at a time."
+      "description": "The update gateway settings request parameters."
     },
     "GatewaySettings": {
       "type": "object",
@@ -2036,35 +2028,9 @@
           "x-ms-client-name": "password",
           "description": "The gateway settings user password.",
           "readOnly": true
-        },
-        "restAuthMsEntra.Users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MsEntraUserInfo",
-            "description": "Details of an Entra user for gateway access."
-          },
-          "description": "List of Entra users for gateway access."
         }
       },
       "description": "Gateway settings."
-    },
-    "MsEntraUserInfo": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The unique object ID of the Entra user or client ID of the enterprise applications."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the Entra user."
-        },
-        "upn": {
-          "type": "string",
-          "description": "The User Principal Name (UPN) of the Entra user. It may be empty in certain cases, such as for enterprise applications."
-        }
-      },
-      "description": "Details of an Entra user for gateway access."
     },
     "AsyncOperationResult": {
       "type": "object",
