@@ -277,13 +277,7 @@ model ManagedServiceIdentityUpdate
  * Describes an experiment update.
  */
 model ExperimentUpdate
-  is OptionalProperties<UpdateableProperties<OmitProperties<
-    Experiment,
-    "name" | "Name" | "identity" | "location" | "properties"
-  >>> {
-  /** The managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
-}
+  is OmitProperties<Experiment, "name" | "Name" | "id" | "type" | "location" | "systemData" | "properties">;
 
 /**
  * Model that represents the Experiment properties model.
