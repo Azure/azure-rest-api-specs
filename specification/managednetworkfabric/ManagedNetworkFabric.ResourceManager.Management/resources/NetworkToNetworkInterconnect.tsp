@@ -2,26 +2,22 @@ import "./NetworkFabric.tsp";
 import "../models/common.tsp";
 import "../models/NetworkToNetworkInterconnect.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.Rest;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The Network To Network Interconnect resource definition.
- */
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The Network To Network Interconnect resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @parentResource(NetworkFabric)
-@Azure.ResourceManager.Private.armResourceInternal(
-  NetworkToNetworkInterconnectProperties
-)
 @includeInapplicableMetadataInPayload(false)
 model NetworkToNetworkInterconnect
   extends Azure.ResourceManager.Foundations.ProxyResource {
-  /**
-   * Name of the Network to Network Interconnect.
-   */
+  @doc("Name of the Network to Network Interconnect.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkToNetworkInterconnectName")
@@ -29,58 +25,53 @@ model NetworkToNetworkInterconnect
   @visibility("read")
   name: string;
 
-  /** The NetworkToNetworkInterconnect Properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkToNetworkInterconnect Properties")
   properties: NetworkToNetworkInterconnectProperties;
 }
 
 @armResourceOperations
 interface NetworkToNetworkInterconnects {
-  /**
-   * Implements NetworkToNetworkInterconnects GET method.
-   */
+  @doc("Implements NetworkToNetworkInterconnects GET method.")
   get is ArmResourceRead<NetworkToNetworkInterconnect>;
 
-  /**
-   * Configuration used to setup CE-PE connectivity PUT Method.
-   */
+  @doc("Configuration used to setup CE-PE connectivity PUT Method.")
   create is ArmResourceCreateOrReplaceAsync<NetworkToNetworkInterconnect>;
 
-  /**
-   * Update certain properties of the Network To NetworkInterconnects resource.
-   */
+  @doc("Update certain properties of the Network To NetworkInterconnects resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<
     NetworkToNetworkInterconnect,
     NetworkToNetworkInterconnectPatch
   >;
 
-  /**
-   * Implements NetworkToNetworkInterconnects DELETE method.
-   */
+  @doc("Implements NetworkToNetworkInterconnects DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkToNetworkInterconnect>;
 
-  /**
-   * Implements Network To Network Interconnects list by Network Fabric GET method.
-   */
+  @doc("Implements Network To Network Interconnects list by Network Fabric GET method.")
   listByNetworkFabric is ArmResourceListByParent<NetworkToNetworkInterconnect>;
 
-  /**
-   * Updates the NPB Static Route BFD Administrative State.
-   */
+  @doc("Updates the NPB Static Route BFD Administrative State.")
+  @removed(Versions.v2024_06_15_preview)
   updateNpbStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
     NetworkToNetworkInterconnect,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
   >;
 
-  /**
-   * Updates the Admin State.
-   */
+  @doc("Updates the Admin State.")
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkToNetworkInterconnect,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Updates the Admin State.")
+  @added(Versions.v2024_06_15_preview)
+  updateBfdAdministrativeState is ArmResourceActionAsync<
+    NetworkToNetworkInterconnect,
+    NniBfdAdministrativeStateRequest,
+    NniBfdAdministrativeStateResponse
   >;
 }
 
@@ -94,5 +85,8 @@ interface NetworkToNetworkInterconnects {
   "Request payload."
 );
 @@doc(NetworkToNetworkInterconnects.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(NetworkToNetworkInterconnects.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );
