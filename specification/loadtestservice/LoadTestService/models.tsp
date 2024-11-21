@@ -352,7 +352,7 @@ model Test {
   @added(APIVersions.v2024_12_01_preview)
   engineBuiltinIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
 
-  @doc("Resource Ids of the managed identity built in to load test engines")
+  @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltinIdentityType is UserAssigned.")
   @added(APIVersions.v2024_12_01_preview)
   engineBuiltinIdentityIds?: string[];
 
