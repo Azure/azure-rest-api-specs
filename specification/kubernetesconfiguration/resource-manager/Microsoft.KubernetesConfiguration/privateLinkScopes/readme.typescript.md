@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-kubernetesconfiguration/privatelinkscopes"
-  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
+  package-name: "@azure/arm-kubernetesconfiguration-privatelinkscopes"
+  output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration-privatelinkscopes"
   override-client-name: PrivateLinkScopesClient
   generate-metadata: true
 ```
