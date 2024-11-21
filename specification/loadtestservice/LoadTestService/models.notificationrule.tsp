@@ -63,7 +63,7 @@ model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
   kind: NotificationEventType.TestRunEnded;
 
   @doc("Event filtering condition.")
-  condition?: TestRunEndedEventFilterCondition;
+  condition?: TestRunEndedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
@@ -82,7 +82,7 @@ model TriggerTestRunEndedNotificationEventFilter
   kind: NotificationEventType.TestRunEnded;
 
   @doc("Event filtering condition.")
-  condition?: TestRunEndedEventFilterCondition;
+  condition?: TestRunEndedEventCondition;
 }
 
 @added(APIVersions.v2024_11_01_preview)
@@ -111,7 +111,7 @@ model TriggerDisabledNotificationEventFilter
 
 @added(APIVersions.v2024_11_01_preview)
 @doc("TestRunEnded Event condition.")
-model TestRunEndedEventFilterCondition {
+model TestRunEndedEventCondition {
   @doc("The test run statuses to send notification for.")
   testRunStatuses?: Status[];
 
