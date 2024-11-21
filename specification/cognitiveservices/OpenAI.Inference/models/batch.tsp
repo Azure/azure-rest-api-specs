@@ -56,7 +56,7 @@ model BatchCreateRequest {
   metadata?: Record<string>;
 }
 
-/** Defines the response when creating a batch. */
+/** The requested new batch job. */
 @added(ServiceApiVersions.v2024_07_01_Preview)
 model BatchCreateResponse {
   // Customization note: the status code in OpenAI is 200.

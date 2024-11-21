@@ -1,0 +1,83 @@
+{
+  "title": "Create Translation",
+  "operationId": "TranslationOperations_CreateTranslation",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2024-05-20-preview",
+    "translationId": "TranslateMyZhCNVideo",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "Operation-Id": "Create-TranslateMyZhCNVideo",
+    "resource": {
+      "displayName": "hello.mp4",
+      "description": "Translate video from en-US to zh-CN.",
+      "input": {
+        "sourceLocale": "en-US",
+        "targetLocale": "zh-CN",
+        "voiceKind": "PlatformVoice",
+        "videoFileUrl": "https://mystorage.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/videotranslation/operations/Create-TranslateMyZhCNVideo?api-version=2024-02-01-preview",
+        "Operation-Id": "Create-TranslateMyZhCNVideo"
+      },
+      "body": {
+        "id": "TranslateMyZhCNVideo",
+        "displayName": "hello.mp4",
+        "description": "Translate video from en-US to zh-CN.",
+        "input": {
+          "sourceLocale": "en-US",
+          "targetLocale": "zh-CN",
+          "voiceKind": "PlatformVoice",
+          "videoFileUrl": "https://mystorage.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "latestIteration": {
+          "id": "Initial",
+          "status": "NotStarted",
+          "input": {
+            "speakerCount": 3,
+            "subtitleMaxCharCountPerSegment": 80,
+            "webvttFile": {
+              "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+              "kind": "MetadataJson"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/videotranslation/operations/Create-TranslateMyZhCNVideo?api-version=2024-02-01-preview",
+        "Operation-Id": "Create-TranslateMyZhCNVideo"
+      },
+      "body": {
+        "id": "TranslateMyZhCNVideo",
+        "description": "Translate video from en-US to zh-CN.",
+        "input": {
+          "sourceLocale": "en-US",
+          "targetLocale": "zh-CN",
+          "voiceKind": "PlatformVoice",
+          "videoFileUrl": "https://mystorage.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "latestIteration": {
+          "id": "Initial",
+          "status": "NotStarted",
+          "input": {
+            "speakerCount": 3,
+            "subtitleMaxCharCountPerSegment": 80,
+            "webvttFile": {
+              "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+              "kind": "MetadataJson"
+            }
+          }
+        }
+      }
+    }
+  }
+}

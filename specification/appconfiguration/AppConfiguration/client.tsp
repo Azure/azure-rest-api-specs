@@ -7,11 +7,17 @@ using AzureAppConfiguration;
 
 namespace SdkCustomizations;
 
-// Cross-language customizations
-@@clientName(Foundations.Error, "ErrorDetail");
-
 // Python specific customizations
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+model MyClientOptions {
+  /**
+   * Used to guarantee real-time consistency between requests.
+   */
+  syncToken?: string;
+}
+@@clientInitialization(AzureAppConfiguration, MyClientOptions, "python");
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
 @@clientName(CompositionType, "SnapshotComposition", "python");
 @@access(putKeyValue, Access.internal, "python");
 @@access(updateSnapshot, Access.internal, "python");
+@@access(SnapshotUpdateParameters, Access.public, "python");
