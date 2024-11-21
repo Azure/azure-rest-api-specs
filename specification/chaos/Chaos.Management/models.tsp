@@ -277,7 +277,7 @@ model ManagedServiceIdentityUpdate
  * Describes an experiment update.
  */
 model ExperimentUpdate
-  is OmitProperties<Experiment, "name" | "Name" | "id" | "type" | "location" | "systemData" | "properties">;
+  is OmitProperties<Experiment, "name" | "Name" | "id" | "type" | "location" | "systemData" | "systemData" | "properties">;
 
 /**
  * Model that represents the Experiment properties model.
