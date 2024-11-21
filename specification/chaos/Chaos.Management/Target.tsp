@@ -15,7 +15,6 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Target resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to add location to proxy resource."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
 model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   ...ResourceNameParameter<
@@ -24,12 +23,6 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
     SegmentName = "targets",
     NamePattern = "^[a-zA-Z0-9_\\-\\.]+$"
   >;
-
-  /**
-   * Azure location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property implementation."
-  location?: azureLocation;
 }
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
