@@ -1052,6 +1052,13 @@
             "in": "header",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-ms-client-transaction-id",
+            "description": "Optional. Default is “Empty”. If the value is set it will set Blob metadata on file create or rename. Max length- 36. Valid only when Hierarchical Namespace is enabled for the account.",
+            "in": "header",
+            "required": false,
+            "type": "string"
           }
         ]
       },
@@ -2074,6 +2081,10 @@
               },
               "x-ms-expiry-time": {
                 "description": "The expiry time of the given path. The format would be RFC1123.",
+                "type": "string"
+              },
+              "x-ms-client-transaction-id": {
+                "description": "If client transaction Id property value is set it will return the set value. Valid only when Hierarchical Namespace is enabled for the account.",
                 "type": "string"
               }
             }
