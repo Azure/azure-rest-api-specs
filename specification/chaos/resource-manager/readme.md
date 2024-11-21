@@ -82,7 +82,7 @@ suppressions:
     reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/1163)
   - code: AvoidAdditionalProperties
     from: openapi.json
-    where: $.definitions.Target.properties
+    where: $.definitions.Target.properties.properties
     reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.          
 ```
 

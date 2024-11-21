@@ -269,22 +269,20 @@ model CapabilityTypePropertiesRuntimeProperties {
  */
 model ExperimentListResult is Azure.Core.Page<Experiment>;
 
-// #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
-// model ManagedServiceIdentityUpdate
-//   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
 
 /**
  * Describes an experiment update.
  */
-model ExperimentUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
-  @doc("Resource tags")
-  @visibility("read", "create", "update")
-  tags?: Record<string>;
-
-  @doc("Resource managed identity")
-  @visibility("read", "create", "update")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+model ExperimentUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    Experiment,
+    "name" | "Name" | "identity" | "location" | "properties"
+  >>> {
+  /** The managed service identity */
+  identity?: ManagedServiceIdentityUpdate;
 }
 
 /**
