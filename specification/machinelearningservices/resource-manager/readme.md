@@ -61,7 +61,7 @@ suppressions:
       - $.definitions.SparkJob.properties.conf
       - $.definitions.SparkJob.properties.environmentVariables
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
-      - $.definitions.CustomKeys.properties.keysz
+      - $.definitions.CustomKeys.properties.keys
   - code: LroLocationHeader
     reason: Existing API behavior
     where:
