@@ -1,0 +1,154 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testsqlserver",
+    "api-version": "2024-09-01-preview",
+    "sqlServerInstanceTelemetryRequest": {
+      "datasetName": "sqlserver_storage_io",
+      "startTime": "2023-09-30T00:00:00Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "columns": [
+          {
+            "name": "row_id",
+            "type": "int"
+          },
+          {
+            "name": "sample_time_utc",
+            "type": "datetime"
+          },
+          {
+            "name": "database_id",
+            "type": "int"
+          },
+          {
+            "name": "database_name",
+            "type": "string"
+          },
+          {
+            "name": "file_id",
+            "type": "int"
+          },
+          {
+            "name": "file_type",
+            "type": "string"
+          },
+          {
+            "name": "file_size_mb",
+            "type": "double"
+          },
+          {
+            "name": "file_max_size_mb",
+            "type": "double"
+          },
+          {
+            "name": "io_stall_read_ms",
+            "type": "int"
+          },
+          {
+            "name": "num_of_reads",
+            "type": "int"
+          },
+          {
+            "name": "num_of_bytes_read",
+            "type": "int"
+          },
+          {
+            "name": "io_stall_write_ms",
+            "type": "int"
+          },
+          {
+            "name": "num_of_writes",
+            "type": "int"
+          },
+          {
+            "name": "num_of_bytes_written",
+            "type": "int"
+          },
+          {
+            "name": "io_stall_queued_read_ms",
+            "type": "int"
+          },
+          {
+            "name": "io_stall_queued_write_ms",
+            "type": "int"
+          },
+          {
+            "name": "size_on_disk_bytes",
+            "type": "int"
+          }
+        ],
+        "rows": [
+          [
+            "1",
+            "2023-09-30T00:00:00Z",
+            "1",
+            "master",
+            "1",
+            "Data",
+            "21.9375",
+            "0",
+            "88",
+            "56",
+            "3473408",
+            "2",
+            "3",
+            "24576",
+            "0",
+            "0",
+            "23003136"
+          ],
+          [
+            "2",
+            "2023-09-30T00:00:00Z",
+            "5",
+            "arcDb",
+            "2",
+            "Log",
+            "0.625",
+            "0",
+            "12",
+            "11",
+            "208896",
+            "5989",
+            "853",
+            "3506176",
+            "0",
+            "0",
+            "4653056"
+          ],
+          [
+            "3",
+            "2023-09-30T00:00:00Z",
+            "2",
+            "model",
+            "1",
+            "Data",
+            "4.4375",
+            "0",
+            "65",
+            "59",
+            "3284992",
+            "279",
+            "661",
+            "5922816",
+            "0",
+            "0",
+            "4653056"
+          ]
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/testsqlserver/getTelemetry?api-version=2024-09-01-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2024-09-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2024-09-01-preview"
+      }
+    }
+  }
+}
