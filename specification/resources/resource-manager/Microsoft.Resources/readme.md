@@ -23,32 +23,18 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Resource API.
 
-``` yaml $(package-deleteoptions)
+``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-deleteoptions-2024-10
+tag: package-2024-10-01-preview
 ```
 
-``` yaml $(package-deletedresources)
-openapi-type: arm
-openapi-subtype: providerHub
-tag: package-deletedresources-2024-10
-```
+### Tag: package-2024-10-01-preview
 
-### Tag: package-deleteoptions-2024-10
+These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-deleteoptions-2024-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deleteoptions-2024-10'
-input-file:
-  - preview/2024-10-01-preview/deleteOptions.json
-```
-
-### Tag: package-deletedresources-2024-10
-
-These settings apply only when `--tag=package-deletedresources-2024-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deletedresources-2024-10'
+```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
   - preview/2024-10-01-preview/deletedResources.json
+  - preview/2024-10-01-preview/deleteOptions.json
 ```
