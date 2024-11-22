@@ -11,6 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -93,7 +94,7 @@ op deidentifyText is Azure.Core.RpcOperation<
   {
     @doc("Request body for de-identification operation.")
     @body
-    //@clientName("content", "csharp")
+    @clientName("content", "csharp")
     body: DeidentificationContent;
   },
   DeidentificationResult,
