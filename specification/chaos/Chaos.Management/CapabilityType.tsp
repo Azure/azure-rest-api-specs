@@ -31,6 +31,7 @@ interface CapabilityTypes {
   /**
    * Get a Capability Type resource for given Target Type and location.
    */
+  @parameterVisibility
   get is ArmResourceRead<CapabilityType>;
 
   /**
