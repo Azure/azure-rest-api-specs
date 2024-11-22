@@ -58,11 +58,11 @@ model BingGroundingToolDefinition extends ToolDefinition {
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
 model MicrosoftFabricToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'microsoft_fabric'.")
-  type: "microsoft_fabric";
+  @doc("The object type, which is always 'fabric_aiskill'.")
+  type: "fabric_aiskill";
 
   @doc("The list of connections used by the Microsoft Fabric tool.")
-  microsoft_fabric: ToolConnectionList;
+  fabric_aiskill: ToolConnectionList;
 }
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
@@ -97,7 +97,7 @@ model FileSearchToolDefinitionDetails {
   maxNumResults?: int32;
 
   @encodedName("application/json", "ranking_options")
-  rankingOptions?: FileSearchRankingOptions
+  rankingOptions?: FileSearchRankingOptions;
 }
 
 @doc("The input definition information for a azure function tool as used to configure an agent.")
@@ -159,7 +159,7 @@ model AzureFunctionDefinition {
 
 @discriminator("type")
 @doc("""
-  An abstract representation a a tool invocation needed by the model to continue a run.
+  An abstract representation of a tool invocation needed by the model to continue a run.
   """)
 model RequiredToolCall {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -273,11 +273,11 @@ model RunStepSharepointToolCall extends RunStepToolCall {
   executed Microsoft Fabric operations.
   """)
 model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'microsoft_fabric'.")
-  type: "microsoft_fabric";
+  @doc("The object type, which is always 'fabric_aiskill'.")
+  type: "fabric_aiskill";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "microsoft_fabric")
+  @encodedName("application/json", "fabric_aiskill")
   microsoftFabric: Record<string>;
 }
 
@@ -421,8 +421,8 @@ union AgentsNamedToolChoiceType {
   /** Tool type `bing_grounding` */
   bingGrounding: "bing_grounding",
 
-  /** Tool type `microsoft_fabric` */
-  microsoftFabric: "microsoft_fabric",
+  /** Tool type `fabric_aiskill` */
+  microsoftFabric: "fabric_aiskill",
 
   /** Tool type `sharepoint_grounding` */
   sharepoint: "sharepoint_grounding",
@@ -438,7 +438,7 @@ model FunctionName {
 }
 
 /**
- * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.
+ * A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.
  */
 model ToolConnectionList {
   /**
