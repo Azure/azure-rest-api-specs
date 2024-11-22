@@ -83,7 +83,11 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: openapi.json
     where: $.definitions.Target.properties.properties
-    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.          
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    where: $.definitions.ExperimentUpdate
+    reason: already used in GA api version, fixing it will cause breaking change              
 ```
 
 ### Tag: package-preview-2024-03
