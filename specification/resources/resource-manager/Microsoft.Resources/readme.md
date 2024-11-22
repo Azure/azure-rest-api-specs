@@ -26,15 +26,29 @@ These are the global settings for the Resource API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-10-01-preview
+tag: package-deleteoptions-2024-10
 ```
 
-### Tag: package-2024-10-01-preview
+``` yaml
+openapi-type: arm
+openapi-subtype: providerHub
+tag: package-deletedresources-2024-10
+```
 
-These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+### Tag: package-deleteoptions-2024-10
 
-```yaml $(tag) == 'package-2024-10-01-preview'
+These settings apply only when `--tag=package-deleteoptions-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deleteoptions-2024-10'
+input-file:
+  - preview/2024-10-01-preview/deleteOptions.json
+```
+
+### Tag: package-deletedresources-2024-10
+
+These settings apply only when `--tag=package-deletedresources-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-deletedresources-2024-10'
 input-file:
   - preview/2024-10-01-preview/deletedResources.json
-  - preview/2024-10-01-preview/deleteOptions.json
 ```
