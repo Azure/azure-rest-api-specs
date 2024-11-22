@@ -69,7 +69,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
@@ -80,20 +79,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: NONE
-  namespace: Microsoft.Azure.Management.Scheduler
-  output-folder: $(csharp-sdks-folder)/scheduler/Microsoft.Azure.Management.Scheduler/src/Generated
-  clear-output-folder: true
-```
 
 ## Python
 
