@@ -10,4 +10,8 @@ using Azure.ClientGenerator.Core;
 namespace HealthDataAIServices.DeidServices {
   @@clientName(listJobDocuments, "listJobDocumentsInternal", "csharp,python");
   @@clientName(listJobs, "listJobsInternal", "csharp,python");
+  @@clientName(HealthDataAIServices.DeidServices, "DeidentificationClient");
+  @@access(listJobDocuments, Access.internal, "csharp,python");
+  @@access(listJobs, Access.internal, "csharp,python");
+  //@@clientName(deidentifyText::parameters.body, "content", "csharp");
 }

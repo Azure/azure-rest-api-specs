@@ -11,12 +11,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
-@client({
-  name: "DeidentificationClient",
-})
 namespace HealthDataAIServices.DeidServices;
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -39,7 +35,6 @@ op deidentifyDocuments is DeidentifyOperations.LongRunningResourceCreateOrReplac
 op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
 
 @summary("List de-identification jobs.")
-@access(Access.internal, "csharp,python")
 op listJobs is DeidentifyOperations.ResourceList<
   DeidentificationJob,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
@@ -48,7 +43,6 @@ op listJobs is DeidentifyOperations.ResourceList<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @summary("List processed documents within a job.")
 @route("/jobs/{jobName}/documents")
-@access(Access.internal, "csharp,python")
 op listJobDocuments is Azure.Core.Foundations.Operation<
   {
     @doc("The name of a job.")
@@ -99,7 +93,7 @@ op deidentifyText is Azure.Core.RpcOperation<
   {
     @doc("Request body for de-identification operation.")
     @body
-    @clientName("content", "csharp")
+    //@clientName("content", "csharp")
     body: DeidentificationContent;
   },
   DeidentificationResult,
