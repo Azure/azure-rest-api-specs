@@ -171,7 +171,7 @@ function New-SwaggerAPIViewTokens {
 
   # Get Changed Swagger Files
   LogInfo " Getting changed swagger files in PR, between $SourceCommitId and $TargetCommitId"
-  $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
+  $changedFiles = Get-ChangedFiles
   $changedSwaggerFiles = Get-ChangedSwaggerFiles -changedFiles $changedFiles
 
   if ($changedSwaggerFiles.Count -eq 0) {
