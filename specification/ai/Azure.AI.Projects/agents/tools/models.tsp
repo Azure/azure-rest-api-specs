@@ -142,8 +142,7 @@ model FunctionDefinition {
 model AzureFunctionDefinition {
 
   @doc("The definition of azure function and its parameters.")
-  @encodedName("application/json", "function")
-  Function: FunctionDefinition;
+  function: FunctionDefinition;
 
   @doc("Input storage queue.")
   @encodedName("application/json", "input_binding")
