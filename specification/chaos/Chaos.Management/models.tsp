@@ -269,15 +269,20 @@ model CapabilityTypeRuntimeProperties {
  */
 model ExperimentListResult is Azure.Core.Page<Experiment>;
 
-#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
-
 /**
  * Describes an experiment update.
  */
-model ExperimentUpdate
-  is OmitProperties<Experiment, "name" | "Name" | "id" | "type" | "location" | "systemData" | "systemData" | "properties">;
+model ExperimentUpdate {
+  /**
+   * Experiment tags.
+   */
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<Experiment>;
+
+  /**
+   * Experiment managed identity.
+   */
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+}
 
 /**
  * Model that represents the Experiment properties model.
