@@ -11,6 +11,7 @@ linter:
 
 options:
   "@azure-tools/typespec-autorest":
+    # This library is meant for SDK generation only, so we don't want to actually emit Swaggers
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/administration.json"

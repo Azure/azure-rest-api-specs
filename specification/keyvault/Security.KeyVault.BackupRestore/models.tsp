@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "../Security.KeyVault.Common/common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -97,42 +98,6 @@ model FullBackupOperation {
    * The Azure blob storage container Uri which contains the full backup
    */
   azureStorageBlobContainerUri?: string;
-}
-
-/**
- * The key vault server error.
- */
-model Error {
-  /**
-   * The error code.
-   */
-  @visibility("read")
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility("read")
-  message?: string;
-
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  @encodedName("application/json", "innererror")
-  innerError?: Error;
-}
-
-/**
- * The key vault error exception.
- */
-@error
-model KeyVaultError {
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  error?: Error;
 }
 
 /**

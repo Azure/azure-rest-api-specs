@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "../Security.KeyVault.Common/common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -233,42 +234,6 @@ union RoleScope {
    * Keys scope
    */
   Keys: "/keys",
-}
-
-/**
- * The key vault server error.
- */
-model Error {
-  /**
-   * The error code.
-   */
-  @visibility("read")
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility("read")
-  message?: string;
-
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  @encodedName("application/json", "innererror")
-  innerError?: Error;
-}
-
-/**
- * The key vault error exception.
- */
-@error
-model KeyVaultError {
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  error?: Error;
 }
 
 /**
