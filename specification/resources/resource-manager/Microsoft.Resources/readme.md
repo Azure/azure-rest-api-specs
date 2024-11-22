@@ -25,11 +25,13 @@ These are the global settings for the Resource API.
 
 ``` yaml $(package-deleteoptions)
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-deleteoptions-2024-10
 ```
 
 ``` yaml $(package-deletedresources)
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-deletedresources-2024-10
 ```
 
