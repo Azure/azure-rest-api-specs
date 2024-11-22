@@ -13,4 +13,5 @@ namespace HealthDataAIServices.DeidServices {
   @@clientName(HealthDataAIServices.DeidServices, "DeidentificationClient");
   @@access(listJobDocuments, Access.internal, "csharp,python");
   @@access(listJobs, Access.internal, "csharp,python");
+  @@clientName(DeidentifyTextRequest.body, "content", "csharp");
 }

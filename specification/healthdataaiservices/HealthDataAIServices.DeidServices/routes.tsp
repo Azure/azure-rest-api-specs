@@ -11,7 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.DeidServices;
@@ -41,21 +40,10 @@ op listJobs is DeidentifyOperations.ResourceList<
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @summary("List processed documents within a job.")
-@route("/jobs/{jobName}/documents")
-op listJobDocuments is Azure.Core.Foundations.Operation<
-  {
-    @doc("The name of a job.")
-    @maxLength(36)
-    @minLength(3) // Must be 3 to match regex
-    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-    jobName: string;
-
-    ...PaginationByTokenQueryParameters;
-  },
-  Page<DeidentificationDocumentDetails>,
-  Azure.Core.Foundations.ErrorResponse
+op listJobDocuments is DeidentifyOperations.ResourceList<
+  DeidentificationDocumentDetails,
+  ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
 @doc("Query parameters for list operation.")
@@ -87,16 +75,16 @@ op cancelJob is DeidentifyOperations.ResourceAction<
 @doc("Removes the record of the job from the service. Does not delete any documents.")
 op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 
+alias DeidentifyTextRequest = {    
+  @doc("Request body for de-identification operation.")    
+  @body body: DeidentificationContent;
+};
+
 @summary("De-identify text.")
 @route("/deid")
 @post
 op deidentifyText is Azure.Core.RpcOperation<
-  {
-    @doc("Request body for de-identification operation.")
-    @body
-    @clientName("content", "csharp")
-    body: DeidentificationContent;
-  },
+  DeidentifyTextRequest,
   DeidentificationResult,
   ServiceTraits
 >;
