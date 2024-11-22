@@ -37,6 +37,8 @@ namespace Azure.AI.Projects.Agents {
   @@access(FunctionDefinition, Access.internal);
   @@clientName(FunctionDefinition, "InternalFunctionDefinition", "csharp");
   @@clientName(FunctionToolDefinition.function, "InternalFunction", "csharp");
+  
+  @@access(AzureFunctionDefinition, Access.internal)
   @@clientName(AzureFunctionDefinition.function, "InternalFunction", "csharp"); 
 
   // SubmitToolOutputsAction: include .tool_calls directly rather than via an intermediate .details.
