@@ -75,9 +75,10 @@ op cancelJob is DeidentifyOperations.ResourceAction<
 @doc("Removes the record of the job from the service. Does not delete any documents.")
 op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 
-alias DeidentifyTextRequest = {    
-  @doc("Request body for de-identification operation.")    
-  @body body: DeidentificationContent;
+alias DeidentifyTextRequest = {
+  @doc("Request body for de-identification operation.")
+  @body
+  body: DeidentificationContent;
 };
 
 @summary("De-identify text.")

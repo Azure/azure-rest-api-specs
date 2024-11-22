@@ -423,17 +423,17 @@
         }
       }
     },
-    "/jobs/{jobName}/documents": {
+    "/jobs/{name}/documents": {
       "get": {
         "operationId": "ListJobDocuments",
         "summary": "List processed documents within a job.",
-        "description": "The most basic operation.",
+        "description": "Resource list operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobName",
+            "name": "name",
             "in": "path",
             "description": "The name of a job.",
             "required": true,
@@ -447,6 +447,9 @@
           },
           {
             "$ref": "#/parameters/PaginationByTokenQueryParameters.continuationToken"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -454,6 +457,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDeidentificationDocumentDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
