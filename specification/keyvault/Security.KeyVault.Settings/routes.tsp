@@ -16,6 +16,7 @@ namespace KeyVault;
  * Description of the pool setting to be updated
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@parameterVisibility
 @summary("Updates key vault account setting, stores it, then returns the setting name and value to the client.")
 @route("/settings/{setting-name}")
 @patch
