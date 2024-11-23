@@ -61,12 +61,12 @@ enum Versions {
 );
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
-@@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
+// #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
+// @@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
+//   "application/json",
+//   "payload"
+// );
+// @@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiVersions.createOrUpdate::parameters.resource,
