@@ -60,7 +60,9 @@ interface Capabilities {
     {
       ...CapabilityParentResourceParameters;
 
-      @doc("String that sets the continuation token.")
+      /**
+       * String that sets the continuation token.
+       */
       @query("continuationToken")
       continuationToken?: string;
     },

@@ -16,15 +16,19 @@ namespace Microsoft.Chaos;
  */
 @armResourceOperations
 interface OperationStatuses {
-  @doc("Returns the current status of an async operation.")
+  /**
+   * Returns the current status of an async operation.
+   */
   @autoRoute
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
+    /**
+     * The provider namespace (this parameter will not show up in operations).
+     */
     @path
     @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
     provider: "Microsoft.Chaos",
 
     ...LocationParameter,

@@ -15,20 +15,26 @@ namespace Microsoft.Chaos;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 alias ParentResourceParameters = {
-  @doc("The parent resource provider namespace.")
+  /**
+   * The parent resource provider namespace.
+   */
   @path
   @segment("providers")
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   parentProviderNamespace: string;
 
-  @doc("The parent resource type.")
+  /**
+   * The parent resource type.
+   */
   @path
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   parentResourceType: string;
 
-  @doc("The parent resource name.")
+  /**
+   * The parent resource name.
+   */
   @path
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
@@ -43,13 +49,19 @@ union ProvisioningState {
   string,
   ResourceProvisioningState,
 
-  @doc("Initial creation in progress.")
+  /**
+   * Initial creation in progress.
+   */
   Creating: "Creating",
 
-  @doc("Update in progress.")
+  /**
+   * Update in progress.
+   */
   Updating: "Updating",
 
-  @doc("Deletion in progress.")
+  /**
+   * Deletion in progress.
+   */
   Deleting: "Deleting",
 }
 
@@ -113,23 +125,33 @@ model PostActionResult {
  * Params model for extension resources
  */
 model ExtensionResourcePathParameters {
-  @doc("Name of schema group.")
+  /**
+   * Subscription id.
+   */
   @path
   subscriptionId: string;
 
-  @doc("Name of schema group.")
+  /**
+   * Resource group name.
+   */
   @path
   resourceGroupName: string;
 
-  @doc("Name of schema group.")
+  /**
+   * Parent resource provider namespace.
+   */
   @path
   parentProviderNamespace: string;
 
-  @doc("Name of schema group.")
+  /**
+   * Parent resource type.
+   */
   @path
   parentResourceType: string;
 
-  @doc("Name of schema group.")
+  /**
+   * Parent resource name.
+   */
   @path
   parentResourceName: string;
 }
@@ -669,42 +691,6 @@ model ExperimentExecutionActionTargetDetailsError {
   @visibility("read")
   message?: string;
 }
-
-// @doc("The current status of an async operation.")
-// @resource("operationstatuses")
-// @parentResource(ArmLocationResource<"Subscription">)
-// model OperationStatus {
-//   @doc("Fully qualified ID for the operation status.")
-//   @visibility("read")
-//   id: string;
-
-//   @doc("The operation id name.")
-//   @maxLength(36)
-//   @minLength(36)
-//   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-//   @key("operationId")
-//   @visibility("read")
-//   name: Azure.Core.uuid;
-
-//   @doc("Provisioning state of the resource.")
-//   status: Azure.Core.Foundations.OperationState;
-
-//   @doc("The id of the resource.")
-//   resourceId?: string;
-
-//   @doc("The start time of the operation, in RFC3339 format.")
-//   startTime?: utcDateTime;
-
-//   @doc("The end time of the operation, in RFC3339 format.")
-//   endTime?: utcDateTime;
-
-//   #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe object"
-//   @doc("Custom operation properties, populated only for a successful operation.")
-//   properties?: unknown;
-
-//   @doc("Operation Error message.")
-//   error?: Azure.Core.Foundations.Error;
-// }
 
 /**
  * Model that represents a list of Target Type resources and a link for pagination.
