@@ -20,6 +20,18 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    clear-output-folder: true
+    package-dir: "chaos"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/chaos"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

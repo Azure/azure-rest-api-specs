@@ -21,7 +21,7 @@ using Microsoft.Chaos;
 @@clientName(ContinuousAction, "ChaosContinuousAction");
 @@clientName(DiscreteAction, "ChaosDiscreteAction");
 @@clientName(DelayAction, "ChaosDelayAction");
-@@clientName(CapabilityTypeRuntimeProperties,
+@@clientName(CapabilityTypePropertiesRuntimeProperties,
   "ChaosCapabilityMetadataRuntimeProperties"
 );
 @@clientName(TargetReference.type, "ReferenceType");
@@ -29,6 +29,7 @@ using Microsoft.Chaos;
 @@clientName(Experiments.start, "StartExperiment");
 @@clientName(Experiments.cancel, "CancelExperiment");
 @@clientName(Targets.createOrUpdate::parameters.resource, "target");
+@@clientName(Capabilities.createOrUpdate::parameters.resource, "capability");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);

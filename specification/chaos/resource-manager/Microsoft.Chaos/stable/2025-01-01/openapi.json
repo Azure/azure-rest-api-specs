@@ -1764,12 +1764,14 @@
           "description": "The Capability items on this page",
           "items": {
             "$ref": "#/definitions/Capability"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1834,12 +1836,14 @@
           "description": "The CapabilityType items on this page",
           "items": {
             "$ref": "#/definitions/CapabilityType"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1904,13 +1908,13 @@
           "readOnly": true
         },
         "runtimeProperties": {
-          "$ref": "#/definitions/CapabilityTypeRuntimeProperties",
+          "$ref": "#/definitions/CapabilityTypePropertiesRuntimeProperties",
           "description": "Runtime properties of this Capability Type.",
           "readOnly": true
         }
       }
     },
-    "CapabilityTypeRuntimeProperties": {
+    "CapabilityTypePropertiesRuntimeProperties": {
       "type": "object",
       "description": "Runtime properties of this Capability Type.",
       "properties": {

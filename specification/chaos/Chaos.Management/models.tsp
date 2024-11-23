@@ -160,6 +160,8 @@ model ExtensionResourcePathParameters {
  * Model that represents a list of Capability resources and a link for pagination.
  */
 model CapabilityListResult is Azure.Core.Page<Capability>;
+@@visibility(CapabilityListResult.nextLink, "read");
+@@visibility(CapabilityListResult.value, "read");
 
 /**
  * Model that represents the Capability properties model.
@@ -203,6 +205,8 @@ model CapabilityProperties {
  * Model that represents a list of Capability Type resources and a link for pagination.
  */
 model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
+@@visibility(CapabilityTypeListResult.nextLink, "read");
+@@visibility(CapabilityTypeListResult.value, "read");
 
 /**
  * Model that represents the Capability Type properties model.
@@ -272,13 +276,13 @@ model CapabilityTypeProperties {
    * Runtime properties of this Capability Type.
    */
   @visibility("read")
-  runtimeProperties?: CapabilityTypeRuntimeProperties;
+  runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 
 /**
  * Runtime properties of this Capability Type.
  */
-model CapabilityTypeRuntimeProperties {
+model CapabilityTypePropertiesRuntimeProperties {
   /**
    * String of the kind of the resource's action type (continuous or discrete).
    */
