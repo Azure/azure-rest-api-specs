@@ -91,6 +91,8 @@ function Invoke-SwaggerAPIViewParser {
         [string]$ResourceProvider,
         [Parameter(Mandatory = $true)]
         [string]$TokenDirectory,
+        [Parameter(Mandatory = $true)]
+        [string]$TempDirectory,
         [string]$Tag
     )
     $tempWorkingDirectoryName = [guid]::NewGuid().ToString()
@@ -102,7 +104,7 @@ function Invoke-SwaggerAPIViewParser {
     try {
       # Generate Swagger APIView tokens
       $command = "swaggerAPIParser"
-      $arguments = @("--readme", "$readMeFile", "--package-name", "$resourceProvider", "--use-tag-for-output")
+      $arguments = @("--readme", "$ReadMeFilePath", "--package-name", "$ResourceProvider")
 
       if ($Tag) {
         $arguments += "--tag"
@@ -110,7 +112,7 @@ function Invoke-SwaggerAPIViewParser {
       }
 
       LogInfo " $command $arguments"
-      LogGroupStart " Generating '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'..."
+      LogGroupStart " Generating '$Type' APIView Tokens using '$ReadMeFilePath' for '$ResourceProvider'..."
 
       & $command @arguments 2>&1 | ForEach-Object { Write-Host $_ }
 
@@ -119,17 +121,14 @@ function Invoke-SwaggerAPIViewParser {
       $generatedAPIViewTokenFile = Get-ChildItem -File | Select-Object -First 1
 
       if (Test-Path -Path $generatedAPIViewTokenFile) {
-        $readMeTag = $generatedAPIViewTokenFile.BaseName
-
-        LogSuccess " Generated '$Type' APIView Token File using file, '$readMeFile' and tag '$readMeTag'"
+        LogSuccess " Generated '$Type' APIView Token File using file, '$ReadMeFilePath' and tag '$Tag'"
   
-        $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
+        $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$ResourceProvider.$Type.json")
         LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
         Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
-        return $readMeTag
       }
     } catch {
-      LogError " Failed to generate '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'"
+      LogError " Failed to generate '$Type' APIView Tokens using '$ReadMeFilePath' for '$ResourceProvider'"
       throw
     } finally {
       Pop-Location
@@ -207,17 +206,27 @@ function New-SwaggerAPIViewTokens {
 
   # Generate Swagger APIView Tokens
   foreach ($readMeFile in $swaggerReadMeFiles) {
-      $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
-      $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
-      New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
+    $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
+    $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
+    New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
 
-      # Generate New APIView Token using default tag on base branch
-      git checkout $SourceCommitId
-      $defaultTag = Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
+    # Generate New APIView Token using default tag on source branch
+    git checkout $SourceCommitId
+    $sourceTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
+    Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+      -TempDirectory $TempDirectory -Tag $sourceTagInfo.DefaultTag | Out-Null
 
-      # Generate BaseLine APIView Token using same tag on target branch
-      git checkout $TargetCommitId
-      Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory -Tag $defaultTag | Out-Null
+    # Generate BaseLine APIView Token using source commit tag on target branch or defaukt tag if source commit tag does not exist
+    git checkout $TargetCommitId
+    if (Test-Path -Path $readMeFile) {
+      $targetTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
+      $baseLineTag = $targetTagInfo.DefaultTag
+      if ($targetTagInfo.Tags.Contains($sourceTagInfo.DefaultTag)) {
+        $baseLineTag = $sourceTagInfo.DefaultTag
+      }
+      Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+        -TempDirectory $TempDirectory -Tag $baseLineTag | Out-Null
+    }
   }
 
   git checkout $currentBranch
@@ -329,5 +338,46 @@ function New-RestSpecsAPIViewReviews {
     LogError "Failed to create APIView for some resource providers. Check the logs for more details."
     Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
     exit 1
+  }
+}
+
+<#
+.DESCRIPTION
+  Get all the tags from the swagger readme file with the default tag indicated.
+
+.PARAMETER ReadMeFilePath
+  The file path to the readme file.
+#>
+function Get-TagInformationFromReadMeFile {
+  param (
+    [Parameter(Mandatory = $true)]
+    [string]$ReadMeFilePath
+  )
+  $tags = [System.Collections.Generic.HashSet[string]]::new()
+  $markDownContent = Get-Content -Path $ReadMeFilePath
+  $chheckForDefaulttag = $false
+  $defaultTag = $null
+
+  foreach ($line in $markDownContent) {
+    if ($line -match "### Basic Information") {
+      $chheckForDefaulttag = $true
+    }
+
+    if ($chheckForDefaulttag -and ($null -eq $defaultTag)) {
+      if ($line -match "^tag:\s(.+)") {
+        $defaultTag = $matches[1]
+        $chheckForDefaulttag = $false
+      }
+    }
+
+    if ($line -match '^```yaml\s\$\(tag\)\s==\s''(.+)''') {
+      $tag = $matches[1]
+      $tags.Add($tag) | Out-Null
+    }
+  }
+
+  [PSCustomObject]@{
+    Tags = $tags
+    DefaultTag  = $defaultTag
   }
 }
