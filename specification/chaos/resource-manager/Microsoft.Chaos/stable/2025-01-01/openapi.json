@@ -1757,6 +1757,9 @@
           "description": "System data."
         }
       },
+      "required": [
+        "systemData"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1835,9 +1838,6 @@
           "description": "System data."
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -2699,9 +2699,6 @@
           "description": "System data."
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -2771,10 +2768,20 @@
           "$ref": "#/definitions/TargetTypeProperties",
           "description": "The properties of the target type resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "System data."
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "systemData"
       ],
       "allOf": [
         {

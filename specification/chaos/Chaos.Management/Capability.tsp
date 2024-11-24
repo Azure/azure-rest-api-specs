@@ -28,7 +28,7 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
    * System data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid breaking SDK changes."
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+  systemData: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 alias CapabilityParentResourceParameters = BaseParameters<Capability> &
