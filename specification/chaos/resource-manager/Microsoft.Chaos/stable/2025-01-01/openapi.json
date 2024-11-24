@@ -2226,14 +2226,18 @@
       "type": "string",
       "description": "Enum union of Chaos experiment action types.",
       "enum": [
+        "delay",
         "discrete",
-        "continuous",
-        "delay"
+        "continuous"
       ],
       "x-ms-enum": {
         "name": "ExperimentActionType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "delay",
+            "value": "delay"
+          },
           {
             "name": "discrete",
             "value": "discrete"
@@ -2241,10 +2245,6 @@
           {
             "name": "continuous",
             "value": "continuous"
-          },
-          {
-            "name": "delay",
-            "value": "delay"
           }
         ]
       }
@@ -2361,11 +2361,6 @@
           "description": "String that represents the stop date time.",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Experiment execution resource provisioning state. Not currently implemented.",
-          "readOnly": true
-        },
         "failureReason": {
           "type": "string",
           "description": "The reason why the execution failed.",
@@ -2441,11 +2436,6 @@
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Experiment execution resource provisioning state. Not currently implemented.",
           "readOnly": true
         }
       }
