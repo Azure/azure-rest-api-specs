@@ -67,7 +67,7 @@
   "paths": {
     "/providers/Microsoft.Chaos/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Operations_ListAll",
         "tags": [
           "Operations"
         ],
@@ -103,7 +103,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/experiments": {
       "get": {
-        "operationId": "Experiments_ListBySubscription",
+        "operationId": "Experiments_ListAll",
         "tags": [
           "Experiments"
         ],
@@ -1056,7 +1056,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments": {
       "get": {
-        "operationId": "Experiments_ListByResourceGroup",
+        "operationId": "Experiments_List",
         "tags": [
           "Experiments"
         ],
@@ -1436,7 +1436,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions": {
       "get": {
-        "operationId": "ExperimentExecutions_List",
+        "operationId": "Experiments_ListAllExecutions",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1487,7 +1487,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}": {
       "get": {
-        "operationId": "ExperimentExecutions_Get",
+        "operationId": "Experiments_GetExecution",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1543,7 +1543,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails": {
       "post": {
-        "operationId": "ExperimentExecutions_GetExecutionDetails",
+        "operationId": "Experiments_ExecutionDetails",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1707,6 +1707,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "BranchStatus": {
       "type": "object",
       "description": "Model that represents the a list of actions and action statuses.",
@@ -1747,6 +1751,11 @@
           "$ref": "#/definitions/CapabilityProperties",
           "description": "The properties of a capability resource.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "System data.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -1762,6 +1771,7 @@
         "value": {
           "type": "array",
           "description": "The Capability items on this page",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Capability"
           },
@@ -1819,8 +1829,21 @@
           "$ref": "#/definitions/CapabilityTypeProperties",
           "description": "The properties of the capability type resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "System data.",
+          "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1834,6 +1857,7 @@
         "value": {
           "type": "array",
           "description": "The CapabilityType items on this page",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CapabilityType"
           },
@@ -2211,10 +2235,16 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "System data.",
+          "readOnly": true
         }
       },
       "required": [
-        "properties"
+        "properties",
+        "systemData"
       ],
       "allOf": [
         {
@@ -2404,6 +2434,7 @@
         "value": {
           "type": "array",
           "description": "The ExperimentExecution items on this page",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExperimentExecution"
           }
@@ -2691,6 +2722,7 @@
         "value": {
           "type": "array",
           "description": "The Target items on this page",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Target"
           }
@@ -2768,6 +2800,7 @@
         "value": {
           "type": "array",
           "description": "The TargetType items on this page",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/TargetType"
           }

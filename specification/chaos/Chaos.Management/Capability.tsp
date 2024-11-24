@@ -23,6 +23,13 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
     SegmentName = "capabilities",
     NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
   >;
+
+  /**
+   * System data.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid breaking SDK changes."
+  @visibility("read")
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 alias CapabilityParentResourceParameters = BaseParameters<Capability> &

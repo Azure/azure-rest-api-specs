@@ -11,10 +11,13 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Autorest;
 using Azure.ClientGenerator.Core;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 
 interface Operations extends Azure.ResourceManager.Operations {}
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to avoid breaking SDK change"
+@@operationId(Operations.list, "Operations_ListAll");
 
 alias ParentResourceParameters = {
   /**
@@ -164,6 +167,8 @@ model ExtensionResourcePathParameters {
 model CapabilityListResult is Azure.Core.Page<Capability>;
 @@visibility(CapabilityListResult.nextLink, "read");
 @@visibility(CapabilityListResult.value, "read");
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(CapabilityListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the Capability properties model.
@@ -209,6 +214,8 @@ model CapabilityProperties {
 model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
 @@visibility(CapabilityTypeListResult.nextLink, "read");
 @@visibility(CapabilityTypeListResult.value, "read");
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(CapabilityTypeListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the Capability Type properties model.
@@ -296,6 +303,8 @@ model CapabilityTypePropertiesRuntimeProperties {
  * Model that represents a list of Experiment resources and a link for pagination.
  */
 model ExperimentListResult is Azure.Core.Page<Experiment>;
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(CapabilityTypeListResult.value, "x-nullable", true);
 
 /**
  * Describes an experiment update.
@@ -422,6 +431,8 @@ model ChaosTargetFilter {
  * Model that represents a list of Experiment executions and a link for pagination.
  */
 model ExperimentExecutionListResult is Azure.Core.Page<ExperimentExecution>;
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(ExperimentExecutionListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the execution properties of an Experiment.
@@ -693,6 +704,8 @@ model ExperimentExecutionActionTargetDetailsError {
  * Model that represents a list of Target Type resources and a link for pagination.
  */
 model TargetTypeListResult is Azure.Core.Page<TargetType>;
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(TargetTypeListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the base Target Type properties model.
@@ -729,6 +742,8 @@ model TargetTypeProperties {
  * Model that represents a list of Target resources and a link for pagination.
  */
 model TargetListResult is Azure.Core.Page<Target>;
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
+@@extension(TargetListResult.value, "x-nullable", true);
 
 /**
  * Model that represents a delay action.

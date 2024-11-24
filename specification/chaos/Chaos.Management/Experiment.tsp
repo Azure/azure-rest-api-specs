@@ -23,6 +23,13 @@ model Experiment
     NamePattern = "^[^<>%&:?#/\\\\]+$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /**
+   * System data.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking changes."
+  @visibility("read")
+  systemData: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 @armResourceOperations
@@ -51,7 +58,7 @@ interface Experiments {
   /**
    * Get a list of Experiment resources in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     Experiment,
     Parameters = {
       /**
@@ -72,7 +79,7 @@ interface Experiments {
   /**
    * Get a list of Experiment resources in a subscription.
    */
-  listBySubscription is ArmListBySubscription<
+  listAll is ArmListBySubscription<
     Experiment,
     Parameters = {
       /**
