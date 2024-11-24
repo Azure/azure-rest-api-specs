@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Chaos;
 /**
@@ -32,6 +33,7 @@ interface ExperimentExecutions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
   @operationId("Experiments_GetExecution")
+  @parameterVisibility
   get is ArmResourceRead<ExperimentExecution>;
 
   /**
@@ -39,6 +41,7 @@ interface ExperimentExecutions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
   @operationId("Experiments_ListAllExecutions")
+  @parameterVisibility
   list is ArmResourceListByParent<
     ExperimentExecution,
     Response = ExperimentExecutionListResult
@@ -49,6 +52,7 @@ interface ExperimentExecutions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
   @operationId("Experiments_ExecutionDetails")
+  @parameterVisibility
   getExecutionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,

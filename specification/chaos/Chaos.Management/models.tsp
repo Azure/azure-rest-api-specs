@@ -12,6 +12,7 @@ using Azure.ResourceManager.Foundations;
 using Autorest;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Chaos;
 
@@ -162,13 +163,29 @@ model ExtensionResourcePathParameters {
 }
 
 /**
+ * Describes a page of resource object.
+ * @template Resource The resource type.
+ * Required to avoid breaking SDK changes because value needs to be nullable currently
+ */
+@pagedResult
+@friendlyName("Paged{name}", Resource)
+@doc("Paged collection of {name} items", Resource)
+model Page<Resource extends TypeSpec.Reflection.Model> {
+  @doc("The {name} items on this page", Resource)
+  @items
+  value?: Resource[];
+
+  @doc("The link to the next page of items")
+  @Azure.Core.nextLink
+  nextLink?: ResourceLocation<Resource>;
+}
+
+/**
  * Model that represents a list of Capability resources and a link for pagination.
  */
-model CapabilityListResult is Azure.Core.Page<Capability>;
+model CapabilityListResult is Page<Capability>;
 @@visibility(CapabilityListResult.nextLink, "read");
 @@visibility(CapabilityListResult.value, "read");
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(CapabilityListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the Capability properties model.
@@ -211,11 +228,9 @@ model CapabilityProperties {
 /**
  * Model that represents a list of Capability Type resources and a link for pagination.
  */
-model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
+model CapabilityTypeListResult is Page<CapabilityType>;
 @@visibility(CapabilityTypeListResult.nextLink, "read");
 @@visibility(CapabilityTypeListResult.value, "read");
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(CapabilityTypeListResult.value, "x-nullable", true);
 
 /**
  * Model that represents the Capability Type properties model.
@@ -302,9 +317,7 @@ model CapabilityTypePropertiesRuntimeProperties {
 /**
  * Model that represents a list of Experiment resources and a link for pagination.
  */
-model ExperimentListResult is Azure.Core.Page<Experiment>;
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(CapabilityTypeListResult.value, "x-nullable", true);
+model ExperimentListResult is Page<Experiment>;
 
 /**
  * Describes an experiment update.
@@ -430,9 +443,7 @@ model ChaosTargetFilter {
 /**
  * Model that represents a list of Experiment executions and a link for pagination.
  */
-model ExperimentExecutionListResult is Azure.Core.Page<ExperimentExecution>;
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(ExperimentExecutionListResult.value, "x-nullable", true);
+model ExperimentExecutionListResult is Page<ExperimentExecution>;
 
 /**
  * Model that represents the execution properties of an Experiment.
@@ -703,9 +714,7 @@ model ExperimentExecutionActionTargetDetailsError {
 /**
  * Model that represents a list of Target Type resources and a link for pagination.
  */
-model TargetTypeListResult is Azure.Core.Page<TargetType>;
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(TargetTypeListResult.value, "x-nullable", true);
+model TargetTypeListResult is Page<TargetType>;
 
 /**
  * Model that represents the base Target Type properties model.
@@ -741,9 +750,7 @@ model TargetTypeProperties {
 /**
  * Model that represents a list of Target resources and a link for pagination.
  */
-model TargetListResult is Azure.Core.Page<Target>;
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Used to avoid breaking SDK change."
-@@extension(TargetListResult.value, "x-nullable", true);
+model TargetListResult is Page<Target>;
 
 /**
  * Model that represents a delay action.

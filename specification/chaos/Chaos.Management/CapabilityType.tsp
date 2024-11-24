@@ -36,7 +36,6 @@ model CapabilityType
    * System data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  @visibility("read")
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
@@ -45,11 +44,13 @@ interface CapabilityTypes {
   /**
    * Get a Capability Type resource for given Target Type and location.
    */
+  @parameterVisibility
   get is ArmResourceRead<CapabilityType>;
 
   /**
    * Get a list of Capability Type resources for given Target Type and location.
    */
+  @parameterVisibility
   list is ArmResourceListByParent<
     CapabilityType,
     Parameters = {

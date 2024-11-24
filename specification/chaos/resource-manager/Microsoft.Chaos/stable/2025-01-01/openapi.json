@@ -1754,8 +1754,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "System data.",
-          "readOnly": true
+          "description": "System data."
         }
       },
       "allOf": [
@@ -1771,7 +1770,6 @@
         "value": {
           "type": "array",
           "description": "The Capability items on this page",
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Capability"
           },
@@ -1783,10 +1781,7 @@
           "description": "The link to the next page of items",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CapabilityProperties": {
       "type": "object",
@@ -1837,8 +1832,7 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "System data.",
-          "readOnly": true
+          "description": "System data."
         }
       },
       "required": [
@@ -1857,7 +1851,6 @@
         "value": {
           "type": "array",
           "description": "The CapabilityType items on this page",
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CapabilityType"
           },
@@ -1869,10 +1862,7 @@
           "description": "The link to the next page of items",
           "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CapabilityTypeProperties": {
       "type": "object",
@@ -2238,13 +2228,11 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "System data.",
-          "readOnly": true
+          "description": "System data."
         }
       },
       "required": [
-        "properties",
-        "systemData"
+        "properties"
       ],
       "allOf": [
         {
@@ -2434,7 +2422,6 @@
         "value": {
           "type": "array",
           "description": "The ExperimentExecution items on this page",
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ExperimentExecution"
           }
@@ -2444,10 +2431,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ExperimentExecutionProperties": {
       "type": "object",
@@ -2488,10 +2472,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ExperimentProperties": {
       "type": "object",
@@ -2707,8 +2688,20 @@
           "description": "The properties of the target resource.",
           "additionalProperties": {},
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "System data."
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -2722,7 +2715,6 @@
         "value": {
           "type": "array",
           "description": "The Target items on this page",
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/Target"
           }
@@ -2732,10 +2724,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "TargetReference": {
       "type": "object",
@@ -2800,7 +2789,6 @@
         "value": {
           "type": "array",
           "description": "The TargetType items on this page",
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/TargetType"
           }
@@ -2810,10 +2798,7 @@
           "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "TargetTypeProperties": {
       "type": "object",

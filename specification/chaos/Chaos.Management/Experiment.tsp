@@ -28,8 +28,7 @@ model Experiment
    * System data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking changes."
-  @visibility("read")
-  systemData: Azure.ResourceManager.CommonTypes.SystemData;
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 @armResourceOperations
