@@ -3,12 +3,14 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Autorest;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Chaos;
 
@@ -470,7 +472,9 @@ model ExperimentExecutionDetails {
   /**
    * The properties of the experiment execution details.
    */
+  #suppress "deprecated" "Required for backwards compatibility"
   @visibility("read")
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ExperimentExecutionDetailsProperties;
 }
 
