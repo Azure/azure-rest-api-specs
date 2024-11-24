@@ -99,9 +99,9 @@ union TargetReferenceType {
  */
 union ExperimentActionType {
   string,
+  delay: "delay",
   discrete: "discrete",
   continuous: "continuous",
-  delay: "delay",
 }
 
 /**
@@ -424,6 +424,7 @@ model ExperimentExecutionListResult is Azure.Core.Page<ExperimentExecution>;
 /**
  * Model that represents the execution properties of an Experiment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "GA proxy resource does not implement ARM async operations."
 model ExperimentExecutionProperties {
   /**
    * The status of the execution.
@@ -442,12 +443,6 @@ model ExperimentExecutionProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
-
-  /**
-   * Experiment execution resource provisioning state. Not currently implemented.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -500,12 +495,6 @@ model ExperimentExecutionDetailsProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
-
-  /**
-   * Experiment execution resource provisioning state. Not currently implemented.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 
   /**
    * The reason why the execution failed.
