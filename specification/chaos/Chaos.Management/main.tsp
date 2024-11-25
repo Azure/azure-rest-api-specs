@@ -16,7 +16,9 @@ import "./ExperimentExecution.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
 import "./OperationStatus.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
@@ -45,3 +47,6 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_01: "2025-01-01",
 }
+
+@@clientName(Targets.createOrUpdate::parameters.resource, "target");
+@@clientName(Capabilities.createOrUpdate::parameters.resource, "capability");

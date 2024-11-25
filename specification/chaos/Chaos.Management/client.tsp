@@ -28,8 +28,6 @@ using Microsoft.Chaos;
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(Experiments.start, "StartExperiment");
 @@clientName(Experiments.cancel, "CancelExperiment");
-@@clientName(Targets.createOrUpdate::parameters.resource, "target");
-@@clientName(Capabilities.createOrUpdate::parameters.resource, "capability");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Experiment.properties);

@@ -605,7 +605,7 @@
             "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
-            "name": "resource",
+            "name": "target",
             "in": "body",
             "description": "Target resource to be created or updated.",
             "required": true,
@@ -938,7 +938,7 @@
             "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
           },
           {
-            "name": "resource",
+            "name": "capability",
             "in": "body",
             "description": "Capability resource to be created or updated.",
             "required": true,
@@ -1751,6 +1751,11 @@
           "$ref": "#/definitions/CapabilityProperties",
           "description": "The properties of a capability resource.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
       },
       "allOf": [
