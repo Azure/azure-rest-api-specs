@@ -17,7 +17,7 @@ import "./PrivateAccess.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
-import "./routes.tsp";
+import "./OperationStatus.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -42,9 +42,9 @@ namespace Microsoft.Chaos;
  */
 enum Versions {
   /**
-   * The 2024-03-22-preview API version.
+   * The 2024-11-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_22_preview: "2024-03-22-preview",
+  v2024_03_22_preview: "2024-11-01-preview",
 }
