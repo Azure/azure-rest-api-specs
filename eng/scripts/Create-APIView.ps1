@@ -355,23 +355,23 @@ function Get-TagInformationFromReadMeFile {
   )
   $tags = [System.Collections.Generic.HashSet[string]]::new()
   $markDownContent = Get-Content -Path $ReadMeFilePath
-  $chheckForDefaulttag = $false
+  $checkForDefaultTag = $false
   $defaultTag = $null
 
   foreach ($line in $markDownContent) {
     if ($line -match "### Basic Information") {
-      $chheckForDefaulttag = $true
+      $checkForDefaultTag = $true
     }
 
-    if ($chheckForDefaulttag -and ($null -eq $defaultTag)) {
-      if ($line -match "^tag:\s(.+)") {
-        $defaultTag = $matches[1]
-        $chheckForDefaulttag = $false
+    if ($checkForDefaulttag -and ($null -eq $defaultTag)) {
+      if ($line -match "^tag:\s*(?<tag>.+)") {
+        $defaultTag = $matches["tag"]
+        $checkForDefaultTag = $false
       }
     }
 
-    if ($line -match '^```yaml\s\$\(tag\)\s==\s''(.+)''') {
-      $tag = $matches[1]
+    if ($line -match '^```\s*yaml\s*\$\(tag\)\s*==\s*''(?<tag>.+)''') {
+      $tag = $matches["tag"]
       $tags.Add($tag) | Out-Null
     }
   }
