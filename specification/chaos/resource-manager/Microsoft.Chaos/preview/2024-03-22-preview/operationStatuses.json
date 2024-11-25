@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "Chaos Management",
-    "version": "2024-03-22-preview",
-    "description": "Azure Chaos Resource Provider REST API"
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2024-03-22-preview"
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "host": "management.azure.com",
-  "produces": [
+  "consumes": [
     "application/json"
   ],
-  "consumes": [
+  "produces": [
     "application/json"
   ],
   "security": [
@@ -25,9 +25,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
         "user_impersonation": "Impersonate your user account"
       }
@@ -36,10 +36,15 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/operationStatuses/{asyncOperationId}": {
       "get": {
-        "operationId": "OperationStatuses_Get",
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        },
         "tags": [
           "asyncOperations"
         ],
+        "operationId": "OperationStatuses_Get",
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
@@ -48,9 +53,9 @@
           {
             "name": "asyncOperationId",
             "in": "path",
-            "description": "The operation Id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The operation Id."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -72,19 +77,19 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get specific operation status": {
-            "$ref": "./examples/GetOperationStatus.json"
-          }
         }
       }
     }
   },
   "definitions": {
     "operationStatus": {
-      "type": "object",
       "description": "The status of operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -96,26 +101,21 @@
         },
         "startTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The start time of the operation.",
+          "format": "date-time",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "format": "date-time",
           "description": "The end time of the operation.",
+          "format": "date-time",
           "readOnly": true
         },
         "status": {
           "type": "string",
           "description": "The status of the operation."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-        }
-      ]
+      }
     }
   },
   "parameters": {}

@@ -9,39 +9,19 @@
     "capability": {
       "type": "object",
       "description": "Model that represents a Capability resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/capabilityProperties",
-          "description": "The properties of a capability resource.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "capabilityListResult": {
-      "type": "object",
-      "description": "Model that represents a list of Capability resources and a link for pagination.",
+      ],
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Capability resources.",
-          "items": {
-            "$ref": "#/definitions/capability"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
-          "description": "URL to retrieve the next page of Capability resources.",
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of a capability resource.",
+          "$ref": "#/definitions/capabilityProperties",
           "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "capabilityProperties": {
       "type": "object",
@@ -70,6 +50,26 @@
         "urn": {
           "$ref": "./common.json#/definitions/urn",
           "description": "String of the URN for this Capability Type.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilityListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Capability resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capability"
+          },
+          "description": "List of Capability resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Capability resources.",
           "readOnly": true
         }
       },
