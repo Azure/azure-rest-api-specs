@@ -41,7 +41,6 @@ batch:
   - tag: package-2018-09-only
   - tag: package-2017-10
   - tag: package-2017-03
-  - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
