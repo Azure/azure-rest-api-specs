@@ -5435,6 +5435,41 @@
         }
       }
     },
+    "StaticSiteZipDeploy": {
+      "description": "A static site zip deployment",
+      "type": "object",
+      "properties": {
+        "contentUrl": {
+          "description": "URL for the zipped content. Contains app, api and/or data-api folders.",
+          "type": "string"
+        },
+        "storageAccountReferenceIdentity": {
+          "description": "UserAssigned or SystemAssigned MI",
+          "type": "string"
+        },
+        "storageAccountResourceId": {
+          "description": "Resource Id of storage account with artifacts to be deployed.",
+          "type": "string"
+        }
+      }
+    },
+    "StaticSiteZipDeployARMResource": {
+      "description": "Static site zip deploy ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSiteZipDeploy",
+          "description": "Core resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "StaticSiteZipDeployment": {
       "description": "A static site zip deployment.",
       "type": "object",
