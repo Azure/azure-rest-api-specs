@@ -18,17 +18,9 @@ alias ServiceTraits = NoConditionalRequests &
 op DocumentIntelligenceOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model & Foundations.RetryAfterHeader
-> is Foundations.Operation<
-  TParams,
-  TResponse,
-  ServiceTraits,
-  DocumentIntelligenceErrorResponse
->;
+> is Foundations.Operation<TParams, TResponse, ServiceTraits, ErrorResponse>;
 
-alias DIResourceOperations = ResourceOperations<
-  ServiceTraits,
-  DocumentIntelligenceErrorResponse
->;
+alias DIResourceOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
 op DocumentIntelligenceLongRunningOperation<
@@ -43,7 +35,7 @@ op DocumentIntelligenceLongRunningOperation<
       operationLocation: ResourceLocation<TResponse>;
     },
   ServiceTraits,
-  DocumentIntelligenceErrorResponse
+  ErrorResponse
 >;
 
 @doc("Document model analyze request parameters.")
@@ -54,7 +46,7 @@ model DocumentModelAnalyzeRequestParams {
   @maxLength(64)
   modelId: string;
 
-  @doc("1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
   @query
   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
   pages?: string;
@@ -80,8 +72,9 @@ model DocumentModelAnalyzeRequestParams {
 
   @doc("Format of the analyze result top-level content.")
   @query
-  outputContentFormat?: DocumentContentFormat = DocumentContentFormat.text;
+  outputContentFormat?: ContentFormat = ContentFormat.text;
 
+  @added(Versions.v2024_07_31_preview)
   @doc("Additional outputs to generate during analysis.")
   @query
   output?: AnalyzeOutputOption[];
@@ -103,7 +96,8 @@ model DocumentClassifierAnalyzeRequestParams {
   @query
   split?: SplitMode = SplitMode.none;
 
-  @doc("1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  @added(Versions.v2024_07_31_preview)
+  @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
   @query
   @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
   pages?: string;
@@ -149,10 +143,11 @@ interface DocumentModels {
       @path
       resultId: uuid;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("Gets the generated searchable PDF output from document analysis.")
   @route("/documentModels/{modelId}/analyzeResults/{resultId}/pdf")
   @get
@@ -180,6 +175,7 @@ interface DocumentModels {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("Gets the generated cropped image of specified figure from document analysis.")
   @route("/documentModels/{modelId}/analyzeResults/{resultId}/figures/{figureId}")
   @get
@@ -210,25 +206,6 @@ interface DocumentModels {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @doc("Mark the result of document analysis for deletion.")
-  @route("/documentModels/{modelId}/analyzeResults/{resultId}")
-  @delete
-  deleteAnalyzeResult is DocumentIntelligenceOperation<
-    {
-      @doc("Unique document model name.")
-      @path
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-      @maxLength(64)
-      modelId: string;
-
-      @doc("Analyze operation result ID.")
-      @path
-      resultId: uuid;
-    },
-    TypeSpec.Http.NoContentResponse
-  >;
-
   #suppress "@azure-tools/typespec-azure-core/byos" "Support uploading input files"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Analyzes document with document model.")
@@ -241,7 +218,7 @@ interface DocumentModels {
       ...DocumentModelAnalyzeRequestParams;
       ...AnalyzeFromStreamRequestParams;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -262,10 +239,11 @@ interface DocumentModels {
       @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("Gets the result of batch document analysis.")
   @route("/documentModels/{modelId}/analyzeBatchResults/{resultId}")
   @get
@@ -281,10 +259,11 @@ interface DocumentModels {
       @path
       resultId: uuid;
     },
-    AnalyzeBatchOperation
+    AnalyzeBatchResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("Analyzes batch documents with document model.")
   @post
   @pollingOperation(DocumentModels.getAnalyzeBatchResult)
@@ -301,41 +280,7 @@ interface DocumentModels {
       @body
       analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
     },
-    AnalyzeBatchOperation
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @doc("List batch document analysis results.")
-  @route("/documentModels/{modelId}/analyzeBatchResults")
-  @get
-  listAnalyzeBatchResults is DocumentIntelligenceOperation<
-    {
-      @doc("Unique document model name.")
-      @path
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-      @maxLength(64)
-      modelId: string;
-    },
-    Foundations.CustomPage<AnalyzeBatchOperation>
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @doc("Mark the batch document analysis result for deletion.")
-  @route("/documentModels/{modelId}/analyzeBatchResults/{resultId}")
-  @delete
-  deleteAnalyzeBatchResult is DocumentIntelligenceOperation<
-    {
-      @doc("Unique document model name.")
-      @path
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-      @maxLength(64)
-      modelId: string;
-
-      @doc("Analyze batch operation result ID.")
-      @path
-      resultId: uuid;
-    },
-    NoContentResponse
+    AnalyzeBatchResultOperation
   >;
 
   @doc("Gets detailed document model information.")
@@ -382,7 +327,7 @@ interface DocumentModels {
       @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
-    ModelCopyAuthorization
+    CopyAuthorization
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -400,7 +345,7 @@ interface DocumentModels {
 
       @doc("Copy to request parameters.")
       @bodyRoot
-      copyToRequest: ModelCopyAuthorization;
+      copyToRequest: CopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
   >;
@@ -415,7 +360,7 @@ interface DocumentModels {
 
 interface MiscellaneousOperations {
   @doc("Lists all operations.")
-  listOperations is DIResourceOperations.ResourceList<DocumentIntelligenceOperationDetails>;
+  listOperations is DIResourceOperations.ResourceList<OperationDetails>;
 
   @sharedRoute
   @doc("Gets operation info.")
@@ -429,6 +374,7 @@ interface MiscellaneousOperations {
   @doc("Gets operation info.")
   getDocumentModelCopyToOperation is DIResourceOperations.ResourceRead<DocumentModelCopyToOperationDetails>;
 
+  @added(Versions.v2024_07_31_preview)
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentClassifierCopyToOperation is DIResourceOperations.ResourceRead<DocumentClassifierCopyToOperationDetails>;
@@ -439,16 +385,13 @@ interface MiscellaneousOperations {
 
   @sharedRoute
   @doc("Gets operation info.")
-  getOperation is DIResourceOperations.ResourceRead<DocumentIntelligenceOperationDetails>;
+  getOperation is DIResourceOperations.ResourceRead<OperationDetails>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Return information about the current resource.")
   @route("/info")
   @get
-  getResourceDetails is DocumentIntelligenceOperation<
-    {},
-    DocumentIntelligenceResourceDetails
-  >;
+  getResourceInfo is DocumentIntelligenceOperation<{}, ResourceDetails>;
 }
 
 interface DocumentClassifiers {
@@ -487,7 +430,7 @@ interface DocumentClassifiers {
       ...DocumentClassifierAnalyzeRequestParams;
       ...AnalyzeFromStreamRequestParams;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -508,7 +451,7 @@ interface DocumentClassifiers {
       @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -527,10 +470,11 @@ interface DocumentClassifiers {
       @path
       resultId: uuid;
     },
-    AnalyzeOperation
+    AnalyzeResultOperation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("""
     Generates authorization to copy a document classifier to this location with
     specified classifierId and optional description.
@@ -547,6 +491,7 @@ interface DocumentClassifiers {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
   @doc("Copies document classifier to the target resource, region, and classifierId.")
   @pollingOperation(
     MiscellaneousOperations.getDocumentClassifierCopyToOperation

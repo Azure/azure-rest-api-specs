@@ -151,6 +151,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -363,7 +368,7 @@
           "description": "The operation status"
         },
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier for the operationStatus resource"
         },
         "name": {

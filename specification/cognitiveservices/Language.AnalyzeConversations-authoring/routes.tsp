@@ -489,7 +489,6 @@ interface ConversationalAnalysisAuthoring {
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getModelEvaluationResults is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringUtteranceEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
@@ -700,7 +699,6 @@ interface ConversationalAnalysisAuthoring {
    * returns deployments belonging to projects owned by other resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
   @get
   @added(Versions.v2023_04_15_preview)
@@ -818,7 +816,6 @@ interface ConversationalAnalysisAuthoring {
    * Lists the support training config version for a given project type.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/training-config-versions")
   @get
   listTrainingConfigVersions is Azure.Core.Foundations.Operation<

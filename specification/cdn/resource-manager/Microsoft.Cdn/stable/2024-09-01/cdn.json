@@ -3132,7 +3132,6 @@
       "properties": {
         "id": {
           "description": "Resource ID.",
-          "format": "arm-id",
           "readOnly": true,
           "type": "string"
         },
@@ -3272,7 +3271,6 @@
       "properties": {
         "id": {
           "description": "Resource ID.",
-          "format": "arm-id",
           "readOnly": true,
           "type": "string"
         },
@@ -5667,7 +5665,7 @@
           "$ref": "#/definitions/DeepCreatedOriginProperties"
         }
       },
-      "x-ms-azure-resource": false
+      "x-ms-azure-resource": true
     },
     "DeepCreatedOriginProperties": {
       "description": "Properties of the origin created on the CDN endpoint.",
@@ -5743,7 +5741,7 @@
           "readOnly": true
         }
       },
-      "x-ms-azure-resource": false
+      "x-ms-azure-resource": true
     },
     "DeepCreatedOriginGroup": {
       "description": "The origin group for CDN content which is added when creating a CDN endpoint. Traffic is sent to the origins within the origin group based on origin health.",
@@ -5761,7 +5759,7 @@
           "$ref": "#/definitions/DeepCreatedOriginGroupProperties"
         }
       },
-      "x-ms-azure-resource": false
+      "x-ms-azure-resource": true
     },
     "DeepCreatedOriginGroupProperties": {
       "description": "Properties of the origin group created on the CDN endpoint.",
@@ -5796,7 +5794,7 @@
           "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
         }
       },
-      "x-ms-azure-resource": false
+      "x-ms-azure-resource": true
     },
     "ResourceReference": {
       "properties": {
@@ -7326,9 +7324,68 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "CdnMigrationToAfdParameters": {
       "type": "object",

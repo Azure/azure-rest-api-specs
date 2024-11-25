@@ -490,7 +490,7 @@ function CloneOrderedDictionary([System.Collections.Specialized.OrderedDictionar
 function SerializePipelineMatrix([Array]$matrix) {
     $pipelineMatrix = [Ordered]@{}
     foreach ($entry in $matrix) {
-        if ($pipelineMatrix.Contains($entry.name)) {
+        if ($pipelineMatrix.Contains($entry.Name)) {
             Write-Warning "Found duplicate configurations for job `"$($entry.name)`". Multiple values may have been replaced with the same value."
             continue
         }

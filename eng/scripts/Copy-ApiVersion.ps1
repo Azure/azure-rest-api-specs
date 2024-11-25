@@ -38,25 +38,18 @@ param (
     [Parameter(Mandatory = $true)]
     [ArgumentCompleter({ "preview/", "stable/" })]
     [ValidateScript({ 
-        function script:Get-Version($version) {
-            if ($version -match '^(?<status>stable|preview)/(?<version>(\d{4}-\d{2}(-\d{2})?|\d+\.\d+)(-preview(\.\d+)?)?)$') {
-                return $Matches['status'], $Matches['version']
+            function script:Get-Version([string] $version) {
+                if ($version -match '^(?<status>stable|preview)/(?<version>(\d{4}-\d{2}-\d{2}|\d+\.\d+)(-preview(\.\d+)?)?)$') {
+                    return $Matches['status'], $Matches['version']
+                }
+        
+                throw 'Version must start with "stable/" or "preview/" and end with either a date-based version (recommended) like 2024-01-05 or a major.minor semver, followed by an optional "-preview" for previews APIs.'
             }
-
-            throw 'Version must start with "stable/" or "preview/" and end with either a date-based version (recommended) like 2024-01-05 or a major.minor semver, followed by an optional "-preview" for previews APIs.'
-        }
-        Get-Version $_
-    })]
+            Get-Version $_ })]
     [string] $NewVersion,
     
     [Parameter(Mandatory = $true)]
-    [ValidateScript({ 
-        if ($_ -match '^(?<status>stable|preview)/(?<version>(\d{4}-\d{2}(-\d{2})?|\d+\.\d+)(-preview(\.\d+)?)?)$') {
-            return $Matches['status'], $Matches['version']
-        }
-
-        throw 'Version must start with "stable/" or "preview/" and end with either a date-based version (recommended) like 2024-01-05 or a major.minor semver, followed by an optional "-preview" for previews APIs.'
-    })]
+    [ValidateScript({ Get-Version $_ })]
     [ArgumentCompleter({
             param($commandName,
                 $parameterName,

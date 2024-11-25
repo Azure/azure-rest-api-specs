@@ -18,7 +18,6 @@ interface RadiologyInsights {
   @get
   getJob is HealthInsightsOperations.ResourceRead<RadiologyInsightsJob>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   @summary("Create Radiology Insights job")
   @tag("RadiologyInsights")
   @doc("Creates a Radiology Insights job with the given request body.")

@@ -127,7 +127,6 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
     /** Create a new job. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
@@ -139,7 +138,6 @@ namespace Quantum.Workspace.Operations {
     update is PatchOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     cancel is CancelOperation<JobDetails>;
 
     /** Get job by its id. */

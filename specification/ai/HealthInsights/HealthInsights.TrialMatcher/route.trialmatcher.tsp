@@ -19,7 +19,6 @@ interface TrialMatcher {
   @get
   getJob is HealthInsightsOperations.ResourceRead<TrialMatcherJob>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   @summary("Create Trial Matcher job")
   @tag("TrialMatcher")
   @doc("Creates a Trial Matcher job with the given request body.")

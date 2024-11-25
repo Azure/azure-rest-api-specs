@@ -23,14 +23,11 @@ import "./Microsoft.SignalRService/SignalRService.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.Web/Web.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.ResourceNotifications/HealthResources.tsp";
-import "./Microsoft.ResourceNotifications/Resources.tsp";
-import "./Microsoft.ResourceNotifications/ContainerServiceEventResources.tsp";
+import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
 
 import "./propertyNameOverride.tsp";
 
 /** Azure Messaging EventGrid SystemEvents */
-#suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
 @service({
   title: "Azure.Messaging.SystemEvents",
 })

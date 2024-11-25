@@ -4266,7 +4266,6 @@
     },
     "Certificate": {
       "description": "Certificate used for https",
-      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/SecretType"
@@ -4293,7 +4292,6 @@
     },
     "CustomerCertificate": {
       "description": "Customer Certificate used for https",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Certificate"
@@ -4388,7 +4386,6 @@
     },
     "AFDDomainListResult": {
       "description": "Result of the request to list domains. It contains a list of domain objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4421,7 +4418,6 @@
     },
     "AFDDomainProperties": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "type": "object",
       "required": [
         "hostName"
       ],
@@ -4485,7 +4481,6 @@
     },
     "AFDDomainUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "type": "object",
       "properties": {
         "profileName": {
           "description": "The name of the profile which holds the domain.",
@@ -4511,7 +4506,6 @@
     },
     "DomainValidationProperties": {
       "description": "The JSON object that contains the properties to validate a domain.",
-      "type": "object",
       "properties": {
         "validationToken": {
           "description": "Challenge used for DNS TXT record or file based validation",
@@ -4527,7 +4521,6 @@
     },
     "AFDDomainHttpsParameters": {
       "description": "The JSON object that contains the properties to secure a domain.",
-      "type": "object",
       "required": [
         "certificateType"
       ],
@@ -4687,7 +4680,6 @@
     },
     "SecurityPolicyListResult": {
       "description": "Result of the request to list security policies. It contains a list of security policy objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4734,7 +4726,6 @@
     },
     "AFDEndpointProperties": {
       "description": "The JSON object that contains the properties required to create an endpoint.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AFDEndpointPropertiesUpdateParameters"
@@ -4757,7 +4748,6 @@
     },
     "AFDEndpointListResult": {
       "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4793,7 +4783,6 @@
     },
     "AFDEndpointPropertiesUpdateParameters": {
       "description": "The JSON object containing endpoint update parameters.",
-      "type": "object",
       "properties": {
         "profileName": {
           "description": "The name of the profile which holds the endpoint.",
@@ -4845,7 +4834,6 @@
     },
     "SecretListResult": {
       "description": "Result of the request to list secrets. It contains a list of Secret objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4878,7 +4866,6 @@
     },
     "SecretProperties": {
       "description": "The JSON object that contains the properties of the Secret to create.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/AFDStateProperties"
@@ -4934,8 +4921,7 @@
       ],
       "required": [
         "keyId",
-        "secretSource",
-        "secretVersion"
+        "secretSource"
       ],
       "properties": {
         "keyId": {
@@ -5079,7 +5065,6 @@
     },
     "RuleSetListResult": {
       "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5168,7 +5153,6 @@
     },
     "AFDOriginUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin.",
-      "type": "object",
       "properties": {
         "originGroupName": {
           "description": "The name of the origin group which contains this origin.",
@@ -5247,7 +5231,6 @@
       }
     },
     "SharedPrivateLinkResourceProperties": {
-      "type": "object",
       "properties": {
         "privateLink": {
           "type": "object",
@@ -5286,7 +5269,6 @@
     },
     "AFDOriginListResult": {
       "description": "Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5342,7 +5324,6 @@
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin group.",
-      "type": "object",
       "properties": {
         "profileName": {
           "description": "The name of the profile which holds the origin group.",
@@ -5402,7 +5383,6 @@
     },
     "AFDOriginGroupListResult": {
       "description": "Result of the request to list origin groups. It contains a list of origin groups objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5420,7 +5400,6 @@
     },
     "RouteListResult": {
       "description": "Result of the request to list routes. It contains a list of route objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5477,7 +5456,6 @@
     },
     "RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "type": "object",
       "properties": {
         "endpointName": {
           "description": "The name of the endpoint which holds the route.",
@@ -5616,7 +5594,6 @@
     },
     "RuleListResult": {
       "description": "Result of the request to list rules. It contains a list of rule objects and a URL link to get the next set of results.",
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5675,7 +5652,6 @@
     },
     "RuleUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the rule to update.",
-      "type": "object",
       "properties": {
         "ruleSetName": {
           "description": "The name of the rule set containing the rule.",
@@ -5832,17 +5808,15 @@
     "AfdErrorResponse": {
       "title": "Error response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
-      "type": "object",
       "properties": {
         "error": {
           "description": "The error object.",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+          "$ref": "./cdn.json#/definitions/ErrorDetail"
         }
       }
     },
     "MetricsResponse": {
       "description": "Metrics Response",
-      "type": "object",
       "properties": {
         "dateTimeBegin": {
           "type": "string",
@@ -5926,7 +5900,6 @@
     },
     "RankingsResponse": {
       "description": "Rankings Response",
-      "type": "object",
       "properties": {
         "dateTimeBegin": {
           "type": "string",
@@ -5985,7 +5958,6 @@
     },
     "ContinentsResponse": {
       "description": "Continents Response",
-      "type": "object",
       "properties": {
         "continents": {
           "type": "array",
@@ -6016,7 +5988,6 @@
     },
     "ResourcesResponse": {
       "description": "Resources Response",
-      "type": "object",
       "properties": {
         "endpoints": {
           "type": "array",
@@ -6079,7 +6050,6 @@
     },
     "WafMetricsResponse": {
       "description": "Waf Metrics Response",
-      "type": "object",
       "properties": {
         "dateTimeBegin": {
           "type": "string",
@@ -6160,7 +6130,6 @@
     },
     "WafRankingsResponse": {
       "description": "Waf Rankings Response",
-      "type": "object",
       "properties": {
         "dateTimeBegin": {
           "type": "string",
@@ -6214,7 +6183,6 @@
       }
     },
     "UsageName": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -6228,7 +6196,6 @@
       "description": "The usage names."
     },
     "Usage": {
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -6270,7 +6237,6 @@
       "description": "Describes resource usage."
     },
     "UsagesListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",

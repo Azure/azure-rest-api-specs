@@ -90,33 +90,31 @@ foreach ($matrixBatchKey in $matrixBatchesByConfig.Keys) {
 
     $packageBatches = Split-ArrayIntoBatches -InputArray $matrixBatch -BatchSize $BATCHSIZE
 
-    # we only need to modify the generated job name if there is more than one matrix config + batch
-    $matrixSuffixNecessary = $matrixBatchesByConfig.Keys.Count -gt 1
+    # we only need to modify the generated job name if there is more than one matrix config or batch in the matrix
+    $matrixSuffixNecessary = $matrixConfigs.Count -gt 1
     $batchSuffixNecessary = $packageBatches.Length -gt 1
     $batchCounter = 1
 
     foreach ($batch in $packageBatches) {
-      $namesForBatch = ($batch | ForEach-Object { $_.ArtifactName }) -join ","
       # to understand this iteration, one must understand that the matrix is a list of hashtables, each with a couple keys:
       # [
       #  { "name": "jobname", "parameters": { matrixSetting1: matrixValue1, ...} },
       # ]
       foreach ($matrixOutputItem in $matrixResults) {
-        # we need to clone this, as each item is an object with possible children
-        $outputItem = $matrixOutputItem | ConvertTo-Json -Depth 100 | ConvertFrom-Json -AsHashtable
+        $namesForBatch = ($batch | ForEach-Object { $_.ArtifactName }) -join ","
         # we just need to iterate across them, grab the parameters hashtable, and add the new key
         # if there is more than one batch, we will need to add a suffix including the batch name to the job name
-        $outputItem["parameters"]["$PRMatrixSetting"] = $namesForBatch
+        $matrixOutputItem["parameters"]["$PRMatrixSetting"] = $namesForBatch
 
         if ($matrixSuffixNecessary) {
-          $outputItem["name"] = $outputItem["name"] + "_" + $matrixConfig.Name
+          $matrixOutputItem["name"] = $matrixOutputItem["name"] + $matrixConfig.Name
         }
 
         if ($batchSuffixNecessary) {
-          $outputItem["name"] = $outputItem["name"] + "_b$batchCounter"
+          $matrixOutputItem["name"] = $matrixOutputItem["name"] + "b$batchCounter"
         }
 
-        $OverallResult += $outputItem
+        $OverallResult += $matrixOutputItem
       }
       $batchCounter += 1
     }

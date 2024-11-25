@@ -62,11 +62,6 @@ parameters:
   type: boolean
   default: false
 
-# Paths to sparse checkout
-- name: SparseCheckoutPaths
-  type: object
-  default: []
-
 extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
@@ -84,8 +79,6 @@ extends:
       - job: Build
         steps:
         - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
-          parameters:
-            Paths: ${{ parameters.SparseCheckoutPaths }}
 
         - ${{ parameters.InitializationSteps }}
 
@@ -418,9 +411,7 @@ extends:
             buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
           steps:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
-            parameters:
-              Paths: ${{ parameters.SparseCheckoutPaths }}
-
+            
           - download: current
             artifact: build_artifacts
             displayName: Download build artifacts
