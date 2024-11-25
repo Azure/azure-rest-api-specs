@@ -34,8 +34,8 @@ namespace Azure.AI.Projects.Agents {
   // FunctionToolDefinition: merge FunctionDefinition structure to recast e.g. toolDefinition.function.name into
   // toolDefinition.name
 
-  //@@access(FunctionDefinition, Access.internal);
-  //@@clientName(FunctionDefinition, "InternalFunctionDefinition", "csharp");
+  @@access(FunctionDefinition, Access.internal);
+  @@clientName(FunctionDefinition, "InternalFunctionDefinition", "csharp");
   @@clientName(FunctionToolDefinition.function, "InternalFunction", "csharp");
   
   // Make AzureFunctionDefinition internal in C#.
