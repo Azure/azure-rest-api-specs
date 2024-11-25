@@ -125,7 +125,7 @@ function Invoke-SwaggerAPIViewParser {
   
         $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$ResourceProvider.$Type.json")
         LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
-        Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
+        Move-Item -Path $generatedAPIViewTokenFile -Destination $apiViewTokensFilePath -Force > $null
       }
     } catch {
       LogError " Failed to generate '$Type' APIView Tokens using '$ReadMeFilePath' for '$ResourceProvider'"
