@@ -146,13 +146,20 @@ model ThreadRun {
   parallelToolCalls?: boolean;
 }
 
+/**
+ * Details on why the run is incomplete. Will be `null` if the run is not incomplete.
+ */
+model IncompleteRunDetails {
+  @doc("he reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
+  reason: IncompleteDetailsReason;
+}
+
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
-union IncompleteRunDetails {
+union IncompleteDetailsReason {
   string,
 
   /** Maximum completion tokens exceeded */
   maxCompletionTokens: "max_completion_tokens",
-
   /** Maximum prompt tokens exceeded */
   maxPromptTokens: "max_prompt_tokens",
 }
