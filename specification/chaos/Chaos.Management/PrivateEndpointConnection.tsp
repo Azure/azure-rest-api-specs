@@ -30,13 +30,11 @@ interface PrivateEndpointConnections {
   /**
    * Gets information about a private endpoint connection under a private access resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Deletes a private endpoint connection under a private access resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
   deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**

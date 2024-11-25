@@ -7,7 +7,6 @@ import "./Target.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -25,40 +24,29 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
   >;
 }
 
-alias CapabilityParentResourceParameters = BaseParameters<Capability> &
-  ParentResourceParameters;
-
 @armResourceOperations
 interface Capabilities {
   /**
    * Get a Capability resource that extends a Target resource.
    */
-  get is ArmResourceRead<Capability, CapabilityParentResourceParameters>;
+  get is ArmResourceRead<Capability>;
 
   /**
    * Create or update a Capability resource that extends a Target resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    Capability,
-    CapabilityParentResourceParameters
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Capability>;
 
   /**
    * Delete a Capability that extends a Target resource.
    */
-  delete is ArmResourceDeleteSync<
-    Capability,
-    CapabilityParentResourceParameters
-  >;
+  delete is ArmResourceDeleteSync<Capability>;
 
   /**
-   * Get a list of Capability resources that extend a Target resource.
+   * Get a list of Capability resources that extend a Target resource..
    */
   list is ArmResourceListByParent<
     Capability,
-    {
-      ...CapabilityParentResourceParameters;
-
+    Parameters = {
       /**
        * String that sets the continuation token.
        */

@@ -1,0 +1,79 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Capability Types",
+    "version": "2024-03-22-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "capability": {
+      "type": "object",
+      "description": "Model that represents a Capability resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/capabilityProperties",
+          "description": "The properties of a capability resource.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "capabilityListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Capability resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Capability resources.",
+          "items": {
+            "$ref": "#/definitions/capability"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Capability resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilityProperties": {
+      "type": "object",
+      "description": "Model that represents the Capability properties model.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "String of the Publisher that this Capability extends.",
+          "readOnly": true
+        },
+        "targetType": {
+          "type": "string",
+          "description": "String of the Target Type that this Capability extends.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized string of the description.",
+          "readOnly": true
+        },
+        "parametersSchema": {
+          "$ref": "./common.json#/definitions/url",
+          "description": "URL to retrieve JSON schema of the Capability parameters.",
+          "readOnly": true
+        },
+        "urn": {
+          "$ref": "./common.json#/definitions/urn",
+          "description": "String of the URN for this Capability Type.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

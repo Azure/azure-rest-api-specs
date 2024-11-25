@@ -10,56 +10,27 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Chaos;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
-alias ParentResourceParameters = {
-  /**
-   * The parent resource provider namespace.
-   */
-  @path
-  @segment("providers")
-  @maxLength(63)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  parentProviderNamespace: string;
-
-  /**
-   * The parent resource type.
-   */
-  @path
-  @maxLength(63)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  parentResourceType: string;
-
-  /**
-   * The parent resource name.
-   */
-  @path
-  @maxLength(63)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  parentResourceName: string;
-};
+/**
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ */
+union ManagedServiceIdentityType {
+  string,
+  None: "None",
+  SystemAssigned: "SystemAssigned",
+  UserAssigned: "UserAssigned",
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+}
 
 /**
  * Current provisioning state for a given Azure Chaos resource.
  */
-@Azure.Core.lroStatus
 union ProvisioningState {
   string,
-  ResourceProvisioningState,
-
-  /**
-   * Initial creation in progress.
-   */
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
   Creating: "Creating",
-
-  /**
-   * Update in progress.
-   */
   Updating: "Updating",
-
-  /**
-   * Deletion in progress.
-   */
   Deleting: "Deleting",
 }
 
@@ -68,15 +39,7 @@ union ProvisioningState {
  */
 union SelectorType {
   string,
-
-  /**
-   * List selector type.
-   */
   List: "List",
-
-  /**
-   * Query selector type.
-   */
   Query: "Query",
 }
 
@@ -85,10 +48,6 @@ union SelectorType {
  */
 union FilterType {
   string,
-
-  /**
-   * Simple filter type.
-   */
   Simple: "Simple",
 }
 
@@ -97,21 +56,20 @@ union FilterType {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-
-  /**
-   * Pending status.
-   */
   Pending: "Pending",
-
-  /**
-   * Approved status.
-   */
   Approved: "Approved",
-
-  /**
-   * Rejected status.
-   */
   Rejected: "Rejected",
+}
+
+/**
+ * The current provisioning state.
+ */
+union PrivateEndpointConnectionProvisioningState {
+  string,
+  Succeeded: "Succeeded",
+  Creating: "Creating",
+  Deleting: "Deleting",
+  Failed: "Failed",
 }
 
 /**
@@ -119,15 +77,7 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union PublicNetworkAccessOption {
   string,
-
-  /**
-   * Enabled access.
-   */
   Enabled: "Enabled",
-
-  /**
-   * Disabled access.
-   */
   Disabled: "Disabled",
 }
 
@@ -136,21 +86,7 @@ union PublicNetworkAccessOption {
  */
 union TargetReferenceType {
   string,
-
-  /**
-   * Chaos target reference type.
-   */
   ChaosTarget: "ChaosTarget",
-}
-
-/**
- * Enum union of Chaos experiment action types.
- */
-union ExperimentActionType {
-  string,
-  delay: "delay",
-  discrete: "discrete",
-  continuous: "continuous",
 }
 
 /**
@@ -193,12 +129,6 @@ model CapabilityProperties {
   @visibility("read")
   @maxLength(2048)
   urn?: string;
-
-  /**
-   * Resource provisioning state. Not currently in use because resource is created synchronously.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -238,7 +168,6 @@ model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
 /**
  * Model that represents the Capability Type properties model.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 model CapabilityTypeProperties {
   /**
    * String of the Publisher that this Capability Type extends.
@@ -287,19 +216,16 @@ model CapabilityTypeProperties {
   /**
    * Control plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacActions?: string[];
 
   /**
    * Data plane actions necessary to execute capability type.
    */
-  @visibility("read")
   azureRbacDataActions?: string[];
 
   /**
    * Runtime properties of this Capability Type.
    */
-  @visibility("read")
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 
@@ -318,6 +244,12 @@ model CapabilityTypePropertiesRuntimeProperties {
  * Model that represents a list of Experiment resources and a link for pagination.
  */
 model ExperimentListResult is Azure.Core.Page<Experiment>;
+
+/**
+ * The identity of the experiment resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ExperimentIdentity extends ManagedServiceIdentity {}
 
 /**
  * Model that represents the Experiment properties model.
@@ -390,11 +322,6 @@ model ChaosExperimentAction {
    */
   @maxLength(2048)
   name: string;
-
-  /**
-   * Chaos experiment action discriminator type
-   */
-  type: ExperimentActionType;
 }
 
 /**
@@ -402,16 +329,13 @@ model ChaosExperimentAction {
  */
 @discriminator("type")
 model ChaosTargetSelector {
+  ...Record<unknown>;
+
   /**
    * String of the selector ID.
    */
   @minLength(1)
   id: string;
-
-  /**
-   * Chaos target selector discriminator type
-   */
-  type: SelectorType;
 
   /**
    * Model that represents available filter types that can be applied to a targets list.
@@ -423,12 +347,7 @@ model ChaosTargetSelector {
  * Model that represents available filter types that can be applied to a targets list.
  */
 @discriminator("type")
-model ChaosTargetFilter {
-  /**
-   * Chaos target filter discriminator type
-   */
-  type: FilterType;
-}
+model ChaosTargetFilter {}
 
 /**
  * Model that represents the Customer Managed Storage for an Experiment.
@@ -459,12 +378,12 @@ model ExperimentUpdate {
   /**
    * The identity of the experiment resource.
    */
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ExperimentIdentity;
 
   /**
-   * Experiment tags.
+   * The tags of the experiment resource.
    */
-  ...Azure.ResourceManager.Foundations.TagsUpdateModel<Experiment>;
+  tags?: Record<string>;
 }
 
 /**
@@ -486,19 +405,15 @@ model ExperimentExecutionProperties {
    * String that represents the start date time.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   stoppedAt?: utcDateTime;
-
-  /**
-   * Resource provisioning state. Not currently in use for executions.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -546,6 +461,7 @@ model ExperimentExecutionDetailsProperties
    * String that represents the last action date time.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastActionAt?: utcDateTime;
 
   /**
@@ -653,12 +569,14 @@ model ActionStatus {
    * String that represents the start time of the action.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * String that represents the end time of the action.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -689,12 +607,14 @@ model ExperimentExecutionActionTargetDetailsProperties {
    * String that represents the failed date time.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   targetFailedTime?: utcDateTime;
 
   /**
    * String that represents the completed date time.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   targetCompletedTime?: utcDateTime;
 
   /**
@@ -740,12 +660,14 @@ model OperationStatus extends ErrorResponse {
    * The start time of the operation.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time of the operation.
    */
   @visibility("read")
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -804,8 +726,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
 /**
@@ -846,7 +767,7 @@ model PrivateAccessPatch {
   /**
    * The tags of the private access resource.
    */
-  ...Azure.ResourceManager.Foundations.TagsUpdateModel<PrivateAccess>;
+  tags?: Record<string>;
 }
 
 /**
@@ -901,7 +822,6 @@ model TargetTypeListResult is Azure.Core.Page<TargetType>;
 /**
  * Model that represents the base Target Type properties model.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 model TargetTypeProperties {
   /**
    * Localized string of the display name.

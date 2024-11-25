@@ -17,7 +17,7 @@ import "./PrivateAccess.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./TargetType.tsp";
 import "./Target.tsp";
-import "./OperationStatus.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

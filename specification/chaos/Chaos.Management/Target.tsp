@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -23,37 +22,29 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   >;
 }
 
-alias TargetParentResourceParameters = BaseParameters<Target> &
-  ParentResourceParameters;
-
 @armResourceOperations
 interface Targets {
   /**
    * Get a Target resource that extends a tracked regional resource.
    */
-  get is ArmResourceRead<Target, TargetParentResourceParameters>;
+  get is ArmResourceRead<Target>;
 
   /**
    * Create or update a Target resource that extends a tracked regional resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    Target,
-    TargetParentResourceParameters
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
 
   /**
    * Delete a Target resource that extends a tracked regional resource.
    */
-  delete is ArmResourceDeleteSync<Target, TargetParentResourceParameters>;
+  delete is ArmResourceDeleteSync<Target>;
 
   /**
    * Get a list of Target resources that extend a tracked regional resource.
    */
   list is ArmResourceListByParent<
     Target,
-    {
-      ...TargetParentResourceParameters;
-
+    Parameters = {
       /**
        * String that sets the continuation token.
        */
