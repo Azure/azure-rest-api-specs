@@ -53,7 +53,7 @@ union VectorStoreFileErrorCode {
   unhandledMimeType: "unhandled_mime_type",
 }
 
-/** Details on the error that may have ocurred while processing a file for this vector store */
+/** Details on the error that may have occurred while processing a file for this vector store */
 model VectorStoreFileError {
   /** One of `server_error` or `rate_limit_exceeded`. */
   code: VectorStoreFileErrorCode;
