@@ -322,16 +322,11 @@
         "actionBindingKind": {
           "$ref": "#/definitions/MessageActionBindingKind",
           "description": "Kind of the MessageActionBinding."
-        },
-        "action": {
-          "$ref": "#/definitions/MessageContent",
-          "description": "Action content of Interactive message."
         }
       },
       "discriminator": "actionBindingKind",
       "required": [
-        "actionBindingKind",
-        "action"
+        "actionBindingKind"
       ]
     },
     "ActionSet": {
@@ -1492,7 +1487,8 @@
       "description": "WhatsApp Binding actions to the interactive message.",
       "properties": {
         "action": {
-          "$ref": "#/definitions/ButtonSetContent"
+          "$ref": "#/definitions/ButtonSetContent",
+          "description": "Action content of Button based Interactive message."
         }
       },
       "required": [
@@ -1510,7 +1506,8 @@
       "description": "WhatsApp List Binding actions to the interactive message.",
       "properties": {
         "action": {
-          "$ref": "#/definitions/ActionSetContent"
+          "$ref": "#/definitions/ActionSetContent",
+          "description": "Action content of Interactive message."
         }
       },
       "required": [
@@ -1642,7 +1639,8 @@
       "description": "WhatsApp Binding actions to the interactive message.",
       "properties": {
         "action": {
-          "$ref": "#/definitions/UrlContent"
+          "$ref": "#/definitions/UrlContent",
+          "description": "Action content of Quick action Interactive message."
         }
       },
       "required": [
