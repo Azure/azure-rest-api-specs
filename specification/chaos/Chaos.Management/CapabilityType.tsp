@@ -24,13 +24,6 @@ model CapabilityType
     SegmentName = "capabilityTypes",
     NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
   >;
-
-  /**
-   * Azure resource location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  @visibility("read")
-  location?: azureLocation;
 }
 
 @armResourceOperations

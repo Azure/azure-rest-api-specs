@@ -47,6 +47,3 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_01: "2025-01-01",
 }
-
-@@clientName(Targets.createOrUpdate::parameters.resource, "target");
-@@clientName(Capabilities.createOrUpdate::parameters.resource, "capability");

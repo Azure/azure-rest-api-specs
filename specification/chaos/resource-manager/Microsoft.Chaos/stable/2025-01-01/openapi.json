@@ -605,7 +605,7 @@
             "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
-            "name": "target",
+            "name": "resource",
             "in": "body",
             "description": "Target resource to be created or updated.",
             "required": true,
@@ -938,7 +938,7 @@
             "pattern": "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
           },
           {
-            "name": "capability",
+            "name": "resource",
             "in": "body",
             "description": "Capability resource to be created or updated.",
             "required": true,
@@ -1825,11 +1825,6 @@
           "$ref": "#/definitions/CapabilityTypeProperties",
           "description": "The properties of the capability type resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure resource location.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -2754,11 +2749,6 @@
           "$ref": "#/definitions/TargetTypeProperties",
           "description": "The properties of the target type resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure resource location.",
-          "readOnly": true
         }
       },
       "required": [
