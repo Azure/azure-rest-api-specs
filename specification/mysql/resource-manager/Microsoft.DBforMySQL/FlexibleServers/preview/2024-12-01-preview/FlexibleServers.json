@@ -942,6 +942,19 @@
           "type": "integer",
           "format": "int32",
           "description": "day of week for maintenance window"
+        },
+        "batchOfMaintenance": {
+          "type": "string",
+          "description": "The batch of maintenance when enabled the custom managed maintenance window of a server.",
+          "enum": [
+            "Default",
+            "Batch1",
+            "Batch2"
+          ],
+          "x-ms-enum": {
+            "name": "BatchOfMaintenance",
+            "modelAsString": true
+          }
         }
       }
     },

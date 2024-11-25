@@ -14,6 +14,7 @@
         "administratorLoginPassword": "your_password",
         "availabilityZone": "1",
         "version": "5.7",
+        "fullVersion": "5.7.44",
         "createMode": "Default",
         "storage": {
           "storageSizeGB": 100,
@@ -27,7 +28,15 @@
           "geoRedundantBackup": "Disabled"
         },
         "highAvailability": {
-          "mode": "Disabled"
+          "mode": "ZoneRedundant",
+          "standbyAvailabilityZone": "3"
+        },
+        "maintenanceWindow": {
+          "customWindow": "Enabled",
+          "batchOfMaintenance": "Default",
+          "dayOfWeek": 1,
+          "startHour": 8,
+          "startMinute": 0
         }
       },
       "location": "southeastasia",
@@ -61,10 +70,10 @@
             "patchStrategy": "Regular"
           },
           "maintenanceWindow": {
-            "customWindow": "Disabled",
+            "customWindow": "Enabled",
             "batchOfMaintenance": "Default",
-            "dayOfWeek": 0,
-            "startHour": 0,
+            "dayOfWeek": 1,
+            "startHour": 8,
             "startMinute": 0
           },
           "replicationRole": "None",
@@ -78,8 +87,9 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "Disabled",
-            "state": "NotEnabled"
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "3"
           },
           "databasePort": 3306
         },
@@ -113,10 +123,10 @@
           "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
           "availabilityZone": "1",
           "maintenanceWindow": {
-            "customWindow": "Disabled",
+            "customWindow": "Enabled",
             "batchOfMaintenance": "Default",
-            "dayOfWeek": 0,
-            "startHour": 0,
+            "dayOfWeek": 1,
+            "startHour": 8,
             "startMinute": 0
           },
           "replicationRole": "None",
@@ -130,8 +140,9 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "Disabled",
-            "state": "NotEnabled"
+            "mode": "ZoneRedundant",
+            "state": "Healthy",
+            "standbyAvailabilityZone": "3"
           },
           "databasePort": 3306
         },
