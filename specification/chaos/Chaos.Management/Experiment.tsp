@@ -23,12 +23,6 @@ model Experiment
     NamePattern = "^[^<>%&:?#/\\\\]+$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-
-  /**
-   * System data.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking changes."
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 @armResourceOperations
