@@ -38,14 +38,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.Chaos/preview/2024-03-22-preview/capabilities.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/capabilityTypes.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/experiments.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/operationStatuses.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/operations.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
-  - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/openapi.json
 directive:
   - from: swagger-document
     where: "$.definitions.action"
