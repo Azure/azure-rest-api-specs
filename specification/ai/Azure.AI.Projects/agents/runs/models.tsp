@@ -93,7 +93,7 @@ model ThreadRun {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "incomplete_details")
   @doc("Details on why the run is incomplete. Will be `null` if the run is not incomplete.")
-  incompleteDetails: IncompleteRunDetails | null;
+  incompleteDetails?: IncompleteRunDetails | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
@@ -150,14 +150,12 @@ model ThreadRun {
  * Details on why the run is incomplete. Will be `null` if the run is not incomplete.
  */
 model IncompleteRunDetails {
-  /**
-   * The reason why the run is incomplete. This indicates which specific token limit was reached during the run.
-   */
-  reason: IncompleteRunReason;
+  @doc("he reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
+  reason: string;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
-union IncompleteRunReason {
+union IncompleteDetailsReason {
   string,
 
   /** Maximum completion tokens exceeded */
