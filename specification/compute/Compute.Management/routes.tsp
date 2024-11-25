@@ -23,7 +23,7 @@ interface UsageOperations {
   @autoRoute
   @get
   @action("usages")
-  list is ComputeProviderActionAsync<
+  list is ComputeProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -40,7 +40,7 @@ interface VirtualMachineSizesOperations {
   @autoRoute
   @get
   @action("vmSizes")
-  list is ComputeProviderActionAsync<
+  list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -57,7 +57,7 @@ interface VirtualMachineScaleSetsOperations {
   @autoRoute
   @get
   @action("virtualMachineScaleSets")
-  listByLocation is ComputeProviderActionAsync<
+  listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -74,7 +74,7 @@ interface VirtualMachinesOperations {
   @autoRoute
   @get
   @action("virtualMachines")
-  listByLocation is ComputeProviderActionAsync<
+  listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -91,7 +91,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @autoRoute
   @get
   @action("publishers")
-  listPublishers is ComputeProviderActionAsync<
+  listPublishers is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -115,7 +115,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
-  listOffers is ComputeProviderActionAsync<
+  listOffers is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -146,7 +146,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @autoRoute
   @get
   @action("skus")
-  listSkus is ComputeProviderActionAsync<
+  listSkus is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -184,7 +184,7 @@ interface VirtualMachineImagesEdgeZoneOperations {
   @autoRoute
   @get
   @action("versions")
-  list is ComputeProviderActionAsync<
+  list is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -294,7 +294,7 @@ interface VirtualMachineImagesOperations {
   @autoRoute
   @get
   @action("vmimages")
-  listByEdgeZone is ComputeProviderActionAsync<
+  listByEdgeZone is ComputeProviderActionSync<
     Response = VmImagesInEdgeZoneListResult,
     Scope = SubscriptionActionScope,
     Parameters = {
@@ -316,7 +316,7 @@ interface VirtualMachineImagesOperations {
   @autoRoute
   @get
   @action("publishers")
-  listPublishers is ComputeProviderActionAsync<
+  listPublishers is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -331,7 +331,7 @@ interface VirtualMachineImagesOperations {
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
-  listOffers is ComputeProviderActionAsync<
+  listOffers is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -355,7 +355,7 @@ interface VirtualMachineImagesOperations {
   @autoRoute
   @get
   @action("skus")
-  listSkus is ComputeProviderActionAsync<
+  listSkus is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -386,7 +386,7 @@ interface VirtualMachineImagesOperations {
   @autoRoute
   @get
   @action("versions")
-  list is ComputeProviderActionAsync<
+  list is ComputeProviderActionSync<
     Response = {
       @bodyRoot _: VirtualMachineImageResource[];
     },
@@ -481,8 +481,9 @@ interface LogAnalyticsOperations {
   @post
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
   exportRequestRateByInterval is ComputeProviderActionAsync<
-    Response = LogAnalyticsOperationResult | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = LogAnalyticsOperationResult,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
     Request = RequestRateByIntervalInput
@@ -497,8 +498,9 @@ interface LogAnalyticsOperations {
   @post
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
-    Response = LogAnalyticsOperationResult | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = LogAnalyticsOperationResult,
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
     Request = ThrottledRequestsInput
@@ -515,7 +517,7 @@ interface VirtualMachineRunCommandsOperations {
   @autoRoute
   @get
   @action("runCommands")
-  list is ComputeProviderActionAsync<
+  list is ComputeProviderActionSync<
     Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
     Parameters = {

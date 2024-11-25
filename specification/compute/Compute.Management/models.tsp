@@ -7362,6 +7362,13 @@ model ImageUpdate extends UpdateResource {
 model RestorePointCollectionListResult
   is Azure.Core.Page<RestorePointCollection>;
 
+@@doc(RestorePointCollectionListResult.value,
+  "Gets the list of restore point collections."
+);
+@@doc(RestorePointCollectionListResult.nextLink,
+  "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections."
+);
+
 /**
  * The restore point collection properties.
  */

@@ -63,6 +63,22 @@ op ComputeProviderActionAsync<
   Error
 >;
 
+
+/** Custom ArmProviderActionSync operation template with CloudError as Error */
+op ComputeProviderActionSync<
+  Request extends {} | void = void,
+  Response extends {} | void = void,
+  Scope extends {} = TenantActionScope,
+  Parameters extends {} = {},
+  Error extends {} = CloudError
+> is ArmProviderActionSync<
+  Request,
+  Response,
+  Scope,
+  Parameters,
+  Error
+>;
+
 /** Custom ArmResourceCreateOrReplaceSync operation template with CloudError as Error */
 op ComputeResourceCreateOrReplaceSync<
   Resource extends Foundations.Resource,
