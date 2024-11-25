@@ -44,11 +44,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/privateAccesses": {
       "get": {
-        "description": "Get a list of private access resources in a subscription.",
+        "operationId": "PrivateAccesses_ListAll",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_ListAll",
+        "description": "Get a list of private access resources in a subscription.",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -74,23 +74,23 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List all private accesses in a subscription.": {
             "$ref": "./examples/ListPrivateAccessInASubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses": {
       "get": {
-        "description": "Get a list of private access resources in a resource group.",
+        "operationId": "PrivateAccesses_List",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_List",
+        "description": "Get a list of private access resources in a resource group.",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -119,22 +119,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List all private access in a resource group.": {
             "$ref": "./examples/ListPrivateAccessInAResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}": {
       "get": {
+        "operationId": "PrivateAccesses_Get",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_Get",
         "description": "Get a private access resource",
         "parameters": [
           {
@@ -174,10 +174,10 @@
         }
       },
       "put": {
+        "operationId": "PrivateAccesses_CreateOrUpdate",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_CreateOrUpdate",
         "description": "Create or update a private access",
         "parameters": [
           {
@@ -194,8 +194,8 @@
           },
           {
             "name": "privateAccess",
-            "description": "private access resource to be created or updated.",
             "in": "body",
+            "description": "private access resource to be created or updated.",
             "required": true,
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
@@ -203,14 +203,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Long running Private access resource created successfully.",
+          "200": {
+            "description": "Private Access resource updated successfully.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
           },
-          "200": {
-            "description": "Private Access resource updated successfully.",
+          "201": {
+            "description": "Long running Private access resource created successfully.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
@@ -222,10 +222,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update a private access resource": {
             "$ref": "./examples/CreateOrUpdateAPrivateAccess.json"
@@ -233,13 +229,17 @@
           "Create or Update a private access resource with publicNetworkAccess": {
             "$ref": "./examples/CreateOrUpdateAPrivateAccess_WithPublicNetworkAccess.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "PrivateAccesses_Update",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_Update",
         "description": "Patch a private access tags",
         "parameters": [
           {
@@ -256,8 +256,8 @@
           },
           {
             "name": "privateAccessPatch",
-            "description": "private access resource's tags to be updated.",
             "in": "body",
+            "description": "private access resource's tags to be updated.",
             "required": true,
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/privateAccessPatch"
@@ -265,6 +265,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request to update the tags for the Private Access resource has been completed successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
           "202": {
             "description": "The request to update the tags for the Private Access resource has been accepted for processing.",
             "schema": {
@@ -276,12 +282,6 @@
               }
             }
           },
-          "200": {
-            "description": "The request to update the tags for the Private Access resource has been completed successfully.",
-            "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -289,21 +289,21 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Update a private access resource's tags": {
             "$ref": "./examples/UpdateAPrivateAccessTags.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
+        "operationId": "PrivateAccesses_Delete",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_Delete",
         "description": "Delete a private access",
         "parameters": [
           {
@@ -339,24 +339,24 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a private access resource": {
             "$ref": "./examples/DeleteAPrivateAccess.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections": {
       "get": {
+        "operationId": "PrivateAccesses_ListPrivateEndpointConnections",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_GetPrivateLinkResources",
-        "description": "Gets the private link resources possible under private access resource",
+        "description": "List information about private endpoint connections under a private access resource",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -375,7 +375,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -385,22 +385,22 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all private endpoint connections under a private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_ListByPrivateAccess.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List all possible private link resources under private access resource.": {
-            "$ref": "./examples/PrivateAccessPrivateLinkResources_Get.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
+        "operationId": "PrivateAccesses_GetAPrivateEndpointConnection",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_GetAPrivateEndpointConnection",
         "description": "Gets information about a private endpoint connection under a private access resource.",
         "parameters": [
           {
@@ -440,10 +440,10 @@
         }
       },
       "delete": {
+        "operationId": "PrivateAccesses_DeleteAPrivateEndpointConnection",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_DeleteAPrivateEndpointConnection",
         "description": "Deletes a private endpoint connection under a private access resource.",
         "parameters": [
           {
@@ -492,13 +492,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateLinkResources": {
       "get": {
+        "operationId": "PrivateAccesses_GetPrivateLinkResources",
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_ListPrivateEndpointConnections",
-        "description": "List information about private endpoint connections under a private access resource",
+        "description": "Gets the private link resources possible under private access resource",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -517,7 +517,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -528,8 +528,8 @@
           }
         },
         "x-ms-examples": {
-          "List all private endpoint connections under a private access resource.": {
-            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_ListByPrivateAccess.json"
+          "List all possible private link resources under private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateLinkResources_Get.json"
           }
         },
         "x-ms-pageable": {
@@ -542,20 +542,20 @@
     "PrivateAccessName": {
       "name": "privateAccessName",
       "in": "path",
+      "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "required": true,
       "type": "string",
-      "pattern": "^[^<>%&:?#/\\\\]+$",
       "minLength": 1,
-      "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionName": {
       "name": "privateEndpointConnectionName",
       "in": "path",
+      "description": "The name of the private endpoint connection.",
       "required": true,
       "type": "string",
       "pattern": "^[^<>%&:?#/\\\\]+$",
-      "description": "The name of the private endpoint connection.",
       "x-ms-parameter-location": "method"
     }
   }

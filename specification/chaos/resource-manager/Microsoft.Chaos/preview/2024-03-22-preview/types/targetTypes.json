@@ -9,25 +9,45 @@
     "targetType": {
       "type": "object",
       "description": "Model that represents a Target Type resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "location": {
           "type": "string",
           "description": "Location of the Target Type resource."
         },
         "properties": {
+          "$ref": "#/definitions/targetTypeProperties",
           "description": "The properties of the target type resource.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/targetTypeProperties"
+          "x-ms-client-flatten": true
         }
       },
       "required": [
         "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
       ]
+    },
+    "targetTypeListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Target Type resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Target Type resources.",
+          "items": {
+            "$ref": "#/definitions/targetType"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Target Type resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
     },
     "targetTypeProperties": {
       "type": "object",
@@ -50,30 +70,10 @@
         },
         "resourceTypes": {
           "type": "array",
+          "description": "List of resource types this Target Type can extend.",
           "items": {
             "type": "string"
           },
-          "description": "List of resource types this Target Type can extend.",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "targetTypeListResult": {
-      "type": "object",
-      "description": "Model that represents a list of Target Type resources and a link for pagination.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/targetType"
-          },
-          "description": "List of Target Type resources.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
-          "description": "URL to retrieve the next page of Target Type resources.",
           "readOnly": true
         }
       },

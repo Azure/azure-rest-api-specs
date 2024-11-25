@@ -9,23 +9,43 @@
     "capabilityType": {
       "type": "object",
       "description": "Model that represents a Capability Type resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "location": {
           "type": "string",
           "description": "Location of the Capability Type resource."
         },
         "properties": {
-          "description": "The properties of the capability type resource.",
           "$ref": "#/definitions/capabilityTypeProperties",
-          "x-ms-client-flatten": true,
+          "description": "The properties of the capability type resource.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "capabilityTypeListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Capability Type resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Capability Type resources.",
+          "items": {
+            "$ref": "#/definitions/capabilityType"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Capability Type resources.",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "capabilityTypeProperties": {
       "type": "object",
@@ -92,26 +112,6 @@
               "readOnly": true
             }
           }
-        }
-      },
-      "additionalProperties": false
-    },
-    "capabilityTypeListResult": {
-      "type": "object",
-      "description": "Model that represents a list of Capability Type resources and a link for pagination.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/capabilityType"
-          },
-          "description": "List of Capability Type resources.",
-          "readOnly": true
-        },
-        "nextLink": {
-          "$ref": "./common.json#/definitions/urlNullable",
-          "description": "URL to retrieve the next page of Capability Type resources.",
-          "readOnly": true
         }
       },
       "additionalProperties": false
