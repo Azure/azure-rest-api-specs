@@ -118,7 +118,7 @@ function Invoke-SwaggerAPIViewParser {
 
       LogGroupEnd
 
-      $generatedAPIViewTokenFile = Get-ChildItem -File | Select-Object -First 1
+      $generatedAPIViewTokenFile = Join-Path (Get-Location) "swagger.json"
 
       if (Test-Path -Path $generatedAPIViewTokenFile) {
         LogSuccess " Generated '$Type' APIView Token File using file, '$ReadMeFilePath' and tag '$Tag'"
