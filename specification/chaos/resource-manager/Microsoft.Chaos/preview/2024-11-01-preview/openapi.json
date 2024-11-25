@@ -190,6 +190,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets Chaos Studio async operation status.": {
+            "$ref": "./examples/OperationStatuses_Get.json"
+          }
         }
       }
     },
@@ -2248,6 +2253,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "BranchStatus": {
       "type": "object",
       "description": "Model that represents the a list of actions and action statuses.",
@@ -3534,6 +3543,11 @@
           "type": "object",
           "description": "The properties of the target resource.",
           "additionalProperties": {}
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location.",
+          "readOnly": true
         }
       },
       "allOf": [
