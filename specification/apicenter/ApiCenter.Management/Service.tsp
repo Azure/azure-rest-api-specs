@@ -6,7 +6,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 @doc("The service entity.")

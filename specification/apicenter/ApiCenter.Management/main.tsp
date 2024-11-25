@@ -12,7 +12,6 @@ import "./Workspace.tsp";
 import "./Api.tsp";
 import "./ApiVersion.tsp";
 import "./ApiDefinition.tsp";
-import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
 
@@ -43,73 +42,66 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
 
-  @doc("Azure API Center 2024-06-01-preview")
+  @doc("Azure API Center 2024-05-01")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_06_01_preview: "2024-06-01-preview",
+  v2024_05_01: "2024-05-01",
 }
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Apis.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiVersions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Deployments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Environments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Environments.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Services.update::parameters.properties,
   "application/json",
   "payload"
 );
 @@clientName(Services.update::parameters.properties, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiDefinitions.importSpecification::parameters.body,
   "application/json",
   "payload"
 );
+
+@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
 
 @@encodedName(ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
@@ -118,7 +110,6 @@ enum Versions {
 
 @@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
 
-#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Services.exportMetadataSchema::parameters.body,
   "application/json",
   "payload"
@@ -208,18 +199,4 @@ model ArmResponseWithEtag<T> {
   ...OkResponse;
   ...Azure.Core.EtagResponseEnvelope;
   ...Body<T>;
-}
-
-model IfMatchParameters<T> {
-  @added(Versions.v2024_06_01_preview)
-  @doc("The request should only proceed if an entity matches this string.")
-  @header("If-Match")
-  ifMatch?: string;
-}
-
-model IfNoneMatchParameters<T> {
-  @added(Versions.v2024_06_01_preview)
-  @header("If-None-Match")
-  @doc("The request should only proceed if no entity matches this string.")
-  ifNoneMatch?: string;
 }
