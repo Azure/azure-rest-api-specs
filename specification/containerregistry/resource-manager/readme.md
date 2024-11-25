@@ -416,25 +416,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # stop the simplifier from making Task conflict:
-  skip-simplifier-on-namespace:
-    - System.Threading.Tasks
-  # last generated using AutoRest.1.0.0-Nightly20170212 with commit 3b0b26b4b6e3bc5e7cf3610b0866d310abb5b814
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerRegistry
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
