@@ -37,7 +37,7 @@ function Get-SwaggerReadMeFile {
     return $null
 }
 
-function Determine-ImpactedTypeSpec {
+function Get-ImpactedTypeSpec {
     param (
         [Parameter(Mandatory = $true)]
         [string]$TypeSpecFile
@@ -45,9 +45,16 @@ function Determine-ImpactedTypeSpec {
     $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
     $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
     $typeSpecProjectBaseDirectory = $filePathParts[0..$($parts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
-    $configFilesInTypeSpecProject = (Get-childitem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse).FullName 
-    
-    
+    $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse
+    if ($configFilesInTypeSpecProjects) {
+      foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
+        $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp" 
+        if ($entryPointFile) {
+          $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName)
+          Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+        }
+      }
+    }
     return $projectRootPaths
 }
 
@@ -154,13 +161,13 @@ function Invoke-SwaggerAPIViewParser {
 
 <#
 .DESCRIPTION
-  Invoke the swagger parset to generate APIView tokens.
+  Invoke the TypeSpec parset to generate APIView tokens.
 
 .PARAMETER Type
-  New or Baseline swagger APIView tokens.
+  New or Baseline TypeSpec APIView tokens.
 
-.PARAMETER ReadMeFilePath
-  The Swagger ReadMeFilePath.
+.PARAMETER ProjectPath
+  The TypeSpec Project path.
 
 .PARAMETER ResourceProvider
   The ResourceProvider Name.
@@ -184,47 +191,31 @@ function Invoke-TypeSpecAPIViewParser {
       [Parameter(Mandatory = $true)]
       [string]$ResourceProvider,
       [Parameter(Mandatory = $true)]
-      [string]$TokenDirectory,
-      [string]$Tag
+      [string]$TokenDirectory
   )
   $tempWorkingDirectoryName = [guid]::NewGuid().ToString()
   $tempWorkingDirectoryPath = [System.IO.Path]::Combine($TempDirectory, $tempWorkingDirectoryName)
   New-Item -ItemType Directory -Path $tempWorkingDirectoryPath > $null
 
-  Push-Location -Path $tempWorkingDirectoryPath
-
   try {
-    # Generate Swagger APIView tokens
-    $command = "swaggerAPIParser"
-    $arguments = @("--readme", "$readMeFile", "--package-name", "$resourceProvider", "--use-tag-for-output")
-
-    if ($Tag) {
-      $arguments += "--tag"
-      $arguments += "$Tag"
-    }
-
-    LogInfo " $command $arguments"
-    LogGroupStart " Generating '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'..."
-
-    & $command @arguments 2>&1 | ForEach-Object { Write-Host $_ }
-
-    LogGroupEnd
-
-    $generatedAPIViewTokenFile = Get-ChildItem -File | Select-Object -First 1
-    $readMeTag = $generatedAPIViewTokenFile.BaseName
-
-    LogSuccess " Generated '$Type' APIView Token File using file, '$readMeFile' and tag '$readMeTag'"
-
+    Write-Host "Installing required dependencies to generate API review"
+    npm ci
+    Write-Host "List current npm package version"
+    npm list
+    Write-Host "Compiling files and generating '$Type' APIView for '$resourceProvider'..."
+    Push-Location $ProjectPath
+    npx tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
+    Pop-Location
+    
+    $generatedAPIViewTokenFile = Get-ChildItem -File $tempWorkingDirectoryPath/output/apiview.json | Select-Object -First 1
     $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
-    LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
+    Write-Host "Moving generated APIView Token file to '$apiViewTokensFilePath'"
     Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
-
     return $readMeTag
   } catch {
     LogError " Failed to generate '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'"
     throw
   } finally {
-    Pop-Location
     if (Test-Path -Path $tempWorkingDirectoryPath) {
       Remove-Item -Path $tempWorkingDirectoryPath -Recurse -Force > $null
     }
@@ -379,9 +370,11 @@ function New-TypeSpecAPIViewTokens {
   # Get Related TypeSpec ReadMe Files
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
-    $tspProj = Determine-ImpactedTypeSpec -TypeSpecFile $_
-    if ($tspProj) {
+    $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile $_
+    if ($tspProjs) {
+      foreach ($tspProj in $tspProjs) {
         $typeSpecProjects.Add($tspProj) | Out-Null
+      }
     }
   }
 
@@ -397,17 +390,16 @@ function New-TypeSpecAPIViewTokens {
 
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
-      $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $typeSpecProject
-      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $resourceProvider)
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject)
       New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
 
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
-      $defaultTag = Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
+      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
 
       # Generate BaseLine APIView Token using same tag on target branch
       git checkout $TargetCommitId
-      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory -Tag $defaultTag | Out-Null
+      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory | Out-Null
   }
 
   git checkout $currentBranch
