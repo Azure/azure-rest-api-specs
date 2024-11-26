@@ -91,12 +91,14 @@ model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-  @segment("organization")
+  @segment("organizations")
   @minLength(1)
   @maxLength(50)
   @doc("Name of the Organization resource")
   @path
   name: string;
+
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
