@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "testrg",
     "sqlServerInstanceName": "testsqlServerInstance",
-    "api-version": "2024-12-01-preview"
+    "api-version": "2024-09-01-preview"
   },
   "responses": {
     "200": {
@@ -12,6 +12,7 @@
           "version": "SQL Server 2012",
           "edition": "Developer",
           "containerResourceId": "Resource id of hosting Arc Machine",
+          "vmId": "12345678-1234-1234-1234-123456789123",
           "createTime": "01/01/2020 01:01:01",
           "patchLevel": "patchlevel",
           "collation": "collation",
@@ -170,7 +171,20 @@
           "clientConnection": {
             "enabled": false
           },
-          "serviceType": "Engine"
+          "serviceType": "Engine",
+          "authentication": {
+            "mode": "Windows",
+            "sqlServerEntraIdentity": [
+              {
+                "clientId": "00000000-1111-2222-3333-444444444444",
+                "identityType": "UserAssignedManagedIdentity"
+              },
+              {
+                "clientId": "",
+                "identityType": "SystemAssignedManagedIdentity"
+              }
+            ]
+          }
         },
         "location": "northeurope",
         "systemData": {
@@ -191,4 +205,3 @@
     }
   }
 }
-

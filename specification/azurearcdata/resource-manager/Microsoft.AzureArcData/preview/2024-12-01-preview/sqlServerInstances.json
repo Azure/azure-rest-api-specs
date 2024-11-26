@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-12-01-preview",
+    "version": "2024-09-01-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -64,6 +64,11 @@
         "containerResourceId": {
           "type": "string",
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique id of the host container.",
           "readOnly": true
         },
         "createTime": {
@@ -283,6 +288,10 @@
           "type": "boolean",
           "description": "Indicates whether DigiCert PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
           "readOnly": true
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
         }
       }
     },
@@ -327,6 +336,11 @@
         "containerResourceId": {
           "type": "string",
           "description": "ARM Resource id of the container resource (Azure Arc for Servers).",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "description": "The unique id of the host container.",
           "readOnly": true
         },
         "createTime": {
@@ -532,6 +546,10 @@
         "serviceType": {
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
+        },
+        "authentication": {
+          "description": "Authentication related configuration for the SQL Server Instance.",
+          "$ref": "#/definitions/Authentication"
         }
       }
     },
@@ -1449,6 +1467,46 @@
           "description": "Additional details about the check, including any recommended actions."
         }
       }
+    },
+    "Authentication": {
+      "description": "Authentication related configuration for the SQL Server Instance.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Mode of authentication in SqlServer.",
+          "enum": [
+            "Mixed",
+            "Windows",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Mixed",
+                "description": "Mixed mode authentication for SQL Server which includes windows and SQL Authentication."
+              },
+              {
+                "value": "Windows",
+                "description": "Windows Authentication for SQL Server."
+              },
+              {
+                "value": "Undefined",
+                "description": "Used for scenarios were the mode cannot be determined."
+              }
+            ]
+          }
+        },
+        "sqlServerEntraIdentity": {
+          "type": "array",
+          "description": "Entra Authentication configuration for the SQL Server Instance.",
+          "items": {
+            "$ref": "./common.json#/definitions/EntraAuthentication"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1473,4 +1531,3 @@
     }
   }
 }
-

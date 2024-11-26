@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-12-01-preview",
+    "version": "2024-09-01-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -133,6 +133,38 @@
         "name": "recommendationStatus",
         "modelAsString": true
       }
+    },
+    "EntraAuthentication": {
+      "description": "Entra Authentication configuration.",
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "enum": [
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "identityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SystemAssignedManagedIdentity",
+                "description": "System Assigned Managed Identity"
+              },
+              {
+                "value": "UserAssignedManagedIdentity",
+                "description": "User Assigned Managed Identity"
+              }
+            ]
+          },
+          "description": "The method used for Entra authentication"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client Id of the Managed Identity to query Microsoft Graph API. An empty string must be used for the system assigned Managed Identity."
+        }
+      }
     }
   },
   "parameters": {
@@ -157,4 +189,3 @@
     }
   }
 }
-
