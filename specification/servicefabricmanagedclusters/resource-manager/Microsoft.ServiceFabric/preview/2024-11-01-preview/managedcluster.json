@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-09-01-preview"
+    "version": "2024-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,6 +34,239 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/startFaultSimulation": {
+      "post": {
+        "tags": [
+          "ManagedCluster",
+          "FaultSimulation"
+        ],
+        "operationId": "ManagedClusters_StartFaultSimulation",
+        "summary": "Starts a fault simulation on the cluster.",
+        "description": "Starts a fault simulation on the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameters describing the fault simulation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Start Fault Simulation": {
+            "$ref": "./examples/faultSimulation/ManagedClusterStartFaultSimulation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FaultSimulation"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/stopFaultSimulation": {
+      "post": {
+        "tags": [
+          "ManagedCluster",
+          "FaultSimulation"
+        ],
+        "operationId": "ManagedClusters_StopFaultSimulation",
+        "summary": "Stops a fault simulation on the cluster.",
+        "description": "Stops a fault simulation on the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameter with fault simulation id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationIdParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Stop Fault Simulation": {
+            "$ref": "./examples/faultSimulation/ManagedClusterStopFaultSimulation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FaultSimulation"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/getFaultSimulation": {
+      "post": {
+        "tags": [
+          "ManagedCluster",
+          "FaultSimulation"
+        ],
+        "operationId": "ManagedClusters_GetFaultSimulation",
+        "summary": "Gets a fault simulation by the simulationId.",
+        "description": "Gets a fault simulation by the simulationId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "parameter with fault simulation id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationIdParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Get Fault Simulation": {
+            "$ref": "./examples/faultSimulation/ManagedClusterGetFaultSimulation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/listFaultSimulation": {
+      "post": {
+        "tags": [
+          "ManagedCluster",
+          "FaultSimulation"
+        ],
+        "operationId": "ManagedClusters_ListFaultSimulation",
+        "summary": "Gets the list of recent fault simulations for the cluster.",
+        "description": "Gets the list of recent fault simulations for the cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Fault Simulation": {
+            "$ref": "./examples/faultSimulation/ManagedClusterListFaultSimulation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulationListResult"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters": {
       "get": {
         "operationId": "ManagedClusters_ListByResourceGroup",
@@ -2256,6 +2489,48 @@
       },
       "description": "Describes a section in the fabric settings of the cluster."
     },
+    "SfmcOperationStatus": {
+      "type": "string",
+      "description": "Sfmc operation status.",
+      "enum": [
+        "Created",
+        "Started",
+        "Succeeded",
+        "Failed",
+        "Aborted",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "SfmcOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Created",
+            "description": "Operation created."
+          },
+          {
+            "value": "Started",
+            "description": "Operation started."
+          },
+          {
+            "value": "Succeeded",
+            "description": "Operation succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "Operation failed."
+          },
+          {
+            "value": "Aborted",
+            "description": "Operation aborted."
+          },
+          {
+            "value": "Canceled",
+            "description": "Operation canceled."
+          }
+        ]
+      }
+    },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
@@ -2288,13 +2563,235 @@
           "description": "The timestamp of resource last modification (UTC)."
         }
       }
+    },
+    "FaultKind": {
+      "type": "string",
+      "description": "The kind of fault simulation.",
+      "enum": [
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "FaultKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Zone",
+            "description": "Simulates an availability zone down."
+          }
+        ]
+      }
+    },
+    "FaultSimulation": {
+      "type": "object",
+      "properties": {
+        "simulationId": {
+          "type": "string",
+          "description": "unique identifier for the fault simulation."
+        },
+        "status": {
+          "$ref": "#/definitions/FaultSimulationStatus",
+          "description": "Fault simulation status"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the fault simulation.",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the fault simulation.",
+          "format": "date-time"
+        },
+        "details": {
+          "$ref": "#/definitions/FaultSimulationDetails",
+          "description": "Fault simulation details"
+        }
+      },
+      "description": "Fault simulation object with status."
+    },
+    "FaultSimulationConstraints": {
+      "type": "object",
+      "description": "Constraints for Fault Simulation action.",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "description": "The absolute expiration timestamp (UTC) after which this fault simulation should be stopped if it's still active.",
+          "format": "date-time"
+        }
+      }
+    },
+    "FaultSimulationDetails": {
+      "type": "object",
+      "description": "Details for Fault Simulation.",
+      "properties": {
+        "clusterId": {
+          "description": "unique identifier for the cluster resource.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "unique identifier for the operation associated with the fault simulation.",
+          "type": "string"
+        },
+        "nodeTypeFaultSimulation": {
+          "type": "array",
+          "title": "Node Type Fault Simulation.",
+          "description": "List of node type simulations associated with the cluster fault simulation.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeFaultSimulation"
+          },
+          "x-ms-identifiers": [
+            "nodeTypeName"
+          ]
+        },
+        "parameters": {
+          "$ref": "#/definitions/FaultSimulationParameters",
+          "description": "Fault simulation parameters."
+        }
+      }
+    },
+    "FaultSimulationIdParameters": {
+      "type": "object",
+      "description": "Parameters for Fault Simulation id.",
+      "required": [
+        "simulationId"
+      ],
+      "properties": {
+        "simulationId": {
+          "type": "string",
+          "description": "unique identifier for the fault simulation."
+        }
+      }
+    },
+    "FaultSimulationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "fault simulation list value.",
+          "description": "The list of fault simulations.",
+          "items": {
+            "$ref": "#/definitions/FaultSimulation"
+          },
+          "x-ms-identifiers": [
+            "simulationId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Fault simulation list results"
+    },
+    "FaultSimulationParameters": {
+      "type": "object",
+      "description": "Parameters for Fault Simulation action.",
+      "required": [
+        "faultKind"
+      ],
+      "discriminator": "faultKind",
+      "properties": {
+        "faultKind": {
+          "$ref": "#/definitions/FaultKind"
+        },
+        "force": {
+          "description": "Force the action to go through without any check on the cluster.",
+          "type": "boolean"
+        },
+        "constraints": {
+          "$ref": "#/definitions/FaultSimulationConstraints"
+        }
+      }
+    },
+    "FaultSimulationStatus": {
+      "type": "string",
+      "description": "Fault simulation status.",
+      "enum": [
+        "Starting",
+        "Active",
+        "Stopping",
+        "Done",
+        "StartFailed",
+        "StopFailed"
+      ],
+      "x-ms-enum": {
+        "name": "FaultSimulationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Starting",
+            "description": "Indicates the fault simulation is starting. The simulation will have this status while the start operation is in progress."
+          },
+          {
+            "value": "Active",
+            "description": "Indicates the fault simulation is active. The simulation will have this status after the start operation has completed successfully."
+          },
+          {
+            "value": "Stopping",
+            "description": "Indicates the fault simulation is stopping. The simulation will have this status while the stop operation is in progress."
+          },
+          {
+            "value": "Done",
+            "description": "Indicates the fault simulation is done. The simulation will have this status after the stop operation has completed successfully."
+          },
+          {
+            "value": "StartFailed",
+            "description": "Indicates the fault simulation has failed on start. The simulation will have this status after the start operation fails."
+          },
+          {
+            "value": "StopFailed",
+            "description": "Indicates the fault simulation has failed on stop. The simulation will have this status after the stop operation fails."
+          }
+        ]
+      }
+    },
+    "NodeTypeFaultSimulation": {
+      "type": "object",
+      "properties": {
+        "nodeTypeName": {
+          "type": "string",
+          "description": "Node type name."
+        },
+        "status": {
+          "$ref": "#/definitions/FaultSimulationStatus",
+          "description": "Fault simulation status"
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Current or latest asynchronous operation identifier on the node type."
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/SfmcOperationStatus",
+          "description": "Current or latest asynchronous operation status on the node type"
+        }
+      },
+      "description": "Node type fault simulation object with status."
+    },
+    "ZoneFaultSimulationParameters": {
+      "type": "object",
+      "description": "Parameters for Zone Fault Simulation action.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FaultSimulationParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "Zone",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Indicates the zones of the fault simulation."
+        }
+      }
     }
   },
   "parameters": {
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-09-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-11-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
