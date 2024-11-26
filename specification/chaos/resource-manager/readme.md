@@ -74,6 +74,26 @@ directive:
     where: "$.definitions.querySelector"
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes    
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes        
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change        
 ```
 
 ### Tag: package-preview-2024-03

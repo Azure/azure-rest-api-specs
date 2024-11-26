@@ -29,7 +29,6 @@ using TypeSpec.Versioning;
  * Chaos Management Client
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "ChaosManagementClient",
 })
@@ -46,5 +45,5 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_22_preview: "2024-11-01-preview",
+  v2024_11_01_preview: "2024-11-01-preview",
 }

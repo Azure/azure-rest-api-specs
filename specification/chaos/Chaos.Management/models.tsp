@@ -205,35 +205,6 @@ model CapabilityProperties {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility("read")
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
  * Model that represents a list of Capability Type resources and a link for pagination.
  */
 model CapabilityTypeListResult is Azure.Core.Page<CapabilityType>;
@@ -866,12 +837,17 @@ model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
 /**
  * A private link resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Resource {
-  /**
-   * Resource properties.
-   */
-  properties?: PrivateLinkResourceProperties;
+model PrivateLinkResource
+  is Azure.ResourceManager.TrackedResource<
+    PrivateLinkResourceProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Experiment,
+    KeyName = "experimentName",
+    SegmentName = "experiments",
+    NamePattern = "^[^<>%&:?#/\\\\]+$"
+  >;
 }
 
 /**
@@ -894,6 +870,12 @@ model PrivateLinkResourceProperties {
    * The private link resource private link DNS zone name.
    */
   requiredZoneNames?: string[];
+
+  /**
+   * Resource provisioning state. Not currently in use.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /**
