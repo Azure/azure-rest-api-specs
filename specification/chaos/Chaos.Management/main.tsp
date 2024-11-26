@@ -31,6 +31,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service({
   title: "ChaosManagementClient",
+  description: "Chaos Management Client",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

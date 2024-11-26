@@ -5,11 +5,15 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    use-read-only-status-schema: true
-    omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
+    omit-unreachable-types: true
+    emit-common-types-schema: "for-visibility-changes"
+    emitter-output-dir: "{project-root}/.."
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    use-read-only-status-schema: true
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
@@ -29,12 +33,11 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
+    flavor: azure
     package-dir: "Azure.ResourceManager.Chaos"
-    namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
-    flavor: azure
-    generate-sample-project: false
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
