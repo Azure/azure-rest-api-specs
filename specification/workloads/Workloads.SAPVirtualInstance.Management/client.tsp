@@ -168,3 +168,9 @@ using Azure.ClientGenerator.Core;
   "UpdateSapApplicationInstanceRequest",
   "java"
 );
+
+@@clientName(Microsoft.Workloads.ErrorDefinition, "ErrorInformation", "csharp");
+
+@@clientName(Microsoft.Workloads.StartRequest, "StartContent", "csharp");
+
+@@clientName(Microsoft.Workloads.StopRequest, "StopContent", "csharp");

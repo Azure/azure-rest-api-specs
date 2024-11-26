@@ -13,12 +13,13 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPVirtualInstance/{version-status}/{version}/SAPVirtualInstance.json"
-  # "@azure-tools/typespec-csharp":
-  #   flavor: azure
-  #   package-dir: "Azure.ResourceManager.SapVirtualInstances"
-  #   clear-output-folder: true
-  #   model-namespace: false
-  #   namespace: "{package-dir}"
+  "@azure-tools/typespec-csharp":
+    service-dir: "sdk/workloadssapvirtualinstance"
+    flavor: azure
+    package-dir: "Azure.ResourceManager.SapVirtualInstances"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
