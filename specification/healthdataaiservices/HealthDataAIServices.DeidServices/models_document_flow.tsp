@@ -38,7 +38,7 @@ model DeidentificationJob {
   @doc("Current status of a job.")
   @visibility("read")
   @pollingOperationParameter
-  status: DeidentificationJobStatus;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
@@ -65,35 +65,6 @@ model DeidentificationJob {
   @doc("Summary of a job. Exists only when the job is completed.")
   @visibility("read")
   summary?: DeidentificationJobSummary;
-}
-
-@doc("List of statuses a job can have.")
-@lroStatus
-union DeidentificationJobStatus {
-  // Cannot use Azure.Core.Foundations.OperationState. because it is not a union type.
-  @doc("Job has been submitted and is waiting to be processed.")
-  NotStarted: "NotStarted",
-
-  @doc("Job has been started.")
-  Running: "Running",
-
-  @lroSucceeded
-  @doc("Job has completed successfully. All documents have succeeded.")
-  Succeeded: "Succeeded",
-
-  @lroFailed
-  @doc("Job has completed with at least a single document failing.")
-  PartialFailed: "PartialFailed",
-
-  @lroFailed
-  @doc("Job has completed with all documents failing, or a validation failure.")
-  Failed: "Failed",
-
-  @lroCanceled
-  @doc("Job has been canceled after user request.")
-  Canceled: "Canceled",
-
-  string,
 }
 
 @doc("Summary metrics of a job.")

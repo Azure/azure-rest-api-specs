@@ -773,7 +773,7 @@
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
-          "$ref": "#/definitions/DeidentificationJobStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Current status of a job.",
           "readOnly": true
         },
@@ -830,54 +830,6 @@
           "description": "Locale in which the output surrogates are written.",
           "default": "en-US"
         }
-      }
-    },
-    "DeidentificationJobStatus": {
-      "type": "string",
-      "description": "List of statuses a job can have.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "PartialFailed",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "DeidentificationJobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Job has been submitted and is waiting to be processed."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Job has been started."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Job has completed successfully. All documents have succeeded."
-          },
-          {
-            "name": "PartialFailed",
-            "value": "PartialFailed",
-            "description": "Job has completed with at least a single document failing."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Job has completed with all documents failing, or a validation failure."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Job has been canceled after user request."
-          }
-        ]
       }
     },
     "DeidentificationJobSummary": {
