@@ -235,6 +235,11 @@ model DeploymentConfig {
    */
   @extension("x-ms-identifiers", [])
   stageDefinition?: Record<Array<string>>;
+
+  /**
+   * Defines the extension is using Managed SDP for rollouts.
+   */
+  managedSdpEnabled?: boolean;
 }
 
 /**
@@ -394,6 +399,7 @@ model PortalExtensionCompileFile {
  * The result of contents of the file to compile.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For matching existin APIs on the service model."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For matching existing APIs on the service model."
 model PortalExtensionCompileFileResult is Record<unknown>;
 
 /**
@@ -679,6 +685,7 @@ model PortalTenantCompileFileProperties {
  * The contents of the file to compile.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For matching existin APIs on the service model."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For matching existing APIs on the service model."
 model PortalTenantCompileFileResult is Record<unknown>;
 
 /**

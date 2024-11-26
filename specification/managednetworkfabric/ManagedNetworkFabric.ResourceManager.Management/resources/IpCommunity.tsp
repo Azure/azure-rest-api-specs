@@ -6,15 +6,12 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The IP Community resource definition.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The IP Community resource definition.")
 @includeInapplicableMetadataInPayload(false)
 model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the IP Community.
-   */
+  @doc("Name of the IP Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("ipCommunityName")
@@ -28,35 +25,23 @@ model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
 
 @armResourceOperations
 interface IpCommunities {
-  /**
-   * Implements an IP Community GET method.
-   */
+  @doc("Implements an IP Community GET method.")
   get is ArmResourceRead<IpCommunity>;
 
-  /**
-   * Implements an IP Community PUT method.
-   */
+  @doc("Implements an IP Community PUT method.")
   create is ArmResourceCreateOrReplaceAsync<IpCommunity>;
 
-  /**
-   * API to update certain properties of the IP Community resource.
-   */
+  @doc("API to update certain properties of the IP Community resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<IpCommunity, IpCommunityPatch>;
 
-  /**
-   * Implements IP Community DELETE method.
-   */
+  @doc("Implements IP Community DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<IpCommunity>;
 
-  /**
-   * Implements IP Communities list by resource group GET method.
-   */
+  @doc("Implements IP Communities list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<IpCommunity>;
 
-  /**
-   * Implements IP Communities list by subscription GET method.
-   */
+  @doc("Implements IP Communities list by subscription GET method.")
   listBySubscription is ArmListBySubscription<IpCommunity>;
 }
 

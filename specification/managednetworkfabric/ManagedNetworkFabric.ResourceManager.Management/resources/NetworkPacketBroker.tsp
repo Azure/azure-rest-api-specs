@@ -6,16 +6,13 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The NetworkPacketBroker resource definition.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The NetworkPacketBroker resource definition.")
 @includeInapplicableMetadataInPayload(false)
 model NetworkPacketBroker
   extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the Network Packet Broker.
-   */
+  @doc("Name of the Network Packet Broker.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkPacketBrokerName")
@@ -29,35 +26,23 @@ model NetworkPacketBroker
 
 @armResourceOperations
 interface NetworkPacketBrokers {
-  /**
-   * Retrieves details of this Network Packet Broker.
-   */
+  @doc("Retrieves details of this Network Packet Broker.")
   get is ArmResourceRead<NetworkPacketBroker>;
 
-  /**
-   * Creates a Network Packet Broker.
-   */
+  @doc("Creates a Network Packet Broker.")
   create is ArmResourceCreateOrReplaceAsync<NetworkPacketBroker>;
 
-  /**
-   * API to update certain properties of the Network Packet Broker resource.
-   */
+  @doc("API to update certain properties of the Network Packet Broker resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<NetworkPacketBroker, NetworkPacketBrokerPatch>;
 
-  /**
-   * Deletes Network Packet Broker.
-   */
+  @doc("Deletes Network Packet Broker.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkPacketBroker>;
 
-  /**
-   * Displays NetworkPacketBrokers list by resource group GET method.
-   */
+  @doc("Displays NetworkPacketBrokers list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<NetworkPacketBroker>;
 
-  /**
-   * Displays Network Packet Brokers list by subscription GET method.
-   */
+  @doc("Displays Network Packet Brokers list by subscription GET method.")
   listBySubscription is ArmListBySubscription<NetworkPacketBroker>;
 }
 

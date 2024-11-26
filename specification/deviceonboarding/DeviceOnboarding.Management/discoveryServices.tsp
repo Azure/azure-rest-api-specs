@@ -33,7 +33,7 @@ model DiscoveryService
 model DiscoveryServiceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   @visibility("read")
   @doc("The discovery service rendezvous endpoints.")
