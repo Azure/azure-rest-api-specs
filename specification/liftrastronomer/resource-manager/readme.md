@@ -80,6 +80,13 @@ input-file:
   - Astronomer.Astro/stable/2023-08-01/astronomer.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: astronomer.json
+```
 
 # Code Generation
 
