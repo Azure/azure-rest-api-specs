@@ -1199,11 +1199,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK."
-          },
           "202": {
-            "description": "Asynchronous operation in progress."
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperation"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -2740,11 +2740,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK."
-          },
           "202": {
-            "description": "Asynchronous operation in progress."
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperation"
+            }
           },
           "default": {
             "description": "App Service error response.",
@@ -5667,6 +5667,10 @@
           "readOnly": true
         }
       }
+    },
+    "AzureAsyncOperation": {
+      "description": "Asynchronous operation in progress.",
+      "type": "string"
     }
   },
   "parameters": {
