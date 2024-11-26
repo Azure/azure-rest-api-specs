@@ -32,46 +32,52 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-01
+tag: package-preview-2024-10
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
 ```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
+  - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: BodyTopLevelProperties
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationIdNounVerb
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationsAPIImplementation
+    from: actionGroups_API.json
+    reason: False positive. Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)
+  - code: PatchBodyParametersSchema
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: PostResponseCodes
+    from: actionGroups_API.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
-  - Microsoft.Insights/preview/2023-09-01-preview/actionGroups_API.json
-  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
-  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
-  - Microsoft.Insights/stable/2024-02-01/metrics_API.json
-  - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
-  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
-  - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2015-04-01/operations_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
-  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
-  - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-  - Microsoft.Insights/preview/2023-05-01-preview/tenantActionGroups_API.json
-  - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
-  - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
-  - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-  - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
-  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
   - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
-  - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
-  - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
-  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-  - Microsoft.Insights/stable/2023-03-11/dataCollectionEndpoints_API.json
-  - Microsoft.Insights/stable/2023-03-11/dataCollectionRuleAssociations_API.json
-  - Microsoft.Insights/stable/2023-03-11/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2024-04
@@ -1567,6 +1573,22 @@ directive:
     from: scheduledQueryRule_API.json
     where: $.definitions.Actions.properties.actionProperties
     reason: "This is a key-value collection which we do not validate and just pass as-is to a service which is several hops down the pipe where they are interpreted. Unknown keys are ignored and there are no invalid values."
+```
+
+### Suppressions
+
+```yaml
+suppressions:
+  - code: AvoidAdditionalProperties
+  - code: BodyTopLevelProperties
+  - code: DefinitionsPropertiesNamesCamelCase
+  - code: LroErrorContent
+  - code: NoErrorCodeResponses
+  - code: OperationIdNounVerb
+  - code: OperationsAPIImplementation
+  - code: PatchBodyParametersSchema
+  - code: PostResponseCodes
+  - code: ResourceNameRestriction
 ```
 
 This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.

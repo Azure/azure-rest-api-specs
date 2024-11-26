@@ -1015,7 +1015,7 @@ model UpdateSAPVirtualInstanceRequest {
   /**
    * Managed service identity (user assigned identities)
    */
-  identity?: CommonTypes.ManagedServiceIdentity;
+  identity?: SAPVirtualInstanceIdentity;
 
   /**
    * The update properties.
@@ -2496,4 +2496,40 @@ model DeployerVmPackages {
    * The deployer VM packages storage account id
    */
   storageAccountId?: string;
+}
+
+/**
+ * Managed service identity (user assigned identities)
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+model SAPVirtualInstanceIdentity {
+  /** The type of managed identity assigned to this resource. */
+  type: SAPVirtualInstanceIdentityType;
+
+  /** The identities assigned to this resource by the user. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
+}
+
+/**
+ * Type of managed service identity (where only None and UserAssigned types are allowed).
+ */
+union SAPVirtualInstanceIdentityType {
+  /** No managed identity. */
+  None: "None",
+
+  /** User assigned managed identity. */
+  UserAssigned: "UserAssigned",
+
+  string,
+}
+
+/**
+ * The managed service identities envelope."
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
+model SAPVirtualInstanceIdentityProperty {
+  /** The managed service identities assigned to this resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  identity?: SAPVirtualInstanceIdentity;
 }
