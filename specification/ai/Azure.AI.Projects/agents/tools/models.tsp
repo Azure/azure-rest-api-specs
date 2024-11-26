@@ -96,6 +96,9 @@ model FileSearchToolDefinitionDetails {
   @maxValue(50)
   maxNumResults?: int32;
 
+  /**
+   * Ranking options for file search.
+   */
   @encodedName("application/json", "ranking_options")
   rankingOptions?: FileSearchRankingOptions;
 }
