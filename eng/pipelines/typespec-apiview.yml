@@ -4,7 +4,7 @@ parameters:
     default: 'TypespecAPIViewArtifacts'
   - name: APIViewArtifactsName
     type: string
-    default: 'swaggerAPIViewArtifacts'
+    default: 'typeSpecAPIViewArtifacts'
   - name: APIViewAPIUri
     type: string
     default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
@@ -37,7 +37,7 @@ jobs:
       targetPath: '$(Build.ArtifactStagingDirectory)/${{ parameters.APIViewArtifactsDirectoryName }}'
       artifactName: '${{ parameters.APIViewArtifactsName }}'
       publishLocation: 'pipeline'
-    displayName: 'Publish Swagger APIView Artifacts'
+    displayName: 'Publish TypeSpec APIView Artifacts'
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
   - pwsh: |
@@ -50,7 +50,7 @@ jobs:
         -BuildId $(Build.BuildId) `
         -RepoName $(Build.Repository.Name) `
         -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
-        -Language 'Swagger' `
+        -Language 'TypeSpec' `
         -CommitSha $(Build.SourceVersion)
-    displayName: Create Swagger APIView
+    displayName: Create TypeSpec APIView
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))

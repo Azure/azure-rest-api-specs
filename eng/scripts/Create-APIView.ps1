@@ -6,13 +6,13 @@
 .DESCRIPTION
   Get the readme.md file associated with a swagger file.
 
-.PARAMETER SpecFile
+.PARAMETER SwaggerFile
   Path to a swagger files inside the 'specification' directory.
 
 .OUTPUTS
   the readme.md file associated with the swagger file or null if not found.
 #>
-function SwaggerReadMeFile {
+function Get-SwaggerReadMeFile {
     param (
         [Parameter(Mandatory = $true)]
         [string]$SwaggerFile
@@ -32,7 +32,17 @@ function SwaggerReadMeFile {
 }
 
 function Determine-ImpactedTypeSpec {
-  return $null
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$TypeSpecFile
+    )
+    $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
+    $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
+    $typeSpecProjectBaseDirectory = $filePathParts[0..$($parts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
+    $configFilesInTypeSpecProject = (Get-childitem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse).FullName 
+    
+    
+    return $projectRootPaths
 }
 
 <#
@@ -163,7 +173,7 @@ function Invoke-TypeSpecAPIViewParser {
       [Parameter(Mandatory = $true)]
       [string]$Type,
       [Parameter(Mandatory = $true)]
-      [string]$ReadMeFilePath,
+      [string]$ProjectPath,
       [Parameter(Mandatory = $true)]
       [string]$ResourceProvider,
       [Parameter(Mandatory = $true)]
@@ -332,33 +342,33 @@ function New-TypeSpecAPIViewTokens {
   $SourceCommitId = $(git rev-parse HEAD^)
   $TargetCommitId = $(git rev-parse HEAD)
 
-  # Get Changed Swagger Files
-  LogInfo " Getting changed swagger files in PR, between $SourceCommitId and $TargetCommitId"
+  # Get Changed TypeSpec Files
+  LogInfo " Getting changed TypeSpec files in PR, between $SourceCommitId and $TargetCommitId"
   $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
-  $changedSwaggerFiles = Get-ChangedSwaggerFiles -changedFiles $changedFiles
+  $changedTypeSpecFiles = Get-ChangedTypeSpecFiles -changedFiles $changedFiles
 
-  if ($changedSwaggerFiles.Count -eq 0) {
-    LogWarning " There are no changes to swagger files in the current PR..."
+  if ($changedTypeSpecFiles.Count -eq 0) {
+    LogWarning " There are no changes to TypeSpec files in the current PR..."
     Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
     exit 0
   }
 
-  LogGroupStart " Pullrequest has changes in these swagger files..."
-  $changedSwaggerFiles | ForEach-Object {
+  LogGroupStart " Pullrequest has changes in these TypeSpec files..."
+  $changedTypeSpecFiles | ForEach-Object {
     LogInfo " - $_"
   }
   LogGroupEnd
 
-  # Get Related Swagger ReadMe Files
-  $swaggerReadMeFiles = [System.Collections.Generic.HashSet[string]]::new()
-  $changedSwaggerFiles | ForEach-Object {
-    $readmeFile = Get-ReadMeFile -SpecFile $_
-    if ($readmeFile) {
-        $swaggerReadMeFiles.Add($readmeFile) | Out-Null
+  # Get Related TypeSpec ReadMe Files
+  $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
+  $changedTypeSpecFiles | ForEach-Object {
+    $tspProj = Determine-ImpactedTypeSpec -TypeSpecFile $_
+    if ($tspProj) {
+        $typeSpecProjects.Add($tspProj) | Out-Null
     }
   }
 
-  LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
+  LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
   $readmeFile | ForEach-Object {
     LogInfo " - $_"
   }
@@ -366,27 +376,27 @@ function New-TypeSpecAPIViewTokens {
 
   $currentBranch = git rev-parse --abbrev-ref HEAD
 
-  $swaggerAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
+  $typeSpecAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
 
-  # Generate Swagger APIView Tokens
-  foreach ($readMeFile in $swaggerReadMeFiles) {
-      $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
-      $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
+  # Generate TypeSpec APIView Tokens
+  foreach ($typeSpecProject in $typeSpecProjects) {
+      $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $typeSpecProject
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $resourceProvider)
       New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
 
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
-      $defaultTag = Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
+      $defaultTag = Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
 
       # Generate BaseLine APIView Token using same tag on target branch
       git checkout $TargetCommitId
-      Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory -Tag $defaultTag | Out-Null
+      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory -Tag $defaultTag | Out-Null
   }
 
   git checkout $currentBranch
 
-  LogGroupStart " See all generated Swagger APIView Artifacts..."
-  Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  LogGroupStart " See all generated TypeSpec APIView Artifacts..."
+  Get-ChildItem -Path $typeSpecAPIViewArtifactsDirectory -Recurse
   LogGroupEnd
 }
 
@@ -409,7 +419,7 @@ TGhe BuildId of the Run
 .PARAMETER PullRequestNumber
   The PR number
 .PARAMETER Language
-  The language of the resource provider `Swagger`
+  The language of the resource provider
 .PARAMETER CommitSha
   The commit sha of the current branch. Uusally the merge commit of the PR.
 #>
