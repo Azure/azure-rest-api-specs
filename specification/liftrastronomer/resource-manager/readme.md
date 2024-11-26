@@ -27,12 +27,21 @@ These are the global settings for the astronomer service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-08-27
+tag: package-2024-11-01-preview
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2024-11-01-preview
+
+These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line. 
+
+```yaml $(tag) == 'package-2024-11-01-preview'
+input-file:
+  - Astronomer.Astro/preview/2024-11-01-preview/astronomer.json
 ```
 
 ### Tag: package-2024-08-27-preview
