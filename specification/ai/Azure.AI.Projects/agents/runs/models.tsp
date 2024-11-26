@@ -150,7 +150,7 @@ model ThreadRun {
  * Details on why the run is incomplete. Will be `null` if the run is not incomplete.
  */
 model IncompleteRunDetails {
-  @doc("he reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
+  @doc("The reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
   reason: IncompleteDetailsReason;
 }
 
