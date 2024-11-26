@@ -9,8 +9,6 @@ using Microsoft.DevOpsInfrastructure;
   "python"
 );
 
-@@access(Operations.list, Access.internal);
-
 /* Rename models */
 @@clientName(ImageVersion, "DevOpsImageVersion", "csharp");
 
