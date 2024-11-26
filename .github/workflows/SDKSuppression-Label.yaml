@@ -1,0 +1,35 @@
+name: breakingchange suppression label Workflow
+
+on:
+  pull_request:
+    branches:
+      - jacktn/suppression-label-script 
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - 'src/specification/**' 
+
+  workflow_dispatch:
+
+jobs:
+  pr_details:
+    runs-on: windows-latest  # Or ubuntu-latest for Linux-based runners
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Manage-SDKSuppression-Label script from file
+        run: |
+          .\scripts\Manage-SDKSuppression-Label.ps1
+        env:
+          GITHUB_EVENT_PULL_REQUEST_BASE_REPO_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_REPO_NAME: ${{ github.event.pull_request.base.repo.name }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_NAME: ${{ github.event.pull_request.head.repo.name }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
