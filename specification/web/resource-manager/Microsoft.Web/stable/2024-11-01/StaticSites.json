@@ -1201,8 +1201,11 @@
         "responses": {
           "202": {
             "description": "Asynchronous operation in progress.",
-            "schema": {
-              "$ref": "#/definitions/AzureAsyncOperation"
+            "headers": {
+              "Location": {
+                "description": "The Azure Async Operation URI where the status of the request can be checked.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2742,9 +2745,12 @@
         "responses": {
           "202": {
             "description": "Asynchronous operation in progress.",
-            "schema": {
-              "$ref": "#/definitions/AzureAsyncOperation"
-            }
+            "headers": {
+                "Location": {
+                  "description": "The Azure Async Operation URI where the status of the request can be checked.",
+                  "type": "string"
+                }
+              }
           },
           "default": {
             "description": "App Service error response.",
@@ -5667,10 +5673,6 @@
           "readOnly": true
         }
       }
-    },
-    "AzureAsyncOperation": {
-      "description": "Asynchronous operation in progress.",
-      "type": "string"
     }
   },
   "parameters": {
