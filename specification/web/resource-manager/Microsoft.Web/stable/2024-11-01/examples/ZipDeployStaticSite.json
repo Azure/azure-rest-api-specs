@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "name": "testStaticSite0",
+    "api-version": "2022-03-01",
+    "staticSiteEnvelope": {
+      "properties": {
+        "ContentUrl": "https://teststorageaccount.blob.core.windows.net/testContainer/content.zip",
+        "StorageAccountReferenceIdentity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-mi",
+        "StorageAccountResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/default-storage-WestUS2/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/westus2/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2019-01-01"
+      }
+    }
+  }
+}

@@ -1167,7 +1167,7 @@
         ],
         "summary": "Deploys zipped content to a static site onto a specified static sites environment.",
         "description": "Description for Deploys zipped content to a static site onto a specified static sites environment.",
-        "operationId": "StaticSites_ZipDeployStaticSiteStaging",
+        "operationId": "StaticSites_ZipDeployStaging",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -1189,11 +1189,7 @@
             }
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "Name of the environment.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/environmentNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1218,7 +1214,7 @@
         },
         "x-ms-examples": {
           "Deploy a site from a zipped package to a specific static sites environment": {
-            "$ref": "./examples/StaticSiteZipDeploy.json"
+            "$ref": "./examples/ZipDeployStaticSiteStaging.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2715,7 +2711,7 @@
         ],
         "summary": "Deploys zipped content to a static site.",
         "description": "Description for Deploys zipped content to a static site.",
-        "operationId": "StaticSites_ZipDeployStaticSite",
+        "operationId": "StaticSites_ZipDeploy",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -2759,7 +2755,7 @@
         },
         "x-ms-examples": {
           "Deploy a site from a zipped package": {
-            "$ref": "./examples/StaticSiteZipDeploy.json"
+            "$ref": "./examples/ZipDeployStaticSite.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -5435,7 +5431,7 @@
         }
       }
     },
-    "StaticSiteZipDeploy": {
+    "ZipDeployStaticSite": {
       "description": "A static site zip deployment",
       "type": "object",
       "properties": {
@@ -5463,7 +5459,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StaticSiteZipDeploy",
+          "$ref": "#/definitions/ZipDeployStaticSite",
           "description": "Core resource properties",
           "type": "object",
           "x-ms-client-flatten": true
