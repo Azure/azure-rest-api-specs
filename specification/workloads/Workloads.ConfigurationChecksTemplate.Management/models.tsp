@@ -64,36 +64,6 @@ union ConfigurationCheckOriginType {
   string,
 }
 
-@doc("Schema for shared parameters to use in 1P resources checks configuration.")
-model CheckConfigurationSharedParameters {
-  /**
-   * Name of the property. This can be updated by Author only. Not allowed for customization.
-   */
-  @doc("Name of the property.")
-  @visibility("read")
-  name: string;
-
-  /**
-   * Data type of the value. This can be updated by Author only. Not allowed for customization.
-   */
-  @doc("Data type of the value.")
-  @visibility("read")
-  dataType: DataType;
-
-  /**
-   * Unit of the property. This can be updated by Author only. Not allowed for customization.
-   */
-  @doc("Unit of the property.")
-  @visibility("read")
-  unit: string;
-
-  /**
-   * Default (or) customized value to be used in the check.
-   */
-  @doc("Default (or) customized value to be used in the check.")
-  value: string;
-}
-
 @doc("Condition to be used to evaluate the output and customize the check.")
 union CheckEvaluationCondition {
   @doc("Check output value must equal defined value.")
@@ -135,70 +105,21 @@ union CheckEvaluationCondition {
   string,
 }
 
-@doc("The model for list of output parameters to be used in the check.")
-model CheckConfigurationOutputParameters {
+@doc("The type of environment for which the checks are executed.")
+union EnvironmentType {
   /**
-   * Condition to be used to evaluate the output and customize the check.
+   * Indicates that environment is production environment.
    */
-  @doc("Condition to be used to evaluate the output and customize the check.")
-  condition: CheckEvaluationCondition;
+  @doc("Environment is production.")
+  Production: "Production",
 
   /**
-   * List of parameters
+   * Indicates that environment is non production environment.
    */
-  @doc("List of parameters.")
-  parameters: CheckConfigurationSharedParameters;
-}
+  @doc("Environment is non production.")
+  NonProduction: "Non-Production",
 
-@doc("Schema for check configuration for allowing customization.")
-model CheckConfiguration {
-  /**
-   * The unique identifier of the check defined in check definition.
-   */
-  @doc("The unique identifier of the check defined in check definition.")
-  checkId: string;
-
-  /**
-   * The origin of how the check applied at the role level in the virtual instance.
-   */
-  @doc("The origin of how the check applied at the role level in the virtual instance.")
-  @visibility("read")
-  checkOriginType: ConfigurationCheckOriginType;
-
-  /**
-   * The flag to enable (or) disable the check execution.
-   */
-  @doc("The flag to enable (or) disable the check execution.")
-  enabled: boolean;
-
-  /**
-   * List of input parameters to be used in the check.
-   */
-  @doc("List of input parameters to be used in the check.")
-  inputParameters: CheckConfigurationSharedParameters;
-
-  /**
-   * List of output parameters to be used in the check.
-   */
-  @doc("List of output parameters to be used in the check.")
-  outputParameters: CheckConfigurationOutputParameters;
-}
-
-@doc("Schema for role configuration including checks and resources.")
-model RoleConfiguration {
-  /**
-   * Name of the role. This can be updated by Author only. Not allowed for customization.
-   */
-  @doc("Name of the role.")
-  @visibility("read")
-  roleName: string;
-
-  /**
-   * List of checks to be executed for the role.
-   */
-  @doc("List of checks to be executed for the role.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  checks: CheckConfiguration[];
+  string,
 }
 
 @doc("Represents the provisioning states of a resource.")
@@ -236,21 +157,102 @@ union ConfigurationChecksTemplateProvisioningState {
   string,
 }
 
-@doc("The type of environment for which the checks are executed.")
-union EnvironmentType {
+@doc("Schema for shared parameters to use in 1P resources checks configuration.")
+model CheckConfigurationSharedParameters {
   /**
-   * Indicates that environment is production environment.
+   * Name of the property. This can be updated by Author only. Not allowed for customization.
    */
-  @doc("Environment is production.")
-  Production: "Production",
+  @doc("Name of the property.")
+  @visibility("read")
+  name: string;
 
   /**
-   * Indicates that environment is non production environment.
+   * Data type of the value. This can be updated by Author only. Not allowed for customization.
    */
-  @doc("Environment is non production.")
-  NonProduction: "Non-Production",
+  @doc("Data type of the value.")
+  @visibility("read")
+  dataType: DataType;
 
-  string,
+  /**
+   * Unit of the property. This can be updated by Author only. Not allowed for customization.
+   */
+  @doc("Unit of the property.")
+  @visibility("read")
+  unit: string;
+
+  /**
+   * Default (or) customized value to be used in the check.
+   */
+  @doc("Default (or) customized value to be used in the check.")
+  value: string;
+}
+
+@doc("The model for list of output parameters to be used in the check.")
+model CheckConfigurationOutputParameters {
+  /**
+   * Condition to be used to evaluate the output and customize the check.
+   */
+  @doc("Condition to be used to evaluate the output and customize the check.")
+  condition: CheckEvaluationCondition;
+
+  /**
+   * List of parameters
+   */
+  @doc("List of parameters.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  parameters: CheckConfigurationSharedParameters[];
+}
+
+@doc("Schema for check configuration for allowing customization.")
+model CheckConfiguration {
+  /**
+   * The unique identifier of the check defined in check definition.
+   */
+  @doc("The unique identifier of the check defined in check definition.")
+  checkId: string;
+
+  /**
+   * The origin of how the check applied at the role level in the virtual instance.
+   */
+  @doc("The origin of how the check applied at the role level in the virtual instance.")
+  @visibility("read")
+  checkOriginType: ConfigurationCheckOriginType;
+
+  /**
+   * The flag to enable (or) disable the check execution.
+   */
+  @doc("The flag to enable (or) disable the check execution.")
+  enabled: boolean;
+
+  /**
+   * List of input parameters to be used in the check.
+   */
+  @doc("List of input parameters to be used in the check.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  inputParameters: CheckConfigurationSharedParameters[];
+
+  /**
+   * List of output parameters to be used in the check.
+   */
+  @doc("List of output parameters to be used in the check.")
+  outputParameters: CheckConfigurationOutputParameters;
+}
+
+@doc("Schema for role configuration including checks and resources.")
+model RoleConfiguration {
+  /**
+   * Name of the role. This can be updated by Author only. Not allowed for customization.
+   */
+  @doc("Name of the role.")
+  @visibility("read")
+  roleName: string;
+
+  /**
+   * List of checks to be executed for the role.
+   */
+  @doc("List of checks to be executed for the role.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  checks: CheckConfiguration[];
 }
 
 @doc("Defines the components that are being managed at the workload level.")
@@ -304,6 +306,7 @@ model ConfigurationChecksTemplateProperties {
    * The interval at which the checks are executed. Supports from 1 hour to 24 hours.
    */
   @doc("The interval at which the checks are executed.")
+  @pattern("^(0[1-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$|^(24:00:00)$")
   executionInterval: string;
 
   /**

@@ -22,6 +22,12 @@ model ConfigurationChecksTemplate
   @pattern("^[a-zA-Z0-9-]{3,63}$")
   @path
   name: string;
+
+  @doc("The location of the resource.")
+  location: string;
+
+  @doc("The ARM resource type.")
+  type: string;
 }
 
 @armResourceOperations
