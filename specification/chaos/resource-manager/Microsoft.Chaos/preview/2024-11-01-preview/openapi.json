@@ -2194,7 +2194,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateLinkResources": {
       "get": {
-        "operationId": "PrivateAccesses_PrivateLinkResources",
+        "operationId": "PrivateAccesses_GetPrivateLinkResources",
         "tags": [
           "PrivateAccesses"
         ],
@@ -2231,6 +2231,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all possible private link resources under private access resource.": {
+            "$ref": "./examples/PrivateAccesses_GetPrivateLinkResources.json"
           }
         },
         "x-ms-pageable": {
