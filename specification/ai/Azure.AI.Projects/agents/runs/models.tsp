@@ -160,6 +160,7 @@ union IncompleteDetailsReason {
 
   /** Maximum completion tokens exceeded */
   maxCompletionTokens: "max_completion_tokens",
+
   /** Maximum prompt tokens exceeded */
   maxPromptTokens: "max_prompt_tokens",
 }
