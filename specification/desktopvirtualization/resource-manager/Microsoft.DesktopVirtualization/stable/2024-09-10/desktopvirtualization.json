@@ -3,7 +3,7 @@
   "info": {
     "title": "Desktop Virtualization API Client",
     "version": "2024-09-10",
-    "description": "// FIXME: (missing-service-description) Add service description",
+    "description": "This Typespec represents the Desktop Virtualization API interfaces.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -39,6 +39,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Operations"
+    },
     {
       "name": "AppAttachPackages"
     },
@@ -83,6 +86,37 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.DesktopVirtualization/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
         "operationId": "AppAttachPackages_ListBySubscription",
@@ -4888,31 +4922,38 @@
         "values": [
           {
             "name": "ARM",
-            "value": "ARM"
+            "value": "ARM",
+            "description": "ARM 32-bit"
           },
           {
             "name": "ARM64",
-            "value": "ARM64"
+            "value": "ARM64",
+            "description": "ARM 64-bit"
           },
           {
             "name": "x86",
-            "value": "x86"
+            "value": "x86",
+            "description": "32-bit x86"
           },
           {
             "name": "x64",
-            "value": "x64"
+            "value": "x64",
+            "description": "64-bit"
           },
           {
             "name": "Neutral",
-            "value": "Neutral"
+            "value": "Neutral",
+            "description": "Any architecture can be used"
           },
           {
             "name": "x86a64",
-            "value": "x86a64"
+            "value": "x86a64",
+            "description": "X86 CHPE for ARM64"
           },
           {
             "name": "ALL",
-            "value": "ALL"
+            "value": "ALL",
+            "description": "Select all listed applications, no filters"
           }
         ]
       }
@@ -5245,11 +5286,13 @@
         "values": [
           {
             "name": "RemoteApp",
-            "value": "RemoteApp"
+            "value": "RemoteApp",
+            "description": "Application group is Remote and can launch individual applications without a Desktop."
           },
           {
             "name": "Desktop",
-            "value": "Desktop"
+            "value": "Desktop",
+            "description": "Application Group delivers a full expected Desktop experience"
           }
         ]
       }
@@ -5438,11 +5481,13 @@
         "values": [
           {
             "name": "RemoteApp",
-            "value": "RemoteApp"
+            "value": "RemoteApp",
+            "description": "Remote Applications (non-desktop)"
           },
           {
             "name": "Desktop",
-            "value": "Desktop"
+            "value": "Desktop",
+            "description": "Desktop Applications"
           }
         ]
       }
@@ -5461,15 +5506,18 @@
         "values": [
           {
             "name": "DoNotAllow",
-            "value": "DoNotAllow"
+            "value": "DoNotAllow",
+            "description": "Cannot be launched with command line arguments."
           },
           {
             "name": "Allow",
-            "value": "Allow"
+            "value": "Allow",
+            "description": "Can optionally be launched with command line arguments."
           },
           {
             "name": "Require",
-            "value": "Require"
+            "value": "Require",
+            "description": "Required to be launched with command line arguments."
           }
         ]
       }
@@ -5590,7 +5638,7 @@
     },
     "DirectUDP": {
       "type": "string",
-      "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+      "description": "Direct UDP Connection Settings",
       "enum": [
         "Default",
         "Enabled",
@@ -5602,15 +5650,18 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "AVD-wide settings are used to determine connection availability"
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "UDP will attempt this connection type when making connections."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "UDP will not attempt this connection type when making connections"
           }
         ]
       }
@@ -5741,15 +5792,18 @@
         "values": [
           {
             "name": "Unhealthy",
-            "value": "Unhealthy"
+            "value": "Unhealthy",
+            "description": "Health Check will report unhealthy"
           },
           {
             "name": "NeedsAssistance",
-            "value": "NeedsAssistance"
+            "value": "NeedsAssistance",
+            "description": "Health Check will report NeedsAssistance"
           },
           {
             "name": "DoNotFail",
-            "value": "DoNotFail"
+            "value": "DoNotFail",
+            "description": "Health Check will not report failure"
           }
         ]
       }
@@ -6209,19 +6263,23 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Allows this resource to be accessed from the public network"
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Prevents this resource from being accessed from the public network"
           },
           {
             "name": "EnabledForSessionHostsOnly",
-            "value": "EnabledForSessionHostsOnly"
+            "value": "EnabledForSessionHostsOnly",
+            "description": "Allows SessionHosts to be accessed from the public network"
           },
           {
             "name": "EnabledForClientsOnly",
-            "value": "EnabledForClientsOnly"
+            "value": "EnabledForClientsOnly",
+            "description": "Allows Clients to be accessed from the public network"
           }
         ]
       }
@@ -6254,15 +6312,18 @@
         "values": [
           {
             "name": "BreadthFirst",
-            "value": "BreadthFirst"
+            "value": "BreadthFirst",
+            "description": "Uses BreadthFirst algorithm for load balancing."
           },
           {
             "name": "DepthFirst",
-            "value": "DepthFirst"
+            "value": "DepthFirst",
+            "description": "Uses DepthFirst algorithm for load balancing."
           },
           {
             "name": "Persistent",
-            "value": "Persistent"
+            "value": "Persistent",
+            "description": "Maintains persistent conenctions."
           }
         ]
       }
@@ -6299,7 +6360,7 @@
     },
     "ManagedPrivateUDP": {
       "type": "string",
-      "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+      "description": "Managed Private UDP Connection Settings",
       "enum": [
         "Default",
         "Enabled",
@@ -6311,15 +6372,18 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "AVD-wide settings are used to determine connection availability"
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "UDP will attempt this connection type when making connections."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "UDP will not attempt this connection type when making connections"
           }
         ]
       }
@@ -6532,11 +6596,13 @@
         "values": [
           {
             "name": "Timestamped",
-            "value": "Timestamped"
+            "value": "Timestamped",
+            "description": "Package is timestamped"
           },
           {
             "name": "NotTimestamped",
-            "value": "NotTimestamped"
+            "value": "NotTimestamped",
+            "description": "Package is not timestamped, use certificate expiry date"
           }
         ]
       }
@@ -6554,11 +6620,13 @@
         "values": [
           {
             "name": "Automatic",
-            "value": "Automatic"
+            "value": "Automatic",
+            "description": "Automatically assigns an available personal desktop to the user."
           },
           {
             "name": "Direct",
-            "value": "Direct"
+            "value": "Direct",
+            "description": "Manually assigns a specific personal desktop to the user."
           }
         ]
       }
@@ -6577,15 +6645,18 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "Internal Use Only"
           },
           {
             "name": "Desktop",
-            "value": "Desktop"
+            "value": "Desktop",
+            "description": "Use Desktop Application Group"
           },
           {
             "name": "RailApplications",
-            "value": "RailApplications"
+            "value": "RailApplications",
+            "description": "Use RailApplications (RemoteApp)"
           }
         ]
       }
@@ -6733,19 +6804,23 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Provisioning was successful"
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "A PrivateEndpointConnection is being created"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "A PrivateEndpointConnection is being deleted"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Provisioning failed"
           }
         ]
       },
@@ -6765,15 +6840,18 @@
         "values": [
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "Connection is Pending"
           },
           {
             "name": "Approved",
-            "value": "Approved"
+            "value": "Approved",
+            "description": "Connection was Approved"
           },
           {
             "name": "Rejected",
-            "value": "Rejected"
+            "value": "Rejected",
+            "description": "Connection was rejected"
           }
         ]
       }
@@ -6873,19 +6951,23 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Provisioning Successful"
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Provisioning in Progress"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Provisioning Failed"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Provisioning was Canceled"
           }
         ]
       },
@@ -6904,18 +6986,20 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "This resource is accessible from the public network."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "This resource is not accessible from the public network."
           }
         ]
       }
     },
     "PublicUDP": {
       "type": "string",
-      "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+      "description": "Public UDP Connection Settings",
       "enum": [
         "Default",
         "Enabled",
@@ -6927,15 +7011,18 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "AVD-wide settings are used to determine connection availability"
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "UDP will attempt this connection type when making connections."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "UDP will not attempt this connection type when making connections"
           }
         ]
       }
@@ -7022,22 +7109,25 @@
         "values": [
           {
             "name": "Delete",
-            "value": "Delete"
+            "value": "Delete",
+            "description": "Delete operation"
           },
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "No Operation"
           },
           {
             "name": "Update",
-            "value": "Update"
+            "value": "Update",
+            "description": "Update Operation"
           }
         ]
       }
     },
     "RelayUDP": {
       "type": "string",
-      "description": "Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections",
+      "description": "Relay UDP Connection Settings",
       "enum": [
         "Default",
         "Enabled",
@@ -7049,15 +7139,18 @@
         "values": [
           {
             "name": "Default",
-            "value": "Default"
+            "value": "Default",
+            "description": "AVD-wide settings are used to determine connection availability"
           },
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "UDP will attempt this connection type when making connections."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "UDP will not attempt this connection type when making connections"
           }
         ]
       }
@@ -7075,11 +7168,13 @@
         "values": [
           {
             "name": "InBuilt",
-            "value": "InBuilt"
+            "value": "InBuilt",
+            "description": "Built-in applications"
           },
           {
             "name": "MsixApplication",
-            "value": "MsixApplication"
+            "value": "MsixApplication",
+            "description": "Imported MSIX application packages"
           }
         ]
       }
@@ -7126,19 +7221,23 @@
         "values": [
           {
             "name": "SharedKey",
-            "value": "SharedKey"
+            "value": "SharedKey",
+            "description": "The SSO Secret is a Shared Key."
           },
           {
             "name": "Certificate",
-            "value": "Certificate"
+            "value": "Certificate",
+            "description": "The SSO Secret is a Certificate."
           },
           {
             "name": "SharedKeyInKeyVault",
-            "value": "SharedKeyInKeyVault"
+            "value": "SharedKeyInKeyVault",
+            "description": "The SSO Secret is a SharedKey that is stored in KeyVault."
           },
           {
             "name": "CertificateInKeyVault",
-            "value": "CertificateInKeyVault"
+            "value": "CertificateInKeyVault",
+            "description": "The SSO Secret is a Certificate that is stored in KeyVault."
           }
         ]
       }
@@ -7722,6 +7821,7 @@
     },
     "ScalingScheduleDaysOfWeekItem": {
       "type": "string",
+      "description": "Days of Week that the Scaling Schedule is active.",
       "enum": [
         "Sunday",
         "Monday",
@@ -7737,31 +7837,38 @@
         "values": [
           {
             "name": "Sunday",
-            "value": "Sunday"
+            "value": "Sunday",
+            "description": "Sunday"
           },
           {
             "name": "Monday",
-            "value": "Monday"
+            "value": "Monday",
+            "description": "Monday"
           },
           {
             "name": "Tuesday",
-            "value": "Tuesday"
+            "value": "Tuesday",
+            "description": "Tuesday"
           },
           {
             "name": "Wednesday",
-            "value": "Wednesday"
+            "value": "Wednesday",
+            "description": "Wednesday"
           },
           {
             "name": "Thursday",
-            "value": "Thursday"
+            "value": "Thursday",
+            "description": "Thursday"
           },
           {
             "name": "Friday",
-            "value": "Friday"
+            "value": "Friday",
+            "description": "Friday"
           },
           {
             "name": "Saturday",
-            "value": "Saturday"
+            "value": "Saturday",
+            "description": "Saturday"
           }
         ]
       }
@@ -7794,15 +7901,18 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "No action will be taken after disconnect"
           },
           {
             "name": "Deallocate",
-            "value": "Deallocate"
+            "value": "Deallocate",
+            "description": "Session Host will be deallocated after disconnect"
           },
           {
             "name": "Hibernate",
-            "value": "Hibernate"
+            "value": "Hibernate",
+            "description": "Session Host will hibernate after disconnect"
           }
         ]
       }
@@ -7924,11 +8034,13 @@
         "values": [
           {
             "name": "BreadthFirst",
-            "value": "BreadthFirst"
+            "value": "BreadthFirst",
+            "description": "Breadth First Algorithm for Load Balancing"
           },
           {
             "name": "DepthFirst",
-            "value": "DepthFirst"
+            "value": "DepthFirst",
+            "description": "Depth First Algorithm for Load Balancing"
           }
         ]
       }
@@ -8071,27 +8183,33 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "SessionState is unknown"
           },
           {
             "name": "Active",
-            "value": "Active"
+            "value": "Active",
+            "description": "Session is active"
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "Session is disconnected"
           },
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "Session is pending connection"
           },
           {
             "name": "LogOff",
-            "value": "LogOff"
+            "value": "LogOff",
+            "description": "Session is logging off"
           },
           {
             "name": "UserProfileDiskMounted",
-            "value": "UserProfileDiskMounted"
+            "value": "UserProfileDiskMounted",
+            "description": "Session has mounted user profile disk"
           }
         ]
       }
@@ -8308,11 +8426,13 @@
         "values": [
           {
             "name": "ZeroSessions",
-            "value": "ZeroSessions"
+            "value": "ZeroSessions",
+            "description": "Zero Total Sessions"
           },
           {
             "name": "ZeroActiveSessions",
-            "value": "ZeroActiveSessions"
+            "value": "ZeroActiveSessions",
+            "description": "Zero Active Sessions"
           }
         ]
       }
@@ -8355,23 +8475,28 @@
         "values": [
           {
             "name": "Initial",
-            "value": "Initial"
+            "value": "Initial",
+            "description": "Update is initializing"
           },
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "Update is pending"
           },
           {
             "name": "Started",
-            "value": "Started"
+            "value": "Started",
+            "description": "Update has started"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Update has succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Update has failed"
           }
         ]
       },

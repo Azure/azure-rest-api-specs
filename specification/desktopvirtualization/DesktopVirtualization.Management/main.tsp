@@ -31,7 +31,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * // FIXME: (missing-service-description) Add service description
+ * This Typespec represents the Desktop Virtualization API interfaces.
  */
 @armProviderNamespace
 @service({
@@ -40,6 +40,11 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DesktopVirtualization;
+
+/**
+ * The operations interface for the Desktop Virtualization API.
+ */
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The available API versions.

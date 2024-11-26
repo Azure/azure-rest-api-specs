@@ -15,9 +15,25 @@ namespace Microsoft.DesktopVirtualization;
  */
 union ProvisioningState {
   string,
+
+  /**
+   *  Provisioning Successful
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * Provisioning in Progress
+   */
   Provisioning: "Provisioning",
+
+  /**
+   * Provisioning Failed
+   */
   Failed: "Failed",
+
+  /**
+   * Provisioning was Canceled
+   */
   Canceled: "Canceled",
 }
 
@@ -26,7 +42,15 @@ union ProvisioningState {
  */
 union PackageTimestamped {
   string,
+
+  /**
+   * Package is timestamped
+   */
   Timestamped: "Timestamped",
+
+  /**
+   * Package is not timestamped, use certificate expiry date
+   */
   NotTimestamped: "NotTimestamped",
 }
 
@@ -35,8 +59,20 @@ union PackageTimestamped {
  */
 union FailHealthCheckOnStagingFailure {
   string,
+
+  /**
+   * Health Check will report unhealthy
+   */
   Unhealthy: "Unhealthy",
+
+  /**
+   * Health Check will report NeedsAssistance
+   */
   NeedsAssistance: "NeedsAssistance",
+
+  /**
+   * Health Check will not report failure
+   */
   DoNotFail: "DoNotFail",
 }
 
@@ -45,7 +81,15 @@ union FailHealthCheckOnStagingFailure {
  */
 union ApplicationGroupType {
   string,
+
+  /**
+   * Application group is Remote and can launch individual applications without a Desktop.
+   */
   RemoteApp: "RemoteApp",
+
+  /**
+   * Application Group delivers a full expected Desktop experience
+   */
   Desktop: "Desktop",
 }
 
@@ -76,7 +120,15 @@ union HostPoolType {
  */
 union PersonalDesktopAssignmentType {
   string,
+
+  /**
+   * Automatically assigns an available personal desktop to the user.
+   */
   Automatic: "Automatic",
+
+  /**
+   * Manually assigns a specific personal desktop to the user.
+   */
   Direct: "Direct",
 }
 
@@ -85,8 +137,20 @@ union PersonalDesktopAssignmentType {
  */
 union LoadBalancerType {
   string,
+
+  /**
+   * Uses BreadthFirst algorithm for load balancing.
+   */
   BreadthFirst: "BreadthFirst",
+
+  /**
+   * Uses DepthFirst algorithm for load balancing.
+   */
   DepthFirst: "DepthFirst",
+
+  /**
+   * Maintains persistent conenctions.
+   */
   Persistent: "Persistent",
 }
 
@@ -95,8 +159,20 @@ union LoadBalancerType {
  */
 union RegistrationTokenOperation {
   string,
+
+  /**
+   * Delete operation
+   */
   Delete: "Delete",
+
+  /**
+   * No Operation
+   */
   None: "None",
+
+  /**
+   * Update Operation
+   */
   Update: "Update",
 }
 
@@ -105,9 +181,25 @@ union RegistrationTokenOperation {
  */
 union SSOSecretType {
   string,
+
+  /**
+   * The SSO Secret is a Shared Key.
+   */
   SharedKey: "SharedKey",
+
+  /**
+   * The SSO Secret is a Certificate.
+   */
   Certificate: "Certificate",
+
+  /**
+   * The SSO Secret is a SharedKey that is stored in KeyVault.
+   */
   SharedKeyInKeyVault: "SharedKeyInKeyVault",
+
+  /**
+   * The SSO Secret is a Certificate that is stored in KeyVault.
+   */
   CertificateInKeyVault: "CertificateInKeyVault",
 }
 
@@ -116,8 +208,20 @@ union SSOSecretType {
  */
 union PreferredAppGroupType {
   string,
+
+  /**
+   *  Internal Use Only
+   */
   None: "None",
+
+  /**
+   * Use Desktop Application Group
+   */
   Desktop: "Desktop",
+
+  /**
+   * Use RailApplications (RemoteApp)
+   */
   RailApplications: "RailApplications",
 }
 
@@ -126,9 +230,25 @@ union PreferredAppGroupType {
  */
 union HostpoolPublicNetworkAccess {
   string,
+
+  /**
+   * Allows this resource to be accessed from the public network
+   */
   Enabled: "Enabled",
+
+  /**
+   * Prevents this resource from being accessed from the public network
+   */
   Disabled: "Disabled",
+
+  /**
+   * Allows SessionHosts to be accessed from the public network
+   */
   EnabledForSessionHostsOnly: "EnabledForSessionHostsOnly",
+
+  /**
+   * Allows Clients to be accessed from the public network
+   */
   EnabledForClientsOnly: "EnabledForClientsOnly",
 }
 
@@ -154,8 +274,20 @@ union SessionHostComponentUpdateType {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
+
+  /**
+   * Connection is Pending
+   */
   Pending: "Pending",
+
+  /**
+   * Connection was Approved
+   */
   Approved: "Approved",
+
+  /**
+   * Connection was rejected
+   */
   Rejected: "Rejected",
 }
 
@@ -164,49 +296,113 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
+
+  /**
+   * Provisioning was successful
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * A PrivateEndpointConnection is being created
+   */
   Creating: "Creating",
+
+  /**
+   * A PrivateEndpointConnection is being deleted
+   */
   Deleting: "Deleting",
+
+  /**
+   * Provisioning failed
+   */
   Failed: "Failed",
 }
 
 /**
- * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+ * Managed Private UDP Connection Settings
  */
 union ManagedPrivateUDP {
   string,
+
+  /**
+   * AVD-wide settings are used to determine connection availability
+   */
   Default: "Default",
+
+  /**
+   * UDP will attempt this connection type when making connections.
+   */
   Enabled: "Enabled",
+
+  /**
+   * UDP will not attempt this connection type when making connections
+   */
   Disabled: "Disabled",
 }
 
 /**
- * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+ * Direct UDP Connection Settings
  */
 union DirectUDP {
   string,
+
+  /**
+   * AVD-wide settings are used to determine connection availability
+   */
   Default: "Default",
+
+  /**
+   * UDP will attempt this connection type when making connections.
+   */
   Enabled: "Enabled",
+
+  /**
+   * UDP will not attempt this connection type when making connections
+   */
   Disabled: "Disabled",
 }
 
 /**
- * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+ * Public UDP Connection Settings
  */
 union PublicUDP {
   string,
+
+  /**
+   * AVD-wide settings are used to determine connection availability
+   */
   Default: "Default",
+
+  /**
+   * UDP will attempt this connection type when making connections.
+   */
   Enabled: "Enabled",
+
+  /**
+   * UDP will not attempt this connection type when making connections
+   */
   Disabled: "Disabled",
 }
 
 /**
- * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+ * Relay UDP Connection Settings
  */
 union RelayUDP {
   string,
+
+  /**
+   * AVD-wide settings are used to determine connection availability
+   */
   Default: "Default",
+
+  /**
+   * UDP will attempt this connection type when making connections.
+   */
   Enabled: "Enabled",
+
+  /**
+   * UDP will not attempt this connection type when making connections
+   */
   Disabled: "Disabled",
 }
 
@@ -222,14 +418,31 @@ union ScalingHostPoolType {
   Pooled: "Pooled",
 }
 
+/**
+ * Days of Week that the Scaling Schedule is active.
+ */
 union ScalingScheduleDaysOfWeekItem {
   string,
+
+  /** Sunday */
   Sunday: "Sunday",
+
+  /** Monday */
   Monday: "Monday",
+
+  /** Tuesday */
   Tuesday: "Tuesday",
+
+  /** Wednesday */
   Wednesday: "Wednesday",
+
+  /** Thursday */
   Thursday: "Thursday",
+
+  /** Friday */
   Friday: "Friday",
+
+  /** Saturday */
   Saturday: "Saturday",
 }
 
@@ -238,7 +451,15 @@ union ScalingScheduleDaysOfWeekItem {
  */
 union SessionHostLoadBalancingAlgorithm {
   string,
+
+  /**
+   * Breadth First Algorithm for Load Balancing
+   */
   BreadthFirst: "BreadthFirst",
+
+  /**
+   * Depth First Algorithm for Load Balancing
+   */
   DepthFirst: "DepthFirst",
 }
 
@@ -247,7 +468,15 @@ union SessionHostLoadBalancingAlgorithm {
  */
 union StopHostsWhen {
   string,
+
+  /**
+   * Zero Total Sessions
+   */
   ZeroSessions: "ZeroSessions",
+
+  /**
+   * Zero Active Sessions
+   */
   ZeroActiveSessions: "ZeroActiveSessions",
 }
 
@@ -256,7 +485,15 @@ union StopHostsWhen {
  */
 union PublicNetworkAccess {
   string,
+
+  /**
+   * This resource is accessible from the public network.
+   */
   Enabled: "Enabled",
+
+  /**
+   * This resource is not accessible from the public network.
+   */
   Disabled: "Disabled",
 }
 
@@ -265,7 +502,15 @@ union PublicNetworkAccess {
  */
 union RemoteApplicationType {
   string,
+
+  /**
+   * Built-in applications
+   */
   InBuilt: "InBuilt",
+
+  /**
+   * Imported MSIX application packages
+   */
   MsixApplication: "MsixApplication",
 }
 
@@ -274,8 +519,20 @@ union RemoteApplicationType {
  */
 union CommandLineSetting {
   string,
+
+  /**
+   * Cannot be launched with command line arguments.
+   */
   DoNotAllow: "DoNotAllow",
+
+  /**
+   * Can optionally be launched with command line arguments.
+   */
   Allow: "Allow",
+
+  /**
+   * Required to be launched with command line arguments.
+   */
   Require: "Require",
 }
 
@@ -284,12 +541,40 @@ union CommandLineSetting {
  */
 union AppAttachPackageArchitectures {
   string,
+
+  /**
+   * ARM 32-bit
+   */
   ARM: "ARM",
+
+  /**
+   * ARM 64-bit
+   */
   ARM64: "ARM64",
+
+  /**
+   * 32-bit x86
+   */
   x86: "x86",
+
+  /**
+   * 64-bit
+   */
   x64: "x64",
+
+  /**
+   * Any architecture can be used
+   */
   Neutral: "Neutral",
+
+  /**
+   * X86 CHPE for ARM64
+   */
   x86a64: "x86a64",
+
+  /**
+   * Select all listed applications, no filters
+   */
   ALL: "ALL",
 }
 
@@ -365,10 +650,30 @@ union Status {
  */
 union UpdateState {
   string,
+
+  /**
+   * Update is initializing
+   */
   Initial: "Initial",
+
+  /**
+   * Update is pending
+   */
   Pending: "Pending",
+
+  /**
+   * Update has started
+   */
   Started: "Started",
+
+  /**
+   * Update has succeeded
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * Update has failed
+   */
   Failed: "Failed",
 }
 
@@ -466,7 +771,15 @@ union HealthCheckResult {
  */
 union ApplicationType {
   string,
+
+  /**
+   * Remote Applications (non-desktop)
+   */
   RemoteApp: "RemoteApp",
+
+  /**
+   * Desktop Applications
+   */
   Desktop: "Desktop",
 }
 
@@ -475,11 +788,35 @@ union ApplicationType {
  */
 union SessionState {
   string,
+
+  /**
+   * SessionState is unknown
+   */
   Unknown: "Unknown",
+
+  /**
+   * Session is active
+   */
   Active: "Active",
+
+  /**
+   * Session is disconnected
+   */
   Disconnected: "Disconnected",
+
+  /**
+   * Session is pending connection
+   */
   Pending: "Pending",
+
+  /**
+   * Session is logging off
+   */
   LogOff: "LogOff",
+
+  /**
+   * Session has mounted user profile disk
+   */
   UserProfileDiskMounted: "UserProfileDiskMounted",
 }
 
@@ -519,8 +856,20 @@ union SetStartVMOnConnect {
  */
 union SessionHandlingOperation {
   string,
+
+  /**
+   * No action will be taken after disconnect
+   */
   None: "None",
+
+  /**
+   * Session Host will be deallocated after disconnect
+   */
   Deallocate: "Deallocate",
+
+  /**
+   * Session Host will hibernate after disconnect
+   */
   Hibernate: "Hibernate",
 }
 
