@@ -121,6 +121,7 @@ model DeidentificationDocumentLocation {
   ...EtagProperty;
 }
 
+// TODO: Add documentation link for customization options.
 @doc("Customizations options to override default service behaviors for job usage.")
 model DeidentificationJobCustomizationOptions {
   ...SharedCustomizationOptions;

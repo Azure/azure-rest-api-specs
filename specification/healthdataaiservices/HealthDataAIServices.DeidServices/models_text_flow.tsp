@@ -32,6 +32,7 @@ model DeidentificationResult {
   taggerResult?: PhiTaggerResult;
 }
 
+// TODO: Add documentation link for customization options.
 @doc("Customizations options to override default service behaviors for synchronous usage.")
 model DeidentificationCustomizationOptions {
   ...SharedCustomizationOptions;
