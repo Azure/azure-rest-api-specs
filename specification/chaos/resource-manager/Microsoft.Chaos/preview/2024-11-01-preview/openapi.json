@@ -74,7 +74,7 @@
   "paths": {
     "/providers/Microsoft.Chaos/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Operations_ListAll",
         "tags": [
           "Operations"
         ],
@@ -96,6 +96,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all Chaos Studio operations.": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1478,7 +1483,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions": {
       "get": {
-        "operationId": "ExperimentExecutions_ListAllExecutions",
+        "operationId": "Experiments_ListAllExecutions",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1517,6 +1522,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all executions of an Experiment.": {
+            "$ref": "./examples/Experiments_ListAllExecutions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1524,7 +1534,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}": {
       "get": {
-        "operationId": "ExperimentExecutions_GetExecution",
+        "operationId": "Experiments_GetExecution",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1570,12 +1580,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the execution of a Experiment.": {
+            "$ref": "./examples/Experiments_GetExecution.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/executionDetails": {
       "post": {
-        "operationId": "ExperimentExecutions_ExecutionDetails",
+        "operationId": "Experiments_ExecutionDetails",
         "tags": [
           "ExperimentExecutions"
         ],
@@ -1620,6 +1635,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get experiment execution details.": {
+            "$ref": "./examples/Experiments_ExecutionDetails.json"
           }
         }
       }
@@ -2050,7 +2070,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnections_ListPrivateEndpointConnections",
+        "operationId": "PrivateAccesses_ListPrivateEndpointConnections",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -2089,6 +2109,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all private endpoint connections under a private access resource.": {
+            "$ref": "./examples/PrivateAccesses_ListPrivateEndpointConnections.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2096,7 +2121,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "PrivateEndpointConnections_GetAPrivateEndpointConnection",
+        "operationId": "PrivateAccesses_GetAPrivateEndpointConnection",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -2142,10 +2167,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get information about a private endpoint connection under a private access resource.": {
+            "$ref": "./examples/PrivateAccesses_GetAPrivateEndpointConnection.json"
+          }
         }
       },
       "delete": {
-        "operationId": "PrivateEndpointConnections_DeleteAPrivateEndpointConnection",
+        "operationId": "PrivateAccesses_DeleteAPrivateEndpointConnection",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -2201,6 +2231,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection under a private access resource.": {
+            "$ref": "./examples/PrivateAccesses_DeleteAPrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation-options": {

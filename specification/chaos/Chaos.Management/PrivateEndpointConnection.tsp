@@ -31,17 +31,23 @@ interface PrivateEndpointConnections {
    * Gets information about a private endpoint connection under a private access resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("PrivateAccesses_GetAPrivateEndpointConnection")
   getAPrivateEndpointConnection is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Deletes a private endpoint connection under a private access resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Linting error - is actually camel-case."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("PrivateAccesses_DeleteAPrivateEndpointConnection")
   deleteAPrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * List information about private endpoint connections under a private access resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("PrivateAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = PrivateEndpointConnectionListResult

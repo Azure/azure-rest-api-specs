@@ -30,11 +30,15 @@ interface ExperimentExecutions {
   /**
    * Get an execution of an Experiment resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("Experiments_GetExecution")
   getExecution is ArmResourceRead<ExperimentExecution>;
 
   /**
    * Get a list of executions of an Experiment resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("Experiments_ListAllExecutions")
   listAllExecutions is ArmResourceListByParent<
     ExperimentExecution,
     Response = ExperimentExecutionListResult
@@ -43,6 +47,8 @@ interface ExperimentExecutions {
   /**
    * Execution details of an experiment resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
+  @operationId("Experiments_ExecutionDetails")
   executionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,

@@ -28,7 +28,7 @@ model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
   @visibility("read")
-  location?: azureLocation;  
+  location?: azureLocation;
 }
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
