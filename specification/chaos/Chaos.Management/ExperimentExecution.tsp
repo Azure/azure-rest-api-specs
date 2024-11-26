@@ -49,7 +49,7 @@ interface ExperimentExecutions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to not break existing SDKs"
   @operationId("Experiments_ExecutionDetails")
-  executionDetails is ArmResourceActionSync<
+  getExecutionDetails is ArmResourceActionSync<
     ExperimentExecution,
     void,
     ExperimentExecutionDetails

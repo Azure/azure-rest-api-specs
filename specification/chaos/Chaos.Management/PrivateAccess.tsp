@@ -80,7 +80,7 @@ interface PrivateAccesses {
    * Gets the private link resources possible under private access resource
    */
   @get
-  getPrivateLinkResources is ArmResourceActionSync<
+  privateLinkResources is ArmResourceActionSync<
     PrivateAccess,
     void,
     PrivateLinkResourceListResult
