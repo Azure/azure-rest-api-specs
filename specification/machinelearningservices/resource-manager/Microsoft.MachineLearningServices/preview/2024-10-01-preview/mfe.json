@@ -22111,23 +22111,6 @@
       },
       "additionalProperties": false
     },
-    "ModelUsageDetails": {
-      "description": "Model usage details.",
-      "type": "object",
-      "properties": {
-        "defaultQuotaUsage": {
-          "format": "int64",
-          "description": "Usage number from default quota",
-          "type": "integer"
-        },
-        "collectionQuotaUsage": {
-          "format": "int64",
-          "description": "Usage number from the collection level quota",
-          "type": "integer"
-        }
-      },
-      "additionalProperties": false
-    },
     "ModelVersion": {
       "description": "Model asset version details.",
       "type": "object",
@@ -23588,6 +23571,37 @@
         }
       },
       "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
+    },
+    "PTUDeploymentUsage": {
+      "type": "object",
+      "properties": {
+        "collectionQuotaUsage": {
+          "format": "int64",
+          "description": "Usage number from the collection level quota",
+          "type": "integer"
+        },
+        "deploymentName": {
+          "description": "Deployment name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "description": "Resource group name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "format": "int64",
+          "description": "Usage number from subscription level quota",
+          "type": "integer"
+        },
+        "workspaceName": {
+          "description": "Workspace name",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "PartialBatchDeployment": {
@@ -26946,7 +26960,6 @@
       "additionalProperties": false
     },
     "UsageAndQuotaDetails": {
-      "description": "Usage and quota details.",
       "type": "object",
       "properties": {
         "quota": {
@@ -26956,16 +26969,9 @@
         },
         "usageDetails": {
           "description": "Usage details for each deployment",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/ModelUsageDetails"
-              }
-            },
-            "x-nullable": true
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PTUDeploymentUsage"
           },
           "x-nullable": true
         }
@@ -26973,7 +26979,6 @@
       "additionalProperties": false
     },
     "UsageAndQuotaProperties": {
-      "description": "Usage and quota properties.",
       "type": "object",
       "properties": {
         "modelCollectionToProperties": {
