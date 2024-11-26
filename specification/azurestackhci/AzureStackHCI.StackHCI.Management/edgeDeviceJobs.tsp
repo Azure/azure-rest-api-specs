@@ -12,12 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+// these contains OS Provisioning Job
+
 @doc("A EdgeDevice")
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
@@ -28,7 +30,7 @@ model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 @doc("EdgeDevice Jobs resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
@@ -65,6 +67,17 @@ interface EdgeDeviceJobs {
 
 ///////////////////models///////////
 
+@doc("Represents the provisioning operating system type.")
+union ProvisioningOsType {
+  string,
+
+  @doc("AzureLinux OS.")
+  AzureLinux: "AzureLinux",
+
+  @doc("HCI OS.")
+  HCI: "HCI",
+}
+
 @doc("Job Type supported by Azure Linux Edge Devices.")
 union AzureLinuxEdgeDeviceJobType {
   string,
@@ -76,6 +89,14 @@ union AzureLinuxEdgeDeviceJobType {
   RemoteSupport: "RemoteSupport",
 }
 
+@doc("Job Type supported by Azure Linux Edge Devices in Restricted operating environment.")
+union AzureLinuxRoeEdgeDeviceJobType {
+  string,
+
+  @doc("Job to provision operating system in the device.")
+  ProvisionOs: "ProvisionOs",
+}
+
 @doc("Job Type supported.")
 union HciEdgeDeviceJobType {
   string,
@@ -85,6 +106,9 @@ union HciEdgeDeviceJobType {
 
   @doc("Job to provide remote support to the device.")
   RemoteSupport: "RemoteSupport",
+
+  @doc("Job to update confidential VM support to the device.")
+  UpdateConfidentialVm: "UpdateConfidentialVm",
 }
 
 @doc("Common Job Types supported.")
@@ -96,6 +120,9 @@ union EdgeDeviceJobType {
 
   @doc("Job to provide remote support to the device.")
   RemoteSupport: "RemoteSupport",
+
+  @doc("Job to establish a remote connection to the device.")
+  RemoteConnect: "RemoteConnect",
 }
 
 @doc("Azure Linux Collect Log Job Properties.")
@@ -175,6 +202,16 @@ model AzureLinuxEdgeDeviceJobProperties {
   jobType: AzureLinuxEdgeDeviceJobType;
 }
 
+@doc("Azure linux edge device job properties in restricted operating environment")
+@discriminator("jobType")
+model AzureLinuxRoeEdgeDeviceJobProperties {
+  ...EdgeDeviceJobProperties;
+
+  @doc("Job Type to support polymorphic resource.")
+  @visibility("create", "read")
+  jobType: AzureLinuxRoeEdgeDeviceJobType;
+}
+
 @doc("Edge device job properties")
 model EdgeDeviceJobProperties {
   @doc("Deployment mode to trigger job.")
@@ -210,6 +247,15 @@ model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
   kind: EdgeDeviceKind.AzureLinux;
 }
 
+@doc("Edge device job for Azure Linux restricted operating environment solution.")
+model AzureLinuxRoeEdgeDeviceJob extends EdgeDeviceJob {
+  @doc("Edge device job properties for restricted operating environment")
+  properties: AzureLinuxRoeEdgeDeviceJobProperties;
+
+  @doc("Edge Solution type to support polymorphic resource.")
+  kind: EdgeDeviceKind.AzureLinuxRoe;
+}
+
 @doc("Represents the properties of an Azure Linux Remote Support job.")
 model AzureLinuxRemoteSupportJobProperties
   extends AzureLinuxEdgeDeviceJobProperties {
@@ -217,6 +263,220 @@ model AzureLinuxRemoteSupportJobProperties
 
   @doc("Job Type to support polymorphic resource.")
   jobType: AzureLinuxEdgeDeviceJobType.RemoteSupport;
+}
+
+@doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
+model AzureLinuxRoeProvisionOsJobProperties
+  extends AzureLinuxRoeEdgeDeviceJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: AzureLinuxRoeEdgeDeviceJobType.ProvisionOs;
+
+  @doc("Os Provisioning request.")
+  provisioningRequest: ProvisioningRequest;
+
+  @doc("Reported Properties for Provision Os job")
+  reportedProperties?: ProvisionOsReportedProperties;
+}
+
+@doc("Reported Properties for Provision Os job")
+model ProvisionOsReportedProperties {
+  ...JobReportedProperties;
+}
+
+@discriminator("target")
+@doc("Represents a provisioning request.")
+model ProvisioningRequest {
+  @doc("Target operating system to support polymorphic resource.")
+  @visibility("create", "read")
+  target: ProvisioningOsType;
+}
+
+@doc("Azure Linux provisioning request.")
+model AzureLinuxProvisioningRequest extends ProvisioningRequest {
+  @doc("Target operating system type to support polymorphic resource.")
+  target: ProvisioningOsType.AzureLinux;
+
+  @doc("Operating system profile.")
+  osProfile: OsProfile;
+
+  @doc("User configuration.")
+  userConfiguration: UserConfiguration;
+
+  @doc("Onboarding configuration.")
+  onboardingConfiguration: OnboardingConfiguration;
+
+  @doc("Device configuration.")
+  deviceConfiguration: DeviceConfiguration;
+}
+
+@doc("HCI provisioning request.")
+model HciProvisioningRequest extends ProvisioningRequest {
+  @doc("Target operating system type to support polymorphic resource.")
+  target: ProvisioningOsType.HCI;
+
+  @doc("Operating system profile.")
+  osProfile: OsProfile;
+
+  @doc("User configuration.")
+  userConfiguration: UserConfiguration;
+
+  @doc("Onboarding configuration.")
+  onboardingConfiguration: OnboardingConfiguration;
+
+  @doc("Device configuration.")
+  deviceConfiguration: DeviceConfiguration;
+}
+
+@doc("Operating system profile.")
+model OsProfile {
+  @doc("Name of the operating system.")
+  osName?: string;
+
+  @doc("Type of the operating system.")
+  osType?: string;
+
+  @doc("Version of the operating system.")
+  osVersion?: string;
+
+  @doc("URL of the operating system image.")
+  osImageUrl?: string;
+}
+
+@doc("User configuration.")
+model UserConfiguration {
+  @doc("Name of the user.")
+  userName: string;
+
+  @doc("Type of the secret used for authentication.")
+  secretType: string;
+
+  @doc("Location of the secret used for authentication.")
+  secretLocation: string;
+}
+
+@doc("Onboarding resource type.")
+union OnboardingResourceType {
+  string,
+
+  @doc("Hybrid Compute Machine.")
+  HybridComputeMachine: "HybridComputeMachine",
+}
+
+@discriminator("type")
+@doc("Onboarding configuration.")
+model OnboardingConfiguration {
+  @doc("Type of the onboarding resource to support polymorphic resource.")
+  @visibility("create", "read")
+  type: OnboardingResourceType;
+}
+
+@doc("Represents properties for hybrid compute machine onboarding resource.")
+model HybridComputeMachineOnboardingConfiguration
+  extends OnboardingConfiguration {
+  @doc("Type of the onboarding resource to support polymorphic resource.")
+  type: OnboardingResourceType.HybridComputeMachine;
+
+  @doc("Resource ID.")
+  resourceId: string;
+
+  @doc("Location of the resource.")
+  location: string;
+
+  @doc("Tenant ID of the resource.")
+  tenantId?: string;
+
+  @doc("Azure Arc virtual machine ID.")
+  arcVirtualMachineId: string;
+}
+
+@doc("Device configuration.")
+model DeviceConfiguration {
+  @doc("Network configuration.")
+  network?: NetworkConfiguration;
+
+  @doc("Hostname of the device.")
+  hostName?: string;
+
+  @doc("Web proxy configuration.")
+  webProxy?: WebProxyConfiguration;
+
+  @doc("Time configuration.")
+  time?: TimeConfiguration;
+}
+
+@doc("Network configuration.")
+model NetworkConfiguration {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("List of network adapters.")
+  networkAdapters: NetworkAdapter[];
+}
+
+@doc("Network adapter configuration.")
+model NetworkAdapter {
+  @doc("Type of IP assignment.")
+  ipAssignmentType: IpAssignmentType;
+
+  @doc("IP address.")
+  ipAddress?: string;
+
+  @doc("IP address range.")
+  ipAddressRange?: IpAddressRange;
+
+  @doc("Gateway id.")
+  gateway?: string;
+
+  @doc("Subnet mask.")
+  subnetMask?: string;
+
+  @doc("Array of DNS addresses.")
+  dnsAddressArray?: string[];
+
+  @doc("VLAN ID for the network setup.")
+  vlanId?: string;
+}
+
+@doc("IP assignment types")
+union IpAssignmentType {
+  string,
+
+  @doc("Automatic IP assignment")
+  Automatic: "Automatic",
+
+  @doc("Manual IP assignment")
+  Manual: "Manual",
+}
+
+@doc("IP address range configuration.")
+model IpAddressRange {
+  @doc("Start IP address.")
+  startIp: string;
+
+  @doc("End IP address.")
+  endIp: string;
+}
+
+@doc("Web proxy configuration.")
+model WebProxyConfiguration {
+  @doc("Connection URI of the web proxy.")
+  connectionUri?: string;
+
+  @doc("Port of the web proxy.")
+  port?: string;
+
+  @doc("Bypass list for the web proxy.")
+  bypassList?: string[];
+}
+
+@doc("Time configuration.")
+model TimeConfiguration {
+  @doc("Primary NTP server.")
+  primaryTimeServer?: string;
+
+  @doc("Secondary NTP server.")
+  secondaryTimeServer?: string;
+
+  @doc("Time zone.")
+  timeZone?: string;
 }
 
 @doc("Represents the reported properties of a remote support job.")
@@ -304,6 +564,15 @@ model HciCollectLogJobProperties extends HciEdgeDeviceJobProperties {
   jobType: HciEdgeDeviceJobType.CollectLog;
 }
 
+@doc("Represents the properties of an HCI Update Confidential Vm job.")
+model HciUpdateConfidentialVmProperties extends HciEdgeDeviceJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: HciEdgeDeviceJobType.UpdateConfidentialVm;
+
+  @doc("Defines the customer's intent for updating confidential VM properties")
+  confidentialVmIntent: ConfidentialVmIntent;
+}
+
 @discriminator("jobType")
 @doc("HCI Edge device job properties")
 model HciEdgeDeviceJobProperties {
@@ -345,4 +614,13 @@ model RemoteSupportJobProperties {
   @doc("log collection job reported properties.")
   @visibility("read")
   reportedProperties?: RemoteSupportReportedProperties;
+}
+
+@doc("Defines the customer's intent for updating confidential VM properties")
+union ConfidentialVmIntent {
+  @doc("Intent provided as a string.")
+  string,
+
+  @doc("Enable confidential VM properties on device")
+  Enable: "Enable",
 }

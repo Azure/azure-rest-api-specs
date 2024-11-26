@@ -1,5 +1,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -129,6 +131,10 @@ union PortType {
   @doc("PortType DestinationPort")
   DestinationPort: "DestinationPort",
 
+  @added(Versions.v2024_06_15_preview)
+  @doc("PortType Bidirectional")
+  Bidirectional: "Bidirectional",
+
   string,
 }
 
@@ -140,6 +146,10 @@ union Layer4Protocol {
   @doc("UDP(User Datagram Protocol) Protocol")
   UDP: "UDP",
 
+  @doc("SCTP(Streaming Control Transmission Protocol) Protocol")
+  @added(Versions.v2024_06_15_preview)
+  SCTP: "SCTP",
+
   string,
 }
 
@@ -150,6 +160,10 @@ union SourceDestinationType {
 
   @doc("SourceDestinationType DestinationIP")
   DestinationIP: "DestinationIP",
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("SourceDestinationType Bidirectional")
+  Bidirectional: "Bidirectional",
 
   string,
 }
@@ -519,6 +533,16 @@ model CommonPostActionResponseForDeviceRWCommands {
 @doc("Import Route Policy Configuration.")
 model ImportRoutePolicyInformation {
   @doc("Import IPv4 Route Policy Id.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importIpv4RoutePolicyId")
+  importIpv4RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("Import IPv4 Route Policy Id.")
+  @added(Versions.v2024_06_15_preview)
   importIpv4RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -526,6 +550,16 @@ model ImportRoutePolicyInformation {
   ]>;
 
   @doc("Import IPv6 Route Policy Id.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importIpv6RoutePolicyId")
+  importIpv6RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("Import IPv6 Route Policy Id.")
+  @added(Versions.v2024_06_15_preview)
   importIpv6RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -539,6 +573,16 @@ model ImportRoutePolicyInformationPatch is ImportRoutePolicyInformation;
 @doc("Export Route Policy Configuration.")
 model ExportRoutePolicyInformation {
   @doc("Export IPv4 Route Policy Id.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportIpv4RoutePolicyId")
+  exportIpv4RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("Export IPv4 Route Policy Id.")
+  @added(Versions.v2024_06_15_preview)
   exportIpv4RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -546,6 +590,16 @@ model ExportRoutePolicyInformation {
   ]>;
 
   @doc("Export IPv6 Route Policy Id.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportIpv6RoutePolicyId")
+  exportIpv6RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("Export IPv6 Route Policy Id.")
+  @added(Versions.v2024_06_15_preview)
   exportIpv6RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -585,18 +639,26 @@ model Layer3IpPrefixProperties {
   primaryIpv4Prefix?: string;
 
   @doc("IPv6 Address Prefix.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "primaryIpv6Prefix")
+  primaryIpv6PrefixPreview?: string;
+
+  @doc("IPv6 Address Prefix.")
+  @added(Versions.v2024_06_15_preview)
   primaryIpv6Prefix?: string;
 
   @doc("Secondary IPv4 Address Prefix.")
   secondaryIpv4Prefix?: string;
 
   @doc("Secondary IPv6 Address Prefix.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "secondaryIpv6Prefix")
+  secondaryIpv6PrefixPreview?: string;
+
+  @doc("Secondary IPv6 Address Prefix.")
+  @added(Versions.v2024_06_15_preview)
   secondaryIpv6Prefix?: string;
 }
-
-@doc("BFD configuration properties")
-@withoutDefaultValues
-model BfdPatchConfiguration is BfdConfiguration;
 
 @doc("BFD configuration properties")
 model BfdConfiguration {
@@ -609,6 +671,19 @@ model BfdConfiguration {
 
   @doc("Multiplier for the Bfd Configuration. Example: 5.")
   multiplier?: int32 = 5;
+}
+
+@doc("BFD configuration properties")
+model BfdPatchConfiguration {
+  @doc("Administrative state of the BfdConfiguration. Example: Enabled | Disabled.")
+  @visibility("read")
+  administrativeState?: BfdAdministrativeState;
+
+  @doc("Interval in milliseconds. Example: 300.")
+  intervalInMilliSeconds?: int32;
+
+  @doc("Multiplier for the Bfd Configuration. Example: 5.")
+  multiplier?: int32;
 }
 
 @doc("Route Properties.")
@@ -643,22 +718,36 @@ model RouteTargetInformation {
 @doc("Route Target Configuration.")
 model RouteTargetPatchInformation is RouteTargetInformation;
 
-/**
- * Import Route Policy either IPv4 or IPv6.
- */
+@doc("Import Route Policy either IPv4 or IPv6.")
 model ImportRoutePolicy {
-  /**
-   * ARM resource ID of RoutePolicy.
-   */
+  @doc("ARM resource ID of RoutePolicy.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importIpv4RoutePolicyId")
+  importIpv4RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("ARM resource ID of RoutePolicy.")
+  @added(Versions.v2024_06_15_preview)
   importIpv4RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * ARM resource ID of RoutePolicy.
-   */
+  @doc("ARM resource ID of RoutePolicy.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importIpv6RoutePolicyId")
+  importIpv6RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("ARM resource ID of RoutePolicy.")
+  @added(Versions.v2024_06_15_preview)
   importIpv6RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -669,22 +758,36 @@ model ImportRoutePolicy {
 @doc("Import Route Policy either IPv4 or IPv6.")
 model ImportRoutePolicyPatch is ImportRoutePolicy;
 
-/**
- * Export Route Policy either IPv4 or IPv6.
- */
+@doc("Export Route Policy either IPv4 or IPv6.")
 model ExportRoutePolicy {
-  /**
-   * ARM resource ID of RoutePolicy.
-   */
+  @doc("ARM resource ID of RoutePolicy.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportIpv4RoutePolicyId")
+  exportIpv4RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("ARM resource ID of RoutePolicy.")
+  @added(Versions.v2024_06_15_preview)
   exportIpv4RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * ARM resource ID of RoutePolicy.
-   */
+  @doc("ARM resource ID of RoutePolicy.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportIpv6RoutePolicyId")
+  exportIpv6RoutePolicyIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/routePolicies";
+    }
+  ]>;
+
+  @doc("ARM resource ID of RoutePolicy.")
+  @added(Versions.v2024_06_15_preview)
   exportIpv6RoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -694,3 +797,127 @@ model ExportRoutePolicy {
 
 @doc("Export Route Policy either IPv4 or IPv6.")
 model ExportRoutePolicyPatch is ExportRoutePolicy;
+
+@doc("Static Route Configuration properties.")
+model StaticRouteConfiguration {
+  @doc("BFD configuration properties")
+  bfdConfiguration?: BfdConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRouteProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRouteProperties[];
+
+  @doc("Extension. Example: NoExtension | NPB.")
+  extension?: Extension = Extension.NoExtension;
+}
+
+@doc("Static Route Configuration properties.")
+model StaticRoutePatchConfiguration {
+  @doc("BFD configuration properties")
+  bfdConfiguration?: BfdPatchConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRoutePatchProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRoutePatchProperties[];
+}
+
+@added(Versions.v2024_06_15_preview)
+@doc("The managed service identities assigned to this resource.")
+model ManagedServiceIdentityPatch
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
+@added(Versions.v2024_06_15_preview)
+@doc("IdentitySelector represents the selection of a managed identity for use.")
+model IdentitySelector {
+  @doc("The type of managed identity that is being selected.")
+  identityType: ManagedServiceIdentitySelectorType;
+
+  @doc("The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.")
+  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2024_06_15_preview)
+@doc("IdentitySelector represents the selection of a managed identity for use.")
+model IdentitySelectorPatch {
+  @doc("The type of managed identity that is being selected.")
+  identityType?: ManagedServiceIdentitySelectorType;
+
+  @doc("The user assigned managed identity resource ID to use. Mutually exclusive with a system assigned identity type.")
+  userAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@doc("The type of managed identity.")
+@added(Versions.v2024_06_15_preview)
+union ManagedServiceIdentitySelectorType {
+  @doc("System Assigned Identity.")
+  SystemAssignedIdentity: "SystemAssignedIdentity",
+
+  @doc("User Assigned Identity.")
+  UserAssignedIdentity: "UserAssignedIdentity",
+
+  string,
+}
+
+@doc("Unique Route Distinguisher Configuration State.")
+@added(Versions.v2024_06_15_preview)
+union UniqueRouteDistinguisherConfigurationState {
+  @doc("UniqueRouteDistinguisherConfigurationState Enabled")
+  Enabled: "Enabled",
+
+  @doc("UniqueRouteDistinguisherConfigurationState Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("NNI Derived Unique Route Distinguisher Configuration State.")
+@added(Versions.v2024_06_15_preview)
+union NNIDerivedUniqueRouteDistinguisherConfigurationState {
+  @doc("NNI derived unique route distinguisher configuration state Enabled")
+  Enabled: "Enabled",
+
+  @doc("NNI derived unique route distinguisher configuration state Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("BGP Monitoring Protocol (BMP) configuration state.")
+@added(Versions.v2024_06_15_preview)
+union BmpConfigurationState {
+  @doc("BGP Monitoring Protocol (BMP) ConfigurationState - Enabled")
+  Enabled: "Enabled",
+
+  @doc("BGP Monitoring Protocol (BMP) ConfigurationState - Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Border Gateway Protocol (BGP) Administrative State values")
+@added(Versions.v2024_06_15_preview)
+union BgpAdministrativeState {
+  @doc("BgpAdministrativeState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("BgpAdministrativeState-Disabled")
+  Disabled: "Disabled",
+
+  string,
+}

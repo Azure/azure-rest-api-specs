@@ -1,0 +1,105 @@
+{
+  "title": "Get Windows Images list",
+  "operationId": "WindowsImages_List",
+  "parameters": {
+    "subscriptionId": "e12d9eff-5d52-4dc4-b4a0-a0c285c01e2e",
+    "api-version": "2024-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.WindowsImageBuilder/WindowsImages/myImage",
+            "name": "myImage",
+            "location": "westus",
+            "type": "Microsoft.WindowsImageBuilder/WindowsImages",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "source": {
+                "os": "Windows server 2022",
+                "edition": "Server Data Center",
+                "arch": "amd64fre",
+                "language": "en-us",
+                "size": 30,
+                "generation": "Gen1",
+                "trigger": true,
+                "type": "MediaFactoryImage"
+              },
+              "customize": [
+                {
+                  "type": "Shell",
+                  "name": "Shell customization example",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "runOutputName": "image_it_pir_1",
+                  "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+                  "artifactTags": {
+                    "tagName": "value"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myOtherResourceGroup/providers/Microsoft.WindowsImageBuilder/WindowsImages/mySecondImage",
+            "name": "mySecondImageTemplate",
+            "location": "westus",
+            "type": "Microsoft.WindowsImageBuilder/WindowsImages",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "source": {
+                "os": "Windows server 2022",
+                "edition": "Server Data Center",
+                "arch": "amd64fre",
+                "language": "en-us",
+                "size": 30,
+                "generation": "Gen1",
+                "trigger": true,
+                "type": "MediaFactoryImage"
+              },
+              "customize": [
+                {
+                  "type": "Shell",
+                  "name": "Shell customization example",
+                  "scriptUri": "https://example.com/path/to/script.sh"
+                }
+              ],
+              "distribute": [
+                {
+                  "type": "ManagedImage",
+                  "runOutputName": "eus",
+                  "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/mySecondImage-eus",
+                  "artifactTags": {
+                    "tagName": "value"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/e12d9eff-5d52-4dc4-b4a0-a0c285c01e2e/resourceGroup/myResourceGroup/providers/Microsoft.WindowsImageBuilder/WindowsImages?api-version=2024-08-22-preview&skip-token=22"
+      }
+    }
+  }
+}

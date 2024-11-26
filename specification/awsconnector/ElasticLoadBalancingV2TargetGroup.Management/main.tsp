@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- ElasticLoadBalancingV2TargetGroups ----------------------------------------------
@@ -214,7 +214,7 @@ model TargetDescription {
 interface ElasticLoadBalancingV2TargetGroups {
   get is ArmResourceRead<ElasticLoadBalancingV2TargetGroup>;
   @doc("Create a ElasticLoadBalancingV2TargetGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticLoadBalancingV2TargetGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ElasticLoadBalancingV2TargetGroup>;
   update is ArmCustomPatchAsync<
     ElasticLoadBalancingV2TargetGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticLoadBalancingV2TargetGroup>

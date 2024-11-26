@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- IamVirtualMFADevices ----------------------------------------------
@@ -107,7 +107,7 @@ model Tag {
 interface IamVirtualMFADevices {
   get is ArmResourceRead<IamVirtualMFADevice>;
   @doc("Create a IamVirtualMFADevice. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<IamVirtualMFADevice>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<IamVirtualMFADevice>;
   update is ArmCustomPatchAsync<
     IamVirtualMFADevice,
     Azure.ResourceManager.Foundations.TagsUpdateModel<IamVirtualMFADevice>
