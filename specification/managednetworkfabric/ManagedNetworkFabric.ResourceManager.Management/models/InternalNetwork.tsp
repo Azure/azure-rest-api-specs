@@ -1,281 +1,269 @@
 import "./common.tsp";
 
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Internal Network Properties defines the properties of the resource.
- */
+@doc("Internal Network Properties defines the properties of the resource.")
 model InternalNetworkProperties {
   ...AnnotationResource;
 
-  /**
-   * Maximum transmission unit. Default value is 1500.
-   */
+  @doc("Maximum transmission unit. Default value is 1500.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32 = 1500;
 
-  /**
-   * List of Connected IPv4 Subnets.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of Connected IPv4 Subnets.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   connectedIPv4Subnets?: ConnectedSubnet[];
 
-  /**
-   * List of connected IPv6 Subnets.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of connected IPv6 Subnets.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   connectedIPv6Subnets?: ConnectedSubnet[];
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   importRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   exportRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * Import Route Policy either IPv4 or IPv6.
-   */
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicy;
+
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicy;
 
-  /**
-   * Export Route Policy either IPv4 or IPv6.
-   */
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicy;
+
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicy;
 
-  /**
-   * Ingress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * Egress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * To check whether monitoring of internal network is enabled or not.
-   */
+  @doc("To check whether monitoring of internal network is enabled or not.")
   isMonitoringEnabled?: IsMonitoringEnabled = IsMonitoringEnabled.False;
 
   @doc("Extension. Example: NoExtension | NPB.")
   extension?: Extension = Extension.NoExtension;
 
-  /**
-   * Vlan identifier. Example: 1001.
-   */
+  @doc("Vlan identifier. Example: 1001.")
   @maxValue(4094)
   @minValue(100)
   vlanId: int32;
 
-  /**
-   * BGP configuration properties.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("V4 over V6 bgp session.")
+  v4overV6BgpSessionState?: V4OverV6BgpSessionState = V4OverV6BgpSessionState.Enabled;
+
+  @doc("v6 over v4 bgp session.")
+  @added(Versions.v2024_06_15_preview)
+  v6overV4BgpSessionState?: V6OverV4BgpSessionState = V6OverV4BgpSessionState.Enabled;
+
+  @doc("BGP configuration properties.")
   bgpConfiguration?: BgpConfiguration;
 
-  /**
-   * Static Route Configuration properties.
-   */
+  @doc("Static Route Configuration properties.")
   staticRouteConfiguration?: StaticRouteConfiguration;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("Native IPv4 Prefix Limit Configuration properties.")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv4PrefixLimit?: NativeIpv4PrefixLimitProperties;
+
+  @doc("Native IPv6 Prefix Limit Configuration properties.")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitProperties;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * BGP configuration properties
- */
+@doc("BGP configuration properties")
 model BgpConfiguration {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...AnnotationResource;
 
-  /**
-   * BFD configuration properties
-   */
+  @doc("BFD configuration properties")
   bfdConfiguration?: BfdConfiguration;
 
-  /**
-   * Originate a defaultRoute. Ex: "True" | "False".
-   */
+  @doc("Originate a defaultRoute. Ex: \"True\" | \"False\".")
   defaultRouteOriginate?: BooleanEnumProperty;
 
-  /**
-   * Allows for routes to be received and processed even if the router detects its own ASN in the AS-Path. 0 is disable, Possible values are 1-10, default is 2.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Allows for routes to be received and processed even if the router detects its own ASN in the AS-Path. 0 is disable, Possible values are 1-10, default is 2.")
   @maxValue(10)
   @minValue(0)
   allowAS?: int32 = 2;
 
-  /**
-   * Enable Or Disable state.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Enable Or Disable state.")
   allowASOverride?: AllowASOverride;
 
-  /**
-   * ASN of Network Fabric. Example: 65048.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of Network Fabric. Example: 65048.")
   @visibility("read")
   fabricASN?: int64;
 
-  /**
-   * Peer ASN. Example: 65047.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Peer ASN. Example: 65047.")
   @maxValue(4294967295)
   @minValue(1)
   peerASN: int64;
 
-  /**
-   * List of BGP IPv4 Listen Range prefixes.
-   */
+  @doc("List of BGP IPv4 Listen Range prefixes.")
   ipv4ListenRangePrefixes?: string[];
 
-  /**
-   * List of BGP IPv6 Listen Ranges prefixes.
-   */
+  @doc("List of BGP IPv6 Listen Ranges prefixes.")
   ipv6ListenRangePrefixes?: string[];
 
-  /**
-   * List with stringified IPv4 Neighbor Addresses.
-   */
+  @doc("List with stringified IPv4 Neighbor Addresses.")
   @OpenAPI.extension("x-ms-identifiers", ["address"])
   ipv4NeighborAddress?: NeighborAddress[];
 
-  /**
-   * List with stringified IPv6 Neighbor Address.
-   */
+  @doc("List with stringified IPv6 Neighbor Address.")
   @OpenAPI.extension("x-ms-identifiers", ["address"])
   ipv6NeighborAddress?: NeighborAddress[];
+
+  @doc("InternalNetwork BMP Configuration")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: InternalNetworkBmpProperties;
 }
 
-/**
- * BGP configuration properties.
- */
+@doc("BGP configuration properties.")
 model BgpPatchConfiguration {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...AnnotationResource;
 
-  /**
-   * BFD configuration properties
-   */
+  @doc("BFD configuration properties")
   bfdConfiguration?: BfdPatchConfiguration;
 
-  /**
-   * Originate a defaultRoute. Ex: "True" | "False".
-   */
+  @doc("Originate a defaultRoute. Ex: \"True\" | \"False\".")
   defaultRouteOriginate?: BooleanEnumProperty;
 
-  /**
-   * Allows for routes to be received and processed even if the router detects its own ASN in the AS-Path. 0 is disable, Possible values are 1-10, default is 2.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Allows for routes to be received and processed even if the router detects its own ASN in the AS-Path. 0 is disable, Possible values are 1-10, default is 2.")
   @maxValue(10)
   @minValue(0)
   allowAS?: int32;
 
-  /**
-   * Enable Or Disable state.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Enable Or Disable state.")
   allowASOverride?: AllowASOverride;
 
-  /**
-   * ASN of Network Fabric. Example: 65048.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of Network Fabric. Example: 65048.")
   @visibility("read")
   fabricASN?: int64;
 
-  /**
-   * Peer ASN. Example: 65047.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Peer ASN. Example: 65047.")
   @maxValue(4294967295)
   @minValue(1)
   peerASN?: int64;
 
-  /**
-   * List of BGP IPv4 Listen Range prefixes.
-   */
+  @doc("List of BGP IPv4 Listen Range prefixes.")
   ipv4ListenRangePrefixes?: string[];
 
-  /**
-   * List of BGP IPv6 Listen Ranges prefixes.
-   */
+  @doc("List of BGP IPv6 Listen Ranges prefixes.")
   ipv6ListenRangePrefixes?: string[];
 
-  /**
-   * List with stringified IPv4 Neighbor Addresses.
-   */
+  @doc("List with stringified IPv4 Neighbor Addresses.")
   @OpenAPI.extension("x-ms-identifiers", ["address"])
   ipv4NeighborAddress?: NeighborAddressPatch[];
 
-  /**
-   * List with stringified IPv6 Neighbor Address.
-   */
+  @doc("List with stringified IPv6 Neighbor Address.")
   @OpenAPI.extension("x-ms-identifiers", ["address"])
   ipv6NeighborAddress?: NeighborAddressPatch[];
+
+  @doc("InternalNetwork BMP Configuration")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: InternalNetworkBmpPatchProperties;
 }
 
-/**
- * Neighbor Address properties.
- */
+@doc("Neighbor Address properties.")
 model NeighborAddress {
-  /**
-   * IP Address.
-   */
+  @doc("IP Address.")
   @minLength(1)
   address?: string;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("BFD Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
+  @added(Versions.v2024_06_15_preview)
+  @visibility("read")
+  bfdAdministrativeState?: BfdAdministrativeState;
+
+  @doc("BGP Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
+  @added(Versions.v2024_06_15_preview)
+  @visibility("read")
+  bgpAdministrativeState?: BgpAdministrativeState;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 }
@@ -283,65 +271,14 @@ model NeighborAddress {
 @doc("Neighbor Address properties.")
 model NeighborAddressPatch is NeighborAddress;
 
-/**
- * Static Route Configuration properties.
- */
-model StaticRouteConfiguration {
-  /**
-   * BFD configuration properties
-   */
-  bfdConfiguration?: BfdConfiguration;
-
-  /**
-   * List of IPv4 Routes.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
-  ipv4Routes?: StaticRouteProperties[];
-
-  /**
-   * List of IPv6 Routes.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
-  ipv6Routes?: StaticRouteProperties[];
-
-  @doc("Extension. Example: NoExtension | NPB.")
-  extension?: Extension = Extension.NoExtension;
-}
-
-/**
- * Static Route Configuration properties.
- */
-model StaticRoutePatchConfiguration {
-  /**
-   * BFD configuration properties
-   */
-  bfdConfiguration?: BfdPatchConfiguration;
-
-  /**
-   * List of IPv4 Routes.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
-  ipv4Routes?: StaticRoutePatchProperties[];
-
-  /**
-   * List of IPv6 Routes.
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
-  ipv6Routes?: StaticRoutePatchProperties[];
-}
-
-/**
- * Connected Subnet properties.
- */
+@doc("Connected Subnet properties.")
 model ConnectedSubnet {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...AnnotationResource;
 
-  /**
-   * Prefix of the Connected Subnet.
-   */
+  @doc("Prefix of the Connected Subnet.")
   @minLength(1)
   prefix: string;
 }
@@ -349,110 +286,128 @@ model ConnectedSubnet {
 @doc("Connected Subnet properties.")
 model ConnectedSubnetPatch is ConnectedSubnet;
 
-/**
- * The InternalNetwork patch resource definition.
- */
+@doc("The InternalNetwork patch resource definition.")
 model InternalNetworkPatch {
-  /**
-   * InternalNetwork Patch properties.
-   */
+  @doc("InternalNetwork Patch properties.")
   properties?: InternalNetworkPatchProperties;
 }
 
-/**
- * InternalNetwork Patch properties.
- */
+@doc("InternalNetwork Patch properties.")
 model InternalNetworkPatchProperties {
   ...AnnotationResource;
 
-  /**
-   * Maximum transmission unit. Default value is 1500.
-   */
+  @doc("Maximum transmission unit. Default value is 1500.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32;
 
-  /**
-   * List of Connected IPv4 Subnets.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of Connected IPv4 Subnets.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   connectedIPv4Subnets?: ConnectedSubnetPatch[];
 
-  /**
-   * List of connected IPv6 Subnets.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("List of connected IPv6 Subnets.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   connectedIPv6Subnets?: ConnectedSubnetPatch[];
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   importRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   exportRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * Import Route Policy either IPv4 or IPv6.
-   */
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicy;
+
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicy;
 
-  /**
-   * Export Route Policy either IPv4 or IPv6.
-   */
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicy;
+
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicy;
 
-  /**
-   * Ingress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * Egress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * To check whether monitoring of internal network is enabled or not.
-   */
+  @doc("To check whether monitoring of internal network is enabled or not.")
   isMonitoringEnabled?: IsMonitoringEnabled;
 
-  /**
-   * BGP configuration properties.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("V4 over V6 bgp session.")
+  v4overV6BgpSessionState?: V4OverV6BgpSessionState;
+
+  @doc("v6 over v4 bgp session.")
+  @added(Versions.v2024_06_15_preview)
+  v6overV4BgpSessionState?: V6OverV4BgpSessionState;
+
+  @doc("BGP configuration properties.")
   bgpConfiguration?: BgpPatchConfiguration;
 
-  /**
-   * Static Route Configuration properties.
-   */
+  @doc("Static Route Configuration properties.")
   staticRouteConfiguration?: StaticRoutePatchConfiguration;
+
+  @doc("Native IPv4 Prefix Limit Configuration properties.")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv4PrefixLimit?: NativeIpv4PrefixLimitPatchProperties;
+
+  @doc("Native IPv6 Prefix Limit Configuration properties.")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitPatchProperties;
 }
 
-/**
- * Extension. Example: NoExtension | NPB.
- */
+@doc("Extension. Example: NoExtension | NPB.")
 union Extension {
   @doc("Extension-NoExtension")
   NoExtension: "NoExtension",
@@ -463,9 +418,7 @@ union Extension {
   string,
 }
 
-/**
- * Enable Or Disable state.
- */
+@doc("Enable Or Disable state.")
 union AllowASOverride {
   @doc("AllowASOverride-Enable")
   Enable: "Enable",
@@ -476,15 +429,201 @@ union AllowASOverride {
   string,
 }
 
-/**
- * To check whether monitoring of internal network is enabled or not.
- */
+@doc("To check whether monitoring of internal network is enabled or not.")
 union IsMonitoringEnabled {
   @doc("IsMonitoringEnabled-True")
   True: "True",
 
   @doc("IsMonitoringEnabled-False")
   False: "False",
+
+  string,
+}
+
+@doc("Internal Network Administrative State Request")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBgpAdministrativeStateRequest {
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BGP Administrative state.")
+  administrativeState?: BgpAdministrativeState;
+}
+
+@doc("Internal Network Administrative State Response")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBgpAdministrativeStateResponse {
+  // The response contains an array of objects. Each object contains the neighbor address and the state.
+  // The response is an array of objects because the request can contain multiple neighbor addresses.
+  @doc("NeighborAddress administrative status")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  neighborAddressAdministrativeStatus?: NeighborAddressBgpAdministrativeStatus[];
+
+  ...ErrorResponse;
+}
+
+@doc("Internal Network BFD Administrative State request")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBfdAdministrativeStateRequest {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: InternalNetworkRouteType;
+
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BFD Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("Internal Network BFD Administrative State response")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBfdAdministrativeStateResponse {
+  // The response contains an array of objects. Each object contains the neighbor address and the state.
+  // The response is an array of objects because the request can contain multiple neighbor addresses.
+  @doc("NeighborAddress administrative status")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  neighborAddressAdministrativeStatus?: NeighborAddressBfdAdministrativeStatus[];
+
+  ...ErrorResponse;
+}
+
+@doc("Internal Network RouteType.")
+@added(Versions.v2024_06_15_preview)
+union InternalNetworkRouteType {
+  @doc("InternalNetwork Static.")
+  Static: "Static",
+
+  @doc("InternalNetwork Bgp.")
+  Bgp: "Bgp",
+
+  string,
+}
+
+@doc("Internal Network BMP Configuration")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBmpProperties {
+  @doc("BMP Collector Address.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  neighborIpExclusions?: string[];
+
+  @doc("BMP Monitoring configuration state.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfigurationState?: BmpConfigurationState;
+}
+
+@doc("Internal Network BMP Configuration")
+@added(Versions.v2024_06_15_preview)
+model InternalNetworkBmpPatchProperties is InternalNetworkBmpProperties;
+
+@doc("Native IPv4 Prefix Limit Configuration properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv4PrefixLimitProperties {
+  @doc("IPv4 Prefix Limit Configuration properties.")
+  ipv4AddrPrefixLimit?: PrefixLimitProperties;
+
+  @doc("IPv6 Prefix Limit Configuration properties.")
+  ipv6AddrPrefixLimit?: PrefixLimitProperties;
+}
+
+@doc("Native IPv4 Prefix Limit Configuration patch properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv4PrefixLimitPatchProperties {
+  @doc("IPv4 Prefix Limit Configuration properties.")
+  ipv4AddrPrefixLimit?: PrefixLimitPatchProperties;
+
+  @doc("IPv6 Prefix Limit Configuration properties.")
+  ipv6AddrPrefixLimit?: PrefixLimitPatchProperties;
+}
+
+@doc("Native IPv6 Prefix Limit Configuration properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv6PrefixLimitProperties {
+  @doc("IPv4 Prefix Limit Configuration properties.")
+  ipv4AddrPrefixLimit?: PrefixLimitProperties;
+
+  @doc("IPv6 Prefix Limit Configuration properties.")
+  ipv6AddrPrefixLimit?: PrefixLimitProperties;
+}
+
+@doc("Native IPv6 Prefix Limit Configuration patch properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv6PrefixLimitPatchProperties {
+  @doc("IPv4 Prefix Limit Configuration properties.")
+  ipv4AddrPrefixLimit?: PrefixLimitPatchProperties;
+
+  @doc("IPv6 Prefix Limit Configuration properties.")
+  ipv6AddrPrefixLimit?: PrefixLimitPatchProperties;
+}
+
+@doc("Prefix Limit Configuration properties")
+@added(Versions.v2024_06_15_preview)
+model PrefixLimitProperties {
+  @doc("Limit at which route prefixes are deleted and recreated.")
+  hardLimit?: int32;
+
+  @doc("Limit at which route prefixes a warning is generate.")
+  softLimit?: int32;
+
+  @doc("Idle Time Expiry in seconds, default is 60.")
+  @maxValue(4294967295)
+  @minValue(60)
+  idleTimeExpiry?: int32 = 60;
+}
+
+@doc("Prefix Limit Configuration properties")
+@added(Versions.v2024_06_15_preview)
+@withoutDefaultValues
+model PrefixLimitPatchProperties is PrefixLimitProperties;
+
+@doc("Neighbor Address BGP Administrative Status")
+@added(Versions.v2024_06_15_preview)
+model NeighborAddressBgpAdministrativeStatus {
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BGP Administrative state.")
+  administrativeState?: BgpAdministrativeState;
+
+  @doc("Error message.")
+  error?: string;
+}
+
+@doc("Neighbor Address Bidirectional Forwarding Detection (BFD) Administrative Status")
+@added(Versions.v2024_06_15_preview)
+model NeighborAddressBfdAdministrativeStatus {
+  @doc("NeighborAddress - Input should be either All or Specific Ipv4 Address or Specific Ipv6 Address.")
+  neighborAddress?: string;
+
+  @doc("BFD Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+
+  @doc("Error message.")
+  error?: string;
+}
+
+@doc("V4 over V6 BGP session state")
+@added(Versions.v2024_06_15_preview)
+union V4OverV6BgpSessionState {
+  @doc("V4OverV6BgpSessionState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("V4OverV6BgpSessionState-Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("V6 over V4 BGP session state")
+@added(Versions.v2024_06_15_preview)
+union V6OverV4BgpSessionState {
+  @doc("V6OverV4BgpSessionState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("V6OverV4BgpSessionState-Disabled")
+  Disabled: "Disabled",
 
   string,
 }

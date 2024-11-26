@@ -444,6 +444,10 @@
           "x-ms-identifiers": [
             "localAvailabilityZoneName"
           ]
+        },
+        "assemblyInfo": {
+          "$ref": "#/definitions/AssemblyInfo",
+          "description": "Assembly Package details for Validated Solution Recipe for AzureStackHCI Cluster"
         }
       }
     },
@@ -758,6 +762,56 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
+        },
+        "confidentialVmIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
+          "description": "Intent to enable CVM capability during Cloud Deployment"
+        }
+      }
+    },
+    "AssemblyInfo": {
+      "type": "object",
+      "description": "Assembly Package details for Validated Solution Recipe for AzureStackHCI Cluster",
+      "properties": {
+        "packageVersion": {
+          "type": "string",
+          "description": "Assembly Package version for Validated Solution Recipe for AzureStackHCI Cluster",
+          "readOnly": true
+        },
+        "payload": {
+          "type": "array",
+          "description": "Payload properties for Validated Solution Recipe for AzureStackHCI Cluster",
+          "items": {
+            "$ref": "#/definitions/AssemblyInfoPayload"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AssemblyInfoPayload": {
+      "type": "object",
+      "description": "Payload properties for Validated Solution Recipe for AzureStackHCI Cluster",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "assembly identifier for Validated Solution Recipe for AzureStackHCI Cluster",
+          "readOnly": true
+        },
+        "hash": {
+          "type": "string",
+          "description": "Hash of assembly package for Validated Solution Recipe for AzureStackHCI Cluster",
+          "readOnly": true
+        },
+        "fileName": {
+          "type": "string",
+          "description": "File name of assembly package for Validated Solution Recipe for AzureStackHCI Cluster",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of assembly package for Validated Solution Recipe for AzureStackHCI Cluster",
+          "readOnly": true
         }
       }
     },

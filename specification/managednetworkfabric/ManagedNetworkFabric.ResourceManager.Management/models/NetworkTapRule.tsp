@@ -1,207 +1,144 @@
 import "./common.tsp";
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Network Tap Rule Properties defines the resource properties.
- */
+@doc("Network Tap Rule Properties defines the resource properties.")
 model NetworkTapRuleProperties {
   ...AnnotationResource;
 
-  /**
-   * Input method to configure Network Tap Rule.
-   */
+  @doc("Input method to configure Network Tap Rule.")
   configurationType: ConfigurationType;
 
-  /**
-   * Network Tap Rules file URL.
-   */
+  @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 
-  /**
-   * List of match configurations.
-   */
+  @doc("List of match configurations.")
   @OpenAPI.extension("x-ms-identifiers", [])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfiguration[];
 
-  /**
-   * List of dynamic match configurations.
-   */
+  @doc("List of dynamic match configurations.")
   @OpenAPI.extension("x-ms-identifiers", [])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfiguration[];
 
-  /**
-   * The ARM resource Id of the NetworkTap.
-   */
+  @doc("The ARM resource Id of the NetworkTap.")
   @visibility("read")
   networkTapId?: string;
 
-  /**
-   * Polling interval in seconds.
-   */
+  @doc("Polling interval in seconds.")
   pollingIntervalInSeconds?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
 
-  /**
-   * The last sync timestamp.
-   */
+  @doc("The last sync timestamp.")
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSyncedTime?: utcDateTime;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("Global network tap rule actions")
+  @added(Versions.v2024_06_15_preview)
+  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionProperties;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * Defines the match configuration that are supported to filter the traffic.
- */
+@doc("Defines the match configuration that are supported to filter the traffic.")
 model NetworkTapRuleMatchConfiguration {
-  /**
-   * The name of the match configuration.
-   */
+  @doc("The name of the match configuration.")
   @minLength(1)
   matchConfigurationName?: string;
 
-  /**
-   * Sequence Number of the match configuration..
-   */
+  @doc("Sequence Number of the match configuration..")
   @maxValue(4294967295)
   @minValue(1)
   sequenceNumber?: int64;
 
-  /**
-   * Type of IP Address. IPv4 or IPv6
-   */
+  @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
-  /**
-   * List of the match conditions.
-   */
+  @doc("List of the match conditions.")
   @OpenAPI.extension("x-ms-identifiers", [])
   matchConditions?: NetworkTapRuleMatchCondition[];
 
-  /**
-   * List of actions that need to be performed for the matched conditions.
-   */
+  @doc("List of actions that need to be performed for the matched conditions.")
   @OpenAPI.extension("x-ms-identifiers", [])
   actions?: NetworkTapRuleAction[];
 }
 
-/**
- * Defines the match configuration that are supported to filter the traffic.
- */
+@doc("Defines the match configuration that are supported to filter the traffic.")
 model NetworkTapRuleMatchConfigurationPatch {
-  /**
-   * The name of the match configuration.
-   */
+  @doc("The name of the match configuration.")
   @minLength(1)
   matchConfigurationName?: string;
 
-  /**
-   * Sequence Number of the match configuration..
-   */
+  @doc("Sequence Number of the match configuration..")
   @maxValue(4294967295)
   @minValue(1)
   sequenceNumber?: int64;
 
-  /**
-   * Type of IP Address. IPv4 or IPv6
-   */
+  @doc("Type of IP Address. IPv4 or IPv6")
   ipAddressType?: IPAddressType;
 
-  /**
-   * List of the match conditions.
-   */
+  @doc("List of the match conditions.")
   @OpenAPI.extension("x-ms-identifiers", [])
   matchConditions?: NetworkTapRuleMatchConditionPatch[];
 
-  /**
-   * List of actions that need to be performed for the matched conditions.
-   */
+  @doc("List of actions that need to be performed for the matched conditions.")
   @OpenAPI.extension("x-ms-identifiers", [])
   actions?: NetworkTapRuleActionPatch[];
 }
 
-/**
- * Defines the match condition that is supported to filter the traffic.
- */
+@doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchCondition {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...CommonMatchConditions;
 
-  /**
-   * Encapsulation Type that needs to be matched.
-   */
+  @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType = EncapsulationType.None;
 
-  /**
-   * Defines the port condition that needs to be matched.
-   */
+  @doc("Defines the port condition that needs to be matched.")
   portCondition?: PortCondition;
 }
 
-/**
- * Defines the match condition that is supported to filter the traffic.
- */
+@doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchConditionPatch {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...CommonMatchConditionsPatch;
 
-  /**
-   * Encapsulation Type that needs to be matched.
-   */
+  @doc("Encapsulation Type that needs to be matched.")
   encapsulationType?: EncapsulationType;
 
-  /**
-   * Defines the port condition that needs to be matched.
-   */
+  @doc("Defines the port condition that needs to be matched.")
   portCondition?: PortConditionPatch;
 }
 
-/**
- * Action that need to performed.
- */
+@doc("Action that need to performed.")
 model NetworkTapRuleAction {
-  /**
-   * Type of actions that can be performed.
-   */
+  @doc("Type of actions that can be performed.")
   type?: TapRuleActionType;
 
-  /**
-   * Truncate. 0 indicates do not truncate.
-   */
+  @doc("Truncate. 0 indicates do not truncate.")
   @minLength(1)
   truncate?: string;
 
-  /**
-   * The parameter to enable or disable the timestamp.
-   */
+  @doc("The parameter to enable or disable the timestamp.")
   isTimestampEnabled?: BooleanEnumProperty;
 
-  /**
-   * Destination Id. The ARM resource Id may be either Network To Network Interconnect or NeighborGroup.
-   */
+  @doc("Destination Id. The ARM resource Id may be either Network To Network Interconnect or NeighborGroup.")
   destinationId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/neighborGroups";
@@ -211,67 +148,60 @@ model NetworkTapRuleAction {
     }
   ]>;
 
-  /**
-   * The name of the match configuration. This is used when Goto type is provided. If Goto type is selected and no match configuration name is provided. It goes to next configuration.
-   */
+  // This is property is present in the older version of the API. However the description for this field is changed
+  // Hence this property is removed and added with a same name but with a different description
+  @doc("The name of the match configuration. This is used when Goto type is provided. If Goto type is selected and no match configuration name is provided. It goes to next configuration.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "matchConfigurationName")
+  @minLength(1)
+  matchConfigurationNameDeprecated?: string;
+
+  @doc("The name of the match configuration. This is used when Goto type is provided.")
+  @added(Versions.v2024_06_15_preview)
   @minLength(1)
   matchConfigurationName?: string;
 }
 
-/**
- * Action that need to performed.
- */
+@doc("Action that need to performed.")
 model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 
-/**
- * The NetworkTapRule resource definition.
- */
+@doc("The NetworkTapRule resource definition.")
 model NetworkTapRulePatch {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...TagsUpdate;
 
-  /**
-   * Network Tap Rule Patch properties.
-   */
+  @doc("Network Tap Rule Patch properties.")
   properties?: NetworkTapRulePatchProperties;
 }
 
-/**
- * Network Tap Rule Patch properties.
- */
+@doc("Network Tap Rule Patch properties.")
 model NetworkTapRulePatchProperties {
   ...AnnotationResource;
 
-  /**
-   * Input method to configure Network Tap Rule.
-   */
+  @doc("Input method to configure Network Tap Rule.")
   configurationType?: ConfigurationType;
 
-  /**
-   * Network Tap Rules file URL.
-   */
+  @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;
 
-  /**
-   * List of match configurations.
-   */
+  @doc("Global network tap rule actions")
+  @added(Versions.v2024_06_15_preview)
+  globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
+
+  @doc("List of match configurations.")
   @OpenAPI.extension("x-ms-identifiers", [])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfigurationPatch[];
 
-  /**
-   * List of dynamic match configurations.
-   */
+  @doc("List of dynamic match configurations.")
   @OpenAPI.extension("x-ms-identifiers", [])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
 }
 
-/**
- * Polling interval in seconds.
- */
+@doc("Polling interval in seconds.")
 union PollingIntervalInSeconds {
   @doc("30 PollingIntervalInSeconds")
   Thirty: 30,
@@ -288,9 +218,7 @@ union PollingIntervalInSeconds {
   int32,
 }
 
-/**
- * Type of actions that can be performed.
- */
+@doc("Type of actions that can be performed.")
 union TapRuleActionType {
   @doc("TapRuleActionType-Drop")
   Drop: "Drop",
@@ -316,9 +244,7 @@ union TapRuleActionType {
   string,
 }
 
-/**
- * Encapsulation Type that needs to be matched.
- */
+@doc("Encapsulation Type that needs to be matched.")
 union EncapsulationType {
   @doc("None EncapsulationType")
   None: "None",
@@ -327,4 +253,26 @@ union EncapsulationType {
   GTPv1: "GTPv1",
 
   string,
+}
+
+@doc("Global network tap rule actions properties")
+@added(Versions.v2024_06_15_preview)
+model GlobalNetworkTapRuleActionProperties {
+  @doc("Configuration to enable network tap rule counter.")
+  enableCount?: BooleanEnumProperty = BooleanEnumProperty.False;
+
+  @doc("Truncate. 0 indicates do not truncate.")
+  @minLength(1)
+  truncate?: string;
+}
+
+@doc("Global network tap rule actions patch properties")
+@added(Versions.v2024_06_15_preview)
+model GlobalNetworkTapRuleActionPatchProperties {
+  @doc("Configuration to enable network tap rule counter.")
+  enableCount?: BooleanEnumProperty;
+
+  @doc("Truncate. 0 indicates do not truncate.")
+  @minLength(1)
+  truncate?: string;
 }
