@@ -3916,6 +3916,87 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/workspaces/{workspaceName}/importApiSource": {
+      "post": {
+        "operationId": "Workspaces_ImportApiSource",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Imports from the API source (one-time import).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportApiSourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3936,6 +4017,34 @@
           }
         ]
       }
+    },
+    "AmazonApiGatewaySource": {
+      "type": "object",
+      "description": "API source configuration for Amazon API Gateway.",
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "description": "Amazon API Gateway Access Key. Must be an Azure Key Vault secret reference."
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "description": "Amazon API Gateway Secret Access Key. Must be an Azure Key Vault secret reference."
+        },
+        "regionName": {
+          "type": "string",
+          "description": "Amazon API Gateway Region (ex. us-east-2)."
+        },
+        "msiResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "(Optional) The resource ID of the managed identity that has access to the Azure Key Vault secrets."
+        }
+      },
+      "required": [
+        "accessKey",
+        "secretAccessKey",
+        "regionName"
+      ]
     },
     "Api": {
       "type": "object",
@@ -4279,9 +4388,17 @@
             ]
           }
         },
+        "apiSourceType": {
+          "$ref": "#/definitions/ApiSourceType",
+          "description": "API source type"
+        },
         "azureApiManagementSource": {
           "$ref": "#/definitions/AzureApiManagementSource",
           "description": "API source configuration for Azure API Management."
+        },
+        "amazonApiGatewaySource": {
+          "$ref": "#/definitions/AmazonApiGatewaySource",
+          "description": "API source configuration for Amazon API Gateway."
         },
         "targetEnvironmentId": {
           "type": "string",
@@ -4297,6 +4414,33 @@
           "description": "The state of the API source link",
           "readOnly": true
         }
+      },
+      "required": [
+        "apiSourceType"
+      ]
+    },
+    "ApiSourceType": {
+      "type": "string",
+      "description": "Supported API source types for import/sync.",
+      "enum": [
+        "AzureApiManagement",
+        "AmazonApiGateway"
+      ],
+      "x-ms-enum": {
+        "name": "ApiSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureApiManagement",
+            "value": "AzureApiManagement",
+            "description": "Azure API Management"
+          },
+          {
+            "name": "AmazonApiGateway",
+            "value": "AmazonApiGateway",
+            "description": "Amazon API Gateway"
+          }
+        ]
       }
     },
     "ApiSpecExportResult": {
@@ -4464,7 +4608,7 @@
         "msiResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the managed identity that has access to the API Management instance."
+          "description": "(Optional) The resource ID of the managed identity that has access to the API Management instance."
         }
       },
       "required": [
@@ -4908,6 +5052,67 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "ImportApiSourceRequest": {
+      "type": "object",
+      "description": "Import API source request properties.",
+      "properties": {
+        "importSpecification": {
+          "type": "string",
+          "description": "Indicates if the specification should be imported along with metadata.",
+          "default": "ondemand",
+          "enum": [
+            "never",
+            "ondemand",
+            "always"
+          ],
+          "x-ms-enum": {
+            "name": "ImportSpecificationOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Never",
+                "value": "never",
+                "description": "Indicates that the specification should be never be imported."
+              },
+              {
+                "name": "OnDemand",
+                "value": "ondemand",
+                "description": "Indicates that the specification should be imported only by request."
+              },
+              {
+                "name": "Always",
+                "value": "always",
+                "description": "Indicates that the specification should always be imported along with metadata."
+              }
+            ]
+          }
+        },
+        "apiSourceType": {
+          "$ref": "#/definitions/ApiSourceType",
+          "description": "API source type"
+        },
+        "azureApiManagementSource": {
+          "$ref": "#/definitions/AzureApiManagementSource",
+          "description": "API source configuration for Azure API Management."
+        },
+        "amazonApiGatewaySource": {
+          "$ref": "#/definitions/AmazonApiGatewaySource",
+          "description": "API source configuration for Amazon API Gateway."
+        },
+        "targetEnvironmentId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The target environment resource ID."
+        },
+        "targetLifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "The target lifecycle stage."
+        }
+      },
+      "required": [
+        "apiSourceType"
       ]
     },
     "ImportSpecificationOptions": {

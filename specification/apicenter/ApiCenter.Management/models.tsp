@@ -459,6 +459,32 @@ model ApiSpecExportResult {
   value?: string;
 }
 
+@added(Versions.v2024_06_01_preview)
+@doc("Import API source request properties.")
+model ImportApiSourceRequest {
+  @doc("Indicates if the specification should be imported along with metadata.")
+  importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
+
+  @doc("API source type")
+  apiSourceType: ApiSourceType;
+
+  @doc("API source configuration for Azure API Management.")
+  azureApiManagementSource?: AzureApiManagementSource;
+
+  @doc("API source configuration for Amazon API Gateway.")
+  amazonApiGatewaySource?: AmazonApiGatewaySource;
+
+  /**
+   * The target environment resource ID.
+   */
+  targetEnvironmentId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The target lifecycle stage.
+   */
+  targetLifecycleStage?: LifecycleStage;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
 @doc("API deployment entity properties.")
 model DeploymentProperties {
@@ -566,8 +592,14 @@ model ApiSourceProperties {
   @doc("Indicates if the specification should be imported along with metadata.")
   importSpecification?: ImportSpecificationOptions = ImportSpecificationOptions.OnDemand;
 
+  @doc("API source type")
+  apiSourceType: ApiSourceType;
+
   @doc("API source configuration for Azure API Management.")
   azureApiManagementSource?: AzureApiManagementSource;
+
+  @doc("API source configuration for Amazon API Gateway.")
+  amazonApiGatewaySource?: AmazonApiGatewaySource;
 
   /**
    * The target environment resource ID.
@@ -610,6 +642,20 @@ union ImportSpecificationOptions {
 }
 
 /**
+ * Supported API source types for import/sync.
+ */
+@added(Versions.v2024_06_01_preview)
+union ApiSourceType {
+  string,
+
+  /** Azure API Management */
+  "AzureApiManagement",
+
+  /** Amazon API Gateway */
+  "AmazonApiGateway",
+}
+
+/**
  * API source configuration for Azure API Management.
  */
 @added(Versions.v2024_06_01_preview)
@@ -620,7 +666,33 @@ model AzureApiManagementSource {
   resourceId: Azure.Core.armResourceIdentifier;
 
   /**
-   * The resource ID of the managed identity that has access to the API Management instance.
+   * (Optional) The resource ID of the managed identity that has access to the API Management instance.
+   */
+  msiResourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * API source configuration for Amazon API Gateway.
+ */
+@added(Versions.v2024_06_01_preview)
+model AmazonApiGatewaySource {
+  /**
+   * Amazon API Gateway Access Key. Must be an Azure Key Vault secret reference.
+   */
+  accessKey: string;
+
+  /**
+   * Amazon API Gateway Secret Access Key. Must be an Azure Key Vault secret reference.
+   */
+  secretAccessKey: string;
+
+  /**
+   * Amazon API Gateway Region (ex. us-east-2).
+   */
+  regionName: string;
+
+  /**
+   * (Optional) The resource ID of the managed identity that has access to the Azure Key Vault secrets.
    */
   msiResourceId?: Azure.Core.armResourceIdentifier;
 }
