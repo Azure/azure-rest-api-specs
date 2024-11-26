@@ -97,8 +97,6 @@ model OrganizationResource
   @doc("Name of the Organization resource")
   @path
   name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
