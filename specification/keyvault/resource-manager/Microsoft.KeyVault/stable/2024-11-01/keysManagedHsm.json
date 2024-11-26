@@ -325,11 +325,11 @@
         "keySize": {
           "type": "integer",
           "format": "int32",
-          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
+          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096."
         },
         "curveName": {
           "type": "string",
-          "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256",
           "enum": [
             "P-256",
             "P-384",
