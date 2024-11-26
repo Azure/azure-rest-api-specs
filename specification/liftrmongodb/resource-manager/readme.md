@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for LiftrMongo service.
+This is the AutoRest configuration file for LiftrMongoDb service.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the LiftrMongo service.
+These are the global settings for the LiftrMongoDb service.
 
 ```yaml
 openapi-type: arm
