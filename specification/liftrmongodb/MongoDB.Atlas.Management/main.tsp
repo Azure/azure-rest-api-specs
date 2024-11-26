@@ -107,13 +107,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  update is ArmCustomPatchAsync<
-    OrganizationResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      OrganizationResource,
-      OrganizationProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
