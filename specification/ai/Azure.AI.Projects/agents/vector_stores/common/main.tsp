@@ -92,8 +92,17 @@ model VectorStoreStaticChunkingStrategyResponse
  * in the case of id_asset it should contain the data ID.
  */
 union VectorStoreDataSourceAssetType {
+  /**
+   * Azure URI
+   */
   uri_asset: "uri_asset",
-  id_asset: "id_asset"
+
+  /**
+   * The data ID
+   */
+  id_asset: "id_asset",
+
+  string,
 }
 
 /**
@@ -117,7 +126,7 @@ model VectorStoreDataSource {
 model VectorStoreConfiguration {
   /** Data sources */
   @encodedName("application/json", "data_sources")
-  dataSources: VectorStoreDataSource[]
+  dataSources: VectorStoreDataSource[];
 }
 
 /**

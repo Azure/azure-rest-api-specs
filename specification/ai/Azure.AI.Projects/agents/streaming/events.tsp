@@ -60,6 +60,9 @@ union RunStreamEvent {
   /** Event sent when a run is completed. The data of this event is of type ThreadRun */
   ThreadRunCompleted: "thread.run.completed",
 
+  /** Event sent when a run ends incompleted. The data of this event is of type ThreadRun */
+  ThreadRunIncomplete: "thread.run.incomplete",
+
   /** Event sent when a run fails. The data of this event is of type ThreadRun */
   ThreadRunFailed: "thread.run.failed",
 
