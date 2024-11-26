@@ -847,7 +847,15 @@ union StartupBehavior {
  */
 union SetStartVMOnConnect {
   string,
+
+  /**
+   * Start VM on Connect is enabled
+   */
   Enable: "Enable",
+
+  /**
+   * Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually
+   */
   Disable: "Disable",
 }
 
@@ -953,6 +961,8 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
+  //FIXME: (logSpecifications) What should this identifier value be?
+  @OpenAPI.extension("x-ms-identifiers", [])
   logSpecifications?: LogSpecification[];
 }
 
@@ -1294,11 +1304,25 @@ model ResourceModelWithAllowedPropertySet
   @visibility("read")
   etag?: string;
 
+  /**
+   * Resource Idenity
+   */
   identity?: ResourceModelWithAllowedPropertySetIdentity;
+
+  /**
+   * Selected image SKU
+   */
   sku?: ResourceModelWithAllowedPropertySetSku;
+
+  /**
+   * Selected user purchase plan
+   */
   plan?: ResourceModelWithAllowedPropertySetPlan;
 }
 
+/**
+ * The resource model definition containing the full set of allowed properties for a resource.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ResourceModelWithAllowedPropertySetIdentity extends Identity {}
 
@@ -1324,6 +1348,9 @@ model Identity {
   type?: "SystemAssigned";
 }
 
+/**
+ * Resource model definition representing SKU and Properties
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ResourceModelWithAllowedPropertySetSku extends Sku {}
 
@@ -1357,6 +1384,9 @@ model Sku {
   capacity?: int32;
 }
 
+/**
+ * Resource model definition representing Plan and Properties
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ResourceModelWithAllowedPropertySetPlan extends Plan {}
 
