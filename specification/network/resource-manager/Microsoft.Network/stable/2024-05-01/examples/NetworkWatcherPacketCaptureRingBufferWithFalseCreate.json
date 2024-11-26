@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
+    "packetCaptureName": "pc1",
+    "parameters": {
+      "properties": {
+        "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+        "storageLocation": {
+          "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/testcapsa",
+          "localPath": "D:\\capture\\pc1.cap"
+        },
+        "captureSettings": {
+          "fileCount": 10,
+          "fileSizeInBytes": 102400,
+          "sessionTimeLimitInSeconds": 600
+        },
+        "continuousCapture": false,
+        "filters": [
+          {
+            "remoteIPAddress": "13.107.226.38"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "pc1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/packetCaptures/pc1",
+        "properties": {
+          "provisioningState": "Updating",
+          "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+          "scope": {
+            "include": [],
+            "exclude": []
+          },
+          "bytesToCapturePerPacket": 0,
+          "storageLocation": {
+            "storageId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/testcapsa",
+            "storagePath": "dummyaddress/subscriptions/subid/resourcegroups/rg2/providers/microsoft.compute/virtualmachines/vm1/2024/02/16/pc1.cap",
+            "localPath": "D:\\capture\\pc1.cap"
+          },
+          "continuousCapture": false,
+          "captureSettings": {
+            "fileCount": 2,
+            "fileSizeInBytes": 102400,
+            "sessionTimeLimitInSeconds": 300
+          },
+          "filters": [
+            {
+              "protocol": "Any",
+              "localIPAddress": "",
+              "localPort": "",
+              "remoteIPAddress": "13.107.226.38",
+              "remotePort": ""
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
+    "packetCaptureName": "pc1",
+    "parameters": {
+      "properties": {
+        "target": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+        "storageLocation": {
+          "storageId": "null",
+          "filePath": "D:\\capture\\pc1.cap"
+        },
+        "continuousCapture": true,
+        "filters": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "InvalidRequestPropertiesInPacketCaptureRequest",
+          "message": "FilePath is not supported in packet capture request.",
+          "details": []
+        }
+      }
+    }
+  }
+}
