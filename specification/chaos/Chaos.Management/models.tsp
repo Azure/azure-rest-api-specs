@@ -557,8 +557,28 @@ model ExperimentExecutionDetails {
  * Model that represents the extended properties of an experiment execution.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ExperimentExecutionDetailsProperties
-  extends ExperimentExecutionProperties {
+model ExperimentExecutionDetailsProperties {
+  /**
+   * The status of the execution.
+   */
+  status?: string;
+
+  /**
+   * String that represents the start date time.
+   */
+  startedAt?: utcDateTime;
+
+  /**
+   * String that represents the stop date time.
+   */
+  stoppedAt?: utcDateTime;
+
+  /**
+   * Resource provisioning state. Not currently in use for executions.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
   /**
    * The reason why the execution failed.
    */
