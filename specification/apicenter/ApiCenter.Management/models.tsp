@@ -726,13 +726,13 @@ model AnalyzerConfigProperties {
   state?: AnalyzerRulesetState;
 }
 
-/** 
+/**
  * Source format for API analyzer ruleset.
  */
 @added(Versions.v2024_12_15_preview)
 union RulesetImportSourceFormat {
   string,
-  
+
   /**
    * The inlined ruleset package.
    */
@@ -773,13 +773,13 @@ model RulesetImportSuccess {
   @statusCode code: 200;
 }
 
-/** 
+/**
  * The rulset export result format.
  */
 @added(Versions.v2024_12_15_preview)
 union RulesetExportResultFormat {
   string,
-  
+
   /**
    * The inlined ruleset package.
    */

@@ -38,7 +38,7 @@ interface AnalyzerConfigs {
 
   @doc("Creates new or updates existing API analyzer configuration.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AnalyzerConfig>;
-  
+
   @doc("Imports the API analyzer ruleset.")
   importRuleset is ArmResourceActionAsync<
     AnalyzerConfig,
