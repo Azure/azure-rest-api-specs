@@ -18,7 +18,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
 interface ScheduledActions {
   // -------------- Routes -------------
-  /** SubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.  */
+  /** SubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesSubmitDeallocate")
   @post
