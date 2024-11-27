@@ -43,7 +43,7 @@ interface AnalyzerConfigs {
   importRuleset is ArmResourceActionAsync<
     AnalyzerConfig,
     RulesetImportRequest,
-    RulesetImportSuccess
+    CommonTypes.OperationStatusResult
   >;
 
   @doc("Exports the API analyzer ruleset.")

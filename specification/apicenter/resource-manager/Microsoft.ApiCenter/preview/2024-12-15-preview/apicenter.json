@@ -518,7 +518,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The API specification was successfully imported."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -5878,10 +5881,6 @@
           }
         ]
       }
-    },
-    "RulesetImportSuccess": {
-      "type": "object",
-      "description": "The API specification was successfully imported."
     },
     "Service": {
       "type": "object",

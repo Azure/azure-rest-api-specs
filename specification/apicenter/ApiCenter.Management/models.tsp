@@ -766,13 +766,6 @@ model RulesetImportRequest {
   format?: RulesetImportSourceFormat;
 }
 
-/** The API specification was successfully imported. */
-@added(Versions.v2024_12_15_preview)
-model RulesetImportSuccess {
-  /** The response status code */
-  @statusCode code: 200;
-}
-
 /**
  * The ruleset export result format.
  */
