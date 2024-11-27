@@ -1,11 +1,20 @@
 {
-  "title": "Accounts_Get",
-  "operationId": "Accounts_Get",
+  "title": "Accounts_Update",
+  "operationId": "Accounts_Update",
   "parameters": {
-    "api-version": "2024-08-01-preview",
+    "api-version": "2024-12-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "dummyrg",
-    "accountName": "myPlaywrightAccount"
+    "accountName": "myPlaywrightAccount",
+    "properties": {
+      "tags": {
+        "Team": "Dev Exp",
+        "Division": "LT"
+      },
+      "properties": {
+        "regionalAffinity": "Enabled"
+      }
+    }
   },
   "responses": {
     "200": {
