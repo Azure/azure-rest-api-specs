@@ -143,6 +143,7 @@ model ThreadRun {
   toolResources?: UpdateToolResourcesOptions | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
+  @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 }
 
@@ -275,6 +276,10 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   responseFormat?: AgentsApiResponseFormatOption | null;
+
+  /** If `true` functions will run in parallel during tool use. */
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
 }
@@ -434,6 +439,10 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   responseFormat?: AgentsApiResponseFormatOption | null;
+
+  /** If `true` functions will run in parallel during tool use. */
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
 }
