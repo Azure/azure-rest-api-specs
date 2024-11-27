@@ -139,21 +139,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Advisor
-  output-folder: $(csharp-sdks-folder)/advisor/Microsoft.Azure.Management.Advisor/src/Generated
-  clear-output-folder: true
-```
-
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
