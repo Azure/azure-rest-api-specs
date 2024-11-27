@@ -673,3 +673,146 @@ union ApiSourceLinkState {
    */
   Deleting: "deleting",
 }
+
+/**
+ * The API analyzer type.
+ */
+@added(Versions.v2024_12_15_preview)
+union AnalyzerType {
+  string,
+
+  /**
+   * The Spectral analyzer.
+   */
+  Spectral: "spectral",
+}
+
+/**
+ * The API analyzer configuration state.
+ */
+@added(Versions.v2024_12_15_preview)
+union AnalyzerRulesetState {
+  string,
+
+  /**
+   * The ruleset is active and analysis is running.
+   */
+  Active: "active",
+
+  /**
+   * The ruleset is inactive because ruleset wasn't uploaded.
+   */
+  Inactive: "active",
+
+  /**
+   * The ruleset is suspended until the next analysis period because the number of analysis runs in the current period has exceeded the limit.
+   */
+  Suspended: "suspended",
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_12_15_preview)
+@doc("API analyzer configuration properties.")
+model AnalyzerConfigProperties {
+  /**
+   * The type of API analyzer.
+   */
+  analyzerType: AnalyzerType;
+
+  /**
+   *The state of the API analyzer ruleset.
+   */
+  @visibility("read")
+  state?: AnalyzerRulesetState;
+}
+
+/** 
+ * Source format for API analyzer ruleset.
+ */
+@added(Versions.v2024_12_15_preview)
+union RulesetImportSourceFormat {
+  string,
+  
+  /**
+   * The inlined ruleset package.
+   */
+  InlineZip: "inline-zip",
+
+  /**
+   * The link to a ruleset package hosted on a publicly accessible internet address.
+   */
+  LinkZip: "link-zip",
+
+  /**
+   * The inlined ruleset JSON document.
+   */
+  InlineJson: "inline-json",
+
+  /**
+   * The inlined ruleset YAML document.
+   */
+  InlineYaml: "inline-yaml",
+}
+
+/**
+ * The API analyzer ruleset import request.
+ */
+@added(Versions.v2024_12_15_preview)
+model RulesetImportRequest {
+  @doc("Value of the ruleset source.")
+  value?: string;
+
+  @doc("Format of the ruleset source.")
+  format?: RulesetImportSourceFormat;
+}
+
+/** The API specification was successfully imported. */
+@added(Versions.v2024_12_15_preview)
+model RulesetImportSuccess {
+  /** The response status code */
+  @statusCode code: 200;
+}
+
+/** 
+ * The rulset export result format.
+ */
+@added(Versions.v2024_12_15_preview)
+union RulesetExportResultFormat {
+  string,
+  
+  /**
+   * The inlined ruleset package.
+   */
+  InlineZip: "inline-zip",
+
+  /**
+   * The link to the ruleset package. The URL is valid for 5 minutes.
+   */
+  LinkZip: "link-zip",
+
+  /**
+   * The inlined ruleset JSON document.
+   */
+  InlineJson: "inline-json",
+
+  /**
+   * The inlined ruleset YAML document.
+   */
+  InlineYaml: "inline-yaml",
+}
+
+/**
+ * The ruleset export result.
+ */
+@added(Versions.v2024_12_15_preview)
+model RulesetExportResult {
+  /**
+   * The format of rulset export result.
+   */
+  format?: RulesetExportResultFormat;
+
+  /**
+   * The result of the export operation.
+   */
+  value?: string;
+}
