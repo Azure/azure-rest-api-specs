@@ -774,7 +774,7 @@ model RulesetImportSuccess {
 }
 
 /**
- * The rulset export result format.
+ * The ruleset export result format.
  */
 @added(Versions.v2024_12_15_preview)
 union RulesetExportResultFormat {
@@ -807,7 +807,7 @@ union RulesetExportResultFormat {
 @added(Versions.v2024_12_15_preview)
 model RulesetExportResult {
   /**
-   * The format of rulset export result.
+   * The format of ruleset export result.
    */
   format?: RulesetExportResultFormat;
 
