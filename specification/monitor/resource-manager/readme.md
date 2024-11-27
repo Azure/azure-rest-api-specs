@@ -675,15 +675,6 @@ input-file:
   - Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
   - Microsoft.Insights/stable/2021-05-01/metrics_API.json
   - Microsoft.Insights/stable/2021-05-01/operations_API.json
-directive:
-  - from: metricBaselines_API.json
-    where: $.parameters
-    transform: delete $["MetricNamespaceParameter"]
-    reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
-  - from: metricBaselines_API.json
-    where: $.parameters
-    transform: delete $["MetricNamesParameter"]
-    reason: Description doesn't match, the definition will be "inherit" from metrics_API.json
 ```
 
 ### Tag: package-2021-08-scheduledqueryrules
