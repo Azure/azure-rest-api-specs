@@ -63,7 +63,7 @@
     "Accept-Language": {
       "name": "Accept-Language",
       "in": "header",
-      "description": "Language in which traffic incident results should be returned. \n\nFor more information, see xxxx for reference.",
+      "description": "Language in which traffic incident results should be returned. \n\nFor more information, see [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for reference.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -73,11 +73,11 @@
     "/traffic/incident": {
       "get": {
         "summary": "Use to get information on traffic incidents inside a given bounding box.",
-        "description": "\n\nThe `Traffic Incident Detail` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box, based on the current [Traffic Model ID](#uri-parameters). The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API.",
-        "operationId": "Traffic_GetTrafficIncidentDetail",
+        "description": "\n\nThe `Traffic Incident` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box.",
+        "operationId": "Traffic_GetTrafficIncident",
         "x-ms-examples": {
           "Request information about a traffic incident": {
-            "$ref": "./examples/GetTrafficIncidentDetail.json"
+            "$ref": "./examples/GetTrafficIncident.json"
           }
         },
         "parameters": [
@@ -172,13 +172,6 @@
             "collectionFormat": "csv"
           },
           {
-            "name": "includeJamIncidents",
-            "in": "query",
-            "description": "",
-            "required": false,
-            "type": "boolean"
-          },
-          {
             "$ref": "#/parameters/Accept-Language"
           }
         ],
@@ -236,54 +229,49 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "",
+          "description": "A description of the incident. \n\n Examples: \n\n - W 95th St between Switzer Rd and Bluejacket Dr - construction \n\n - WB Johnson Dr at I-435 - bridge repair",
           "type": "string"
         },
         "startTime": {
-          "description": "",
+          "description": "The time the incident occurred. The time is specified as UTC time in milliseconds using the epoch (start time) of January 1, 1970, 00:00:00.\n\n Examples: Date(1295704800000)",
           "type": "object",
           "format": "UTC"
         },
         "endTime": {
-          "description": "",
+          "description": "The time that the traffic incident will end. The time is specified as UTC time in milliseconds using the epoch (start time) of January 1, 1970, 00:00:00.\n\n Examples: Date(1295704800000)",
           "type": "object",
           "format": "UTC"
         },
-        "incidentId": {
-          "description": "",
+        "id": {
+          "description": "A unique ID for the incident.",
           "type": "number",
           "format": "float"
         },
         "lastModified": {
-          "description": "",
+          "description": "The time the incident information was last updated. The time is specified as UTC time in milliseconds using the epoch (start time) of January 1, 1970, 00:00:00.\n\n Examples: Date(1295704800000)",
           "type": "object",
           "format": "dateTime"
         },
-        "roadClosed": {
-          "description": "",
+        "isRoadClosed": {
+          "description": "A value of 'true' indicates that there is a road closure.",
           "type": "boolean"
         },
         "severity": {
-          "description": "",
+          "description": "Specifies the level of importance of incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
           "type": "number",
           "format": "int32"
         },
         "type": {
-          "description": "",
+          "description": "Specifies the type of incident. \n\n - 1: Accident \n\n - 2: Congestion \n\n - 3: DisabledVehicle \n\n - 4: MassTransit \n\n - 5: Miscellaneous \n\n - 6: OtherNews \n\n - 7: PlannedEvent \n\n - 8: RoadHazard \n\n - 9: Construction \n\n - 10: Alert \n\n - 11: Weather",
           "type": "number",
           "format": "int32"
         },
         "title": {
-          "description": "",
+          "description": "Names and direction of affected roads.",
           "type": "string"
         },
-        "icon": {
-          "description": "",
-          "type": "number",
-          "format": "int32"
-        },
-        "isJamIncident": {
-          "description": "",
+        "isTrafficJam": {
+          "description": "Flag indicating that the area of road covered by this incident is experiencing abnormal traffic conditions resulting in non-typical delays.",
           "type": "boolean"
         }
       }
