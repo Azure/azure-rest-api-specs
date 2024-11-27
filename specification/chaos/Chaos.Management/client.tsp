@@ -9,7 +9,9 @@ using Microsoft.Chaos;
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Target, "ChaosTarget", "csharp");
+@@clientName(TargetType, "ChaosTargetType", "csharp");
 @@clientName(Capability, "ChaosCapability", "csharp");
+@@clientName(CapabilityType, "ChaosCapabilityType", "csharp");
 @@clientName(TargetReference, "ChaosTargetReference", "csharp");
 @@clientName(TargetReferenceType, "ChaosTargetReferenceType", "csharp");
 @@clientName(ProvisioningState, "ChaosProvisioningState", "csharp");
@@ -25,8 +27,6 @@ using Microsoft.Chaos;
   "ExecutionDetails",
   "csharp"
 );
-@@clientName(Experiments.start, "StartExperiment", "csharp");
-@@clientName(Experiments.cancel, "CancelExperiment", "csharp");
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");
