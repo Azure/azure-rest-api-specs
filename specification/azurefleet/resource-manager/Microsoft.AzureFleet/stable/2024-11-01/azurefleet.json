@@ -695,6 +695,10 @@
         ]
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "BasePriorityProfile": {
       "type": "object",
       "description": "Contains common properties that are applicable to both Spot and Regular.",
@@ -1565,7 +1569,7 @@
       "description": "Represents the profile for a single additional location in the Fleet. The location and the virtualMachineProfileOverride (optional).",
       "properties": {
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The ARM location name of the additional region. If LocationProfile is specified, then location is required."
         },
         "virtualMachineProfileOverride": {
@@ -2470,7 +2474,7 @@
         },
         "localStorageSupport": {
           "$ref": "#/definitions/VMAttributeSupport",
-          "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not."
+          "description": "Specifies whether the VMSize supporting local storage should be used to build Fleet or not.\nIncluded - Default if not specified as most Azure VMs support local storage."
         },
         "localStorageInGiB": {
           "$ref": "#/definitions/VMAttributeMinMaxDouble",
@@ -2746,6 +2750,7 @@
         },
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The compute RP resource id of the virtualMachineScaleSet \n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}\"",
           "readOnly": true
         },

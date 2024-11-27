@@ -40,13 +40,13 @@
   },
   "tags": [
     {
-      "name": "ExportTerraform"
-    },
-    {
       "name": "Operations"
     },
     {
-      "name": "OperationStatuses"
+      "name": "Terraform"
+    },
+    {
+      "name": "ExportTerraform"
     }
   ],
   "paths": {
@@ -88,8 +88,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
       "post": {
-        "operationId": "ExportTerraform",
+        "operationId": "Terraform_ExportTerraform",
         "tags": [
+          "Terraform",
           "ExportTerraform"
         ],
         "description": "Exports the Terraform configuration of the specified resource(s).",
@@ -101,9 +102,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "exportParameter",
+            "name": "body",
             "in": "body",
-            "description": "The export parameter",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BaseExportModel"
@@ -112,7 +113,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Export request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -143,75 +144,44 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/OperationStatus"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/operationStatuses/{operationId}": {
-      "get": {
-        "operationId": "OperationStatuses_Get",
-        "tags": [
-          "OperationStatuses"
-        ],
-        "description": "Get the status of a long running azure asynchronous operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "202": {
-            "description": "InProgress operation status",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get specific operation status": {
-            "$ref": "./examples/GetOperationStatus.json"
-          }
-        }
       }
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "BaseExportModel": {
       "type": "object",
       "description": "The base export parameter",
@@ -298,7 +268,9 @@
           "type": "array",
           "description": "The id of the resource to be exported",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "resourceName": {
@@ -362,7 +334,9 @@
           "type": "array",
           "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "errors": {
@@ -375,53 +349,56 @@
         }
       }
     },
-    "OperationStatus": {
+    "TerraformOperationStatus": {
       "type": "object",
       "description": "The status of the LRO operation.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExportResult",
+          "description": "RP-specific properties for the operationStatus resource, only appears when operation ended with Succeeded status",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The operation status"
+        },
         "id": {
           "type": "string",
-          "description": "The operation status resource id."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The fully qualified resource id of the resource for which the operation was performed.",
-          "readOnly": true
+          "description": "The unique identifier for the operationStatus resource"
         },
         "name": {
           "type": "string",
-          "description": "The operation name."
+          "description": "The name of the  operationStatus resource",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the operation.",
+          "description": "Operation start time",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the operation.",
+          "description": "Operation complete time",
           "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
         },
         "percentComplete": {
           "type": "number",
           "format": "double",
-          "description": "The progress percentage of the operation, ranges from 0 to 100"
-        },
-        "properties": {
-          "$ref": "#/definitions/ExportResult",
-          "description": "The Terraform export result"
+          "description": "The progress made toward completing the operation",
+          "readOnly": true
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "The error object."
+          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "status",
+        "id"
+      ]
     },
     "Type": {
       "type": "string",
