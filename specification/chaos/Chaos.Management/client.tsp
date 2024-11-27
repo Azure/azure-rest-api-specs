@@ -30,6 +30,7 @@ using Microsoft.Chaos;
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");
+@@clientName(Capabilities, "Capabilities", "javascript");
 
 // python
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "python");
