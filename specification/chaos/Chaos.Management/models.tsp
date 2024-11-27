@@ -22,19 +22,19 @@ union ResourceIdentityType {
   string,
 
   /**
-   * None.
+   * No identity.
    */
-  None: "No identity",
+  None: "None",
 
   /**
    * System assigned.
    */
-  SystemAssigned: "System assigned identity",
+  SystemAssigned: "SystemAssigned",
 
   /**
    * User assigned.
    */
-  UserAssigned: "User assigned identity",
+  UserAssigned: "UserAssigned",
 }
 
 /**
