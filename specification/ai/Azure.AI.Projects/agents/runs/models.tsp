@@ -143,7 +143,6 @@ model ThreadRun {
   toolResources?: UpdateToolResourcesOptions | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
-  @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 }
 
