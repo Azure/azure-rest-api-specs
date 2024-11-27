@@ -4139,6 +4139,11 @@
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -4300,6 +4305,11 @@
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
         },
         "metadata": {
           "type": "object",
@@ -7116,9 +7126,10 @@
           ],
           "x-ms-client-name": "toolResources"
         },
-        "parallelToolCalls": {
+        "parallel_tool_calls": {
           "type": "boolean",
-          "description": "Determines if tools can be executed in parallel within the run."
+          "description": "Determines if tools can be executed in parallel within the run.",
+          "x-ms-client-name": "parallelToolCalls"
         }
       },
       "required": [
