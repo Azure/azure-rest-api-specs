@@ -90,7 +90,7 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 
-  /** GetOperationErrors: Get operation error details on operation errors (like transient errors encountered, additional logs) if they exist. */
+  /** GetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors")
   @post
