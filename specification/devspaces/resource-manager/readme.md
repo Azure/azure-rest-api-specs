@@ -58,22 +58,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.1.0.0-Nightly20170126
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DevSpaces
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/devspaces/Microsoft.Azure.Management.DevSpaces/src/Generated
-  clear-output-folder: true
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
