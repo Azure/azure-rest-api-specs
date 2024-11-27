@@ -25,85 +25,35 @@ Write-Host "Pull Request Number: $prNumber"
 $SuppressionFileName = "sdk-suppressions.yaml"
 
 $sdkLabels = @{
-    "azure-cli-extensions"           = @{
-        breakingChange                    = $null
-        breakingChangeApproved            = $null
-        breakingChangeSuppression         = $null
-        breakingChangeSuppressionApproved = $null
-        deprecatedBreakingChange          = $null
-        deprecatedBreakingChangeApproved  = $null
-    }
-    "azure-resource-manager-schemas" = @{
-        breakingChange                    = $null
-        breakingChangeApproved            = $null
-        breakingChangeSuppression         = $null
-        breakingChangeSuppressionApproved = $null
-        deprecatedBreakingChange          = $null
-        deprecatedBreakingChangeApproved  = $null
-    }
     "azure-sdk-for-go"               = @{
         breakingChange                    = "BreakingChange-Go-Sdk"
         breakingChangeApproved            = "BreakingChange-Go-Sdk-Approved"
         breakingChangeSuppression         = "BreakingChange-Go-Sdk-Suppression"
         breakingChangeSuppressionApproved = "BreakingChange-Go-Sdk-Suppression-Approved"
-        deprecatedBreakingChange          = "CI-BreakingChange-Go"
-        deprecatedBreakingChangeApproved  = "Approved-SdkBreakingChange-Go"
     }
     "azure-sdk-for-java"             = @{
         breakingChange                    = "BreakingChange-Java-Sdk"
         breakingChangeApproved            = "BreakingChange-Java-Sdk-Approved"
         breakingChangeSuppression         = "BreakingChange-Java-Sdk-Suppression"
         breakingChangeSuppressionApproved = "BreakingChange-Java-Sdk-Suppression-Approved"
-        deprecatedBreakingChange          = "CI-BreakingChange-Java"
-        deprecatedBreakingChangeApproved  = "Approved-SdkBreakingChange-Java"
     }
     "azure-sdk-for-js"               = @{
         breakingChange                    = "BreakingChange-JavaScript-Sdk"
         breakingChangeApproved            = "BreakingChange-JavaScript-Sdk-Approved"
         breakingChangeSuppression         = "BreakingChange-JavaScript-Sdk-Suppression"
         breakingChangeSuppressionApproved = "BreakingChange-JavaScript-Sdk-Suppression-Approved"
-        deprecatedBreakingChange          = "CI-BreakingChange-JavaScript"
-        deprecatedBreakingChangeApproved  = "Approved-SdkBreakingChange-JavaScript"
     }
     "azure-sdk-for-net"              = @{
         breakingChange                    = $null
         breakingChangeApproved            = $null
         breakingChangeSuppression         = $null
         breakingChangeSuppressionApproved = $null
-        deprecatedBreakingChange          = $null
-        deprecatedBreakingChangeApproved  = $null
-    }
-    "azure-sdk-for-net-track2"       = @{
-        breakingChange                    = $null
-        breakingChangeApproved            = $null
-        breakingChangeSuppression         = $null
-        breakingChangeSuppressionApproved = $null
-        deprecatedBreakingChange          = $null
-        deprecatedBreakingChangeApproved  = $null
     }
     "azure-sdk-for-python"           = @{
         breakingChange                    = "BreakingChange-Python-Sdk"
         breakingChangeApproved            = "BreakingChange-Python-Sdk-Approved"
         breakingChangeSuppression         = "BreakingChange-Python-Sdk-Suppression"
         breakingChangeSuppressionApproved = "BreakingChange-Python-Sdk-Suppression-Approved"
-        deprecatedBreakingChange          = "CI-BreakingChange-Python"
-        deprecatedBreakingChangeApproved  = "Approved-SdkBreakingChange-Python"
-    }
-    "azure-sdk-for-python-track2"    = @{
-        breakingChange                    = "BreakingChange-Python-Track2-Sdk"
-        breakingChangeApproved            = "BreakingChange-Python-Track2-Sdk-Approved"
-        breakingChangeSuppression         = "BreakingChange-Python-Sdk-Suppression"
-        breakingChangeSuppressionApproved = "BreakingChange-Python-Sdk-Suppression-Approved"
-        deprecatedBreakingChange          = "CI-BreakingChange-Python-Track2"
-        deprecatedBreakingChangeApproved  = "Approved-SdkBreakingChange-Python"
-    }
-    "azure-sdk-for-trenton"          = @{
-        breakingChange                    = $null
-        breakingChangeApproved            = $null
-        breakingChangeSuppression         = $null
-        breakingChangeSuppressionApproved = $null
-        deprecatedBreakingChange          = $null
-        deprecatedBreakingChangeApproved  = $null
     }
 }
 
