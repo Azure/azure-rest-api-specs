@@ -702,7 +702,7 @@ union AnalyzerRulesetState {
   /**
    * The ruleset is inactive because ruleset wasn't uploaded.
    */
-  Inactive: "active",
+  Inactive: "inactive",
 
   /**
    * The ruleset is suspended until the next analysis period because the number of analysis runs in the current period has exceeded the limit.
