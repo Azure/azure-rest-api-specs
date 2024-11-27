@@ -23,9 +23,9 @@ using Microsoft.Chaos;
 @@clientName(DiscreteAction, "ChaosDiscreteAction", "csharp");
 @@clientName(DelayAction, "ChaosDelayAction", "csharp");
 @@clientName(CapabilityTypePropertiesRuntimeProperties,
-    "ChaosCapabilityMetadataRuntimeProperties",
-    "csharp"
-  );
+  "ChaosCapabilityMetadataRuntimeProperties",
+  "csharp"
+);
 @@clientName(TargetReference.type, "ReferenceType", "csharp");
 @@clientName(ExperimentExecutions.getExecutionDetails,
   "ExecutionDetails",
