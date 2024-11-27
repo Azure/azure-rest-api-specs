@@ -6,11 +6,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
-using Azure.Core;
-using Azure.Core.Traits;
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2024_11_30)
@@ -51,20 +46,7 @@ interface DocumentIntelligenceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   composeModel is DocumentModels.composeModel;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @doc("""
-    Generates authorization to copy a document model to this location with
-    specified modelId and optional description.
-    """)
-  @route("/documentModels:authorizeCopy")
-  @post
-  authorizeModelCopy is DocumentIntelligenceOperation<
-    {
-      @doc("Authorize copy request parameters.")
-      @bodyRoot
-      body: AuthorizeCopyRequest;
-    },
-    ModelCopyAuthorization
-  >;
+  authorizeModelCopy is DocumentModels.authorizeModelCopy;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   copyModelTo is DocumentModels.copyModelTo;
   getModel is DocumentModels.getModel;
