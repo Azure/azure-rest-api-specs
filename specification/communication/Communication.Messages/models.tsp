@@ -432,6 +432,9 @@ model MediaMessageContent {
 model ActionBindings {
   @doc("Kind of the MessageActionBinding.")
   actionBindingKind: MessageActionBindingKind;
+
+  @doc("Action content of Interactive message.")
+  action: MessageContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
