@@ -432,9 +432,6 @@ model MediaMessageContent {
 model ActionBindings {
   @doc("Kind of the MessageActionBinding.")
   actionBindingKind: MessageActionBindingKind;
-
-  @doc("Action content of Interactive message.")
-  action: MessageContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -442,6 +439,9 @@ model ActionBindings {
 model WhatsAppListActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppListAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppListAction;
+
+  @doc("Action content of Interactive message.")
+  action: ActionSetContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -449,6 +449,9 @@ model WhatsAppListActionBindings extends ActionBindings {
 model WhatsAppButtonActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppButtonAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppButtonAction;
+
+  @doc("Action content of Interactive message.")
+  action: ButtonSetContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -456,6 +459,9 @@ model WhatsAppButtonActionBindings extends ActionBindings {
 model WhatsAppUrlActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppUrlAction.")
   actionBindingKind: MessageActionBindingKind.whatsAppUrlAction;
+
+  @doc("Action content of Interactive message.")
+  action: UrlContent;
 }
 
 @doc("A request to send a template notification.")
