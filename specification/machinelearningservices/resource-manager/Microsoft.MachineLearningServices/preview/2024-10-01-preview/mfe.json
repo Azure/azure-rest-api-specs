@@ -45,9 +45,6 @@
           "Get available MaaS PTU quota.": {
             "$ref": "./examples/PTUQuota/getAvailable.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -26962,6 +26959,11 @@
     "UsageAndQuotaDetails": {
       "type": "object",
       "properties": {
+        "modelCollection": {
+          "description": "Model collection name",
+          "type": "string",
+          "x-nullable": true
+        },
         "quota": {
           "format": "int64",
           "description": "The total number of quota",
@@ -26981,12 +26983,11 @@
     "UsageAndQuotaProperties": {
       "type": "object",
       "properties": {
-        "modelCollectionToProperties": {
+        "modelCollectionProperties": {
           "description": "Usage and quota details by model collection",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UsageAndQuotaDetails",
-            "x-nullable": true
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageAndQuotaDetails"
           },
           "x-nullable": true
         }
