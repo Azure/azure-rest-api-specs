@@ -1,6 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -353,7 +353,8 @@ model EpicVirtualInstanceError {
   /**
    * The Virtual Instance for Epic error body.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ErrorDefinition;
 }
 

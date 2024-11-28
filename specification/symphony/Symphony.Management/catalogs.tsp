@@ -22,7 +22,7 @@ model Catalog is TrackedResource<CatalogProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
   @minLength(1)
-  @pattern("^[a-z0-9]+(\\.[a-z0-9]+)*$")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   @path
   @key("catalogName")
   @segment("catalogs")
@@ -40,11 +40,11 @@ interface Catalogs {
   @doc("Returns details of the Catalog.")
   get is Azure.ResourceManager.ArmResourceRead<Catalog>;
   @doc("Creates new or updates the Catalog.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Catalog>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Catalog>;
   @doc("Updates the existing Catalog.")
-  update is ArmCustomPatchSync<Catalog>;
+  update is ArmCustomPatchAsync<Catalog>;
   @doc("Deletes specified Catalog.")
-  delete is ArmResourceDeleteSync<Catalog>;
+  delete is ArmResourceDeleteWithoutOkAsync<Catalog>;
   @doc("Returns a collection of Catalogs within the resource group.")
   listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Catalog>;
   @doc("Lists Catalogs within an Azure subscription.")

@@ -455,7 +455,8 @@
           "enum": [
             "AzureLogAnalyticsDataFeed",
             "AzureDataExplorerDataFeed",
-            "AzureResourceGraphDataFeed"
+            "AzureResourceGraphDataFeed",
+            "AzureMonitorMetricsDataFeed"
           ],
           "x-ms-enum": {
             "name": "dataFeedType",
@@ -573,6 +574,80 @@
         },
         "dataStore": {
           "$ref": "#/definitions/AzureResourceGraphDataStore"
+        }
+      }
+    },
+    "AzureMonitorMetricsDataFeed": {
+      "description": "Azure Monitor Metrics datafeed.",
+      "type": "object",
+      "required": [
+        "details",
+        "trigger"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeed"
+        }
+      ],
+      "properties": {
+        "details": {
+          "description": "Details of Azure Monitor Metric datafeed",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorMetricDetail"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
+        },
+        "dataStore": {
+          "$ref": "#/definitions/AzureMonitorMetricsDataStore"
+        }
+      }
+    },
+    "AzureMonitorMetricDetail": {
+      "description": "Azure Monitor Metric detail",
+      "type": "object",
+      "required": [
+        "resourceType",
+        "metricDetails"
+      ],
+      "properties": {
+        "resourceType": {
+          "description": "Type of resource for which the metrics are fetched",
+          "type": "string"
+        },
+        "metricDetails": {
+          "description": "Details of the metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDetail"
+          },
+          "x-ms-identifiers": [
+            "metricName"
+          ]
+        }
+      }
+    },
+    "MetricDetail": {
+      "description": "metric detail object inside the metric details",
+      "type": "object",
+      "required": [
+        "metricName",
+        "aggregation"
+      ],
+      "properties": {
+        "metricName": {
+          "description": "Name of the metric for which the metrics are fetched",
+          "type": "string"
+        },
+        "aggregation": {
+          "description": "Aggregation type of the fetched metric",
+          "type": "string"
+        },
+        "filter": {
+          "description": "filter query for the metric to be fetched",
+          "type": "string"
         }
       }
     },
@@ -789,7 +864,8 @@
             "ImpactResourceProviderDataStore",
             "AzureDataExplorerDataStore",
             "EventHubDataStore",
-            "AzureResourceGraphDataStore"
+            "AzureResourceGraphDataStore",
+            "AzureMonitorMetricsDataStore"
           ],
           "x-ms-enum": {
             "name": "dataStoreType",
@@ -849,6 +925,15 @@
     },
     "AzureResourceGraphDataStore": {
       "description": "Azure Resource Graph in data store.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ]
+    },
+    "AzureMonitorMetricsDataStore": {
+      "description": "Azure Monitor Metric in data store.",
       "type": "object",
       "allOf": [
         {

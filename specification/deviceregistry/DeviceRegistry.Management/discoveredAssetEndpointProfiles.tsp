@@ -16,6 +16,7 @@ using OpenAPI;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset Endpoint Profile definition.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
@@ -36,6 +37,7 @@ model DiscoveredAssetEndpointProfile
 }
 
 @doc("Defines the Discovered Asset Endpoint Profile properties.")
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 model DiscoveredAssetEndpointProfileProperties {
   @doc("The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration.")
@@ -63,6 +65,7 @@ model DiscoveredAssetEndpointProfileProperties {
 }
 
 @armResourceOperations
+@removed(Versions.v2024_10_01_preview)
 @added(Versions.v2024_07_01_preview)
 interface DiscoveredAssetEndpointProfiles {
   get is ArmResourceRead<DiscoveredAssetEndpointProfile>;

@@ -38,12 +38,12 @@ interface Sims {
   @doc("Deletes the specified SIM.")
   delete is ArmResourceDeleteWithoutOkAsync<Sim>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_ListBySimGroup. Changed it to Sims_ListByGroup to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_ListBySimGroup. Changed it to Sims_ListByGroup to addressed the OperationIdNounVerb error."
   @doc("Gets all the SIMs in a SIM group.")
   @operationId("Sims_ListByGroup")
   listBySimGroup is ArmResourceListByParent<Sim>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_UploadSims. Changed it to Sims_BulkUpload to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_UploadSims. Changed it to Sims_BulkUpload to addressed the OperationIdNounVerb error."
   @doc("Bulk upload SIMs to a SIM group.")
   @operationId("Sims_BulkUpload")
   uploadSims is ArmResourceActionAsync<
@@ -52,7 +52,7 @@ interface Sims {
     AsyncOperationStatus
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_DeleteSims. Changed it to Sims_BulkDelete to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_DeleteSims. Changed it to Sims_BulkDelete to addressed the OperationIdNounVerb error."
   @doc("Bulk delete SIMs from a SIM group.")
   @operationId("Sims_BulkDelete")
   deleteSims is ArmResourceActionAsync<
@@ -61,7 +61,7 @@ interface Sims {
     AsyncOperationStatus
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_UploadEncryptedSims. Changed it to Sims_BulkUploadEncrypted to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_UploadEncryptedSims. Changed it to Sims_BulkUploadEncrypted to addressed the OperationIdNounVerb error."
   @doc("Bulk upload SIMs in encrypted form to a SIM group. The SIM credentials must be encrypted.")
   @operationId("Sims_BulkUploadEncrypted")
   uploadEncryptedSims is ArmResourceActionAsync<
@@ -70,12 +70,12 @@ interface Sims {
     AsyncOperationStatus
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_MoveSims. Changed it to Sims_Move to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_MoveSims. Changed it to Sims_Move to addressed the OperationIdNounVerb error."
   @doc("Move SIMs to another SIM Group")
   @operationId("Sims_Move")
   moveSims is ArmResourceActionAsync<SimGroup, SimMove, AsyncOperationStatus>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "TypeSpec generated an Operation ID called Sims_CloneSims. Changed it to Sims_Clone to addressed the OperationIdNounVerb error."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TypeSpec generated an Operation ID called Sims_CloneSims. Changed it to Sims_Clone to addressed the OperationIdNounVerb error."
   @doc("Clone SIMs to another SIM Group")
   @operationId("Sims_Clone")
   cloneSims is ArmResourceActionAsync<SimGroup, SimClone, AsyncOperationStatus>;

@@ -8,13 +8,13 @@ using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
 namespace Microsoft.AzureCis;
 
 @doc("dstsApplication properties")
-@removed(Versions.v2024_06_24_preview)
 model DstsApplicationResourceProperties {
   @doc("Application.")
   applicationAccount?: ApplicationAccount;
@@ -28,7 +28,6 @@ model DstsApplicationResourceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"
-@removed(Versions.v2024_06_24_preview)
 @doc("dstsApplication Resource")
 model DstsApplicationResource
   is ProxyResource<DstsApplicationResourceProperties> {
@@ -42,7 +41,6 @@ model DstsApplicationResource
 }
 
 @doc("Application. Optional.")
-@removed(Versions.v2024_06_24_preview)
 model ApplicationAccount {
   @doc("The dSTS instance where the Application resides. Required.")
   dstsInstance: string;
@@ -83,10 +81,13 @@ model ApplicationAccount {
 
   @doc("Client identity when using the application as a client. Optional.")
   applicationClientIdentity?: ApplicationClientIdentity;
+
+  @doc("The Azure location")
+  @added(Versions.v2024_06_24_preview)
+  azureLocation?: azureLocation;
 }
 
 @doc("The application group. Optional.")
-@removed(Versions.v2024_06_24_preview)
 model ApplicationGroup {
   @doc("Group id. Optional.")
   id?: string;
@@ -134,10 +135,13 @@ model ApplicationGroup {
 
   @doc("Client identity when using the application as a client. Optional.")
   applicationClientIdentity?: ApplicationClientIdentity;
+
+  @doc("The Azure location")
+  @added(Versions.v2024_06_24_preview)
+  azureLocation?: azureLocation;
 }
 
 @doc("The claim rule which apply to Application.")
-@removed(Versions.v2024_06_24_preview)
 model ApplicationClaimRule {
   @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
   clientIdentifier: Claim;
@@ -153,7 +157,6 @@ model ApplicationClaimRule {
 }
 
 @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
-@removed(Versions.v2024_06_24_preview)
 model Claim {
   @doc("Type of the claim")
   type: string;
@@ -163,7 +166,6 @@ model Claim {
 }
 
 @doc("Represents application client identity.")
-@removed(Versions.v2024_06_24_preview)
 model ApplicationClientIdentity {
   @doc("Dmsi client.")
   dmsiInfo?: DmsiInfo;
@@ -183,7 +185,6 @@ model ApplicationClientIdentity {
 }
 
 @doc("Dmsi information")
-@removed(Versions.v2024_06_24_preview)
 model DmsiInfo {
   @doc("Dmsi path")
   path: string;
@@ -196,7 +197,6 @@ model DmsiInfo {
 }
 
 @doc("Represents certificate based authentication.")
-@removed(Versions.v2024_06_24_preview)
 model CertificateBasedIdentity {
   @doc("Certificate")
   @extension("x-ms-identifiers", [])
@@ -204,7 +204,6 @@ model CertificateBasedIdentity {
 }
 
 @doc("Certification based application client identity.")
-@removed(Versions.v2024_06_24_preview)
 model CertificateInfo {
   @doc("Certificate thumbprint information")
   thumbprint: string;
@@ -214,14 +213,12 @@ model CertificateInfo {
 }
 
 @doc("Represents application subject name base identity.")
-@removed(Versions.v2024_06_24_preview)
 model SubjectNameBasedIdentity {
   @doc("List of subject names for sni based auth")
   subjectNames: Array<string>;
 }
 
 @doc("Class for a contiguous range of IP Addresses.")
-@removed(Versions.v2024_06_24_preview)
 model IpRange {
   @doc("From IP address.")
   fromIpAddress: string;
@@ -232,7 +229,6 @@ model IpRange {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
-@removed(Versions.v2024_06_24_preview)
 interface DstsApplications {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
   @Azure.Core.useFinalStateVia("azure-async-operation")

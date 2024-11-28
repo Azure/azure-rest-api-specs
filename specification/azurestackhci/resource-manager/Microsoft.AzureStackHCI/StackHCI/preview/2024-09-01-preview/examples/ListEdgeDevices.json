@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
+    "edgeDeviceName": "default",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/providers/Microsoft.AzureStackHCI/edgeDevices/default",
+            "name": "default",
+            "type": "Microsoft.AzureStackHCI/edgeDevices",
+            "kind": "HCI",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2021-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "reportedProperties": {
+                "networkProfile": {
+                  "nicDetails": [
+                    {
+                      "adapterName": "vmanagement",
+                      "interfaceDescription": "Hyper-V Virtual Ethernet Adapter",
+                      "componentId": "vms_mp",
+                      "driverVersion": "10.0.25398.1",
+                      "ip4Address": "192.168.200.92",
+                      "subnetMask": "255.255.255.0",
+                      "defaultGateway": "192.168.200.1",
+                      "dnsServers": [
+                        "192.168.200.222"
+                      ],
+                      "defaultIsolationId": "0",
+                      "slot": "0",
+                      "macAddress": "000000000041",
+                      "switchName": null,
+                      "nicType": "Virtual",
+                      "vlanId": "0",
+                      "nicStatus": "Up"
+                    }
+                  ],
+                  "switchDetails": [
+                    {
+                      "switchName": "vmanagement",
+                      "switchType": "External"
+                    }
+                  ]
+                },
+                "osProfile": {
+                  "bootType": "UEFI",
+                  "assemblyVersion": "2402.1"
+                },
+                "sbeDeploymentPackageInfo": {
+                  "code": "NewerThanLatestPublished",
+                  "message": "The SBE package at path 'C:\\SBE' with version 4.1.2312.10 is published later than the latest SBE manifest published for online discovery. ",
+                  "sbeManifest": "PEFwcGxpY2Fi"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

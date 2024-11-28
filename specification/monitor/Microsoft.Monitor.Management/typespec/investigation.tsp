@@ -371,6 +371,7 @@ model InvestigationResult {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO is x-ms-azure-resource needed?"
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 @removed(Microsoft.Monitor.Versions.v2024_10_01)
 @extension("x-ms-azure-resource", true)
@@ -432,7 +433,7 @@ interface Investigations {
   /**
    * Get all the Investigations at the given resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Investigations_ListAtResource")
   @doc("Returns all the investigations of a specific resource.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
@@ -468,6 +469,7 @@ interface Investigations {
   >;
 }
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Investigations.createOrUpdateAtResource::parameters.resource,
   "application/json",
   "investigation"

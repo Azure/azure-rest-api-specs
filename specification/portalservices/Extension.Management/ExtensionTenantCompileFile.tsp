@@ -48,7 +48,3 @@ interface PortalTenant {
 @@clientName(PortalTenant.compilefile::parameters.body,
   "portalTenantCompileFile"
 );
-@@encodedName(PortalTenant.compilefile::parameters.body,
-  "application/json",
-  "portalTenantCompileFile"
-);

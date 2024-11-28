@@ -2,10 +2,12 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ToolchainOrchestrator;
@@ -34,7 +36,7 @@ model CampaignVersion is TrackedResource<CampaignVersionProperties> {
   @doc("The name of the campaignVersion.")
   @maxLength(90)
   @minLength(1)
-  @pattern("^[a-z0-9]+(\\.[a-z0-9]+)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   @path
   @key("versionName")
   @segment("versions")
@@ -44,7 +46,8 @@ model CampaignVersion is TrackedResource<CampaignVersionProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.v2024_08_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -52,11 +55,11 @@ interface CampaignVersions {
   @doc("Returns the details of the campaignVersion.")
   get is Azure.ResourceManager.ArmResourceRead<CampaignVersion>;
   @doc("Creates a new or updates an existing campaignVersion.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<CampaignVersion>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<CampaignVersion>;
   @doc("Updates an existing campaignVersion.")
-  update is ArmCustomPatchSync<CampaignVersion>;
+  update is ArmCustomPatchAsync<CampaignVersion>;
   @doc("Deletes a specified campaignVersion.")
-  delete is ArmResourceDeleteSync<CampaignVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<CampaignVersion>;
   @doc("Lists CampaignVersions within a Campaign.")
   listByCampaign is ArmResourceListByParent<CampaignVersion>;
 }

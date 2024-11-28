@@ -78,7 +78,3 @@ interface PortalExtensionDeployments {
 @@clientName(PortalExtensionDeployments.update::parameters.properties,
   "parameters"
 );
-@@encodedName(PortalExtensionDeployments.update::parameters.properties,
-  "application/json",
-  "parameters"
-);

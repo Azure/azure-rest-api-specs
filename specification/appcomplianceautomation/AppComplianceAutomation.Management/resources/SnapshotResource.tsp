@@ -34,7 +34,8 @@ model SnapshotResource extends ProxyResourceBase {
   /**
    * Snapshot's property'.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties?: SnapshotProperties;
 }
@@ -45,14 +46,14 @@ interface SnapshotResources {
   /**
    * Get the AppComplianceAutomation snapshot and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshots_Get")
   get is ArmResourceRead<SnapshotResource>;
 
   /**
    * Get the AppComplianceAutomation snapshot list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshots_List")
   list is ArmResourceListByParent<
     SnapshotResource,
@@ -65,7 +66,7 @@ interface SnapshotResources {
   /**
    * Download compliance needs from snapshot, like: Compliance Report, Resource List.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Snapshots_Download")
   download is ArmResourceActionAsync<
     SnapshotResource,

@@ -100,12 +100,14 @@ interface UpdateAccounts {
   "The update to be imported (see schema https://json.schemastore.org/azure-deviceupdate-import-manifest-5.0.json for details)."
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(UpdateAccounts.create::parameters.resource,
   "application/json",
   "UpdateAccount"
 );
 @@clientName(UpdateAccounts.create::parameters.resource, "UpdateAccount");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(UpdateAccounts.update::parameters.properties,
   "application/json",
   "updateAccountUpdatePayload"
@@ -114,6 +116,7 @@ interface UpdateAccounts {
   "updateAccountUpdatePayload"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(UpdateAccounts.importUpdate::parameters.body,
   "application/json",
   "updateToImport"

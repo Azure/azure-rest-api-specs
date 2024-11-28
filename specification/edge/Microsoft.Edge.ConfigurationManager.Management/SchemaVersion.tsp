@@ -30,7 +30,10 @@ model SchemaVersionProperties {
 @parentResource(Schema)
 @resource("versions")
 model SchemaVersion is ProxyResource<SchemaVersionProperties> {
-  ...ResourceNameParameter<SchemaVersion>;
+  ...ResourceNameParameter<
+    SchemaVersion,
+    NamePattern = "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+  >;
 }
 
 @armResourceOperations

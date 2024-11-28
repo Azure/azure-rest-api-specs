@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- LogsLogStreams ----------------------------------------------
@@ -83,7 +83,7 @@ model AwsLogsLogStreamProperties {
 interface LogsLogStreams {
   get is ArmResourceRead<LogsLogStream>;
   @doc("Create a LogsLogStream. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LogsLogStream>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<LogsLogStream>;
   update is ArmCustomPatchAsync<
     LogsLogStream,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsLogStream>

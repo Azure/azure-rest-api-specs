@@ -55,7 +55,7 @@ interface MessagingCatalogs {
   /**
    * List MessagingCatalog resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("MessagingCatalogs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<MessagingCatalog>;
 
@@ -63,4 +63,23 @@ interface MessagingCatalogs {
    * List MessagingCatalog resources by subscription ID
    */
   listBySubscription is ArmListBySubscription<MessagingCatalog>;
+
+  associate is ArmResourceActionAsync<
+    MessagingCatalog,
+    Association,
+    Association,
+    BaseParameters<Association>
+  >;
+
+  listAssociations is ArmResourceActionAsync<
+    MessagingCatalog,
+    AssociationListRequest,
+    AssociationListResponse
+  >;
+
+  removeAssociation is ArmResourceActionAsync<
+    MessagingCatalog,
+    AssociationRemoveRequest,
+    AssociationDeleteResponse
+  >;
 }

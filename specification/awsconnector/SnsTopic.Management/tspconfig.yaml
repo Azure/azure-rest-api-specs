@@ -4,11 +4,9 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "./resource-manager"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     emitter-output-dir: "{output-dir}"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/snsTopic.json"
-    examples-directory: ./examples
+    examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true
 linter:
   extends:

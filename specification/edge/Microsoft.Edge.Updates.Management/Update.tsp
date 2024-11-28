@@ -55,7 +55,7 @@ interface Updates {
   /**
    * List Update resources by parent
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("Updates_List")
   list is ArmResourceListByParent<Update>;
 }

@@ -31,6 +31,21 @@ tag: package-2024-09
 ```
 
 
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - preview/2024-10-01-preview/SAPVirtualInstance.json
+  - ../common-types/v1/commonTypes.json
+  - ../operations/preview/2024-10-01-preview/operations.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from: SAPVirtualInstance.json
+    reason: This is an incorrect failure due to a bug in the tool
+```
+
 ### Tag: package-2024-09
 
 These settings apply only when `--tag=package-2024-09` is specified on the command line.

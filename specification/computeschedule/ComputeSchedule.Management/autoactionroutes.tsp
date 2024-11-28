@@ -6,7 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
 import "./occurrencemodels.tsp";
 import "./occurrenceroutes.tsp";
-import "./commons.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -27,39 +26,44 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
-  @segment("resources")
-  getResources is ArmResourceListActionSync<AutoAction, AutoActionResource>;
-  attachResources is ArmResourceActionNoContentSync<
+  listResources is ArmResourceActionSync<
     AutoAction,
-    AutoActionResource[]
+    void,
+    AutoActionResourceListResponse
   >;
-  detachResources is ArmResourceActionNoContentSync<
+  attachResources is ArmResourceActionSync<
     AutoAction,
-    AutoActionResource[]
+    AutoActionResourceAttachRequest,
+    AutoActionResourceOperationResponse
+  >;
+  detachResources is ArmResourceActionSync<
+    AutoAction,
+    AutoActionResourceDetachRequest,
+    AutoActionResourceOperationResponse
+  >;
+  patchResources is ArmResourceActionSync<
+    AutoAction,
+    AutoActionResourcePatchRequest,
+    AutoActionResourceOperationResponse
   >;
 
-  @doc("disables the auto action")
-  disable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
-  @doc("enables the auto action")
-  enable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
+  disable is ArmResourceActionSync<AutoAction, void, OkResponse>;
+  enable is ArmResourceActionSync<AutoAction, void, OkResponse>;
 
-  cancelNextOccurrence is ArmResourceActionAsync<
+  cancelNextOccurrence is ArmResourceActionSync<
     AutoAction,
-    OccurrenceResource[],
+    CancelOccurrenceRequest,
     Occurrence
   >;
-  triggerManualOccurrence is ArmResourceActionAsync<
+  triggerManualOccurrence is ArmResourceActionSync<
     AutoAction,
     void,
     Occurrence
   >;
+}
 
-  @doc("List auto actions associated to the resource. This is intended to be used for Microsoft.Compute/virtualMachines only")
-  @segment("autoActions")
-  listByVms is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceUriParameter &
-      Azure.ResourceManager.Foundations.TenantScope<AutoAction>,
-    ArmResponse<ResourceListResult<AutoAction>>,
-    ErrorResponse
-  >;
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@armResourceOperations
+interface AutoActionsExtension {
+  listByVms is ArmResourceListByParent<AutoActionResources>;
 }

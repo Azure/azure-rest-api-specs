@@ -17,19 +17,43 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@doc("Configured Solution Version")
+model ConfiguredSolutionVersion {
+  @doc("Solution Version")
+  solutionVersion: string;
+
+  @doc("Latest Configuration Revision")
+  latestConfigRevision: string;
+}
+
+@doc("Solution Configuration Parameter")
+model SolutionConfigurationParameter {
+  @doc("Solution Version")
+  solutionVersion: string;
+}
+
 @doc("Solution Binding Properties")
 model SolutionBindingProperties {
   @doc("Solution of solution binding")
-  solution: string;
+  @visibility("read")
+  solution?: string;
 
   @doc("Deployment Target of solution binding")
-  deploymentTarget: string;
+  @visibility("read")
+  deploymentTarget?: string;
 
-  @doc("Active Deployment Instance of solution binding")
-  activeSolutionInstance: string;
+  @doc("Active Solution Instance of solution binding")
+  @visibility("read")
+  activeSolutionInstance?: string;
 
   @doc("Scope of solution binding")
-  scope: string;
+  @visibility("read")
+  scope?: string;
+
+  @doc("Array of configured solution versions")
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  configuredSolutionVersions?: ConfiguredSolutionVersion[];
 
   @doc("Provisioning state of resource")
   @visibility("read")
@@ -38,7 +62,10 @@ model SolutionBindingProperties {
 
 @doc("Solution Binding Resource")
 model SolutionBinding is TrackedResource<SolutionBindingProperties> {
-  ...ResourceNameParameter<SolutionBinding>;
+  ...ResourceNameParameter<
+    SolutionBinding,
+    NamePattern = "^[a-zA-Z0-9-]{3,60}$"
+  >;
 }
 
 @armResourceOperations
@@ -70,7 +97,7 @@ interface SolutionBindings {
   @doc("Post request to resolve configuration")
   resolveConfiguration is ArmResourceActionAsync<
     SolutionBinding,
-    void,
+    SolutionConfigurationParameter,
     SolutionBindingConfiguration
   >;
 

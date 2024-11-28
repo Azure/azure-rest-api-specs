@@ -42,15 +42,18 @@ model StorageCollectionRuleProperties {
   @doc("The description of the storage collection rule.")
   description?: string;
 
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("The filters definition of the storage collection rule. The storage collection rule will be applied to all of the storage accounts captured by these filters.")
   filters: StorageCollectionRuleFilters;
 
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("The destinations to which the storage collection rule sends data.")
   destinations: StorageCollectionRuleDestinations;
 
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flattening"
+  @Azure.ClientGenerator.Core.flattenProperty
   @doc("The configuration of the storage collection rule.")
   configuration: StorageCollectionRuleConfiguration;
 

@@ -61,9 +61,11 @@ interface Agents {
 @@doc(Agents.create::parameters.resource, "Agent details.");
 @@doc(Agents.update::parameters.properties, "Updated tags.");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Agents.create::parameters.resource, "application/json", "agent");
 @@clientName(Agents.create::parameters.resource, "agent");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Agents.update::parameters.properties,
   "application/json",
   "tagUpdatePayload"

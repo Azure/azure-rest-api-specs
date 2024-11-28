@@ -206,9 +206,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualMachineInstanceFromLocal": {
-            "$ref": "./examples/VirtualMachineInstances__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualMachineInstanceWithGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
           },
@@ -2195,9 +2192,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateNetworkInterfaceFromLocal": {
-            "$ref": "./examples/NetworkInterfaces__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutNetworkInterface": {
             "$ref": "./examples/NetworkInterfaces_CreateOrUpdate.json"
           }
@@ -3342,9 +3336,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualHardDiskFromLocal": {
-            "$ref": "./examples/VirtualHardDisks__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualHardDisk": {
             "$ref": "./examples/VirtualHardDisks_CreateOrUpdate.json"
           }
@@ -3479,80 +3470,6 @@
         "x-ms-examples": {
           "DeleteVirtualHardDisk": {
             "$ref": "./examples/VirtualHardDisks_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
-      "post": {
-        "operationId": "VirtualHardDisks_Upload",
-        "tags": [
-          "VirtualHardDisks"
-        ],
-        "description": "The operation to upload a virtual hard disk.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualHardDiskName",
-            "in": "path",
-            "description": "Name of the virtual hard disk",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDiskUploadRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDiskUploadResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UploadVirtualHardDisk": {
-            "$ref": "./examples/VirtualHardDisks_Upload.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3974,8 +3891,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -4115,8 +4031,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "GalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4518,8 +4433,7 @@
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "IPConfigurationProperties": {
       "type": "object",
@@ -4744,8 +4658,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "LogicalNetworkArmReference": {
       "type": "object",
@@ -4759,6 +4672,18 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l2Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l3Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               }
             ]
           }
@@ -4847,8 +4772,7 @@
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "LogicalNetworkStatusProvisioningStatus": {
       "type": "object",
@@ -4895,8 +4819,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "MarketplaceGalleryImageListResult": {
       "type": "object",
@@ -4995,8 +4918,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "MarketplaceGalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -5067,8 +4989,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
@@ -5142,11 +5063,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local network interface or if one should be created.",
-          "default": false
         }
       }
     },
@@ -5166,8 +5082,7 @@
           "$ref": "#/definitions/NetworkInterfaceStatusProvisioningStatus",
           "description": "Network interface provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "NetworkInterfaceStatusProvisioningStatus": {
       "type": "object",
@@ -5966,8 +5881,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "StorageContainerArmReference": {
       "type": "object",
@@ -6057,8 +5971,7 @@
           "$ref": "#/definitions/StorageContainerStatusProvisioningStatus",
           "description": "Storage container's provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "StorageContainerStatusProvisioningStatus": {
       "type": "object",
@@ -6228,8 +6141,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
@@ -6315,15 +6227,6 @@
           "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
           "x-ms-secret": true
         },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local hard disk or if one should be created.",
-          "default": false
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemTypes",
-          "description": "Operating system type of the OS disk. Possible values are: Windows, Linux."
-        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6380,8 +6283,7 @@
           "$ref": "#/definitions/VirtualHardDiskUploadStatus",
           "description": "The upload status of the virtual hard disk"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6533,8 +6435,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualMachineInstanceListResult": {
       "type": "object",
@@ -6612,11 +6513,6 @@
         "resourceUid": {
           "type": "string",
           "description": "Unique identifier defined by ARC to identify the guest of the VM."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local virtual machine or if one should be created.",
-          "default": false
         }
       }
     },
@@ -7048,8 +6944,7 @@
           "$ref": "#/definitions/VirtualMachineInstanceStatusProvisioningStatus",
           "description": "Provisioning status of the virtual machine instance"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualMachineInstanceStatusProvisioningStatus": {
       "type": "object",

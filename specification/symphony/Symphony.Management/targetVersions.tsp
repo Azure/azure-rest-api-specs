@@ -2,15 +2,18 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ToolchainOrchestrator;
 
 @doc("The properties of a TargetVersion resource.")
+@removed(Versions.v2024_08_01_preview)
 model TargetVersionProperties {
   @doc("The status of the last operation.")
   @visibility("read")
@@ -53,6 +56,7 @@ model TargetVersionProperties {
 @doc("A TargetVersion resource belonging to a Target resource.")
 @resource("versions")
 @parentResource(Target)
+@removed(Versions.v2024_08_01_preview)
 model TargetVersion is TrackedResource<TargetVersionProperties> {
   @doc("The name of Azure API Center service.")
   @maxLength(90)
@@ -71,6 +75,7 @@ model TargetVersion is TrackedResource<TargetVersionProperties> {
 }
 
 @armResourceOperations
+@removed(Versions.v2024_08_01_preview)
 interface TargetVersions {
   @doc("Returns details of specified TargetVersion resource.")
   get is Azure.ResourceManager.ArmResourceRead<TargetVersion>;

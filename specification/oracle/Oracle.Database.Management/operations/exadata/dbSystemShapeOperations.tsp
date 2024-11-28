@@ -8,10 +8,12 @@ namespace Oracle.Database;
 @armResourceOperations
 interface DbSystemShapes extends OracleLocationBasedResource<DbSystemShape> {}
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DbSystemShapes.listByLocation,
   "./examples/dbSystemShapes_listByLocation.json",
   "List DbSystemShapes by location"
 );
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DbSystemShapes.get,
   "./examples/dbSystemShapes_get.json",
   "Get a DbSystemShape by name"

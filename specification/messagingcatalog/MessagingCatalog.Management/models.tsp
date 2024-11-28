@@ -84,11 +84,9 @@ model ResourceLabel {
 
 @doc("The type used for update operations of the Messaging Catalog.")
 model MessagingCatalogUpdate {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The updatable properties of the Messaging Catalog.")
-  @extension("x-ms-client-flatten", true)
   properties?: MessagingCatalogUpdateProperties;
 }
 
@@ -121,4 +119,61 @@ model ProblemDetails {
 
   @doc("Details about the error result.")
   instance?: string;
+}
+
+@doc("An association between external entities and catalog resources.")
+model Association {
+  @doc("Id of the association.")
+  id?: string;
+
+  @doc("Type of association.")
+  associationType: string;
+
+  @doc("Details about the Association.")
+  definition: AssociationDefinition;
+}
+
+@doc("Details about the catalog association.")
+model AssociationDefinition {
+  @doc("The tenant id to associate.")
+  tenantId?: string;
+
+  @doc("The workspace id to associate.")
+  workspaceId?: string;
+
+  @doc("The artifact id to associate.")
+  artifactId?: string;
+
+  @doc("The message group id to associate.")
+  messageGroupId?: string;
+
+  @doc("The schema group id to associate.")
+  schemaGroupId?: string;
+}
+
+@doc("An request to remove an association.")
+model AssociationRemoveRequest {
+  @doc("Id of the association, which by default is a guid.")
+  associationId: string;
+}
+
+@doc("An request to paginate a list of result.")
+model AssociationListRequest {
+  @doc("Controls how many results to skip.")
+  skip?: int32;
+
+  @doc("Controls how many results to retrieve.")
+  top?: int32;
+}
+
+@doc("An response of paginated associations.")
+model AssociationListResponse {
+  @doc("List of associations.")
+  associations: Association[];
+}
+
+@doc("An response of a association deletion.")
+model AssociationDeleteResponse {
+  @doc("A string detailing the result of the operation.")
+  status: ProvisioningState;
 }

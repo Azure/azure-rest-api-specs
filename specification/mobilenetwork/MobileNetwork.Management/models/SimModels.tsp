@@ -1,4 +1,4 @@
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 
 import "../common/CommonModels.tsp";
 
@@ -110,8 +110,9 @@ model SimNameAndProperties {
   @doc("The name of the SIM.")
   name: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("SIM Properties.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: SimPropertiesFormat;
 }
 
@@ -148,8 +149,9 @@ model SimNameAndEncryptedProperties {
   @doc("The name of the SIM.")
   name: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Encrypted SIM Properties.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: EncryptedSimPropertiesFormat;
 }
 

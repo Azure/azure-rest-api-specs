@@ -46,30 +46,33 @@
       "name": "AutoActions"
     },
     {
+      "name": "AutoActionsExtension"
+    },
+    {
       "name": "Occurrences"
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActions": {
+    "/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActionResources": {
       "get": {
-        "operationId": "AutoActions_ListByVms",
+        "operationId": "AutoActionsExtension_ListByVms",
         "tags": [
-          "AutoActions"
+          "AutoActionsExtension"
         ],
-        "description": "List auto actions associated to the resource. This is intended to be used for Microsoft.Compute/virtualMachines only",
+        "description": "List AutoActionResources resources by parent",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoActionListResult"
+              "$ref": "#/definitions/AutoActionResourcesListResult"
             }
           },
           "default": {
@@ -80,8 +83,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_ListByVms": {
-            "$ref": "./examples/AutoActions_ListByVms_MaximumSet_Gen.json"
+          "AutoActionsExtension_ListByVms_MaximumSet": {
+            "$ref": "./examples/AutoActionsExtension_ListByVms_MaximumSet_Gen.json"
+          },
+          "AutoActionsExtension_ListByVms_MinimumSet": {
+            "$ref": "./examples/AutoActionsExtension_ListByVms_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -116,11 +122,11 @@
           }
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          },
-          "Operations_List_Max": {
+          "Operations_List_MaximumSet": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -158,8 +164,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_ListBySubscription": {
+          "AutoActions_ListBySubscription_MaximumSet": {
             "$ref": "./examples/AutoActions_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "AutoActions_ListBySubscription_MinimumSet": {
+            "$ref": "./examples/AutoActions_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -211,11 +220,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesCancelOperations": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesCancelOperations_Max": {
+          "ScheduledActions_VirtualMachinesCancelOperations_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesCancelOperations_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen.json"
           }
         }
       }
@@ -264,11 +273,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteDeallocate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteDeallocate_Max": {
+          "ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen.json"
           }
         }
       }
@@ -317,11 +326,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteHibernate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteHibernate_Max": {
+          "ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen.json"
           }
         }
       }
@@ -370,11 +379,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteStart": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteStart_Max": {
+          "ScheduledActions_VirtualMachinesExecuteStart_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesExecuteStart_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
           }
         }
       }
@@ -423,11 +432,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesGetOperationStatus": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesGetOperationStatus_Max": {
+          "ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -476,11 +485,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitDeallocate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitDeallocate_Max": {
+          "ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen.json"
           }
         }
       }
@@ -529,11 +538,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitHibernate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitHibernate_Max": {
+          "ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen.json"
           }
         }
       }
@@ -582,11 +591,11 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitStart": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitStart_Max": {
+          "ScheduledActions_VirtualMachinesSubmitStart_MaximumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen.json"
+          },
+          "ScheduledActions_VirtualMachinesSubmitStart_MinimumSet": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen.json"
           }
         }
       }
@@ -624,8 +633,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_ListByResourceGroup": {
+          "AutoActions_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/AutoActions_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "AutoActions_ListByResourceGroup_MinimumSet": {
+            "$ref": "./examples/AutoActions_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -674,8 +686,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Get": {
+          "AutoActions_Get_MaximumSet": {
             "$ref": "./examples/AutoActions_Get_MaximumSet_Gen.json"
+          },
+          "AutoActions_Get_MinimumSet": {
+            "$ref": "./examples/AutoActions_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -745,8 +760,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_CreateOrUpdate": {
+          "AutoActions_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/AutoActions_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "AutoActions_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/AutoActions_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -803,8 +821,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Update": {
+          "AutoActions_Update_MaximumSet": {
             "$ref": "./examples/AutoActions_Update_MaximumSet_Gen.json"
+          },
+          "AutoActions_Update_MinimumSet": {
+            "$ref": "./examples/AutoActions_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -859,8 +880,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Delete": {
+          "AutoActions_Delete_MaximumSet": {
             "$ref": "./examples/AutoActions_Delete_MaximumSet_Gen.json"
+          },
+          "AutoActions_Delete_MinimumSet": {
+            "$ref": "./examples/AutoActions_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -875,7 +899,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "A synchronous resource action that returns no content.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -900,17 +924,16 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AutoActionResource"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/AutoActionResourceAttachRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoActionResourceOperationResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -920,8 +943,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_AttachResources": {
+          "AutoActions_AttachResources_MaximumSet": {
             "$ref": "./examples/AutoActions_AttachResources_MaximumSet_Gen.json"
+          },
+          "AutoActions_AttachResources_MinimumSet": {
+            "$ref": "./examples/AutoActions_AttachResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -932,7 +958,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "A long-running resource action.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -957,11 +983,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OccurrenceResource"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/CancelOccurrenceRequest"
             }
           }
         ],
@@ -972,20 +994,6 @@
               "$ref": "#/definitions/Occurrence"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -994,14 +1002,13 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_CancelNextOccurrence": {
+          "AutoActions_CancelNextOccurrence_MaximumSet": {
             "$ref": "./examples/AutoActions_CancelNextOccurrence_MaximumSet_Gen.json"
+          },
+          "AutoActions_CancelNextOccurrence_MinimumSet": {
+            "$ref": "./examples/AutoActions_CancelNextOccurrence_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/detachResources": {
@@ -1010,7 +1017,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "A synchronous resource action that returns no content.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1035,17 +1042,16 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AutoActionResource"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/AutoActionResourceDetachRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoActionResourceOperationResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1055,8 +1061,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_DetachResources": {
+          "AutoActions_DetachResources_MaximumSet": {
             "$ref": "./examples/AutoActions_DetachResources_MaximumSet_Gen.json"
+          },
+          "AutoActions_DetachResources_MinimumSet": {
+            "$ref": "./examples/AutoActions_DetachResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -1067,7 +1076,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "disables the auto action",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1088,8 +1097,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1099,8 +1108,11 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Disable": {
+          "AutoActions_Disable_MaximumSet": {
             "$ref": "./examples/AutoActions_Disable_MaximumSet_Gen.json"
+          },
+          "AutoActions_Disable_MinimumSet": {
+            "$ref": "./examples/AutoActions_Disable_MinimumSet_Gen.json"
           }
         }
       }
@@ -1111,7 +1123,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "enables the auto action",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1132,8 +1144,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Operation completed successfully."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1143,9 +1155,65 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Enable": {
+          "AutoActions_Enable_MaximumSet": {
             "$ref": "./examples/AutoActions_Enable_MaximumSet_Gen.json"
+          },
+          "AutoActions_Enable_MinimumSet": {
+            "$ref": "./examples/AutoActions_Enable_MinimumSet_Gen.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/listResources": {
+      "post": {
+        "operationId": "AutoActions_ListResources",
+        "tags": [
+          "AutoActions"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "autoActionName",
+            "in": "path",
+            "description": "The name of the AutoAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutoActionResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AutoActions_ListResources_MaximumSet": {
+            "$ref": "./examples/AutoActions_ListResources_MaximumSet_Gen.json"
+          },
+          "AutoActions_ListResources_MinimumSet": {
+            "$ref": "./examples/AutoActions_ListResources_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1190,8 +1258,11 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_ListByAutoAction": {
+          "Occurrences_ListByAutoAction_MaximumSet": {
             "$ref": "./examples/Occurrences_ListByAutoAction_MaximumSet_Gen.json"
+          },
+          "Occurrences_ListByAutoAction_MinimumSet": {
+            "$ref": "./examples/Occurrences_ListByAutoAction_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1248,8 +1319,11 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Get": {
+          "Occurrences_Get_MaximumSet": {
             "$ref": "./examples/Occurrences_Get_MaximumSet_Gen.json"
+          },
+          "Occurrences_Get_MinimumSet": {
+            "$ref": "./examples/Occurrences_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1260,7 +1334,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "A synchronous resource action that returns no content.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1293,17 +1367,16 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/OccurrenceResource"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/CancelOccurrenceRequest"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1313,8 +1386,11 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Cancel": {
+          "Occurrences_Cancel_MaximumSet": {
             "$ref": "./examples/Occurrences_Cancel_MaximumSet_Gen.json"
+          },
+          "Occurrences_Cancel_MinimumSet": {
+            "$ref": "./examples/Occurrences_Cancel_MinimumSet_Gen.json"
           }
         }
       }
@@ -1325,7 +1401,7 @@
         "tags": [
           "Occurrences"
         ],
-        "description": "A synchronous resource action that returns no content.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1363,8 +1439,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1374,19 +1453,22 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Delay": {
+          "Occurrences_Delay_MaximumSet": {
             "$ref": "./examples/Occurrences_Delay_MaximumSet_Gen.json"
+          },
+          "Occurrences_Delay_MinimumSet": {
+            "$ref": "./examples/Occurrences_Delay_MinimumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}/resources": {
-      "get": {
-        "operationId": "Occurrences_GetResources",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}/listResources": {
+      "post": {
+        "operationId": "Occurrences_ListResources",
         "tags": [
           "Occurrences"
         ],
-        "description": "Lists OccurrenceResource",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1418,7 +1500,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OccurrenceResourceListResult"
+              "$ref": "#/definitions/OccurrenceResourceListResponse"
             }
           },
           "default": {
@@ -1429,8 +1511,11 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_GetResources": {
-            "$ref": "./examples/Occurrences_GetResources_MaximumSet_Gen.json"
+          "Occurrences_ListResources_MaximumSet": {
+            "$ref": "./examples/Occurrences_ListResources_MaximumSet_Gen.json"
+          },
+          "Occurrences_ListResources_MinimumSet": {
+            "$ref": "./examples/Occurrences_ListResources_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1438,13 +1523,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/resources": {
-      "get": {
-        "operationId": "AutoActions_GetResources",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/patchResources": {
+      "post": {
+        "operationId": "AutoActions_PatchResources",
         "tags": [
           "AutoActions"
         ],
-        "description": "Lists AutoActionResource",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1462,13 +1547,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoActionResourcePatchRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoActionResourceListResult"
+              "$ref": "#/definitions/AutoActionResourceOperationResponse"
             }
           },
           "default": {
@@ -1479,12 +1573,12 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_GetResources": {
-            "$ref": "./examples/AutoActions_GetResources_MaximumSet_Gen.json"
+          "AutoActions_PatchResources_MaximumSet": {
+            "$ref": "./examples/AutoActions_PatchResources_MaximumSet_Gen.json"
+          },
+          "AutoActions_PatchResources_MinimumSet": {
+            "$ref": "./examples/AutoActions_PatchResources_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1494,7 +1588,7 @@
         "tags": [
           "AutoActions"
         ],
-        "description": "A long-running resource action.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1521,20 +1615,6 @@
               "$ref": "#/definitions/Occurrence"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1543,14 +1623,13 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_TriggerManualOccurrence": {
+          "AutoActions_TriggerManualOccurrence_MaximumSet": {
             "$ref": "./examples/AutoActions_TriggerManualOccurrence_MaximumSet_Gen.json"
+          },
+          "AutoActions_TriggerManualOccurrence_MinimumSet": {
+            "$ref": "./examples/AutoActions_TriggerManualOccurrence_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
@@ -1643,20 +1722,6 @@
           "format": "date-time",
           "description": "The time when the auto action is supposed to stop scheduling"
         },
-        "resources": {
-          "type": "array",
-          "description": "The list of the resources the auto action is supposed to perform the actions on",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ],
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
         "schedule": {
           "$ref": "#/definitions/AutoActionSchedule",
           "description": "The schedule the auto action is supposed to follow"
@@ -1671,13 +1736,13 @@
             "destination"
           ]
         },
-        "isDisabled": {
+        "disabled": {
           "type": "boolean",
           "description": "Tell if the auto action is disabled or not",
-          "readOnly": true
+          "default": false
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
@@ -1686,10 +1751,8 @@
         "resourceType",
         "actionType",
         "startTime",
-        "resources",
         "schedule",
-        "notificationSettings",
-        "isDisabled"
+        "notificationSettings"
       ]
     },
     "AutoActionPropertiesUpdate": {
@@ -1714,20 +1777,6 @@
           "format": "date-time",
           "description": "The time when the auto action is supposed to stop scheduling"
         },
-        "resources": {
-          "type": "array",
-          "description": "The list of the resources the auto action is supposed to perform the actions on",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ],
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
         "schedule": {
           "$ref": "#/definitions/AutoActionScheduleUpdate",
           "description": "The schedule the auto action is supposed to follow"
@@ -1741,6 +1790,11 @@
           "x-ms-identifiers": [
             "destination"
           ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the auto action is disabled or not",
+          "default": false
         }
       }
     },
@@ -1749,7 +1803,7 @@
       "description": "Represents an auto action resource metadata.",
       "properties": {
         "resourceId": {
-          "$ref": "#/definitions/validAutoActionResourceId",
+          "$ref": "#/definitions/ValidAutoActionResourceId",
           "description": "The ARM Id of the resource."
         },
         "notificationSettings": {
@@ -1758,7 +1812,6 @@
           "items": {
             "$ref": "#/definitions/NotificationProperties"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "destination"
           ]
@@ -1768,9 +1821,44 @@
         "resourceId"
       ]
     },
-    "AutoActionResourceListResult": {
+    "AutoActionResourceAttachRequest": {
       "type": "object",
-      "description": "The response of a AutoActionResource list operation.",
+      "description": "Request model to attach a list of auto action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be attached/patched",
+          "items": {
+            "$ref": "#/definitions/AutoActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "AutoActionResourceDetachRequest": {
+      "type": "object",
+      "description": "Request model to detach a list of auto action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be detached",
+          "items": {
+            "$ref": "#/definitions/ValidAutoActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "AutoActionResourceListResponse": {
+      "type": "object",
+      "description": "Paged collection of AutoActionResource items",
       "properties": {
         "value": {
           "type": "array",
@@ -1779,6 +1867,86 @@
             "$ref": "#/definitions/AutoActionResource"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoActionResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from auto action resource requests, which contains the status of each resource",
+      "properties": {
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources operated on"
+        },
+        "resourcesStatuses": {
+          "type": "array",
+          "description": "The resource status of for each resource",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "totalResources",
+        "resourcesStatuses"
+      ]
+    },
+    "AutoActionResourcePatchRequest": {
+      "type": "object",
+      "description": "Request model perform a resource operation in a list of resources",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "The list of resources we watch to patch",
+          "items": {
+            "$ref": "#/definitions/AutoActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "AutoActionResources": {
+      "type": "object",
+      "description": "The auto action extension",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutoActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AutoActionResourcesListResult": {
+      "type": "object",
+      "description": "The response of a AutoActionResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AutoActionResources items on this page",
+          "items": {
+            "$ref": "#/definitions/AutoActionResources"
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1999,6 +2167,22 @@
       },
       "readOnly": true
     },
+    "CancelOccurrenceRequest": {
+      "type": "object",
+      "description": "The request to cancel an occurrence.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "The resources the cancellation should act on. If no resource is passed in the list, Auto Action will cancel the occurrence for all resources.",
+          "items": {
+            "$ref": "#/definitions/ValidAutoActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "resourceIds"
+      ]
+    },
     "CancelOperationsRequest": {
       "type": "object",
       "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
@@ -2120,22 +2304,19 @@
         "delay": {
           "type": "string",
           "format": "duration",
-          "description": "The amount of delay the occurrence should have"
+          "description": "The amount of delay the occurrence should apply"
         },
-        "resources": {
+        "resourceIds": {
           "type": "array",
-          "description": "The resources that should be delayed. If empty, the delay will apply to the whole occurrence.",
+          "description": "The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.",
           "items": {
-            "$ref": "#/definitions/OccurrenceResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
+            "$ref": "#/definitions/ValidAutoActionResourceId"
+          }
         }
       },
       "required": [
         "delay",
-        "resources"
+        "resourceIds"
       ]
     },
     "ExecuteDeallocateRequest": {
@@ -2421,6 +2602,11 @@
         "language": {
           "$ref": "#/definitions/Language",
           "description": "The language the notification should be sent on."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tells if the notification is enabled or not.",
+          "default": false
         }
       },
       "required": [
@@ -2514,7 +2700,7 @@
       "description": "Represents an auto action resource metadata.",
       "properties": {
         "resourceId": {
-          "$ref": "#/definitions/validAutoActionResourceId",
+          "$ref": "#/definitions/ValidAutoActionResourceId",
           "description": "The ARM Id of the resource."
         },
         "notificationSettings": {
@@ -2523,7 +2709,6 @@
           "items": {
             "$ref": "#/definitions/NotificationProperties"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "destination"
           ]
@@ -2550,9 +2735,9 @@
         "scheduledTime"
       ]
     },
-    "OccurrenceResourceListResult": {
+    "OccurrenceResourceListResponse": {
       "type": "object",
-      "description": "The response of a OccurrenceResource list operation.",
+      "description": "Paged collection of OccurrenceResource items",
       "properties": {
         "value": {
           "type": "array",
@@ -2749,6 +2934,43 @@
         ]
       }
     },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -2818,8 +3040,7 @@
                 "description": "Hibernate operations on the resources"
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "subscriptionId": {
           "type": "string",
@@ -2859,8 +3080,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         },
         "state": {
           "type": "string",
@@ -2928,8 +3148,7 @@
               }
             ]
           },
-          "readOnly": true,
-          "x-ms-enum.modelAsString": true
+          "readOnly": true
         },
         "timeZone": {
           "type": "string",
@@ -2976,6 +3195,31 @@
         "errorCode",
         "errorDetails"
       ]
+    },
+    "ResourceOperationStatus": {
+      "type": "string",
+      "description": "The state the resource is on after the resource operation is applied",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource operation was successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation has failed."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ResourceOperationType": {
       "type": "string",
@@ -3034,6 +3278,28 @@
       "required": [
         "code",
         "count"
+      ]
+    },
+    "ResourceStatus": {
+      "type": "object",
+      "description": "The status of a resource after a resource level operation was performed",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidAutoActionResourceId",
+          "description": "The arm identifier of the resource"
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceOperationStatus",
+          "description": "The state the resource is currently on"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Errors encountered while trying to perform"
+        }
+      },
+      "required": [
+        "resourceId",
+        "status"
       ]
     },
     "ResourceType": {
@@ -3134,8 +3400,7 @@
                 "description": "Complete the operation by the given deadline."
               }
             ]
-          },
-          "x-ms-enum.modelAsString": true
+          }
         }
       },
       "required": [
@@ -3265,6 +3530,21 @@
         "correlationid"
       ]
     },
+    "ValidAutoActionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/virtualMachines"
+          },
+          {
+            "type": "Microsoft.Compute/virtualMachineScaleSets"
+          }
+        ]
+      }
+    },
     "WeekDay": {
       "type": "string",
       "description": "Representation of the possible selection of days in a week in a gregorian calendar for auto actions",
@@ -3321,21 +3601,6 @@
             "name": "All",
             "value": "All",
             "description": "All week days"
-          }
-        ]
-      }
-    },
-    "validAutoActionResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Compute/virtualMachines"
-          },
-          {
-            "type": "Microsoft.Compute/virtualMachineScaleSets"
           }
         ]
       }

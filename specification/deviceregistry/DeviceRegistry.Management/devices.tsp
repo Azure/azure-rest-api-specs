@@ -13,8 +13,10 @@ using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
+@removed(Versions.v2024_10_01_preview)
 @doc("Device Model as ARM resource.")
 model Device is TrackedResource<DeviceProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "legacy"
   @doc("Name of the device.")
   @key("deviceName")
   @segment("devices")
@@ -30,13 +32,14 @@ model Device is TrackedResource<DeviceProperties> {
   etag?: string;
 }
 
+@removed(Versions.v2024_10_01_preview)
 @doc("Defines the device properties.")
 model DeviceProperties {
   @doc("Gets a unique identifier for this resource.")
   @visibility("read")
   uuid?: string;
 
-  @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD.")
+  @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
   enabled?: boolean = true;
 
   @doc("Gets the device Id provided by customer.")
@@ -47,7 +50,7 @@ model DeviceProperties {
   @visibility("read", "create")
   deviceTemplateId?: string;
 
-  @doc("The AAD group the device is a member of.")
+  @doc("The Microsoft Entra ID group the device is a member of.")
   deviceGroupId?: string;
 
   @doc("Hardware manufacturer name.")
@@ -82,13 +85,13 @@ model DeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The backing AAD identity for the device used for authentication to other services.")
+@doc("The backing Microsoft Entra ID for the device used for authentication to other services.")
 model DeviceIdentity {
   @doc("Principal id for the device resource.")
   @visibility("read")
   principalId?: string;
 
-  @doc("Tenant id for the AAD tenant.")
+  @doc("Tenant id for the Microsoft Entra ID tenant.")
   @visibility("read")
   tenantId?: string;
 }
@@ -114,6 +117,7 @@ model Endpoint {
   address?: string;
 }
 
+@removed(Versions.v2024_10_01_preview)
 @armResourceOperations
 interface Devices {
   get is ArmResourceRead<Device>;

@@ -34,17 +34,17 @@ model NetworkSettingsResource
 
 @armResourceOperations
 interface NetworkSettingsResources {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Retrieves the properties of a GitHub.Network networkSettings resource.")
   @operationId("networkSettings_Get")
   get is ArmResourceRead<NetworkSettingsResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Creates a GitHub.Network networkSettings resource with the specified create parameters.")
   @operationId("networkSettings_Create")
   create is ArmResourceCreateOrReplaceSync<NetworkSettingsResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.")
   @parameterVisibility("read")
   @operationId("networkSettings_Update")
@@ -53,17 +53,17 @@ interface NetworkSettingsResources {
     NetworkSettingsResourceProperties
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Deletes an existing GitHub.Network networkSettings resource.")
   @operationId("networkSettings_Delete")
   delete is ArmResourceDeleteSync<NetworkSettingsResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Retrieves the properties of all GitHub.Network networkSettings resources.")
   @operationId("networkSettings_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<NetworkSettingsResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @doc("Retrieves the properties of all GitHub.Network networkSettings resources.")
   @operationId("networkSettings_ListBySubscription")
   listBySubscription is ArmListBySubscription<NetworkSettingsResource>;

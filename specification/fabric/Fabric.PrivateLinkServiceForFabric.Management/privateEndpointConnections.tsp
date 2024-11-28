@@ -162,7 +162,7 @@ interface PrivateEndpointConnections {
   update is CustomizedArmResourceOperation.ArmResourceUpdateSync<PrivateEndpointConnection>;
   @doc("Delete private endpoint connection")
   delete is CustomizedArmResourceOperation.ArmResourceDeleteNoOkAsync<PrivateEndpointConnection>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @doc("List private endpoint connections")
   @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListAtScope<PrivateEndpointConnection>;

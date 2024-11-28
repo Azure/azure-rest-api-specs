@@ -22,14 +22,6 @@ model SchemaProperties {
   @doc("Current Version of schema")
   currentVersion: string;
 
-  @doc("Type of configuration")
-  @visibility("read")
-  configurationType?: ConfigurationType;
-
-  @doc("Type of configuration model")
-  @visibility("read")
-  configurationModel?: ConfigurationModel;
-
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;

@@ -236,6 +236,73 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "telemetryDataFeed3",
+              "dataFeedType": "AzureMonitorMetricsDataFeed",
+              "dataFeedClass": "Raw",
+              "details": [
+                {
+                  "resourceType": "microsoft.compute/virtualmachines",
+                  "metricDetails": [
+                    {
+                      "metricName": "Inbound Flows",
+                      "aggregation": "Average",
+                      "filter": ""
+                    },
+                    {
+                      "metricName": "Outbound Flows",
+                      "aggregation": "Average",
+                      "filter": ""
+                    },
+                    {
+                      "metricName": "Network Out Total",
+                      "aggregation": "Total",
+                      "filter": ""
+                    },
+                    {
+                      "metricName": "Network In Total",
+                      "aggregation": "Total",
+                      "filter": ""
+                    },
+                    {
+                      "metricName": "VmAvailabilityMetric",
+                      "aggregation": "Average",
+                      "filter": ""
+                    },
+                    {
+                      "metricName": "Data Disk IOPS Consumed percentage",
+                      "aggregation": "Average"
+                    },
+                    {
+                      "metricName": "Data Disk Latency",
+                      "aggregation": "Average"
+                    },
+                    {
+                      "metricName": "Data Disk Queue Depth",
+                      "aggregation": "Average"
+                    }
+                  ]
+                },
+                {
+                  "resourceType": "Microsoft.Storage/storageAccounts",
+                  "metricDetails": [
+                    {
+                      "metricName": "Availability",
+                      "aggregation": "Average"
+                    }
+                  ]
+                }
+              ],
+              "dataStore": {
+                "dataStoreType": "AzureMonitorMetricsDataStore"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 300,
+                "startFrom": "2024-08-30T00:00:00.000Z"
+              }
             }
           ],
           "outputDataStores": [

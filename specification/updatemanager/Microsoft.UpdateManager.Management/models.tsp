@@ -10,12 +10,12 @@ using Azure.ResourceManager;
 
 namespace Microsoft.UpdateManager;
 
-model UpdateRuleSet is TrackedResource<UpdateRuleSetProperties> {
-  ...ResourceNameParameter<UpdateRuleSet>;
+model UpdateRule is TrackedResource<UpdateRuleProperties> {
+  ...ResourceNameParameter<UpdateRule>;
 }
 
 @doc("Update rule set properties.")
-model UpdateRuleSetProperties {
+model UpdateRuleProperties {
   @doc("reboot settings.")
   rebootSettings?: rebootSettings;
 
@@ -25,10 +25,8 @@ model UpdateRuleSetProperties {
   @doc("linux parameter.")
   linuxParameters?: LinuxParameters;
 
-  @doc("Approve patches after days.")
-  @minValue(0)
-  @maxValue(35)
-  approvePatchesAfterDays?: int32;
+  @doc("policies properties.")
+  policies?: Policies;
 
   @doc("The status of the last operation.")
   @visibility("read")
@@ -80,6 +78,33 @@ model WindowsParameters {
   excludeKbsRequiringReboot?: boolean;
 }
 
+@doc("Policies properties.")
+model Policies {
+  @doc("The availability policy.")
+  availability?: Availability;
+
+  @doc("Approve windows patches after the mentioned date.")
+  @pattern(
+    "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(([1-9]|1[0-4])(?!\\d))(?!\\w)",
+    "The value must be in the format of '2Tuesday+OffsetY' or 'DaysY' only"
+  )
+  installWindowsPatchesAfter?: string;
+}
+
+@doc("Availability policy.")
+model Availability {
+  @doc("The availability set.")
+  vmAvailabilitySet?: VMAvailabilitySet;
+}
+
+@doc("VMAvailabilitySet property.")
+union VMAvailabilitySet {
+  @doc("Bypass the availability set.")
+  Bypass: "Bypass",
+
+  string,
+}
+
 @lroStatus
 @doc("The provisioning state.")
 union ProvisioningState {
@@ -103,11 +128,11 @@ union ProvisioningState {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface UpdateRuleSets {
-  get is ArmResourceRead<UpdateRuleSet>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<UpdateRuleSet>;
-  update is ArmResourcePatchSync<UpdateRuleSet, UpdateRuleSetProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<UpdateRuleSet>;
-  listByResourceGroup is ArmResourceListByParent<UpdateRuleSet>;
-  listBySubscription is ArmListBySubscription<UpdateRuleSet>;
+interface UpdateRules {
+  get is ArmResourceRead<UpdateRule>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<UpdateRule>;
+  update is ArmResourcePatchSync<UpdateRule, UpdateRuleProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<UpdateRule>;
+  listByResourceGroup is ArmResourceListByParent<UpdateRule>;
+  listBySubscription is ArmListBySubscription<UpdateRule>;
 }
