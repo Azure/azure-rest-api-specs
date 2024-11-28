@@ -143,7 +143,7 @@ model ThreadRun {
   toolResources?: UpdateToolResourcesOptions | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
-  parallelToolCalls?: boolean;
+  parallelToolCalls: boolean;
 }
 
 /**
