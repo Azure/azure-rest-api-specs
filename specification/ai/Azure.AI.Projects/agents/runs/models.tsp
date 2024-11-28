@@ -277,7 +277,6 @@ model CreateRunOptions {
   responseFormat?: AgentsApiResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
-  @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
@@ -440,7 +439,6 @@ model CreateAndRunThreadOptions {
   responseFormat?: AgentsApiResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
-  @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
