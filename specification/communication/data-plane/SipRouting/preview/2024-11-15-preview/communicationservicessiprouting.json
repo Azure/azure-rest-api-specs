@@ -191,11 +191,11 @@
         },
         "privacyHeader": {
           "$ref": "#/definitions/PrivacyHeader",
-          "description": "SIP Privacy header."
+          "description": "SIP Privacy header. Default value is id."
         },
         "ipAddressVersion": {
           "$ref": "#/definitions/IpAddressVersion",
-          "description": "IP address version used by the trunk."
+          "description": "IP address version used by the trunk. Default value is ipv4."
         }
       }
     },
@@ -383,11 +383,11 @@
         },
         "privacyHeader": {
           "$ref": "#/definitions/PrivacyHeader",
-          "description": "SIP Privacy header."
+          "description": "SIP Privacy header. Default value is id."
         },
         "ipAddressVersion": {
           "$ref": "#/definitions/IpAddressVersion",
-          "description": "IP address version used by the trunk."
+          "description": "IP address version used by the trunk. The default value is ipv4."
         }
       }
     },
@@ -424,7 +424,7 @@
         },
         "callerIdOverride": {
           "type": "string",
-          "description": "Gets or sets caller ID override of the route."
+          "description": "Gets or sets caller ID override. This value will override caller ID of outgoing call specified at runtime."
         }
       }
     },
@@ -432,8 +432,8 @@
       "type": "string",
       "description": "IP address version.",
       "enum": [
-        "IPv4",
-        "IPv6"
+        "ipv4",
+        "ipv6"
       ],
       "x-ms-enum": {
         "name": "IpAddressVersion",
@@ -444,8 +444,8 @@
       "type": "string",
       "description": "SIP privacy header value.",
       "enum": [
-        "ID",
-        "None"
+        "id",
+        "none"
       ],
       "x-ms-enum": {
         "name": "PrivacyHeader",
