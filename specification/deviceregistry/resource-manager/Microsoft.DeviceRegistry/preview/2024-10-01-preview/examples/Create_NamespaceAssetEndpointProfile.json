@@ -1,13 +1,13 @@
 {
-  "title": "CreateOrReplace_NamespaceAsset",
-  "operationId": "NamespaceAssets_CreateOrReplace",
-  "description": "Create or replace a namesapce asset.",
+  "title": "Create_NamespaceAssetEndpointProfile",
+  "operationId": "NamespaceAssetEndpointProfiles_CreateOrReplace",
+  "description": "Create a Namespace Asset Endpoint Profile",
   "parameters": {
     "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "adr-namespace-gbk1001-n03",
-    "assetName": "amespace-gbk0925-n01",
+    "assetEndpointProfileName": "my-assetendpointprofile",
     "resource": {
       "location": "West Europe",
       "extendedLocation": {
@@ -18,15 +18,19 @@
         "site": "building-1"
       },
       "properties": {
-        "assetEndpointProfileRef": "my-asset-endpoint-ref"
+        "targetAddress": "https://www.example.com/myTargetAddress",
+        "endpointProfileType": "myEndpointProfileType",
+        "authentication": {
+          "method": "Anonymous"
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-asset-name",
-        "name": "my-asset-name",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-assetendpointprofile",
+        "name": "my-assetendpointprofile",
         "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {
@@ -45,15 +49,20 @@
           "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
         },
         "properties": {
-          "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "assetEndpointProfileRef": "my-asset-endpoint-ref"
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "endpointProfileType": "myEndpointProfileType",
+          "authentication": {
+            "method": "Anonymous"
+          },
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-asset-name",
-        "name": "my-asset-name",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-assetendpointprofile",
+        "name": "my-assetendpointprofile",
         "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {
@@ -72,8 +81,13 @@
           "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
         },
         "properties": {
-          "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "assetEndpointProfileRef": "my-asset-endpoint-ref"
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "endpointProfileType": "myEndpointProfileType",
+          "authentication": {
+            "method": "Anonymous"
+          },
+          "provisioningState": "Accepted"
         }
       }
     }

@@ -1,20 +1,20 @@
 {
-  "title": "Get_NamespaceAsset",
-  "operationId": "NamespaceAssets_Get",
-  "description": "Get an Asset from a Namespace",
+  "title": "Get_NamespaceDiscoveredAssetEndpointProfile",
+  "operationId": "NamespaceDiscoveredAssetEndpointProfiles_Get",
+  "description": "Get a Namespace Discovered Asset Endpoint Profile",
   "parameters": {
     "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "adr-namespace-gbk1001-n03",
-    "assetName": "my-asset-name"
+    "discoveredAssetEndpointProfileName": "my-discoveredassetendpointprofile"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-asset-name",
-        "name": "my-asset-name",
-        "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/discoveredAssetEndpointProfiles/my-discoveredassetendpointprofile",
+        "name": "my-discoveredassetendpointprofile",
+        "type": "Microsoft.DeviceRegistry/discoveredAssetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {
           "type": "CustomLocation",
@@ -32,8 +32,12 @@
           "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
         },
         "properties": {
-          "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "assetEndpointProfileRef": "my-asset-endpoint-ref"
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "additionalConfiguration": "{\"foo\": \"bar\"}",
+          "discoveryId": "11111111-1111-1111-1111-111111111111",
+          "version": 73766,
+          "endpointProfileType": "myEndpointProfileType",
+          "provisioningState": "Succeeded"
         }
       }
     }

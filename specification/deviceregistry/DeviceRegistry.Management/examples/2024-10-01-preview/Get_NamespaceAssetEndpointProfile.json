@@ -1,19 +1,19 @@
 {
-  "title": "Get_NamespaceAsset",
-  "operationId": "NamespaceAssets_Get",
-  "description": "Get an Asset from a Namespace",
+  "title": "Get_NamespaceAssetEndpointProfile",
+  "operationId": "NamespaceAssetEndpointProfiles_Get",
+  "description": "Get a Namespace Asset Endpoint Profile",
   "parameters": {
     "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "adr-namespace-gbk1001-n03",
-    "assetName": "my-asset-name"
+    "assetEndpointProfileName": "my-assetendpointprofile"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-asset-name",
-        "name": "my-asset-name",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/adr-namespace-gbk1001-n03/assetEndpointProfiles/my-assetendpointprofile",
+        "name": "my-assetendpointprofile",
         "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
         "location": "West Europe",
         "extendedLocation": {
@@ -33,7 +33,16 @@
         },
         "properties": {
           "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "assetEndpointProfileRef": "my-asset-endpoint-ref"
+          "targetAddress": "https://www.example.com/myTargetAddress",
+          "endpointProfileType": "myEndpointProfileType",
+          "authentication": {
+            "method": "UsernamePassword",
+            "usernamePasswordCredentials": {
+              "usernameSecretName": "usernameRef",
+              "passwordSecretName": "passwordRef"
+            }
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }

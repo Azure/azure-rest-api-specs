@@ -16,10 +16,10 @@ using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@doc("Discovered Asset Endpoint Profile definition.")
-@removed(Versions.v2024_10_01_preview)
-@added(Versions.v2024_07_01_preview)
-model DiscoveredAssetEndpointProfile
+@doc("Namespace Discovered Asset Endpoint Profile definition.")
+@parentResource(Namespace)
+@added(Versions.v2024_10_01_preview)
+model NamespaceDiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
   @doc("Discovered Asset Endpoint Profile name parameter.")
   @key("discoveredAssetEndpointProfileName")
@@ -38,16 +38,18 @@ model DiscoveredAssetEndpointProfile
 }
 
 @armResourceOperations
-@removed(Versions.v2024_10_01_preview)
-@added(Versions.v2024_07_01_preview)
-interface DiscoveredAssetEndpointProfiles {
-  get is ArmResourceRead<DiscoveredAssetEndpointProfile>;
-  createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAssetEndpointProfile>;
-  update is ArmResourcePatchAsync<
-    DiscoveredAssetEndpointProfile,
-    DiscoveredAssetEndpointProfileProperties
+@added(Versions.v2024_10_01_preview)
+interface NamespaceDiscoveredAssetEndpointProfiles {
+  get is ArmResourceRead<NamespaceDiscoveredAssetEndpointProfile>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredAssetEndpointProfile>;
+  update is ArmCustomPatchAsync<
+    NamespaceDiscoveredAssetEndpointProfile,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      NamespaceDiscoveredAssetEndpointProfile,
+      DiscoveredAssetEndpointProfileProperties
+    >
   >;
-  delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAssetEndpointProfile>;
-  listByResourceGroup is ArmResourceListByParent<DiscoveredAssetEndpointProfile>;
-  listBySubscription is ArmListBySubscription<DiscoveredAssetEndpointProfile>;
+  delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredAssetEndpointProfile>;
+  listByResourceGroup is ArmResourceListByParent<NamespaceDiscoveredAssetEndpointProfile>;
+  listBySubscription is ArmListBySubscription<NamespaceDiscoveredAssetEndpointProfile>;
 }
