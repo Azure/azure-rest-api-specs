@@ -15,58 +15,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to avoid breaking SDK change"
 @@operationId(Operations.list, "Operations_ListAll");
 
-/**
- * Resource identity type.
- */
-union ResourceIdentityType {
-  string,
-
-  /**
-   * No identity.
-   */
-  None: "None",
-
-  /**
-   * System assigned.
-   */
-  SystemAssigned: "SystemAssigned",
-
-  /**
-   * User assigned.
-   */
-  UserAssigned: "UserAssigned",
-}
-
-/**
- * The identity of a resource.
- */
-model ResourceIdentity {
-  /**
-   * String of the resource identity type.
-   */
-  type: ResourceIdentityType;
-
-  /**
-   * The list of user identities associated with the Experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid breaking SDK change"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-
-  /**
-   * GUID that represents the principal ID of this resource identity.
-   */
-  @visibility("read")
-  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-  principalId?: string;
-
-  /**
-   * GUID that represents the tenant ID of this resource identity.
-   */
-  @visibility("read")
-  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-  tenantId?: string;
-}
-
 alias ParentResourceParameters = {
   /**
    * The parent resource provider namespace.
@@ -482,15 +430,8 @@ model CustomerDataStorageProperties {
  * Describes an experiment update.
  */
 model ExperimentUpdate {
-  /**
-   * The identity of the experiment resource.
-   */
-  identity?: ResourceIdentity;
-
-  /**
-   * Experiment tags.
-   */
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<Experiment>;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 /**

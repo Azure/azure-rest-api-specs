@@ -3121,16 +3121,16 @@
       "type": "object",
       "description": "Describes an experiment update.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/ResourceIdentity",
-          "description": "The identity of the experiment resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -3514,68 +3514,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Disabled access."
-          }
-        ]
-      }
-    },
-    "ResourceIdentity": {
-      "type": "object",
-      "description": "The identity of a resource.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ResourceIdentityType",
-          "description": "String of the resource identity type."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with the Experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        },
-        "principalId": {
-          "type": "string",
-          "description": "GUID that represents the principal ID of this resource identity.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "GUID that represents the tenant ID of this resource identity.",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ResourceIdentityType": {
-      "type": "string",
-      "description": "Resource identity type.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned."
           }
         ]
       }
