@@ -1,82 +1,80 @@
 import "./common.tsp";
 
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * External Network Properties.
- */
+@doc("External Network Properties.")
 model ExternalNetworkProperties {
   ...AnnotationResource;
 
-  /**
-   * ARM Resource ID of the networkToNetworkInterconnectId of the ExternalNetwork resource.
-   */
+  @doc("ARM Resource ID of the networkToNetworkInterconnectId of the ExternalNetwork resource.")
   networkToNetworkInterconnectId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics/networkToNetworkInterconnects";
     }
   ]>;
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   importRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.
-   */
+  @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   exportRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
     }
   ]>;
 
-  /**
-   * Import Route Policy either IPv4 or IPv6.
-   */
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicy;
+
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicy;
 
-  /**
-   * Export Route Policy either IPv4 or IPv6.
-   */
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicy;
+
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicy;
 
-  /**
-   * Peering option list.
-   */
+  @doc("Peering option list.")
   peeringOption: PeeringOption;
 
-  /**
-   * option B properties object
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("option B properties object")
   optionBProperties?: L3OptionBProperties;
 
-  /**
-   * option A properties object
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("option A properties object")
   optionAProperties?: ExternalNetworkPropertiesOptionAProperties;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("Static Route Configuration.")
+  staticRouteConfiguration?: ExternalNetworkStaticRouteConfiguration;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
@@ -107,59 +105,69 @@ model L3OptionBProperties {
   routeTargets?: RouteTargetInformation;
 }
 
-/**
- * option A properties object
- */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("option A properties object")
 model ExternalNetworkPropertiesOptionAProperties {
   ...Layer3IpPrefixProperties;
 
-  /**
-   * MTU to use for option A peering.
-   */
+  @doc("MTU to use for option A peering.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32 = 1500;
 
-  /**
-   * Vlan identifier. Example : 501
-   */
+  @doc("Vlan identifier. Example : 501")
   @maxValue(4094)
   @minValue(501)
   vlanId: int32;
 
-  /**
-   * Fabric ASN number. Example 65001
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Fabric ASN number. Example 65001")
   @visibility("read")
   @maxValue(4294967295)
   @minValue(1)
   fabricASN?: int64;
 
-  /**
-   * Peer ASN number.Example : 28
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Peer ASN number.Example : 28")
   @maxValue(4294967295)
   @minValue(1)
   peerASN: int64;
 
-  /**
-   * BFD configuration properties
-   */
+  @doc("BFD configuration properties")
   bfdConfiguration?: BfdConfiguration;
 
-  /**
-   * Ingress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
+  @doc("BMP Monitor Configuration.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: ExternalNetworkBmpProperties;
+
   @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
@@ -185,6 +193,7 @@ model ExternalNetworkPatchProperties {
   ]>;
 
   @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   importRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -192,6 +201,7 @@ model ExternalNetworkPatchProperties {
   ]>;
 
   @doc("ARM Resource ID of the RoutePolicy. This is used for the backward compatibility.")
+  @removed(Versions.v2024_06_15_preview)
   exportRoutePolicyId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/routePolicies";
@@ -199,9 +209,21 @@ model ExternalNetworkPatchProperties {
   ]>;
 
   @doc("Import Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicyPatch;
+
+  @doc("Import Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicyPatch;
 
   @doc("Export Route Policy either IPv4 or IPv6.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicyPatch;
+
+  @doc("Export Route Policy either IPv4 or IPv6.")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicyPatch;
 
   @doc("Peering option list.")
@@ -214,6 +236,10 @@ model ExternalNetworkPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("option A properties object")
   optionAProperties?: ExternalNetworkPatchPropertiesOptionAProperties;
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("Static Route Configuration.")
+  staticRouteConfiguration?: ExternalNetworkStaticRoutePatchConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -248,6 +274,16 @@ model ExternalNetworkPatchPropertiesOptionAProperties {
   bfdConfiguration?: BfdPatchConfiguration;
 
   @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
@@ -255,9 +291,101 @@ model ExternalNetworkPatchPropertiesOptionAProperties {
   ]>;
 
   @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
+
+  @doc("BMP Monitor Configuration.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: ExternalNetworkBmpPatchProperties;
+}
+
+@doc("External Network Administrative State request")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkBfdAdministrativeStateRequest {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: ExternalNetworkRouteType;
+
+  @doc("Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("External Network Administrative State response")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkBfdAdministrativeStateResponse {
+  @doc("Route Type that helps to know which bfd we are updating.")
+  routeType?: ExternalNetworkRouteType;
+
+  @doc("Administrative state.")
+  administrativeState?: BfdAdministrativeState;
+
+  ...ErrorResponse;
+}
+
+@doc("External Network RouteType.")
+@added(Versions.v2024_06_15_preview)
+union ExternalNetworkRouteType {
+  @doc("ExternalNetwork Static.")
+  Static: "Static",
+
+  @doc("ExternalNetwork OptionA.")
+  OptionA: "OptionA",
+
+  string,
+}
+
+@doc("Static Route Configuration properties for ExternalNetwork.")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkStaticRouteConfiguration {
+  @doc("BFD configuration properties")
+  bfdConfiguration?: BfdConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRouteProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRouteProperties[];
+}
+
+@doc("Static Route Configuration properties for External Network.")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkStaticRoutePatchConfiguration {
+  @doc("BFD configuration properties")
+  bfdConfiguration?: BfdPatchConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRoutePatchProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRoutePatchProperties[];
+}
+
+@doc("BGP Monitoring Protocol (BMP) Configuration properties.")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkBmpProperties {
+  @doc("BMP Configuration State.")
+  configurationState?: BmpConfigurationState = BmpConfigurationState.Disabled;
+}
+
+@doc("BMP Monitoring Configuration patch properties.")
+@added(Versions.v2024_06_15_preview)
+model ExternalNetworkBmpPatchProperties {
+  @doc("BMP Configuration State.")
+  configurationState?: BmpConfigurationState;
 }
