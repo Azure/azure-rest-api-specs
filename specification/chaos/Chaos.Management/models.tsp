@@ -505,16 +505,19 @@ model ExperimentExecutionProperties {
   /**
    * The status of the execution.
    */
+  @visibility("read")
   status?: string;
 
   /**
    * String that represents the start date time.
    */
+  @visibility("read")
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
+  @visibility("read")
   stoppedAt?: utcDateTime;
 
   /**
@@ -561,16 +564,19 @@ model ExperimentExecutionDetailsProperties {
   /**
    * The status of the execution.
    */
+  @visibility("read")
   status?: string;
 
   /**
    * String that represents the start date time.
    */
+  @visibility("read")
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
+  @visibility("read")
   stoppedAt?: utcDateTime;
 
   /**
