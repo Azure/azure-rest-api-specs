@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-03-03
+tag: package-2024-10-01
 
 directive:
   - where:
@@ -288,11 +288,11 @@ suppressions:
     reason: Existing issue from last version. 
 ```
 
-### Tag: package-2024-03-03
+### Tag: package-2024-10-01
 
-These settings apply only when `--tag=package-2024-03-03` is specified on the command line.
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-03-03'
+``` yaml $(tag) == 'package-2024-10-01'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
