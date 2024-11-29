@@ -259,6 +259,7 @@ model IngressProfileProperties {
 /**
  * The AAD Profile
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model AADProfileProperties {
   /**
    * The arc ingress gateway server app id.
@@ -305,3 +306,8 @@ model ManagedProxyResource {
    */
   expiresOn: int64;
 }
+
+@@doc(EndpointsList.value, "The list of endpoint.");
+@@doc(EndpointsList.nextLink, "The link used to get the next page of endpoints list.");
+@@doc(ServiceConfigurationList.value, "The list of service configuration");
+@@doc(ServiceConfigurationList.nextLink, "The link to fetch the next page of connected cluster");

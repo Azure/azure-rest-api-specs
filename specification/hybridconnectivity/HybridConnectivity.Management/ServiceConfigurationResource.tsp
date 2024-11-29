@@ -92,3 +92,6 @@ interface ServiceConfigurationResources {
 @@doc(ServiceConfigurationResources.update::parameters.properties,
   "Service details"
 );
+@@summary(ServiceConfigurationResources.listByEndpointResource,
+  "Lists of all the services associated with endpoint resource."
+);
