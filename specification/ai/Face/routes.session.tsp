@@ -140,7 +140,7 @@ interface LivenessSessionOperations {
   @sharedRoute
   createLivenessWithVerifySessionWithVerifyImage is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySessionBeforeV1_2,
-    CreateLivenessWithVerifySessionRequest,
+    CreateLivenessWithVerifySessionRequestBeforeV1_2,
     CreateLivenessWithVerifySessionResult
   >;
 

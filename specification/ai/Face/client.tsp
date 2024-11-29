@@ -22,9 +22,6 @@ namespace ClientCustomizations;
 @@clientName(TrainingResult, "FaceTrainingResult");
 @@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
 @@clientName(IdentificationResult, "FaceIdentificationResult");
-@@clientName(CreateLivenessWithVerifySessionJsonContent,
-  "CreateLivenessWithVerifySessionContent"
-);
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);

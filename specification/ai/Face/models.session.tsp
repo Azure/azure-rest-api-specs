@@ -320,8 +320,11 @@ model CreateLivenessWithVerifySessionMultipartContent {
   VerifyImage: bytes;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for update model in new version."
+@removed(Versions.v1_2)
+@renamedFrom(Versions.v1_2, "CreateLivenessWithVerifySessionRequest")
 @doc("Request wrapper of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionRequest {
+model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
   contentType: "multipart/form-data";
@@ -492,4 +495,32 @@ model LivenessDecisionTargets {
 model LivenessColorDecisionTarget {
   @doc("The face region where the liveness classification was made on.")
   faceRectangle: FaceRectangle;
+}
+
+@added(Versions.v1_2)
+@doc("Request wrapper of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionRequest {
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+
+  @doc("Request content of liveness with verify session creation.")
+  @body
+  body: CreateLivenessWithVerifySessionContent;
+}
+
+@added(Versions.v1_2)
+@doc("Request of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionContent is CreateLivenessSessionContent {
+  @doc("Whether or not return the verify image hash.")
+  returnVerifyImageHash?: boolean;
+
+  @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
+  @minValue(0)
+  @maxValue(1)
+  verifyConfidenceThreshold?: float32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
+  verifyImage: bytes;
 }
