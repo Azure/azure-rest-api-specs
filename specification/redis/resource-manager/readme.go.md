@@ -35,8 +35,6 @@ directive:
   where: $.definitions.OperationStatus
   transform: >
     $["x-ms-external"] = false
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Go multi-api

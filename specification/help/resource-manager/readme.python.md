@@ -4,15 +4,16 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(python)
+title: SelfHelpMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-help
-namespace: azure.mgmt.help
+package-name: azure-mgmt-selfhelp
+namespace: azure.mgmt.selfhelp
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/help/azure-mgmt-help/azure/mgmt/help
+output-folder: $(python-sdks-folder)/selfhelp/azure-mgmt-selfhelp/azure/mgmt/selfhelp
 ```

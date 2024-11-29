@@ -1,0 +1,507 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/{ipExtendedCommunityName}": {
+      "put": {
+        "tags": [
+          "IpExtendedCommunities"
+        ],
+        "operationId": "IpExtendedCommunities_Create",
+        "summary": "Create an IP Extended Community.",
+        "description": "Implements IP Extended Community PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpExtendedCommunityNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunity"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_Create_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IpExtendedCommunities"
+        ],
+        "operationId": "IpExtendedCommunities_Get",
+        "summary": "Gets an IP Extended Community.",
+        "description": "Implements IP Extended Community GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpExtendedCommunityNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_Get_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IpExtendedCommunities"
+        ],
+        "operationId": "IpExtendedCommunities_Update",
+        "summary": "Updates the IP Extended Community.",
+        "description": "API to update certain properties of the IP Extended Community resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpExtendedCommunityNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "IP Extended Community properties to update.",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunityPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunity"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_Update_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IpExtendedCommunities"
+        ],
+        "operationId": "IpExtendedCommunities_Delete",
+        "summary": "Deletes the IP Extended Community.",
+        "description": "Implements IP Extended Community DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpExtendedCommunityNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities": {
+      "get": {
+        "operationId": "IpExtendedCommunities_ListByResourceGroup",
+        "summary": "List IpExtendedCommunities by resource group.",
+        "description": "Implements IpExtendedCommunities list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all IpExtendedCommunities under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities": {
+      "get": {
+        "operationId": "IpExtendedCommunities_ListBySubscription",
+        "summary": "List IpExtendedCommunities by subscription.",
+        "description": "Implements IpExtendedCommunities list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all IpExtendedCommunities under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/IpExtendedCommunityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpExtendedCommunities_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpExtendedCommunityProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "description": "IP Extended Community patchable properties.",
+          "$ref": "#/definitions/IpExtendedCommunityPatchableProperties"
+        }
+      ],
+      "properties": {
+        "configurationState": {
+          "description": "Configuration state of the resource.",
+          "$ref": "./common.json#/definitions/ConfigurationState"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        },
+        "administrativeState": {
+          "description": "Administrative state of the resource.",
+          "$ref": "./common.json#/definitions/AdministrativeState"
+        }
+      },
+      "description": "IP Extended Community Properties defines the resource properties."
+    },
+    "IpExtendedCommunity": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/IpExtendedCommunityProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The IP Extended Community resource definition."
+    },
+    "IpExtendedCommunityListResult": {
+      "type": "object",
+      "description": "List of IP Extended Communities.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of IP Extended Communities resources.",
+          "items": {
+            "$ref": "#/definitions/IpExtendedCommunity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "IpExtendedCommunityPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "IP Extended Community patchable properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IpExtendedCommunityPatchableProperties"
+            },
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "description": "Resource tags",
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The IP Extended Communities patch resource definition."
+    },
+    "IpExtendedCommunityPatchableProperties": {
+      "type": "object",
+      "description": "IP Extended Community patchable properties.",
+      "properties": {
+        "ipExtendedCommunityRules": {
+          "type": "array",
+          "description": "List of IP Extended Community Rules.",
+          "items": {
+            "$ref": "#/definitions/IpExtendedCommunityRule"
+          }
+        }
+      },
+      "required": [
+        "ipExtendedCommunityRules"
+      ]
+    },
+    "IpExtendedCommunityRule": {
+      "type": "object",
+      "description": "List of IP Extended Community Rules.",
+      "properties": {
+        "action": {
+          "description": "Action to be taken on the configuration. Example: Permit | Deny.",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "Sequence to insert to/delete from existing route. Prefix lists are evaluated starting with the lowest sequence number and continue down the list until a match is made. Once a match is made, the permit or deny statement is applied to that network and the rest of the list is ignored."
+        },
+        "routeTargets": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Route Target List.The expected formats are ASN(plain):NN >> example 4294967294:50, ASN.ASN:NN >> example 65533.65333:40, IP-address:NN >> example 10.10.10.10:65535. The possible values of ASN,NN are in range of 0-65535, ASN(plain) is in range of 0-4294967295.",
+          "items": {
+            "description": "Route Target.",
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "action",
+        "sequenceNumber",
+        "routeTargets"
+      ]
+    }
+  },
+  "parameters": {
+    "IpExtendedCommunityNameParameter": {
+      "type": "string",
+      "description": "Name of the IP Extended Community.",
+      "in": "path",
+      "name": "ipExtendedCommunityName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -25,8 +25,20 @@ To see additional help and options, run:
 These are the global settings for the DNS resolver API.
 
 ``` yaml
+title: DnsResolverManagementClient
+description: DNS Resolver Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2023-07
+```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Network/preview/2023-07-01-preview/dnsresolver.json
+  - Microsoft.Network/preview/2023-07-01-preview/dnsresolverpolicy.json
 ```
 
 ### Tag: package-2022-07
@@ -60,21 +72,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DnsResolver
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/dnsresolver/Microsoft.Azure.Management.DnsResolver/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
@@ -129,4 +126,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

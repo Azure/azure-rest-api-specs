@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-liftrqumulo"
-  output-folder: "$(typescript-sdks-folder)/sdk/liftrqumulo/arm-liftrqumulo"
+  package-name: "@azure/arm-qumulo"
+  output-folder: "$(typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

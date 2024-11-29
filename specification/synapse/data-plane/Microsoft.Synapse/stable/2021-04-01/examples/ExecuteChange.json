@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "endpoint": "exampleWorkspace.dev.azuresynapse.net",
+    "createArtifactsPayload": {
+      "ddls": [
+        {
+          "actionType": "CREATE",
+          "oldEntity": null,
+          "newEntity": {
+            "name": "dummyDatabase",
+            "type": "DATABASE"
+          }
+        }
+      ]
+    },
+    "api-version": "2021-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "syMsApiDdlResponse": [
+          {
+            "ddlType": "CREATE",
+            "entityName": "exampleEntity1",
+            "entityType": "DATABASE",
+            "publishStatus": "PUBLISHED",
+            "originObjectId": "exampleOriginObjectId1",
+            "objectId": "exampleObjectId",
+            "objectVersion": 1
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

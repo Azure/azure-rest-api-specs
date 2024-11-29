@@ -82,6 +82,9 @@
           },
           "Create a Delta Lake output": {
             "$ref": "./examples/Output_Create_DeltaLake.json"
+          },
+          "Create an Azure Data Explorer output": {
+            "$ref": "./examples/Output_Create_AzureDataExplorer.json"
           }
         },
         "parameters": [
@@ -1266,6 +1269,45 @@
         "maxWriterCount": {
           "type": "number",
           "description": "Max Writer count, currently only 1(single writer) and 0(based on query partition) are available. Optional on PUT requests."
+        },
+        "authenticationMode": {
+          "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",
+          "description": "Authentication Mode."
+        }
+      }
+    },
+    "AzureDataExplorerOutputDataSource": {
+      "type": "object",
+      "description": "Describes an Azure Data Explorer output data source.",
+      "x-ms-discriminator-value": "Microsoft.Kusto/clusters/databases",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataExplorerOutputDataSourceProperties",
+          "description": "The properties that are associated with an Azure Data Explorer output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureDataExplorerOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with an Azure Data Explorer output.",
+      "properties": {
+        "cluster": {
+          "type": "string",
+          "description": "The name of the Azure Data Explorer cluster. Required on PUT (CreateOrReplace) requests."
+        },
+        "database": {
+          "type": "string",
+          "description": "The name of the Azure Data Explorer database. Required on PUT (CreateOrReplace) requests."
+        },
+        "table": {
+          "type": "string",
+          "description": "The name of the Azure Table. Required on PUT (CreateOrReplace) requests."
         },
         "authenticationMode": {
           "$ref": "../../common/v1/definitions.json#/definitions/AuthenticationMode",

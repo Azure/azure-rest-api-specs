@@ -1,0 +1,233 @@
+{
+  "title": "AssessedSqlDatabaseV2Operations_ListBySqlAssessmentV2",
+  "operationId": "AssessedSqlDatabaseV2Operations_ListBySqlAssessmentV2",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "rgmigrate",
+    "$filter": "(contains(Properties/DatabaseName,'adv130'))",
+    "pageSize": 23,
+    "totalRecordCount": 1,
+    "continuationToken": null,
+    "projectName": "fci-test6904project",
+    "groupName": "test_fci_hadr",
+    "assessmentName": "test_swagger_1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1/assessedSqlDatabases/858eb860-9e07-417c-91b6-bca1bffb3bf5",
+            "name": "858eb860-9e07-417c-91b6-bca1bffb3bf5",
+            "systemData": {
+              "createdAt": "0001-01-01T00:00:00",
+              "createdBy": null,
+              "createdByType": null,
+              "lastModifiedAt": "0001-01-01T00:00:00",
+              "lastModifiedBy": null,
+              "lastModifiedByType": null
+            },
+            "type": "Microsoft.Migrate/assessmentprojects/groups/sqlAssessments/assessedSqlDatabases",
+            "properties": {
+              "recommendedAzureSqlTargetType": "AzureSqlVirtualMachine",
+              "recommendedSuitability": "SuitableForSqlVM",
+              "bufferCacheSizeInMB": 18.875576036866359,
+              "productSupportStatus": {
+                "currentVersion": null,
+                "servicePackStatus": "Unknown",
+                "esuStatus": "Unknown",
+                "supportStatus": "Extended",
+                "eta": 9,
+                "currentEsuYear": "Unknown",
+                "mainstreamEndDate": "2019-07-09T00:00:00Z",
+                "extendedSupportEndDate": "2024-07-09T00:00:00Z",
+                "extendedSecurityUpdateYear1EndDate": "0001-01-01T00:00:00",
+                "extendedSecurityUpdateYear2EndDate": "0001-01-01T00:00:00",
+                "extendedSecurityUpdateYear3EndDate": "0001-01-01T00:00:00"
+              },
+              "azureSqlMISuitabilityDetails": {
+                "azureSqlSku": null,
+                "replicaAzureSqlSku": [],
+                "sharedResources": null,
+                "monthlyComputeCost": 0.0,
+                "monthlyStorageCost": 0.0,
+                "costComponents": [
+                  {
+                    "name": "MonthlySecurityCost",
+                    "value": 0.0,
+                    "description": null
+                  }
+                ],
+                "securitySuitability": "Unknown",
+                "shouldProvisionReplicas": false,
+                "skuReplicationMode": "NotApplicable",
+                "migrationGuidelines": [],
+                "recommendationReasonings": [],
+                "migrationTargetPlatform": "AzureSqlManagedInstance",
+                "suitability": "NotSuitable",
+                "migrationIssues": [
+                  {
+                    "issueId": "SuitabilityReportMissing",
+                    "issueCategory": "Internal",
+                    "impactedObjects": []
+                  },
+                  {
+                    "issueId": "PerformanceDataMissing",
+                    "issueCategory": "Internal",
+                    "impactedObjects": []
+                  },
+                  {
+                    "issueId": "SkuNotFound",
+                    "issueCategory": "Issue",
+                    "impactedObjects": [
+                      {
+                        "objectName": "Finance_User10",
+                        "objectType": "SqlDatabase"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "azureSqlDBSuitabilityDetails": {
+                "azureSqlSku": {
+                  "azureSqlServiceTier": "GeneralPurpose",
+                  "azureSqlComputeTier": "Provisioned",
+                  "azureSqlHardwareGeneration": "Gen5",
+                  "storageMaxSizeInMB": 1024.0,
+                  "predictedDataSizeInMB": 10.0,
+                  "predictedLogSizeInMB": 5.0,
+                  "cores": 2,
+                  "azureSqlTargetType": "AzureSqlDatabase"
+                },
+                "replicaAzureSqlSku": [],
+                "sharedResources": {
+                  "sharedDataDisks": [],
+                  "sharedLogDisks": [],
+                  "sharedTempDbDisks": [],
+                  "numberOfMounts": 0,
+                  "quorumWitness": null
+                },
+                "monthlyComputeCost": 118.999824,
+                "monthlyStorageCost": 0.69,
+                "costComponents": [
+                  {
+                    "name": "MonthlySecurityCost",
+                    "value": 0.0,
+                    "description": null
+                  }
+                ],
+                "securitySuitability": "Unknown",
+                "shouldProvisionReplicas": false,
+                "skuReplicationMode": "NotApplicable",
+                "migrationGuidelines": [],
+                "recommendationReasonings": [
+                  {
+                    "reasoningId": "DatabaseCpuScalingFactorRequirementUnavailable",
+                    "reasoningString": null,
+                    "reasoningCategory": "CpuType",
+                    "contextParameters": [
+                      {
+                        "contextKey": "AllocatedCores",
+                        "contextValue": "2"
+                      },
+                      {
+                        "contextKey": "TargetCoresRecommended",
+                        "contextValue": "2"
+                      }
+                    ]
+                  },
+                  {
+                    "reasoningId": "MeetsDatabaseStorageRequirement",
+                    "reasoningString": null,
+                    "reasoningCategory": "StorageType",
+                    "contextParameters": [
+                      {
+                        "contextKey": "TotalStorageConsumedByDataFilesInGB",
+                        "contextValue": "0.01"
+                      },
+                      {
+                        "contextKey": "TotalStorageConsumedByLogFilesInGB",
+                        "contextValue": "0.005"
+                      },
+                      {
+                        "contextKey": "TotalRecommendedStorageInGB",
+                        "contextValue": "1024"
+                      }
+                    ]
+                  },
+                  {
+                    "reasoningId": "MeetsProvisionedComputeTierRequirement",
+                    "reasoningString": null,
+                    "reasoningCategory": "ComputeTier",
+                    "contextParameters": [
+                      {
+                        "contextKey": "ComputeTier",
+                        "contextValue": "Provisioned"
+                      }
+                    ]
+                  },
+                  {
+                    "reasoningId": "MeetsServiceTierRequirement",
+                    "reasoningString": null,
+                    "reasoningCategory": "ServiceTier",
+                    "contextParameters": [
+                      {
+                        "contextKey": "ServiceTier",
+                        "contextValue": "GeneralPurpose"
+                      }
+                    ]
+                  }
+                ],
+                "migrationTargetPlatform": "AzureSqlDatabase",
+                "suitability": "ReadinessUnknown",
+                "migrationIssues": [
+                  {
+                    "issueId": "SuitabilityReportMissing",
+                    "issueCategory": "Internal",
+                    "impactedObjects": []
+                  },
+                  {
+                    "issueId": "PerformanceDataMissing",
+                    "issueCategory": "Internal",
+                    "impactedObjects": []
+                  },
+                  {
+                    "issueId": "PerfBasedFallbackToAsOnPremises",
+                    "issueCategory": "Warning",
+                    "impactedObjects": [
+                      {
+                        "objectName": "Finance_User10",
+                        "objectType": "SqlDatabase"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "isDatabaseHighlyAvailable": false,
+              "linkedAvailabilityGroupOverview": null,
+              "sizingCriterion": "AsOnPremises",
+              "machineArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/machines/cc64c9dc-b38e-435d-85ad-d509df5d92c6",
+              "assessedSqlInstanceArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/bansalankit-rg/providers/Microsoft.Migrate/assessmentprojects/fci-ankit-test6904project/groups/test_fci_hadr/sqlAssessments/test_swagger_1/assessedSqlInstances/b11d90cc-b528-49e4-aac2-1c9a53209f8e",
+              "machineName": "SQLHAVM17",
+              "instanceName": "MSSQLSERVER",
+              "databaseName": "Finance_User10",
+              "databaseSizeInMB": 15.0,
+              "compatibilityLevel": "CompatLevel120",
+              "sqlDatabaseSdsArmId": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourcegroups/bansalankit-rg/providers/microsoft.offazure/mastersites/fci-ankit-test6065mastersite/sqlsites/fci-ankit-test6065sqlsites/sqldatabases/ea92ba27-3656-5370-8bcc-e5eed9d7ba5e",
+              "percentageCoresUtilization": 100.0,
+              "megabytesPerSecondOfRead": 0.0,
+              "megabytesPerSecondOfWrite": 0.0,
+              "numberOfReadOperationsPerSecond": 0.0,
+              "numberOfWriteOperationsPerSecond": 0.0,
+              "confidenceRatingInPercentage": 0.0,
+              "createdTimestamp": "2023-09-08T05:22:34.8572031Z",
+              "updatedTimestamp": "2023-09-08T05:22:36.4665924Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/rackSkus/rackSkuName",
+            "name": "rackSkuName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/rackSkus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "rackType": "Single",
+              "maxClusterSlots": 0,
+              "description": "Sample SKU for the single rack.",
+              "controllerMachines": [
+                {
+                  "properties": {
+                    "vendor": "Dell",
+                    "model": "PowerEdge R650",
+                    "generation": "8",
+                    "hardwareVersion": "3",
+                    "bootstrapProtocol": "PXE",
+                    "cpuSockets": 1,
+                    "cpuCores": 8,
+                    "totalThreads": 16,
+                    "memoryCapacityGB": 128,
+                    "disks": [
+                      {
+                        "capacityGB": 893,
+                        "type": "SSD",
+                        "connection": "SAS"
+                      }
+                    ],
+                    "networkInterfaces": [
+                      {
+                        "address": "04:00.0",
+                        "physicalSlot": 2,
+                        "portCount": 2,
+                        "portSpeed": 1,
+                        "deviceConnectionType": "PCI",
+                        "vendor": "Broadcom Corp",
+                        "model": "Broadcom Gigabit Ethernet BCM5720"
+                      }
+                    ]
+                  },
+                  "rackSlot": 5
+                }
+              ],
+              "computeMachines": [
+                {
+                  "properties": {
+                    "vendor": "Dell",
+                    "model": "PowerEdge R750",
+                    "generation": "8",
+                    "hardwareVersion": "3",
+                    "bootstrapProtocol": "PXE",
+                    "cpuSockets": 2,
+                    "cpuCores": 28,
+                    "totalThreads": 112,
+                    "memoryCapacityGB": 512,
+                    "disks": [
+                      {
+                        "capacityGB": 893,
+                        "type": "SSD",
+                        "connection": "SAS"
+                      }
+                    ],
+                    "networkInterfaces": [
+                      {
+                        "address": "04:00.0",
+                        "physicalSlot": 1,
+                        "portCount": 2,
+                        "portSpeed": 1,
+                        "deviceConnectionType": "PCI",
+                        "vendor": "Broadcom Corp",
+                        "model": "Broadcom Gigabit Ethernet BCM5720"
+                      }
+                    ]
+                  },
+                  "rackSlot": 1
+                }
+              ],
+              "storageAppliances": [
+                {
+                  "properties": {
+                    "capacityGB": 9100,
+                    "model": "x70r3-9"
+                  },
+                  "rackSlot": 2
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

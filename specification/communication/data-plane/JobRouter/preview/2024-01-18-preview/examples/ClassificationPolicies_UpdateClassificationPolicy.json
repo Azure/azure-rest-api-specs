@@ -1,0 +1,74 @@
+{
+  "title": "Updates a Classification Policy",
+  "operationId": "JobRouterAdministrationOperations_UpsertClassificationPolicy",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "classificationPolicyId": "90eb00c4-234e-4df7-a231-ef7895518384",
+    "resource": {
+      "name": "MainUpdate"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+        "name": "MainUpdate",
+        "fallbackQueueId": "MainQueue",
+        "queueSelectorAttachments": [
+          {
+            "kind": "conditional",
+            "condition": {
+              "kind": "expression",
+              "language": "powerFx",
+              "expression": "1 = 1"
+            },
+            "queueSelectors": [
+              {
+                "key": "foo",
+                "labelOperator": "equal",
+                "value": "bar"
+              }
+            ]
+          }
+        ],
+        "prioritizationRule": {
+          "kind": "static",
+          "value": "2"
+        },
+        "workerSelectorAttachments": [],
+        "etag": "etag"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "90eb00c4-234e-4df7-a231-ef7895518384",
+        "name": "MainUpdate",
+        "fallbackQueueId": "MainQueue",
+        "queueSelectorAttachments": [
+          {
+            "kind": "conditional",
+            "condition": {
+              "kind": "expression",
+              "language": "powerFx",
+              "expression": "1 = 1"
+            },
+            "queueSelectors": [
+              {
+                "key": "foo",
+                "labelOperator": "equal",
+                "value": "bar"
+              }
+            ]
+          }
+        ],
+        "prioritizationRule": {
+          "kind": "static",
+          "value": "2"
+        },
+        "workerSelectorAttachments": [],
+        "etag": "etag"
+      }
+    }
+  }
+}

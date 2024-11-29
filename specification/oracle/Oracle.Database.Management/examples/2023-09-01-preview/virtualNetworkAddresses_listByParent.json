@@ -1,0 +1,33 @@
+{
+  "operationId": "VirtualNetworkAddresses_listByCloudVmCluster",
+  "title": "VirtualNetworkAddresses_listByCloudVmCluster",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "cloudvmclustername": "cluster1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudVmClusters/cluster1/virtualNetworkAddresses/hostname1",
+            "type": "Oracle.Database/cloudVmClusters/virtualNetworkAddresses",
+            "properties": {
+              "ipAddress": "192.168.0.1",
+              "vmOcid": "ocid1..aaaa",
+              "ocid": "ocid1..aaaaaa",
+              "domain": "domain1",
+              "lifecycleDetails": "success",
+              "provisioningState": "Succeeded",
+              "lifecycleState": "Available",
+              "timeAssigned": "2023-10-22T00:27:02.119Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+parameters:
+  "service-dir":
+    "default": "sdk/documentintelligence"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+  # - "@azure-tools/typespec-csharp",
+  # - "@azure-tools/typespec-python",
+  # - "@azure-tools/typespec-ts"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DocumentIntelligence.json"
+  "@azure-tools/typespec-python":
+    package-pprint-name: "Azure AI Document Intelligence"
+    package-dir: "azure-ai-documentintelligence"
+    package-name: "{package-dir}"
+    package-version: 1.0.0b2
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-documentintelligence"
+    namespace: "com.azure.ai.documentintelligence"
+    enable-sync-stack: true
+    custom-types-subpackage: "implementation.models"
+    generate-tests: false
+    customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
+    polling:
+      buildDocumentModel:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+      buildClassifier:
+        final-type: com.azure.ai.documentintelligence.models.DocumentClassifierDetails
+      composeModel:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+      copyModelTo:
+        final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.DocumentIntelligence"
+    namespace: "Azure.AI.DocumentIntelligence"
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    title: DocumentIntelligence
+    package-dir: "ai-document-intelligence-rest"
+    generateMetadata: true
+    generate-tests: false
+    packageDetails:
+      name: "@azure-rest/ai-document-intelligence"
+      description: "Document Intelligence Rest Client"
+      version: "1.0.0"
+    flavor: azure

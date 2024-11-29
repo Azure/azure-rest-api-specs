@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "endpoint4899",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "kay1": "value1"
+        },
+        "location": "WestUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originHostHeader": "www.bing.com",
+          "provisioningState": "Succeeded",
+          "resourceState": "Starting",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "NotSet",
+          "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443
+              }
+            }
+          ],
+          "contentTypesToCompress": [],
+          "isCompressionEnabled": false,
+          "optimizationType": "DynamicSiteAcceleration",
+          "probePath": "/image",
+          "geoFilters": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "name": "endpoint4899",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "kay1": "value1"
+        },
+        "location": "WestUs",
+        "properties": {
+          "hostName": "endpoint1.azureedge.net",
+          "originHostHeader": "www.bing.com",
+          "provisioningState": "Succeeded",
+          "resourceState": "Starting",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "NotSet",
+          "originPath": null,
+          "origins": [
+            {
+              "name": "www-bing-com",
+              "properties": {
+                "hostName": "www.bing.com",
+                "httpPort": 80,
+                "httpsPort": 443
+              }
+            }
+          ],
+          "contentTypesToCompress": [],
+          "isCompressionEnabled": false,
+          "optimizationType": "DynamicSiteAcceleration",
+          "probePath": "/image",
+          "geoFilters": []
+        }
+      }
+    }
+  }
+}

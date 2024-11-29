@@ -1,0 +1,77 @@
+{
+  "operationId": "AnalyzeConversationsJobStatus",
+  "title": "SuccessfulConversationSummarizationTaskResult",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "3e9e8518-492f-47f9-abd1-9a7468231086"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "displayName": "Conversation Summarization Example",
+        "createdDateTime": "2022-04-01T15:00:45Z",
+        "expirationDateTime": "2022-04-02T15:00:45Z",
+        "jobId": "3e9e8518-492f-47f9-abd1-9a7468231086",
+        "lastUpdatedDateTime": "2022-04-01T15:00:49Z",
+        "status": "succeeded",
+        "tasks": {
+          "completed": 1,
+          "failed": 0,
+          "inProgress": 0,
+          "total": 1,
+          "items": [
+            {
+              "kind": "ConversationalSummarizationResults",
+              "lastUpdateDateTime": "2022-04-01T15:00:49Z",
+              "taskName": "Conversation Summarization Task 1",
+              "status": "succeeded",
+              "results": {
+                "conversations": [
+                  {
+                    "id": "1",
+                    "summaries": [
+                      {
+                        "aspect": "chapterTitle",
+                        "text": "Bug Triage",
+                        "contexts": [
+                          {
+                            "conversationItemId": "2",
+                            "offset": 4,
+                            "length": 39
+                          }
+                        ]
+                      },
+                      {
+                        "aspect": "narrative",
+                        "text": "Speaker 3 believes there are 3 remaining bugs.",
+                        "contexts": [
+                          {
+                            "conversationItemId": "2",
+                            "offset": 4,
+                            "length": 39
+                          },
+                          {
+                            "conversationItemId": "3",
+                            "offset": 0,
+                            "length": 7
+                          }
+                        ]
+                      }
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "errors": [],
+                "modelVersion": "latest"
+              }
+            }
+          ]
+        },
+        "nextLink": "<resource-endpoint>/language/analyze-conversation/jobs/3e9e8518-492f-47f9-abd1-9a7468231086?$skip=10&$top=10"
+      }
+    }
+  }
+}

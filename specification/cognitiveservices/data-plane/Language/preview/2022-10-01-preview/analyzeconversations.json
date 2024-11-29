@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations",
-    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
+    "description": "The Language Service Conversations API is a suite of natural language processing (NLP) skills that you can use to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as Language Understanding (LUIS) generally available, question answering, and conversational language understanding, and then calls the best candidate service to handle the request. Finally, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like conversation summarization and detection of personally identifiable information (PII) in conversation.",
     "version": "2022-10-01-preview"
   },
   "securityDefinitions": {
@@ -10,14 +10,14 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) flows. When you pair them with [Azure role-based access control (RBAC)](https://docs.microsoft.com/azure/role-based-access-control/overview), you can use them to control access to Azure Maps REST APIs. You use RBAC to designate access to one or more Azure Maps resource accounts or subresources. You can grant any user, group, or service principal access via a built-in role or a custom role that consists of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling applications via objects that are capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition requires the use of the x-ms-client-id header to indicate which Azure Maps resource the application is requesting access to. You can get this header from the [Azure Maps management API](https://aka.ms/amauthdetails).\n* \nThe authorization URL is specific to the Azure public cloud instance. Sovereign clouds have unique authorization URLs and Azure Active Directory configurations. \n* \nYou configure RBAC from the [Azure management plane](https://aka.ms/amrbac) via the Azure portal, PowerShell, the Azure CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration-based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports work, school, and guest accounts but does not support personal accounts.",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
       }
     },
     "apim_key": {
       "type": "apiKey",
-      "description": "A subscription key for a Language service resource.",
+      "description": "Subscription key for a language service resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
@@ -51,7 +51,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "description": "A single conversational task to execute.",
+            "description": "A single conversation task to execute.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -68,7 +68,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The conversation analysis response.",
+            "description": "Conversation analysis response.",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTaskResult"
             }
@@ -80,7 +80,7 @@
             },
             "headers": {
               "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
+                "description": "Error code for the specific error that occurred.",
                 "type": "string"
               }
             }
@@ -115,7 +115,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "description": "The collection of conversations to analyze and one or more tasks to execute.",
+            "description": "Collection of conversations to analyze and one or more tasks to execute.",
             "in": "body",
             "name": "body",
             "schema": {
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "description": "A successful call results in an Operation-Location header that's used to check the status of the analysis job.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -162,7 +162,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Get the status of an analysis job. A job may consist of one or more tasks. Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "operationId": "AnalyzeConversation_JobStatus",
         "summary": "Get analysis status and results",
         "parameters": [
@@ -211,7 +211,7 @@
         "produces": [
           "application/json"
         ],
-        "description": "Cancel a long-running Text Analysis conversations job.",
+        "description": "Cancel a long-running job for text analysis of conversations.",
         "operationId": "AnalyzeConversation_CancelJob",
         "summary": "Cancel a long-running Text Analysis conversations job",
         "parameters": [
@@ -224,7 +224,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Cancel Job request has been received.",
+            "description": "The request to cancel a job has been received.",
             "headers": {
               "Operation-Location": {
                 "type": "string"
@@ -232,7 +232,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "Unexpected error.",
             "schema": {
               "$ref": "common.json#/definitions/ErrorResponse"
             }
@@ -250,7 +250,7 @@
   "definitions": {
     "AnalyzeConversationTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported Conversation tasks.",
+      "description": "Enumeration of supported conversation tasks.",
       "enum": [
         "Conversation"
       ],
@@ -261,7 +261,7 @@
     },
     "AnalyzeConversationTaskResultsKind": {
       "type": "string",
-      "description": "Enumeration of supported conversational task results",
+      "description": "Enumeration of supported conversation task results.",
       "enum": [
         "ConversationResult"
       ],
@@ -272,7 +272,7 @@
     },
     "AnalyzeConversationTask": {
       "type": "object",
-      "description": "The base class of a conversation input task.",
+      "description": "Base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -285,7 +285,7 @@
     },
     "AnalyzeConversationTaskResult": {
       "type": "object",
-      "description": "The base class of a conversation task result.",
+      "description": "Base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -298,7 +298,7 @@
     },
     "ConversationalTask": {
       "type": "object",
-      "description": "The input for a custom conversation task.",
+      "description": "Input for a custom conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTask"
@@ -320,15 +320,15 @@
     },
     "ConversationTaskParameters": {
       "type": "object",
-      "description": "Input parameters necessary for a Conversation task.",
+      "description": "Input parameters necessary for a conversation task.",
       "properties": {
         "projectName": {
           "type": "string",
-          "description": "The name of the project to use."
+          "description": "Name of the project to use."
         },
         "deploymentName": {
           "type": "string",
-          "description": "The name of the deployment to use."
+          "description": "Name of the deployment to use."
         },
         "verbose": {
           "type": "boolean",
@@ -343,11 +343,11 @@
         },
         "directTarget": {
           "type": "string",
-          "description": "The name of a target project to forward the request to."
+          "description": "Name of a target project to forward the request to."
         },
         "targetProjectParameters": {
           "type": "object",
-          "description": "A dictionary representing the parameters for each target project.",
+          "description": "Dictionary that represents the parameters for each target project.",
           "additionalProperties": {
             "$ref": "#/definitions/AnalysisParameters"
           }
@@ -359,7 +359,7 @@
       ]
     },
     "ConversationalTaskResult": {
-      "description": "The results of a Conversation task.",
+      "description": "Results of a conversation task.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
@@ -378,18 +378,18 @@
     },
     "ConversationItemBase": {
       "type": "object",
-      "description": "The abstract base for a user input formatted conversation (e.g., Text, Transcript).",
+      "description": "Abstract base for a user input formatted conversation (for example, text or transcript).",
       "properties": {
         "id": {
-          "description": "The ID of a conversation item.",
+          "description": "ID of a conversation item.",
           "type": "string"
         },
         "participantId": {
-          "description": "The participant ID of a conversation item.",
+          "description": "Participant ID of a conversation item.",
           "type": "string"
         },
         "language": {
-          "description": "The override language of a conversation item in BCP 47 language representation.",
+          "description": "Override language of a conversation item in BCP 47 language representation.",
           "type": "string"
         },
         "modality": {
@@ -397,7 +397,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The role of the participant.",
+          "description": "Role of the participant.",
           "enum": [
             "agent",
             "customer",
@@ -417,7 +417,7 @@
     },
     "TextConversationItem": {
       "type": "object",
-      "description": "The text modality of an input conversation.",
+      "description": "Text modality of an input conversation.",
       "allOf": [
         {
           "$ref": "#/definitions/ConversationItemBase"
@@ -425,7 +425,7 @@
       ],
       "properties": {
         "text": {
-          "description": "The text input",
+          "description": "Text input.",
           "type": "string"
         }
       },
@@ -435,7 +435,7 @@
     },
     "ConversationAnalysisOptions": {
       "type": "object",
-      "description": "The input ConversationItem and its optional parameters",
+      "description": "ConversationItem input and its optional parameters.",
       "required": [
         "conversationItem"
       ],
@@ -447,7 +447,7 @@
     },
     "AnalysisParameters": {
       "type": "object",
-      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
+      "description": "This is the parameter set of either the orchestration project itself or one of the target services.",
       "required": [
         "targetProjectKind"
       ],
@@ -455,7 +455,7 @@
       "properties": {
         "targetProjectKind": {
           "type": "string",
-          "description": "The type of a target service.",
+          "description": "Type of a target service.",
           "enum": [
             "Luis",
             "Conversation",
@@ -469,13 +469,13 @@
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version to use when call a specific target service."
+          "description": "API version to use in calling a specific target service."
         }
       }
     },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
-      "description": "A wrap up of non-linked intent response.",
+      "description": "Wrap-up of a non-linked intent response.",
       "x-ms-discriminator-value": "NonLinked",
       "allOf": [
         {
@@ -485,12 +485,12 @@
       "properties": {
         "result": {
           "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project."
+          "description": "Actual response from a conversation project."
         }
       }
     },
     "LuisParameters": {
-      "description": "This is a set of request parameters for LUIS Generally Available projects.",
+      "description": "This is a set of request parameters for LUIS generally available projects.",
       "x-ms-discriminator-value": "Luis",
       "type": "object",
       "allOf": [
@@ -502,49 +502,49 @@
         "query": {
           "type": "string",
           "maxLength": 500,
-          "description": "The utterance to predict."
+          "description": "Utterance to predict."
         },
         "callingOptions": {
           "type": "object",
-          "description": "This customizes how the service calls LUIS Generally Available projects.",
+          "description": "This customizes how the service calls LUIS generally available projects.",
           "$ref": "#/definitions/LuisCallingOptions"
         }
       },
       "additionalProperties": true
     },
     "LuisCallingOptions": {
-      "description": "This customizes how the service calls LUIS Generally Available projects.",
+      "description": "This customizes how the service calls LUIS generally available projects.",
       "type": "object",
       "properties": {
         "verbose": {
-          "description": "Enable verbose response.",
+          "description": "Enable a verbose response.",
           "type": "boolean"
         },
         "log": {
-          "description": "Save log to add in training utterances later.",
+          "description": "Save the log to add in training utterances later.",
           "type": "boolean"
         },
         "show-all-intents": {
-          "description": "Set true to show all intents.",
+          "description": "Set to true to show all intents.",
           "type": "boolean"
         },
         "timezoneOffset": {
           "type": "number",
-          "description": "The timezone offset for the location of the request."
+          "description": "Time zone offset for the location of the request."
         },
         "spellCheck": {
           "type": "boolean",
           "description": "Enable spell checking."
         },
         "bing-spell-check-subscription-key": {
-          "description": "The subscription key to use when enabling Bing spell check",
+          "description": "Subscription key to use for enabling the Bing spell checker.",
           "type": "string"
         }
       }
     },
     "ConversationParameters": {
       "type": "object",
-      "description": "This is a set of request parameters for Customized Conversation projects.",
+      "description": "This is a set of request parameters for customized conversation projects.",
       "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
@@ -560,10 +560,10 @@
     },
     "ConversationCallingOptions": {
       "type": "object",
-      "description": "The option to set to call a Conversation project.",
+      "description": "Option to set to call a conversation project.",
       "properties": {
         "language": {
-          "description": "The language of the query in BCP 47 language representation..",
+          "description": "Language of the query in BCP 47 language representation.",
           "type": "string"
         },
         "verbose": {
@@ -578,7 +578,7 @@
     },
     "QuestionAnsweringParameters": {
       "type": "object",
-      "description": "This is a set of request parameters for Question Answering knowledge bases.",
+      "description": "This is a set of request parameters for question-answering knowledge bases.",
       "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
@@ -587,7 +587,7 @@
       ],
       "properties": {
         "callingOptions": {
-          "description": "The options sent to a Question Answering KB.",
+          "description": "Options sent to a question-answering knowledge base.",
           "$ref": "common.json#/definitions/AnswersOptions"
         }
       }
@@ -602,21 +602,21 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "The conversation utterance given by the caller."
+          "description": "Conversation utterance given by the caller."
         },
         "detectedLanguage": {
           "type": "string",
-          "description": "The system detected language for the query in BCP 47 language representation.."
+          "description": "System detected language for the query in BCP 47 language representation."
         },
         "prediction": {
-          "description": "The prediction result of a conversation project.",
+          "description": "Prediction result of a conversation project.",
           "$ref": "#/definitions/BasePrediction"
         }
       }
     },
     "BasePrediction": {
       "type": "object",
-      "description": "This is the base class of prediction",
+      "description": "This is the base class of prediction.",
       "required": [
         "projectKind"
       ],
@@ -624,7 +624,7 @@
       "properties": {
         "projectKind": {
           "type": "string",
-          "description": "The type of the project.",
+          "description": "Type of the project.",
           "enum": [
             "Conversation",
             "Orchestration"
@@ -636,13 +636,13 @@
         },
         "topIntent": {
           "type": "string",
-          "description": "The intent with the highest score."
+          "description": "Intent with the highest score."
         }
       }
     },
     "OrchestrationPrediction": {
       "type": "object",
-      "description": "This represents the prediction result of an Orchestration project.",
+      "description": "This represents the prediction result of an orchestration project.",
       "x-ms-discriminator-value": "Orchestration",
       "required": [
         "intents"
@@ -654,7 +654,7 @@
       ],
       "properties": {
         "intents": {
-          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
+          "description": "Dictionary that contains all intents. A key is an intent name, and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/TargetIntentResult"
@@ -664,7 +664,7 @@
     },
     "TargetIntentResult": {
       "type": "object",
-      "description": "This is the base class of an intent prediction",
+      "description": "This is the base class of an intent prediction.",
       "discriminator": "targetProjectKind",
       "required": [
         "confidenceScore",
@@ -687,13 +687,13 @@
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version used to call a target service."
+          "description": "API version that's used to call a target service."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
           "x-ms-client-name": "confidence",
-          "description": "The prediction score and it ranges from 0.0 to 1.0.",
+          "description": "Prediction score, which ranges from 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         }
@@ -701,7 +701,7 @@
     },
     "ConversationTargetIntentResult": {
       "type": "object",
-      "description": "A wrap up of Conversation project response.",
+      "description": "Wrap-up of a conversation project response.",
       "x-ms-discriminator-value": "Conversation",
       "allOf": [
         {
@@ -712,34 +712,34 @@
         "result": {
           "type": "object",
           "$ref": "#/definitions/ConversationResult",
-          "description": "The actual response from a Conversation project."
+          "description": "Actual response from a conversation project."
         }
       }
     },
     "ConversationResult": {
       "type": "object",
-      "description": "The response returned by a Conversation project.",
+      "description": "Response that a conversation project returned.",
       "required": [
         "query"
       ],
       "properties": {
         "query": {
-          "description": "The same query given in request.",
+          "description": "The same query given in a request.",
           "type": "string"
         },
         "detectedLanguage": {
-          "description": "The detected language from the query in BCP 47 language representation..",
+          "description": "Detected language from the query in BCP 47 language representation.",
           "type": "string"
         },
         "prediction": {
-          "description": "The predicted result for the query.",
+          "description": "Predicted result for the query.",
           "$ref": "#/definitions/ConversationPrediction"
         }
       }
     },
     "ConversationPrediction": {
       "type": "object",
-      "description": "Represents the prediction section of a Conversation project.",
+      "description": "Represents the prediction section of a conversation project.",
       "x-ms-discriminator-value": "Conversation",
       "required": [
         "intents",
@@ -752,14 +752,14 @@
       ],
       "properties": {
         "intents": {
-          "description": "The intent classification results.",
+          "description": "Intent classification results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationIntent"
           }
         },
         "entities": {
-          "description": "The entity extraction results.",
+          "description": "Entity extraction results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationEntity"
@@ -769,20 +769,20 @@
     },
     "ConversationIntent": {
       "type": "object",
-      "description": "The intent classification result of a Conversation project.",
+      "description": "Intent classification result of a conversation project.",
       "required": [
         "category",
         "confidenceScore"
       ],
       "properties": {
         "category": {
-          "description": "A predicted class.",
+          "description": "Predicted class.",
           "type": "string"
         },
         "confidenceScore": {
           "format": "float",
           "x-ms-client-name": "confidence",
-          "description": "The confidence score of the class from 0.0 to 1.0.",
+          "description": "Confidence score of the class, from 0.0 to 1.0.",
           "type": "number",
           "minimum": 0,
           "maximum": 1
@@ -791,7 +791,7 @@
     },
     "ConversationEntity": {
       "type": "object",
-      "description": "The entity extraction result of a Conversation project.",
+      "description": "Entity extraction result of a conversation project.",
       "required": [
         "category",
         "text",
@@ -801,38 +801,38 @@
       ],
       "properties": {
         "category": {
-          "description": "The entity category.",
+          "description": "Entity category.",
           "type": "string"
         },
         "text": {
-          "description": "The predicted entity text.",
+          "description": "Predicted entity text.",
           "type": "string"
         },
         "offset": {
           "format": "int32",
-          "description": "The starting index of this entity in the query.",
+          "description": "Starting index of this entity in the query.",
           "type": "integer"
         },
         "length": {
           "format": "int32",
-          "description": "The length of the text.",
+          "description": "Length of the text.",
           "type": "integer"
         },
         "confidenceScore": {
           "format": "float",
           "x-ms-client-name": "confidence",
-          "description": "The entity confidence score.",
+          "description": "Entity confidence score.",
           "type": "number"
         },
         "resolutions": {
-          "description": "The collection of entity resolution objects.",
+          "description": "Collection of objects for entity resolution.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaseResolution"
           }
         },
         "extraInformation": {
-          "description": "The collection of entity extra information objects.",
+          "description": "Collection of objects for entity extra information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
@@ -841,12 +841,12 @@
       }
     },
     "BaseResolution": {
-      "description": "The abstract base class for entity resolutions.",
+      "description": "Abstract base class for entity resolutions.",
       "type": "object",
       "discriminator": "resolutionKind",
       "properties": {
         "resolutionKind": {
-          "description": "The entity resolution object kind.",
+          "description": "Kind of entity resolution object.",
           "type": "string",
           "enum": [
             "BooleanResolution",
@@ -882,7 +882,7 @@
         "value": {
           "type": "number",
           "format": "double",
-          "description": "The numeric value that the extracted text denotes."
+          "description": "Numeric value that the extracted text denotes."
         }
       },
       "required": [
@@ -890,7 +890,7 @@
       ]
     },
     "AgeResolution": {
-      "description": "Represents the Age entity resolution model.",
+      "description": "Represents the model for age entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -915,7 +915,7 @@
             "name": "AgeUnit",
             "modelAsString": true
           },
-          "description": "The Age Unit of measurement"
+          "description": "Age unit of measurement."
         }
       },
       "required": [
@@ -923,7 +923,7 @@
       ]
     },
     "VolumeResolution": {
-      "description": "Represents the volume entity resolution model.",
+      "description": "Represents the model for volume entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -971,7 +971,7 @@
             "name": "VolumeUnit",
             "modelAsString": true
           },
-          "description": "The Volume Unit of measurement"
+          "description": "Volume unit of measurement."
         }
       },
       "required": [
@@ -979,7 +979,7 @@
       ]
     },
     "SpeedResolution": {
-      "description": "Represents the speed entity resolution model.",
+      "description": "Represents the model for speed entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1013,7 +1013,7 @@
             "name": "SpeedUnit",
             "modelAsString": true
           },
-          "description": "The speed Unit of measurement"
+          "description": "Speed unit of measurement."
         }
       },
       "required": [
@@ -1021,7 +1021,7 @@
       ]
     },
     "AreaResolution": {
-      "description": "Represents the area entity resolution model.",
+      "description": "Represents the model for area entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1054,7 +1054,7 @@
             "name": "AreaUnit",
             "modelAsString": true
           },
-          "description": "The area Unit of measurement"
+          "description": "Area unit of measurement."
         }
       },
       "required": [
@@ -1062,7 +1062,7 @@
       ]
     },
     "LengthResolution": {
-      "description": "Represents the length entity resolution model.",
+      "description": "Represents the model for length entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1099,7 +1099,7 @@
             "name": "LengthUnit",
             "modelAsString": true
           },
-          "description": "The length Unit of measurement"
+          "description": "Length unit of measurement."
         }
       },
       "required": [
@@ -1107,7 +1107,7 @@
       ]
     },
     "InformationResolution": {
-      "description": "Represents the information (data) entity resolution model.",
+      "description": "Represents the model for information (data) entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1140,7 +1140,7 @@
             "name": "InformationUnit",
             "modelAsString": true
           },
-          "description": "The information (data) Unit of measurement."
+          "description": "Information (data) unit of measurement."
         }
       },
       "required": [
@@ -1148,7 +1148,7 @@
       ]
     },
     "TemperatureResolution": {
-      "description": "Represents the temperature entity resolution model.",
+      "description": "Represents the model for temperature entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1173,7 +1173,7 @@
             "name": "TemperatureUnit",
             "modelAsString": true
           },
-          "description": "The temperature Unit of measurement."
+          "description": "Temperature unit of measurement."
         }
       },
       "required": [
@@ -1181,7 +1181,7 @@
       ]
     },
     "WeightResolution": {
-      "description": "Represents the weight entity resolution model.",
+      "description": "Represents the model for weight entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1217,7 +1217,7 @@
             "name": "WeightUnit",
             "modelAsString": true
           },
-          "description": "The weight Unit of measurement."
+          "description": "Weight unit of measurement."
         }
       },
       "required": [
@@ -1225,7 +1225,7 @@
       ]
     },
     "CurrencyResolution": {
-      "description": "Represents the currency entity resolution model.",
+      "description": "Represents the model for currency entity resolution.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1239,16 +1239,16 @@
       "properties": {
         "ISO4217": {
           "type": "string",
-          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
+          "description": "Alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country/region names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country/region name. Where possible, the third letter of the ISO 4217 code corresponds to the first letter of the currency name."
         },
         "value": {
           "type": "number",
           "format": "double",
-          "description": "The money amount captured in the extracted entity"
+          "description": "Money amount captured in the extracted entity."
         },
         "unit": {
           "type": "string",
-          "description": "The unit of the amount captured in the extracted entity"
+          "description": "Unit of the amount captured in the extracted entity."
         }
       },
       "required": [
@@ -1257,7 +1257,7 @@
       ]
     },
     "BooleanResolution": {
-      "description": "A resolution for boolean expressions",
+      "description": "Resolution for Boolean expressions.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1275,7 +1275,7 @@
       ]
     },
     "DateTimeResolution": {
-      "description": "A resolution for datetime entity instances.",
+      "description": "Resolution for date/time entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1300,11 +1300,11 @@
             "name": "DateTimeSubKind",
             "modelAsString": true
           },
-          "description": "The DateTime SubKind"
+          "description": "Date/time subkind."
         },
         "value": {
           "type": "string",
-          "description": "The actual time that the extracted text denote."
+          "description": "Actual time that the extracted text denotes."
         },
         "modifier": {
           "$ref": "#/definitions/TemporalModifier"
@@ -1317,7 +1317,7 @@
       ]
     },
     "NumberResolution": {
-      "description": "A resolution for numeric entity instances.",
+      "description": "Resolution for numeric entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1340,12 +1340,12 @@
             "name": "NumberKind",
             "modelAsString": true
           },
-          "description": "The type of the extracted number entity."
+          "description": "Type of the extracted number entity."
         },
         "value": {
           "type": "number",
           "format": "double",
-          "description": "A numeric representation of what the extracted text denotes."
+          "description": "Numeric representation of what the extracted text denotes."
         }
       },
       "required": [
@@ -1354,7 +1354,7 @@
       ]
     },
     "OrdinalResolution": {
-      "description": "A resolution for ordinal numbers entity instances.",
+      "description": "Resolution for ordinal number entity instances.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1365,7 +1365,7 @@
       "properties": {
         "offset": {
           "type": "string",
-          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
+          "description": "Offset with respect to the reference (for example, offset = -1 in \"show me the second to last\")."
         },
         "relativeTo": {
           "type": "string",
@@ -1378,11 +1378,11 @@
             "name": "RelativeTo",
             "modelAsString": true
           },
-          "description": "The reference point that the ordinal number denotes."
+          "description": "Reference point that the ordinal number denotes."
         },
         "value": {
           "type": "string",
-          "description": "A simple arithmetic expression that the ordinal denotes."
+          "description": "Simple arithmetic expression that the ordinal number denotes."
         }
       },
       "required": [
@@ -1392,7 +1392,7 @@
       ]
     },
     "TemporalSpanResolution": {
-      "description": "represents the resolution of a date and/or time span.",
+      "description": "Represents the resolution of a date and/or time span.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1409,19 +1409,19 @@
         },
         "duration": {
           "type": "string",
-          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+          "description": "Duration value whose formatting is based on ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)."
         },
         "modifier": {
           "$ref": "#/definitions/TemporalModifier"
         },
         "timex": {
           "type": "string",
-          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
+          "description": "Triplet that contains the beginning, the end, and the duration, all stated as ISO 8601 formatted strings."
         }
       }
     },
     "NumericRangeResolution": {
-      "description": "represents the resolution of numeric intervals.",
+      "description": "Represents the resolution of numeric intervals.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseResolution"
@@ -1448,17 +1448,17 @@
             "name": "RangeKind",
             "modelAsString": true
           },
-          "description": "The kind of range that the resolution object represents."
+          "description": "Kind of range that the resolution object represents."
         },
         "minimum": {
           "type": "number",
           "format": "double",
-          "description": "The beginning value of  the interval."
+          "description": "Beginning value of the interval."
         },
         "maximum": {
           "type": "number",
           "format": "double",
-          "description": "The ending value of the interval."
+          "description": "Ending value of the interval."
         }
       },
       "required": [
@@ -1469,7 +1469,7 @@
     },
     "TemporalModifier": {
       "type": "string",
-      "description": "An optional modifier of a date/time instance.",
+      "description": "Modifier of a date/time instance.",
       "enum": [
         "AfterApprox",
         "Before",
@@ -1497,15 +1497,15 @@
     },
     "TimeExpression": {
       "type": "string",
-      "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+      "description": "Extended ISO 8601 date/time representation, as described in https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml."
     },
     "BaseExtraInformation": {
-      "description": "The abstract base object for entity extra information.",
+      "description": "Abstract base object for entity extra information.",
       "type": "object",
       "discriminator": "extraInformationKind",
       "properties": {
         "extraInformationKind": {
-          "description": "The extra information object kind.",
+          "description": "Kind of extra information object.",
           "type": "string",
           "enum": [
             "EntitySubtype",
@@ -1523,7 +1523,7 @@
       ]
     },
     "EntitySubtype": {
-      "description": "The concrete entity Subtype model of extra information.",
+      "description": "Concrete entity subtype model of extra information.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1534,12 +1534,12 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "The Subtype of an extracted entity type."
+          "description": "Subtype of an extracted entity type."
         }
       }
     },
     "ListKey": {
-      "description": "The list key extra data kind.",
+      "description": "Kind of extra data for a list key.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1550,12 +1550,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The canonical form of the extracted entity."
+          "description": "Canonical form of the extracted entity."
         }
       }
     },
     "RegexKey": {
-      "description": "The regex key extra data kind.",
+      "description": "Kind of extra data for a regex key.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseExtraInformation"
@@ -1566,17 +1566,17 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the regex pattern used in extracting the entity."
+          "description": "Key of the regex pattern that's used in extracting the entity."
         },
         "regexPattern": {
           "type": "string",
-          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+          "description": ".NET regex pattern that's used in extracting the entity. For more information about .NET regular expressions, go to https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions."
         }
       }
     },
     "LuisTargetIntentResult": {
       "type": "object",
-      "description": "It is a wrap up of LUIS Generally Available response.",
+      "description": "Wrap-up of the LUIS generally available response.",
       "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
@@ -1586,13 +1586,13 @@
       "properties": {
         "result": {
           "type": "object",
-          "description": "The actual response from a LUIS Generally Available application."
+          "description": "Actual response from a LUIS generally available application."
         }
       }
     },
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
-      "description": "It is a wrap up a Question Answering KB response.",
+      "description": "Wrap-up of the question-answering knowledge base response.",
       "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
@@ -1601,7 +1601,7 @@
       ],
       "properties": {
         "result": {
-          "description": "The generated answer by a Question Answering KB.",
+          "description": "Generated answer by a question-answering knowledge base.",
           "$ref": "common.json#/definitions/AnswersResult"
         }
       }
@@ -1610,14 +1610,14 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Optional display name for the analysis job.",
+          "description": "Display name for the analysis job.",
           "type": "string"
         },
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageConversationAnalysisInput"
         },
         "tasks": {
-          "description": "The set of tasks to execute on the input conversation.",
+          "description": "Set of tasks to execute on the input conversation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationLROTask"
@@ -1631,7 +1631,7 @@
     },
     "AnalyzeConversationLROTask": {
       "type": "object",
-      "description": "The base class for an long running conversation input task.",
+      "description": "Base class for a long-running conversation input task.",
       "discriminator": "kind",
       "required": [
         "kind"
@@ -1649,7 +1649,7 @@
     },
     "AnalyzeConversationLROTaskKind": {
       "type": "string",
-      "description": "Enumeration of supported analysis tasks on a collection of conversation.",
+      "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
         "ConversationalPIITask",
         "ConversationalSummarizationTask",
@@ -1662,7 +1662,7 @@
     },
     "AnalyzeConversationResultsKind": {
       "type": "string",
-      "description": "Enumeration of supported Conversation Analysis task results.",
+      "description": "Enumeration of results for supported conversation analysis tasks.",
       "enum": [
         "ConversationalPIIResults",
         "ConversationalSummarizationResults",
@@ -1727,7 +1727,7 @@
     },
     "Conversation": {
       "type": "object",
-      "description": "A complete ordered set of utterances (spoken or written), by one or more speakers to be used for analysis.",
+      "description": "Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.",
       "discriminator": "modality",
       "required": [
         "id",
@@ -1740,7 +1740,7 @@
           "type": "string"
         },
         "language": {
-          "description": "The language of the conversation item in BCP-47 format.",
+          "description": "Language of the conversation item in BCP-47 format.",
           "type": "string"
         },
         "modality": {
@@ -1835,56 +1835,56 @@
       "properties": {
         "itn": {
           "type": "string",
-          "description": "Inverse Text Normalization representation of input. The inverse-text-normalized form is the recognized text from Microsoft's Speech to Text API, with phone numbers, numbers, abbreviations, and other transformations applied."
+          "description": "Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied."
         },
         "maskedItn": {
           "type": "string",
-          "description": "The Inverse Text Normalized format with profanity masking applied."
+          "description": "Inverse-text-normalized format with profanity masking applied."
         },
         "text": {
           "type": "string",
-          "description": "The display form of the recognized text from speech to text API, with punctuation and capitalization added."
+          "description": "Display form of the recognized text from the speech-to-text API, with punctuation and capitalization added."
         },
         "lexical": {
           "type": "string",
-          "description": "The lexical form of the recognized text from speech to text API with the actual words recognized."
+          "description": "Lexical form of the recognized text from the speech-to-text API, with the actual words recognized."
         },
         "wordLevelTimings": {
           "type": "array",
-          "description": "The list of word level audio timing information",
+          "description": "List of word-level audio timing information.",
           "items": {
             "$ref": "#/definitions/WordLevelTiming"
           }
         },
         "conversationItemLevelTiming": {
-          "description": "Conversation item level audio timing. This still can help on AI quality if word level audio timings are not available.",
+          "description": "Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available.",
           "$ref": "#/definitions/ConversationItemLevelTiming"
         }
       }
     },
     "RedactedTranscriptContent": {
       "type": "object",
-      "description": "The transcript content response generated by the service with all necessary personally identifiable information redacted.",
+      "description": "Transcript content response that the service generates, with all necessary personally identifiable information redacted.",
       "properties": {
         "itn": {
           "type": "string",
-          "description": "The redacted output for inverse text normalized format input."
+          "description": "Redacted output for input in inverse-text-normalized format."
         },
         "maskedItn": {
           "type": "string",
-          "description": "The redacted output for masked inverse text normalized format input."
+          "description": "Redacted output for input in masked inverse-text-normalized format."
         },
         "text": {
           "type": "string",
-          "description": "The redacted output for text (Microsoft's Speech to Text 'display') format input."
+          "description": "Redacted output for input in text (Microsoft's speech-to-text 'display') format."
         },
         "lexical": {
           "type": "string",
-          "description": "The redacted output for lexical format input."
+          "description": "Redacted output for input in lexical format."
         },
         "audioTimings": {
           "type": "array",
-          "description": "The list of redacted audio segments.",
+          "description": "List of redacted audio segments.",
           "items": {
             "$ref": "#/definitions/AudioTiming"
           }
@@ -1893,11 +1893,11 @@
     },
     "WordLevelTiming": {
       "type": "object",
-      "description": "Word level timing information generated by the speech to text API. The words in this object should have 1:1 correspondence with the 'lexical' input to allow for audio redaction.",
+      "description": "Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.",
       "properties": {
         "word": {
           "type": "string",
-          "description": "The word recognized."
+          "description": "Recognized word."
         }
       },
       "allOf": [
@@ -1908,15 +1908,15 @@
     },
     "AudioTiming": {
       "type": "object",
-      "description": "The audio timing information.",
+      "description": "Audio timing information.",
       "properties": {
         "offset": {
-          "description": "Offset from start of speech audio, in ticks. 1 tick = 100 ns.",
+          "description": "Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds.",
           "type": "integer",
           "format": "int64"
         },
         "duration": {
-          "description": "Duration of word articulation, in ticks. 1 tick = 100 ns.",
+          "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds.",
           "type": "integer",
           "format": "int64"
         }
@@ -1934,7 +1934,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "Entity text as appears in the request."
+          "description": "Entity text as it appears in the request."
         },
         "category": {
           "type": "string",
@@ -1942,28 +1942,28 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity sub type."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+          "description": "Start position for the entity text. Use of different stringIndexType values can affect the offset that's returned."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+          "description": "Length for the entity text. Use of different stringIndexType values can affect the length that's returned."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
+          "description": "Confidence score between 0 and 1 for the extracted entity."
         }
       }
     },
     "AnalyzeConversationConversationPIIResult": {
       "type": "object",
-      "description": "Result from the personally identifiable information detection and redaction operation performed on a list of conversations.",
+      "description": "Result from the PII detection and redaction operation that's performed on a list of conversations.",
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeConversationJobResult"
@@ -1981,7 +1981,7 @@
     },
     "ConversationPIIResults": {
       "type": "object",
-      "description": "The result from PII detection and redaction operation for each conversation.",
+      "description": "Result from the PII detection and redaction operation for each conversation.",
       "required": [
         "conversations"
       ],
@@ -2012,7 +2012,7 @@
     },
     "ConversationPIIResult": {
       "type": "object",
-      "description": "The result from PII detection and redaction operation for each conversation.",
+      "description": "Result from the PII detection and redaction operation for each conversation.",
       "required": [
         "conversationItems"
       ],
@@ -2028,19 +2028,19 @@
     },
     "ConversationPIITaskParameters": {
       "type": "object",
-      "description": "Supported parameters for a Conversational PII detection and redaction task.",
+      "description": "Supported parameters for a conversational PII detection and redaction task.",
       "properties": {
         "piiCategories": {
           "$ref": "#/definitions/ConversationPIICategories"
         },
         "includeAudioRedaction": {
           "type": "boolean",
-          "description": "Flag to indicate if audio redaction is requested. By default audio redaction will not be performed.",
+          "description": "Flag to indicate if audio redaction is requested. By default, audio redaction won't be performed.",
           "default": false
         },
         "redactionSource": {
           "type": "string",
-          "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "description": "For transcript conversations, this parameter provides information about which content type (ITN, text, lexical, masked ITN) should be used for entity detection. The details of the detected entities - like the offset, the length, and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
         }
       },
@@ -2051,7 +2051,7 @@
       ]
     },
     "ConversationPIICategories": {
-      "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "description": "Describes the PII categories to return for detection. If it's not provided, default categories that vary with the language will be returned.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -2105,7 +2105,7 @@
     },
     "ConversationSummarizationTaskParameters": {
       "type": "object",
-      "description": "Supported parameters for an conversational summarization task.",
+      "description": "Supported parameters for a conversational summarization task.",
       "required": [
         "summaryAspects"
       ],
@@ -2126,19 +2126,19 @@
               "values": [
                 {
                   "value": "issue",
-                  "description": "A summary of issues in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                  "description": "Summary of issues in transcripts of web chats and service calls between customer-service agents and customers."
                 },
                 {
                   "value": "resolution",
-                  "description": "A summary of resolutions in transcripts of web chats and service call transcripts between customer-service agents, and your customers."
+                  "description": "Summary of resolutions in transcripts of web chats and service calls between customer-service agents and customers."
                 },
                 {
                   "value": "chapterTitle",
-                  "description": "A chapter title of any conversation. It is usually one phrase or several phrases naturally combined together. Long conversation tends to have more chapters. The chapter boundary can be found from the summary context."
+                  "description": "Chapter title of any conversation. It's usually one phrase or several phrases naturally combined. Long conversations tend to have more chapters. You can find the chapter boundary from the summary context."
                 },
                 {
                   "value": "narrative",
-                  "description": "A generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length and keeps the salient information."
+                  "description": "Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information."
                 }
               ]
             }
@@ -2221,7 +2221,7 @@
         },
         "contexts": {
           "type": "array",
-          "description": "The context list of the summary.",
+          "description": "Context list of the summary.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
           }
@@ -2249,11 +2249,11 @@
     },
     "ConversationalSentimentTaskParameters": {
       "type": "object",
-      "description": "Supported parameters for a Conversational sentiment analysis task.",
+      "description": "Supported parameters for a conversational sentiment analysis task.",
       "properties": {
         "predictionSource": {
           "type": "string",
-          "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.",
+          "description": "For transcript conversations, this parameter provides information about which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, the length, and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
         }
       },
@@ -2283,7 +2283,7 @@
     },
     "ConversationSentimentResults": {
       "type": "object",
-      "description": "The result from sentiment analysis operation for each conversation.",
+      "description": "Result from the sentiment analysis operation for each conversation.",
       "required": [
         "conversations"
       ],
@@ -2310,13 +2310,13 @@
     },
     "ConversationSentimentResult": {
       "type": "object",
-      "description": "The result from sentiment analysis operation for each conversation item.",
+      "description": "Result from the sentiment analysis operation for each conversation item.",
       "required": [
         "conversationItems"
       ],
       "properties": {
         "conversationItems": {
-          "description": "Enumeration of Sentiment operation results for all the conversation items in a conversation.",
+          "description": "Enumeration of sentiment operation results for all the conversation items in a conversation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConversationSentimentItemResult"
@@ -2334,11 +2334,11 @@
       ],
       "properties": {
         "id": {
-          "description": "The identifier for the conversation item",
+          "description": "Identifier for the conversation item.",
           "type": "string"
         },
         "participantId": {
-          "description": "The identifier for the speaker",
+          "description": "Identifier for the speaker.",
           "type": "string"
         },
         "sentiment": {
@@ -2351,7 +2351,7 @@
       }
     },
     "AnalyzeConversationJobState": {
-      "description": "Contains the status of the analyze conversations job submitted along with related statistics.",
+      "description": "Contains the status of the submitted job for analyzing a conversation, along with related statistics.",
       "allOf": [
         {
           "$ref": "common.json#/definitions/JobState"
@@ -2365,7 +2365,7 @@
       ]
     },
     "AnalyzeConversationJobStatistics": {
-      "description": "Contains the statistics for the job submitted.",
+      "description": "Contains the statistics for the submitted job.",
       "properties": {
         "statistics": {
           "$ref": "#/definitions/ConversationRequestStatistics"
@@ -2374,12 +2374,12 @@
       "type": "object"
     },
     "ConversationTasksState": {
-      "description": "Contains the state for the tasks being executed as part of the analyze conversation job submitted.",
+      "description": "Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.",
       "properties": {
         "tasks": {
           "properties": {
             "completed": {
-              "description": "Count of tasks completed successfully.",
+              "description": "Count of tasks that finished successfully.",
               "type": "integer",
               "format": "int32"
             },
@@ -2389,7 +2389,7 @@
               "format": "int32"
             },
             "inProgress": {
-              "description": "Count of tasks in progress currently.",
+              "description": "Count of tasks that are currently in progress.",
               "type": "integer",
               "format": "int32"
             },
@@ -2422,7 +2422,7 @@
     },
     "AnalyzeConversationJobResult": {
       "type": "object",
-      "description": "Container for results for all tasks in the conversation job.",
+      "description": "Container for results of all tasks in the conversation job.",
       "discriminator": "kind",
       "properties": {
         "kind": {
@@ -2455,7 +2455,7 @@
         },
         "warnings": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Warnings encountered in processing the document.",
           "items": {
             "$ref": "common.json#/definitions/InputWarning"
           }
@@ -2467,7 +2467,7 @@
     },
     "ConversationStatistics": {
       "type": "object",
-      "description": "If showStats=true was specified in the request this field will contain information about the conversation payload.",
+      "description": "If showStats=true was specified in the request, this field contains information about the conversation payload.",
       "required": [
         "transactionsCount"
       ],
@@ -2481,7 +2481,7 @@
     },
     "ConversationRequestStatistics": {
       "type": "object",
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+      "description": "if showStats=true was specified in the request, this field contains information about the request payload.",
       "required": [
         "conversationsCount",
         "validConversationsCount",
@@ -2496,12 +2496,12 @@
         "validConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of conversations documents. This excludes empty, over-size limit or non-supported languages documents."
+          "description": "Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages."
         },
         "erroneousConversationsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+          "description": "Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages."
         }
       },
       "allOf": [
@@ -2512,7 +2512,7 @@
     },
     "ConversationItemLevelTiming": {
       "type": "object",
-      "description": "The conversation item level audio timing.",
+      "description": "Audio timing at the conversation item level.",
       "allOf": [
         {
           "$ref": "#/definitions/AudioTiming"
@@ -2521,14 +2521,14 @@
     },
     "ItemizedSummaryContext": {
       "type": "object",
-      "description": "The context of the summary with conversation item id.",
+      "description": "Context of the summary with a conversation item ID.",
       "required": [
         "conversationItemId"
       ],
       "properties": {
         "conversationItemId": {
           "type": "string",
-          "description": "Reference to the id of ConversationItem."
+          "description": "Reference to the ID of ConversationItem."
         }
       },
       "allOf": [
@@ -2546,7 +2546,7 @@
       "schema": {
         "$ref": "#/definitions/ConversationAnalysisOptions"
       },
-      "description": "Post body of the request.",
+      "description": "POST body of the request.",
       "x-ms-parameter-location": "method"
     }
   }

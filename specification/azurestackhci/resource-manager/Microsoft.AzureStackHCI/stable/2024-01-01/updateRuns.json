@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns": {
+      "get": {
+        "operationId": "UpdateRuns_List",
+        "description": "List all Update runs for a specified update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRunList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Update runs under cluster resource": {
+            "$ref": "./examples/ListUpdateRuns.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}": {
+      "delete": {
+        "operationId": "UpdateRuns_Delete",
+        "description": "Delete specified Update Run",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateRuns.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRuns_Put",
+        "description": "Put Update runs for a specified update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateRunsProperties",
+            "in": "body",
+            "description": "Properties of the updateRuns object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update runs under cluster resource": {
+            "$ref": "./examples/PutUpdateRuns.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "UpdateRuns_Get",
+        "description": "Get the Update run for a specified update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UpdateRunNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Update runs under cluster resource": {
+            "$ref": "./examples/GetUpdateRuns.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UpdateRunList": {
+      "description": "List of Update runs",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Update runs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateRun"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateRun": {
+      "description": "Details of an Update run",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "properties": {
+          "description": "Describes Update Run Properties.",
+          "$ref": "#/definitions/UpdateRunProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateRunProperties": {
+      "description": "Details of an Update run",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the UpdateRuns proxy resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "timeStarted": {
+          "description": "Timestamp of the update run was started.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedTime": {
+          "description": "Timestamp of the most recently completed step in the update run.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "duration": {
+          "description": "Duration of the update run.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the update run.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "InProgress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "updateRunPropertiesState",
+            "modelAsString": true
+          }
+        },
+        "progress": {
+          "description": "Progress representation of the update run steps.",
+          "$ref": "#/definitions/Step",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Step": {
+      "description": "Progress representation of the update run steps.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the step.",
+          "type": "string"
+        },
+        "description": {
+          "description": "More detailed description of the step.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message, specified if the step is in a failed state.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the step, bubbled up from the ECE action plan for installation attempts. Values are: 'Success', 'Error', 'InProgress', and 'Unknown status'.",
+          "type": "string"
+        },
+        "startTimeUtc": {
+          "description": "When the step started, or empty if it has not started executing.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTimeUtc": {
+          "description": "When the step reached a terminal state.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedTimeUtc": {
+          "description": "Completion time of this step or the last completed sub-step.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "steps": {
+          "description": "Recursive model for child steps of this step.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateNameParameter": {
+      "name": "updateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Update",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateRunNameParameter": {
+      "name": "updateRunName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Update Run",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

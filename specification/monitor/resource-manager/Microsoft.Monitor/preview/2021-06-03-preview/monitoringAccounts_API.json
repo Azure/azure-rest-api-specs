@@ -51,7 +51,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Lists all workspaces in the specified resource group",
+        "description": "Lists all Azure Monitor Workspaces in the specified resource group",
         "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
         "produces": [
           "application/json"
@@ -85,7 +85,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List monitor workspaces by resource group": {
+          "List Azure Monitor Workspaces by resource group": {
             "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
           }
         }
@@ -96,7 +96,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Lists all workspaces in the specified subscription",
+        "description": "Lists all Azure Monitor Workspaces in the specified subscription",
         "operationId": "AzureMonitorWorkspaces_ListBySubscription",
         "produces": [
           "application/json"
@@ -127,7 +127,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List workspaces by subscription": {
+          "List Azure Monitor Workspaces by subscription": {
             "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
           }
         }
@@ -138,7 +138,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Returns the specific Azure Monitor workspace",
+        "description": "Returns the specified Azure Monitor Workspace",
         "operationId": "AzureMonitorWorkspaces_Get",
         "produces": [
           "application/json"
@@ -172,7 +172,7 @@
           }
         },
         "x-ms-examples": {
-          "Get workspace": {
+          "Get Azure Monitor Workspace": {
             "$ref": "./examples/AzureMonitorWorkspacesGet.json"
           }
         }
@@ -181,7 +181,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Create or update a workspace",
+        "description": "Creates or updates an Azure Monitor Workspace",
         "operationId": "AzureMonitorWorkspaces_Create",
         "consumes": [
           "application/json"
@@ -205,7 +205,7 @@
           {
             "in": "body",
             "name": "azureMonitorWorkspaceProperties",
-            "description": "Properties that need to be specified to create a new workspace",
+            "description": "Properties that need to be specified to create a new Azure Monitor Workspace",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
@@ -214,13 +214,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Monitor workspace was successfully updated",
+            "description": "Azure Monitor Workspace was successfully updated",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           },
           "201": {
-            "description": "Azure Monitor workspace was successfully created",
+            "description": "Azure Monitor Workspace was successfully created",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
@@ -233,7 +233,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update workspace": {
+          "Create or update an Azure Monitor Workspace": {
             "$ref": "./examples/AzureMonitorWorkspacesCreate.json"
           }
         }
@@ -242,7 +242,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Updates part of a workspace",
+        "description": "Updates part of an Azure Monitor Workspace",
         "operationId": "AzureMonitorWorkspaces_Update",
         "consumes": [
           "application/json"
@@ -274,7 +274,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Monitor workspace was successfully updated",
+            "description": "Azure Monitor Workspace was successfully updated",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
@@ -287,7 +287,7 @@
           }
         },
         "x-ms-examples": {
-          "Update workspace": {
+          "Update an Azure Monitor Workspace": {
             "$ref": "./examples/AzureMonitorWorkspacesUpdate.json"
           }
         }
@@ -296,7 +296,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Delete a workspace",
+        "description": "Deletes an Azure Monitor Workspace",
         "operationId": "AzureMonitorWorkspaces_Delete",
         "produces": [
           "application/json"
@@ -317,10 +317,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Workspace was successfully deleted"
+            "description": "Azure Monitor Workspace was successfully deleted"
           },
           "204": {
-            "description": "Workspace did not exist"
+            "description": "Azure Monitor Workspace does not exist"
           },
           "default": {
             "description": "Error",
@@ -330,7 +330,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete workspace": {
+          "Delete an Azure Monitor Workspace": {
             "$ref": "./examples/AzureMonitorWorkspacesDelete.json"
           }
         }
@@ -339,11 +339,11 @@
   },
   "definitions": {
     "Metrics": {
-      "description": "Information about metrics for the workspace",
+      "description": "Properties related to the metrics container in the Azure Monitor Workspace",
       "type": "object",
       "properties": {
         "prometheusQueryEndpoint": {
-          "description": "The Prometheus query endpoint for the workspace",
+          "description": "The Prometheus query endpoint for the Azure Monitor Workspace",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -365,7 +365,7 @@
       "type": "object",
       "properties": {
         "dataCollectionRuleResourceId": {
-          "description": "The Azure resource Id of the default data collection rule for this workspace.",
+          "description": "The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -373,7 +373,7 @@
           ]
         },
         "dataCollectionEndpointResourceId": {
-          "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
+          "description": "The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -383,11 +383,11 @@
       }
     },
     "AzureMonitorWorkspace": {
-      "description": "Properties of an Azure Monitor workspace",
+      "description": "Properties of an Azure Monitor Workspace",
       "type": "object",
       "properties": {
         "accountId": {
-          "description": "The immutable ID of the Azure Monitor workspace. This property is read-only.",
+          "description": "The immutable Id of the Azure Monitor Workspace. This property is read-only.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -395,7 +395,7 @@
           ]
         },
         "metrics": {
-          "description": "Information about metrics for the Azure Monitor workspace",
+          "description": "Properties related to the metrics container in the Azure Monitor Workspace",
           "allOf": [
             {
               "$ref": "#/definitions/Metrics"
@@ -407,7 +407,7 @@
           ]
         },
         "provisioningState": {
-          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
+          "description": "The provisioning state of the Azure Monitor Workspace. Set to Succeeded if everything is healthy.",
           "enum": [
             "Creating",
             "Succeeded",
@@ -492,7 +492,7 @@
       }
     },
     "AzureMonitorWorkspaceResourceForUpdate": {
-      "description": "Definition of ARM tracked top level resource properties for update operation",
+      "description": "Definition of ARM tracked top level resource properties for the Update operation",
       "type": "object",
       "properties": {
         "tags": {
@@ -509,7 +509,7 @@
     "AzureMonitorWorkspaceNameParameter": {
       "in": "path",
       "name": "azureMonitorWorkspaceName",
-      "description": "The name of the Azure Monitor workspace.  The name is case insensitive",
+      "description": "The name of the Azure Monitor Workspace. The name is case insensitive",
       "required": true,
       "type": "string",
       "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$",

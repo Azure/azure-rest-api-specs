@@ -1,0 +1,185 @@
+{
+  "title": "Facet Query",
+  "description": "A query on resources requesting extra facets.",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
+      "facets": [
+        {
+          "expression": "location",
+          "options": {
+            "sortOrder": "desc",
+            "$top": 3
+          }
+        },
+        {
+          "expression": "properties.storageProfile.osDisk.osType",
+          "options": {
+            "sortOrder": "desc",
+            "$top": 3
+          }
+        },
+        {
+          "expression": "nonExistingColumn",
+          "options": {
+            "sortOrder": "desc",
+            "$top": 3
+          }
+        },
+        {
+          "expression": "resourceGroup",
+          "options": {
+            "sortBy": "tolower(resourceGroup)",
+            "sortOrder": "asc",
+            "$top": 3
+          }
+        },
+        {
+          "expression": "resourceGroup",
+          "options": {
+            "filter": "resourceGroup contains 'test'",
+            "$top": 3
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 5,
+        "count": 5,
+        "resultTruncated": "false",
+        "data": [
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/B-TEST-RG/providers/Microsoft.Compute/virtualMachines/myTestVm",
+            "name": "myTestVm",
+            "location": "eastus",
+            "resourceGroup": "B-TEST-RG",
+            "properties_storageProfile_osDisk_osType": "Windows"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/c-rg/providers/Microsoft.Compute/virtualMachines/myTestAccountVm",
+            "name": "myTestAccountVm",
+            "location": "westcentralus",
+            "resourceGroup": "c-rg",
+            "properties_storageProfile_osDisk_osType": "Windows"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/I-RG/providers/Microsoft.Compute/virtualMachines/yetanothertest",
+            "name": "yetanothertest",
+            "location": "eastus",
+            "resourceGroup": "I-RG",
+            "properties_storageProfile_osDisk_osType": "Linux"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/x-test-rg/providers/Microsoft.Compute/virtualMachines/drafttest1bux4cv7a7q3aw",
+            "name": "drafttest1bux4cv7a7q3aw",
+            "location": "southcentralus",
+            "resourceGroup": "x-test-rg",
+            "properties_storageProfile_osDisk_osType": "Linux"
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/y-rg/providers/Microsoft.Compute/virtualMachines/testvmntp25370",
+            "name": "testvmntp25370",
+            "location": "eastus",
+            "resourceGroup": "y-rg",
+            "properties_storageProfile_osDisk_osType": "Windows"
+          }
+        ],
+        "facets": [
+          {
+            "expression": "location",
+            "resultType": "FacetResult",
+            "totalRecords": 3,
+            "count": 3,
+            "data": [
+              {
+                "location": "eastus",
+                "count": 3
+              },
+              {
+                "location": "southcentralus",
+                "count": 1
+              },
+              {
+                "location": "westcentralus",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "expression": "properties.storageProfile.osDisk.osType",
+            "resultType": "FacetResult",
+            "totalRecords": 2,
+            "count": 2,
+            "data": [
+              {
+                "properties_storageProfile_osDisk_osType": "Linux",
+                "count": 2
+              },
+              {
+                "properties_storageProfile_osDisk_osType": "Windows",
+                "count": 3
+              }
+            ]
+          },
+          {
+            "expression": "nonExistingColumn",
+            "resultType": "FacetError",
+            "errors": [
+              {
+                "code": "NoValidColumns",
+                "message": "No valid columns in facet expression."
+              },
+              {
+                "code": "InvalidColumnNames",
+                "message": "Invalid column names: [nonExistingColumn]."
+              }
+            ]
+          },
+          {
+            "expression": "resourceGroup",
+            "resultType": "FacetResult",
+            "totalRecords": 5,
+            "count": 3,
+            "data": [
+              {
+                "resourceGroup": "B-TEST-RG",
+                "count": 1
+              },
+              {
+                "resourceGroup": "c-rg",
+                "count": 1
+              },
+              {
+                "resourceGroup": "I-RG",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "expression": "resourceGroup",
+            "resultType": "FacetResult",
+            "totalRecords": 2,
+            "count": 2,
+            "data": [
+              {
+                "resourceGroup": "B-TEST-RG",
+                "count": 1
+              },
+              {
+                "resourceGroup": "x-test-rg",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
