@@ -5121,6 +5121,52 @@
           "readOnly": true
         }
       }
+    },
+    "IncomingCall": {
+      "type": "object",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "communicationSubject": {
+          "type": "string",
+          "readOnly": true
+        },
+        "to": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the target user."
+        },
+        "from": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who initiated the call."
+        },
+        "serverCallId": {
+          "description": "The server call id.",
+          "type": "string"
+        },
+        "callerDisplayName": {
+          "description": "Display name of caller.",
+          "type": "string"
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Custom Context of Incoming Call"
+        },
+        "incomingCallContext": {
+          "description": "Incoming call context.",
+          "type": "string"
+        },
+        "onBehalfOfCallee": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user on behalf of whom the call is made."
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
