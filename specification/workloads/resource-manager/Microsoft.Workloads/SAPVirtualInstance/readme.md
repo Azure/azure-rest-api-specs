@@ -44,6 +44,10 @@ suppressions:
   - code: BodyTopLevelProperties
     from: SAPVirtualInstance.json
     reason: This is an incorrect failure due to a bug in the tool
+  - code: AvoidAnonymousTypes
+    from: SAPVirtualInstance.json
+    where: $.definitions.SAPVirtualInstanceIdentity.properties.userAssignedIdentities.additionalProperties
+    reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
 ### Tag: package-preview-2023-10
@@ -72,7 +76,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
