@@ -2,23 +2,23 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Monitor Workspaces Control Plane API",
-    "description": "Provides operations for working with Azure Monitor Workspaces",
     "version": "2023-04-03",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
+    "description": "Provides operations for working with Azure Monitor Workspaces",
     "contact": {
       "email": "obsaccounts@microsoft.com"
+    },
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
     }
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -31,12 +31,12 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
-      },
-      "description": "Azure Active Directory OAuth2 Flow"
+      }
     }
   },
   "tags": [
@@ -46,13 +46,55 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_ListBySubscription",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Lists all Azure Monitor Workspaces in the specified subscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by subscription": {
+            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts": {
       "get": {
+        "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
         "tags": [
           "AzureMonitorWorkspaces"
         ],
         "description": "Lists all Azure Monitor Workspaces in the specified resource group",
-        "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -81,65 +123,23 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List Azure Monitor Workspaces by resource group": {
             "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
-      "get": {
-        "tags": [
-          "AzureMonitorWorkspaces"
-        ],
-        "description": "Lists all Azure Monitor Workspaces in the specified subscription",
-        "operationId": "AzureMonitorWorkspaces_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request completed successfully",
-            "schema": {
-              "$ref": "#/definitions/AzureMonitorWorkspaceResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List Azure Monitor Workspaces by subscription": {
-            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}": {
       "get": {
+        "operationId": "AzureMonitorWorkspaces_Get",
         "tags": [
           "AzureMonitorWorkspaces"
         ],
         "description": "Returns the specified Azure Monitor Workspace",
-        "operationId": "AzureMonitorWorkspaces_Get",
         "produces": [
           "application/json"
         ],
@@ -178,15 +178,15 @@
         }
       },
       "put": {
+        "operationId": "AzureMonitorWorkspaces_Create",
         "tags": [
           "AzureMonitorWorkspaces"
         ],
         "description": "Creates or updates an Azure Monitor Workspace",
-        "operationId": "AzureMonitorWorkspaces_Create",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
@@ -203,8 +203,8 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "body",
             "name": "azureMonitorWorkspaceProperties",
+            "in": "body",
             "description": "Properties that need to be specified to create a new Azure Monitor Workspace",
             "required": true,
             "schema": {
@@ -239,15 +239,15 @@
         }
       },
       "patch": {
+        "operationId": "AzureMonitorWorkspaces_Update",
         "tags": [
           "AzureMonitorWorkspaces"
         ],
         "description": "Updates part of an Azure Monitor Workspace",
-        "operationId": "AzureMonitorWorkspaces_Update",
-        "consumes": [
+        "produces": [
           "application/json"
         ],
-        "produces": [
+        "consumes": [
           "application/json"
         ],
         "parameters": [
@@ -264,8 +264,8 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "body",
             "name": "azureMonitorWorkspaceProperties",
+            "in": "body",
             "description": "The payload",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResourceForUpdate"
@@ -293,11 +293,11 @@
         }
       },
       "delete": {
+        "operationId": "AzureMonitorWorkspaces_Delete",
         "tags": [
           "AzureMonitorWorkspaces"
         ],
         "description": "Deletes an Azure Monitor Workspace",
-        "operationId": "AzureMonitorWorkspaces_Delete",
         "produces": [
           "application/json"
         ],
@@ -342,65 +342,21 @@
             "$ref": "./examples/AzureMonitorWorkspacesDelete.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "Metrics": {
-      "description": "Properties related to the metrics container in the Azure Monitor Workspace",
-      "type": "object",
-      "properties": {
-        "prometheusQueryEndpoint": {
-          "description": "The Prometheus query endpoint for the Azure Monitor Workspace",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "internalId": {
-          "description": "An internal identifier for the metrics container. Only to be used by the system",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "IngestionSettings": {
-      "description": "Settings for data ingestion",
-      "type": "object",
-      "properties": {
-        "dataCollectionRuleResourceId": {
-          "description": "The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "dataCollectionEndpointResourceId": {
-          "description": "The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
     "AzureMonitorWorkspace": {
-      "description": "Properties of an Azure Monitor Workspace",
       "type": "object",
+      "description": "Properties of an Azure Monitor Workspace",
       "properties": {
         "accountId": {
-          "description": "The immutable Id of the Azure Monitor Workspace. This property is read-only.",
           "type": "string",
+          "description": "The immutable Id of the Azure Monitor Workspace. This property is read-only.",
           "readOnly": true,
           "x-ms-mutability": [
             "read"
@@ -419,6 +375,7 @@
           ]
         },
         "provisioningState": {
+          "type": "string",
           "description": "The provisioning state of the Azure Monitor Workspace. Set to Succeeded if everything is healthy.",
           "enum": [
             "Creating",
@@ -427,12 +384,11 @@
             "Failed",
             "Canceled"
           ],
-          "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
           },
+          "readOnly": true,
           "x-ms-mutability": [
             "read"
           ]
@@ -450,26 +406,26 @@
           ]
         },
         "privateEndpointConnections": {
-          "description": "List of private endpoint connections",
           "type": "array",
+          "description": "List of private endpoint connections",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
           "x-ms-identifiers": [
             "id"
+          ],
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "publicNetworkAccess": {
+          "type": "string",
           "description": "Gets or sets allow or disallow public network access to Azure Monitor Workspace",
           "enum": [
             "Enabled",
             "Disabled"
           ],
-          "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
@@ -483,11 +439,8 @@
       }
     },
     "AzureMonitorWorkspaceResource": {
-      "description": "An Azure Monitor Workspace definition",
-      "required": [
-        "location"
-      ],
       "type": "object",
+      "description": "An Azure Monitor Workspace definition",
       "properties": {
         "properties": {
           "description": "Resource properties",
@@ -499,14 +452,17 @@
           "x-ms-client-flatten": true
         },
         "etag": {
-          "description": "Resource entity tag (ETag)",
           "type": "string",
+          "description": "Resource entity tag (ETag)",
           "readOnly": true,
           "x-ms-mutability": [
             "read"
           ]
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -514,44 +470,88 @@
       ],
       "x-ms-azure-resource": true
     },
-    "AzureMonitorWorkspaceResourceListResult": {
-      "description": "A pageable list of resources",
-      "required": [
-        "value"
-      ],
+    "AzureMonitorWorkspaceResourceForUpdate": {
       "type": "object",
+      "description": "Definition of ARM tracked top level resource properties for the Update operation",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureMonitorWorkspaceResourceListResult": {
+      "type": "object",
+      "description": "A pageable list of resources",
       "properties": {
         "value": {
-          "description": "A list of resources",
           "type": "array",
+          "description": "A list of resources",
           "items": {
             "$ref": "#/definitions/AzureMonitorWorkspaceResource"
           }
         },
         "nextLink": {
-          "description": "The URL to use for getting the next set of results",
-          "type": "string"
+          "type": "string",
+          "description": "The URL to use for getting the next set of results"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IngestionSettings": {
+      "type": "object",
+      "description": "Settings for data ingestion",
+      "properties": {
+        "dataCollectionRuleResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "dataCollectionEndpointResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
-    "AzureMonitorWorkspaceResourceForUpdate": {
-      "description": "Definition of ARM tracked top level resource properties for the Update operation",
+    "Metrics": {
       "type": "object",
+      "description": "Properties related to the metrics container in the Azure Monitor Workspace",
       "properties": {
-        "tags": {
-          "description": "Resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "prometheusQueryEndpoint": {
+          "type": "string",
+          "description": "The Prometheus query endpoint for the Azure Monitor Workspace",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier for the metrics container. Only to be used by the system",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     }
   },
   "parameters": {
     "AzureMonitorWorkspaceNameParameter": {
-      "in": "path",
       "name": "azureMonitorWorkspaceName",
+      "in": "path",
       "description": "The name of the Azure Monitor Workspace. The name is case insensitive",
       "required": true,
       "type": "string",
