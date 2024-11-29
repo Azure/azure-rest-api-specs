@@ -39,10 +39,12 @@ interface EndpointResources {
    * Create or update the endpoint to the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes"
   @operationId("Endpoints_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EndpointResource,
-    Azure.ResourceManager.Foundations.ExtensionBaseParameters
+    Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Response = ArmResourceUpdatedResponse<EndpointResource>
   >;
 
   /**
@@ -83,10 +85,14 @@ interface EndpointResources {
    * Gets the endpoint access credentials to the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @operationId("Endpoints_ListCredentials")
   listCredentials is ArmResourceActionSync<
     EndpointResource,
-    ListCredentialsRequest,
+    {
+      @doc("Object of type ListCredentialsRequest")
+      @bodyRoot ListCredentialsRequest?: ListCredentialsRequest;
+    },
     EndpointAccessResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
@@ -140,9 +146,12 @@ interface EndpointResources {
   "Endpoint details"
 );
 @@doc(EndpointResources.update::parameters.properties, "Endpoint details");
-@@doc(EndpointResources.listCredentials::parameters.body,
-  "Object of type ListCredentialsRequest"
-);
 @@doc(EndpointResources.listManagedProxyDetails::parameters.body,
   "Object of type ManagedProxyRequest"
+);
+@@doc(EndpointResources.listIngressGatewayCredentials,
+  "Gets the ingress gateway endpoint credentials "
+);
+@@doc(EndpointResources.listManagedProxyDetails,
+  "Fetches the managed proxy details "
 );

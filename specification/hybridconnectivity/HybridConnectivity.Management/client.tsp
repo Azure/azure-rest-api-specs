@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -18,21 +17,22 @@ namespace Microsoft.HybridConnectivity;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(IngressProfileProperties.aadProfile);
 
-@@clientName(EndpointResources.update,
-  "EndpointResources.update::parameters.properties",
+@@clientName(EndpointResources.createOrUpdate::parameters.resource,
   "EndpointResource"
 );
-@@clientName(EndpointResources.listCredentials,
-  "EndpointResources.listCredentials::parameters.body",
+@@clientName(EndpointResources.listCredentials::parameters.body,
   "ListCredentialsRequest"
 );
-@@clientName(EndpointResources.listManagedProxyDetails,
-  "EndpointResources.listManagedProxyDetails::parameters.body",
+@@clientName(EndpointResources.listManagedProxyDetails::parameters.body,
   "ManagedProxyRequest"
 );
-
-@@clientName(ServiceConfigurationResources.update,
-  "ServiceConfigurationResources.update::parameters.properties",
+@@clientName(ServiceConfigurationResources.update::parameters.properties,
+  "ServiceConfigurationResource"
+);
+@@clientName(EndpointResources.update::parameters.properties,
+  "EndpointResource"
+);
+@@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

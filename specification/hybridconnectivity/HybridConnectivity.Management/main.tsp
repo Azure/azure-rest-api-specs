@@ -11,6 +11,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./EndpointResource.tsp";
 import "./ServiceConfigurationResource.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
