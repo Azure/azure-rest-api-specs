@@ -224,7 +224,7 @@ interface LivenessSessionOperations {
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
   @added(Versions.v1_2)
-  @doc(CreateLivenessWithVerifySessionWithVerifyImageDescription)
+  @doc(LivenessSessionWithVerifyDescription) // No need to add option descriptions about providing VerifyImage since we only keep MFD request
   @summary(CreateLivenessWithVerifySessionWithVerifyImageSummary)
   @returnsDoc(SessionCreationSuccess)
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
