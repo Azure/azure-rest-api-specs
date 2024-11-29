@@ -22,14 +22,6 @@ model ConfigurationChecksTemplate
   @pattern("^[a-zA-Z0-9-]{3,63}$")
   @path
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the TypeSpec Validation"
-  @doc("The location of the resource.")
-  location: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the TypeSpec Validation"
-  @doc("The ARM resource type.")
-  type: string;
 }
 
 @armResourceOperations
