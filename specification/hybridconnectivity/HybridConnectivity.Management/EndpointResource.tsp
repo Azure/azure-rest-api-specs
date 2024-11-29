@@ -85,12 +85,14 @@ interface EndpointResources {
    * Gets the endpoint access credentials to the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The name of the body starts with a capital letter"
   @operationId("Endpoints_ListCredentials")
   listCredentials is ArmResourceActionSync<
     EndpointResource,
     {
-      @doc("Object of type ListCredentialsRequest")
+      /**
+       * Object of type ListCredentialsRequest
+       */
       @bodyRoot ListCredentialsRequest?: ListCredentialsRequest;
     },
     EndpointAccessResource,
