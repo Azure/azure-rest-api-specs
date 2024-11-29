@@ -40,6 +40,7 @@ model MarketplaceProperties {
   /**
    * Azure marketplace Legacy Offer ID for this plan. This is used to fetch the details of the plan from the Azure marketplace.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   legacyOfferId?: string;
 
   /**
@@ -55,6 +56,7 @@ model MarketplaceProperties {
   /**
    * Azure marketplace Term ID for this plan.
    */
+  @TypeSpec.Versioning.removed(Versions.v2024_11_01_preview)
   termId?: string;
 }
 

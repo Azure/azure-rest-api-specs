@@ -12,11 +12,11 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ProgrammableConnectivity;
 /**
- * A Programmable Connectivity Gateway resource
+ * A Programmable Connectivity Gateway resource.
  */
 model Gateway is Azure.ResourceManager.TrackedResource<GatewayProperties> {
   /**
-   * Azure Programmable Connectivity Gateway Name
+   * Azure Programmable Connectivity Gateway Name.
    */
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -27,11 +27,11 @@ model Gateway is Azure.ResourceManager.TrackedResource<GatewayProperties> {
 }
 
 /**
- * Gateway resource properties
+ * Gateway resource properties.
  */
 model GatewayProperties {
   /**
-   * List of Operator API Connections selected by the user
+   * List of Operator API Connections selected by the user.
    */
   @visibility("read")
   operatorApiConnections?: Azure.Core.armResourceIdentifier<[
@@ -41,7 +41,7 @@ model GatewayProperties {
   ]>[];
 
   /**
-   * Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.
+   * Base URL of the Gateway resource. This is the URL that the users would use to make Network API requests to the Operators via Azure.
    */
   @visibility("read")
   gatewayBaseUrl?: string;
@@ -68,7 +68,7 @@ model GatewayProperties {
 }
 
 /**
- * Details about the Application Owner (i.e.e organization) that would use the Operator's Network APIs.
+ * Details about the Application Owner (i.e. organization) that would use the Operator's Network APIs.
  */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 model ApplicationOwnerProperties {
@@ -98,32 +98,32 @@ model ApplicationOwnerProperties {
   taxNumber: string;
 
   /**
-   * ID number for official identification of the organization
+   * ID number for official identification of the organization.
    */
   organizationIdentificationId: string;
 
   /**
-   * Issuing organization of the ID for official identification of the organization
+   * Issuing organization of the ID for official identification of the organization.
    */
   organizationIdentificationIssuer: string;
 
   /**
-   * Contact email address for the use of Network APIs at the company
+   * Email address for the person responsible for the use of Network APIs in this application.
    */
   contactEmailAddress: string;
 
   /**
-   * Legal representative of the organization
+   * Legal representative of the organization.
    */
   legalRepresentative: Person;
 
   /**
-   * Privacy manager of the organization
+   * Privacy manager of the organization.
    */
   privacyManager: Person;
 
   /**
-   * Registered Geographic address
+   * Registered Geographic address.
    */
   registeredGeographicAddress: GeographicAddress;
 }
@@ -133,7 +133,7 @@ model ApplicationOwnerProperties {
  */
 model ApplicationProperties {
   /**
-   * Name of the application. Example: Contoso App.
+   * Name of the application.
    */
   @TypeSpec.Versioning.madeRequired(Versions.v2024_11_01_preview)
   name: string;
@@ -188,7 +188,7 @@ model ApplicationProperties {
 }
 
 /**
- * Model defining a contactable person
+ * Model defining a contactable person.
  */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 model Person {
@@ -198,48 +198,48 @@ model Person {
   familyName: string;
 
   /**
-   * Given name of the contactable person
+   * Given name of the contactable person.
    */
   givenName: string;
 
   /**
-   * Email address of the contactable person
+   * Email address of the contactable person.
    */
   emailAddress: string;
 }
 
 /**
- * Model defining a geographic address
+ * Model defining a geographic address.
  */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 model GeographicAddress {
   /**
-   * Street Number of the address
+   * Street Number of the address.
    */
   streetNumber?: string;
 
   /**
-   * Street Name of the address
+   * Street Name of the address.
    */
   streetName: string;
 
   /**
-   * Locality of the address
+   * Locality of the address.
    */
   locality?: string;
 
   /**
-   * City of the address
+   * City of the address.
    */
   city: string;
 
   /**
-   * Postal code of the address
+   * Postal code of the address.
    */
   postalCode?: string;
 
   /**
-   * Country code of the address
+   * Country code of the address.
    */
   @pattern("[A-Z]{2}", "Provide 2 letter country code")
   countryCode: string;
