@@ -86,8 +86,8 @@ function Validate-Terraform-Error($repoPath, $filePath) {
 function Get-AddedSwaggerFiles() {
   $addedFiles = git -c core.quotepath=off diff --name-status --diff-filter=d $BaseCommitish $TargetCommitish | Where-Object { $_ -match 'A\s' } | ForEach-Object { $_.Substring(2).Trim() }
   $addedSwaggerFiles = $addedFiles.Where({ 
-    $_.EndsWith(".json")
-  })
+      $_ -match "\d{4}-\d{2}-\d{2}(-preview)?/[^/]*\.json$"
+    })
     
   return $addedSwaggerFiles
 }
@@ -112,9 +112,9 @@ foreach ($file in $addedSwaggerFiles) {
   $swaggerFilesToBeTest += $file
 
   $terraformFiles = $filesToCheck.Where({ 
-    # since `git diff` returns paths with `/`, use the following code to match the `main.tf`
-    $_.StartsWith($directory)
-  })
+      # since `git diff` returns paths with `/`, use the following code to match the `main.tf`
+      $_.StartsWith($directory)
+    })
 
   if ($terraformFiles.Count -eq 0) {
     LogError "The new swagger file $file does not have Armstrong Configurations"
