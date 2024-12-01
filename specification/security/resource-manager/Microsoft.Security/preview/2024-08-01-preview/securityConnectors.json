@@ -358,7 +358,8 @@
             "Github",
             "AzureDevOps",
             "GitLab",
-            "DockerHub"
+            "DockerHub",
+            "JFrog"
           ],
           "x-ms-enum": {
             "name": "cloudName",
@@ -397,7 +398,8 @@
             "GithubScope",
             "AzureDevOpsScope",
             "GitlabScope",
-            "DockerHubOrganization"
+            "DockerHubOrganization",
+            "JFrogArtifactory"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -725,6 +727,25 @@
         }
       }
     },
+    "JFrogEnvironmentData": {
+      "type": "object",
+      "description": "The JFrog Artifactory connector environment data",
+      "x-ms-discriminator-value": "JFrogArtifactory",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "scanInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scan interval in hours (value should be between 1-hour to 24-hours)",
+          "minimum": 1,
+          "maximum": 24
+        }
+      }
+    },
     "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
@@ -752,7 +773,10 @@
             "CspmMonitorGitLab",
             "CspmMonitorDockerHub",
             "DefenderForContainersDockerHub",
-            "DefenderCspmDockerHub"
+            "DefenderCspmDockerHub",
+            "CspmMonitorJFrog",
+            "DefenderForContainersJFrog",
+            "DefenderCspmJFrog"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -1586,6 +1610,48 @@
         }
       ],
       "properties": {}
+    },
+    "cspmMonitorJFrogOffering": {
+      "type": "object",
+      "description": "The CSPM (Cloud security posture management) monitoring for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "CspmMonitorJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ]
+    },
+    "defenderForContainersJFrogOffering": {
+      "type": "object",
+      "description": "The Defender for Containers for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "DefenderForContainersJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ]
+    },
+    "defenderCspmJFrogOffering": {
+      "type": "object",
+      "description": "The CSPM P1 for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "DefenderCspmJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender Container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            }
+          }
+        }
+      }
     },
     "vmScannersBase": {
       "type": "object",
