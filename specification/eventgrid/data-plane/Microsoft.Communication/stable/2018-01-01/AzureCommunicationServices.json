@@ -1566,11 +1566,21 @@
             ]
           }
         },
+        "messageType": {
+          "description": "The received WhatsApp message type",
+          "type": "string"
+        },
         "media": {
           "description": "The received message media content",
           "$ref": "#/definitions/AcsMessageMediaContent",
           "type": "object",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "description": "The received message reaction content",
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "type": "object",
+          "x-ms-client-name": "reactionContent"
         },
         "context": {
           "description": "The received message context",
@@ -2232,6 +2242,24 @@
         },
         "caption": {
           "description": "The caption for the media object, if supported and provided",
+          "type": "string"
+        },
+        "animated": {
+          "description": "Set to true if the sticker is animated; false otherwise.",
+          "type": "bool"
+        }
+      }
+    },
+    "AcsMessageReactionContent": {
+      "description": "Message Reaction Content",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "WhatsApp message ID of message you want to apply the emoji to.",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "Unicode escape sequence of the emoji.",
           "type": "string"
         }
       }

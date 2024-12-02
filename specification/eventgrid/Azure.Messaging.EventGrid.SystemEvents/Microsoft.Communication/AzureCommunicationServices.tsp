@@ -1,4 +1,4 @@
-import "@typespec/versioning";
+﻿import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
@@ -1188,11 +1188,17 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** The message content */
   content?: string;
 
+  /** WhatsApp message type */
+  messageType: string;
+
   /** The message channel type */
   channelType: AcsMessageChannelKind;
 
   /** The received message media content */
   media: AcsMessageMediaContent;
+
+  /** The received message reaction content */
+  reaction: AcsMessageReactionContent;
 
   /** The received message context */
   context: AcsMessageContext;
@@ -1217,6 +1223,18 @@ model AcsMessageMediaContent {
 
   /** The caption for the media object, if supported and provided */
   caption?: string;
+
+  /** Set to  true if the sticker is animated;  false otherwise.  */
+  animated?: bool;
+}
+
+/** Message Reaction Content */
+model AcsMessageReactionContent {
+  /** WhatsApp message ID of message you want to apply the emoji to.  */
+  messageId?: string;
+
+  /** Unicode escape sequence of the emoji. */
+  emoji?: string;
 }
 
 /** Message Context */
