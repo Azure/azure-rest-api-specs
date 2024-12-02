@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2023-07-01",
+    "datasetId": "[datasetId]",
+    "TilesetConfiguration": {
+      "version": 1,
+      "layers": {
+        "Indoor test": {
+          "minZoom": 10,
+          "maxZoom": 18,
+          "features": {
+            "featureClasses": [
+              "unit"
+            ],
+            "filter": [
+              "any",
+              [
+                "!=",
+                [
+                  "get",
+                  "featureType"
+                ],
+                "conference"
+              ],
+              [
+                "!=",
+                [
+                  "get",
+                  "featureType"
+                ],
+                "restroom"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "valid": false,
+        "warnings": [],
+        "errors": [
+          {
+            "code": "CustomLayerNameNotSupported",
+            "message": "Custom layerName 'Indoor test' is not supported yet.",
+            "target": "Indoor test"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,3 +1,9 @@
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  "service-dir":
+    default: "sdk/hybridconnectivity"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,6 +20,21 @@ options:
     namespace: "Azure.ResourceManager.HybridConnectivity"
     clear-output-folder: true
     examples-dir: "{project-root}/examples"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-hybridconnectivity"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.hybridconnectivity"
+    service-name: "Hybrid Connectivity"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    examples-directory: "{project-root}/examples"
+    generateSample: true
+    package-dir: "arm-hybridconnectivity"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-hybridconnectivity"

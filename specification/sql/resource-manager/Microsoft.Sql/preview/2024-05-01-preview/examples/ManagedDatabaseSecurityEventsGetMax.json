@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testcl",
+    "databaseName": "database1",
+    "api-version": "2024-05-01-preview",
+    "$filter": "ShowServerRecords eq true",
+    "$skip": "0",
+    "$top": "1",
+    "$skiptoken": "eyJCbG9iTmFtZURhdGVUaW1lIjoiXC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbG92ZXJJbmRleCI6IjAiLCJFbmREYXRlIjoiXC9EYXRlKDE1MTI0NjYyMDA1MjkpXC8iLCJJc1NraXBUb2tlblNldCI6ZmFsc2UsIklzVjJCbG9iVGltZUZvcm1hdCI6dHJ1ZSwiU2hvd1NlcnZlclJlY29yZHMiOmZhbHNlLCJTa2lwVmFsdWUiOjAsIlRha2VWYWx1ZSI6MTB9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents?$skipToken=C9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sbC9EYXRlKDE1MTIyODg4MTIwMTArMDIwMClcLyIsIkJsb2JOYW1lUm9sb&api-version=2017-10-01-preview",
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/databases/database1/securityEvents/06364798761800000000000000001",
+            "name": "06364798761800000000000000001",
+            "type": "Microsoft.Sql/servers/databases/securityEvents",
+            "properties": {
+              "eventTime": "2017-12-24T10:13:24.729Z",
+              "securityEventType": "SqlInjectionExploit",
+              "subscription": "00000000-1111-2222-3333-444444444444",
+              "server": "testcl",
+              "database": "database1",
+              "clientIp": "10.166.113.220",
+              "applicationName": "myApp",
+              "principalName": "maliciousUser",
+              "securityEventSqlInjectionAdditionalProperties": {
+                "threatId": "1",
+                "statement": "select * from sys.databases where database_id like '' or 1 = 1 --' and family = 'test11'",
+                "statementHighlightOffset": 52,
+                "statementHighlightLength": 13,
+                "errorCode": 0,
+                "errorSeverity": 0,
+                "errorMessage": ""
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

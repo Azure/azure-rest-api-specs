@@ -1,0 +1,785 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on tenant entity associated with your Azure API Management deployment. Using this entity you can manage properties and configuration that apply to the entire API Management service instance.",
+    "version": "2024-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant": {
+      "get": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_ListByService",
+        "description": "Returns list of access infos - for Git and Management endpoints.",
+        "x-ms-examples": {
+          "ApiManagementListTenantAccess": {
+            "$ref": "./examples/ApiManagementListTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Not used"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists a collection of TenantAccessInfo entities.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/AccessInformationContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}": {
+      "head": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_GetEntityTag",
+        "description": "Tenant access metadata",
+        "x-ms-examples": {
+          "ApiManagementHeadTenantAccess": {
+            "$ref": "./examples/ApiManagementHeadTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Get",
+        "description": "Get tenant access information details without secrets.",
+        "x-ms-examples": {
+          "ApiManagementGetTenantAccess": {
+            "$ref": "./examples/ApiManagementGetTenantAccess.json"
+          },
+          "ApiManagementGetTenantGitAccess": {
+            "$ref": "./examples/ApiManagementGetTenantGitAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Create",
+        "description": "Update tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementCreateTenantAccess": {
+            "$ref": "./examples/ApiManagementCreateTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationCreateParameters"
+            },
+            "description": "Parameters supplied to retrieve the Tenant Access Information."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information was updated successfully.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_Update",
+        "description": "Update tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementUpdateTenantAccess": {
+            "$ref": "./examples/ApiManagementUpdateTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationUpdateParameters"
+            },
+            "description": "Parameters supplied to retrieve the Tenant Access Information."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information was updated successfully.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/regeneratePrimaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_RegeneratePrimaryKey",
+        "description": "Regenerate primary access key",
+        "x-ms-examples": {
+          "ApiManagementTenantAccessRegenerateKey": {
+            "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The primary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/regenerateSecondaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_RegenerateSecondaryKey",
+        "description": "Regenerate secondary access key",
+        "x-ms-examples": {
+          "ApiManagementTenantAccessRegenerateKey": {
+            "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/listSecrets": {
+      "post": {
+        "tags": [
+          "TenantAccess"
+        ],
+        "operationId": "TenantAccess_ListSecrets",
+        "description": "Get tenant access information details.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsTenantAccess": {
+            "$ref": "./examples/ApiManagementListSecretsTenantAccess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant Access information.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AccessInformationSecretsContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/regeneratePrimaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccessGit"
+        ],
+        "operationId": "TenantAccessGit_RegeneratePrimaryKey",
+        "description": "Regenerate primary access key for GIT.",
+        "x-ms-examples": {
+          "ApiManagementTenantAccessRegenerateKey": {
+            "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The primary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/git/regenerateSecondaryKey": {
+      "post": {
+        "tags": [
+          "TenantAccessGit"
+        ],
+        "operationId": "TenantAccessGit_RegenerateSecondaryKey",
+        "description": "Regenerate secondary access key for GIT.",
+        "x-ms-examples": {
+          "ApiManagementTenantAccessRegenerateKey": {
+            "$ref": "./examples/ApiManagementTenantAccessRegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AccessParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/deploy": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Deploy",
+        "description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.",
+        "externalDocs": {
+          "description": "To deploy any service configuration changes to the API Management service instance",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"
+        },
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationDeploy": {
+            "$ref": "./examples/ApiManagementTenantConfigurationDeploy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeployConfigurationParameters"
+            },
+            "description": "Deploy Configuration parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Result of applying changes from Git branch to database.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/save": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Save",
+        "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.",
+        "externalDocs": {
+          "description": "To save the service configuration to the Git repository",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-configuration-repository-git/#to-save-the-service-configuration-to-the-git-repository"
+        },
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationSave": {
+            "$ref": "./examples/ApiManagementTenantConfigurationSave.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SaveConfigurationParameter"
+            },
+            "description": "Save Configuration parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Result of creating a commit in the repository.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/validate": {
+      "post": {
+        "tags": [
+          "TenantConfiguration"
+        ],
+        "operationId": "TenantConfiguration_Validate",
+        "description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementTenantConfigurationValidate": {
+            "$ref": "./examples/ApiManagementTenantConfigurationValidate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DeployConfigurationParameters"
+            },
+            "description": "Validate Configuration parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Result of validating the changes in the specified Git branch.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/OperationResultContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{configurationName}/syncState": {
+      "get": {
+        "tags": [
+          "TenantConfigurationSyncState"
+        ],
+        "operationId": "TenantConfiguration_GetSyncState",
+        "description": "Gets the status of the most recent synchronization between the configuration database and the Git repository.",
+        "x-ms-examples": {
+          "ApiManagementTenantAccessSyncState": {
+            "$ref": "./examples/ApiManagementTenantAccessSyncState.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sync state result.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TenantConfigurationSyncStateContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

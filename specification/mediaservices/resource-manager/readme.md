@@ -388,7 +388,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -398,22 +398,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_media_services']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated from commit 3586e2989d502434c4f607dd38d40e46aabede5c
-  azure-arm: true
-  payload-flattening-threshold: 2
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Media
-  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Management.Media/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

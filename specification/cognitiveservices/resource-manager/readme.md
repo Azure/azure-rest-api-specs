@@ -30,18 +30,65 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-12
+tag: package-2024-10
 ```
 
+
+### Tag: package-2024-10
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.CognitiveServices/stable/2024-10-01/cognitiveservices.json
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - Microsoft.CognitiveServices/preview/2024-06-01-preview/cognitiveservices.json
+```
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json
+```
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.CognitiveServices/preview/2023-10-01-preview/cognitiveservices.json
+suppressions:    
+  - code:  ResourceNameRestriction
+    reason: The resource name parameter 'deploymentName' is not a new added parameter and was already implemented in previous versions of API, we cannot add pattern now.
+    from: cognitiveservices.json
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.CognitiveServices/stable/2023-05-01/cognitiveservices.json
+```
 
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.CognitiveServices/stable/2022-12-01/cognitiveservices.json
 ```
+
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
@@ -97,6 +144,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation
@@ -117,7 +165,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -127,20 +175,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cognitive_services']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CognitiveServices
-  output-folder: $(csharp-sdks-folder)/cognitiveservices/Microsoft.Azure.Management.CognitiveServices/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

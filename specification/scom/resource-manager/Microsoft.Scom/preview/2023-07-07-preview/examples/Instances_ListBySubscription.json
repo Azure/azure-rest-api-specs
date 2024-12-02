@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2023-07-07-preview",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.SCOM/managedInstances/myManagedInstace",
+            "name": "myInstace",
+            "type": "Microsoft.SCOM/managedInstances",
+            "location": "eastus2",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "principalId": "principalId1",
+                  "clientId": "clientId1"
+                }
+              }
+            },
+            "properties": {
+              "productVersion": "1.0.81.2",
+              "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
+              "databaseInstance": {
+                "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1",
+                "databaseFqdn": "testinstance.1b4e2caff2530.database.windows.net",
+                "dwDatabaseName": "inst1DW"
+              },
+              "domainController": {
+                "domainName": "domain.com",
+                "dnsServer": "10.10.10.10"
+              },
+              "domainUserCredentials": {
+                "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
+                "userNameSecret": "userNameSecret",
+                "passwordSecret": "passwordSecret"
+              },
+              "gmsaDetails": {
+                "loadBalancerIP": "10.10.10.10",
+                "gmsaAccount": "vmsslb2$",
+                "managementServerGroupName": "servergroup",
+                "dnsName": "dnsname.com"
+              },
+              "azureHybridBenefit": {
+                "scomLicenseType": "None",
+                "windowsServerLicenseType": "None",
+                "sqlServerLicenseType": "None"
+              },
+              "operationsStatus": [
+                {
+                  "operationName": "Scaling",
+                  "operationState": "Success"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,3305 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RedisManagementClient",
+    "description": "REST API for Azure Redis Cache Service.",
+    "version": "2023-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Cache/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_CheckNameAvailability",
+        "x-ms-examples": {
+          "RedisCacheCheckNameAvailability": {
+            "$ref": "./examples/RedisCacheCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the redis cache name is valid and is not already in use.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the CheckNameAvailability Redis operation. The only supported resource type is 'Microsoft.Cache/redis'"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Name is available"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/listUpgradeNotifications": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListUpgradeNotifications",
+        "x-ms-examples": {
+          "RedisCacheListUpgradeNotifications": {
+            "$ref": "./examples/RedisCacheListUpgradeNotifications.json"
+          }
+        },
+        "description": "Gets any upgrade notifications for a Redis cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "history",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": "how many minutes in past to look for upgrade notifications"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All upgrade notifications in given time range",
+            "schema": {
+              "$ref": "#/definitions/NotificationListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}": {
+      "put": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Create",
+        "x-ms-examples": {
+          "RedisCacheCreateDefaultVersion": {
+            "$ref": "./examples/RedisCacheCreateDefaultVersion.json"
+          },
+          "RedisCacheCreateLatestVersion": {
+            "$ref": "./examples/RedisCacheCreateLatestVersion.json"
+          },
+          "RedisCacheCreate": {
+            "$ref": "./examples/RedisCacheCreate.json"
+          }
+        },
+        "description": "Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCreateParameters"
+            },
+            "description": "Parameters supplied to the Create Redis operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The new redis cache was successfully created. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "200": {
+            "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Update",
+        "x-ms-examples": {
+          "RedisCacheUpdate": {
+            "$ref": "./examples/RedisCacheUpdate.json"
+          }
+        },
+        "description": "Update an existing Redis cache.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisUpdateParameters"
+            },
+            "description": "Parameters supplied to the Update Redis operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing redis cache was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "202": {
+            "description": "The existing redis cache was successfully updated. Check Azure-AsyncOperation headers to poll detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Delete",
+        "x-ms-examples": {
+          "RedisCacheDelete": {
+            "$ref": "./examples/RedisCacheDelete.json"
+          }
+        },
+        "description": "Deletes a Redis cache.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The redis cache was successfully deleted."
+          },
+          "202": {
+            "description": "The redis cache 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "The redis cache was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_Get",
+        "x-ms-examples": {
+          "RedisCacheGet": {
+            "$ref": "./examples/RedisCacheGet.json"
+          }
+        },
+        "description": "Gets a Redis cache (resource description).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The redis cache was successfully found.",
+            "schema": {
+              "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListByResourceGroup",
+        "x-ms-examples": {
+          "RedisCacheListByResourceGroup": {
+            "$ref": "./examples/RedisCacheListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all Redis caches in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/redis": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListBySubscription",
+        "x-ms-examples": {
+          "RedisCacheList": {
+            "$ref": "./examples/RedisCacheList.json"
+          }
+        },
+        "description": "Gets all Redis caches in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/listKeys": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ListKeys",
+        "x-ms-examples": {
+          "RedisCacheListKeys": {
+            "$ref": "./examples/RedisCacheListKeys.json"
+          }
+        },
+        "description": "Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the keys for the specified Redis cache.",
+            "schema": {
+              "$ref": "#/definitions/RedisAccessKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/regenerateKey": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_RegenerateKey",
+        "x-ms-examples": {
+          "RedisCacheRegenerateKey": {
+            "$ref": "./examples/RedisCacheRegenerateKey.json"
+          }
+        },
+        "description": "Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisRegenerateKeyParameters"
+            },
+            "description": "Specifies which key to regenerate."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the regenerated keys for Redis Cache",
+            "schema": {
+              "$ref": "#/definitions/RedisAccessKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/forceReboot": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ForceReboot",
+        "x-ms-examples": {
+          "RedisCacheForceReboot": {
+            "$ref": "./examples/RedisCacheForceReboot.json"
+          }
+        },
+        "description": "Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisRebootParameters"
+            },
+            "description": "Specifies which Redis node(s) to reboot."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reboot operation successfully enqueued",
+            "schema": {
+              "$ref": "#/definitions/RedisForceRebootResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/import": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ImportData",
+        "x-ms-examples": {
+          "RedisCacheImport": {
+            "$ref": "./examples/RedisCacheImport.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Import data into Redis cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportRDBParameters"
+            },
+            "description": "Parameters for Redis import operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Import operation successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "200": {
+            "description": "Import operation succeeded."
+          },
+          "204": {
+            "description": "Import operation succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/export": {
+      "post": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_ExportData",
+        "x-ms-examples": {
+          "RedisCacheExport": {
+            "$ref": "./examples/RedisCacheExport.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Export data from the redis cache to blobs in a container.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportRDBParameters"
+            },
+            "description": "Parameters for Redis export operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Export operation successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "200": {
+            "description": "Export operation succeeded."
+          },
+          "204": {
+            "description": "Export operation succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules": {
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_List",
+        "description": "Gets all firewall rules in the specified redis cache.",
+        "x-ms-examples": {
+          "RedisCacheFirewallRulesList": {
+            "$ref": "./examples/RedisCacheFirewallRulesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current rules",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/firewallRules/{ruleName}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "description": "Create or update a redis cache firewall rule",
+        "x-ms-examples": {
+          "RedisCacheFirewallRuleCreate": {
+            "$ref": "./examples/RedisCacheFirewallRuleCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            },
+            "description": "Parameters supplied to the create or update redis firewall rule operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource was successfully created",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "description": "Gets a single firewall rule in a specified redis cache.",
+        "x-ms-examples": {
+          "RedisCacheFirewallRuleGet": {
+            "$ref": "./examples/RedisCacheFirewallRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found the rule",
+            "schema": {
+              "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "description": "Deletes a single firewall rule in a specified redis cache.",
+        "x-ms-examples": {
+          "RedisCacheFirewallRuleDelete": {
+            "$ref": "./examples/RedisCacheFirewallRuleDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the firewall rule."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the rule"
+          },
+          "204": {
+            "description": "Successfully deleted the rule"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/patchSchedules": {
+      "get": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_ListByRedisResource",
+        "description": "Gets all patch schedules in the specified redis cache (there is only one).",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesList": {
+            "$ref": "./examples/RedisCachePatchSchedulesList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the current patch schedules",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/patchSchedules/{default}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_CreateOrUpdate",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesCreateOrUpdate": {
+            "$ref": "./examples/RedisCachePatchSchedulesCreateOrUpdate.json"
+          }
+        },
+        "description": "Create or replace the patching schedule for Redis cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedule"
+            },
+            "description": "Parameters to set the patching schedule for Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The patch schedule was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedule"
+            }
+          },
+          "201": {
+            "description": "The patch schedule was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_Delete",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesDelete": {
+            "$ref": "./examples/RedisCachePatchSchedulesDelete.json"
+          }
+        },
+        "description": "Deletes the patching schedule of a redis cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "PatchSchedules"
+        ],
+        "operationId": "PatchSchedules_Get",
+        "x-ms-examples": {
+          "RedisCachePatchSchedulesGet": {
+            "$ref": "./examples/RedisCachePatchSchedulesGet.json"
+          }
+        },
+        "description": "Gets the patching schedule of a redis cache.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "defaultName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get patch schedules.",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/linkedServers/{linkedServerName}": {
+      "put": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "LinkedServer_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "LinkedServer_Create": {
+            "$ref": "./examples/RedisCacheLinkedServer_Create.json"
+          }
+        },
+        "description": "Adds a linked server to the Redis cache (requires Premium SKU).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "linkedServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the linked server that is being added to the Redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerCreateParameters"
+            },
+            "description": "Parameters supplied to the Create Linked server operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The linked server was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
+            }
+          },
+          "201": {
+            "description": "The linked server was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "LinkedServer_Delete",
+        "x-ms-examples": {
+          "LinkedServerDelete": {
+            "$ref": "./examples/RedisCacheLinkedServer_Delete.json"
+          }
+        },
+        "description": "Deletes the linked server from a redis cache (requires Premium SKU).",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "linkedServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the linked server that is being added to the Redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Linked server was successfully deleted."
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "The linked server 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "LinkedServer_Get",
+        "x-ms-examples": {
+          "LinkedServer_Get": {
+            "$ref": "./examples/RedisCacheLinkedServer_Get.json"
+          }
+        },
+        "description": "Gets the detailed information about a linked server of a redis cache (requires Premium SKU).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "linkedServerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the linked server."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get linked server.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithProperties"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{name}/linkedServers": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "LinkedServer_List",
+        "x-ms-examples": {
+          "LinkedServer_List": {
+            "$ref": "./examples/RedisCacheLinkedServer_List.json"
+          }
+        },
+        "description": "Gets the list of linked servers associated with this redis cache (requires Premium SKU).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get linked servers.",
+            "schema": {
+              "$ref": "#/definitions/RedisLinkedServerWithPropertiesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_List",
+        "description": "List all the private endpoint connections associated with the redis cache.",
+        "x-ms-examples": {
+          "RedisCacheListPrivateEndpointConnection": {
+            "$ref": "./examples/RedisCacheListPrivateEndpointConnections.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the redis cache.",
+        "x-ms-examples": {
+          "RedisCacheGetPrivateEndpointConnection": {
+            "$ref": "./examples/RedisCacheGetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Put",
+        "description": "Update the state of specified private endpoint connection associated with the redis cache.",
+        "x-ms-examples": {
+          "RedisCachePutPrivateEndpointConnection": {
+            "$ref": "./examples/RedisCachePutPrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the redis cache.",
+        "x-ms-examples": {
+          "RedisCacheDeletePrivateEndpointConnection": {
+            "$ref": "./examples/RedisCacheDeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByRedisCache",
+        "description": "Gets the private link resources that need to be created for a redis cache.",
+        "x-ms-examples": {
+          "StorageAccountListPrivateLinkResources": {
+            "$ref": "./examples/RedisCacheListPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "operationId": "AsyncOperationStatus_Get",
+        "description": "For checking the ongoing status of an operation",
+        "x-ms-examples": {
+          "RedisCacheAsyncOperationStatus": {
+            "$ref": "./examples/RedisCacheAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location at which operation was triggered"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of asynchronous operation"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Asynchronous operation status response",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicies/{accessPolicyName}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicy_CreateUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyCreateUpdate": {
+            "$ref": "./examples/RedisCacheAccessPolicyCreateUpdate.json"
+          }
+        },
+        "description": "Adds an access policy to the redis cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
+            },
+            "description": "Parameters supplied to the Create Update Access Policy operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing access policy was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
+            }
+          },
+          "201": {
+            "description": "The new access policy was successfully created. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicy_Delete",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyDelete": {
+            "$ref": "./examples/RedisCacheAccessPolicyDelete.json"
+          }
+        },
+        "description": "Deletes the access policy from a redis cache",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the access policy"
+          },
+          "204": {
+            "description": "Successfully deleted the access policy"
+          },
+          "202": {
+            "description": "The access policy 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicy_Get",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyGet": {
+            "$ref": "./examples/RedisCacheAccessPolicyGet.json"
+          }
+        },
+        "description": "Gets the detailed information about an access policy of a redis cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get access policy.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicies": {
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicy_List",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyList": {
+            "$ref": "./examples/RedisCacheAccessPolicyList.json"
+          }
+        },
+        "description": "Gets the list of access policies associated with this redis cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of list access policies.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments/{accessPolicyAssignmentName}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_CreateUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentCreateUpdate": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentCreateUpdate.json"
+          }
+        },
+        "description": "Adds the access policy assignment to the specified users",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+            },
+            "description": "Parameters supplied to the Create Update Access Policy Assignment operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing access policy assignment was successfully updated. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+            }
+          },
+          "201": {
+            "description": "The new access policy assignment was successfully created. Check provisioningState to see detailed status.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_Delete",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentDelete": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentDelete.json"
+          }
+        },
+        "description": "Deletes the access policy assignment from a redis cache",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the access policy assignment"
+          },
+          "204": {
+            "description": "Successfully deleted the access policy assignment"
+          },
+          "202": {
+            "description": "The access policy assignment 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_Get",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentGet": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentGet.json"
+          }
+        },
+        "description": "Gets the list of assignments for an access policy of a redis cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get access policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments": {
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_List",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentList": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentList.json"
+          }
+        },
+        "description": "Gets the list of access policy assignments associated with this redis cache",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of list access policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Sku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "family": {
+          "type": "string",
+          "description": "The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium).",
+          "enum": [
+            "C",
+            "P"
+          ],
+          "x-ms-enum": {
+            "name": "SkuFamily",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the Redis cache to deploy. Valid values: for C (Basic/Standard) family (0, 1, 2, 3, 4, 5, 6), for P (Premium) family (1, 2, 3, 4)."
+        }
+      },
+      "required": [
+        "name",
+        "family",
+        "capacity"
+      ],
+      "description": "SKU parameters supplied to the create Redis operation."
+    },
+    "RedisCommonProperties": {
+      "properties": {
+        "redisConfiguration": {
+          "type": "object",
+          "properties": {
+            "rdb-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the rdb backup is enabled"
+            },
+            "rdb-backup-frequency": {
+              "type": "string",
+              "description": "Specifies the frequency for creating rdb backup in minutes. Valid values: (15, 30, 60, 360, 720, 1440)"
+            },
+            "rdb-backup-max-snapshot-count": {
+              "type": "string",
+              "description": "Specifies the maximum number of snapshots for rdb backup"
+            },
+            "rdb-storage-connection-string": {
+              "type": "string",
+              "description": "The storage account connection string for storing rdb file"
+            },
+            "aof-backup-enabled": {
+              "type": "string",
+              "description": "Specifies whether the aof backup is enabled"
+            },
+            "aof-storage-connection-string-0": {
+              "type": "string",
+              "description": "First storage account connection string"
+            },
+            "aof-storage-connection-string-1": {
+              "type": "string",
+              "description": "Second storage account connection string"
+            },
+            "maxfragmentationmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for fragmentation per shard"
+            },
+            "maxmemory-policy": {
+              "type": "string",
+              "description": "The eviction strategy used when your data won't fit within its memory limit."
+            },
+            "maxmemory-reserved": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxmemory-delta": {
+              "type": "string",
+              "description": "Value in megabytes reserved for non-cache usage per shard e.g. failover."
+            },
+            "maxclients": {
+              "type": "string",
+              "description": "The max clients config",
+              "readOnly": true
+            },
+            "notify-keyspace-events": {
+              "type": "string",
+              "description": "The keyspace events which should be monitored."
+            },
+            "preferred-data-archive-auth-method": {
+              "type": "string",
+              "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS",
+              "readOnly": true
+            },
+            "preferred-data-persistence-auth-method": {
+              "type": "string",
+              "description": "Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS"
+            },
+            "zonal-configuration": {
+              "type": "string",
+              "description": "Zonal Configuration",
+              "readOnly": true
+            },
+            "authnotrequired": {
+              "type": "string",
+              "description": "Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view."
+            },
+            "storage-subscription-id": {
+              "type": "string",
+              "description": "SubscriptionId of the storage account for persistence (aof/rdb) using ManagedIdentity."
+            },
+            "aad-enabled": {
+              "type": "string",
+              "description": "Specifies whether AAD based authentication has been enabled or disabled for the cache"
+            }
+          },
+          "additionalProperties": {},
+          "description": "All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc."
+        },
+        "redisVersion": {
+          "type": "string",
+          "description": "Redis version. This should be in the form 'major[.minor]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Supported versions: 4.0, 6.0 (latest). Default value is 'latest'."
+        },
+        "enableNonSslPort": {
+          "type": "boolean",
+          "default": false,
+          "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
+        },
+        "replicasPerMaster": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas to be created per primary."
+        },
+        "replicasPerPrimary": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas to be created per primary."
+        },
+        "tenantSettings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A dictionary of tenant settings"
+        },
+        "shardCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of shards to be created on a Premium Cluster Cache."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "description": "Optional: requires clients to use a specified TLS version (or higher) to connect (e,g, '1.0', '1.1', '1.2')",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public endpoint access is allowed for this cache.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'. If 'Disabled', private endpoints are the exclusive access method. Default value is 'Enabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Create/Update/Get common properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisCreateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        },
+        "subnetId": {
+          "type": "string",
+          "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
+          "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
+        },
+        "staticIP": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
+          "description": "Static IP address. Optionally, may be specified when deploying a Redis cache inside an existing Azure Virtual Network; auto assigned by default.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCommonProperties"
+        }
+      ],
+      "description": "Properties supplied to Create Redis operation.",
+      "x-ms-external": true
+    },
+    "RedisUpdateProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the Redis cache to deploy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCommonProperties"
+        }
+      ],
+      "description": "Patchable properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis instance provisioning status.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Disabled",
+            "Failed",
+            "Linking",
+            "Provisioning",
+            "RecoveringScaleFailure",
+            "Scaling",
+            "Succeeded",
+            "Unlinking",
+            "Unprovisioning",
+            "Updating",
+            "ConfiguringAAD"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Redis host name."
+        },
+        "port": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis non-SSL port."
+        },
+        "sslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis SSL port."
+        },
+        "accessKeys": {
+          "readOnly": true,
+          "$ref": "#/definitions/RedisAccessKeys",
+          "description": "The keys of the Redis cache - not set if this object is not the response to Create or Update redis cache"
+        },
+        "linkedServers": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisLinkedServer"
+          },
+          "description": "List of the linked servers associated with the cache"
+        },
+        "instances": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisInstanceDetails"
+          },
+          "x-ms-identifiers": [
+            "shardId"
+          ],
+          "description": "List of the Redis instances associated with the cache"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connection associated with the specified redis cache"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCreateProperties"
+        }
+      ],
+      "description": "Properties of the redis cache.",
+      "x-ms-external": true
+    },
+    "RedisCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCreateProperties",
+          "description": "Redis cache properties."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        }
+      },
+      "required": [
+        "properties",
+        "location"
+      ],
+      "description": "Parameters supplied to the Create Redis operation."
+    },
+    "RedisUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisUpdateProperties",
+          "description": "Redis cache properties."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        }
+      },
+      "description": "Parameters supplied to the Update Redis operation."
+    },
+    "RedisAccessKeys": {
+      "properties": {
+        "primaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current primary key that clients can use to authenticate with Redis cache."
+        },
+        "secondaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current secondary key that clients can use to authenticate with Redis cache."
+        }
+      },
+      "description": "Redis cache access keys."
+    },
+    "RedisFirewallRule": {
+      "description": "A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisFirewallRuleProperties",
+          "description": "redis cache firewall rule properties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RedisFirewallRuleCreateParameters": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisFirewallRule"
+        }
+      ],
+      "description": "Parameters required for creating a firewall rule on redis cache. (Note, you can just use the FirewallRule type instead now.)"
+    },
+    "RedisFirewallRuleProperties": {
+      "description": "Specifies a range of IP addresses permitted to connect to the cache",
+      "properties": {
+        "startIP": {
+          "type": "string",
+          "description": "lowest IP address included in the range"
+        },
+        "endIP": {
+          "type": "string",
+          "description": "highest IP address included in the range"
+        }
+      },
+      "required": [
+        "startIP",
+        "endIP"
+      ]
+    },
+    "RedisFirewallRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisFirewallRule"
+          },
+          "description": "Results of the list firewall rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list firewall rules Redis operation."
+    },
+    "RedisResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisProperties",
+          "description": "Redis cache properties."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "A single Redis item in List or Get Operation."
+    },
+    "RedisInstanceDetails": {
+      "properties": {
+        "sslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis instance SSL port."
+        },
+        "nonSslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "If enableNonSslPort is true, provides Redis instance Non-SSL port."
+        },
+        "zone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "If the Cache uses availability zones, specifies availability zone where this instance is located."
+        },
+        "shardId": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "If clustering is enabled, the Shard ID of Redis Instance"
+        },
+        "isMaster": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a primary node."
+        },
+        "isPrimary": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a primary node."
+        }
+      },
+      "description": "Details of single instance of redis."
+    },
+    "RedisListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisResource"
+          },
+          "description": "List of Redis cache instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list Redis operation."
+    },
+    "RedisRegenerateKeyParameters": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The Redis access key to regenerate.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "RedisKeyType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Specifies which Redis access keys to reset."
+    },
+    "RedisRebootParameters": {
+      "properties": {
+        "rebootType": {
+          "type": "string",
+          "description": "Which Redis node(s) to reboot. Depending on this value data loss is possible.",
+          "enum": [
+            "PrimaryNode",
+            "SecondaryNode",
+            "AllNodes"
+          ],
+          "x-ms-enum": {
+            "name": "RebootType",
+            "modelAsString": true
+          }
+        },
+        "shardId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If clustering is enabled, the ID of the shard to be rebooted."
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "A list of redis instances to reboot, specified by per-instance SSL ports or non-SSL ports."
+        }
+      },
+      "description": "Specifies which Redis node(s) to reboot."
+    },
+    "ExportRDBParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "File format."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix to use for exported files."
+        },
+        "container": {
+          "type": "string",
+          "description": "Container name to export to."
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
+        },
+        "storage-subscription-id": {
+          "type": "string",
+          "description": "Subscription id of the storage container for data to be exported using ManagedIdentity."
+        }
+      },
+      "required": [
+        "container",
+        "prefix"
+      ],
+      "description": "Parameters for Redis export operation."
+    },
+    "ImportRDBParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "File format."
+        },
+        "files": {
+          "type": "array",
+          "description": "files to import.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preferred-data-archive-auth-method": {
+          "type": "string",
+          "description": "Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS"
+        },
+        "storage-subscription-id": {
+          "type": "string",
+          "description": "Subscription id of the storage container containing files to import using Managed Identity."
+        }
+      },
+      "required": [
+        "files"
+      ],
+      "description": "Parameters for Redis import operation."
+    },
+    "ScheduleEntry": {
+      "properties": {
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of the week when a cache can be patched.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Everyday",
+            "Weekend"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": false
+          }
+        },
+        "startHourUtc": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour after which cache patching can start."
+        },
+        "maintenanceWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying how much time cache patching can take. "
+        }
+      },
+      "required": [
+        "dayOfWeek",
+        "startHourUtc"
+      ],
+      "description": "Patch schedule entry for a Premium Redis Cache."
+    },
+    "ScheduleEntries": {
+      "properties": {
+        "scheduleEntries": {
+          "x-ms-client-name": "ScheduleEntries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleEntry"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of patch schedules for a Redis cache."
+        }
+      },
+      "required": [
+        "scheduleEntries"
+      ],
+      "description": "List of patch schedules for a Redis cache."
+    },
+    "RedisPatchSchedule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to put/get patch schedules for Redis cache."
+    },
+    "RedisPatchScheduleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisPatchSchedule"
+          },
+          "description": "Results of the list patch schedules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next page of results."
+        }
+      },
+      "description": "The response of list patch schedules Redis operation."
+    },
+    "RedisForceRebootResponse": {
+      "properties": {
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status message"
+        }
+      },
+      "description": "Response to force reboot for Redis cache."
+    },
+    "RedisLinkedServer": {
+      "description": "Linked server Id",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Linked server Id."
+        }
+      }
+    },
+    "RedisLinkedServerWithProperties": {
+      "description": "Response to put/get linked server (with properties) for Redis cache.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisLinkedServerProperties",
+          "description": "Properties of the linked server."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RedisLinkedServerProperties": {
+      "description": "Properties of a linked server to be returned in get/put response",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Terminal state of the link between primary and secondary redis cache."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisLinkedServerCreateProperties"
+        }
+      ]
+    },
+    "RedisLinkedServerWithPropertiesList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisLinkedServerWithProperties"
+          },
+          "description": "List of linked servers (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of linked servers (with properties) of a Redis cache."
+    },
+    "RedisLinkedServerCreateProperties": {
+      "description": "Create properties for a linked server",
+      "properties": {
+        "linkedRedisCacheId": {
+          "type": "string",
+          "description": "Fully qualified resourceId of the linked redis cache."
+        },
+        "linkedRedisCacheLocation": {
+          "type": "string",
+          "description": "Location of the linked redis cache.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serverRole": {
+          "type": "string",
+          "description": "Role of the linked server.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationRole",
+            "modelAsString": false
+          }
+        },
+        "geoReplicatedPrimaryHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unchanging DNS name which will always point to current geo-primary cache among the linked redis caches for seamless Geo Failover experience."
+        },
+        "primaryHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The changing DNS name that resolves to the current geo-primary cache among the linked redis caches before or after the Geo Failover."
+        }
+      },
+      "required": [
+        "linkedRedisCacheId",
+        "linkedRedisCacheLocation",
+        "serverRole"
+      ]
+    },
+    "RedisLinkedServerCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisLinkedServerCreateProperties",
+          "description": "Properties required to create a linked server."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameter required for creating a linked server to redis cache."
+    },
+    "RedisCacheAccessPolicyProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of access policy",
+          "readOnly": true,
+          "enum": [
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Built-In or Custom access policy",
+          "readOnly": true,
+          "enum": [
+            "Custom",
+            "BuiltIn"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyType",
+            "modelAsString": true
+          }
+        },
+        "permissions": {
+          "type": "string",
+          "description": "Permissions for the access policy. Learn how to configure permissions at https://aka.ms/redis/AADPreRequisites"
+        }
+      },
+      "required": [
+        "permissions"
+      ],
+      "description": "All properties of an access policy.",
+      "type": "object"
+    },
+    "RedisCacheAccessPolicy": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
+          "description": "Properties of an access policy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to get/put access policy.",
+      "type": "object"
+    },
+    "RedisCacheAccessPolicyList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicy"
+          },
+          "description": "List of access policies (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of access policies (with properties) of a Redis cache.",
+      "type": "object"
+    },
+    "RedisCacheAccessPolicyAssignmentProperties": {
+      "description": "Properties for an access policy assignment",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of an access policy assignment set",
+          "readOnly": true,
+          "enum": [
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyAssignmentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object Id to assign access policy to"
+        },
+        "objectIdAlias": {
+          "type": "string",
+          "description": "User friendly name for object id. Also represents username for token based authentication"
+        },
+        "accessPolicyName": {
+          "type": "string",
+          "description": "The name of the access policy that is being assigned",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+        }
+      },
+      "required": [
+        "objectId",
+        "objectIdAlias",
+        "accessPolicyName"
+      ],
+      "type": "object"
+    },
+    "RedisCacheAccessPolicyAssignment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties",
+          "description": "Properties of an access policy assignment"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to an operation on access policy assignment",
+      "type": "object"
+    },
+    "RedisCacheAccessPolicyAssignmentList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+          },
+          "description": "List of access policies assignments (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of access policies assignments (with properties) of a Redis cache.",
+      "type": "object"
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "description": "Friendly name of the resource provider",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: read, write, delete, listKeys/action, etc.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Friendly name of the operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "description": "Parameters body to pass for resource name availability check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. The only legal value of this property for checking redis cache name availability is 'Microsoft.Cache/redis'."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "UpgradeNotification": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of upgrade notification."
+        },
+        "timestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when upgrade notification occurred."
+        },
+        "upsellNotification": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Details about this upgrade notification"
+        }
+      },
+      "description": "Properties of upgrade notification."
+    },
+    "NotificationListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpgradeNotification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "timestamp"
+          ],
+          "description": "List of all notifications."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set of notifications."
+        }
+      },
+      "description": "The response of listUpgradeNotifications."
+    },
+    "OperationStatus": {
+      "type": "object",
+      "description": "Asynchronous operation status",
+      "properties": {
+        "properties": {
+          "description": "Additional properties from RP, only when operation is successful",
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "CacheNameParameter": {
+      "name": "cacheName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Redis cache.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+    },
+    "AccessPolicyNameParameter": {
+      "name": "accessPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the access policy that is being added to the Redis cache.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "AccessPolicyAssignmentNameParameter": {
+      "name": "accessPolicyAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the access policy assignment.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+      "minLength": 3,
+      "maxLength": 63
+    }
+  }
+}

@@ -1,0 +1,41 @@
+parameters:
+  "service-dir":
+    default: "sdk/eventgrid"
+  "service-directory-name":
+    default: "eventgrid"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: false
+    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/GeneratedSystemEvents.json"
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+  "@azure-tools/typespec-python":
+    package-pprint-name: '"Azure Event Grid System Events"'
+    package-version: 4.12.0b1
+    package-dir: "azure-eventgrid"
+    package-name: "{package-dir}"
+    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-tools/typespec-csharp":
+    package-dir: Azure.Messaging.EventGrid.SystemEvents
+    model-namespace: false
+    namespace: Azure.Messaging.EventGrid.SystemEvents
+    flavor: azure
+    api-version: "2018-01-01"
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "eventgrid-system-events"
+    packageDetails:
+      name: "@azure/eventgrid-system-events"
+    flavor: azure

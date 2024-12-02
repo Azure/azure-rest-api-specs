@@ -1,0 +1,158 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/sbomComponents": {
+      "get": {
+        "tags": [
+          "SBOM"
+        ],
+        "operationId": "SbomComponents_ListByFirmware",
+        "description": "Lists SBOM analysis results of a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SbomComponentListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SbomComponents_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/SbomComponents_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "SbomComponents_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/SbomComponents_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SbomComponent": {
+      "type": "object",
+      "properties": {
+        "componentId": {
+          "description": "ID for the component.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "componentName": {
+          "description": "Name for the component.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version for the component.",
+          "type": "string"
+        },
+        "license": {
+          "description": "License for the component.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "File paths related to the component."
+        }
+      },
+      "description": "SBOM component of a firmware."
+    },
+    "SbomComponentResource": {
+      "type": "object",
+      "description": "SBOM analysis result resource",
+      "properties": {
+        "properties": {
+          "title": "SBOM result properties",
+          "description": "The properties of an SBOM component found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SbomComponent"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SbomComponentListResult": {
+      "type": "object",
+      "description": "List of SBOM results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SbomComponentResource"
+          },
+          "description": "The list of SBOM components."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

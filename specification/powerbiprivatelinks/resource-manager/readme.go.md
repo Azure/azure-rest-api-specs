@@ -8,4 +8,21 @@ license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/powerbiprivatelinks/armpowerbiprivatelinks
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
+directive: 
+- from: swagger-document
+  where: $.parameters.ResourceGroupNameParameter
+  transform: >
+    $["x-ms-parameter-location"] = "method"; 
+- from: swagger-document
+  where: $.parameters.AzureResourceNameParameter
+  transform: >
+    $["x-ms-parameter-location"] = "method"; 
+- from: swagger-document
+  where: $.parameters.PrivateEndpointNameParameter
+  transform: >
+    $["x-ms-parameter-location"] = "method"; 
+- from: swagger-document
+  where: $.parameters.OperationIdParameter
+  transform: >
+    $["x-ms-parameter-location"] = "method"; 
 ```

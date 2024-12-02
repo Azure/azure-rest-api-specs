@@ -104,7 +104,7 @@
       ],
       "x-ms-enum": {
         "name": "AccessRights",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AuthorizationRule": {
@@ -341,7 +341,7 @@
       ],
       "x-ms-enum": {
         "name": "EntityAvailabilityStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "EntityStatus": {
@@ -364,7 +364,7 @@
       ],
       "x-ms-enum": {
         "name": "EntityStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "MessageCountDetails": {
@@ -441,7 +441,7 @@
       ],
       "x-ms-enum": {
         "name": "MessagingSku",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "NamespaceProperties": {
@@ -506,6 +506,9 @@
     "NamespacePropertiesEntry": {
       "description": "Represents an entry in the feed when querying namespace info",
       "type": "object",
+      "required": [
+        "title"
+      ],
       "properties": {
         "id": {
           "description": "The URL of the GET request",
@@ -538,6 +541,10 @@
         "content": {
           "description": "Information about the namespace.",
           "type": "object",
+          "required": [
+            "type",
+            "NamespaceProperties"
+          ],
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           },
@@ -599,7 +606,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -779,14 +786,6 @@
         "entityAvailabilityStatus": {
           "$ref": "#/definitions/EntityAvailabilityStatus"
         },
-        "enableExpress": {
-          "description": "A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.",
-          "type": "boolean",
-          "xml": {
-            "name": "EnableExpress",
-            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
-          }
-        },
         "forwardDeadLetteredMessagesTo": {
           "description": "The name of the recipient entity to which all the dead-lettered messages of this subscription are forwarded to.",
           "type": "string",
@@ -795,10 +794,18 @@
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
           }
         },
+        "enableExpress": {
+          "description": "A value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.",
+          "type": "boolean",
+          "xml": {
+            "name": "EnableExpress",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        },
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the queue.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -858,6 +865,10 @@
         "content": {
           "description": "The QueueDescription",
           "type": "object",
+          "required": [
+            "type",
+            "QueueDescription"
+          ],
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           },
@@ -1008,7 +1019,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the topic in megabytes, which is the size of memory allocated for the topic.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1173,7 +1184,7 @@
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the topic.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1233,6 +1244,10 @@
         "content": {
           "description": "The TopicDescription",
           "type": "object",
+          "required": [
+            "type",
+            "TopicDescription"
+          ],
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           },
@@ -1348,6 +1363,14 @@
           "type": "boolean",
           "xml": {
             "name": "DeadLetteringOnFilterEvaluationExceptions",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        },
+        "defaultRuleDescription": {
+          "description": "The default rule description.",
+          "$ref": "#/definitions/RuleDescription",
+          "xml": {
+            "name": "DefaultRuleDescription",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
           }
         },
@@ -1488,6 +1511,10 @@
         "content": {
           "description": "The SubscriptionDescription.",
           "type": "object",
+          "required": [
+            "type",
+            "SubscriptionDescription"
+          ],
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           },
@@ -1573,6 +1600,30 @@
         },
         "value": {
           "type": "string",
+          "xml": {
+            "name": "Value",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        }
+      }
+    },
+    "KeyObjectValue": {
+      "description": "Key Values of custom properties",
+      "type": "object",
+      "xml": {
+        "name": "KeyValueOfObjectType",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "key": {
+          "type": "string",
+          "xml": {
+            "name": "Key",
+            "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+          }
+        },
+        "value": {
+          "type": "object",
           "xml": {
             "name": "Value",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1673,7 +1724,7 @@
                 "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
               },
               "items": {
-                "$ref": "#/definitions/KeyValue"
+                "$ref": "#/definitions/KeyObjectValue"
               }
             }
           }
@@ -1891,6 +1942,10 @@
         "content": {
           "description": "The RuleDescription",
           "type": "object",
+          "required": [
+            "type",
+            "RuleDescription"
+          ],
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           },

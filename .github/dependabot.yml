@@ -1,0 +1,26 @@
+version: 2
+updates:
+- package-ecosystem: "npm"
+  directories:
+  - "/"
+  - "/eng/tools/**"
+  schedule:
+    interval: "daily"
+  ignore:
+  # Updated manually to align with minimum supported Node version
+  - dependency-name: "@types/node"
+  # Updated manually to align with repo microsoft/typespec
+  - dependency-name: "typescript"
+  - dependency-name: "prettier"
+  # minimatch@9 is the last version to support Node 18
+  - dependency-name: "minimatch"
+    versions: [ ">= 10.0.0"]
+  groups:
+    typespec:
+      patterns:
+      - "*typespec*"
+    eslint:
+      patterns:
+      - "*eslint*"
+  # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
+  versioning-strategy: increase-if-necessary

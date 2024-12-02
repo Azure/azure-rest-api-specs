@@ -26,7 +26,7 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10-preview
+tag: package-2024-01
 ```
 
 ### Tag: package-2021-01-preview
@@ -173,6 +173,44 @@ input-file:
 - Microsoft.ServiceBus/stable/2017-04-01/topics.json
 ```
 
+### Tag: package-2023-01-preview
+
+These settings apply only when `--tag=package-2023-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-preview'
+input-file:
+- Microsoft.ServiceBus/preview/2023-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2023-01-01-preview/CheckNameAvailability.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+- Microsoft.ServiceBus/stable/2024-01-01/namespace-preview.json
+- Microsoft.ServiceBus/stable/2024-01-01/operations.json
+- Microsoft.ServiceBus/stable/2024-01-01/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/stable/2024-01-01/migrationconfigs.json
+- Microsoft.ServiceBus/stable/2024-01-01/networksets.json
+- Microsoft.ServiceBus/stable/2024-01-01/AuthorizationRules.json
+- Microsoft.ServiceBus/stable/2024-01-01/Queue.json
+- Microsoft.ServiceBus/stable/2024-01-01/topics.json
+- Microsoft.ServiceBus/stable/2024-01-01/Rules.json
+- Microsoft.ServiceBus/stable/2024-01-01/subscriptions.json
+- Microsoft.ServiceBus/stable/2024-01-01/CheckNameAvailability.json
+```
+
 Important notes:
 On the advice of @fearthecowboy, the  `EncodingCaptureDescription` enum previously contained two values [`Avro`,`AvroDeflate`] ; the service has been changed (on 2018-01-17) and will not ever return the `AvroDeflate` value,
  however, we have left the value in the enum (in servicebus.json) so that existing clients won't suffer a binary breaking change
@@ -199,7 +237,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -211,20 +249,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ServiceBus
-  output-folder: $(csharp-sdks-folder)/servicebus/Microsoft.Azure.Management.ServiceBus/src/Generated
-  clear-output-folder: true
-```
 
 ## Python
 
@@ -238,5 +262,23 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: namespace-preview.json
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
+  
+  - suppress: ResourceNameRestriction
+    from: AuthorizationRules.json
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: AuthorizationRules.json
+    reason: Authorization rules are not tracked resources.
+  - suppress: PutResponseCodes
+    from: AuthorizationRules.json
+    reason: Breaking change in order to change the API response code.
+```
 
 

@@ -71,12 +71,13 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "SapMonitors_List",
         "summary": "Gets a list of SAP monitors in the specified subscription.",
-        "description": "Gets a list of SAP monitors in the specified subscription. The operations returns various properties of each SAP monitor.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "List all SAP Monitors in a subscription": {
             "$ref": "./examples/SapMonitors_List.json"
@@ -111,12 +112,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}": {
       "get": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "SapMonitors_Get",
         "summary": "Gets properties of a SAP monitor.",
-        "description": "Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
             "$ref": "./examples/SapMonitors_Get.json"
@@ -155,13 +157,14 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "SapMonitors_Create",
         "x-ms-long-running-operation": true,
         "summary": "Creates a SAP monitor.",
-        "description": "Creates a SAP monitor for the specified subscription, resource group, and resource name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Create a SAP Monitor": {
             "$ref": "./examples/SapMonitors_Create.json"
@@ -193,6 +196,12 @@
           },
           "201": {
             "description": "Creating SapMonitor",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SapMonitor"
             }
@@ -206,13 +215,14 @@
         }
       },
       "delete": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "SapMonitors_Delete",
         "x-ms-long-running-operation": true,
         "summary": "Deletes a SAP monitor.",
-        "description": "Deletes a SAP monitor with the specified subscription, resource group, and monitor name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Deletes a SAP monitor": {
             "$ref": "./examples/SapMonitors_Delete.json"
@@ -237,7 +247,13 @@
             "description": "Deleted SapMonitor"
           },
           "202": {
-            "description": "Deleting SapMonitor"
+            "description": "Deleting SapMonitor",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "No SapMonitor to delete"
@@ -251,12 +267,13 @@
         }
       },
       "patch": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "SapMonitors_Update",
         "summary": "Patches the Tags field of a SAP monitor.",
-        "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and monitor name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Update Tags field of a SAP monitor": {
             "$ref": "./examples/SapMonitors_PatchTags.json"
@@ -300,12 +317,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances": {
       "get": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "ProviderInstances_List",
         "summary": "Gets a list of provider instances in the specified SAP monitor.",
-        "description": "Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "List all SAP Monitors in a subscription": {
             "$ref": "./examples/ProviderInstances_List.json"
@@ -346,12 +364,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances/{providerInstanceName}": {
       "get": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "ProviderInstances_Get",
         "summary": "Gets properties of a provider instance.",
-        "description": "Gets properties of a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Get properties of a SAP monitor": {
             "$ref": "./examples/ProviderInstances_Get.json"
@@ -393,13 +412,14 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "ProviderInstances_Create",
         "x-ms-long-running-operation": true,
         "summary": "Creates a provider instance.",
-        "description": "Creates a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Create a SAP Monitor": {
             "$ref": "./examples/ProviderInstances_Create.json"
@@ -434,6 +454,12 @@
           },
           "201": {
             "description": "Creating provider instance",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ProviderInstance"
             }
@@ -447,13 +473,14 @@
         }
       },
       "delete": {
+        "deprecated": true,
         "tags": [
           "HanaOnAzure"
         ],
         "operationId": "ProviderInstances_Delete",
         "x-ms-long-running-operation": true,
         "summary": "Deletes a provider instance.",
-        "description": "Deletes a provider instance for the specified subscription, resource group, SapMonitor name, and resource name.",
+        "description": "The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.",
         "x-ms-examples": {
           "Deletes a SAP monitor": {
             "$ref": "./examples/ProviderInstances_Delete.json"
@@ -481,7 +508,13 @@
             "description": "Deleted provider instance"
           },
           "202": {
-            "description": "Deleting provider instance"
+            "description": "Deleting provider instance",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "No provider instance to delete"

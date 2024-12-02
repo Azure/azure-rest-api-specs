@@ -316,13 +316,22 @@
               "$ref": "#/definitions/Cluster"
             }
           },
+          "202": {
+            "description": "Accepted response definition.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
