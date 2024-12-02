@@ -8858,7 +8858,7 @@ model AMLParameters {
 }
 
 /**
- * A URI fragment specifying the type of identity.
+ * Clears the identity property of a datasource.
  */
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
   /** The discriminator for derived types. */
