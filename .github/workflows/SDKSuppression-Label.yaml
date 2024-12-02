@@ -16,6 +16,9 @@ jobs:
     runs-on: windows-latest
     
     steps:
+      - name: Enable long path support
+        run: git config --system core.longpaths true
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
