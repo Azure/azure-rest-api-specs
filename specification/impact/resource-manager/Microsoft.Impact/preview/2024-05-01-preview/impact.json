@@ -39,6 +39,9 @@
   },
   "tags": [
     {
+      "name": "UploadService"
+    },
+    {
       "name": "Operations"
     },
     {
@@ -335,6 +338,37 @@
         "x-ms-examples": {
           "Connectors_Delete": {
             "$ref": "./examples/Connectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getUploadToken": {
+      "post": {
+        "operationId": "UploadService_GetUploadToken",
+        "tags": [
+          "UploadService"
+        ],
+        "description": "Customer can use this POST endpoint to trigger an action, where the UserRP/AzImpactRP service creates and returns a user-delegate SAS token for the storage account/container unique to the customer (identified by subscription ID).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation to get upload token completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UploadTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1744,6 +1778,19 @@
           }
         ]
       }
+    },
+    "UploadTokenResponse": {
+      "type": "object",
+      "description": "Define the model for the Upload Token response. uploadUrl field should be akin to https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token>",
+      "properties": {
+        "uploadUrl": {
+          "type": "string",
+          "description": "The SAS token URL for uploading"
+        }
+      },
+      "required": [
+        "uploadUrl"
+      ]
     },
     "Workload": {
       "type": "object",
