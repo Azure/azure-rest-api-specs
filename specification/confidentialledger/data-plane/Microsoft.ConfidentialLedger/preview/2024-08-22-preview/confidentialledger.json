@@ -836,7 +836,7 @@
           "200": {
             "description": "Gets role actions for user defined roles",
             "schema": {
-              "$ref": "#/definitions/Role"
+              "$ref": "#/definitions/Roles"
             }
           },
           "default": {
@@ -1712,6 +1712,13 @@
     "boolean": {
       "type": "boolean"
     },
+    "Roles": {
+      "description": "Definition for roles",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Role"
+      }
+    },
     "Role": {
       "description": "Definition for roles",
       "type": "object",
@@ -1724,7 +1731,7 @@
           "items": {
             "$ref": "#/definitions/RoleActionDef"
           },
-          "type": "object"
+          "type": "array"
         }
       }
     },
@@ -1842,13 +1849,13 @@
       }
     },
     "RoleParameter": {
-      "name": "role",
+      "name": "roles",
       "description": "user defined role",
       "in": "body",
       "required": true,
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/Role"
+        "$ref": "#/definitions/Roles"
       }
     },
     "RoleNameParameter": {

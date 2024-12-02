@@ -170,21 +170,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.MixedReality
-  output-folder: $(csharp-sdks-folder)/mixedreality/Microsoft.Azure.Management.MixedReality/src/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 See configuration in [readme.Python.md](./readme.python.md)
