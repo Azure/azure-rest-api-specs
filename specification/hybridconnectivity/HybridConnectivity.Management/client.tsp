@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Microsoft.HybridConnectivity;
@@ -37,3 +38,14 @@ namespace Microsoft.HybridConnectivity;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ServiceConfigurationResource.properties);
+
+@@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
+@@clientName(ServiceConfigurationResource, "HybridConnectivityServiceConfiguration", "csharp");
+@@clientName(IngressGatewayResource, "IngressGatewayAsset", "csharp");
+@@clientName(EndpointAccessResource, "TargetResourceEndpointAccess", "csharp");
+@@clientName(EndpointProperties, "HybridConnectivityEndpointProperties", "csharp");
+@@clientName(ManagedProxyResource, "ManagedProxyAsset", "csharp");
+@@clientName(ProvisioningState, "HybridConnectivityProvisioningState", "csharp");
+@@clientName(ServiceName, "HybridConnectivityServiceName", "csharp");
+@@clientName(Type, "HybridConnectivityEndpointType", "csharp");
+@@clientName(EndpointProperties.type, "endpointType", "csharp");
