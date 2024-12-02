@@ -13,6 +13,7 @@ namespace Customizations;
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
 @@usage(VectorSearchVectorizerKind, Usage.input);
+@@clientName(VectorQuery.k, "kNearestNeighbors");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalResultCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
