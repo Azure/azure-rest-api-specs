@@ -996,90 +996,88 @@
       "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
       "type": "object",
       "properties": {
-        "properties": {
-          "subnetResourceId": {
-            "description": "The Virtual Network subnet's Azure resource ID",
-            "type": "string",
-            "format": "arm-id",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Network/virtualNetworks/subnets"
-                }
-              ]
-            }
-          },
-          "swiftSupported": {
-            "description": "Boolean flag indicating whether Swift integration is supported",
-            "type": "boolean"
-          },
-          "subnetIpAllocation": {
-            "description": "IP allocation for a Swift Subnet",
-            "type": "object",
-            "properties": {
-              "subnetIpAddressesAvailable": {
-                "description": "The number of IP addresses available in the Swift subnet address space",
-                "type": "integer",
-                "format": "int32"
-              },
-              "subnetIpAddressesUsed": {
-                "description": "The number of IP addresses that have already been used in the Swift subnet address space",
-                "type": "integer",
-                "format": "int32"
+        "subnetResourceId": {
+          "description": "The Virtual Network subnet's Azure resource ID",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
               }
+            ]
+          }
+        },
+        "swiftSupported": {
+          "description": "Boolean flag indicating whether Swift integration is supported",
+          "type": "boolean"
+        },
+        "subnetIpAllocation": {
+          "description": "IP allocation for a Swift Subnet",
+          "type": "object",
+          "properties": {
+            "subnetIpAddressesAvailable": {
+              "description": "The number of IP addresses available in the Swift subnet address space",
+              "type": "integer",
+              "format": "int32"
+            },
+            "subnetIpAddressesUsed": {
+              "description": "The number of IP addresses that have already been used in the Swift subnet address space",
+              "type": "integer",
+              "format": "int32"
             }
-          },
-          "vnetConnectionAllocation": {
-            "description": "Swift Connection allocations for an App Service Plan",
-            "type": "object",
-            "properties": {
-              "vnetConnectionsUsed": {
-                "description": "The number of Swift Connections used for an App Service Plan",
-                "type": "integer",
-                "format": "int32"
-              },
-              "vnetConnectionsMax": {
-                "description": "The maximum number of Swift Connections available for an App Service Plan",
-                "type": "integer",
-                "format": "int32"
-              }
+          }
+        },
+        "vnetConnectionAllocation": {
+          "description": "Swift Connection allocations for an App Service Plan",
+          "type": "object",
+          "properties": {
+            "vnetConnectionsUsed": {
+              "description": "The number of Swift Connections used for an App Service Plan",
+              "type": "integer",
+              "format": "int32"
+            },
+            "vnetConnectionsMax": {
+              "description": "The maximum number of Swift Connections available for an App Service Plan",
+              "type": "integer",
+              "format": "int32"
             }
-          },
-          "resourceAllocation": {
-            "description": "Resources (sites and serverfarms) allocated to this subnet",
-            "type": "object",
-            "properties": {
-              "connectedServerFarmsId": {
-                "description": "The list of all ServerFarms' Azure resource ID that are using the VNET",
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "arm-id",
-                  "x-ms-arm-id-details": {
-                    "allowedResources": [
-                      {
-                        "type": "Microsoft.Web/serverfarms"
-                      }
-                    ]
-                  }
+          }
+        },
+        "resourceAllocation": {
+          "description": "Resources (sites and serverfarms) allocated to this subnet",
+          "type": "object",
+          "properties": {
+            "connectedServerFarmsId": {
+              "description": "The list of all ServerFarms' Azure resource ID that are using the VNET",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.Web/serverfarms"
+                    }
+                  ]
                 }
-              },
-              "connectedSitesId": {
-                "description": "The list of all Sites' Azure resource ID that are using the VNET",
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "arm-id",
-                  "x-ms-arm-id-details": {
-                    "allowedResources": [
-                      {
-                        "type": "Microsoft.Web/sites"
-                      },
-                      {
-                        "type": "Microsoft.Web/sites/slots"
-                      }
-                    ]
-                  }
+              }
+            },
+            "connectedSitesId": {
+              "description": "The list of all Sites' Azure resource ID that are using the VNET",
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.Web/sites"
+                    },
+                    {
+                      "type": "Microsoft.Web/sites/slots"
+                    }
+                  ]
                 }
               }
             }
