@@ -12,7 +12,7 @@ $headBranch = $env:GITHUB_EVENT_PULL_REQUEST_HEAD_REF
 
 $prNumber = $env:GITHUB_EVENT_PULL_REQUEST_NUMBER
 
-$GithubToken = $env:SPEC_REPO_TOKEN
+$GithubToken = $env:GITHUB_TOKEN
 
 LogNotice "Base Owner: $baseOwner"
 LogNotice "Base Repo: $baseRepo"
