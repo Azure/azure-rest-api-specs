@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/liftrqumulo"
 output-dir: "{project-root}/"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -10,6 +13,23 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Qumulo.Storage.json"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-qumulo"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-qumulo"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-qumulo"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
