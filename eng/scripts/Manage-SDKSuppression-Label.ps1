@@ -12,15 +12,15 @@ $headBranch = $env:GITHUB_EVENT_PULL_REQUEST_HEAD_REF
 
 $prNumber = $env:GITHUB_EVENT_PULL_REQUEST_NUMBER
 
-$GithubToken = $env:TOKEN
+$GithubToken = $env:SPEC_REPO_TOKEN
 
-Write-Host "Base Owner: $baseOwner"
-Write-Host "Base Repo: $baseRepo"
-Write-Host "Base Branch: $baseBranch"
-Write-Host "Head Owner: $headOwner"
-Write-Host "Head Repo: $headRepo"
-Write-Host "Head Branch: $headBranch"
-Write-Host "Pull Request Number: $prNumber"
+LogNotice "Base Owner: $baseOwner"
+LogNotice "Base Repo: $baseRepo"
+LogNotice "Base Branch: $baseBranch"
+LogNotice "Head Owner: $headOwner"
+LogNotice "Head Repo: $headRepo"
+LogNotice "Head Branch: $headBranch"
+LogNotice "Pull Request Number: $prNumber"
 
 $SuppressionFileName = "sdk-suppressions.yaml"
 
@@ -59,46 +59,8 @@ $sdkLabels = @{
 
 # Check if the token is available
 if ($null -eq $GithubToken) {
-    Write-Host "GitHub token is not available"
+    LogError "GitHub token is not available"
     exit 1
-}
-
-function Get-GitHubFileContent {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$Token,
-        [Parameter(Mandatory = $true)]
-        [string]$RepoOwner,
-        [Parameter(Mandatory = $true)]
-        [string]$RepoName,
-        [Parameter(Mandatory = $true)]
-        [string]$FilePath,
-
-        [string]$Branch = "main"
-    )
-
-    if (-not $RepoOwner -or -not $RepoName -or -not $FilePath) {
-        throw "Missing required parameters: RepoOwner, RepoName, or FilePath."
-    }
-
-    $BaseUrl = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$FilePath"
-    $Url = $BaseUrl + "?ref=$Branch"
-
-    $Headers = @{
-        Authorization = "token $Token"
-        Accept        = "application/vnd.github.v3+json"
-    }
-
-    try {
-        $Response = Invoke-RestMethod -Uri $Url -Headers $Headers -Method Get
-        $DecodedContent = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Response.content))
-
-        return $DecodedContent
-    }
-    catch {
-        Write-Error "Failed to fetch file: $_"
-        return $null
-    }
 }
 
 function Get-SDKNames {
@@ -129,14 +91,14 @@ function Get-SDKNames {
         $BaseSDKSuppressionYaml = Get-GitHubFileContent -Token $AuthToken -RepoOwner $BaseRepoOwner -RepoName $BaseRepoName -FilePath $SuppressionFile -Branch $BaseRepoBranch
 
         if (!$HeadSDKSuppressionYaml -or !$BaseSDKSuppressionYaml) {
-            Write-Host "Unable to retrieve file content."
+            LogError "Unable to retrieve file content."
             exit 1
         }
         $HeadSDKSuppressionYamlContent = Convert-Yaml -yamlContent $HeadSDKSuppressionYaml
         $BaseSDKSuppressionYamlContent = Convert-Yaml -yamlContent $BaseSDKSuppressionYaml
     
         if (!$HeadSDKSuppressionYamlContent -or !$BaseSDKSuppressionYamlContent) {
-            write-host "Yaml is invalid"
+            LogError "Yaml is invalid"
             exit 1
         } 
 
@@ -273,7 +235,7 @@ function Update-Label {
                     }
                 }
                 if (-not ($presentLabels -contains $sdkSuppressionsApprovedLabel)) {
-                    Write-Host "updateSdkSuppressionsLabels: PR: $("pr.html_url") To remove the existed suppression label if there are no difference between head commit and base commit for the suppression content."
+                    LogNotice "updateSdkSuppressionsLabels: PR: $("pr.html_url") To remove the existed suppression label if there are no difference between head commit and base commit for the suppression content."
                     [void]$removeSdkSuppressionsLabels.Add($prLabel);
                 }
             }
@@ -281,10 +243,10 @@ function Update-Label {
         if ($removeSdkSuppressionsLabels.length -gt 0) {
             Remove-GithubIssueLabels -RepoOwner $RepoOwner -RepoName $RepoName `
                 -IssueNumber $IssueNumber -LabelsToRemove $willRemoveLabel -AuthToken $token
-            Write-Host "updateSdkSuppressionsLabels: PR: $("pr.html_url") Remove label: $($removeSdkSuppressionsLabels -join ", " )"
+            LogNotice "updateSdkSuppressionsLabels: PR: $("pr.html_url") Remove label: $($removeSdkSuppressionsLabels -join ", " )"
         }
         else {
-            Write-Host "updateSdkSuppressionsLabels: PR: $("pr.html_url") No Remove label"
+            LogNotice "updateSdkSuppressionsLabels: PR: $("pr.html_url") No Remove label"
         }
     }
     else {
@@ -304,10 +266,10 @@ function Update-Label {
                 LogError "Add-GithubIssueLabels failed with exception:`n$_"
                 exit 1
             }
-            Write-Host "updateSdkSuppressionsLabels: PR: $("$pr.html_url") add label: $($addSdkSuppressionsLabels -join ", " )"
+            LogNotice "updateSdkSuppressionsLabels: PR: $("$pr.html_url") add label: $($addSdkSuppressionsLabels -join ", " )"
         }
         else {
-            Write-Host "updateSdkSuppressionsLabels: PR: $("pr.html_url") no add label"
+            LogNotice "updateSdkSuppressionsLabels: PR: $("pr.html_url") no add label"
         }
     }
 }
@@ -317,7 +279,7 @@ $FilesChanges = Get-GitHubPullRequestChangeFiles -RepoOwner $baseOwner -RepoName
 
 $FilteredSuppressionFiles = $FilesChanges | Where-Object { $_.Split('/')[-1] -eq $SuppressionFileName }
 if ($null -eq $FilteredSuppressionFiles) {
-    Write-Host "No suppression file changes found in the pull request."
+    LogError "No suppression file changes found in the pull request."
     exit 1
 }
 $SDKNames = Get-SDKNames -BaseRepoOwner $baseOwner -BaseRepoName $baseRepo -BaseRepoBranch $baseBranch `
@@ -326,7 +288,7 @@ $SDKNames = Get-SDKNames -BaseRepoOwner $baseOwner -BaseRepoName $baseRepo -Base
     -SuppressionFile $FilteredSuppressionFiles -AuthToken $GithubToken
 
 if ($null -eq $SDKNames) {
-    Write-Host "No SDKs changes found in the suppression file."
+    LogError "No SDKs changes found in the suppression file."
     exit 1
 }
 else {

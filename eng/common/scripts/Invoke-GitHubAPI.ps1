@@ -178,6 +178,44 @@ function Get-GitHubPullRequestChangeFiles {
     }
 }
 
+function Get-GitHubFileContent {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Token,
+        [Parameter(Mandatory = $true)]
+        [string]$RepoOwner,
+        [Parameter(Mandatory = $true)]
+        [string]$RepoName,
+        [Parameter(Mandatory = $true)]
+        [string]$FilePath,
+
+        [string]$Branch = "main"
+    )
+
+    if (-not $RepoOwner -or -not $RepoName -or -not $FilePath) {
+        throw "Missing required parameters: RepoOwner, RepoName, or FilePath."
+    }
+
+    $BaseUrl = "https://api.github.com/repos/$RepoOwner/$RepoName/contents/$FilePath"
+    $Url = $BaseUrl + "?ref=$Branch"
+
+    $Headers = @{
+        Authorization = "token $Token"
+        Accept        = "application/vnd.github.v3+json"
+    }
+
+    try {
+        $Response = Invoke-RestMethod -Uri $Url -Headers $Headers -Method Get
+        $DecodedContent = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Response.content))
+
+        return $DecodedContent
+    }
+    catch {
+        Write-Error "Failed to fetch file: $_"
+        return $null
+    }
+}
+
 function New-GitHubPullRequest {
     param (
         $RepoOwner,
