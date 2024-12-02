@@ -13,16 +13,17 @@ using Azure.Core;
 using Azure.ResourceManager;
 using LiftrBase;
 
-/* MongoDb.Atlas Resource Provider management API. */
+/* MongoDB.Atlas Resource Provider management API. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Namespace is business requirement"
 @armProviderNamespace
 @service({
-  title: "MongoDb.Atlas",
+  title: "MongoDB.Atlas",
 })
-@versioned(MongoDb.Atlas.Versions)
-namespace MongoDb.Atlas;
+@versioned(MongoDB.Atlas.Versions)
+namespace MongoDB.Atlas;
 
 /** The available API versions. */
-@doc("Supported versions for the MongoDb.Atlas resource model")
+@doc("Supported versions for the MongoDB.Atlas resource model")
 enum Versions {
   /** 2024-11-18 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
