@@ -282,7 +282,7 @@ interface DocumentsOperations {
       @query("$select")
       selectedFields?: string[];
     },
-    Record<unknown>
+    LookupDocument
   >;
 
   /**

@@ -279,16 +279,13 @@ union AutocompleteMode {
 
   /**
    * Matching two-term phrases in the index will be suggested. For example, if the
-   * input is 'medic', the suggested terms could include 'medicare coverage' and
-   * 'medical assistant'.
+   * input is 'medic', the suggested terms could include 'medicare coverage' and 'medical assistant'.
    */
   TwoTerms: "twoTerms",
 
   /**
    * Completes the last term in a query with two or more terms, where the last two
-   * terms are a phrase that exists in the index. For example, if the input is
-   * 'washington medic', the suggested terms could include 'washington medicaid' and
-   * 'washington medical'.
+   * terms are a phrase that exists in the index. For example, if the input is 'washington medic', the suggested terms could include 'washington medicaid' and 'washington medical'.
    */
   OneTermWithContext: "oneTermWithContext",
 }
@@ -646,8 +643,8 @@ model VectorQuery {
 
   /**
    * Oversampling factor. Minimum value is 1. It overrides the 'defaultOversampling'
-   * parameter configured in the index definition. It can be set only when
-   * 'rerankWithOriginalVectors' is true. This parameter is only permitted when a
+   * parameter configured in the index definition. It can be set only when 'rerankWithOriginalVectors'
+   * is true. This parameter is only permitted when a
    * compression method is used on the underlying vector field.
    */
   oversampling?: float64;
@@ -872,6 +869,14 @@ model IndexAction {
    */
   @encodedName("application/json", "@search.action")
   actionType?: IndexActionType;
+}
+
+/**
+ * A document retrieved via a document lookup operation.
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+model LookupDocument {
+  ...Record<unknown>;
 }
 
 /**
