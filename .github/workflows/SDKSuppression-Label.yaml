@@ -16,10 +16,11 @@ jobs:
     runs-on: windows-latest
     
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Run Manage-SDKSuppression-Label script from file
+        shell: pwsh
         run: |
           .\scripts\Manage-SDKSuppression-Label.ps1
         env:
