@@ -24,7 +24,6 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     package-dir: Azure.Messaging.EventGrid.SystemEvents
@@ -32,3 +31,11 @@ options:
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure
     api-version: "2018-01-01"
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "eventgrid-system-events"
+    packageDetails:
+      name: "@azure/eventgrid-system-events"
+    flavor: azure
