@@ -97,7 +97,7 @@ model GeoCatalogUpdate {
 interface GeoCatalogs {
   get is ArmResourceRead<GeoCatalog>;
   create is ArmResourceCreateOrUpdateAsync<GeoCatalog>;
-  update is ArmCustomPatchAsync<GeoCatalog, GeoCatalogUpdate>; //ArmResourcePatchSync<GeoCatalog, GeoCatalogProperties>;
+  update is ArmCustomPatchSync<GeoCatalog, GeoCatalogUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<GeoCatalog>;
   listByResourceGroup is ArmResourceListByParent<GeoCatalog>;
   listBySubscription is ArmListBySubscription<GeoCatalog>;
