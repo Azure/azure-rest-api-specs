@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
@@ -88,6 +86,17 @@ union SecretType {
   string,
   @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
   @doc("If the secret value provided as plain text.") "SECRET_VALUE",
+}
+
+@doc("Managed identity type.")
+union ManagedIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
 }
 
 @doc("Types of certificates supported.")
@@ -248,6 +257,14 @@ union TestKind {
   "Locust",
 }
 
+@added(APIVersions.v2024_07_01_preview)
+@doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+union CreateByTypes {
+  string,
+  @doc("Entity was created by a user.") "User",
+  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+}
+
 @doc("Test file info.")
 @resource("files")
 @parentResource(Test)
@@ -323,6 +340,14 @@ model Test {
   @doc("Resource Id of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityId?: string;
 
+  @doc("Type of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Id of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityId?: string;
+
   ...SystemMetaData;
 }
 
@@ -330,6 +355,10 @@ model Test {
 model PassFailCriteria {
   @doc("Map of id and pass fail metrics { id  : pass fail metrics }.")
   passFailMetrics?: Record<PassFailMetric>;
+
+  @doc("Map of id and pass fail server metrics { id  : pass fail metrics }.")
+  @added(APIVersions.v2024_07_01_preview)
+  passFailServerMetrics?: Record<PassFailServerMetric>;
 }
 
 @doc("Pass fail metric")
@@ -361,6 +390,38 @@ model PassFailMetric {
   action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
+  @visibility("read")
+  actualValue?: float64;
+
+  @doc("Outcome of the test run.")
+  @visibility("read")
+  result?: PFResult;
+}
+
+@doc("Pass fail server metric")
+model PassFailServerMetric {
+  @doc("The resource id of the resource emitting the metric.")
+  resourceId: string;
+
+  @doc("The server metric namespace.")
+  metricNamespace: string;
+
+  @doc("The server metric name.")
+  metricName: string;
+
+  @doc("Aggregation Type")
+  aggregation: string;
+
+  @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
+  condition: string;
+
+  @doc("The value to compare with the server metric.")
+  value: float64;
+
+  @doc("Action taken after the threshold is met. Default is ‘continue’.")
+  action?: PFAction = PFAction.continue;
+
+  @doc("The actual value of the server metric ")
   @visibility("read")
   actualValue?: float64;
 
@@ -719,6 +780,11 @@ model TestRun {
   @visibility("read")
   duration?: int64;
 
+  @doc("Virtual user hours consumed by the test run.")
+  @visibility("read")
+  @added(APIVersions.v2024_07_01_preview)
+  virtualUserHours?: float64;
+
   @doc("Subnet ID on which the load test instances should run.")
   @visibility("read")
   subnetId?: string;
@@ -741,6 +807,10 @@ model TestRun {
   @doc("Inject load test engines without deploying public IP for outbound access")
   @visibility("read")
   publicIPDisabled?: boolean;
+
+  @added(APIVersions.v2024_07_01_preview)
+  @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+  createdByType?: CreateByTypes;
 
   ...SystemMetaData;
 }
@@ -1055,7 +1125,6 @@ model MetricDimensionsRequest {
     The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
     """)
   @query
-  @clientName("time_interval", "python")
   timespan: string;
 }
 

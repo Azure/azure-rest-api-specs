@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/informaticadatamanagement"
+    default: "sdk/informatica"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,10 +11,12 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-  # "@azure-tools/typespec-python":
-  #   package-dir: "azure-mgmt-informaticadatamanagement"
-  #   package-name: "{package-dir}"
-  #   flavor: "azure"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-informaticadatamanagement"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
   # "@azure-tools/typespec-java":
   #   package-dir: "azure-resourcemanager-informaticadatamanagement"
   #   flavor: "azure"
@@ -25,6 +27,17 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-informaticadatamanagement"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-informaticadatamanagement"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
