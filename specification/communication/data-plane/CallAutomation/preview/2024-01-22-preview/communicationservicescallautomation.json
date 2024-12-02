@@ -992,6 +992,99 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:startMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Starts media streaming in the call",
+        "description": "Starts media streaming in the call.",
+        "operationId": "CallMedia_StartMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startMediaStreamingRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the start media streaming request and will begin processing it. You will receive either MediaStreamingStarted or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartMediaStreaming": {
+            "$ref": "./examples/CallMedia_StartMediaStreaming.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopMediaStreaming": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stops media streaming in the call",
+        "description": "Stops media streaming in the call.",
+        "operationId": "CallMedia_StopMediaStreaming",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stopMediaStreamingRequest",
+            "in": "body",
+            "description": "stop media streaming request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StopMediaStreamingRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the stop media streaming request and will begin processing it. You will receive either MediaStreamingStopped or MediaStreamingFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopMediaStreaming": {
+            "$ref": "./examples/CallMedia_StopMediaStreaming.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/dialogs/{dialogId}": {
       "put": {
         "tags": [
@@ -1690,6 +1783,10 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
+        },
+        "mediaStreamingConfiguration": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Configuration."
         }
       }
     },
@@ -1773,6 +1870,100 @@
         }
       }
     },
+    "MediaStreamingTransportType": {
+      "description": "The type of transport to be used for media streaming, eg. Websocket",
+      "enum": [
+        "websocket"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingTransportType",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingContentType": {
+      "description": "Content type to stream, eg. audio",
+      "enum": [
+        "audio"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingContentType",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingAudioChannelType": {
+      "description": "Audio channel type to stream, eg. unmixed audio, mixed audio",
+      "enum": [
+        "mixed",
+        "unmixed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingAudioChannelType",
+        "modelAsString": true
+      }
+    },
+    "AudioFormat": {
+      "description": "Specifies the audio format used for encoding, including sample rate and channel type.",
+      "enum": [
+        "pcm16KMono",
+        "pcm24KMono"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pcm16KMono",
+            "description": "Pcm16KMono",
+            "value": "Pcm16KMono"
+          },
+          {
+            "name": "Pcm24KMono",
+            "description": "Pcm24KMono",
+            "value": "Pcm24KMono"
+          }
+        ]
+      }
+    },
+    "MediaStreamingOptions": {
+      "description": "Configuration of Media streaming.",
+      "required": [
+        "transportUrl",
+        "transportType",
+        "contentType",
+        "audioChannelType"
+      ],
+      "type": "object",
+      "properties": {
+        "transportUrl": {
+          "description": "Transport URL for media streaming",
+          "type": "string"
+        },
+        "transportType": {
+          "$ref": "#/definitions/MediaStreamingTransportType"
+        },
+        "contentType": {
+          "$ref": "#/definitions/MediaStreamingContentType"
+        },
+        "audioChannelType": {
+          "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        },
+        "startMediaStreaming": {
+          "description": "Determines if the media streaming should be started immediately after call is answered or not.",
+          "type": "boolean"
+        },
+        "enableBidirectional": {
+          "description": "A value indicating whether bidirectional streaming is enabled.",
+          "type": "boolean"
+        },
+        "audioFormat": {
+          "$ref": "#/definitions/AudioFormat"
+        }
+      }
+    },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
     },
@@ -1848,6 +2039,43 @@
         "answeredBy": {
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "Identity of the answering entity. Only populated when identity is provided in the request."
+        },
+        "mediaStreamingSubscription": {
+          "$ref": "#/definitions/MediaStreamingSubscription",
+          "description": "The state of media streaming subscription for the call"
+        }
+      }
+    },
+    "MediaStreamingSubscriptionState": {
+      "description": "Media streaming subscription state.",
+      "enum": [
+        "disabled",
+        "inactive",
+        "active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingSubscriptionState",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingSubscription": {
+      "description": "Media streaming Subscription Object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Subscription Id.",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/MediaStreamingSubscriptionState"
+        },
+        "subscribedContentTypes": {
+          "description": "Subscribed media streaming content types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaStreamingContentType"
+          }
         }
       }
     },
@@ -1882,6 +2110,10 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
+        },
+        "mediaStreamingConfiguration": {
+          "$ref": "#/definitions/MediaStreamingOptions",
+          "description": "Media Streaming Configuration."
         }
       }
     },
@@ -2478,6 +2710,32 @@
         "playTo": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StartMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "StopMediaStreamingRequest": {
+      "type": "object",
+      "properties": {
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
@@ -4386,6 +4644,162 @@
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "MediaStreamingFailed": {
+      "type": "object",
+      "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStatus": {
+      "enum": [
+        "mediaStreamingStarted",
+        "mediaStreamingFailed",
+        "mediaStreamingStopped",
+        "unspecifiedError"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatus",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingStatusDetails": {
+      "enum": [
+        "subscriptionStarted",
+        "streamConnectionReestablished",
+        "streamConnectionUnsuccessful",
+        "streamUrlMissing",
+        "serviceShutdown",
+        "streamConnectionInterrupted",
+        "speechServicesConnectionError",
+        "subscriptionStopped",
+        "unspecifiedError",
+        "authenticationFailure",
+        "badRequest",
+        "tooManyRequests",
+        "forbidden",
+        "serviceTimeout",
+        "initialWebSocketConnectionFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MediaStreamingStatusDetails",
+        "modelAsString": true
+      }
+    },
+    "MediaStreamingUpdate": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        },
+        "mediaStreamingStatus": {
+          "$ref": "#/definitions/MediaStreamingStatus"
+        },
+        "mediaStreamingStatusDetails": {
+          "$ref": "#/definitions/MediaStreamingStatusDetails"
+        }
+      }
+    },
+    "MediaStreamingStarted": {
+      "type": "object",
+      "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingStopped": {
+      "type": "object",
+      "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for audio streaming update with the current status and the details about the status",
+          "readOnly": true
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
