@@ -25,7 +25,7 @@ enum Versions {
   v2024_05_01_preview: "2024-05-01-preview",
 }
 
-/** Define the model for the Upload Token response. uploadUrl field should be akin to https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token> */
+/** A successful response from getUploadToken will contain an "uploadUrl" field. This uploadUrl field's value should be follow the format: https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token> */
 model UploadTokenResponse {
   @doc("The SAS token URL for uploading")
   uploadUrl: string;

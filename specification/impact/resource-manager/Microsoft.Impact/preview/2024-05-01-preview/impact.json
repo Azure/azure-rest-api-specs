@@ -359,7 +359,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation to get upload token completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/UploadTokenResponse"
             }
@@ -1781,7 +1781,7 @@
     },
     "UploadTokenResponse": {
       "type": "object",
-      "description": "Define the model for the Upload Token response. uploadUrl field should be akin to https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token>",
+      "description": "A successful response from getUploadToken will contain an \"uploadUrl\" field. This uploadUrl field's value should be follow the format: https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token>",
       "properties": {
         "uploadUrl": {
           "type": "string",
