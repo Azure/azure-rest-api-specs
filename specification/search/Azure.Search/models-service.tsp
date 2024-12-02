@@ -8744,8 +8744,7 @@ model WebApiVectorizerParameters {
 }
 
 /**
- * Specifies the AI Services Vision parameters for vectorizing a query image or
- * text.
+ * Clears the identity property of a datasource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @added(Versions.v2024_11_01_preview)
