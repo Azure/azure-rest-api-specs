@@ -173,7 +173,7 @@ function Get-GitHubPullRequestChangeFiles {
 
     }
     catch {
-        Write-Error "Get-PullRequest failed with exception:`n$_"
+        LogError "Get-PullRequest failed with exception:`n$_"
         exit 1
     }
 }
@@ -211,7 +211,7 @@ function Get-GitHubFileContent {
         return $DecodedContent
     }
     catch {
-        Write-Error "Failed to fetch file: $_"
+        LogError "Failed to fetch file: $_"
         return $null
     }
 }
