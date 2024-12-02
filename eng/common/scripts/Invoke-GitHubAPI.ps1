@@ -173,7 +173,7 @@ function Get-GitHubPullRequestChangeFiles {
 
     }
     catch {
-        LogError "Get-PullRequest failed with exception:`n$_"
+        LogError "Get-GitHubPullRequestChangeFiles failed with exception: $($_.Exception.Message)"
         exit 1
     }
 }
@@ -211,7 +211,7 @@ function Get-GitHubFileContent {
         return $DecodedContent
     }
     catch {
-        LogError "Failed to fetch file: $_"
+        LogError "Get-GitHubFileContent failed with exception: $($_.Exception.Message)"
         return $null
     }
 }
@@ -443,7 +443,6 @@ function Remove-GitHubIssueLabels {
             Write-Output "Label '$label' removed from PR #$IssueNumber"
         }
         catch {
-            # Handle errors (e.g., label not found)
             Write-Warning "Failed to remove label '$label': $($_.Exception.Message)"
         }
     }

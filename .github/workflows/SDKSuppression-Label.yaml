@@ -16,6 +16,11 @@ jobs:
     runs-on: windows-latest
     
     steps:
+      - name: Run PowerShell script
+        run: |
+          Write-Output "Running PowerShell!"
+          $PSVersionTable
+          
       - name: Enable long path support
         run: git config --system core.longpaths true
 
