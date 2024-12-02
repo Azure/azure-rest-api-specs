@@ -17,7 +17,7 @@ jobs:
     
     steps:
       - name: Enable long path support
-        uses: ./eng/common/pipelines/templates/steps/enable-long-path-support.yml
+        run: git config --system core.longpaths true
 
       - name: Checkout code
         uses: actions/checkout@v4
