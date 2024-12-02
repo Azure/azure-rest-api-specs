@@ -8088,8 +8088,7 @@ model WebApiVectorizerParameters {
 }
 
 /**
- * Specifies the AI Services Vision parameters for vectorizing a query image or
- * text.
+ * Clears the identity property of a datasource.
  */
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
   /**
