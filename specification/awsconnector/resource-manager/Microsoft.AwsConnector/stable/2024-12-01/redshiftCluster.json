@@ -1,0 +1,825 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RedshiftClusters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/redshiftClusters": {
+      "get": {
+        "operationId": "RedshiftClusters_ListBySubscription",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "List RedshiftCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RedshiftClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_ListBySubscription": {
+            "$ref": "./examples/RedshiftClusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/redshiftClusters": {
+      "get": {
+        "operationId": "RedshiftClusters_ListByResourceGroup",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "List RedshiftCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RedshiftClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_ListByResourceGroup": {
+            "$ref": "./examples/RedshiftClusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/redshiftClusters/{name}": {
+      "get": {
+        "operationId": "RedshiftClusters_Get",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "Get a RedshiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RedshiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RedshiftCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_Get": {
+            "$ref": "./examples/RedshiftClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RedshiftClusters_CreateOrReplace",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "Create a RedshiftCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RedshiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedshiftCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RedshiftCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RedshiftCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'RedshiftCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RedshiftCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_CreateOrReplace": {
+            "$ref": "./examples/RedshiftClusters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RedshiftClusters_Update",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "Update a RedshiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RedshiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedshiftClusterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RedshiftCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_Update": {
+            "$ref": "./examples/RedshiftClusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RedshiftClusters_Delete",
+        "tags": [
+          "RedshiftClusters"
+        ],
+        "description": "Delete a RedshiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RedshiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedshiftClusters_Delete": {
+            "$ref": "./examples/RedshiftClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsRedshiftClusterProperties": {
+      "type": "object",
+      "description": "Definition of awsRedshiftCluster",
+      "properties": {
+        "allowVersionUpgrade": {
+          "type": "boolean",
+          "description": "Major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster. Default value is True"
+        },
+        "aquaConfigurationStatus": {
+          "type": "string",
+          "description": "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.disabled - Don't use AQUA.auto - Amazon Redshift determines whether to use AQUA."
+        },
+        "automatedSnapshotRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Default value is 1"
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint"
+        },
+        "availabilityZoneRelocation": {
+          "type": "boolean",
+          "description": "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete."
+        },
+        "availabilityZoneRelocationStatus": {
+          "type": "string",
+          "description": "The availability zone relocation status of the cluster"
+        },
+        "classic": {
+          "type": "boolean",
+          "description": "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic."
+        },
+        "clusterIdentifier": {
+          "type": "string",
+          "description": "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account"
+        },
+        "clusterNamespaceArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the cluster namespace."
+        },
+        "clusterParameterGroupName": {
+          "type": "string",
+          "description": "The name of the parameter group to be associated with this cluster."
+        },
+        "clusterSecurityGroups": {
+          "type": "array",
+          "description": "A list of security groups to be associated with this cluster.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "clusterSubnetGroupName": {
+          "type": "string",
+          "description": "The name of a cluster subnet group to be associated with this cluster."
+        },
+        "clusterType": {
+          "type": "string",
+          "description": "The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required"
+        },
+        "clusterVersion": {
+          "type": "string",
+          "description": "The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database."
+        },
+        "deferMaintenance": {
+          "type": "boolean",
+          "description": "A boolean indicating whether to enable the deferred maintenance window."
+        },
+        "deferMaintenanceDuration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less."
+        },
+        "deferMaintenanceEndTime": {
+          "type": "string",
+          "description": "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration."
+        },
+        "deferMaintenanceIdentifier": {
+          "type": "string",
+          "description": "A unique identifier for the deferred maintenance window."
+        },
+        "deferMaintenanceStartTime": {
+          "type": "string",
+          "description": "A timestamp indicating the start time for the deferred maintenance window."
+        },
+        "destinationRegion": {
+          "type": "string",
+          "description": "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference"
+        },
+        "elasticIp": {
+          "type": "string",
+          "description": "The Elastic IP (EIP) address for the cluster."
+        },
+        "encrypted": {
+          "type": "boolean",
+          "description": "If true, the data in the cluster is encrypted at rest."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/Endpoint",
+          "description": "Property endpoint"
+        },
+        "enhancedVpcRouting": {
+          "type": "boolean",
+          "description": "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.If this option is true , enhanced VPC routing is enabled.Default: false"
+        },
+        "hsmClientCertificateIdentifier": {
+          "type": "string",
+          "description": "Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM"
+        },
+        "hsmConfigurationIdentifier": {
+          "type": "string",
+          "description": "Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM."
+        },
+        "iamRoles": {
+          "type": "array",
+          "description": "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster."
+        },
+        "loggingProperties": {
+          "$ref": "#/definitions/LoggingProperties",
+          "description": "Property loggingProperties"
+        },
+        "maintenanceTrackName": {
+          "type": "string",
+          "description": "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied."
+        },
+        "manageMasterPassword": {
+          "type": "boolean",
+          "description": "A boolean indicating if the redshift cluster's admin user credentials is managed by Redshift or not. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password."
+        },
+        "manualSnapshotRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.The value must be either -1 or an integer between 1 and 3,653."
+        },
+        "masterPasswordSecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) for the cluster's admin user credentials secret."
+        },
+        "masterPasswordSecretKmsKeyId": {
+          "type": "string",
+          "description": "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret."
+        },
+        "masterUserPassword": {
+          "type": "string",
+          "description": "The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character."
+        },
+        "masterUsername": {
+          "type": "string",
+          "description": "The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter."
+        },
+        "multiAZ": {
+          "type": "boolean",
+          "description": "A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az."
+        },
+        "namespaceResourcePolicy": {
+          "description": "The namespace resource policy document that will be attached to a Redshift cluster."
+        },
+        "nodeType": {
+          "type": "string",
+          "description": "The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge"
+        },
+        "numberOfNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node."
+        },
+        "ownerAccount": {
+          "type": "string",
+          "description": "Property ownerAccount"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings"
+        },
+        "preferredMaintenanceWindow": {
+          "type": "string",
+          "description": "The weekly time range (in UTC) during which automated cluster maintenance can occur."
+        },
+        "publiclyAccessible": {
+          "type": "boolean",
+          "description": "If true, the cluster can be accessed from a public network."
+        },
+        "resourceAction": {
+          "type": "string",
+          "description": "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster, failover-primary-compute APIs"
+        },
+        "revisionTarget": {
+          "type": "string",
+          "description": "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request."
+        },
+        "rotateEncryptionKey": {
+          "type": "boolean",
+          "description": "A boolean indicating if we want to rotate Encryption Keys."
+        },
+        "snapshotClusterIdentifier": {
+          "type": "string",
+          "description": "The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name."
+        },
+        "snapshotCopyGrantName": {
+          "type": "string",
+          "description": "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region."
+        },
+        "snapshotCopyManual": {
+          "type": "boolean",
+          "description": "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots."
+        },
+        "snapshotCopyRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days to retain automated snapshots in the destination region after they are copied from the source region.  Default is 7.  Constraints: Must be at least 1 and no more than 35."
+        },
+        "snapshotIdentifier": {
+          "type": "string",
+          "description": "The name of the snapshot from which to create the new cluster. This parameter isn't case sensitive."
+        },
+        "tags": {
+          "type": "array",
+          "description": "The list of tags for the cluster parameter group.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcSecurityGroupIds": {
+          "type": "array",
+          "description": "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Definition of Endpoint",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Property address"
+        },
+        "port": {
+          "type": "string",
+          "description": "Property port"
+        }
+      }
+    },
+    "LoggingProperties": {
+      "type": "object",
+      "description": "Definition of LoggingProperties",
+      "properties": {
+        "bucketName": {
+          "type": "string",
+          "description": "Property bucketName"
+        },
+        "s3KeyPrefix": {
+          "type": "string",
+          "description": "Property s3KeyPrefix"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RedshiftCluster": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedshiftClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RedshiftClusterListResult": {
+      "type": "object",
+      "description": "The response of a RedshiftCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RedshiftCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/RedshiftCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RedshiftClusterProperties": {
+      "type": "object",
+      "description": "Definition of RedshiftCluster",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsRedshiftClusterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "RedshiftClusterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in RedshiftCluster resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
