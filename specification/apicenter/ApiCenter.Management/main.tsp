@@ -15,6 +15,7 @@ import "./ApiDefinition.tsp";
 import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
+import "./AnalyzerConfig.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,6 +48,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_06_01_preview: "2024-06-01-preview",
+
+  @doc("Azure API Center 2024-12-15-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_12_15_preview: "2024-12-15-preview",
 }
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
