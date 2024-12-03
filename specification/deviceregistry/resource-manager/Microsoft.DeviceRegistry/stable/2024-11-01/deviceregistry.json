@@ -1084,7 +1084,7 @@
     },
     "AssetEndpointProfileUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AssetEndpointProfile.",
+      "description": "Defines the Asset Endpoint Profile properties for update operation.",
       "properties": {
         "tags": {
           "type": "object",
@@ -1193,6 +1193,7 @@
         },
         "manufacturerUri": {
           "type": "string",
+          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {
@@ -1213,6 +1214,7 @@
         },
         "documentationUri": {
           "type": "string",
+          "format": "uri",
           "description": "Reference to the documentation."
         },
         "serialNumber": {
@@ -1374,7 +1376,7 @@
     },
     "AssetUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Asset.",
+      "description": "Defines the asset properties for update operation.",
       "properties": {
         "tags": {
           "type": "object",
@@ -1412,6 +1414,7 @@
         },
         "manufacturerUri": {
           "type": "string",
+          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {
@@ -1432,6 +1435,7 @@
         },
         "documentationUri": {
           "type": "string",
+          "format": "uri",
           "description": "Reference to the documentation."
         },
         "serialNumber": {
@@ -1566,6 +1570,10 @@
         }
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "BillingContainer": {
       "type": "object",
       "description": "billingContainer Model as Azure resource whose sole purpose is to keep track of billables resources under a subscription.",
@@ -1576,7 +1584,7 @@
           "x-ms-client-flatten": true
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Resource ETag",
           "readOnly": true
         }

@@ -53,7 +53,7 @@ model DiscoveredAssetProperties {
   manufacturer?: string;
 
   @doc("Asset manufacturer URI.")
-  manufacturerUri?: string;
+  manufacturerUri?: url;
 
   @doc("Asset model name.")
   `model`?: string;
@@ -68,7 +68,7 @@ model DiscoveredAssetProperties {
   softwareRevision?: string;
 
   @doc("Reference to the documentation.")
-  documentationUri?: string;
+  documentationUri?: url;
 
   @doc("Asset serial number.")
   serialNumber?: string;
@@ -94,6 +94,15 @@ model DiscoveredAssetProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+@doc("Defines the discovered asset properties for update operation.")
+@added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
+model DiscoveredAssetUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    DiscoveredAsset,
+    DiscoveredAssetProperties
+  >;
 
 @doc("Defines the dataset properties.")
 @added(Versions.v2024_09_01_preview)
@@ -159,13 +168,7 @@ interface DiscoveredAssets {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<
-    DiscoveredAsset,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      DiscoveredAsset,
-      DiscoveredAssetProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<DiscoveredAsset, DiscoveredAssetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAsset>;
   listByResourceGroup is ArmResourceListByParent<DiscoveredAsset>;
   listBySubscription is ArmListBySubscription<DiscoveredAsset>;

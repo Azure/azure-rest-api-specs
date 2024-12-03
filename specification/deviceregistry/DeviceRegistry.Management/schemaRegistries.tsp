@@ -51,12 +51,21 @@ model SchemaRegistryProperties {
 
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility("read", "create")
-  storageAccountContainerUrl: string;
+  storageAccountContainerUrl: url;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+@added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
+@doc("Defines the schema registry properties for update operation.")
+model SchemaRegistryUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    SchemaRegistry,
+    SchemaRegistryProperties
+  >;
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
@@ -176,13 +185,7 @@ interface SchemaRegistries {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<
-    SchemaRegistry,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      SchemaRegistry,
-      SchemaRegistryProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<SchemaRegistry, SchemaRegistryUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<SchemaRegistry>;
   listByResourceGroup is ArmResourceListByParent<SchemaRegistry>;
   listBySubscription is ArmListBySubscription<SchemaRegistry>;
