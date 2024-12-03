@@ -4,8 +4,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.EventGrid.SystemEvents {
   alias RedisBaseEventData = {
     /** The time at which the event occurred. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
-    timestamp: utcDateTime;
+    timestamp?: utcDateTime;
 
     /** The name of this event. */
     name?: string;
