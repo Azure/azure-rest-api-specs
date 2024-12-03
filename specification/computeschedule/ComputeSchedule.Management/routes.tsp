@@ -45,7 +45,7 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: SubmitStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
-  /** ExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it. */
+  /** ExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDeallocate")
   @post
@@ -54,7 +54,7 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: ExecuteDeallocateRequest,
   ): ArmResponse<DeallocateResourceOperationResponse> | ErrorResponse;
 
-  /** ExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it. */
+  /** ExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteHibernate")
   @post
@@ -63,7 +63,7 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: ExecuteHibernateRequest,
   ): ArmResponse<HibernateResourceOperationResponse> | ErrorResponse;
 
-  /** ExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it. */
+  /** ExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteStart")
   @post

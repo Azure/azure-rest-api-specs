@@ -22,14 +22,12 @@ union DeadlineType {
   @doc("Initiate the operation at the given deadline.")
   InitiateAt: "InitiateAt",
 
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Complete the operation by the given deadline.")
   CompleteBy: "CompleteBy",
 
   string,
 }
 
-@removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
 @doc("The preferences customers can select to optimize their requests to ScheduledActions")
 union OptimizationPreference {
   @doc("Optimize while considering cost savings")
