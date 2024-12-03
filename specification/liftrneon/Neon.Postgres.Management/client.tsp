@@ -7,10 +7,7 @@ using Azure.ClientGenerator.Core;
   "com.azure.resourcemanager.neonpostgres",
   "java"
 );
-@@clientNamespace(LiftrBase,
-  "com.azure.resourcemanager.neonpostgres",
-  "java"
-);
+@@clientNamespace(LiftrBase, "com.azure.resourcemanager.neonpostgres", "java");
 @@clientNamespace(LiftrBase.Data,
   "com.azure.resourcemanager.neonpostgres",
   "java"
