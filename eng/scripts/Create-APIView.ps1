@@ -370,7 +370,8 @@ function New-TypeSpecAPIViewTokens {
   # Get Related TypeSpec ReadMe Files
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
-    $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile $_
+    Write-Host "$_"
+    $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile "$_"
     if ($tspProjs) {
       foreach ($tspProj in $tspProjs) {
         $typeSpecProjects.Add($tspProj) | Out-Null
