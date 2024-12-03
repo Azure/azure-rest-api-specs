@@ -139,7 +139,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDeallocate": {
       "post": {
         "operationId": "ScheduledActions_VirtualMachinesExecuteDeallocate",
-        "description": "ExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it.",
+        "description": "ExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -192,7 +192,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteHibernate": {
       "post": {
         "operationId": "ScheduledActions_VirtualMachinesExecuteHibernate",
-        "description": "ExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it.",
+        "description": "ExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -245,7 +245,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteStart": {
       "post": {
         "operationId": "ScheduledActions_VirtualMachinesExecuteStart",
-        "description": "ExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule recieves it.",
+        "description": "ExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -611,7 +611,8 @@
       "description": "The types of deadlines supported by ScheduledActions",
       "enum": [
         "Unknown",
-        "InitiateAt"
+        "InitiateAt",
+        "CompleteBy"
       ],
       "x-ms-enum": {
         "name": "DeadlineType",
@@ -626,6 +627,11 @@
             "name": "InitiateAt",
             "value": "InitiateAt",
             "description": "Initiate the operation at the given deadline."
+          },
+          {
+            "name": "CompleteBy",
+            "value": "CompleteBy",
+            "description": "Complete the operation by the given deadline."
           }
         ]
       }
@@ -1001,6 +1007,36 @@
         ]
       }
     },
+    "OptimizationPreference": {
+      "type": "string",
+      "description": "The preferences customers can select to optimize their requests to ScheduledActions",
+      "enum": [
+        "Cost",
+        "Availability",
+        "CostAvailabilityBalanced"
+      ],
+      "x-ms-enum": {
+        "name": "OptimizationPreference",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Optimize while considering cost savings"
+          },
+          {
+            "name": "Availability",
+            "value": "Availability",
+            "description": "Optimize while considering availability of resources"
+          },
+          {
+            "name": "CostAvailabilityBalanced",
+            "value": "CostAvailabilityBalanced",
+            "description": "Optimize while considering a balance of cost and availability"
+          }
+        ]
+      }
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -1089,7 +1125,8 @@
           "default": "Unknown",
           "enum": [
             "Unknown",
-            "InitiateAt"
+            "InitiateAt",
+            "CompleteBy"
           ],
           "x-ms-enum": {
             "name": "DeadlineType",
@@ -1104,6 +1141,11 @@
                 "name": "InitiateAt",
                 "value": "InitiateAt",
                 "description": "Initiate the operation at the given deadline."
+              },
+              {
+                "name": "CompleteBy",
+                "value": "CompleteBy",
+                "description": "Complete the operation by the given deadline."
               }
             ]
           }
@@ -1317,7 +1359,8 @@
           "default": "Unknown",
           "enum": [
             "Unknown",
-            "InitiateAt"
+            "InitiateAt",
+            "CompleteBy"
           ],
           "x-ms-enum": {
             "name": "DeadlineType",
@@ -1332,6 +1375,11 @@
                 "name": "InitiateAt",
                 "value": "InitiateAt",
                 "description": "Initiate the operation at the given deadline."
+              },
+              {
+                "name": "CompleteBy",
+                "value": "CompleteBy",
+                "description": "Complete the operation by the given deadline."
               }
             ]
           }
