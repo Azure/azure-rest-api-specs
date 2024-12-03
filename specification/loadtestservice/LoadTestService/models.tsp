@@ -348,6 +348,14 @@ model Test {
   @added(APIVersions.v2024_07_01_preview)
   metricsReferenceIdentityId?: string;
 
+  @doc("Type of the managed identity built in load test engines")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityIds?: string[];
+
   ...SystemMetaData;
 }
 
