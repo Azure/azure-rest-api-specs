@@ -40,6 +40,10 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 ``` yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/operations.json
+suppressions:
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
 ```
 
 ---
