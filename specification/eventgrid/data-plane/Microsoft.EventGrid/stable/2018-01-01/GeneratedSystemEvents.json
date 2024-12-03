@@ -3678,7 +3678,10 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "serialNumber"
+      ]
     },
     "DataBoxCopyStartedEventData": {
       "type": "object",
@@ -3697,7 +3700,10 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "serialNumber"
+      ]
     },
     "DataBoxOrderCompletedEventData": {
       "type": "object",
@@ -3716,7 +3722,10 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "serialNumber"
+      ]
     },
     "DataBoxStageName": {
       "type": "string",
@@ -3756,7 +3765,10 @@
           "type": "string",
           "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
         }
-      }
+      },
+      "required": [
+        "sequenceNumber"
+      ]
     },
     "DeviceConnectionStateEventProperties": {
       "type": "object",
@@ -3780,6 +3792,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "deviceConnectionStateEventInfo"
       ]
     },
@@ -3801,6 +3815,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "twin"
       ]
     },
@@ -3886,7 +3902,14 @@
         }
       },
       "required": [
+        "authenticationType",
+        "connectionState",
+        "deviceId",
+        "etag",
+        "lastActivityTime",
         "properties",
+        "status",
+        "statusUpdateTime",
         "x509Thumbprint"
       ]
     },
@@ -3920,7 +3943,11 @@
           "type": "string",
           "description": "Secondary thumbprint for the x509 certificate."
         }
-      }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
     },
     "DeviceTwinMetadata": {
       "type": "object",
@@ -3931,7 +3958,10 @@
           "description": "The ISO8601 timestamp of the last time the properties were updated.",
           "x-ms-client-name": "$lastUpdated"
         }
-      }
+      },
+      "required": [
+        "lastUpdated"
+      ]
     },
     "DeviceTwinProperties": {
       "type": "object",
@@ -4091,7 +4121,12 @@
           "type": "string",
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         }
-      }
+      },
+      "required": [
+        "clientAuthenticationName",
+        "clientName",
+        "namespaceName"
+      ]
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
@@ -4107,6 +4142,9 @@
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       },
+      "required": [
+        "clientSessionName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4131,6 +4169,9 @@
           "description": "Reason for the disconnection of the MQTT client's session. The value could be\none of the values in the disconnection reasons table."
         }
       },
+      "required": [
+        "clientSessionName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4239,7 +4280,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareDicomImageDeletedEventData": {
       "type": "object",
@@ -4270,7 +4318,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareDicomImageUpdatedEventData": {
       "type": "object",
@@ -4301,7 +4356,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
@@ -4328,7 +4390,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "HealthcareFhirResourceDeletedEventData": {
       "type": "object",
@@ -4355,7 +4421,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "HealthcareFhirResourceType": {
       "type": "string",
@@ -5360,7 +5430,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "IotHubDeviceConnectedEventData": {
       "type": "object",
@@ -6123,7 +6197,15 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
+      ]
     },
     "PolicyInsightsPolicyStateCreatedEventData": {
       "type": "object",
@@ -6158,7 +6240,15 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
+      ]
     },
     "PolicyInsightsPolicyStateDeletedEventData": {
       "type": "object",
@@ -6193,7 +6283,15 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
+      ]
     },
     "RedisExportRDBCompletedEventData": {
       "type": "object",
@@ -7013,17 +7111,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusActiveMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -7043,17 +7152,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
@@ -7073,17 +7193,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -7103,17 +7234,28 @@
         },
         "queueName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null.",
+          "x-nullable": true
         },
         "topicName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         },
         "subscriptionName": {
           "type": "string",
-          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
+          "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null.",
+          "x-nullable": true
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "SignalRServiceClientConnectionConnectedEventData": {
       "type": "object",
@@ -7914,7 +8056,10 @@
           "type": "string",
           "description": "The Azure resource ID of the deleted event subscription."
         }
-      }
+      },
+      "required": [
+        "eventSubscriptionId"
+      ]
     },
     "SubscriptionValidationEventData": {
       "type": "object",
@@ -7928,7 +8073,11 @@
           "type": "string",
           "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         }
-      }
+      },
+      "required": [
+        "validationCode",
+        "validationUrl"
+      ]
     },
     "SubscriptionValidationResponse": {
       "type": "object",
@@ -7938,7 +8087,10 @@
           "type": "string",
           "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
-      }
+      },
+      "required": [
+        "validationResponse"
+      ]
     },
     "WebAppServicePlanUpdatedEventData": {
       "type": "object",
