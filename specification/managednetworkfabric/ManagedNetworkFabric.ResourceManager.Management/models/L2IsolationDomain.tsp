@@ -1,76 +1,63 @@
 import "./common.tsp";
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * L2Isolation Domain Properties defines the properties of the resource.
- */
+@doc("L2Isolation Domain Properties defines the properties of the resource.")
 model L2IsolationDomainProperties {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...AnnotationResource;
 
-  /**
-   * ARM Resource ID of the Network Fabric.
-   */
+  @doc("ARM Resource ID of the Network Fabric.")
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
     }
   ]>;
 
-  /**
-   * Vlan Identifier of the Network Fabric. Example: 501.
-   */
+  @doc("Vlan Identifier of the Network Fabric. Example: 501.")
   @maxValue(4094)
   @minValue(100)
   vlanId: int32;
 
-  /**
-   * Maximum transmission unit. Default value is 1500.
-   */
+  @doc("Maximum transmission unit. Default value is 1500.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32 = 1500;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("Extended VLAN status, default value is Disabled.")
+  extendedVlan?: ExtendedVlan = ExtendedVlan.Disabled;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * The L2 Isolation Domain patch resource definition.
- */
+@doc("The L2 Isolation Domain patch resource definition.")
 model L2IsolationDomainPatch {
   /*
    * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
    */
   ...TagsUpdate;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   properties?: L2IsolationDomainPatchProperties;
 }
 
-/**
- * L2 Isolation Domain Patch Properties defines the patchable properties of the resource.
- */
+@doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")
 @withoutDefaultValues
 model L2IsolationDomainPatchProperties {
   /*
@@ -78,10 +65,23 @@ model L2IsolationDomainPatchProperties {
    */
   ...AnnotationResource;
 
-  /**
-   * Maximum transmission unit. Default value is 1500.
-   */
+  @doc("Maximum transmission unit. Default value is 1500.")
   @maxValue(9200)
   @minValue(64)
-  mtu?: int32 = 1500;
+  mtu?: int32;
+
+  @doc("Extended VLAN status.")
+  @added(Versions.v2024_06_15_preview)
+  extendedVlan?: ExtendedVlan;
+}
+
+@doc("Extended VLAN status.")
+union ExtendedVlan {
+  @doc("Extended VLAN is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Extended VLAN is disabled.")
+  Disabled: "Disabled",
+
+  string,
 }

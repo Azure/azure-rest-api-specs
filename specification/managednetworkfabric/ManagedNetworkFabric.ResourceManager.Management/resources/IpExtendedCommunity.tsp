@@ -6,16 +6,13 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The IP Extended Community resource definition.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The IP Extended Community resource definition.")
 @includeInapplicableMetadataInPayload(false)
 model IpExtendedCommunity
   extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the IP Extended Community.
-   */
+  @doc("Name of the IP Extended Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("ipExtendedCommunityName")
@@ -29,35 +26,23 @@ model IpExtendedCommunity
 
 @armResourceOperations
 interface IpExtendedCommunities {
-  /**
-   * Implements IP Extended Community GET method.
-   */
+  @doc("Implements IP Extended Community GET method.")
   get is ArmResourceRead<IpExtendedCommunity>;
 
-  /**
-   * Implements IP Extended Community PUT method.
-   */
+  @doc("Implements IP Extended Community PUT method.")
   create is ArmResourceCreateOrReplaceAsync<IpExtendedCommunity>;
 
-  /**
-   * API to update certain properties of the IP Extended Community resource.
-   */
+  @doc("API to update certain properties of the IP Extended Community resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<IpExtendedCommunity, IpExtendedCommunityPatch>;
 
-  /**
-   * Implements IP Extended Community DELETE method.
-   */
+  @doc("Implements IP Extended Community DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<IpExtendedCommunity>;
 
-  /**
-   * Implements IpExtendedCommunities list by resource group GET method.
-   */
+  @doc("Implements IpExtendedCommunities list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<IpExtendedCommunity>;
 
-  /**
-   * Implements IpExtendedCommunities list by subscription GET method.
-   */
+  @doc("Implements IpExtendedCommunities list by subscription GET method.")
   listBySubscription is ArmListBySubscription<IpExtendedCommunity>;
 }
 

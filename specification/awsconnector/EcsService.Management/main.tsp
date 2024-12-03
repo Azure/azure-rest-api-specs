@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- EcsServices ----------------------------------------------
@@ -632,7 +632,7 @@ model ServiceConnectTlsCertificateAuthority {
 interface EcsServices {
   get is ArmResourceRead<EcsService>;
   @doc("Create a EcsService. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EcsService>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EcsService>;
   update is ArmCustomPatchAsync<
     EcsService,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcsService>

@@ -566,7 +566,7 @@
           "description": "If a RequestedNodeLabel declared inside of MachineFunction, this particular MachineFunction will filled with this RequestedNodeLabels, but if no such requestedNodeLabel in ManaTree files, it will throw exception."
         },
         "azureLocation": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {
@@ -582,6 +582,10 @@
         "sourceManaTree",
         "targetManaTree"
       ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "EnvironmentMode": {
       "type": "string",
@@ -706,7 +710,7 @@
           "readOnly": true
         },
         "azureLocation": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {

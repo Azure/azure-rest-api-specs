@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- OrganizationsOrganizations ----------------------------------------------
@@ -110,7 +110,7 @@ union FeatureSet {
 interface OrganizationsOrganizations {
   get is ArmResourceRead<OrganizationsOrganization>;
   @doc("Create a OrganizationsOrganization. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationsOrganization>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<OrganizationsOrganization>;
   update is ArmCustomPatchAsync<
     OrganizationsOrganization,
     Azure.ResourceManager.Foundations.TagsUpdateModel<OrganizationsOrganization>

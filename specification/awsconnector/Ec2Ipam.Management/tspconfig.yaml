@@ -1,0 +1,13 @@
+output-dir: "{project-root}/../"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "./resource-manager"
+    emitter-output-dir: "{output-dir}"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ec2Ipam.json"
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

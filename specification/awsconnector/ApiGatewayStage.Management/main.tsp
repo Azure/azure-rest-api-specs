@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- ApiGatewayStages ----------------------------------------------
@@ -203,7 +203,7 @@ model Tag {
 interface ApiGatewayStages {
   get is ArmResourceRead<ApiGatewayStage>;
   @doc("Create a ApiGatewayStage. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ApiGatewayStage>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ApiGatewayStage>;
   update is ArmCustomPatchAsync<
     ApiGatewayStage,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ApiGatewayStage>
