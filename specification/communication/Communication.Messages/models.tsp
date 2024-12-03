@@ -422,6 +422,7 @@ model ActionGroupItem {
 @added(Versions.c2024_11_15_Preview)
 @doc("The media content.")
 model MediaMessageContent {
+  @clientName("mediaUrl", "java")
   @doc("MediaUri of the media content.")
   mediaUri: url;
 }
