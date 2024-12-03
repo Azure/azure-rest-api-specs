@@ -978,7 +978,7 @@
         }
       }
     },
-    "SwiftVirtualNetworkProxy": {
+    "SwiftVirtualNetwork": {
       "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
       "type": "object",
       "allOf": [
@@ -988,12 +988,12 @@
       ],
       "properties": {
         "properties":{
-          "$ref": "#/definitions/SwiftVirtualNetwork"
+          "$ref": "#/definitions/SwiftVirtualNetworkProperties"
         }
       }
     },
-    "SwiftVirtualNetwork": {
-      "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
+    "SwiftVirtualNetworkProperties": {
+      "description": "SwiftVirtualNetwork resource specific properties",
       "type": "object",
       "properties": {
         "subnetResourceId": {
@@ -1096,7 +1096,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SwiftVirtualNetwork"
+            "$ref": "#/definitions/SwiftVirtualNetworkProperties"
           }
         },
         "nextLink": {
