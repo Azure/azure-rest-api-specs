@@ -1,0 +1,855 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "NetworkFirewallFirewallPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/networkFirewallFirewallPolicies": {
+      "get": {
+        "operationId": "NetworkFirewallFirewallPolicies_ListBySubscription",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "List NetworkFirewallFirewallPolicy resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_ListBySubscription": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallFirewallPolicies": {
+      "get": {
+        "operationId": "NetworkFirewallFirewallPolicies_ListByResourceGroup",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "List NetworkFirewallFirewallPolicy resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_ListByResourceGroup": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/networkFirewallFirewallPolicies/{name}": {
+      "get": {
+        "operationId": "NetworkFirewallFirewallPolicies_Get",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "Get a NetworkFirewallFirewallPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallFirewallPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_Get": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkFirewallFirewallPolicies_CreateOrReplace",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "Create a NetworkFirewallFirewallPolicy. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallFirewallPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkFirewallFirewallPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkFirewallFirewallPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_CreateOrReplace": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NetworkFirewallFirewallPolicies_Update",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "Update a NetworkFirewallFirewallPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallFirewallPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicyTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_Update": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkFirewallFirewallPolicies_Delete",
+        "tags": [
+          "NetworkFirewallFirewallPolicies"
+        ],
+        "description": "Delete a NetworkFirewallFirewallPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of NetworkFirewallFirewallPolicy",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFirewallFirewallPolicies_Delete": {
+            "$ref": "./examples/NetworkFirewallFirewallPolicies_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ActionDefinition": {
+      "type": "object",
+      "description": "Definition of ActionDefinition",
+      "properties": {
+        "publishMetricAction": {
+          "$ref": "#/definitions/PublishMetricAction",
+          "description": "Property publishMetricAction"
+        }
+      }
+    },
+    "AwsNetworkFirewallFirewallPolicyProperties": {
+      "type": "object",
+      "description": "Definition of awsNetworkFirewallFirewallPolicy",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Property description"
+        },
+        "firewallPolicy": {
+          "$ref": "#/definitions/FirewallPolicy",
+          "description": "Property firewallPolicy"
+        },
+        "firewallPolicyArn": {
+          "type": "string",
+          "description": "A resource ARN."
+        },
+        "firewallPolicyId": {
+          "type": "string",
+          "description": "Property firewallPolicyId"
+        },
+        "firewallPolicyName": {
+          "type": "string",
+          "description": "Property firewallPolicyName"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Property tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CustomAction": {
+      "type": "object",
+      "description": "Definition of CustomAction",
+      "properties": {
+        "actionDefinition": {
+          "$ref": "#/definitions/ActionDefinition",
+          "description": "Property actionDefinition"
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Property actionName"
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Definition of Dimension",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    },
+    "FirewallPolicy": {
+      "type": "object",
+      "description": "Definition of FirewallPolicy",
+      "properties": {
+        "policyVariables": {
+          "$ref": "#/definitions/RuleVariablesModel",
+          "description": "Property policyVariables"
+        },
+        "statefulDefaultActions": {
+          "type": "array",
+          "description": "Property statefulDefaultActions",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "statefulEngineOptions": {
+          "$ref": "#/definitions/StatefulEngineOptions",
+          "description": "Property statefulEngineOptions"
+        },
+        "statefulRuleGroupReferences": {
+          "type": "array",
+          "description": "Property statefulRuleGroupReferences",
+          "items": {
+            "$ref": "#/definitions/StatefulRuleGroupReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessCustomActions": {
+          "type": "array",
+          "description": "Property statelessCustomActions",
+          "items": {
+            "$ref": "#/definitions/CustomAction"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessDefaultActions": {
+          "type": "array",
+          "description": "Property statelessDefaultActions",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessFragmentDefaultActions": {
+          "type": "array",
+          "description": "Property statelessFragmentDefaultActions",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "statelessRuleGroupReferences": {
+          "type": "array",
+          "description": "Property statelessRuleGroupReferences",
+          "items": {
+            "$ref": "#/definitions/StatelessRuleGroupReference"
+          },
+          "x-ms-identifiers": []
+        },
+        "tlsInspectionConfigurationArn": {
+          "type": "string",
+          "description": "A resource ARN."
+        }
+      }
+    },
+    "IPSet": {
+      "type": "object",
+      "description": "Definition of IPSet",
+      "properties": {
+        "definition": {
+          "type": "array",
+          "description": "Property definition",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkFirewallFirewallPolicy": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkFirewallFirewallPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFirewallFirewallPolicyListResult": {
+      "type": "object",
+      "description": "The response of a NetworkFirewallFirewallPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkFirewallFirewallPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkFirewallFirewallPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkFirewallFirewallPolicyProperties": {
+      "type": "object",
+      "description": "Definition of NetworkFirewallFirewallPolicy",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsNetworkFirewallFirewallPolicyProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkFirewallFirewallPolicyTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in NetworkFirewallFirewallPolicy resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublishMetricAction": {
+      "type": "object",
+      "description": "Definition of PublishMetricAction",
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "description": "Property dimensions",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RuleVariablesModel": {
+      "type": "object",
+      "description": "Definition of RuleVariables",
+      "properties": {
+        "ruleVariables": {
+          "type": "object",
+          "description": "Property ruleVariables",
+          "additionalProperties": {
+            "$ref": "#/definitions/IPSet"
+          }
+        }
+      }
+    },
+    "StatefulEngineOptions": {
+      "type": "object",
+      "description": "Definition of StatefulEngineOptions",
+      "properties": {
+        "ruleOrder": {
+          "$ref": "#/definitions/StatefulEngineOptionsRuleOrder",
+          "description": "Property ruleOrder"
+        },
+        "streamExceptionPolicy": {
+          "$ref": "#/definitions/StatefulEngineOptionsStreamExceptionPolicy",
+          "description": "Property streamExceptionPolicy"
+        }
+      }
+    },
+    "StatefulEngineOptionsRuleOrder": {
+      "type": "string",
+      "description": "StatefulEngineOptionsRuleOrder enum",
+      "enum": [
+        "DEFAULT_ACTION_ORDER",
+        "STRICT_ORDER"
+      ],
+      "x-ms-enum": {
+        "name": "StatefulEngineOptionsRuleOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEFAULT_ACTION_ORDER",
+            "value": "DEFAULT_ACTION_ORDER",
+            "description": "StatefulEngineOptionsRuleOrder enum DEFAULT_ACTION_ORDER"
+          },
+          {
+            "name": "STRICT_ORDER",
+            "value": "STRICT_ORDER",
+            "description": "StatefulEngineOptionsRuleOrder enum STRICT_ORDER"
+          }
+        ]
+      }
+    },
+    "StatefulEngineOptionsStreamExceptionPolicy": {
+      "type": "string",
+      "description": "StatefulEngineOptionsStreamExceptionPolicy enum",
+      "enum": [
+        "CONTINUE",
+        "DROP",
+        "REJECT"
+      ],
+      "x-ms-enum": {
+        "name": "StatefulEngineOptionsStreamExceptionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CONTINUE",
+            "value": "CONTINUE",
+            "description": "StatefulEngineOptionsStreamExceptionPolicy enum CONTINUE"
+          },
+          {
+            "name": "DROP",
+            "value": "DROP",
+            "description": "StatefulEngineOptionsStreamExceptionPolicy enum DROP"
+          },
+          {
+            "name": "REJECT",
+            "value": "REJECT",
+            "description": "StatefulEngineOptionsStreamExceptionPolicy enum REJECT"
+          }
+        ]
+      }
+    },
+    "StatefulRuleGroupOverride": {
+      "type": "object",
+      "description": "Definition of StatefulRuleGroupOverride",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/StatefulRuleGroupOverrideAction",
+          "description": "Property action"
+        }
+      }
+    },
+    "StatefulRuleGroupOverrideAction": {
+      "type": "string",
+      "description": "StatefulRuleGroupOverrideAction enum",
+      "enum": [
+        "DROP_TO_ALERT"
+      ],
+      "x-ms-enum": {
+        "name": "StatefulRuleGroupOverrideAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DROP_TO_ALERT",
+            "value": "DROP_TO_ALERT",
+            "description": "StatefulRuleGroupOverrideAction enum DROP_TO_ALERT"
+          }
+        ]
+      }
+    },
+    "StatefulRuleGroupReference": {
+      "type": "object",
+      "description": "Definition of StatefulRuleGroupReference",
+      "properties": {
+        "override": {
+          "$ref": "#/definitions/StatefulRuleGroupOverride",
+          "description": "Property override"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property priority"
+        },
+        "resourceArn": {
+          "type": "string",
+          "description": "A resource ARN."
+        }
+      }
+    },
+    "StatelessRuleGroupReference": {
+      "type": "object",
+      "description": "Definition of StatelessRuleGroupReference",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property priority"
+        },
+        "resourceArn": {
+          "type": "string",
+          "description": "A resource ARN."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

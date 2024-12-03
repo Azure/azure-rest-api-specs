@@ -1,0 +1,852 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticLoadBalancingV2Listeners"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2Listeners": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2Listeners_ListBySubscription",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "List ElasticLoadBalancingV2Listener resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_ListBySubscription": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2Listeners": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2Listeners_ListByResourceGroup",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "List ElasticLoadBalancingV2Listener resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_ListByResourceGroup": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2Listeners/{name}": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2Listeners_Get",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "Get a ElasticLoadBalancingV2Listener",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2Listener",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_Get": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticLoadBalancingV2Listeners_CreateOrReplace",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "Create a ElasticLoadBalancingV2Listener. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2Listener",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticLoadBalancingV2Listener' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticLoadBalancingV2Listener' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_CreateOrReplace": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticLoadBalancingV2Listeners_Update",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "Update a ElasticLoadBalancingV2Listener",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2Listener",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2ListenerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_Update": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticLoadBalancingV2Listeners_Delete",
+        "tags": [
+          "ElasticLoadBalancingV2Listeners"
+        ],
+        "description": "Delete a ElasticLoadBalancingV2Listener",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2Listener",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2Listeners_Delete": {
+            "$ref": "./examples/ElasticLoadBalancingV2Listeners_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "Definition of Action",
+      "properties": {
+        "authenticateCognitoConfig": {
+          "$ref": "#/definitions/AuthenticateCognitoConfig",
+          "description": "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``. Specifies information required when integrating with Amazon Cognito to authenticate users."
+        },
+        "authenticateOidcConfig": {
+          "$ref": "#/definitions/AuthenticateOidcConfig",
+          "description": "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``. Specifies information required using an identity provide (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users."
+        },
+        "fixedResponseConfig": {
+          "$ref": "#/definitions/FixedResponseConfig",
+          "description": "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. Specifies information required when returning a custom HTTP response."
+        },
+        "forwardConfig": {
+          "$ref": "#/definitions/ForwardConfig",
+          "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first."
+        },
+        "redirectConfig": {
+          "$ref": "#/definitions/RedirectConfig",
+          "description": "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. Information about a redirect action. A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values. You can reuse URI components using the following reserved keywords:  +  #{protocol}  +  #{host}  +  #{port}  +  #{path} (the leading '/' is removed)  +  #{query}   For example, you can change the path to '/new/#{path}', the hostname to 'example.#{host}', or the query to '#{query}&value=xyz'."
+        },
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AuthenticateCognitoConfig": {
+      "type": "object",
+      "description": "Definition of AuthenticateCognitoConfig",
+      "properties": {
+        "authenticationRequestExtraParams": {
+          "type": "object",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "onUnauthenticatedRequest": {
+          "type": "string",
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
+        },
+        "sessionCookieName": {
+          "type": "string",
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
+        },
+        "sessionTimeout": {
+          "type": "string",
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
+        },
+        "userPoolArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the Amazon Cognito user pool."
+        },
+        "userPoolClientId": {
+          "type": "string",
+          "description": "The ID of the Amazon Cognito user pool client."
+        },
+        "userPoolDomain": {
+          "type": "string",
+          "description": "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool."
+        }
+      }
+    },
+    "AuthenticateOidcConfig": {
+      "type": "object",
+      "description": "Definition of AuthenticateOidcConfig",
+      "properties": {
+        "authenticationRequestExtraParams": {
+          "type": "object",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The OAuth 2.0 client identifier."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "onUnauthenticatedRequest": {
+          "type": "string",
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
+        },
+        "sessionCookieName": {
+          "type": "string",
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
+        },
+        "sessionTimeout": {
+          "type": "string",
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        },
+        "useExistingClientSecret": {
+          "type": "boolean",
+          "description": "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false."
+        },
+        "userInfoEndpoint": {
+          "type": "string",
+          "description": "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
+        }
+      }
+    },
+    "AwsElasticLoadBalancingV2ListenerProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticLoadBalancingV2Listener",
+      "properties": {
+        "alpnPolicy": {
+          "type": "array",
+          "description": "[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "certificates": {
+          "type": "array",
+          "description": "The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultActions": {
+          "type": "array",
+          "description": "The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": []
+        },
+        "listenerArn": {
+          "type": "string",
+          "description": "Property listenerArn"
+        },
+        "loadBalancerArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the load balancer."
+        },
+        "mutualAuthentication": {
+          "$ref": "#/definitions/MutualAuthentication",
+          "description": "The mutual authentication configuration information. Specifies the configuration information for mutual authentication."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port on which the load balancer is listening. You cannot specify a port for a Gateway Load Balancer."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You cannot specify a protocol for a Gateway Load Balancer."
+        },
+        "sslPolicy": {
+          "type": "string",
+          "description": "[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies) in the *Network Load Balancers Guide*."
+        }
+      }
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "Definition of Certificate",
+      "properties": {
+        "certificateArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the certificate."
+        }
+      }
+    },
+    "ElasticLoadBalancingV2Listener": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticLoadBalancingV2ListenerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticLoadBalancingV2ListenerListResult": {
+      "type": "object",
+      "description": "The response of a ElasticLoadBalancingV2Listener list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticLoadBalancingV2Listener items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticLoadBalancingV2Listener"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticLoadBalancingV2ListenerProperties": {
+      "type": "object",
+      "description": "Definition of ElasticLoadBalancingV2Listener",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticLoadBalancingV2ListenerProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticLoadBalancingV2ListenerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticLoadBalancingV2Listener resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FixedResponseConfig": {
+      "type": "object",
+      "description": "Definition of FixedResponseConfig",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "The content type. Valid Values: text/plain | text/css | text/html | application/javascript | application/json"
+        },
+        "messageBody": {
+          "type": "string",
+          "description": "The message."
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP response code (2XX, 4XX, or 5XX)."
+        }
+      }
+    },
+    "ForwardConfig": {
+      "type": "object",
+      "description": "Definition of ForwardConfig",
+      "properties": {
+        "targetGroupStickinessConfig": {
+          "$ref": "#/definitions/TargetGroupStickinessConfig",
+          "description": "Information about the target group stickiness for a rule. Information about the target group stickiness for a rule."
+        },
+        "targetGroups": {
+          "type": "array",
+          "description": "Information about how traffic will be distributed between multiple target groups in a forward rule.",
+          "items": {
+            "$ref": "#/definitions/TargetGroupTuple"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MutualAuthentication": {
+      "type": "object",
+      "description": "Definition of MutualAuthentication",
+      "properties": {
+        "ignoreClientCertificateExpiry": {
+          "type": "boolean",
+          "description": "Indicates whether expired client certificates are ignored."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``."
+        },
+        "trustStoreArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the trust store."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RedirectConfig": {
+      "type": "object",
+      "description": "Definition of RedirectConfig",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "The hostname. This component is not percent-encoded. The hostname can contain #{host}."
+        },
+        "path": {
+          "type": "string",
+          "description": "The absolute path, starting with the leading '/'. This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port. You can specify a value from 1 to 65535 or #{port}."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading '?', as it is automatically added. You can specify any of the reserved keywords."
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302)."
+        }
+      }
+    },
+    "TargetGroupStickinessConfig": {
+      "type": "object",
+      "description": "Definition of TargetGroupStickinessConfig",
+      "properties": {
+        "durationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days)."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether target group stickiness is enabled."
+        }
+      }
+    },
+    "TargetGroupTuple": {
+      "type": "object",
+      "description": "Definition of TargetGroupTuple",
+      "properties": {
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the target group."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight. The range is 0 to 999."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
