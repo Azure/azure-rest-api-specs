@@ -32,10 +32,10 @@ op createRun is Azure.Core.Foundations.Operation<
     @path
     threadId: string;
 
-    @doc("
-    A list of additional fields to include in the response.
-    Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-    ")
+    @doc("""
+      A list of additional fields to include in the response.
+      Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
+      """)
     @query
     include: string[];
 

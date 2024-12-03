@@ -134,6 +134,7 @@ model AgentsApiResponseFormat {
 }
 
 /** Possible API response formats. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
 union ResponseFormat {
   string,
 
@@ -152,15 +153,17 @@ union ResponseFormat {
  */
 model ResponseFormatJsonSchemaType {
   /** Type */
-  type: "json_schema",
+  type: "json_schema";
 
+  /** The JSON schema, describing response format. */
   @encodedName("application/json", "json_schema")
-  jsonSchema: ResponseFormatJsonSchema
+  jsonSchema: ResponseFormatJsonSchema;
 }
 
 /**
  * A description of what the response format is for, used by the model to determine how to respond in the format.
  */
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
 model ResponseFormatJsonSchema {
   /** A description of what the response format is for, used by the model to determine how to respond in the format. */
   description?: string;

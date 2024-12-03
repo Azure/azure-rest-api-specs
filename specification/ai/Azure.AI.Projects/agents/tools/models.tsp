@@ -207,8 +207,8 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
-  File search tool call result.
-""")
+    File search tool call result.
+  """)
 model RunStepFileSearchToolCallResults {
   @doc("The ID of the file that result was found in.")
   @encodedName("application/json", "file_id")
@@ -221,19 +221,19 @@ model RunStepFileSearchToolCallResults {
   @doc("The score of the result. All values must be a floating point number between 0 and 1.")
   @minValue(0)
   @maxValue(1)
-  score: float32
+  score: float32;
 
   @doc("The content of the result that was found. The content is only included if requested via the include query parameter.")
-  content?: FileSearchToolCallContent[]
+  content?: FileSearchToolCallContent[];
 }
 
-@doc("""The file search result content object.""")
+@doc("The file search result content object.")
 model FileSearchToolCallContent {
   @doc("The type of the content.")
-  type: "text"
+  type: "text";
 
   @doc("The text content of the file.")
-  text: string
+  text: string;
 }
 
 @doc("""
