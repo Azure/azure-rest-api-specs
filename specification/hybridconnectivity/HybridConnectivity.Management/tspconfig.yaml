@@ -44,3 +44,14 @@ options:
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-hybridconnectivity"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/hybridconnectivity"
+    package-dir: "armhybridconnectivity"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
