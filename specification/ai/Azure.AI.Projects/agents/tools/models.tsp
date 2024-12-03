@@ -142,7 +142,6 @@ model FunctionDefinition {
 
 @doc("The definition of Azure function.")
 model AzureFunctionDefinition {
-
   @doc("The definition of azure function and its parameters.")
   function: FunctionDefinition;
 
@@ -473,12 +472,12 @@ model AzureFunctionBinding {
 
 @doc("The definition of input or output queue for Azure function.")
 model AzureStorageQueueBinding extends AzureFunctionBinding {
-    @doc("The type of binding, which is always 'storage_queue'.")
-    type: "storage_queue";
+  @doc("The type of binding, which is always 'storage_queue'.")
+  type: "storage_queue";
 
-    @doc("Storage queue.")
-    @encodedName("application/json", "storage_queue")
-    StorageQueue: AzureFunctionStorageQueue;
+  @doc("Storage queue.")
+  @encodedName("application/json", "storage_queue")
+  StorageQueue: AzureFunctionStorageQueue;
 }
 
 @doc("The structure for keeping storage queue name and URI.")

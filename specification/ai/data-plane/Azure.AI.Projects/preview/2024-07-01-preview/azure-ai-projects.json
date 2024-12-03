@@ -3908,6 +3908,105 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "Agents.AzureFunctionBinding": {
+      "type": "object",
+      "description": "The Azure function binding",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of binding."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "Agents.AzureFunctionDefinition": {
+      "type": "object",
+      "description": "The definition of Azure function.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/Agents.FunctionDefinition",
+          "description": "The definition of azure function and its parameters."
+        },
+        "input_binding": {
+          "$ref": "#/definitions/Agents.AzureStorageQueueBinding",
+          "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it.",
+          "x-ms-client-name": "InputBinding"
+        },
+        "output_binding": {
+          "$ref": "#/definitions/Agents.AzureStorageQueueBinding",
+          "description": "Output storage queue. The function writes output to this queue when the input items are processed.",
+          "x-ms-client-name": "OutputBinding"
+        }
+      },
+      "required": [
+        "function",
+        "input_binding",
+        "output_binding"
+      ]
+    },
+    "Agents.AzureFunctionStorageQueue": {
+      "type": "object",
+      "description": "The structure for keeping storage queue name and URI.",
+      "properties": {
+        "queue_service_uri": {
+          "type": "string",
+          "description": "URI to the Azure Storage Queue service allowing you to manipulate a queue.",
+          "x-ms-client-name": "StorageQueueUri"
+        },
+        "queue_name": {
+          "type": "string",
+          "description": "The name of an Azure function storage queue.",
+          "x-ms-client-name": "QueueName"
+        }
+      },
+      "required": [
+        "queue_service_uri",
+        "queue_name"
+      ]
+    },
+    "Agents.AzureFunctionToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a azure function tool as used to configure an agent.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/Agents.AzureFunctionDefinition",
+          "description": "The definition of the concrete function that the function tool should call.",
+          "x-ms-client-name": "AzureFunction"
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
+    "Agents.AzureStorageQueueBinding": {
+      "type": "object",
+      "description": "The definition of input or output queue for Azure function.",
+      "properties": {
+        "storage_queue": {
+          "$ref": "#/definitions/Agents.AzureFunctionStorageQueue",
+          "description": "Storage queue.",
+          "x-ms-client-name": "StorageQueue"
+        }
+      },
+      "required": [
+        "storage_queue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.AzureFunctionBinding"
+        }
+      ],
+      "x-ms-discriminator-value": "storage_queue"
+    },
     "Agents.BingGroundingToolDefinition": {
       "type": "object",
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
