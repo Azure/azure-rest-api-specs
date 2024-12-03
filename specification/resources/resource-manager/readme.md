@@ -42,7 +42,11 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2024-05-stable
+tag: package-policy-2025-01-stable
+```
+
+``` yaml $(package-databoundaries)
+tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
@@ -89,12 +93,28 @@ tag: package-snapshots-2022-11
 tag: package-bicep-2023-11
 ```
 
+### Tag: package-policy-2025-01-stable
 
-### Tag: package-policy-2024-05-stable
+These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
 
-These settings apply only when `--tag=package-policy-2024-05-stable` is specified on the command line.
+```yaml $(tag) == 'package-policy-2025-01-stable'
+input-file:
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
 
-```yaml $(tag) == 'package-policy-2024-05-stable'
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-05
+
+These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-05'
 input-file:
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2024-05-01/policyDefinitionVersions.json
@@ -305,6 +325,15 @@ These settings apply only when `--tag=package-snapshots-2022-11` is specified on
 ``` yaml $(tag) == 'package-snapshots-2022-11'
 input-file:
 - Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
+```
+
+### Tag: package-databoundaries-2024-08
+
+These settings apply only when `--tag=package-databoundaries-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-databoundaries-2024-08'
+input-file:
+  - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
 ```
 
 ### Tag: package-changes-2022-05
@@ -1008,6 +1037,23 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
+```
+
 ## Suppression
 
 ``` yaml
@@ -1535,6 +1581,24 @@ directive:
   - suppress: ResourceNameRestriction
     from: policySetDefinitionVersions.json
     reason: Using common types for management group name
+  - suppress: TenantLevelAPIsNotAllowed
+    from: dataBoundaries.json
+    reason: "Have approval from the PAS team."
+  - suppress: GetCollectionResponseSchema
+    from: dataBoundaries.json
+    reason: "Do not have any list calls."
+  - suppress: ParametersInPointGet
+    from: policyAssignments.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: ParametersInPointGet
+    from: policySetDefinitions.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: ParametersInPointGet
+    from: policySetDefinitionVersions.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: policyAssignments.json
+    reason: "Policy assignments can have a manged identity associated with them. This requires a location."
 ```
 
 ---
@@ -1589,21 +1653,4 @@ batch:
   - package-changes: true
   - package-snapshots: true
   - package-bicep: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2016-09-01/locks.json
-- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
-- Microsoft.Resources/stable/2016-06-01/subscriptions.json
-- Microsoft.Resources/stable/2018-05-01/resources.json
-
-override-info:
-  title: PolicyClient
 ```
