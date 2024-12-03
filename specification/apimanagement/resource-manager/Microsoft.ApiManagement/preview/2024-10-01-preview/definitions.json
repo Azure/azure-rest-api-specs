@@ -9232,12 +9232,70 @@
         "description": {
           "type": "string",
           "description": "Description of the workspace."
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of Gateway.",
+          "enum": [
+            "KubernetesManaged",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "KubernetesManaged",
+                "description": "Gateway managed by Kubernetes resources."
+              },
+              {
+                "value": "Default",
+                "description": "Default kind of gateway."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state.",
+          "enum": [
+            "Created",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "configurationApi": {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/ConfigurationApiProperties",
+              "description": "Configuration API properties."
+            }
+          }
         }
       },
       "required": [
         "displayName"
       ],
       "description": "Workspace entity properties."
+    },
+    "ConfigurationApiProperties": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Hostname of the configuration API."
+        }
+      },
+      "required": [
+        "hostname"
+      ],
+      "description": "Configuration API properties."
     },
     "ProductApiLinkCollection": {
       "type": "object",

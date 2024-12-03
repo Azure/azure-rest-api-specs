@@ -666,6 +666,29 @@
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of gateway.",
+          "enum": [
+            "KubernetesManaged",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "KubernetesManaged",
+                "description": "Gateway managed by Kubernetes resources."
+              },
+              {
+                "value": "Default",
+                "description": "Default kind of gateway."
+              }
+            ]
+          }
         }
       },
       "allOf": [
