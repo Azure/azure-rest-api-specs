@@ -44,11 +44,11 @@ tag: package-2024-05-01-preview
 
 ### Tag: package-2024-05-01-preview
 
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05-01-preview'
+```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
-  - Microsoft.Impact/preview/2024-05-01-preview/impact.json
+  - Microsoft.Impact/preview/2025-02-01-preview/impact.json
 ```
 
 ---
