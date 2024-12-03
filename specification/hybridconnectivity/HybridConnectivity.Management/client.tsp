@@ -49,3 +49,6 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceName, "HybridConnectivityServiceName", "csharp");
 @@clientName(Type, "HybridConnectivityEndpointType", "csharp");
 @@clientName(EndpointProperties.type, "endpointType", "csharp");
+
+@@clientName(ServiceConfigurationResources, "ServiceConfigurations", "go");
+@@clientName(EndpointResources, "Endpoints", "go");
