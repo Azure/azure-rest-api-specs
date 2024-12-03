@@ -206,26 +206,34 @@ function New-SwaggerAPIViewTokens {
 
   # Generate Swagger APIView Tokens
   foreach ($readMeFile in $swaggerReadMeFiles) {
-    $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
-    $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
-    New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
-
-    # Generate New APIView Token using default tag on source branch
     git checkout $SourceCommitId
-    $sourceTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
-    Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
-      -TempDirectory $TempDirectory -Tag $sourceTagInfo.DefaultTag | Out-Null
+    if (Test-Path -Path $readmeFile) {
+      $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
+      $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
+      New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
 
-    # Generate BaseLine APIView Token using source commit tag on target branch or defaukt tag if source commit tag does not exist
-    git checkout $TargetCommitId
-    if (Test-Path -Path $readMeFile) {
-      $targetTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
-      $baseLineTag = $targetTagInfo.DefaultTag
-      if ($targetTagInfo.Tags.Contains($sourceTagInfo.DefaultTag)) {
-        $baseLineTag = $sourceTagInfo.DefaultTag
+      # Generate New APIView Token using default tag on source branch
+      $sourceTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
+      Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+        -TempDirectory $TempDirectory -Tag $sourceTagInfo.DefaultTag | Out-Null
+
+      # Generate BaseLine APIView Token using source commit tag on target branch or defaukt tag if source commit tag does not exist
+      git checkout $TargetCommitId
+      if (Test-Path -Path $readMeFile) {
+        $targetTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
+        $baseLineTag = $targetTagInfo.DefaultTag
+        if ($targetTagInfo.Tags.Contains($sourceTagInfo.DefaultTag)) {
+          $baseLineTag = $sourceTagInfo.DefaultTag
+        }
+        Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+          -TempDirectory $TempDirectory -Tag $baseLineTag | Out-Null
       }
-      Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
-        -TempDirectory $TempDirectory -Tag $baseLineTag | Out-Null
+      else {
+        LogWarning " Swagger ReadMe file '$readMeFile' not found on TargetBranch. Skipping APIView token generation."
+      }
+    }
+    else {
+      LogWarning " Swagger ReadMe file '$readMeFile' not found on SourceBranch. Skipping APIView token generation."
     }
   }
 
