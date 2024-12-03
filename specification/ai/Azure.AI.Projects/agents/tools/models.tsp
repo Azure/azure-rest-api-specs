@@ -96,6 +96,9 @@ model FileSearchToolDefinitionDetails {
   @maxValue(50)
   maxNumResults?: int32;
 
+  /**
+   * Ranking options for file search.
+   */
   @encodedName("application/json", "ranking_options")
   rankingOptions?: FileSearchRankingOptions;
 }
@@ -114,13 +117,12 @@ model AzureFunctionToolDefinition extends ToolDefinition {
  * Ranking options for file search.
  */
 model FileSearchRankingOptions {
-
   @doc("File search ranker.")
   ranker: string;
 
   @doc("Ranker search threshold.")
   @encodedName("application/json", "score_threshold")
-  scoreThreshold: float32
+  scoreThreshold: float32;
 }
 
 // Definition details: Functions

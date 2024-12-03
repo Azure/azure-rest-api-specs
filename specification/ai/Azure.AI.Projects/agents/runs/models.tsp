@@ -143,11 +143,20 @@ model ThreadRun {
   toolResources?: UpdateToolResourcesOptions | null;
 
   @doc("Determines if tools can be executed in parallel within the run.")
-  parallelToolCalls?: boolean;
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls: boolean;
+}
+
+/**
+ * Details on why the run is incomplete. Will be `null` if the run is not incomplete.
+ */
+model IncompleteRunDetails {
+  @doc("The reason why the run is incomplete. This indicates which specific token limit was reached during the run.")
+  reason: IncompleteDetailsReason;
 }
 
 /** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
-union IncompleteRunDetails {
+union IncompleteDetailsReason {
   string,
 
   /** Maximum completion tokens exceeded */
@@ -267,6 +276,10 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   responseFormat?: AgentsApiResponseFormatOption | null;
+
+  /** If `true` functions will run in parallel during tool use. */
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
 }
@@ -426,6 +439,10 @@ model CreateAndRunThreadOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
   responseFormat?: AgentsApiResponseFormatOption | null;
+
+  /** If `true` functions will run in parallel during tool use. */
+  @encodedName("application/json", "parallel_tool_calls")
+  parallelToolCalls?: boolean;
 
   ...OptionalNullableMetadata;
 }

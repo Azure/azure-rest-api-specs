@@ -2688,15 +2688,23 @@
                   },
                   "x-ms-client-name": "fileIds"
                 },
+                "data_sources": {
+                  "type": "array",
+                  "description": "List of Azure assets.",
+                  "minItems": 1,
+                  "maxItems": 500,
+                  "items": {
+                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
+                  },
+                  "x-ms-client-name": "dataSources",
+                  "x-ms-identifiers": []
+                },
                 "chunking_strategy": {
                   "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
-              },
-              "required": [
-                "file_ids"
-              ]
+              }
             }
           }
         ],
@@ -3184,15 +3192,21 @@
                   "description": "Identifier of the file.",
                   "x-ms-client-name": "fileId"
                 },
+                "data_sources": {
+                  "type": "array",
+                  "description": "Azure asset ID.",
+                  "items": {
+                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
+                  },
+                  "x-ms-client-name": "dataSources",
+                  "x-ms-identifiers": []
+                },
                 "chunking_strategy": {
                   "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
-              },
-              "required": [
-                "file_id"
-              ]
+              }
             }
           }
         ],
@@ -3455,6 +3469,7 @@
         "thread.run.in_progress",
         "thread.run.requires_action",
         "thread.run.completed",
+        "thread.run.incomplete",
         "thread.run.failed",
         "thread.run.cancelling",
         "thread.run.cancelled",
@@ -3507,6 +3522,11 @@
             "name": "ThreadRunCompleted",
             "value": "thread.run.completed",
             "description": "Event sent when a run is completed. The data of this event is of type ThreadRun"
+          },
+          {
+            "name": "ThreadRunIncomplete",
+            "value": "thread.run.incomplete",
+            "description": "Event sent when a run ends incomplete. The data of this event is of type ThreadRun"
           },
           {
             "name": "ThreadRunFailed",
@@ -3792,7 +3812,7 @@
         "code_interpreter",
         "file_search",
         "bing_grounding",
-        "microsoft_fabric",
+        "fabric_aiskill",
         "sharepoint_grounding",
         "azure_ai_search"
       ],
@@ -3822,8 +3842,8 @@
           },
           {
             "name": "microsoftFabric",
-            "value": "microsoft_fabric",
-            "description": "Tool type `microsoft_fabric`"
+            "value": "fabric_aiskill",
+            "description": "Tool type `fabric_aiskill`"
           },
           {
             "name": "sharepoint",
@@ -3930,6 +3950,16 @@
             "type": "string"
           },
           "x-ms-client-name": "fileIds"
+        },
+        "data_sources": {
+          "type": "array",
+          "description": "The data sources to be used. This option is mutually exclusive with the `fileIds` property.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4109,6 +4139,11 @@
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -4201,9 +4236,10 @@
           "description": "Adds additional messages to the thread before creating the run.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.ThreadMessage"
+            "$ref": "#/definitions/Agents.ThreadMessageOptions"
           },
-          "x-ms-client-name": "additionalMessages"
+          "x-ms-client-name": "additionalMessages",
+          "x-ms-identifiers": []
         },
         "tools": {
           "type": "array",
@@ -4269,6 +4305,11 @@
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
         },
         "metadata": {
           "type": "object",
@@ -4450,6 +4491,26 @@
         ]
       }
     },
+    "Agents.FileSearchRankingOptions": {
+      "type": "object",
+      "description": "Ranking options for file search.",
+      "properties": {
+        "ranker": {
+          "type": "string",
+          "description": "File search ranker."
+        },
+        "score_threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Ranker search threshold.",
+          "x-ms-client-name": "scoreThreshold"
+        }
+      },
+      "required": [
+        "ranker",
+        "score_threshold"
+      ]
+    },
     "Agents.FileSearchToolDefinition": {
       "type": "object",
       "description": "The input definition information for a file search tool as used to configure an agent.",
@@ -4478,6 +4539,11 @@
           "minimum": 1,
           "maximum": 50,
           "x-ms-client-name": "maxNumResults"
+        },
+        "ranking_options": {
+          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "description": "Ranking options for file search.",
+          "x-ms-client-name": "rankingOptions"
         }
       }
     },
@@ -4493,6 +4559,16 @@
             "type": "string"
           },
           "x-ms-client-name": "vectorStoreIds"
+        },
+        "vector_stores": {
+          "type": "array",
+          "description": "The list of vector store configuration objects from Azure.\nThis list is limited to one element.\nThe only element of this list contains the list of azure asset IDs used by the search tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreConfigurations"
+          },
+          "x-ms-client-name": "vectorStores",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4603,7 +4679,7 @@
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.IncompleteRunDetails": {
+    "Agents.IncompleteDetailsReason": {
       "type": "string",
       "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
       "enum": [
@@ -4611,7 +4687,7 @@
         "max_prompt_tokens"
       ],
       "x-ms-enum": {
-        "name": "IncompleteRunDetails",
+        "name": "IncompleteDetailsReason",
         "modelAsString": true,
         "values": [
           {
@@ -4626,6 +4702,19 @@
           }
         ]
       }
+    },
+    "Agents.IncompleteRunDetails": {
+      "type": "object",
+      "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/Agents.IncompleteDetailsReason",
+          "description": "The reason why the run is incomplete. This indicates which specific token limit was reached during the run."
+        }
+      },
+      "required": [
+        "reason"
+      ]
     },
     "Agents.IndexResource": {
       "type": "object",
@@ -4680,6 +4769,15 @@
           "description": "The ID of the file to attach to the message.",
           "x-ms-client-name": "fileId"
         },
+        "data_sources": {
+          "type": "array",
+          "description": "Azure asset ID.",
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
+        },
         "tools": {
           "type": "array",
           "description": "The tools to add to this file.",
@@ -4689,7 +4787,6 @@
         }
       },
       "required": [
-        "file_id",
         "tools"
       ]
     },
@@ -5315,20 +5412,20 @@
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
-        "microsoft_fabric": {
+        "fabric_aiskill": {
           "$ref": "#/definitions/Agents.ToolConnectionList",
           "description": "The list of connections used by the Microsoft Fabric tool."
         }
       },
       "required": [
-        "microsoft_fabric"
+        "fabric_aiskill"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
         }
       ],
-      "x-ms-discriminator-value": "microsoft_fabric"
+      "x-ms-discriminator-value": "fabric_aiskill"
     },
     "Agents.OpenAIFile": {
       "type": "object",
@@ -5439,7 +5536,7 @@
     },
     "Agents.RequiredToolCall": {
       "type": "object",
-      "description": "An abstract representation a a tool invocation needed by the model to continue a run.",
+      "description": "An abstract representation of a tool invocation needed by the model to continue a run.",
       "properties": {
         "type": {
           "type": "string",
@@ -6314,7 +6411,7 @@
       "type": "object",
       "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
       "properties": {
-        "microsoft_fabric": {
+        "fabric_aiskill": {
           "type": "object",
           "description": "Reserved for future use.",
           "additionalProperties": {
@@ -6324,14 +6421,14 @@
         }
       },
       "required": [
-        "microsoft_fabric"
+        "fabric_aiskill"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.RunStepToolCall"
         }
       ],
-      "x-ms-discriminator-value": "microsoft_fabric"
+      "x-ms-discriminator-value": "fabric_aiskill"
     },
     "Agents.RunStepSharepointToolCall": {
       "type": "object",
@@ -6527,6 +6624,7 @@
         "thread.run.in_progress",
         "thread.run.requires_action",
         "thread.run.completed",
+        "thread.run.incomplete",
         "thread.run.failed",
         "thread.run.cancelling",
         "thread.run.cancelled",
@@ -6560,6 +6658,11 @@
             "name": "ThreadRunCompleted",
             "value": "thread.run.completed",
             "description": "Event sent when a run is completed. The data of this event is of type ThreadRun"
+          },
+          {
+            "name": "ThreadRunIncomplete",
+            "value": "thread.run.incomplete",
+            "description": "Event sent when a run ends incomplete. The data of this event is of type ThreadRun"
           },
           {
             "name": "ThreadRunFailed",
@@ -6934,9 +7037,14 @@
           "x-ms-client-name": "failedAt"
         },
         "incomplete_details": {
-          "$ref": "#/definitions/Agents.IncompleteRunDetails",
+          "type": "object",
           "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Agents.IncompleteRunDetails"
+            }
+          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
@@ -7018,9 +7126,10 @@
           ],
           "x-ms-client-name": "toolResources"
         },
-        "parallelToolCalls": {
+        "parallel_tool_calls": {
           "type": "boolean",
-          "description": "Determines if tools can be executed in parallel within the run."
+          "description": "Determines if tools can be executed in parallel within the run.",
+          "x-ms-client-name": "parallelToolCalls"
         }
       },
       "required": [
@@ -7046,7 +7155,8 @@
         "truncation_strategy",
         "tool_choice",
         "response_format",
-        "metadata"
+        "metadata",
+        "parallel_tool_calls"
       ]
     },
     "Agents.ThreadStreamEvent": {
@@ -7083,7 +7193,7 @@
     },
     "Agents.ToolConnectionList": {
       "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.",
       "properties": {
         "connections": {
           "type": "array",
@@ -7132,7 +7242,7 @@
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/Agents.CodeInterpreterToolResource",
-          "description": "Resources to be used by the `code_interpreter tool` consisting of file IDs.",
+          "description": "Resources to be used by the `code_interpreter` tool consisting of file IDs.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
@@ -7531,6 +7641,88 @@
         ]
       }
     },
+    "Agents.VectorStoreConfiguration": {
+      "type": "object",
+      "description": "Vector storage configuration is the list of data sources, used when multiple\nfiles can be used for the enterprise file search.",
+      "properties": {
+        "data_sources": {
+          "type": "array",
+          "description": "Data sources",
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "data_sources"
+      ]
+    },
+    "Agents.VectorStoreConfigurations": {
+      "type": "object",
+      "description": "The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name",
+          "x-ms-client-name": "storeName"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "description": "Configurations",
+          "x-ms-client-name": "storeConfiguration"
+        }
+      },
+      "required": [
+        "name",
+        "configuration"
+      ]
+    },
+    "Agents.VectorStoreDataSource": {
+      "type": "object",
+      "description": "The structure, containing Azure asset URI path and the asset type of the file used as a data source\nfor the enterprise file search.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Asset URI.",
+          "x-ms-client-name": "assetIdentifier"
+        },
+        "type": {
+          "$ref": "#/definitions/Agents.VectorStoreDataSourceAssetType",
+          "description": "The asset type",
+          "x-ms-client-name": "assetType"
+        }
+      },
+      "required": [
+        "uri",
+        "type"
+      ]
+    },
+    "Agents.VectorStoreDataSourceAssetType": {
+      "type": "string",
+      "description": "Type of vector storage asset. Asset type may be a uri_asset, in this case it should contain asset URI ID,\nin the case of id_asset it should contain the data ID.",
+      "enum": [
+        "uri_asset",
+        "id_asset"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreDataSourceAssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "uri_asset",
+            "value": "uri_asset",
+            "description": "Azure URI"
+          },
+          {
+            "name": "id_asset",
+            "value": "id_asset",
+            "description": "The data ID"
+          }
+        ]
+      }
+    },
     "Agents.VectorStoreDeletionStatus": {
       "type": "object",
       "description": "Response object for deleting a vector store.",
@@ -7820,7 +8012,7 @@
     },
     "Agents.VectorStoreFileError": {
       "type": "object",
-      "description": "Details on the error that may have ocurred while processing a file for this vector store",
+      "description": "Details on the error that may have occurred while processing a file for this vector store",
       "properties": {
         "code": {
           "$ref": "#/definitions/Agents.VectorStoreFileErrorCode",
@@ -7960,6 +8152,11 @@
         "name": {
           "type": "string",
           "description": "The name of the vector store."
+        },
+        "configuration": {
+          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "description": "The vector store configuration, used when vector store is created from Azure asset URIs.",
+          "x-ms-client-name": "storeConfiguration"
         },
         "expires_after": {
           "$ref": "#/definitions/Agents.VectorStoreExpirationPolicy",
