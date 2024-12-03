@@ -79,7 +79,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/UsageAndQuotaPropertiesArmPaginatedResult"
+              "$ref": "#/definitions/UsageAndQuotaDetailsArmPaginatedResult"
             }
           }
         },
@@ -14293,7 +14293,17 @@
       "additionalProperties": false
     },
     "AvailableQuota": {
-      "description": "The number of available quota.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Available quota properties",
+          "$ref": "#/definitions/AvailableQuotaProperties",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AvailableQuotaProperties": {
       "type": "object",
       "properties": {
         "total": {
@@ -26980,35 +26990,20 @@
       },
       "additionalProperties": false
     },
-    "UsageAndQuotaProperties": {
-      "type": "object",
-      "properties": {
-        "modelCollectionProperties": {
-          "description": "Usage and quota details by model collection",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UsageAndQuotaDetails"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "UsageAndQuotaPropertiesArmPaginatedResult": {
-      "description": "A paginated list of UsageAndQuotaProperties entities.",
+    "UsageAndQuotaDetailsArmPaginatedResult": {
+      "description": "A paginated list of UsageAndQuotaDetails entities.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link to the next page of UsageAndQuotaProperties objects. If null, there are no additional pages.",
+          "description": "The link to the next page of UsageAndQuotaDetails objects. If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
-          "description": "An array of objects of type UsageAndQuotaProperties.",
+          "description": "An array of objects of type UsageAndQuotaDetails.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UsageAndQuotaProperties"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/UsageAndQuotaDetails"
+          }
         }
       },
       "additionalProperties": false
