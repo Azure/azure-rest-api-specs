@@ -63,7 +63,7 @@
   "paths": {
     "/authoring/analyze-text/projects": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListProjects",
+        "operationId": "AnalyzeTextAuthoring_ListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -83,7 +83,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -105,7 +105,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetProject",
+        "operationId": "AnalyzeTextAuthoring_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -123,7 +123,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -140,7 +140,7 @@
         }
       },
       "patch": {
-        "operationId": "TextAnalysisAuthoring_CreateProject",
+        "operationId": "AnalyzeTextAuthoring_CreateProject",
         "description": "The most basic operation that applies to a resource.",
         "consumes": [
           "application/merge-patch+json"
@@ -162,7 +162,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions"
+              "$ref": "#/definitions/AnalyzeTextAuthoringCreateProjectOptions"
             }
           }
         ],
@@ -170,13 +170,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectMetadata"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectMetadata"
             }
           },
           "default": {
@@ -193,7 +193,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteProject",
+        "operationId": "AnalyzeTextAuthoring_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -235,7 +235,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:export": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Export",
+        "operationId": "AnalyzeTextAuthoring_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -312,7 +312,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:import": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Import",
+        "operationId": "AnalyzeTextAuthoring_Import",
         "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
         "parameters": [
           {
@@ -363,7 +363,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/:train": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_Train",
+        "operationId": "AnalyzeTextAuthoring_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -382,7 +382,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
+              "$ref": "#/definitions/AnalyzeTextAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -414,7 +414,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListDeployments",
+        "operationId": "AnalyzeTextAuthoring_ListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -441,7 +441,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectDeployment"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -463,7 +463,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetDeployment",
+        "operationId": "AnalyzeTextAuthoring_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -488,7 +488,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectDeployment"
             }
           },
           "default": {
@@ -505,7 +505,7 @@
         }
       },
       "put": {
-        "operationId": "TextAnalysisAuthoring_DeployProject",
+        "operationId": "AnalyzeTextAuthoring_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -531,7 +531,7 @@
             "description": "The new deployment info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringCreateDeploymentOptions"
+              "$ref": "#/definitions/AnalyzeTextAuthoringCreateDeploymentOptions"
             }
           }
         ],
@@ -561,7 +561,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteDeployment",
+        "operationId": "AnalyzeTextAuthoring_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -610,7 +610,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetDeploymentStatus",
+        "operationId": "AnalyzeTextAuthoring_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -642,7 +642,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringDeploymentJobState"
             }
           },
           "default": {
@@ -661,7 +661,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_SwapDeployments",
+        "operationId": "AnalyzeTextAuthoring_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -680,7 +680,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
+              "$ref": "#/definitions/AnalyzeTextAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -712,7 +712,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetSwapDeploymentsStatus",
+        "operationId": "AnalyzeTextAuthoring_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -737,7 +737,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringSwapDeploymentsJobState"
             }
           },
           "default": {
@@ -756,7 +756,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetExportStatus",
+        "operationId": "AnalyzeTextAuthoring_GetExportStatus",
         "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
         "parameters": [
           {
@@ -781,7 +781,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringExportProjectJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringExportProjectJobState"
             }
           },
           "default": {
@@ -800,7 +800,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetImportStatus",
+        "operationId": "AnalyzeTextAuthoring_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -825,7 +825,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringImportProjectJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringImportProjectJobState"
             }
           },
           "default": {
@@ -844,7 +844,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainedModels",
+        "operationId": "AnalyzeTextAuthoring_ListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -871,7 +871,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringProjectTrainedModel"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -893,7 +893,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetTrainedModel",
+        "operationId": "AnalyzeTextAuthoring_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -918,7 +918,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectTrainedModel"
             }
           },
           "default": {
@@ -935,7 +935,7 @@
         }
       },
       "delete": {
-        "operationId": "TextAnalysisAuthoring_DeleteTrainedModel",
+        "operationId": "AnalyzeTextAuthoring_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -976,7 +976,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_LoadSnapshot",
+        "operationId": "AnalyzeTextAuthoring_LoadSnapshot",
         "description": "Long-running operation.",
         "parameters": [
           {
@@ -1025,7 +1025,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetModelEvaluationResults",
+        "operationId": "AnalyzeTextAuthoring_GetModelEvaluationResults",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
@@ -1062,7 +1062,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringDocumentEvaluationResult"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringDocumentEvaluationResult"
             }
           },
           "default": {
@@ -1084,7 +1084,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetModelEvaluationSummary",
+        "operationId": "AnalyzeTextAuthoring_GetModelEvaluationSummary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
@@ -1109,7 +1109,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
+              "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationSummary"
             }
           },
           "default": {
@@ -1128,7 +1128,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetLoadSnapshotStatus",
+        "operationId": "AnalyzeTextAuthoring_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -1160,7 +1160,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringLoadSnapshotJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringLoadSnapshotJobState"
             }
           },
           "default": {
@@ -1179,7 +1179,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainingJobs",
+        "operationId": "AnalyzeTextAuthoring_ListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -1206,7 +1206,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringTrainingJobState"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringTrainingJobState"
             }
           },
           "default": {
@@ -1228,7 +1228,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetTrainingStatus",
+        "operationId": "AnalyzeTextAuthoring_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -1253,7 +1253,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringTrainingJobState"
             }
           },
           "default": {
@@ -1272,7 +1272,7 @@
     },
     "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "TextAnalysisAuthoring_CancelTrainingJob",
+        "operationId": "AnalyzeTextAuthoring_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -1321,7 +1321,7 @@
     },
     "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetProjectDeletionStatus",
+        "operationId": "AnalyzeTextAuthoring_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {
@@ -1339,7 +1339,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringProjectDeletionJobState"
+              "$ref": "#/definitions/AnalyzeTextAuthoringProjectDeletionJobState"
             }
           },
           "default": {
@@ -1358,7 +1358,7 @@
     },
     "/authoring/analyze-text/projects/global/languages": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_GetSupportedLanguages",
+        "operationId": "AnalyzeTextAuthoring_GetSupportedLanguages",
         "description": "Lists the supported languages.",
         "parameters": [
           {
@@ -1381,7 +1381,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringSupportedLanguage"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringSupportedLanguage"
             }
           },
           "default": {
@@ -1403,7 +1403,7 @@
     },
     "/authoring/analyze-text/projects/global/training-config-versions": {
       "get": {
-        "operationId": "TextAnalysisAuthoring_ListTrainingConfigVersions",
+        "operationId": "AnalyzeTextAuthoring_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -1426,7 +1426,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTextAnalysisAuthoringTrainingConfigVersion"
+              "$ref": "#/definitions/PagedAnalyzeTextAuthoringTrainingConfigVersion"
             }
           },
           "default": {
@@ -1448,6 +1448,1621 @@
     }
   },
   "definitions": {
+    "AnalyzeTextAuthoringConfusionMatrix": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AnalyzeTextAuthoringConfusionMatrixRow"
+      }
+    },
+    "AnalyzeTextAuthoringConfusionMatrixCell": {
+      "type": "object",
+      "description": "Represents a cell in a confusion matrix.",
+      "properties": {
+        "normalizedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents normalized value in percentages."
+        },
+        "rawValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents raw value."
+        }
+      },
+      "required": [
+        "normalizedValue",
+        "rawValue"
+      ]
+    },
+    "AnalyzeTextAuthoringConfusionMatrixRow": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AnalyzeTextAuthoringConfusionMatrixCell"
+      }
+    },
+    "AnalyzeTextAuthoringCreateDeploymentOptions": {
+      "type": "object",
+      "description": "Represents the options for creating or updating a project deployment.",
+      "properties": {
+        "trainedModelLabel": {
+          "type": "string",
+          "description": "Represents the trained model label."
+        }
+      },
+      "required": [
+        "trainedModelLabel"
+      ]
+    },
+    "AnalyzeTextAuthoringCreateProjectOptions": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "The project settings."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "projectKind",
+        "storageInputContainerName",
+        "projectName",
+        "language"
+      ]
+    },
+    "AnalyzeTextAuthoringCustomEntityRecognitionDocumentEvaluationResult": {
+      "type": "object",
+      "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
+      "properties": {
+        "customEntityRecognitionResult": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEntityRecognitionEvaluationResult",
+          "description": "Represents the evaluation prediction for entity recognition."
+        }
+      },
+      "required": [
+        "customEntityRecognitionResult"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomEntityRecognition"
+    },
+    "AnalyzeTextAuthoringCustomEntityRecognitionEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a custom entity recognition project.",
+      "properties": {
+        "customEntityRecognitionEvaluation": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEntityRecognitionEvaluationSummary",
+          "description": "Contains the data related to extraction evaluation."
+        }
+      },
+      "required": [
+        "customEntityRecognitionEvaluation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationSummary"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomEntityRecognition"
+    },
+    "AnalyzeTextAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
+      "type": "object",
+      "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
+      "properties": {
+        "customMultiLabelClassificationResult": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentMultiLabelClassificationEvaluationResult",
+          "description": "Represents the evaluation prediction for multi label classification."
+        }
+      },
+      "required": [
+        "customMultiLabelClassificationResult"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomMultiLabelClassification"
+    },
+    "AnalyzeTextAuthoringCustomMultiLabelClassificationEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a custom multi-label classification\nproject.",
+      "properties": {
+        "customMultiLabelClassificationEvaluation": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringMultiLabelClassificationEvaluationSummary",
+          "description": "Contains the data related to multi label classification evaluation."
+        }
+      },
+      "required": [
+        "customMultiLabelClassificationEvaluation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationSummary"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomMultiLabelClassification"
+    },
+    "AnalyzeTextAuthoringCustomSingleLabelClassificationDocumentEvaluationResult": {
+      "type": "object",
+      "description": "Represents the document evaluation result for a custom single-label\nclassification project.",
+      "properties": {
+        "customSingleLabelClassificationResult": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentSingleLabelClassificationEvaluationResult",
+          "description": "Represents the evaluation prediction for single label classification."
+        }
+      },
+      "required": [
+        "customSingleLabelClassificationResult"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEvaluationResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+    },
+    "AnalyzeTextAuthoringCustomSingleLabelClassificationEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "properties": {
+        "customSingleLabelClassificationEvaluation": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringSingleLabelClassificationEvaluationSummary",
+          "description": "Contains the data related to single label classification evaluation."
+        }
+      },
+      "required": [
+        "customSingleLabelClassificationEvaluation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationSummary"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+    },
+    "AnalyzeTextAuthoringDeploymentJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentEntityLabelEvaluationResult": {
+      "type": "object",
+      "description": "Represents an evaluation result entity label.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Represents the entity category."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity offset index relative to the original text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the entity length."
+        }
+      },
+      "required": [
+        "category",
+        "offset",
+        "length"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentEntityRecognitionEvaluationResult": {
+      "type": "object",
+      "description": "Represents the entity recognition evaluation result for a document.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Represents the document labelled entities.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEntityRegionEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entities"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentEntityRegionEvaluationResult": {
+      "type": "object",
+      "description": "Represents the evaluation comparison between the expected and predicted\nentities of a document region.",
+      "properties": {
+        "expectedEntities": {
+          "type": "array",
+          "description": "Represents the region's expected entity labels.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEntityLabelEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "predictedEntities": {
+          "type": "array",
+          "description": "Represents the region's predicted entity labels.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEntityLabelEvaluationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "regionOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the region offset."
+        },
+        "regionLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the region length."
+        }
+      },
+      "required": [
+        "expectedEntities",
+        "predictedEntities",
+        "regionOffset",
+        "regionLength"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentEvaluationResult": {
+      "type": "object",
+      "description": "Represents the evaluation result of a document.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Represents the document path."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+        }
+      },
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind",
+        "location",
+        "language"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentMultiLabelClassificationEvaluationResult": {
+      "type": "object",
+      "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
+      "properties": {
+        "expectedClasses": {
+          "type": "array",
+          "description": "Represents the document's expected classes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "predictedClasses": {
+          "type": "array",
+          "description": "Represents the document's predicted classes.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "expectedClasses",
+        "predictedClasses"
+      ]
+    },
+    "AnalyzeTextAuthoringDocumentSingleLabelClassificationEvaluationResult": {
+      "type": "object",
+      "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
+      "properties": {
+        "expectedClass": {
+          "type": "string",
+          "description": "Represents the document's expected class."
+        },
+        "predictedClass": {
+          "type": "string",
+          "description": "Represents the document's predicted class."
+        }
+      },
+      "required": [
+        "expectedClass",
+        "predictedClass"
+      ]
+    },
+    "AnalyzeTextAuthoringEntityEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for an entity.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ]
+    },
+    "AnalyzeTextAuthoringEntityRecognitionEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a custom entity recognition project.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+        },
+        "entities": {
+          "type": "object",
+          "description": "Represents the entities evaluation",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringEntityEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+        }
+      },
+      "required": [
+        "confusionMatrix",
+        "entities",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ]
+    },
+    "AnalyzeTextAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the summary for an evaluation operation.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project type that the evaluation ran on."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationOptions",
+          "description": "Represents the options used running the evaluation."
+        }
+      },
+      "discriminator": "projectKind",
+      "required": [
+        "projectKind",
+        "evaluationOptions"
+      ]
+    },
+    "AnalyzeTextAuthoringExportProjectJobState": {
+      "type": "object",
+      "description": "Represents the state of an export job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "resultUrl": {
+          "type": "string",
+          "description": "The URL to use in order to download the exported project."
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringExportedClass": {
+      "type": "object",
+      "description": "Represents a class of an exported project.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The class category."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedCustomEntityRecognitionDocument": {
+      "type": "object",
+      "description": "Represents an exported document for a custom entity recognition project.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "The list of entity labels belonging to the document.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedDocumentEntityRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the document in the storage."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedCustomEntityRecognitionProjectAssets": {
+      "type": "object",
+      "description": "Represents the exported assets for a entity recognition project.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "The list of entities belonging to the project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "documents": {
+          "type": "array",
+          "description": "The list of documents belonging to the project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedCustomEntityRecognitionDocument"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomEntityRecognition"
+    },
+    "AnalyzeTextAuthoringExportedCustomMultiLabelClassificationDocument": {
+      "type": "object",
+      "description": "Represents an exported document of a custom multi-label classification project.",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "description": "The document classes.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedDocumentClass"
+          },
+          "x-ms-identifiers": []
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the document in the storage."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedCustomMultiLabelClassificationProjectAssets": {
+      "type": "object",
+      "description": "Represents the exported assets for a custom multi-label classification project.",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "description": "The list of classes in the project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedClass"
+          },
+          "x-ms-identifiers": []
+        },
+        "documents": {
+          "type": "array",
+          "description": "The list of documents in the project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedCustomMultiLabelClassificationDocument"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomMultiLabelClassification"
+    },
+    "AnalyzeTextAuthoringExportedCustomSingleLabelClassificationDocument": {
+      "type": "object",
+      "description": "Represents an exported document for a custom single-label classification\nproject.",
+      "properties": {
+        "class": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringExportedDocumentClass",
+          "description": "The class of the documents."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the document in the storage."
+        },
+        "language": {
+          "type": "string",
+          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+        },
+        "dataset": {
+          "type": "string",
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedCustomSingleLabelClassificationProjectAssets": {
+      "type": "object",
+      "description": "Represents the exported assets for a single-label classification project.",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "description": "The list of classes belonging to this project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedClass"
+          },
+          "x-ms-identifiers": []
+        },
+        "documents": {
+          "type": "array",
+          "description": "The list of documents belonging to this project.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedCustomSingleLabelClassificationDocument"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportedProjectAssets"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+    },
+    "AnalyzeTextAuthoringExportedDocumentClass": {
+      "type": "object",
+      "description": "Represents a classification label for a document.",
+      "properties": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedDocumentEntityLabel": {
+      "type": "object",
+      "description": "Represents an entity label for a document.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The entity category."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedDocumentEntityRegion": {
+      "type": "object",
+      "description": "Represents a region in a document for entity labeling.",
+      "properties": {
+        "regionOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the region."
+        },
+        "regionLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the region text."
+        },
+        "labels": {
+          "type": "array",
+          "description": "The list of entity labels belonging to this region.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringExportedDocumentEntityLabel"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AnalyzeTextAuthoringExportedEntity": {
+      "type": "object",
+      "description": "Represents an entity in an exported project.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The entity category."
+        }
+      }
+    },
+    "AnalyzeTextAuthoringImportProjectJobState": {
+      "type": "object",
+      "description": "Represents the state of an import job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringLoadSnapshotJobState": {
+      "type": "object",
+      "description": "Represents the state of loading a snapshot job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringMultiLabelClassEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary of a class in a multi-label classification\nproject.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ]
+    },
+    "AnalyzeTextAuthoringMultiLabelClassificationEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a multi-label classification project.",
+      "properties": {
+        "classes": {
+          "type": "object",
+          "description": "Represents the classes evaluation",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringMultiLabelClassEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+        }
+      },
+      "required": [
+        "classes",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ]
+    },
+    "AnalyzeTextAuthoringProjectDeletionJobState": {
+      "type": "object",
+      "description": "Represents the state of a project deletion job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringProjectDeployment": {
+      "type": "object",
+      "description": "Represents a project deployment.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "description": "Represents deployment name.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Represents deployment modelId."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last trained time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents deployment last deployed time."
+        },
+        "deploymentExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents deployment expiration date in the runtime."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "Represents model training config version."
+        }
+      },
+      "required": [
+        "deploymentName",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastDeployedDateTime",
+        "deploymentExpirationDate",
+        "modelTrainingConfigVersion"
+      ]
+    },
+    "AnalyzeTextAuthoringProjectMetadata": {
+      "type": "object",
+      "description": "Represents the metadata of a project.",
+      "properties": {
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project creation datetime."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last modification datetime."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last training datetime."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployment datetime."
+        },
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "The project settings."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name.",
+          "readOnly": true
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "projectKind",
+        "storageInputContainerName",
+        "projectName",
+        "language"
+      ]
+    },
+    "AnalyzeTextAuthoringProjectTrainedModel": {
+      "type": "object",
+      "description": "Represents a trained model.",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The trained model label.",
+          "readOnly": true
+        },
+        "modelId": {
+          "type": "string",
+          "description": "The model ID."
+        },
+        "lastTrainedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last trained date time of the model."
+        },
+        "lastTrainingDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the model's last training request in seconds."
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The model expiration date."
+        },
+        "modelTrainingConfigVersion": {
+          "type": "string",
+          "description": "The model training config version."
+        },
+        "hasSnapshot": {
+          "type": "boolean",
+          "description": "The flag to indicate if the trained model has a snapshot ready."
+        }
+      },
+      "required": [
+        "label",
+        "modelId",
+        "lastTrainedDateTime",
+        "lastTrainingDurationInSeconds",
+        "modelExpirationDate",
+        "modelTrainingConfigVersion",
+        "hasSnapshot"
+      ]
+    },
+    "AnalyzeTextAuthoringSingleLabelClassEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
+      "properties": {
+        "f1": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model precision"
+        },
+        "precision": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model recall"
+        },
+        "recall": {
+          "type": "number",
+          "format": "double",
+          "description": "Represents the model F1 score"
+        },
+        "truePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true positive"
+        },
+        "trueNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of true negative"
+        },
+        "falsePositiveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false positive"
+        },
+        "falseNegativeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the count of false negative"
+        }
+      },
+      "required": [
+        "f1",
+        "precision",
+        "recall",
+        "truePositiveCount",
+        "trueNegativeCount",
+        "falsePositiveCount",
+        "falseNegativeCount"
+      ]
+    },
+    "AnalyzeTextAuthoringSingleLabelClassificationEvaluationSummary": {
+      "type": "object",
+      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "properties": {
+        "confusionMatrix": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringConfusionMatrix",
+          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
+        },
+        "classes": {
+          "type": "object",
+          "description": "Represents the classes evaluation",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringSingleLabelClassEvaluationSummary"
+          }
+        },
+        "microF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "microPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "microRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroF1": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
+        },
+        "macroPrecision": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+        },
+        "macroRecall": {
+          "type": "number",
+          "format": "float",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+        }
+      },
+      "required": [
+        "confusionMatrix",
+        "classes",
+        "microF1",
+        "microPrecision",
+        "microRecall",
+        "macroF1",
+        "macroPrecision",
+        "macroRecall"
+      ]
+    },
+    "AnalyzeTextAuthoringSubTrainingJobState": {
+      "type": "object",
+      "description": "Represents the detailed state of a training sub-operation.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents progress percentage."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the start date time."
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the end date time."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Represents the status of the sub-operation."
+        }
+      },
+      "required": [
+        "percentComplete",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringSupportedLanguage": {
+      "type": "object",
+      "description": "Represents a supported language.",
+      "properties": {
+        "languageName": {
+          "type": "string",
+          "description": "The language name.",
+          "readOnly": true
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "languageName",
+        "languageCode"
+      ]
+    },
+    "AnalyzeTextAuthoringSwapDeploymentsJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
+    "AnalyzeTextAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
+    "AnalyzeTextAuthoringTrainingConfigVersion": {
+      "type": "object",
+      "description": "Represents a training config version.",
+      "properties": {
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents the version of the config.",
+          "readOnly": true
+        },
+        "modelExpirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Represents the training config version expiration date."
+        }
+      },
+      "required": [
+        "trainingConfigVersion",
+        "modelExpirationDate"
+      ]
+    },
+    "AnalyzeTextAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion"
+      ]
+    },
+    "AnalyzeTextAuthoringTrainingJobResult": {
+      "type": "object",
+      "description": "Represents the output of a training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents trained model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "trainingStatus": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringSubTrainingJobState",
+          "description": "Represents model train status."
+        },
+        "evaluationStatus": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringSubTrainingJobState",
+          "description": "Represents model evaluation status."
+        },
+        "estimatedEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the estimate end date time for training and evaluation."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion",
+        "trainingStatus"
+      ]
+    },
+    "AnalyzeTextAuthoringTrainingJobState": {
+      "type": "object",
+      "description": "Represents the state of a training job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextAuthoringWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "result": {
+          "$ref": "#/definitions/AnalyzeTextAuthoringTrainingJobResult",
+          "description": "Represents training tasks detailed result."
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status",
+        "result"
+      ]
+    },
+    "AnalyzeTextAuthoringWarning": {
+      "type": "object",
+      "description": "Represents a warning that was encountered while executing the request.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The warning message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "Error": {
       "type": "object",
       "description": "The error object.",
@@ -1633,7 +3248,7 @@
           "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
         },
         "metadata": {
-          "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions",
+          "$ref": "#/definitions/AnalyzeTextAuthoringCreateProjectOptions",
           "description": "Represents the project metadata."
         },
         "assets": {
@@ -1821,15 +3436,15 @@
         ]
       }
     },
-    "PagedTextAnalysisAuthoringDocumentEvaluationResult": {
+    "PagedAnalyzeTextAuthoringDocumentEvaluationResult": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringDocumentEvaluationResult items",
+      "description": "Paged collection of AnalyzeTextAuthoringDocumentEvaluationResult items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringDocumentEvaluationResult items on this page",
+          "description": "The AnalyzeTextAuthoringDocumentEvaluationResult items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
+            "$ref": "#/definitions/AnalyzeTextAuthoringDocumentEvaluationResult"
           },
           "x-ms-identifiers": []
         },
@@ -1843,15 +3458,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringProjectDeployment": {
+    "PagedAnalyzeTextAuthoringProjectDeployment": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringProjectDeployment items",
+      "description": "Paged collection of AnalyzeTextAuthoringProjectDeployment items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringProjectDeployment items on this page",
+          "description": "The AnalyzeTextAuthoringProjectDeployment items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectDeployment"
+            "$ref": "#/definitions/AnalyzeTextAuthoringProjectDeployment"
           },
           "x-ms-identifiers": []
         },
@@ -1865,15 +3480,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringProjectMetadata": {
+    "PagedAnalyzeTextAuthoringProjectMetadata": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringProjectMetadata items",
+      "description": "Paged collection of AnalyzeTextAuthoringProjectMetadata items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringProjectMetadata items on this page",
+          "description": "The AnalyzeTextAuthoringProjectMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectMetadata"
+            "$ref": "#/definitions/AnalyzeTextAuthoringProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -1887,15 +3502,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringProjectTrainedModel": {
+    "PagedAnalyzeTextAuthoringProjectTrainedModel": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringProjectTrainedModel items",
+      "description": "Paged collection of AnalyzeTextAuthoringProjectTrainedModel items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringProjectTrainedModel items on this page",
+          "description": "The AnalyzeTextAuthoringProjectTrainedModel items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringProjectTrainedModel"
+            "$ref": "#/definitions/AnalyzeTextAuthoringProjectTrainedModel"
           },
           "x-ms-identifiers": []
         },
@@ -1909,15 +3524,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringSupportedLanguage": {
+    "PagedAnalyzeTextAuthoringSupportedLanguage": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringSupportedLanguage items",
+      "description": "Paged collection of AnalyzeTextAuthoringSupportedLanguage items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringSupportedLanguage items on this page",
+          "description": "The AnalyzeTextAuthoringSupportedLanguage items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringSupportedLanguage"
+            "$ref": "#/definitions/AnalyzeTextAuthoringSupportedLanguage"
           },
           "x-ms-identifiers": []
         },
@@ -1931,15 +3546,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringTrainingConfigVersion": {
+    "PagedAnalyzeTextAuthoringTrainingConfigVersion": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringTrainingConfigVersion items",
+      "description": "Paged collection of AnalyzeTextAuthoringTrainingConfigVersion items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringTrainingConfigVersion items on this page",
+          "description": "The AnalyzeTextAuthoringTrainingConfigVersion items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringTrainingConfigVersion"
+            "$ref": "#/definitions/AnalyzeTextAuthoringTrainingConfigVersion"
           },
           "x-ms-identifiers": []
         },
@@ -1953,15 +3568,15 @@
         "value"
       ]
     },
-    "PagedTextAnalysisAuthoringTrainingJobState": {
+    "PagedAnalyzeTextAuthoringTrainingJobState": {
       "type": "object",
-      "description": "Paged collection of TextAnalysisAuthoringTrainingJobState items",
+      "description": "Paged collection of AnalyzeTextAuthoringTrainingJobState items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TextAnalysisAuthoringTrainingJobState items on this page",
+          "description": "The AnalyzeTextAuthoringTrainingJobState items on this page",
           "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobState"
+            "$ref": "#/definitions/AnalyzeTextAuthoringTrainingJobState"
           },
           "x-ms-identifiers": []
         },
@@ -2031,1621 +3646,6 @@
           }
         ]
       }
-    },
-    "TextAnalysisAuthoringConfusionMatrix": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixRow"
-      }
-    },
-    "TextAnalysisAuthoringConfusionMatrixCell": {
-      "type": "object",
-      "description": "Represents a cell in a confusion matrix.",
-      "properties": {
-        "normalizedValue": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents normalized value in percentages."
-        },
-        "rawValue": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents raw value."
-        }
-      },
-      "required": [
-        "normalizedValue",
-        "rawValue"
-      ]
-    },
-    "TextAnalysisAuthoringConfusionMatrixRow": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrixCell"
-      }
-    },
-    "TextAnalysisAuthoringCreateDeploymentOptions": {
-      "type": "object",
-      "description": "Represents the options for creating or updating a project deployment.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "Represents the trained model label."
-        }
-      },
-      "required": [
-        "trainedModelLabel"
-      ]
-    },
-    "TextAnalysisAuthoringCreateProjectOptions": {
-      "type": "object",
-      "description": "Represents the options used to create or update a project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "The project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name."
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "projectKind",
-        "storageInputContainerName",
-        "projectName",
-        "language"
-      ]
-    },
-    "TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
-      "properties": {
-        "customEntityRecognitionResult": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult",
-          "description": "Represents the evaluation prediction for entity recognition."
-        }
-      },
-      "required": [
-        "customEntityRecognitionResult"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognition"
-    },
-    "TextAnalysisAuthoringCustomEntityRecognitionEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom entity recognition project.",
-      "properties": {
-        "customEntityRecognitionEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEntityRecognitionEvaluationSummary",
-          "description": "Contains the data related to extraction evaluation."
-        }
-      },
-      "required": [
-        "customEntityRecognitionEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognition"
-    },
-    "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
-      "properties": {
-        "customMultiLabelClassificationResult": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult",
-          "description": "Represents the evaluation prediction for multi label classification."
-        }
-      },
-      "required": [
-        "customMultiLabelClassificationResult"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassification"
-    },
-    "TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom multi-label classification\nproject.",
-      "properties": {
-        "customMultiLabelClassificationEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary",
-          "description": "Contains the data related to multi label classification evaluation."
-        }
-      },
-      "required": [
-        "customMultiLabelClassificationEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassification"
-    },
-    "TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the document evaluation result for a custom single-label\nclassification project.",
-      "properties": {
-        "customSingleLabelClassificationResult": {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult",
-          "description": "Represents the evaluation prediction for single label classification."
-        }
-      },
-      "required": [
-        "customSingleLabelClassificationResult"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringDocumentEvaluationResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
-    },
-    "TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
-      "properties": {
-        "customSingleLabelClassificationEvaluation": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary",
-          "description": "Contains the data related to single label classification evaluation."
-        }
-      },
-      "required": [
-        "customSingleLabelClassificationEvaluation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationSummary"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
-    },
-    "TextAnalysisAuthoringDeploymentJobState": {
-      "type": "object",
-      "description": "Represents the state of a deployment job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
-      "type": "object",
-      "description": "Represents an evaluation result entity label.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "Represents the entity category."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the entity offset index relative to the original text."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the entity length."
-        }
-      },
-      "required": [
-        "category",
-        "offset",
-        "length"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult": {
-      "type": "object",
-      "description": "Represents the entity recognition evaluation result for a document.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Represents the document labelled entities.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRegionEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entities"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentEntityRegionEvaluationResult": {
-      "type": "object",
-      "description": "Represents the evaluation comparison between the expected and predicted\nentities of a document region.",
-      "properties": {
-        "expectedEntities": {
-          "type": "array",
-          "description": "Represents the region's expected entity labels.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "predictedEntities": {
-          "type": "array",
-          "description": "Represents the region's predicted entity labels.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityLabelEvaluationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "regionOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the region offset."
-        },
-        "regionLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the region length."
-        }
-      },
-      "required": [
-        "expectedEntities",
-        "predictedEntities",
-        "regionOffset",
-        "regionLength"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentEvaluationResult": {
-      "type": "object",
-      "description": "Represents the evaluation result of a document.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Represents the document path."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        }
-      },
-      "discriminator": "projectKind",
-      "required": [
-        "projectKind",
-        "location",
-        "language"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
-      "type": "object",
-      "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
-      "properties": {
-        "expectedClasses": {
-          "type": "array",
-          "description": "Represents the document's expected classes.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "predictedClasses": {
-          "type": "array",
-          "description": "Represents the document's predicted classes.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "expectedClasses",
-        "predictedClasses"
-      ]
-    },
-    "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
-      "type": "object",
-      "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
-      "properties": {
-        "expectedClass": {
-          "type": "string",
-          "description": "Represents the document's expected class."
-        },
-        "predictedClass": {
-          "type": "string",
-          "description": "Represents the document's predicted class."
-        }
-      },
-      "required": [
-        "expectedClass",
-        "predictedClass"
-      ]
-    },
-    "TextAnalysisAuthoringEntityEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for an entity.",
-      "properties": {
-        "f1": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model precision"
-        },
-        "precision": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model recall"
-        },
-        "recall": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model F1 score"
-        },
-        "truePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true positive"
-        },
-        "trueNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true negative"
-        },
-        "falsePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false positive"
-        },
-        "falseNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false negative"
-        }
-      },
-      "required": [
-        "f1",
-        "precision",
-        "recall",
-        "truePositiveCount",
-        "trueNegativeCount",
-        "falsePositiveCount",
-        "falseNegativeCount"
-      ]
-    },
-    "TextAnalysisAuthoringEntityRecognitionEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom entity recognition project.",
-      "properties": {
-        "confusionMatrix": {
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
-        },
-        "entities": {
-          "type": "object",
-          "description": "Represents the entities evaluation",
-          "additionalProperties": {
-            "$ref": "#/definitions/TextAnalysisAuthoringEntityEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "microPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "microRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "macroPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
-        }
-      },
-      "required": [
-        "confusionMatrix",
-        "entities",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
-      ]
-    },
-    "TextAnalysisAuthoringEvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
-      }
-    },
-    "TextAnalysisAuthoringEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the summary for an evaluation operation.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project type that the evaluation ran on."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
-          "description": "Represents the options used running the evaluation."
-        }
-      },
-      "discriminator": "projectKind",
-      "required": [
-        "projectKind",
-        "evaluationOptions"
-      ]
-    },
-    "TextAnalysisAuthoringExportProjectJobState": {
-      "type": "object",
-      "description": "Represents the state of an export job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "resultUrl": {
-          "type": "string",
-          "description": "The URL to use in order to download the exported project."
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringExportedClass": {
-      "type": "object",
-      "description": "Represents a class of an exported project.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The class category."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomEntityRecognitionDocument": {
-      "type": "object",
-      "description": "Represents an exported document for a custom entity recognition project.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "The list of entity labels belonging to the document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityRegion"
-          },
-          "x-ms-identifiers": []
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomEntityRecognitionProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for a entity recognition project.",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "The list of entities belonging to the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "documents": {
-          "type": "array",
-          "description": "The list of documents belonging to the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomEntityRecognitionDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognition"
-    },
-    "TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument": {
-      "type": "object",
-      "description": "Represents an exported document of a custom multi-label classification project.",
-      "properties": {
-        "classes": {
-          "type": "array",
-          "description": "The document classes.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass"
-          },
-          "x-ms-identifiers": []
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomMultiLabelClassificationProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for a custom multi-label classification project.",
-      "properties": {
-        "classes": {
-          "type": "array",
-          "description": "The list of classes in the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
-          },
-          "x-ms-identifiers": []
-        },
-        "documents": {
-          "type": "array",
-          "description": "The list of documents in the project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomMultiLabelClassificationDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassification"
-    },
-    "TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument": {
-      "type": "object",
-      "description": "Represents an exported document for a custom single-label classification\nproject.",
-      "properties": {
-        "class": {
-          "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass",
-          "description": "The class of the documents."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the document in the storage."
-        },
-        "language": {
-          "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedCustomSingleLabelClassificationProjectAssets": {
-      "type": "object",
-      "description": "Represents the exported assets for a single-label classification project.",
-      "properties": {
-        "classes": {
-          "type": "array",
-          "description": "The list of classes belonging to this project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedClass"
-          },
-          "x-ms-identifiers": []
-        },
-        "documents": {
-          "type": "array",
-          "description": "The list of documents belonging to this project.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExportedProjectAssets"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
-    },
-    "TextAnalysisAuthoringExportedDocumentClass": {
-      "type": "object",
-      "description": "Represents a classification label for a document.",
-      "properties": {
-        "category": {
-          "type": "string"
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedDocumentEntityLabel": {
-      "type": "object",
-      "description": "Represents an entity label for a document.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The entity category."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text."
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedDocumentEntityRegion": {
-      "type": "object",
-      "description": "Represents a region in a document for entity labeling.",
-      "properties": {
-        "regionOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the region."
-        },
-        "regionLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the region text."
-        },
-        "labels": {
-          "type": "array",
-          "description": "The list of entity labels belonging to this region.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentEntityLabel"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "TextAnalysisAuthoringExportedEntity": {
-      "type": "object",
-      "description": "Represents an entity in an exported project.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The entity category."
-        }
-      }
-    },
-    "TextAnalysisAuthoringImportProjectJobState": {
-      "type": "object",
-      "description": "Represents the state of an import job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringLoadSnapshotJobState": {
-      "type": "object",
-      "description": "Represents the state of loading a snapshot job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringMultiLabelClassEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary of a class in a multi-label classification\nproject.",
-      "properties": {
-        "f1": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model precision"
-        },
-        "precision": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model recall"
-        },
-        "recall": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model F1 score"
-        },
-        "truePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true positive"
-        },
-        "trueNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true negative"
-        },
-        "falsePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false positive"
-        },
-        "falseNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false negative"
-        }
-      },
-      "required": [
-        "f1",
-        "precision",
-        "recall",
-        "truePositiveCount",
-        "trueNegativeCount",
-        "falsePositiveCount",
-        "falseNegativeCount"
-      ]
-    },
-    "TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a multi-label classification project.",
-      "properties": {
-        "classes": {
-          "type": "object",
-          "description": "Represents the classes evaluation",
-          "additionalProperties": {
-            "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "microPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "microRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "macroPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
-        }
-      },
-      "required": [
-        "classes",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
-      ]
-    },
-    "TextAnalysisAuthoringProjectDeletionJobState": {
-      "type": "object",
-      "description": "Represents the state of a project deletion job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringProjectDeployment": {
-      "type": "object",
-      "description": "Represents a project deployment.",
-      "properties": {
-        "deploymentName": {
-          "type": "string",
-          "description": "Represents deployment name.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "Represents deployment modelId."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last trained time."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents deployment last deployed time."
-        },
-        "deploymentExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Represents deployment expiration date in the runtime."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "Represents model training config version."
-        }
-      },
-      "required": [
-        "deploymentName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastDeployedDateTime",
-        "deploymentExpirationDate",
-        "modelTrainingConfigVersion"
-      ]
-    },
-    "TextAnalysisAuthoringProjectMetadata": {
-      "type": "object",
-      "description": "Represents the metadata of a project.",
-      "properties": {
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project creation datetime."
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last modification datetime."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last training datetime."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last deployment datetime."
-        },
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "The project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name.",
-          "readOnly": true
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "createdDateTime",
-        "lastModifiedDateTime",
-        "projectKind",
-        "storageInputContainerName",
-        "projectName",
-        "language"
-      ]
-    },
-    "TextAnalysisAuthoringProjectTrainedModel": {
-      "type": "object",
-      "description": "Represents a trained model.",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "The trained model label.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastTrainingDurationInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the model's last training request in seconds."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        },
-        "hasSnapshot": {
-          "type": "boolean",
-          "description": "The flag to indicate if the trained model has a snapshot ready."
-        }
-      },
-      "required": [
-        "label",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastTrainingDurationInSeconds",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion",
-        "hasSnapshot"
-      ]
-    },
-    "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
-      "properties": {
-        "f1": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model precision"
-        },
-        "precision": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model recall"
-        },
-        "recall": {
-          "type": "number",
-          "format": "double",
-          "description": "Represents the model F1 score"
-        },
-        "truePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true positive"
-        },
-        "trueNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of true negative"
-        },
-        "falsePositiveCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false positive"
-        },
-        "falseNegativeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the count of false negative"
-        }
-      },
-      "required": [
-        "f1",
-        "precision",
-        "recall",
-        "truePositiveCount",
-        "trueNegativeCount",
-        "falsePositiveCount",
-        "falseNegativeCount"
-      ]
-    },
-    "TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary": {
-      "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
-      "properties": {
-        "confusionMatrix": {
-          "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
-        },
-        "classes": {
-          "type": "object",
-          "description": "Represents the classes evaluation",
-          "additionalProperties": {
-            "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassEvaluationSummary"
-          }
-        },
-        "microF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "microPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "microRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroF1": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive."
-        },
-        "macroPrecision": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
-        },
-        "macroRecall": {
-          "type": "number",
-          "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
-        }
-      },
-      "required": [
-        "confusionMatrix",
-        "classes",
-        "microF1",
-        "microPrecision",
-        "microRecall",
-        "macroF1",
-        "macroPrecision",
-        "macroRecall"
-      ]
-    },
-    "TextAnalysisAuthoringSubTrainingJobState": {
-      "type": "object",
-      "description": "Represents the detailed state of a training sub-operation.",
-      "properties": {
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents progress percentage."
-        },
-        "startDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the start date time."
-        },
-        "endDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the end date time."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "Represents the status of the sub-operation."
-        }
-      },
-      "required": [
-        "percentComplete",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringSupportedLanguage": {
-      "type": "object",
-      "description": "Represents a supported language.",
-      "properties": {
-        "languageName": {
-          "type": "string",
-          "description": "The language name.",
-          "readOnly": true
-        },
-        "languageCode": {
-          "type": "string",
-          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "languageName",
-        "languageCode"
-      ]
-    },
-    "TextAnalysisAuthoringSwapDeploymentsJobState": {
-      "type": "object",
-      "description": "Represents the state of a deployment job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "TextAnalysisAuthoringSwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingConfigVersion": {
-      "type": "object",
-      "description": "Represents a training config version.",
-      "properties": {
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents the version of the config.",
-          "readOnly": true
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "Represents the training config version expiration date."
-        }
-      },
-      "required": [
-        "trainingConfigVersion",
-        "modelExpirationDate"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingJobResult": {
-      "type": "object",
-      "description": "Represents the output of a training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents trained model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "trainingStatus": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSubTrainingJobState",
-          "description": "Represents model train status."
-        },
-        "evaluationStatus": {
-          "$ref": "#/definitions/TextAnalysisAuthoringSubTrainingJobState",
-          "description": "Represents model evaluation status."
-        },
-        "estimatedEndDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the estimate end date time for training and evaluation."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion",
-        "trainingStatus"
-      ]
-    },
-    "TextAnalysisAuthoringTrainingJobState": {
-      "type": "object",
-      "description": "Represents the state of a training job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/TextAnalysisAuthoringWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "result": {
-          "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobResult",
-          "description": "Represents training tasks detailed result."
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status",
-        "result"
-      ]
-    },
-    "TextAnalysisAuthoringWarning": {
-      "type": "object",
-      "description": "Represents a warning that was encountered while executing the request.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The warning code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The warning message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     }
   },
   "parameters": {
