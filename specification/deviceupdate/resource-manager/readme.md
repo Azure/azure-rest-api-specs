@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
   - Microsoft.DeviceUpdate/duedge/preview/2025-04-01-preview/deviceupdate.json
-- suppressions:
+suppressions:
   - code: AvoidAdditionalProperties
     from: deviceupdate.json
     reason: Hash algorithm to hashed value map. Service validates the algorithms.
