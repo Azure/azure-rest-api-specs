@@ -20,35 +20,35 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-interface AnalyzeTextAuthoring {
+interface TextAnalysisAuthoring {
   /**
    * Lists the existing projects.
    */
   listProjects is languageOperations.ResourceList<
-    AnalyzeTextAuthoringProjectMetadata,
+    TextAnalysisAuthoringProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a project.
    */
-  getProject is languageOperations.ResourceRead<AnalyzeTextAuthoringProjectMetadata>;
+  getProject is languageOperations.ResourceRead<TextAnalysisAuthoringProjectMetadata>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  @createsOrUpdatesResource(AnalyzeTextAuthoringProjectMetadata)
+  @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
   @parameterVisibility
   @patch
   createProject is Foundations.ResourceOperation<
-    AnalyzeTextAuthoringProjectMetadata,
+    TextAnalysisAuthoringProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
       @TypeSpec.Http.header("Content-Type")
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: AnalyzeTextAuthoringCreateProjectOptions;
+      @bodyRoot body: TextAnalysisAuthoringCreateProjectOptions;
     },
-    Foundations.ResourceCreatedOrOkResponse<AnalyzeTextAuthoringProjectMetadata>,
+    Foundations.ResourceCreatedOrOkResponse<TextAnalysisAuthoringProjectMetadata>,
     {},
     ErrorResponse
   >;
@@ -59,7 +59,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}")
   @delete
-  @pollingOperation(AnalyzeTextAuthoring.getProjectDeletionStatus)
+  @pollingOperation(TextAnalysisAuthoring.getProjectDeletionStatus)
   deleteProject is Foundations.LongRunningOperation<
     {
       /**
@@ -81,9 +81,9 @@ interface AnalyzeTextAuthoring {
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
-    AnalyzeTextAuthoringProjectMetadata,
-    AnalyzeTextAuthoringCopyAuthorizationOptions,
-    AnalyzeTextAuthoringCopyProjectOptions
+    TextAnalysisAuthoringProjectMetadata,
+    TextAnalysisAuthoringCopyAuthorizationOptions,
+    TextAnalysisAuthoringCopyProjectOptions
   >;
 
   /**
@@ -92,7 +92,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:copy")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getCopyProjectStatus)
+  @pollingOperation(TextAnalysisAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
@@ -106,7 +106,7 @@ interface AnalyzeTextAuthoring {
        * The copy project info.
        */
       @body
-      body: AnalyzeTextAuthoringCopyProjectOptions;
+      body: TextAnalysisAuthoringCopyProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -119,7 +119,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:export")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getExportStatus)
+  @pollingOperation(TextAnalysisAuthoring.getExportStatus)
   export is Foundations.LongRunningOperation<
     {
       /**
@@ -157,7 +157,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:import")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getImportStatus)
+  @pollingOperation(TextAnalysisAuthoring.getImportStatus)
   `import` is Foundations.LongRunningOperation<
     {
       /**
@@ -177,7 +177,7 @@ interface AnalyzeTextAuthoring {
        * The project data to import.
        */
       @body
-      body: AnalyzeTextAuthoringExportedProject;
+      body: TextAnalysisAuthoringExportedProject;
     },
     AcceptedResponse,
     {},
@@ -190,7 +190,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:train")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getTrainingStatus)
+  @pollingOperation(TextAnalysisAuthoring.getTrainingStatus)
   train is Foundations.LongRunningOperation<
     {
       /**
@@ -203,7 +203,7 @@ interface AnalyzeTextAuthoring {
        * The training input parameters.
        */
       @body
-      body: AnalyzeTextAuthoringTrainingJobOptions;
+      body: TextAnalysisAuthoringTrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -214,20 +214,20 @@ interface AnalyzeTextAuthoring {
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringCopyProjectJobState>;
+  getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
    */
   listDeployments is languageOperations.ResourceList<
-    AnalyzeTextAuthoringProjectDeployment,
+    TextAnalysisAuthoringProjectDeployment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a deployment.
    */
-  getDeployment is languageOperations.ResourceRead<AnalyzeTextAuthoringProjectDeployment>;
+  getDeployment is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -235,7 +235,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @put
-  @pollingOperation(AnalyzeTextAuthoring.getDeploymentStatus)
+  @pollingOperation(TextAnalysisAuthoring.getDeploymentStatus)
   deployProject is Foundations.LongRunningOperation<
     {
       /**
@@ -254,7 +254,7 @@ interface AnalyzeTextAuthoring {
        * The new deployment info.
        */
       @body
-      body: AnalyzeTextAuthoringCreateDeploymentOptions;
+      body: TextAnalysisAuthoringCreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -267,7 +267,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}")
   @delete
-  @pollingOperation(AnalyzeTextAuthoring.getDeploymentStatus)
+  @pollingOperation(TextAnalysisAuthoring.getDeploymentStatus)
   deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
@@ -294,7 +294,7 @@ interface AnalyzeTextAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
   @post
   @pollingOperation(
-    AnalyzeTextAuthoring.getDeploymentDeleteFromResourcesStatus
+    TextAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
@@ -315,7 +315,7 @@ interface AnalyzeTextAuthoring {
        * The options for deleting the deployment.
        */
       @body
-      body: AnalyzeTextAuthoringDeleteDeploymentOptions;
+      body: TextAnalysisAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -326,12 +326,12 @@ interface AnalyzeTextAuthoring {
    * Gets the status of an existing delete deployment from specific resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringDeploymentDeleteFromResourcesJobState>;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
-  getDeploymentStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringDeploymentJobState>;
+  getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
 
   /**
    * Swaps two existing deployments with each other.
@@ -339,7 +339,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/deployments/:swap")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getSwapDeploymentsStatus)
+  @pollingOperation(TextAnalysisAuthoring.getSwapDeploymentsStatus)
   swapDeployments is Foundations.LongRunningOperation<
     {
       /**
@@ -352,7 +352,7 @@ interface AnalyzeTextAuthoring {
        * The job object to swap two deployments.
        */
       @body
-      body: AnalyzeTextAuthoringSwapDeploymentsOptions;
+      body: TextAnalysisAuthoringSwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -362,19 +362,19 @@ interface AnalyzeTextAuthoring {
   /**
    * Gets the status of an existing swap deployment job.
    */
-  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringSwapDeploymentsJobState>;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
-  getExportStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringExportProjectJobState>;
+  getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
   /**
    * Lists the exported models belonging to a project.
    */
   @added(Versions.v2023_04_15_preview)
   listExportedModels is languageOperations.ResourceList<
-    AnalyzeTextAuthoringExportedTrainedModel,
+    TextAnalysisAuthoringExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -382,7 +382,7 @@ interface AnalyzeTextAuthoring {
    * Gets the details of an exported model.
    */
   @added(Versions.v2023_04_15_preview)
-  getExportedModel is languageOperations.ResourceRead<AnalyzeTextAuthoringExportedTrainedModel>;
+  getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
 
   /**
    * Creates a new exported model or replaces an existing one.
@@ -390,7 +390,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(AnalyzeTextAuthoring.getExportedModelJobStatus)
+  @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -410,7 +410,7 @@ interface AnalyzeTextAuthoring {
        * The exported model info.
        */
       @body
-      body: AnalyzeTextAuthoringExportedModelOptions;
+      body: TextAnalysisAuthoringExportedModelOptions;
     },
     AcceptedResponse,
     {},
@@ -423,7 +423,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(AnalyzeTextAuthoring.getExportedModelJobStatus)
+  @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
   @added(Versions.v2023_04_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -448,7 +448,7 @@ interface AnalyzeTextAuthoring {
    * Gets the status for an existing job to create or update an exported model.
    */
   @added(Versions.v2023_04_15_preview)
-  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringExportedModelJobState>;
+  getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
   /**
    * Gets the details and URL needed to download the exported model.
@@ -471,7 +471,7 @@ interface AnalyzeTextAuthoring {
       @path
       exportedModelName: string;
     },
-    AnalyzeTextAuthoringExportedModelManifest,
+    TextAnalysisAuthoringExportedModelManifest,
     {},
     ErrorResponse
   >;
@@ -479,25 +479,25 @@ interface AnalyzeTextAuthoring {
   /**
    * Gets the status for an import.
    */
-  getImportStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringImportProjectJobState>;
+  getImportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.
    */
   listTrainedModels is languageOperations.ResourceList<
-    AnalyzeTextAuthoringProjectTrainedModel,
+    TextAnalysisAuthoringProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a trained model.
    */
-  getTrainedModel is languageOperations.ResourceRead<AnalyzeTextAuthoringProjectTrainedModel>;
+  getTrainedModel is languageOperations.ResourceRead<TextAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  deleteTrainedModel is languageOperations.ResourceDelete<AnalyzeTextAuthoringProjectTrainedModel>;
+  deleteTrainedModel is languageOperations.ResourceDelete<TextAnalysisAuthoringProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -505,7 +505,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getEvaluationStatus)
+  @pollingOperation(TextAnalysisAuthoring.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
@@ -525,7 +525,7 @@ interface AnalyzeTextAuthoring {
        * The training input parameters.
        */
       @body
-      body: AnalyzeTextAuthoringEvaluationOptions;
+      body: TextAnalysisAuthoringEvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -535,7 +535,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getLoadSnapshotStatus)
+  @pollingOperation(TextAnalysisAuthoring.getLoadSnapshotStatus)
   loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
@@ -559,13 +559,13 @@ interface AnalyzeTextAuthoring {
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringEvaluationJobState>;
+  getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.
    */
   getModelEvaluationResults is languageOperations.ResourceList<
-    AnalyzeTextAuthoringDocumentEvaluationResult,
+    TextAnalysisAuthoringDocumentEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
       StringIndexTypeQueryParameter>
   >;
@@ -590,7 +590,7 @@ interface AnalyzeTextAuthoring {
       @path
       trainedModelLabel: string;
     },
-    AnalyzeTextAuthoringEvaluationSummary,
+    TextAnalysisAuthoringEvaluationSummary,
     {},
     ErrorResponse
   >;
@@ -598,14 +598,14 @@ interface AnalyzeTextAuthoring {
   /**
    * Gets the status for loading a snapshot.
    */
-  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringLoadSnapshotJobState>;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
    */
   @added(Versions.v2023_04_15_preview)
   listDeploymentResources is languageOperations.ResourceList<
-    AnalyzeTextAuthoringAssignedDeploymentResource,
+    TextAnalysisAuthoringAssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -615,7 +615,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getAssignDeploymentResourcesStatus)
+  @pollingOperation(TextAnalysisAuthoring.getAssignDeploymentResourcesStatus)
   @added(Versions.v2023_04_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -629,7 +629,7 @@ interface AnalyzeTextAuthoring {
        * The new project resources info.
        */
       @body
-      body: AnalyzeTextAuthoringAssignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringAssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -642,7 +642,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getUnassignDeploymentResourcesStatus)
+  @pollingOperation(TextAnalysisAuthoring.getUnassignDeploymentResourcesStatus)
   @added(Versions.v2023_04_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -656,7 +656,7 @@ interface AnalyzeTextAuthoring {
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: AnalyzeTextAuthoringUnassignDeploymentResourcesOptions;
+      body: TextAnalysisAuthoringUnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -667,26 +667,26 @@ interface AnalyzeTextAuthoring {
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringAssignDeploymentResourcesJobState>;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringUnassignDeploymentResourcesJobState>;
+  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
 
   /**
    * Lists the non-expired training jobs created for a project.
    */
   listTrainingJobs is languageOperations.ResourceList<
-    AnalyzeTextAuthoringTrainingJobState,
+    TextAnalysisAuthoringTrainingJobState,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the status for a training job.
    */
-  getTrainingStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringTrainingJobState>;
+  getTrainingStatus is languageOperations.ResourceRead<TextAnalysisAuthoringTrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
@@ -694,7 +694,7 @@ interface AnalyzeTextAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(AnalyzeTextAuthoring.getTrainingStatus)
+  @pollingOperation(TextAnalysisAuthoring.getTrainingStatus)
   cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
@@ -717,14 +717,14 @@ interface AnalyzeTextAuthoring {
   /**
    * Gets the status for a project deletion job.
    */
-  getProjectDeletionStatus is languageOperations.ResourceRead<AnalyzeTextAuthoringProjectDeletionJobState>;
+  getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 
   /**
    * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
    */
   @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is languageOperations.ResourceList<
-    AnalyzeTextAuthoringAssignedProjectDeploymentsMetadata,
+    TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -732,7 +732,7 @@ interface AnalyzeTextAuthoring {
    * Lists the supported languages.
    */
   getSupportedLanguages is languageOperations.ResourceList<
-    AnalyzeTextAuthoringSupportedLanguage,
+    TextAnalysisAuthoringSupportedLanguage,
     ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
   >;
@@ -742,7 +742,7 @@ interface AnalyzeTextAuthoring {
    */
   @added(Versions.v2023_04_15_preview)
   getSupportedPrebuiltEntities is languageOperations.ResourceList<
-    AnalyzeTextAuthoringPrebuiltEntity,
+    TextAnalysisAuthoringPrebuiltEntity,
     SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
   >;
 
@@ -750,7 +750,7 @@ interface AnalyzeTextAuthoring {
    * Lists the support training config version for a given project type.
    */
   listTrainingConfigVersions is languageOperations.ResourceList<
-    AnalyzeTextAuthoringTrainingConfigVersion,
+    TextAnalysisAuthoringTrainingConfigVersion,
     ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
   >;
