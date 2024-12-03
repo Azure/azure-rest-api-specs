@@ -379,7 +379,7 @@ function New-TypeSpecAPIViewTokens {
   }
 
   LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
-  $readmeFile | ForEach-Object {
+  $typeSpecProjects | ForEach-Object {
     LogInfo " - $_"
   }
   LogGroupEnd
@@ -395,11 +395,11 @@ function New-TypeSpecAPIViewTokens {
 
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
-      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
+      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
 
       # Generate BaseLine APIView Token using same tag on target branch
       git checkout $TargetCommitId
-      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory | Out-Null
+      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
   }
 
   git checkout $currentBranch
