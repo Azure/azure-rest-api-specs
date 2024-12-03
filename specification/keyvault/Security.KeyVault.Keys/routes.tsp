@@ -35,6 +35,7 @@ op createKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
@@ -69,6 +70,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   KeyBundle,
@@ -98,6 +100,7 @@ op importKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
@@ -129,6 +132,7 @@ op deleteKey is Azure.Core.Foundations.Operation<
      * The name of the key to delete.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   DeletedKeyBundle,
@@ -154,12 +158,14 @@ op updateKey is Azure.Core.Foundations.Operation<
      * The name of key to update.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key to update.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -190,6 +196,7 @@ op getKey is Azure.Core.Foundations.Operation<
      * The name of the key to get.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
@@ -198,6 +205,7 @@ op getKey is Azure.Core.Foundations.Operation<
      * returned.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
   },
   KeyBundle,
@@ -220,6 +228,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
@@ -289,6 +298,7 @@ op backupKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   BackupKeyResult,
@@ -353,12 +363,14 @@ op encrypt is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -399,12 +411,14 @@ op decrypt is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -437,12 +451,14 @@ op sign is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -478,12 +494,14 @@ op verify is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -520,12 +538,14 @@ op wrapKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -563,12 +583,14 @@ op unwrapKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * The version of the key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -600,12 +622,14 @@ op release is Azure.Core.Foundations.Operation<
      * The name of the key to get.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
      * Adding the version parameter retrieves a specific version of a key.
      */
     @path("key-version")
+    @clientName("version", "go")
     keyVersion: string;
 
     /**
@@ -666,6 +690,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   DeletedKeyBundle,
@@ -690,6 +715,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the key
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   void,
@@ -714,6 +740,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the deleted key.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   KeyBundle,
@@ -735,6 +762,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
      * The name of the key in a given key vault.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
   },
   KeyRotationPolicy,
@@ -757,6 +785,7 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
      * The name of the key in the given vault.
      */
     @path("key-name")
+    @clientName("name", "go")
     keyName: string;
 
     /**
