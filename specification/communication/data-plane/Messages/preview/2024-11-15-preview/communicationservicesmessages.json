@@ -319,29 +319,29 @@
       "type": "object",
       "description": "Binding actions to the interactive message.",
       "properties": {
-        "actionBindingKind": {
+        "kind": {
           "$ref": "#/definitions/MessageActionBindingKind",
           "description": "Kind of the MessageActionBinding."
         }
       },
-      "discriminator": "actionBindingKind",
+      "discriminator": "kind",
       "required": [
-        "actionBindingKind"
+        "kind"
       ]
     },
-    "ActionSet": {
+    "ActionGroup": {
       "type": "object",
-      "description": "The Action Set content.",
+      "description": "The Action Group content.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "Title of the ActionSet."
+          "description": "Title of the ActionGroup."
         },
         "items": {
           "type": "array",
-          "description": "Array of items in ActionSet.",
+          "description": "Array of items in ActionGroup.",
           "items": {
-            "$ref": "#/definitions/ActionSetItem"
+            "$ref": "#/definitions/ActionGroupItem"
           }
         }
       },
@@ -350,37 +350,37 @@
         "items"
       ]
     },
-    "ActionSetContent": {
+    "ActionGroupContent": {
       "type": "object",
-      "description": "The action content of type ActionSet.",
+      "description": "The action content of type ActionGroup.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "Title of the actionSet content."
+          "description": "Title of the actionGroup content."
         },
-        "actionSet": {
+        "groups": {
           "type": "array",
           "description": "Set or group of actions.",
           "items": {
-            "$ref": "#/definitions/ActionSet"
+            "$ref": "#/definitions/ActionGroup"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "title",
-        "actionSet"
+        "groups"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/MessageContent"
         }
       ],
-      "x-ms-discriminator-value": "actionSet"
+      "x-ms-discriminator-value": "group"
     },
-    "ActionSetItem": {
+    "ActionGroupItem": {
       "type": "object",
-      "description": "The Action set item in the content.",
+      "description": "The Action group item in the content.",
       "properties": {
         "id": {
           "type": "string",
@@ -725,14 +725,14 @@
           "$ref": "#/definitions/TextMessageContent",
           "description": "Gets or Sets Message footer content. Emojis, markdown, and links are supported."
         },
-        "actionBindings": {
+        "action": {
           "$ref": "#/definitions/ActionBindings",
           "description": "The binding object to get or set Action which describes options user have to respond to message."
         }
       },
       "required": [
         "body",
-        "actionBindings"
+        "action"
       ]
     },
     "InteractiveNotificationContent": {
@@ -753,6 +753,31 @@
         }
       ],
       "x-ms-discriminator-value": "interactive"
+    },
+    "LinkContent": {
+      "type": "object",
+      "description": "The message content of type Url information.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the url content."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The url in the content."
+        }
+      },
+      "required": [
+        "title",
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "url"
     },
     "MediaNotificationContent": {
       "type": "object",
@@ -830,7 +855,7 @@
         "image",
         "video",
         "document",
-        "actionSet",
+        "group",
         "buttonSet",
         "url"
       ],
@@ -859,8 +884,8 @@
             "description": "The document content type."
           },
           {
-            "name": "actionSet",
-            "value": "actionSet",
+            "name": "group",
+            "value": "group",
             "description": "The ActionSet content type."
           },
           {
@@ -1413,31 +1438,6 @@
       ],
       "x-ms-discriminator-value": "text"
     },
-    "UrlContent": {
-      "type": "object",
-      "description": "The message content of type Url information.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "Title of the url content."
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The url in the content."
-        }
-      },
-      "required": [
-        "title",
-        "url"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageContent"
-        }
-      ],
-      "x-ms-discriminator-value": "url"
-    },
     "VideoMessageContent": {
       "type": "object",
       "description": "The message content of type video information.",
@@ -1486,13 +1486,13 @@
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
       "properties": {
-        "action": {
+        "content": {
           "$ref": "#/definitions/ButtonSetContent",
           "description": "Action content of Interactive message."
         }
       },
       "required": [
-        "action"
+        "content"
       ],
       "allOf": [
         {
@@ -1505,13 +1505,13 @@
       "type": "object",
       "description": "WhatsApp List Binding actions to the interactive message.",
       "properties": {
-        "action": {
-          "$ref": "#/definitions/ActionSetContent",
+        "content": {
+          "$ref": "#/definitions/ActionGroupContent",
           "description": "Action content of Interactive message."
         }
       },
       "required": [
-        "action"
+        "content"
       ],
       "allOf": [
         {
@@ -1638,13 +1638,13 @@
       "type": "object",
       "description": "WhatsApp Binding actions to the interactive message.",
       "properties": {
-        "action": {
-          "$ref": "#/definitions/UrlContent",
+        "content": {
+          "$ref": "#/definitions/LinkContent",
           "description": "Action content of Interactive message."
         }
       },
       "required": [
-        "action"
+        "content"
       ],
       "allOf": [
         {

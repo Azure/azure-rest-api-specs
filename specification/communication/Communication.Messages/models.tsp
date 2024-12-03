@@ -87,7 +87,7 @@ union MessageContentKind {
   document: "document",
 
   @doc("The ActionSet content type.")
-  actionSet: "actionSet",
+  group: "group",
 
   @doc("The ButtonSet content type.")
   buttonSet: "buttonSet",
@@ -302,7 +302,7 @@ model InteractiveMessage {
   footer?: TextMessageContent;
 
   @doc("The binding object to get or set Action which describes options user have to respond to message.")
-  actionBindings: ActionBindings;
+  action: ActionBindings;
 }
 
 @added(Versions.c2024_11_15_Preview)
@@ -372,7 +372,7 @@ model ButtonSetContent extends MessageContent {
 
 @added(Versions.c2024_11_15_Preview)
 @doc("The message content of type Url information.")
-model UrlContent extends MessageContent {
+model LinkContent extends MessageContent {
   @doc("Message content kind is url.")
   kind: MessageContentKind.url;
 
@@ -384,31 +384,31 @@ model UrlContent extends MessageContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The action content of type ActionSet.")
-model ActionSetContent extends MessageContent {
-  @doc("Message content kind is actionSet.")
-  kind: MessageContentKind.actionSet;
+@doc("The action content of type ActionGroup.")
+model ActionGroupContent extends MessageContent {
+  @doc("Message content kind is actionGroup.")
+  kind: MessageContentKind.group;
 
-  @doc("Title of the actionSet content.")
+  @doc("Title of the actionGroup content.")
   title: string;
 
   @doc("Set or group of actions.")
-  actionSet: ActionSet[];
+  groups: ActionGroup[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The Action Set content.")
-model ActionSet {
-  @doc("Title of the ActionSet.")
+@doc("The Action Group content.")
+model ActionGroup {
+  @doc("Title of the ActionGroup.")
   title: string;
 
-  @doc("Array of items in ActionSet.")
-  items: ActionSetItem[];
+  @doc("Array of items in ActionGroup.")
+  items: ActionGroupItem[];
 }
 
 @added(Versions.c2024_11_15_Preview)
-@doc("The Action set item in the content.")
-model ActionSetItem {
+@doc("The Action group item in the content.")
+model ActionGroupItem {
   @doc("Id of the Item.")
   id: string;
 
@@ -427,41 +427,41 @@ model MediaMessageContent {
 }
 
 @added(Versions.c2024_11_15_Preview)
-@discriminator("actionBindingKind")
+@discriminator("kind")
 @doc("Binding actions to the interactive message.")
 model ActionBindings {
   @doc("Kind of the MessageActionBinding.")
-  actionBindingKind: MessageActionBindingKind;
+  kind: MessageActionBindingKind;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp List Binding actions to the interactive message.")
 model WhatsAppListActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppListAction.")
-  actionBindingKind: MessageActionBindingKind.whatsAppListAction;
+  kind: MessageActionBindingKind.whatsAppListAction;
 
   @doc("Action content of Interactive message.")
-  action: ActionSetContent;
+  content: ActionGroupContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppButtonActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppButtonAction.")
-  actionBindingKind: MessageActionBindingKind.whatsAppButtonAction;
+  kind: MessageActionBindingKind.whatsAppButtonAction;
 
   @doc("Action content of Interactive message.")
-  action: ButtonSetContent;
+  content: ButtonSetContent;
 }
 
 @added(Versions.c2024_11_15_Preview)
 @doc("WhatsApp Binding actions to the interactive message.")
 model WhatsAppUrlActionBindings extends ActionBindings {
   @doc("Message action binding type is WhatsAppUrlAction.")
-  actionBindingKind: MessageActionBindingKind.whatsAppUrlAction;
+  kind: MessageActionBindingKind.whatsAppUrlAction;
 
   @doc("Action content of Interactive message.")
-  action: UrlContent;
+  content: LinkContent;
 }
 
 @doc("A request to send a template notification.")
