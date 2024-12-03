@@ -50,7 +50,7 @@ function Get-ImpactedTypeSpec {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
         $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp" 
         if ($entryPointFile) {
-          $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName)
+          $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName) | Out-Null
           Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
         }
       }
