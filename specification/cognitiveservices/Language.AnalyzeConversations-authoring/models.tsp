@@ -367,7 +367,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("CreateProjectConfig", "csharp")
+@clientName("CreateProjectOptions", "csharp")
 model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
