@@ -8,9 +8,7 @@
         }
       },
       "location": "westus2",
-
       "properties": {
-        "sku": "StandardCache",
         "deviceEnrollmentScope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg",
         "encryption": {
           "keyVaultKeyUri": "https://contoso.vault.azure.net/keys/contoso",
@@ -23,18 +21,7 @@
           }
         ],
         "deviceType": "DeviceRegistryDevice",
-        "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
-        "deviceEnrollmentScopes": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000",
-            "type": "Subscription",
-            "cache": {
-              "arcExtensionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Kubernetes/connectedClusters/vm-server-arc/Providers/Microsoft.KubernetesConfiguration/extensions/adu",
-              "cacheDownloadEndpoint" : "http://my.download.server"
-            }
-          }
-        ],
-        "cacheStorageResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/mycachestorage"
+        "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
       }
     },
     "api-version": "2025-04-01-preview",
@@ -83,18 +70,7 @@
           "deviceType": "DeviceRegistryDevice",
           "provisioningState": "Accepted",
           "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
-          "sku": "StandardCache",
-          "deviceEnrollmentScopes": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000",
-            "type": "Subscription",
-            "cache": {
-              "arcExtensionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Kubernetes/connectedClusters/vm-server-arc/Providers/Microsoft.KubernetesConfiguration/extensions/adu",
-              "cacheDownloadEndpoint" : "http://my.download.server"
-            }
-          }
-          ],
-          "cacheStorageResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/mycachestorage"
+          "sku": "Standard"
         }
       }
     },
@@ -138,18 +114,7 @@
           "deviceType": "DeviceRegistryDevice",
           "provisioningState": "Accepted",
           "serviceManagedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
-          "sku": "StandardCache",
-          "deviceEnrollmentScopes": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000",
-            "type": "Subscription",
-            "cache": {
-              "arcExtensionResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Kubernetes/connectedClusters/vm-server-arc/Providers/Microsoft.KubernetesConfiguration/extensions/adu",
-              "cacheDownloadEndpoint" : "http://my.download.server"
-            }
-          }
-          ],
-          "cacheStorageResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/mycachestorage"
+          "sku": "Standard"
         }
       }
     }

@@ -2626,6 +2626,24 @@
         "deviceUuid"
       ]
     },
+    "Cache": {
+      "type": "object",
+      "description": "The Cache information",
+      "properties": {
+        "arcExtensionResourceId": {
+          "type": "string",
+          "description": "The Arc extension resource id"
+        },
+        "cacheDownloadEndpoint": {
+          "type": "string",
+          "description": "The cache download url"
+        }
+      },
+      "required": [
+        "arcExtensionResourceId",
+        "cacheDownloadEndpoint"
+      ]
+    },
     "Deployment": {
       "type": "object",
       "description": "Deployment details.",
@@ -3153,6 +3171,49 @@
         ]
       }
     },
+    "DeviceEnrollmentScope": {
+      "type": "object",
+      "description": "The DeviceEnrollmentScope",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Subscription or resource group used for device enrollment."
+        },
+        "scopeType": {
+          "type": "string",
+          "description": "The scope type",
+          "default": "Subscription",
+          "enum": [
+            "Subscription",
+            "ResourceGroup"
+          ],
+          "x-ms-enum": {
+            "name": "ScopeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Subscription",
+                "value": "Subscription",
+                "description": "Subscription"
+              },
+              {
+                "name": "ResourceGroup",
+                "value": "ResourceGroup",
+                "description": "Resource group"
+              }
+            ]
+          }
+        },
+        "cache": {
+          "$ref": "#/definitions/Cache",
+          "description": "The cache information"
+        }
+      },
+      "required": [
+        "id",
+        "scopeType"
+      ]
+    },
     "DeviceType": {
       "type": "string",
       "description": "The type of devices managed by this account",
@@ -3675,7 +3736,8 @@
           "default": "Standard",
           "enum": [
             "Free",
-            "Standard"
+            "Standard",
+            "StandardCache"
           ],
           "x-ms-enum": {
             "name": "SKU",
@@ -3690,6 +3752,11 @@
                 "name": "Standard",
                 "value": "Standard",
                 "description": "Standard SKU"
+              },
+              {
+                "name": "StandardCache",
+                "value": "StandardCache",
+                "description": "StandardCache SKU"
               }
             ]
           }
@@ -3730,6 +3797,18 @@
         "serviceManagedIdentityResourceId": {
           "type": "string",
           "description": "User assigned managed identity used for device enrollment and broker communication."
+        },
+        "deviceEnrollmentScopes": {
+          "type": "array",
+          "description": "Device enrollment scopes",
+          "items": {
+            "$ref": "#/definitions/DeviceEnrollmentScope"
+          },
+          "x-ms-identifiers": []
+        },
+        "cacheStorageResourceId": {
+          "type": "string",
+          "description": "The cache storage account resource id used to import content."
         }
       },
       "required": [

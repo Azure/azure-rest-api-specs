@@ -75,7 +75,6 @@ union SKU {
   /**
    * StandardCache SKU
    */
-  @added(Versions.v2025_04_01_preview)
   StandardCache: "StandardCache",
 }
 
@@ -357,7 +356,7 @@ model UpdateAccountProperties {
    */
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  deviceEnrollmentScopes?: DeviceEnrollmentScopes[];
+  deviceEnrollmentScopes?: DeviceEnrollmentScope[];
 
   /**
    * The cache storage account resource id used to import content.
