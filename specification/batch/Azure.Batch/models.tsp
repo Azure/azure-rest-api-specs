@@ -2592,7 +2592,7 @@ model BatchJobPreparationAndReleaseTaskStatusListResult {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
-  @Azure.Core.nextLink
+  @nextLink
   `odata.nextLink`?: string;
 }
 
@@ -3106,7 +3106,7 @@ model BatchPoolListResult {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
-  @Azure.Core.nextLink
+  @nextLink
   `odata.nextLink`?: string;
 }
 
@@ -3545,7 +3545,7 @@ model BatchTaskListResult {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
-  @Azure.Core.nextLink
+  @nextLink
   `odata.nextLink`?: string;
 }
 
@@ -4022,6 +4022,6 @@ model BatchNodeVMExtensionListResult {
   value?: BatchNodeVMExtension[];
 
   @doc("The URL to get the next set of results.")
-  @Azure.Core.nextLink
+  @nextLink
   `odata.nextLink`?: string;
 }
