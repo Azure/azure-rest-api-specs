@@ -44,7 +44,7 @@ function Get-ImpactedTypeSpec {
     )
     $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
     $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
-    $typeSpecProjectBaseDirectory = $filePathParts[0..$($parts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
+    $typeSpecProjectBaseDirectory = $filePathParts[0..$($filePathParts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
     $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse
     if ($configFilesInTypeSpecProjects) {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
@@ -370,7 +370,6 @@ function New-TypeSpecAPIViewTokens {
   # Get Related TypeSpec ReadMe Files
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
-    Write-Host "$_"
     $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile "$_"
     if ($tspProjs) {
       foreach ($tspProj in $tspProjs) {
