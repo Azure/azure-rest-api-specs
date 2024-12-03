@@ -75,6 +75,7 @@ union SKU {
   /**
    * StandardCache SKU
    */
+  @added(Versions.v2025_04_01_preview)
   StandardCache: "StandardCache",
 }
 
@@ -442,7 +443,7 @@ model Cache {
   /**
    * The Arc extension resource id
    */
-  ArcExtensionResourceId: string;
+  arcExtensionResourceId: string;
 
   /**
    * The cache download url

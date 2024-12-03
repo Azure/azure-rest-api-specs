@@ -48,9 +48,6 @@ input-file:
     reason: Optional file properties (not consumed by service but pass-through to device).
     where:
       - $.definitions.UpdateFile.properties.properties
-  - code: ProvisioningStateMustBeReadOnly
-    from: deviceupdate.json
-    reason: False positive. Provisioning state is read-only.
 ```
 
 ### Tag: package-2024-10-01-preview
