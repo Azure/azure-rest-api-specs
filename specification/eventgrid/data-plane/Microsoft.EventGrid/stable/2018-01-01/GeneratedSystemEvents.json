@@ -3765,7 +3765,10 @@
           "type": "string",
           "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
         }
-      }
+      },
+      "required": [
+        "sequenceNumber"
+      ]
     },
     "DeviceConnectionStateEventProperties": {
       "type": "object",
@@ -3789,6 +3792,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "deviceConnectionStateEventInfo"
       ]
     },
@@ -3810,6 +3815,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "twin"
       ]
     },
@@ -3895,7 +3902,14 @@
         }
       },
       "required": [
+        "authenticationType",
+        "connectionState",
+        "deviceId",
+        "etag",
+        "lastActivityTime",
         "properties",
+        "status",
+        "statusUpdateTime",
         "x509Thumbprint"
       ]
     },
@@ -3929,7 +3943,11 @@
           "type": "string",
           "description": "Secondary thumbprint for the x509 certificate."
         }
-      }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
     },
     "DeviceTwinMetadata": {
       "type": "object",
@@ -3940,7 +3958,10 @@
           "description": "The ISO8601 timestamp of the last time the properties were updated.",
           "x-ms-client-name": "$lastUpdated"
         }
-      }
+      },
+      "required": [
+        "lastUpdated"
+      ]
     },
     "DeviceTwinProperties": {
       "type": "object",
