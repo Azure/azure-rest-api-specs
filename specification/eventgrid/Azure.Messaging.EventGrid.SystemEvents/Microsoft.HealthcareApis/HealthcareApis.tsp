@@ -1,5 +1,4 @@
 import "@typespec/versioning";
-
 using TypeSpec.Versioning;
 
 /** Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
@@ -12,13 +11,14 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    resourceFhirAccount?: string;
+    resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    resourceFhirId?: string;
+    resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    resourceVersionId?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resourceVersionId: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event. */
@@ -28,13 +28,14 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    resourceFhirAccount?: string;
+    resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    resourceFhirId?: string;
+    resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    resourceVersionId?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resourceVersionId: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event. */
@@ -44,76 +45,80 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    resourceFhirAccount?: string;
+    resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    resourceFhirId?: string;
+    resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
-    resourceVersionId?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resourceVersionId: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event. */
   model HealthcareDicomImageCreatedEventData {
     /** Data partition name */
-    partitionName?: string;
+    partitionName: string;
 
     /** Unique identifier for the Study */
-    imageStudyInstanceUid?: string;
+    imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    imageSeriesInstanceUid?: string;
+    imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    imageSopInstanceUid?: string;
+    imageSopInstanceUid: string;
 
     /** Domain name of the DICOM account for this image. */
-    serviceHostName?: string;
+    serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
-    sequenceNumber?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    sequenceNumber: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event. */
   model HealthcareDicomImageDeletedEventData {
     /** Data partition name */
-    partitionName?: string;
+    partitionName: string;
 
     /** Unique identifier for the Study */
-    imageStudyInstanceUid?: string;
+    imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    imageSeriesInstanceUid?: string;
+    imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    imageSopInstanceUid?: string;
+    imageSopInstanceUid: string;
 
     /** Host name of the DICOM account for this image. */
-    serviceHostName?: string;
+    serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
-    sequenceNumber?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    sequenceNumber: int64;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event. */
   model HealthcareDicomImageUpdatedEventData {
     /** Data partition name */
-    partitionName?: string;
+    partitionName: string;
 
     /** Unique identifier for the Study */
-    imageStudyInstanceUid?: string;
+    imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    imageSeriesInstanceUid?: string;
+    imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    imageSopInstanceUid?: string;
+    imageSopInstanceUid: string;
 
     /** Domain name of the DICOM account for this image. */
-    serviceHostName?: string;
+    serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service. */
-    sequenceNumber?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    sequenceNumber: int64;
   }
 
   /** Schema of FHIR resource type enumeration. */

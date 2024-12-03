@@ -4280,7 +4280,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareDicomImageDeletedEventData": {
       "type": "object",
@@ -4311,7 +4318,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareDicomImageUpdatedEventData": {
       "type": "object",
@@ -4342,7 +4356,14 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName"
+      ]
     },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
@@ -4369,7 +4390,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "HealthcareFhirResourceDeletedEventData": {
       "type": "object",
@@ -4396,7 +4421,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "HealthcareFhirResourceType": {
       "type": "string",
@@ -5401,7 +5430,11 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceFhirAccount",
+        "resourceFhirId"
+      ]
     },
     "IotHubDeviceConnectedEventData": {
       "type": "object",
