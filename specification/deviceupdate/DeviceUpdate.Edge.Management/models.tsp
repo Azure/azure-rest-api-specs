@@ -71,6 +71,11 @@ union SKU {
    * Standard SKU
    */
   Standard: "Standard",
+
+  /**
+   * StandardCache SKU
+   */
+  StandardCache: "StandardCache",
 }
 
 /**
@@ -127,6 +132,23 @@ union DeviceType {
    * All device types supported by Device Update service.
    */
   AllDeviceTypes: "AllDeviceTypes",
+}
+
+/**
+ * The scope of the enrollment
+ */
+union ScopeType {
+  string,
+
+  /**
+   * Subscription
+   */
+  Subscription: "Subscription",
+
+  /**
+   * Resource group
+   */
+  ResourceGroup: "ResourceGroup",
 }
 
 /**
@@ -328,6 +350,19 @@ model UpdateAccountProperties {
    * User assigned managed identity used for device enrollment and broker communication.
    */
   serviceManagedIdentityResourceId: string;
+
+  /**
+   * Device enrollment scopes
+   */
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  deviceEnrollmentScopes?: DeviceEnrollmentScopes[];
+
+  /**
+   * The cache storage account resource id used to import content.
+   */
+  @added(Versions.v2025_04_01_preview)
+  cacheStorageResourceId?: string;
 }
 
 /**
@@ -378,6 +413,41 @@ model MqttBroker {
    * The type of a MQTT Broker
    */
   type: BrokerType = BrokerType.EventGrid;
+}
+
+/**
+ * The DeviceEnrollmentScope
+ */
+model DeviceEnrollmentScope {
+  /**
+   * Subscription or resource group used for device enrollment.
+   */
+  id: string;
+
+  /**
+   * The scope type
+   */
+  scopeType: ScopeType = ScopeType.Subscription;
+
+  /**
+   * The cache information
+   */
+  cache?: Cache;
+}
+
+/**
+ * The Cache information
+ */
+model Cache {
+  /**
+   * The Arc extension resource id
+   */
+  ArcExtensionResourceId: string;
+
+  /**
+   * The cache download url
+   */
+  cacheDownloadEndpoint: string;
 }
 
 /**
