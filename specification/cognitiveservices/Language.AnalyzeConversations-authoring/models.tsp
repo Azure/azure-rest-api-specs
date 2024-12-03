@@ -103,9 +103,7 @@ union StringIndexType {
   string,
 
   /**
-   * The offset and length values will correspond to UTF-16 code units. Use this
-   * option if your application is written in a language that support Unicode, for
-   * example Java, JavaScript.
+   * The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript.
    */
   Utf16CodeUnit: "Utf16CodeUnit",
 }
@@ -115,8 +113,7 @@ union TrainingMode {
   string,
 
   /**
-   * Trains using fine-tuned neural network transformer models. Can train
-   * multilingual projects.
+   * Trains using fine-tuned neural network transformer models. Can train multilingual projects.
    */
   advanced: "advanced",
 
@@ -131,8 +128,7 @@ union EvaluationKind {
   string,
 
   /**
-   * Split the data into training and test sets according to user-defined
-   * percentages.
+   * Split the data into training and test sets according to user-defined percentages.
    */
   percentage: "percentage",
 
@@ -167,27 +163,22 @@ union CompositionSetting {
   string,
 
   /**
-   * When two or more components are found in the text and overlap, the component
-   * with the longest set of characters is returned.
+   * When two or more components are found in the text and overlap, the component with the longest set of characters is returned.
    */
   returnLongestOverlap: "returnLongestOverlap",
 
   /**
-   * All components must overlap at the exact same characters in the text for the
-   * entity to return. If one of the defined components is not matched or predicted,
-   * the entity will not return.
+   * All components must overlap at the exact same characters in the text for the entity to return. If one of the defined components is not matched or predicted, the entity will not return.
    */
   requireExactOverlap: "requireExactOverlap",
 
   /**
-   * Every component's match or prediction is returned as a separate instance of the
-   * entity.
+   * Every component's match or prediction is returned as a separate instance of the entity.
    */
   separateComponents: "separateComponents",
 
   /**
-   * When two or more components are found in the text and overlap, the components'
-   * spans are merged together into one span combining all of them.
+   * When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them.
    */
   combineComponents: "combineComponents",
 }
@@ -344,9 +335,7 @@ model Error {
 }
 
 /**
- * An object containing more specific information about the error. As per
- * Microsoft One API guidelines -
- * https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+ * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
 model InnerErrorModel {
   /**
@@ -370,8 +359,7 @@ model InnerErrorModel {
   target?: string;
 
   /**
-   * An object containing more specific information than the current object about
-   * the error.
+   * An object containing more specific information than the current object about the error.
    */
   innererror?: InnerErrorModel;
 }
@@ -441,8 +429,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
 }
 
 /**
- * Represents the options for copying an existing project to another Azure
- * resource.
+ * Represents the options for copying an existing project to another Azure resource.
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("CopyProjectConfig", "csharp")
@@ -489,8 +476,7 @@ model AnalyzeConversationAuthoringExportedProject {
   projectFileVersion: string;
 
   /**
-   * Specifies the method used to interpret string offsets. For additional
-   * information see https://aka.ms/text-analytics-offsets.
+   * Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.
    */
   stringIndexType: StringIndexType;
 
@@ -528,8 +514,7 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
   modelLabel: string;
 
   /**
-   * Represents training config version. By default, "latest" value is used which
-   * uses the latest released training config version.
+   * Represents training config version. By default, "latest" value is used which uses the latest released training config version.
    */
   trainingConfigVersion?: string;
 
@@ -539,9 +524,7 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
   trainingMode: TrainingMode;
 
   /**
-   * Represents the evaluation options. By default, the evaluation kind is
-   * percentage, with training split percentage as 80, and testing split percentage
-   * as 20.
+   * Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.
    */
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
 }
@@ -552,20 +535,17 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
 @clientName("EvaluationConfig", "csharp")
 model AnalyzeConversationAuthoringEvaluationOptions {
   /**
-   * Represents the evaluation kind. By default, the evaluation kind is set to
-   * percentage.
+   * Represents the evaluation kind. By default, the evaluation kind is set to percentage.
    */
   kind?: EvaluationKind;
 
   /**
-   * Represents the training dataset split percentage. Only needed in case the
-   * evaluation kind is percentage.
+   * Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage.
    */
   trainingSplitPercentage?: int32;
 
   /**
-   * Represents the testing dataset split percentage. Only needed in case the
-   * evaluation kind is percentage.
+   * Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage.
    */
   testingSplitPercentage?: int32;
 }
@@ -729,9 +709,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   trainedModelLabel: string;
 
   /**
-   * Represents the resource IDs to be assigned to the deployment.
-   *             If provided, the deployment will be rolled out to the resources
-   * provided here as well as the original resource in which the project is created.
+   * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2023_04_15_preview)
   assignedResourceIds?: string[];
@@ -743,11 +721,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 @clientName("DeleteDeploymentConfig", "csharp")
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
-   * Represents the resource IDs to delete the deployment from.
-   *             If not provided, the deployment will be rolled out from all the
-   * resources it is deployed to.
-   *             If provided, it will delete the deployment only from the specified
-   * assigned resources, and leave it for the rest.
+   * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
    */
   assignedResourceIds?: string[];
 }
@@ -942,8 +916,7 @@ model AnalyzeConversationAuthoringEvaluationResults {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model StringIndexTypeQueryParameter {
   /**
-   * Specifies the method used to interpret string offsets. For additional
-   * information see https://aka.ms/text-analytics-offsets.
+   * Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.
    */
   @query("stringIndexType")
   stringIndexType: StringIndexType;
@@ -964,9 +937,7 @@ model AnalyzeConversationAuthoringUtteranceEvaluationResult {
   text: string;
 
   /**
-   * Represents the utterance language. This is BCP-47 representation of a language.
-   * For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish
-   * etc.
+   * Represents the utterance language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language: string;
 
@@ -982,8 +953,7 @@ model AnalyzeConversationAuthoringUtteranceEvaluationResult {
 }
 
 /**
- * Represents the comparison between the expected and predicted entities for an
- * utterance.
+ * Represents the comparison between the expected and predicted entities for an utterance.
  */
 @clientName("UtteranceEntitiesEvaluationResult", "csharp")
 model AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult {
@@ -1020,8 +990,7 @@ model AnalyzeConversationAuthoringUtteranceEntityEvaluationResult {
 }
 
 /**
- * Represents the comparison between the expected and the predicted intent for an
- * utterance.
+ * Represents the comparison between the expected and the predicted intent for an utterance.
  */
 @clientName("UtteranceIntentsEvaluationResult", "csharp")
 model AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult {
@@ -1073,9 +1042,7 @@ model AnalyzeConversationAuthoringConfusionMatrixRow
 @clientName("EntitiesEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
-   * Represents the confusion matrix between two entities (the two entities can be
-   * the same). The matrix is between the entity that was labelled and the entity
-   * that was predicted.
+   * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
    */
   confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
 
@@ -1090,14 +1057,12 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   microF1: float32;
 
   /**
-   * Represents the micro precision. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the micro precision. Expected value is a float between 0 and 1 inclusive.
    */
   microPrecision: float32;
 
   /**
-   * Represents the micro recall. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the micro recall. Expected value is a float between 0 and 1 inclusive.
    */
   microRecall: float32;
 
@@ -1107,14 +1072,12 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   macroF1: float32;
 
   /**
-   * Represents the macro precision. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the macro precision. Expected value is a float between 0 and 1 inclusive.
    */
   macroPrecision: float32;
 
   /**
-   * Represents the macro recall. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the macro recall. Expected value is a float between 0 and 1 inclusive.
    */
   macroRecall: float32;
 }
@@ -1182,9 +1145,7 @@ model AnalyzeConversationAuthoringEntityEvaluationSummary {
 @clientName("IntentsEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
-   * Represents the confusion matrix between two intents (the two intents can be the
-   * same). The matrix is between the intent that was labelled and the intent that
-   * was predicted.
+   * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
    */
   confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
 
@@ -1199,14 +1160,12 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   microF1: float32;
 
   /**
-   * Represents the micro precision. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the micro precision. Expected value is a float between 0 and 1 inclusive.
    */
   microPrecision: float32;
 
   /**
-   * Represents the micro recall. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the micro recall. Expected value is a float between 0 and 1 inclusive.
    */
   microRecall: float32;
 
@@ -1216,14 +1175,12 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   macroF1: float32;
 
   /**
-   * Represents the macro precision. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the macro precision. Expected value is a float between 0 and 1 inclusive.
    */
   macroPrecision: float32;
 
   /**
-   * Represents the macro recall. Expected value is a float between 0 and 1
-   * inclusive.
+   * Represents the macro recall. Expected value is a float between 0 and 1 inclusive.
    */
   macroRecall: float32;
 }
@@ -1556,8 +1513,7 @@ model AnalyzeConversationAuthoringSupportedLanguage {
   languageName: string;
 
   /**
-   * The language code. This is BCP-47 representation of a language. For example,
-   * "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   * The language code. This is BCP-47 representation of a language. For example, "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   languageCode: string;
 }
@@ -1700,9 +1656,7 @@ model AnalyzeConversationAuthoringExportedEntitySublist {
 @clientName("ExportedEntityListSynonym", "csharp")
 model AnalyzeConversationAuthoringExportedEntityListSynonym {
   /**
-   * Represents the language of the synonyms. This is BCP-47 representation of a
-   * language. For example, use "en" for English, "en-gb" for English (UK), "es" for
-   * Spanish etc.
+   * Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language?: string;
 
@@ -1729,17 +1683,13 @@ model AnalyzeConversationAuthoringExportedPrebuiltEntity {
 @clientName("ExportedEntityRegex", "csharp")
 model AnalyzeConversationAuthoringExportedEntityRegex {
   /**
-   * The regex expressions of the regex component. These expressions follow the .NET
-   * regex syntax. For reference, check here:
-   * https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
+   * The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
    */
   expressions?: AnalyzeConversationAuthoringExportedEntityRegexExpression[];
 }
 
 /**
- * Represents a regex expression inside a regex component. This expression follows
- * the .NET regex syntax. For reference, check here:
- * https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
+ * Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
  */
 @clientName("ExportedEntityRegexExpression", "csharp")
 model AnalyzeConversationAuthoringExportedEntityRegexExpression {
@@ -1749,9 +1699,7 @@ model AnalyzeConversationAuthoringExportedEntityRegexExpression {
   regexKey?: string;
 
   /**
-   * Represents the language of the regex expression. This is BCP-47 representation
-   * of a language. For example, use "en" for English, "en-gb" for English (UK),
-   * "es" for Spanish etc.
+   * Represents the language of the regex expression. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language?: string;
 
@@ -1815,9 +1763,7 @@ model AnalyzeConversationAuthoringConversationExportedUtterance {
   text: string;
 
   /**
-   * Represents the utterance's language. This is BCP-47 representation of a
-   * language. For example, use "en" for English, "en-gb" for English (UK), "es" for
-   * Spanish etc.
+   * Represents the utterance's language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language?: string;
 
@@ -1871,14 +1817,12 @@ model AnalyzeConversationAuthoringCustomConversationSummarizationConversation {
   summaryLocation?: string;
 
   /**
-   * Represents the conversation file location in the blob store container
-   * associated with the project.
+   * Represents the conversation file location in the blob store container associated with the project.
    */
   location: string;
 
   /**
-   * Represents the language. This is BCP-47 representation of a language. For
-   * example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+   * Represents the language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language?: string;
 
@@ -2045,9 +1989,7 @@ model AnalyzeConversationAuthoringOrchestrationExportedUtterance {
   text: string;
 
   /**
-   * Represents the utterance's language. This is BCP-47 representation of a
-   * language. For example, use "en" for English, "en-gb" for English (UK), "es" for
-   * Spanish etc.
+   * Represents the utterance's language. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
    */
   language?: string;
 
@@ -2084,13 +2026,11 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastTrainedDateTime: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastExportedModelDateTime: utcDateTime;
 
   /**

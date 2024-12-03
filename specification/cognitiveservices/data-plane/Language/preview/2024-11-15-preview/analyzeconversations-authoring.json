@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Conversations Authoring",
     "version": "2024-11-15-preview",
-    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms. The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\\n\\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -20,7 +20,7 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "description": "Supported Cognitive Services endpoint (e.g.,\nhttps://<resource-name>.api.cognitiveservices.azure.com).",
+        "description": "Supported Cognitive Services endpoint e.g., https://<resource-name>.api.cognitiveservices.azure.com.",
         "required": true,
         "type": "string"
       }
@@ -238,7 +238,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
         "operationId": "AnalyzeConversationAuthoring_CopyProjectAuthorization",
-        "description": "Generates a copy project operation authorization to the current target Azure\nresource.",
+        "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -380,7 +380,7 @@
           {
             "name": "stringIndexType",
             "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
             "required": true,
             "type": "string",
             "enum": [
@@ -393,7 +393,7 @@
                 {
                   "name": "Utf16CodeUnit",
                   "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
                 }
               ]
             }
@@ -442,7 +442,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
         "operationId": "AnalyzeConversationAuthoring_Import",
-        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+        "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1079,7 +1079,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "operationId": "AnalyzeConversationAuthoring_GetExportStatus",
-        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+        "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1613,7 +1613,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "operationId": "AnalyzeConversationAuthoring_LoadSnapshot",
-        "description": "Restores the snapshot of this trained model to be the current working directory\nof the project.",
+        "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1715,7 +1715,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
         "operationId": "AnalyzeConversationAuthoring_GetModelEvaluationResults",
-        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1775,7 +1775,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
         "operationId": "AnalyzeConversationAuthoring_GetModelEvaluationSummary",
-        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1922,7 +1922,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
         "operationId": "AnalyzeConversationAuthoring_AssignDeploymentResources",
-        "description": "Assign new Azure resources to a project to allow deploying new deployments to\nthem. This API is available only via AAD authentication and not supported via\nsubscription key authentication. For more details about AAD authentication,\ncheck here:\nhttps://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
+        "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1974,7 +1974,7 @@
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
         "operationId": "AnalyzeConversationAuthoring_UnassignDeploymentResources",
-        "description": "Unassign resources from a project. This disallows deploying new deployments to\nthese resources, and deletes existing deployments assigned to them.",
+        "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2298,7 +2298,7 @@
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
         "operationId": "AnalyzeConversationAuthoring_ListAssignedResourceDeployments",
-        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't\nreturn deployments belonging to projects owned by this resource. It only\nreturns deployments belonging to projects owned by other resources.",
+        "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2440,7 +2440,7 @@
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
         "operationId": "AnalyzeConversationAuthoring_GetSupportedPrebuiltEntities",
-        "description": "Lists the supported prebuilt entities that can be used while creating composed\nentities.",
+        "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2448,14 +2448,14 @@
           {
             "name": "language",
             "in": "query",
-            "description": "The language to get supported prebuilt entities for. Required if multilingual\nis false. This is BCP-47 representation of a language. For example, use \"en\"\nfor English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
             "required": false,
             "type": "string"
           },
           {
             "name": "multilingual",
             "in": "query",
-            "description": "Whether to get the support prebuilt entities for multilingual or monolingual\nprojects. If true, the language parameter is ignored.",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
             "required": false,
             "type": "string"
           },
@@ -2838,7 +2838,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the utterance's language. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "intent": {
           "type": "string",
@@ -2929,7 +2929,7 @@
     },
     "AnalyzeConversationAuthoringCopyProjectOptions": {
       "type": "object",
-      "description": "Represents the options for copying an existing project to another Azure\nresource.",
+      "description": "Represents the options for copying an existing project to another Azure resource.",
       "properties": {
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
@@ -2976,7 +2976,7 @@
         },
         "assignedResourceIds": {
           "type": "array",
-          "description": "Represents the resource IDs to be assigned to the deployment.\nIf provided, the deployment will be rolled out to the resources\nprovided here as well as the original resource in which the project is created.",
+          "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
             "type": "string"
           }
@@ -3031,7 +3031,7 @@
       "properties": {
         "assignedResourceIds": {
           "type": "array",
-          "description": "Represents the resource IDs to delete the deployment from.\nIf not provided, the deployment will be rolled out from all the\nresources it is deployed to.\nIf provided, it will delete the deployment only from the specified\nassigned resources, and leave it for the rest.",
+          "description": "Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.",
           "items": {
             "type": "string"
           }
@@ -3218,7 +3218,7 @@
       "properties": {
         "confusionMatrix": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted."
         },
         "entities": {
           "type": "object",
@@ -3235,12 +3235,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -3250,12 +3250,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -3410,17 +3410,17 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage."
         },
         "trainingSplitPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage."
         },
         "testingSplitPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage."
         }
       }
     },
@@ -3559,7 +3559,7 @@
       "properties": {
         "language": {
           "type": "string",
-          "description": "Represents the language of the synonyms. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "values": {
           "type": "array",
@@ -3576,7 +3576,7 @@
       "properties": {
         "expressions": {
           "type": "array",
-          "description": "The regex expressions of the regex component. These expressions follow the .NET\nregex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
+          "description": "The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationAuthoringExportedEntityRegexExpression"
           },
@@ -3586,7 +3586,7 @@
     },
     "AnalyzeConversationAuthoringExportedEntityRegexExpression": {
       "type": "object",
-      "description": "Represents a regex expression inside a regex component. This expression follows\nthe .NET regex syntax. For reference, check here:\nhttps://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
+      "description": "Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions",
       "properties": {
         "regexKey": {
           "type": "string",
@@ -3594,7 +3594,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the language of the regex expression. This is BCP-47 representation\nof a language. For example, use \"en\" for English, \"en-gb\" for English (UK),\n\"es\" for Spanish etc."
+          "description": "Represents the language of the regex expression. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "regexPattern": {
           "type": "string",
@@ -3748,7 +3748,7 @@
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets."
         },
         "metadata": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringCreateProjectOptions",
@@ -3986,7 +3986,7 @@
       "properties": {
         "confusionMatrix": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two intents (the two intents can be the\nsame). The matrix is between the intent that was labelled and the intent that\nwas predicted."
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted."
         },
         "intents": {
           "type": "object",
@@ -4003,12 +4003,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -4018,12 +4018,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -4144,7 +4144,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the utterance's language. This is BCP-47 representation of a\nlanguage. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+          "description": "Represents the utterance's language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "intent": {
           "type": "string",
@@ -4520,7 +4520,7 @@
         },
         "languageCode": {
           "type": "string",
-          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -4669,7 +4669,7 @@
         },
         "trainingConfigVersion": {
           "type": "string",
-          "description": "Represents training config version. By default, \"latest\" value is used which\nuses the latest released training config version."
+          "description": "Represents training config version. By default, \"latest\" value is used which uses the latest released training config version."
         },
         "trainingMode": {
           "$ref": "#/definitions/TrainingMode",
@@ -4677,7 +4677,7 @@
         },
         "evaluationOptions": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
         }
       },
       "required": [
@@ -4796,7 +4796,7 @@
     },
     "AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and predicted entities for an\nutterance.",
+      "description": "Represents the comparison between the expected and predicted entities for an utterance.",
       "properties": {
         "expectedEntities": {
           "type": "array",
@@ -4856,7 +4856,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the utterance language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the utterance language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "entitiesResult": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult",
@@ -4876,7 +4876,7 @@
     },
     "AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and the predicted intent for an\nutterance.",
+      "description": "Represents the comparison between the expected and the predicted intent for an utterance.",
       "properties": {
         "expectedIntent": {
           "type": "string",
@@ -4912,22 +4912,22 @@
           {
             "name": "returnLongestOverlap",
             "value": "returnLongestOverlap",
-            "description": "When two or more components are found in the text and overlap, the component\nwith the longest set of characters is returned."
+            "description": "When two or more components are found in the text and overlap, the component with the longest set of characters is returned."
           },
           {
             "name": "requireExactOverlap",
             "value": "requireExactOverlap",
-            "description": "All components must overlap at the exact same characters in the text for the\nentity to return. If one of the defined components is not matched or predicted,\nthe entity will not return."
+            "description": "All components must overlap at the exact same characters in the text for the entity to return. If one of the defined components is not matched or predicted, the entity will not return."
           },
           {
             "name": "separateComponents",
             "value": "separateComponents",
-            "description": "Every component's match or prediction is returned as a separate instance of the\nentity."
+            "description": "Every component's match or prediction is returned as a separate instance of the entity."
           },
           {
             "name": "combineComponents",
             "value": "combineComponents",
-            "description": "When two or more components are found in the text and overlap, the components'\nspans are merged together into one span combining all of them."
+            "description": "When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them."
           }
         ]
       }
@@ -5094,7 +5094,7 @@
           {
             "name": "percentage",
             "value": "percentage",
-            "description": "Split the data into training and test sets according to user-defined\npercentages."
+            "description": "Split the data into training and test sets according to user-defined percentages."
           },
           {
             "name": "manual",
@@ -5201,7 +5201,7 @@
     },
     "InnerErrorModel": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "$ref": "#/definitions/InnerErrorCode",
@@ -5224,7 +5224,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
+          "description": "An object containing more specific information than the current object about the error."
         }
       },
       "required": [
@@ -5499,7 +5499,7 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
       }
@@ -5517,7 +5517,7 @@
           {
             "name": "advanced",
             "value": "advanced",
-            "description": "Trains using fine-tuned neural network transformer models. Can train\nmultilingual projects."
+            "description": "Trains using fine-tuned neural network transformer models. Can train multilingual projects."
           },
           {
             "name": "standard",
@@ -5588,7 +5588,7 @@
     "StringIndexTypeQueryParameter": {
       "name": "stringIndexType",
       "in": "query",
-      "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+      "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
       "required": true,
       "type": "string",
       "enum": [
@@ -5601,7 +5601,7 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
       },

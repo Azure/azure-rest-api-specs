@@ -78,8 +78,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Generates a copy project operation authorization to the current target Azure
-   * resource.
+   * Generates a copy project operation authorization to the current target Azure resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
@@ -144,8 +143,7 @@ interface AnalyzeConversationAuthoring {
       ExportedProjectFormat?: ExportedProjectFormat;
 
       /**
-       * Specifies the method used to interpret string offsets. For additional
-       * information see https://aka.ms/text-analytics-offsets.
+       * Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
       stringIndexType: StringIndexType;
@@ -168,8 +166,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Triggers a job to import a project. If a project with the same name already
-   * exists, the data of that project is replaced.
+   * Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:import")
@@ -389,8 +386,7 @@ interface AnalyzeConversationAuthoring {
   getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
 
   /**
-   * Gets the status of an export job. Once job completes, returns the project
-   * metadata, and assets.
+   * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
   getExportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportProjectJobState>;
 
@@ -452,8 +448,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Restores the snapshot of this trained model to be the current working directory
-   * of the project.
+   * Restores the snapshot of this trained model to be the current working directory of the project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
@@ -486,8 +481,7 @@ interface AnalyzeConversationAuthoring {
   getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
-   * Gets the detailed results of the evaluation for a trained model. This includes
-   * the raw inference results for the data included in the evaluation process.
+   * Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.
    */
   getModelEvaluationResults is languageOperations.ResourceList<
     AnalyzeConversationAuthoringUtteranceEvaluationResult,
@@ -496,8 +490,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Gets the evaluation summary of a trained model. The summary includes high level
-   * performance measurements of the model e.g., F1, Precision, Recall, etc.
+   * Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
@@ -537,11 +530,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Assign new Azure resources to a project to allow deploying new deployments to
-   * them. This API is available only via AAD authentication and not supported via
-   * subscription key authentication. For more details about AAD authentication,
-   * check here:
-   * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
@@ -571,8 +560,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Unassign resources from a project. This disallows deploying new deployments to
-   * these resources, and deletes existing deployments assigned to them.
+   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
@@ -694,9 +682,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't
-   * return deployments belonging to projects owned by this resource. It only
-   * returns deployments belonging to projects owned by other resources.
+   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
@@ -766,8 +752,7 @@ interface AnalyzeConversationAuthoring {
   >;
 
   /**
-   * Lists the supported prebuilt entities that can be used while creating composed
-   * entities.
+   * Lists the supported prebuilt entities that can be used while creating composed entities.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
@@ -775,16 +760,13 @@ interface AnalyzeConversationAuthoring {
   getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     {
       /**
-       * The language to get supported prebuilt entities for. Required if multilingual
-       * is false. This is BCP-47 representation of a language. For example, use "en"
-       * for English, "en-gb" for English (UK), "es" for Spanish etc.
+       * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
        */
       @query("language")
       language?: string;
 
       /**
-       * Whether to get the support prebuilt entities for multilingual or monolingual
-       * projects. If true, the language parameter is ignored.
+       * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
        */
       @query("multilingual")
       multilingual?: string;
