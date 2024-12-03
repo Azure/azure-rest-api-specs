@@ -144,11 +144,11 @@ model AzureFunctionDefinition {
   @doc("The definition of azure function and its parameters.")
   function: FunctionDefinition;
 
-  @doc("Input storage queue.")
+  @doc("Input storage queue. The queue storage trigger runs a function as messages are added to it.")
   @encodedName("application/json", "input_binding")
   InputBinding: AzureStorageQueueBinding;
 
-  @doc("Output storage queue.")
+  @doc("Output storage queue. The function writes output to this queue when the input items are processed.")
   @encodedName("application/json", "output_binding")
   OutputBinding: AzureStorageQueueBinding;
 }
@@ -481,7 +481,7 @@ model AzureStorageQueueBinding extends AzureFunctionBinding {
 
 @doc("The structure for keeping storage queue name and URI.")
 model AzureFunctionStorageQueue {
-  @doc("The URI of an Azure function storage queue.")
+  @doc("URI to the Azure Storage Queue service allowing you to manipulate a queue.")
   @encodedName("application/json", "queue_service_uri")
   StorageQueueUri: string;
 
