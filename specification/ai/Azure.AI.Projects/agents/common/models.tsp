@@ -130,11 +130,11 @@ union AgentsApiResponseFormatMode {
  */
 model AgentsApiResponseFormat {
   /** Must be one of `text` or `json_object`. */
-  type?: ApiResponseFormat = ApiResponseFormat.text;
+  type?: ResponseFormat = ResponseFormat.text;
 }
 
 /** Possible API response formats. */
-union ApiResponseFormat {
+union ResponseFormat {
   string,
 
   /** `text` format should be used for requests involving any sort of ToolCall. */
@@ -142,4 +142,32 @@ union ApiResponseFormat {
 
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
+
+  /** Using `json_schema` format will provide a description of what the response format is for. */
+  jsonSchema: ResponseFormatJsonSchema,
+}
+
+/**
+ * The type of response format being defined: `json_schema`
+ */
+model ResponseFormatJsonSchemaType {
+  /** Type */
+  type: "json_schema",
+
+  @encodedName("application/json", "json_schema")
+  jsonSchema: ResponseFormatJsonSchema
+}
+
+/**
+ * A description of what the response format is for, used by the model to determine how to respond in the format.
+ */
+model ResponseFormatJsonSchema {
+  /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+  description?: string;
+
+  /** The name of a schema. */
+  name: string;
+
+  /** The JSON schema object, describing the response format. */
+  schema: unknown;
 }

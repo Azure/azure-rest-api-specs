@@ -40,17 +40,14 @@ union VectorStoreFileStatus {
 union VectorStoreFileErrorCode {
   string,
 
-  /** An internal error occurred. */
-  internalError: "internal_error",
+  /** An server error occurred. */
+  serverError: "server_error",
 
-  /** The file was not found. */
-  fileNotFound: "file_not_found",
+  /** The file is not valid. */
+  invalidFile: "invalid_file",
 
-  /** The file could not be parsed. */
-  parsingError: "parsing_error",
-
-  /** The file has an unhandled mime type. */
-  unhandledMimeType: "unhandled_mime_type",
+  /** The file is of unsupported type. */
+  unsupportedFile: "unsupported_file",
 }
 
 /** Details on the error that may have occurred while processing a file for this vector store */
