@@ -322,8 +322,8 @@ function New-SwaggerAPIViewTokens {
 
 <#
 .DESCRIPTION
-  Generate New and Baseline APIView tokens for the changed swagger files in the PR.
-  Detects the swagger files changed in the PR and generates APIView tokens for the swagger files.
+  Generate New and Baseline APIView tokens for the changed TypeSpec files in the PR.
+  Detects the TypeSpec files changed in the PR and generates APIView tokens for the TypeSpec files.
   New APIView tokens are generated using the default tag on the base branch.
   Baseline APIView tokens are generated using the same tag on the target branch.
   Script asumes that the merge commit is checked out. Such that Source commit = HEAD^ and Target commit = HEAD.
@@ -367,7 +367,7 @@ function New-TypeSpecAPIViewTokens {
   }
   LogGroupEnd
 
-  # Get Related TypeSpec ReadMe Files
+  # Get impacted TypeSpec projects
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
     $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile "$_"
