@@ -1,5 +1,6 @@
 // client.tsp
 import "./administration.tsp";
+import "../Security.KeyVault.Common/common.tsp";
 import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6_preview.1`)
@@ -26,7 +27,7 @@ namespace ClientCustomizations;
   "csharp"
 );
 @@clientName(KeyVault.Permission, "KeyVaultPermission", "csharp");
-@@clientName(KeyVault.Error, "KeyVaultServiceError", "csharp");
+@@clientName(Error, "KeyVaultServiceError", "csharp");
 @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "csharp");
 @@clientName(KeyVault.RestoreOperation, "RestoreDetailsInternal", "csharp");
 @@access(KeyVault.RoleAssignmentCreateParameters, Access.internal, "csharp");
