@@ -128,7 +128,7 @@
           "description": "The unique identifier of the check defined in check definition."
         },
         "checkOriginType": {
-          "$ref": "#/definitions/ConfigurationCheckOriginType",
+          "$ref": "#/definitions/CheckOriginType",
           "description": "The origin of how the check applied at the role level in the virtual instance.",
           "readOnly": true
         },
@@ -140,13 +140,17 @@
           "type": "array",
           "description": "List of input parameters to be used in the check.",
           "items": {
-            "$ref": "#/definitions/CheckConfigurationSharedParameters"
+            "$ref": "#/definitions/SharedParameters"
           },
           "x-ms-identifiers": []
         },
         "outputParameters": {
-          "$ref": "#/definitions/CheckConfigurationOutputParameters",
-          "description": "List of output parameters to be used in the check."
+          "type": "array",
+          "description": "List of output parameters to be used in the check.",
+          "items": {
+            "$ref": "#/definitions/OutputParameters"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -155,59 +159,6 @@
         "enabled",
         "inputParameters",
         "outputParameters"
-      ]
-    },
-    "CheckConfigurationOutputParameters": {
-      "type": "object",
-      "description": "The model for list of output parameters to be used in the check.",
-      "properties": {
-        "condition": {
-          "$ref": "#/definitions/CheckEvaluationCondition",
-          "description": "Condition to be used to evaluate the output and customize the check."
-        },
-        "parameters": {
-          "type": "array",
-          "description": "List of parameters.",
-          "items": {
-            "$ref": "#/definitions/CheckConfigurationSharedParameters"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "condition",
-        "parameters"
-      ]
-    },
-    "CheckConfigurationSharedParameters": {
-      "type": "object",
-      "description": "Schema for shared parameters to use in 1P resources checks configuration.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the property.",
-          "readOnly": true
-        },
-        "dataType": {
-          "$ref": "#/definitions/DataType",
-          "description": "Data type of the value.",
-          "readOnly": true
-        },
-        "unit": {
-          "type": "string",
-          "description": "Unit of the property.",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "description": "Default (or) customized value to be used in the check."
-        }
-      },
-      "required": [
-        "name",
-        "dataType",
-        "unit",
-        "value"
       ]
     },
     "CheckEvaluationCondition": {
@@ -294,7 +245,7 @@
         ]
       }
     },
-    "ConfigurationCheckOriginType": {
+    "CheckOriginType": {
       "type": "string",
       "description": "Defines the origin of how the check is applied at the role level in the virtual instance.",
       "enum": [
@@ -302,7 +253,7 @@
         "TemplateDefinition"
       ],
       "x-ms-enum": {
-        "name": "ConfigurationCheckOriginType",
+        "name": "CheckOriginType",
         "modelAsString": true,
         "values": [
           {
@@ -317,6 +268,42 @@
           }
         ]
       }
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Defines the configuration for the template properties.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The type of workload for which the checks are executed. Referenced from VI resource."
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "The type of environment for which the checks are executed. Referenced from VI resource."
+        },
+        "components": {
+          "type": "array",
+          "description": "List of components managed at the workload level.",
+          "items": {
+            "$ref": "#/definitions/WorkloadComponents"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonChecks": {
+          "type": "array",
+          "description": "List of common checks to be executed for all the components (or) at parent resource level.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "workloadType",
+        "environmentType",
+        "components",
+        "commonChecks"
+      ]
     },
     "ConfigurationChecksTemplate": {
       "type": "object",
@@ -369,49 +356,13 @@
           "readOnly": true
         },
         "configuration": {
-          "$ref": "#/definitions/ConfigurationChecksTemplatePropertiesConfiguration",
+          "$ref": "#/definitions/Configuration",
           "description": "The configurations for the template."
         }
       },
       "required": [
         "executionInterval",
         "configuration"
-      ]
-    },
-    "ConfigurationChecksTemplatePropertiesConfiguration": {
-      "type": "object",
-      "description": "Defines the configuration for the template properties.",
-      "properties": {
-        "workloadType": {
-          "type": "string",
-          "description": "The type of workload for which the checks are executed. Referenced from VI resource."
-        },
-        "environmentType": {
-          "$ref": "#/definitions/EnvironmentType",
-          "description": "The type of environment for which the checks are executed. Referenced from VI resource."
-        },
-        "components": {
-          "type": "array",
-          "description": "List of components managed at the workload level.",
-          "items": {
-            "$ref": "#/definitions/WorkloadComponents"
-          },
-          "x-ms-identifiers": []
-        },
-        "commonChecks": {
-          "type": "array",
-          "description": "List of common checks to be executed for all the components (or) at parent resource level.",
-          "items": {
-            "$ref": "#/definitions/CheckConfiguration"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "workloadType",
-        "environmentType",
-        "components",
-        "commonChecks"
       ]
     },
     "ConfigurationChecksTemplateProvisioningState": {
@@ -461,45 +412,45 @@
       "type": "string",
       "description": "The data type.",
       "enum": [
-        "string",
-        "integer",
-        "long",
-        "boolean",
-        "float",
-        "double"
+        "String",
+        "Integer",
+        "Long",
+        "Boolean",
+        "Float",
+        "Double"
       ],
       "x-ms-enum": {
         "name": "DataType",
         "modelAsString": true,
         "values": [
           {
-            "name": "string",
-            "value": "string",
+            "name": "String",
+            "value": "String",
             "description": "String datatype."
           },
           {
-            "name": "integer",
-            "value": "integer",
+            "name": "Integer",
+            "value": "Integer",
             "description": "Integer datatype."
           },
           {
-            "name": "long",
-            "value": "long",
+            "name": "Long",
+            "value": "Long",
             "description": "Long datatype."
           },
           {
-            "name": "boolean",
-            "value": "boolean",
+            "name": "Boolean",
+            "value": "Boolean",
             "description": "Boolean datatype."
           },
           {
-            "name": "float",
-            "value": "float",
+            "name": "Float",
+            "value": "Float",
             "description": "Float datatype."
           },
           {
-            "name": "double",
-            "value": "double",
+            "name": "Double",
+            "value": "Double",
             "description": "Double datatype."
           }
         ]
@@ -529,6 +480,30 @@
         ]
       }
     },
+    "OutputParameters": {
+      "type": "object",
+      "description": "The model for list of output parameters to be used in the check.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of output.",
+          "default": "Result"
+        },
+        "condition": {
+          "$ref": "#/definitions/CheckEvaluationCondition",
+          "description": "Condition to be used to evaluate the output and customize the check."
+        },
+        "parameters": {
+          "$ref": "#/definitions/SharedParameters",
+          "description": "List of parameters."
+        }
+      },
+      "required": [
+        "name",
+        "condition",
+        "parameters"
+      ]
+    },
     "RoleConfiguration": {
       "type": "object",
       "description": "Schema for role configuration including checks and resources.",
@@ -550,6 +525,37 @@
       "required": [
         "roleName",
         "checks"
+      ]
+    },
+    "SharedParameters": {
+      "type": "object",
+      "description": "Schema for shared parameters to use in 1P resources checks configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the property.",
+          "readOnly": true
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Data type of the value.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the property.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Default (or) customized value to be used in the check."
+        }
+      },
+      "required": [
+        "name",
+        "dataType",
+        "unit",
+        "value"
       ]
     },
     "WorkloadComponents": {

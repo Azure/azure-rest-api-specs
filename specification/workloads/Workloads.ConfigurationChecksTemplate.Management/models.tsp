@@ -18,43 +18,43 @@ union DataType {
    * String datatype.
    */
   @doc("String datatype.")
-  string: "string",
+  String: "String",
 
   /**
    * Integer datatype.
    */
   @doc("Integer datatype.")
-  integer: "integer",
+  Integer: "Integer",
 
   /**
    * Long datatype.
    */
   @doc("Long datatype.")
-  long: "long",
+  Long: "Long",
 
   /**
    * Boolean datatype.
    */
   @doc("Boolean datatype.")
-  boolean: "boolean",
+  Boolean: "Boolean",
 
   /**
    * Float datatype.
    */
   @doc("Float datatype.")
-  float: "float",
+  Float: "Float",
 
   /**
    * Double datatype.
    */
   @doc("Double datatype.")
-  double: "double",
+  Double: "Double",
 
   string,
 }
 
 @doc("Defines the origin of how the check is applied at the role level in the virtual instance.")
-union ConfigurationCheckOriginType {
+union CheckOriginType {
   @doc("Manual application of the check.")
   Manual: "Manual",
 
@@ -158,7 +158,7 @@ union ConfigurationChecksTemplateProvisioningState {
 }
 
 @doc("Schema for shared parameters to use in 1P resources checks configuration.")
-model CheckConfigurationSharedParameters {
+model SharedParameters {
   /**
    * Name of the property. This can be updated by Author only. Not allowed for customization.
    */
@@ -188,7 +188,13 @@ model CheckConfigurationSharedParameters {
 }
 
 @doc("The model for list of output parameters to be used in the check.")
-model CheckConfigurationOutputParameters {
+model OutputParameters {
+  /**
+   * Name of the output. Default value is Result.
+   */
+  @doc("Name of output.")
+  name: string = "Result";
+
   /**
    * Condition to be used to evaluate the output and customize the check.
    */
@@ -199,8 +205,7 @@ model CheckConfigurationOutputParameters {
    * List of parameters
    */
   @doc("List of parameters.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  parameters: CheckConfigurationSharedParameters[];
+  parameters: SharedParameters;
 }
 
 @doc("Schema for check configuration for allowing customization.")
@@ -216,7 +221,7 @@ model CheckConfiguration {
    */
   @doc("The origin of how the check applied at the role level in the virtual instance.")
   @visibility("read")
-  checkOriginType: ConfigurationCheckOriginType;
+  checkOriginType: CheckOriginType;
 
   /**
    * The flag to enable (or) disable the check execution.
@@ -229,13 +234,14 @@ model CheckConfiguration {
    */
   @doc("List of input parameters to be used in the check.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  inputParameters: CheckConfigurationSharedParameters[];
+  inputParameters: SharedParameters[];
 
   /**
    * List of output parameters to be used in the check.
    */
   @doc("List of output parameters to be used in the check.")
-  outputParameters: CheckConfigurationOutputParameters;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  outputParameters: OutputParameters[];
 }
 
 @doc("Schema for role configuration including checks and resources.")
@@ -272,7 +278,7 @@ model WorkloadComponents {
 }
 
 @doc("Defines the configuration for the template properties.")
-model ConfigurationChecksTemplatePropertiesConfiguration {
+model Configuration {
   /**
    * The type of workload for which the checks are executed. Referenced from VI resource.
    */
@@ -320,5 +326,5 @@ model ConfigurationChecksTemplateProperties {
    * The configurations for the template.
    */
   @doc("The configurations for the template.")
-  configuration: ConfigurationChecksTemplatePropertiesConfiguration;
+  configuration: Configuration;
 }
