@@ -339,40 +339,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/getUploadToken": {
-      "post": {
-        "operationId": "UploadService_GetUploadToken",
-        "tags": [
-          "UploadService"
-        ],
-        "description": "Customer can use this POST endpoint to trigger an action, where the UserRP/AzImpactRP service creates and returns a user-delegate SAS token for the storage account/container unique to the customer (identified by subscription ID).",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UploadTokenResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-=======
->>>>>>> parent of bd01f4ba47 (Updated spec for POST to getUploadToken)
     "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/impactCategories": {
       "get": {
         "operationId": "ImpactCategories_ListBySubscription",
@@ -1779,22 +1745,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-    "UploadTokenResponse": {
-      "type": "object",
-      "description": "A successful response from getUploadToken will contain an \"uploadUrl\" field. This uploadUrl field's value should be follow the format: https://<storage-account-name>.blob.core.windows.net/<container-name>/<ENTER YOUR BLOB NAME HERE>?<SAS-token>",
-      "properties": {
-        "uploadUrl": {
-          "type": "string",
-          "description": "The SAS token URL for uploading"
-        }
-      },
-      "required": [
-        "uploadUrl"
-      ]
-    },
-=======
->>>>>>> parent of bd01f4ba47 (Updated spec for POST to getUploadToken)
     "Workload": {
       "type": "object",
       "description": "Information about the impacted workload",
