@@ -13,6 +13,13 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/deviceregistry.json"
     use-read-only-status-schema: true
     omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.DeviceRegistry"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+    api-version: "2024-09-01-preview"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-deviceregistry"
     flavor: "azure"
