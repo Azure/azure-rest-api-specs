@@ -145,7 +145,6 @@ model RetryPolicy {
 
 @doc("Extra details needed to run the user's request")
 model ExecutionParameters {
-  @removed(Microsoft.ComputeSchedule.Versions.`2024-10-01`)
   @doc("Details that could optimize the user's request")
   optimizationPreference?: OptimizationPreference;
 
