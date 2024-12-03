@@ -74,13 +74,13 @@ namespace Microsoft.EventGrid.SystemEvents {
     Version: string;
 
     /** Not before date of the object that triggered this event */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     NBF: float32;
 
     /** The expiration date of the object that triggered this event */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     EXP: float32;
   };
 }
