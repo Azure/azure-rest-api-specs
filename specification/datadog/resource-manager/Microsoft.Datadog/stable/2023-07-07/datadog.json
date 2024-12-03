@@ -142,7 +142,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
+              "$ref": "#/definitions/CreateResourceSupportedResponseList"
             }
           },
           "default": {
@@ -151,6 +151,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CreationSupported_Get": {
@@ -1234,7 +1237,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
             }
           },
           "default": {
@@ -1243,6 +1246,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1601,6 +1607,18 @@
         }
       }
     },
+    "CreateResourceSupportedResponseList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateResourceSupportedResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DatadogApiKey": {
       "required": [
         "key"
@@ -1883,6 +1901,17 @@
         },
         "properties": {
           "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
+          }
         }
       }
     },
