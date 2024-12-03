@@ -292,7 +292,7 @@ function New-SwaggerAPIViewTokens {
   foreach ($readMeFile in $swaggerReadMeFiles) {
     $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
     $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
-    New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
+    New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
     # Generate New APIView Token using default tag on source branch
     git checkout $SourceCommitId
@@ -391,7 +391,7 @@ function New-TypeSpecAPIViewTokens {
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject)
-      New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
+      New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
