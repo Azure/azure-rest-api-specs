@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 import "./models.testprofile.tsp";
+import "./models.trigger.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -16,6 +17,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Azure.Core.Foundations.ResourceBody.resource,
   "application/json",
   "body"
@@ -51,6 +53,7 @@ interface LoadTestAdministration {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("""
     Upload input file for a given test Id. File size can't be more than 50 MB.
     Existing file with same name for the given test will be overwritten. File
@@ -232,13 +235,14 @@ interface LoadTestRun {
   @doc("Get test run file by file name.")
   getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @summary("Stop test run by test run Id.")
   @doc("Stop test run by test run Id.")
   @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
@@ -259,6 +263,7 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric definitions for a load test run.")
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
@@ -313,6 +318,7 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metric-dimensions/{name}/values")
@@ -489,7 +495,7 @@ interface TestProfileRunAdministration {
   @added(APIVersions.v2024_05_01_preview)
   deleteTestProfileRun is StandardResourceOperations.ResourceDelete<TestProfileRun>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @summary("Stop test profile run.")
   @doc("Stop test profile run for the given test profile run Id.")
   @operationId("TestProfileRunAdministration_StopTestProfileRun")
@@ -507,5 +513,20 @@ interface TestProfileRunAdministration {
   listTestProfileRuns is StandardResourceOperations.ResourceList<
     TestProfileRun,
     ListQueryParametersTrait<ListTestProfileRunQueryParams>
+  >;
+}
+
+@tag("Trigger")
+@added(APIVersions.v2024_07_01_preview)
+interface TriggerAdministration {
+  getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
+
+  createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
+
+  deleteTrigger is StandardResourceOperations.ResourceDelete<Trigger>;
+
+  listTrigger is StandardResourceOperations.ResourceList<
+    Trigger,
+    ListQueryParametersTrait<ListTriggerQueryParams>
   >;
 }

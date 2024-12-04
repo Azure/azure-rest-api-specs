@@ -5154,6 +5154,16 @@
           "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleCategory"
         },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "status": {
           "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleStatus"
@@ -5342,14 +5352,6 @@
         "destination": {
           "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/PrivateEndpointDestination"
-        },
-        "parentRuleName": {
-          "description": "The dependency rule name.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       },
       "x-ms-discriminator-value": "PrivateEndpoint"

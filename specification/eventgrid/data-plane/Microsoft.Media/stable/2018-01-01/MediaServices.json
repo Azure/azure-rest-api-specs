@@ -356,7 +356,8 @@
       "type": "object",
       "required": [
         "progress",
-        "state"
+        "state",
+        "@odata.type"
       ],
       "description": "The event data for a Job output."
     },
@@ -377,7 +378,6 @@
       "description": "The event data for a Job output asset."
     },
     "MediaJobOutputProgressEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProgress",
       "description": "Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "type": "object",
       "properties": {
@@ -466,7 +466,6 @@
       }
     },
     "MediaJobScheduledEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobScheduled",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -477,7 +476,6 @@
       "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobScheduled event."
     },
     "MediaJobProcessingEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobProcessing",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -488,7 +486,6 @@
       "description": "Job processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobProcessing event."
     },
     "MediaJobCancelingEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobCanceling",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -499,7 +496,6 @@
       "description": "Job canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceling event."
     },
     "MediaJobFinishedEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobFinished",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -518,7 +514,6 @@
       "description": "Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event."
     },
     "MediaJobCanceledEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobCanceled",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -537,7 +532,6 @@
       "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event."
     },
     "MediaJobErroredEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobErrored",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -556,7 +550,6 @@
       "description": "Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event."
     },
     "MediaJobOutputCanceledEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceled",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -567,7 +560,6 @@
       "description": "Job output canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceled event."
     },
     "MediaJobOutputCancelingEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputCanceling",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -578,7 +570,6 @@
       "description": "Job output canceling event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputCanceling event."
     },
     "MediaJobOutputErroredEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputErrored",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -589,7 +580,6 @@
       "description": "Job output error event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputErrored event."
     },
     "MediaJobOutputFinishedEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputFinished",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -600,7 +590,6 @@
       "description": "Job output finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputFinished event."
     },
     "MediaJobOutputProcessingEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProcessing",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"
@@ -611,7 +600,6 @@
       "description": "Job output processing event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobOutputProcessing event."
     },
     "MediaJobOutputScheduledEventData": {
-      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputScheduled",
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutputStateChangeEventData"

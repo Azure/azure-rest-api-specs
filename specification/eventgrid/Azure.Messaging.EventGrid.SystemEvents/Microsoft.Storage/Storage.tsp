@@ -2,6 +2,26 @@ import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
+  /** The access tier of the blob. */
+  union StorageBlobAccessTier {
+    /** The blob is in access tier Hot */
+    "Hot",
+
+    /** The blob is in access tier Cool */
+    "Cool",
+
+    /** The blob is in access tier Cold */
+    "Cold",
+
+    /** The blob is in access tier Archive */
+    "Archive",
+
+    /** The blob is in access tier Default(Inferred) */
+    "Default",
+
+    string,
+  }
+
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
   model StorageBlobCreatedEventData {
     /** The name of the API/operation that triggered this event. */
@@ -27,6 +47,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The type of blob. */
     blobType?: string;
+
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
     url?: string;
@@ -160,6 +183,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The time the policy task was scheduled. */
     scheduleTime?: string;
 
+    /** Policy execution summary which shows the completion status of a LCM run" */
+    policyRunSummary: StorageLifecyclePolicyRunSummary;
+
     /** Execution statistics of a specific policy action in a Blob Management cycle. */
     deleteSummary: StorageLifecyclePolicyActionSummaryDetail;
 
@@ -168,6 +194,9 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Execution statistics of a specific policy action in a Blob Management cycle. */
     tierToArchiveSummary: StorageLifecyclePolicyActionSummaryDetail;
+
+    /** Execution statistics of a specific policy action in a Blob Management cycle. */
+    tierToColdSummary: StorageLifecyclePolicyActionSummaryDetail;
   }
 
   /** Execution statistics of a specific policy action in a Blob Management cycle. */
@@ -180,6 +209,12 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Error messages of this action if any. */
     errorList?: string;
+  }
+
+  /** Policy run status of an account in a Blob Management cycle. */
+  model StorageLifecyclePolicyRunSummary {
+    /** Policy status can be Completed/CompletedWithError/Incomplete. */
+    completionStatus: StorageLifecycleCompletionStatus;
   }
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event. */
@@ -201,6 +236,12 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The type of blob. */
     blobType?: string;
+
+    /** The current tier of the blob. */
+    accessTier: StorageBlobAccessTier;
+
+    /** The previous tier of the blob. */
+    previousTier: StorageBlobAccessTier;
 
     /** The path to the blob. */
     url?: string;
@@ -325,6 +366,20 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The summary report blob url for a storage task */
     summaryReportBlobUrl: url;
+  }
+
+  /** The status for a LCM policy. */
+  union StorageLifecycleCompletionStatus {
+    /** Completed */
+    "Completed",
+
+    /** CompletedWithError */
+    "CompletedWithError",
+
+    /** Incomplete */
+    "Incomplete",
+
+    string,
   }
 
   /** The status for a storage task. */

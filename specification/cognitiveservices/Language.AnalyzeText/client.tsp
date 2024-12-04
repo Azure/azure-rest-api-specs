@@ -591,8 +591,16 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
 @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
+@@clientName(MultiLanguageAnalysisInput.documents,
+  "MultiLanguageInputs",
+  "csharp"
+);
 @@clientName(LanguageDetectionAnalysisInput,
   "LanguageDetectionTextInput",
+  "csharp"
+);
+@@clientName(LanguageDetectionAnalysisInput.documents,
+  "LanguageInputs",
   "csharp"
 );
 
@@ -687,23 +695,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
-@@clientName(AnalyzeTextDynamicClassificationInput,
-  "TextDynamicClassificationInput",
-  "csharp"
-);
-@@clientName(AnalyzeTextDynamicClassificationInput.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(AnalyzeTextDynamicClassificationInput.analysisInput,
-  "TextInput",
-  "csharp"
-);
-@@clientName(DynamicClassificationTaskParameters,
-  "DynamicClassificationActionContent",
-  "csharp"
-);
-
 @@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult", "csharp");
 @@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind", "csharp");
 
@@ -716,10 +707,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult", "csharp");
 @@clientName(EntityLinkingTaskResult,
   "AnalyzeTextEntityLinkingResult",
-  "csharp"
-);
-@@clientName(DynamicClassificationTaskResult,
-  "AnalyzeTextDynamicClassificationResult",
   "csharp"
 );
 @@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult", "csharp");
@@ -741,19 +728,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(SentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
-
-@@clientName(CustomSentimentAnalysisLROTask,
-  "CustomSentimentAnalysisOperationAction",
-  "csharp"
-);
-@@clientName(CustomSentimentAnalysisLROTask.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(CustomSentimentAnalysisTaskParameters,
-  "CustomSentimentAnalysisActionContent",
-  "csharp"
-);
 
 @@clientName(ExtractiveSummarizationLROTask,
   "ExtractiveSummarizationOperationAction",
@@ -778,19 +752,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(AbstractiveSummarizationTaskParameters,
   "AbstractiveSummarizationActionContent",
-  "csharp"
-);
-
-@@clientName(CustomAbstractiveSummarizationLROTask,
-  "CustomAbstractiveSummarizationOperationAction",
-  "csharp"
-);
-@@clientName(CustomAbstractiveSummarizationLROTask.parameters,
-  "ActionContent",
-  "csharp"
-);
-@@clientName(CustomAbstractiveSummarizationTaskParameters,
-  "CustomAbstractiveSummarizationActionContent",
   "csharp"
 );
 
@@ -840,16 +801,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(CustomEntitiesLROTask.parameters, "ActionContent", "csharp");
 @@clientName(CustomEntitiesTaskParameters,
   "CustomEntitiesActionContent",
-  "csharp"
-);
-
-@@clientName(CustomHealthcareLROTask,
-  "CustomHealthcareOperationAction",
-  "csharp"
-);
-@@clientName(CustomHealthcareLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomHealthcareTaskParameters,
-  "CustomHealthcareActionContent",
   "csharp"
 );
 
@@ -908,33 +859,12 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummarizationOperationResults",
   "csharp"
 );
-@@clientName(AnalyzeTextLROResultsKind.CustomHealthcareLROResults,
-  "CustomHealthcareOperationResults",
-  "csharp"
-);
-@@clientName(AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults,
-  "CustomSentimentAnalysisOperationResults",
-  "csharp"
-);
-@@clientName(AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults,
-  "CustomAbstractiveSummarizationOperationResults",
-  "csharp"
-);
-
-@@clientName(CustomAbstractiveSummarizationLROResult,
-  "CustomAbstractiveSummarizationOperationResult",
-  "csharp"
-);
 @@clientName(AbstractiveSummarizationLROResult,
   "AbstractiveSummarizationOperationResult",
   "csharp"
 );
 @@clientName(ExtractiveSummarizationLROResult,
   "ExtractiveSummarizationOperationResult",
-  "csharp"
-);
-@@clientName(CustomSentimentAnalysisLROResult,
-  "CustomSentimentAnalysisOperationResult",
   "csharp"
 );
 @@clientName(SentimentLROResult, "SentimentOperationResult", "csharp");
@@ -964,11 +894,41 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomEntityRecognitionOperationResult",
   "csharp"
 );
-@@clientName(CustomHealthcareLROResult,
-  "CustomHealthcareOperationResult",
-  "csharp"
-);
 
 @@clientName(analyzeTextSubmitJob, "AnalyzeTextSubmitOperation", "csharp");
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
+
+@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+  "EntityActionResult",
+  "csharp"
+);
+@@clientName(ClassificationDocumentResultWithDetectedLanguage,
+  "ClassificationActionResult",
+  "csharp"
+);
+@@clientName(EntityLinkingResultWithDetectedLanguage,
+  "EntityLinkingActionResult",
+  "csharp"
+);
+@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage,
+  "KeyPhrasesActionResult",
+  "csharp"
+);
+@@clientName(PiiResultWithDetectedLanguage, "PiiActionResult", "csharp");
+@@clientName(SentimentDocumentResultWithDetectedLanguage,
+  "SentimentActionResult",
+  "csharp"
+);
+@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage,
+  "ExtractedSummaryActionResult",
+  "csharp"
+);
+@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage,
+  "AbstractiveSummaryActionResult",
+  "csharp"
+);
+@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "HealthcareActionResult",
+  "csharp"
+);
