@@ -15,7 +15,7 @@ alias appConfigOperation<
   Traits extends Reflection.Model = {},
   TError = Error
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader,
+  TParams & RequestIdResponseHeader,
   TResponse,
   Traits,
   TError
@@ -302,7 +302,7 @@ op getKeyValue is Foundations.ResourceOperation<
     ...ClientRequestIdHeader;
   },
   Response = Body<KeyValue> & {
-    ...ClientRequestIdHeader;
+    ...RequestIdResponseHeader;
     ...AppConfigResponseHeaders;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
