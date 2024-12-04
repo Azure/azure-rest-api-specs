@@ -404,8 +404,8 @@ function New-TypeSpecAPIViewTokens {
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
       $typeSpecProjectPathParts = $typeSpecProject.Split([IO.Path]::DirectorySeparatorChar)
-      $typeSpecProjectRelativePath = $typeSpecProjectPathParts[($typeSpecProjectPathParts.IndexOf("specification") - $typeSpecProjectPathParts.Length)..(-1)] -Join [IO.Path]::DirectorySeparatorChar
-      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProjectRelativePath)
+      # $typeSpecProjectRelativePath = $typeSpecProjectPathParts[($typeSpecProjectPathParts.IndexOf("specification") + 2 - $typeSpecProjectPathParts.Length)..(-1)] -Join [IO.Path]::DirectorySeparatorChar
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
       Write-Host $tokenDirectory
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
