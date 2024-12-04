@@ -1053,6 +1053,10 @@
         "confidentialVmProperties": {
           "description": "Confidential VM Properties of the cluster",
           "$ref": "#/definitions/ConfidentialVmProperties"
+        },
+        "confidentialGpuProperties": {
+          "description": "Confidential GPU Properties of the cluster",
+          "$ref": "#/definitions/ConfidentialGpuProperties"
         }
       }
     },
@@ -1858,11 +1862,21 @@
             "modelAsString": true
           },
           "readOnly": true
+        }
+      }
+    },
+    "ConfidentialGpuProperties": {
+      "type": "object",
+      "description": "Confidential GPU Properties of the cluster",
+      "properties": {
+        "confidentialGpuIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialGpuIntent"
         },
         "confidentialGpuStatus": {
           "type": "string",
           "enum": [
             "Enabled",
+            "PartiallyEnabled",
             "Disabled"
           ],
           "default": "Disabled",
