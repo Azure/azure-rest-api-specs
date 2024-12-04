@@ -75,6 +75,7 @@ union SKU {
   /**
    * StandardCache SKU
    */
+  @added(Versions.v2025_04_01_preview)
   StandardCache: "StandardCache",
 }
 
