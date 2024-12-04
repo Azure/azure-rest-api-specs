@@ -13,107 +13,102 @@ using Azure.Core;
 using Azure.ResourceManager;
 using LiftrBase;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Required casing for MongoDB"
-namespace MongoDB {
-  @armProviderNamespace
-  @service({
-    title: "MongoDB.Atlas",
-  })
-  @versioned(MongoDB.Atlas.Versions)
-  namespace Atlas {
-    /** The available API versions. */
-    @doc("Supported versions for the MongoDB.Atlas resource model")
-    enum Versions {
-      /** 2024-11-18 preview version */
-      @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-      @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-      @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-      @useDependency(LiftrBase.Versions.v1_preview)
-      v2021_10_01_preview: "2024-11-18-preview",
-    }
+/* MongoDB.Atlas Resource Provider management API. */
+@armProviderNamespace
+@service({
+  title: "MongoDB.Atlas",
+})
+@versioned(MongoDB.Atlas.Versions)
+namespace MongoDB.Atlas;
 
-    @doc("User details for an organization")
-    model UserDetails {
-      @doc("First name of the user")
-      firstName: string;
+/** The available API versions. */
+@doc("Supported versions for the MongoDB.Atlas resource model")
+enum Versions {
+  /** 2024-11-18 preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2021_10_01_preview: "2024-11-18-preview",
+}
 
-      @doc("Last name of the user")
-      lastName: string;
+@doc("User details for an organization")
+model UserDetails {
+  @doc("First name of the user")
+  firstName: string;
 
-      @doc("Email address of the user")
-      emailAddress: email;
+  @doc("Last name of the user")
+  lastName: string;
 
-      @doc("User's principal name")
-      upn?: string;
+  @doc("Email address of the user")
+  emailAddress: email;
 
-      @doc("User's phone number")
-      phoneNumber?: string;
+  @doc("User's principal name")
+  upn?: string;
 
-      @doc("Company Name")
-      companyName?: string;
-    }
+  @doc("User's phone number")
+  phoneNumber?: string;
 
-    @doc("Base resource properties that can be extended for arm resources.")
-    model BaseResourceProperties {
-      @doc("Marketplace details of the resource.")
-      @visibility("create", "read")
-      marketplace: MarketplaceDetails;
+  @doc("Company Name")
+  companyName?: string;
+}
 
-      @doc("Details of the user.")
-      user: UserDetails;
+@doc("Base resource properties that can be extended for arm resources.")
+model BaseResourceProperties {
+  @doc("Marketplace details of the resource.")
+  @visibility("create", "read")
+  marketplace: MarketplaceDetails;
 
-      @doc("Provisioning state of the resource.")
-      @visibility("read")
-      provisioningState?: ResourceProvisioningState;
-    }
+  @doc("Details of the user.")
+  user: UserDetails;
 
-    @doc("Partner's specific Properties")
-    model PartnerProperties {
-      @doc("Organization Id in partner's system")
-      organizationId?: string;
+  @doc("Provisioning state of the resource.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
 
-      @doc("Organization name in partner's system")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-      @minLength(1)
-      @maxLength(50)
-      organizationName: string;
-    }
+@doc("Partner's specific Properties")
+model PartnerProperties {
+  @doc("Organization Id in partner's system")
+  organizationId?: string;
 
-    /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
-     * BaseResourceProperties contains Marketplace, useDetail related properties*/
-    @doc("Properties specific to Organization")
-    model OrganizationProperties is BaseResourceProperties {
-      @doc("partner properties")
-      partnerProperties?: PartnerProperties;
-    }
+  @doc("Organization name in partner's system")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @minLength(1)
+  @maxLength(50)
+  organizationName: string;
+}
 
-    model OrganizationResource
-      is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
-      @key("organizationName")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-      @segment("organizations")
-      @minLength(1)
-      @maxLength(50)
-      @doc("Name of the Organization resource")
-      @path
-      name: string;
+/** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
+ * BaseResourceProperties contains Marketplace, useDetail related properties*/
+@doc("Properties specific to Organization")
+model OrganizationProperties is BaseResourceProperties {
+  @doc("partner properties")
+  partnerProperties?: PartnerProperties;
+}
 
-      ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-    }
+model OrganizationResource
+  is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
+  @key("organizationName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @segment("organizations")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the Organization resource")
+  @path
+  name: string;
 
-    interface Operations extends Azure.ResourceManager.Operations {}
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
 
-    @armResourceOperations
-    interface Organizations {
-      get is ArmResourceRead<OrganizationResource>;
-      createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-      update is ArmResourcePatchAsync<
-        OrganizationResource,
-        OrganizationProperties
-      >;
-      delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
-      listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
-      listBySubscription is ArmListBySubscription<OrganizationResource>;
-    }
-  }
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations
+interface Organizations {
+  get is ArmResourceRead<OrganizationResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
+  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
+  listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
+  listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
