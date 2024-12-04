@@ -407,6 +407,7 @@ function New-TypeSpecAPIViewTokens {
       Write-Host $tokenDirectory
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
       ls $typeSpecAPIViewArtifactsDirectory
+      
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
       Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
