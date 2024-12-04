@@ -5498,7 +5498,7 @@
       "description": "authentication details for OpenApiFunctionDefinition",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/Agents.OpenApiAuthType",
           "description": "The type of authentication, must be anonymous/connection/managed_identity"
         }
       },
@@ -5506,6 +5506,33 @@
       "required": [
         "type"
       ]
+    },
+    "Agents.OpenApiAuthType": {
+      "type": "string",
+      "description": "Type of chunking strategy",
+      "enum": [
+        "anonymous",
+        "connection",
+        "managed_identity"
+      ],
+      "x-ms-enum": {
+        "name": "OpenApiAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "connection",
+            "value": "connection"
+          },
+          {
+            "name": "managedIdentity",
+            "value": "managed_identity"
+          }
+        ]
+      }
     },
     "Agents.OpenApiConnectionAuthDetails": {
       "type": "object",

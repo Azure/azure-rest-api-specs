@@ -158,24 +158,31 @@ model OpenApiFunctionDefinition {
   auth: OpenApiAuthDetails;
 }
 
+/** Type of chunking strategy */
+union OpenApiAuthType {
+  anonymous: "anonymous",
+  connection: "connection",
+  managedIdentity: "managed_identity",
+  string,
+}
+
 @doc("authentication details for OpenApiFunctionDefinition")
 @discriminator("type")
 model OpenApiAuthDetails {
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The type of authentication, must be anonymous/connection/managed_identity")
-  type: string;
+  type: OpenApiAuthType;
 }
 
 @doc("Security details for OpenApi anonymous authentication")
 model OpenApiAnonymousAuthDetails extends OpenApiAuthDetails {
   @doc("The object type, which is always 'anonymous'.")
-  type: "anonymous";
+  type: OpenApiAuthType.anonymous;
 }
 
 @doc("Security details for OpenApi connection authentication")
 model OpenApiConnectionAuthDetails extends OpenApiAuthDetails {
   @doc("The object type, which is always 'connection'.")
-  type: "connection";
+  type: OpenApiAuthType.connection;
 
   @doc("Connection auth security details")
   security_scheme: OpenApiConnectionSecurityScheme;
@@ -184,7 +191,7 @@ model OpenApiConnectionAuthDetails extends OpenApiAuthDetails {
 @doc("Security details for OpenApi managed_identity authentication")
 model OpenApiManagedAuthDetails extends OpenApiAuthDetails {
   @doc("The object type, which is always 'managed_identity'.")
-  type: "managed_identity";
+  type: OpenApiAuthType.managedIdentity;
 
   @doc("Connection auth security details")
   security_scheme: OpenApiManagedSecurityScheme;
