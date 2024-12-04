@@ -6,528 +6,523 @@ import "../SharedEnums.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-namespace SkillContext
-{
+namespace SkillContext;
 
-	@doc("SkillContext object containing properties of the current session relevant to the invoked skill")
-	model SkillContextResponse {
-	  @doc("Skill descriptor containing attributes that describe a skill (i.e. Inputs required to execute the skill)")
-	  descriptor: SkillDescriptor;
 
-	  @doc("SkillContext Id")
-	  id: string;
+@doc("SkillContext object containing properties of the current session relevant to the invoked skill")
+model SkillContextResponse {
+	@doc("Skill descriptor containing attributes that describe a skill (i.e. Inputs required to execute the skill)")
+	descriptor: SkillDescriptor;
 
-	  @doc("Array of feature flags")
-	  featureFlags: Array<string>;
+	@doc("SkillContext Id")
+	id: string;
 
-	  @doc("Skill Variable Collection")
-	  inputs: Record<SkillVariable>;
+	@doc("Array of feature flags")
+	featureFlags: Array<string>;
 
-	  @doc("Additional skill specific settings")
-	  properties: Record<string>;
+	@doc("Skill Variable Collection")
+	inputs: Record<SkillVariable>;
 
-	  @doc("TODO")
-	  startTime: utcDateTime;
+	@doc("Additional skill specific settings")
+	properties: Record<string>;
 
-	  @doc("Tenant id of tenant in which skill invocation occured")
-	  tenantId: string;
+	@doc("TODO")
+	startTime: utcDateTime;
 
-	  @doc("User id of user that invoked the skill")
-	  userId: string;
+	@doc("Tenant id of tenant in which skill invocation occured")
+	tenantId: string;
 
-	  @doc("Current session ID")
-	  sessionId: string;
+	@doc("User id of user that invoked the skill")
+	userId: string;
 
-	  @doc("Current prompt ID")
-	  promptId: string;
+	@doc("Current session ID")
+	sessionId: string;
 
-	  @doc("Current evaluation ID")
-	  evaluationId: string;
+	@doc("Current prompt ID")
+	promptId: string;
 
-	  @doc("Compliance flags for logging.")
-	  complianceFlags: ComplianceFlags;
+	@doc("Current evaluation ID")
+	evaluationId: string;
 
-	  @doc("Fidelis Workspace Id")
-	  workspaceId: string;
+	@doc("Compliance flags for logging.")
+	complianceFlags: ComplianceFlags;
 
-	  @doc("Originating source tag for the evaluation (i.e. Immersive, Logic Apps, etc.)")
-	  source: string;
+	@doc("Fidelis Workspace Id")
+	workspaceId: string;
 
-	  @doc("Indicates whether the evaluation is user driven or automated")
-	  invocationType: EvaluationInvocationType;
+	@doc("Originating source tag for the evaluation (i.e. Immersive, Logic Apps, etc.)")
+	source: string;
 
-	  @doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
-	  invocationCategory: EvaluationInvocationCategory;
+	@doc("Indicates whether the evaluation is user driven or automated")
+	invocationType: EvaluationInvocationType;
 
-	  @doc("Username of the user that invoked the skill")
-	  userName: string;
-	}
+	@doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
+	invocationCategory: EvaluationInvocationCategory;
 
-	@doc("Evaluation Invocation Type")
-	enum EvaluationInvocationType {
-	  @doc("Manual generation")
-	  Manual,
-
-	  @doc("Automated generation")
-	  Automated,
-	}
-
-	@doc("Evaluation Invocation Category")
-	enum EvaluationInvocationCategory {
-	  @doc("Generated from a Prompt")
-	  UserPrompt,
-
-	  @doc("Generated from a Promptbook")
-	  Promptbooks,
-	}
-
-	@doc("ComplianceFlags")
-	model ComplianceFlags {
-	  @doc("Whether to record logs in Geneva and Kusto for this user")
-	  recordLog: boolean;
-
-	  @doc("Locked down tables not required and non-customer content table does not have to be redacted")
-	  customerOptedInToEyesOnProductImprovement: boolean;
-
-	  @doc("When this is true, the data may be used for model improvement. This flag does not affect redaction.")
-	  customerOptedInToModelImprovement: boolean;
-	}
-
-	@doc("Skill Variable")
-	model SkillVariable {
-	  @doc("Skill variable type")
-	  type?: string;
-
-	  @doc("Skill variable value")
-	  value?: string;
-
-	  @doc("Skill variable value is stored as json document")
-	  valueStoredAsJson: boolean;
-	}
-
-	@doc("Invoke skill request including necessary inputs for invoking a skill")
-	model InvokeSkillRequest {
-	  @doc("Name of skillset in which desired skill to invoke resides")
-	  skillsetName?: string;
-
-	  @doc("Name of skill to be invoked")
-	  skillName: string;
-
-	  @doc("Skill inputs")
-	  inputs: Record<SkillVariable> | null;
-	}
-
-	@doc("Skill variable parent entity adding additional attribute 'skillsource' to provide visibility to users as to what data/information was used in generating the output of a skill")
-	model OutputSkillVariable extends SkillVariable {
-	  @doc("Array of cited sources that were fetched by a skill and that impacted the output of the skill evaluation")
-	  sources: Array<SkillSource> | null;
-
-	  @doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
-	  suggestedPrompts: Array<SuggestedPrompt> | null;
-
-	  @doc("Skill name")
-	  skillName: string | null;
-
-	  @doc("Skill inputs that were used in generating the output of the skill evaluation")
-	  skillInputs: Record<string> | null;
-
-	  @doc("Skill output language")
-	  outputLanguage: string | null;
-
-	  @doc("Enum indicating the output type of the skill. Supports StructuredOutput and Primitive")
-	  outputType: SkillOutputType;
-	}
-
-	model EvaluationResultOutput {
-	  skillOutputType: SkillOutputType;
-	  primitiveOutput?: OutputSkillVariable;
-	  structuredOutput?: SkillStructuredOutput;
-	  primitiveOutputValue?: string;
-	}
-
-	model SkillStructuredOutput {
-	  components: Array<SkillOutputComponent>;
-	}
-
-	model SkillOutputComponent extends OutputComponent{
-	  action: SkillOutputComponentAction;
-	  includeInEvalResultAsRawComponent: boolean;
-	}
-
-	model OutputComponent {
-	  name: string;
-	  content: string;
-	  description?: string;
-	  type: OutputComponentType;
-	}
-
-	model SkillImageSource {
-	  displayName: string;
-	  imageFileType: string;
-	  description: string;
-	  imageBase64: string;
-	  imageThumbnailBase64: string;
-	}
-
-	enum OutputComponentType {
-	  GptOutput,
-	  Text,
-	  Image,
-	}
-
-	enum SkillOutputComponentAction {
-	  None,
-	  Summarize,
-	  Substitute,
-	}
-
-	@doc("Auth Location")
-	enum AuthLocationEnum {
-	  @doc("Using Header")
-	  Header,
-
-	  @doc("Using QueryParams")
-	  QueryParams,
-	}
-
-	@doc("Skill Output type enum. Supports StructuredOutput and Primitive")
-	enum SkillOutputType {
-	  @doc("Primitive")
-	  Primitive,
-	  @doc("Structured Components")
-	  StructuredComponents,
-	}
-
-	@doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
-	model SuggestedPrompt {
-	  @doc("Prompt text")
-	  prompt: string;
-	}
-
-	@doc("Source that is fetched during the evaluation of a skill. Provides visibility to users as to what data/information was used in generating the output of a skill")
-	model SkillSource {
-	  @doc("User friendly name for the information source")
-	  displayName: string;
-
-	  @doc("Information source content (i.e. URL to article)")
-	  sourceContent: string;
-
-	  @doc("The source type (i.e. URI)")
-	  sourceType: SkillSourceType;
-
-	  @doc("Source data serialized as string")
-	  sourceSerializedData?: string | null;
-	}
-
-	@doc("The prompt history of the current session")
-	model PromptHistoryResponse {
-	  @doc("List of prompts that have been evaluated in the current session")
-	  prompts: Array<SessionPrompt>;
-	}
-
-	@doc("A record for a prompt and response used in tracking session prompt history")
-	model SessionPrompt {
-	  @doc("The content of the prompt")
-	  prompt: string;
-
-	  @doc("Prompt response returned by the prompt evaluation")
-	  response: string | null;
-	}
-
-	@doc("The progress message to log during a skill invocation")
-	model LogProgressRequest {
-	  @doc("Log level")
-	  level?: ProgressLogLevel;
-
-	  @doc("Log message")
-	  message: string;
-	}
-
-	@doc("Auth Details")
-	model AuthDetails {
-	  @doc("Auth Location")
-	  authLocation: AuthLocationEnum;
-
-	  @doc("Auth Info")
-	  authInfo: Record<string>;
-	}
-
-	@doc("TokenCredentialRequest")
-	model GetTokenCredentialRequest {
-	  @doc("Scopes")
-	  scopes: Array<string>;
-
-	  @doc("TokenCredential Type")
-	  tokenCredentialType: TokenCredentialEnum = TokenCredentialEnum.None;
-
-	  @doc("TenantId")
-	  tenantId?: string | null;
-	}
-
-	@doc("AccessToken")
-	model AccessToken {
-	  @doc("Token string")
-	  token: string;
-
-	  @doc("Expiry time")
-	  expiresOn: offsetDateTime;
-	}
-
-	@doc("GetInputRequest")
-	model GetInputRequest {
-	  @doc("Input Name")
-	  inputName: string;
-
-	  @doc("Default value for the input")
-	  defaultValue?: SkillVariable | null;
-	}
-
-	@doc("SetInputRequest")
-	model SetInputRequest {
-	  @doc("Input Name")
-	  inputName: string;
-
-	  @doc("Default value for the input")
-	  defaultValue?: SkillVariable | null;
-	}
-
-	@doc("AddSourcesRequest")
-	model AddSourcesRequest {
-	  @doc("List of SkillSource")
-	  sources: Array<SkillSource>;
-	}
-
-	@doc("AddSourceRequest")
-	model AddSourceRequest {
-	  @doc("SkillSource")
-	  source: SkillSource;
-	}
+	@doc("Username of the user that invoked the skill")
+	userName: string;
 }
 
-namespace OpenAIClient
-{
-	@doc("CreateChatCompletionRequest")
-	model CreateChatCompletionRequest {
-	  deploymentId?: string;
-	  chatCompletionRequest: ChatCompletionRequest;
-	  openAiExecutionContext?: AzureOpenAIExecutionContext; 
-	}
+@doc("Evaluation Invocation Type")
+enum EvaluationInvocationType {
+	@doc("Manual generation")
+	Manual,
 
-	@doc("CreateCompletionRequest")
-	model CreateCompletionRequest {
-	  deploymentId?: string;
-	  completionRequest: CompletionRequest;
-	  openAiExecutionContext?: AzureOpenAIExecutionContext; 
-	}
+	@doc("Automated generation")
+	Automated,
+}
 
-	@doc("CreateEmbeddingRequest")
-	model CreateEmbeddingRequest {
-	  deploymentId?: string;
-	  embeddingRequest: EmbeddingRequest;
-	  openAiExecutionContext?: AzureOpenAIExecutionContext; 
-	}
+@doc("Evaluation Invocation Category")
+enum EvaluationInvocationCategory {
+	@doc("Generated from a Prompt")
+	UserPrompt,
 
-	model ChatCompletionRequest extends BaseCompletionRequest {
-		Messages: Array<Message>;
-		Functions: Array<GPTFunction>;
-		FunctionCall: string;
-		Tools?: Array<Tools>;
-		ToolChoice?: string;
-		ParallelToolCalls?: boolean;
-	}
+	@doc("Generated from a Promptbook")
+	Promptbooks,
+}
 
-	model Message {
-		Content?: string;
-		Role: string;
-		Name?: string;
-		FunctionCall?: FunctionCall;
-		ToolCalls?: Array<ToolCall>;
-		ToolCallId?: string;
+@doc("ComplianceFlags")
+model ComplianceFlags {
+	@doc("Whether to record logs in Geneva and Kusto for this user")
+	recordLog: boolean;
 
-	}
+	@doc("Locked down tables not required and non-customer content table does not have to be redacted")
+	customerOptedInToEyesOnProductImprovement: boolean;
 
-	model FunctionCall {
-		Name: string;
-		Arguments?: Record<string>;
-	}
+	@doc("When this is true, the data may be used for model improvement. This flag does not affect redaction.")
+	customerOptedInToModelImprovement: boolean;
+}
 
-	model ToolCall {
-		Id: string;
-		Type: string;
-		Function: ToolFunctionCall;
-	}
+@doc("Skill Variable")
+model SkillVariable {
+	@doc("Skill variable type")
+	type?: string;
 
-	model ToolFunctionCall {
-		Name: string;
-		Arguments: string;
-	}
+	@doc("Skill variable value")
+	value?: string;
 
-	model GPTFunction {
-		Name: string;
-		Description: string;
-		Parameters: FunctionParameter;
-		Result: FunctionResult;
-	}
+	@doc("Skill variable value is stored as json document")
+	valueStoredAsJson: boolean;
+}
 
-	model FunctionParameter {
-		Type: string;
-		Properties: Record<FunctionParameterProperty>;
-		Required: Array<string>;
-	}
+@doc("Invoke skill request including necessary inputs for invoking a skill")
+model InvokeSkillRequest {
+	@doc("Name of skillset in which desired skill to invoke resides")
+	skillsetName?: string;
 
-	model FunctionParameterProperty {
-		Type: string;
-		Description: string;
-		Enum: Array<string>;
-	}
+	@doc("Name of skill to be invoked")
+	skillName: string;
 
-	model FunctionResult {
-		Type: string;
-	}
+	@doc("Skill inputs")
+	inputs: Record<SkillVariable> | null;
+}
 
-	model Tools {
-		Type: string;
-		Function: FunctionDefinition;
-	}
+@doc("Skill variable parent entity adding additional attribute 'skillsource' to provide visibility to users as to what data/information was used in generating the output of a skill")
+model OutputSkillVariable extends SkillVariable {
+	@doc("Array of cited sources that were fetched by a skill and that impacted the output of the skill evaluation")
+	sources: Array<SkillSource> | null;
 
-	model FunctionDefinition {
-		Description: string;
-		Name: string;
-		Parameters: unknown;
-	}
+	@doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
+	suggestedPrompts: Array<SuggestedPrompt> | null;
 
-	model AzureOpenAIExecutionContext {
-		ApiVersion: string | "2024-06-01";
-		Environment: string;
-		IsGPUProxyEnabled: boolean | false;
-		GpuProcessingGeo: string;
-		CustomerAllowCrossGeoCompute: boolean | false;
-		EcsAllowCrossGeoCompute: boolean | false;
-		ContentFilterProperties: Record<string>;
-		ReportingProperties: Record<string>;
+	@doc("Skill name")
+	skillName: string | null;
 
-	}
+	@doc("Skill inputs that were used in generating the output of the skill evaluation")
+	skillInputs: Record<string> | null;
 
-	model BaseCompletionRequest {
-		MaxTokens?: numeric;
-		Temperature?: numeric;
-		TopP?: numeric;
-		N?: numeric;
-		Stream?: boolean;
-		Logprobs?: numeric;
-		Echo?: boolean;
-		Stop: Array<string>;
-		PresencePenalty?: numeric;
-		FrequencyPenalty?: numeric;
-		BestOf?: numeric;
-		LogitBias: Record<numeric>;
-		ResponseFormat: unknown;
+	@doc("Skill output language")
+	outputLanguage: string | null;
 
-	}
+	@doc("Enum indicating the output type of the skill. Supports StructuredOutput and Primitive")
+	outputType: SkillOutputType;
+}
 
-	model CompletionRequest extends BaseCompletionRequest {
-		Prompt: string;
-	}
+model EvaluationResultOutput {
+	skillOutputType: SkillOutputType;
+	primitiveOutput?: OutputSkillVariable;
+	structuredOutput?: SkillStructuredOutput;
+	primitiveOutputValue?: string;
+}
 
-	model EmbeddingRequest {
-		Input: unknown;
-	}
+model SkillStructuredOutput {
+	components: Array<SkillOutputComponent>;
+}
 
-	model BaseCompletionResponse {
-		Id: string;
-		Object: string;
-		Created: utcDateTime;
-		Model: string;
-		Usage: Usage;
-		PromptFilterResults: Array<PromptAnnotation>;
-	}
+model SkillOutputComponent extends OutputComponent{
+	action: SkillOutputComponentAction;
+	includeInEvalResultAsRawComponent: boolean;
+}
 
-	model Usage {
-		PromptTokens: numeric;
-		CompletionTokens: numeric;
-		TotalTokens: numeric;
-	}
+model OutputComponent {
+	name: string;
+	content: string;
+	description?: string;
+	type: OutputComponentType;
+}
 
-	model PromptAnnotation {
-		PromptIndex: numeric;
-		ContentFilterResults: ContentFilterResults;
-	}
+model SkillImageSource {
+	displayName: string;
+	imageFileType: string;
+	description: string;
+	imageBase64: string;
+	imageThumbnailBase64: string;
+}
 
-	model ContentFilterResults {
-		Hate?: ContentFilterResult;
-		SelfHarm?: ContentFilterResult;
-		Sexual?: ContentFilterResult;
-		Violence?: ContentFilterResult;
-		Profanity?: ContentFilterResult;
-		ProtectedMaterialCode?: ContentFilterResult;
-		ProtectedMaterialText?: ContentFilterResult;
-		Jailbreak?: ContentFilterResult;
-	}
+enum OutputComponentType {
+	GptOutput,
+	Text,
+	Image,
+}
 
-	model CodeCitation {
-		Url: string;
-		License: string;
-	}
+enum SkillOutputComponentAction {
+	None,
+	Summarize,
+	Substitute,
+}
 
-	enum FilterSeverity {
-		safe,
-		low,
-		medium,
-		high,
-	}
+@doc("Auth Location")
+enum AuthLocationEnum {
+	@doc("Using Header")
+	Header,
 
-	model ContentFilterResult {
-		Filtered: boolean;
-		Detected?: boolean;
-		Severity?: FilterSeverity;
-		Citation?: CodeCitation;
-	}
+	@doc("Using QueryParams")
+	QueryParams,
+}
 
-	model ChatCompletionResponse extends BaseCompletionResponse {
-		Choices: Array<ChatChoice>;
-	}
+@doc("Skill Output type enum. Supports StructuredOutput and Primitive")
+enum SkillOutputType {
+	@doc("Primitive")
+	Primitive,
+	@doc("Structured Components")
+	StructuredComponents,
+}
 
-	model BaseChoice {
-		Index: numeric;
-		LogProbs: unknown;
-		FinishReason: string;
-		ContentFilterResults?: ContentFilterResults;
-		ContentFilterError?: ContentFilterError;
-	}
+@doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
+model SuggestedPrompt {
+	@doc("Prompt text")
+	prompt: string;
+}
 
-	model ContentFilterResultError {
-		Code?: string;
-		Message?: string;
-	}
+@doc("Source that is fetched during the evaluation of a skill. Provides visibility to users as to what data/information was used in generating the output of a skill")
+model SkillSource {
+	@doc("User friendly name for the information source")
+	displayName: string;
 
-	model ContentFilterError {
-		Error?: ContentFilterResultError; 
-	}
+	@doc("Information source content (i.e. URL to article)")
+	sourceContent: string;
 
-	model ChatChoice extends BaseChoice {
-		Message: Message;
-	}
+	@doc("The source type (i.e. URI)")
+	sourceType: SkillSourceType;
 
-	model CompletionResponse extends BaseCompletionResponse {
-		Choices: Array<Choice>;
-	}
+	@doc("Source data serialized as string")
+	sourceSerializedData?: string | null;
+}
 
-	model Choice extends BaseChoice {
-		Text: string;
-	}
+@doc("The prompt history of the current session")
+model PromptHistoryResponse {
+	@doc("List of prompts that have been evaluated in the current session")
+	prompts: Array<SessionPrompt>;
+}
 
-	model EmbeddingData {
-		Embedding: Array<numeric>;
-		Index: numeric;
-		Object: string;
-	}
+@doc("A record for a prompt and response used in tracking session prompt history")
+model SessionPrompt {
+	@doc("The content of the prompt")
+	prompt: string;
 
-	model EmbeddingResponse {
-		Data: Array<EmbeddingData>;
-		Model: string;
-		Object: string;
-		Usage: Usage;
-	}
+	@doc("Prompt response returned by the prompt evaluation")
+	response: string | null;
+}
+
+@doc("The progress message to log during a skill invocation")
+model LogProgressRequest {
+	@doc("Log level")
+	level?: ProgressLogLevel;
+
+	@doc("Log message")
+	message: string;
+}
+
+@doc("Auth Details")
+model AuthDetails {
+	@doc("Auth Location")
+	authLocation: AuthLocationEnum;
+
+	@doc("Auth Info")
+	authInfo: Record<string>;
+}
+
+@doc("TokenCredentialRequest")
+model GetTokenCredentialRequest {
+	@doc("Scopes")
+	scopes: Array<string>;
+
+	@doc("TokenCredential Type")
+	tokenCredentialType: TokenCredentialEnum = TokenCredentialEnum.None;
+
+	@doc("TenantId")
+	tenantId?: string | null;
+}
+
+@doc("AccessToken")
+model AccessToken {
+	@doc("Token string")
+	token: string;
+
+	@doc("Expiry time")
+	expiresOn: offsetDateTime;
+}
+
+@doc("GetInputRequest")
+model GetInputRequest {
+	@doc("Input Name")
+	inputName: string;
+
+	@doc("Default value for the input")
+	defaultValue?: SkillVariable | null;
+}
+
+@doc("SetInputRequest")
+model SetInputRequest {
+	@doc("Input Name")
+	inputName: string;
+
+	@doc("Default value for the input")
+	defaultValue?: SkillVariable | null;
+}
+
+@doc("AddSourcesRequest")
+model AddSourcesRequest {
+	@doc("List of SkillSource")
+	sources: Array<SkillSource>;
+}
+
+@doc("AddSourceRequest")
+model AddSourceRequest {
+	@doc("SkillSource")
+	source: SkillSource;
+}
 
 
+@doc("CreateChatCompletionRequest")
+model CreateChatCompletionRequest {
+	deploymentId?: string;
+	chatCompletionRequest: ChatCompletionRequest;
+	openAiExecutionContext?: AzureOpenAIExecutionContext; 
+}
+
+@doc("CreateCompletionRequest")
+model CreateCompletionRequest {
+	deploymentId?: string;
+	completionRequest: CompletionRequest;
+	openAiExecutionContext?: AzureOpenAIExecutionContext; 
+}
+
+@doc("CreateEmbeddingRequest")
+model CreateEmbeddingRequest {
+	deploymentId?: string;
+	embeddingRequest: EmbeddingRequest;
+	openAiExecutionContext?: AzureOpenAIExecutionContext; 
+}
+
+model ChatCompletionRequest extends BaseCompletionRequest {
+	Messages: Array<Message>;
+	Functions: Array<GPTFunction>;
+	FunctionCall: string;
+	Tools?: Array<Tools>;
+	ToolChoice?: string;
+	ParallelToolCalls?: boolean;
+}
+
+model Message {
+	Content?: string;
+	Role: string;
+	Name?: string;
+	FunctionCall?: FunctionCall;
+	ToolCalls?: Array<ToolCall>;
+	ToolCallId?: string;
+
+}
+
+model FunctionCall {
+	Name: string;
+	Arguments?: Record<string>;
+}
+
+model ToolCall {
+	Id: string;
+	Type: string;
+	Function: ToolFunctionCall;
+}
+
+model ToolFunctionCall {
+	Name: string;
+	Arguments: string;
+}
+
+model GPTFunction {
+	Name: string;
+	Description: string;
+	Parameters: FunctionParameter;
+	Result: FunctionResult;
+}
+
+model FunctionParameter {
+	Type: string;
+	Properties: Record<FunctionParameterProperty>;
+	Required: Array<string>;
+}
+
+model FunctionParameterProperty {
+	Type: string;
+	Description: string;
+	Enum: Array<string>;
+}
+
+model FunctionResult {
+	Type: string;
+}
+
+model Tools {
+	Type: string;
+	Function: FunctionDefinition;
+}
+
+model FunctionDefinition {
+	Description: string;
+	Name: string;
+	Parameters: unknown;
+}
+
+model AzureOpenAIExecutionContext {
+	ApiVersion: string | "2024-06-01";
+	Environment: string;
+	IsGPUProxyEnabled: boolean | false;
+	GpuProcessingGeo: string;
+	CustomerAllowCrossGeoCompute: boolean | false;
+	EcsAllowCrossGeoCompute: boolean | false;
+	ContentFilterProperties: Record<string>;
+	ReportingProperties: Record<string>;
+
+}
+
+model BaseCompletionRequest {
+	MaxTokens?: numeric;
+	Temperature?: numeric;
+	TopP?: numeric;
+	N?: numeric;
+	Stream?: boolean;
+	Logprobs?: numeric;
+	Echo?: boolean;
+	Stop: Array<string>;
+	PresencePenalty?: numeric;
+	FrequencyPenalty?: numeric;
+	BestOf?: numeric;
+	LogitBias: Record<numeric>;
+	ResponseFormat: unknown;
+
+}
+
+model CompletionRequest extends BaseCompletionRequest {
+	Prompt: string;
+}
+
+model EmbeddingRequest {
+	Input: unknown;
+}
+
+model BaseCompletionResponse {
+	Id: string;
+	Object: string;
+	Created: utcDateTime;
+	Model: string;
+	Usage: Usage;
+	PromptFilterResults: Array<PromptAnnotation>;
+}
+
+model Usage {
+	PromptTokens: numeric;
+	CompletionTokens: numeric;
+	TotalTokens: numeric;
+}
+
+model PromptAnnotation {
+	PromptIndex: numeric;
+	ContentFilterResults: ContentFilterResults;
+}
+
+model ContentFilterResults {
+	Hate?: ContentFilterResult;
+	SelfHarm?: ContentFilterResult;
+	Sexual?: ContentFilterResult;
+	Violence?: ContentFilterResult;
+	Profanity?: ContentFilterResult;
+	ProtectedMaterialCode?: ContentFilterResult;
+	ProtectedMaterialText?: ContentFilterResult;
+	Jailbreak?: ContentFilterResult;
+}
+
+model CodeCitation {
+	Url: string;
+	License: string;
+}
+
+enum FilterSeverity {
+	safe,
+	low,
+	medium,
+	high,
+}
+
+model ContentFilterResult {
+	Filtered: boolean;
+	Detected?: boolean;
+	Severity?: FilterSeverity;
+	Citation?: CodeCitation;
+}
+
+model ChatCompletionResponse extends BaseCompletionResponse {
+	Choices: Array<ChatChoice>;
+}
+
+model BaseChoice {
+	Index: numeric;
+	LogProbs: unknown;
+	FinishReason: string;
+	ContentFilterResults?: ContentFilterResults;
+	ContentFilterError?: ContentFilterError;
+}
+
+model ContentFilterResultError {
+	Code?: string;
+	Message?: string;
+}
+
+model ContentFilterError {
+	Error?: ContentFilterResultError; 
+}
+
+model ChatChoice extends BaseChoice {
+	Message: Message;
+}
+
+model CompletionResponse extends BaseCompletionResponse {
+	Choices: Array<Choice>;
+}
+
+model Choice extends BaseChoice {
+	Text: string;
+}
+
+model EmbeddingData {
+	Embedding: Array<numeric>;
+	Index: numeric;
+	Object: string;
+}
+
+model EmbeddingResponse {
+	Data: Array<EmbeddingData>;
+	Model: string;
+	Object: string;
+	Usage: Usage;
 }

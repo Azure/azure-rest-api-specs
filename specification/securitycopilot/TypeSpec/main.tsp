@@ -30,23 +30,16 @@ reading the inputs of the skill, invoking other skills, reporting progress of ex
 AI client to create chat completion and get embeddings.
 """)
 
-namespace SkillContext
-{
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-    enum APIVersion {
-        version: "2023-08-01-preview",
-    }
+namespace SkillContext;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
+enum APIVersion {
+    version: "2023-08-01-preview",
 }
 
-namespace OpenAIClient
-{
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-    enum APIVersion {
-        version: "2024-01-01",
-    }
 
-}
+
+
 
 
 
