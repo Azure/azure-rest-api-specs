@@ -57,6 +57,7 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   DeletedCertificateBundle,
@@ -265,6 +266,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -300,6 +302,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -331,6 +334,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -362,6 +366,7 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
      * The name of the certificate in a given key vault.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   CertificatePolicy,
@@ -383,6 +388,7 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
      * The name of the certificate in the given vault.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -410,12 +416,14 @@ op updateCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate in the given key vault.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
      * The version of the certificate.
      */
     @path("certificate-version")
+    @clientName("version", "go")
     certificateVersion: string;
 
     /**
@@ -445,6 +453,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate in the given vault.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -452,6 +461,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
      * specified, the latest version of the certificate is returned.
      */
     @path("certificate-version")
+    @clientName("version", "go")
     certificateVersion: string;
   },
   CertificateBundle,
@@ -474,6 +484,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -503,6 +514,7 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   CertificateOperation,
@@ -525,6 +537,7 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   CertificateOperation,
@@ -547,6 +560,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
 
     /**
@@ -577,6 +591,7 @@ op backupCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate.
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   BackupCertificateResult,
@@ -657,6 +672,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   DeletedCertificateBundle,
@@ -681,6 +697,7 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
      * The name of the certificate
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   void,
@@ -705,6 +722,7 @@ op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
      * The name of the deleted certificate
      */
     @path("certificate-name")
+    @clientName("name", "go")
     certificateName: string;
   },
   CertificateBundle,

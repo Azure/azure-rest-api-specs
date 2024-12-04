@@ -8,8 +8,6 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
-@@usage(DeletionRecoveryLevel, Usage.output);
-
 // rename Go operations
 @@clientName(setCertificateContacts, "SetContacts", "go");
 
