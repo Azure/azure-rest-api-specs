@@ -145,7 +145,279 @@ union AccountType {
 }
 
 /**
- * Valid values for the purpose based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/
+ * Model defining how received data is processed.
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model DataProcessing {
+  /**
+   *  The operation that is performed on the data received.
+   */
+  processingOperation: ProcessingOperation;
+
+  /**
+   * The contexts in which the data is processed.
+   */
+  contexts: Context[];
+
+  /**
+   * The duration or temporal limitation of the data processing.
+   */
+  duration: Duration;
+
+  /**
+   * The frequency of the data processing.
+   */
+  frequency: Frequency;
+
+  /**
+   * The countries the data transits through.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["countryCode"])
+  transitCountries: DataCountries[];
+
+  /**
+   * The countries the data is stored in.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["countryCode"])
+  storageCountries: DataCountries[];
+}
+
+/**
+ * Model defining the information required about the countries the data transits through or is stored in.
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model DataCountries {
+  /**
+   * The country code of the country the data transits through or is stored in.
+   */
+  @pattern("[A-Z]{2}", "Provide 2 letter country code")
+  countryCode: string;
+
+  /**
+   * The commercial organization who is managing the data
+   */
+  commercialOrganization?: string;
+
+  /**
+   * Flag to indicate if commercial activity applies to this data management.
+   */
+  commercialActivity: boolean;
+
+  /**
+   * URL to the organization or governmental data privacy framework.
+   */
+  dataPrivacyFrameworkUrl: string;
+}
+
+/**
+ * Valid values for the frequency based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union Frequency {
+  dpvContinuousFrequency: "Continuous",
+  dpvOftenFrequency: "Often",
+  dpvSingularFrequency: "Singular",
+  dpvSporadicFrequency: "Sporadic",
+  string,
+}
+
+/**
+ * Valid values for the duration based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union Duration {
+  dpvEndlessDuration: "Endless",
+  dpvFixedOccurrencesDuration: "Fixed occurrences",
+  dpvIndeterminateDuration: "Indeterminate",
+  dpvTemporalDuration: "Temporal",
+  dpvUntilEventDuration: "Until event",
+  dpvUntilTimeDuration: "Until time",
+  string,
+}
+
+/**
+ * Valid values for the context based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union Context {
+  dpvAlgorithmicLogic: "Algorithmic logic",
+  dpvAssistiveAutomation: "Assistive automation",
+  dpvAutomatedDecisionMaking: "Automated decision making",
+  dpvAutomatedScoringOfIndividuals: "Automated scoring of individuals",
+  dpvAutomationLevel: "Automation level",
+  dpvAutonomous: "Autonomous",
+  dpvCannotChallengeProcess: "Cannot challenge process",
+  dpvCannotChallengeProcessInput: "Cannot challenge process input",
+  dpvCannotChallengeProcessOutput: "Cannot challenge process output",
+  dpvCannotCorrectProcess: "Cannot correct process",
+  dpvCannotCorrectProcessInput: "Cannot correct process input",
+  dpvCannotCorrectProcessOutput: "Cannot correct process output",
+  dpvCannotObjectToProcess: "Cannot object to process",
+  dpvCannotOptInToProcess: "Cannot opt in to process",
+  dpvCannotOptOutFromProcess: "Cannot opt out from process",
+  dpvCannotReverseProcessEffects: "Cannot reverse process effects",
+  dpvCannotReverseProcessInput: "Cannot reverse process input",
+  dpvCannotReverseProcessOutput: "Cannot reverse process output",
+  dpvCannotWithdrawFromProcess: "Cannot withdraw from process",
+  dpvChallengingProcess: "Challenging process",
+  dpvChallengingProcessInput: "Challenging process input",
+  dpvChallengingProcessOutput: "Challenging process output",
+  dpvConditionalAutomation: "Conditional automation",
+  dpvConsentControl: "Consent control",
+  dpvCorrectingProcess: "Correcting process",
+  dpvCorrectingProcessInput: "Correcting process input",
+  dpvCorrectingProcessOutput: "Correcting process output",
+  dpvCompletelyManualProcessing: "Completely manual processing",
+  dpvDataControllerDataSource: "Data controller data source",
+  dpvDataPublishedByDataSubject: "Data published by data subject",
+  dpvDataSource: "Data source",
+  dpvDataSubject: "Data subject",
+  dpvDataSubjectDataSource: "Data subject data source",
+  dpvDataSubjectScale: "Data subject scale",
+  dpvDataVolume: "Data volume",
+  dpvDecisionMaking: "Decision making",
+  dpvEntityActiveInvolvement: "Entity active involvement",
+  dpvEntityInvolvement: "Entity involvement",
+  dpvEntityNonInvolvement: "Entity non involvement",
+  dpvEntityNonPermissiveInvolvement: "Entity non permissive involvement",
+  dpvEntityPassiveInvolvement: "Entity passive involvement",
+  dpvEntityPermissiveInvolvement: "Entity permissive involvement",
+  dpvEvaluationOfIndividuals: "Evaluation of individuals",
+  dpvEvaluationScoring: "Evaluation scoring",
+  dpvFullAutomation: "Full automation",
+  dpvGeographicCoverage: "Geographic coverage",
+  dpvGlobalScale: "Global scale",
+  dpvHighAutomation: "High automation",
+  dpvHugeDataVolume: "Huge data volume",
+  dpvHugeScaleOfDataSubjects: "Huge scale of data subjects",
+  dpvHumanInvolved: "Human involved",
+  dpvHumanInvolvement: "Human involvement",
+  dpvHumanInvolvementForControl: "Human involvement for control",
+  dpvHumanInvolvementForDecision: "Human involvement for decision",
+  dpvHumanInvolvementForInput: "Human involvement for input",
+  dpvHumanInvolvementForIntervention: "Human involvement for intervention",
+  dpvHumanInvolvementForOversight: "Human involvement for oversight",
+  dpvHumanInvolvementForVerification: "Human involvement for verification",
+  dpvHumanNotInvolved: "Human not involved",
+  dpvInnovativeUseOfExistingTechnology: "Innovative use of existing technology",
+  dpvInnovativeUseOfNewTechnologies: "Innovative use of new technologies",
+  dpvInnovativeUseOfTechnology: "Innovative use of technology",
+  dpvLargeDataVolume: "Large data volume",
+  dpvLargeScaleOfDataSubjects: "Large scale of data subjects",
+  dpvLargeScaleProcessing: "Large scale processing",
+  dpvLocalEnvironmentScale: "Local environment scale",
+  dpvLocalityScale: "Locality scale",
+  dpvMediumDataVolume: "Medium data volume",
+  dpvMediumScaleOfDataSubjects: "Medium scale of data subjects",
+  dpvMediumScaleProcessing: "Medium scale processing",
+  dpvMultiNationalScale: "Multi national scale",
+  dpvNationalScale: "National scale",
+  dpvNearlyGlobalScale: "Nearly global scale",
+  dpvNonPublicDataSource: "Non public data source",
+  dpvNotAutomated: "Not automated",
+  dpvObjectingToProcess: "Objecting to process",
+  dpvObtainConsent: "Obtain consent",
+  dpvOptingInToProcess: "Opting in to process",
+  dpvOptingOutFromProcess: "Opting out from process",
+  dpvPartialAutomation: "Partial automation",
+  dpvProcessingCondition: "Processing condition",
+  dpvProcessingDuration: "Processing duration",
+  dpvProcessingLocation: "Processing location",
+  dpvProcessingScale: "Processing scale",
+  dpvProvideConsent: "Provide consent",
+  dpvPublicDataSource: "Public data source",
+  dpvReaffirmConsent: "Reaffirm consent",
+  dpvRegionalScale: "Regional scale",
+  dpvReversingProcessEffects: "Reversing process effects",
+  dpvReversingProcessInput: "Reversing process input",
+  dpvReversingProcessOutput: "Reversing process output",
+  dpvScale: "Scale",
+  dpvScoringOfIndividuals: "Scoring of individuals",
+  dpvSingularDataVolume: "Singular data volume",
+  dpvSingularScaleOfDataSubjects: "Singular scale of data subjects",
+  dpvSmallDataVolume: "Small data volume",
+  dpvSmallScaleOfDataSubjects: "Small scale of data subjects",
+  dpvSmallScaleProcessing: "Small scale processing",
+  dpvSporadicDataVolume: "Sporadic data volume",
+  dpvSporadicScaleOfDataSubjects: "Sporadic scale of data subjects",
+  dpvStorageCondition: "Storage condition",
+  dpvStorageDeletion: "Storage deletion",
+  dpvStorageDuration: "Storage duration",
+  dpvStorageLocation: "Storage location",
+  dpvStorageRestoration: "Storage restoration",
+  dpvSystematicMonitoring: "Systematic monitoring",
+  dpvThirdPartyDataSource: "Third party data source",
+  dpvWithdrawConsent: "Withdraw consent",
+  dpvWithdrawingFromProcess: "Withdrawing from process",
+  string,
+}
+
+/**
+ * Valid values for the processing operation based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union ProcessingOperation {
+  dpvAccess: "Access",
+  dpvAcquire: "Acquire",
+  dpvAdapt: "Adapt",
+  dpvAggregate: "Aggregate",
+  dpvAlign: "Align",
+  dpvAlter: "Alter",
+  dpvAnalyse: "Analyze",
+  dpvAnonymise: "Anonymize",
+  dpvAssess: "Assess",
+  dpvCollect: "Collect",
+  dpvCombine: "Combine",
+  dpvConsult: "Consult",
+  dpvCopy: "Copy",
+  dpvCrossBorderTransfer: "Cross border transfer",
+  dpvDelete: "Delete",
+  dpvDerive: "Derive",
+  dpvDestruct: "Destruct",
+  dpvDisclose: "Disclose",
+  dpvDiscloseByTransmission: "Disclose by transmission",
+  dpvDisplay: "Display",
+  dpvDisseminate: "Disseminate",
+  dpvDownload: "Download",
+  dpvErase: "Erase",
+  dpvExport: "Export",
+  dpvFilter: "Filter",
+  dpvFormat: "Format",
+  dpvGenerate: "Generate",
+  dpvInfer: "Infer",
+  dpvMakeAvailable: "Make available",
+  dpvMatch: "Match",
+  dpvModify: "Modify",
+  dpvMonitor: "Monitor",
+  dpvMove: "Move",
+  dpvObserve: "Observe",
+  dpvObtain: "Obtain",
+  dpvOrganise: "Organize",
+  dpvProfiling: "Profiling",
+  dpvPseudonymise: "Pseudonymize",
+  dpvQuery: "Query",
+  dpvRecord: "Record",
+  dpvReformat: "Reformat",
+  dpvRemove: "Remove",
+  dpvRestrict: "Restrict",
+  dpvRetrieve: "Retrieve",
+  dpvScreen: "Screen",
+  dpvShare: "Share",
+  dpvStore: "Store",
+  dpvStructure: "Structure",
+  dpvTransfer: "Transfer",
+  dpvTransform: "Transform",
+  dpvTransmit: "Transmit",
+  dpvUse: "Use",
+  string,
+}
+
+/**
+ * Valid values for the purpose based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)

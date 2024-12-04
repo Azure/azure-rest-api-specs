@@ -126,6 +126,17 @@ model ApplicationOwnerProperties {
    * Registered Geographic address.
    */
   registeredGeographicAddress: GeographicAddress;
+
+  /**
+   * URL for the organization's privacy policy.
+   */
+  privacyPolicyUrl: string;
+
+  /**
+   * List of local representatives.
+   */
+  @OpenAPI.extension("x-ms-identifiers", ["countryCode"])
+  localRepresentatives: LocalRepresentative[];
 }
 
 /**
@@ -157,10 +168,22 @@ model ApplicationProperties {
   category: Category;
 
   /**
+   * Commercial name of the application.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  commercialName: string;
+
+  /**
    * Privacy rights request email address.
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   privacyRightsRequestEmailAddress: string;
+
+  /**
+   * URL for the organization's privacy policy.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  privacyPolicyUrl: string;
 
   /**
    * Legal name of the organization owning the application.
@@ -221,7 +244,7 @@ model GeographicAddress {
   /**
    * Street Name of the address.
    */
-  streetName: string;
+  streetName?: string;
 
   /**
    * Locality of the address.
@@ -231,7 +254,7 @@ model GeographicAddress {
   /**
    * City of the address.
    */
-  city: string;
+  city?: string;
 
   /**
    * Postal code of the address.
@@ -243,6 +266,23 @@ model GeographicAddress {
    */
   @pattern("[A-Z]{2}", "Provide 2 letter country code")
   countryCode: string;
+}
+
+/**
+ * Model defining a local representative for a country.
+ */
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+model LocalRepresentative {
+  /**
+   * Country code for the country the local representative is representing.
+   */
+  @pattern("[A-Z]{2}", "Provide 2 letter country code")
+  countryCode: string;
+
+  /**
+   * Local representative for this country
+   */
+  localRepresentativePerson: Person;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
