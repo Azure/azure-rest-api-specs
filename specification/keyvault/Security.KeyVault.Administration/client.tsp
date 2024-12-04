@@ -2,9 +2,12 @@
 import "./administration.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 import "@azure-tools/typespec-client-generator-core";
+
 using Azure.ClientGenerator.Core;
+
 @TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6_preview.1`)
 namespace ClientCustomizations;
+
 @@clientName(KeyVault.Setting, "KeyVaultSetting", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
@@ -30,6 +33,7 @@ namespace ClientCustomizations;
 @@clientName(Error, "KeyVaultServiceError", "csharp");
 @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "csharp");
 @@clientName(KeyVault.RestoreOperation, "RestoreDetailsInternal", "csharp");
+
 @@access(KeyVault.RoleAssignmentCreateParameters, Access.internal, "csharp");
 @@access(KeyVault.RoleDefinitionCreateParameters, Access.internal, "csharp");
 @@access(KeyVault.SASTokenParameter, Access.internal, "csharp");
@@ -38,10 +42,14 @@ namespace ClientCustomizations;
   "csharp"
 );
 @@access(KeyVault.RoleDefinitionProperties, Access.internal, "csharp");
-@client({
-  name: "BackupRestoreRestClient",
-  service: KeyVault,
-})
+
+@client(
+  {
+    name: "BackupRestoreRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
 interface BackupRestoreRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   fullBackup is KeyVault.fullBackup;
@@ -60,10 +68,14 @@ interface BackupRestoreRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   selectiveKeyRestoreOperation is KeyVault.selectiveKeyRestoreOperation;
 }
-@client({
-  name: "RoleAssignmentsRestClient",
-  service: KeyVault,
-})
+
+@client(
+  {
+    name: "RoleAssignmentsRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
 interface RoleAssignmentsRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   delete is KeyVault.RoleAssignments.delete;
@@ -74,10 +86,14 @@ interface RoleAssignmentsRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   listForScope is KeyVault.RoleAssignments.listForScope;
 }
-@client({
-  name: "RoleDefinitionsRestClient",
-  service: KeyVault,
-})
+
+@client(
+  {
+    name: "RoleDefinitionsRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
 interface RoleDefinitionsRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   delete is KeyVault.RoleDefinitions.delete;
@@ -88,10 +104,14 @@ interface RoleDefinitionsRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   list is KeyVault.RoleDefinitions.list;
 }
-@client({
-  name: "SettingsRestClient",
-  service: KeyVault,
-})
+
+@client(
+  {
+    name: "SettingsRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
 interface SettingsRestClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updateSetting is KeyVault.updateSetting;
