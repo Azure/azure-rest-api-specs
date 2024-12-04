@@ -183,7 +183,9 @@ model ListContainersSegmentResponse {
 
   /** The container segment. */
   // TODO: should this be unwrapped? The swagger shows it as wrapped. Example in docs: https://learn.microsoft.com/en-us/rest/api/storageservices/list-containers2?tabs=microsoft-entra-id#response-body
-  @Xml.name("Containers") containerItems: ContainerItem[];
+  @Azure.Core.items
+  @Xml.name("Containers")
+  containerItems: ContainerItem[];
 
   /** The next marker of the containers. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
@@ -1924,7 +1926,9 @@ model BlobPrefix {
 @Xml.name("Blobs")
 model BlobHierarchyListSegment {
   /** The blob items */
-  @Xml.name("BlobItems") blobItems: BlobItemInternal[];
+  @Azure.Core.items
+  @Xml.name("BlobItems")
+  blobItems: BlobItemInternal[];
 
   /** The blob prefixes. */
   @Xml.name("BlobPrefixes") blobPrefixes?: BlobPrefix[];
