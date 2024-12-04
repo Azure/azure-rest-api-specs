@@ -403,7 +403,7 @@ function New-TypeSpecAPIViewTokens {
   Write-Host "xxxxxxxxxxx"
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
-      $typeSpecProjectPathParts = $typeSpecProject.Split([IO.Path]::DirectorySeparatorChar)]
+      $typeSpecProjectPathParts = $typeSpecProject.Split([IO.Path]::DirectorySeparatorChar)
       $typeSpecProjectRelativePath = $typeSpecProjectPathParts[($typeSpecProjectPathParts.IndexOf("specification") - $typeSpecProjectPathParts.Length)..(-1)] -Join [IO.Path]::DirectorySeparatorChar
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProjectRelativePath)
       Write-Host $tokenDirectory
