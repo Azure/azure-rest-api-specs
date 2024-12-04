@@ -38,3 +38,21 @@ namespace Microsoft.HybridConnectivity;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ServiceConfigurationResource.properties);
+
+@@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
+@@clientName(ServiceConfigurationResource, "HybridConnectivityServiceConfiguration", "csharp");
+@@clientName(IngressGatewayResource, "IngressGatewayAsset", "csharp");
+@@clientName(EndpointAccessResource, "TargetResourceEndpointAccess", "csharp");
+@@clientName(EndpointProperties, "HybridConnectivityEndpointProperties", "csharp");
+@@clientName(ManagedProxyResource, "ManagedProxyAsset", "csharp");
+@@clientName(ProvisioningState, "HybridConnectivityProvisioningState", "csharp");
+@@clientName(ServiceName, "HybridConnectivityServiceName", "csharp");
+@@clientName(Type, "HybridConnectivityEndpointType", "csharp");
+@@clientName(EndpointProperties.type, "endpointType", "csharp");
+
+@@clientName(ServiceConfigurationResources, "ServiceConfigurations", "go");
+@@clientName(EndpointResources, "Endpoints", "go");
+
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmtClient", "python");
+@@clientName(ServiceConfigurationResources, "ServiceConfigurations", "python");
+@@clientName(EndpointResources, "Endpoints", "python");
