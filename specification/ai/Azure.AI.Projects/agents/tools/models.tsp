@@ -110,7 +110,7 @@ model AzureFunctionToolDefinition extends ToolDefinition {
 
   @doc("The definition of the concrete function that the function tool should call.")
   @encodedName("application/json", "azure_function")
-  AzureFunction: AzureFunctionDefinition;
+  azureFunction: AzureFunctionDefinition;
 }
 
 /**
@@ -147,11 +147,11 @@ model AzureFunctionDefinition {
 
   @doc("Input storage queue. The queue storage trigger runs a function as messages are added to it.")
   @encodedName("application/json", "input_binding")
-  InputBinding: AzureStorageQueueBinding;
+  inputBinding: AzureStorageQueueBinding;
 
   @doc("Output storage queue. The function writes output to this queue when the input items are processed.")
   @encodedName("application/json", "output_binding")
-  OutputBinding: AzureStorageQueueBinding;
+  outputBinding: AzureStorageQueueBinding;
 }
 //
 // Required tool calls -- provided on a run and represent tools that need outputs submitted for the run to continue
@@ -477,16 +477,16 @@ model AzureStorageQueueBinding extends AzureFunctionBinding {
 
   @doc("Storage queue.")
   @encodedName("application/json", "storage_queue")
-  StorageQueue: AzureFunctionStorageQueue;
+  storageQueue: AzureFunctionStorageQueue;
 }
 
 @doc("The structure for keeping storage queue name and URI.")
 model AzureFunctionStorageQueue {
   @doc("URI to the Azure Storage Queue service allowing you to manipulate a queue.")
   @encodedName("application/json", "queue_service_uri")
-  StorageQueueUri: string;
+  storageQueueUri: string;
 
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "queue_name")
-  QueueName: string;
+  queueName: string;
 }
