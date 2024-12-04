@@ -1465,6 +1465,9 @@ directive:
   - suppress: DefaultErrorResponseSchema
     from: actionGroups_API.json
     reason: "Updating the error response to the new format would be a breaking change."
+  - suppress: DefaultErrorResponseSchema
+    from: metricBaselines_API.json.json
+    reason: "Updating the error response to the new format would be a breaking change."
   - suppress: OperationsAPIImplementation
     from: operations_API.json
     where: $.paths
