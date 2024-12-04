@@ -196,6 +196,30 @@
           "type": "string",
           "description": "The device's preferred IP address"
         },
+        "dcCodeArmId": {
+          "type": "string",
+          "description": "The datacenter short code's ARM Id string"
+        },
+        "loopbackIpV4ArmId": {
+          "type": "string",
+          "description": "The device's IPv4 address's ARM Id string"
+        },
+        "loopbackIpV6ArmId": {
+          "type": "string",
+          "description": "The device's IPv6 address's ARM Id string"
+        },
+        "managementIpV4ArmId": {
+          "type": "string",
+          "description": "The management console's IPv4 address's ARM Id string"
+        },
+        "managementIpV6ArmId": {
+          "type": "string",
+          "description": "The management console's IPv6 address's ARM Id string"
+        },
+        "preferredIpArmId": {
+          "type": "string",
+          "description": "The device's preferred IP address's ARM Id string"
+        },
         "hardwareSku": {
           "type": "string",
           "description": "The device's hardware SKU"
@@ -207,6 +231,10 @@
         "cluster": {
           "type": "string",
           "description": "The cluster the device belongs to"
+        },
+        "clusterArmId": {
+          "type": "string",
+          "description": "The cluster the device belongs to's ARM Id string"
         },
         "cloudType": {
           "type": "string",
@@ -220,6 +248,10 @@
           "type": "string",
           "description": "The device's rack location"
         },
+        "dcRackLocationArmId": {
+          "type": "string",
+          "description": "The device's rack location's ARM Id string"
+        },
         "serviceTreeId": {
           "type": "string",
           "description": "The device owner's Service Tree Id"
@@ -227,6 +259,13 @@
         "additionalIps": {
           "type": "array",
           "description": "Additional Device Interface IP addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalIpsArmId": {
+          "type": "array",
+          "description": "Additional Device Interface IP addresses's ARM Ids",
           "items": {
             "type": "string"
           }
@@ -244,14 +283,23 @@
         "managementIpV4",
         "managementIpV6",
         "preferredIp",
+        "dcCodeArmId",
+        "loopbackIpV4ArmId",
+        "loopbackIpV6ArmId",
+        "managementIpV4ArmId",
+        "managementIpV6ArmId",
+        "preferredIpArmId",
         "hardwareSku",
         "deviceType",
         "cluster",
+        "clusterArmId",
         "cloudType",
         "deploymentType",
         "dcRackLocation",
+        "dcRackLocationArmId",
         "serviceTreeId",
-        "additionalIps"
+        "additionalIps",
+        "additionalIpsArmId"
       ]
     },
     "NetworkDeviceResource": {
