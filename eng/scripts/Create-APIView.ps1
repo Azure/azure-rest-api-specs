@@ -32,6 +32,7 @@ function Get-SwaggerReadMeFile {
       }
 
       $readmeFile = Get-ChildItem -Path $currentPath -Filter "readme.md" -File -ErrorAction SilentlyContinue
+      
       if ($readmeFile -and $readmeFile.Name -eq "readme.md" -and (Assert-AutoRestConfiguration -readMeFile $readmeFile.FullName)) {
           return $readmeFile.FullName
       }
