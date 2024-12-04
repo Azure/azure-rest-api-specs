@@ -1,0 +1,1016 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AcmCertificateSummaries"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/acmCertificateSummaries": {
+      "get": {
+        "operationId": "AcmCertificateSummaries_ListBySubscription",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "List AcmCertificateSummary resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_ListBySubscription": {
+            "$ref": "./examples/AcmCertificateSummaries_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/acmCertificateSummaries": {
+      "get": {
+        "operationId": "AcmCertificateSummaries_ListByResourceGroup",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "List AcmCertificateSummary resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_ListByResourceGroup": {
+            "$ref": "./examples/AcmCertificateSummaries_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/acmCertificateSummaries/{name}": {
+      "get": {
+        "operationId": "AcmCertificateSummaries_Get",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "Get a AcmCertificateSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AcmCertificateSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_Get": {
+            "$ref": "./examples/AcmCertificateSummaries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AcmCertificateSummaries_CreateOrReplace",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "Create a AcmCertificateSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AcmCertificateSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AcmCertificateSummary' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummary"
+            }
+          },
+          "201": {
+            "description": "Resource 'AcmCertificateSummary' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummary"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_CreateOrReplace": {
+            "$ref": "./examples/AcmCertificateSummaries_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AcmCertificateSummaries_Update",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "Update a AcmCertificateSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AcmCertificateSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummaryTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AcmCertificateSummary"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_Update": {
+            "$ref": "./examples/AcmCertificateSummaries_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AcmCertificateSummaries_Delete",
+        "tags": [
+          "AcmCertificateSummaries"
+        ],
+        "description": "Delete a AcmCertificateSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of AcmCertificateSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AcmCertificateSummaries_Delete": {
+            "$ref": "./examples/AcmCertificateSummaries_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AcmCertificateSummary": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AcmCertificateSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AcmCertificateSummaryListResult": {
+      "type": "object",
+      "description": "The response of a AcmCertificateSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AcmCertificateSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/AcmCertificateSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AcmCertificateSummaryProperties": {
+      "type": "object",
+      "description": "Definition of AcmCertificateSummary",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsAcmCertificateSummaryProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AcmCertificateSummaryTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AcmCertificateSummary resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AwsAcmCertificateSummaryProperties": {
+      "type": "object",
+      "description": "Definition of awsAcmCertificateSummary",
+      "properties": {
+        "certificateArn": {
+          "type": "string",
+          "description": "<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p> <p> <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code> </p> <p>For more information about ARNs, see <a href='https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html'>Amazon Resource Names (ARNs)</a>.</p>"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time at which the certificate was requested.</p>"
+        },
+        "domainName": {
+          "type": "string",
+          "description": "<p>Fully qualified domain name (FQDN), such as www.example.com or example.com, for the certificate.</p>"
+        },
+        "exported": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the certificate has been exported. This value exists only when the certificate type is <code>PRIVATE</code>.</p>"
+        },
+        "extendedKeyUsages": {
+          "type": "array",
+          "description": "<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID). </p>",
+          "items": {
+            "$ref": "#/definitions/ExtendedKeyUsageName"
+          },
+          "x-ms-identifiers": []
+        },
+        "hasAdditionalSubjectAlternativeNames": {
+          "type": "boolean",
+          "description": "<p>When called by <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html'>ListCertificates</a>, indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html'>DescribeCertificate</a>.</p>"
+        },
+        "importedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time when the certificate was imported. This value exists only when the certificate type is <code>IMPORTED</code>. </p>"
+        },
+        "inUse": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the certificate is currently in use by any Amazon Web Services resources.</p>"
+        },
+        "issuedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time at which the certificate was issued. This value exists only when the certificate type is <code>AMAZON_ISSUED</code>. </p>"
+        },
+        "keyAlgorithm": {
+          "$ref": "#/definitions/KeyAlgorithmEnumValue",
+          "description": "<p>The algorithm that was used to generate the public-private key pair.</p>"
+        },
+        "keyUsages": {
+          "type": "array",
+          "description": "<p>A list of Key Usage X.509 v3 extension objects. Each object is a string value that identifies the purpose of the public key contained in the certificate. Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.</p>",
+          "items": {
+            "$ref": "#/definitions/KeyUsageName"
+          },
+          "x-ms-identifiers": []
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time after which the certificate is not valid.</p>"
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time before which the certificate is not valid.</p>"
+        },
+        "renewalEligibility": {
+          "$ref": "#/definitions/RenewalEligibilityEnumValue",
+          "description": "<p>Specifies whether the certificate is eligible for renewal. At this time, only exported private certificates can be renewed with the <a>RenewCertificate</a> command.</p>"
+        },
+        "revokedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time at which the certificate was revoked. This value exists only when the certificate status is <code>REVOKED</code>. </p>"
+        },
+        "status": {
+          "$ref": "#/definitions/CertificateStatusEnumValue",
+          "description": "<p>The status of the certificate.</p> <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for any of the reasons given in the troubleshooting topic <a href='https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html'>Certificate request fails</a>. ACM makes repeated attempts to validate a certificate for 72 hours and then times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href='https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html'>DNS validation</a> or <a href='https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html'>Email validation</a>, and try again. If validation succeeds, the certificate enters status ISSUED. </p>"
+        },
+        "subjectAlternativeNameSummaries": {
+          "type": "array",
+          "description": "<p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website. </p> <p>When called by <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html'>ListCertificates</a>, this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use <a href='https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html'>DescribeCertificate</a>.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "type": {
+          "$ref": "#/definitions/CertificateTypeEnumValue",
+          "description": "<p>The source of the certificate. For certificates provided by ACM, this value is <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide <a href='https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html'>managed renewal</a> for imported certificates. For more information about the differences between certificates that you import and those that ACM provides, see <a href='https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html'>Importing Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>"
+        }
+      }
+    },
+    "CertificateStatus": {
+      "type": "string",
+      "description": "CertificateStatus enum",
+      "enum": [
+        "EXPIRED",
+        "FAILED",
+        "INACTIVE",
+        "ISSUED",
+        "PENDING_VALIDATION",
+        "REVOKED",
+        "VALIDATION_TIMED_OUT"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EXPIRED",
+            "value": "EXPIRED",
+            "description": "CertificateStatus enum EXPIRED"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "CertificateStatus enum FAILED"
+          },
+          {
+            "name": "INACTIVE",
+            "value": "INACTIVE",
+            "description": "CertificateStatus enum INACTIVE"
+          },
+          {
+            "name": "ISSUED",
+            "value": "ISSUED",
+            "description": "CertificateStatus enum ISSUED"
+          },
+          {
+            "name": "PENDING_VALIDATION",
+            "value": "PENDING_VALIDATION",
+            "description": "CertificateStatus enum PENDING_VALIDATION"
+          },
+          {
+            "name": "REVOKED",
+            "value": "REVOKED",
+            "description": "CertificateStatus enum REVOKED"
+          },
+          {
+            "name": "VALIDATION_TIMED_OUT",
+            "value": "VALIDATION_TIMED_OUT",
+            "description": "CertificateStatus enum VALIDATION_TIMED_OUT"
+          }
+        ]
+      }
+    },
+    "CertificateStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of CertificateStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CertificateStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "CertificateType": {
+      "type": "string",
+      "description": "CertificateType enum",
+      "enum": [
+        "AMAZON_ISSUED",
+        "IMPORTED",
+        "PRIVATE"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMAZON_ISSUED",
+            "value": "AMAZON_ISSUED",
+            "description": "CertificateType enum AMAZON_ISSUED"
+          },
+          {
+            "name": "IMPORTED",
+            "value": "IMPORTED",
+            "description": "CertificateType enum IMPORTED"
+          },
+          {
+            "name": "PRIVATE",
+            "value": "PRIVATE",
+            "description": "CertificateType enum PRIVATE"
+          }
+        ]
+      }
+    },
+    "CertificateTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of CertificateTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/CertificateType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ExtendedKeyUsageName": {
+      "type": "string",
+      "description": "ExtendedKeyUsageName enum",
+      "enum": [
+        "ANY",
+        "CODE_SIGNING",
+        "CUSTOM",
+        "EMAIL_PROTECTION",
+        "IPSEC_END_SYSTEM",
+        "IPSEC_TUNNEL",
+        "IPSEC_USER",
+        "NONE",
+        "OCSP_SIGNING",
+        "TIME_STAMPING",
+        "TLS_WEB_CLIENT_AUTHENTICATION",
+        "TLS_WEB_SERVER_AUTHENTICATION"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedKeyUsageName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANY",
+            "value": "ANY",
+            "description": "ExtendedKeyUsageName enum ANY"
+          },
+          {
+            "name": "CODE_SIGNING",
+            "value": "CODE_SIGNING",
+            "description": "ExtendedKeyUsageName enum CODE_SIGNING"
+          },
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "ExtendedKeyUsageName enum CUSTOM"
+          },
+          {
+            "name": "EMAIL_PROTECTION",
+            "value": "EMAIL_PROTECTION",
+            "description": "ExtendedKeyUsageName enum EMAIL_PROTECTION"
+          },
+          {
+            "name": "IPSEC_END_SYSTEM",
+            "value": "IPSEC_END_SYSTEM",
+            "description": "ExtendedKeyUsageName enum IPSEC_END_SYSTEM"
+          },
+          {
+            "name": "IPSEC_TUNNEL",
+            "value": "IPSEC_TUNNEL",
+            "description": "ExtendedKeyUsageName enum IPSEC_TUNNEL"
+          },
+          {
+            "name": "IPSEC_USER",
+            "value": "IPSEC_USER",
+            "description": "ExtendedKeyUsageName enum IPSEC_USER"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "ExtendedKeyUsageName enum NONE"
+          },
+          {
+            "name": "OCSP_SIGNING",
+            "value": "OCSP_SIGNING",
+            "description": "ExtendedKeyUsageName enum OCSP_SIGNING"
+          },
+          {
+            "name": "TIME_STAMPING",
+            "value": "TIME_STAMPING",
+            "description": "ExtendedKeyUsageName enum TIME_STAMPING"
+          },
+          {
+            "name": "TLS_WEB_CLIENT_AUTHENTICATION",
+            "value": "TLS_WEB_CLIENT_AUTHENTICATION",
+            "description": "ExtendedKeyUsageName enum TLS_WEB_CLIENT_AUTHENTICATION"
+          },
+          {
+            "name": "TLS_WEB_SERVER_AUTHENTICATION",
+            "value": "TLS_WEB_SERVER_AUTHENTICATION",
+            "description": "ExtendedKeyUsageName enum TLS_WEB_SERVER_AUTHENTICATION"
+          }
+        ]
+      }
+    },
+    "ExtendedKeyUsageNameEnumValue": {
+      "type": "object",
+      "description": "Definition of ExtendedKeyUsageNameEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ExtendedKeyUsageName",
+          "description": "Property value"
+        }
+      }
+    },
+    "KeyAlgorithm": {
+      "type": "string",
+      "description": "KeyAlgorithm enum",
+      "enum": [
+        "EC_prime256v1",
+        "EC_secp384r1",
+        "EC_secp521r1",
+        "RSA_1024",
+        "RSA_2048",
+        "RSA_3072",
+        "RSA_4096"
+      ],
+      "x-ms-enum": {
+        "name": "KeyAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EC_prime256v1",
+            "value": "EC_prime256v1",
+            "description": "KeyAlgorithm enum EC_prime256v1"
+          },
+          {
+            "name": "EC_secp384r1",
+            "value": "EC_secp384r1",
+            "description": "KeyAlgorithm enum EC_secp384r1"
+          },
+          {
+            "name": "EC_secp521r1",
+            "value": "EC_secp521r1",
+            "description": "KeyAlgorithm enum EC_secp521r1"
+          },
+          {
+            "name": "RSA_1024",
+            "value": "RSA_1024",
+            "description": "KeyAlgorithm enum RSA_1024"
+          },
+          {
+            "name": "RSA_2048",
+            "value": "RSA_2048",
+            "description": "KeyAlgorithm enum RSA_2048"
+          },
+          {
+            "name": "RSA_3072",
+            "value": "RSA_3072",
+            "description": "KeyAlgorithm enum RSA_3072"
+          },
+          {
+            "name": "RSA_4096",
+            "value": "RSA_4096",
+            "description": "KeyAlgorithm enum RSA_4096"
+          }
+        ]
+      }
+    },
+    "KeyAlgorithmEnumValue": {
+      "type": "object",
+      "description": "Definition of KeyAlgorithmEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KeyAlgorithm",
+          "description": "Property value"
+        }
+      }
+    },
+    "KeyUsageName": {
+      "type": "string",
+      "description": "KeyUsageName enum",
+      "enum": [
+        "ANY",
+        "CERTIFICATE_SIGNING",
+        "CRL_SIGNING",
+        "CUSTOM",
+        "DATA_ENCIPHERMENT",
+        "DECIPHER_ONLY",
+        "DIGITAL_SIGNATURE",
+        "ENCIPHER_ONLY",
+        "KEY_AGREEMENT",
+        "KEY_ENCIPHERMENT",
+        "NON_REPUDIATION"
+      ],
+      "x-ms-enum": {
+        "name": "KeyUsageName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ANY",
+            "value": "ANY",
+            "description": "KeyUsageName enum ANY"
+          },
+          {
+            "name": "CERTIFICATE_SIGNING",
+            "value": "CERTIFICATE_SIGNING",
+            "description": "KeyUsageName enum CERTIFICATE_SIGNING"
+          },
+          {
+            "name": "CRL_SIGNING",
+            "value": "CRL_SIGNING",
+            "description": "KeyUsageName enum CRL_SIGNING"
+          },
+          {
+            "name": "CUSTOM",
+            "value": "CUSTOM",
+            "description": "KeyUsageName enum CUSTOM"
+          },
+          {
+            "name": "DATA_ENCIPHERMENT",
+            "value": "DATA_ENCIPHERMENT",
+            "description": "KeyUsageName enum DATA_ENCIPHERMENT"
+          },
+          {
+            "name": "DECIPHER_ONLY",
+            "value": "DECIPHER_ONLY",
+            "description": "KeyUsageName enum DECIPHER_ONLY"
+          },
+          {
+            "name": "DIGITAL_SIGNATURE",
+            "value": "DIGITAL_SIGNATURE",
+            "description": "KeyUsageName enum DIGITAL_SIGNATURE"
+          },
+          {
+            "name": "ENCIPHER_ONLY",
+            "value": "ENCIPHER_ONLY",
+            "description": "KeyUsageName enum ENCIPHER_ONLY"
+          },
+          {
+            "name": "KEY_AGREEMENT",
+            "value": "KEY_AGREEMENT",
+            "description": "KeyUsageName enum KEY_AGREEMENT"
+          },
+          {
+            "name": "KEY_ENCIPHERMENT",
+            "value": "KEY_ENCIPHERMENT",
+            "description": "KeyUsageName enum KEY_ENCIPHERMENT"
+          },
+          {
+            "name": "NON_REPUDIATION",
+            "value": "NON_REPUDIATION",
+            "description": "KeyUsageName enum NON_REPUDIATION"
+          }
+        ]
+      }
+    },
+    "KeyUsageNameEnumValue": {
+      "type": "object",
+      "description": "Definition of KeyUsageNameEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/KeyUsageName",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RenewalEligibility": {
+      "type": "string",
+      "description": "RenewalEligibility enum",
+      "enum": [
+        "ELIGIBLE",
+        "INELIGIBLE"
+      ],
+      "x-ms-enum": {
+        "name": "RenewalEligibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ELIGIBLE",
+            "value": "ELIGIBLE",
+            "description": "RenewalEligibility enum ELIGIBLE"
+          },
+          {
+            "name": "INELIGIBLE",
+            "value": "INELIGIBLE",
+            "description": "RenewalEligibility enum INELIGIBLE"
+          }
+        ]
+      }
+    },
+    "RenewalEligibilityEnumValue": {
+      "type": "object",
+      "description": "Definition of RenewalEligibilityEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RenewalEligibility",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -6,6 +6,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -46,8 +48,10 @@ model PushAgentV2AccountResourceProperties {
   @doc("Error Reporting Table name.")
   errorReportingTable: string;
 
-  @doc("The ARM location of the Storage Account. ARM location is different from PAv2/CIS location, e.g. eastus VS. useast.")
-  armLocation: string;
+  @renamedFrom(Versions.v2024_06_24_preview, "armLocation")
+  @typeChangedFrom(Versions.v2024_06_24_preview, string)
+  @doc("The Azure location of the Storage Account. Azure location is different from PAv2/CIS location, e.g. eastus VS. useast.")
+  azureLocation: azureLocation;
 
   @doc("Tenant ID of the Subscription.")
   tenantId: string;

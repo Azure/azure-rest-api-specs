@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- EcrRepositories ----------------------------------------------
@@ -93,7 +93,7 @@ model AwsEcrRepositoryProperties {
   repositoryName?: string;
 
   @doc("The JSON repository policy text to apply to the repository. For more information, see [Amazon ECR repository policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html) in the *Amazon Elastic Container Registry User Guide*.")
-  repositoryPolicyText?: string;
+  repositoryPolicyText?: Record<unknown>;
 
   @doc("Property repositoryUri")
   repositoryUri?: string;
@@ -121,10 +121,21 @@ union ImageTagMutability {
 @doc("Definition of EncryptionConfiguration")
 model EncryptionConfiguration {
   @doc("The encryption type to use. If you use the ``KMS`` encryption type, the contents of the repository will be encrypted using server-side encryption with KMSlong key stored in KMS. When you use KMS to encrypt your data, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see [Protecting data using server-side encryption with an key stored in (SSE-KMS)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the *Amazon Simple Storage Service Console Developer Guide*. If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) in the *Ama The encryption type to use.")
-  encryptionType?: string;
+  encryptionType?: EncryptionConfigurationEncryptionType;
 
   @doc("If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used. If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.")
   kmsKey?: string;
+}
+
+@doc("EncryptionConfigurationEncryptionType enum")
+union EncryptionConfigurationEncryptionType {
+  @doc("EncryptionConfigurationEncryptionType enum AES256")
+  AES256: "AES256",
+
+  @doc("EncryptionConfigurationEncryptionType enum KMS")
+  KMS: "KMS",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -168,7 +179,7 @@ model Tag {
 interface EcrRepositories {
   get is ArmResourceRead<EcrRepository>;
   @doc("Create a EcrRepository. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EcrRepository>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<EcrRepository>;
   update is ArmCustomPatchAsync<
     EcrRepository,
     Azure.ResourceManager.Foundations.TagsUpdateModel<EcrRepository>

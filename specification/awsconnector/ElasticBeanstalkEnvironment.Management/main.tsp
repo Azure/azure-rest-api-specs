@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- ElasticBeanstalkEnvironments ----------------------------------------------
@@ -167,7 +167,7 @@ model Tier {
 interface ElasticBeanstalkEnvironments {
   get is ArmResourceRead<ElasticBeanstalkEnvironment>;
   @doc("Create a ElasticBeanstalkEnvironment. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBeanstalkEnvironment>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ElasticBeanstalkEnvironment>;
   update is ArmCustomPatchAsync<
     ElasticBeanstalkEnvironment,
     Azure.ResourceManager.Foundations.TagsUpdateModel<ElasticBeanstalkEnvironment>

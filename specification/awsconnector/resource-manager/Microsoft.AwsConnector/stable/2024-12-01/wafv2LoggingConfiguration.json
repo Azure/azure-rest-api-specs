@@ -1,0 +1,793 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Wafv2LoggingConfigurations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/wafv2LoggingConfigurations": {
+      "get": {
+        "operationId": "Wafv2LoggingConfigurations_ListBySubscription",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "List Wafv2LoggingConfiguration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_ListBySubscription": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/wafv2LoggingConfigurations": {
+      "get": {
+        "operationId": "Wafv2LoggingConfigurations_ListByResourceGroup",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "List Wafv2LoggingConfiguration resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_ListByResourceGroup": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/wafv2LoggingConfigurations/{name}": {
+      "get": {
+        "operationId": "Wafv2LoggingConfigurations_Get",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "Get a Wafv2LoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Wafv2LoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_Get": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Wafv2LoggingConfigurations_CreateOrReplace",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "Create a Wafv2LoggingConfiguration. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Wafv2LoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Wafv2LoggingConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'Wafv2LoggingConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_CreateOrReplace": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Wafv2LoggingConfigurations_Update",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "Update a Wafv2LoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Wafv2LoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfigurationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Wafv2LoggingConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_Update": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Wafv2LoggingConfigurations_Delete",
+        "tags": [
+          "Wafv2LoggingConfigurations"
+        ],
+        "description": "Delete a Wafv2LoggingConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Wafv2LoggingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Wafv2LoggingConfigurations_Delete": {
+            "$ref": "./examples/Wafv2LoggingConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "string",
+      "description": "Action enum",
+      "enum": [
+        "ALLOW",
+        "BLOCK",
+        "CAPTCHA",
+        "CHALLENGE",
+        "COUNT",
+        "EXCLUDED_AS_COUNT"
+      ],
+      "x-ms-enum": {
+        "name": "Action",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALLOW",
+            "value": "ALLOW",
+            "description": "Action enum ALLOW"
+          },
+          {
+            "name": "BLOCK",
+            "value": "BLOCK",
+            "description": "Action enum BLOCK"
+          },
+          {
+            "name": "CAPTCHA",
+            "value": "CAPTCHA",
+            "description": "Action enum CAPTCHA"
+          },
+          {
+            "name": "CHALLENGE",
+            "value": "CHALLENGE",
+            "description": "Action enum CHALLENGE"
+          },
+          {
+            "name": "COUNT",
+            "value": "COUNT",
+            "description": "Action enum COUNT"
+          },
+          {
+            "name": "EXCLUDED_AS_COUNT",
+            "value": "EXCLUDED_AS_COUNT",
+            "description": "Action enum EXCLUDED_AS_COUNT"
+          }
+        ]
+      }
+    },
+    "ActionConditionModelProperties": {
+      "type": "object",
+      "description": "Definition of ActionConditionModelProperties",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition."
+        }
+      }
+    },
+    "AwsWafv2LoggingConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of awsWafv2LoggingConfiguration",
+      "properties": {
+        "logDestinationConfigs": {
+          "type": "array",
+          "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "loggingFilter": {
+          "$ref": "#/definitions/LoggingFilterModelProperties",
+          "description": "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation."
+        },
+        "managedByFirewallManager": {
+          "type": "boolean",
+          "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration."
+        },
+        "redactedFields": {
+          "type": "array",
+          "description": "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
+          "items": {
+            "$ref": "#/definitions/FieldToMatch"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs."
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Definition of Condition",
+      "properties": {
+        "actionCondition": {
+          "$ref": "#/definitions/ActionConditionModelProperties",
+          "description": "A single action condition."
+        },
+        "labelNameCondition": {
+          "$ref": "#/definitions/LabelNameConditionModelProperties",
+          "description": "A single label name condition."
+        }
+      }
+    },
+    "DefaultBehavior": {
+      "type": "string",
+      "description": "DefaultBehavior enum",
+      "enum": [
+        "DROP",
+        "KEEP"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DROP",
+            "value": "DROP",
+            "description": "DefaultBehavior enum DROP"
+          },
+          {
+            "name": "KEEP",
+            "value": "KEEP",
+            "description": "DefaultBehavior enum KEEP"
+          }
+        ]
+      }
+    },
+    "FieldToMatch": {
+      "type": "object",
+      "description": "Definition of FieldToMatch",
+      "properties": {
+        "method": {
+          "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform."
+        },
+        "queryString": {
+          "description": "Inspect the query string. This is the part of a URL that appears after a ? character, if any."
+        },
+        "singleHeader": {
+          "$ref": "#/definitions/SingleHeaderModelProperties",
+          "description": "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive."
+        },
+        "uriPath": {
+          "description": "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg."
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "description": "Definition of Filter",
+      "properties": {
+        "behavior": {
+          "$ref": "#/definitions/FilterBehavior",
+          "description": "How to handle logs that satisfy the filter's conditions and requirement."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Match conditions for the filter.",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "x-ms-identifiers": []
+        },
+        "requirement": {
+          "$ref": "#/definitions/FilterRequirement",
+          "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition."
+        }
+      }
+    },
+    "FilterBehavior": {
+      "type": "string",
+      "description": "FilterBehavior enum",
+      "enum": [
+        "DROP",
+        "KEEP"
+      ],
+      "x-ms-enum": {
+        "name": "FilterBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DROP",
+            "value": "DROP",
+            "description": "FilterBehavior enum DROP"
+          },
+          {
+            "name": "KEEP",
+            "value": "KEEP",
+            "description": "FilterBehavior enum KEEP"
+          }
+        ]
+      }
+    },
+    "FilterRequirement": {
+      "type": "string",
+      "description": "FilterRequirement enum",
+      "enum": [
+        "MEETS_ALL",
+        "MEETS_ANY"
+      ],
+      "x-ms-enum": {
+        "name": "FilterRequirement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MEETS_ALL",
+            "value": "MEETS_ALL",
+            "description": "FilterRequirement enum MEETS_ALL"
+          },
+          {
+            "name": "MEETS_ANY",
+            "value": "MEETS_ANY",
+            "description": "FilterRequirement enum MEETS_ANY"
+          }
+        ]
+      }
+    },
+    "LabelNameConditionModelProperties": {
+      "type": "object",
+      "description": "Definition of LabelNameConditionModelProperties",
+      "properties": {
+        "labelName": {
+          "type": "string",
+          "description": "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label."
+        }
+      }
+    },
+    "LoggingFilterModelProperties": {
+      "type": "object",
+      "description": "Definition of LoggingFilterModelProperties",
+      "properties": {
+        "defaultBehavior": {
+          "$ref": "#/definitions/DefaultBehavior",
+          "description": "Default handling for logs that don't match any of the specified filtering conditions."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filters that you want to apply to the logs.",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SingleHeaderModelProperties": {
+      "type": "object",
+      "description": "Definition of SingleHeaderModelProperties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the query header to inspect."
+        }
+      }
+    },
+    "Wafv2LoggingConfiguration": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Wafv2LoggingConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Wafv2LoggingConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a Wafv2LoggingConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Wafv2LoggingConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/Wafv2LoggingConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Wafv2LoggingConfigurationProperties": {
+      "type": "object",
+      "description": "Definition of Wafv2LoggingConfiguration",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsWafv2LoggingConfigurationProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Wafv2LoggingConfigurationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Wafv2LoggingConfiguration resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
