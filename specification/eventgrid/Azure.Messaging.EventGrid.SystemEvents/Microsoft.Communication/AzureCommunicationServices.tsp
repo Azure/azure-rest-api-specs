@@ -1225,7 +1225,7 @@ model AcsMessageMediaContent {
   caption?: string;
 
   /** Set to  true if the sticker is animated;  false otherwise.  */
-  animated?: bool;
+  animated?: boolean;
 }
 
 /** Message Reaction Content */
