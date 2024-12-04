@@ -1,4 +1,4 @@
-# MongoDb.Atlas RP
+# MongoDB.Atlas RP
 
 > see https://aka.ms/autorest
 
@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2024-11-18-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-11-18-preview'
 input-file:
-  - MongoDb.Atlas/preview/2024-11-18-preview/openapi.json
+  - MongoDB.Atlas/preview/2024-11-18-preview/openapi.json
 ```
