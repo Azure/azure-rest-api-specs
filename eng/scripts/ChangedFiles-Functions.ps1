@@ -32,7 +32,7 @@ function Get-ChangedTypeSpecFiles($changedFiles = (Get-ChangedFiles)) {
   $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
 
   $changedTypeSpecFiles = $changedFiles.Where({ 
-    $_.EndsWith(".tsp") -or $_.EndsWith("tspconfig.yaml")
+    $_.EndsWith(".tsp")
   })
     
   return $changedTypeSpecFiles

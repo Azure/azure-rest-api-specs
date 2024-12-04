@@ -37,7 +37,7 @@ function Get-SwaggerReadMeFile {
     return $null
 }
 
-function Get-ImpactedTypeSpec {
+function Get-ImpactedTypespecProjects {
     param (
         [Parameter(Mandatory = $true)]
         [string]$TypeSpecFile
@@ -377,7 +377,7 @@ function New-TypeSpecAPIViewTokens {
   # Get impacted TypeSpec projects
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
-    $tspProjs = Get-ImpactedTypeSpec -TypeSpecFile "$_"
+    $tspProjs = Get-ImpactedTypespecProjects -TypeSpecFile "$_"
     if ($tspProjs) {
       foreach ($tspProj in $tspProjs) {
         $typeSpecProjects.Add($tspProj) | Out-Null
