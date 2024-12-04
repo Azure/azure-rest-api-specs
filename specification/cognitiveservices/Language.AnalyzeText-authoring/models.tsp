@@ -360,7 +360,7 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("CreateProjectConfig", "csharp")
+@clientName("CreateProjectDetails", "csharp")
 model TextAnalysisAuthoringCreateProjectOptions {
   /**
    * The project kind.
@@ -402,7 +402,7 @@ model TextAnalysisAuthoringCreateProjectOptions {
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
 @clientName("CopyAuthorizationOptions")
-@clientName("CopyAuthorizationConfig", "csharp")
+@clientName("CopyAuthorizationDetails", "csharp")
 model TextAnalysisAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -423,7 +423,7 @@ model TextAnalysisAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
-@clientName("CopyProjectConfig", "csharp")
+@clientName("CopyProjectDetails", "csharp")
 model TextAnalysisAuthoringCopyProjectOptions {
   /**
    * Represents the project kind.
@@ -494,7 +494,7 @@ model TextAnalysisAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("TrainingJobConfig", "csharp")
+@clientName("TrainingJobDetails", "csharp")
 model TextAnalysisAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -561,7 +561,7 @@ model TextAnalysisAuthoringDataGenerationConnectionInfo {
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("EvaluationConfig", "csharp")
+@clientName("EvaluationDetails", "csharp")
 model TextAnalysisAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to percentage.
@@ -730,7 +730,7 @@ model TextAnalysisAuthoringDeploymentResource {
 /**
  * Represents the options for creating or updating a project deployment.
  */
-@clientName("CreateDeploymentConfig", "csharp")
+@clientName("CreateDeploymentDetails", "csharp")
 model TextAnalysisAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -748,7 +748,7 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
  * Represents the options for deleting a project deployment.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("DeleteDeploymentConfig", "csharp")
+@clientName("DeleteDeploymentDetails", "csharp")
 model TextAnalysisAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -789,7 +789,7 @@ model TextAnalysisAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("SwapDeploymentsConfig", "csharp")
+@clientName("SwapDeploymentsDetails", "csharp")
 model TextAnalysisAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -876,7 +876,7 @@ model TextAnalysisAuthoringExportedTrainedModel {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ExportedModelConfig", "csharp")
+@clientName("ExportedModelDetails", "csharp")
 model TextAnalysisAuthoringExportedModelOptions {
   /**
    * The trained model label.
@@ -1184,7 +1184,7 @@ model TextAnalysisAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-@clientName("AssignDeploymentResourcesConfig", "csharp")
+@clientName("AssignDeploymentResourcesDetails", "csharp")
 model TextAnalysisAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1217,7 +1217,7 @@ model TextAnalysisAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("UnassignDeploymentResourcesConfig", "csharp")
+@clientName("UnassignDeploymentResourcesDetails", "csharp")
 model TextAnalysisAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
