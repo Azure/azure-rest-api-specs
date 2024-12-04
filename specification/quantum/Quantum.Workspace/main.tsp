@@ -76,6 +76,9 @@ namespace Quantum.Workspace.Services {
 
   interface Quotas extends Quantum.Workspace.Operations.QuotaOperations {}
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+    """
   interface TopLevelItems
     extends Quantum.Workspace.Operations.ItemsOperations {}
 }

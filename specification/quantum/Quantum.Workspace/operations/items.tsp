@@ -80,12 +80,27 @@ model ItemDetails {
   errorData?: Errors.WorkspaceItemError;
 }
 
+alias PagedItemDetails = Azure.Core.Page<ItemDetails>;
+
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
 
   interface ItemsOperations {
     /** List top-level items. */
-    list is ListOperation<ItemDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+      See https://github.com/Azure/typespec-azure/issues/494
+      """
+    list is CustomListOperation<
+      Resource = ItemDetails,
+      Response = PagedItemDetails,
+      Parameters = {
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
+      }
+    >;
   }
 }

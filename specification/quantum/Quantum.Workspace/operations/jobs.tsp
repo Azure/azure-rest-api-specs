@@ -52,6 +52,50 @@ model QuantumComputingData {
   count: int64;
 }
 
+/**
+ * Provides the custom 'filter' query parameter for list operations
+ */
+model CustomFilterQueryParameter {
+  /**
+   * Filter the result list using the given expression
+   */
+  @query("filter")
+  filter?: string;
+}
+
+/**
+ * Provides the custom 'skip' query parameter for list operations.
+ */
+model CustomSkipQueryParameter {
+  /**
+   * The number of result items to skip.
+   */
+  @query("skip")
+  skip?: int32;
+}
+
+/**
+ * Provides the custom 'top' query parameter for list operations.
+ */
+model CustomTopQueryParameter {
+  /**
+   * The number of jobs taken.
+   */
+  @query("top")
+  top?: int32;
+}
+
+/**
+ * Provides the custom 'orderBy' query parameter for list operations.
+ */
+model CustomOrderByQueryParameter {
+  /**
+   * The order of returned items.
+   */
+  @query("orderby")
+  orderby?: string;
+}
+
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(QuantumWorkspace)
@@ -127,7 +171,6 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
     /** Create a new job. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
@@ -139,7 +182,6 @@ namespace Quantum.Workspace.Operations {
     update is PatchOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     cancel is CancelOperation<JobDetails>;
 
     /** Get job by its id. */
@@ -152,7 +194,13 @@ namespace Quantum.Workspace.Operations {
       """
     list is CustomListOperation<
       Resource = JobDetails,
-      Response = PagedJobDetails
+      Response = PagedJobDetails,
+      Parameters = {
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
+      }
     >;
   }
 }
