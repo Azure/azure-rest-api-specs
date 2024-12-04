@@ -961,8 +961,7 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  //FIXME: (logSpecifications) What should this identifier value be?
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -2551,6 +2550,7 @@ model ExpandMsixImageProperties {
   /**
    * List of package dependencies.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -2780,6 +2780,7 @@ model SessionHostProperties {
    * List of SessionHostHealthCheckReports
    */
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["healthCheckName"])
   sessionHostHealthCheckResults?: SessionHostHealthCheckReport[];
 }
 
@@ -2960,11 +2961,13 @@ model ScalingPlanPatchProperties {
   /**
    * List of ScalingSchedule definitions.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -3319,6 +3322,7 @@ model MsixPackageProperties {
   /**
    * List of package dependencies.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
@@ -3335,6 +3339,7 @@ model MsixPackageProperties {
   /**
    * List of package applications.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["appId"])
   packageApplications?: MsixPackageApplications[];
 }
 
