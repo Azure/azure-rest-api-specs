@@ -393,7 +393,7 @@ namespace OpenAIClient
 	model FunctionDefinition {
 		Description: string;
 		Name: string;
-		Parameters: any;
+		Parameters: unknown;
 	}
 
 	model AzureOpenAIExecutionContext {
@@ -409,19 +409,19 @@ namespace OpenAIClient
 	}
 
 	model BaseCompletionRequest {
-		MaxTokens?: number;
-		Temperature?: number;
-		TopP?: number;
-		N?: number;
+		MaxTokens?: numeric;
+		Temperature?: numeric;
+		TopP?: numeric;
+		N?: numeric;
 		Stream?: boolean;
-		Logprobs?: number;
+		Logprobs?: numeric;
 		Echo?: boolean;
 		Stop: Array<string>;
-		PresencePenalty?: number;
-		FrequencyPenalty?: number;
-		BestOf?: number;
-		LogitBias: Record<number>;
-		ResponseFormat: any;
+		PresencePenalty?: numeric;
+		FrequencyPenalty?: numeric;
+		BestOf?: numeric;
+		LogitBias: Record<numeric>;
+		ResponseFormat: unknown;
 
 	}
 
@@ -430,7 +430,7 @@ namespace OpenAIClient
 	}
 
 	model EmbeddingRequest {
-		Input: any;
+		Input: unknown;
 	}
 
 	model BaseCompletionResponse {
@@ -443,13 +443,13 @@ namespace OpenAIClient
 	}
 
 	model Usage {
-		PromptTokens: number;
-		CompletionTokens: number;
-		TotalTokens: number;
+		PromptTokens: numeric;
+		CompletionTokens: numeric;
+		TotalTokens: numeric;
 	}
 
 	model PromptAnnotation {
-		PromptIndex: number;
+		PromptIndex: numeric;
 		ContentFilterResults: ContentFilterResults;
 	}
 
@@ -488,8 +488,8 @@ namespace OpenAIClient
 	}
 
 	model BaseChoice {
-		Index: number;
-		LogProbs: any;
+		Index: numeric;
+		LogProbs: unknown;
 		FinishReason: string;
 		ContentFilterResults?: ContentFilterResults;
 		ContentFilterError?: ContentFilterError;
@@ -517,15 +517,15 @@ namespace OpenAIClient
 	}
 
 	model EmbeddingData {
-		Embedding: Array<number>;
-		Index: number;
-		@Object: string;
+		Embedding: Array<numeric>;
+		Index: numeric;
+		Object: string;
 	}
 
 	model EmbeddingResponse {
 		Data: Array<EmbeddingData>;
 		Model: string;
-		@Object: string;
+		Object: string;
 		Usage: Usage;
 	}
 
