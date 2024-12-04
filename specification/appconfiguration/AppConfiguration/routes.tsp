@@ -15,7 +15,7 @@ alias appConfigOperation<
   Traits extends Reflection.Model = {},
   TError = Error
 > = Foundations.Operation<
-  TParams & RequestIdResponseHeader,
+  TParams & ClientRequestIdHeader,
   TResponse,
   Traits,
   TError
