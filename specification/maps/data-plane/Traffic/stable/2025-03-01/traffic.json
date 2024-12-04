@@ -90,7 +90,7 @@
           {
             "name": "incidentType",
             "in": "query",
-            "description": "Specifies the type of traffic incident to return.",
+            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. For example, '&incidentType=Accident&incidentType=Construction'. Will return all the available incident types if not specified.",
             "required": false,
             "type": "string",
             "enum": [
@@ -112,47 +112,47 @@
               "values": [
                 {
                   "value": "Accident",
-                  "description": ""
+                  "description": "Accident"
                 },
                 {
                   "value": "Congestion",
-                  "description": ""
+                  "description": "Congestion"
                 },
                 {
                   "value": "DisabledVehicle",
-                  "description": ""
+                  "description": "DisabledVehicle"
                 },
                 {
                   "value": "MassTransit",
-                  "description": ""
+                  "description": "MassTransit"
                 },
                 {
                   "value": "Miscellaneous",
-                  "description": ""
+                  "description": "Miscellaneous"
                 },
                 {
                   "value": "OtherNews",
-                  "description": ""
+                  "description": "OtherNews"
                 },
                 {
                   "value": "PlannedEvent",
-                  "description": ""
+                  "description": "PlannedEvent"
                 },
                 {
                   "value": "RoadHazard",
-                  "description": ""
+                  "description": "RoadHazard"
                 },
                 {
                   "value": "Construction",
-                  "description": ""
+                  "description": "Construction"
                 },
                 {
                   "value": "Alert",
-                  "description": ""
+                  "description": "Alert"
                 },
                 {
                   "value": "Weather",
-                  "description": ""
+                  "description": "Weather"
                 }
               ]
             }
@@ -160,7 +160,7 @@
           {
             "name": "bbox",
             "in": "query",
-            "description": "A bounding box for the area of interest. It must conform to GeoJSON format [minLon, minLat, maxLon, maxLat]",
+            "description": "A bounding box for the area of interest. It must conform to GeoJSON format [minLon, minLat, maxLon, maxLat].\n\nEither height or width of the area bounding box should not smaller than 12m.\n\nEither height or width of the area bounding box should not exceed 500km. A maximum limit of 30 degrees for either width or height is enforced. (maxLon - minLon should <= 30 and maxLat - minLat should <= 30).",
             "required": true,
             "type": "array",
             "items": {
@@ -245,7 +245,7 @@
         "id": {
           "description": "A unique ID for the incident.",
           "type": "number",
-          "format": "float"
+          "format": "long"
         },
         "lastModified": {
           "description": "The time the incident information was last updated. The time is specified as UTC time in milliseconds using the epoch (start time) of January 1, 1970, 00:00:00.\n\n Examples: Date(1295704800000)",
@@ -262,9 +262,8 @@
           "format": "int32"
         },
         "type": {
-          "description": "Specifies the type of incident. \n\n - 1: Accident \n\n - 2: Congestion \n\n - 3: DisabledVehicle \n\n - 4: MassTransit \n\n - 5: Miscellaneous \n\n - 6: OtherNews \n\n - 7: PlannedEvent \n\n - 8: RoadHazard \n\n - 9: Construction \n\n - 10: Alert \n\n - 11: Weather",
-          "type": "number",
-          "format": "int32"
+          "description": "Specifies the type of incident. \n\n - Accident \n\n - Congestion \n\n - DisabledVehicle \n\n - MassTransit \n\n - Miscellaneous \n\n - OtherNews \n\n - PlannedEvent \n\n - RoadHazard \n\n - Construction \n\n - Alert \n\n - Weather",
+          "type": "string"
         },
         "title": {
           "description": "Names and direction of affected roads.",
