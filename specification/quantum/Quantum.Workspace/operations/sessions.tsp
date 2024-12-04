@@ -75,7 +75,7 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
-    open is CreateOperation<SessionDetails>;
+    createOrReplace is CreateOperation<SessionDetails>;
 
     /** Close an existing session. */
     close is ActionOperation<SessionDetails>;
