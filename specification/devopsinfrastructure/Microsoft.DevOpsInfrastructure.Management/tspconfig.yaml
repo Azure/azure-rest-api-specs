@@ -38,3 +38,25 @@ options:
     clear-output-folder: true
     package-dir: "Azure.ResourceManager.DevOpsInfrastructure"
     namespace: "{package-dir}"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-devopsinfrastructure"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-devopsinfrastructure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/devopsinfrastructure"
+    package-dir: "armdevopsinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
