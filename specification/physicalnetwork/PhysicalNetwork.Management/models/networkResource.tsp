@@ -62,7 +62,7 @@ model NetworkDeviceProperties {
   cluster: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
-  @doc("The cluster the device belongs to's ARM Id string")
+  @doc("The cluster's ARM Id string")
   clusterArmId: string;
 
   @doc("The cloud the device is in")
@@ -87,7 +87,7 @@ model NetworkDeviceProperties {
   additionalIps: Array<string>;
 
   @Versioning.added(Versions.v2024_09_01_preview)
-  @doc("Additional Device Interface IP addresses's ARM Ids")
+  @doc("Additional Device Interface IP address ARM Ids")
   additionalIpsArmId: Array<string>;
 
   @doc("Provisioning state")
