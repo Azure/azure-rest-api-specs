@@ -76,13 +76,6 @@ model AssetEndpointProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Defines the Asset Endpoint Profile properties for update operation.")
-model AssetEndpointProfileUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    AssetEndpointProfile,
-    AssetEndpointProfileProperties
-  >;
-
 @doc("Definition of the client authentication mechanism to the server.")
 @renamedFrom(Versions.v2024_09_01_preview, "UserAuthentication")
 model Authentication {
@@ -180,7 +173,10 @@ interface AssetEndpointProfiles {
   // since otherwise it extends the ARM TrackedResource type.
   update is ArmCustomPatchAsync<
     AssetEndpointProfile,
-    AssetEndpointProfileUpdate
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AssetEndpointProfile,
+      AssetEndpointProfileProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;

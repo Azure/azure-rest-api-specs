@@ -60,15 +60,6 @@ model SchemaRegistryProperties {
 
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
-@doc("Defines the schema registry properties for update operation.")
-model SchemaRegistryUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    SchemaRegistry,
-    SchemaRegistryProperties
-  >;
-
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
 @parentResource(SchemaRegistry)
 @doc("Schema definition.")
 model Schema is ProxyResource<SchemaProperties> {
@@ -185,7 +176,13 @@ interface SchemaRegistries {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<SchemaRegistry, SchemaRegistryUpdate>;
+  update is ArmCustomPatchAsync<
+    SchemaRegistry,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      SchemaRegistry,
+      SchemaRegistryProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<SchemaRegistry>;
   listByResourceGroup is ArmResourceListByParent<SchemaRegistry>;
   listBySubscription is ArmListBySubscription<SchemaRegistry>;

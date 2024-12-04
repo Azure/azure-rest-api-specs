@@ -64,15 +64,6 @@ model DiscoveredAssetEndpointProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Defines the Discovered Asset Endpoint Profile properties for update operation.")
-@added(Versions.v2024_09_01_preview)
-@removed(Versions.v2024_11_01)
-model DiscoveredAssetEndpointProfileUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    DiscoveredAssetEndpointProfile,
-    DiscoveredAssetEndpointProfileProperties
-  >;
-
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
 @removed(Versions.v2024_11_01)
@@ -84,7 +75,10 @@ interface DiscoveredAssetEndpointProfiles {
   // since otherwise it extends the ARM TrackedResource type.
   update is ArmCustomPatchAsync<
     DiscoveredAssetEndpointProfile,
-    DiscoveredAssetEndpointProfileUpdate
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DiscoveredAssetEndpointProfile,
+      DiscoveredAssetEndpointProfileProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAssetEndpointProfile>;
   listByResourceGroup is ArmResourceListByParent<DiscoveredAssetEndpointProfile>;

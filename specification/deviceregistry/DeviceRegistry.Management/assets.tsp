@@ -142,13 +142,6 @@ model AssetProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Defines the asset properties for update operation.")
-model AssetUpdate
-  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-    Asset,
-    AssetProperties
-  >;
-
 @doc("Defines the dataset properties.")
 @added(Versions.v2024_09_01_preview)
 model Dataset {
@@ -383,7 +376,13 @@ interface Assets {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  update is ArmCustomPatchAsync<Asset, AssetUpdate>;
+  update is ArmCustomPatchAsync<
+    Asset,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Asset,
+      AssetProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
   listByResourceGroup is ArmResourceListByParent<Asset>;
   listBySubscription is ArmListBySubscription<Asset>;
