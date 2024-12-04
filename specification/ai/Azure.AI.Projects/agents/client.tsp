@@ -48,6 +48,7 @@ namespace Azure.AI.Projects.Agents {
     "InternalAzureFunction",
     "csharp"
   );
+  @@access(AzureFunctionBinding, Access.public);
 
   // SubmitToolOutputsAction: include .tool_calls directly rather than via an intermediate .details.
 
