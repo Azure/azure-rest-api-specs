@@ -408,7 +408,6 @@ function New-TypeSpecAPIViewTokens {
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProjectRelativePath))
       Write-Host $tokenDirectory
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
-      ls $typeSpecAPIViewArtifactsDirectory
 
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
