@@ -403,11 +403,12 @@ function New-TypeSpecAPIViewTokens {
   Write-Host "xxxxxxxxxxx"
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
-      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject)
+      $typeSpecProjectPathParts = $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, [string]::Join([IO.Path]::DirectorySeparatorChar, $typeSpecProjectPathParts[-$typeSpecProjectPathParts.IndexOf("specification")..(-1)]))
       Write-Host $tokenDirectory
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
       ls $typeSpecAPIViewArtifactsDirectory
-      
+
       # Generate New APIView Token using default tag on base branch
       git checkout $SourceCommitId
       Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
