@@ -56,7 +56,7 @@ suppressions:
     from: deviceupdate.json
     reason: Type will not be shared
     where: 
-      - $.definitions.Identity.properties.userAssignedIdentities.additionalProperties
+      - $.definitions.ManagedServiceIdentityUpdate.properties.userAssignedIdentities.additionalProperties
 ```
 
 ### Tag: package-2024-10-01-preview
