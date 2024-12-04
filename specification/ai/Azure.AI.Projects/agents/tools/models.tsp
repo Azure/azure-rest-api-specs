@@ -80,6 +80,16 @@ model AzureAISearchToolDefinition extends ToolDefinition {
   type: "azure_ai_search";
 }
 
+@doc("The input definition information for an OpenAPI tool as used to configure an agent.")
+model OpenApiToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'openapi'.")
+  type: "openapi";
+
+  @doc("The openapi function definition.")
+  openapi: OpenApiFunctionDefinition;
+}
+
+
 // Definition details: File Search
 
 /**
@@ -128,6 +138,68 @@ model FunctionDefinition {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the functions accepts, described as a JSON Schema object.")
   parameters: unknown;
+}
+
+// Definition details: OpenAPI
+
+@doc("The input definition information for an openapi function.")
+model OpenApiFunctionDefinition {
+  @doc("The name of the function to be called.")
+  name: string;
+
+  @doc("A description of what the function does, used by the model to choose when and how to call the function.")
+  description?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  @doc("The openapi function shape, described as a JSON Schema object.")
+  spec: unknown;
+
+  @doc("Open API authentication details")
+  auth: OpenApiAuthDetails;
+}
+
+@doc("authentication details for OpenApiFunctionDefinition")
+@discriminator("type")
+model OpenApiAuthDetails {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The type of authentication, must be anonymous/connection/managed_identity")
+  type: string;
+}
+
+@doc("Security details for OpenApi anonymous authentication")
+model OpenApiAnonymousAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'anonymous'.")
+  type: "anonymous";
+}
+
+@doc("Security details for OpenApi connection authentication")
+model OpenApiConnectionAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'connection'.")
+  type: "connection";
+
+  @doc("Connection auth security details")
+  security_scheme: OpenApiConnectionSecurityScheme;
+}
+
+@doc("Security details for OpenApi managed_identity authentication")
+model OpenApiManagedAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'managed_identity'.")
+  type: "managed_identity";
+
+  @doc("Connection auth security details")
+  security_scheme: OpenApiManagedSecurityScheme;
+}
+
+@doc("Security scheme for OpenApi managed_identity authentication")
+model OpenApiManagedSecurityScheme {
+  @doc("Authentication scope for managed_identity auth type")
+  audience: string;
+}
+
+@doc("Security scheme for OpenApi managed_identity authentication")
+model OpenApiConnectionSecurityScheme {
+  @doc("Connection id for Connection auth type")
+  connection_id: string;
 }
 
 //
