@@ -113,3 +113,32 @@ namespace SkillContext {
     @body addSourceRequest  : AddSourceRequest,
   ): NoContentResponse;
 }
+
+@route("/medeinaOpenAI")
+@summary("Operations for skills to interact with Open AI Client ")
+namespace OpenAIClient {
+  @post
+  @route("createChatCompletion")
+  @doc("Executes an Open AI Chat completion request")
+  op createChatCompletion(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request  : CreateChatCompletionRequest,
+  ): ChatCompletionResponse;
+
+  @post
+  @route("createCompletion")
+  @doc("Executes an OpenAI completion request")
+  op createCompletion(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request  : CreateCompletionRequest,
+  ): CompletionResponse;
+
+  @post
+  @route("CreateEmbedding")
+  @doc("Creates embeddings for the prompt messages based on the model chosen.")
+  op CreateEmbedding(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request  : CreateEmbeddingRequest,
+  ): EmbeddingResponse;
+  
+}

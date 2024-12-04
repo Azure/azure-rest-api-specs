@@ -26,9 +26,11 @@ https://api.medeina-dev.defender.microsoft.com).
 )
 @doc("""
 The Skillset Authoring API exposes endpoints allowing a skill to interact with the current session to perform actions such as accessing previous prompts/responses within the current session, 
-reading the inputs of the skill, invoking other skills, reporting progress of execution, returning results/errors, acquiring tokens to access other resources, and retrieving skill specific settings.
+reading the inputs of the skill, invoking other skills, reporting progress of execution, returning results/errors, acquiring tokens to access other resources, and retrieving skill specific settings. It also provides methods to interact with Open
+AI client to create chat completion and get embeddings.
 """)
 namespace SkillContext;
+namespace OpenAIClient;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum APIVersion {
