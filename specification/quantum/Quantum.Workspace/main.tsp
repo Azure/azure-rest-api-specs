@@ -11,7 +11,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/openapi3";
 import "@typespec/versioning";
 
 import "./common/versions.tsp";
