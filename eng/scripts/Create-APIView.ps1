@@ -211,9 +211,8 @@ function Invoke-TypeSpecAPIViewParser {
     $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
     Write-Host "Moving generated APIView Token file to '$apiViewTokensFilePath'"
     Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
-    return $readMeTag
   } catch {
-    LogError " Failed to generate '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'"
+    LogError " Failed to generate '$Type' APIView Tokens on '$ProjectPath' for '$resourceProvider', please check the detail log and make sure TypeSpec compiler version is the latest."
     throw
   } finally {
     if (Test-Path -Path $tempWorkingDirectoryPath) {
