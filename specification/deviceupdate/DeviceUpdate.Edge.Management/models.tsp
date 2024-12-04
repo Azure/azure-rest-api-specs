@@ -142,12 +142,12 @@ union ScopeType {
   string,
 
   /**
-   * Subscription
+   * Subscription scope
    */
   Subscription: "Subscription",
 
   /**
-   * Resource group
+   * Resource group scope
    */
   ResourceGroup: "ResourceGroup",
 }

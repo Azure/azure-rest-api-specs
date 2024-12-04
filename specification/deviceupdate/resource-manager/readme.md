@@ -49,6 +49,13 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
     reason: False positive. Provisioning state is read-only.
+  - code: UnsupportedPatchProperties
+    from: deviceupdate.json
+    reason: False positive. Location is read-only.
+  - code: AvoidAnonymousTypes
+    from: deviceupdate.json
+    reason: Type will not be shared
+    where: $.definitions.Identity.properties
 ```
 
 ### Tag: package-2024-10-01-preview
