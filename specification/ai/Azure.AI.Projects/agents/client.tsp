@@ -44,7 +44,7 @@ namespace Azure.AI.Projects.Agents {
     "InternalAzureFunctionDefinition",
     "csharp"
   );
-  @@clientName(AzureFunctionToolDefinition.AzureFunction,
+  @@clientName(AzureFunctionToolDefinition.azureFunction,
     "InternalAzureFunction",
     "csharp"
   );
