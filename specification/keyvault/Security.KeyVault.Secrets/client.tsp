@@ -8,7 +8,8 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
-@@usage(DeletionRecoveryLevel, Usage.output);
+// generate DeletionRecoveryLevel in JS
+@@usage(DeletionRecoveryLevel, Usage.output, "javascript");
 
 @@clientName(SecretProperties, "SecretP", "go");
 @@clientName(DeletedSecretBundle, "DeletedSecret", "go");
