@@ -437,18 +437,13 @@ model BaseCompletionResponse {
 	Created: utcDateTime;
 	Model: string;
 	Usage: Usage;
-	PromptFilterResults: Array<PromptAnnotation>;
+	PromptFilterResults: Array<unknown>;
 }
 
 model Usage {
 	PromptTokens: numeric;
 	CompletionTokens: numeric;
 	TotalTokens: numeric;
-}
-
-model PromptAnnotation {
-	PromptIndex: numeric;
-	ContentFilterResults: ContentFilterResults;
 }
 
 model ContentFilterResults {
