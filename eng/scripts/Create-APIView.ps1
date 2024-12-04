@@ -396,11 +396,6 @@ function New-TypeSpecAPIViewTokens {
 
   $typeSpecAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
 
-  Write-Host "xxxxxxxxxxx"
-  Write-Host $ArtiFactsStagingDirectory
-  Write-Host $APIViewArtifactsDirectoryName
-  Write-Host $typeSpecAPIViewArtifactsDirectory
-  Write-Host "xxxxxxxxxxx"
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
       $typeSpecProjectPathParts = $typeSpecProject.Split([IO.Path]::DirectorySeparatorChar)
