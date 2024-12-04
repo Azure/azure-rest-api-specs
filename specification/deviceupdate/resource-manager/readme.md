@@ -55,7 +55,8 @@ suppressions:
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
-    where: $.definitions.Identity.properties
+    where: 
+      - $.definitions.Identity.properties.userAssignedIdentities.additionalProperties
 ```
 
 ### Tag: package-2024-10-01-preview
