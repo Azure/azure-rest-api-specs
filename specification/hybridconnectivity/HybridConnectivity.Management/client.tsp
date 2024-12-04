@@ -53,6 +53,6 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "go");
 @@clientName(EndpointResources, "Endpoints", "go");
 
-@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmtClient", "python")
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmtClient", "python");
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "python");
 @@clientName(EndpointResources, "Endpoints", "python");
