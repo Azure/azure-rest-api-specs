@@ -1189,7 +1189,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   content?: string;
 
   /** WhatsApp message type */
-  messageType: string;
+  messageType?: string;
 
   /** The message channel type */
   channelType: AcsMessageChannelKind;
