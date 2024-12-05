@@ -33,9 +33,17 @@ jobs:
       #     script: |
       #       const action = require('./.github/actions/update-labels/action.js')
       #       await action({ github, context, core });
+      - name: Set color
+        id: color-selector
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+      - name: Get color
+        env:
+          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+        run: echo "The selected color is $SELECTED_COLOR"
 
-      - name: 获取 PR 信息
-        uses: actions/github-script@v6
+      - name: get GitHub pr info
+        uses: actions/github-script@v7
+        id: fetch-pr-info
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -46,21 +54,24 @@ jobs:
             console.log(`PR Number: ${prNumber}`);
             console.log(`PR Title: ${prTitle}`);
 
-            // 保存到环境变量
-            return { prNumber, prTitle };
-          result-encoding: string
-        id: fetch-pr-info
+            core.setOutput("prNumber", prNumber); // 显式设置输出
+            core.setOutput("prTitle", prTitle);  // 显式设置输出
 
-      - name: 保存到 GitHub 环境变量
+            return { prNumber, prTitle };
+
+          result-encoding: string
+
+      - name: save GitHub env
         run: |
           echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.prNumber }}" >> $GITHUB_ENV
           echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
 
-      - name: 测试打印环境变量
+      - name: test GitHub env
         run: |
+          echo "Pull Request Number:  ${{ steps.fetch-pr-info.outputs.prNumber }}"
+          echo "Pull Request Title: ${{ steps.fetch-pr-info.outputs.prTitle }}"
           echo "Pull Request Number: $PR_NUMBER"
           echo "Pull Request Title: $PR_TITLE"
-
           
       - name: test github-script
         uses: actions/github-script@v7
