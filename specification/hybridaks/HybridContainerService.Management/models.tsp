@@ -466,6 +466,7 @@ model SMBWitnessProfile extends WitnessProfile {
   /**
    * The password to access the SMB file share as the witness.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO: should be using @secret"
   @OpenAPI.extension("x-ms-secret", true)
   @visibility("create", "update")
   password?: string;
@@ -483,6 +484,7 @@ model AzureBlobWitnessProfile extends WitnessProfile {
   /**
    * The SAS token to access the Azure Blob storage as the witness.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO: should be using @secret"
   @OpenAPI.extension("x-ms-secret", true)
   @visibility("create", "update")
   sasToken?: string;
@@ -1545,9 +1547,8 @@ model LinuxProfile {
  * URI parameter for the connected cluster resource.
  */
 model ConnectedClusterResourceUriParameter {
-  @path
+  @path(#{ allowReserved: true })
   @doc("The fully qualified Azure Resource Manager identifier of the connected cluster resource.")
-  @OpenAPI.extension("x-ms-skip-url-encoding", true)
   connectedClusterResourceUri: string;
 }
 
@@ -1563,9 +1564,8 @@ alias ConnectedClusterResourceUriParameters = {
  * URI parameter for the custom location resource.
  */
 model CustomLocationResourceUriParameter {
-  @path
+  @path(#{ allowReserved: true })
   @doc("The fully qualified Azure Resource Manager identifier of the custom location resource.")
-  @OpenAPI.extension("x-ms-skip-url-encoding", true)
   customLocationResourceUri: string;
 }
 

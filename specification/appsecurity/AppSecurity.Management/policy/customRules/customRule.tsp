@@ -15,9 +15,18 @@ alias MinCustomRuleConditionsCount = 1;
 alias MaxCustomRuleConditionsCount = 10;
 alias RateLimitMinThreshold = 1;
 
+union CustomRuleType {
+  MatchBased: "MatchBased",
+  RateBased: "RateBased",
+  string,
+}
+
 @doc("Defines a custom rule")
 @discriminator("ruleType")
 model CustomRule {
+  @doc("Defines the rule type")
+  ruleType: CustomRuleType;
+
   @doc("The name of the rule")
   @minLength(MinCustomRuleNameLength)
   @maxLength(MaxCustomRuleNameLength)
@@ -48,13 +57,13 @@ model CustomRule {
 @doc("User defined rule to execute an action if conditions are met on an incoming request")
 model MatchCustomRule extends CustomRule {
   @doc("Defines the rule type")
-  ruleType: "MatchBased";
+  ruleType: CustomRuleType.MatchBased;
 }
 
 @doc("User defined rule that is triggered by the rate of incoming requests")
 model RateBasedCustomRule extends CustomRule {
   @doc("Defines the rule type")
-  ruleType: "RateBased";
+  ruleType: CustomRuleType.RateBased;
 
   @doc("Configures a rate limit mechanism for the rule")
   rateLimit: RateLimit;
@@ -62,7 +71,7 @@ model RateBasedCustomRule extends CustomRule {
 
 @doc("Describes the rate limit configuration of a rate limit custom rule")
 model RateLimit {
-  @doc("The time duration for which the rate limit threshold is enforced. Default value is 1 minute")
+  @doc("The time duration for which the rate limit threshold is enforced. Default value is 1 minute.")
   durationInMinutes: DurationInMinutes = DurationInMinutes.One;
 
   @doc("If the total number of requests exceeds this threshold during a rate limit duration, the rate limit action will be invoked")
@@ -74,19 +83,23 @@ model RateLimit {
 }
 
 @doc("Defines the available grouping options for rate limiting")
-enum RateLimitGroupByType {
+union RateLimitGroupByType {
+  string,
+
   @doc("Grouping based on client address")
-  ClientAddr,
+  ClientAddr: "ClientAddr",
 
   @doc("Grouping is based on the geographic location of the request")
-  GeoLocation,
+  GeoLocation: "GeoLocation",
 
   @doc("No grouping is being done. Rate limit is global")
-  None,
+  None: "None",
 }
 
-@doc("Duration in minutes")
-enum DurationInMinutes {
+@doc("Duration over which rate limit policy will be applied, for rate based rules.")
+union DurationInMinutes {
+  int32,
+
   @doc("One minute")
   One: 1,
 

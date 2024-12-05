@@ -3807,7 +3807,7 @@
     },
     "DeviceIdentity": {
       "type": "object",
-      "description": "The backing AAD identity for the device used for authentication to other services.",
+      "description": "The backing Microsoft Entra ID for the device used for authentication to other services.",
       "properties": {
         "principalId": {
           "type": "string",
@@ -3816,7 +3816,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "Tenant id for the AAD tenant.",
+          "description": "Tenant id for the Microsoft Entra ID tenant.",
           "readOnly": true
         }
       }
@@ -3853,7 +3853,7 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD.",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
           "default": true
         },
         "externalDeviceId": {
@@ -3874,7 +3874,7 @@
         },
         "deviceGroupId": {
           "type": "string",
-          "description": "The AAD group the device is a member of."
+          "description": "The Microsoft Entra ID group the device is a member of."
         },
         "manufacturer": {
           "type": "string",
@@ -3929,12 +3929,12 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with AAD.",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
           "default": true
         },
         "deviceGroupId": {
           "type": "string",
-          "description": "The AAD group the device is a member of."
+          "description": "The Microsoft Entra ID group the device is a member of."
         },
         "endpoints": {
           "$ref": "#/definitions/DeviceEndpointsUpdate",

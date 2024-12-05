@@ -338,6 +338,7 @@ model PatchableDashboard {
   @doc("The shared dashboard properties.")
   properties?: DashboardProperties;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -381,6 +382,7 @@ model BladeReferenceWithContextPane {
   @doc("The extension name of the blade to open.")
   extension?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For matching existing APIs on the service model."
   @doc("The parameters to pass to the blade.")
   parameters?: {};
 
@@ -500,6 +502,7 @@ model QueryTileVisualization {
   @doc("Enumeration of supported visualization types.")
   type?: VisualizationType;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For matching existing APIs on the service model."
   @doc("Options for Query Tile visualizations.")
   options?: {};
 }

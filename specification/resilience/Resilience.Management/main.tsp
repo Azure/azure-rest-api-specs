@@ -26,6 +26,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-06-01-preview")
   v2024_06_01_preview: "2024-06-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2024-11-01-preview")
+  v2024_11_01_preview: "2024-11-01-preview",
 }
 
 alias ProviderName = "Microsoft.Resilience";
@@ -52,7 +58,17 @@ model ResilienceProperties {
   @visibility("read")
   eventType: ArnEventType;
 
-  @doc("Resilience evaluation for the resource and its dependencies.")
+  @added(Versions.v2024_11_01_preview)
+  @doc("Tenant ID of the resource(s) being evaluated.")
+  @visibility("read")
+  tenantId: string;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("Resilience state of the resource after evaluating all its related resources' resilience states.")
+  @visibility("read")
+  resilienceState: ResilienceState;
+
+  @doc("Resilience evaluation for the resource and all its related resources.")
   @visibility("read")
   resilienceProfiles: ResourceResilienceProfile[];
 
@@ -70,6 +86,7 @@ model ResourceResilienceProfile {
   @doc("Resource Type of the resource being evaluated.")
   type: string;
 
+  @visibility("read", "create")
   @doc("Location of the resource being evaluated.")
   location: string;
 

@@ -284,6 +284,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "GenericGenevaActionsProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -389,8 +393,8 @@
           "type": "string",
           "description": "The input mode for geneva action (single/batch)"
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "parameters": {
@@ -403,7 +407,12 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/GenericGenevaActionsProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "genericGenevaActionsOpResult": {
+          "type": "string",
+          "description": "Resource event argument result; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },

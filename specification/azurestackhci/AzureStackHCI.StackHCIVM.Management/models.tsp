@@ -463,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -534,6 +546,10 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
+
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -557,6 +573,17 @@ model GalleryImageProperties {
   ]>;
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
+}
+
 @doc("This is the gallery image definition identifier.")
 model GalleryImageIdentifier {
   @doc("The name of the gallery image definition publisher.")
@@ -574,8 +601,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -607,7 +635,6 @@ model GalleryOSDiskImage {
 }
 
 @doc("The observed state of gallery images")
-@extension("x-ms-client-flatten", true)
 model GalleryImageStatus {
   @doc("GalleryImage provisioning error code")
   errorCode?: string;
@@ -686,8 +713,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -738,8 +766,9 @@ model RouteTable {
   @visibility("read")
   type?: string;
 
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route table.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
 }
 
@@ -752,8 +781,9 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route.")
-  @extension("x-ms-client-flatten", true)
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -817,6 +847,34 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility("read")
+  @added(Versions.v2024_10_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
@@ -875,15 +933,11 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
-
-  @added(Versions.v2024_07_15_preview)
-  @doc("Boolean indicating whether this is a local network interface or if one should be created.")
-  createFromLocal?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "deprecated" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
-@extension("x-ms-client-flatten", true)
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
@@ -923,8 +977,8 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of network interfaces")
-@extension("x-ms-client-flatten", true)
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
   errorCode?: string;
@@ -945,8 +999,8 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
-@extension("x-ms-client-flatten", true)
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
   errorCode?: string;
@@ -972,6 +1026,38 @@ model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: LogicalNetworkUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties under the logical network resource")
+model LogicalNetworkUpdateProperties {
+  @doc("Subnet - list of subnets under the logical network")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  subnets?: SubnetUpdate[];
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Subnet resource")
+model SubnetUpdate {
+  #suppress "deprecated" "Legacy flattening"
+  @doc("Properties of the subnet.")
+  @Azure.ClientGenerator.Core.flattenProperty
+  properties?: SubnetUpdateProperties;
+
+  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  name?: string;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties of the subnet.")
+model SubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1008,8 +1094,8 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
-@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
   errorCode?: string;
@@ -1055,6 +1141,17 @@ model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: NetworkInterfacesUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Defines the resource properties for the update.")
+model NetworkInterfacesUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Tags object for patch operations.")
@@ -1078,8 +1175,8 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of storage containers")
-@extension("x-ms-client-flatten", true)
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
   errorCode?: string;
@@ -1138,14 +1235,6 @@ model VirtualHardDiskProperties {
   @secret
   downloadUrl?: string;
 
-  @added(Versions.v2024_07_15_preview)
-  @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
-  createFromLocal?: boolean = false;
-
-  @added(Versions.v2024_07_15_preview)
-  @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
-  osType?: OperatingSystemTypes;
-
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
@@ -1169,8 +1258,8 @@ model VirtualHardDiskProperties {
   status?: VirtualHardDiskStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
-@extension("x-ms-client-flatten", true)
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
   errorCode?: string;
@@ -1205,6 +1294,14 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1216,6 +1313,18 @@ model VirtualHardDiskUploadStatus {
 
   @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
   status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
 
 @doc("The virtual hard disk resource patch definition.")
@@ -1288,10 +1397,6 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
-
-  @added(Versions.v2024_07_15_preview)
-  @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
-  createFromLocal?: boolean = false;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1542,8 +1647,8 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
-@extension("x-ms-client-flatten", true)
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
   errorCode?: string;

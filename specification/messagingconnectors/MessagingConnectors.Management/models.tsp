@@ -4,20 +4,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
-
-@doc("Microsoft.MessagingConnectors Resource Provider management API.")
-@armProviderNamespace
-@service({
-  title: "Microsoft.MessagingConnectors management service",
-})
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
 @lroStatus
@@ -124,6 +113,21 @@ union ConnectorType {
   @doc("mysql source connector.")
   MySqlSource: "MySqlSource",
 
+  @doc("servicebus source connector.")
+  AzureServiceBusSource: "AzureServiceBusSource",
+
+  @doc("hana database source connector.")
+  @added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+  HanaDatabaseSource: "HanaDatabaseSource",
+
+  @doc("Azure Data Explorer source connector.")
+  @added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+  AzureDataExplorerSource: "AzureDataExplorerSource",
+
+  @doc("mqtt source connector.")
+  @added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+  MqttSource: "MqttSource",
+
   string,
 }
 
@@ -207,6 +211,9 @@ model EventHubConfig {
 
 @doc("Source data format Types")
 union SourceDataFormatTypes {
+  @doc("Do not use SourceDataFormat feature.")
+  None: "None",
+
   @doc("JSON format")
   JSON: "JSON",
 
@@ -278,6 +285,107 @@ model CsvSourceDataFormat extends SourceDataFormat {
   textCharset: string;
 }
 
+@doc("Base class for Converter config")
+@discriminator("type")
+model ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType;
+}
+
+@doc("CsvConverter config")
+model CsvConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.CsvConverter;
+}
+
+@doc("AvroConverter config")
+model AvroConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.AvroConverter;
+}
+
+@doc("StringConverter config")
+model StringConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.StringConverter;
+}
+
+@doc("ByteArrayConverter config")
+model ByteArrayConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.ByteArrayConverter;
+}
+
+@doc("Json Decimal Format configuration")
+union JsonDecimalFormat {
+  @doc("Type of Base64.")
+  Base64: "Base64",
+
+  @doc("Type of Numeric.")
+  Numeric: "Numeric",
+
+  string,
+}
+
+@doc("JsonConverter config")
+model JsonConverterConfig extends ConverterConfig {
+  @doc("Type of converter.")
+  type: ConverterType.JsonConverter;
+
+  @doc("Whether schemas enabled.")
+  schemasEnabled?: boolean;
+
+  @doc("Format for Decimal type.")
+  decimalFormat?: JsonDecimalFormat;
+}
+
+@doc("CloudEvents types")
+union CloudEventsTypes {
+  @doc("Do not use CloudEventsConfig")
+  None: "None",
+
+  @doc("CatalogCloudEventsConfig")
+  Catalog: "Catalog",
+
+  string,
+}
+
+@doc("Cloud events config")
+@discriminator("type")
+model CloudEventsConfig {
+  @doc("Type of CloudEventsConfig.")
+  type: CloudEventsTypes;
+}
+
+@doc("Catalog schema id config")
+model CatalogSchemaId {
+  @doc("SchemaGroup id.")
+  schemaGroupId: string;
+
+  @doc("Schema id.")
+  schemaId: string;
+
+  @doc("Endpoint for catalog.")
+  endpoint: string;
+}
+
+@doc("Catalog cloud events transform config.")
+model CatalogCloudEventsConfig extends CloudEventsConfig {
+  @doc("Type of CatalogCloudEventsConfig.")
+  type: CloudEventsTypes.Catalog;
+
+  @doc("Whether auto-register new schemas.")
+  autoRegisterSchemas: boolean;
+
+  @doc("Catalog schemaIds.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  catalogSchemaIds: CatalogSchemaId[];
+
+  @doc("access token.")
+  @secret
+  accessToken: string;
+}
+
 @doc("Properties of one arm resource")
 model ResourceProperties {
   @doc("Properties of one Connector")
@@ -297,6 +405,9 @@ model ConnectorProperties {
   @doc("Type of the Connector.")
   valueConverter: ConverterType;
 
+  @doc("Type of the Connector.")
+  converterConfig: ConverterConfig;
+
   @doc("Direction of the Connector.")
   connectorDirection?: Direction;
 
@@ -308,6 +419,9 @@ model ConnectorProperties {
 
   @doc("Data format of the data source")
   sourceDataFormat?: SourceDataFormat;
+
+  @doc("Cloud events config")
+  cloudEventsConfig?: CloudEventsConfig;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -403,6 +517,26 @@ model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
   accountKey: string;
 }
 
+@doc("StartPosition types for Kinesis")
+union KinesisStartPositionType {
+  @doc("TrimHorizon type")
+  TrimHorizon: "TrimHorizon",
+
+  @doc("Latest type")
+  Latest: "Latest",
+
+  @doc("AtSequenceNumber type")
+  AtSequenceNumber: "AtSequenceNumber",
+
+  @doc("AfterSequenceNumber type")
+  AfterSequenceNumber: "AfterSequenceNumber",
+
+  @doc("AtTimestamp type")
+  AtTimestamp: "AtTimestamp",
+
+  string,
+}
+
 @doc("Configuration for KinesisSourceConnector")
 model KinesisSourceConnectorProperties extends ConnectorProperties {
   @doc("Type of KinesisSourceConnector")
@@ -423,6 +557,15 @@ model KinesisSourceConnectorProperties extends ConnectorProperties {
 
   @doc("StreamName in AWS Kinesis Server.")
   awsKinesisStreamName: string;
+
+  @doc("startPosition supported by Kinesis.")
+  startPosition: KinesisStartPositionType;
+
+  @doc("startSequence for startPosition.")
+  startSequence?: string;
+
+  @doc("startTime for startPosition.")
+  startTime?: utcDateTime;
 }
 
 @doc("Configuration for PostgreSqlSourceConnector")
@@ -513,6 +656,212 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+
+  @doc("Snapshot Locking Mode")
+  @added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+  snapshotLockingMode?: SnapshotLockingModeForMysql;
+}
+
+@doc("Type of AzureServiceBusType")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+union SnapshotLockingModeForMysql {
+  @doc("Minimal type")
+  Minimal: "Minimal",
+
+  @doc("Extended type")
+  Extended: "Extended",
+
+  @doc("None type")
+  None: "None",
+
+  string,
+}
+
+@doc("Type of AzureServiceBusType")
+union AzureServiceBusType {
+  @doc("Topic type")
+  Topic: "Topic",
+
+  @doc("Queue type")
+  Queue: "Queue",
+
+  string,
+}
+
+@doc("Configuration for AzureServiceBusSourceConnector")
+model AzureServiceBusSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of AzureServiceBusSource")
+  connectorType: ConnectorType.AzureServiceBusSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Name for topic Or Queue.")
+  topicOrQueueName: string;
+
+  @doc("Name for subscription.")
+  subscriptionName?: string;
+
+  @doc("connectionString for AzureServiceBusSource.")
+  connectionString: string;
+
+  @doc("AzureServiceBusSource type.")
+  serviceBusType: AzureServiceBusType;
+}
+
+@doc("Configuration for HanaDatabaseSourceConnector")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+model HanaDatabaseSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of HanaDatabaseSourceConnector")
+  connectorType: ConnectorType.HanaDatabaseSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Url of HANA database.")
+  connectionUrl: string;
+
+  @doc("User for HANA database.")
+  userName: string;
+
+  @doc("Password for HANA database.")
+  @secret
+  password: string;
+
+  @doc("The query mode in which data should be fetched from SAP DB table.")
+  queryMode?: HanaQueryMode;
+
+  @doc("HANA schema to source data from, default as the HANA username..")
+  schema?: string;
+
+  @doc("Table name for HANA database.")
+  table?: string;
+
+  @doc("The query statement when queryMode is set to query.")
+  query?: string;
+
+  @doc("Max rows to include in a single batch call. Should be an integer.")
+  batch?: int32;
+
+  @doc("The poll interval at which the data should be fetched from SAP DB table.")
+  interval?: int32;
+
+  @doc("The number of topic partitions that the Source connector can use to publish the data.")
+  partitions?: int32;
+
+  @doc("Whether the DECIMAL column types are mapped to the default decimal type or one of the primitive types.")
+  numericMapping?: HanaNumericMapping;
+
+  @doc("The mode in which data should be fetched from SAP DB table.")
+  mode?: HanaMode;
+
+  @doc("In order to fetch data from a SAP DB table when mode is set to incrementing, an incremental (or auto-incremental) column needs to be provided.")
+  incrementingColumn?: string;
+}
+
+@doc("Type of HanaQueryMode")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+union HanaQueryMode {
+  @doc("Table type")
+  Table: "Table",
+
+  @doc("Query type")
+  Query: "Query",
+
+  string,
+}
+
+@doc("Type of HanaNumericMapping")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+union HanaNumericMapping {
+  @doc("Table type")
+  None: "None",
+
+  @doc("Query type")
+  BestFit: "BestFit",
+
+  @doc("BestFitEagerDouble type")
+  BestFitEagerDouble: "BestFitEagerDouble",
+
+  string,
+}
+
+@doc("Type of HanaNumericMapping")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+union HanaMode {
+  @doc("Bulk mode")
+  Bulk: "Bulk",
+
+  @doc("Incrementing mode")
+  Incrementing: "Incrementing",
+
+  string,
+}
+
+@doc("Configuration for AzureDataExplorerSourceConnector")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+model AzureDataExplorerSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of AzureDataExplorerSourceConnector")
+  connectorType: ConnectorType.AzureDataExplorerSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Url of AzureDataExplorer cluster.")
+  clusterUrl: string;
+
+  @doc("Database name for AzureDataExplorer.")
+  database: string;
+
+  @doc("AzureDataExplorer table names use commas to separate multiple tables.")
+  tableNames: string;
+
+  @doc("The uniquely identifies your application in the Microsoft identity platform.")
+  applicationClientId: string;
+
+  @doc("A secret string that the application uses to prove its identity when requesting a token.")
+  @secret
+  applicationSecret: string;
+
+  @doc("AAD tenant Id GUID or microsoft.com")
+  aadAuthorityId: string;
+}
+
+@doc("Configuration for MqttSourceConnector")
+@added(Microsoft.MessagingConnectors.Versions.v2024_11_01_preview)
+model MqttSourceConnectorProperties extends ConnectorProperties {
+  @doc("Type of MqttSourceConnector")
+  connectorType: ConnectorType.MqttSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Mqtt server version.")
+  serverVersion: MqttVersion;
+
+  @doc("Topic to subscribe to.")
+  topic: string;
+
+  @doc("URL of the broker where to establish the connection.")
+  brokerUrl: string;
+
+  @doc("Username to use when connecting to the MQTT v5 compliant broker.")
+  username?: string;
+
+  @doc("Password to use when connecting to the MQTT v5 compliant broker.")
+  @secret
+  password?: string;
+}
+
+@doc("Version for Mqtt server")
+union MqttVersion {
+  @doc("Mqtt v5")
+  V5: "V5",
+
+  @doc("Mqtt v3 and below")
+  V3AndBelow: "V3AndBelow",
+
+  string,
 }
 
 @doc("Type of DataRange")

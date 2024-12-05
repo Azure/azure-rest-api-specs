@@ -1,0 +1,1178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WindowsImageBuilder",
+    "version": "2024-08-22-preview",
+    "description": "Windows Image Builder Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "WindowsImages"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.WindowsImageBuilder/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List of Operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsImageBuilder/windowsImages": {
+      "get": {
+        "operationId": "WindowsImages_List",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Gets information about the  images associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Windows Images list": {
+            "$ref": "./examples/ListWindowsImages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsImageBuilder/windowsImages": {
+      "get": {
+        "operationId": "WindowsImages_ListByResourceGroup",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Gets information about the  images associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Windows Images list by Rg": {
+            "$ref": "./examples/ListWindowsImagesByRg.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsImageBuilder/windowsImages/{imageName}": {
+      "get": {
+        "operationId": "WindowsImages_Get",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Get information about a image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the windows image ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsImage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Windows Image": {
+            "$ref": "./examples/GetWindowsImage.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WindowsImages_Create",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Request to initiate SMF media creation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the windows image ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to Create WindowsImage operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WindowsImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WindowsImage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WindowsImage"
+            }
+          },
+          "201": {
+            "description": "Resource 'WindowsImage' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WindowsImage"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Windows Image": {
+            "$ref": "./examples/CreateWindowsImage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "WindowsImages_Update",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Update the tags for the windows Image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the windows image ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Additional parameters for Windows Image update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WindowsImageTagUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsImage"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Windows Image Tag": {
+            "$ref": "./examples/UpdateWindowsImageTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WindowsImages_Delete",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Delete a Windows image",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the windows image ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Windows Image": {
+            "$ref": "./examples/DeleteWindowsImage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsImageBuilder/windowsImages/{imageName}/cancel": {
+      "post": {
+        "operationId": "WindowsImages_Cancel",
+        "tags": [
+          "WindowsImages"
+        ],
+        "description": "Cancel the long running image build",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the windows image ",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel Windows Image": {
+            "$ref": "./examples/CancelWindowsImage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "MediaBuildError": {
+      "type": "string",
+      "description": "Error handling behavior upon build failure",
+      "enum": [
+        "OnCreation",
+        "Validation",
+        "Publishing"
+      ],
+      "x-ms-enum": {
+        "name": "MediaBuildError",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OnCreation",
+            "value": "OnCreation",
+            "description": "Error in media creation"
+          },
+          {
+            "name": "Validation",
+            "value": "Validation",
+            "description": "Error in media validation"
+          },
+          {
+            "name": "Publishing",
+            "value": "Publishing",
+            "description": "Error in media publishing"
+          }
+        ]
+      }
+    },
+    "ProvisioningError": {
+      "type": "object",
+      "description": "Describes the error happened when create or update a image",
+      "properties": {
+        "provisioningErrorCode": {
+          "$ref": "#/definitions/ProvisioningErrorCode",
+          "description": "Error code of the provisioning failure"
+        },
+        "message": {
+          "type": "string",
+          "description": "Verbose error message about the provisioning failure"
+        }
+      }
+    },
+    "ProvisioningErrorCode": {
+      "type": "string",
+      "description": "Error code of the provisioning failure",
+      "enum": [
+        "BadSourceType",
+        "BadManagedImageSource",
+        "BadSharedImageVersionSource",
+        "BadCustomizerType",
+        "UnsupportedCustomizerType",
+        "NoCustomizerScript",
+        "BadValidatorType",
+        "UnsupportedValidatorType",
+        "NoValidatorScript",
+        "BadDistributeType",
+        "BadSharedImageDistribute",
+        "ServerError",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BadSourceType",
+            "value": "BadSourceType",
+            "description": "ProvisioningError BadSourceType"
+          },
+          {
+            "name": "BadManagedImageSource",
+            "value": "BadManagedImageSource",
+            "description": "ProvisioningError BadManagedImageSource"
+          },
+          {
+            "name": "BadSharedImageVersionSource",
+            "value": "BadSharedImageVersionSource",
+            "description": "ProvisioningError BadSharedImageVersionSource"
+          },
+          {
+            "name": "BadCustomizerType",
+            "value": "BadCustomizerType",
+            "description": "ProvisioningError BadCustomizerType"
+          },
+          {
+            "name": "UnsupportedCustomizerType",
+            "value": "UnsupportedCustomizerType",
+            "description": "ProvisioningError UnsupportedCustomizerType"
+          },
+          {
+            "name": "NoCustomizerScript",
+            "value": "NoCustomizerScript",
+            "description": "ProvisioningError NoCustomizerScript"
+          },
+          {
+            "name": "BadValidatorType",
+            "value": "BadValidatorType",
+            "description": "ProvisioningError  BadValidatorType"
+          },
+          {
+            "name": "UnsupportedValidatorType",
+            "value": "UnsupportedValidatorType",
+            "description": "ProvisioningError UnsupportedValidatorType"
+          },
+          {
+            "name": "NoValidatorScript",
+            "value": "NoValidatorScript",
+            "description": "ProvisioningError NoValidatorScript"
+          },
+          {
+            "name": "BadDistributeType",
+            "value": "BadDistributeType",
+            "description": "ProvisioningError BadDistributeType"
+          },
+          {
+            "name": "BadSharedImageDistribute",
+            "value": "BadSharedImageDistribute",
+            "description": "ProvisioningError BadSharedImageDistribute"
+          },
+          {
+            "name": "ServerError",
+            "value": "ServerError",
+            "description": "ProvisioningError ServerError"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "ProvisioningError Other"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource provisioning succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource provisioning failed"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource provisioning was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "description": "Specifies the storage account type to be used to store the Azure Compute Gallery image version in.",
+      "enum": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard locally redundant storage"
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "Standard  Zone-Redundant storage"
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium locally redundant storage"
+          }
+        ]
+      }
+    },
+    "TargetRegion": {
+      "type": "object",
+      "description": "Describes the target region information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas of the Image Version to be created in this region. Omit to use the default (1).",
+          "default": 1,
+          "minimum": 1
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "description": "Specifies the storage account type to be used to store the image in this region. Omit to use the default (Standard_LRS)."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "WindowsImage": {
+      "type": "object",
+      "description": "WindowsImage template is an ARM resource managed by Microsoft.WindowsImageBuilder provider",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WindowsImageProperties",
+          "description": "The properties of the windows image"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WindowsImageCustomizer": {
+      "type": "object",
+      "description": "Describes a unit of image customization",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WindowsImageCustomizerType",
+          "description": "type of customization"
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly Name to provide context on what this customization step does"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "WindowsImageCustomizerType": {
+      "type": "string",
+      "description": "The type of customization available for windows image",
+      "enum": [
+        "Shell",
+        "WindowsRestart",
+        "WindowsUpdate",
+        "PowerShell",
+        "File"
+      ],
+      "x-ms-enum": {
+        "name": "WindowsImageCustomizerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Shell",
+            "value": "Shell",
+            "description": "Shell customization"
+          },
+          {
+            "name": "WindowsRestart",
+            "value": "WindowsRestart",
+            "description": "WindowsRestart customization"
+          },
+          {
+            "name": "WindowsUpdate",
+            "value": "WindowsUpdate",
+            "description": "WindowsUpdate customization"
+          },
+          {
+            "name": "PowerShell",
+            "value": "PowerShell",
+            "description": "PowerShell customization"
+          },
+          {
+            "name": "File",
+            "value": "File",
+            "description": "File customization"
+          }
+        ]
+      }
+    },
+    "WindowsImageDistributor": {
+      "type": "object",
+      "description": "Generic distribution object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of distribution."
+        },
+        "galleryImageId": {
+          "type": "string",
+          "description": "resource ID"
+        },
+        "runOutputName": {
+          "type": "string",
+          "description": "The name to be used for the associated RunOutput.",
+          "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+        },
+        "artifactTags": {
+          "type": "object",
+          "description": "Tags that will be applied to the artifact once it has been created/updated by the distributor.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetRegions": {
+          "type": "array",
+          "description": "The target regions where the distributed Image Version is going to be replicated to. This object supersedes replicationRegions and can be specified only if replicationRegions is not specified.",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "type",
+        "galleryImageId",
+        "runOutputName"
+      ]
+    },
+    "WindowsImageFileCustomizer": {
+      "type": "object",
+      "description": "Uploads files to VMs (Linux, Windows). Corresponds to Packer file provisioner",
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "The URI of the file to be uploaded for customizing the VM. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the file provided in the sourceUri field above",
+          "default": ""
+        },
+        "destination": {
+          "type": "string",
+          "description": "The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowsImageCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "File"
+    },
+    "WindowsImageIdentity": {
+      "type": "object",
+      "description": "Identity for the  windows image.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WindowsResourceIdentityType",
+          "description": "The type of identity used for the windows image. The type 'None' will remove any identities from the windows image ."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "WindowsImageListResult": {
+      "type": "object",
+      "description": "The response of a WindowsImage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WindowsImage items on this page",
+          "items": {
+            "$ref": "#/definitions/WindowsImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WindowsImagePowerShellCustomizer": {
+      "type": "object",
+      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the power shell script provided in the scriptUri field above",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runElevated": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges"
+        },
+        "runAsSystem": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true."
+        },
+        "validExitCodes": {
+          "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowsImageCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "PowerShell"
+    },
+    "WindowsImageProperties": {
+      "type": "object",
+      "description": "Describes the properties of a windows image.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/WindowsImageSource",
+          "description": "Specifies the properties used to describe the source image."
+        },
+        "customize": {
+          "type": "array",
+          "description": "Specifies the properties used to describe the customization steps of the image, like Image source etc",
+          "items": {
+            "$ref": "#/definitions/WindowsImageCustomizer"
+          },
+          "x-ms-identifiers": []
+        },
+        "distribute": {
+          "type": "array",
+          "description": "The distribution targets where the image output needs to go to.",
+          "items": {
+            "$ref": "#/definitions/WindowsImageDistributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorHandling": {
+          "$ref": "#/definitions/MediaBuildError",
+          "description": "Error handling options upon a build failure"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        },
+        "provisioningError": {
+          "$ref": "#/definitions/ProvisioningError",
+          "description": "Provisioning error, if any",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "source",
+        "distribute"
+      ]
+    },
+    "WindowsImageRestartCustomizer": {
+      "type": "object",
+      "description": "Reboots a VM and waits for it to come back online (Windows). Corresponds to Packer windows-restart provisioner",
+      "properties": {
+        "restartCommand": {
+          "type": "string",
+          "description": "Command to execute the restart [Default: 'shutdown /r /f /t 0 /c \"packer restart\"']"
+        },
+        "restartCheckCommand": {
+          "type": "string",
+          "description": "Command to check if restart succeeded [Default: '']"
+        },
+        "restartTimeout": {
+          "type": "string",
+          "description": "Restart timeout specified as a string of magnitude and unit, e.g. '5m' (5 minutes) or '2h' (2 hours) [Default: '5m']"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowsImageCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "WindowsRestart"
+    },
+    "WindowsImageShellCustomizer": {
+      "type": "object",
+      "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the shell script provided in the scriptUri field",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowsImageCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "Shell"
+    },
+    "WindowsImageSource": {
+      "type": "object",
+      "description": "Describes a windows image source for building, customizing and distributing",
+      "properties": {
+        "os": {
+          "type": "string",
+          "description": "Name of OS"
+        },
+        "edition": {
+          "type": "string",
+          "description": "Name of edition"
+        },
+        "arch": {
+          "type": "string",
+          "description": "Architecture value"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language value"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size value"
+        },
+        "generation": {
+          "type": "string",
+          "description": "Generation value"
+        },
+        "trigger": {
+          "type": "boolean",
+          "description": "set trigger"
+        },
+        "type": {
+          "type": "string",
+          "description": "type of image"
+        }
+      },
+      "required": [
+        "os",
+        "edition",
+        "arch",
+        "language",
+        "size",
+        "generation",
+        "trigger",
+        "type"
+      ]
+    },
+    "WindowsImageTagUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating a Windows image.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/WindowsImageIdentity",
+          "description": "The identity of the  windows image configured."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The user-specified tags associated with the windows image.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WindowsImageTagUpdateParametersProperties",
+          "description": "Parameters for updating a Windows image."
+        }
+      }
+    },
+    "WindowsImageTagUpdateParametersProperties": {
+      "type": "object",
+      "description": "Parameters for updating a Windows image.",
+      "properties": {
+        "distribute": {
+          "type": "array",
+          "description": "The distribution targets where the image output needs to go to.",
+          "items": {
+            "$ref": "#/definitions/WindowsImageDistributor"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "WindowsResourceIdentityType": {
+      "type": "string",
+      "description": "The type of identity used for the windows image. The type 'None' will remove any identities from the image",
+      "enum": [
+        "UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "WindowsResourceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No identity"
+          }
+        ]
+      }
+    },
+    "WindowsUpdateCustomizer": {
+      "type": "object",
+      "description": "Installs Windows Updates. Corresponds to Packer Windows Update Provisioner (https://github.com/rgl/packer-provisioner-windows-update)",
+      "properties": {
+        "searchCriteria": {
+          "type": "string",
+          "description": "Criteria to search updates. Omit or specify empty string to use the default (search all). Refer to above link for examples and detailed description of this field."
+        },
+        "filters": {
+          "type": "array",
+          "description": "Array of filters to select updates to apply. Omit or specify empty array to use the default (no filter). Refer to above link for examples and detailed description of this field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowsImageCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "WindowsUpdate"
+    }
+  },
+  "parameters": {}
+}

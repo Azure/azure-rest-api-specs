@@ -2,15 +2,18 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ToolchainOrchestrator;
 
 @doc("The properties of an InstanceVersion resource.")
+@removed(Versions.v2024_08_01_preview)
 model InstanceVersionProperties {
   @doc("The status of the last operation.")
   @visibility("read")
@@ -43,6 +46,7 @@ model InstanceVersionProperties {
 @doc("An InstanceVersion resource belonging to an Instance resource.")
 @resource("versions")
 @parentResource(Instance)
+@removed(Versions.v2024_08_01_preview)
 model InstanceVersion is TrackedResource<InstanceVersionProperties> {
   @doc("Name of InstanceVersion resource.")
   @maxLength(90)
@@ -57,10 +61,11 @@ model InstanceVersion is TrackedResource<InstanceVersionProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
-  extendedLocation: ExtendedLocation;
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
+@removed(Versions.v2024_08_01_preview)
 interface InstanceVersions {
   @doc("Returns details of specified InstanceVersion resource.")
   get is Azure.ResourceManager.ArmResourceRead<InstanceVersion>;
