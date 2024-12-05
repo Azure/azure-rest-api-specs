@@ -9236,7 +9236,7 @@
         "kind": {
           "type": "string",
           "readOnly": true,
-          "description": "The kind of Gateway.",
+          "description": "The kind of workspace.",
           "enum": [
             "KubernetesManaged",
             "Default"
@@ -9247,25 +9247,13 @@
             "values": [
               {
                 "value": "KubernetesManaged",
-                "description": "Gateway managed by Kubernetes resources."
+                "description": "Configuration of traffic routes in workspace is managed by Kubernetes resources."
               },
               {
                 "value": "Default",
-                "description": "Default kind of gateway."
+                "description": "Configuration of APIs in workspace is managed through Azure Resource Manager (ARM)."
               }
             ]
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state.",
-          "enum": [
-            "Created",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": false
           }
         },
         "configurationApi": {
@@ -9274,7 +9262,8 @@
             "properties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/ConfigurationApiProperties",
-              "description": "Configuration API properties."
+              "description": "Configuration API properties.",
+              "readOnly": true
             }
           }
         }
