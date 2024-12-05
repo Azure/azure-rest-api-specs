@@ -21,7 +21,7 @@ namespace Azure.Speech.SpeechToText.Fast;
 @post
 @route("/transcriptions:transcribe")
 @doc("Transcribes the provided audio stream.")
-op transcribeTranscription(
+op transcribe(
   @header @doc("request content type") contentType: "multipart/form-data",
 
   @query("api-version")
