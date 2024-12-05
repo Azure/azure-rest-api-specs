@@ -29,9 +29,7 @@ model SASTokenParameter {
   token?: string;
 
   /**
-   * Indicates which authentication method should be used. If set to true, Managed
-   * HSM will use the configured user-assigned managed identity to authenticate with
-   * Azure Storage. Otherwise, a SAS token has to be specified.
+   * Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.
    */
   useManagedIdentity?: boolean = false;
 }
@@ -116,9 +114,7 @@ model PreBackupOperationParameters {
   token?: string;
 
   /**
-   * Indicates which authentication method should be used. If set to true, Managed
-   * HSM will use the configured user-assigned managed identity to authenticate with
-   * Azure Storage. Otherwise, a SAS token has to be specified.
+   * Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.
    */
   useManagedIdentity?: boolean = false;
 }

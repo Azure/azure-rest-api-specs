@@ -98,8 +98,7 @@ interface RoleDefinitions {
       scope: string;
 
       /**
-       * The filter to apply on the operation. Use atScopeAndBelow filter to search
-       * below the given scope as well.
+       * The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.
        */
       @query("$filter")
       $filter?: string;
@@ -200,9 +199,7 @@ interface RoleAssignments {
       scope: string;
 
       /**
-       * The filter to apply on the operation. Use $filter=atScope() to return all role
-       * assignments at or above the scope. Use $filter=principalId eq {id} to return
-       * all role assignments at, above or below the scope for the specified principal.
+       * The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.
        */
       @query("$filter")
       $filter?: string;

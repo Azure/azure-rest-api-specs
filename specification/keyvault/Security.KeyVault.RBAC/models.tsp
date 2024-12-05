@@ -307,8 +307,7 @@ model Permission {
   actions?: string[];
 
   /**
-   * Action permissions that are excluded but not denied. They may be granted by
-   * other role definitions assigned to a principal.
+   * Action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.
    */
   notActions?: string[];
 
@@ -318,8 +317,7 @@ model Permission {
   dataActions?: DataAction[];
 
   /**
-   * Data action permissions that are excluded but not denied. They may be granted
-   * by other role definitions assigned to a principal.
+   * Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.
    */
   notDataActions?: DataAction[];
 }
@@ -420,8 +418,7 @@ model RoleAssignmentProperties {
   roleDefinitionId: string;
 
   /**
-   * The principal ID assigned to the role. This maps to the ID inside the Active
-   * Directory. It can point to a user, service principal, or security group.
+   * The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.
    */
   principalId: string;
 }

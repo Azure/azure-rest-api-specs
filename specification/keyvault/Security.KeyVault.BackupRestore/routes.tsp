@@ -33,8 +33,7 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Creates a full backup using a user-provided SAS token to an Azure blob storage
- * container.
+ * Creates a full backup using a user-provided SAS token to an Azure blob storage container.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(fullBackupStatus)
@@ -45,8 +44,7 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
 op fullBackup is Azure.Core.Foundations.Operation<
   {
     /**
-     * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be
-     * stored. This token needs to be valid for at least next 24 hours from the time of making this call.
+     * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.
      */
     @body azureStorageBlobContainerUri?: SASTokenParameter;
   },
@@ -61,8 +59,7 @@ op fullBackup is Azure.Core.Foundations.Operation<
     azureAsyncOperation?: string;
 
     /**
-     * The recommended number of seconds to wait before calling the URI specified in
-     * Azure-AsyncOperation.
+     * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
      */
     @header("Retry-After") retryAfter?: int32;
 
@@ -76,8 +73,7 @@ op fullBackup is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Pre-backup operation for checking whether the customer can perform a full
- * backup operation.
+ * Pre-backup operation for checking whether the customer can perform a full backup operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @added(KeyVault.Versions.`v7.6_preview.1`)
@@ -102,8 +98,7 @@ op preFullBackup is Azure.Core.Foundations.Operation<
     azureAsyncOperation?: string;
 
     /**
-     * The recommended number of seconds to wait before calling the URI specified in
-     * Azure-AsyncOperation.
+     * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
      */
     @header("Retry-After") retryAfter?: int32;
 
@@ -137,8 +132,7 @@ op restoreStatus is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Pre-restore operation for checking whether the customer can perform a full
- * restore operation.
+ * Pre-restore operation for checking whether the customer can perform a full restore operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @added(KeyVault.Versions.`v7.6_preview.1`)
@@ -163,8 +157,7 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
     azureAsyncOperation?: string;
 
     /**
-     * The recommended number of seconds to wait before calling the URI specified in
-     * Azure-AsyncOperation.
+     * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
      */
     @header("Retry-After") retryAfter?: int32;
 
@@ -178,8 +171,7 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Restores all key materials using the SAS token pointing to a previously stored
- * Azure Blob storage backup folder
+ * Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
@@ -203,8 +195,7 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
     azureAsyncOperation?: string;
 
     /**
-     * The recommended number of seconds to wait before calling the URI specified in
-     * Azure-AsyncOperation.
+     * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
      */
     @header("Retry-After") retryAfter?: int32;
 
@@ -218,8 +209,7 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Restores all key versions of a given key using user supplied SAS token pointing
- * to a previously stored Azure Blob storage backup folder
+ * Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @pollingOperation(restoreStatus)
@@ -236,8 +226,7 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     keyName: string;
 
     /**
-     * The Azure blob SAS token pointing to a folder where the previous successful
-     * full backup was stored
+     * The Azure blob SAS token pointing to a folder where the previous successful full backup was stored
      */
     @body
     restoreBlobDetails?: SelectiveKeyRestoreOperationParameters;
@@ -253,8 +242,7 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
     azureAsyncOperation?: string;
 
     /**
-     * The recommended number of seconds to wait before calling the URI specified in
-     * Azure-AsyncOperation.
+     * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
      */
     @header("Retry-After") retryAfter?: int32;
 

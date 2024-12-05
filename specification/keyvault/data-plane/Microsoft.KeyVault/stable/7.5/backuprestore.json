@@ -3,7 +3,7 @@
   "info": {
     "title": "KeyVaultClient",
     "version": "7.5",
-    "description": "The key vault client performs cryptographic key operations and vault operations\nagainst the Key Vault service.",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -55,7 +55,7 @@
     "/backup": {
       "post": {
         "operationId": "FullBackup",
-        "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage\ncontainer.",
+        "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -63,7 +63,7 @@
           {
             "name": "azureStorageBlobContainerUri",
             "in": "body",
-            "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be\nstored. This token needs to be valid for at least next 24 hours from the time of making this call.",
+            "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/SASTokenParameter"
@@ -84,7 +84,7 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The recommended number of seconds to wait before calling the URI specified in\nAzure-AsyncOperation."
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
               }
             }
           },
@@ -146,7 +146,7 @@
     "/keys/{keyName}/restore": {
       "put": {
         "operationId": "SelectiveKeyRestoreOperation",
-        "description": "Restores all key versions of a given key using user supplied SAS token pointing\nto a previously stored Azure Blob storage backup folder",
+        "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -161,7 +161,7 @@
           {
             "name": "restoreBlobDetails",
             "in": "body",
-            "description": "The Azure blob SAS token pointing to a folder where the previous successful\nfull backup was stored",
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored",
             "required": false,
             "schema": {
               "$ref": "#/definitions/SelectiveKeyRestoreOperationParameters"
@@ -182,7 +182,7 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The recommended number of seconds to wait before calling the URI specified in\nAzure-AsyncOperation."
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
               }
             }
           },
@@ -207,7 +207,7 @@
     "/restore": {
       "put": {
         "operationId": "FullRestoreOperation",
-        "description": "Restores all key materials using the SAS token pointing to a previously stored\nAzure Blob storage backup folder",
+        "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -236,7 +236,7 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The recommended number of seconds to wait before calling the URI specified in\nAzure-AsyncOperation."
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
               }
             }
           },
@@ -468,7 +468,7 @@
         },
         "useManagedIdentity": {
           "type": "boolean",
-          "description": "Indicates which authentication method should be used. If set to true, Managed\nHSM will use the configured user-assigned managed identity to authenticate with\nAzure Storage. Otherwise, a SAS token has to be specified.",
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
           "default": false
         }
       },

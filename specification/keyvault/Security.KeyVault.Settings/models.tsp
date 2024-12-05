@@ -72,8 +72,7 @@ model Setting {
  */
 model SettingsListResult {
   /**
-   * A response message containing a list of account settings with their associated
-   * value.
+   * A response message containing a list of account settings with their associated value.
    */
   @visibility("read")
   settings?: Setting[];
