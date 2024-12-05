@@ -3,7 +3,7 @@
   "info": {
     "title": "KeyVaultClient",
     "version": "7.5",
-    "description": "The key vault client performs cryptographic key operations and vault operations\nagainst the Key Vault service.",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -56,7 +56,7 @@
       "get": {
         "operationId": "GetCertificates",
         "summary": "List certificates in a specified key vault",
-        "description": "The GetCertificates operation returns the set of certificates resources in the\nspecified key vault. This operation requires the certificates/list permission.",
+        "description": "The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -64,7 +64,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -107,7 +107,7 @@
       "delete": {
         "operationId": "DeleteCertificate",
         "summary": "Deletes a certificate from a specified key vault.",
-        "description": "Deletes all versions of a certificate object along with its associated policy.\nDelete certificate cannot be used to remove individual versions of a\ncertificate object. This operation requires the certificates/delete permission.",
+        "description": "Deletes all versions of a certificate object along with its associated policy. Delete certificate cannot be used to remove individual versions of a certificate object. This operation requires the certificates/delete permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -146,7 +146,7 @@
       "get": {
         "operationId": "GetCertificate",
         "summary": "Gets information about a certificate.",
-        "description": "Gets information about a specific certificate. This operation requires the\ncertificates/get permission.",
+        "description": "Gets information about a specific certificate. This operation requires the certificates/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -162,7 +162,7 @@
           {
             "name": "certificate-version",
             "in": "path",
-            "description": "The version of the certificate. This URI fragment is optional. If not\nspecified, the latest version of the certificate is returned.",
+            "description": "The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "certificateVersion"
@@ -191,7 +191,7 @@
       "patch": {
         "operationId": "UpdateCertificate",
         "summary": "Updates the specified attributes associated with the given certificate.",
-        "description": "The UpdateCertificate operation applies the specified update on the given\ncertificate; the only elements updated are the certificate's attributes. This\noperation requires the certificates/update permission.",
+        "description": "The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -247,7 +247,7 @@
       "post": {
         "operationId": "BackupCertificate",
         "summary": "Backs up the specified certificate.",
-        "description": "Requests that a backup of the specified certificate be downloaded to the\nclient. All versions of the certificate will be downloaded. This operation\nrequires the certificates/backup permission.",
+        "description": "Requests that a backup of the specified certificate be downloaded to the client. All versions of the certificate will be downloaded. This operation requires the certificates/backup permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -286,7 +286,7 @@
       "post": {
         "operationId": "CreateCertificate",
         "summary": "Creates a new certificate.",
-        "description": "If this is the first version, the certificate resource is created. This\noperation requires the certificates/create permission.",
+        "description": "If this is the first version, the certificate resource is created. This operation requires the certificates/create permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -294,7 +294,7 @@
           {
             "name": "certificate-name",
             "in": "path",
-            "description": "The name of the certificate. The value you provide may be copied globally for\nthe purpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
+            "description": "The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
@@ -335,7 +335,7 @@
       "post": {
         "operationId": "ImportCertificate",
         "summary": "Imports a certificate into a specified key vault.",
-        "description": "Imports an existing valid certificate, containing a private key, into Azure Key\nVault. This operation requires the certificates/import permission. The\ncertificate to be imported can be in either PFX or PEM format. If the\ncertificate is in PEM format the PEM file must contain the key as well as x509\ncertificates. Key Vault will only accept a key in PKCS#8 format.",
+        "description": "Imports an existing valid certificate, containing a private key, into Azure Key Vault. This operation requires the certificates/import permission. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. Key Vault will only accept a key in PKCS#8 format.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -343,7 +343,7 @@
           {
             "name": "certificate-name",
             "in": "path",
-            "description": "The name of the certificate. The value you provide may be copied globally for\nthe purpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
+            "description": "The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
@@ -384,7 +384,7 @@
       "get": {
         "operationId": "GetCertificateOperation",
         "summary": "Gets the creation operation of a certificate.",
-        "description": "Gets the creation operation associated with a specified certificate. This\noperation requires the certificates/get permission.",
+        "description": "Gets the creation operation associated with a specified certificate. This operation requires the certificates/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -421,7 +421,7 @@
       "patch": {
         "operationId": "UpdateCertificateOperation",
         "summary": "Updates a certificate operation.",
-        "description": "Updates a certificate creation operation that is already in progress. This\noperation requires the certificates/update permission.",
+        "description": "Updates a certificate creation operation that is already in progress. This operation requires the certificates/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -467,7 +467,7 @@
       "delete": {
         "operationId": "DeleteCertificateOperation",
         "summary": "Deletes the creation operation for a specific certificate.",
-        "description": "Deletes the creation operation for a specified certificate that is in the\nprocess of being created. The certificate is no longer created. This operation\nrequires the certificates/update permission.",
+        "description": "Deletes the creation operation for a specified certificate that is in the process of being created. The certificate is no longer created. This operation requires the certificates/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -506,7 +506,7 @@
       "post": {
         "operationId": "MergeCertificate",
         "summary": "Merges a certificate or a certificate chain with a key pair existing on the server.",
-        "description": "The MergeCertificate operation performs the merging of a certificate or\ncertificate chain with a key pair currently available in the service. This\noperation requires the certificates/create permission.",
+        "description": "The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. This operation requires the certificates/create permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -554,7 +554,7 @@
       "get": {
         "operationId": "GetCertificatePolicy",
         "summary": "Lists the policy for a certificate.",
-        "description": "The GetCertificatePolicy operation returns the specified certificate policy\nresources in the specified key vault. This operation requires the\ncertificates/get permission.",
+        "description": "The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault. This operation requires the certificates/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -591,7 +591,7 @@
       "patch": {
         "operationId": "UpdateCertificatePolicy",
         "summary": "Updates the policy for a certificate.",
-        "description": "Set specified members in the certificate policy. Leave others as null. This\noperation requires the certificates/update permission.",
+        "description": "Set specified members in the certificate policy. Leave others as null. This operation requires the certificates/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -639,7 +639,7 @@
       "get": {
         "operationId": "GetCertificateVersions",
         "summary": "List the versions of a certificate.",
-        "description": "The GetCertificateVersions operation returns the versions of a certificate in\nthe specified key vault. This operation requires the certificates/list\npermission.",
+        "description": "The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -655,7 +655,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -691,7 +691,7 @@
       "get": {
         "operationId": "GetCertificateContacts",
         "summary": "Lists the certificate contacts for a specified key vault.",
-        "description": "The GetCertificateContacts operation returns the set of certificate contact\nresources in the specified key vault. This operation requires the\ncertificates/managecontacts permission.",
+        "description": "The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault. This operation requires the certificates/managecontacts permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -720,7 +720,7 @@
       "put": {
         "operationId": "SetCertificateContacts",
         "summary": "Sets the certificate contacts for the specified key vault.",
-        "description": "Sets the certificate contacts for the specified key vault. This operation\nrequires the certificates/managecontacts permission.",
+        "description": "Sets the certificate contacts for the specified key vault. This operation requires the certificates/managecontacts permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -758,7 +758,7 @@
       "delete": {
         "operationId": "DeleteCertificateContacts",
         "summary": "Deletes the certificate contacts for a specified key vault.",
-        "description": "Deletes the certificate contacts for a specified key vault certificate. This\noperation requires the certificates/managecontacts permission.",
+        "description": "Deletes the certificate contacts for a specified key vault certificate. This operation requires the certificates/managecontacts permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -789,7 +789,7 @@
       "get": {
         "operationId": "GetCertificateIssuers",
         "summary": "List certificate issuers for a specified key vault.",
-        "description": "The GetCertificateIssuers operation returns the set of certificate issuer\nresources in the specified key vault. This operation requires the\ncertificates/manageissuers/getissuers permission.",
+        "description": "The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -797,7 +797,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -833,7 +833,7 @@
       "get": {
         "operationId": "GetCertificateIssuer",
         "summary": "Lists the specified certificate issuer.",
-        "description": "The GetCertificateIssuer operation returns the specified certificate issuer\nresources in the specified key vault. This operation requires the\ncertificates/manageissuers/getissuers permission.",
+        "description": "The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -870,7 +870,7 @@
       "put": {
         "operationId": "SetCertificateIssuer",
         "summary": "Sets the specified certificate issuer.",
-        "description": "The SetCertificateIssuer operation adds or updates the specified certificate\nissuer. This operation requires the certificates/setissuers permission.",
+        "description": "The SetCertificateIssuer operation adds or updates the specified certificate issuer. This operation requires the certificates/setissuers permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -878,7 +878,7 @@
           {
             "name": "issuer-name",
             "in": "path",
-            "description": "The name of the issuer. The value you provide may be copied globally for the\npurpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
+            "description": "The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "issuerName"
@@ -916,7 +916,7 @@
       "patch": {
         "operationId": "UpdateCertificateIssuer",
         "summary": "Updates the specified certificate issuer.",
-        "description": "The UpdateCertificateIssuer operation performs an update on the specified\ncertificate issuer entity. This operation requires the certificates/setissuers\npermission.",
+        "description": "The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity. This operation requires the certificates/setissuers permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -962,7 +962,7 @@
       "delete": {
         "operationId": "DeleteCertificateIssuer",
         "summary": "Deletes the specified certificate issuer.",
-        "description": "The DeleteCertificateIssuer operation permanently removes the specified\ncertificate issuer from the vault. This operation requires the\ncertificates/manageissuers/deleteissuers permission.",
+        "description": "The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault. This operation requires the certificates/manageissuers/deleteissuers permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1001,7 +1001,7 @@
       "post": {
         "operationId": "RestoreCertificate",
         "summary": "Restores a backed up certificate to a vault.",
-        "description": "Restores a backed up certificate, and all its versions, to a vault. This\noperation requires the certificates/restore permission.",
+        "description": "Restores a backed up certificate, and all its versions, to a vault. This operation requires the certificates/restore permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1041,7 +1041,7 @@
       "get": {
         "operationId": "GetDeletedCertificates",
         "summary": "Lists the deleted certificates in the specified vault currently available for recovery.",
-        "description": "The GetDeletedCertificates operation retrieves the certificates in the current\nvault which are in a deleted state and ready for recovery or purging. This\noperation includes deletion-specific information. This operation requires the\ncertificates/get/list permission. This operation can only be enabled on\nsoft-delete enabled vaults.",
+        "description": "The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1049,7 +1049,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1092,7 +1092,7 @@
       "get": {
         "operationId": "GetDeletedCertificate",
         "summary": "Retrieves information about the specified deleted certificate.",
-        "description": "The GetDeletedCertificate operation retrieves the deleted certificate\ninformation plus its attributes, such as retention interval, scheduled\npermanent deletion and the current deletion recovery level. This operation\nrequires the certificates/get permission.",
+        "description": "The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level. This operation requires the certificates/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1129,7 +1129,7 @@
       "delete": {
         "operationId": "PurgeDeletedCertificate",
         "summary": "Permanently deletes the specified deleted certificate.",
-        "description": "The PurgeDeletedCertificate operation performs an irreversible deletion of the\nspecified certificate, without possibility for recovery. The operation is not\navailable if the recovery level does not specify 'Purgeable'. This operation\nrequires the certificate/purge permission.",
+        "description": "The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify 'Purgeable'. This operation requires the certificate/purge permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1165,7 +1165,7 @@
       "post": {
         "operationId": "RecoverDeletedCertificate",
         "summary": "Recovers the deleted certificate back to its current version under /certificates.",
-        "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete\noperation. The operation is applicable in vaults enabled for soft-delete, and\nmust be issued during the retention interval (available in the deleted\ncertificate's attributes). This operation requires the certificates/recover\npermission.",
+        "description": "The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate's attributes). This operation requires the certificates/recover permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1317,12 +1317,12 @@
         "recoverableDays": {
           "type": "integer",
           "format": "int32",
-          "description": "softDelete data retention days. Value should be >=7 and <=90 when softDelete\nenabled, otherwise 0.",
+          "description": "softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.",
           "readOnly": true
         },
         "recoveryLevel": {
-          "type": "string",
-          "description": "Reflects the deletion recovery level currently in effect for certificates in\nthe current vault. If it contains 'Purgeable', the certificate can be\npermanently deleted by a privileged user; otherwise, only the system can purge\nthe certificate, at the end of the retention interval.",
+          "$ref": "#/definitions/DeletionRecoveryLevel",
+          "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
           "readOnly": true
         }
       }
@@ -1365,7 +1365,7 @@
         },
         "contentType": {
           "type": "string",
-          "description": "The content type of the secret. eg. 'application/x-pem-file' or\n'application/x-pkcs12',"
+          "description": "The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12',"
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
@@ -1409,12 +1409,12 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Base64 encoded representation of the certificate object to import. This\ncertificate needs to contain the private key.",
+          "description": "Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key.",
           "x-ms-client-name": "base64EncodedCertificate"
         },
         "pwd": {
           "type": "string",
-          "description": "If the private key in base64EncodedCertificate is encrypted, the password used\nfor encryption.",
+          "description": "If the private key in base64EncodedCertificate is encrypted, the password used for encryption.",
           "x-ms-client-name": "password"
         },
         "policy": {
@@ -1459,7 +1459,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A response message containing a list of certificate issuers in the key vault along with a link to the next page of\ncertificate issuers.",
+          "description": "A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.",
           "items": {
             "$ref": "#/definitions/CertificateIssuerItem"
           },
@@ -1554,7 +1554,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A response message containing a list of certificates in the key vault along with a link to the next page of\ncertificates.",
+          "description": "A response message containing a list of certificates in the key vault along with a link to the next page of certificates.",
           "items": {
             "$ref": "#/definitions/CertificateItem"
           },
@@ -1614,7 +1614,7 @@
         "csr": {
           "type": "string",
           "format": "byte",
-          "description": "The certificate signing request (CSR) that is being used in the certificate\noperation."
+          "description": "The certificate signing request (CSR) that is being used in the certificate operation."
         },
         "cancellation_requested": {
           "type": "boolean",
@@ -1802,7 +1802,7 @@
     },
     "DeletedCertificateBundle": {
       "type": "object",
-      "description": "A Deleted Certificate consisting of its previous id, attributes and its tags,\nas well as information on when it will be purged.",
+      "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged.",
       "properties": {
         "id": {
           "type": "string",
@@ -1838,7 +1838,7 @@
         },
         "contentType": {
           "type": "string",
-          "description": "The content type of the secret. eg. 'application/x-pem-file' or\n'application/x-pkcs12',"
+          "description": "The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12',"
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
@@ -1853,7 +1853,7 @@
         },
         "recoveryId": {
           "type": "string",
-          "description": "The url of the recovery object, used to identify and recover the deleted\ncertificate."
+          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
         },
         "scheduledPurgeDate": {
           "type": "integer",
@@ -1918,7 +1918,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of\ndeleted certificates.",
+          "description": "A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates.",
           "items": {
             "$ref": "#/definitions/DeletedCertificateItem"
           },
@@ -1933,7 +1933,7 @@
     },
     "DeletionRecoveryLevel": {
       "type": "string",
-      "description": "Reflects the deletion recovery level currently in effect for certificates in\nthe current vault. If it contains 'Purgeable', the certificate can be\npermanently deleted by a privileged user; otherwise, only the system can purge\nthe certificate, at the end of the retention interval.",
+      "description": "Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.",
       "enum": [
         "Purgeable",
         "Recoverable+Purgeable",
@@ -1950,37 +1950,37 @@
           {
             "name": "Purgeable",
             "value": "Purgeable",
-            "description": "Denotes a vault state in which deletion is an irreversible operation, without\nthe possibility for recovery. This level corresponds to no protection being\navailable against a Delete operation; the data is irretrievably lost upon\naccepting a Delete operation at the entity level or higher (vault, resource\ngroup, subscription etc.)"
+            "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
           },
           {
             "name": "RecoverablePurgeable",
             "value": "Recoverable+Purgeable",
-            "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval (90 days),\nunless a Purge operation is requested, or the subscription is cancelled. System\nwil permanently delete it after 90 days, if not recovered"
+            "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "Recoverable",
             "value": "Recoverable",
-            "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval(90 days) and\nwhile the subscription is still available. System wil permanently delete it\nafter 90 days, if not recovered"
+            "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "RecoverableProtectedSubscription",
             "value": "Recoverable+ProtectedSubscription",
-            "description": "Denotes a vault and subscription state in which deletion is recoverable within\nretention interval (90 days), immediate and permanent deletion (i.e. purge) is\nnot permitted, and in which the subscription itself  cannot be permanently\ncanceled. System wil permanently delete it after 90 days, if not recovered"
+            "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "CustomizedRecoverablePurgeable",
             "value": "CustomizedRecoverable+Purgeable",
-            "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays\n< 90). This level guarantees the recoverability of the deleted entity during\nthe retention interval, unless a Purge operation is requested, or the\nsubscription is cancelled."
+            "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
           },
           {
             "name": "CustomizedRecoverable",
             "value": "CustomizedRecoverable",
-            "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge when 7<=\nSoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the\ndeleted entity during the retention interval and while the subscription is\nstill available."
+            "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
           },
           {
             "name": "CustomizedRecoverableProtectedSubscription",
             "value": "CustomizedRecoverable+ProtectedSubscription",
-            "description": "Denotes a vault and subscription state in which deletion is recoverable,\nimmediate and permanent deletion (i.e. purge) is not permitted, and in which\nthe subscription itself cannot be permanently canceled when 7<=\nSoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the\ndeleted entity during the retention interval, and also reflects the fact that\nthe subscription itself cannot be cancelled."
+            "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7 <= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
           }
         ]
       }
@@ -2078,16 +2078,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the referenced issuer object or reserved names; for example, 'Self' or\n'Unknown'."
+          "description": "Name of the referenced issuer object or reserved names; for example, 'Self' or 'Unknown'."
         },
         "cty": {
           "type": "string",
-          "description": "Certificate type as supported by the provider (optional); for example 'OV-SSL',\n'EV-SSL'",
+          "description": "Certificate type as supported by the provider (optional); for example 'OV-SSL', 'EV-SSL'",
           "x-ms-client-name": "CertificateType"
         },
         "cert_transparency": {
           "type": "boolean",
-          "description": "Indicates if the certificates generated under this policy should be published\nto certificate transparency logs.",
+          "description": "Indicates if the certificates generated under this policy should be published to certificate transparency logs.",
           "x-ms-client-name": "CertificateTransparency"
         }
       }
@@ -2182,7 +2182,7 @@
       "properties": {
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported. Release policy must be provided\nwhen creating the first version of an exportable key."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key."
         },
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
@@ -2286,7 +2286,7 @@
     },
     "LifetimeAction": {
       "type": "object",
-      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of\na certificate.",
+      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a certificate.",
       "properties": {
         "trigger": {
           "$ref": "#/definitions/Trigger",
@@ -2380,7 +2380,7 @@
         "days_before_expiry": {
           "type": "integer",
           "format": "int32",
-          "description": "Days before expiry to attempt renewal. Value should be between 1 and\nvalidity_in_months multiplied by 27. If validity_in_months is 36, then value\nshould be between 1 and 972 (36 * 27).",
+          "description": "Days before expiry to attempt renewal. Value should be between 1 and validity_in_months multiplied by 27. If validity_in_months is 36, then value should be between 1 and 972 (36 * 27).",
           "x-ms-client-name": "daysBeforeExpiry"
         }
       }

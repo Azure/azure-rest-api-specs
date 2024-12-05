@@ -9,74 +9,43 @@ using Azure.Core;
 namespace KeyVault;
 
 /**
- * Reflects the deletion recovery level currently in effect for certificates in
- * the current vault. If it contains 'Purgeable', the certificate can be
- * permanently deleted by a privileged user; otherwise, only the system can purge
- * the certificate, at the end of the retention interval.
+ * Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.
  */
 union DeletionRecoveryLevel {
   string,
 
   /**
-   * Denotes a vault state in which deletion is an irreversible operation, without
-   * the possibility for recovery. This level corresponds to no protection being
-   * available against a Delete operation; the data is irretrievably lost upon
-   * accepting a Delete operation at the entity level or higher (vault, resource
-   * group, subscription etc.)
+   * Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)
    */
   Purgeable: "Purgeable",
 
   /**
-   * Denotes a vault state in which deletion is recoverable, and which also permits
-   * immediate and permanent deletion (i.e. purge). This level guarantees the
-   * recoverability of the deleted entity during the retention interval (90 days),
-   * unless a Purge operation is requested, or the subscription is cancelled. System
-   * wil permanently delete it after 90 days, if not recovered
+   * Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered
    */
   RecoverablePurgeable: "Recoverable+Purgeable",
 
   /**
-   * Denotes a vault state in which deletion is recoverable without the possibility
-   * for immediate and permanent deletion (i.e. purge). This level guarantees the
-   * recoverability of the deleted entity during the retention interval(90 days) and
-   * while the subscription is still available. System wil permanently delete it
-   * after 90 days, if not recovered
+   * Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered
    */
   Recoverable: "Recoverable",
 
   /**
-   * Denotes a vault and subscription state in which deletion is recoverable within
-   * retention interval (90 days), immediate and permanent deletion (i.e. purge) is
-   * not permitted, and in which the subscription itself  cannot be permanently
-   * canceled. System wil permanently delete it after 90 days, if not recovered
+   * Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered
    */
   RecoverableProtectedSubscription: "Recoverable+ProtectedSubscription",
 
   /**
-   * Denotes a vault state in which deletion is recoverable, and which also permits
-   * immediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays
-   * < 90). This level guarantees the recoverability of the deleted entity during
-   * the retention interval, unless a Purge operation is requested, or the
-   * subscription is cancelled.
+   * Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled.
    */
   CustomizedRecoverablePurgeable: "CustomizedRecoverable+Purgeable",
 
   /**
-   * Denotes a vault state in which deletion is recoverable without the possibility
-   * for immediate and permanent deletion (i.e. purge when 7<=
-   * SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the
-   * deleted entity during the retention interval and while the subscription is
-   * still available.
+   * Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available.
    */
   CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
-   * Denotes a vault and subscription state in which deletion is recoverable,
-   * immediate and permanent deletion (i.e. purge) is not permitted, and in which
-   * the subscription itself cannot be permanently canceled when 7<=
-   * SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the
-   * deleted entity during the retention interval, and also reflects the fact that
-   * the subscription itself cannot be cancelled.
+   * Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7 <= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled.
    */
   CustomizedRecoverableProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
 }
@@ -177,8 +146,7 @@ enum CertificatePolicyAction {
 @pagedResult
 model CertificateListResult {
   /**
-   * A response message containing a list of certificates in the key vault along with a link to the next page of
-   * certificates.
+   * A response message containing a list of certificates in the key vault along with a link to the next page of certificates.
    */
   @items
   @visibility("read")
@@ -227,20 +195,16 @@ model CertificateAttributes {
   ...Attributes;
 
   /**
-   * softDelete data retention days. Value should be >=7 and <=90 when softDelete
-   * enabled, otherwise 0.
+   * softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.
    */
   @visibility("read")
   recoverableDays?: int32;
 
   /**
-   * Reflects the deletion recovery level currently in effect for certificates in
-   * the current vault. If it contains 'Purgeable', the certificate can be
-   * permanently deleted by a privileged user; otherwise, only the system can purge
-   * the certificate, at the end of the retention interval.
+   * Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.
    */
   @visibility("read")
-  recoveryLevel?: string; // DeletionRecoveryLevel, but this should be treated as an opaque string.
+  recoveryLevel?: DeletionRecoveryLevel;
 }
 
 /**
@@ -320,15 +284,13 @@ model Error {
 }
 
 /**
- * A Deleted Certificate consisting of its previous id, attributes and its tags,
- * as well as information on when it will be purged.
+ * A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged.
  */
 model DeletedCertificateBundle {
   ...CertificateBundle;
 
   /**
-   * The url of the recovery object, used to identify and recover the deleted
-   * certificate.
+   * The url of the recovery object, used to identify and recover the deleted certificate.
    */
   recoveryId?: string;
 
@@ -390,8 +352,7 @@ model CertificateBundle {
   cer?: bytes;
 
   /**
-   * The content type of the secret. eg. 'application/x-pem-file' or
-   * 'application/x-pkcs12',
+   * The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12',
    */
   contentType?: string;
 
@@ -459,8 +420,7 @@ model CertificatePolicy {
  */
 model KeyProperties {
   /**
-   * Indicates if the private key can be exported. Release policy must be provided
-   * when creating the first version of an exportable key.
+   * Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key.
    */
   exportable?: boolean;
 
@@ -556,8 +516,7 @@ model SubjectAlternativeNames {
 }
 
 /**
- * Action and its trigger that will be performed by Key Vault over the lifetime of
- * a certificate.
+ * Action and its trigger that will be performed by Key Vault over the lifetime of a certificate.
  */
 model LifetimeAction {
   /**
@@ -584,9 +543,7 @@ model Trigger {
   lifetimePercentage?: int32;
 
   /**
-   * Days before expiry to attempt renewal. Value should be between 1 and
-   * validity_in_months multiplied by 27. If validity_in_months is 36, then value
-   * should be between 1 and 972 (36 * 27).
+   * Days before expiry to attempt renewal. Value should be between 1 and validity_in_months multiplied by 27. If validity_in_months is 36, then value should be between 1 and 972 (36 * 27).
    */
   @encodedName("application/json", "days_before_expiry")
   daysBeforeExpiry?: int32;
@@ -608,22 +565,19 @@ model Action {
  */
 model IssuerParameters {
   /**
-   * Name of the referenced issuer object or reserved names; for example, 'Self' or
-   * 'Unknown'.
+   * Name of the referenced issuer object or reserved names; for example, 'Self' or 'Unknown'.
    */
   name?: string;
 
   /**
-   * Certificate type as supported by the provider (optional); for example 'OV-SSL',
-   * 'EV-SSL'
+   * Certificate type as supported by the provider (optional); for example 'OV-SSL', 'EV-SSL'
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "cty")
   CertificateType?: string;
 
   /**
-   * Indicates if the certificates generated under this policy should be published
-   * to certificate transparency logs.
+   * Indicates if the certificates generated under this policy should be published to certificate transparency logs.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
   @encodedName("application/json", "cert_transparency")
@@ -676,8 +630,7 @@ model Contact {
 @pagedResult
 model CertificateIssuerListResult {
   /**
-   * A response message containing a list of certificate issuers in the key vault along with a link to the next page of
-   * certificate issuers.
+   * A response message containing a list of certificate issuers in the key vault along with a link to the next page of certificate issuers.
    */
   @items
   @visibility("read")
@@ -916,8 +869,7 @@ model CertificateOperation {
   issuerParameters?: IssuerParameters;
 
   /**
-   * The certificate signing request (CSR) that is being used in the certificate
-   * operation.
+   * The certificate signing request (CSR) that is being used in the certificate operation.
    */
   csr?: bytes;
 
@@ -960,15 +912,13 @@ model CertificateOperation {
  */
 model CertificateImportParameters {
   /**
-   * Base64 encoded representation of the certificate object to import. This
-   * certificate needs to contain the private key.
+   * Base64 encoded representation of the certificate object to import. This certificate needs to contain the private key.
    */
   @encodedName("application/json", "value")
   base64EncodedCertificate: string;
 
   /**
-   * If the private key in base64EncodedCertificate is encrypted, the password used
-   * for encryption.
+   * If the private key in base64EncodedCertificate is encrypted, the password used for encryption.
    */
   @encodedName("application/json", "pwd")
   password?: string;
@@ -1076,8 +1026,7 @@ model CertificateRestoreParameters {
 @pagedResult
 model DeletedCertificateListResult {
   /**
-   * A response message containing a list of deleted certificates in the vault along with a link to the next page of
-   * deleted certificates.
+   * A response message containing a list of deleted certificates in the vault along with a link to the next page of deleted certificates.
    */
   @items
   @visibility("read")

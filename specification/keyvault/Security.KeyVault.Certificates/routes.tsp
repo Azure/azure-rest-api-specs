@@ -12,8 +12,7 @@ using TypeSpec.Http;
 namespace KeyVault;
 
 /**
- * The GetCertificates operation returns the set of certificates resources in the
- * specified key vault. This operation requires the certificates/list permission.
+ * The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -23,8 +22,7 @@ namespace KeyVault;
 op getCertificates is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -43,9 +41,7 @@ op getCertificates is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Deletes all versions of a certificate object along with its associated policy.
- * Delete certificate cannot be used to remove individual versions of a
- * certificate object. This operation requires the certificates/delete permission.
+ * Deletes all versions of a certificate object along with its associated policy. Delete certificate cannot be used to remove individual versions of a certificate object. This operation requires the certificates/delete permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a certificate from a specified key vault.")
@@ -66,8 +62,7 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Sets the certificate contacts for the specified key vault. This operation
- * requires the certificates/managecontacts permission.
+ * Sets the certificate contacts for the specified key vault. This operation requires the certificates/managecontacts permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -87,9 +82,7 @@ op setCertificateContacts is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetCertificateContacts operation returns the set of certificate contact
- * resources in the specified key vault. This operation requires the
- * certificates/managecontacts permission.
+ * The GetCertificateContacts operation returns the set of certificate contact resources in the specified key vault. This operation requires the certificates/managecontacts permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the certificate contacts for a specified key vault.")
@@ -103,8 +96,7 @@ op getCertificateContacts is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Deletes the certificate contacts for a specified key vault certificate. This
- * operation requires the certificates/managecontacts permission.
+ * Deletes the certificate contacts for a specified key vault certificate. This operation requires the certificates/managecontacts permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the certificate contacts for a specified key vault.")
@@ -118,9 +110,7 @@ op deleteCertificateContacts is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetCertificateIssuers operation returns the set of certificate issuer
- * resources in the specified key vault. This operation requires the
- * certificates/manageissuers/getissuers permission.
+ * The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -130,8 +120,7 @@ op deleteCertificateContacts is Azure.Core.Foundations.Operation<
 op getCertificateIssuers is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -144,8 +133,7 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The SetCertificateIssuer operation adds or updates the specified certificate
- * issuer. This operation requires the certificates/setissuers permission.
+ * The SetCertificateIssuer operation adds or updates the specified certificate issuer. This operation requires the certificates/setissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -155,9 +143,7 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
 op setCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name of the issuer. The value you provide may be copied globally for the
-     * purpose of running the service. The value provided should not include
-     * personally identifiable or sensitive information.
+     * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @path("issuer-name")
     issuerName: string;
@@ -176,9 +162,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The UpdateCertificateIssuer operation performs an update on the specified
- * certificate issuer entity. This operation requires the certificates/setissuers
- * permission.
+ * The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity. This operation requires the certificates/setissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
@@ -206,9 +190,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetCertificateIssuer operation returns the specified certificate issuer
- * resources in the specified key vault. This operation requires the
- * certificates/manageissuers/getissuers permission.
+ * The GetCertificateIssuer operation returns the specified certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the specified certificate issuer.")
@@ -228,9 +210,7 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The DeleteCertificateIssuer operation permanently removes the specified
- * certificate issuer from the vault. This operation requires the
- * certificates/manageissuers/deleteissuers permission.
+ * The DeleteCertificateIssuer operation permanently removes the specified certificate issuer from the vault. This operation requires the certificates/manageissuers/deleteissuers permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the specified certificate issuer.")
@@ -250,8 +230,7 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * If this is the first version, the certificate resource is created. This
- * operation requires the certificates/create permission.
+ * If this is the first version, the certificate resource is created. This operation requires the certificates/create permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Creates a new certificate.")
@@ -260,9 +239,7 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
 op createCertificate is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name of the certificate. The value you provide may be copied globally for
-     * the purpose of running the service. The value provided should not include
-     * personally identifiable or sensitive information.
+     * The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("certificate-name")
@@ -283,11 +260,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Imports an existing valid certificate, containing a private key, into Azure Key
- * Vault. This operation requires the certificates/import permission. The
- * certificate to be imported can be in either PFX or PEM format. If the
- * certificate is in PEM format the PEM file must contain the key as well as x509
- * certificates. Key Vault will only accept a key in PKCS#8 format.
+ * Imports an existing valid certificate, containing a private key, into Azure Key Vault. This operation requires the certificates/import permission. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. Key Vault will only accept a key in PKCS#8 format.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Imports a certificate into a specified key vault.")
@@ -296,9 +269,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
 op importCertificate is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name of the certificate. The value you provide may be copied globally for
-     * the purpose of running the service. The value provided should not include
-     * personally identifiable or sensitive information.
+     * The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("certificate-name")
@@ -319,9 +290,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetCertificateVersions operation returns the versions of a certificate in
- * the specified key vault. This operation requires the certificates/list
- * permission.
+ * The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -338,8 +307,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
     certificateName: string;
 
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -352,9 +320,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetCertificatePolicy operation returns the specified certificate policy
- * resources in the specified key vault. This operation requires the
- * certificates/get permission.
+ * The GetCertificatePolicy operation returns the specified certificate policy resources in the specified key vault. This operation requires the certificates/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a certificate.")
@@ -375,8 +341,7 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Set specified members in the certificate policy. Leave others as null. This
- * operation requires the certificates/update permission.
+ * Set specified members in the certificate policy. Leave others as null. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
@@ -402,9 +367,7 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The UpdateCertificate operation applies the specified update on the given
- * certificate; the only elements updated are the certificate's attributes. This
- * operation requires the certificates/update permission.
+ * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
@@ -440,8 +403,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Gets information about a specific certificate. This operation requires the
- * certificates/get permission.
+ * Gets information about a specific certificate. This operation requires the certificates/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets information about a certificate.")
@@ -457,8 +419,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
     certificateName: string;
 
     /**
-     * The version of the certificate. This URI fragment is optional. If not
-     * specified, the latest version of the certificate is returned.
+     * The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned.
      */
     @path("certificate-version")
     @clientName("version", "go")
@@ -470,8 +431,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Updates a certificate creation operation that is already in progress. This
- * operation requires the certificates/update permission.
+ * Updates a certificate creation operation that is already in progress. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @parameterVisibility
@@ -501,8 +461,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Gets the creation operation associated with a specified certificate. This
- * operation requires the certificates/get permission.
+ * Gets the creation operation associated with a specified certificate. This operation requires the certificates/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the creation operation of a certificate.")
@@ -523,9 +482,7 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Deletes the creation operation for a specified certificate that is in the
- * process of being created. The certificate is no longer created. This operation
- * requires the certificates/update permission.
+ * Deletes the creation operation for a specified certificate that is in the process of being created. The certificate is no longer created. This operation requires the certificates/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the creation operation for a specific certificate.")
@@ -546,9 +503,7 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The MergeCertificate operation performs the merging of a certificate or
- * certificate chain with a key pair currently available in the service. This
- * operation requires the certificates/create permission.
+ * The MergeCertificate operation performs the merging of a certificate or certificate chain with a key pair currently available in the service. This operation requires the certificates/create permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Merges a certificate or a certificate chain with a key pair existing on the server.")
@@ -577,9 +532,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Requests that a backup of the specified certificate be downloaded to the
- * client. All versions of the certificate will be downloaded. This operation
- * requires the certificates/backup permission.
+ * Requests that a backup of the specified certificate be downloaded to the client. All versions of the certificate will be downloaded. This operation requires the certificates/backup permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified certificate.")
@@ -600,8 +553,7 @@ op backupCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Restores a backed up certificate, and all its versions, to a vault. This
- * operation requires the certificates/restore permission.
+ * Restores a backed up certificate, and all its versions, to a vault. This operation requires the certificates/restore permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up certificate to a vault.")
@@ -623,11 +575,7 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetDeletedCertificates operation retrieves the certificates in the current
- * vault which are in a deleted state and ready for recovery or purging. This
- * operation includes deletion-specific information. This operation requires the
- * certificates/get/list permission. This operation can only be enabled on
- * soft-delete enabled vaults.
+ * The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -637,8 +585,7 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
 op getDeletedCertificates is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -657,10 +604,7 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetDeletedCertificate operation retrieves the deleted certificate
- * information plus its attributes, such as retention interval, scheduled
- * permanent deletion and the current deletion recovery level. This operation
- * requires the certificates/get permission.
+ * The GetDeletedCertificate operation retrieves the deleted certificate information plus its attributes, such as retention interval, scheduled permanent deletion and the current deletion recovery level. This operation requires the certificates/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Retrieves information about the specified deleted certificate.")
@@ -681,10 +625,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The PurgeDeletedCertificate operation performs an irreversible deletion of the
- * specified certificate, without possibility for recovery. The operation is not
- * available if the recovery level does not specify 'Purgeable'. This operation
- * requires the certificate/purge permission.
+ * The PurgeDeletedCertificate operation performs an irreversible deletion of the specified certificate, without possibility for recovery. The operation is not available if the recovery level does not specify 'Purgeable'. This operation requires the certificate/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -706,11 +647,7 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The RecoverDeletedCertificate operation performs the reversal of the Delete
- * operation. The operation is applicable in vaults enabled for soft-delete, and
- * must be issued during the retention interval (available in the deleted
- * certificate's attributes). This operation requires the certificates/recover
- * permission.
+ * The RecoverDeletedCertificate operation performs the reversal of the Delete operation. The operation is applicable in vaults enabled for soft-delete, and must be issued during the retention interval (available in the deleted certificate's attributes). This operation requires the certificates/recover permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted certificate back to its current version under /certificates.")

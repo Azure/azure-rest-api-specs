@@ -8,9 +8,6 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
-// generate DeletionRecoveryLevel in JS
-@@usage(DeletionRecoveryLevel, Usage.output, "javascript");
-
 // rename Go operations
 @@clientName(setCertificateContacts, "SetContacts", "go");
 
