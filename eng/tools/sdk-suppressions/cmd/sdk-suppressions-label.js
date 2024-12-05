@@ -1,9 +1,11 @@
+const fs = require("fs");
 
+console.log('test sdk-suppressions-label.js is working 2');
 
-console.log('test sdk-suppressions-label.js is working');
+const result = { removeLabel: "remove-label", addLabel: "add-label" };
 
-// script.js
-const result = { key: "value", success: true };
-console.log(JSON.stringify(result)); // 以 JSON 格式输出
+fs.writeFileSync("output.json", JSON.stringify(result));
+console.log("JSON output saved to output.json");
 
+console.log("Ending log");
 
