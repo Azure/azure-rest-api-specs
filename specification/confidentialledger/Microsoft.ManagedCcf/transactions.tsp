@@ -31,8 +31,6 @@ model Transaction {
   status: TransactionStatus;
 }
 
-@doc("trigger testing")
-
 @doc("Description of a named transaction's current state.")
 @TypeSpec.Rest.resource("transactions")
 model NamedTransaction {
