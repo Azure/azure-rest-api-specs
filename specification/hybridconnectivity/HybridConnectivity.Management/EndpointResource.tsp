@@ -112,10 +112,17 @@ interface EndpointResources {
    * Gets the ingress gateway endpoint credentials
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The name of the body starts with a capital letter"
   @operationId("Endpoints_ListIngressGatewayCredentials")
   listIngressGatewayCredentials is ArmResourceActionSync<
     EndpointResource,
-    void,
+    {
+      /**
+       * Object of type ListIngressGatewayCredentialsRequest
+       */
+      @bodyRoot
+      ListIngressGatewayCredentialsRequest?: ListIngressGatewayCredentialsRequest;
+    },
     IngressGatewayResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
