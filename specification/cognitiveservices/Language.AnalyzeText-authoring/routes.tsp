@@ -78,7 +78,7 @@ interface TextAnalysisAuthoring {
    * resource.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
@@ -94,7 +94,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/:copy")
   @post
   @pollingOperation(TextAnalysisAuthoring.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -174,7 +174,7 @@ interface TextAnalysisAuthoring {
        * The format of the project to import. The currently supported formats are json
        * and aml formats. If not provided, the default is set to json.
        */
-      @added(Versions.v2023_04_15_preview)
+      @added(Versions.v2024_11_15_preview)
       @header
       format?: string;
 
@@ -218,7 +218,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
 
   /**
@@ -301,7 +301,7 @@ interface TextAnalysisAuthoring {
   @pollingOperation(
     TextAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -330,7 +330,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -378,7 +378,7 @@ interface TextAnalysisAuthoring {
   /**
    * Lists the exported models belonging to a project.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   listExportedModels is languageOperations.ResourceList<
     TextAnalysisAuthoringExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
@@ -387,7 +387,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the details of an exported model.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
 
   /**
@@ -397,7 +397,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @put
   @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -430,7 +430,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
   @pollingOperation(TextAnalysisAuthoring.getExportedModelJobStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
@@ -453,7 +453,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
 
   /**
@@ -462,7 +462,7 @@ interface TextAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/exported-models/{exportedModelName}/manifest")
   @get
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getExportedModelManifest is Azure.Core.Foundations.Operation<
     {
       /**
@@ -512,7 +512,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(TextAnalysisAuthoring.getEvaluationStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -564,7 +564,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
   /**
@@ -612,7 +612,7 @@ interface TextAnalysisAuthoring {
   /**
    * Lists the deployments resources assigned to the project.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   listDeploymentResources is languageOperations.ResourceList<
     TextAnalysisAuthoringAssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
@@ -629,7 +629,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(TextAnalysisAuthoring.getAssignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -657,7 +657,7 @@ interface TextAnalysisAuthoring {
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(TextAnalysisAuthoring.getUnassignDeploymentResourcesStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -680,13 +680,13 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
 
   /**
@@ -738,7 +738,7 @@ interface TextAnalysisAuthoring {
    * return deployments belonging to projects owned by this resource. It only
    * returns deployments belonging to projects owned by other resources.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   listAssignedResourceDeployments is languageOperations.ResourceList<
     TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
@@ -759,7 +759,7 @@ interface TextAnalysisAuthoring {
    * entities.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getSupportedPrebuiltEntities is languageOperations.ResourceList<
     TextAnalysisAuthoringPrebuiltEntity,
     SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters

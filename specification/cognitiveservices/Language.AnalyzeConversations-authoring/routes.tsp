@@ -83,7 +83,7 @@ interface ConversationalAnalysisAuthoring {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
@@ -99,7 +99,7 @@ interface ConversationalAnalysisAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -232,7 +232,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringCopyProjectJobState>;
 
   /**
@@ -345,7 +345,7 @@ interface ConversationalAnalysisAuthoring {
   @pollingOperation(
     ConversationalAnalysisAuthoring.getDeploymentDeleteFromResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -375,7 +375,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -424,7 +424,7 @@ interface ConversationalAnalysisAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(ConversationalAnalysisAuthoring.getEvaluationStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -482,7 +482,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringEvaluationJobState>;
 
   /**
@@ -531,7 +531,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Lists the deployments resources assigned to the project.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   listDeploymentResources is languageOperations.ResourceList<
     ConversationalAnalysisAuthoringAssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
@@ -550,7 +550,7 @@ interface ConversationalAnalysisAuthoring {
   @pollingOperation(
     ConversationalAnalysisAuthoring.getAssignDeploymentResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -581,7 +581,7 @@ interface ConversationalAnalysisAuthoring {
   @pollingOperation(
     ConversationalAnalysisAuthoring.getUnassignDeploymentResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -605,7 +605,7 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentResourcesJobState>;
 
   /**
@@ -614,7 +614,7 @@ interface ConversationalAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -703,7 +703,7 @@ interface ConversationalAnalysisAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
   @get
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
     {
       /**
