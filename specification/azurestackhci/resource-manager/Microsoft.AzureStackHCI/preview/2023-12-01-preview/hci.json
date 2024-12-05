@@ -759,9 +759,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/validatedSolutionRecipes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes": {
       "get": {
-        "operationId": "ValidatedSolutionRecipes_ListBySubscription",
+        "operationId": "ValidatedSolutionRecipes_ListBySubscriptionLocationResource",
         "tags": [
           "ValidatedSolutionRecipes"
         ],
@@ -772,6 +772,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -789,8 +792,8 @@
           }
         },
         "x-ms-examples": {
-          "ValidatedSolutionRecipes_ListBySubscription": {
-            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscription.json"
+          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
+            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
           }
         },
         "x-ms-pageable": {
@@ -798,7 +801,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/validatedSolutionRecipes/{validatedSolutionRecipeName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes/{validatedSolutionRecipeName}": {
       "get": {
         "operationId": "ValidatedSolutionRecipes_Get",
         "tags": [
@@ -811,6 +814,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "validatedSolutionRecipeName",
@@ -1120,7 +1126,7 @@
           "$ref": "#/definitions/DeploymentHostNetwork",
           "description": "HostNetwork properties to set network intent."
         },
-        "arcNodeResourceId": {
+        "serverResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
@@ -1142,7 +1148,7 @@
           "type": "string",
           "description": "Ip address of server to be added to cluster."
         },
-        "arcNodeResourceId": {
+        "serverResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
@@ -3484,7 +3490,7 @@
           "type": "string",
           "description": "Name of server to be added to cluster."
         },
-        "arcNodeResourceId": {
+        "serverResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
@@ -3832,7 +3838,7 @@
           "type": "string",
           "description": "Name of server to be repaired in cluster."
         },
-        "arcNodeResourceId": {
+        "serverResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
@@ -3850,7 +3856,7 @@
           "type": "string",
           "description": "Name of server to be resume in cluster."
         },
-        "arcNodeResourceId": {
+        "serverResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
