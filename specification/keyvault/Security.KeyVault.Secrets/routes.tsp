@@ -11,9 +11,7 @@ using TypeSpec.Http;
 namespace KeyVault;
 
 /**
- *  The SET operation adds a secret to the Azure Key Vault. If the named secret
- * already exists, Azure Key Vault creates a new version of that secret. This
- * operation requires the secrets/set permission.
+ * The SET operation adds a secret to the Azure Key Vault. If the named secret already exists, Azure Key Vault creates a new version of that secret. This operation requires the secrets/set permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -23,9 +21,7 @@ namespace KeyVault;
 op setSecret is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name of the secret. The value you provide may be copied globally for the
-     * purpose of running the service. The value provided should not include
-     * personally identifiable or sensitive information.
+     * The name of the secret. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("secret-name")
@@ -46,9 +42,7 @@ op setSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The DELETE operation applies to any secret stored in Azure Key Vault. DELETE
- * cannot be applied to an individual version of a secret. This operation requires
- * the secrets/delete permission.
+ * The DELETE operation applies to any secret stored in Azure Key Vault. DELETE cannot be applied to an individual version of a secret. This operation requires the secrets/delete permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a secret from a specified key vault.")
@@ -69,10 +63,7 @@ op deleteSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The UPDATE operation changes specified attributes of an existing stored secret.
- * Attributes that are not specified in the request are left unchanged. The value
- * of a secret itself cannot be changed. This operation requires the secrets/set
- * permission.
+ * The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
@@ -108,8 +99,7 @@ op updateSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GET operation is applicable to any secret stored in Azure Key Vault. This
- * operation requires the secrets/get permission.
+ * The GET operation is applicable to any secret stored in Azure Key Vault. This operation requires the secrets/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get a specified secret from a given key vault.")
@@ -125,8 +115,7 @@ op getSecret is Azure.Core.Foundations.Operation<
     secretName: string;
 
     /**
-     * The version of the secret. This URI fragment is optional. If not specified, the
-     * latest version of the secret is returned.
+     * The version of the secret. This URI fragment is optional. If not specified, the latest version of the secret is returned.
      */
     @path("secret-version")
     @clientName("version", "go")
@@ -138,10 +127,7 @@ op getSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Get Secrets operation is applicable to the entire vault. However, only the
- * base secret identifier and its attributes are provided in the response.
- * Individual secret versions are not listed in the response. This operation
- * requires the secrets/list permission.
+ * The Get Secrets operation is applicable to the entire vault. However, only the base secret identifier and its attributes are provided in the response. Individual secret versions are not listed in the response. This operation requires the secrets/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -151,8 +137,7 @@ op getSecret is Azure.Core.Foundations.Operation<
 op getSecrets is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -165,9 +150,7 @@ op getSecrets is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The full secret identifier and attributes are provided in the response. No
- * values are returned for the secrets. This operations requires the secrets/list
- * permission.
+ * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -184,8 +167,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
     secretName: string;
 
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -198,9 +180,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Get Deleted Secrets operation returns the secrets that have been deleted
- * for a vault enabled for soft-delete. This operation requires the secrets/list
- * permission.
+ * The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. This operation requires the secrets/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -210,8 +190,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
 op getDeletedSecrets is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -224,8 +203,7 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Get Deleted Secret operation returns the specified deleted secret along
- * with its attributes. This operation requires the secrets/get permission.
+ * The Get Deleted Secret operation returns the specified deleted secret along with its attributes. This operation requires the secrets/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the specified deleted secret.")
@@ -246,9 +224,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The purge deleted secret operation removes the secret permanently, without the
- * possibility of recovery. This operation can only be enabled on a soft-delete
- * enabled vault. This operation requires the secrets/purge permission.
+ * The purge deleted secret operation removes the secret permanently, without the possibility of recovery. This operation can only be enabled on a soft-delete enabled vault. This operation requires the secrets/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -270,9 +246,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Recovers the deleted secret in the specified vault. This operation can only be
- * performed on a soft-delete enabled vault. This operation requires the
- * secrets/recover permission.
+ * Recovers the deleted secret in the specified vault. This operation can only be performed on a soft-delete enabled vault. This operation requires the secrets/recover permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted secret to the latest version.")
@@ -293,9 +267,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Requests that a backup of the specified secret be downloaded to the client. All
- * versions of the secret will be downloaded. This operation requires the
- * secrets/backup permission.
+ * Requests that a backup of the specified secret be downloaded to the client. All versions of the secret will be downloaded. This operation requires the secrets/backup permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified secret.")
@@ -316,8 +288,7 @@ op backupSecret is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Restores a backed up secret, and all its versions, to a vault. This operation
- * requires the secrets/restore permission.
+ * Restores a backed up secret, and all its versions, to a vault. This operation requires the secrets/restore permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up secret to a vault.")
