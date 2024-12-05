@@ -2269,10 +2269,24 @@
             "name": "include",
             "in": "query",
             "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
-            "required": true,
+            "required": false,
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
             },
             "collectionFormat": "csv"
           }
@@ -5611,6 +5625,24 @@
         "type",
         "json_schema"
       ]
+    },
+    "Agents.RunAdditionalFieldList": {
+      "type": "string",
+      "description": "A list of additional fields to include in the response.",
+      "enum": [
+        "step_details.tool_calls[*].file_search.results[*].content"
+      ],
+      "x-ms-enum": {
+        "name": "RunAdditionalFieldList",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FileSearchContents",
+            "value": "step_details.tool_calls[*].file_search.results[*].content",
+            "description": "File search result content."
+          }
+        ]
+      }
     },
     "Agents.RunCompletionUsage": {
       "type": "object",
