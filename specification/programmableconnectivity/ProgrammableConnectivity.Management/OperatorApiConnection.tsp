@@ -124,6 +124,12 @@ model OperatorApiConnectionProperties {
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   @maxItems(1)
   purposes: Purpose[];
+
+  /**
+   * Explanation of the reason that justifies the prupose: specifically why is the API used for the application's use case.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  purposeReason: string;
 }
 
 /**
@@ -194,7 +200,7 @@ model DataCountries {
   countryCode: string;
 
   /**
-   * The commercial organization who is managing the data
+   * The commercial organization who is managing the data.
    */
   commercialOrganization?: string;
 
