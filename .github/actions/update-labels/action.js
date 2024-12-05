@@ -33,8 +33,19 @@ module.exports = async ({ github, context, core }) => {
 
     artifactNames = artifacts.data.artifacts.map((a) => a.name);
   } else {
+<<<<<<< HEAD
     // TODO: List all artifacts of all workflows associated with issue_number
     throw new Error("Required input 'run_id' not found in env or context");
+=======
+    const workflows = await github.rest.actions.listWorkflowRunsForRepo({
+        owner,
+        repo,
+        event: 'pull_request',
+        status: 'completed',
+        head_sha: context.payload
+      });
+    // TODO: List all artifacts of issue_number
+>>>>>>> ff897aaa2e (test action using js)
   }
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
