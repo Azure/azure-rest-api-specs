@@ -11,6 +11,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  script_result: ''
+
 jobs:
   manage_sdk_suppressions_labels:
     runs-on: ubuntu-latest
@@ -19,6 +22,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set the value
+        id: step_one
+        run: |
+          echo "action_state=yellow" >> "$GITHUB_ENV"
+      - name: Use the value
+        id: step_two
+        run: |
+          printf '%s\n' "$action_state" # This will output 'yellow'
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -26,18 +38,18 @@ jobs:
 
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-      - name: 运行 Node.js 脚本
+      - name: Run Node.js script
         id: run-script
         run: |
-          # 运行脚本并捕获输出
-          OUTPUT=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "脚本输出: $OUTPUT"
-          # 将输出保存为环境变量
-          echo "result=$OUTPUT" >> $GITHUB_ENV
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          OUTPUT=$(cat output.json)
+          echo "Script JSON Output: $OUTPUT"
+          echo "script_result=$OUTPUT" >> $GITHUB_ENV
 
-      - name: 在下一步中使用结果
+      - name: Write all JSON content
         run: |
-          echo "脚本结果为: $OUTPUT"
+          echo "Entire JSON content:"
+          echo "${{ env.script_result }}"
 
 
       # - name: Run Manage-SDKSuppression-Label script from file
