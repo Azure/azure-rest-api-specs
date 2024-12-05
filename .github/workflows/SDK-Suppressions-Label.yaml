@@ -35,8 +35,11 @@ jobs:
       #       await action({ github, context, core });
 
       - name: Add a comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
+          result-encoding: string
+          retries: 3
+          retry-exempt-status-codes: 400,401
           script: |
             # github.rest.issues.createComment({
             #   owner: context.repo.owner,
@@ -44,13 +47,44 @@ jobs:
             #   issue_number: context.issue.number,
             #   body: "Thank you for your contribution! 🚀"
             # });
-            const action = require('./.github/actions/handle-suppressions/suppressions.js')
-            await action({ github, context, core });
+            console.log(context)
+            const script = require('.github/actions/handle-suppressions/suppressions.js')
+            await script({github, context, core})
+        env:
+          GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
+
+
+      # - name: 获取 PR 信息
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const pr = context.payload.pull_request;
+      #       const prNumber = pr.number;
+      #       const prTitle = pr.title;
+
+
+      #       console.log(`PR Number: ${prNumber}`);
+      #       console.log(`PR Title: ${prTitle}`);
+
+      #       // 保存到环境变量
+      #       return { prNumber, prTitle };
+      #     result-encoding: string
+      #   id: fetch-pr-info
+
+      # - name: 保存到 GitHub 环境变量
+      #   run: |
+      #     echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.prNumber }}" >> $GITHUB_ENV
+      #     echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
+
+      # - name: 测试打印环境变量
+      #   run: |
+      #     echo "Pull Request Number: $PR_NUMBER"
+      #     echo "Pull Request Title: $PR_TITLE"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-            node-version: '18'
+            node-version: '20'
 
       # - name: Print GitHub Context
       #   run: |
