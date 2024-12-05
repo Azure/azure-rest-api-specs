@@ -126,7 +126,7 @@ model OperatorApiConnectionProperties {
   purposes: Purpose[];
 
   /**
-   * Explanation of the reason that justifies the prupose: specifically why is the API used for the application's use case.
+   * Explanation of the reason that justifies the purpose: specifically why is the API used for the application's use case.
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   purposeReason: string;
