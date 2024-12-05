@@ -38,7 +38,7 @@ jobs:
 
       - name: Print GitHub Context
         run: |
-          echo "GitHub Context: ${{ toJson(github) }}"
+          echo "GitHub Context: ${{ toJson(github.event) }}"
 
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
