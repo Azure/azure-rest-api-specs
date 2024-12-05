@@ -50,15 +50,13 @@ jobs:
             const prNumber = pr.number;
             const prTitle = pr.title;
 
-
             console.log(`PR Number: ${prNumber}`);
             console.log(`PR Title: ${prTitle}`);
 
             core.setOutput("prNumber", prNumber);
             core.setOutput("prTitle", prTitle);
 
-            # cannot use this code - return { prNumber, prTitle };
-
+            return { prNumber, prTitle };
           result-encoding: string
 
       - name: save GitHub env
