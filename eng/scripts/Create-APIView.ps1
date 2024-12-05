@@ -435,7 +435,7 @@ function New-TypeSpecAPIViewTokens {
     
     # Skip Baseline APIView Token for new projects
     if (!(Test-Path -Path $typeSpecProjectDir)) {
-      Write-Host("TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+      Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
     }
     else {
       Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
