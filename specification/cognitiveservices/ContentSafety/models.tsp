@@ -25,7 +25,7 @@ union TextCategory {
   @doc("The harm category for Text - Violence.")
   "Violence",
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @doc("The harm category for Text - Drugs.")
   "Drugs",
 }
@@ -46,7 +46,7 @@ union ImageCategory {
   @doc("The harm category for Image - Violence.")
   "Violence",
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @doc("The harm category for Text - Drugs.")
   "Drugs",
 }
@@ -146,21 +146,21 @@ model ImageData {
   blobUrl?: url;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request of detecting potential protected material present in the given text.")
 model DetectImageProtectedMaterialOptions {
   @doc("The image to be analyzed, which may contain protected material.")
   image: ImageData;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The combined detection results of potential protected material.")
 model DetectImageProtectedMaterialResult {
   @doc("Analysis result for the given image.")
   protectedMaterialAnalysis: ImageProtectedMaterialAnalysisResult;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The individual detection result of potential protected material.")
 model ImageProtectedMaterialAnalysisResult {
   @doc("Whether potential protected material is detected or not.")
@@ -295,21 +295,21 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request of detecting potential protected material present in the given code.")
 model DetectCodeProtectedMaterialOptions {
   @doc("The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
   code: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The combined detection results of potential protected material for code.")
 model DetectCodeProtectedMaterialResult {
   @doc("Analysis result for the given text.")
   protectedMaterialAnalysis: CodeProtectedMaterialAnalysisResult;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The code citation of potential protected material for code.")
 model CodeCitation {
   @doc("The license type fetched from source repository.")
@@ -319,7 +319,7 @@ model CodeCitation {
   sourceUrls: string[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The individual detection result of potential protected material for code.")
 model CodeProtectedMaterialAnalysisResult {
   @doc("Whether potential protected material is detected or not.")
@@ -329,7 +329,7 @@ model CodeProtectedMaterialAnalysisResult {
   codeCitations: CodeCitation[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The domain supported in Text Groundedness analysis.")
 union GroundednessDomain {
   string,
@@ -341,7 +341,7 @@ union GroundednessDomain {
   Medical: "Medical",
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The task type supported in Text Groundedness analysis.")
 union GroundednessTask {
   string,
@@ -354,7 +354,7 @@ union GroundednessTask {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The options for QnA task.")
 model QnAOptions {
   @doc("The user's question input in a QnA task.")
@@ -362,7 +362,7 @@ model QnAOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The LLM resource type supported in Text Groundedness analysis.")
 union LLMResourceType {
   string,
@@ -372,7 +372,7 @@ union LLMResourceType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Details of the given LLM resource.")
 model LLMResource {
   @doc("LLM resource type.")
@@ -387,7 +387,7 @@ model LLMResource {
   azureOpenAIDeploymentName: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request of text groundedness analysis.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
@@ -436,7 +436,7 @@ model AnalyzeTextGroundednessOptions {
   llmResource?: LLMResource;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("To describe the string index in different representations.")
 model IndexDetails {
   @doc("Indicate the index when encoding is UTF-8.")
@@ -449,7 +449,7 @@ model IndexDetails {
   codePoint: int64;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Details of the content that identified as ungroundedness.")
 model UngroundednessDetails {
   @doc("The original text which is considered as ungrounded.")
@@ -468,7 +468,7 @@ model UngroundednessDetails {
   reason?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The response of text groundedness analysis.")
 model AnalyzeTextGroundednessResult {
   @doc("Indicates whether ungrounded content is detected.")
@@ -491,7 +491,7 @@ model AnalyzeTextGroundednessResult {
   correctedText?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The possible status of a content safety incident operation.")
 union IncidentOperationStatus {
   string,
@@ -512,7 +512,7 @@ union IncidentOperationStatus {
   "Canceled",
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of a content safety Text Incident.")
 @resource("text/incidents")
 model TextIncident {
@@ -535,7 +535,7 @@ model TextIncident {
   lastUpdated: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of a sample in a Text Incident.")
 @resource("incidentSamples")
 @parentResource(TextIncident)
@@ -550,28 +550,28 @@ model TextIncidentSample {
   text?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to add incident samples to a Text Incident.")
 model AddTextIncidentSamplesOptions {
   @doc("Incident samples to be added.")
   incidentSamples: TextIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The response of adding incident samples to a Text Incident.")
 model AddTextIncidentSamplesResult {
   @doc("Incident samples have been added.")
   incidentSamples: TextIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to remove incident samples from a Text Incident.")
 model RemoveTextIncidentSamplesOptions {
   @doc("Incident samples to be removed.")
   incidentSampleIds: string[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to analyze given text content with content safety Text Incidents defined.")
 model AnalyzeTextDetectIncidentsOptions {
   @doc("The text to be analyzed.")
@@ -581,21 +581,21 @@ model AnalyzeTextDetectIncidentsOptions {
   incidentNames: string[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The definition of a matched content safety incident.")
 model IncidentMatch {
   @doc("The name of the matched incident.")
   incidentName: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The response of analyzing given content with content safety incidents defined.")
 model DetectIncidentsResult {
   @doc("The details of matched incidents.")
   incidentMatches: IncidentMatch[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of a content safety Image Incident.")
 @resource("image/incidents")
 model ImageIncident {
@@ -615,7 +615,7 @@ model ImageIncident {
   lastUpdated: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of an Image Incident sample in a request.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -630,14 +630,14 @@ model ImageIncidentSample {
   image?: ImageData;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to add incident samples to an Image Incident.")
 model AddImageIncidentSamplesOptions {
   @doc("Incident samples to be added.")
   incidentSamples: ImageIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("A single sample in an Image Incident sample list.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -648,21 +648,21 @@ model ListImageIncidentSampleResult {
   incidentSampleId: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The response of adding incident samples to an Image Incident.")
 model AddImageIncidentSamplesResult {
   @doc("Array of incidentSamples have been added.")
   incidentSamples: ListImageIncidentSampleResult[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of an image in a response.")
 model ImageDataResult {
   @doc("Base64-encoded image.")
   content?: bytes;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Definition of an Image Incident sample in a response.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -676,14 +676,14 @@ model ImageIncidentSampleResult {
   image?: ImageDataResult;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to remove incident samples from an Image Incident.")
 model RemoveImageIncidentSamplesOptions {
   @doc("Incident samples to be removed.")
   incidentSampleIds: string[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to analyze given image with content safety Image Incidents defined.")
 model AnalyzeImageDetectIncidentsOptions {
   @doc("The image to be analyzed.")
@@ -693,7 +693,7 @@ model AnalyzeImageDetectIncidentsOptions {
   incidentNames: string[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The details of a long running operation of Text Incident.")
 @resource("text/incidents/operations")
 model TextIncidentOperationResult {
@@ -710,7 +710,7 @@ model TextIncidentOperationResult {
   errorMessage?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The details of a long running operation of Image Incident.")
 @resource("image/incidents/operations")
 model ImageIncidentOperationResult {
@@ -727,7 +727,7 @@ model ImageIncidentOperationResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Incident long running operation parameters.")
 model IncidentLongRunningOperationParameters {
   @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
@@ -737,7 +737,7 @@ model IncidentLongRunningOperationParameters {
   operationId?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Incident long running operation status result.")
 model IncidentLongRunningOperationStatusResult {
   @doc("The operation id passed by the user in the request or a random UUID generated by server side.")
@@ -747,7 +747,7 @@ model IncidentLongRunningOperationStatusResult {
   operationId: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @resource("text/categories")
 @doc("Definition of a Customer Category version.")
 model TextCustomCategoryVersion {
@@ -787,7 +787,7 @@ model TextCustomCategoryVersion {
   errorMessage?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The possible status of building a Custom Category.")
 union CustomCategoryStatus {
   string,
@@ -805,14 +805,14 @@ union CustomCategoryStatus {
   "Failed",
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("All versions of a Custom Category.")
 model TextCustomCategoryVersionList {
   @doc("List of custom category versions.")
   value: TextCustomCategoryVersion[];
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The possible status of a Custom Category operation.")
 union CustomCategoryOperationStatus {
   string,
@@ -830,7 +830,7 @@ union CustomCategoryOperationStatus {
   "Failed",
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The details of a long running operation of Custom Category.")
 @resource("text/categories/operations")
 model CustomCategoryOperationDetail {
@@ -848,7 +848,7 @@ model CustomCategoryOperationDetail {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Custom Category long running operation parameters.")
 model CustomCategoryLongRunningOperationParameters {
   @doc("The build will target on the given version.")
@@ -862,7 +862,7 @@ model CustomCategoryLongRunningOperationParameters {
   operationId?: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("Custom Category long running operation status result.")
 model CustomCategoryLongRunningOperationStatusResult {
   @doc("The operation id passed by the user in the request or a random UUID generated by server side.")
@@ -872,7 +872,7 @@ model CustomCategoryLongRunningOperationStatusResult {
   operationId: string;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to analyze given text content with the Custom Category version defined.")
 model AnalyzeTextCustomCategoryOption {
   @doc("The text needs to be analyzed.")
@@ -885,21 +885,21 @@ model AnalyzeTextCustomCategoryOption {
   version?: int32;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The analysis result of Custom Category.")
 model TextCustomCategoryAnalysis {
   @doc("Whether the Custom Category is detected.")
   detected: boolean;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The response of analyzing text with Custom Category.")
 model AnalyzeTextCustomCategoryResult {
   @doc("The analysis result with Custom Category.")
   customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The harm category supported in Image-with-Text content analysis.")
 union ImageWithTextCategory {
   string,
@@ -917,7 +917,7 @@ union ImageWithTextCategory {
   "Violence",
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 @doc("The request to analyze an image with embedded or custom text.")
 model AnalyzeImageWithTextOptions {
   @doc("The image content to be analyzed.")
@@ -933,7 +933,7 @@ model AnalyzeImageWithTextOptions {
   enableOcr: boolean;
 }
 
-@added(Versions.v2024_09_15_Preview)
+@added(Versions.v2024_12_15_Preview)
 @doc("The definition of individual result for analyzing an image with embedded or custom text.")
 model ImageWithTextCategoriesAnalysis {
   @doc("The harm category detected.")
@@ -943,9 +943,395 @@ model ImageWithTextCategoriesAnalysis {
   severity?: int32;
 }
 
-@added(Versions.v2024_09_15_Preview)
+@added(Versions.v2024_12_15_Preview)
 @doc("The response of analyzing an image with embedded or custom text.")
 model AnalyzeImageWithTextResult {
   @doc("The individual analysis result for each harm category.")
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
+}
+
+@doc("The modality of the content.")
+union Modality {
+  string,
+
+  @doc("The modality for content - Text.")
+  "Text",
+
+  @doc("The modality for content - Image.")
+  "Image",
+}
+
+@doc("The source type of the message.")
+union SourceType {
+  string,
+
+  @doc("The source type for message - message to AI.")
+  "MESSAGE_TO_AI",
+
+  @doc("The source type for message - message from AI.")
+  "MESSAGE_FROM_AI",
+}
+
+@doc("The type of the role.")
+union RoleType {
+  string,
+
+  @doc("All roles.")
+  "All",
+
+  @doc("User role.")
+  "User",
+
+  @doc("System role.")
+  "System",
+
+  @doc("Assistant role.")
+  "Assistant",
+
+  @doc("Tool role.")
+  "Tool",
+}
+
+@doc("The harm category.")
+union HarmCategory {
+  string,
+
+  @doc("Unspecified harm category.")
+  "Unspecified",
+
+  @doc("Celebrity harm category.")
+  "Celebrity",
+
+  @doc("Drug harm category.")
+  "Drug",
+
+  @doc("Hate harm category.")
+  "Hate",
+
+  @doc("Prompt injection harm category.")
+  "PromptInjection",
+
+  @doc("Protected material harm category.")
+  "ProtectedMaterial",
+
+  @doc("Sexual harm category.")
+  "Sexual",
+
+  @doc("Self-harm category.")
+  "SelfHarm",
+
+  @doc("Violence harm category.")
+  "Violence",
+}
+
+@doc("The risk level.")
+union RiskLevel {
+  string,
+
+  @doc("Safe risk level.")
+  "Safe",
+
+  @doc("Low risk level.")
+  "Low",
+
+  @doc("Medium risk level.")
+  "Medium",
+
+  @doc("High risk level.")
+  "High",
+}
+
+@doc("The task type.")
+union TaskType {
+  string,
+
+  @doc("Harm category task type.")
+  "HarmCategory",
+
+  @doc("Blocklist task type.")
+  "Blocklist",
+
+  @doc("Safety incident task type.")
+  "SafetyIncident",
+
+  @doc("Custom harm category task type.")
+  "CustomHarmCategory",
+}
+
+@doc("Unify content model.")
+model UnifyContent {
+  @doc("The modality of the content.")
+  modality: Modality;
+
+  @doc("The text content.")
+  text?: string;
+
+  @doc("The base64 encoded image content.")
+  imageBase64?: string;
+
+  @doc("The blob URL of the image content.")
+  imageBlob?: string;
+}
+
+@doc("Unify message model.")
+model UnifyMessage {
+  @doc("The source type of the message.")
+  source: SourceType;
+
+  @doc("The role of the message.")
+  role: RoleType;
+
+  @doc("The contents of the message.")
+  contents: UnifyContent[];
+}
+
+@doc("Applied for model.")
+model AppliedFor {
+  @doc("The role applied for.")
+  role: RoleType;
+
+  @doc("The source type applied for.")
+  sourceType: SourceType;
+}
+
+@doc("Harm category task setting model.")
+model HarmCategoryTaskSetting {
+  @doc("The harm category.")
+  harmCategory: HarmCategory;
+
+  @doc("The harm configuration ID.")
+  harmConfigId: string;
+}
+
+@doc("Blocklist task setting model.")
+model BlocklistTaskSetting {
+  @doc("The name of the blocklist.")
+  name: string;
+}
+
+@doc("Safety incident task setting model.")
+model SafetyIncidentTaskSetting {
+  @doc("The name of the safety incident.")
+  name: string;
+}
+
+@doc("Custom harm category task setting model.")
+model CustomHarmCategoryTaskSetting {
+  @doc("The name of the custom harm category.")
+  name: string;
+}
+
+@doc("Blocking criteria model.")
+model BlockingCriteria {
+  @doc("The allowed severity level.")
+  allowedSeverity: int32;
+
+  @doc("Indicates if it is detected.")
+  isDetected: boolean;
+
+  @doc("The risk level.")
+  riskLevel: RiskLevel;
+}
+
+@doc("Task setting model.")
+model TaskSetting {
+  @doc("The setting ID.")
+  settingId: string;
+
+  @doc("Indicates if the setting is enabled.")
+  settingEnabled: boolean;
+
+  @doc("The applied for settings.")
+  appliedFor: AppliedFor[];
+
+  @doc("The task type.")
+  type: TaskType;
+
+  @doc("The harm category task setting.")
+  harmCategoryTaskSetting?: HarmCategoryTaskSetting;
+
+  @doc("The blocklist task setting.")
+  blocklistTaskSetting?: BlocklistTaskSetting;
+
+  @doc("The safety incident task setting.")
+  safetyIncidentTaskSetting?: SafetyIncidentTaskSetting;
+
+  @doc("The custom harm category task setting.")
+  customHarmCategoryTaskSetting?: CustomHarmCategoryTaskSetting;
+
+  @doc("Indicates if blocking criteria is enabled.")
+  blockingCriteriaEnabled: boolean;
+
+  @doc("The blocking criteria.")
+  blockingCriteria: BlockingCriteria;
+}
+
+@resource("safetyPolicies")
+@doc("Safety policy model.")
+model SafetyPolicy {
+  @doc("The safety policy name.")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @key("safetyPolicyName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  name: string;
+
+  @doc("The task settings.")
+  taskSettings: TaskSetting[];
+}
+
+@doc("Defines the options for analyzing content with a safety policy.")
+model SafetyPolicyAnalyzeOption {
+  @doc("The messages to be analyzed.")
+  messages: UnifyMessage[];
+
+  @doc("The inline safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided.")
+  safetyPolicyInline?: SafetyPolicy;
+
+  @doc("The name of a predefined safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided.")
+  safetyPolicyName?: string;
+}
+
+@doc("The result code.")
+union ResultCode {
+  string,
+
+  @doc("OK result code.")
+  "OK",
+
+  @doc("No valid input result code.")
+  "NoValidInput",
+
+  @doc("Internal timeout result code.")
+  "InternalTimeout",
+
+  @doc("Internal error result code.")
+  "InternalError",
+}
+
+@doc("Details the output of an analysis, including detection status, severity, and additional information.")
+model PromptInjectionDetail {
+  @doc("Indicates whether prompt injection was detected.")
+  promptInjection?: boolean;
+
+  @doc("Indicates whether cross-domain issues were detected.")
+  crossDomain?: boolean;
+}
+
+@doc("Harm category task result model.")
+model HarmCategoryTaskResult {
+  @doc("The harm category.")
+  harmCategory: HarmCategory;
+
+  @doc("The harm configuration ID.")
+  harmConfigId: string;
+
+  @doc("Indicates if it is detected.")
+  isDetected: boolean;
+
+  @doc("The severity level.")
+  severity: int32;
+
+  @doc("The risk level.")
+  riskLevel: RiskLevel;
+
+  @doc("Advanced results.")
+  advanced?: PromptInjectionDetail;
+}
+
+@doc("Blocklist task result model.")
+model BlocklistTaskResult {
+  @doc("The name of the blocklist.")
+  name: string;
+
+  @doc("Indicates if it is detected.")
+  isDetected: boolean;
+}
+
+@doc("Safety incident task result model.")
+model SafetyIncidentTaskResult {
+  @doc("The name of the safety incident.")
+  name: string;
+
+  @doc("Indicates if it is detected.")
+  isDetected: boolean;
+}
+
+@doc("Custom category task result model.")
+model CustomCategoryTaskResult {
+  @doc("The name of the custom category.")
+  name: string;
+
+  @doc("Indicates if it is detected.")
+  isDetected: boolean;
+}
+
+@doc("Task result model.")
+model TaskResult {
+  @doc("The setting ID.")
+  settingId: string;
+
+  @doc("The result code.")
+  resultCode: ResultCode;
+
+  @doc("The result code detail.")
+  resultCodeDetail: string;
+
+  @doc("Indicates if blocking criteria is met.")
+  isBlockingCriteriaMet: boolean;
+
+  @doc("The task type.")
+  taskType: TaskType;
+
+  @doc("The harm category task result.")
+  harmCategoryTaskResult?: HarmCategoryTaskResult;
+
+  @doc("The blocklist task result.")
+  blocklistTaskResult?: BlocklistTaskResult;
+
+  @doc("The safety incident task result.")
+  safetyIncidentTaskResult?: SafetyIncidentTaskResult;
+
+  @doc("The custom category task result.")
+  customCategoryTaskResult?: CustomCategoryTaskResult;
+}
+
+@doc("The result.")
+union Result {
+  string,
+
+  @doc("Unspecified result.")
+  "Unspecified",
+
+  @doc("No criteria met result.")
+  "NoCriteriaMet",
+
+  @doc("Blocking criteria met result.")
+  "BlockingCriteriaMet",
+}
+
+@doc("The state.")
+union State {
+  string,
+
+  @doc("Unspecified state.")
+  "Unspecified",
+
+  @doc("All analysis succeeded state.")
+  "AnalysisAllSucceed",
+
+  @doc("Not all analysis succeeded state.")
+  "AnalysisNotAllSucceed",
+}
+
+@doc("Represents the analysis response obtained by applying a safety policy.")
+model SafetyPolicyAnalyzeResponse {
+  @doc("The state of the analysis.")
+  state: State;
+
+  @doc("The result of the analysis.")
+  result: Result;
+
+  @doc("The task results of the analysis.")
+  taskResults: TaskResult[];
 }

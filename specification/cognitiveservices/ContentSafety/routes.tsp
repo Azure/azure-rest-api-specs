@@ -64,7 +64,7 @@ interface TextOperations {
     DetectTextProtectedMaterialResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Detect Protected Material for Code")
   @doc("A synchronous API for detecting protected material in the given code.")
   @route("/text:detectProtectedMaterialForCode")
@@ -81,7 +81,7 @@ interface TextOperations {
     DetectCodeProtectedMaterialResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Analyze Text with Custom Category")
   @doc("A synchronous API to analyze content with Custom Category defined.")
   @route("/text:analyzeCustomCategory")
@@ -98,7 +98,7 @@ interface TextOperations {
     AnalyzeTextCustomCategoryResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Analyze Text with Text Incidents")
   @doc("A synchronous API to analyze text content with the custom content safety Text Incidents defined.")
   @route("/text:detectIncidents")
@@ -115,7 +115,7 @@ interface TextOperations {
     DetectIncidentsResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Analyze Text Groundedness")
   @doc("A synchronous API to analyze the language model outputs to evaluate alignment with user-provided information or to identify fictional content.")
   @route("/text:detectGroundedness")
@@ -150,7 +150,7 @@ interface ImageOperations {
     AnalyzeImageResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Analyze Image with Image Incidents")
   @doc("A synchronous API to analyze image content with the custom content safety Image Incidents defined.")
   @route("/image:detectIncidents")
@@ -167,7 +167,7 @@ interface ImageOperations {
     DetectIncidentsResult
   >;
 
-  @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @added(ContentSafety.Versions.v2024_12_15_Preview)
   @summary("Detect Protected Material for Image")
   @doc("A synchronous API for detecting protected material in the given image.")
   @route("/image:detectProtectedMaterial")
@@ -185,7 +185,7 @@ interface ImageOperations {
   >;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface ImageWithTextOperations {
   @summary("Analyze Image with Text")
   @doc("A synchronous API to analyze image content with embedded or custom text content.")
@@ -265,13 +265,13 @@ interface TextBlocklists {
   >;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface TextIncidentOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface TextIncidentOperations {
   @summary("Text Incident - Deploy")
   @doc("Deploy the given text safety incident. After the deployment completed, the incident can be used to detect content. This will submit a long running operation.")
@@ -333,13 +333,13 @@ interface TextIncidentOperations {
   >;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface ImageIncidentOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface ImageIncidentOperations {
   @summary("Image Incident - Deploy")
   @doc("Deploy the given image safety incident. After the deployment completed, the incident can be used to detect content. This will submit a long running operation.")
@@ -401,13 +401,13 @@ interface ImageIncidentOperations {
   >;
 }
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface TextCustomizedCategoryOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_09_15_Preview)
+@added(ContentSafety.Versions.v2024_12_15_Preview)
 interface TextCustomizedCategoryOperations {
   @summary("Custom Category - Build")
   @doc("Trigger the build process for the given Custom Category. After the build completed, the category can be used to analyze content. This will submit a long running operation.")
@@ -461,4 +461,50 @@ interface TextCustomizedCategoryOperations {
       version?: int32;
     }>
   >;
+}
+
+@added(Versions.v2024_12_15_Preview)
+interface SafetyPolicyAnalyzeOperations {
+@summary("Safety Policy Analysis")
+@doc("A synchronous API for the safety policy analysis of input content")
+@route("/analyzeBySafetyPolicy")
+@post
+analyzeBySafetyPolicy is Azure.Core.RpcOperation<
+  {
+    @body
+    @doc("The safety policy analyze request.")
+    @clientName("options", "csharp")
+    @clientName("options", "python")
+    @clientName("options", "java")
+    body: SafetyPolicyAnalyzeOption;
+  },
+  SafetyPolicyAnalyzeResponse
+>;
+}
+
+@added(Versions.v2024_12_15_Preview)
+interface SafetyPolicyOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+@added(Versions.v2024_12_15_Preview)
+interface SafetyPolicyManagement {
+  @summary("Create Or Update Safety Policy")
+  @doc("Updates a safety policy. If the policyName does not exist, a new safety policy will be created.")
+  createOrUpdateSafetyPolicy is SafetyPolicyOps.ResourceCreateOrUpdate<SafetyPolicy>;
+
+  @summary("Delete A Safety Policy By policyName")
+  @doc("Deletes a safety policy.")
+  deleteSafetyPolicy is SafetyPolicyOps.ResourceDelete<SafetyPolicy>;
+
+  @summary("Get Safety Policy By policyName")
+  @doc("Returns safety policy details.")
+  getSafetyPolicy is SafetyPolicyOps.ResourceRead<SafetyPolicy>;
+
+  @summary("Get All Safety Policies")
+  @doc("Get all safety policies details.")
+  listSafetyPolicies is SafetyPolicyOps.ResourceList<SafetyPolicy>;
 }
