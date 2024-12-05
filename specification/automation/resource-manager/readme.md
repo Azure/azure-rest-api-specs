@@ -668,6 +668,7 @@ directive:
     from: powershell72Module.json
   - suppress: AvoidAdditionalProperties
     from: runtimeEnvironment.json
+    where: $.definitions.DefaultPackages.additionalProperties
     reason: Already used in previous api version, fixing it will cause breaking change        
 
 
