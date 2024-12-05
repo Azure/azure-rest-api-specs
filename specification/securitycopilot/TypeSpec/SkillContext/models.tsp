@@ -474,11 +474,7 @@ model BaseChoice {
 	LogProbs: unknown;
 	FinishReason: string;
 	ContentFilterResults?: unknown;
-	ContentFilterError?: ContentFilterError;
-}
-
-model ContentFilterError {
-	Error?: unknown; 
+	ContentFilterError?: unknown;
 }
 
 model ChatChoice extends BaseChoice {
