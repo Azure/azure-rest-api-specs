@@ -40,6 +40,9 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}"]
     reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: AvoidAnonymousTypes
+    from: openapi.json
+    reason: Typespec generated definitions contain anonymous types.
 ```
 
 ### Basic Information
