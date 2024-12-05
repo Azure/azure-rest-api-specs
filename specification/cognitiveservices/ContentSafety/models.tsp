@@ -996,9 +996,6 @@ union RoleType {
 union HarmCategory {
   string,
 
-  @doc("Unspecified harm category.")
-  "Unspecified",
-
   @doc("Celebrity harm category.")
   "Celebrity",
 
@@ -1300,9 +1297,6 @@ model TaskResult {
 union Result {
   string,
 
-  @doc("Unspecified result.")
-  "Unspecified",
-
   @doc("No criteria met result.")
   "NoCriteriaMet",
 
@@ -1313,9 +1307,6 @@ union Result {
 @doc("The state.")
 union State {
   string,
-
-  @doc("Unspecified state.")
-  "Unspecified",
 
   @doc("All analysis succeeded state.")
   "AnalysisAllSucceed",
