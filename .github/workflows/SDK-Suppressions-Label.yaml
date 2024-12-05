@@ -41,6 +41,16 @@ jobs:
       - name: Run Node.js script
         id: run-script
         run: |
+          # echo "GITHUB_PULL_REQUEST_BASE_REPO_OWNER=${{ github.event.pull_request.base.repo.owner.login }}" >> $GITHUB_ENV
+          # echo "GITHUB_PULL_REQUEST_BASE_REPO_NAME=${{ github.event.pull_request.base.repo.name }}" >> $GITHUB_ENV
+          # echo "GITHUB_PULL_REQUEST_HEAD_REPO_OWNER=${{ github.event.pull_request.head.repo.owner.login }}" >> $GITHUB_ENV
+          # echo "GITHUB_PULL_REQUEST_HEAD_REPO_NAME=${{ github.event.pull_request.head.repo.name }}" >> $GITHUB_ENV
+          # echo "GITHUB_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
+          echo "GITHUB_HEAD_REF=${{ github.head_ref }}" >> $GITHUB_ENV
+          echo "GITHUB_BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
+          echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat output.json)
           echo "Script JSON Output: $OUTPUT"
@@ -50,7 +60,6 @@ jobs:
         run: |
           echo "Entire JSON content:"
           echo "${{ env.script_result }}"
-
 
       # - name: Run Manage-SDKSuppression-Label script from file
       #   run: |
