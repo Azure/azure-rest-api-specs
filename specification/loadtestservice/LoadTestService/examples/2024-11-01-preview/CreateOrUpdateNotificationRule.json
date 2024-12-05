@@ -1,6 +1,6 @@
 {
   "operationId": "NotificationRuleAdministration_CreateOrUpdateNotificationRule",
-  "title": "Create or update a notification rule for triggers.",
+  "title": "Create or update a notification rule for tests.",
   "parameters": {
     "api-version": "2024-11-01-preview",
     "notificationRuleId": "12345678-1234-1234-1234-123456789012",
@@ -9,18 +9,12 @@
       "actionGroupIds": [
         "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
       ],
-      "scope": "Triggers",
-      "triggerIds": [
+      "scope": "Tests",
+      "testIds": [
         "12345678-1234-1234-1234-123456789012"
       ],
       "eventFilters": {
         "eventfilter1": {
-          "kind": "TriggerCompleted"
-        },
-        "eventfilter2": {
-          "kind": "TriggerDisabled"
-        },
-        "eventfilter3": {
           "kind": "TestRunEnded",
           "condition": {
             "testRunStatuses": [
@@ -33,8 +27,14 @@
             ]
           }
         },
-        "eventfilter4": {
+        "eventfilter2": {
           "kind": "TestRunStarted"
+        },
+        "eventfilter3": {
+          "kind": "TriggerCompleted"
+        },
+        "eventfilter4": {
+          "kind": "TriggerDisabled"
         }
       }
     }
@@ -47,18 +47,12 @@
         "actionGroupIds": [
           "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
         ],
-        "scope": "Triggers",
-        "triggerIds": [
+        "scope": "Tests",
+        "testIds": [
           "12345678-1234-1234-1234-123456789012"
         ],
         "eventFilters": {
           "eventfilter1": {
-            "kind": "TriggerCompleted"
-          },
-          "eventfilter2": {
-            "kind": "TriggerDisabled"
-          },
-          "eventfilter3": {
             "kind": "TestRunEnded",
             "condition": {
               "testRunStatuses": [
@@ -71,8 +65,14 @@
               ]
             }
           },
-          "eventfilter4": {
+          "eventfilter2": {
             "kind": "TestRunStarted"
+          },
+          "eventfilter3": {
+            "kind": "TriggerCompleted"
+          },
+          "eventfilter4": {
+            "kind": "TriggerDisabled"
           }
         },
         "createdDateTime": "2024-05-01T16:43:46.072Z",
@@ -88,19 +88,13 @@
         "actionGroupIds": [
           "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/sampleRG/providers/microsoft.insights/actionGroups/sampleActionGroup"
         ],
-        "scope": "Triggers",
-        "triggerIds": [
+        "scope": "Tests",
+        "testIds": [
           "12345678-1234-1234-1234-123456789012"
         ],
         "eventFilters": {
           "eventfilter1": {
-            "name": "TriggerCompleted"
-          },
-          "eventfilter2": {
-            "name": "TriggerDisabled"
-          },
-          "eventfilter3": {
-            "kind": "TestRunEnded",
+            "name": "TestRunEnded",
             "condition": {
               "testRunStatuses": [
                 "FAILED",
@@ -112,8 +106,8 @@
               ]
             }
           },
-          "eventfilter4": {
-            "kind": "TestRunStarted"
+          "eventfilter2": {
+            "name": "TestRunStarted"
           }
         },
         "createdDateTime": "2024-05-01T16:43:46.072Z",
