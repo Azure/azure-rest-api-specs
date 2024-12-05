@@ -422,8 +422,7 @@ function New-TypeSpecAPIViewTokens {
 
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
-    $typeSpecProjectDir = $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]
-    $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProjectDir)
+    $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
     New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
     # Generate New APIView Token using default tag on base branch
@@ -434,7 +433,7 @@ function New-TypeSpecAPIViewTokens {
     git checkout $TargetCommitId
     
     # Skip Baseline APIView Token for new projects
-    if (!(Test-Path -Path $typeSpecProjectDir)) {
+    if (!(Test-Path -Path $typeSpecProject)) {
       Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
     }
     else {
