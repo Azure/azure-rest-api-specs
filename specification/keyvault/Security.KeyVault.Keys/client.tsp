@@ -52,5 +52,3 @@ using KeyVault;
 @@clientName(JsonWebKey.dp, "DP", "go");
 @@clientName(JsonWebKey.dq, "DQ", "go");
 @@clientName(JsonWebKey.qi, "QI", "go");
-
-@@usage(DeletionRecoveryLevel, Usage.output, "javascript");

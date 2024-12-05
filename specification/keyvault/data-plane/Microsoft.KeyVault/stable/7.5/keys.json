@@ -3,7 +3,7 @@
   "info": {
     "title": "KeyVaultClient",
     "version": "7.5",
-    "description": "The key vault client performs cryptographic key operations and vault operations\nagainst the Key Vault service.",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -56,7 +56,7 @@
       "get": {
         "operationId": "GetDeletedKeys",
         "summary": "Lists the deleted keys in the specified vault.",
-        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that\ncontain the public part of a deleted key. This operation includes\ndeletion-specific information. The Get Deleted Keys operation is applicable for\nvaults enabled for soft-delete. While the operation can be invoked on any\nvault, it will return an error if invoked on a non soft-delete enabled vault.\nThis operation requires the keys/list permission.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/list permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -64,7 +64,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -100,7 +100,7 @@
       "get": {
         "operationId": "GetDeletedKey",
         "summary": "Gets the public part of a deleted key.",
-        "description": "The Get Deleted Key operation is applicable for soft-delete enabled vaults.\nWhile the operation can be invoked on any vault, it will return an error if\ninvoked on a non soft-delete enabled vault. This operation requires the\nkeys/get permission.",
+        "description": "The Get Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -137,7 +137,7 @@
       "delete": {
         "operationId": "PurgeDeletedKey",
         "summary": "Permanently deletes the specified key.",
-        "description": "The Purge Deleted Key operation is applicable for soft-delete enabled vaults.\nWhile the operation can be invoked on any vault, it will return an error if\ninvoked on a non soft-delete enabled vault. This operation requires the\nkeys/purge permission.",
+        "description": "The Purge Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/purge permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -173,7 +173,7 @@
       "post": {
         "operationId": "RecoverDeletedKey",
         "summary": "Recovers the deleted key to its latest version.",
-        "description": "The Recover Deleted Key operation is applicable for deleted keys in soft-delete\nenabled vaults. It recovers the deleted key back to its latest version under\n/keys. An attempt to recover an non-deleted key will return an error. Consider\nthis the inverse of the delete operation on soft-delete enabled vaults. This\noperation requires the keys/recover permission.",
+        "description": "The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults. This operation requires the keys/recover permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -212,7 +212,7 @@
       "get": {
         "operationId": "GetKeys",
         "summary": "List keys in the specified vault.",
-        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that\ncontain the public part of a stored key. The LIST operation is applicable to\nall key types, however only the base key identifier, attributes, and tags are\nprovided in the response. Individual versions of a key are not listed in the\nresponse. This operation requires the keys/list permission.",
+        "description": "Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. This operation requires the keys/list permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -220,7 +220,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -255,8 +255,8 @@
     "/keys/{key-name}": {
       "put": {
         "operationId": "ImportKey",
-        "summary": "Imports an externally created key, stores it, and returns key parameters and\nattributes to the client.",
-        "description": "The import key operation may be used to import any key type into an Azure Key\nVault. If the named key already exists, Azure Key Vault creates a new version\nof the key. This operation requires the keys/import permission.",
+        "summary": "Imports an externally created key, stores it, and returns key parameters and attributes to the client.",
+        "description": "The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. This operation requires the keys/import permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -264,7 +264,7 @@
           {
             "name": "key-name",
             "in": "path",
-            "description": "Name for the imported key. The value you provide may be copied globally for the\npurpose of running the service. The value provided should not include\npersonally identifiable or sensitive information.",
+            "description": "Name for the imported key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
@@ -303,7 +303,7 @@
       "delete": {
         "operationId": "DeleteKey",
         "summary": "Deletes a key of any type from storage in Azure Key Vault.",
-        "description": "The delete key operation cannot be used to remove individual versions of a key.\nThis operation removes the cryptographic material associated with the key,\nwhich means the key is not usable for Sign/Verify, Wrap/Unwrap or\nEncrypt/Decrypt operations. This operation requires the keys/delete permission.",
+        "description": "The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. This operation requires the keys/delete permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -342,7 +342,7 @@
       "get": {
         "operationId": "GetKey",
         "summary": "Gets the public part of a stored key.",
-        "description": "The get key operation is applicable to all key types. If the requested key is\nsymmetric, then no key material is released in the response. This operation\nrequires the keys/get permission.",
+        "description": "The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. This operation requires the keys/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -358,7 +358,7 @@
           {
             "name": "key-version",
             "in": "path",
-            "description": "Adding the version parameter retrieves a specific version of a key. This URI\nfragment is optional. If not specified, the latest version of the key is\nreturned.",
+            "description": "Adding the version parameter retrieves a specific version of a key. This URI fragment is optional. If not specified, the latest version of the key is returned.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "keyVersion"
@@ -386,8 +386,8 @@
       },
       "patch": {
         "operationId": "UpdateKey",
-        "summary": "The update key operation changes specified attributes of a stored key and can\nbe applied to any key type and key version stored in Azure Key Vault.",
-        "description": "In order to perform this operation, the key must already exist in the Key\nVault. Note: The cryptographic material of a key itself cannot be changed. This\noperation requires the keys/update permission.",
+        "summary": "The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.",
+        "description": "In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -443,7 +443,7 @@
       "post": {
         "operationId": "decrypt",
         "summary": "Decrypts a single block of encrypted data.",
-        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the\ntarget encryption key and specified algorithm. This operation is the reverse of\nthe ENCRYPT operation; only a single block of data may be decrypted, the size\nof this block is dependent on the target key and the algorithm to be used. The\nDECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key\nVault since it uses the private portion of the key. This operation requires the\nkeys/decrypt permission. Microsoft recommends not to use CBC algorithms for\ndecryption without first ensuring the integrity of the ciphertext using an\nHMAC, for example. See\nhttps://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode\nfor more information.",
+        "description": "The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -498,8 +498,8 @@
     "/keys/{key-name}/{key-version}/encrypt": {
       "post": {
         "operationId": "encrypt",
-        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored\nin a key vault.",
-        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an\nencryption key that is stored in Azure Key Vault. Note that the ENCRYPT\noperation only supports a single block of data, the size of which is dependent\non the target key and the encryption algorithm to be used. The ENCRYPT\noperation is only strictly necessary for symmetric keys stored in Azure Key\nVault since protection with an asymmetric key can be performed using public\nportion of the key. This operation is supported for asymmetric keys as a\nconvenience for callers that have a key-reference but do not have access to the\npublic key material. This operation requires the keys/encrypt permission.",
+        "summary": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.",
+        "description": "The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -555,7 +555,7 @@
       "post": {
         "operationId": "release",
         "summary": "Releases a key.",
-        "description": "The release key operation is applicable to all key types. The target key must\nbe marked exportable. This operation requires the keys/release permission.",
+        "description": "The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -611,7 +611,7 @@
       "post": {
         "operationId": "sign",
         "summary": "Creates a signature from a digest using the specified key.",
-        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in\nAzure Key Vault since this operation uses the private portion of the key. This\noperation requires the keys/sign permission.",
+        "description": "The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -666,8 +666,8 @@
     "/keys/{key-name}/{key-version}/unwrapkey": {
       "post": {
         "operationId": "unwrapKey",
-        "summary": "Unwraps a symmetric key using the specified key that was initially used for\nwrapping that key.",
-        "description": "The UNWRAP operation supports decryption of a symmetric key using the target\nkey encryption key. This operation is the reverse of the WRAP operation. The\nUNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key\nVault since it uses the private portion of the key. This operation requires the\nkeys/unwrapKey permission.",
+        "summary": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key.",
+        "description": "The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -723,7 +723,7 @@
       "post": {
         "operationId": "verify",
         "summary": "Verifies a signature using a specified key.",
-        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault.\nVERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault\nsince signature verification can be performed using the public portion of the\nkey but this operation is supported as a convenience for callers that only have\na key-reference and not the public portion of the key. This operation requires\nthe keys/verify permission.",
+        "description": "The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -779,7 +779,7 @@
       "post": {
         "operationId": "wrapKey",
         "summary": "Wraps a symmetric key using a specified key.",
-        "description": "The WRAP operation supports encryption of a symmetric key using a key\nencryption key that has previously been stored in an Azure Key Vault. The WRAP\noperation is only strictly necessary for symmetric keys stored in Azure Key\nVault since protection with an asymmetric key can be performed using the public\nportion of the key. This operation is supported for asymmetric keys as a\nconvenience for callers that have a key-reference but do not have access to the\npublic key material. This operation requires the keys/wrapKey permission.",
+        "description": "The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -835,7 +835,7 @@
       "post": {
         "operationId": "BackupKey",
         "summary": "Requests that a backup of the specified key be downloaded to the client.",
-        "description": "The Key Backup operation exports a key from Azure Key Vault in a protected\nform. Note that this operation does NOT return key material in a form that can\nbe used outside the Azure Key Vault system, the returned key material is either\nprotected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of\nthis operation is to allow a client to GENERATE a key in one Azure Key Vault\ninstance, BACKUP the key, and then RESTORE it into another Azure Key Vault\ninstance. The BACKUP operation may be used to export, in protected form, any\nkey type from Azure Key Vault. Individual versions of a key cannot be backed\nup. BACKUP / RESTORE can be performed within geographical boundaries only;\nmeaning that a BACKUP from one geographical area cannot be restored to another\ngeographical area. For example, a backup from the US geographical area cannot\nbe restored in an EU geographical area. This operation requires the key/backup\npermission.",
+        "description": "The Key Backup operation exports a key from Azure Key Vault in a protected form. Note that this operation does NOT return key material in a form that can be used outside the Azure Key Vault system, the returned key material is either protected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of this operation is to allow a client to GENERATE a key in one Azure Key Vault instance, BACKUP the key, and then RESTORE it into another Azure Key Vault instance. The BACKUP operation may be used to export, in protected form, any key type from Azure Key Vault. Individual versions of a key cannot be backed up. BACKUP / RESTORE can be performed within geographical boundaries only; meaning that a BACKUP from one geographical area cannot be restored to another geographical area. For example, a backup from the US geographical area cannot be restored in an EU geographical area. This operation requires the key/backup permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -873,8 +873,8 @@
     "/keys/{key-name}/create": {
       "post": {
         "operationId": "CreateKey",
-        "summary": "Creates a new key, stores it, then returns key parameters and attributes to the\nclient.",
-        "description": "The create key operation can be used to create any key type in Azure Key Vault.\nIf the named key already exists, Azure Key Vault creates a new version of the\nkey. It requires the keys/create permission.",
+        "summary": "Creates a new key, stores it, then returns key parameters and attributes to the client.",
+        "description": "The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. It requires the keys/create permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -882,7 +882,7 @@
           {
             "name": "key-name",
             "in": "path",
-            "description": "The name for the new key. The system will generate the version name for the new\nkey. The value you provide may be copied globally for the purpose of running\nthe service. The value provided should not include personally identifiable or\nsensitive information.",
+            "description": "The name for the new key. The system will generate the version name for the new key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
@@ -922,8 +922,8 @@
     "/keys/{key-name}/rotate": {
       "post": {
         "operationId": "RotateKey",
-        "summary": "Creates a new key version, stores it, then returns key parameters, attributes\nand policy to the client.",
-        "description": "The operation will rotate the key based on the key policy. It requires the\nkeys/rotate permission.",
+        "summary": "Creates a new key version, stores it, then returns key parameters, attributes and policy to the client.",
+        "description": "The operation will rotate the key based on the key policy. It requires the keys/rotate permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -931,7 +931,7 @@
           {
             "name": "key-name",
             "in": "path",
-            "description": "The name of key to be rotated. The system will generate a new version in the\nspecified key.",
+            "description": "The name of key to be rotated. The system will generate a new version in the specified key.",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-zA-Z-]+$",
@@ -963,7 +963,7 @@
       "get": {
         "operationId": "GetKeyRotationPolicy",
         "summary": "Lists the policy for a key.",
-        "description": "The GetKeyRotationPolicy operation returns the specified key policy resources\nin the specified key vault. This operation requires the keys/get permission.",
+        "description": "The GetKeyRotationPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1000,7 +1000,7 @@
       "put": {
         "operationId": "UpdateKeyRotationPolicy",
         "summary": "Updates the rotation policy for a key.",
-        "description": "Set specified members in the key policy. Leave others as undefined. This\noperation requires the keys/update permission.",
+        "description": "Set specified members in the key policy. Leave others as undefined. This operation requires the keys/update permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1048,7 +1048,7 @@
       "get": {
         "operationId": "GetKeyVersions",
         "summary": "Retrieves a list of individual key versions with the same key name.",
-        "description": "The full key identifier, attributes, and tags are provided in the response.\nThis operation requires the keys/list permission.",
+        "description": "The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1064,7 +1064,7 @@
           {
             "name": "maxresults",
             "in": "query",
-            "description": "Maximum number of results to return in a page. If not specified the service\nwill return up to 25 results.",
+            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1100,7 +1100,7 @@
       "post": {
         "operationId": "RestoreKey",
         "summary": "Restores a backed up key to a vault.",
-        "description": "Imports a previously backed up key into Azure Key Vault, restoring the key, its\nkey identifier, attributes and access control policies. The RESTORE operation\nmay be used to import a previously backed up key. Individual versions of a key\ncannot be restored. The key is restored in its entirety with the same key name\nas it had when it was backed up. If the key name is not available in the target\nKey Vault, the RESTORE operation will be rejected. While the key name is\nretained during restore, the final key identifier will change if the key is\nrestored to a different vault. Restore will restore all versions and preserve\nversion identifiers. The RESTORE operation is subject to security constraints:\nThe target Key Vault must be owned by the same Microsoft Azure Subscription as\nthe source Key Vault The user must have RESTORE permission in the target Key\nVault. This operation requires the keys/restore permission.",
+        "description": "Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies. The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored. The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault. Restore will restore all versions and preserve version identifiers. The RESTORE operation is subject to security constraints: The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault The user must have RESTORE permission in the target Key Vault. This operation requires the keys/restore permission.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1245,7 +1245,7 @@
         },
         "managed": {
           "type": "boolean",
-          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a\ncertificate, then managed will be true.",
+          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.",
           "readOnly": true
         },
         "release_policy": {
@@ -1273,7 +1273,7 @@
     },
     "DeletedKeyItem": {
       "type": "object",
-      "description": "The deleted key item containing the deleted key metadata and information about\ndeletion.",
+      "description": "The deleted key item containing the deleted key metadata and information about deletion.",
       "properties": {
         "kid": {
           "type": "string",
@@ -1292,7 +1292,7 @@
         },
         "managed": {
           "type": "boolean",
-          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a\ncertificate, then managed will be true.",
+          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.",
           "readOnly": true
         },
         "recoveryId": {
@@ -1319,7 +1319,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "A response message containing a list of deleted keys in the key vault along with a link to the next page of\ndeleted keys.",
+          "description": "A response message containing a list of deleted keys in the key vault along with a link to the next page of deleted keys.",
           "items": {
             "$ref": "#/definitions/DeletedKeyItem"
           },
@@ -1335,7 +1335,7 @@
     },
     "DeletionRecoveryLevel": {
       "type": "string",
-      "description": "Reflects the deletion recovery level currently in effect for certificates in\nthe current vault. If it contains 'Purgeable', the certificate can be\npermanently deleted by a privileged user; otherwise, only the system can purge\nthe certificate, at the end of the retention interval.",
+      "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
       "enum": [
         "Purgeable",
         "Recoverable+Purgeable",
@@ -1352,37 +1352,37 @@
           {
             "name": "Purgeable",
             "value": "Purgeable",
-            "description": "Denotes a vault state in which deletion is an irreversible operation, without\nthe possibility for recovery. This level corresponds to no protection being\navailable against a Delete operation; the data is irretrievably lost upon\naccepting a Delete operation at the entity level or higher (vault, resource\ngroup, subscription etc.)"
+            "description": "Denotes a vault state in which deletion is an irreversible operation, without the possibility for recovery. This level corresponds to no protection being available against a Delete operation; the data is irretrievably lost upon accepting a Delete operation at the entity level or higher (vault, resource group, subscription etc.)"
           },
           {
             "name": "RecoverablePurgeable",
             "value": "Recoverable+Purgeable",
-            "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval (90 days),\nunless a Purge operation is requested, or the subscription is cancelled. System\nwil permanently delete it after 90 days, if not recovered"
+            "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval (90 days), unless a Purge operation is requested, or the subscription is cancelled. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "Recoverable",
             "value": "Recoverable",
-            "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge). This level guarantees the\nrecoverability of the deleted entity during the retention interval(90 days) and\nwhile the subscription is still available. System wil permanently delete it\nafter 90 days, if not recovered"
+            "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge). This level guarantees the recoverability of the deleted entity during the retention interval(90 days) and while the subscription is still available. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "RecoverableProtectedSubscription",
             "value": "Recoverable+ProtectedSubscription",
-            "description": "Denotes a vault and subscription state in which deletion is recoverable within\nretention interval (90 days), immediate and permanent deletion (i.e. purge) is\nnot permitted, and in which the subscription itself  cannot be permanently\ncanceled. System wil permanently delete it after 90 days, if not recovered"
+            "description": "Denotes a vault and subscription state in which deletion is recoverable within retention interval (90 days), immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself  cannot be permanently canceled. System wil permanently delete it after 90 days, if not recovered"
           },
           {
             "name": "CustomizedRecoverablePurgeable",
             "value": "CustomizedRecoverable+Purgeable",
-            "description": "Denotes a vault state in which deletion is recoverable, and which also permits\nimmediate and permanent deletion (i.e. purge when 7<= SoftDeleteRetentionInDays\n< 90). This level guarantees the recoverability of the deleted entity during\nthe retention interval, unless a Purge operation is requested, or the\nsubscription is cancelled."
+            "description": "Denotes a vault state in which deletion is recoverable, and which also permits immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90). This level guarantees the recoverability of the deleted entity during the retention interval, unless a Purge operation is requested, or the subscription is cancelled."
           },
           {
             "name": "CustomizedRecoverable",
             "value": "CustomizedRecoverable",
-            "description": "Denotes a vault state in which deletion is recoverable without the possibility\nfor immediate and permanent deletion (i.e. purge when 7<=\nSoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the\ndeleted entity during the retention interval and while the subscription is\nstill available."
+            "description": "Denotes a vault state in which deletion is recoverable without the possibility for immediate and permanent deletion (i.e. purge when 7 <= SoftDeleteRetentionInDays < 90).This level guarantees the recoverability of the deleted entity during the retention interval and while the subscription is still available."
           },
           {
             "name": "CustomizedRecoverableProtectedSubscription",
             "value": "CustomizedRecoverable+ProtectedSubscription",
-            "description": "Denotes a vault and subscription state in which deletion is recoverable,\nimmediate and permanent deletion (i.e. purge) is not permitted, and in which\nthe subscription itself cannot be permanently canceled when 7<=\nSoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the\ndeleted entity during the retention interval, and also reflects the fact that\nthe subscription itself cannot be cancelled."
+            "description": "Denotes a vault and subscription state in which deletion is recoverable, immediate and permanent deletion (i.e. purge) is not permitted, and in which the subscription itself cannot be permanently canceled when 7 <= SoftDeleteRetentionInDays < 90. This level guarantees the recoverability of the deleted entity during the retention interval, and also reflects the fact that the subscription itself cannot be cancelled."
           }
         ]
       }
@@ -1435,11 +1435,11 @@
         },
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
-          "description": "JsonWebKey Key Type (kty), as defined in\nhttps://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40."
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40."
         },
         "key_ops": {
           "type": "array",
-          "description": "Json web key operations. For more information on possible key operations, see\nJsonWebKeyOperation.",
+          "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation.",
           "items": {
             "type": "string"
           },
@@ -1575,12 +1575,12 @@
           {
             "name": "RSA_OAEP",
             "value": "RSA-OAEP",
-            "description": "RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in\nhttps://tools.ietf.org/html/rfc3447, with the default parameters specified by\nRFC 3447 in Section A.2.1. Those default parameters are using a hash function\nof SHA-1 and a mask generation function of MGF1 with SHA-1."
+            "description": "RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1."
           },
           {
             "name": "RSA_OAEP256",
             "value": "RSA-OAEP-256",
-            "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256\nand a mask generation function of MGF1 with SHA-256."
+            "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256."
           },
           {
             "name": "RSA1_5",
@@ -1712,7 +1712,7 @@
     },
     "JsonWebKeySignatureAlgorithm": {
       "type": "string",
-      "description": "The signing/verification algorithm identifier. For more information on possible\nalgorithm types, see JsonWebKeySignatureAlgorithm.",
+      "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
       "enum": [
         "PS256",
         "PS384",
@@ -1733,32 +1733,32 @@
           {
             "name": "PS256",
             "value": "PS256",
-            "description": "RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "PS384",
             "value": "PS384",
-            "description": "RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "PS512",
             "value": "PS512",
-            "description": "RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "RS256",
             "value": "RS256",
-            "description": "RSASSA-PKCS1-v1_5 using SHA-256, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PKCS1-v1_5 using SHA-256, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "RS384",
             "value": "RS384",
-            "description": "RSASSA-PKCS1-v1_5 using SHA-384, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PKCS1-v1_5 using SHA-384, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "RS512",
             "value": "RS512",
-            "description": "RSASSA-PKCS1-v1_5 using SHA-512, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "RSASSA-PKCS1-v1_5 using SHA-512, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "RSNULL",
@@ -1768,29 +1768,29 @@
           {
             "name": "ES256",
             "value": "ES256",
-            "description": "ECDSA using P-256 and SHA-256, as described in\nhttps://tools.ietf.org/html/rfc7518."
+            "description": "ECDSA using P-256 and SHA-256, as described in https://tools.ietf.org/html/rfc7518."
           },
           {
             "name": "ES384",
             "value": "ES384",
-            "description": "ECDSA using P-384 and SHA-384, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "ECDSA using P-384 and SHA-384, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "ES512",
             "value": "ES512",
-            "description": "ECDSA using P-521 and SHA-512, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "ECDSA using P-521 and SHA-512, as described in https://tools.ietf.org/html/rfc7518"
           },
           {
             "name": "ES256_K",
             "value": "ES256K",
-            "description": "ECDSA using P-256K and SHA-256, as described in\nhttps://tools.ietf.org/html/rfc7518"
+            "description": "ECDSA using P-256K and SHA-256, as described in https://tools.ietf.org/html/rfc7518"
           }
         ]
       }
     },
     "JsonWebKeyType": {
       "type": "string",
-      "description": "JsonWebKey Key Type (kty), as defined in\nhttps://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.",
+      "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.",
       "enum": [
         "EC",
         "EC-HSM",
@@ -1871,17 +1871,17 @@
         "recoverableDays": {
           "type": "integer",
           "format": "int32",
-          "description": "softDelete data retention days. Value should be >=7 and <=90 when softDelete\nenabled, otherwise 0.",
+          "description": "softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.",
           "readOnly": true
         },
         "recoveryLevel": {
-          "type": "string",
-          "description": "Reflects the deletion recovery level currently in effect for keys in the\ncurrent vault. If it contains 'Purgeable' the key can be permanently deleted by\na privileged user; otherwise, only the system can purge the key, at the end of\nthe retention interval.",
+          "$ref": "#/definitions/DeletionRecoveryLevel",
+          "description": "Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.",
           "readOnly": true
         },
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported. Release policy must be provided\nwhen creating the first version of an exportable key."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key."
         },
         "hsmPlatform": {
           "type": "string",
@@ -1911,7 +1911,7 @@
         },
         "managed": {
           "type": "boolean",
-          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a\ncertificate, then managed will be true.",
+          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.",
           "readOnly": true
         },
         "release_policy": {
@@ -1943,7 +1943,7 @@
         },
         "key_ops": {
           "type": "array",
-          "description": "Json web key operations. For more information on possible key operations, see\nJsonWebKeyOperation.",
+          "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation.",
           "items": {
             "$ref": "#/definitions/JsonWebKeyOperation"
           },
@@ -2012,11 +2012,11 @@
       "properties": {
         "wrappingKey": {
           "$ref": "#/definitions/JsonWebKey",
-          "description": "The export key encryption Json web key. This key MUST be a RSA key that\nsupports encryption."
+          "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
         },
         "wrappingKid": {
           "type": "string",
-          "description": "The export key encryption key identifier. This key MUST be a RSA key that\nsupports encryption."
+          "description": "The export key encryption key identifier. This key MUST be a RSA key that supports encryption."
         },
         "enc": {
           "$ref": "#/definitions/KeyEncryptionAlgorithm",
@@ -2080,7 +2080,7 @@
         },
         "managed": {
           "type": "boolean",
-          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a\ncertificate, then managed will be true.",
+          "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.",
           "readOnly": true
         }
       }
@@ -2124,20 +2124,20 @@
         "iv": {
           "type": "string",
           "format": "base64url",
-          "description": "Cryptographically random, non-repeating initialization vector for symmetric\nalgorithms.",
+          "description": "Cryptographically random, non-repeating initialization vector for symmetric algorithms.",
           "readOnly": true
         },
         "tag": {
           "type": "string",
           "format": "base64url",
-          "description": "The tag to authenticate when performing decryption with an authenticated\nalgorithm.",
+          "description": "The tag to authenticate when performing decryption with an authenticated algorithm.",
           "readOnly": true,
           "x-ms-client-name": "authenticationTag"
         },
         "aad": {
           "type": "string",
           "format": "base64url",
-          "description": "Additional data to authenticate but not encrypt/decrypt when using\nauthenticated crypto algorithms.",
+          "description": "Additional data to authenticate but not encrypt/decrypt when using authenticated crypto algorithms.",
           "readOnly": true,
           "x-ms-client-name": "additionalAuthenticatedData"
         }
@@ -2160,17 +2160,17 @@
         "iv": {
           "type": "string",
           "format": "base64url",
-          "description": "Cryptographically random, non-repeating initialization vector for symmetric\nalgorithms."
+          "description": "Cryptographically random, non-repeating initialization vector for symmetric algorithms."
         },
         "aad": {
           "type": "string",
           "format": "base64url",
-          "description": "Additional data to authenticate but not encrypt/decrypt when using\nauthenticated crypto algorithms."
+          "description": "Additional data to authenticate but not encrypt/decrypt when using authenticated crypto algorithms."
         },
         "tag": {
           "type": "string",
           "format": "base64url",
-          "description": "The tag to authenticate when performing decryption with an authenticated\nalgorithm."
+          "description": "The tag to authenticate when performing decryption with an authenticated algorithm."
         }
       },
       "required": [
@@ -2184,7 +2184,7 @@
       "properties": {
         "exportable": {
           "type": "boolean",
-          "description": "Indicates if the private key can be exported. Release policy must be provided\nwhen creating the first version of an exportable key."
+          "description": "Indicates if the private key can be exported. Release policy must be provided when creating the first version of an exportable key."
         },
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
@@ -2243,12 +2243,12 @@
         },
         "immutable": {
           "type": "boolean",
-          "description": "Defines the mutability state of the policy. Once marked immutable, this flag\ncannot be reset and the policy cannot be changed under any circumstances."
+          "description": "Defines the mutability state of the policy. Once marked immutable, this flag cannot be reset and the policy cannot be changed under any circumstances."
         },
         "data": {
           "type": "string",
           "format": "base64url",
-          "description": "Blob encoding the policy rules under which the key can be released. Blob must\nbe base64 URL encoded.",
+          "description": "Blob encoding the policy rules under which the key can be released. Blob must be base64 URL encoded.",
           "x-ms-client-name": "encodedPolicy"
         }
       }
@@ -2290,7 +2290,7 @@
         },
         "lifetimeActions": {
           "type": "array",
-          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For\npreview, lifetimeActions can only have two items at maximum: one for rotate,\none for notify. Notification time would be default to 30 days before expiry and\nit is not configurable.",
+          "description": "Actions that will be performed by Key Vault over the lifetime of a key. For preview, lifetimeActions can only have two items at maximum: one for rotate, one for notify. Notification time would be default to 30 days before expiry and it is not configurable.",
           "items": {
             "$ref": "#/definitions/LifetimeActions"
           },
@@ -2332,7 +2332,7 @@
       "properties": {
         "expiryTime": {
           "type": "string",
-          "description": "The expiryTime will be applied on the new key version. It should be at least 28\ndays. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48\nhours: PT48H, 1 year and 10 days: P1Y10D"
+          "description": "The expiryTime will be applied on the new key version. It should be at least 28 days. It will be in ISO 8601 Format. Examples: 90 days: P90D, 3 months: P3M, 48 hours: PT48H, 1 year and 10 days: P1Y10D"
         },
         "created": {
           "type": "integer",
@@ -2354,7 +2354,7 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm identifier. For more information on possible\nalgorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "value": {
@@ -2374,7 +2374,7 @@
       "properties": {
         "key_ops": {
           "type": "array",
-          "description": "Json web key operations. For more information on possible key operations, see\nJsonWebKeyOperation.",
+          "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation.",
           "items": {
             "$ref": "#/definitions/JsonWebKeyOperation"
           },
@@ -2416,7 +2416,7 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm. For more information on possible algorithm\ntypes, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "digest": {
@@ -2450,7 +2450,7 @@
     },
     "LifetimeActions": {
       "type": "object",
-      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of\na key.",
+      "description": "Action and its trigger that will be performed by Key Vault over the lifetime of a key.",
       "properties": {
         "trigger": {
           "$ref": "#/definitions/LifetimeActionsTrigger",
@@ -2468,11 +2468,11 @@
       "properties": {
         "timeAfterCreate": {
           "type": "string",
-          "description": "Time after creation to attempt to rotate. It only applies to rotate. It will be\nin ISO 8601 duration format. Example: 90 days : \"P90D\""
+          "description": "Time after creation to attempt to rotate. It only applies to rotate. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\""
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "description": "Time before expiry to attempt to rotate or notify. It will be in ISO 8601\nduration format. Example: 90 days : \"P90D\""
+          "description": "Time before expiry to attempt to rotate or notify. It will be in ISO 8601 duration format. Example: 90 days : \"P90D\""
         }
       }
     },

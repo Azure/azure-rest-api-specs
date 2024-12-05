@@ -14,24 +14,16 @@ using TypeSpec.Rest;
 namespace KeyVault;
 
 /**
- * The create key operation can be used to create any key type in Azure Key Vault.
- * If the named key already exists, Azure Key Vault creates a new version of the
- * key. It requires the keys/create permission.
+ * The create key operation can be used to create any key type in Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. It requires the keys/create permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("""
-  Creates a new key, stores it, then returns key parameters and attributes to the
-  client.
-  """)
+@summary("Creates a new key, stores it, then returns key parameters and attributes to the client.")
 @route("/keys/{key-name}/create")
 @post
 op createKey is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name for the new key. The system will generate the version name for the new
-     * key. The value you provide may be copied globally for the purpose of running
-     * the service. The value provided should not include personally identifiable or
-     * sensitive information.
+     * The name for the new key. The system will generate the version name for the new key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
@@ -52,21 +44,16 @@ op createKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The operation will rotate the key based on the key policy. It requires the
- * keys/rotate permission.
+ * The operation will rotate the key based on the key policy. It requires the keys/rotate permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("""
-  Creates a new key version, stores it, then returns key parameters, attributes
-  and policy to the client.
-  """)
+@summary("Creates a new key version, stores it, then returns key parameters, attributes and policy to the client.")
 @route("/keys/{key-name}/rotate")
 @post
 op rotateKey is Azure.Core.Foundations.Operation<
   {
     /**
-     * The name of key to be rotated. The system will generate a new version in the
-     * specified key.
+     * The name of key to be rotated. The system will generate a new version in the specified key.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
@@ -79,24 +66,17 @@ op rotateKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The import key operation may be used to import any key type into an Azure Key
- * Vault. If the named key already exists, Azure Key Vault creates a new version
- * of the key. This operation requires the keys/import permission.
+ * The import key operation may be used to import any key type into an Azure Key Vault. If the named key already exists, Azure Key Vault creates a new version of the key. This operation requires the keys/import permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("""
-  Imports an externally created key, stores it, and returns key parameters and
-  attributes to the client.
-  """)
+@summary("Imports an externally created key, stores it, and returns key parameters and attributes to the client.")
 @route("/keys/{key-name}")
 @put
 op importKey is Azure.Core.Foundations.Operation<
   {
     /**
-     * Name for the imported key. The value you provide may be copied globally for the
-     * purpose of running the service. The value provided should not include
-     * personally identifiable or sensitive information.
+     * Name for the imported key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path("key-name")
@@ -117,10 +97,7 @@ op importKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The delete key operation cannot be used to remove individual versions of a key.
- * This operation removes the cryptographic material associated with the key,
- * which means the key is not usable for Sign/Verify, Wrap/Unwrap or
- * Encrypt/Decrypt operations. This operation requires the keys/delete permission.
+ * The delete key operation cannot be used to remove individual versions of a key. This operation removes the cryptographic material associated with the key, which means the key is not usable for Sign/Verify, Wrap/Unwrap or Encrypt/Decrypt operations. This operation requires the keys/delete permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a key of any type from storage in Azure Key Vault.")
@@ -141,15 +118,10 @@ op deleteKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * In order to perform this operation, the key must already exist in the Key
- * Vault. Note: The cryptographic material of a key itself cannot be changed. This
- * operation requires the keys/update permission.
+ * In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("""
-  The update key operation changes specified attributes of a stored key and can
-  be applied to any key type and key version stored in Azure Key Vault.
-  """)
+@summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
 @route("/keys/{key-name}/{key-version}")
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
@@ -182,9 +154,7 @@ op updateKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The get key operation is applicable to all key types. If the requested key is
- * symmetric, then no key material is released in the response. This operation
- * requires the keys/get permission.
+ * The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. This operation requires the keys/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a stored key.")
@@ -200,9 +170,7 @@ op getKey is Azure.Core.Foundations.Operation<
     keyName: string;
 
     /**
-     * Adding the version parameter retrieves a specific version of a key. This URI
-     * fragment is optional. If not specified, the latest version of the key is
-     * returned.
+     * Adding the version parameter retrieves a specific version of a key. This URI fragment is optional. If not specified, the latest version of the key is returned.
      */
     @path("key-version")
     @clientName("version", "go")
@@ -214,8 +182,7 @@ op getKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The full key identifier, attributes, and tags are provided in the response.
- * This operation requires the keys/list permission.
+ * The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -232,8 +199,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
     keyName: string;
 
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -246,11 +212,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that
- * contain the public part of a stored key. The LIST operation is applicable to
- * all key types, however only the base key identifier, attributes, and tags are
- * provided in the response. Individual versions of a key are not listed in the
- * response. This operation requires the keys/list permission.
+ * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. This operation requires the keys/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -260,8 +222,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
 op getKeys is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -274,19 +235,7 @@ op getKeys is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Key Backup operation exports a key from Azure Key Vault in a protected
- * form. Note that this operation does NOT return key material in a form that can
- * be used outside the Azure Key Vault system, the returned key material is either
- * protected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of
- * this operation is to allow a client to GENERATE a key in one Azure Key Vault
- * instance, BACKUP the key, and then RESTORE it into another Azure Key Vault
- * instance. The BACKUP operation may be used to export, in protected form, any
- * key type from Azure Key Vault. Individual versions of a key cannot be backed
- * up. BACKUP / RESTORE can be performed within geographical boundaries only;
- * meaning that a BACKUP from one geographical area cannot be restored to another
- * geographical area. For example, a backup from the US geographical area cannot
- * be restored in an EU geographical area. This operation requires the key/backup
- * permission.
+ * The Key Backup operation exports a key from Azure Key Vault in a protected form. Note that this operation does NOT return key material in a form that can be used outside the Azure Key Vault system, the returned key material is either protected to a Azure Key Vault HSM or to Azure Key Vault itself. The intent of this operation is to allow a client to GENERATE a key in one Azure Key Vault instance, BACKUP the key, and then RESTORE it into another Azure Key Vault instance. The BACKUP operation may be used to export, in protected form, any key type from Azure Key Vault. Individual versions of a key cannot be backed up. BACKUP / RESTORE can be performed within geographical boundaries only; meaning that a BACKUP from one geographical area cannot be restored to another geographical area. For example, a backup from the US geographical area cannot be restored in an EU geographical area. This operation requires the key/backup permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Requests that a backup of the specified key be downloaded to the client.")
@@ -307,18 +256,7 @@ op backupKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Imports a previously backed up key into Azure Key Vault, restoring the key, its
- * key identifier, attributes and access control policies. The RESTORE operation
- * may be used to import a previously backed up key. Individual versions of a key
- * cannot be restored. The key is restored in its entirety with the same key name
- * as it had when it was backed up. If the key name is not available in the target
- * Key Vault, the RESTORE operation will be rejected. While the key name is
- * retained during restore, the final key identifier will change if the key is
- * restored to a different vault. Restore will restore all versions and preserve
- * version identifiers. The RESTORE operation is subject to security constraints:
- * The target Key Vault must be owned by the same Microsoft Azure Subscription as
- * the source Key Vault The user must have RESTORE permission in the target Key
- * Vault. This operation requires the keys/restore permission.
+ * Imports a previously backed up key into Azure Key Vault, restoring the key, its key identifier, attributes and access control policies. The RESTORE operation may be used to import a previously backed up key. Individual versions of a key cannot be restored. The key is restored in its entirety with the same key name as it had when it was backed up. If the key name is not available in the target Key Vault, the RESTORE operation will be rejected. While the key name is retained during restore, the final key identifier will change if the key is restored to a different vault. Restore will restore all versions and preserve version identifiers. The RESTORE operation is subject to security constraints: The target Key Vault must be owned by the same Microsoft Azure Subscription as the source Key Vault The user must have RESTORE permission in the target Key Vault. This operation requires the keys/restore permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up key to a vault.")
@@ -338,23 +276,12 @@ op restoreKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The ENCRYPT operation encrypts an arbitrary sequence of bytes using an
- * encryption key that is stored in Azure Key Vault. Note that the ENCRYPT
- * operation only supports a single block of data, the size of which is dependent
- * on the target key and the encryption algorithm to be used. The ENCRYPT
- * operation is only strictly necessary for symmetric keys stored in Azure Key
- * Vault since protection with an asymmetric key can be performed using public
- * portion of the key. This operation is supported for asymmetric keys as a
- * convenience for callers that have a key-reference but do not have access to the
- * public key material. This operation requires the keys/encrypt permission.
+ * The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("encrypt")
-@summary("""
-  Encrypts an arbitrary sequence of bytes using an encryption key that is stored
-  in a key vault.
-  """)
+@summary("Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.")
 @route("/keys/{key-name}/{key-version}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
@@ -387,17 +314,7 @@ op encrypt is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The DECRYPT operation decrypts a well-formed block of ciphertext using the
- * target encryption key and specified algorithm. This operation is the reverse of
- * the ENCRYPT operation; only a single block of data may be decrypted, the size
- * of this block is dependent on the target key and the algorithm to be used. The
- * DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key
- * Vault since it uses the private portion of the key. This operation requires the
- * keys/decrypt permission. Microsoft recommends not to use CBC algorithms for
- * decryption without first ensuring the integrity of the ciphertext using an
- * HMAC, for example. See
- * https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode
- * for more information.
+ * The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -435,9 +352,7 @@ op decrypt is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The SIGN operation is applicable to asymmetric and symmetric keys stored in
- * Azure Key Vault since this operation uses the private portion of the key. This
- * operation requires the keys/sign permission.
+ * The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -475,12 +390,7 @@ op sign is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault.
- * VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault
- * since signature verification can be performed using the public portion of the
- * key but this operation is supported as a convenience for callers that only have
- * a key-reference and not the public portion of the key. This operation requires
- * the keys/verify permission.
+ * The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -518,13 +428,7 @@ op verify is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The WRAP operation supports encryption of a symmetric key using a key
- * encryption key that has previously been stored in an Azure Key Vault. The WRAP
- * operation is only strictly necessary for symmetric keys stored in Azure Key
- * Vault since protection with an asymmetric key can be performed using the public
- * portion of the key. This operation is supported for asymmetric keys as a
- * convenience for callers that have a key-reference but do not have access to the
- * public key material. This operation requires the keys/wrapKey permission.
+ * The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -562,19 +466,12 @@ op wrapKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The UNWRAP operation supports decryption of a symmetric key using the target
- * key encryption key. This operation is the reverse of the WRAP operation. The
- * UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key
- * Vault since it uses the private portion of the key. This operation requires the
- * keys/unwrapKey permission.
+ * The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
 @operationId("unwrapKey")
-@summary("""
-  Unwraps a symmetric key using the specified key that was initially used for
-  wrapping that key.
-  """)
+@summary("Unwraps a symmetric key using the specified key that was initially used for wrapping that key.")
 @route("/keys/{key-name}/{key-version}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
@@ -607,8 +504,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The release key operation is applicable to all key types. The target key must
- * be marked exportable. This operation requires the keys/release permission.
+ * The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -646,12 +542,7 @@ op release is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that
- * contain the public part of a deleted key. This operation includes
- * deletion-specific information. The Get Deleted Keys operation is applicable for
- * vaults enabled for soft-delete. While the operation can be invoked on any
- * vault, it will return an error if invoked on a non soft-delete enabled vault.
- * This operation requires the keys/list permission.
+ * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/list permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -661,8 +552,7 @@ op release is Azure.Core.Foundations.Operation<
 op getDeletedKeys is Azure.Core.Foundations.Operation<
   {
     /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
+     * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
      */
     @maxValue(25)
     @minValue(1)
@@ -675,10 +565,7 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Get Deleted Key operation is applicable for soft-delete enabled vaults.
- * While the operation can be invoked on any vault, it will return an error if
- * invoked on a non soft-delete enabled vault. This operation requires the
- * keys/get permission.
+ * The Get Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a deleted key.")
@@ -699,10 +586,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Purge Deleted Key operation is applicable for soft-delete enabled vaults.
- * While the operation can be invoked on any vault, it will return an error if
- * invoked on a non soft-delete enabled vault. This operation requires the
- * keys/purge permission.
+ * The Purge Deleted Key operation is applicable for soft-delete enabled vaults. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/purge permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
@@ -724,11 +608,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The Recover Deleted Key operation is applicable for deleted keys in soft-delete
- * enabled vaults. It recovers the deleted key back to its latest version under
- * /keys. An attempt to recover an non-deleted key will return an error. Consider
- * this the inverse of the delete operation on soft-delete enabled vaults. This
- * operation requires the keys/recover permission.
+ * The Recover Deleted Key operation is applicable for deleted keys in soft-delete enabled vaults. It recovers the deleted key back to its latest version under /keys. An attempt to recover an non-deleted key will return an error. Consider this the inverse of the delete operation on soft-delete enabled vaults. This operation requires the keys/recover permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted key to its latest version.")
@@ -749,8 +629,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * The GetKeyRotationPolicy operation returns the specified key policy resources
- * in the specified key vault. This operation requires the keys/get permission.
+ * The GetKeyRotationPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a key.")
@@ -771,8 +650,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
 >;
 
 /**
- * Set specified members in the key policy. Leave others as undefined. This
- * operation requires the keys/update permission.
+ * Set specified members in the key policy. Leave others as undefined. This operation requires the keys/update permission.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
