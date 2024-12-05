@@ -379,6 +379,7 @@ model LinkContent extends MessageContent {
   @doc("Title of the url content.")
   title: string;
 
+  @clientName("uri", "csharp")
   @doc("The url in the content.")
   url: url;
 }
