@@ -25,6 +25,8 @@ jobs:
   steps:
   - checkout: self
     fetchDepth: 0
+  
+  - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1

@@ -198,10 +198,6 @@ function Invoke-TypeSpecAPIViewParser {
   New-Item -ItemType Directory -Path $tempWorkingDirectoryPath > $null
 
   try {
-    Write-Host "Installing required dependencies to generate API review"
-    npm ci
-    Write-Host "List current npm package version"
-    npm list
     Write-Host "Compiling files and generating '$Type' APIView for '$resourceProvider'..."
     Push-Location $ProjectPath
     npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
