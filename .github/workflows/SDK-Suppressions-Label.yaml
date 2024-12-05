@@ -22,14 +22,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set the value
-        id: step_one
-        run: |
-          echo "action_state=yellow" >> "$GITHUB_ENV"
-      - name: Use the value
-        id: step_two
-        run: |
-          printf '%s\n' "$action_state" # This will output 'yellow'
+      # - name: Get PR info from GitHub API
+      #   uses: octokit/request-action@v2
+      #   id: pr_info
+      #   with:
+      #       route: GET /repos/${{ github.repository }}/pulls
+      #       headers: '{"Authorization": "token ${{ secrets.GITHUB_TOKEN }}"}'
+      
+      # - name: Show PR number
+      #   run: |
+      #     echo "Pull Request Number: ${{ steps.pr_info.outputs.data[0].number }}"
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -56,6 +58,9 @@ jobs:
           echo "GITHUB_HEAD_REF=${{ github.head_ref }}" >> $GITHUB_ENV
           echo "GITHUB_BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
           echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+          echo "GITHUB_PR_REF=${{ github.ref }}" >> $GITHUB_ENV
+          echo "GITHUB_PR_REF_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "GITHUB_PR_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
 
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat output.json)
