@@ -1,0 +1,41 @@
+name: breakingchange suppressions label Workflow
+
+on:
+  pull_request:
+    branches:
+      - jacktn/suppression-action 
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+  workflow_dispatch:
+
+jobs:
+  manage_sdk_suppressions_labels:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: '18'
+
+      - name: Run the script
+        run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+
+      # - name: Run Manage-SDKSuppression-Label script from file
+      #   run: |
+      #     .\scripts\Manage-SDKSuppression-Label.ps1
+      #   env:
+      #     GITHUB_EVENT_PULL_REQUEST_BASE_REPO_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
+      #     GITHUB_EVENT_PULL_REQUEST_BASE_REPO_NAME: ${{ github.event.pull_request.base.repo.name }}
+      #     GITHUB_EVENT_PULL_REQUEST_BASE_REF: ${{ github.event.pull_request.base.ref }}
+      #     GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+      #     GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_NAME: ${{ github.event.pull_request.head.repo.name }}
+      #     GITHUB_EVENT_PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      #     GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+      #     GITHUB_TOKEN: ${{ secrets.TOKEN }}
