@@ -54,10 +54,10 @@ jobs:
             console.log(`PR Number: ${prNumber}`);
             console.log(`PR Title: ${prTitle}`);
 
-            core.setOutput("prNumber", prNumber); // 显式设置输出
-            core.setOutput("prTitle", prTitle);  // 显式设置输出
+            core.setOutput("prNumber", prNumber);
+            core.setOutput("prTitle", prTitle);
 
-            return { prNumber, prTitle };
+            # cannot use this code - return { prNumber, prTitle };
 
           result-encoding: string
 
@@ -86,13 +86,34 @@ jobs:
             #   issue_number: context.issue.number,
             #   body: "Thank you for your contribution! 🚀"
             # });
-            console.log(context)
-            const script = require('.github/actions/handle-suppressions/suppressions.js')
-            await script({github, context, core})
+            
+
+            # const script = require('.github/actions/handle-suppressions/suppressions.js')
+            # await script({github, context, core})
+
+            console.log("event:", context.eventName);
+            console.log("actor:", context.actor);
+            console.log("repo:", context.repo);
+            console.log("SHA:", context.sha);
+            console.log("payload", context.payload);
+            console.log("pull_request", context.payload.pull_request);
+
+
+            console.log("=== GitHub Context ===");
+            console.log(context);
+
+            console.log("Repository Info:", context.repo);
+            console.log("Actor:", context.actor);
+            console.log("Event Name:", context.eventName);
+            console.log("Payload:", context.payload);
+            console.log("Run ID:", context.runId);
+            console.log("Run Number:", context.runNumber);
+            console.log("SHA:", context.sha);
+            console.log("Ref:", context.ref);
+            console.log("Workflow:", context.workflow);
+            console.log("Job:", context.job);
         env:
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
-
-
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
