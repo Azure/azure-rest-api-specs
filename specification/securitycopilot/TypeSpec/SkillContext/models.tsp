@@ -477,13 +477,8 @@ model BaseChoice {
 	ContentFilterError?: ContentFilterError;
 }
 
-model ContentFilterResultError {
-	Code?: string;
-	Message?: string;
-}
-
 model ContentFilterError {
-	Error?: ContentFilterResultError; 
+	Error?: unknown; 
 }
 
 model ChatChoice extends BaseChoice {
