@@ -20,6 +20,28 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/providers/MongoDB.Atlas/operations"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/MongoDB.Atlas/organizations"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}"]
+    reason: MongoDB.Atlas namespace is business requirement.
+```
+
 ### Basic Information
 
 These are the global settings for the LiftrMongoDB service.
