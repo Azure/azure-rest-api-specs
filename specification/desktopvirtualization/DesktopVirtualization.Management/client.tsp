@@ -8,6 +8,6 @@ using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
-@@clientName(PrivateEndpointConnectionWithSystemDataOperationGroup,
+@@clientName(PrivateEndpointConnectionWithSystemData,
   "PrivateEndpointConnectionWithSystemData"
 );
