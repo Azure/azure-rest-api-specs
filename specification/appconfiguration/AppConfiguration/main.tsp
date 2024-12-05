@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@doc("Azure App Configuration REST API")
+@doc("Azure App Configuration REST API.")
 namespace AzureAppConfiguration;
 
 @doc("Service API versions")
