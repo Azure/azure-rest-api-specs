@@ -83,6 +83,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeBatchOperationDetail.resultUrl, "ResultUri", "csharp");
 @@clientName(AnalyzeBatchOperationDetail.sourceUrl, "SourceUri", "csharp");
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "csharp");
+@@clientName(AnalyzeDocumentRequest.base64Source, "BytesSource", "csharp");
 @@clientName(AnalyzeDocumentRequest.urlSource, "UriSource", "csharp");
 @@clientName(AuthorizeClassifierCopyRequest,
   "AuthorizeClassifierCopyOptions",
@@ -123,11 +124,13 @@ interface DocumentIntelligenceAdministrationClient {
   "csharp"
 );
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "csharp");
+@@clientName(ClassifyDocumentRequest.base64Source, "BytesSource", "csharp");
 @@clientName(ClassifyDocumentRequest.urlSource, "UriSource", "csharp");
 @@clientName(ComposeDocumentModelRequest, "ComposeModelOptions", "csharp");
 @@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "csharp");
 @@clientName(ContentSourceKind.azureBlob, "Blob", "csharp");
 @@clientName(ContentSourceKind.azureBlobFileList, "BlobFileList", "csharp");
+@@clientName(ContentSourceKind.base64, "Bytes", "csharp");
 @@clientName(ContentSourceKind.url, "Uri", "csharp");
 @@clientName(ModelCopyAuthorization.expirationDateTime, "ExpiresOn", "csharp");
 @@clientName(AnalyzedDocument.docType, "DocumentType", "csharp");
