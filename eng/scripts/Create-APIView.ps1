@@ -397,19 +397,24 @@ function New-TypeSpecAPIViewTokens {
 
   # Generate TypeSpec APIView Tokens
   foreach ($typeSpecProject in $typeSpecProjects) {
-      $typeSpecProjectPathParts = $typeSpecProject.Split([IO.Path]::DirectorySeparatorChar)
-      # $typeSpecProjectRelativePath = $typeSpecProjectPathParts[($typeSpecProjectPathParts.IndexOf("specification") + 2 - $typeSpecProjectPathParts.Length)..(-1)] -Join [IO.Path]::DirectorySeparatorChar
-      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
-      Write-Host $tokenDirectory
-      New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
+    $typeSpecProjectDir = $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]
+    $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProjectDir)
+    New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
-      # Generate New APIView Token using default tag on base branch
-      git checkout $SourceCommitId
-      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+    # Generate New APIView Token using default tag on base branch
+    git checkout $SourceCommitId
+    Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
 
-      # Generate BaseLine APIView Token using same tag on target branch
-      git checkout $TargetCommitId
+    # Generate BaseLine APIView Token using same tag on target branch
+    git checkout $TargetCommitId
+    
+    # Skip Baseline APIView Token for new projects
+    if (!(Test-Path -Path $typeSpecProjectDir)) {
+      Write-Host("TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+    }
+    else {
       Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
+    }
   }
 
   git checkout $currentBranch
