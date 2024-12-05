@@ -1,0 +1,1315 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContentSafety Service",
+    "version": "2024-09-01",
+    "description": "Analyze harmful content",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/contentsafety",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://<resource-name>.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "application",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/image:analyze": {
+      "post": {
+        "operationId": "ImageOperations_AnalyzeImage",
+        "summary": "Analyze Image",
+        "description": "A synchronous API for the analysis of potentially harmful image content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The image analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Image": {
+            "$ref": "./examples/AnalyzeImage.json"
+          }
+        }
+      }
+    },
+    "/text/blocklists": {
+      "get": {
+        "operationId": "TextBlocklists_ListTextBlocklists",
+        "summary": "Get All Text Blocklists",
+        "description": "Get all text blocklists details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All Text Blocklists": {
+            "$ref": "./examples/ListTextBlocklists.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}": {
+      "get": {
+        "operationId": "TextBlocklists_GetTextBlocklist",
+        "summary": "Get Text Blocklist By blocklistName",
+        "description": "Returns text blocklist details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Text Blocklist By blocklistName": {
+            "$ref": "./examples/GetTextBlocklist.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TextBlocklists_CreateOrUpdateTextBlocklist",
+        "summary": "Create Or Update Text Blocklist",
+        "description": "Updates a text blocklist. If the blocklistName does not exist, a new blocklist will be created.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextBlocklistCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklist"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update Text Blocklist": {
+            "$ref": "./examples/CreateOrUpdateTextBlocklist.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextBlocklists_DeleteTextBlocklist",
+        "summary": "Delete Text Blocklist By blocklistName",
+        "description": "Deletes a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Text Blocklist By blocklistName": {
+            "$ref": "./examples/DeleteTextBlocklist.json"
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems": {
+      "post": {
+        "operationId": "TextBlocklists_AddOrUpdateBlocklistItems",
+        "summary": "Add or update BlocklistItems To Text Blocklist",
+        "description": "Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Options for adding or updating blocklist items.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOrUpdateTextBlocklistItemsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddOrUpdateTextBlocklistItemsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add or Update BlocklistItems To Text Blocklist": {
+            "$ref": "./examples/AddOrUpdateBlocklistItems.json"
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}:removeBlocklistItems": {
+      "post": {
+        "operationId": "TextBlocklists_RemoveBlocklistItems",
+        "summary": "Remove BlocklistItems From Text Blocklist",
+        "description": "Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Options for removing blocklist items.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveTextBlocklistItemsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove BlockItems From Text Blocklist": {
+            "$ref": "./examples/RemoveBlocklistItems.json"
+          }
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}/blocklistItems": {
+      "get": {
+        "operationId": "TextBlocklists_ListTextBlocklistItems",
+        "summary": "Get All BlocklistItems By blocklistName",
+        "description": "Get all blocklistItems in a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextBlocklistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get All BlockItems By blocklistName": {
+            "$ref": "./examples/ListTextBlocklistItems.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/blocklists/{blocklistName}/blocklistItems/{blocklistItemId}": {
+      "get": {
+        "operationId": "TextBlocklists_GetTextBlocklistItem",
+        "summary": "Get BlocklistItem By blocklistName And blocklistItemId",
+        "description": "Get blocklistItem by blocklistName and blocklistItemId from a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "description": "Text blocklist name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$"
+          },
+          {
+            "name": "blocklistItemId",
+            "in": "path",
+            "description": "The service will generate a BlocklistItemId, which will be a UUID.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextBlocklistItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get BlockItem By blocklistName And blocklistItemId": {
+            "$ref": "./examples/GetTextBlocklistItem.json"
+          }
+        }
+      }
+    },
+    "/text:analyze": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeText",
+        "summary": "Analyze Text",
+        "description": "A synchronous API for the analysis of potentially harmful text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Text": {
+            "$ref": "./examples/AnalyzeText.json"
+          }
+        }
+      }
+    },
+    "/text:detectProtectedMaterial": {
+      "post": {
+        "operationId": "TextOperations_DetectTextProtectedMaterial",
+        "summary": "Detect Protected Material for Text",
+        "description": "A synchronous API for detecting protected material in the given text.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectTextProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Protected Material for Text": {
+            "$ref": "./examples/DetectTextProtectedMaterial.json"
+          }
+        }
+      }
+    },
+    "/text:shieldPrompt": {
+      "post": {
+        "operationId": "TextOperations_ShieldPrompt",
+        "summary": "Shield Prompt",
+        "description": "A synchronous API for shielding prompt from direct and indirect injection attacks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain direct or indirect injection attacks.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShieldPromptResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Shield Prompt": {
+            "$ref": "./examples/ShieldPrompt.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddOrUpdateTextBlocklistItemsOptions": {
+      "type": "object",
+      "description": "The request to add blocklistItems to a text blocklist.",
+      "properties": {
+        "blocklistItems": {
+          "type": "array",
+          "description": "Array of blocklistItems to add.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "blocklistItems"
+      ]
+    },
+    "AddOrUpdateTextBlocklistItemsResult": {
+      "type": "object",
+      "description": "The response of adding blocklistItems to the text blocklist.",
+      "properties": {
+        "blocklistItems": {
+          "type": "array",
+          "description": "Array of blocklistItems have been added.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "blocklistItems"
+      ]
+    },
+    "AnalyzeImageOptions": {
+      "type": "object",
+      "description": "The image analysis request.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image to be analyzed."
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        },
+        "outputType": {
+          "type": "string",
+          "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeImageOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "AnalyzeImageResult": {
+      "type": "object",
+      "description": "The image analysis response.",
+      "properties": {
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for categories.",
+          "items": {
+            "$ref": "#/definitions/ImageCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextOptions": {
+      "type": "object",
+      "description": "The text analysis request.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
+          "maxLength": 10000
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
+        },
+        "blocklistNames": {
+          "type": "array",
+          "description": "The names of blocklists.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "haltOnBlocklistHit": {
+          "type": "boolean",
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
+        },
+        "outputType": {
+          "type": "string",
+          "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels",
+            "EightSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeTextOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              },
+              {
+                "name": "EightSeverityLevels",
+                "value": "EightSeverityLevels",
+                "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextResult": {
+      "type": "object",
+      "description": "The text analysis response.",
+      "properties": {
+        "blocklistsMatch": {
+          "type": "array",
+          "description": "The blocklist match details.",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistMatch"
+          },
+          "x-ms-identifiers": []
+        },
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "Analysis result for categories.",
+          "items": {
+            "$ref": "#/definitions/TextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "DetectTextProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points."
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "DetectTextProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/TextProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given text."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
+    },
+    "DocumentInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given documents.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    },
+    "ImageCategoriesAnalysis": {
+      "type": "object",
+      "description": "Image analysis result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory",
+          "description": "The image analysis category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’, and the output value can be 0, 2, 4, 6."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ImageCategory": {
+      "type": "string",
+      "description": "The harm category supported in Image content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image - Violence."
+          }
+        ]
+      }
+    },
+    "ImageData": {
+      "type": "object",
+      "description": "The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "The Base64 encoding of the image."
+        },
+        "blobUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob url of the image."
+        }
+      }
+    },
+    "PagedTextBlocklist": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklist items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklist items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklist"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTextBlocklistItem": {
+      "type": "object",
+      "description": "Paged collection of TextBlocklistItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextBlocklistItem items on this page",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RemoveTextBlocklistItemsOptions": {
+      "type": "object",
+      "description": "The request to remove blocklistItems from a text blocklist.",
+      "properties": {
+        "blocklistItemIds": {
+          "type": "array",
+          "description": "Array of blocklistItemIds to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "blocklistItemIds"
+      ]
+    },
+    "ShieldPromptOptions": {
+      "type": "object",
+      "description": "The request of analyzing potential direct or indirect injection attacks.",
+      "properties": {
+        "userPrompt": {
+          "type": "string",
+          "description": "The user prompt to be analyzed, which may contain direct injection attacks."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents to be analyzed, which may contain direct or indirect injection attacks.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ShieldPromptResult": {
+      "type": "object",
+      "description": "The combined analysis results of potential direct or indirect injection attacks.",
+      "properties": {
+        "userPromptAnalysis": {
+          "$ref": "#/definitions/UserPromptInjectionAnalysisResult",
+          "description": "Direct injection attacks analysis result for the given user prompt."
+        },
+        "documentsAnalysis": {
+          "type": "array",
+          "description": "Direct and indirect injection attacks analysis result for the given documents.",
+          "items": {
+            "$ref": "#/definitions/DocumentInjectionAnalysisResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TextBlocklist": {
+      "type": "object",
+      "description": "Text Blocklist.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "blocklistName"
+      ]
+    },
+    "TextBlocklistCreateOrUpdate": {
+      "type": "object",
+      "description": "Text Blocklist.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "TextBlocklistItem": {
+      "type": "object",
+      "description": "Item in a TextBlocklist.",
+      "properties": {
+        "blocklistItemId": {
+          "type": "string",
+          "description": "The service will generate a BlocklistItemId, which will be a UUID.",
+          "maxLength": 64,
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "BlocklistItem description.",
+          "maxLength": 1024
+        },
+        "text": {
+          "type": "string",
+          "description": "BlocklistItem content. The length is counted using Unicode code point.",
+          "maxLength": 128
+        },
+        "isRegex": {
+          "type": "boolean",
+          "description": "An optional properties indicating whether this item is to be matched as a regular expression."
+        }
+      },
+      "required": [
+        "blocklistItemId",
+        "text"
+      ]
+    },
+    "TextBlocklistMatch": {
+      "type": "object",
+      "description": "The result of blocklist match.",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "The name of the matched blocklist.",
+          "maxLength": 64
+        },
+        "blocklistItemId": {
+          "type": "string",
+          "description": "The ID of the matched item.",
+          "maxLength": 64
+        },
+        "blocklistItemText": {
+          "type": "string",
+          "description": "The content of the matched item.",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "blocklistName",
+        "blocklistItemId",
+        "blocklistItemText"
+      ]
+    },
+    "TextCategoriesAnalysis": {
+      "type": "object",
+      "description": "Text analysis result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/TextCategory",
+          "description": "The text analysis category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The value increases with the severity of the input content. The value of this field is determined by the output type specified in the request. The output type could be ‘FourSeverityLevels’ or ‘EightSeverity Levels’, and the output value can be 0, 2, 4, 6 or 0, 1, 2, 3, 4, 5, 6, or 7."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "TextCategory": {
+      "type": "string",
+      "description": "The harm category supported in Text content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Text - Violence."
+          }
+        ]
+      }
+    },
+    "TextProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "UserPromptInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given user prompt.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

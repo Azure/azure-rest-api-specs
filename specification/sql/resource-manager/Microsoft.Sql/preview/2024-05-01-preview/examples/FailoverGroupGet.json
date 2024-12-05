@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "failovergroupprimaryserver",
+    "failoverGroupName": "failovergrouptest3",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/failoverGroups/failovergrouptest3",
+        "name": "failovergrouptest3",
+        "type": "Microsoft.Sql/servers/failoverGroups",
+        "location": "Japan West",
+        "properties": {
+          "readWriteEndpoint": {
+            "failoverPolicy": "Automatic",
+            "failoverWithDataLossGracePeriodMinutes": 120
+          },
+          "readOnlyEndpoint": {
+            "failoverPolicy": "Enabled",
+            "targetServer": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver"
+          },
+          "replicationRole": "Primary",
+          "replicationState": "CATCH_UP",
+          "partnerServers": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupsecondaryserver",
+              "location": "Japan East",
+              "replicationRole": "Secondary"
+            }
+          ],
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb1",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/failovergroupprimaryserver/databases/testdb2"
+          ]
+        }
+      }
+    }
+  }
+}

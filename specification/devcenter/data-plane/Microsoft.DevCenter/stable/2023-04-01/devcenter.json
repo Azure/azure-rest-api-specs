@@ -291,14 +291,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
             "name": "catalogName",
@@ -416,14 +409,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           }
         ],
         "responses": {
@@ -514,14 +500,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           }
         ],
         "responses": {
@@ -725,14 +704,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
             "name": "poolName",
@@ -850,24 +822,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           }
         ],
         "responses": {
@@ -973,34 +931,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute the operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
-            "name": "devBoxName",
-            "in": "path",
-            "description": "The name of a Dev Box.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
             "name": "body",
@@ -1063,34 +1000,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
-            "name": "devBoxName",
-            "in": "path",
-            "description": "The name of a Dev Box.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/DevBoxNameParameter"
           }
         ],
         "responses": {
@@ -1245,11 +1161,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
-            "name": "hibernate",
-            "in": "query",
-            "description": "Optional parameter to hibernate the dev box.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/HibernateQueryParameter"
           }
         ],
         "responses": {
@@ -1628,13 +1540,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
-            "name": "until",
-            "in": "query",
-            "description": "The time to delay the Dev Box action or actions until.",
-            "required": true,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "delayUntil"
+            "$ref": "#/parameters/DelayUntilQueryParameter"
           }
         ],
         "responses": {
@@ -1703,13 +1609,7 @@
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
-            "name": "until",
-            "in": "query",
-            "description": "The time to delay the Dev Box action or actions until.",
-            "required": true,
-            "type": "string",
-            "format": "date-time",
-            "x-ms-client-name": "delayUntil"
+            "$ref": "#/parameters/DelayUntilQueryParameter"
           }
         ],
         "responses": {
@@ -1751,34 +1651,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
-            "name": "devBoxName",
-            "in": "path",
-            "description": "The name of a Dev Box.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/DevBoxNameParameter"
           }
         ],
         "responses": {
@@ -1817,24 +1696,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           }
         ],
         "responses": {
@@ -1940,34 +1805,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
             "name": "body",
@@ -2019,34 +1863,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/ProjectNameParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           },
           {
-            "name": "environmentName",
-            "in": "path",
-            "description": "The name of the environment.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
         "responses": {
@@ -2097,14 +1920,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+            "$ref": "#/parameters/UserIdParameter"
           }
         ],
         "responses": {
@@ -2359,7 +2175,7 @@
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation time of this Dev Box.",
+          "description": "Creation time of this Dev Box, in RFC3339 format.",
           "readOnly": true
         },
         "localAdministrator": {
@@ -2399,7 +2215,7 @@
         "suspendedUntil": {
           "type": "string",
           "format": "date-time",
-          "description": "The earliest time that the action could occur (UTC)."
+          "description": "The earliest time that the action could occur (UTC), in RFC3339 format."
         },
         "next": {
           "$ref": "#/definitions/DevBoxNextAction",
@@ -2487,7 +2303,7 @@
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the action will be triggered (UTC)."
+          "description": "The time the action will be triggered (UTC), in RFC3339 format."
         }
       },
       "required": [
@@ -2961,7 +2777,7 @@
         "publishedDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime that the backing image version was published.",
+          "description": "The datetime that the backing image version was published, in RFC3339 format.",
           "readOnly": true
         }
       }
@@ -3018,12 +2834,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the operation."
+          "description": "The start time of the operation, in RFC3339 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the operation."
+          "description": "The end time of the operation, in RFC3339 format."
         },
         "percentComplete": {
           "type": "number",
@@ -3805,6 +3621,68 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "DelayUntilQueryParameter": {
+      "name": "until",
+      "in": "query",
+      "description": "The time to delay the Dev Box action or actions until, in RFC3339 format.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "delayUntil"
+    },
+    "DevBoxNameParameter": {
+      "name": "devBoxName",
+      "in": "path",
+      "description": "The name of a Dev Box.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentNameParameter": {
+      "name": "environmentName",
+      "in": "path",
+      "description": "The name of the environment.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "x-ms-parameter-location": "method"
+    },
+    "HibernateQueryParameter": {
+      "name": "hibernate",
+      "in": "query",
+      "description": "Optional parameter to hibernate the dev box.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "description": "The DevCenter Project upon which to execute operations.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "x-ms-parameter-location": "method"
+    },
+    "UserIdParameter": {
+      "name": "userId",
+      "in": "path",
+      "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 36,
+      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -111,10 +111,11 @@ union ResourceState {
 model RpSkuEnumerationForNewResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The collection of available SKUs for new resources")
+  @items
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 
@@ -140,10 +141,11 @@ model RpSkuProperties {
 model RpSkuEnumerationForExistingResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The SKU details")
+  @items
   value: Array<RpSkuDetailsForExistingResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @Azure.Core.nextLink
   nextLink?: string;
 }
 

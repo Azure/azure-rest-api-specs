@@ -1292,6 +1292,16 @@
         "modelAsString": true
       }
     },
+    "IcebergWriteSettings": {
+      "description": "Iceberg write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {}
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -4266,6 +4276,25 @@
         }
       }
     },
+    "IcebergSink": {
+      "description": "A copy activity Iceberg sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Iceberg store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/IcebergWriteSettings",
+          "description": "Iceberg format settings."
+        }
+      }
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
@@ -4618,7 +4647,6 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
-          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "importSettings": {
@@ -8047,6 +8075,10 @@
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -8152,6 +8184,10 @@
           "type": "object",
           "description": "Expression to filter data from source.",
           "$ref": "#/definitions/ExpressionV2"
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
         }
       }
     },
