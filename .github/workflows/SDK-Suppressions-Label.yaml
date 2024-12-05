@@ -98,6 +98,49 @@ jobs:
             return files.map(file => file.filename);
         id: get-changed-files
 
+#  // Filter files by regexp
+#             const filteredFiles = files.filter(file => regex.test(file.filename));
+
+#             if (filteredFiles.length === 0) {
+#               console.log("No files matched the regexp.");
+#             }
+
+#             // Fetch content of filtered files from head and base branches
+#             const fileContents = await Promise.all(filteredFiles.map(async (file) => {
+#               // Get content from the base branch (target branch of the PR)
+#               const baseContent = await github.rest.repos.getContent({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 path: file.filename,
+#                 ref: context.payload.pull_request.base.sha, // base branch SHA
+#               }).catch(() => null); // In case the file does not exist on the base branch
+
+#               // Get content from the head branch (source branch of the PR)
+#               const headContent = await github.rest.repos.getContent({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 path: file.filename,
+#                 ref: context.payload.pull_request.head.sha, // head branch SHA
+#               }).catch(() => null); // In case the file does not exist on the head branch
+
+#               return {
+#                 file: file.filename,
+#                 baseContent: baseContent ? baseContent.data : null,
+#                 headContent: headContent ? headContent.data : null,
+#               };
+#             }));
+
+#             // Log the content differences or the file contents
+#             fileContents.forEach(({ file, baseContent, headContent }) => {
+#               console.log(`File: ${file}`);
+#               console.log(`Base Content (from ${context.payload.pull_request.base.ref}):`, baseContent);
+#               console.log(`Head Content (from ${context.payload.pull_request.head.ref}):`, headContent);
+#             });
+
+#             return fileContents; // Return the file contents for further processing if needed
+#         id: fetch-files
+
+
       - name: Save changed files to GitHub environment
         run: |
           echo "CHANGED_FILES=${{ steps.get-changed-files.outputs.result }}" >> $GITHUB_ENV
