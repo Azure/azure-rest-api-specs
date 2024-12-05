@@ -36,6 +36,10 @@ jobs:
         with:
             node-version: '18'
 
+      - name: Print GitHub Context
+        run: |
+          echo "GitHub Context: ${{ toJson(github) }}"
+
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
       - name: Run Node.js script
@@ -46,6 +50,8 @@ jobs:
           # echo "GITHUB_PULL_REQUEST_HEAD_REPO_OWNER=${{ github.event.pull_request.head.repo.owner.login }}" >> $GITHUB_ENV
           # echo "GITHUB_PULL_REQUEST_HEAD_REPO_NAME=${{ github.event.pull_request.head.repo.name }}" >> $GITHUB_ENV
           # echo "GITHUB_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
+          echo "GITHUB_EVENT_NAME=${{ github.event_name }}" >> $GITHUB_ENV
 
           echo "GITHUB_HEAD_REF=${{ github.head_ref }}" >> $GITHUB_ENV
           echo "GITHUB_BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
