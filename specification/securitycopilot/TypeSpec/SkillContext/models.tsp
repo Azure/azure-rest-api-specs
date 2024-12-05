@@ -446,17 +446,6 @@ model Usage {
 	TotalTokens: numeric;
 }
 
-model ContentFilterResults {
-	Hate?: ContentFilterResult;
-	SelfHarm?: ContentFilterResult;
-	Sexual?: ContentFilterResult;
-	Violence?: ContentFilterResult;
-	Profanity?: ContentFilterResult;
-	ProtectedMaterialCode?: ContentFilterResult;
-	ProtectedMaterialText?: ContentFilterResult;
-	Jailbreak?: ContentFilterResult;
-}
-
 model CodeCitation {
 	Url: string;
 	License: string;
@@ -484,7 +473,7 @@ model BaseChoice {
 	Index: numeric;
 	LogProbs: unknown;
 	FinishReason: string;
-	ContentFilterResults?: ContentFilterResults;
+	ContentFilterResults?: unknown;
 	ContentFilterError?: ContentFilterError;
 }
 
