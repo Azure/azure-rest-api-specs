@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @service({
-  title : "Azure App Configuration",
+  title: "Azure App Configuration",
 })
 @versioned(Versions)
 @useAuth(
@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@doc("Azure App Configuration REST API")
+@doc("Azure App Configuration REST API.")
 namespace AzureAppConfiguration;
 
 @doc("Service API versions")
