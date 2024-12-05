@@ -26,6 +26,19 @@ jobs:
 
       - name: Run the script
         run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+      - name: 运行 Node.js 脚本
+        id: run-script
+        run: |
+          # 运行脚本并捕获输出
+          OUTPUT=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
+          echo "脚本输出: $OUTPUT"
+          # 将输出保存为环境变量
+          echo "result=$OUTPUT" >> $GITHUB_ENV
+
+      - name: 在下一步中使用结果
+        run: |
+          echo "脚本结果为: $OUTPUT"
+
 
       # - name: Run Manage-SDKSuppression-Label script from file
       #   run: |
