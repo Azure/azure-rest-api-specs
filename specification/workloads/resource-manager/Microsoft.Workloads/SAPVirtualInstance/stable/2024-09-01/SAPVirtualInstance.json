@@ -40,6 +40,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "SAPVirtualInstances"
     },
     {
@@ -53,6 +56,42 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.Workloads/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/{location}/sapVirtualInstanceMetadata/default/getAvailabilityZoneDetails": {
       "post": {
         "operationId": "SapVirtualInstances_InvokeAvailabilityZoneDetails",
@@ -3169,7 +3208,7 @@
     },
     "LinuxConfiguration": {
       "type": "object",
-      "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).",
+      "description": "Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).",
       "properties": {
         "disablePasswordAuthentication": {
           "type": "boolean",
@@ -4746,7 +4785,7 @@
     },
     "SingleServerConfiguration": {
       "type": "object",
-      "description": "Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
+      "description": "Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)",
       "properties": {
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",
@@ -4870,7 +4909,7 @@
     },
     "SshKeyPair": {
       "type": "object",
-      "description": "The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).",
+      "description": "The SSH Key-pair used to authenticate with the VM. The key needs to be at least 2048-bit and in ssh-rsa format. For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).",
       "properties": {
         "publicKey": {
           "type": "string",
@@ -4945,7 +4984,7 @@
     },
     "ThreeTierConfiguration": {
       "type": "object",
-      "description": "Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
+      "description": "Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&amp;clcid=0x409)",
       "properties": {
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",

@@ -168,3 +168,177 @@ using Azure.ClientGenerator.Core;
   "UpdateSapApplicationInstanceRequest",
   "java"
 );
+
+@@clientName(Microsoft.Workloads.ErrorDefinition, "ErrorInformation", "csharp");
+
+@@clientName(Microsoft.Workloads.StartRequest, "StartContent", "csharp");
+
+@@clientName(Microsoft.Workloads.StopRequest, "StopContent", "csharp");
+
+@@clientName(Microsoft.Workloads,
+  "WorkloadsSapVirtualInstanceMgmtClient",
+  "csharp"
+);
+
+// interfaces
+@@clientName(Microsoft.Workloads.SAPApplicationServerInstances,
+  "SapApplicationServerInstances",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerInstances,
+  "SapCentralServerInstances",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseInstances,
+  "SapDatabaseInstances",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstances,
+  "SapVirtualInstances",
+  "csharp"
+);
+// unions and models
+@@clientName(Microsoft.Workloads.SAPEnvironmentType,
+  "SapEnvironmentType",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPProductType, "SapProductType", "csharp");
+@@clientName(Microsoft.Workloads.SAPDeploymentType,
+  "SapDeploymentType",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseType, "SapDatabaseType", "csharp");
+@@clientName(Microsoft.Workloads.SAPDatabaseScaleMethod,
+  "SapDatabaseScaleMethod",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPHighAvailabilityType,
+  "SapHighAvailabilityType",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPConfigurationType,
+  "SapConfigurationType",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceStatus,
+  "SapVirtualInstanceStatus",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPHealthState, "SapHealthState", "csharp");
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceState,
+  "SapVirtualInstanceState",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSoftwareInstallationType,
+  "SapSoftwareInstallationType",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSizingRecommendationRequest,
+  "SapSizingRecommendationRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSizingRecommendationResult,
+  "SapSizingRecommendationResult",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSupportedSkusRequest,
+  "SapSupportedSkusRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSupportedResourceSkusResult,
+  "SapSupportedResourceSkusResult",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPSupportedSku, "SapSupportedSku", "csharp");
+@@clientName(Microsoft.Workloads.SAPDiskConfigurationsRequest,
+  "SapDiskConfigurationsRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfigurationsResult,
+  "SapDiskConfigurationsResult",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDiskConfiguration,
+  "SapDiskConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZoneDetailsRequest,
+  "SapAvailabilityZoneDetailsRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZoneDetailsResult,
+  "SapAvailabilityZoneDetailsResult",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPAvailabilityZonePair,
+  "SapAvailabilityZonePair",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceProperties,
+  "SapVirtualInstanceProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPConfiguration,
+  "SapConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceError,
+  "SapVirtualInstanceError",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerProperties,
+  "SapCentralServerProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseProperties,
+  "SapDatabaseProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPApplicationServerProperties,
+  "SapApplicationServerProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPInstallWithoutOSConfigSoftwareConfiguration,
+  "SapInstallWithoutOSConfigSoftwareConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPApplicationServerInstance,
+  "SapApplicationServerInstance",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPCentralServerInstance,
+  "SapCentralServerInstance",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPDatabaseInstance,
+  "SapDatabaseInstance",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstance,
+  "SapVirtualInstance",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.SAPVirtualInstanceMetadata,
+  "SapVirtualInstanceMetadata",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPVirtualInstanceRequest,
+  "UpdateSapVirtualInstanceRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPVirtualInstanceProperties,
+  "UpdateSapVirtualInstanceProperties",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPCentralInstanceRequest,
+  "UpdateSapCentralInstanceRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPDatabaseInstanceRequest,
+  "UpdateSapDatabaseInstanceRequest",
+  "csharp"
+);
+@@clientName(Microsoft.Workloads.UpdateSAPApplicationInstanceRequest,
+  "UpdateSapApplicationInstanceRequest",
+  "csharp"
+);
