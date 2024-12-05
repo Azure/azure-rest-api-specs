@@ -38,12 +38,14 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: "Thank you for your contribution! 🚀"
-            });
+            # github.rest.issues.createComment({
+            #   owner: context.repo.owner,
+            #   repo: context.repo.repo,
+            #   issue_number: context.issue.number,
+            #   body: "Thank you for your contribution! 🚀"
+            # });
+            const action = require('./.github/actions/handle-suppressions/suppressions.js')
+            await action({ github, context, core });
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
