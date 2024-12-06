@@ -223,10 +223,10 @@ jobs:
           echo "GITHUB_PR_REF_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "GITHUB_PR_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
 
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-          OUTPUT=$(cat output.json)
-          echo "Script JSON Output: $OUTPUT"
-          echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          # node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          # OUTPUT=$(cat output.json)
+          # echo "Script JSON Output: $OUTPUT"
+          # echo "script_result=$OUTPUT" >> $GITHUB_ENV
 
       - name: Write all JSON content
         run: |
