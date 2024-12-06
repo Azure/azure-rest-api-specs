@@ -32,7 +32,7 @@ jobs:
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
       New-TypeSpecAPIViewTokens `
         -TempDirectory "$(Agent.TempDirectory)" `
-        -ArtiFactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
+        -ArtifactsStagingDirectory "$(Build.ArtifactStagingDirectory)" `
         -APIViewArtifactsDirectoryName "${{ parameters.APIViewArtifactsDirectoryName }}"
     displayName: Generate TypeSpec APIView Tokens
 
