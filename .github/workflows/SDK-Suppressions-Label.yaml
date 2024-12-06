@@ -22,45 +22,40 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: get GitHub pr info
+      - name: Get GitHub pr info
         uses: actions/github-script@v7
         id: fetch-pr-info
         with:
           script: |
             const pr = context.payload.pull_request;
-            const prNumber = pr.number;
-            const prTitle = pr.title;
-
-            console.log("event:", context.eventName);
-            console.log("actor:", context.actor);
-            console.log("pull_request", context.payload.pull_request);
-
-            console.log(`PR Number: ${prNumber}`);
-            console.log(`PR Title: ${prTitle}`);
-
-            core.setOutput("prNumber", prNumber);
-            core.setOutput("prTitle", prTitle);
-
-            // return { prNumber, prTitle };
+            if (!pr) {
+              throw new Error("This workflow must run in the context of a pull request.");
+            }
+            console.log("This action trigger by ", context.eventName);
+            const prInfo = {
+              number: pr.number,
+              title: pr.title,
+              base: {
+                owner: pr.base.repo.owner.login,
+                repo: pr.base.repo.name,
+                branch: pr.base.ref
+              },
+              head: {
+                owner: pr.head.repo.owner.login,
+                repo: pr.head.repo.name,
+                branch: pr.head.ref
+              },
+              labels: pr.labels.map(label => label.name)
+            };
+            return JSON.stringify(prInfo);
           result-encoding: string
 
-      - name: save GitHub env
+      - name: Set GitHub env
         run: |
-          echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.prNumber }}" >> $GITHUB_ENV
-          echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
+          echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.result }}" >> $GITHUB_ENV
 
-      - name: test GitHub env
-        run: |
-          echo "Pull Request Number:  ${{ steps.fetch-pr-info.outputs.prNumber }}"
-          echo "Pull Request Title: ${{ steps.fetch-pr-info.outputs.prTitle }}"
-          echo "Pull Request Number: $PR_NUMBER"
-          echo "Pull Request Title: $PR_TITLE"
-
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-            node-version: '20'
+      - name: Setup Node and run `npm ci`
+        uses: ./.github/actions/setup-node-npm-ci
 
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
