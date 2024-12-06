@@ -18,26 +18,28 @@ namespace Microsoft.DesktopVirtualization;
  */
 model PrivateEndpointConnectionWithSystemData
   is TrackedResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
+  ...ResourceNameParameter<Resource = PrivateEndpointConnection>;
 }
+
+alias PrivateEndpointParameter = {
+  /** The name parameter for private endpoint */
+  @path
+  @segment("privateEndpointConnections")
+  privateEndpointName: string;
+};
 
 @armResourceOperations
 interface HostPoolOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ParentParameters = ResourceInstanceParameters<HostPool>,
-      ResourceTypeParameter = KeysOf<PrivateEndpointConnection>
+      ResourceTypeParameter = PrivateEndpointParameter
     > {}
 
 @armResourceOperations
 interface WorkspaceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       ParentParameters = ResourceInstanceParameters<Workspace>,
-      ResourceTypeParameter = KeysOf<PrivateEndpointConnection>
+      ResourceTypeParameter = PrivateEndpointParameter
     > {}
 
 @armResourceOperations
