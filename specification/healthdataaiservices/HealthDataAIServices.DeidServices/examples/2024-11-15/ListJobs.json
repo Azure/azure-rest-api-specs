@@ -2,7 +2,7 @@
   "title": "List de-identification jobs.",
   "operationId": "ListJobs",
   "parameters": {
-    "api-version": "2024-07-12-preview",
+    "api-version": "2024-11-15",
     "maxpagesize": 10,
     "continuationToken": "K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ==",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
@@ -12,21 +12,20 @@
       "body": {
         "value": [
           {
-            "name": "documents_smith_1",
+            "name": "job_smith_documents_1",
+            "operation": "Redact",
             "sourceLocation": {
-              "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
-              "prefix": "/documents",
-              "extensions": [
-                "*"
-              ]
+              "location": "https://blobtest.blob.core.windows.net/container",
+              "prefix": "documents/"
             },
             "targetLocation": {
-              "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
-              "prefix": "/documents"
+              "location": "https://blobtest.blob.core.windows.net/container",
+              "prefix": "_output/",
+              "overwrite": true
             },
-            "operation": "Redact",
-            "dataType": "Plaintext",
-            "redactionFormat": "[{type}]",
+            "customizations": {
+              "redactionFormat": "[{type}]"
+            },
             "status": "Succeeded",
             "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
             "createdAt": "2024-01-25T23:27:43.009Z",
@@ -40,7 +39,7 @@
             }
           }
         ],
-        "nextLink": "https://deidtest.api.deid.azure.com/jobs?top=10&skip=10&maxpagesize=10"
+        "nextLink": "https://deidtest.api.deid.azure.com/jobs?maxpagesize=10&continuationToken=K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ=="
       }
     }
   }
