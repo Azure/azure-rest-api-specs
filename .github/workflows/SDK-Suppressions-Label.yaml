@@ -52,31 +52,23 @@ jobs:
 
       - name: Set GitHub env
         run: |
-          echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.result }}" >> $GITHUB_ENV
+          echo "PR_INFO=${{ steps.fetch-pr-info.outputs.result }}" >> $GITHUB_ENV
+
+      - name: Verify PR Info
+        run: |
+          echo "PR Info: $PR_INFO"
 
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
 
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-      - name: Run Node.js script
+      - name: Run get suppressions label script
         id: run-script
+        env:
+          PR_INFO: ${{ steps.fetch-pr-info.outputs.result }}
         run: |
-          # echo "GITHUB_PULL_REQUEST_BASE_REPO_OWNER=${{ github.event.pull_request.base.repo.owner.login }}" >> $GITHUB_ENV
-          # echo "GITHUB_PULL_REQUEST_BASE_REPO_NAME=${{ github.event.pull_request.base.repo.name }}" >> $GITHUB_ENV
-          # echo "GITHUB_PULL_REQUEST_HEAD_REPO_OWNER=${{ github.event.pull_request.head.repo.owner.login }}" >> $GITHUB_ENV
-          # echo "GITHUB_PULL_REQUEST_HEAD_REPO_NAME=${{ github.event.pull_request.head.repo.name }}" >> $GITHUB_ENV
-          # echo "GITHUB_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-
-          echo "GITHUB_EVENT_NAME=${{ github.event_name }}" >> $GITHUB_ENV
-
-          echo "GITHUB_HEAD_REF=${{ github.head_ref }}" >> $GITHUB_ENV
-          echo "GITHUB_BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
-          echo "GITHUB_PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
-          echo "GITHUB_PR_REF=${{ github.ref }}" >> $GITHUB_ENV
-          echo "GITHUB_PR_REF_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "GITHUB_PR_RUN_NUMBER=${{ github.run_number }}" >> $GITHUB_ENV
-
+          echo "PR_INFO=$PR_INFO"
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat output.json)
           echo "Script JSON Output: $OUTPUT"
