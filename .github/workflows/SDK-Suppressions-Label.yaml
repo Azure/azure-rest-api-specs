@@ -58,11 +58,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
           result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "suppressions-lables=$result" >> $GITHUB_ENV
+          echo "Result from Node.js script: $result"  # Debugging output
           echo "::set-output name=result::$result"
 
       - name: Write all labels
         run: |
           echo "Entire labels content:"
           echo "${{ steps.run-suppressions-script.outputs.result }}"
-          echo $suppressions-lables
