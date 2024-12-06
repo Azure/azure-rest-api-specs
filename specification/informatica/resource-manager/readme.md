@@ -34,7 +34,7 @@ tag: package-2024-11-29-preview
 
 These settings apply only when `--tag=package-2024-11-29-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-07-22-preview'
+```yaml $(tag) == 'package-2024-11-29-preview'
 input-file:
   - Informatica.DataManagement/preview/2024-11-29-preview/openapi.json
 ```
