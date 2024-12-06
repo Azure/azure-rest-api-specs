@@ -188,7 +188,7 @@ function Get-PrPkgProperties([string]$InputDiffJson) {
     }
 
     foreach ($addition in $additionalValidationPackages) {
-        $key = $addition.Replace($RepoRoot, "").TrimStart('\/')
+        $key = $addition.Replace($RepoRoot, "").TrimStart('\/').Replace("\", "/")
 
         if ($lookup[$key]) {
             $lookup[$key].IncludedForValidation = $true
