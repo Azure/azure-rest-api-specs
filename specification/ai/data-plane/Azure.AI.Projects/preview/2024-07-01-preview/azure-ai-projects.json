@@ -4795,14 +4795,10 @@
           "description": "The ID of the file to attach to the message.",
           "x-ms-client-name": "fileId"
         },
-        "data_sources": {
-          "type": "array",
+        "data_source": {
+          "$ref": "#/definitions/Agents.VectorStoreDataSource",
           "description": "Azure asset ID.",
-          "items": {
-            "$ref": "#/definitions/Agents.VectorStoreDataSource"
-          },
-          "x-ms-client-name": "dataSources",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "dataSource"
         },
         "tools": {
           "type": "array",
@@ -5508,6 +5504,166 @@
         "created_at",
         "purpose"
       ]
+    },
+    "Agents.OpenApiAnonymousAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi anonymous authentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "anonymous"
+    },
+    "Agents.OpenApiAuthDetails": {
+      "type": "object",
+      "description": "authentication details for OpenApiFunctionDefinition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Agents.OpenApiAuthType",
+          "description": "The type of authentication, must be anonymous/connection/managed_identity"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "Agents.OpenApiAuthType": {
+      "type": "string",
+      "description": "Type of chunking strategy",
+      "enum": [
+        "anonymous",
+        "connection",
+        "managed_identity"
+      ],
+      "x-ms-enum": {
+        "name": "OpenApiAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "connection",
+            "value": "connection"
+          },
+          {
+            "name": "managedIdentity",
+            "value": "managed_identity"
+          }
+        ]
+      }
+    },
+    "Agents.OpenApiConnectionAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi connection authentication",
+      "properties": {
+        "security_scheme": {
+          "$ref": "#/definitions/Agents.OpenApiConnectionSecurityScheme",
+          "description": "Connection auth security details"
+        }
+      },
+      "required": [
+        "security_scheme"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
+    "Agents.OpenApiConnectionSecurityScheme": {
+      "type": "object",
+      "description": "Security scheme for OpenApi managed_identity authentication",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "Connection id for Connection auth type"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "Agents.OpenApiFunctionDefinition": {
+      "type": "object",
+      "description": "The input definition information for an openapi function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does, used by the model to choose when and how to call the function."
+        },
+        "spec": {
+          "description": "The openapi function shape, described as a JSON Schema object."
+        },
+        "auth": {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails",
+          "description": "Open API authentication details"
+        }
+      },
+      "required": [
+        "name",
+        "spec",
+        "auth"
+      ]
+    },
+    "Agents.OpenApiManagedAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi managed_identity authentication",
+      "properties": {
+        "security_scheme": {
+          "$ref": "#/definitions/Agents.OpenApiManagedSecurityScheme",
+          "description": "Connection auth security details"
+        }
+      },
+      "required": [
+        "security_scheme"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "managed_identity"
+    },
+    "Agents.OpenApiManagedSecurityScheme": {
+      "type": "object",
+      "description": "Security scheme for OpenApi managed_identity authentication",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Authentication scope for managed_identity auth type"
+        }
+      },
+      "required": [
+        "audience"
+      ]
+    },
+    "Agents.OpenApiToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
+      "properties": {
+        "openapi": {
+          "$ref": "#/definitions/Agents.OpenApiFunctionDefinition",
+          "description": "The openapi function definition."
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "Agents.RequiredAction": {
       "type": "object",
