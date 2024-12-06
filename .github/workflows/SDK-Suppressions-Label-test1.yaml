@@ -228,6 +228,15 @@ jobs:
           # echo "Script JSON Output: $OUTPUT"
           # echo "script_result=$OUTPUT" >> $GITHUB_ENV
 
+          # node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          # OUTPUT=$(cat output.json)
+          # echo "Script JSON Output: $OUTPUT"
+          # echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          
+          # const result = require('eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js');
+          # console.log(JSON.stringify(result));
+          # echo "SCRIPT_OUTPUT_RESULT=$result" >> $GITHUB_ENV
+
       - name: Write all JSON content
         run: |
           echo "Entire JSON content:"
