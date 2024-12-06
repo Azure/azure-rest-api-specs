@@ -11,9 +11,8 @@ function getUsage(): string {
 export async function main() {
     const pullRequestContext = process.env.GITHUB_PULL_REQUEST_CONTEXT as string;
     const githubToken = process.env.GITHUB_TOKEN as string;
-
     if (pullRequestContext && githubToken) {
-      const _pullRequestContext = JSON.parse(pullRequestContext) as unknown as PullRequestContext;
+      const _pullRequestContext = pullRequestContext as unknown as PullRequestContext;
       const _token = githubToken;
       const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(_pullRequestContext, _token);
       console.log(JSON.stringify(changedLabels));
