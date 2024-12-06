@@ -11,6 +11,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  script_result: ''
+  
 jobs:
   manage_sdk_suppressions_labels:
     runs-on: ubuntu-latest
@@ -57,20 +60,12 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
-          labels=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-
-          echo "Result from Node.js script: $labels"
-
-          result_object=$(echo "$labels" | node -p "JSON.parse(process.argv[1])" "$labels")
-          echo "::set-output name=labels::$result_object"
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          OUTPUT=$(cat output.json)
+          echo "Script output labels: $OUTPUT"
+          echo "script_result=$OUTPUT" >> $GITHUB_ENV
 
       - name: Write all labels
         run: |
           echo "Entire labels content:"
-          result_json="${{ steps.run-suppressions-script.outputs.labels }}"
-          
-          echo "Received JSON string: $result_json"
-          
-          result_object=$(echo "$result_json" | node -p "JSON.parse(process.argv[1])" "$result_json")
-          
-          echo "Processed result object: $result_object"
+          echo "${{ env.script_result }}"
