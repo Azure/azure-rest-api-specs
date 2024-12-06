@@ -3779,7 +3779,7 @@
       }
     },
     "PlayResumed": {
-      "description": "Play started event.",
+      "description": "Play Resumed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -3805,7 +3805,7 @@
       }
     },
     "PlayPaused": {
-      "description": "Play started event.",
+      "description": "Play Paused event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -3831,6 +3831,7 @@
       }
     },
     "HoldAudioPaused": {
+      "description": "Hold Audio Paused event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -3856,6 +3857,7 @@
       }
     },
     "HoldAudioResumed": {
+      "description": "Hold Audio Resumed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -3881,6 +3883,7 @@
       }
     },
     "HoldAudioCompleted": {
+      "description": "Hold Audio Completed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -4694,6 +4697,7 @@
       }
     },
     "HoldFailed": {
+      "description": "Hold Failed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -4719,6 +4723,7 @@
       }
     },
     "HoldAudioStarted": {
+      "description": "Hold Audio Started event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -4774,33 +4779,28 @@
       "properties": {
         "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for audio streaming update with the current status and the details about the status",
-          "readOnly": true
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -4860,33 +4860,28 @@
       "properties": {
         "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for audio streaming update with the current status and the details about the status",
-          "readOnly": true
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -4895,77 +4890,72 @@
       "properties": {
         "mediaStreamingUpdate": {
           "$ref": "#/definitions/MediaStreamingUpdate",
-          "description": "Defines the result for audio streaming update with the current status and the details about the status",
-          "readOnly": true
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
           "readOnly": true
         },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     }
   },
-    "parameters": {
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "description": "Version of API to invoke.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "Endpoint": {
-        "name": "endpoint",
-        "in": "path",
-        "description": "The endpoint of the Azure Communication resource.",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
-      }
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-    "securityDefinitions": {
-      "Authorization": {
-        "type": "apiKey",
-        "description": "An Azure Communication Services user access token.",
-        "name": "Authorization",
-        "in": "header"
-      }
-    },
-    "security": [
-      {
-        "Authorization": []
-      }
-    ],
-    "x-ms-parameterized-host": {
-      "hostTemplate": "{endpoint}",
-      "useSchemePrefix": false,
-      "parameters": [
-        {
-          "$ref": "#/parameters/Endpoint"
-        }
-      ]
+    "Endpoint": {
+      "name": "endpoint",
+      "in": "path",
+      "description": "The endpoint of the Azure Communication resource.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
     }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "description": "An Azure Communication Services user access token.",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
   }
+}
