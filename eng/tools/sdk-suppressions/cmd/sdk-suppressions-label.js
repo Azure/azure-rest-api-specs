@@ -28,6 +28,7 @@ console.log(`This workflow ref ${ref} `);
 console.log(`This workflow ref name ${refName} `);
 console.log(`This workflow run_number ${run_number} `);
 
-
 console.log("Ending log");
+
+return result;
 
