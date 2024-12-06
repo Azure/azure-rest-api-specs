@@ -4769,14 +4769,10 @@
           "description": "The ID of the file to attach to the message.",
           "x-ms-client-name": "fileId"
         },
-        "data_sources": {
-          "type": "array",
+        "data_source": {
+          "$ref": "#/definitions/Agents.VectorStoreDataSource",
           "description": "Azure asset ID.",
-          "items": {
-            "$ref": "#/definitions/Agents.VectorStoreDataSource"
-          },
-          "x-ms-client-name": "dataSources",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "dataSource"
         },
         "tools": {
           "type": "array",
