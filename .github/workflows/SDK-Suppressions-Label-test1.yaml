@@ -57,14 +57,14 @@ jobs:
             console.log(`PR Title: ${prTitle}`);
             console.log(`base sha: ${prBaseSha}`);
             console.log(`head sha: ${prHeadSha}`);
-            prlabels.forEach(file => console.log(file.filename));
-            console.log(`labels: ${prlabels}`);
+            // prlabels.forEach(file => console.log(file.filename));
+            // console.log(`labels: ${prlabels}`);
 
             core.setOutput("prNumber", prNumber);
             core.setOutput("prTitle", prTitle);
             core.setOutput("prBaseSha", prBaseSha);
             core.setOutput("prHeadSha", prHeadSha);
-            core.setOutput("prLabels", prlabels);
+            // core.setOutput("prLabels", prlabels);
 
             return { prNumber, prTitle };
           result-encoding: string
@@ -77,7 +77,7 @@ jobs:
           echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
           echo "PR_BASE_SHA=${{ steps.fetch-pr-info.outputs.prBaseSha }}" >> $GITHUB_ENV
           echo "PR_HEAD_SHA=${{ steps.fetch-pr-info.outputs.prHeadSha }}" >> $GITHUB_ENV
-          echo "PR_LABELS='${{ steps.fetch-pr-info.outputs.prlabels }}'" >> $GITHUB_ENV
+          # echo "PR_LABELS='${{ steps.fetch-pr-info.outputs.prlabels }}'" >> $GITHUB_ENV
 
       - name: test GitHub env
         run: |
