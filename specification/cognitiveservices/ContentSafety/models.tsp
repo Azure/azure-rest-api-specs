@@ -955,10 +955,10 @@ union Modality {
   string,
 
   @doc("The modality for content - Text.")
-  "Text",
+  "text",
 
   @doc("The modality for content - Image.")
-  "Image",
+  "image",
 }
 
 @doc("The source type of the message.")
@@ -966,10 +966,10 @@ union SourceType {
   string,
 
   @doc("The source type for message - message to AI.")
-  "MESSAGE_TO_AI",
+  "messageToAI",
 
   @doc("The source type for message - message from AI.")
-  "MESSAGE_FROM_AI",
+  "messageFromAI",
 }
 
 @doc("The type of the role.")
@@ -977,19 +977,19 @@ union RoleType {
   string,
 
   @doc("All roles.")
-  "All",
+  "all",
 
   @doc("User role.")
-  "User",
+  "user",
 
   @doc("System role.")
-  "System",
+  "system",
 
   @doc("Assistant role.")
-  "Assistant",
+  "assistant",
 
   @doc("Tool role.")
-  "Tool",
+  "tool",
 }
 
 @doc("The harm category.")
@@ -997,28 +997,28 @@ union HarmCategory {
   string,
 
   @doc("Celebrity harm category.")
-  "Celebrity",
+  "celebrity",
 
   @doc("Drug harm category.")
-  "Drug",
+  "drug",
 
   @doc("Hate harm category.")
-  "Hate",
+  "hate",
 
   @doc("Prompt injection harm category.")
-  "PromptInjection",
+  "promptInjection",
 
   @doc("Protected material harm category.")
-  "ProtectedMaterial",
+  "protectedMaterial",
 
   @doc("Sexual harm category.")
-  "Sexual",
+  "sexual",
 
   @doc("Self-harm category.")
-  "SelfHarm",
+  "selfHarm",
 
   @doc("Violence harm category.")
-  "Violence",
+  "violence",
 }
 
 @doc("The risk level.")
@@ -1026,16 +1026,16 @@ union RiskLevel {
   string,
 
   @doc("Safe risk level.")
-  "Safe",
+  "safe",
 
   @doc("Low risk level.")
-  "Low",
+  "low",
 
   @doc("Medium risk level.")
-  "Medium",
+  "medium",
 
   @doc("High risk level.")
-  "High",
+  "high",
 }
 
 @doc("The task type.")
@@ -1043,16 +1043,16 @@ union TaskType {
   string,
 
   @doc("Harm category task type.")
-  "HarmCategory",
+  "harmCategory",
 
   @doc("Blocklist task type.")
-  "Blocklist",
+  "blocklist",
 
   @doc("Safety incident task type.")
-  "SafetyIncident",
+  "safetyIncident",
 
   @doc("Custom harm category task type.")
-  "CustomHarmCategory",
+  "customHarmCategory",
 }
 
 @doc("Unify content model.")
@@ -1194,16 +1194,16 @@ union ResultCode {
   string,
 
   @doc("OK result code.")
-  "OK",
+  "oK",
 
   @doc("No valid input result code.")
-  "NoValidInput",
+  "noValidInput",
 
   @doc("Internal timeout result code.")
-  "InternalTimeout",
+  "internalTimeout",
 
   @doc("Internal error result code.")
-  "InternalError",
+  "internalError",
 }
 
 @doc("Details the output of an analysis, including detection status, severity, and additional information.")
@@ -1298,10 +1298,10 @@ union Result {
   string,
 
   @doc("No criteria met result.")
-  "NoCriteriaMet",
+  "noCriteriaMet",
 
   @doc("Blocking criteria met result.")
-  "BlockingCriteriaMet",
+  "blockingCriteriaMet",
 }
 
 @doc("The state.")
@@ -1309,10 +1309,10 @@ union State {
   string,
 
   @doc("All analysis succeeded state.")
-  "AnalysisAllSucceed",
+  "analysisAllSucceed",
 
   @doc("Not all analysis succeeded state.")
-  "AnalysisNotAllSucceed",
+  "analysisNotAllSucceed",
 }
 
 @doc("Represents the analysis response obtained by applying a safety policy.")
