@@ -22,9 +22,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get GitHub pr info
+      - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
-        id: fetch-pr-info
+        id: Fetch-PullRequest-Context
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -32,31 +32,32 @@ jobs:
               throw new Error("This workflow must run in the context of a pull request.");
             }
             console.log("This action trigger by ", context.eventName);
-            const prInfo = {
+            const prContext = {
               number: pr.number,
               title: pr.title,
+              html_url: pr.html_url,
               base: {
                 owner: pr.base.repo.owner.login,
                 repo: pr.base.repo.name,
-                branch: pr.base.ref
+                ref: pr.base.ref
               },
               head: {
                 owner: pr.head.repo.owner.login,
                 repo: pr.head.repo.name,
-                branch: pr.head.ref
+                ref: pr.head.ref
               },
               labels: pr.labels.map(label => label.name)
             };
-            return JSON.stringify(prInfo);
+            return JSON.stringify(prContext);
           result-encoding: string
 
-      - name: Set GitHub env
-        run: |
-          echo "PR_INFO=${{ steps.fetch-pr-info.outputs.result }}" >> $GITHUB_ENV
+      # - name: Set GitHub env
+      #   run: |
+      #     echo "GITHUB_PULL_REQUEST_CONTEXT=${{ steps.Fetch-PullRequest-Context.outputs.result }}" >> $GITHUB_ENV
 
-      - name: Verify PR Info
-        run: |
-          echo "PR Info: $PR_INFO"
+      # - name: Verify PR Context
+      #   run: |
+      #     echo "PR Info: $GITHUB_PULL_REQUEST_CONTEXT"
 
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
@@ -64,15 +65,24 @@ jobs:
       # - name: Run the script
       #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
       - name: Run get suppressions label script
-        id: run-script
+        id: run-suppressions-script
         env:
-          PR_INFO: ${{ steps.fetch-pr-info.outputs.result }}
+          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
+          GITHUB_TOLEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
-          echo "PR_INFO=$PR_INFO"
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-          OUTPUT=$(cat output.json)
-          echo "Script JSON Output: $OUTPUT"
-          echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          echo "PR_INFO=$GITHUB_PULL_REQUEST_CONTEXT"
+
+          # node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          # OUTPUT=$(cat output.json)
+          # echo "Script JSON Output: $OUTPUT"
+          # echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          
+          result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
+          echo "SCRIPT_OUTPUT=$result" >> $GITHUB_ENV
+
+          # const result = require('eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js');
+          # console.log(JSON.stringify(result));
+          # echo "SCRIPT_OUTPUT_RESULT=$result" >> $GITHUB_ENV
 
       - name: Write all JSON content
         run: |

@@ -1,12 +1,27 @@
 {
-  "name": "sdk-suppressions",
+  "name": "@azure-tools/sdk-suppressions",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "get-sdk-suppressions-label": "cmd/sdk-suppressions-label.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "18.0.3",
+    "@octokit/types": "^5.4.0",
+    "ajv": "^6.12.6",
+    "js-yaml": "^3.14.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.12.5",
+    "@types/lodash": "^4.14.161"
+  }
 }
