@@ -73,7 +73,7 @@ jobs:
         id: run-suppressions-script
         env:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
-          GITHUB_TOLEN: ${{ secrets.SPEC_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
           echo "PR_INFO=$GITHUB_PULL_REQUEST_CONTEXT"
 
