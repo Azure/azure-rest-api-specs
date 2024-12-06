@@ -130,6 +130,13 @@ model OperatorApiConnectionProperties {
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
   purposeReason: string;
+
+  /**
+   * List of ways the data returned on this API is processed.
+   */
+  @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", ["processingOperation"])
+  dataProcessingList: DataProcessing[];
 }
 
 /**
@@ -176,25 +183,25 @@ model DataProcessing {
   frequency: Frequency;
 
   /**
-   * The countries the data transits through.
+   * The countries/regions the data transits through.
    */
   @OpenAPI.extension("x-ms-identifiers", ["countryCode"])
-  transitCountries: DataCountries[];
+  transitRegions: DataRegions[];
 
   /**
-   * The countries the data is stored in.
+   * The countries/regions the data is stored in.
    */
   @OpenAPI.extension("x-ms-identifiers", ["countryCode"])
-  storageCountries: DataCountries[];
+  storageRegions: DataRegions[];
 }
 
 /**
- * Model defining the information required about the countries the data transits through or is stored in.
+ * Model defining the information required about the countries/regions the data transits through or is stored in.
  */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
-model DataCountries {
+model DataRegions {
   /**
-   * The country code of the country the data transits through or is stored in.
+   * The country code of the country/region the data transits through or is stored in.
    */
   @pattern("[A-Z]{2}", "Provide 2 letter country code")
   countryCode: string;

@@ -1759,34 +1759,6 @@
         ]
       }
     },
-    "DataCountries": {
-      "type": "object",
-      "description": "Model defining the information required about the countries the data transits through or is stored in.",
-      "properties": {
-        "countryCode": {
-          "type": "string",
-          "description": "The country code of the country the data transits through or is stored in.",
-          "pattern": "[A-Z]{2}"
-        },
-        "commercialOrganization": {
-          "type": "string",
-          "description": "The commercial organization who is managing the data."
-        },
-        "commercialActivity": {
-          "type": "boolean",
-          "description": "Flag to indicate if commercial activity applies to this data management."
-        },
-        "dataPrivacyFrameworkUrl": {
-          "type": "string",
-          "description": "URL to the organization or governmental data privacy framework."
-        }
-      },
-      "required": [
-        "countryCode",
-        "commercialActivity",
-        "dataPrivacyFrameworkUrl"
-      ]
-    },
     "DataProcessing": {
       "type": "object",
       "description": "Model defining how received data is processed.",
@@ -1810,21 +1782,21 @@
           "$ref": "#/definitions/Frequency",
           "description": "The frequency of the data processing."
         },
-        "transitCountries": {
+        "transitRegions": {
           "type": "array",
-          "description": "The countries the data transits through.",
+          "description": "The countries/regions the data transits through.",
           "items": {
-            "$ref": "#/definitions/DataCountries"
+            "$ref": "#/definitions/DataRegions"
           },
           "x-ms-identifiers": [
             "countryCode"
           ]
         },
-        "storageCountries": {
+        "storageRegions": {
           "type": "array",
-          "description": "The countries the data is stored in.",
+          "description": "The countries/regions the data is stored in.",
           "items": {
-            "$ref": "#/definitions/DataCountries"
+            "$ref": "#/definitions/DataRegions"
           },
           "x-ms-identifiers": [
             "countryCode"
@@ -1836,8 +1808,36 @@
         "contexts",
         "duration",
         "frequency",
-        "transitCountries",
-        "storageCountries"
+        "transitRegions",
+        "storageRegions"
+      ]
+    },
+    "DataRegions": {
+      "type": "object",
+      "description": "Model defining the information required about the countries/regions the data transits through or is stored in.",
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "description": "The country code of the country/region the data transits through or is stored in.",
+          "pattern": "[A-Z]{2}"
+        },
+        "commercialOrganization": {
+          "type": "string",
+          "description": "The commercial organization who is managing the data."
+        },
+        "commercialActivity": {
+          "type": "boolean",
+          "description": "Flag to indicate if commercial activity applies to this data management."
+        },
+        "dataPrivacyFrameworkUrl": {
+          "type": "string",
+          "description": "URL to the organization or governmental data privacy framework."
+        }
+      },
+      "required": [
+        "countryCode",
+        "commercialActivity",
+        "dataPrivacyFrameworkUrl"
       ]
     },
     "Duration": {
@@ -2055,16 +2055,16 @@
     },
     "LocalRepresentative": {
       "type": "object",
-      "description": "Model defining a local representative for a country.",
+      "description": "Model defining a local representative for a country/region.",
       "properties": {
         "countryCode": {
           "type": "string",
-          "description": "Country code for the country the local representative is representing.",
+          "description": "Country code for the country/region the local representative is representing.",
           "pattern": "[A-Z]{2}"
         },
         "localRepresentativePerson": {
           "$ref": "#/definitions/Person",
-          "description": "Local representative for this country"
+          "description": "Local representative for this country/region."
         }
       },
       "required": [
@@ -2200,13 +2200,24 @@
         "purposeReason": {
           "type": "string",
           "description": "Explanation of the reason that justifies the purpose: specifically why is the API used for the application's use case."
+        },
+        "dataProcessingList": {
+          "type": "array",
+          "description": "List of ways the data returned on this API is processed.",
+          "items": {
+            "$ref": "#/definitions/DataProcessing"
+          },
+          "x-ms-identifiers": [
+            "processingOperation"
+          ]
         }
       },
       "required": [
         "operatorApiPlanId",
         "gatewayId",
         "purposes",
-        "purposeReason"
+        "purposeReason",
+        "dataProcessingList"
       ]
     },
     "OperatorApiConnectionUpdate": {
@@ -2259,6 +2270,16 @@
         "purposeReason": {
           "type": "string",
           "description": "Explanation of the reason that justifies the purpose: specifically why is the API used for the application's use case."
+        },
+        "dataProcessingList": {
+          "type": "array",
+          "description": "List of ways the data returned on this API is processed.",
+          "items": {
+            "$ref": "#/definitions/DataProcessing"
+          },
+          "x-ms-identifiers": [
+            "processingOperation"
+          ]
         }
       }
     },

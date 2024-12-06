@@ -269,18 +269,18 @@ model GeographicAddress {
 }
 
 /**
- * Model defining a local representative for a country.
+ * Model defining a local representative for a country/region.
  */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 model LocalRepresentative {
   /**
-   * Country code for the country the local representative is representing.
+   * Country code for the country/region the local representative is representing.
    */
   @pattern("[A-Z]{2}", "Provide 2 letter country code")
   countryCode: string;
 
   /**
-   * Local representative for this country
+   * Local representative for this country/region.
    */
   localRepresentativePerson: Person;
 }
