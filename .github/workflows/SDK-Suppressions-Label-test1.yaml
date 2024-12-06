@@ -1,4 +1,4 @@
-name: breakingchange suppressions label Workflow
+name: breakingchange suppressions label Workflow Test
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ env:
   script_result: ''
 
 jobs:
-  manage_sdk_suppressions_labels:
+  manage_sdk_suppressions_labels_test:
     runs-on: ubuntu-latest
     
     steps:
@@ -51,16 +51,21 @@ jobs:
             const prTitle = pr.title;
             const prBaseSha = pr.base.sha;
             const prHeadSha = pr.head.sha;
+            const prlabels = pr.labels;
 
             console.log(`PR Number: ${prNumber}`);
             console.log(`PR Title: ${prTitle}`);
             console.log(`base sha: ${prBaseSha}`);
             console.log(`head sha: ${prHeadSha}`);
+            console.log(`labels: ${prlabels}`);
 
             core.setOutput("prNumber", prNumber);
             core.setOutput("prTitle", prTitle);
+            core.setOutput("prBaseSha", prBaseSha);
+            core.setOutput("prHeadSha", prHeadSha);
+            core.setOutput("prLabels", prlabels);
 
-            return { prNumber, prTitle, prBaseSha, prHeadSha };
+            return { prNumber, prTitle };
           result-encoding: string
 
       - name: save GitHub env
@@ -69,6 +74,7 @@ jobs:
           echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
           echo "PR_BASE_SHA=${{ steps.fetch-pr-info.outputs.prBaseSha }}" >> $GITHUB_ENV
           echo "PR_HEAD_SHA=${{ steps.fetch-pr-info.outputs.prHeadSha }}" >> $GITHUB_ENV
+          echo "PR_LABELS=${{ steps.fetch-pr-info.outputs.prlabels }}" >> $GITHUB_ENV
 
       - name: test GitHub env
         run: |
@@ -76,6 +82,7 @@ jobs:
           echo "Pull Request Title: $PR_TITLE"
           echo "Pull Request base: $PR_BASE_SHA"
           echo "Pull Request head: $PR_HEAD_SHA"
+          echo "Pull Request head: $PR_LABELS"
 
       - name: Use GitHub Script to get changed files
         uses: actions/github-script@v7
@@ -99,49 +106,6 @@ jobs:
             // Optionally return the list of files to be used in the next steps
             return files.map(file => file.filename);
         id: get-changed-files
-
-#  // Filter files by regexp
-#             const filteredFiles = files.filter(file => regex.test(file.filename));
-
-#             if (filteredFiles.length === 0) {
-#               console.log("No files matched the regexp.");
-#             }
-
-#             // Fetch content of filtered files from head and base branches
-#             const fileContents = await Promise.all(filteredFiles.map(async (file) => {
-#               // Get content from the base branch (target branch of the PR)
-#               const baseContent = await github.rest.repos.getContent({
-#                 owner: context.repo.owner,
-#                 repo: context.repo.repo,
-#                 path: file.filename,
-#                 ref: context.payload.pull_request.base.sha, // base branch SHA
-#               }).catch(() => null); // In case the file does not exist on the base branch
-
-#               // Get content from the head branch (source branch of the PR)
-#               const headContent = await github.rest.repos.getContent({
-#                 owner: context.repo.owner,
-#                 repo: context.repo.repo,
-#                 path: file.filename,
-#                 ref: context.payload.pull_request.head.sha, // head branch SHA
-#               }).catch(() => null); // In case the file does not exist on the head branch
-
-#               return {
-#                 file: file.filename,
-#                 baseContent: baseContent ? baseContent.data : null,
-#                 headContent: headContent ? headContent.data : null,
-#               };
-#             }));
-
-#             // Log the content differences or the file contents
-#             fileContents.forEach(({ file, baseContent, headContent }) => {
-#               console.log(`File: ${file}`);
-#               console.log(`Base Content (from ${context.payload.pull_request.base.ref}):`, baseContent);
-#               console.log(`Head Content (from ${context.payload.pull_request.head.ref}):`, headContent);
-#             });
-
-#             return fileContents; // Return the file contents for further processing if needed
-#         id: fetch-files
-
 
       - name: Save changed files to GitHub environment
         run: |
