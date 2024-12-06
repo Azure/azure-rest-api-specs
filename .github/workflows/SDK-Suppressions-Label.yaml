@@ -38,8 +38,8 @@ jobs:
             console.log(`PR Number: ${prNumber}`);
             console.log(`PR Title: ${prTitle}`);
 
-            core.setOutput("prNumber", prNumber);
-            core.setOutput("prTitle", prTitle);
+            // core.setOutput("prNumber", prNumber);
+            // core.setOutput("prTitle", prTitle);
 
             return { prNumber, prTitle };
           result-encoding: string
@@ -103,7 +103,7 @@ jobs:
 
             // Optionally return the list of files to be used in the next steps
             // return files.map(file => file.filename);
-            return {baseContent, headContent}
+            return fileContents.map(file => file.baseContent);
         id: get-changed-files
 
       - name: Save changed files to GitHub environment
