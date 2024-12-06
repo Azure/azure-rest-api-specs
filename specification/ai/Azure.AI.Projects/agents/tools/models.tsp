@@ -89,7 +89,6 @@ model OpenApiToolDefinition extends ToolDefinition {
   openapi: OpenApiFunctionDefinition;
 }
 
-
 // Definition details: File Search
 
 /**

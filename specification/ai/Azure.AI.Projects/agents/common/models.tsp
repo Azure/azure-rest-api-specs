@@ -145,7 +145,7 @@ union ResponseFormat {
   jsonObject: "json_object",
 
   /** Using `json_schema` format will provide a description of what the response format is for. */
-  jsonSchema: ResponseFormatJsonSchema,
+  jsonSchema: ResponseFormatJsonSchemaType,
 }
 
 /**
