@@ -1,4 +1,5 @@
 import _ from "lodash";
+const fs = require("fs");
 import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
 import { OctokitResponse, ReposGetContentResponseData } from "@octokit/types";
 import { sdkLabels, SdkName } from './sdk.js';
@@ -257,6 +258,12 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
       console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} no add label`);
     }
   }
+  const result = {
+    labelsToAdd: addSdkSuppressionsLabels,
+    labelsToRemove: removeSdkSuppressionsLabels
+  }
+  fs.writeFileSync("output.json", JSON.stringify(result));
+  console.log("JSON output saved to output.json");
 
   return {
     labelsToAdd: addSdkSuppressionsLabels,
