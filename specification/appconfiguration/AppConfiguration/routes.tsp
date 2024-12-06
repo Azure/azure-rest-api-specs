@@ -525,7 +525,6 @@ op getSnapshot is standardOps.ResourceRead<
       ifNoneMatch?: string;
 
       ...ClientRequestIdHeader;
-
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
