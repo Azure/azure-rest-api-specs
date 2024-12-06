@@ -98,6 +98,11 @@ model ApplicationOwnerProperties {
   taxNumber: string;
 
   /**
+   * The type of organization that the Application Owner is.
+   */
+  organizationType: OrganizationType;
+
+  /**
    * ID number for official identification of the organization.
    */
   organizationIdentificationId: string;
@@ -106,6 +111,11 @@ model ApplicationOwnerProperties {
    * Issuing organization of the ID for official identification of the organization.
    */
   organizationIdentificationIssuer: string;
+
+  /**
+   * Type of official identification of the organization.
+   */
+  organizationIdentificationType: string;
 
   /**
    * Email address for the person responsible for the use of Network APIs in this application.
@@ -332,6 +342,20 @@ union Category {
   travelAndLocal: "Travel and local",
   water: "Water",
   weather: "Weather",
+  string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
+union OrganizationType {
+  dpvAcademicScientificOrganisation: "Academic scientific organization",
+  dpvForProfitOrganisation: "For profit organization",
+  dpvGovernmentalOrganisation: "Governmental organization",
+  dpvIndustryConsortium: "Industry consortium",
+  dpvInternationalOrganisation: "International organization",
+  dpvNonGovernmentalOrganisation: "Non-governmental organization",
+  dpvNonProfitOrganisation: "Non-profit organization",
+  dpvOrganisationalUnit: "Organizational unit",
   string,
 }
 

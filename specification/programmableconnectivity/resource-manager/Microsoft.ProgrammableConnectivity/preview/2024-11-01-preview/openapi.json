@@ -923,8 +923,10 @@
         "tradingName",
         "organizationDescription",
         "taxNumber",
+        "organizationType",
         "organizationIdentificationId",
         "organizationIdentificationIssuer",
+        "organizationIdentificationType",
         "contactEmailAddress",
         "legalRepresentative",
         "privacyManager",
@@ -2366,6 +2368,57 @@
           "description": "The status of the last operation on the Gateway resource.",
           "readOnly": true
         }
+      }
+    },
+    "OrganizationType": {
+      "type": "string",
+      "enum": [
+        "Academic scientific organization",
+        "For profit organization",
+        "Governmental organization",
+        "Industry consortium",
+        "International organization",
+        "Non-governmental organization",
+        "Non-profit organization",
+        "Organizational unit"
+      ],
+      "x-ms-enum": {
+        "name": "OrganizationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "dpvAcademicScientificOrganisation",
+            "value": "Academic scientific organization"
+          },
+          {
+            "name": "dpvForProfitOrganisation",
+            "value": "For profit organization"
+          },
+          {
+            "name": "dpvGovernmentalOrganisation",
+            "value": "Governmental organization"
+          },
+          {
+            "name": "dpvIndustryConsortium",
+            "value": "Industry consortium"
+          },
+          {
+            "name": "dpvInternationalOrganisation",
+            "value": "International organization"
+          },
+          {
+            "name": "dpvNonGovernmentalOrganisation",
+            "value": "Non-governmental organization"
+          },
+          {
+            "name": "dpvNonProfitOrganisation",
+            "value": "Non-profit organization"
+          },
+          {
+            "name": "dpvOrganisationalUnit",
+            "value": "Organizational unit"
+          }
+        ]
       }
     },
     "Person": {
