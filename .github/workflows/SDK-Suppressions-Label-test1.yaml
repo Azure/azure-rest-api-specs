@@ -57,7 +57,7 @@ jobs:
             console.log(`PR Title: ${prTitle}`);
             console.log(`base sha: ${prBaseSha}`);
             console.log(`head sha: ${prHeadSha}`);
-            prlabels.map(file => console.log(file.filename));
+            prlabels.forEach(file => console.log(file.filename));
             console.log(`labels: ${prlabels}`);
 
             core.setOutput("prNumber", prNumber);
@@ -71,14 +71,18 @@ jobs:
 
       - name: save GitHub env
         run: |
+          echo "PR_LABELS111='[\"bug\",\"feature\",\"documentation\"]'" >> $GITHUB_ENV
+          echo "PR_INFO111='{\"number\":123,\"title\":\"Fix issue\",\"author\":\"octocat\"}'" >> $GITHUB_ENV
           echo "PR_NUMBER=${{ steps.fetch-pr-info.outputs.prNumber }}" >> $GITHUB_ENV
           echo "PR_TITLE=${{ steps.fetch-pr-info.outputs.prTitle }}" >> $GITHUB_ENV
           echo "PR_BASE_SHA=${{ steps.fetch-pr-info.outputs.prBaseSha }}" >> $GITHUB_ENV
           echo "PR_HEAD_SHA=${{ steps.fetch-pr-info.outputs.prHeadSha }}" >> $GITHUB_ENV
-          echo "PR_LABELS=${{ steps.fetch-pr-info.outputs.prlabels }}" >> $GITHUB_ENV
+          echo "PR_LABELS='${{ steps.fetch-pr-info.outputs.prlabels }}'" >> $GITHUB_ENV
 
       - name: test GitHub env
         run: |
+          echo "Pull Request Number t: $PR_LABELS111"
+          echo "Pull Request Number t: $PR_INFO111"
           echo "Pull Request Number: $PR_NUMBER"
           echo "Pull Request Title: $PR_TITLE"
           echo "Pull Request base: $PR_BASE_SHA"
