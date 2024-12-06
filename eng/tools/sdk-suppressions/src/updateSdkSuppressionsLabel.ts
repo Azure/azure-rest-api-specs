@@ -216,9 +216,9 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
   const appClient: Octokit = new Octokit({
       auth: githubToken
   });
-  console.log('---------------pr info', pr);
+  console.log('Pull Request Context', pr);
   const sdkNames = await getSdkSuppressionsSdkNames(appClient, pr);
-  console.log('=============== sdkNames', sdkNames);
+  console.log('Changed SdkNames', sdkNames);
   
   console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} Get the required suppressions label based on compared SDK List ${sdkNames.join(", ")}`);
   let addSdkSuppressionsLabels: string[] = [];
