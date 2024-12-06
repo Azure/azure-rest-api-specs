@@ -53,7 +53,7 @@ model DiscoveredAssetProperties {
   manufacturer?: string;
 
   @doc("Asset manufacturer URI.")
-  manufacturerUri?: string;
+  manufacturerUri?: url;
 
   @doc("Asset model name.")
   `model`?: string;
@@ -68,7 +68,7 @@ model DiscoveredAssetProperties {
   softwareRevision?: string;
 
   @doc("Reference to the documentation.")
-  documentationUri?: string;
+  documentationUri?: url;
 
   @doc("Asset serial number.")
   serialNumber?: string;

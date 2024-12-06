@@ -51,7 +51,7 @@ model SchemaRegistryProperties {
 
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility("read", "create")
-  storageAccountContainerUrl: string;
+  storageAccountContainerUrl: url;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
