@@ -2,8 +2,8 @@
   "title": "List processed documents within a job.",
   "operationId": "ListJobDocuments",
   "parameters": {
-    "api-version": "2024-07-12-preview",
-    "name": "documents_smith_1",
+    "api-version": "2024-11-15",
+    "name": "job_smith_documents_1",
     "maxpagesize": 10,
     "continuationToken": "K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ==",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
@@ -15,12 +15,8 @@
           {
             "id": "00000000-0000-0000-0000-000000000000",
             "input": {
-              "path": "/documents/patient_doc_1",
+              "location": "https://blobtest.blob.core.windows.net/container/documents/patient_doc_1",
               "etag": "0x8DB638EEA0CC717"
-            },
-            "output": {
-              "path": "_output/documents/patient_doc_1",
-              "etag": "0xAB298APO23099ZL"
             },
             "status": "Failed",
             "error": {
@@ -31,7 +27,7 @@
             }
           }
         ],
-        "nextLink": "https://deidtest.api.deid.azure.com/jobs/00000000-0000-0000-0000-000000000000/files?top=10&skip=10&maxpagesize=10"
+        "nextLink": "https://deidtest.api.deid.azure.com/jobs/00000000-0000-0000-0000-000000000000/documents?maxpagesize=10&continuationToken=K1JJRDpzOEtaQWZabUQrQUNBQUFBQUFBQUFBQT09I1JUOjEjVFJDOjEwI0ZQQzpBZ0VBQUFBTUFDUUFBQUFBQUE9PQ=="
       }
     }
   }
