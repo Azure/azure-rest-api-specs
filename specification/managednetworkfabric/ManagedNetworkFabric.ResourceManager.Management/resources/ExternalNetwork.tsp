@@ -4,19 +4,17 @@ import "./L3IsolationDomain.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * Defines the External Network resource.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
 model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
-  /**
-   * Name of the External Network.
-   */
+  @doc("Name of the External Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("externalNetworkName")
@@ -31,48 +29,43 @@ model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 interface ExternalNetworks {
-  /**
-   * Implements ExternalNetworks GET method.
-   */
+  @doc("Implements ExternalNetworks GET method.")
   get is ArmResourceRead<ExternalNetwork>;
 
-  /**
-   * Creates ExternalNetwork PUT method.
-   */
+  @doc("Creates ExternalNetwork PUT method.")
   create is ArmResourceCreateOrReplaceAsync<ExternalNetwork>;
 
-  /**
-   * API to update certain properties of the ExternalNetworks resource.
-   */
+  @doc("API to update certain properties of the ExternalNetworks resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<ExternalNetwork, ExternalNetworkPatch>;
 
-  /**
-   * Implements ExternalNetworks DELETE method.
-   */
+  @doc("Implements ExternalNetworks DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<ExternalNetwork>;
 
-  /**
-   * Implements External Networks list by resource group GET method.
-   */
+  @doc("Implements External Networks list by resource group GET method.")
   listByL3IsolationDomain is ArmResourceListByParent<ExternalNetwork>;
 
-  /**
-   * Executes update operation to enable or disable administrative State for externalNetwork.
-   */
+  @doc("Executes update operation to enable or disable administrative State for externalNetwork.")
   updateAdministrativeState is ArmResourceActionAsync<
     ExternalNetwork,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
   >;
 
-  /**
-   * Update Static Route BFD for external Network.
-   */
+  @doc("Update Static Route BFD for external Network.")
+  @removed(Versions.v2024_06_15_preview)
   updateStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
     ExternalNetwork,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("BFD administrative state for either static or bgp for internalNetwork.")
+  @added(Versions.v2024_06_15_preview)
+  updateBfdAdministrativeState is ArmResourceActionAsync<
+    ExternalNetwork,
+    ExternalNetworkBfdAdministrativeStateRequest,
+    ExternalNetworkBfdAdministrativeStateResponse
   >;
 }
 
@@ -84,5 +77,8 @@ interface ExternalNetworks {
   "Request payload."
 );
 @@doc(ExternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(ExternalNetworks.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );

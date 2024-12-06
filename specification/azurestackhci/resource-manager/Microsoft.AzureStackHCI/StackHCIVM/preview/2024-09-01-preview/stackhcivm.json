@@ -206,9 +206,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualMachineInstanceFromLocal": {
-            "$ref": "./examples/VirtualMachineInstances__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualMachineInstanceWithGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
           },
@@ -2195,9 +2192,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateNetworkInterfaceFromLocal": {
-            "$ref": "./examples/NetworkInterfaces__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutNetworkInterface": {
             "$ref": "./examples/NetworkInterfaces_CreateOrUpdate.json"
           }
@@ -3342,9 +3336,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualHardDiskFromLocal": {
-            "$ref": "./examples/VirtualHardDisks__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualHardDisk": {
             "$ref": "./examples/VirtualHardDisks_CreateOrUpdate.json"
           }
@@ -5208,11 +5199,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local network interface or if one should be created.",
-          "default": false
         }
       }
     },
@@ -6405,15 +6391,6 @@
           "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
           "x-ms-secret": true
         },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local hard disk or if one should be created.",
-          "default": false
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemTypes",
-          "description": "Operating system type of the OS disk. Possible values are: Windows, Linux."
-        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6710,11 +6687,6 @@
         "resourceUid": {
           "type": "string",
           "description": "Unique identifier defined by ARC to identify the guest of the VM."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local virtual machine or if one should be created.",
-          "default": false
         }
       }
     },

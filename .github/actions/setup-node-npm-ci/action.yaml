@@ -14,9 +14,14 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - run: npm ci
+    - run: |
+        echo "::group::npm ci"
+        npm ci
+        echo "::endgroup::"
       shell: bash
 
-    - run: npm ls -a
+    - run: |
+        echo "::group::npm ls -a"
+        npm ls -a || true
+        echo "::endgroup::"
       shell: bash
-      continue-on-error: true

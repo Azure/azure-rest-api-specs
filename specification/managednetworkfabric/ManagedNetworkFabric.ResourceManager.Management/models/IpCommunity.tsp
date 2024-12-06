@@ -1,88 +1,68 @@
 import "./common.tsp";
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * IP Community Properties defines the resource properties.
- */
+@doc("IP Community Properties defines the resource properties.")
 model IpCommunityProperties {
   ...AnnotationResource;
 
-  /**
-   * List of IP Community Rules.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("ARM Resource ID of the Network Fabric.")
+  @visibility("read")
+  networkFabricId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>;
+
+  @doc("List of IP Community Rules.")
   @OpenAPI.extension("x-ms-identifiers", [])
   ipCommunityRules: IpCommunityRule[];
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * IP Community patchable properties.
- */
+@doc("IP Community patchable properties.")
 model IpCommunityPatchableProperties {
-  /**
-   * List of IP Community Rules.
-   */
+  @doc("List of IP Community Rules.")
   @OpenAPI.extension("x-ms-identifiers", [])
   ipCommunityRules?: IpCommunityRule[];
 }
 
-/**
- * IP Community patchable properties.
- */
+@doc("IP Community patchable properties.")
 model IpCommunityRule {
-  /**
-   * Action to be taken on the configuration. Example: Permit | Deny.
-   */
+  @doc("Action to be taken on the configuration. Example: Permit | Deny.")
   action: CommunityActionTypes;
 
-  /**
-   * Sequence to insert to/delete from existing route. Prefix lists are evaluated starting with the lowest sequence number and continue down the list until a match is made. Once a match is made, the permit or deny statement is applied to that network and the rest of the list is ignored.
-   */
+  @doc("Sequence to insert to/delete from existing route. Prefix lists are evaluated starting with the lowest sequence number and continue down the list until a match is made. Once a match is made, the permit or deny statement is applied to that network and the rest of the list is ignored.")
   @maxValue(4294967295)
   @minValue(1)
   sequenceNumber: int64;
 
-  /**
-   * Supported well known Community List.
-   */
+  @doc("Supported well known Community List.")
   wellKnownCommunities?: WellKnownCommunities[];
 
-  /**
-   * List the community members of IP Community.
-   */
+  @doc("List the community members of IP Community.")
   @minItems(1)
   communityMembers: string[];
 }
 
-/**
- * The IP Community patch resource definition.
- */
+@doc("The IP Community patch resource definition.")
 model IpCommunityPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
-  /**
-   * IP Community patchable properties.
-   */
+  @doc("IP Community patchable properties.")
   properties?: IpCommunityPatchableProperties;
 }
 

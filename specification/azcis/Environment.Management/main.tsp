@@ -1,4 +1,4 @@
-import "./versions.tsp";
+import "../versions.tsp";
 import "./autopilotenvironment.tsp";
 import "./autopilotmachinefunction.tsp";
 

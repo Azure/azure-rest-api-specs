@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -46,7 +47,14 @@ interface PortalExtensions {
   /**
    * Updates an existing portal extension.
    */
-  update is ArmCustomPatchSync<PortalExtension, PatchablePortalExtension>;
+  @useFinalStateVia("azure-async-operation")
+  update is ArmCustomPatchAsync<
+    PortalExtension,
+    PatchablePortalExtension,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader &
+      ArmLroLocationHeader
+  >;
 
   /**
    * Deletes the portal extension.
@@ -66,7 +74,15 @@ interface PortalExtensions {
   /**
    * Alters portal extension source files.
    */
-  alter is ArmResourceActionAsync<PortalExtension, PortalExtensionAlter, never>;
+  @useFinalStateVia("azure-async-operation")
+  alter is ArmResourceActionAsync<
+    PortalExtension,
+    PortalExtensionAlter,
+    never,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader &
+      ArmLroLocationHeader
+  >;
 
   /**
    * compiles a file in the context of the extension.
@@ -80,10 +96,14 @@ interface PortalExtensions {
   /**
    * Exports the extension.
    */
+  @useFinalStateVia("azure-async-operation")
   export is ArmResourceActionAsync<
     PortalExtension,
     PortalExtensionExport,
-    PortalExtensionExportResult
+    PortalExtensionExportResult,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader &
+      ArmLroLocationHeader
   >;
 
   /**

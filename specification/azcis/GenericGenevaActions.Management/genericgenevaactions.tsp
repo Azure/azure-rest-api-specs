@@ -8,6 +8,7 @@ using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -35,7 +36,7 @@ model GenericGenevaActionsResourceProperties {
 
   @added(Versions.v2024_06_24_preview)
   @doc("The Azure location")
-  armLocation?: string;
+  azureLocation?: azureLocation;
 
   @doc("The parameter list for geneva action")
   @extension("x-ms-identifiers", [])

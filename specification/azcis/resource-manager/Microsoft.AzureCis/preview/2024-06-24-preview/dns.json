@@ -1214,8 +1214,8 @@
           "description": "Gets or sets the TTL"
         },
         "azureLocation": {
-          "type": "string",
-          "description": "Azure location"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/AddressRecordProvisioningState",
@@ -1311,8 +1311,8 @@
           "description": "Gets or sets the auto pilot DNS name. This is case-insensitive"
         },
         "azureLocation": {
-          "type": "string",
-          "description": "Azure location"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/ApSlbVipProvisioningState",
@@ -1323,6 +1323,10 @@
       "required": [
         "autoPilotDnsName"
       ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "CanonicalNameRecordProvisioningState": {
       "type": "string",
@@ -1414,8 +1418,8 @@
           "description": "Gets or sets the TTL"
         },
         "azureLocation": {
-          "type": "string",
-          "description": "Azure location"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/CanonicalNameRecordProvisioningState",
@@ -1519,8 +1523,8 @@
           "description": "Gets or sets the TTL"
         },
         "azureLocation": {
-          "type": "string",
-          "description": "Azure location"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/PtrRecordProvisioningState",
@@ -1636,8 +1640,8 @@
           "description": "Gets or sets the TTL"
         },
         "azureLocation": {
-          "type": "string",
-          "description": "Azure location"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/ServiceRecordProvisioningState",

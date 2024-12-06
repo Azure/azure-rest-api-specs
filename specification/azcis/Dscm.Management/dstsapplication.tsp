@@ -8,6 +8,7 @@ using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -80,6 +81,10 @@ model ApplicationAccount {
 
   @doc("Client identity when using the application as a client. Optional.")
   applicationClientIdentity?: ApplicationClientIdentity;
+
+  @doc("The Azure location")
+  @added(Versions.v2024_06_24_preview)
+  azureLocation?: azureLocation;
 }
 
 @doc("The application group. Optional.")
@@ -130,6 +135,10 @@ model ApplicationGroup {
 
   @doc("Client identity when using the application as a client. Optional.")
   applicationClientIdentity?: ApplicationClientIdentity;
+
+  @doc("The Azure location")
+  @added(Versions.v2024_06_24_preview)
+  azureLocation?: azureLocation;
 }
 
 @doc("The claim rule which apply to Application.")
