@@ -12,6 +12,8 @@ export async function main() {
     const PullRequestContext = process.env.GITHUB_PULL_REQUEST_CONTEXT as unknown as PullRequestContext;
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
     console.log(`PullRequestContext: JSON.stringify(${PullRequestContext})`);
+    console.log(`GITHUB_TOKEN: is exist ? ${!!GITHUB_TOKEN}`);
+    console.log(`GITHUB_PULL_REQUEST_CONTEXT: is exist ? ${!!PullRequestContext}`);
 
     if (PullRequestContext && GITHUB_TOKEN) {
       const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(PullRequestContext, GITHUB_TOKEN);
