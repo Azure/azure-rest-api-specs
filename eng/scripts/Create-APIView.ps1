@@ -474,7 +474,7 @@ TGhe BuildId of the Run
 function New-RestSpecsAPIViewReviews {
   param (
     [Parameter(Mandatory = $true)]
-    [string]$ArtiFactsStagingDirectory,
+    [string]$ArtifactsStagingDirectory,
     [Parameter(Mandatory = $true)]
     [string]$APIViewArtifactsDirectoryName,
     [Parameter(Mandatory = $true)]
