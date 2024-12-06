@@ -133,7 +133,6 @@ model SourceStorageLocation {
   location: url;
 
   @doc("Prefix to filter path by.")
-  @minLength(1)
   @maxLength(1024)
   prefix: string;
 
@@ -157,7 +156,6 @@ model TargetStorageLocation {
     
     Output file: "output_docs/note.txt"
     """)
-  @minLength(1)
   @maxLength(1024)
   prefix: string;
 
