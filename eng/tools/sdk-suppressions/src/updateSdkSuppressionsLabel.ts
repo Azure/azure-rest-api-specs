@@ -1,5 +1,5 @@
 import _ from "lodash";
-const fs = require("fs");
+import * as fs from "fs";
 import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
 import { OctokitResponse, ReposGetContentResponseData } from "@octokit/types";
 import { sdkLabels, SdkName } from './sdk.js';
