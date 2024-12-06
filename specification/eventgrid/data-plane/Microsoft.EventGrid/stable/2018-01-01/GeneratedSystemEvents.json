@@ -1133,6 +1133,24 @@
         "caption": {
           "type": "string",
           "description": "The caption for the media object, if supported and provided"
+        },
+        "animated": {
+          "type": "boolean",
+          "description": "Set to  true if the sticker is animated;  false otherwise."
+        }
+      }
+    },
+    "AcsMessageReactionContent": {
+      "type": "object",
+      "description": "Message Reaction Content",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "WhatsApp message ID of message you want to apply the emoji to"
+        },
+        "emoji": {
+          "type": "string",
+          "description": "Unicode escape sequence of the emoji."
         }
       }
     },
@@ -1149,10 +1167,18 @@
           "description": "The message channel type",
           "x-ms-client-name": "channelKind"
         },
+        "messageType": {
+          "type": "string",
+          "description": "WhatsApp message type"
+        },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
           "description": "The received message media content",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "$ref": "#/definitions/AcsMessageRectionContent",
+          "description": "The received message reaction content"
         },
         "context": {
           "$ref": "#/definitions/AcsMessageContext",
