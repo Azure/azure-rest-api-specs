@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [string]$BaseCommitish = "HEAD^",
   [string]$TargetCommitish = "HEAD"
@@ -21,7 +22,7 @@ else {
   $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -targetCommitish $TargetCommitish -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
-  if ($coreChangedFiles) {
+  if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
     $changedFiles = $checkAllPath
     $checkedAll = $true
