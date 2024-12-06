@@ -58,10 +58,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
           result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "Result from Node.js script: $result"  # Debugging output
-          echo "::set-output name=result::$result"
+
+          echo "Result from Node.js script: $result"
+
+          result_object=$(echo "$result" | node -p "JSON.parse(process.argv[1])" "$result")
+          echo "::set-output name=result::$result_object"
 
       - name: Write all labels
         run: |
           echo "Entire labels content:"
-          echo "${{ steps.run-suppressions-script.outputs.result }}"
+          result_json="${{ steps.run-suppressions-script.outputs.result }}"
+          
+          echo "Received JSON string: $result_json"
+          
+          result_object=$(echo "$result_json" | node -p "JSON.parse(process.argv[1])" "$result_json")
+          
+          echo "Processed result object: $result_object"
