@@ -22,7 +22,7 @@ alias appConfigOperation<
 >;
 
 alias standardOps = ResourceOperations<
-  SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
+  NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
 
@@ -523,6 +523,9 @@ op getSnapshot is standardOps.ResourceRead<
         """)
       @header("If-None-Match")
       ifNoneMatch?: string;
+
+      ...ClientRequestIdHeader;
+
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
@@ -530,7 +533,7 @@ op getSnapshot is standardOps.ResourceRead<
       link?: string;
 
       ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }>
+    } & RequestIdResponseHeader>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
