@@ -1,0 +1,381 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2024-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{tiType}/query": {
+      "post": {
+        "x-ms-examples": {
+          "Get TI objects": {
+            "$ref": "./examples/threatintelligence/PostThreatIntelligenceQuery.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Gets all TI objects for the workspace.",
+        "operationId": "ThreatIntelligence_Query",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/TiType"
+          },
+          {
+            "$ref": "#/parameters/Query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ThreatIntelligenceList": {
+      "description": "List all the threat intelligence objects on the workspace that match the provided query.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of threat intelligence objects.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of threat intelligence objects on the workspace that match the provided query.",
+          "items": {
+            "$ref": "ThreatIntelligence.json#/definitions/TIObject"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "Query": {
+      "description": "Represents a query to run on the TI objects in the workspace.",
+      "properties": {
+        "condition": {
+          "description": "Represents a condition used to query for TI objects.",
+          "properties": {
+            "stixObjectType": {
+              "description": "The STIX type for the objects returned by this query.",
+              "type": "string"
+            },
+            "clauses": {
+              "description": "The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.",
+              "items": {
+                "$ref": "#/definitions/ConditionClause"
+              },
+              "type": "array"
+            },
+            "conditionConnective": {
+              "description": "The top level connective operator for this condition.",
+              "type": "string",
+              "$ref": "#/definitions/Connective"
+            }
+          },
+          "required": [
+            "clauses"
+          ],
+          "type": "object"
+        },
+        "sortBy": {
+          "description": "Specifies how to sort the query results.",
+          "properties": {
+            "direction": {
+              "description": "The direction to sort the results by.",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "SortingDirection",
+                "values": [
+                  {
+                    "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                    "value": "ASC"
+                  },
+                  {
+                    "description": "Indicates that the query should be sorted from lowest-to-highest value.",
+                    "value": "DESC"
+                  }
+                ]
+              }
+            },
+            "field": {
+              "description": "Represents the field to sort the results by.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "maxPageSize": {
+          "description": "Represents the maximum size of the page that will be returned from the query API.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minPageSize": {
+          "description": "Represents the minimum size of the page that will be returned from the query API.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Connective": {
+      "description": "Represents boolean connectives used to join clauses in conditions.",
+      "enum": [
+        "And",
+        "Or"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "Connective",
+        "values": [
+          {
+            "description": "'And' connective",
+            "value": "And"
+          },
+          {
+            "description": "'Or' connective",
+            "value": "Or"
+          }
+        ]
+      }
+    },
+    "ConditionClause": {
+      "description": "Represents a single clause to be evaluated by a NormalizedCondition.",
+      "properties": {
+        "clauseConnective": {
+          "description": "The connective used to join all values in this ConditionClause",
+          "type": "string",
+          "$ref": "#/definitions/Connective"
+        },
+        "field": {
+          "description": "The name of the field that is evaluated.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Represents an operator in a ConditionClause.",
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "LessThan",
+            "LessThanEqual",
+            "GreaterThan",
+            "GreaterThanEqual",
+            "StringContains",
+            "StringNotContains",
+            "StringStartsWith",
+            "StringNotStartsWith",
+            "StringEndsWith",
+            "StringNotEndsWith",
+            "StringIsEmpty",
+            "IsNull",
+            "IsTrue",
+            "IsFalse",
+            "ArrayContains",
+            "ArrayNotContains",
+            "OnOrAfterRelative",
+            "AfterRelative",
+            "OnOrBeforeRelative",
+            "BeforeRelative",
+            "OnOrAfterAbsolute",
+            "AfterAbsolute",
+            "OnOrBeforeAbsolute",
+            "BeforeAbsolute"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operator",
+            "values": [
+              {
+                "value": "Equals"
+              },
+              {
+                "value": "NotEquals"
+              },
+              {
+                "value": "LessThan"
+              },
+              {
+                "value": "LessThanEqual"
+              },
+              {
+                "value": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanEqual"
+              },
+              {
+                "value": "StringContains"
+              },
+              {
+                "value": "StringNotContains"
+              },
+              {
+                "value": "StringStartsWith"
+              },
+              {
+                "value": "StringNotStartsWith"
+              },
+              {
+                "value": "StringEndsWith"
+              },
+              {
+                "value": "StringNotEndsWith"
+              },
+              {
+                "value": "StringIsEmpty"
+              },
+              {
+                "value": "IsNull"
+              },
+              {
+                "value": "IsTrue"
+              },
+              {
+                "value": "IsFalse"
+              },
+              {
+                "value": "ArrayContains"
+              },
+              {
+                "value": "ArrayNotContains"
+              },
+              {
+                "value": "OnOrAfterRelative"
+              },
+              {
+                "value": "AfterRelative"
+              },
+              {
+                "value": "OnOrBeforeRelative"
+              },
+              {
+                "value": "BeforeRelative"
+              },
+              {
+                "value": "OnOrAfterAbsolute"
+              },
+              {
+                "value": "AfterAbsolute"
+              },
+              {
+                "value": "OnOrBeforeAbsolute"
+              },
+              {
+                "value": "BeforeAbsolute"
+              }
+            ]
+          }
+        },
+        "values": {
+          "description": "The top level connective operator for this condition.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "values"
+      ],
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "Query": {
+      "description": "The query to run on the TI objects in the workspace.",
+      "in": "body",
+      "name": "query",
+      "schema": {
+        "$ref": "#/definitions/Query"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TiType": {
+      "description": "TI type",
+      "in": "path",
+      "name": "tiType",
+      "required": true,
+      "enum": [
+        "main"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TiType",
+        "values": [
+          {
+            "value": "main"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
