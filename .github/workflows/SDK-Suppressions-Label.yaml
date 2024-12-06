@@ -51,24 +51,9 @@ jobs:
             return JSON.stringify(prContext);
           result-encoding: string
 
-      # - name: Set GitHub env
-      #   run: |
-      #     echo "GITHUB_PULL_REQUEST_CONTEXT=${{ steps.Fetch-PullRequest-Context.outputs.result }}" >> $GITHUB_ENV
-
-      # - name: Verify PR Context
-      #   run: |
-      #     echo "PR Info: $GITHUB_PULL_REQUEST_CONTEXT"
-
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
       
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #       node-version: '20'
-
-      # - name: Run the script
-      #   run: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
       - name: Run get suppressions label script
         id: run-suppressions-script
         env:
@@ -76,11 +61,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
           echo "PR_INFO=$GITHUB_PULL_REQUEST_CONTEXT"
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
 
-          result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "SCRIPT_OUTPUT=$result" >> $GITHUB_ENV
-
-      - name: Write all JSON content
-        run: |
-          echo "Entire JSON content:"
-          echo "${{ env.script_result }}"
