@@ -60,11 +60,11 @@ jobs:
             prlabels.map(file => console.log(file.filename));
             console.log(`labels: ${prlabels}`);
 
-            # core.setOutput("prNumber", prNumber);
-            # core.setOutput("prTitle", prTitle);
-            # core.setOutput("prBaseSha", prBaseSha);
-            # core.setOutput("prHeadSha", prHeadSha);
-            # core.setOutput("prLabels", prlabels);
+            core.setOutput("prNumber", prNumber);
+            core.setOutput("prTitle", prTitle);
+            core.setOutput("prBaseSha", prBaseSha);
+            core.setOutput("prHeadSha", prHeadSha);
+            core.setOutput("prLabels", prlabels);
 
             return { prNumber, prTitle };
           result-encoding: string
