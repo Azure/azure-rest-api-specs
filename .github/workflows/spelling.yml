@@ -1,0 +1,29 @@
+name: Check Spelling in Changed Files
+
+on:
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+
+jobs:
+  check-spelling:
+    runs-on: linux-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      # TODO: is this required?
+      with:
+        fetch-depth: 0  # Ensure full history is fetched
+
+    - name: Set up PowerShell
+      uses: actions/setup-powershell@v2
+
+    - name: Run spelling check
+      run: |
+        pwsh eng/common/scripts/check-spelling-in-changed-files.ps1 `
+            -SourceCommittish ${{ github.action_ref }} `
+            -TargetCommittish ${{ github.base_ref }}
+      shell: pwsh
