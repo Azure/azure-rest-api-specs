@@ -208,6 +208,9 @@ function Invoke-TypeSpecAPIViewParser {
     Write-Host "Compiling files and generating '$Type' APIView for '$resourceProvider'..."
     Push-Location $ProjectPath
     npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
+    if ($LASTEXITCODE) {
+      throw
+    }
     Pop-Location
     
     $generatedAPIViewTokenFile = Get-ChildItem -File $tempWorkingDirectoryPath/output/apiview.json | Select-Object -First 1
