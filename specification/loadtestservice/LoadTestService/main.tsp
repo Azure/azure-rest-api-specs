@@ -47,10 +47,6 @@ enum APIVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_01_preview: "2024-07-01-preview",
 
-  @doc("The 2024-11-01-preview version of the Azure Load Testing API.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_11_01_preview: "2024-11-01-preview",
-
   @doc("The 2024-12-01-preview version of the Azure Load Testing API.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_12_01_preview: "2024-12-01-preview",

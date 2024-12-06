@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("Scope type of a notification rule.")
 union NotificationScopeType {
   string,
@@ -19,7 +19,7 @@ union NotificationScopeType {
   Tests: "Tests",
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("Notification event type.")
 union NotificationEventType {
   string,
@@ -37,7 +37,7 @@ union NotificationEventType {
   TriggerDisabled: "TriggerDisabled",
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @discriminator("kind")
 @doc("The notification event filter for Tests scope.")
 model TestsNotificationEventFilter {
@@ -45,7 +45,7 @@ model TestsNotificationEventFilter {
   kind: NotificationEventType;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("The notification event filter when the event type is TestRunEnded and scope is Tests.")
 model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
   @doc("Event type for test run ended event.")
@@ -55,7 +55,7 @@ model TestRunEndedNotificationEventFilter extends TestsNotificationEventFilter {
   condition?: TestRunEndedEventCondition;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("The notification event filter when the event type is TestRunStarted and scope is Tests.")
 model TestRunStartedNotificationEventFilter
   extends TestsNotificationEventFilter {
@@ -63,7 +63,7 @@ model TestRunStartedNotificationEventFilter
   kind: NotificationEventType.TestRunStarted;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("The notification event filter when the event type is TriggerCompleted.")
 model TriggerCompletedNotificationEventFilter
   extends TestsNotificationEventFilter {
@@ -71,7 +71,7 @@ model TriggerCompletedNotificationEventFilter
   kind: NotificationEventType.TriggerCompleted;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("The notification event filter when the event type is TriggerDisabled.")
 model TriggerDisabledNotificationEventFilter
   extends TestsNotificationEventFilter {
@@ -79,7 +79,7 @@ model TriggerDisabledNotificationEventFilter
   kind: NotificationEventType.TriggerDisabled;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("TestRunEnded Event condition.")
 model TestRunEndedEventCondition {
   @doc("The test run statuses to send notification for.")
@@ -89,7 +89,7 @@ model TestRunEndedEventCondition {
   testRunResults?: PFTestResult[];
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @resource("notification-rules")
 @discriminator("scope")
 @doc("Notification rule model.")
@@ -116,7 +116,7 @@ model NotificationRule {
   ...SystemMetaData;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("Tests Notification rule model.")
 model TestsNotificationRule extends NotificationRule {
   @doc("Scope of type Tests.")
@@ -132,7 +132,7 @@ model TestsNotificationRule extends NotificationRule {
   eventFilters: Record<TestsNotificationEventFilter>;
 }
 
-@added(APIVersions.v2024_11_01_preview)
+@added(APIVersions.v2024_12_01_preview)
 @doc("Parameters for list notification rule operation.")
 model ListNotificationRuleQueryParams {
   @doc("Search based on notification rules associated with the provided test ids.")
