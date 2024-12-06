@@ -11,9 +11,6 @@ on:
 
   workflow_dispatch:
 
-env:
-  script_result: ''
-
 jobs:
   manage_sdk_suppressions_labels:
     runs-on: ubuntu-latest
@@ -60,6 +57,12 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
-          echo "PR_INFO=$GITHUB_PULL_REQUEST_CONTEXT"
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
+          echo "suppressions-lables=$result" >> $GITHUB_ENV
+          echo "::set-output name=result::$result"
 
+      - name: Write all labels
+        run: |
+          echo "Entire labels content:"
+          echo "${{ steps.run-suppressions-script.outputs.result }}"
+          echo $suppressions-lables
