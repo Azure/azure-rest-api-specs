@@ -189,7 +189,7 @@ function Invoke-SwaggerAPIViewParser {
 
 <#
 .DESCRIPTION
-  Invoke the TypeSpec parset to generate APIView tokens.
+  Invoke the TypeSpec parser to generate APIView tokens.
 
 .PARAMETER Type
   New or Baseline TypeSpec APIView tokens.
