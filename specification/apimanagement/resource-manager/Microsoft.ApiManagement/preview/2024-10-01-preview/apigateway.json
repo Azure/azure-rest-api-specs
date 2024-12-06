@@ -666,6 +666,29 @@
           "type": "string",
           "description": "ETag of the resource.",
           "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of gateway.",
+          "enum": [
+            "KubernetesManaged",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Kind of gateway that is capable of exposing APIs for workspaces using configuration managed through Azure Resource Manager (ARM)."
+              },
+              {
+                "value": "KubernetesManaged",
+                "description": "Kind of gateway that is capable of exposing traffic routes for workspaces using configuration managed by Kubernetes resources."
+              }              
+            ]
+          }
         }
       },
       "allOf": [
