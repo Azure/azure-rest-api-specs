@@ -9,15 +9,13 @@ function getUsage(): string {
   }
 
 export async function main() {
-    const GITHUB_PULL_REQUEST_CONTEXT = process.env.GITHUB_PULL_REQUEST_CONTEXT as string;
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN as string;
-    console.log(`PullRequestContext: (${GITHUB_PULL_REQUEST_CONTEXT})`);
-    console.log(`GITHUB_TOKEN: is exist ? ${!!GITHUB_TOKEN}`);
-    console.log(`GITHUB_PULL_REQUEST_CONTEXT: is exist ? ${!!GITHUB_PULL_REQUEST_CONTEXT}`);
+    const _pullRequestContext = process.env.GITHUB_PULL_REQUEST_CONTEXT as string;
+    const _githubToken = process.env.GITHUB_TOKEN as string;
 
-    if (GITHUB_PULL_REQUEST_CONTEXT && GITHUB_TOKEN) {
-      const pullRequestContext = JSON.parse(GITHUB_PULL_REQUEST_CONTEXT) as unknown as PullRequestContext;
-      const token = GITHUB_TOKEN;
+    if (_pullRequestContext && _githubToken) {
+      const pullRequestContext = JSON.parse(_pullRequestContext) as unknown as PullRequestContext;
+      console.log(`PullRequestContext: (${pullRequestContext})`);
+      const token = _githubToken;
       const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(pullRequestContext, token);
       console.log(JSON.stringify(changedLabels));
       exit(0);
