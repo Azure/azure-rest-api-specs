@@ -44,6 +44,15 @@ suppressions:
   - code: OperationsApiSchemaUsesCommonTypes
     from: operations.json
     reason: Existing service contract needs to be backward compatible.  
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: ResourceNameRestriction
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: OperationsApiResponseSchema
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.            
 ```
 
 ---
