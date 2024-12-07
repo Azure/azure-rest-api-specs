@@ -63,7 +63,7 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-04
+tag: package-2024-10
 directive:
   - where:
       - $.paths
@@ -71,6 +71,15 @@ directive:
       - UniqueResourcePaths
 ```
 
+
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-10-01/service.json
+```
 
 ### Tag: package-2024-04
 
@@ -345,21 +354,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services_site_recovery']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 0
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
-  output-folder: $(csharp-sdks-folder)/recoveryservices-siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
-  clear-output-folder: true
 ```
 
 ## Go
