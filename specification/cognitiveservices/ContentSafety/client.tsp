@@ -16,6 +16,7 @@ interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+  analyzeBySafetyPolicy is ContentSafety.SafetyPolicyAnalyzeOperations.analyzeBySafetyPolicy;
 }
 
 @client({
@@ -34,3 +35,14 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+@client({
+  name: "SafetyPolicyClient",
+  service: ContentSafety,
+})
+interface SafetyPolicyClient {
+  createOrUpdateSafetyPolicy is ContentSafety.SafetyPolicy.createOrUpdateSafetyPolicy;
+  deleteSafetyPolicy is ContentSafety.SafetyPolicy.deleteSafetyPolicy;
+  getSafetyPolicy is ContentSafety.SafetyPolicy.getSafetyPolicy;
+  listSafetyPolicies is ContentSafety.SafetyPolicy.listSafetyPolicies;
+}
