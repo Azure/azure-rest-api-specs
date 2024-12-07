@@ -23,8 +23,8 @@ jobs:
         Write-Host '${{ toJson(github) }}'
         Write-Host "Remotes..."
         git remote -vv
-        
-        $targetCommittish = git rev-parse ${{ github. }}/${{ github.base_ref }}
+
+        $targetCommittish = git rev-parse ${{ github.base_ref }}
         ./eng/common/scripts/check-spelling-in-changed-files.ps1 `
             -CSpellConfigPath 'cSpell.json' `
             -SourceCommittish '${{ github.sha }}' `
