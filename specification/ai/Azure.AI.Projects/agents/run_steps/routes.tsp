@@ -77,7 +77,7 @@ op listRunSteps is Azure.Core.Foundations.Operation<
       Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
       """)
     @query
-    include: RunAdditionalFieldList[];
+    include?: RunAdditionalFieldList[];
 
     ...OpenAIListRequestOptions;
   },
