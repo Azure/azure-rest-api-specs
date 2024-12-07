@@ -20,9 +20,7 @@ jobs:
 
     - name: Run spelling check
       run: |
-        $sourceCommittish = git rev-parse ${{ github.ref }}
-        $targetCommittish = '${{ github.base_ref }}'
         ./eng/common/scripts/check-spelling-in-changed-files.ps1 `
-            -SourceCommittish $sourceCommittish`
-            -TargetCommittish $targetCommittish
+            -SourceCommittish '${{ github.sha }}' `
+            -TargetCommittish  '${{ github.base_ref }}'
       shell: pwsh
