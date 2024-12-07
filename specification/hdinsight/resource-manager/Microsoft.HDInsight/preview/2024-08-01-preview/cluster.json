@@ -2004,9 +2004,14 @@
           "type": "string",
           "x-ms-client-name": "password",
           "description": "The gateway settings user password."
+        },
+        "entraUsers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of Entra user emails for gateway access."
         }
       },
-      "description": "The update gateway settings request parameters."
+      "description": "The update gateway settings request parameters. Plz note either basic or entraUsers should be selected at a time."
     },
     "GatewaySettings": {
       "type": "object",
@@ -2028,6 +2033,13 @@
           "x-ms-client-name": "password",
           "description": "The gateway settings user password.",
           "readOnly": true
+        },
+        "entraUsers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Entra user emails for gateway access."
         }
       },
       "description": "Gateway settings."
