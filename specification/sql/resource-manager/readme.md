@@ -31,7 +31,6 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2024-08
 
 These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
