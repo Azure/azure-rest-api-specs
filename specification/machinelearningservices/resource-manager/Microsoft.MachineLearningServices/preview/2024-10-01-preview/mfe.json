@@ -13761,21 +13761,33 @@
     "ActualCapacityInfo": {
       "type": "object",
       "properties": {
-        "allocated": {
+        "total": {
           "format": "int32",
-          "description": "Gets or sets the total number of instances for the group.",
+          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
           "default": 0,
           "type": "integer"
         },
-        "assignmentFailed": {
+        "succeeded": {
           "format": "int32",
-          "description": "Gets or sets the number of instances which failed to successfully complete assignment.",
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state and target group payload.",
           "default": 0,
           "type": "integer"
         },
-        "assignmentSuccess": {
+        "failed": {
           "format": "int32",
-          "description": "Gets or sets the number of instances which successfully completed assignment.",
+          "description": "Gets or sets the number of instances (scale units) which Failed provisioning state and have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedSucceeded": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedFailed": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
           "default": 0,
           "type": "integer"
         }
