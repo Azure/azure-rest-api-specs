@@ -177,3 +177,16 @@ model RpUsageAndQuotaDetailsForExistingResource {
   @doc("The quota limit")
   limit: int32;
 }
+
+@doc("An object that represents enumerating usage and quota details for existing resources")
+@pagedResult
+model RpUsageAndQuotaEnumerationForExistingResourceResult {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  @doc("The usage and quota details")
+  @items
+  value: Array<RpUsageAndQuotaDetailsForExistingResource>;
+
+  @doc("Url for the next page.  Null if no more pages available")
+  @Azure.Core.nextLink
+  nextLink?: string;
+}
