@@ -170,6 +170,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/locations/{location}/usages": {
+      "get": {
+        "operationId": "FabricCapacities_ListUsages",
+        "tags": [
+          "FabricCapacities"
+        ],
+        "description": "List the current consumption and limit in this location for the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RpUsageAndQuotaDetailsForExistingResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/skus": {
       "get": {
         "operationId": "FabricCapacities_ListSkus",
@@ -1083,6 +1117,26 @@
           }
         ]
       }
+    },
+    "RpUsageAndQuotaDetailsForExistingResource": {
+      "type": "object",
+      "description": "An object that represents usage and quota details for existing resources",
+      "properties": {
+        "currentValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current consumption value"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota limit"
+        }
+      },
+      "required": [
+        "currentValue",
+        "limit"
+      ]
     }
   },
   "parameters": {
