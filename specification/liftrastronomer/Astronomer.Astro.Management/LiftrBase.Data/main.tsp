@@ -26,6 +26,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2024_08_27)
   v2024_08_27: "2024-08-27",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v2024_11_01_preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v2024_11_01_preview)
+  v2024_11_01_preview: "2024-11-01-preview",
 }
 
 @doc("Properties specific to Data Organization resource")

@@ -44,6 +44,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2024_08_27)
   @useDependency(LiftrBase.Data.Versions.v2024_08_27)
   v2024_08_27: "2024-08-27",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_11_01_preview, LiftrBase.Data.Versions.v2024_11_01_preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v2024_11_01_preview)
+  @useDependency(LiftrBase.Data.Versions.v2024_11_01_preview)
+  v2024_11_01_preview: "2024-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -81,4 +87,234 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("list of users with roles.")
+  @armResourceAction(OrganizationResource)
+  @action("getUsers")
+  @post
+  getUsers(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("properties of GetUsersRequest")
+    @body
+    properties: GetUsersRequest,
+  ): ArmResponse<GetUsersSuccessResponse> | ErrorResponse;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("list of available roles.")
+  @armResourceAction(OrganizationResource)
+  @action("getRoles")
+  @post
+  getRoles(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("properties of GetRolesRequest")
+    @body
+    properties: GetRolesRequest,
+  ): ArmResponse<GetRolesSuccessResponse> | ErrorResponse;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("list of available resources.")
+  @armResourceAction(OrganizationResource)
+  @action("getResources")
+  @post
+  getResources(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("properties of GetResourcesRequest")
+    @body
+    properties: GetResourcesRequest,
+  ): ArmResponse<GetResourcesSuccessResponse> | ErrorResponse;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("manage roles of users")
+  @armResourceAction(OrganizationResource)
+  @action("manageRoles")
+  @post
+  manageRoles(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("properties of ManageRolesRequest")
+    @body
+    properties: ManageRolesModel,
+  ): ArmResponse<ManageRolesModel> | ErrorResponse;
+
+  @added(Versions.v2024_11_01_preview)
+  @doc("remove user")
+  @armResourceAction(OrganizationResource)
+  @action("removeUser")
+  @post
+  removeUser(
+    ...ResourceInstanceParameters<OrganizationResource>,
+
+    @doc("properties of RemoveUserRequest")
+    @body
+    properties: RemoveUserRequest,
+  ): ArmDeletedNoContentResponse | ErrorResponse;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Request model for get users API")
+model GetUsersRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+  @doc("parameters to filter results")
+  searchParamsDictionary?: Record<string>;
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("PageInfo model")
+model PageInfo {
+  @doc("numbers of objects to skip")
+  offset?: int64;
+
+  @doc("max numbers of objects in response")
+  limit?: int64;
+
+  @doc("total numbers of objects")
+  totalCount?: int64;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Response model for get users API")
+model GetUsersSuccessResponse {
+  @doc("User object array")
+  users: User[];
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+@added(Versions.v2024_11_01_preview)
+@doc("User object")
+model User {
+  @doc("User id")
+  id?: string;
+
+  @doc("user type")
+  type?: string;
+
+  @doc("email of User")
+  email: string;
+
+  @doc("Full name")
+  fullName?: string;
+
+  @doc("Auth type")
+  authType?: string;
+
+  @doc("User status")
+  status?: string;
+
+  @doc("avatar url")
+  avatarUrl?: string;
+
+  @doc("roles assigned to user")
+  roles: Role[];
+
+  @doc("User metadata")
+  metadataUser?: Record<string>;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Role object")
+model Role {
+  @doc("Role id")
+  id?: string;
+
+  @doc("Role name")
+  name: string;
+
+  @doc("Role type")
+  type?: string;
+
+  @doc("description of role")
+  description?: string;
+
+  @doc("scope at which roles are assigned")
+  scope?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+@added(Versions.v2024_11_01_preview)
+@doc("Request model for get roles API")
+model GetRolesRequest {
+  @doc("parameters to filter results")
+  searchParamsDictionary?: Record<string>;
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Response model for get roles API")
+model GetRolesSuccessResponse {
+  @doc("Role object array")
+  roles: Role[];
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+@added(Versions.v2024_11_01_preview)
+@doc("Request model for get resources API")
+model GetResourcesRequest {
+  @doc("parameters to filter results")
+  searchParamsDictionary?: Record<string>;
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Response model for get resources API")
+model GetResourcesSuccessResponse {
+  @doc("Resource object array")
+  resources: PartnerResource[];
+
+  @doc("page details")
+  pageInfo?: PageInfo;
+}
+
+@added(Versions.v2024_11_01_preview)
+@doc("Partner Resource object")
+model PartnerResource {
+  @doc("Resource id")
+  id?: string;
+
+  @doc("Resource name")
+  name: string;
+
+  @doc("Resource type")
+  type?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+@added(Versions.v2024_11_01_preview)
+@doc("Request model for manage roles API")
+model ManageRolesModel {
+  @doc("Users object array")
+  principals: User[];
+
+  @doc("Role object array")
+  roles: Role[];
+
+  @doc("Additional data to assign roles")
+  additionalData?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+@added(Versions.v2024_11_01_preview)
+@doc("Request model for manage roles API")
+model RemoveUserRequest {
+  @doc("User object")
+  principal: User;
+
+  @doc("Additional data for deleting user")
+  additionalData?: Record<string>;
 }
