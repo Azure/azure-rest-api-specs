@@ -258,21 +258,19 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
       console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} no add label`);
     }
   }
-  const result = {
+
+  const willSaveOutput = {
+    labelsToAdd: ['a1', 'b1'],
+    labelsToRemove: ['c1']
+  };
+  fs.writeFileSync("output.json", JSON.stringify(willSaveOutput));
+  console.log("JSON output saved to output.json");
+
+  return {
     labelsToAdd: addSdkSuppressionsLabels,
     labelsToRemove: removeSdkSuppressionsLabels
   }
-  fs.writeFileSync("output.json", JSON.stringify(result));
-  console.log("JSON output saved to output.json");
 
-//   return {
-//     labelsToAdd: addSdkSuppressionsLabels,
-//     labelsToRemove: removeSdkSuppressionsLabels
-//   }
-    return {
-        labelsToAdd: ['a1', 'a2'],
-        labelsToRemove: ['abc']
-    }
 }
 
 function logSuppressionFileInfo(pr: { owner: string, repo: string, ref: string, path: string }) {
