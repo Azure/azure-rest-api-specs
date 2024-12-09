@@ -12,6 +12,9 @@ import "./schemaRegistries.tsp";
 import "./namespaces.tsp";
 import "./ns_devices.tsp";
 import "./ns_assets.tsp";
+import "./ns_discoveredAssets.tsp";
+import "./ns_assetEndpointProfiles.tsp";
+import "./ns_discoveredAssetEndpointProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -16,7 +16,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 @doc("Represents a validated solution recipe resource.")
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model ValidatedSolutionRecipe
   is Azure.ResourceManager.ProxyResource<ValidatedSolutionRecipeProperties> {
   ...ResourceNameParameter<
