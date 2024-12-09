@@ -260,8 +260,8 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
   }
 
   const result = {
-    labelsToAdd: ['a1', 'b1'],
-    labelsToRemove: ['c1']
+    labelsToAdd: ['c1', 'b1'],
+    labelsToRemove: ['a1']
   };
   const willSaveOutput = [
     ...result.labelsToAdd.map(label => `label-${label}=true`),
