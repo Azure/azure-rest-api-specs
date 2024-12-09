@@ -1,0 +1,30 @@
+name: Check Spelling - All
+
+on:
+  push:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+
+  schedule:
+    # Run every day at 12:06 UTC
+    - cron: '6 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-spelling:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      
+      - name: Run spelling check
+        run: |
+          ./eng/common/spelling/Invoke-Cspell.ps1 `
+            -ScanGlobs 'specifications/**' `
+            -CSpellConfigPath './cspell.json'
+        shell: pwsh
