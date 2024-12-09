@@ -7,5 +7,17 @@ jobs:
     name: Trigger Test
     runs-on: ubuntu-latest
     steps:
-      - name: Print Message
-        run: echo "Trigger workflow completed"
+      - name: Create empty file to upload artifact
+        run: "> $RUNNER_TEMP/empty.txt"
+        shell: bash
+
+      # A recommended format is "key=value".  The maximum length is reported to be 260 characters.
+      #
+      # A full list of invalid artifact name characters is documented here:
+      # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: label-aaa=true
+          path: ${{ runner.temp }}/empty.txt
+          if-no-files-found: error
+          overwrite: true
