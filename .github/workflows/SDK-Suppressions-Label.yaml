@@ -64,7 +64,7 @@ jobs:
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat output.json)
-          echo "Script output labels: $OUTPUT"
+          echo "Script output labels1111: $OUTPUT"
           echo "script_result=$OUTPUT" >> $GITHUB_ENV
           echo "::set-output name=suppressions-result-output::$OUTPUT"
 
@@ -81,5 +81,8 @@ jobs:
     steps:
       - name: Use the suppressions result in job manage-sdk-suppressions-labels
         run: |
+          echo "11111"
+          OUTPUT=$(cat output.json)
+          echo "Script output labels2222: $OUTPUT"
           echo "2222"
           echo "The result from job1 is: $SUPPRESSIONS_LABELS"
