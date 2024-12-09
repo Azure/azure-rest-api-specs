@@ -1406,10 +1406,10 @@
           "type": "string",
           "description": "Keepalive time, per RFC4271"
         },
-        "communities": {
-          "type": "array",
-          "description": "BGP Communities",
-          "items": {
+        "nodeSelector": {
+          "type": "object",
+          "description": "A dynamic label mapping to select related nodes to peer with. For instance, if you want to create a BGP peer only for nodes with label \"a=b\", then please specify {\"a\": \"b\"} in the field.",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -1596,6 +1596,13 @@
         "bgpPeers": {
           "type": "array",
           "description": "The list of BGP peers it should advertise to. Null or empty means to advertise to all peers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "communities": {
+          "type": "array",
+          "description": "BGP Communities",
           "items": {
             "type": "string"
           }

@@ -60,9 +60,9 @@ model BgpPeerProperties {
   @added(Versions.v2024_08_01)
   keepAliveTime?: string;
 
-  @doc("BGP Communities")
-  @added(Versions.v2024_08_01)
-  communities?: string[];
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The type of the field is a record because it is a mapping of labels in the customer cluster"
+  @doc("A dynamic label mapping to select related nodes to peer with. For instance, if you want to create a BGP peer only for nodes with label \"a=b\", then please specify {\"a\": \"b\"} in the field.")
+  nodeSelector?: Record<string>;
 
   @visibility("read")
   @doc("Resource provision state")
