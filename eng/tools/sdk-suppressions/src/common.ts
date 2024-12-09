@@ -1,4 +1,4 @@
-import * as YAML from "js-yaml";
+import * as yaml from "js-yaml";
 
 /**
  * @param yamlContent 
@@ -14,7 +14,7 @@ export function parseYamlContent(yamlContent: string, path: string): {
     let content = undefined;
     // if yaml file is not a valid yaml, catch error and return undefined
     try {
-      content = YAML.load(yamlContent);
+      content = yaml.load(yamlContent);
     } catch (error) {
       console.error(`The file parsing failed in the ${path}. Details: ${error}`);
       return {
