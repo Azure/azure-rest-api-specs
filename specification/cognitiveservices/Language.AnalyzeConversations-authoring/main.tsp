@@ -12,14 +12,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 /**
- * The language service API is a suite of natural language processing (NLP) skills
- * built with best-in-class Microsoft machine learning algorithms. The API can be
- * used to analyze unstructured text for tasks such as sentiment analysis, key
- * phrase extraction, language detection and question answering. Further
- * documentation can be found in <a
- * href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.
+ * The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.
  */
-/** The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection. */
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
@@ -39,15 +33,12 @@ using TypeSpec.Versioning;
   "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
   {
     /**
-     * Supported Cognitive Services endpoint (e.g.,
-     * https://<resource-name>.api.cognitiveservices.azure.com).
+     * Supported Cognitive Services endpoint e.g., https://<resource-name>.api.cognitiveservices.azure.com.
      */
-    endpoint: string,
-
     Endpoint: string,
   }
 )
-namespace Language.Authoring.Conversations;
+namespace Language.Conversations.Authoring;
 
 /**
  * The available API versions.

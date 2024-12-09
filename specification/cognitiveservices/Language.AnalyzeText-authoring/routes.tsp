@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.Authoring.Text;
+namespace Language.Text.Authoring;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -74,8 +74,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Generates a copy project operation authorization to the current target Azure
-   * resource.
+   * Generates a copy project operation authorization to the current target Azure resource.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_15_preview)
@@ -130,8 +129,7 @@ interface TextAnalysisAuthoring {
       projectName: string;
 
       /**
-       * Specifies the method used to interpret string offsets. For additional
-       * information see https://aka.ms/text-analytics-offsets.
+       * Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.
        */
       @query("stringIndexType")
       stringIndexType: StringIndexType;
@@ -143,8 +141,7 @@ interface TextAnalysisAuthoring {
       assetKind?: string;
 
       /**
-       * Trained model label to export. If the trainedModelLabel is null, the default
-       * behavior is to export the current working copy.
+       * Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.
        */
       @query("trainedModelLabel")
       trainedModelLabel?: string;
@@ -155,8 +152,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Triggers a job to import a project. If a project with the same name already
-   * exists, the data of that project is replaced.
+   * Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/:import")
@@ -171,8 +167,7 @@ interface TextAnalysisAuthoring {
       projectName: string;
 
       /**
-       * The format of the project to import. The currently supported formats are json
-       * and aml formats. If not provided, the default is set to json.
+       * The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.
        */
       @added(Versions.v2023_04_15_preview)
       @header
@@ -370,8 +365,7 @@ interface TextAnalysisAuthoring {
   getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
 
   /**
-   * Gets the status of an export job. Once job completes, returns the project
-   * metadata, and assets.
+   * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
   getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
 
@@ -568,8 +562,7 @@ interface TextAnalysisAuthoring {
   getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
 
   /**
-   * Gets the detailed results of the evaluation for a trained model. This includes
-   * the raw inference results for the data included in the evaluation process.
+   * Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getModelEvaluationResults is languageOperations.ResourceList<
@@ -579,8 +572,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Gets the evaluation summary of a trained model. The summary includes high level
-   * performance measurements of the model e.g., F1, Precision, Recall, etc.
+   * Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
@@ -619,11 +611,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Assign new Azure resources to a project to allow deploying new deployments to
-   * them. This API is available only via AAD authentication and not supported via
-   * subscription key authentication. For more details about AAD authentication,
-   * check here:
-   * https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:assign")
@@ -650,8 +638,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Unassign resources from a project. This disallows deploying new deployments to
-   * these resources, and deletes existing deployments assigned to them.
+   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-text/projects/{projectName}/resources/:unassign")
@@ -734,9 +721,7 @@ interface TextAnalysisAuthoring {
   getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
 
   /**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't
-   * return deployments belonging to projects owned by this resource. It only
-   * returns deployments belonging to projects owned by other resources.
+   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
    */
   @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is languageOperations.ResourceList<
@@ -755,8 +740,7 @@ interface TextAnalysisAuthoring {
   >;
 
   /**
-   * Lists the supported prebuilt entities that can be used while creating composed
-   * entities.
+   * Lists the supported prebuilt entities that can be used while creating composed entities.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @added(Versions.v2023_04_15_preview)
