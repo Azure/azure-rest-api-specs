@@ -78,11 +78,22 @@ jobs:
     needs: manage-sdk-suppressions-labels
     env:
       SUPPRESSIONS_LABELS: ${{ needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out }}
+    strategy:
+      matrix:
+        artifact-name: ${{ fromJson(needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out) }}
     steps:
       - name: Use the suppressions result in job manage-sdk-suppressions-labels
         run: |
-          echo "11111"
-          OUTPUT=$(cat output.json)
-          echo "Script output labels2222: $OUTPUT"
-          echo "2222"
           echo "The result from job1 is: $SUPPRESSIONS_LABELS"
+    
+      - name: Create empty file to upload artifacts
+        run: "> $RUNNER_TEMP/empty.txt"
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}  # Artifact name from matrix
+          path: ${{ runner.temp }}/empty.txt
+          if-no-files-found: error
+          overwrite: true

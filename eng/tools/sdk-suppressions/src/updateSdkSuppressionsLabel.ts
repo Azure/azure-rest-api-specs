@@ -259,10 +259,14 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
     }
   }
 
-  const willSaveOutput = {
+  const result = {
     labelsToAdd: ['a1', 'b1'],
     labelsToRemove: ['c1']
   };
+  const willSaveOutput = [
+    ...result.labelsToAdd.map(label => `label-${label}=true`),
+    ...result.labelsToRemove.map(label => `label-${label}=false`)
+  ];
   fs.writeFileSync("output.json", JSON.stringify(willSaveOutput));
   console.log("JSON output saved to output.json");
 
