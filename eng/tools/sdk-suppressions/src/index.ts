@@ -11,10 +11,11 @@ function getUsage(): string {
 export async function main() {
     const pullRequestContext = process.env.GITHUB_PULL_REQUEST_CONTEXT as string;
     const githubToken = process.env.GITHUB_TOKEN as string;
-    if (pullRequestContext && githubToken) {
+    const outputFile = process.env.OUTPUT_FILE as string;
+    if (pullRequestContext && githubToken && outputFile) {
       const _pullRequestContext = JSON.parse(pullRequestContext) as unknown as PullRequestContext;
       const _token = githubToken;
-      const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(_pullRequestContext, _token);
+      const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(_pullRequestContext, _token, outputFile);
       console.log(JSON.stringify(changedLabels));
       exit(0);
     } else {
