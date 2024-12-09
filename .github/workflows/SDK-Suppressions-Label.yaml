@@ -79,13 +79,13 @@ jobs:
   #         # echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
   #         echo "The suppressions result is ${{ env.suppressions-result }}"
 
-  # update-suppressions-labels:
-  #   runs-on: ubuntu-latest
-  #   needs: manage-sdk-suppressions-labels
-  #   env:
-  #     SUPPRESSIONS_LABELS: ${{ needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out }}
-  #   steps:
-  #     - name: Use the suppressions result in job2
-  #       run: |
-  #         echo "2222"
-  #         echo "The result from job1 is: $SUPPRESSIONS_LABELS"
+  update-suppressions-labels:
+    runs-on: ubuntu-latest
+    needs: manage-sdk-suppressions-labels
+    env:
+      SUPPRESSIONS_LABELS: ${{ needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out }}
+    steps:
+      - name: Use the suppressions result in job2
+        run: |
+          echo "2222"
+          echo "The result from job1 is: $SUPPRESSIONS_LABELS"
