@@ -11,6 +11,8 @@ jobs:
   test-workflow-run:
     name: Test Workflow Run
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_STEP_DEBUG: true
     steps:
       - name: Confirm Trigger
         run: echo "Workflow triggered by Trigger Workflow 1"
