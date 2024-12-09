@@ -1,4 +1,7 @@
-import { load }  from "js-yaml";
+// import { load } from "js-yaml";
+import pkg from 'js-yaml';
+const { load } = pkg;
+
 
 /**
  * @param yamlContent 

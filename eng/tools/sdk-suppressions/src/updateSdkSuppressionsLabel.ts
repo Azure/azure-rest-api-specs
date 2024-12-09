@@ -1,5 +1,5 @@
 import _ from "lodash";
-import * as fs from "fs";
+import { writeFileSync } from "fs";
 import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
 import { OctokitResponse, ReposGetContentResponseData } from "@octokit/types";
 import { sdkLabels, SdkName } from './sdk.js';
@@ -267,7 +267,7 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
     ...result.labelsToAdd.map(label => `label-${label}=true`),
     ...result.labelsToRemove.map(label => `label-${label}=false`)
   ];
-  fs.writeFileSync(outputFile, JSON.stringify(willSaveOutput));
+  writeFileSync(outputFile, JSON.stringify(willSaveOutput));
   console.log("JSON output saved to output.json");
 
   return result;
