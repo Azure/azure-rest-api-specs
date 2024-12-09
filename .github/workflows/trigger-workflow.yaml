@@ -5,10 +5,13 @@ on: pull_request
 jobs:
   upload-artifacts:
     name: Trigger Test
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        artifact-name: ["label-test1=true", "label-test2=true", "label-aaa=false"]
+        artifact-name: ["label-test1=true", "label-test2=false", "label-aaa=false"]
 
     steps:
       - name: Create empty file to upload artifacts
