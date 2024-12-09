@@ -71,7 +71,7 @@ interface DocumentIntelligenceAdministrationClient {
 
 @@clientName(AuthorizeClassifierCopyRequest, "AuthorizeClassifierCopyOptions", "java");
 @@clientName(BuildDocumentClassifierRequest, "BuildDocumentClassifierOptions", "java");
-@@clientName(BuildDocumentClassifierRequest.docTypes, "DocumentTypes", "java");
+@@clientName(BuildDocumentClassifierRequest.docTypes, "documentTypes", "java");
 @@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
 @@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "java");
@@ -84,7 +84,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentModelDetails.docTypes, "documentTypes", "java");
 @@clientName(DocumentModelDetails.expirationDateTime, "expiresOn", "java");
 @@clientName(DocumentModelDetails.modifiedDateTime, "modifiedOn", "java");
-@@clientName(ComposeDocumentModelRequest.docTypes, "DocumentTypes", "java");
+@@clientName(ComposeDocumentModelRequest.docTypes, "documentTypes", "java");
 @@clientName(ModelCopyAuthorization.expirationDateTime, "expiresOn", "java");
 @@clientName(AnalyzedDocument.docType, "documentType", "java");
 @@clientName(DocumentClassifierDetails.createdDateTime, "createdOn", "java");
