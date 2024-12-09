@@ -2,38 +2,53 @@
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/../common/scripts/logging.ps1
 
+$defaultTagRegex = "^tag:\s*(?<tag>.+)"
+$tagRegex = '^```\s*yaml\s*\$\(tag\)\s*==\s*''(?<tag>.+)'''
+
 <#
 .DESCRIPTION
-  Get the readme.md file associated with a swagger file.
+  Gets configuration info (tags and configFilePath) associated with a swagger file.
 
 .PARAMETER SwaggerFile
   Path to a swagger files inside the 'specification' directory.
 
 .OUTPUTS
-  the readme.md file associated with the swagger file or null if not found.
+  the configuration info (tags and configFilePath) or null if not found.
 #>
-function Get-SwaggerReadMeFile {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$SwaggerFile
-    )
-    
-    $currentPath = Resolve-Path $SwaggerFile
-    
-    while ($currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
-        $currentPath = [System.IO.Path]::GetDirectoryName($currentPath)
-        $readmeFile = Get-ChildItem -Path $currentPath -Filter "readme.md" -File -ErrorAction SilentlyContinue
-        if ($readmeFile -and $readmeFile.Name -eq "readme.md") {
-            return $readmeFile.FullName
-        }
+function Get-AutoRestConfigInfo {
+  param (
+      [Parameter(Mandatory = $true)]
+      [string]$SwaggerFile
+  )
+  
+  $currentPath = Resolve-Path $SwaggerFile
+
+  while ($currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
+    $currentPath = [System.IO.Path]::GetDirectoryName($currentPath)
+    $currentFilePath = [System.IO.Path]::GetFileName($currentPath)
+
+    if ($currentFilePath -eq "specification") {
+      break
     }
 
-    return $null
+    $readmeFile = Get-ChildItem -Path $currentPath -Filter "readme.md" -File -ErrorAction SilentlyContinue
+    if ($readmeFile -and $readmeFile.Name -eq "readme.md") {
+      $tagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readmeFile.FullName
+
+      if ($tagInfo.DefaultTag) {
+        $tagInfo | Add-Member -MemberType NoteProperty -Name "ConfigPath" -Value $readmeFile
+        return $tagInfo
+      }
+    }
+  }
+
+  return $null
 }
 
 <#
 .DESCRIPTION
   Use the directory structure convention to get the resource provider name.
+  Append the service directory name if there are multiple services in the same resource provider
 
 .PARAMETER ReadMeFilePath
   ReadMe File Path for a resource provider.
@@ -43,13 +58,32 @@ function Get-SwaggerReadMeFile {
 #>
 function Get-ResourceProviderFromReadMePath {
     param (
-        [Parameter(Mandatory = $true)]
-        [string]$ReadMeFilePath
+      [Parameter(Mandatory = $true)]
+      [string]$ReadMeFilePath
     )
 
     $directoryPath = [System.IO.Path]::GetDirectoryName($ReadMeFilePath)
-    $resourceProviderDirectory = Get-ChildItem -Path $directoryPath -Directory | Select-Object -First 1
-    return $resourceProviderDirectory.Name
+    $pathName = [System.IO.Path]::GetFileName($directoryPath)
+
+    if ($pathName -eq "resource-manager" -or $pathName -eq "data-plane") {
+      $resourceProviderDirectory = Get-ChildItem -Path $directoryPath -Directory | Select-Object -First 1
+      return $resourceProviderDirectory.Name
+    }
+    else {
+      $currentPath = Resolve-Path $directoryPath
+      $serviceName = $pathName
+
+      while ($currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
+        $pathName = [System.IO.Path]::GetFileName($currentPath)
+
+        if ($pathName -eq "resource-manager" -or $pathName -eq "data-plane") {
+          $resourceProviderDirectory = Get-ChildItem -Path $currentPath -Directory | Select-Object -First 1
+          return $resourceProviderDirectory.Name + "-" + $serviceName
+        }
+        $currentPath = Resolve-Path ([System.IO.Path]::GetDirectoryName($currentPath))
+      }
+    }
+    return $null
 }
 
 <#
@@ -85,6 +119,8 @@ function Invoke-SwaggerAPIViewParser {
         [string]$ResourceProvider,
         [Parameter(Mandatory = $true)]
         [string]$TokenDirectory,
+        [Parameter(Mandatory = $true)]
+        [string]$TempDirectory,
         [string]$Tag
     )
     $tempWorkingDirectoryName = [guid]::NewGuid().ToString()
@@ -96,7 +132,7 @@ function Invoke-SwaggerAPIViewParser {
     try {
       # Generate Swagger APIView tokens
       $command = "swaggerAPIParser"
-      $arguments = @("--readme", "$readMeFile", "--package-name", "$resourceProvider", "--use-tag-for-output")
+      $arguments = @("--readme", "$ReadMeFilePath", "--package-name", "$ResourceProvider")
 
       if ($Tag) {
         $arguments += "--tag"
@@ -104,24 +140,23 @@ function Invoke-SwaggerAPIViewParser {
       }
 
       LogInfo " $command $arguments"
-      LogGroupStart " Generating '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'..."
+      LogGroupStart " Generating '$Type' APIView Tokens using '$ReadMeFilePath' for '$ResourceProvider'..."
 
       & $command @arguments 2>&1 | ForEach-Object { Write-Host $_ }
 
       LogGroupEnd
 
-      $generatedAPIViewTokenFile = Get-ChildItem -File | Select-Object -First 1
-      $readMeTag = $generatedAPIViewTokenFile.BaseName
+      $generatedAPIViewTokenFile = Join-Path (Get-Location) "swagger.json"
 
-      LogSuccess " Generated '$Type' APIView Token File using file, '$readMeFile' and tag '$readMeTag'"
-
-      $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
-      LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
-      Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
-
-      return $readMeTag
+      if (Test-Path -Path $generatedAPIViewTokenFile) {
+        LogSuccess " Generated '$Type' APIView Token File using file, '$ReadMeFilePath' and tag '$Tag'"
+  
+        $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$ResourceProvider.$Type.json")
+        LogInfo " Moving generated APIView Token file to '$apiViewTokensFilePath'"
+        Move-Item -Path $generatedAPIViewTokenFile -Destination $apiViewTokensFilePath -Force > $null
+      }
     } catch {
-      LogError " Failed to generate '$Type' APIView Tokens using '$readMeFile' for '$resourceProvider'"
+      LogError " Failed to generate '$Type' APIView Tokens using '$ReadMeFilePath' for '$ResourceProvider'"
       throw
     } finally {
       Pop-Location
@@ -163,7 +198,7 @@ function New-SwaggerAPIViewTokens {
 
   # Get Changed Swagger Files
   LogInfo " Getting changed swagger files in PR, between $SourceCommitId and $TargetCommitId"
-  $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
+  $changedFiles = Get-ChangedFiles
   $changedSwaggerFiles = Get-ChangedSwaggerFiles -changedFiles $changedFiles
 
   if ($changedSwaggerFiles.Count -eq 0) {
@@ -178,18 +213,18 @@ function New-SwaggerAPIViewTokens {
   }
   LogGroupEnd
 
-  # Get Related Swagger ReadMe Files
-  $swaggerReadMeFiles = [System.Collections.Generic.HashSet[string]]::new()
+  # Get Related AutoRest Configuration Information
+  $autoRestConfigInfo = [System.Collections.Generic.Dictionary[string, object]]::new()
   $changedSwaggerFiles | ForEach-Object {
-    $readmeFile = Get-SwaggerReadMeFile -swaggerFile $_
-    if ($readmeFile) {
-        $swaggerReadMeFiles.Add($readmeFile) | Out-Null
+    $configInfo = Get-AutoRestConfigInfo -swaggerFile $_
+    if ($null -ne $configInfo -and -not $autoRestConfigInfo.ContainsKey($configInfo.ConfigPath)) {
+      $autoRestConfigInfo[$configInfo.ConfigPath] = $configInfo
     }
   }
 
   LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
-  $readmeFile | ForEach-Object {
-    LogInfo " - $_"
+  $autoRestConfigInfo.GetEnumerator() | ForEach-Object {
+    LogInfo " - $($_.Key)"
   }
   LogGroupEnd
 
@@ -198,18 +233,37 @@ function New-SwaggerAPIViewTokens {
   $swaggerAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
 
   # Generate Swagger APIView Tokens
-  foreach ($readMeFile in $swaggerReadMeFiles) {
+  foreach ($entry in $autoRestConfigInfo.GetEnumerator()) {
+    $configInfo = $entry.Value
+    $readMeFile = $entry.Key
+    git checkout $SourceCommitId
+    if (Test-Path -Path $readmeFile) {
       $resourceProvider = Get-ResourceProviderFromReadMePath -ReadMeFilePath $readMeFile
       $tokenDirectory = [System.IO.Path]::Combine($swaggerAPIViewArtifactsDirectory, $resourceProvider)
-      New-Item -ItemType Directory -Path $tokenDirectory | Out-Null
+      New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
-      # Generate New APIView Token using default tag on base branch
-      git checkout $SourceCommitId
-      $defaultTag = Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory
+      # Generate New APIView Token using default tag on source branch
+      Invoke-SwaggerAPIViewParser -Type "New" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+        -TempDirectory $TempDirectory -Tag $configInfo.DefaultTag | Out-Null
 
-      # Generate BaseLine APIView Token using same tag on target branch
+      # Generate BaseLine APIView Token using source commit tag on target branch or defaukt tag if source commit tag does not exist
       git checkout $TargetCommitId
-      Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory -Tag $defaultTag | Out-Null
+      if (Test-Path -Path $readMeFile) {
+        $targetTagInfo = Get-TagInformationFromReadMeFile -ReadMeFilePath $readMeFile
+        $baseLineTag = $targetTagInfo.DefaultTag
+        if ($targetTagInfo.Tags.Contains($configInfo.DefaultTag)) {
+          $baseLineTag = $configInfo.DefaultTag
+        }
+        Invoke-SwaggerAPIViewParser -Type "Baseline" -ReadMeFilePath $readMeFile -ResourceProvider $resourceProvider -TokenDirectory $tokenDirectory `
+          -TempDirectory $TempDirectory -Tag $baseLineTag | Out-Null
+      }
+      else {
+        LogWarning " Swagger ReadMe file '$readMeFile' not found on TargetBranch. Skipping APIView token generation."
+      }
+    }
+    else {
+      LogWarning " Swagger ReadMe file '$readMeFile' not found on SourceBranch. Skipping APIView token generation."
+    }
   }
 
   git checkout $currentBranch
@@ -321,5 +375,47 @@ function New-RestSpecsAPIViewReviews {
     LogError "Failed to create APIView for some resource providers. Check the logs for more details."
     Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
     exit 1
+  }
+}
+
+<#
+.DESCRIPTION
+  Get all the tags from the swagger readme file with the default tag indicated.
+
+.PARAMETER ReadMeFilePath
+  The file path to the readme file.
+#>
+function Get-TagInformationFromReadMeFile {
+  param (
+    [Parameter(Mandatory = $true)]
+    [string]$ReadMeFilePath
+  )
+  $tags = [System.Collections.Generic.HashSet[string]]::new()
+  $markDownContent = Get-Content -Path $ReadMeFilePath
+  $checkForDefaultTag = $false
+  $defaultTag = $null
+
+  foreach ($line in $markDownContent) {
+    $line = $line.Trim()
+    if ($line -match "###\s+Basic\s+Information") {
+      $checkForDefaultTag = $true
+    }
+
+    if ($checkForDefaulttag -and ($null -eq $defaultTag)) {
+      if ($line -match $defaultTagRegex) {
+        $defaultTag = $matches["tag"]
+        $checkForDefaultTag = $false
+      }
+    }
+
+    if ($line -match $tagRegex) {
+      $tag = $matches["tag"]
+      $tags.Add($tag) | Out-Null
+    }
+  }
+
+  [PSCustomObject]@{
+    Tags = $tags
+    DefaultTag  = $defaultTag
   }
 }

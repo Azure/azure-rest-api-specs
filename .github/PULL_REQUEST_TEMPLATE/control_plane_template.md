@@ -15,7 +15,7 @@ What's the purpose of this PR? Check the specific option that applies. This is *
 
   - [ ] New resource provider.
   - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been created in adherence to [OpenAPI specs PR creation guidance](https://aka.ms/azsdkdocs/createopenapispec)).
-  - [x] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
+  - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix OpenAPI spec quality issues in S360.
   - [ ] Convert existing [OpenAPI spec to TypeSpec spec](https://aka.ms/typespec/conversion) (do not combine this with implementing changes for a new API version).
   - [ ] Other, please clarify:
@@ -26,8 +26,8 @@ What's the purpose of this PR? Check the specific option that applies. This is *
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
 
-- [x] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
-- [x] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
+- [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data plane related specifications.
+- [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://aka.ms/azurerpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.

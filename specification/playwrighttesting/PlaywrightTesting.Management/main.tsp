@@ -20,10 +20,10 @@ namespace Microsoft.AzurePlaywrightService;
 
 @doc("Microsoft.AzurePlaywrightService Management API Versions.")
 enum Versions {
-  /** 2024-08-01-preview version */
+  /** 2024-12-01 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
