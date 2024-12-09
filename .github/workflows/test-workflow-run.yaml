@@ -1,0 +1,16 @@
+name: Test Workflow Run
+
+on:
+  workflow_run:
+    workflows:
+      - breakingchange suppressions label Workflow
+    types:
+      - completed
+
+jobs:
+  test-workflow-run:
+    name: Test Workflow Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm Trigger
+        run: echo "Workflow triggered by Trigger Workflow"
