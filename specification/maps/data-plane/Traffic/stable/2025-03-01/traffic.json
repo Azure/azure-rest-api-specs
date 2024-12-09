@@ -90,7 +90,7 @@
           {
             "name": "incidentType",
             "in": "query",
-            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. For example, '&incidentType=Accident&incidentType=Construction'. Will return all the available incident types if not specified.",
+            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. For example, '&incidentType=Accident,Construction'. Will return all the available incident types if not specified.",
             "required": false,
             "type": "string",
             "enum": [
@@ -271,6 +271,10 @@
           "type": "number",
           "format": "int32"
         },
+        "endPoint": {
+          "description": "endPoint of the traffic incident, In the Point format of GeoJson",
+          "type": "object"
+        },
         "isTrafficJam": {
           "description": "Flag indicating that the area of road covered by this incident is experiencing abnormal traffic conditions resulting in non-typical delays.",
           "type": "boolean"
@@ -289,7 +293,7 @@
               "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
             },
             "properties": {
               "$ref": "#/definitions/TrafficIncidentFeatureProperties"
