@@ -41,7 +41,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
-  - [`Swagger SpellCheck`](#swagger-spellcheck)
+  - [`Spell Check`](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
@@ -247,7 +247,7 @@ oav validate-spec <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
-## Spell Checking
+## Spell Check
 
 If you receive a spelling failure either fix the spelling in source. If there are words that need to be suppressed for
 your service, add the word to the override list in the `words` list in the `specification/<service>/cspell.json`
