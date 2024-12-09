@@ -1,0 +1,638 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DynamoDBContinuousBackupsDescriptions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/dynamoDBContinuousBackupsDescriptions": {
+      "get": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_ListBySubscription",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "List DynamoDBContinuousBackupsDescription resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_ListBySubscription": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/dynamoDBContinuousBackupsDescriptions": {
+      "get": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_ListByResourceGroup",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "List DynamoDBContinuousBackupsDescription resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_ListByResourceGroup": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/dynamoDBContinuousBackupsDescriptions/{name}": {
+      "get": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_Get",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "Get a DynamoDBContinuousBackupsDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DynamoDBContinuousBackupsDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_Get": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_CreateOrReplace",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "Create a DynamoDBContinuousBackupsDescription. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DynamoDBContinuousBackupsDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DynamoDBContinuousBackupsDescription' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+            }
+          },
+          "201": {
+            "description": "Resource 'DynamoDBContinuousBackupsDescription' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_CreateOrReplace": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_Update",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "Update a DynamoDBContinuousBackupsDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DynamoDBContinuousBackupsDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescriptionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_Update": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DynamoDbContinuousBackupsDescriptions_Delete",
+        "tags": [
+          "DynamoDBContinuousBackupsDescriptions"
+        ],
+        "description": "Delete a DynamoDBContinuousBackupsDescription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of DynamoDBContinuousBackupsDescription",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamoDbContinuousBackupsDescriptions_Delete": {
+            "$ref": "./examples/DynamoDbContinuousBackupsDescriptions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsDynamoDBContinuousBackupsDescriptionProperties": {
+      "type": "object",
+      "description": "Definition of awsDynamoDBContinuousBackupsDescription",
+      "properties": {
+        "continuousBackupsStatus": {
+          "$ref": "#/definitions/ContinuousBackupsStatusEnumValue",
+          "description": "<p> <code>ContinuousBackupsStatus</code> can be one of the following states: ENABLED, DISABLED</p>"
+        },
+        "pointInTimeRecoveryDescription": {
+          "$ref": "#/definitions/PointInTimeRecoveryDescription",
+          "description": "<p>The description of the point in time recovery settings applied to the table.</p>"
+        }
+      }
+    },
+    "ContinuousBackupsStatus": {
+      "type": "string",
+      "description": "ContinuousBackupsStatus enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ContinuousBackupsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ContinuousBackupsStatus enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ContinuousBackupsStatus enum ENABLED"
+          }
+        ]
+      }
+    },
+    "ContinuousBackupsStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of ContinuousBackupsStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ContinuousBackupsStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "DynamoDBContinuousBackupsDescription": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamoDBContinuousBackupsDescriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DynamoDBContinuousBackupsDescriptionListResult": {
+      "type": "object",
+      "description": "The response of a DynamoDBContinuousBackupsDescription list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DynamoDBContinuousBackupsDescription items on this page",
+          "items": {
+            "$ref": "#/definitions/DynamoDBContinuousBackupsDescription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DynamoDBContinuousBackupsDescriptionProperties": {
+      "type": "object",
+      "description": "Definition of DynamoDBContinuousBackupsDescription",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsDynamoDBContinuousBackupsDescriptionProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DynamoDBContinuousBackupsDescriptionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in DynamoDBContinuousBackupsDescription resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PointInTimeRecoveryDescription": {
+      "type": "object",
+      "description": "Definition of PointInTimeRecoveryDescription",
+      "properties": {
+        "earliestRestorableDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>Specifies the earliest point in time you can restore your table to. You can restore your table to any point in time during the last 35 days. </p>"
+        },
+        "latestRestorableDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p> <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. </p>"
+        },
+        "pointInTimeRecoveryStatus": {
+          "$ref": "#/definitions/PointInTimeRecoveryStatusEnumValue",
+          "description": "<p>The current state of point in time recovery:</p> <ul> <li> <p> <code>ENABLED</code> - Point in time recovery is enabled.</p> </li> <li> <p> <code>DISABLED</code> - Point in time recovery is disabled.</p> </li> </ul>"
+        }
+      }
+    },
+    "PointInTimeRecoveryStatus": {
+      "type": "string",
+      "description": "PointInTimeRecoveryStatus enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "PointInTimeRecoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "PointInTimeRecoveryStatus enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "PointInTimeRecoveryStatus enum ENABLED"
+          }
+        ]
+      }
+    },
+    "PointInTimeRecoveryStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of PointInTimeRecoveryStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PointInTimeRecoveryStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

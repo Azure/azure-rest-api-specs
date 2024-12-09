@@ -1,0 +1,3190 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ConfigServiceConfigurationRecorders"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorders": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorders_ListBySubscription",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "List ConfigServiceConfigurationRecorder resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_ListBySubscription": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorders": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorders_ListByResourceGroup",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "List ConfigServiceConfigurationRecorder resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_ListByResourceGroup": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceConfigurationRecorders/{name}": {
+      "get": {
+        "operationId": "ConfigServiceConfigurationRecorders_Get",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "Get a ConfigServiceConfigurationRecorder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorder",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_Get": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigServiceConfigurationRecorders_CreateOrReplace",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "Create a ConfigServiceConfigurationRecorder. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorder",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigServiceConfigurationRecorder' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigServiceConfigurationRecorder' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_CreateOrReplace": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ConfigServiceConfigurationRecorders_Update",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "Update a ConfigServiceConfigurationRecorder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorder",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorderTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_Update": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConfigServiceConfigurationRecorders_Delete",
+        "tags": [
+          "ConfigServiceConfigurationRecorders"
+        ],
+        "description": "Delete a ConfigServiceConfigurationRecorder",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceConfigurationRecorder",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceConfigurationRecorders_Delete": {
+            "$ref": "./examples/ConfigServiceConfigurationRecorders_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsConfigServiceConfigurationRecorderProperties": {
+      "type": "object",
+      "description": "Definition of awsConfigServiceConfigurationRecorder",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the configuration recorder. Config automatically assigns the name of 'default' when creating the configuration recorder.</p> <note> <p>You cannot change the name of the configuration recorder after it has been created. To change the configuration recorder name, you must delete it and create a new configuration recorder with a new name. </p> </note>"
+        },
+        "recordingGroup": {
+          "$ref": "#/definitions/RecordingGroup",
+          "description": "<p>Specifies which resource types Config records for configuration changes.</p> <note> <p> <b> High Number of Config Evaluations</b> </p> <p>You may notice increased activity in your account during your initial month recording with Config when compared to subsequent months. During the initial bootstrapping process, Config runs evaluations on all the resources in your account that you have selected for Config to record.</p> <p>If you are running ephemeral workloads, you may see increased activity from Config as it records configuration changes associated with creating and deleting these temporary resources. An <i>ephemeral workload</i> is a temporary use of computing resources that are loaded and run when needed. Examples include Amazon Elastic Compute Cloud (Amazon EC2) Spot Instances, Amazon EMR jobs, and Auto Scaling. If you want to avoid the increased activity from running ephemeral workloads, you can run these types of workloads in a separate account with Config turned off to avoid increased configuration recording and rule evaluations.</p> </note>"
+        },
+        "recordingMode": {
+          "$ref": "#/definitions/RecordingMode",
+          "description": "<p>Specifies the default recording frequency that Config uses to record configuration changes. Config supports <i>Continuous recording</i> and <i>Daily recording</i>.</p> <ul> <li> <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p> </li> <li> <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded. </p> </li> </ul> <note> <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager, it is recommended that you set the recording frequency to Continuous.</p> </note> <p>You can also override the recording frequency for specific resource types.</p>"
+        },
+        "roleARN": {
+          "type": "string",
+          "description": "<p>Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the configuration recorder.</p> <note> <p>While the API model does not require this field, the server will reject a request without a defined <code>roleARN</code> for the configuration recorder.</p> </note> <note> <p> <b>Pre-existing Config role</b> </p> <p>If you have used an Amazon Web Services service that uses Config, such as Security Hub or Control Tower, and an Config role has already been created, make sure that the IAM role that you use when setting up Config keeps the same minimum permissions as the already created Config role. You must do this so that the other Amazon Web Services service continues to run as expected. </p> <p>For example, if Control Tower has an IAM role that allows Config to read Amazon Simple Storage Service (Amazon S3) objects, make sure that the same permissions are granted within the IAM role you use when setting up Config. Otherwise, it may interfere with how Control Tower operates. For more information about IAM roles for Config, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/security-iam.html'> <b>Identity and Access Management for Config</b> </a> in the <i>Config Developer Guide</i>. </p> </note>"
+        }
+      }
+    },
+    "ConfigServiceConfigurationRecorder": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigServiceConfigurationRecorderProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConfigServiceConfigurationRecorderListResult": {
+      "type": "object",
+      "description": "The response of a ConfigServiceConfigurationRecorder list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigServiceConfigurationRecorder items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigServiceConfigurationRecorder"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigServiceConfigurationRecorderProperties": {
+      "type": "object",
+      "description": "Definition of ConfigServiceConfigurationRecorder",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsConfigServiceConfigurationRecorderProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigServiceConfigurationRecorderTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ConfigServiceConfigurationRecorder resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExclusionByResourceTypes": {
+      "type": "object",
+      "description": "Definition of ExclusionByResourceTypes",
+      "properties": {
+        "resourceTypes": {
+          "type": "array",
+          "description": "<p>A comma-separated list of resource types to exclude from recording by the configuration recorder.</p>",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RecordingFrequency": {
+      "type": "string",
+      "description": "RecordingFrequency enum",
+      "enum": [
+        "CONTINUOUS",
+        "DAILY"
+      ],
+      "x-ms-enum": {
+        "name": "RecordingFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CONTINUOUS",
+            "value": "CONTINUOUS",
+            "description": "RecordingFrequency enum CONTINUOUS"
+          },
+          {
+            "name": "DAILY",
+            "value": "DAILY",
+            "description": "RecordingFrequency enum DAILY"
+          }
+        ]
+      }
+    },
+    "RecordingFrequencyEnumValue": {
+      "type": "object",
+      "description": "Definition of RecordingFrequencyEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RecordingFrequency",
+          "description": "Property value"
+        }
+      }
+    },
+    "RecordingGroup": {
+      "type": "object",
+      "description": "Definition of RecordingGroup",
+      "properties": {
+        "allSupported": {
+          "type": "boolean",
+          "description": "<p>Specifies whether Config records configuration changes for all supported resource types, excluding the global IAM resource types.</p> <p>If you set this field to <code>true</code>, when Config adds support for a new resource type, Config starts recording resources of that type automatically.</p> <p>If you set this field to <code>true</code>, you cannot enumerate specific resource types to record in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>, or to exclude in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> <note> <p> <b>Region availability</b> </p> <p>Check <a href='https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html'>Resource Coverage by Region Availability</a> to see if a resource type is supported in the Amazon Web Services Region where you set up Config.</p> </note>"
+        },
+        "exclusionByResourceTypes": {
+          "$ref": "#/definitions/ExclusionByResourceTypes",
+          "description": "<p>An object that specifies how Config excludes resource types from being recorded by the configuration recorder.</p> <note> <p> <b>Required fields</b> </p> <p>To use this option, you must set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>.</p> </note>"
+        },
+        "includeGlobalResourceTypes": {
+          "type": "boolean",
+          "description": "<p>This option is a bundle which only applies to the global IAM resource types: IAM users, groups, roles, and customer managed policies. These global IAM resource types can only be recorded by Config in Regions where Config was available before February 2022. You cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM resource types includes the following Regions:</p> <ul> <li> <p>Asia Pacific (Hyderabad)</p> </li> <li> <p>Asia Pacific (Melbourne)</p> </li> <li> <p>Canada West (Calgary)</p> </li> <li> <p>Europe (Spain)</p> </li> <li> <p>Europe (Zurich)</p> </li> <li> <p>Israel (Tel Aviv)</p> </li> <li> <p>Middle East (UAE)</p> </li> </ul> <important> <p> <b>Aurora global clusters are recorded in all enabled Regions</b> </p> <p>The <code>AWS::RDS::GlobalCluster</code> resource type will be recorded in all supported Config Regions where the configuration recorder is enabled, even if <code>includeGlobalResourceTypes</code> is set<code>false</code>. The <code>includeGlobalResourceTypes</code> option is a bundle which only applies to IAM users, groups, roles, and customer managed policies. </p> <p>If you do not want to record <code>AWS::RDS::GlobalCluster</code> in all enabled Regions, use one of the following recording strategies:</p> <ol> <li> <p> <b>Record all current and future resource types with exclusions</b> (<code>EXCLUSION_BY_RESOURCE_TYPES</code>), or</p> </li> <li> <p> <b>Record specific resource types</b> (<code>INCLUSION_BY_RESOURCE_TYPES</code>).</p> </li> </ol> <p>For more information, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-all'>Selecting Which Resources are Recorded</a> in the <i>Config developer guide</i>.</p> </important> <important> <p> <b>includeGlobalResourceTypes and the exclusion recording strategy</b> </p> <p>The <code>includeGlobalResourceTypes</code> field has no impact on the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy. This means that the global IAM resource types (IAM users, groups, roles, and customer managed policies) will not be automatically added as exclusions for <code>exclusionByResourceTypes</code> when <code>includeGlobalResourceTypes</code> is set to <code>false</code>.</p> <p>The <code>includeGlobalResourceTypes</code> field should only be used to modify the <code>AllSupported</code> field, as the default for the <code>AllSupported</code> field is to record configuration changes for all supported resource types excluding the global IAM resource types. To include the global IAM resource types when <code>AllSupported</code> is set to <code>true</code>, make sure to set <code>includeGlobalResourceTypes</code> to <code>true</code>.</p> <p>To exclude the global IAM resource types for the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, you need to manually add them to the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p> </important> <note> <p> <b>Required and optional fields</b> </p> <p>Before you set this field to <code>true</code>, set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>. Optionally, you can set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>.</p> </note> <note> <p> <b>Overriding fields</b> </p> <p>If you set this field to <code>false</code> but list global IAM resource types in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>, Config will still record configuration changes for those specified resource types <i>regardless</i> of if you set the <code>includeGlobalResourceTypes</code> field to false.</p> <p>If you do not want to record configuration changes to the global IAM resource types (IAM users, groups, roles, and customer managed policies), make sure to not list them in the <code>resourceTypes</code> field in addition to setting the <code>includeGlobalResourceTypes</code> field to false.</p> </note>"
+        },
+        "recordingStrategy": {
+          "$ref": "#/definitions/RecordingStrategy",
+          "description": "<p>An object that specifies the recording strategy for the configuration recorder.</p> <ul> <li> <p>If you set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, excluding the global IAM resource types. You also must set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>. When Config adds support for a new resource type, Config automatically starts recording resources of that type.</p> </li> <li> <p>If you set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for only the resource types you specify in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> </li> <li> <p>If you set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>EXCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types except the resource types that you specify to exclude from being recorded in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </li> </ul> <note> <p> <b>Required and optional fields</b> </p> <p>The <code>recordingStrategy</code> field is optional when you set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>.</p> <p>The <code>recordingStrategy</code> field is optional when you list resource types in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> <p>The <code>recordingStrategy</code> field is required if you list resource types to exclude from recording in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </note> <note> <p> <b>Overriding fields</b> </p> <p>If you choose <code>EXCLUSION_BY_RESOURCE_TYPES</code> for the recording strategy, the <code>exclusionByResourceTypes</code> field will override other properties in the request.</p> <p>For example, even if you set <code>includeGlobalResourceTypes</code> to false, global IAM resource types will still be automatically recorded in this option unless those resource types are specifically listed as exclusions in the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p> </note> <note> <p> <b>Global resources types and the resource exclusion recording strategy</b> </p> <p>By default, if you choose the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, when Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types, Config starts recording resources of that type automatically.</p> <p>Unless specifically listed as exclusions, <code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported Config Regions were the configuration recorder is enabled.</p> <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config was available before February 2022. You cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM resource types includes the following Regions:</p> <ul> <li> <p>Asia Pacific (Hyderabad)</p> </li> <li> <p>Asia Pacific (Melbourne)</p> </li> <li> <p>Canada West (Calgary)</p> </li> <li> <p>Europe (Spain)</p> </li> <li> <p>Europe (Zurich)</p> </li> <li> <p>Israel (Tel Aviv)</p> </li> <li> <p>Middle East (UAE)</p> </li> </ul> </note>"
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "<p>A comma-separated list that specifies which resource types Config records.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>Resource Type Value</b> column in <a href='https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources'>Supported Amazon Web Services resource Types</a> in the <i>Config developer guide</i>.</p> <note> <p> <b>Required and optional fields</b> </p> <p>Optionally, you can set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>.</p> <p>To record all configuration changes, set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>, and either omit this field or don't specify any resource types in this field. If you set the <code>allSupported</code> field to <code>false</code> and specify values for <code>resourceTypes</code>, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> </note> <note> <p> <b>Region availability</b> </p> <p>Before specifying a resource type for Config to track, check <a href='https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html'>Resource Coverage by Region Availability</a> to see if the resource type is supported in the Amazon Web Services Region where you set up Config. If a resource type is supported by Config in at least one Region, you can enable the recording of that resource type in all Regions supported by Config, even if the specified resource type is not supported in the Amazon Web Services Region where you set up Config.</p> </note>",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RecordingMode": {
+      "type": "object",
+      "description": "Definition of RecordingMode",
+      "properties": {
+        "recordingFrequency": {
+          "$ref": "#/definitions/RecordingFrequencyEnumValue",
+          "description": "<p>The default recording frequency that Config uses to record configuration changes.</p> <important> <p>Daily recording is not supported for the following resource types:</p> <ul> <li> <p> <code>AWS::Config::ResourceCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConformancePackCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConfigurationRecorder</code> </p> </li> </ul> <p>For the <b>allSupported</b> (<code>ALL_SUPPORTED_RESOURCE_TYPES</code>) recording strategy, these resource types will be set to Continuous recording.</p> </important>"
+        },
+        "recordingModeOverrides": {
+          "type": "array",
+          "description": "<p>An array of <code>recordingModeOverride</code> objects for you to specify your overrides for the recording mode. The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>",
+          "items": {
+            "$ref": "#/definitions/RecordingModeOverride"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RecordingModeOverride": {
+      "type": "object",
+      "description": "Definition of RecordingModeOverride",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>A description that you provide for the override.</p>"
+        },
+        "recordingFrequency": {
+          "$ref": "#/definitions/RecordingFrequencyEnumValue",
+          "description": "<p>The recording frequency that will be applied to all the resource types specified in the override.</p> <ul> <li> <p>Continuous recording allows you to record configuration changes continuously whenever a change occurs.</p> </li> <li> <p>Daily recording allows you to receive a configuration item (CI) representing the most recent state of your resources over the last 24-hour period, only if it’s different from the previous CI recorded. </p> </li> </ul> <note> <p>Firewall Manager depends on continuous recording to monitor your resources. If you are using Firewall Manager, it is recommended that you set the recording frequency to Continuous.</p> </note>"
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "<p>A comma-separated list that specifies which resource types Config includes in the override.</p> <important> <p>Daily recording is not supported for the following resource types:</p> <ul> <li> <p> <code>AWS::Config::ResourceCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConformancePackCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConfigurationRecorder</code> </p> </li> </ul> </important>",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RecordingStrategy": {
+      "type": "object",
+      "description": "Definition of RecordingStrategy",
+      "properties": {
+        "useOnly": {
+          "$ref": "#/definitions/RecordingStrategyTypeEnumValue",
+          "description": "<p>The recording strategy for the configuration recorder.</p> <ul> <li> <p>If you set this option to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, excluding the global IAM resource types. You also must set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>. When Config adds support for a new resource type, Config automatically starts recording resources of that type. For a list of supported resource types, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources'>Supported Resource Types</a> in the <i>Config developer guide</i>.</p> </li> <li> <p>If you set this option to <code>INCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for only the resource types that you specify in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> </li> <li> <p>If you set this option to <code>EXCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, except the resource types that you specify to exclude from being recorded in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </li> </ul> <note> <p> <b>Required and optional fields</b> </p> <p>The <code>recordingStrategy</code> field is optional when you set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>.</p> <p>The <code>recordingStrategy</code> field is optional when you list resource types in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> <p>The <code>recordingStrategy</code> field is required if you list resource types to exclude from recording in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </note> <note> <p> <b>Overriding fields</b> </p> <p>If you choose <code>EXCLUSION_BY_RESOURCE_TYPES</code> for the recording strategy, the <code>exclusionByResourceTypes</code> field will override other properties in the request.</p> <p>For example, even if you set <code>includeGlobalResourceTypes</code> to false, global IAM resource types will still be automatically recorded in this option unless those resource types are specifically listed as exclusions in the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p> </note> <note> <p> <b>Global resource types and the exclusion recording strategy</b> </p> <p>By default, if you choose the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, when Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types, Config starts recording resources of that type automatically.</p> <p>Unless specifically listed as exclusions, <code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported Config Regions were the configuration recorder is enabled.</p> <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config was available before February 2022. You cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM resource types includes the following Regions:</p> <ul> <li> <p>Asia Pacific (Hyderabad)</p> </li> <li> <p>Asia Pacific (Melbourne)</p> </li> <li> <p>Canada West (Calgary)</p> </li> <li> <p>Europe (Spain)</p> </li> <li> <p>Europe (Zurich)</p> </li> <li> <p>Israel (Tel Aviv)</p> </li> <li> <p>Middle East (UAE)</p> </li> </ul> </note>"
+        }
+      }
+    },
+    "RecordingStrategyType": {
+      "type": "string",
+      "description": "RecordingStrategyType enum",
+      "enum": [
+        "ALL_SUPPORTED_RESOURCE_TYPES",
+        "EXCLUSION_BY_RESOURCE_TYPES",
+        "INCLUSION_BY_RESOURCE_TYPES"
+      ],
+      "x-ms-enum": {
+        "name": "RecordingStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALL_SUPPORTED_RESOURCE_TYPES",
+            "value": "ALL_SUPPORTED_RESOURCE_TYPES",
+            "description": "RecordingStrategyType enum ALL_SUPPORTED_RESOURCE_TYPES"
+          },
+          {
+            "name": "EXCLUSION_BY_RESOURCE_TYPES",
+            "value": "EXCLUSION_BY_RESOURCE_TYPES",
+            "description": "RecordingStrategyType enum EXCLUSION_BY_RESOURCE_TYPES"
+          },
+          {
+            "name": "INCLUSION_BY_RESOURCE_TYPES",
+            "value": "INCLUSION_BY_RESOURCE_TYPES",
+            "description": "RecordingStrategyType enum INCLUSION_BY_RESOURCE_TYPES"
+          }
+        ]
+      }
+    },
+    "RecordingStrategyTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of RecordingStrategyTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RecordingStrategyType",
+          "description": "Property value"
+        }
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "ResourceType enum",
+      "enum": [
+        "AWS::ACM::Certificate",
+        "AWS::ACMPCA::CertificateAuthority",
+        "AWS::ACMPCA::CertificateAuthorityActivation",
+        "AWS::APS::RuleGroupsNamespace",
+        "AWS::AccessAnalyzer::Analyzer",
+        "AWS::AmazonMQ::Broker",
+        "AWS::Amplify::App",
+        "AWS::Amplify::Branch",
+        "AWS::ApiGateway::RestApi",
+        "AWS::ApiGateway::Stage",
+        "AWS::ApiGatewayV2::Api",
+        "AWS::ApiGatewayV2::Stage",
+        "AWS::AppConfig::Application",
+        "AWS::AppConfig::ConfigurationProfile",
+        "AWS::AppConfig::DeploymentStrategy",
+        "AWS::AppConfig::Environment",
+        "AWS::AppConfig::HostedConfigurationVersion",
+        "AWS::AppFlow::Flow",
+        "AWS::AppIntegrations::EventIntegration",
+        "AWS::AppMesh::GatewayRoute",
+        "AWS::AppMesh::Mesh",
+        "AWS::AppMesh::Route",
+        "AWS::AppMesh::VirtualGateway",
+        "AWS::AppMesh::VirtualNode",
+        "AWS::AppMesh::VirtualRouter",
+        "AWS::AppMesh::VirtualService",
+        "AWS::AppRunner::Service",
+        "AWS::AppRunner::VpcConnector",
+        "AWS::AppStream::Application",
+        "AWS::AppStream::DirectoryConfig",
+        "AWS::AppStream::Fleet",
+        "AWS::AppStream::Stack",
+        "AWS::AppSync::GraphQLApi",
+        "AWS::Athena::DataCatalog",
+        "AWS::Athena::PreparedStatement",
+        "AWS::Athena::WorkGroup",
+        "AWS::AuditManager::Assessment",
+        "AWS::AutoScaling::AutoScalingGroup",
+        "AWS::AutoScaling::LaunchConfiguration",
+        "AWS::AutoScaling::ScalingPolicy",
+        "AWS::AutoScaling::ScheduledAction",
+        "AWS::AutoScaling::WarmPool",
+        "AWS::Backup::BackupPlan",
+        "AWS::Backup::BackupSelection",
+        "AWS::Backup::BackupVault",
+        "AWS::Backup::RecoveryPoint",
+        "AWS::Backup::ReportPlan",
+        "AWS::Batch::ComputeEnvironment",
+        "AWS::Batch::JobQueue",
+        "AWS::Batch::SchedulingPolicy",
+        "AWS::Budgets::BudgetsAction",
+        "AWS::Cassandra::Keyspace",
+        "AWS::Cloud9::EnvironmentEC2",
+        "AWS::CloudFormation::Stack",
+        "AWS::CloudFront::Distribution",
+        "AWS::CloudFront::StreamingDistribution",
+        "AWS::CloudTrail::Trail",
+        "AWS::CloudWatch::Alarm",
+        "AWS::CloudWatch::MetricStream",
+        "AWS::CodeArtifact::Repository",
+        "AWS::CodeBuild::Project",
+        "AWS::CodeBuild::ReportGroup",
+        "AWS::CodeDeploy::Application",
+        "AWS::CodeDeploy::DeploymentConfig",
+        "AWS::CodeDeploy::DeploymentGroup",
+        "AWS::CodeGuruProfiler::ProfilingGroup",
+        "AWS::CodeGuruReviewer::RepositoryAssociation",
+        "AWS::CodePipeline::Pipeline",
+        "AWS::Cognito::UserPool",
+        "AWS::Cognito::UserPoolClient",
+        "AWS::Cognito::UserPoolGroup",
+        "AWS::Config::ConformancePackCompliance",
+        "AWS::Config::ResourceCompliance",
+        "AWS::Connect::Instance",
+        "AWS::Connect::PhoneNumber",
+        "AWS::Connect::QuickConnect",
+        "AWS::CustomerProfiles::Domain",
+        "AWS::CustomerProfiles::ObjectType",
+        "AWS::DMS::Certificate",
+        "AWS::DMS::Endpoint",
+        "AWS::DMS::EventSubscription",
+        "AWS::DMS::ReplicationSubnetGroup",
+        "AWS::DataSync::LocationEFS",
+        "AWS::DataSync::LocationFSxLustre",
+        "AWS::DataSync::LocationFSxWindows",
+        "AWS::DataSync::LocationHDFS",
+        "AWS::DataSync::LocationNFS",
+        "AWS::DataSync::LocationObjectStorage",
+        "AWS::DataSync::LocationS3",
+        "AWS::DataSync::LocationSMB",
+        "AWS::DataSync::Task",
+        "AWS::Detective::Graph",
+        "AWS::DeviceFarm::InstanceProfile",
+        "AWS::DeviceFarm::Project",
+        "AWS::DeviceFarm::TestGridProject",
+        "AWS::DynamoDB::Table",
+        "AWS::EC2::CapacityReservation",
+        "AWS::EC2::CarrierGateway",
+        "AWS::EC2::ClientVpnEndpoint",
+        "AWS::EC2::CustomerGateway",
+        "AWS::EC2::DHCPOptions",
+        "AWS::EC2::EC2Fleet",
+        "AWS::EC2::EIP",
+        "AWS::EC2::EgressOnlyInternetGateway",
+        "AWS::EC2::FlowLog",
+        "AWS::EC2::Host",
+        "AWS::EC2::IPAM",
+        "AWS::EC2::IPAMPool",
+        "AWS::EC2::IPAMScope",
+        "AWS::EC2::Instance",
+        "AWS::EC2::InternetGateway",
+        "AWS::EC2::LaunchTemplate",
+        "AWS::EC2::NatGateway",
+        "AWS::EC2::NetworkAcl",
+        "AWS::EC2::NetworkInsightsAccessScope",
+        "AWS::EC2::NetworkInsightsAccessScopeAnalysis",
+        "AWS::EC2::NetworkInsightsAnalysis",
+        "AWS::EC2::NetworkInsightsPath",
+        "AWS::EC2::NetworkInterface",
+        "AWS::EC2::PrefixList",
+        "AWS::EC2::RegisteredHAInstance",
+        "AWS::EC2::RouteTable",
+        "AWS::EC2::SecurityGroup",
+        "AWS::EC2::SpotFleet",
+        "AWS::EC2::Subnet",
+        "AWS::EC2::SubnetRouteTableAssociation",
+        "AWS::EC2::TrafficMirrorFilter",
+        "AWS::EC2::TrafficMirrorSession",
+        "AWS::EC2::TrafficMirrorTarget",
+        "AWS::EC2::TransitGateway",
+        "AWS::EC2::TransitGatewayAttachment",
+        "AWS::EC2::TransitGatewayConnect",
+        "AWS::EC2::TransitGatewayMulticastDomain",
+        "AWS::EC2::TransitGatewayRouteTable",
+        "AWS::EC2::VPC",
+        "AWS::EC2::VPCEndpoint",
+        "AWS::EC2::VPCEndpointService",
+        "AWS::EC2::VPCPeeringConnection",
+        "AWS::EC2::VPNConnection",
+        "AWS::EC2::VPNGateway",
+        "AWS::EC2::Volume",
+        "AWS::ECR::PublicRepository",
+        "AWS::ECR::PullThroughCacheRule",
+        "AWS::ECR::RegistryPolicy",
+        "AWS::ECR::Repository",
+        "AWS::ECS::CapacityProvider",
+        "AWS::ECS::Cluster",
+        "AWS::ECS::Service",
+        "AWS::ECS::TaskDefinition",
+        "AWS::ECS::TaskSet",
+        "AWS::EFS::AccessPoint",
+        "AWS::EFS::FileSystem",
+        "AWS::EKS::Addon",
+        "AWS::EKS::Cluster",
+        "AWS::EKS::FargateProfile",
+        "AWS::EKS::IdentityProviderConfig",
+        "AWS::EMR::SecurityConfiguration",
+        "AWS::ElasticBeanstalk::Application",
+        "AWS::ElasticBeanstalk::ApplicationVersion",
+        "AWS::ElasticBeanstalk::Environment",
+        "AWS::ElasticLoadBalancing::LoadBalancer",
+        "AWS::ElasticLoadBalancingV2::Listener",
+        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "AWS::Elasticsearch::Domain",
+        "AWS::EventSchemas::Discoverer",
+        "AWS::EventSchemas::Registry",
+        "AWS::EventSchemas::RegistryPolicy",
+        "AWS::EventSchemas::Schema",
+        "AWS::Events::ApiDestination",
+        "AWS::Events::Archive",
+        "AWS::Events::Connection",
+        "AWS::Events::Endpoint",
+        "AWS::Events::EventBus",
+        "AWS::Events::Rule",
+        "AWS::Evidently::Launch",
+        "AWS::Evidently::Project",
+        "AWS::FIS::ExperimentTemplate",
+        "AWS::Forecast::Dataset",
+        "AWS::Forecast::DatasetGroup",
+        "AWS::FraudDetector::EntityType",
+        "AWS::FraudDetector::Label",
+        "AWS::FraudDetector::Outcome",
+        "AWS::FraudDetector::Variable",
+        "AWS::GlobalAccelerator::Accelerator",
+        "AWS::GlobalAccelerator::EndpointGroup",
+        "AWS::GlobalAccelerator::Listener",
+        "AWS::Glue::Classifier",
+        "AWS::Glue::Job",
+        "AWS::Glue::MLTransform",
+        "AWS::Grafana::Workspace",
+        "AWS::GreengrassV2::ComponentVersion",
+        "AWS::GroundStation::Config",
+        "AWS::GroundStation::DataflowEndpointGroup",
+        "AWS::GroundStation::MissionProfile",
+        "AWS::GuardDuty::Detector",
+        "AWS::GuardDuty::Filter",
+        "AWS::GuardDuty::IPSet",
+        "AWS::GuardDuty::ThreatIntelSet",
+        "AWS::HealthLake::FHIRDatastore",
+        "AWS::IAM::Group",
+        "AWS::IAM::InstanceProfile",
+        "AWS::IAM::Policy",
+        "AWS::IAM::Role",
+        "AWS::IAM::SAMLProvider",
+        "AWS::IAM::ServerCertificate",
+        "AWS::IAM::User",
+        "AWS::IVS::Channel",
+        "AWS::IVS::PlaybackKeyPair",
+        "AWS::IVS::RecordingConfiguration",
+        "AWS::ImageBuilder::ContainerRecipe",
+        "AWS::ImageBuilder::DistributionConfiguration",
+        "AWS::ImageBuilder::ImagePipeline",
+        "AWS::ImageBuilder::ImageRecipe",
+        "AWS::ImageBuilder::InfrastructureConfiguration",
+        "AWS::InspectorV2::Filter",
+        "AWS::IoT::AccountAuditConfiguration",
+        "AWS::IoT::Authorizer",
+        "AWS::IoT::CACertificate",
+        "AWS::IoT::CustomMetric",
+        "AWS::IoT::Dimension",
+        "AWS::IoT::FleetMetric",
+        "AWS::IoT::JobTemplate",
+        "AWS::IoT::MitigationAction",
+        "AWS::IoT::Policy",
+        "AWS::IoT::ProvisioningTemplate",
+        "AWS::IoT::RoleAlias",
+        "AWS::IoT::ScheduledAudit",
+        "AWS::IoT::SecurityProfile",
+        "AWS::IoTAnalytics::Channel",
+        "AWS::IoTAnalytics::Dataset",
+        "AWS::IoTAnalytics::Datastore",
+        "AWS::IoTAnalytics::Pipeline",
+        "AWS::IoTEvents::AlarmModel",
+        "AWS::IoTEvents::DetectorModel",
+        "AWS::IoTEvents::Input",
+        "AWS::IoTSiteWise::AssetModel",
+        "AWS::IoTSiteWise::Dashboard",
+        "AWS::IoTSiteWise::Gateway",
+        "AWS::IoTSiteWise::Portal",
+        "AWS::IoTSiteWise::Project",
+        "AWS::IoTTwinMaker::ComponentType",
+        "AWS::IoTTwinMaker::Entity",
+        "AWS::IoTTwinMaker::Scene",
+        "AWS::IoTTwinMaker::SyncJob",
+        "AWS::IoTTwinMaker::Workspace",
+        "AWS::IoTWireless::FuotaTask",
+        "AWS::IoTWireless::MulticastGroup",
+        "AWS::IoTWireless::ServiceProfile",
+        "AWS::KMS::Alias",
+        "AWS::KMS::Key",
+        "AWS::KafkaConnect::Connector",
+        "AWS::Kendra::Index",
+        "AWS::Kinesis::Stream",
+        "AWS::Kinesis::StreamConsumer",
+        "AWS::KinesisAnalyticsV2::Application",
+        "AWS::KinesisFirehose::DeliveryStream",
+        "AWS::KinesisVideo::SignalingChannel",
+        "AWS::KinesisVideo::Stream",
+        "AWS::Lambda::CodeSigningConfig",
+        "AWS::Lambda::Function",
+        "AWS::Lex::Bot",
+        "AWS::Lex::BotAlias",
+        "AWS::Lightsail::Bucket",
+        "AWS::Lightsail::Certificate",
+        "AWS::Lightsail::Disk",
+        "AWS::Lightsail::StaticIp",
+        "AWS::Logs::Destination",
+        "AWS::LookoutMetrics::Alert",
+        "AWS::LookoutVision::Project",
+        "AWS::M2::Environment",
+        "AWS::MSK::BatchScramSecret",
+        "AWS::MSK::Cluster",
+        "AWS::MSK::Configuration",
+        "AWS::MediaConnect::FlowEntitlement",
+        "AWS::MediaConnect::FlowSource",
+        "AWS::MediaConnect::FlowVpcInterface",
+        "AWS::MediaPackage::PackagingConfiguration",
+        "AWS::MediaPackage::PackagingGroup",
+        "AWS::MediaTailor::PlaybackConfiguration",
+        "AWS::NetworkFirewall::Firewall",
+        "AWS::NetworkFirewall::FirewallPolicy",
+        "AWS::NetworkFirewall::RuleGroup",
+        "AWS::NetworkManager::ConnectPeer",
+        "AWS::NetworkManager::CustomerGatewayAssociation",
+        "AWS::NetworkManager::Device",
+        "AWS::NetworkManager::GlobalNetwork",
+        "AWS::NetworkManager::Link",
+        "AWS::NetworkManager::LinkAssociation",
+        "AWS::NetworkManager::Site",
+        "AWS::NetworkManager::TransitGatewayRegistration",
+        "AWS::OpenSearch::Domain",
+        "AWS::Panorama::Package",
+        "AWS::Personalize::Dataset",
+        "AWS::Personalize::DatasetGroup",
+        "AWS::Personalize::Schema",
+        "AWS::Personalize::Solution",
+        "AWS::Pinpoint::App",
+        "AWS::Pinpoint::ApplicationSettings",
+        "AWS::Pinpoint::Campaign",
+        "AWS::Pinpoint::EmailChannel",
+        "AWS::Pinpoint::EmailTemplate",
+        "AWS::Pinpoint::EventStream",
+        "AWS::Pinpoint::InAppTemplate",
+        "AWS::Pinpoint::Segment",
+        "AWS::QLDB::Ledger",
+        "AWS::QuickSight::DataSource",
+        "AWS::QuickSight::Template",
+        "AWS::QuickSight::Theme",
+        "AWS::RDS::DBCluster",
+        "AWS::RDS::DBClusterSnapshot",
+        "AWS::RDS::DBInstance",
+        "AWS::RDS::DBSecurityGroup",
+        "AWS::RDS::DBSnapshot",
+        "AWS::RDS::DBSubnetGroup",
+        "AWS::RDS::EventSubscription",
+        "AWS::RDS::GlobalCluster",
+        "AWS::RDS::OptionGroup",
+        "AWS::RUM::AppMonitor",
+        "AWS::Redshift::Cluster",
+        "AWS::Redshift::ClusterParameterGroup",
+        "AWS::Redshift::ClusterSecurityGroup",
+        "AWS::Redshift::ClusterSnapshot",
+        "AWS::Redshift::ClusterSubnetGroup",
+        "AWS::Redshift::EndpointAccess",
+        "AWS::Redshift::EventSubscription",
+        "AWS::Redshift::ScheduledAction",
+        "AWS::ResilienceHub::App",
+        "AWS::ResilienceHub::ResiliencyPolicy",
+        "AWS::ResourceExplorer2::Index",
+        "AWS::RoboMaker::RobotApplication",
+        "AWS::RoboMaker::RobotApplicationVersion",
+        "AWS::RoboMaker::SimulationApplication",
+        "AWS::Route53::HostedZone",
+        "AWS::Route53RecoveryControl::Cluster",
+        "AWS::Route53RecoveryControl::ControlPanel",
+        "AWS::Route53RecoveryControl::RoutingControl",
+        "AWS::Route53RecoveryControl::SafetyRule",
+        "AWS::Route53RecoveryReadiness::Cell",
+        "AWS::Route53RecoveryReadiness::ReadinessCheck",
+        "AWS::Route53RecoveryReadiness::RecoveryGroup",
+        "AWS::Route53RecoveryReadiness::ResourceSet",
+        "AWS::Route53Resolver::FirewallDomainList",
+        "AWS::Route53Resolver::FirewallRuleGroup",
+        "AWS::Route53Resolver::FirewallRuleGroupAssociation",
+        "AWS::Route53Resolver::ResolverEndpoint",
+        "AWS::Route53Resolver::ResolverQueryLoggingConfig",
+        "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation",
+        "AWS::Route53Resolver::ResolverRule",
+        "AWS::Route53Resolver::ResolverRuleAssociation",
+        "AWS::S3::AccessPoint",
+        "AWS::S3::AccountPublicAccessBlock",
+        "AWS::S3::Bucket",
+        "AWS::S3::MultiRegionAccessPoint",
+        "AWS::S3::StorageLens",
+        "AWS::SES::ConfigurationSet",
+        "AWS::SES::ContactList",
+        "AWS::SES::ReceiptFilter",
+        "AWS::SES::ReceiptRuleSet",
+        "AWS::SES::Template",
+        "AWS::SNS::Topic",
+        "AWS::SQS::Queue",
+        "AWS::SSM::AssociationCompliance",
+        "AWS::SSM::Document",
+        "AWS::SSM::FileData",
+        "AWS::SSM::ManagedInstanceInventory",
+        "AWS::SSM::PatchCompliance",
+        "AWS::SageMaker::AppImageConfig",
+        "AWS::SageMaker::CodeRepository",
+        "AWS::SageMaker::Domain",
+        "AWS::SageMaker::FeatureGroup",
+        "AWS::SageMaker::Image",
+        "AWS::SageMaker::Model",
+        "AWS::SageMaker::NotebookInstanceLifecycleConfig",
+        "AWS::SageMaker::Workteam",
+        "AWS::SecretsManager::Secret",
+        "AWS::ServiceCatalog::CloudFormationProduct",
+        "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+        "AWS::ServiceCatalog::Portfolio",
+        "AWS::ServiceDiscovery::HttpNamespace",
+        "AWS::ServiceDiscovery::Instance",
+        "AWS::ServiceDiscovery::PublicDnsNamespace",
+        "AWS::ServiceDiscovery::Service",
+        "AWS::Shield::Protection",
+        "AWS::ShieldRegional::Protection",
+        "AWS::Signer::SigningProfile",
+        "AWS::StepFunctions::Activity",
+        "AWS::StepFunctions::StateMachine",
+        "AWS::Transfer::Agreement",
+        "AWS::Transfer::Certificate",
+        "AWS::Transfer::Connector",
+        "AWS::Transfer::Workflow",
+        "AWS::WAF::RateBasedRule",
+        "AWS::WAF::Rule",
+        "AWS::WAF::RuleGroup",
+        "AWS::WAF::WebACL",
+        "AWS::WAFRegional::RateBasedRule",
+        "AWS::WAFRegional::Rule",
+        "AWS::WAFRegional::RuleGroup",
+        "AWS::WAFRegional::WebACL",
+        "AWS::WAFv2::IPSet",
+        "AWS::WAFv2::ManagedRuleSet",
+        "AWS::WAFv2::RegexPatternSet",
+        "AWS::WAFv2::RuleGroup",
+        "AWS::WAFv2::WebACL",
+        "AWS::WorkSpaces::ConnectionAlias",
+        "AWS::WorkSpaces::Workspace",
+        "AWS::XRay::EncryptionConfig"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AWSACMCertificate",
+            "value": "AWS::ACM::Certificate",
+            "description": "ResourceType enum AWS::ACM::Certificate"
+          },
+          {
+            "name": "AWSACMPCACertificateAuthority",
+            "value": "AWS::ACMPCA::CertificateAuthority",
+            "description": "ResourceType enum AWS::ACMPCA::CertificateAuthority"
+          },
+          {
+            "name": "AWSACMPCACertificateAuthorityActivation",
+            "value": "AWS::ACMPCA::CertificateAuthorityActivation",
+            "description": "ResourceType enum AWS::ACMPCA::CertificateAuthorityActivation"
+          },
+          {
+            "name": "AWSAPSRuleGroupsNamespace",
+            "value": "AWS::APS::RuleGroupsNamespace",
+            "description": "ResourceType enum AWS::APS::RuleGroupsNamespace"
+          },
+          {
+            "name": "AWSAccessAnalyzerAnalyzer",
+            "value": "AWS::AccessAnalyzer::Analyzer",
+            "description": "ResourceType enum AWS::AccessAnalyzer::Analyzer"
+          },
+          {
+            "name": "AWSAmazonMQBroker",
+            "value": "AWS::AmazonMQ::Broker",
+            "description": "ResourceType enum AWS::AmazonMQ::Broker"
+          },
+          {
+            "name": "AWSAmplifyApp",
+            "value": "AWS::Amplify::App",
+            "description": "ResourceType enum AWS::Amplify::App"
+          },
+          {
+            "name": "AWSAmplifyBranch",
+            "value": "AWS::Amplify::Branch",
+            "description": "ResourceType enum AWS::Amplify::Branch"
+          },
+          {
+            "name": "AWSApiGatewayRestApi",
+            "value": "AWS::ApiGateway::RestApi",
+            "description": "ResourceType enum AWS::ApiGateway::RestApi"
+          },
+          {
+            "name": "AWSApiGatewayStage",
+            "value": "AWS::ApiGateway::Stage",
+            "description": "ResourceType enum AWS::ApiGateway::Stage"
+          },
+          {
+            "name": "AWSApiGatewayV2Api",
+            "value": "AWS::ApiGatewayV2::Api",
+            "description": "ResourceType enum AWS::ApiGatewayV2::Api"
+          },
+          {
+            "name": "AWSApiGatewayV2Stage",
+            "value": "AWS::ApiGatewayV2::Stage",
+            "description": "ResourceType enum AWS::ApiGatewayV2::Stage"
+          },
+          {
+            "name": "AWSAppConfigApplication",
+            "value": "AWS::AppConfig::Application",
+            "description": "ResourceType enum AWS::AppConfig::Application"
+          },
+          {
+            "name": "AWSAppConfigConfigurationProfile",
+            "value": "AWS::AppConfig::ConfigurationProfile",
+            "description": "ResourceType enum AWS::AppConfig::ConfigurationProfile"
+          },
+          {
+            "name": "AWSAppConfigDeploymentStrategy",
+            "value": "AWS::AppConfig::DeploymentStrategy",
+            "description": "ResourceType enum AWS::AppConfig::DeploymentStrategy"
+          },
+          {
+            "name": "AWSAppConfigEnvironment",
+            "value": "AWS::AppConfig::Environment",
+            "description": "ResourceType enum AWS::AppConfig::Environment"
+          },
+          {
+            "name": "AWSAppConfigHostedConfigurationVersion",
+            "value": "AWS::AppConfig::HostedConfigurationVersion",
+            "description": "ResourceType enum AWS::AppConfig::HostedConfigurationVersion"
+          },
+          {
+            "name": "AWSAppFlowFlow",
+            "value": "AWS::AppFlow::Flow",
+            "description": "ResourceType enum AWS::AppFlow::Flow"
+          },
+          {
+            "name": "AWSAppIntegrationsEventIntegration",
+            "value": "AWS::AppIntegrations::EventIntegration",
+            "description": "ResourceType enum AWS::AppIntegrations::EventIntegration"
+          },
+          {
+            "name": "AWSAppMeshGatewayRoute",
+            "value": "AWS::AppMesh::GatewayRoute",
+            "description": "ResourceType enum AWS::AppMesh::GatewayRoute"
+          },
+          {
+            "name": "AWSAppMeshMesh",
+            "value": "AWS::AppMesh::Mesh",
+            "description": "ResourceType enum AWS::AppMesh::Mesh"
+          },
+          {
+            "name": "AWSAppMeshRoute",
+            "value": "AWS::AppMesh::Route",
+            "description": "ResourceType enum AWS::AppMesh::Route"
+          },
+          {
+            "name": "AWSAppMeshVirtualGateway",
+            "value": "AWS::AppMesh::VirtualGateway",
+            "description": "ResourceType enum AWS::AppMesh::VirtualGateway"
+          },
+          {
+            "name": "AWSAppMeshVirtualNode",
+            "value": "AWS::AppMesh::VirtualNode",
+            "description": "ResourceType enum AWS::AppMesh::VirtualNode"
+          },
+          {
+            "name": "AWSAppMeshVirtualRouter",
+            "value": "AWS::AppMesh::VirtualRouter",
+            "description": "ResourceType enum AWS::AppMesh::VirtualRouter"
+          },
+          {
+            "name": "AWSAppMeshVirtualService",
+            "value": "AWS::AppMesh::VirtualService",
+            "description": "ResourceType enum AWS::AppMesh::VirtualService"
+          },
+          {
+            "name": "AWSAppRunnerService",
+            "value": "AWS::AppRunner::Service",
+            "description": "ResourceType enum AWS::AppRunner::Service"
+          },
+          {
+            "name": "AWSAppRunnerVpcConnector",
+            "value": "AWS::AppRunner::VpcConnector",
+            "description": "ResourceType enum AWS::AppRunner::VpcConnector"
+          },
+          {
+            "name": "AWSAppStreamApplication",
+            "value": "AWS::AppStream::Application",
+            "description": "ResourceType enum AWS::AppStream::Application"
+          },
+          {
+            "name": "AWSAppStreamDirectoryConfig",
+            "value": "AWS::AppStream::DirectoryConfig",
+            "description": "ResourceType enum AWS::AppStream::DirectoryConfig"
+          },
+          {
+            "name": "AWSAppStreamFleet",
+            "value": "AWS::AppStream::Fleet",
+            "description": "ResourceType enum AWS::AppStream::Fleet"
+          },
+          {
+            "name": "AWSAppStreamStack",
+            "value": "AWS::AppStream::Stack",
+            "description": "ResourceType enum AWS::AppStream::Stack"
+          },
+          {
+            "name": "AWSAppSyncGraphQLApi",
+            "value": "AWS::AppSync::GraphQLApi",
+            "description": "ResourceType enum AWS::AppSync::GraphQLApi"
+          },
+          {
+            "name": "AWSAthenaDataCatalog",
+            "value": "AWS::Athena::DataCatalog",
+            "description": "ResourceType enum AWS::Athena::DataCatalog"
+          },
+          {
+            "name": "AWSAthenaPreparedStatement",
+            "value": "AWS::Athena::PreparedStatement",
+            "description": "ResourceType enum AWS::Athena::PreparedStatement"
+          },
+          {
+            "name": "AWSAthenaWorkGroup",
+            "value": "AWS::Athena::WorkGroup",
+            "description": "ResourceType enum AWS::Athena::WorkGroup"
+          },
+          {
+            "name": "AWSAuditManagerAssessment",
+            "value": "AWS::AuditManager::Assessment",
+            "description": "ResourceType enum AWS::AuditManager::Assessment"
+          },
+          {
+            "name": "AWSAutoScalingAutoScalingGroup",
+            "value": "AWS::AutoScaling::AutoScalingGroup",
+            "description": "ResourceType enum AWS::AutoScaling::AutoScalingGroup"
+          },
+          {
+            "name": "AWSAutoScalingLaunchConfiguration",
+            "value": "AWS::AutoScaling::LaunchConfiguration",
+            "description": "ResourceType enum AWS::AutoScaling::LaunchConfiguration"
+          },
+          {
+            "name": "AWSAutoScalingScalingPolicy",
+            "value": "AWS::AutoScaling::ScalingPolicy",
+            "description": "ResourceType enum AWS::AutoScaling::ScalingPolicy"
+          },
+          {
+            "name": "AWSAutoScalingScheduledAction",
+            "value": "AWS::AutoScaling::ScheduledAction",
+            "description": "ResourceType enum AWS::AutoScaling::ScheduledAction"
+          },
+          {
+            "name": "AWSAutoScalingWarmPool",
+            "value": "AWS::AutoScaling::WarmPool",
+            "description": "ResourceType enum AWS::AutoScaling::WarmPool"
+          },
+          {
+            "name": "AWSBackupBackupPlan",
+            "value": "AWS::Backup::BackupPlan",
+            "description": "ResourceType enum AWS::Backup::BackupPlan"
+          },
+          {
+            "name": "AWSBackupBackupSelection",
+            "value": "AWS::Backup::BackupSelection",
+            "description": "ResourceType enum AWS::Backup::BackupSelection"
+          },
+          {
+            "name": "AWSBackupBackupVault",
+            "value": "AWS::Backup::BackupVault",
+            "description": "ResourceType enum AWS::Backup::BackupVault"
+          },
+          {
+            "name": "AWSBackupRecoveryPoint",
+            "value": "AWS::Backup::RecoveryPoint",
+            "description": "ResourceType enum AWS::Backup::RecoveryPoint"
+          },
+          {
+            "name": "AWSBackupReportPlan",
+            "value": "AWS::Backup::ReportPlan",
+            "description": "ResourceType enum AWS::Backup::ReportPlan"
+          },
+          {
+            "name": "AWSBatchComputeEnvironment",
+            "value": "AWS::Batch::ComputeEnvironment",
+            "description": "ResourceType enum AWS::Batch::ComputeEnvironment"
+          },
+          {
+            "name": "AWSBatchJobQueue",
+            "value": "AWS::Batch::JobQueue",
+            "description": "ResourceType enum AWS::Batch::JobQueue"
+          },
+          {
+            "name": "AWSBatchSchedulingPolicy",
+            "value": "AWS::Batch::SchedulingPolicy",
+            "description": "ResourceType enum AWS::Batch::SchedulingPolicy"
+          },
+          {
+            "name": "AWSBudgetsBudgetsAction",
+            "value": "AWS::Budgets::BudgetsAction",
+            "description": "ResourceType enum AWS::Budgets::BudgetsAction"
+          },
+          {
+            "name": "AWSCassandraKeyspace",
+            "value": "AWS::Cassandra::Keyspace",
+            "description": "ResourceType enum AWS::Cassandra::Keyspace"
+          },
+          {
+            "name": "AWSCloud9EnvironmentEC2",
+            "value": "AWS::Cloud9::EnvironmentEC2",
+            "description": "ResourceType enum AWS::Cloud9::EnvironmentEC2"
+          },
+          {
+            "name": "AWSCloudFormationStack",
+            "value": "AWS::CloudFormation::Stack",
+            "description": "ResourceType enum AWS::CloudFormation::Stack"
+          },
+          {
+            "name": "AWSCloudFrontDistribution",
+            "value": "AWS::CloudFront::Distribution",
+            "description": "ResourceType enum AWS::CloudFront::Distribution"
+          },
+          {
+            "name": "AWSCloudFrontStreamingDistribution",
+            "value": "AWS::CloudFront::StreamingDistribution",
+            "description": "ResourceType enum AWS::CloudFront::StreamingDistribution"
+          },
+          {
+            "name": "AWSCloudTrailTrail",
+            "value": "AWS::CloudTrail::Trail",
+            "description": "ResourceType enum AWS::CloudTrail::Trail"
+          },
+          {
+            "name": "AWSCloudWatchAlarm",
+            "value": "AWS::CloudWatch::Alarm",
+            "description": "ResourceType enum AWS::CloudWatch::Alarm"
+          },
+          {
+            "name": "AWSCloudWatchMetricStream",
+            "value": "AWS::CloudWatch::MetricStream",
+            "description": "ResourceType enum AWS::CloudWatch::MetricStream"
+          },
+          {
+            "name": "AWSCodeArtifactRepository",
+            "value": "AWS::CodeArtifact::Repository",
+            "description": "ResourceType enum AWS::CodeArtifact::Repository"
+          },
+          {
+            "name": "AWSCodeBuildProject",
+            "value": "AWS::CodeBuild::Project",
+            "description": "ResourceType enum AWS::CodeBuild::Project"
+          },
+          {
+            "name": "AWSCodeBuildReportGroup",
+            "value": "AWS::CodeBuild::ReportGroup",
+            "description": "ResourceType enum AWS::CodeBuild::ReportGroup"
+          },
+          {
+            "name": "AWSCodeDeployApplication",
+            "value": "AWS::CodeDeploy::Application",
+            "description": "ResourceType enum AWS::CodeDeploy::Application"
+          },
+          {
+            "name": "AWSCodeDeployDeploymentConfig",
+            "value": "AWS::CodeDeploy::DeploymentConfig",
+            "description": "ResourceType enum AWS::CodeDeploy::DeploymentConfig"
+          },
+          {
+            "name": "AWSCodeDeployDeploymentGroup",
+            "value": "AWS::CodeDeploy::DeploymentGroup",
+            "description": "ResourceType enum AWS::CodeDeploy::DeploymentGroup"
+          },
+          {
+            "name": "AWSCodeGuruProfilerProfilingGroup",
+            "value": "AWS::CodeGuruProfiler::ProfilingGroup",
+            "description": "ResourceType enum AWS::CodeGuruProfiler::ProfilingGroup"
+          },
+          {
+            "name": "AWSCodeGuruReviewerRepositoryAssociation",
+            "value": "AWS::CodeGuruReviewer::RepositoryAssociation",
+            "description": "ResourceType enum AWS::CodeGuruReviewer::RepositoryAssociation"
+          },
+          {
+            "name": "AWSCodePipelinePipeline",
+            "value": "AWS::CodePipeline::Pipeline",
+            "description": "ResourceType enum AWS::CodePipeline::Pipeline"
+          },
+          {
+            "name": "AWSCognitoUserPool",
+            "value": "AWS::Cognito::UserPool",
+            "description": "ResourceType enum AWS::Cognito::UserPool"
+          },
+          {
+            "name": "AWSCognitoUserPoolClient",
+            "value": "AWS::Cognito::UserPoolClient",
+            "description": "ResourceType enum AWS::Cognito::UserPoolClient"
+          },
+          {
+            "name": "AWSCognitoUserPoolGroup",
+            "value": "AWS::Cognito::UserPoolGroup",
+            "description": "ResourceType enum AWS::Cognito::UserPoolGroup"
+          },
+          {
+            "name": "AWSConfigConformancePackCompliance",
+            "value": "AWS::Config::ConformancePackCompliance",
+            "description": "ResourceType enum AWS::Config::ConformancePackCompliance"
+          },
+          {
+            "name": "AWSConfigResourceCompliance",
+            "value": "AWS::Config::ResourceCompliance",
+            "description": "ResourceType enum AWS::Config::ResourceCompliance"
+          },
+          {
+            "name": "AWSConnectInstance",
+            "value": "AWS::Connect::Instance",
+            "description": "ResourceType enum AWS::Connect::Instance"
+          },
+          {
+            "name": "AWSConnectPhoneNumber",
+            "value": "AWS::Connect::PhoneNumber",
+            "description": "ResourceType enum AWS::Connect::PhoneNumber"
+          },
+          {
+            "name": "AWSConnectQuickConnect",
+            "value": "AWS::Connect::QuickConnect",
+            "description": "ResourceType enum AWS::Connect::QuickConnect"
+          },
+          {
+            "name": "AWSCustomerProfilesDomain",
+            "value": "AWS::CustomerProfiles::Domain",
+            "description": "ResourceType enum AWS::CustomerProfiles::Domain"
+          },
+          {
+            "name": "AWSCustomerProfilesObjectType",
+            "value": "AWS::CustomerProfiles::ObjectType",
+            "description": "ResourceType enum AWS::CustomerProfiles::ObjectType"
+          },
+          {
+            "name": "AWSDMSCertificate",
+            "value": "AWS::DMS::Certificate",
+            "description": "ResourceType enum AWS::DMS::Certificate"
+          },
+          {
+            "name": "AWSDMSEndpoint",
+            "value": "AWS::DMS::Endpoint",
+            "description": "ResourceType enum AWS::DMS::Endpoint"
+          },
+          {
+            "name": "AWSDMSEventSubscription",
+            "value": "AWS::DMS::EventSubscription",
+            "description": "ResourceType enum AWS::DMS::EventSubscription"
+          },
+          {
+            "name": "AWSDMSReplicationSubnetGroup",
+            "value": "AWS::DMS::ReplicationSubnetGroup",
+            "description": "ResourceType enum AWS::DMS::ReplicationSubnetGroup"
+          },
+          {
+            "name": "AWSDataSyncLocationEFS",
+            "value": "AWS::DataSync::LocationEFS",
+            "description": "ResourceType enum AWS::DataSync::LocationEFS"
+          },
+          {
+            "name": "AWSDataSyncLocationFSxLustre",
+            "value": "AWS::DataSync::LocationFSxLustre",
+            "description": "ResourceType enum AWS::DataSync::LocationFSxLustre"
+          },
+          {
+            "name": "AWSDataSyncLocationFSxWindows",
+            "value": "AWS::DataSync::LocationFSxWindows",
+            "description": "ResourceType enum AWS::DataSync::LocationFSxWindows"
+          },
+          {
+            "name": "AWSDataSyncLocationHDFS",
+            "value": "AWS::DataSync::LocationHDFS",
+            "description": "ResourceType enum AWS::DataSync::LocationHDFS"
+          },
+          {
+            "name": "AWSDataSyncLocationNFS",
+            "value": "AWS::DataSync::LocationNFS",
+            "description": "ResourceType enum AWS::DataSync::LocationNFS"
+          },
+          {
+            "name": "AWSDataSyncLocationObjectStorage",
+            "value": "AWS::DataSync::LocationObjectStorage",
+            "description": "ResourceType enum AWS::DataSync::LocationObjectStorage"
+          },
+          {
+            "name": "AWSDataSyncLocationS3",
+            "value": "AWS::DataSync::LocationS3",
+            "description": "ResourceType enum AWS::DataSync::LocationS3"
+          },
+          {
+            "name": "AWSDataSyncLocationSMB",
+            "value": "AWS::DataSync::LocationSMB",
+            "description": "ResourceType enum AWS::DataSync::LocationSMB"
+          },
+          {
+            "name": "AWSDataSyncTask",
+            "value": "AWS::DataSync::Task",
+            "description": "ResourceType enum AWS::DataSync::Task"
+          },
+          {
+            "name": "AWSDetectiveGraph",
+            "value": "AWS::Detective::Graph",
+            "description": "ResourceType enum AWS::Detective::Graph"
+          },
+          {
+            "name": "AWSDeviceFarmInstanceProfile",
+            "value": "AWS::DeviceFarm::InstanceProfile",
+            "description": "ResourceType enum AWS::DeviceFarm::InstanceProfile"
+          },
+          {
+            "name": "AWSDeviceFarmProject",
+            "value": "AWS::DeviceFarm::Project",
+            "description": "ResourceType enum AWS::DeviceFarm::Project"
+          },
+          {
+            "name": "AWSDeviceFarmTestGridProject",
+            "value": "AWS::DeviceFarm::TestGridProject",
+            "description": "ResourceType enum AWS::DeviceFarm::TestGridProject"
+          },
+          {
+            "name": "AWSDynamoDBTable",
+            "value": "AWS::DynamoDB::Table",
+            "description": "ResourceType enum AWS::DynamoDB::Table"
+          },
+          {
+            "name": "AWSEC2CapacityReservation",
+            "value": "AWS::EC2::CapacityReservation",
+            "description": "ResourceType enum AWS::EC2::CapacityReservation"
+          },
+          {
+            "name": "AWSEC2CarrierGateway",
+            "value": "AWS::EC2::CarrierGateway",
+            "description": "ResourceType enum AWS::EC2::CarrierGateway"
+          },
+          {
+            "name": "AWSEC2ClientVpnEndpoint",
+            "value": "AWS::EC2::ClientVpnEndpoint",
+            "description": "ResourceType enum AWS::EC2::ClientVpnEndpoint"
+          },
+          {
+            "name": "AWSEC2CustomerGateway",
+            "value": "AWS::EC2::CustomerGateway",
+            "description": "ResourceType enum AWS::EC2::CustomerGateway"
+          },
+          {
+            "name": "AWSEC2DHCPOptions",
+            "value": "AWS::EC2::DHCPOptions",
+            "description": "ResourceType enum AWS::EC2::DHCPOptions"
+          },
+          {
+            "name": "AWSEC2EC2Fleet",
+            "value": "AWS::EC2::EC2Fleet",
+            "description": "ResourceType enum AWS::EC2::EC2Fleet"
+          },
+          {
+            "name": "AWSEC2EIP",
+            "value": "AWS::EC2::EIP",
+            "description": "ResourceType enum AWS::EC2::EIP"
+          },
+          {
+            "name": "AWSEC2EgressOnlyInternetGateway",
+            "value": "AWS::EC2::EgressOnlyInternetGateway",
+            "description": "ResourceType enum AWS::EC2::EgressOnlyInternetGateway"
+          },
+          {
+            "name": "AWSEC2FlowLog",
+            "value": "AWS::EC2::FlowLog",
+            "description": "ResourceType enum AWS::EC2::FlowLog"
+          },
+          {
+            "name": "AWSEC2Host",
+            "value": "AWS::EC2::Host",
+            "description": "ResourceType enum AWS::EC2::Host"
+          },
+          {
+            "name": "AWSEC2IPAM",
+            "value": "AWS::EC2::IPAM",
+            "description": "ResourceType enum AWS::EC2::IPAM"
+          },
+          {
+            "name": "AWSEC2IPAMPool",
+            "value": "AWS::EC2::IPAMPool",
+            "description": "ResourceType enum AWS::EC2::IPAMPool"
+          },
+          {
+            "name": "AWSEC2IPAMScope",
+            "value": "AWS::EC2::IPAMScope",
+            "description": "ResourceType enum AWS::EC2::IPAMScope"
+          },
+          {
+            "name": "AWSEC2Instance",
+            "value": "AWS::EC2::Instance",
+            "description": "ResourceType enum AWS::EC2::Instance"
+          },
+          {
+            "name": "AWSEC2InternetGateway",
+            "value": "AWS::EC2::InternetGateway",
+            "description": "ResourceType enum AWS::EC2::InternetGateway"
+          },
+          {
+            "name": "AWSEC2LaunchTemplate",
+            "value": "AWS::EC2::LaunchTemplate",
+            "description": "ResourceType enum AWS::EC2::LaunchTemplate"
+          },
+          {
+            "name": "AWSEC2NatGateway",
+            "value": "AWS::EC2::NatGateway",
+            "description": "ResourceType enum AWS::EC2::NatGateway"
+          },
+          {
+            "name": "AWSEC2NetworkAcl",
+            "value": "AWS::EC2::NetworkAcl",
+            "description": "ResourceType enum AWS::EC2::NetworkAcl"
+          },
+          {
+            "name": "AWSEC2NetworkInsightsAccessScope",
+            "value": "AWS::EC2::NetworkInsightsAccessScope",
+            "description": "ResourceType enum AWS::EC2::NetworkInsightsAccessScope"
+          },
+          {
+            "name": "AWSEC2NetworkInsightsAccessScopeAnalysis",
+            "value": "AWS::EC2::NetworkInsightsAccessScopeAnalysis",
+            "description": "ResourceType enum AWS::EC2::NetworkInsightsAccessScopeAnalysis"
+          },
+          {
+            "name": "AWSEC2NetworkInsightsAnalysis",
+            "value": "AWS::EC2::NetworkInsightsAnalysis",
+            "description": "ResourceType enum AWS::EC2::NetworkInsightsAnalysis"
+          },
+          {
+            "name": "AWSEC2NetworkInsightsPath",
+            "value": "AWS::EC2::NetworkInsightsPath",
+            "description": "ResourceType enum AWS::EC2::NetworkInsightsPath"
+          },
+          {
+            "name": "AWSEC2NetworkInterface",
+            "value": "AWS::EC2::NetworkInterface",
+            "description": "ResourceType enum AWS::EC2::NetworkInterface"
+          },
+          {
+            "name": "AWSEC2PrefixList",
+            "value": "AWS::EC2::PrefixList",
+            "description": "ResourceType enum AWS::EC2::PrefixList"
+          },
+          {
+            "name": "AWSEC2RegisteredHAInstance",
+            "value": "AWS::EC2::RegisteredHAInstance",
+            "description": "ResourceType enum AWS::EC2::RegisteredHAInstance"
+          },
+          {
+            "name": "AWSEC2RouteTable",
+            "value": "AWS::EC2::RouteTable",
+            "description": "ResourceType enum AWS::EC2::RouteTable"
+          },
+          {
+            "name": "AWSEC2SecurityGroup",
+            "value": "AWS::EC2::SecurityGroup",
+            "description": "ResourceType enum AWS::EC2::SecurityGroup"
+          },
+          {
+            "name": "AWSEC2SpotFleet",
+            "value": "AWS::EC2::SpotFleet",
+            "description": "ResourceType enum AWS::EC2::SpotFleet"
+          },
+          {
+            "name": "AWSEC2Subnet",
+            "value": "AWS::EC2::Subnet",
+            "description": "ResourceType enum AWS::EC2::Subnet"
+          },
+          {
+            "name": "AWSEC2SubnetRouteTableAssociation",
+            "value": "AWS::EC2::SubnetRouteTableAssociation",
+            "description": "ResourceType enum AWS::EC2::SubnetRouteTableAssociation"
+          },
+          {
+            "name": "AWSEC2TrafficMirrorFilter",
+            "value": "AWS::EC2::TrafficMirrorFilter",
+            "description": "ResourceType enum AWS::EC2::TrafficMirrorFilter"
+          },
+          {
+            "name": "AWSEC2TrafficMirrorSession",
+            "value": "AWS::EC2::TrafficMirrorSession",
+            "description": "ResourceType enum AWS::EC2::TrafficMirrorSession"
+          },
+          {
+            "name": "AWSEC2TrafficMirrorTarget",
+            "value": "AWS::EC2::TrafficMirrorTarget",
+            "description": "ResourceType enum AWS::EC2::TrafficMirrorTarget"
+          },
+          {
+            "name": "AWSEC2TransitGateway",
+            "value": "AWS::EC2::TransitGateway",
+            "description": "ResourceType enum AWS::EC2::TransitGateway"
+          },
+          {
+            "name": "AWSEC2TransitGatewayAttachment",
+            "value": "AWS::EC2::TransitGatewayAttachment",
+            "description": "ResourceType enum AWS::EC2::TransitGatewayAttachment"
+          },
+          {
+            "name": "AWSEC2TransitGatewayConnect",
+            "value": "AWS::EC2::TransitGatewayConnect",
+            "description": "ResourceType enum AWS::EC2::TransitGatewayConnect"
+          },
+          {
+            "name": "AWSEC2TransitGatewayMulticastDomain",
+            "value": "AWS::EC2::TransitGatewayMulticastDomain",
+            "description": "ResourceType enum AWS::EC2::TransitGatewayMulticastDomain"
+          },
+          {
+            "name": "AWSEC2TransitGatewayRouteTable",
+            "value": "AWS::EC2::TransitGatewayRouteTable",
+            "description": "ResourceType enum AWS::EC2::TransitGatewayRouteTable"
+          },
+          {
+            "name": "AWSEC2VPC",
+            "value": "AWS::EC2::VPC",
+            "description": "ResourceType enum AWS::EC2::VPC"
+          },
+          {
+            "name": "AWSEC2VPCEndpoint",
+            "value": "AWS::EC2::VPCEndpoint",
+            "description": "ResourceType enum AWS::EC2::VPCEndpoint"
+          },
+          {
+            "name": "AWSEC2VPCEndpointService",
+            "value": "AWS::EC2::VPCEndpointService",
+            "description": "ResourceType enum AWS::EC2::VPCEndpointService"
+          },
+          {
+            "name": "AWSEC2VPCPeeringConnection",
+            "value": "AWS::EC2::VPCPeeringConnection",
+            "description": "ResourceType enum AWS::EC2::VPCPeeringConnection"
+          },
+          {
+            "name": "AWSEC2VPNConnection",
+            "value": "AWS::EC2::VPNConnection",
+            "description": "ResourceType enum AWS::EC2::VPNConnection"
+          },
+          {
+            "name": "AWSEC2VPNGateway",
+            "value": "AWS::EC2::VPNGateway",
+            "description": "ResourceType enum AWS::EC2::VPNGateway"
+          },
+          {
+            "name": "AWSEC2Volume",
+            "value": "AWS::EC2::Volume",
+            "description": "ResourceType enum AWS::EC2::Volume"
+          },
+          {
+            "name": "AWSECRPublicRepository",
+            "value": "AWS::ECR::PublicRepository",
+            "description": "ResourceType enum AWS::ECR::PublicRepository"
+          },
+          {
+            "name": "AWSECRPullThroughCacheRule",
+            "value": "AWS::ECR::PullThroughCacheRule",
+            "description": "ResourceType enum AWS::ECR::PullThroughCacheRule"
+          },
+          {
+            "name": "AWSECRRegistryPolicy",
+            "value": "AWS::ECR::RegistryPolicy",
+            "description": "ResourceType enum AWS::ECR::RegistryPolicy"
+          },
+          {
+            "name": "AWSECRRepository",
+            "value": "AWS::ECR::Repository",
+            "description": "ResourceType enum AWS::ECR::Repository"
+          },
+          {
+            "name": "AWSECSCapacityProvider",
+            "value": "AWS::ECS::CapacityProvider",
+            "description": "ResourceType enum AWS::ECS::CapacityProvider"
+          },
+          {
+            "name": "AWSECSCluster",
+            "value": "AWS::ECS::Cluster",
+            "description": "ResourceType enum AWS::ECS::Cluster"
+          },
+          {
+            "name": "AWSECSService",
+            "value": "AWS::ECS::Service",
+            "description": "ResourceType enum AWS::ECS::Service"
+          },
+          {
+            "name": "AWSECSTaskDefinition",
+            "value": "AWS::ECS::TaskDefinition",
+            "description": "ResourceType enum AWS::ECS::TaskDefinition"
+          },
+          {
+            "name": "AWSECSTaskSet",
+            "value": "AWS::ECS::TaskSet",
+            "description": "ResourceType enum AWS::ECS::TaskSet"
+          },
+          {
+            "name": "AWSEFSAccessPoint",
+            "value": "AWS::EFS::AccessPoint",
+            "description": "ResourceType enum AWS::EFS::AccessPoint"
+          },
+          {
+            "name": "AWSEFSFileSystem",
+            "value": "AWS::EFS::FileSystem",
+            "description": "ResourceType enum AWS::EFS::FileSystem"
+          },
+          {
+            "name": "AWSEKSAddon",
+            "value": "AWS::EKS::Addon",
+            "description": "ResourceType enum AWS::EKS::Addon"
+          },
+          {
+            "name": "AWSEKSCluster",
+            "value": "AWS::EKS::Cluster",
+            "description": "ResourceType enum AWS::EKS::Cluster"
+          },
+          {
+            "name": "AWSEKSFargateProfile",
+            "value": "AWS::EKS::FargateProfile",
+            "description": "ResourceType enum AWS::EKS::FargateProfile"
+          },
+          {
+            "name": "AWSEKSIdentityProviderConfig",
+            "value": "AWS::EKS::IdentityProviderConfig",
+            "description": "ResourceType enum AWS::EKS::IdentityProviderConfig"
+          },
+          {
+            "name": "AWSEMRSecurityConfiguration",
+            "value": "AWS::EMR::SecurityConfiguration",
+            "description": "ResourceType enum AWS::EMR::SecurityConfiguration"
+          },
+          {
+            "name": "AWSElasticBeanstalkApplication",
+            "value": "AWS::ElasticBeanstalk::Application",
+            "description": "ResourceType enum AWS::ElasticBeanstalk::Application"
+          },
+          {
+            "name": "AWSElasticBeanstalkApplicationVersion",
+            "value": "AWS::ElasticBeanstalk::ApplicationVersion",
+            "description": "ResourceType enum AWS::ElasticBeanstalk::ApplicationVersion"
+          },
+          {
+            "name": "AWSElasticBeanstalkEnvironment",
+            "value": "AWS::ElasticBeanstalk::Environment",
+            "description": "ResourceType enum AWS::ElasticBeanstalk::Environment"
+          },
+          {
+            "name": "AWSElasticLoadBalancingLoadBalancer",
+            "value": "AWS::ElasticLoadBalancing::LoadBalancer",
+            "description": "ResourceType enum AWS::ElasticLoadBalancing::LoadBalancer"
+          },
+          {
+            "name": "AWSElasticLoadBalancingV2Listener",
+            "value": "AWS::ElasticLoadBalancingV2::Listener",
+            "description": "ResourceType enum AWS::ElasticLoadBalancingV2::Listener"
+          },
+          {
+            "name": "AWSElasticLoadBalancingV2LoadBalancer",
+            "value": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+            "description": "ResourceType enum AWS::ElasticLoadBalancingV2::LoadBalancer"
+          },
+          {
+            "name": "AWSElasticsearchDomain",
+            "value": "AWS::Elasticsearch::Domain",
+            "description": "ResourceType enum AWS::Elasticsearch::Domain"
+          },
+          {
+            "name": "AWSEventSchemasDiscoverer",
+            "value": "AWS::EventSchemas::Discoverer",
+            "description": "ResourceType enum AWS::EventSchemas::Discoverer"
+          },
+          {
+            "name": "AWSEventSchemasRegistry",
+            "value": "AWS::EventSchemas::Registry",
+            "description": "ResourceType enum AWS::EventSchemas::Registry"
+          },
+          {
+            "name": "AWSEventSchemasRegistryPolicy",
+            "value": "AWS::EventSchemas::RegistryPolicy",
+            "description": "ResourceType enum AWS::EventSchemas::RegistryPolicy"
+          },
+          {
+            "name": "AWSEventSchemasSchema",
+            "value": "AWS::EventSchemas::Schema",
+            "description": "ResourceType enum AWS::EventSchemas::Schema"
+          },
+          {
+            "name": "AWSEventsApiDestination",
+            "value": "AWS::Events::ApiDestination",
+            "description": "ResourceType enum AWS::Events::ApiDestination"
+          },
+          {
+            "name": "AWSEventsArchive",
+            "value": "AWS::Events::Archive",
+            "description": "ResourceType enum AWS::Events::Archive"
+          },
+          {
+            "name": "AWSEventsConnection",
+            "value": "AWS::Events::Connection",
+            "description": "ResourceType enum AWS::Events::Connection"
+          },
+          {
+            "name": "AWSEventsEndpoint",
+            "value": "AWS::Events::Endpoint",
+            "description": "ResourceType enum AWS::Events::Endpoint"
+          },
+          {
+            "name": "AWSEventsEventBus",
+            "value": "AWS::Events::EventBus",
+            "description": "ResourceType enum AWS::Events::EventBus"
+          },
+          {
+            "name": "AWSEventsRule",
+            "value": "AWS::Events::Rule",
+            "description": "ResourceType enum AWS::Events::Rule"
+          },
+          {
+            "name": "AWSEvidentlyLaunch",
+            "value": "AWS::Evidently::Launch",
+            "description": "ResourceType enum AWS::Evidently::Launch"
+          },
+          {
+            "name": "AWSEvidentlyProject",
+            "value": "AWS::Evidently::Project",
+            "description": "ResourceType enum AWS::Evidently::Project"
+          },
+          {
+            "name": "AWSFISExperimentTemplate",
+            "value": "AWS::FIS::ExperimentTemplate",
+            "description": "ResourceType enum AWS::FIS::ExperimentTemplate"
+          },
+          {
+            "name": "AWSForecastDataset",
+            "value": "AWS::Forecast::Dataset",
+            "description": "ResourceType enum AWS::Forecast::Dataset"
+          },
+          {
+            "name": "AWSForecastDatasetGroup",
+            "value": "AWS::Forecast::DatasetGroup",
+            "description": "ResourceType enum AWS::Forecast::DatasetGroup"
+          },
+          {
+            "name": "AWSFraudDetectorEntityType",
+            "value": "AWS::FraudDetector::EntityType",
+            "description": "ResourceType enum AWS::FraudDetector::EntityType"
+          },
+          {
+            "name": "AWSFraudDetectorLabel",
+            "value": "AWS::FraudDetector::Label",
+            "description": "ResourceType enum AWS::FraudDetector::Label"
+          },
+          {
+            "name": "AWSFraudDetectorOutcome",
+            "value": "AWS::FraudDetector::Outcome",
+            "description": "ResourceType enum AWS::FraudDetector::Outcome"
+          },
+          {
+            "name": "AWSFraudDetectorVariable",
+            "value": "AWS::FraudDetector::Variable",
+            "description": "ResourceType enum AWS::FraudDetector::Variable"
+          },
+          {
+            "name": "AWSGlobalAcceleratorAccelerator",
+            "value": "AWS::GlobalAccelerator::Accelerator",
+            "description": "ResourceType enum AWS::GlobalAccelerator::Accelerator"
+          },
+          {
+            "name": "AWSGlobalAcceleratorEndpointGroup",
+            "value": "AWS::GlobalAccelerator::EndpointGroup",
+            "description": "ResourceType enum AWS::GlobalAccelerator::EndpointGroup"
+          },
+          {
+            "name": "AWSGlobalAcceleratorListener",
+            "value": "AWS::GlobalAccelerator::Listener",
+            "description": "ResourceType enum AWS::GlobalAccelerator::Listener"
+          },
+          {
+            "name": "AWSGlueClassifier",
+            "value": "AWS::Glue::Classifier",
+            "description": "ResourceType enum AWS::Glue::Classifier"
+          },
+          {
+            "name": "AWSGlueJob",
+            "value": "AWS::Glue::Job",
+            "description": "ResourceType enum AWS::Glue::Job"
+          },
+          {
+            "name": "AWSGlueMLTransform",
+            "value": "AWS::Glue::MLTransform",
+            "description": "ResourceType enum AWS::Glue::MLTransform"
+          },
+          {
+            "name": "AWSGrafanaWorkspace",
+            "value": "AWS::Grafana::Workspace",
+            "description": "ResourceType enum AWS::Grafana::Workspace"
+          },
+          {
+            "name": "AWSGreengrassV2ComponentVersion",
+            "value": "AWS::GreengrassV2::ComponentVersion",
+            "description": "ResourceType enum AWS::GreengrassV2::ComponentVersion"
+          },
+          {
+            "name": "AWSGroundStationConfig",
+            "value": "AWS::GroundStation::Config",
+            "description": "ResourceType enum AWS::GroundStation::Config"
+          },
+          {
+            "name": "AWSGroundStationDataflowEndpointGroup",
+            "value": "AWS::GroundStation::DataflowEndpointGroup",
+            "description": "ResourceType enum AWS::GroundStation::DataflowEndpointGroup"
+          },
+          {
+            "name": "AWSGroundStationMissionProfile",
+            "value": "AWS::GroundStation::MissionProfile",
+            "description": "ResourceType enum AWS::GroundStation::MissionProfile"
+          },
+          {
+            "name": "AWSGuardDutyDetector",
+            "value": "AWS::GuardDuty::Detector",
+            "description": "ResourceType enum AWS::GuardDuty::Detector"
+          },
+          {
+            "name": "AWSGuardDutyFilter",
+            "value": "AWS::GuardDuty::Filter",
+            "description": "ResourceType enum AWS::GuardDuty::Filter"
+          },
+          {
+            "name": "AWSGuardDutyIPSet",
+            "value": "AWS::GuardDuty::IPSet",
+            "description": "ResourceType enum AWS::GuardDuty::IPSet"
+          },
+          {
+            "name": "AWSGuardDutyThreatIntelSet",
+            "value": "AWS::GuardDuty::ThreatIntelSet",
+            "description": "ResourceType enum AWS::GuardDuty::ThreatIntelSet"
+          },
+          {
+            "name": "AWSHealthLakeFHIRDatastore",
+            "value": "AWS::HealthLake::FHIRDatastore",
+            "description": "ResourceType enum AWS::HealthLake::FHIRDatastore"
+          },
+          {
+            "name": "AWSIAMGroup",
+            "value": "AWS::IAM::Group",
+            "description": "ResourceType enum AWS::IAM::Group"
+          },
+          {
+            "name": "AWSIAMInstanceProfile",
+            "value": "AWS::IAM::InstanceProfile",
+            "description": "ResourceType enum AWS::IAM::InstanceProfile"
+          },
+          {
+            "name": "AWSIAMPolicy",
+            "value": "AWS::IAM::Policy",
+            "description": "ResourceType enum AWS::IAM::Policy"
+          },
+          {
+            "name": "AWSIAMRole",
+            "value": "AWS::IAM::Role",
+            "description": "ResourceType enum AWS::IAM::Role"
+          },
+          {
+            "name": "AWSIAMSAMLProvider",
+            "value": "AWS::IAM::SAMLProvider",
+            "description": "ResourceType enum AWS::IAM::SAMLProvider"
+          },
+          {
+            "name": "AWSIAMServerCertificate",
+            "value": "AWS::IAM::ServerCertificate",
+            "description": "ResourceType enum AWS::IAM::ServerCertificate"
+          },
+          {
+            "name": "AWSIAMUser",
+            "value": "AWS::IAM::User",
+            "description": "ResourceType enum AWS::IAM::User"
+          },
+          {
+            "name": "AWSIVSChannel",
+            "value": "AWS::IVS::Channel",
+            "description": "ResourceType enum AWS::IVS::Channel"
+          },
+          {
+            "name": "AWSIVSPlaybackKeyPair",
+            "value": "AWS::IVS::PlaybackKeyPair",
+            "description": "ResourceType enum AWS::IVS::PlaybackKeyPair"
+          },
+          {
+            "name": "AWSIVSRecordingConfiguration",
+            "value": "AWS::IVS::RecordingConfiguration",
+            "description": "ResourceType enum AWS::IVS::RecordingConfiguration"
+          },
+          {
+            "name": "AWSImageBuilderContainerRecipe",
+            "value": "AWS::ImageBuilder::ContainerRecipe",
+            "description": "ResourceType enum AWS::ImageBuilder::ContainerRecipe"
+          },
+          {
+            "name": "AWSImageBuilderDistributionConfiguration",
+            "value": "AWS::ImageBuilder::DistributionConfiguration",
+            "description": "ResourceType enum AWS::ImageBuilder::DistributionConfiguration"
+          },
+          {
+            "name": "AWSImageBuilderImagePipeline",
+            "value": "AWS::ImageBuilder::ImagePipeline",
+            "description": "ResourceType enum AWS::ImageBuilder::ImagePipeline"
+          },
+          {
+            "name": "AWSImageBuilderImageRecipe",
+            "value": "AWS::ImageBuilder::ImageRecipe",
+            "description": "ResourceType enum AWS::ImageBuilder::ImageRecipe"
+          },
+          {
+            "name": "AWSImageBuilderInfrastructureConfiguration",
+            "value": "AWS::ImageBuilder::InfrastructureConfiguration",
+            "description": "ResourceType enum AWS::ImageBuilder::InfrastructureConfiguration"
+          },
+          {
+            "name": "AWSInspectorV2Filter",
+            "value": "AWS::InspectorV2::Filter",
+            "description": "ResourceType enum AWS::InspectorV2::Filter"
+          },
+          {
+            "name": "AWSIoTAccountAuditConfiguration",
+            "value": "AWS::IoT::AccountAuditConfiguration",
+            "description": "ResourceType enum AWS::IoT::AccountAuditConfiguration"
+          },
+          {
+            "name": "AWSIoTAuthorizer",
+            "value": "AWS::IoT::Authorizer",
+            "description": "ResourceType enum AWS::IoT::Authorizer"
+          },
+          {
+            "name": "AWSIoTCACertificate",
+            "value": "AWS::IoT::CACertificate",
+            "description": "ResourceType enum AWS::IoT::CACertificate"
+          },
+          {
+            "name": "AWSIoTCustomMetric",
+            "value": "AWS::IoT::CustomMetric",
+            "description": "ResourceType enum AWS::IoT::CustomMetric"
+          },
+          {
+            "name": "AWSIoTDimension",
+            "value": "AWS::IoT::Dimension",
+            "description": "ResourceType enum AWS::IoT::Dimension"
+          },
+          {
+            "name": "AWSIoTFleetMetric",
+            "value": "AWS::IoT::FleetMetric",
+            "description": "ResourceType enum AWS::IoT::FleetMetric"
+          },
+          {
+            "name": "AWSIoTJobTemplate",
+            "value": "AWS::IoT::JobTemplate",
+            "description": "ResourceType enum AWS::IoT::JobTemplate"
+          },
+          {
+            "name": "AWSIoTMitigationAction",
+            "value": "AWS::IoT::MitigationAction",
+            "description": "ResourceType enum AWS::IoT::MitigationAction"
+          },
+          {
+            "name": "AWSIoTPolicy",
+            "value": "AWS::IoT::Policy",
+            "description": "ResourceType enum AWS::IoT::Policy"
+          },
+          {
+            "name": "AWSIoTProvisioningTemplate",
+            "value": "AWS::IoT::ProvisioningTemplate",
+            "description": "ResourceType enum AWS::IoT::ProvisioningTemplate"
+          },
+          {
+            "name": "AWSIoTRoleAlias",
+            "value": "AWS::IoT::RoleAlias",
+            "description": "ResourceType enum AWS::IoT::RoleAlias"
+          },
+          {
+            "name": "AWSIoTScheduledAudit",
+            "value": "AWS::IoT::ScheduledAudit",
+            "description": "ResourceType enum AWS::IoT::ScheduledAudit"
+          },
+          {
+            "name": "AWSIoTSecurityProfile",
+            "value": "AWS::IoT::SecurityProfile",
+            "description": "ResourceType enum AWS::IoT::SecurityProfile"
+          },
+          {
+            "name": "AWSIoTAnalyticsChannel",
+            "value": "AWS::IoTAnalytics::Channel",
+            "description": "ResourceType enum AWS::IoTAnalytics::Channel"
+          },
+          {
+            "name": "AWSIoTAnalyticsDataset",
+            "value": "AWS::IoTAnalytics::Dataset",
+            "description": "ResourceType enum AWS::IoTAnalytics::Dataset"
+          },
+          {
+            "name": "AWSIoTAnalyticsDatastore",
+            "value": "AWS::IoTAnalytics::Datastore",
+            "description": "ResourceType enum AWS::IoTAnalytics::Datastore"
+          },
+          {
+            "name": "AWSIoTAnalyticsPipeline",
+            "value": "AWS::IoTAnalytics::Pipeline",
+            "description": "ResourceType enum AWS::IoTAnalytics::Pipeline"
+          },
+          {
+            "name": "AWSIoTEventsAlarmModel",
+            "value": "AWS::IoTEvents::AlarmModel",
+            "description": "ResourceType enum AWS::IoTEvents::AlarmModel"
+          },
+          {
+            "name": "AWSIoTEventsDetectorModel",
+            "value": "AWS::IoTEvents::DetectorModel",
+            "description": "ResourceType enum AWS::IoTEvents::DetectorModel"
+          },
+          {
+            "name": "AWSIoTEventsInput",
+            "value": "AWS::IoTEvents::Input",
+            "description": "ResourceType enum AWS::IoTEvents::Input"
+          },
+          {
+            "name": "AWSIoTSiteWiseAssetModel",
+            "value": "AWS::IoTSiteWise::AssetModel",
+            "description": "ResourceType enum AWS::IoTSiteWise::AssetModel"
+          },
+          {
+            "name": "AWSIoTSiteWiseDashboard",
+            "value": "AWS::IoTSiteWise::Dashboard",
+            "description": "ResourceType enum AWS::IoTSiteWise::Dashboard"
+          },
+          {
+            "name": "AWSIoTSiteWiseGateway",
+            "value": "AWS::IoTSiteWise::Gateway",
+            "description": "ResourceType enum AWS::IoTSiteWise::Gateway"
+          },
+          {
+            "name": "AWSIoTSiteWisePortal",
+            "value": "AWS::IoTSiteWise::Portal",
+            "description": "ResourceType enum AWS::IoTSiteWise::Portal"
+          },
+          {
+            "name": "AWSIoTSiteWiseProject",
+            "value": "AWS::IoTSiteWise::Project",
+            "description": "ResourceType enum AWS::IoTSiteWise::Project"
+          },
+          {
+            "name": "AWSIoTTwinMakerComponentType",
+            "value": "AWS::IoTTwinMaker::ComponentType",
+            "description": "ResourceType enum AWS::IoTTwinMaker::ComponentType"
+          },
+          {
+            "name": "AWSIoTTwinMakerEntity",
+            "value": "AWS::IoTTwinMaker::Entity",
+            "description": "ResourceType enum AWS::IoTTwinMaker::Entity"
+          },
+          {
+            "name": "AWSIoTTwinMakerScene",
+            "value": "AWS::IoTTwinMaker::Scene",
+            "description": "ResourceType enum AWS::IoTTwinMaker::Scene"
+          },
+          {
+            "name": "AWSIoTTwinMakerSyncJob",
+            "value": "AWS::IoTTwinMaker::SyncJob",
+            "description": "ResourceType enum AWS::IoTTwinMaker::SyncJob"
+          },
+          {
+            "name": "AWSIoTTwinMakerWorkspace",
+            "value": "AWS::IoTTwinMaker::Workspace",
+            "description": "ResourceType enum AWS::IoTTwinMaker::Workspace"
+          },
+          {
+            "name": "AWSIoTWirelessFuotaTask",
+            "value": "AWS::IoTWireless::FuotaTask",
+            "description": "ResourceType enum AWS::IoTWireless::FuotaTask"
+          },
+          {
+            "name": "AWSIoTWirelessMulticastGroup",
+            "value": "AWS::IoTWireless::MulticastGroup",
+            "description": "ResourceType enum AWS::IoTWireless::MulticastGroup"
+          },
+          {
+            "name": "AWSIoTWirelessServiceProfile",
+            "value": "AWS::IoTWireless::ServiceProfile",
+            "description": "ResourceType enum AWS::IoTWireless::ServiceProfile"
+          },
+          {
+            "name": "AWSKMSAlias",
+            "value": "AWS::KMS::Alias",
+            "description": "ResourceType enum AWS::KMS::Alias"
+          },
+          {
+            "name": "AWSKMSKey",
+            "value": "AWS::KMS::Key",
+            "description": "ResourceType enum AWS::KMS::Key"
+          },
+          {
+            "name": "AWSKafkaConnectConnector",
+            "value": "AWS::KafkaConnect::Connector",
+            "description": "ResourceType enum AWS::KafkaConnect::Connector"
+          },
+          {
+            "name": "AWSKendraIndex",
+            "value": "AWS::Kendra::Index",
+            "description": "ResourceType enum AWS::Kendra::Index"
+          },
+          {
+            "name": "AWSKinesisStream",
+            "value": "AWS::Kinesis::Stream",
+            "description": "ResourceType enum AWS::Kinesis::Stream"
+          },
+          {
+            "name": "AWSKinesisStreamConsumer",
+            "value": "AWS::Kinesis::StreamConsumer",
+            "description": "ResourceType enum AWS::Kinesis::StreamConsumer"
+          },
+          {
+            "name": "AWSKinesisAnalyticsV2Application",
+            "value": "AWS::KinesisAnalyticsV2::Application",
+            "description": "ResourceType enum AWS::KinesisAnalyticsV2::Application"
+          },
+          {
+            "name": "AWSKinesisFirehoseDeliveryStream",
+            "value": "AWS::KinesisFirehose::DeliveryStream",
+            "description": "ResourceType enum AWS::KinesisFirehose::DeliveryStream"
+          },
+          {
+            "name": "AWSKinesisVideoSignalingChannel",
+            "value": "AWS::KinesisVideo::SignalingChannel",
+            "description": "ResourceType enum AWS::KinesisVideo::SignalingChannel"
+          },
+          {
+            "name": "AWSKinesisVideoStream",
+            "value": "AWS::KinesisVideo::Stream",
+            "description": "ResourceType enum AWS::KinesisVideo::Stream"
+          },
+          {
+            "name": "AWSLambdaCodeSigningConfig",
+            "value": "AWS::Lambda::CodeSigningConfig",
+            "description": "ResourceType enum AWS::Lambda::CodeSigningConfig"
+          },
+          {
+            "name": "AWSLambdaFunction",
+            "value": "AWS::Lambda::Function",
+            "description": "ResourceType enum AWS::Lambda::Function"
+          },
+          {
+            "name": "AWSLexBot",
+            "value": "AWS::Lex::Bot",
+            "description": "ResourceType enum AWS::Lex::Bot"
+          },
+          {
+            "name": "AWSLexBotAlias",
+            "value": "AWS::Lex::BotAlias",
+            "description": "ResourceType enum AWS::Lex::BotAlias"
+          },
+          {
+            "name": "AWSLightsailBucket",
+            "value": "AWS::Lightsail::Bucket",
+            "description": "ResourceType enum AWS::Lightsail::Bucket"
+          },
+          {
+            "name": "AWSLightsailCertificate",
+            "value": "AWS::Lightsail::Certificate",
+            "description": "ResourceType enum AWS::Lightsail::Certificate"
+          },
+          {
+            "name": "AWSLightsailDisk",
+            "value": "AWS::Lightsail::Disk",
+            "description": "ResourceType enum AWS::Lightsail::Disk"
+          },
+          {
+            "name": "AWSLightsailStaticIp",
+            "value": "AWS::Lightsail::StaticIp",
+            "description": "ResourceType enum AWS::Lightsail::StaticIp"
+          },
+          {
+            "name": "AWSLogsDestination",
+            "value": "AWS::Logs::Destination",
+            "description": "ResourceType enum AWS::Logs::Destination"
+          },
+          {
+            "name": "AWSLookoutMetricsAlert",
+            "value": "AWS::LookoutMetrics::Alert",
+            "description": "ResourceType enum AWS::LookoutMetrics::Alert"
+          },
+          {
+            "name": "AWSLookoutVisionProject",
+            "value": "AWS::LookoutVision::Project",
+            "description": "ResourceType enum AWS::LookoutVision::Project"
+          },
+          {
+            "name": "AWSM2Environment",
+            "value": "AWS::M2::Environment",
+            "description": "ResourceType enum AWS::M2::Environment"
+          },
+          {
+            "name": "AWSMSKBatchScramSecret",
+            "value": "AWS::MSK::BatchScramSecret",
+            "description": "ResourceType enum AWS::MSK::BatchScramSecret"
+          },
+          {
+            "name": "AWSMSKCluster",
+            "value": "AWS::MSK::Cluster",
+            "description": "ResourceType enum AWS::MSK::Cluster"
+          },
+          {
+            "name": "AWSMSKConfiguration",
+            "value": "AWS::MSK::Configuration",
+            "description": "ResourceType enum AWS::MSK::Configuration"
+          },
+          {
+            "name": "AWSMediaConnectFlowEntitlement",
+            "value": "AWS::MediaConnect::FlowEntitlement",
+            "description": "ResourceType enum AWS::MediaConnect::FlowEntitlement"
+          },
+          {
+            "name": "AWSMediaConnectFlowSource",
+            "value": "AWS::MediaConnect::FlowSource",
+            "description": "ResourceType enum AWS::MediaConnect::FlowSource"
+          },
+          {
+            "name": "AWSMediaConnectFlowVpcInterface",
+            "value": "AWS::MediaConnect::FlowVpcInterface",
+            "description": "ResourceType enum AWS::MediaConnect::FlowVpcInterface"
+          },
+          {
+            "name": "AWSMediaPackagePackagingConfiguration",
+            "value": "AWS::MediaPackage::PackagingConfiguration",
+            "description": "ResourceType enum AWS::MediaPackage::PackagingConfiguration"
+          },
+          {
+            "name": "AWSMediaPackagePackagingGroup",
+            "value": "AWS::MediaPackage::PackagingGroup",
+            "description": "ResourceType enum AWS::MediaPackage::PackagingGroup"
+          },
+          {
+            "name": "AWSMediaTailorPlaybackConfiguration",
+            "value": "AWS::MediaTailor::PlaybackConfiguration",
+            "description": "ResourceType enum AWS::MediaTailor::PlaybackConfiguration"
+          },
+          {
+            "name": "AWSNetworkFirewallFirewall",
+            "value": "AWS::NetworkFirewall::Firewall",
+            "description": "ResourceType enum AWS::NetworkFirewall::Firewall"
+          },
+          {
+            "name": "AWSNetworkFirewallFirewallPolicy",
+            "value": "AWS::NetworkFirewall::FirewallPolicy",
+            "description": "ResourceType enum AWS::NetworkFirewall::FirewallPolicy"
+          },
+          {
+            "name": "AWSNetworkFirewallRuleGroup",
+            "value": "AWS::NetworkFirewall::RuleGroup",
+            "description": "ResourceType enum AWS::NetworkFirewall::RuleGroup"
+          },
+          {
+            "name": "AWSNetworkManagerConnectPeer",
+            "value": "AWS::NetworkManager::ConnectPeer",
+            "description": "ResourceType enum AWS::NetworkManager::ConnectPeer"
+          },
+          {
+            "name": "AWSNetworkManagerCustomerGatewayAssociation",
+            "value": "AWS::NetworkManager::CustomerGatewayAssociation",
+            "description": "ResourceType enum AWS::NetworkManager::CustomerGatewayAssociation"
+          },
+          {
+            "name": "AWSNetworkManagerDevice",
+            "value": "AWS::NetworkManager::Device",
+            "description": "ResourceType enum AWS::NetworkManager::Device"
+          },
+          {
+            "name": "AWSNetworkManagerGlobalNetwork",
+            "value": "AWS::NetworkManager::GlobalNetwork",
+            "description": "ResourceType enum AWS::NetworkManager::GlobalNetwork"
+          },
+          {
+            "name": "AWSNetworkManagerLink",
+            "value": "AWS::NetworkManager::Link",
+            "description": "ResourceType enum AWS::NetworkManager::Link"
+          },
+          {
+            "name": "AWSNetworkManagerLinkAssociation",
+            "value": "AWS::NetworkManager::LinkAssociation",
+            "description": "ResourceType enum AWS::NetworkManager::LinkAssociation"
+          },
+          {
+            "name": "AWSNetworkManagerSite",
+            "value": "AWS::NetworkManager::Site",
+            "description": "ResourceType enum AWS::NetworkManager::Site"
+          },
+          {
+            "name": "AWSNetworkManagerTransitGatewayRegistration",
+            "value": "AWS::NetworkManager::TransitGatewayRegistration",
+            "description": "ResourceType enum AWS::NetworkManager::TransitGatewayRegistration"
+          },
+          {
+            "name": "AWSOpenSearchDomain",
+            "value": "AWS::OpenSearch::Domain",
+            "description": "ResourceType enum AWS::OpenSearch::Domain"
+          },
+          {
+            "name": "AWSPanoramaPackage",
+            "value": "AWS::Panorama::Package",
+            "description": "ResourceType enum AWS::Panorama::Package"
+          },
+          {
+            "name": "AWSPersonalizeDataset",
+            "value": "AWS::Personalize::Dataset",
+            "description": "ResourceType enum AWS::Personalize::Dataset"
+          },
+          {
+            "name": "AWSPersonalizeDatasetGroup",
+            "value": "AWS::Personalize::DatasetGroup",
+            "description": "ResourceType enum AWS::Personalize::DatasetGroup"
+          },
+          {
+            "name": "AWSPersonalizeSchema",
+            "value": "AWS::Personalize::Schema",
+            "description": "ResourceType enum AWS::Personalize::Schema"
+          },
+          {
+            "name": "AWSPersonalizeSolution",
+            "value": "AWS::Personalize::Solution",
+            "description": "ResourceType enum AWS::Personalize::Solution"
+          },
+          {
+            "name": "AWSPinpointApp",
+            "value": "AWS::Pinpoint::App",
+            "description": "ResourceType enum AWS::Pinpoint::App"
+          },
+          {
+            "name": "AWSPinpointApplicationSettings",
+            "value": "AWS::Pinpoint::ApplicationSettings",
+            "description": "ResourceType enum AWS::Pinpoint::ApplicationSettings"
+          },
+          {
+            "name": "AWSPinpointCampaign",
+            "value": "AWS::Pinpoint::Campaign",
+            "description": "ResourceType enum AWS::Pinpoint::Campaign"
+          },
+          {
+            "name": "AWSPinpointEmailChannel",
+            "value": "AWS::Pinpoint::EmailChannel",
+            "description": "ResourceType enum AWS::Pinpoint::EmailChannel"
+          },
+          {
+            "name": "AWSPinpointEmailTemplate",
+            "value": "AWS::Pinpoint::EmailTemplate",
+            "description": "ResourceType enum AWS::Pinpoint::EmailTemplate"
+          },
+          {
+            "name": "AWSPinpointEventStream",
+            "value": "AWS::Pinpoint::EventStream",
+            "description": "ResourceType enum AWS::Pinpoint::EventStream"
+          },
+          {
+            "name": "AWSPinpointInAppTemplate",
+            "value": "AWS::Pinpoint::InAppTemplate",
+            "description": "ResourceType enum AWS::Pinpoint::InAppTemplate"
+          },
+          {
+            "name": "AWSPinpointSegment",
+            "value": "AWS::Pinpoint::Segment",
+            "description": "ResourceType enum AWS::Pinpoint::Segment"
+          },
+          {
+            "name": "AWSQLDBLedger",
+            "value": "AWS::QLDB::Ledger",
+            "description": "ResourceType enum AWS::QLDB::Ledger"
+          },
+          {
+            "name": "AWSQuickSightDataSource",
+            "value": "AWS::QuickSight::DataSource",
+            "description": "ResourceType enum AWS::QuickSight::DataSource"
+          },
+          {
+            "name": "AWSQuickSightTemplate",
+            "value": "AWS::QuickSight::Template",
+            "description": "ResourceType enum AWS::QuickSight::Template"
+          },
+          {
+            "name": "AWSQuickSightTheme",
+            "value": "AWS::QuickSight::Theme",
+            "description": "ResourceType enum AWS::QuickSight::Theme"
+          },
+          {
+            "name": "AWSRDSDBCluster",
+            "value": "AWS::RDS::DBCluster",
+            "description": "ResourceType enum AWS::RDS::DBCluster"
+          },
+          {
+            "name": "AWSRDSDBClusterSnapshot",
+            "value": "AWS::RDS::DBClusterSnapshot",
+            "description": "ResourceType enum AWS::RDS::DBClusterSnapshot"
+          },
+          {
+            "name": "AWSRDSDBInstance",
+            "value": "AWS::RDS::DBInstance",
+            "description": "ResourceType enum AWS::RDS::DBInstance"
+          },
+          {
+            "name": "AWSRDSDBSecurityGroup",
+            "value": "AWS::RDS::DBSecurityGroup",
+            "description": "ResourceType enum AWS::RDS::DBSecurityGroup"
+          },
+          {
+            "name": "AWSRDSDBSnapshot",
+            "value": "AWS::RDS::DBSnapshot",
+            "description": "ResourceType enum AWS::RDS::DBSnapshot"
+          },
+          {
+            "name": "AWSRDSDBSubnetGroup",
+            "value": "AWS::RDS::DBSubnetGroup",
+            "description": "ResourceType enum AWS::RDS::DBSubnetGroup"
+          },
+          {
+            "name": "AWSRDSEventSubscription",
+            "value": "AWS::RDS::EventSubscription",
+            "description": "ResourceType enum AWS::RDS::EventSubscription"
+          },
+          {
+            "name": "AWSRDSGlobalCluster",
+            "value": "AWS::RDS::GlobalCluster",
+            "description": "ResourceType enum AWS::RDS::GlobalCluster"
+          },
+          {
+            "name": "AWSRDSOptionGroup",
+            "value": "AWS::RDS::OptionGroup",
+            "description": "ResourceType enum AWS::RDS::OptionGroup"
+          },
+          {
+            "name": "AWSRUMAppMonitor",
+            "value": "AWS::RUM::AppMonitor",
+            "description": "ResourceType enum AWS::RUM::AppMonitor"
+          },
+          {
+            "name": "AWSRedshiftCluster",
+            "value": "AWS::Redshift::Cluster",
+            "description": "ResourceType enum AWS::Redshift::Cluster"
+          },
+          {
+            "name": "AWSRedshiftClusterParameterGroup",
+            "value": "AWS::Redshift::ClusterParameterGroup",
+            "description": "ResourceType enum AWS::Redshift::ClusterParameterGroup"
+          },
+          {
+            "name": "AWSRedshiftClusterSecurityGroup",
+            "value": "AWS::Redshift::ClusterSecurityGroup",
+            "description": "ResourceType enum AWS::Redshift::ClusterSecurityGroup"
+          },
+          {
+            "name": "AWSRedshiftClusterSnapshot",
+            "value": "AWS::Redshift::ClusterSnapshot",
+            "description": "ResourceType enum AWS::Redshift::ClusterSnapshot"
+          },
+          {
+            "name": "AWSRedshiftClusterSubnetGroup",
+            "value": "AWS::Redshift::ClusterSubnetGroup",
+            "description": "ResourceType enum AWS::Redshift::ClusterSubnetGroup"
+          },
+          {
+            "name": "AWSRedshiftEndpointAccess",
+            "value": "AWS::Redshift::EndpointAccess",
+            "description": "ResourceType enum AWS::Redshift::EndpointAccess"
+          },
+          {
+            "name": "AWSRedshiftEventSubscription",
+            "value": "AWS::Redshift::EventSubscription",
+            "description": "ResourceType enum AWS::Redshift::EventSubscription"
+          },
+          {
+            "name": "AWSRedshiftScheduledAction",
+            "value": "AWS::Redshift::ScheduledAction",
+            "description": "ResourceType enum AWS::Redshift::ScheduledAction"
+          },
+          {
+            "name": "AWSResilienceHubApp",
+            "value": "AWS::ResilienceHub::App",
+            "description": "ResourceType enum AWS::ResilienceHub::App"
+          },
+          {
+            "name": "AWSResilienceHubResiliencyPolicy",
+            "value": "AWS::ResilienceHub::ResiliencyPolicy",
+            "description": "ResourceType enum AWS::ResilienceHub::ResiliencyPolicy"
+          },
+          {
+            "name": "AWSResourceExplorer2Index",
+            "value": "AWS::ResourceExplorer2::Index",
+            "description": "ResourceType enum AWS::ResourceExplorer2::Index"
+          },
+          {
+            "name": "AWSRoboMakerRobotApplication",
+            "value": "AWS::RoboMaker::RobotApplication",
+            "description": "ResourceType enum AWS::RoboMaker::RobotApplication"
+          },
+          {
+            "name": "AWSRoboMakerRobotApplicationVersion",
+            "value": "AWS::RoboMaker::RobotApplicationVersion",
+            "description": "ResourceType enum AWS::RoboMaker::RobotApplicationVersion"
+          },
+          {
+            "name": "AWSRoboMakerSimulationApplication",
+            "value": "AWS::RoboMaker::SimulationApplication",
+            "description": "ResourceType enum AWS::RoboMaker::SimulationApplication"
+          },
+          {
+            "name": "AWSRoute53HostedZone",
+            "value": "AWS::Route53::HostedZone",
+            "description": "ResourceType enum AWS::Route53::HostedZone"
+          },
+          {
+            "name": "AWSRoute53RecoveryControlCluster",
+            "value": "AWS::Route53RecoveryControl::Cluster",
+            "description": "ResourceType enum AWS::Route53RecoveryControl::Cluster"
+          },
+          {
+            "name": "AWSRoute53RecoveryControlControlPanel",
+            "value": "AWS::Route53RecoveryControl::ControlPanel",
+            "description": "ResourceType enum AWS::Route53RecoveryControl::ControlPanel"
+          },
+          {
+            "name": "AWSRoute53RecoveryControlRoutingControl",
+            "value": "AWS::Route53RecoveryControl::RoutingControl",
+            "description": "ResourceType enum AWS::Route53RecoveryControl::RoutingControl"
+          },
+          {
+            "name": "AWSRoute53RecoveryControlSafetyRule",
+            "value": "AWS::Route53RecoveryControl::SafetyRule",
+            "description": "ResourceType enum AWS::Route53RecoveryControl::SafetyRule"
+          },
+          {
+            "name": "AWSRoute53RecoveryReadinessCell",
+            "value": "AWS::Route53RecoveryReadiness::Cell",
+            "description": "ResourceType enum AWS::Route53RecoveryReadiness::Cell"
+          },
+          {
+            "name": "AWSRoute53RecoveryReadinessReadinessCheck",
+            "value": "AWS::Route53RecoveryReadiness::ReadinessCheck",
+            "description": "ResourceType enum AWS::Route53RecoveryReadiness::ReadinessCheck"
+          },
+          {
+            "name": "AWSRoute53RecoveryReadinessRecoveryGroup",
+            "value": "AWS::Route53RecoveryReadiness::RecoveryGroup",
+            "description": "ResourceType enum AWS::Route53RecoveryReadiness::RecoveryGroup"
+          },
+          {
+            "name": "AWSRoute53RecoveryReadinessResourceSet",
+            "value": "AWS::Route53RecoveryReadiness::ResourceSet",
+            "description": "ResourceType enum AWS::Route53RecoveryReadiness::ResourceSet"
+          },
+          {
+            "name": "AWSRoute53ResolverFirewallDomainList",
+            "value": "AWS::Route53Resolver::FirewallDomainList",
+            "description": "ResourceType enum AWS::Route53Resolver::FirewallDomainList"
+          },
+          {
+            "name": "AWSRoute53ResolverFirewallRuleGroup",
+            "value": "AWS::Route53Resolver::FirewallRuleGroup",
+            "description": "ResourceType enum AWS::Route53Resolver::FirewallRuleGroup"
+          },
+          {
+            "name": "AWSRoute53ResolverFirewallRuleGroupAssociation",
+            "value": "AWS::Route53Resolver::FirewallRuleGroupAssociation",
+            "description": "ResourceType enum AWS::Route53Resolver::FirewallRuleGroupAssociation"
+          },
+          {
+            "name": "AWSRoute53ResolverResolverEndpoint",
+            "value": "AWS::Route53Resolver::ResolverEndpoint",
+            "description": "ResourceType enum AWS::Route53Resolver::ResolverEndpoint"
+          },
+          {
+            "name": "AWSRoute53ResolverResolverQueryLoggingConfig",
+            "value": "AWS::Route53Resolver::ResolverQueryLoggingConfig",
+            "description": "ResourceType enum AWS::Route53Resolver::ResolverQueryLoggingConfig"
+          },
+          {
+            "name": "AWSRoute53ResolverResolverQueryLoggingConfigAssociation",
+            "value": "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation",
+            "description": "ResourceType enum AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation"
+          },
+          {
+            "name": "AWSRoute53ResolverResolverRule",
+            "value": "AWS::Route53Resolver::ResolverRule",
+            "description": "ResourceType enum AWS::Route53Resolver::ResolverRule"
+          },
+          {
+            "name": "AWSRoute53ResolverResolverRuleAssociation",
+            "value": "AWS::Route53Resolver::ResolverRuleAssociation",
+            "description": "ResourceType enum AWS::Route53Resolver::ResolverRuleAssociation"
+          },
+          {
+            "name": "AWSS3AccessPoint",
+            "value": "AWS::S3::AccessPoint",
+            "description": "ResourceType enum AWS::S3::AccessPoint"
+          },
+          {
+            "name": "AWSS3AccountPublicAccessBlock",
+            "value": "AWS::S3::AccountPublicAccessBlock",
+            "description": "ResourceType enum AWS::S3::AccountPublicAccessBlock"
+          },
+          {
+            "name": "AWSS3Bucket",
+            "value": "AWS::S3::Bucket",
+            "description": "ResourceType enum AWS::S3::Bucket"
+          },
+          {
+            "name": "AWSS3MultiRegionAccessPoint",
+            "value": "AWS::S3::MultiRegionAccessPoint",
+            "description": "ResourceType enum AWS::S3::MultiRegionAccessPoint"
+          },
+          {
+            "name": "AWSS3StorageLens",
+            "value": "AWS::S3::StorageLens",
+            "description": "ResourceType enum AWS::S3::StorageLens"
+          },
+          {
+            "name": "AWSSESConfigurationSet",
+            "value": "AWS::SES::ConfigurationSet",
+            "description": "ResourceType enum AWS::SES::ConfigurationSet"
+          },
+          {
+            "name": "AWSSESContactList",
+            "value": "AWS::SES::ContactList",
+            "description": "ResourceType enum AWS::SES::ContactList"
+          },
+          {
+            "name": "AWSSESReceiptFilter",
+            "value": "AWS::SES::ReceiptFilter",
+            "description": "ResourceType enum AWS::SES::ReceiptFilter"
+          },
+          {
+            "name": "AWSSESReceiptRuleSet",
+            "value": "AWS::SES::ReceiptRuleSet",
+            "description": "ResourceType enum AWS::SES::ReceiptRuleSet"
+          },
+          {
+            "name": "AWSSESTemplate",
+            "value": "AWS::SES::Template",
+            "description": "ResourceType enum AWS::SES::Template"
+          },
+          {
+            "name": "AWSSNSTopic",
+            "value": "AWS::SNS::Topic",
+            "description": "ResourceType enum AWS::SNS::Topic"
+          },
+          {
+            "name": "AWSSQSQueue",
+            "value": "AWS::SQS::Queue",
+            "description": "ResourceType enum AWS::SQS::Queue"
+          },
+          {
+            "name": "AWSSSMAssociationCompliance",
+            "value": "AWS::SSM::AssociationCompliance",
+            "description": "ResourceType enum AWS::SSM::AssociationCompliance"
+          },
+          {
+            "name": "AWSSSMDocument",
+            "value": "AWS::SSM::Document",
+            "description": "ResourceType enum AWS::SSM::Document"
+          },
+          {
+            "name": "AWSSSMFileData",
+            "value": "AWS::SSM::FileData",
+            "description": "ResourceType enum AWS::SSM::FileData"
+          },
+          {
+            "name": "AWSSSMManagedInstanceInventory",
+            "value": "AWS::SSM::ManagedInstanceInventory",
+            "description": "ResourceType enum AWS::SSM::ManagedInstanceInventory"
+          },
+          {
+            "name": "AWSSSMPatchCompliance",
+            "value": "AWS::SSM::PatchCompliance",
+            "description": "ResourceType enum AWS::SSM::PatchCompliance"
+          },
+          {
+            "name": "AWSSageMakerAppImageConfig",
+            "value": "AWS::SageMaker::AppImageConfig",
+            "description": "ResourceType enum AWS::SageMaker::AppImageConfig"
+          },
+          {
+            "name": "AWSSageMakerCodeRepository",
+            "value": "AWS::SageMaker::CodeRepository",
+            "description": "ResourceType enum AWS::SageMaker::CodeRepository"
+          },
+          {
+            "name": "AWSSageMakerDomain",
+            "value": "AWS::SageMaker::Domain",
+            "description": "ResourceType enum AWS::SageMaker::Domain"
+          },
+          {
+            "name": "AWSSageMakerFeatureGroup",
+            "value": "AWS::SageMaker::FeatureGroup",
+            "description": "ResourceType enum AWS::SageMaker::FeatureGroup"
+          },
+          {
+            "name": "AWSSageMakerImage",
+            "value": "AWS::SageMaker::Image",
+            "description": "ResourceType enum AWS::SageMaker::Image"
+          },
+          {
+            "name": "AWSSageMakerModel",
+            "value": "AWS::SageMaker::Model",
+            "description": "ResourceType enum AWS::SageMaker::Model"
+          },
+          {
+            "name": "AWSSageMakerNotebookInstanceLifecycleConfig",
+            "value": "AWS::SageMaker::NotebookInstanceLifecycleConfig",
+            "description": "ResourceType enum AWS::SageMaker::NotebookInstanceLifecycleConfig"
+          },
+          {
+            "name": "AWSSageMakerWorkteam",
+            "value": "AWS::SageMaker::Workteam",
+            "description": "ResourceType enum AWS::SageMaker::Workteam"
+          },
+          {
+            "name": "AWSSecretsManagerSecret",
+            "value": "AWS::SecretsManager::Secret",
+            "description": "ResourceType enum AWS::SecretsManager::Secret"
+          },
+          {
+            "name": "AWSServiceCatalogCloudFormationProduct",
+            "value": "AWS::ServiceCatalog::CloudFormationProduct",
+            "description": "ResourceType enum AWS::ServiceCatalog::CloudFormationProduct"
+          },
+          {
+            "name": "AWSServiceCatalogCloudFormationProvisionedProduct",
+            "value": "AWS::ServiceCatalog::CloudFormationProvisionedProduct",
+            "description": "ResourceType enum AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+          },
+          {
+            "name": "AWSServiceCatalogPortfolio",
+            "value": "AWS::ServiceCatalog::Portfolio",
+            "description": "ResourceType enum AWS::ServiceCatalog::Portfolio"
+          },
+          {
+            "name": "AWSServiceDiscoveryHttpNamespace",
+            "value": "AWS::ServiceDiscovery::HttpNamespace",
+            "description": "ResourceType enum AWS::ServiceDiscovery::HttpNamespace"
+          },
+          {
+            "name": "AWSServiceDiscoveryInstance",
+            "value": "AWS::ServiceDiscovery::Instance",
+            "description": "ResourceType enum AWS::ServiceDiscovery::Instance"
+          },
+          {
+            "name": "AWSServiceDiscoveryPublicDnsNamespace",
+            "value": "AWS::ServiceDiscovery::PublicDnsNamespace",
+            "description": "ResourceType enum AWS::ServiceDiscovery::PublicDnsNamespace"
+          },
+          {
+            "name": "AWSServiceDiscoveryService",
+            "value": "AWS::ServiceDiscovery::Service",
+            "description": "ResourceType enum AWS::ServiceDiscovery::Service"
+          },
+          {
+            "name": "AWSShieldProtection",
+            "value": "AWS::Shield::Protection",
+            "description": "ResourceType enum AWS::Shield::Protection"
+          },
+          {
+            "name": "AWSShieldRegionalProtection",
+            "value": "AWS::ShieldRegional::Protection",
+            "description": "ResourceType enum AWS::ShieldRegional::Protection"
+          },
+          {
+            "name": "AWSSignerSigningProfile",
+            "value": "AWS::Signer::SigningProfile",
+            "description": "ResourceType enum AWS::Signer::SigningProfile"
+          },
+          {
+            "name": "AWSStepFunctionsActivity",
+            "value": "AWS::StepFunctions::Activity",
+            "description": "ResourceType enum AWS::StepFunctions::Activity"
+          },
+          {
+            "name": "AWSStepFunctionsStateMachine",
+            "value": "AWS::StepFunctions::StateMachine",
+            "description": "ResourceType enum AWS::StepFunctions::StateMachine"
+          },
+          {
+            "name": "AWSTransferAgreement",
+            "value": "AWS::Transfer::Agreement",
+            "description": "ResourceType enum AWS::Transfer::Agreement"
+          },
+          {
+            "name": "AWSTransferCertificate",
+            "value": "AWS::Transfer::Certificate",
+            "description": "ResourceType enum AWS::Transfer::Certificate"
+          },
+          {
+            "name": "AWSTransferConnector",
+            "value": "AWS::Transfer::Connector",
+            "description": "ResourceType enum AWS::Transfer::Connector"
+          },
+          {
+            "name": "AWSTransferWorkflow",
+            "value": "AWS::Transfer::Workflow",
+            "description": "ResourceType enum AWS::Transfer::Workflow"
+          },
+          {
+            "name": "AWSWAFRateBasedRule",
+            "value": "AWS::WAF::RateBasedRule",
+            "description": "ResourceType enum AWS::WAF::RateBasedRule"
+          },
+          {
+            "name": "AWSWAFRule",
+            "value": "AWS::WAF::Rule",
+            "description": "ResourceType enum AWS::WAF::Rule"
+          },
+          {
+            "name": "AWSWAFRuleGroup",
+            "value": "AWS::WAF::RuleGroup",
+            "description": "ResourceType enum AWS::WAF::RuleGroup"
+          },
+          {
+            "name": "AWSWAFWebACL",
+            "value": "AWS::WAF::WebACL",
+            "description": "ResourceType enum AWS::WAF::WebACL"
+          },
+          {
+            "name": "AWSWAFRegionalRateBasedRule",
+            "value": "AWS::WAFRegional::RateBasedRule",
+            "description": "ResourceType enum AWS::WAFRegional::RateBasedRule"
+          },
+          {
+            "name": "AWSWAFRegionalRule",
+            "value": "AWS::WAFRegional::Rule",
+            "description": "ResourceType enum AWS::WAFRegional::Rule"
+          },
+          {
+            "name": "AWSWAFRegionalRuleGroup",
+            "value": "AWS::WAFRegional::RuleGroup",
+            "description": "ResourceType enum AWS::WAFRegional::RuleGroup"
+          },
+          {
+            "name": "AWSWAFRegionalWebACL",
+            "value": "AWS::WAFRegional::WebACL",
+            "description": "ResourceType enum AWS::WAFRegional::WebACL"
+          },
+          {
+            "name": "AWSWAFv2IPSet",
+            "value": "AWS::WAFv2::IPSet",
+            "description": "ResourceType enum AWS::WAFv2::IPSet"
+          },
+          {
+            "name": "AWSWAFv2ManagedRuleSet",
+            "value": "AWS::WAFv2::ManagedRuleSet",
+            "description": "ResourceType enum AWS::WAFv2::ManagedRuleSet"
+          },
+          {
+            "name": "AWSWAFv2RegexPatternSet",
+            "value": "AWS::WAFv2::RegexPatternSet",
+            "description": "ResourceType enum AWS::WAFv2::RegexPatternSet"
+          },
+          {
+            "name": "AWSWAFv2RuleGroup",
+            "value": "AWS::WAFv2::RuleGroup",
+            "description": "ResourceType enum AWS::WAFv2::RuleGroup"
+          },
+          {
+            "name": "AWSWAFv2WebACL",
+            "value": "AWS::WAFv2::WebACL",
+            "description": "ResourceType enum AWS::WAFv2::WebACL"
+          },
+          {
+            "name": "AWSWorkSpacesConnectionAlias",
+            "value": "AWS::WorkSpaces::ConnectionAlias",
+            "description": "ResourceType enum AWS::WorkSpaces::ConnectionAlias"
+          },
+          {
+            "name": "AWSWorkSpacesWorkspace",
+            "value": "AWS::WorkSpaces::Workspace",
+            "description": "ResourceType enum AWS::WorkSpaces::Workspace"
+          },
+          {
+            "name": "AWSXRayEncryptionConfig",
+            "value": "AWS::XRay::EncryptionConfig",
+            "description": "ResourceType enum AWS::XRay::EncryptionConfig"
+          }
+        ]
+      }
+    },
+    "ResourceTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of ResourceTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
