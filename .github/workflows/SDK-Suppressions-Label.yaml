@@ -13,11 +13,14 @@ on:
 
 env:
   script_result: ''
+  suppressions-result: ''
   
 jobs:
   manage_sdk_suppressions_labels:
     name: breakingchange suppressions label Workflow
     runs-on: ubuntu-latest
+    outputs:
+      suppressions-result: ${{ steps.run-suppressions-script.outputs.suppressions-result }}
     
     steps:
       - name: Checkout code
@@ -78,4 +81,15 @@ jobs:
           
       - name: Use the suppressions result
         run: |
-          echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
+          # echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
+          echo "The suppressions result is ${{ env.suppressions-result }}"
+
+  update-suppressions-labels:
+    runs-on: ubuntu-latest
+    needs: manage_sdk_suppressions_labels
+    env:
+      SUPPRESSIONS_RESULT: ${{ needs.manage_sdk_suppressions_labels.outputs.suppressions-result }}
+    steps:
+      - name: Use the suppressions result in job2
+        run: |
+          echo "The result from job1 is: $SUPPRESSIONS_RESULT"
