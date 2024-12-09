@@ -66,20 +66,12 @@ jobs:
           OUTPUT=$(cat output.json)
           echo "Script output labels: $OUTPUT"
           echo "script_result=$OUTPUT" >> $GITHUB_ENV
-          echo "::set-output name=suppressions-result-output::$result"
+          echo "::set-output name=suppressions-result-output::$OUTPUT"
 
       - name: Write all labels
         run: |
           echo "Entire labels content:"
           echo "${{ env.script_result }}"
-
-  # echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
-          
-  #     - name: Use the suppressions result
-  #       run: |
-  #         echo "11111"
-  #         # echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
-  #         echo "The suppressions result is ${{ env.suppressions-result }}"
 
   update-suppressions-labels:
     runs-on: ubuntu-latest
@@ -87,7 +79,7 @@ jobs:
     env:
       SUPPRESSIONS_LABELS: ${{ needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out }}
     steps:
-      - name: Use the suppressions result in job2
+      - name: Use the suppressions result in job manage-sdk-suppressions-labels
         run: |
           echo "2222"
           echo "The result from job1 is: $SUPPRESSIONS_LABELS"
