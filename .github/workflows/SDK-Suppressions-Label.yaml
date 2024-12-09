@@ -62,7 +62,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
           result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "::set-output name=suppressions-result::$result"
+          
+
+          echo "suppressions-result=$result" >> $GITHUB_ENV
+
+          # echo "::set-output name=suppressions-result::$result"
           # OUTPUT=$(cat output.json)
           # echo "Script output labels: $OUTPUT"
           # echo "script_result=$OUTPUT" >> $GITHUB_ENV
