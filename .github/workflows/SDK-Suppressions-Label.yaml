@@ -1,4 +1,4 @@
-name: breakingchange suppressions label Workflow
+name: Manage SDK Breakingchange Suppressions Labels Workflow
 
 on:
   pull_request:
@@ -12,13 +12,11 @@ on:
   workflow_dispatch:
   
 jobs:
-  manage-sdk-suppressions-labels:
+  process-sdk-suppressions-labels:
     name: breakingchange suppressions label Workflow
     runs-on: ubuntu-latest
-    env:
-      script_result: ''
     outputs:
-      suppressions-result-out: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
+      process-sdk-suppressions-output: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
     
     steps:
       - name: Checkout code
@@ -64,28 +62,16 @@ jobs:
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat output.json)
-          echo "Script output labels1111: $OUTPUT"
-          echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          echo "Script output labels: $OUTPUT"
           echo "::set-output name=suppressions-result-output::$OUTPUT"
 
-      - name: Write all labels
-        run: |
-          echo "Entire labels content:"
-          echo "${{ env.script_result }}"
-
-  update-suppressions-labels:
+  update-sdk-suppressions-labels:
     runs-on: ubuntu-latest
-    needs: manage-sdk-suppressions-labels
-    env:
-      SUPPRESSIONS_LABELS: ${{ needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out }}
+    needs: process-sdk-suppressions-labels
     strategy:
       matrix:
-        artifact-name: ${{ fromJson(needs.manage-sdk-suppressions-labels.outputs.suppressions-result-out) }}
+        artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
     steps:
-      - name: Use the suppressions result in job manage-sdk-suppressions-labels
-        run: |
-          echo "The result from job1 is: $SUPPRESSIONS_LABELS"
-    
       - name: Create empty file to upload artifacts
         run: "> $RUNNER_TEMP/empty.txt"
         shell: bash
