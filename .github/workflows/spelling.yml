@@ -1,4 +1,4 @@
-name: Check Spelling in Changed Files
+name: Check Spelling - Changed Files
 
 on:
   pull_request:
@@ -27,4 +27,8 @@ jobs:
               -SourceCommittish '${{ github.sha }}' `
               -TargetCommittish  $targetCommittish `
               -ExitWithError
+          if ($LASTEXITCODE) {
+            Write-Host "Spelling errors found in changed files. See https://aka.ms/ci-fix#spell-check"
+            exit $LASTEXITCODE
+          }
         shell: pwsh
