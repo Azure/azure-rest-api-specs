@@ -12,11 +12,22 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 > see https://aka.ms/autorest
 
 ``` yaml
-tag: package-2024-08-22-preview-ledger
+tag: package-preview-2024-12-09
 openapi-type: data-plane
 ```
 
 ## Configuration
+
+### Tag: package-preview-2024-12-09-preview
+
+These settings apply only when `--tag=package-preview-2024-12-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12-09-preview'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/common.json
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json
+```
 
 ### Tag: package-0.1-preview-ledger
 
