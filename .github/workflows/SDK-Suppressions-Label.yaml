@@ -64,8 +64,7 @@ jobs:
         run: |
           saresult=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
           echo "Cleaned result: $saresult"
-
-       #   echo "suppressions-result=$script-result" >> $GITHUB_ENV
+          echo "suppressions-result=$saresult" >> $GITHUB_ENV
 
       # - name: Write all labels
       #   run: |
