@@ -3,21 +3,22 @@ name: Trigger Workflow
 on: pull_request
 
 jobs:
-  trigger:
+  upload-artifacts:
     name: Trigger Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        artifact-name: ["label-test1=true", "label-test2=true", "label-aaa=false"]
+
     steps:
-      - name: Create empty file to upload artifact
+      - name: Create empty file to upload artifacts
         run: "> $RUNNER_TEMP/empty.txt"
         shell: bash
 
-      # A recommended format is "key=value".  The maximum length is reported to be 260 characters.
-      #
-      # A full list of invalid artifact name characters is documented here:
-      # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: label-aaa=true
+          name: ${{ matrix.artifact-name }}  # Artifact name from matrix
           path: ${{ runner.temp }}/empty.txt
           if-no-files-found: error
           overwrite: true
