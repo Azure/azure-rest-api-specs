@@ -1,15 +1,15 @@
 {
-  "title": "ScheduledActions_VirtualMachinesSubmitStartMax",
+  "title": "ScheduledActions_VirtualMachinesSubmitStart",
   "operationId": "ScheduledActions_VirtualMachinesSubmitStart",
   "parameters": {
     "api-version": "2024-08-15-preview",
     "subscriptionId": "DE84A209-5715-43E7-BC76-3E208A9A82C5",
-    "locationparameter": "hrbepqlfyctbhuydklbnuv",
+    "locationparameter": "eastus2euap",
     "requestBody": {
       "schedule": {
-        "deadlineType": "Unknown",
+        "deadlineType": "InitiateAt",
         "deadLine": "2024-11-14T00:31:09.827Z",
-        "timeZone": "zxbhdntlqpbkbnyenyjup"
+        "timeZone": "UTC"
       },
       "executionParameters": {
         "optimizationPreference": "Cost",
@@ -29,35 +29,35 @@
   "responses": {
     "200": {
       "body": {
-        "type": "gxmnjtgu",
-        "location": "uvlidhowwv",
+        "type": "virtualMachine",
+        "location": "eastus2euap",
         "results": [
           {
             "resourceId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Compute/virtualMachines/testResource4",
-            "errorCode": "pliurpaykwv",
-            "errorDetails": "mbqwkpxl",
+            "errorCode": "null",
+            "errorDetails": "null",
             "operation": {
               "operationId": "23480d2f-1dca-4610-afb4-dd25eec1f34",
               "resourceId": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.Compute/virtualMachines/testResource4",
-              "opType": "Unknown",
+              "opType": "Start",
               "subscriptionId": "52C81249-550F-459E-9B6E-5BAB6EE62227",
               "deadline": "2024-07-12T18:06:52.974Z",
-              "deadlineType": "Unknown",
-              "state": "Unknown",
+              "deadlineType": "InitiateAt",
+              "state": "Succeeded",
               "resourceOperationError": {
-                "errorCode": "fticyqukvkillwd",
-                "errorDetails": "yimgxqrkp"
+                "errorCode": "null",
+                "errorDetails": "null"
               },
               "completedAt": "2024-07-12T18:06:52.974Z",
               "retryPolicy": {
                 "retryCount": 30,
                 "retryWindowInMinutes": 27
               },
-              "timeZone": "ccgybymveyrqnfwwjy"
+              "timeZone": "UTC"
             }
           }
         ],
-        "description": "swzesyaila"
+        "description": "Start Resource Request"
       }
     }
   }
