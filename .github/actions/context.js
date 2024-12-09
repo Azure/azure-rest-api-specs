@@ -77,6 +77,7 @@ async function extractInputs(github, context, core) {
     const inputs = {
       owner: payload.workflow_run.repository.owner.login,
       repo: payload.workflow_run.repository.name,
+      head_sha: payload.workflow_run.head_sha,
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
     };
