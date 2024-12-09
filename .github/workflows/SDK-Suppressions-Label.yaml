@@ -62,8 +62,8 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
         run: |
-          script-result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
-          echo "Cleaned result: $script-result"
+          saresult=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
+          echo "Cleaned result: $saresult"
 
        #   echo "suppressions-result=$script-result" >> $GITHUB_ENV
 
