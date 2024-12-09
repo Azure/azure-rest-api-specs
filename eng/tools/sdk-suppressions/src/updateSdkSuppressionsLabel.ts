@@ -260,8 +260,8 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
   }
 
   const result = {
-    labelsToAdd: ['c1', 'b1'],
-    labelsToRemove: ['a1']
+    labelsToAdd: addSdkSuppressionsLabels,
+    labelsToRemove: removeSdkSuppressionsLabels
   };
   const willSaveOutput = [
     ...result.labelsToAdd.map(label => `label-${label}=true`),
@@ -270,11 +270,7 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
   fs.writeFileSync(outputFile, JSON.stringify(willSaveOutput));
   console.log("JSON output saved to output.json");
 
-  return {
-    labelsToAdd: addSdkSuppressionsLabels,
-    labelsToRemove: removeSdkSuppressionsLabels
-  }
-
+  return result;
 }
 
 function logSuppressionFileInfo(pr: { owner: string, repo: string, ref: string, path: string }) {

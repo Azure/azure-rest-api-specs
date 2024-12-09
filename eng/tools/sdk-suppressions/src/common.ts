@@ -14,7 +14,7 @@ export function parseYamlContent(yamlContent: string, path: string): {
     let content = undefined;
     // if yaml file is not a valid yaml, catch error and return undefined
     try {
-      content = YAML.safeLoad(yamlContent);
+      content = YAML.load(yamlContent);
     } catch (error) {
       console.error(`The file parsing failed in the ${path}. Details: ${error}`);
       return {
