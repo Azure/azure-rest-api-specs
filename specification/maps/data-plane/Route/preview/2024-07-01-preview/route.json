@@ -726,13 +726,13 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nIf the `departAt` not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nIf the `departAt` is not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time",
           "default": "any"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value is the date-time format. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -989,7 +989,7 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExample:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -1056,7 +1056,7 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExamples:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` parameter cannot be used in conjunction with `arriveAt`.\n\nThe `departAt` also supports:\n\n `any` value tailored to the use case where the time context is irrelevant. The `traffic=live` parameter value cannot be used together with `any`.\n\n`now` value to set the departure time to the processing time of each individual cell. Processing time may be any time between submission and its completion. This mode is best used together with traffic=live.\n\nDefault value: `any` if `departAt` is not specified.\n\nExample:\n\n\"departAt\": \"2024-12-01T09:30:00.000-07:00\"",
           "type": "string"
         },
         "arriveAt": {
@@ -3080,7 +3080,7 @@
       "description": "Specifies the parameters to use for the calculation of isochrone polygon.",
       "properties": {
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nIf the `departAt` not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nIf the `departAt` is not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
