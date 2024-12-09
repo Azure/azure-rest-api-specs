@@ -66,12 +66,14 @@ jobs:
           OUTPUT=$(cat output.json)
           echo "Script output labels: $OUTPUT"
           echo "script_result=$OUTPUT" >> $GITHUB_ENV
+          echo "::set-output name=suppressions-result-output::$result"
 
       - name: Write all labels
         run: |
           echo "Entire labels content:"
           echo "${{ env.script_result }}"
-          echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
+
+  # echo "The result from the script is: ${{ steps.run-suppressions-script.outputs.suppressions-result }}"
           
   #     - name: Use the suppressions result
   #       run: |
