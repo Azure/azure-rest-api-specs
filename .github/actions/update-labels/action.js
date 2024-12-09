@@ -83,7 +83,7 @@ module.exports = async ({ github, context, core }) => {
 
   if (labelsToRemove.length > 0) {
     // Must loop over labelsToRemove ourselves, since GitHub doesn't expose a REST API to remove in bulk. 
-    for (const name in labelsToRemove) {
+    for (const name of labelsToRemove) {
       try {
         await github.rest.issues.removeLabel({
           owner: owner,
