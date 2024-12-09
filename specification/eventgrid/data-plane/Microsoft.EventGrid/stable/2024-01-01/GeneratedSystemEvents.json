@@ -1198,18 +1198,19 @@
           "type": "string",
           "description": "The message content"
         },
+        "messageType": {
+          "type": "string",
+          "description": "WhatsApp message type"
+        },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
           "description": "The message channel type",
           "x-ms-client-name": "channelKind"
         },
-        "messageType": {
-          "type": "string",
-          "description": "WhatsApp message type"
-        },
         "media": {
           "$ref": "#/definitions/AcsMessageMediaContent",
-          "description": "The received message media content"
+          "description": "The received message media content",
+          "x-ms-client-name": "mediaContent"
         },
         "reaction": {
           "$ref": "#/definitions/AcsMessageReactionContent",
