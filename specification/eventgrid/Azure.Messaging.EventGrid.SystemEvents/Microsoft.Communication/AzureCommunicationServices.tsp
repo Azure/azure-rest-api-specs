@@ -1195,10 +1195,10 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   channelType: AcsMessageChannelKind;
 
   /** The received message media content */
-  media: AcsMessageMediaContent;
+  media?: AcsMessageMediaContent;
 
   /** The received message reaction content */
-  reaction: AcsMessageReactionContent;
+  reaction?: AcsMessageReactionContent;
 
   /** The received message context */
   context: AcsMessageContext;
