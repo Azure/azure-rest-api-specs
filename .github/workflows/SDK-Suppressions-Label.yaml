@@ -59,9 +59,10 @@ jobs:
         env:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
+          OUTPUT_FILE: "output.json"
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-          OUTPUT=$(cat output.json)
+          OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
           echo "::set-output name=suppressions-result-output::$OUTPUT"
 

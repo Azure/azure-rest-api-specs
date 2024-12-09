@@ -213,7 +213,7 @@ export function getSdkNamesWithChangedSuppressions(
  * 2. It removes the label if the PR no longer contains the suppression file.
  * 3. It leaves the label unchanged if the PR already has both the suppression and the suppression approved labels.
  */
-export async function updateSdkSuppressionsLabels(pr: PullRequestContext, githubToken: string): Promise<{labelsToAdd: String[], labelsToRemove: String[]}> {
+export async function updateSdkSuppressionsLabels(pr: PullRequestContext, githubToken: string, outputFile: string): Promise<{labelsToAdd: String[], labelsToRemove: String[]}> {
   const appClient: Octokit = new Octokit({
       auth: githubToken
   });
@@ -267,7 +267,7 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
     ...result.labelsToAdd.map(label => `label-${label}=true`),
     ...result.labelsToRemove.map(label => `label-${label}=false`)
   ];
-  fs.writeFileSync("output.json", JSON.stringify(willSaveOutput));
+  fs.writeFileSync(outputFile, JSON.stringify(willSaveOutput));
   console.log("JSON output saved to output.json");
 
   return {
