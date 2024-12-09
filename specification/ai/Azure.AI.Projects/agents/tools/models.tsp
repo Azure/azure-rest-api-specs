@@ -474,8 +474,8 @@ model AzureFunctionBinding {
 @doc("The structure for keeping storage queue name and URI.")
 model AzureFunctionStorageQueue {
   @doc("URI to the Azure Storage Queue service allowing you to manipulate a queue.")
-  @encodedName("application/json", "queue_service_uri")
-  storageServiceUri: string;
+  @encodedName("application/json", "queue_service_endpoint")
+  storageServiceEndpoint: string;
 
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "queue_name")
