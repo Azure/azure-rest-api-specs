@@ -580,7 +580,7 @@
         },
         "x-ms-examples": {
           "Accounts_List": {
-            "$ref": "examples/Accounts_List.json"
+            "$ref": "examples/Accounts_ListBySubscription.json"
           }
         }
       }
@@ -2004,6 +2004,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string",
+            "description": "User can filter the Quota Report operation using the quotaType, quotaTarget, and usageThresholdPercentage query parameters. Both quotaType and quotaTarget must be provided together, as omitting either one will result in an error from the API. However, it is valid for the user to not provide both quotaType and quotaTarget. The usageThresholdPercentage query parameter takes the usage threshold percentage and returns records where the usage is greater than or equal to the input value.",
+            "required": false
           }
         ],
         "responses": {
