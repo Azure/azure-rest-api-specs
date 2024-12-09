@@ -1,5 +1,5 @@
 name: Add Label Artifact
-description: Uploads an empty artifact named `label-${name}=${value}`, that's consumed by update-labels.yaml
+description: Uploads an empty artifact named `label-${name}=${value}`, that's consumed by action "update-labels"
 
 inputs:
   name:
@@ -17,9 +17,7 @@ runs:
       run: "> $RUNNER_TEMP/empty.txt"
       shell: bash
 
-    # A recommended format is "key=value".  The maximum length is reported to be 260 characters.
-    #
-    # A full list of invalid artifact name characters is documented here:
+    # The maximum length is reported to be 260 characters. A full list of invalid artifact name characters is documented here:
     # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
     - uses: actions/upload-artifact@v4
       with:
