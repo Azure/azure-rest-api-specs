@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       script_result: ''
-      suppressions-result: ''
     outputs:
       suppressions-result-out: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
     
@@ -65,9 +64,7 @@ jobs:
         run: |
           result=$(node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js)
           echo "Cleaned result: $result"
-
-      #    echo "suppressions-result=$result" >> $GITHUB_ENV
-
+          echo "suppressions-result=$result" >> $GITHUB_ENV
 
       # - name: Write all labels
       #   run: |
