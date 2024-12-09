@@ -173,6 +173,24 @@ namespace Azure.ResourceManager.Legacy {
     ): Response | ErrorType;
 
     /**
+     * @dev List a resource
+     * @template Resource The resource being listed
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The response returned by the list
+     */
+    @autoRoute
+    @doc("Get a {name}", Resource)
+    @get
+    @listsResource(Resource)
+    @segmentOf(ResourceTypeParameter)
+    @armResourceList(Resource)
+    List<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>
+    >(...ParentParameters, ...Parameters): Response | ErrorType;
+
+    /**
      * @dev Get a resource
      * @template Resource The resource being read
      * @template Parameters Optional. Additional parameters after the path parameters
@@ -192,24 +210,6 @@ namespace Azure.ResourceManager.Legacy {
       ...ResourceTypeParameter,
       ...Parameters,
     ): Response | ErrorType;
-
-    /**
-     * @dev List a resource
-     * @template Resource The resource being listed
-     * @template Parameters Optional. Additional parameters after the path parameters
-     * @template Response Optional. The response returned by the list
-     */
-    @autoRoute
-    @doc("Get a {name}", Resource)
-    @get
-    @listsResource(Resource)
-    @segmentOf(Resource)
-    @armResourceList(Resource)
-    List<
-      Resource extends Azure.ResourceManager.CommonTypes.Resource,
-      Parameters extends {} = {},
-      Response extends {} = ArmResponse<ResourceListResult<Resource>>
-    >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
      * A synchronous resource action.

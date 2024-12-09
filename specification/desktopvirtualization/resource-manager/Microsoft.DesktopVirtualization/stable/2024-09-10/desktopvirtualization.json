@@ -64,10 +64,10 @@
       "name": "Desktops"
     },
     {
-      "name": "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup"
+      "name": "HostPoolPrivateEndpointConnectionOperations"
     },
     {
-      "name": "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup"
+      "name": "WorkspacePrivateEndpointConnectionOperations"
     },
     {
       "name": "SessionHosts"
@@ -2248,11 +2248,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup_ListByHostPool",
+        "operationId": "HostPoolPrivateEndpointConnectionOperations_ListByHostPool",
         "tags": [
-          "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup"
+          "HostPoolPrivateEndpointConnectionOperations"
         ],
-        "description": "List private endpoint connections associated with hostpool.",
+        "description": "Get a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2272,36 +2272,13 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Number of items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolListResultWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -2318,11 +2295,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup_GetByHostPool",
+        "operationId": "HostPoolPrivateEndpointConnectionOperations_GetByHostPool",
         "tags": [
-          "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup"
+          "HostPoolPrivateEndpointConnectionOperations"
         ],
-        "description": "Get a private endpoint connection.",
+        "description": "Get a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2346,7 +2323,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           }
@@ -2355,7 +2332,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2367,11 +2344,11 @@
         }
       },
       "put": {
-        "operationId": "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup_UpdateByHostPool",
+        "operationId": "HostPoolPrivateEndpointConnectionOperations_UpdateByHostPool",
         "tags": [
-          "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup"
+          "HostPoolPrivateEndpointConnectionOperations"
         ],
-        "description": "Approve or reject a private endpoint connection.",
+        "description": "Create a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2395,31 +2372,31 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Object containing the updated connection.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionOnHostPoolWithSystemData' update operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnectionOnHostPoolWithSystemData' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2431,11 +2408,11 @@
         }
       },
       "delete": {
-        "operationId": "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup_DeleteByHostPool",
+        "operationId": "HostPoolPrivateEndpointConnectionOperations_DeleteByHostPool",
         "tags": [
-          "PrivateEndpointConnectionOnHostPoolWithSystemDataOperationGroup"
+          "HostPoolPrivateEndpointConnectionOperations"
         ],
-        "description": "Remove a connection.",
+        "description": "Delete a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2459,7 +2436,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           }
@@ -4600,11 +4577,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup_ListByWorkspace",
+        "operationId": "WorkspacePrivateEndpointConnectionOperations_ListByWorkspace",
         "tags": [
-          "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup"
+          "WorkspacePrivateEndpointConnectionOperations"
         ],
-        "description": "List private endpoint connections associated with Workspace.",
+        "description": "Get a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4624,36 +4601,13 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Number of items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnWorkspaceListResultWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -4670,11 +4624,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup_GetByWorkspace",
+        "operationId": "WorkspacePrivateEndpointConnectionOperations_GetByWorkspace",
         "tags": [
-          "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup"
+          "WorkspacePrivateEndpointConnectionOperations"
         ],
-        "description": "Get a private endpoint connection.",
+        "description": "Get a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4698,7 +4652,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           }
@@ -4707,7 +4661,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnWorkspaceWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -4719,11 +4673,11 @@
         }
       },
       "put": {
-        "operationId": "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup_UpdateByWorkspace",
+        "operationId": "WorkspacePrivateEndpointConnectionOperations_UpdateByWorkspace",
         "tags": [
-          "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup"
+          "WorkspacePrivateEndpointConnectionOperations"
         ],
-        "description": "Approve or reject a private endpoint connection.",
+        "description": "Create a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4747,31 +4701,31 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "Object containing the updated connection.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnWorkspaceWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionOnWorkspaceWithSystemData' update operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnWorkspaceWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnectionOnWorkspaceWithSystemData' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionOnWorkspaceWithSystemData"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -4783,11 +4737,11 @@
         }
       },
       "delete": {
-        "operationId": "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup_DeleteByWorkspace",
+        "operationId": "WorkspacePrivateEndpointConnectionOperations_DeleteByWorkspace",
         "tags": [
-          "PrivateEndpointConnectionOnWorkspaceWithSystemDataOperationGroup"
+          "WorkspacePrivateEndpointConnectionOperations"
         ],
-        "description": "Remove a connection.",
+        "description": "Delete a PrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4811,7 +4765,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
-            "description": "The name of the private endpoint connection associated with the Azure resource.",
+            "description": "The name parameter for private endpoint",
             "required": true,
             "type": "string"
           }
@@ -6693,15 +6647,15 @@
         }
       ]
     },
-    "PrivateEndpointConnectionOnHostPoolListResultWithSystemData": {
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "List of private endpoint connection associated with the specified HostPool",
+      "description": "The response of a PrivateEndpointConnection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnectionOnHostPoolWithSystemData items on this page",
+          "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {
@@ -6712,57 +6666,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "PrivateEndpointConnectionOnHostPoolWithSystemData": {
-      "type": "object",
-      "description": "The Private Endpoint Connection resource.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionOnWorkspaceListResultWithSystemData": {
-      "type": "object",
-      "description": "List of private endpoint connection associated with the specified Workspace",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateEndpointConnectionOnHostPoolWithSystemData items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionOnHostPoolWithSystemData"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateEndpointConnectionOnWorkspaceWithSystemData": {
-      "type": "object",
-      "description": "The Private Endpoint Connection resource.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "PrivateEndpointConnectionProperties": {

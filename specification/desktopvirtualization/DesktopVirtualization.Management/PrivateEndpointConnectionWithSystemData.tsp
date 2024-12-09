@@ -25,7 +25,8 @@ alias PrivateEndpointParameter = {
   /** The name parameter for private endpoint */
   @path
   @segment("privateEndpointConnections")
-  privateEndpointName: string;
+  @key
+  privateEndpointConnectionName: string;
 };
 
 @armResourceOperations
