@@ -43,6 +43,11 @@ namespace ClientCustomizations;
 );
 @@access(KeyVault.RoleDefinitionProperties, Access.internal, "csharp");
 
+@@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
+  "folderUri",
+  "javascript"
+);
+
 @client(
   {
     name: "BackupRestoreRestClient",
