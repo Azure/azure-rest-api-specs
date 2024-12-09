@@ -94,4 +94,7 @@ using Microsoft.ComputeSchedule;
 @@clientName(Schedule.deadLine, "userRequestDeadline", "csharp");
 @@clientName(Schedule.timeZone, "userRequestTimezone", "csharp");
 @@clientName(ResourceOperationDetails.timeZone, "operationTimezone", "csharp");
-@@clientName(OperationErrorDetails.timeStamp, "errorDetailsTimestamp", "csharp");
+@@clientName(OperationErrorDetails.timeStamp,
+  "errorDetailsTimestamp",
+  "csharp"
+);
