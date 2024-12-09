@@ -67,9 +67,6 @@ module.exports = async ({ github, context, core }) => {
     }
   }
 
-  core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
-  core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
-
   if (labelsToAdd.length > 0) {
     await github.rest.issues.addLabels({
       owner: owner,
@@ -87,7 +84,7 @@ module.exports = async ({ github, context, core }) => {
           owner: owner,
           repo: repo,
           issue_number: issue_number,
-          name: "brownfield",
+          name: name,
         });
       } catch (error) {
         if (error.status === 404) {
