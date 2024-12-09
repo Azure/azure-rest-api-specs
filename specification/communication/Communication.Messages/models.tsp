@@ -56,6 +56,7 @@ union CommunicationMessageKind {
   interactive: "interactive",
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The Kind of interactive message channel action binding like WhatsAppListAction.")
 union MessageActionBindingKind {
   string,
@@ -70,6 +71,7 @@ union MessageActionBindingKind {
   whatsAppUrlAction: "whatsAppUrlAction",
 }
 
+@added(Versions.c2024_11_15_Preview)
 @doc("The kind of Interactive message content.")
 union MessageContentKind {
   string,
@@ -379,7 +381,6 @@ model LinkContent extends MessageContent {
   @doc("Title of the url content.")
   title: string;
 
-  @clientName("uri", "csharp")
   @doc("The url in the content.")
   url: url;
 }
@@ -423,7 +424,6 @@ model ActionGroupItem {
 @added(Versions.c2024_11_15_Preview)
 @doc("The media content.")
 model MediaMessageContent {
-  @clientName("mediaUrl", "java")
   @doc("MediaUri of the media content.")
   mediaUri: url;
 }
