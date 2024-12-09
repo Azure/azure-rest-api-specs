@@ -2568,6 +2568,23 @@
           "readOnly": true,
           "type": "string",
           "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
+        },
+        "upgradeAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicates whether or not the search service has an upgrade available."
+        },
+        "serviceCreatedDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was created."
+        },
+        "serviceUpgradeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time."
         }
       },
       "description": "Properties of the search service."
