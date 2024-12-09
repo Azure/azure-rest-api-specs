@@ -94,9 +94,6 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentIntelligenceOperationDetails.createdDateTime, "createdOn", "java");
 @@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime, "lastUpdatedOn", "java");
 @@clientName(ClassifierCopyAuthorization.expirationDateTime, "expiresOn", "java");
-@@clientName(ClassifyDocumentRequest.urlSource, "sourceUrl", "java");
-@@clientName(ClassifyDocumentRequest.urlSource, "sourceUrl", "java");
-@@clientName(AnalyzeDocumentRequest.urlSource, "sourceUrl", "java");
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "java");
 @@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "java");
 @@clientName(AnalyzeOperation.createdDateTime, "createdOn", "java");
