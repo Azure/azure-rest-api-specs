@@ -309,7 +309,6 @@ namespace Microsoft.EventGrid {
     {
       ...ReleaseOptions;
 
-      @removed(ServiceApiVersions.v2023_11_01)
       @added(ServiceApiVersions.v2024_06_01)
       @doc("Release cloud events with the specified delay in seconds.")
       @query
@@ -333,7 +332,6 @@ namespace Microsoft.EventGrid {
 
   // RenewLock Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
-  @removed(ServiceApiVersions.v2023_11_01)
   @added(ServiceApiVersions.v2024_06_01)
   @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")
