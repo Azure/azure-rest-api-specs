@@ -44,7 +44,7 @@ op getRunStep is Azure.Core.Foundations.Operation<
       Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
       """)
     @query
-    include?: RunAdditionalFieldList[];
+    include?: Array<RunAdditionalFieldList>;
   },
   RunStep
 >;
@@ -77,7 +77,7 @@ op listRunSteps is Azure.Core.Foundations.Operation<
       Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
       """)
     @query
-    include?: RunAdditionalFieldList[];
+    include?: Array<RunAdditionalFieldList>;
 
     ...OpenAIListRequestOptions;
   },
