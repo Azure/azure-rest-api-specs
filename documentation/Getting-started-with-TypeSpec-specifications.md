@@ -16,10 +16,10 @@ Within the azure-rest-api-specs repository, the TypeSpec specification serves as
 
 #### ARM:
 - :white_check_mark: TypeSpec folder name should end with `.Management`.
-- :white_check_mark: This `tspconfig.yaml` is [standard for ARM](https://github.com/Azure/typespec-azure/blob/main/eng/feeds/arm/tspconfig.yaml). The one thing you may customize is the output json file name for `typespec-autorest` emitter.
+- :white_check_mark: Starting from `tspconfig.yaml`[ARM template](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml). The one thing you may customize is the output json file name for `typespec-autorest` emitter.
 
 #### Data-Plane:
-- :white_check_mark: `tspconfig.yaml` starting template for [Data-plane is here.](https://github.com/Azure/typespec-azure/blob/main/eng/feeds/data-plane/tspconfig.yaml). For `typespec-autorest` emitter, you may only customize the output json file name. For other language SDK emitters' settings, you may override values for TypeSpec direct SDK generation.
+- :white_check_mark: `tspconfig.yaml` starting template for [Data-plane](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml). For `typespec-autorest` emitter, you may only customize the output json file name. For other language SDK emitters' settings, you may override values for TypeSpec direct SDK generation.
 
 ### Detailed information
 
