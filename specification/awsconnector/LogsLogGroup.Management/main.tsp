@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- LogsLogGroups ----------------------------------------------
@@ -123,7 +123,7 @@ model Tag {
 interface LogsLogGroups {
   get is ArmResourceRead<LogsLogGroup>;
   @doc("Create a LogsLogGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LogsLogGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<LogsLogGroup>;
   update is ArmCustomPatchAsync<
     LogsLogGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<LogsLogGroup>

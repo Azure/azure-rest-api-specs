@@ -6,15 +6,12 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * Defines the Neighbor Group.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("Defines the Neighbor Group.")
 @includeInapplicableMetadataInPayload(false)
 model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the Neighbor Group.
-   */
+  @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("neighborGroupName")
@@ -28,35 +25,23 @@ model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
 
 @armResourceOperations
 interface NeighborGroups {
-  /**
-   * Gets the Neighbor Group.
-   */
+  @doc("Gets the Neighbor Group.")
   get is ArmResourceRead<NeighborGroup>;
 
-  /**
-   * Implements the Neighbor Group PUT method.
-   */
+  @doc("Implements the Neighbor Group PUT method.")
   create is ArmResourceCreateOrReplaceAsync<NeighborGroup>;
 
-  /**
-   * Updates the Neighbor Group.
-   */
+  @doc("Updates the Neighbor Group.")
   @parameterVisibility
   update is ArmCustomPatchAsync<NeighborGroup, NeighborGroupPatch>;
 
-  /**
-   * Implements Neighbor Group DELETE method.
-   */
+  @doc("Implements Neighbor Group DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<NeighborGroup>;
 
-  /**
-   * Displays NeighborGroups list by resource group GET method.
-   */
+  @doc("Displays NeighborGroups list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<NeighborGroup>;
 
-  /**
-   * Displays NeighborGroups list by subscription GET method.
-   */
+  @doc("Displays NeighborGroups list by subscription GET method.")
   listBySubscription is ArmListBySubscription<NeighborGroup>;
 }
 
