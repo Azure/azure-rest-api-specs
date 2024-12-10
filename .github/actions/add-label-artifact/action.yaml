@@ -1,0 +1,27 @@
+name: Add Label Artifact
+description: Uploads an empty artifact named `label-${name}=${value}`, that's consumed by action "update-labels"
+
+inputs:
+  name:
+    description: Name
+    required: true
+  value:
+    description: Value ("true" or "false")
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Create empty file to upload artifact
+      run: "> $RUNNER_TEMP/empty.txt"
+      shell: bash
+
+    # The maximum length is reported to be 260 characters. A full list of invalid artifact name characters is documented here:
+    # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
+    - uses: actions/upload-artifact@v4
+      with:
+        name: label-${{ inputs.name }}=${{ inputs.value }}
+        path: ${{ runner.temp }}/empty.txt
+        if-no-files-found: error
+        overwrite: true
