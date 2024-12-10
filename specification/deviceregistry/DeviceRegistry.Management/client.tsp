@@ -8,4 +8,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
-@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryClient", "java");
+@@clientName(Microsoft.DeviceRegistry,
+  "DeviceRegistryManagementClient",
+  "java"
+);
