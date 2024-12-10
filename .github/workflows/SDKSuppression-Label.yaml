@@ -1,0 +1,42 @@
+name: Sdk Breaking Change Suppressions
+
+on:
+  pull_request:
+    branches:
+      - jacktn/suppression-label-script 
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+  workflow_dispatch:
+
+jobs:
+  Run-Manage-SDKSuppression-Label:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Run PowerShell script
+        run: |
+          Write-Output "Running PowerShell!"
+          $PSVersionTable
+          
+      - name: Enable long path support
+        run: git config --system core.longpaths true
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Manage-SDKSuppression-Label script from file
+        shell: pwsh
+        run: |
+          powershell ./eng/scripts/Manage-SDKSuppression-Label.ps1
+        env:
+          GITHUB_EVENT_PULL_REQUEST_BASE_REPO_OWNER: ${{ github.event.pull_request.base.repo.owner.login }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_REPO_NAME: ${{ github.event.pull_request.base.repo.name }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_NAME: ${{ github.event.pull_request.head.repo.name }}
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          GITHUB_EVENT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
