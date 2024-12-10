@@ -38,7 +38,7 @@ foreach ($file in $changedFiles) {
   if ($file -match 'specification(\/[^\/]+\/)+') {
     $path = "$repoPath/$($matches[0])"
     if (Test-Path $path) {
-      Write-host "Checking for tspconfig files under $path"
+      Write-Verbose "Checking for tspconfig files under $path"
       $typespecFolder = Get-ChildItem -path $path tspconfig.* -Recurse
       if ($typespecFolder) {
         $typespecFolders += $typespecFolder.Directory.FullName
