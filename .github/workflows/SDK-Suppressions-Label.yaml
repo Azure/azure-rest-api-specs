@@ -51,6 +51,13 @@ jobs:
             return JSON.stringify(prContext);
           result-encoding: string
 
+      - name: Detect changes to protected files
+        shell: pwsh
+        run: |
+          . eng/scripts/ChangedFiles-Functions.ps1
+          $changedFiles = @(Get-ChangedFiles)
+          echo "Changed files: $changedFiles"
+
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
       
