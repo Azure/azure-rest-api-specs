@@ -52,6 +52,8 @@ foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Uniq
   Write-Host "Cannot find directory $skippedTypespecFolder"
 }
 
-$typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+if ($typespecFolders.Length) {
+  $typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+}
 
 return @($typespecFolders, $checkedAll)
