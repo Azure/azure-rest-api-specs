@@ -150,6 +150,9 @@
           },
           "Get a RestApiPoller data connector": {
             "$ref": "./examples/dataConnectors/GetRestApiPollerById.json"
+          },
+          "Get a PurviewAudit data connector": {
+            "$ref": "./examples/dataConnectors/GetPurviewAuditDataConnectorById.json"
           }
         },
         "tags": [
@@ -227,6 +230,9 @@
           },
           "Creates or updates a GCP data connector": {
             "$ref": "./examples/dataConnectors/CreateGoogleCloudPlatform.json"
+          },
+          "Creates or updates a PurviewAudit data connector": {
+            "$ref": "./examples/dataConnectors/CreatePurviewAuditDataConnector.json"
           }
         },
         "tags": [
@@ -300,6 +306,9 @@
           },
           "Delete a GCP data connector": {
             "$ref": "./examples/dataConnectors/DeleteGoogleCloudPlatform.json"
+          },
+          "Delete a PurviewAudit data connector": {
+            "$ref": "./examples/dataConnectors/DeletePurviewAuditDataConnector.json"
           }
         },
         "tags": [
@@ -483,6 +492,9 @@
           },
           "Check requirements for IoT.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsIoT.json"
+          },
+          "Check requirements for PurviewAudit.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsPurviewAudit.json"
           }
         },
         "tags": [
@@ -947,6 +959,32 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "OfficePowerBI"
+    },
+    "PurviewAuditCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents PurviewAudit requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PurviewAuditCheckRequirementsProperties",
+          "description": "PurviewAudit requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PurviewAudit"
+    },
+    "PurviewAuditCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "PurviewAudit requirements check properties.",
+      "type": "object"
     },
     "OfficePowerBICheckRequirementsProperties": {
       "allOf": [
@@ -2539,7 +2577,8 @@
         "APIPolling",
         "IOT",
         "GCP",
-        "RestApiPoller"
+        "RestApiPoller",
+        "PurviewAudit"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2614,6 +2653,9 @@
           },
           {
             "value": "RestApiPoller"
+          },
+          {
+            "value": "PurviewAudit"
           }
         ]
       }
@@ -2935,6 +2977,71 @@
       "properties": {
         "dataTypes": {
           "$ref": "#/definitions/OfficePowerBIConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
+    },
+    "PurviewAuditDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents PurviewAudit data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PurviewAuditDataConnectorProperties",
+          "description": "PurviewAudit data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "PurviewAudit"
+    },
+    "PurviewAuditConnectorDataTypes": {
+      "description": "The available data types for PurviewAudit data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "PurviewAuditDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "PurviewAudit data connector properties.",
+      "properties": {
+        "connectorDefinitionName": {
+          "description": "The connector definition name (the dataConnectorDefinition resource id).",
+          "type": "string"
+        },
+        "sourceType": {
+          "description": "The source type indicates which kind of data is relevant for this connector.",
+          "type": "string"
+        },
+        "dcrConfig": {
+          "description": "The DCR related properties.",
+          "$ref": "#/definitions/DCRConfiguration"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/PurviewAuditConnectorDataTypes",
           "description": "The available data types for the connector."
         }
       },
