@@ -1722,6 +1722,19 @@
     }
   },
   "definitions": {
+    "Kind": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Distinguishes the kind of cluster. Read-only.",
+      "enum": [
+        "v1",
+        "v2"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true
+      }
+    },
     "Sku": {
       "description": "SKU parameters supplied to the create Redis Enterprise cluster operation.",
       "type": "object",
@@ -1847,6 +1860,9 @@
       "description": "Describes the Redis Enterprise cluster",
       "type": "object",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/Kind"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU to create, which affects price, performance, and features."
