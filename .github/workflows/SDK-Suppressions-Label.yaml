@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # Required since "HEAD^" is passed to Get-ChangedFiles
+          fetch-depth: 2
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
