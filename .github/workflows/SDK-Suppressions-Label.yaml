@@ -54,12 +54,14 @@ jobs:
             return JSON.stringify(prContext);
           result-encoding: string
 
-      - name: Detect changes to protected files
+      - name: Get GitHub PullRequest Changed Files
         shell: pwsh
+        id: get-changedFiles
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
           $changedFiles = @(Get-ChangedFiles)
           echo "Changed files: $changedFiles"
+          echo "::set-output name=changedFiles::$changedFiles"
 
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
@@ -70,6 +72,7 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
           OUTPUT_FILE: "output.json"
+          GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
