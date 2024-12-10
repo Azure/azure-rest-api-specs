@@ -35,4 +35,8 @@ enum QuantumWorkspaceAPIVersion {
   /** 2024-03-01-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2024-03-01-preview`,
+
+  /** 2024-10-01-preview */
+  @useDependency(DefaultAzureCoreVersion)
+  `2024-10-01-preview`,
 }
