@@ -38,17 +38,6 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 input-file:
   - Microsoft.DeviceUpdate/duedge/preview/2025-04-01-preview/deviceupdate.json
 suppressions:
-  - code: AvoidAdditionalProperties
-    from: deviceupdate.json
-    reason: Hash algorithm to hashed value map. Service validates the algorithms.
-    where:
-      - $.definitions.UpdateFile.properties.hashes
-  - code: AvoidAdditionalProperties
-    from: deviceupdate.json
-    reason: Optional file properties (not consumed by service but pass-through to device).
-  - code: ProvisioningStateMustBeReadOnly
-    from: deviceupdate.json
-    reason: False positive. Provisioning state is read-only.
   - code: UnsupportedPatchProperties
     from: deviceupdate.json
     reason: False positive. Location is read-only.
