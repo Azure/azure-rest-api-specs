@@ -41,7 +41,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
-  - [`Swagger SpellCheck`](#swagger-spellcheck)
+  - [`Spell Check`](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
@@ -247,35 +247,34 @@ oav validate-spec <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
-## `Swagger SpellCheck`
+## Spell Check
 
-If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
-add to your existing section or create a new section for your specific spec or service family if the work is more generally used in lots of files under your service.
+If you receive a spelling failure either fix the spelling in source. If there are words that need to be suppressed for
+your service, add the word to the override list in the `words` list in the `specification/<service>/cspell.json`
+file for your service.
 
-``` yaml
- "overrides": [
-    ... example of specific file override
-    {
-        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
-        "words": [
-            "saskey"
-        ]
-    }
-    ... example of specific service family override
-    {
-        "filename": "**/specification/cognitiveservices/**/*.json",
-        "words": [
-            "flac",
-            "mpga"
-        ]
-    }
+If the `specification/<service>/cspell.json` file does not exist, create it using the example below and set the `words`
+list to the words that need to be suppressed. Both `version` and `import` fields are required, use the values in the
+example.
+
+For example (note the words list is sorted alphabetically):
+
+```json
+{
+  "version": "0.2",
+  "import": [
+    "../../cspell.json"
+  ],
+  "words": [
+    "aardvark",
+    "zoology"
+  ]
+}
 ```
 
-Words are case-insensitive so use lower case for the word list.
+Words are case-insensitive so you only need to add the word once.
 
-If you need more information on see [cspell configuration](https://cspell.org/configuration/).
-
-*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
+For more information see [cspell configuration](https://cspell.org/configuration/).
 
 ## `TypeSpec Validation`
 
