@@ -23,8 +23,4 @@ jobs:
           fetch-depth: 1
       
       - name: Run spelling check
-        run: |
-          ./eng/common/spelling/Invoke-Cspell.ps1 `
-            -ScanGlobs 'specifications/**' `
-            -CSpellConfigPath './cspell.json'
-        shell: pwsh
+        run: pwsh -c "./eng/common/spelling/Invoke-Cspell.ps1 -ScanGlobs 'specification/**' -CSpellConfigPath './cspell.json'"
