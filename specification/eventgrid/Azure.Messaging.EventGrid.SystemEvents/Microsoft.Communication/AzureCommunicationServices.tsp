@@ -222,7 +222,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
 
-  /** Number of segmensts in the message */
+  /** Number of segments in the message */
   segmentCount?: int32;
 }
 
