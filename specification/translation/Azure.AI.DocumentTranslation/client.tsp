@@ -8,7 +8,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
+@TypeSpec.Versioning.useDependency(
+  DocumentTranslation.Versions.v2024_11_01_preview
+)
 namespace ClientCustomizations;
 
 @client({
@@ -19,14 +21,17 @@ interface DocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   startTranslation is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getTranslationsStatus is DocumentTranslation.DocumentTranslationOperations.getTranslationsStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDocumentStatus is DocumentTranslation.DocumentTranslationOperations.getDocumentStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getTranslationStatus is DocumentTranslation.DocumentTranslationOperations.getTranslationStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   cancelTranslation is DocumentTranslation.DocumentTranslationOperations.cancelTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getDocumentsStatus is DocumentTranslation.DocumentTranslationOperations.getDocumentsStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getSupportedFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedFormats;
@@ -47,6 +52,14 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
 
+@@clientName(DocumentTranslation.GetTranslationsStatusOptions.ids,
+  "translationIds"
+);
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+
+@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp, java"
@@ -57,9 +70,23 @@ interface SingleDocumentTranslationClient {
   "csharp, java"
 );
 
+@@clientName(DocumentTranslation.SourceInput,
+  "TranslationSource",
+  "csharp, java"
+);
+
+@@clientName(DocumentTranslation.TargetInput,
+  "TranslationTarget",
+  "csharp, java"
+);
+
 @@clientName(DocumentTranslation.BatchRequest, "documentBatch", "python");
 
 @@convenientAPI(DocumentTranslationClient.getSupportedFormats, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getTranslationsStatus, false, "java");
+
+@@convenientAPI(DocumentTranslationClient.getDocumentsStatus, false, "java");
 
 @@access(DocumentTranslationClient.getSupportedFormats,
   Access.internal,
@@ -108,7 +135,10 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
 
-@@clientName(DocumentTranslation.Glossary, "TranslationGlossary", "python");
+@@clientName(DocumentTranslation.Glossary,
+  "TranslationGlossary",
+  "python, java"
+);
 
 @@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
   "created_on",
@@ -198,6 +228,11 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.TranslationStatus,
   "translationStatusResult",
+  "java"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus,
+  "documentStatusResult",
   "java"
 );
 

@@ -35,6 +35,7 @@ op analyzeConversations is RpcOperation<
 >;
 
 /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @added(Versions.v2023_04_01)
 @summary("Get analysis status and results")
 op analyzeConversationsJobStatus is languageOperations.ResourceRead<
