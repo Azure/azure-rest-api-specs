@@ -9236,32 +9236,22 @@
         "configurationApi": {
           "type": "object",
           "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ConfigurationApiProperties",
-              "description": "Configuration API properties.",
-              "readOnly": true
+            "hostname": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Hostname to which the agent connects to propagate configuration to the cloud."
             }
-          }
+          },
+          "required": [
+            "hostname"
+          ],
+          "description": "Information regarding the Configuration API."
         }
       },
       "required": [
         "displayName"
       ],
       "description": "Workspace entity properties."
-    },
-    "ConfigurationApiProperties": {
-      "type": "object",
-      "properties": {
-        "hostname": {
-          "type": "string",
-          "description": "Hostname of the configuration API."
-        }
-      },
-      "required": [
-        "hostname"
-      ],
-      "description": "Configuration API properties."
     },
     "ProductApiLinkCollection": {
       "type": "object",
@@ -9599,4 +9589,3 @@
   },
   "parameters": {}
 }
-
