@@ -308,16 +308,6 @@ model ManagedProxyResource {
   expiresOn: int64;
 }
 
-/**
- * Represent ListIngressGatewayCredentials Request object.
- */
-model ListIngressGatewayCredentialsRequest {
-  /**
-   * The name of the service. If not provided, the request will by pass the generation of service configuration token.
-   */
-  serviceName?: ServiceName;
-}
-
 @@doc(EndpointsList.value, "The list of endpoint.");
 @@doc(EndpointsList.nextLink,
   "The link used to get the next page of endpoints list."
