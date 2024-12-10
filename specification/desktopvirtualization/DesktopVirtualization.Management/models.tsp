@@ -2100,11 +2100,6 @@ model ApplicationProperties {
  */
 model ApplicationPatch {
   /**
-   * tags to be updated
-   */
-  tags?: Record<string>;
-
-  /**
    * Detailed properties for Application
    */
   properties?: ApplicationPatchProperties;
@@ -2212,11 +2207,6 @@ model DesktopProperties {
  * Desktop properties that can be patched.
  */
 model DesktopPatch {
-  /**
-   * tags to be updated
-   */
-  tags?: Record<string>;
-
   /**
    * Detailed properties for Desktop
    */
