@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "properties": {
+      "identity": {
+        "type": "None"
+      },
+      "properties": {
+        "managedResourcesNetworkAccessType": "Private"
+      },
+      "tags": {
+        "key1": "svi1"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "X00",
+        "type": "Microsoft.Workloads/sapVirtualInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00",
+        "identity": {
+          "type": "None"
+        },
+        "location": "westcentralus",
+        "properties": {
+          "configuration": {
+            "configurationType": "Deployment"
+          },
+          "environment": "Prod",
+          "health": "Unknown",
+          "managedResourceGroupConfiguration": {
+            "name": "mrg-x00-6d875e77-e412-4d7d-9af4-8895278b4443"
+          },
+          "managedResourcesNetworkAccessType": "Private",
+          "provisioningState": "Succeeded",
+          "sapProduct": "S4HANA",
+          "state": "InfrastructureDeploymentPending",
+          "status": "Starting"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "svi1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/locations/EASTUS2EUAP/operationStatuses/b7d35156-cfc9-419f-838a-b1e7eff64474*465BB862DF6F3B58F4A29B409D4197F48D5A22B67E126174D4C11F42B19263E5?api-version=2021-12-01-preview"
+      }
+    }
+  },
+  "operationId": "SapVirtualInstances_Update",
+  "title": "SAPVirtualInstances_TrustedAccessEnable_Update"
+}

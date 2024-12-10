@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "subid",
+    "databaseName": "databaseName",
+    "containerName": "mvContainerName",
+    "createUpdateSqlContainerParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "mvContainerName",
+          "indexingPolicy": {
+            "indexingMode": "consistent",
+            "automatic": true,
+            "includedPaths": [
+              {
+                "path": "/*",
+                "indexes": [
+                  {
+                    "kind": "Range",
+                    "dataType": "String",
+                    "precision": -1
+                  },
+                  {
+                    "kind": "Range",
+                    "dataType": "Number",
+                    "precision": -1
+                  }
+                ]
+              }
+            ],
+            "excludedPaths": []
+          },
+          "partitionKey": {
+            "paths": [
+              "/mvpk"
+            ],
+            "kind": "Hash"
+          },
+          "materializedViewDefinition": {
+            "sourceCollectionId": "sourceContainerName",
+            "definition": "select * from ROOT"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/containers/mvContainerName",
+        "name": "mvContainerName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "mvContainerName",
+            "indexingPolicy": {
+              "indexingMode": "consistent",
+              "automatic": true,
+              "includedPaths": [
+                {
+                  "path": "/*"
+                }
+              ],
+              "excludedPaths": [
+                {
+                  "path": "/\"_etag\"/?"
+                }
+              ]
+            },
+            "partitionKey": {
+              "paths": [
+                "/mvpk"
+              ],
+              "kind": "Hash"
+            },
+            "defaultTtl": -1,
+            "uniqueKeyPolicy": {
+              "uniqueKeys": []
+            },
+            "conflictResolutionPolicy": {
+              "mode": "LastWriterWins",
+              "conflictResolutionPath": "/_ts",
+              "conflictResolutionProcedure": ""
+            },
+            "materializedViewDefinition": {
+              "sourceCollectionRid": "vb0sn6nEu9A=",
+              "sourceCollectionId": "sourceContainerName",
+              "definition": "select * from ROOT"
+            },
+            "_rid": "vb0sn8MDxLw=",
+            "_ts": 1671427656,
+            "_etag": "\"00000800-0000-0200-0000-639ff6480000\""
+          }
+        }
+      }
+    },
+    "202": {}
+  }
+}

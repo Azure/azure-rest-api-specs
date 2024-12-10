@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2024-04
+tag: package-2024-09-preview
 
 directive:
   - suppress: ListInOperationName
@@ -67,6 +67,28 @@ directive:
     reason:
       - Currently systemData is not allowed.
 
+```
+
+### Tag: package-2024-09-preview
+
+These settings apply only when `--tag=package-2024-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2024-09-01-preview/nodetype.json
+```
+
+### Tag: package-2024-06-preview
+
+These settings apply only when `--tag=package-2024-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2024-06-01-preview/managedapplication.json
+- Microsoft.ServiceFabric/preview/2024-06-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2024-06-01-preview/nodetype.json
 ```
 
 ### Tag: package-2024-04
@@ -296,26 +318,18 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ServiceFabricManagedClusters
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
-  clear-output-folder: true
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## TypeScript
 
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)

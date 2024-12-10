@@ -5,7 +5,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 
 @@path(ResourceUriParameter.resourceUri, "scope");
-@@Azure.ResourceManager.Private.armCommonParameter(ResourceUriParameter.resourceUri,
+@@Azure.ResourceManager.CommonTypes.Private.armCommonParameter(ResourceUriParameter.resourceUri,
   "ScopeParameter",
   Azure.ResourceManager.CommonTypes.Versions.v5
 );

@@ -1597,6 +1597,16 @@
         "modelAsString": true
       }
     },
+    "IcebergWriteSettings": {
+      "description": "Iceberg write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {}
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -4389,6 +4399,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -4758,6 +4773,25 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Binary store settings."
+        }
+      }
+    },
+    "IcebergSink": {
+      "description": "A copy activity Iceberg sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Iceberg store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/IcebergWriteSettings",
+          "description": "Iceberg format settings."
         }
       }
     },
@@ -5349,6 +5383,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -8359,6 +8398,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -8399,6 +8442,27 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "x-ms-format": "dfe-int",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        }
+      }
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",
@@ -8510,6 +8574,11 @@
           "required": [
             "logDestination"
           ]
+        },
+        "returnMultistatementResult": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Enable to retrieve result sets from multiple SQL statements and the number of rows affected by the DML statement. Supported connector: SnowflakeV2. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
@@ -9111,6 +9180,11 @@
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object",
           "x-ms-format": "dfe-bool"
+        },
+        "pageSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Page size for each http request, too large pageSize will caused timeout, default 300,000. Type: integer (or Expression with resultType integer)."
         }
       }
     },
@@ -9223,6 +9297,11 @@
           "type": "object",
           "description": "Expression to filter data from source.",
           "$ref": "#/definitions/ExpressionV2"
+        },
+        "pageSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
         }
       }
     },

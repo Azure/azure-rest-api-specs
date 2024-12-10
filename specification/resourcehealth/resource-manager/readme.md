@@ -26,7 +26,7 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-02
+tag: package-preview-2023-10
 azure-validator: true
 ```
 
@@ -176,7 +176,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
     after_scripts:
     - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']

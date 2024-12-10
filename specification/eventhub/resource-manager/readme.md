@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-05-preview
+tag: package-2024-01
 ```
 
 ### Tag: package-2017-04
@@ -495,20 +495,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.EventHub
-  output-folder: $(csharp-sdks-folder)/eventhub/Microsoft.Azure.Management.EventHub/src/Generated
-  clear-output-folder: true
-```
 
 ## Python
 

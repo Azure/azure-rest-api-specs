@@ -12,7 +12,7 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/Azure.AI.ChatProtocol/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
-    examples-directory: examples
+    emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.ChatProtocol"
@@ -25,6 +25,8 @@ options:
     package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-ts":
     package-dir: "ai-chat-protocol"
     isModularLibrary: true

@@ -76,7 +76,7 @@
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
-        "description": "List the latest version of each index.",
+        "description": "List the latest version of each index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -124,7 +124,7 @@
     "/indexes/{name}": {
       "get": {
         "operationId": "Indexes_GetLatest",
-        "description": "Get latest Index.",
+        "description": "Get latest version of the Index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -135,7 +135,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -168,7 +169,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version.",
+        "description": "Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -179,7 +180,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -212,7 +214,7 @@
     "/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_List",
-        "description": "The most basic operation.",
+        "description": "List the versions of an Index given the name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -223,7 +225,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "listViewType",
@@ -236,7 +239,7 @@
           {
             "name": "orderBy",
             "in": "query",
-            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
+            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
             "required": false,
             "type": "string"
           },
@@ -290,7 +293,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_Get",
-        "description": "Fetch a IndexVersion by name.",
+        "description": "Get a specific version of an Index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -301,7 +304,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -350,7 +354,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -415,7 +420,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -429,22 +434,21 @@
         },
         "tags": {
           "type": "object",
-          "description": "Asset's tags.",
+          "description": "Asset's tags. Unlike properties, tags are fully mutable.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
-          "description": "Asset's properties.",
+          "description": "Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
           }
         }
       },
       "required": [
-        "id",
-        "stage"
+        "id"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -519,7 +523,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -533,14 +537,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Asset's tags.",
+          "description": "Asset's tags. Unlike properties, tags are fully mutable.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
-          "description": "Asset's properties.",
+          "description": "Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
           }
@@ -552,7 +556,6 @@
       },
       "required": [
         "id",
-        "stage",
         "storageUri"
       ]
     },
@@ -613,7 +616,7 @@
         "nextVersion": {
           "type": "integer",
           "format": "int64",
-          "description": "Next version as defined by the server."
+          "description": "Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'."
         },
         "latestVersion": {
           "type": "string",

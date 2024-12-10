@@ -4,6 +4,8 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./models.testprofile.tsp";
+import "./models.trigger.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -15,6 +17,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Azure.Core.Foundations.ResourceBody.resource,
   "application/json",
   "body"
@@ -36,13 +39,13 @@ interface LoadTestAdministration {
   getTest is StandardResourceOperations.ResourceRead<Test>;
 
   @summary("""
-Get all load tests by the fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-""")
+    Get all load tests by the fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+    """)
   @doc("""
-Get all load tests by the fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-""")
+    Get all load tests by the fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+    """)
   listTests is StandardResourceOperations.ResourceList<
     Test,
     ListQueryParametersTrait<ListTestQueryParams>
@@ -50,16 +53,17 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("""
-Upload input file for a given test Id. File size can't be more than 50 MB.
-Existing file with same name for the given test will be overwritten. File
-should be provided in the request body as application/octet-stream.
-""")
+    Upload input file for a given test Id. File size can't be more than 50 MB.
+    Existing file with same name for the given test will be overwritten. File
+    should be provided in the request body as application/octet-stream.
+    """)
   @doc("""
-Upload input file for a given test Id. File size can't be more than 50 MB.
-Existing file with same name for the given test will be overwritten. File
-should be provided in the request body as application/octet-stream.
-""")
+    Upload input file for a given test Id. File size can't be more than 50 MB.
+    Existing file with same name for the given test will be overwritten. File
+    should be provided in the request body as application/octet-stream.
+    """)
   @route("/tests/{testId}/files/{fileName}")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
@@ -69,9 +73,9 @@ should be provided in the request body as application/octet-stream.
       contentType: "application/octet-stream";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -117,9 +121,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -141,9 +145,9 @@ numeric, underscore or hyphen characters.
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -165,9 +169,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -189,9 +193,9 @@ numeric, underscore or hyphen characters.
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -231,13 +235,14 @@ interface LoadTestRun {
   @doc("Get test run file by file name.")
   getTestRunFile is StandardResourceOperations.ResourceRead<TestRunFileInfo>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @summary("Stop test run by test run Id.")
   @doc("Stop test run by test run Id.")
   @operationId("LoadTestRun_StopTestRun")
   stop is StandardResourceOperations.ResourceAction<TestRun, {}, TestRun, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric namespaces for a load test run.")
   @doc("List the metric namespaces for a load test run.")
   @route("/test-runs/{testRunId}/metric-namespaces")
@@ -245,9 +250,9 @@ interface LoadTestRun {
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -258,6 +263,7 @@ numeric, underscore or hyphen characters.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the metric definitions for a load test run.")
   @doc("List the metric definitions for a load test run.")
   @route("/test-runs/{testRunId}/metric-definitions")
@@ -265,9 +271,9 @@ numeric, underscore or hyphen characters.
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -289,9 +295,9 @@ numeric, underscore or hyphen characters.
   listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -312,15 +318,16 @@ numeric, underscore or hyphen characters.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
   @route("/test-runs/{testRunId}/metric-dimensions/{name}/values")
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -348,9 +355,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique Id for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique Id for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -366,21 +373,21 @@ numeric, underscore or hyphen characters.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("""
-Get associated app component (collection of azure resources) for the given test
-run.
-""")
+    Get associated app component (collection of azure resources) for the given test
+    run.
+    """)
   @doc("""
-Get associated app component (collection of azure resources) for the given test
-run.
-""")
+    Get associated app component (collection of azure resources) for the given test
+    run.
+    """)
   @route("/test-runs/{testRunId}/app-components")
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -402,9 +409,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique Id for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique Id for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -426,9 +433,9 @@ numeric, underscore or hyphen characters.
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -436,5 +443,90 @@ numeric, underscore or hyphen characters.
       testRunId: string;
     },
     TestRunServerMetricConfig
+  >;
+}
+
+// NOTE(mitsha): In clients.tsp, when we use `op is <Op>` syntax, it removes all the decorators defined on the interface
+// including the @added decorator and causes tsp compile client.tsp to fail. To handle this, @added is added at each operation level instead.
+// Do the same whenever routes are added in a new API Version
+@tag("TestProfile")
+interface TestProfileAdministration {
+  @summary("Create a new test profile or update an existing test profile.")
+  @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  createOrUpdateTestProfile is StandardResourceOperations.ResourceCreateOrUpdate<TestProfile>;
+
+  @summary("Delete a test profile.")
+  @doc("Delete a test profile by its test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  deleteTestProfile is StandardResourceOperations.ResourceDelete<TestProfile>;
+
+  @summary("Get load test profile details.")
+  @doc("Get load test profile details by test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  getTestProfile is StandardResourceOperations.ResourceRead<TestProfile>;
+
+  @summary("List test profiles.")
+  @doc("""
+    Get all test profiles for the given filters.
+    """)
+  @added(APIVersions.v2024_05_01_preview)
+  listTestProfiles is StandardResourceOperations.ResourceList<
+    TestProfile,
+    ListQueryParametersTrait<ListTestProfileQueryParams>
+  >;
+}
+
+@tag("TestProfileRun")
+interface TestProfileRunAdministration {
+  @summary("Get test profile run details.")
+  @doc("Get test profile run details by test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  getTestProfileRun is StandardResourceOperations.ResourceRead<TestProfileRun>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create and start a new test profile run.")
+  @doc("Create and start a new test profile run with the given test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  createOrUpdateTestProfileRun is StandardResourceOperations.ResourceCreateOrUpdate<TestProfileRun>;
+
+  @summary("Delete an existing load test profile run.")
+  @doc("Delete an existing load test profile run by providing the test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
+  deleteTestProfileRun is StandardResourceOperations.ResourceDelete<TestProfileRun>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  @summary("Stop test profile run.")
+  @doc("Stop test profile run for the given test profile run Id.")
+  @operationId("TestProfileRunAdministration_StopTestProfileRun")
+  @added(APIVersions.v2024_05_01_preview)
+  stop is StandardResourceOperations.ResourceAction<
+    TestProfileRun,
+    {},
+    TestProfileRun,
+    {}
+  >;
+
+  @summary("List test profile runs.")
+  @doc("Get all test profile runs for the given filters.")
+  @added(APIVersions.v2024_05_01_preview)
+  listTestProfileRuns is StandardResourceOperations.ResourceList<
+    TestProfileRun,
+    ListQueryParametersTrait<ListTestProfileRunQueryParams>
+  >;
+}
+
+@tag("Trigger")
+@added(APIVersions.v2024_07_01_preview)
+interface TriggerAdministration {
+  getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
+
+  createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
+
+  deleteTrigger is StandardResourceOperations.ResourceDelete<Trigger>;
+
+  listTrigger is StandardResourceOperations.ResourceList<
+    Trigger,
+    ListQueryParametersTrait<ListTriggerQueryParams>
   >;
 }

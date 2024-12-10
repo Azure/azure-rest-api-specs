@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "aadwithclientcred",
+    "parameters": {
+      "properties": {
+        "displayName": "aadwithclientcred",
+        "identityProvider": "aad",
+        "oauth2": {
+          "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+          "grantTypes": {
+            "authorizationCode": {
+              "scopes": "User.Read.All Group.Read.All",
+              "resourceUri": "https://graph.microsoft.com"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "aadwithclientcred",
+        "properties": {
+          "displayName": "aadwithclientcred",
+          "identityProvider": "aad",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "clientCredentials": {
+                "scopes": "User.Read.All Group.Read.All",
+                "loginUri": "https://login.windows.net",
+                "resourceUri": "https://graph.microsoft.com",
+                "tenantId": "common"
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders",
+        "name": "aadwithclientcred",
+        "properties": {
+          "displayName": "aadwithclientcred",
+          "identityProvider": "aad",
+          "oauth2": {
+            "redirectUrl": "https://authorization-manager.consent.azure-apim.net/redirect/apim/apimService1",
+            "grantTypes": {
+              "clientCredentials": {
+                "scopes": "User.Read.All Group.Read.All",
+                "loginUri": "https://login.windows.net",
+                "resourceUri": "https://graph.microsoft.com",
+                "tenantId": "common"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

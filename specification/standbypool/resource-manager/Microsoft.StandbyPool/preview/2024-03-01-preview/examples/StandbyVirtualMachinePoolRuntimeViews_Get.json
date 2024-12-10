@@ -1,0 +1,120 @@
+{
+  "title": "StandbyVirtualMachinePoolRuntimeViews_Get",
+  "operationId": "StandbyVirtualMachinePoolRuntimeViews_Get",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "resourceGroupName": "rgstandbypool",
+    "standbyVirtualMachinePoolName": "pool",
+    "runtimeView": "latest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "instanceCountSummary": [
+            {
+              "zone": 1,
+              "instanceCountsByState": [
+                {
+                  "state": "creating",
+                  "count": 100
+                },
+                {
+                  "state": "running",
+                  "count": 20
+                },
+                {
+                  "state": "deallocating",
+                  "count": 10
+                },
+                {
+                  "state": "deallocated",
+                  "count": 100
+                },
+                {
+                  "state": "starting",
+                  "count": 0
+                },
+                {
+                  "state": "deleting",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "zone": 2,
+              "instanceCountsByState": [
+                {
+                  "state": "creating",
+                  "count": 100
+                },
+                {
+                  "state": "running",
+                  "count": 20
+                },
+                {
+                  "state": "deallocating",
+                  "count": 10
+                },
+                {
+                  "state": "deallocated",
+                  "count": 100
+                },
+                {
+                  "state": "starting",
+                  "count": 0
+                },
+                {
+                  "state": "deleting",
+                  "count": 0
+                }
+              ]
+            },
+            {
+              "zone": 3,
+              "instanceCountsByState": [
+                {
+                  "state": "creating",
+                  "count": 100
+                },
+                {
+                  "state": "running",
+                  "count": 20
+                },
+                {
+                  "state": "deallocating",
+                  "count": 10
+                },
+                {
+                  "state": "deallocated",
+                  "count": 100
+                },
+                {
+                  "state": "starting",
+                  "count": 0
+                },
+                {
+                  "state": "deleting",
+                  "count": 0
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool/runtimeViews/latest",
+        "name": "pool",
+        "type": "Microsoft.StandbyPool/standbyVirtualMachinePools/runtimeViews",
+        "systemData": {
+          "createdBy": "pooluser@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-02-14T23:31:59.679Z",
+          "lastModifiedBy": "pooluser@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-14T23:31:59.679Z"
+        }
+      }
+    }
+  }
+}

@@ -162,12 +162,7 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NotificationContent"
-            }
+            "$ref": "#/parameters/NotificationMessagesSendRequestBody"
           }
         ],
         "responses": {
@@ -364,7 +359,7 @@
     },
     "CommunicationMessageKind": {
       "type": "string",
-      "description": "The type of message. Supports text, image, template.",
+      "description": "The type of message.",
       "enum": [
         "text",
         "image",
@@ -412,7 +407,7 @@
     },
     "MediaNotificationContent": {
       "type": "object",
-      "description": "A request to send a media notification.",
+      "description": "A request to send an image notification.",
       "properties": {
         "content": {
           "type": "string",
@@ -1062,6 +1057,16 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
+    },
+    "NotificationMessagesSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the message to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/NotificationContent"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

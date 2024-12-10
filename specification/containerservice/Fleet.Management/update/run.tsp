@@ -51,14 +51,14 @@ model UpdateRunProperties {
 
   @doc("""
     The resource id of the FleetUpdateStrategy resource to reference.
-
+    
     When creating a new run, there are three ways to define a strategy for the run:
     1. Define a new strategy in place: Set the "strategy" field.
     2. Use an existing strategy: Set the "updateStrategyId" field. (since 2023-08-15-preview)
     3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since 2023-08-15-preview)
-
+    
     Setting both "updateStrategyId" and "strategy" is invalid.
-
+    
     UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
     Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
@@ -67,10 +67,10 @@ model UpdateRunProperties {
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
   @doc("""
-The strategy defines the order in which the clusters will be updated.
-If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
-The strategy of the UpdateRun can be modified until the run is started.
-""")
+    The strategy defines the order in which the clusters will be updated.
+    If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
+    The strategy of the UpdateRun can be modified until the run is started.
+    """)
   strategy?: UpdateRunStrategy;
 
   @doc("The update to be applied to all clusters in the UpdateRun. The managedClusterUpdate can be modified until the run is started.")
@@ -98,6 +98,11 @@ model NodeImageSelection {
   @visibility("create", "read")
   @doc("The node image upgrade type.")
   type: NodeImageSelectionType;
+
+  @added(Versions.v2024_05_02_preview)
+  @doc("Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.")
+  @extension("x-ms-identifiers", ["version"])
+  customNodeImageVersions?: NodeImageVersion[];
 }
 
 @doc("The node image upgrade type.")
@@ -110,6 +115,10 @@ union NodeImageSelectionType {
 
   @doc("The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'.")
   "Consistent",
+
+  @added(Versions.v2024_05_02_preview)
+  @doc("Upgrade the nodes to the custom image versions. When set, update run will use node image versions provided in customNodeImageVersions to upgrade the nodes. If set, customNodeImageVersions must not be empty.")
+  "Custom",
 }
 
 scalar KubernetesVersion extends string;
@@ -314,10 +323,10 @@ model SkipTarget {
   type: TargetType;
 
   @doc("""
-  The skip target's name. 
-  To skip a member/group/stage, use the member/group/stage's name;
-  Tp skip an after stage wait, use the parent stage's name.
-  """)
+    The skip target's name. 
+    To skip a member/group/stage, use the member/group/stage's name;
+    Tp skip an after stage wait, use the parent stage's name.
+    """)
   name: string;
 }
 
@@ -334,11 +343,14 @@ model SkipProperties {
 interface UpdateRuns {
   get is ArmResourceRead<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT VERSION"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     UpdateRun,
     Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
       IfMatchParameters<UpdateRun> &
-      IfNoneMatchParameters<UpdateRun>
+      IfNoneMatchParameters<UpdateRun>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
@@ -349,7 +361,8 @@ interface UpdateRuns {
       IfMatchParameters<UpdateRun>
   >;
 
-  listByParent is ArmResourceListByParent<UpdateRun>;
+  /** List UpdateRun resources by Fleet */
+  listByFleet is ArmResourceListByParent<UpdateRun>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")

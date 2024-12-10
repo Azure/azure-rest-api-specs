@@ -223,14 +223,16 @@ alias EnvironmentUpdateProperties = {
   parameters?: Record<unknown>;
 };
 
-alias EnvironmentPatchProperties = {
+@doc("Properties of an environment. These properties can be updated via PATCH after the resource has been created.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentPatchProperties {
   @doc("""
-  The time the expiration date will be triggered (UTC), after which the
-  environment and associated resources will be deleted.
-  """)
+    The time the expiration date will be triggered (UTC), after which the
+    environment and associated resources will be deleted.
+    """)
   @added(APIVersions.v2024_02_01)
   expirationDate?: utcDateTime;
-};
+}
 
 @doc("Outputs from environment deployment.")
 @added(APIVersions.v2024_02_01)
@@ -279,10 +281,10 @@ model EnvironmentOperation {
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
 
-  @doc("The time the operation started.")
+  @doc("The time the operation started, in RFC3339 format.")
   startTime?: utcDateTime;
 
-  @doc("The time the operation finished.")
+  @doc("The time the operation finished, in RFC3339 format.")
   endTime?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
@@ -320,14 +322,14 @@ model EnvironmentAction {
   @visibility("read")
   lastModifiedBy?: Azure.Core.uuid;
 
-  @doc("Time the object was last modified.")
+  @doc("Time the object was last modified, in RFC3339 format.")
   lastModifiedAt?: utcDateTime;
 }
 
 @doc("Details about the next run of an action.")
 @added(APIVersions.v2024_02_01)
 model EnvironmentNextAction {
-  @doc("The time the action will be triggered (UTC).")
+  @doc("The time the action will be triggered (UTC), in RFC3339 format.")
   scheduledTime?: utcDateTime;
 }
 
@@ -401,15 +403,15 @@ model EnvironmentDefinitionParameter {
   default?: string;
 
   @doc("""
-A string of one of the basic JSON types (number, integer, array, object,
-boolean, string).
-""")
+    A string of one of the basic JSON types (number, integer, array, object,
+    boolean, string).
+    """)
   type: ParameterType;
 
   @doc("""
-Whether or not this parameter is read-only.  If true, default should have a
-value.
-""")
+    Whether or not this parameter is read-only.  If true, default should have a
+    value.
+    """)
   readOnly?: boolean;
 
   @doc("Whether or not this parameter is required.")
@@ -439,10 +441,10 @@ model EnvironmentType {
   name: string;
 
   @doc("""
-Id of a subscription or management group that the environment type will be
-mapped to. The environment's resources will be deployed into this subscription
-or management group.
-""")
+    Id of a subscription or management group that the environment type will be
+    mapped to. The environment's resources will be deployed into this subscription
+    or management group.
+    """)
   deploymentTargetId: string;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")

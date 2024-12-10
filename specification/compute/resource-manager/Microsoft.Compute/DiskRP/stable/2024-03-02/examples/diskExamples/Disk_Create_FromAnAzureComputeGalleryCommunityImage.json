@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-02",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "osType": "Windows",
+        "creationData": {
+          "createOption": "FromImage",
+          "galleryImageReference": {
+            "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "galleryImageReference": {
+              "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+            }
+          },
+          "provisioningState": "Updating"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "name": "myDisk",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "galleryImageReference": {
+              "communityGalleryImageId": "/CommunityGalleries/{communityGalleryPublicGalleryName}/Images/{imageName}/Versions/1.0.0"
+            }
+          }
+        }
+      }
+    }
+  }
+}

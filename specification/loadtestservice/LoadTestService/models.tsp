@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
@@ -30,9 +28,36 @@ union PFAgFunc {
   @doc("Criteria applies for given percentage value.") "percentage",
   @doc("Criteria applies for avg value.") "avg",
   @doc("Criteria applies for 50th percentile value.") "p50",
+
+  @doc("Criteria applies for 75th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p75",
+
   @doc("Criteria applies for 90th percentile value.") "p90",
   @doc("Criteria applies for 95th percentile value.") "p95",
+
+  @doc("Criteria applies for 96th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p96",
+
+  @doc("Criteria applies for 97th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p97",
+
+  @doc("Criteria applies for 98th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p98",
+
   @doc("Criteria applies for 99th percentile value.") "p99",
+
+  @doc("Criteria applies for 99.9th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p99.9",
+
+  @doc("Criteria applies for 99.99th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p99.99",
+
   @doc("Criteria applies for minimum value.") "min",
   @doc("Criteria applies for maximum value.") "max",
 }
@@ -63,6 +88,17 @@ union SecretType {
   @doc("If the secret value provided as plain text.") "SECRET_VALUE",
 }
 
+@doc("Managed identity type.")
+union ManagedIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+}
+
 @doc("Types of certificates supported.")
 union CertificateType {
   string,
@@ -88,7 +124,7 @@ union FileType {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  "URL_TEST_CONFIG_JSON",
+  "URL_TEST_CONFIG",
 
   @added(APIVersions.v2024_03_01_preview)
   @doc("If the file is a test script.")
@@ -141,9 +177,35 @@ union AggregationType {
   @doc("Total count.") "Count",
   @doc("Aggregation will be average in this case.") "None",
   @doc("Total sum.") "Total",
+
+  @doc("75th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile75",
+
   @doc("90th percentile.") "Percentile90",
   @doc("95th percentile.") "Percentile95",
+
+  @doc("96th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile96",
+
+  @doc("97th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile97",
+
+  @doc("98th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile98",
+
   @doc("99th percentile.") "Percentile99",
+
+  @doc("99.9th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile999",
+
+  @doc("99.99th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile9999",
 }
 
 @doc("Metric unit.")
@@ -195,6 +257,14 @@ union TestKind {
   "Locust",
 }
 
+@added(APIVersions.v2024_07_01_preview)
+@doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+union CreateByTypes {
+  string,
+  @doc("Entity was created by a user.") "User",
+  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+}
+
 @doc("Test file info.")
 @resource("files")
 @parentResource(Test)
@@ -216,12 +286,12 @@ model Test {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata.")
@@ -270,6 +340,22 @@ SECRET_VALUE.
   @doc("Resource Id of the managed identity referencing the Key vault.")
   keyvaultReferenceIdentityId?: string;
 
+  @doc("Type of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Id of the managed identity referencing the metrics.")
+  @added(APIVersions.v2024_07_01_preview)
+  metricsReferenceIdentityId?: string;
+
+  @doc("Type of the managed identity built in load test engines")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityIds?: string[];
+
   ...SystemMetaData;
 }
 
@@ -277,6 +363,10 @@ SECRET_VALUE.
 model PassFailCriteria {
   @doc("Map of id and pass fail metrics { id  : pass fail metrics }.")
   passFailMetrics?: Record<PassFailMetric>;
+
+  @doc("Map of id and pass fail server metrics { id  : pass fail metrics }.")
+  @added(APIVersions.v2024_07_01_preview)
+  passFailServerMetrics?: Record<PassFailServerMetric>;
 }
 
 @doc("Pass fail metric")
@@ -285,11 +375,11 @@ model PassFailMetric {
   clientMetric?: PFMetrics;
 
   @doc("""
-The aggregation function to be applied on the client metric. Allowed functions
-- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
-‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-‘count’ - for requests
-""")
+    The aggregation function to be applied on the client metric. Allowed functions
+    - ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,
+    ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+    ‘count’ - for requests
+    """)
   aggregate?: PFAgFunc;
 
   @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
@@ -299,15 +389,47 @@ The aggregation function to be applied on the client metric. Allowed functions
   requestName?: string;
 
   @doc("""
-The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
-100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
-""")
+    The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+    100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
+    """)
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
   action?: PFAction = PFAction.continue;
 
   @doc("The actual value of the client metric for the test run.")
+  @visibility("read")
+  actualValue?: float64;
+
+  @doc("Outcome of the test run.")
+  @visibility("read")
+  result?: PFResult;
+}
+
+@doc("Pass fail server metric")
+model PassFailServerMetric {
+  @doc("The resource id of the resource emitting the metric.")
+  resourceId: string;
+
+  @doc("The server metric namespace.")
+  metricNamespace: string;
+
+  @doc("The server metric name.")
+  metricName: string;
+
+  @doc("Aggregation Type")
+  aggregation: string;
+
+  @doc("The comparison operator. Supported types ‘>’, ‘<’ ")
+  condition: string;
+
+  @doc("The value to compare with the server metric.")
+  value: float64;
+
+  @doc("Action taken after the threshold is met. Default is ‘continue’.")
+  action?: PFAction = PFAction.continue;
+
+  @doc("The actual value of the server metric ")
   @visibility("read")
   actualValue?: float64;
 
@@ -353,23 +475,23 @@ model AutoStopCriteria {
 @doc("Configurations for the load test.")
 model LoadTestConfiguration {
   @doc("""
-The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
-""")
+    The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
+    """)
   engineInstances?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
   @doc("""
-If false, Azure Load Testing copies and processes your input files unmodified
-across all test engine instances. If true, Azure Load Testing splits the CSV
-input data evenly across all engine instances. If you provide multiple CSV
-files, each file will be split evenly.
-""")
+    If false, Azure Load Testing copies and processes your input files unmodified
+    across all test engine instances. If true, Azure Load Testing splits the CSV
+    input data evenly across all engine instances. If you provide multiple CSV
+    files, each file will be split evenly.
+    """)
   splitAllCSVs?: boolean = false;
 
   @doc("""
-If true, optionalLoadTestConfig is required and JMX script for the load test is
-not required to upload.
-""")
+    If true, optionalLoadTestConfig is required and JMX script for the load test is
+    not required to upload.
+    """)
   quickStartTest?: boolean = false;
 
   @doc("Configuration for quick load test")
@@ -383,15 +505,15 @@ not required to upload.
 @doc("Region distribution configuration for the load test.")
 model RegionalConfiguration {
   @doc("""
-  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
-""")
+      The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
+    """)
   engineInstances: int32;
 
   @doc("""
-Azure region name.
-The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
-The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
-""")
+    Azure region name.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
   region: string;
 }
 
@@ -443,9 +565,9 @@ model TestInputArtifacts {
 
 @doc("File info")
 model FileInfo {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "model is output only"
   @doc("Name of the file.")
   @key
-  @visibility
   fileName: string;
 
   @doc("File URL.")
@@ -473,10 +595,10 @@ model FileInfo {
 @doc("Test app components")
 model TestAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test identifier")
@@ -487,12 +609,12 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 }
 
 @doc("""
-An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
-""")
+  An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+  """)
 model AppComponent {
   @doc("""
-fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
-""")
+    fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+    """)
   @visibility("read")
   resourceId: string;
 
@@ -524,20 +646,20 @@ model TestServerMetricConfig {
   testId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics: Record<ResourceMetric>;
 
   ...SystemMetaData;
 }
 
 @doc("""
-Associated metric definition for particular metrics of the azure resource (
-Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-""")
+  Associated metric definition for particular metrics of the azure resource (
+  Refer :
+  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+  """)
 model ResourceMetric {
   @doc("Unique name for metric.")
   @visibility("read")
@@ -578,12 +700,12 @@ model TestRun {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata")
@@ -597,18 +719,18 @@ SECRET_VALUE.
   errorDetails?: ErrorDetails[];
 
   @doc("""
-Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
-The sampler name is the same as the name mentioned in the test script.
-Sampler name "Total" represents the aggregated statistics of all the samplers.
-""")
+    Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
+    The sampler name is the same as the name mentioned in the test script.
+    Sampler name "Total" represents the aggregated statistics of all the samplers.
+    """)
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
 
   @doc("""
-Regional statistics. Key is the Azure region name and value is the test run statistics.
-The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
-The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
-""")
+    Regional statistics. Key is the Azure region name and value is the test run statistics.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
   @visibility("read")
   @added(APIVersions.v2024_03_01_preview)
   regionalStatistics?: Record<TestRunStatistics>;
@@ -666,6 +788,11 @@ The region name must match one of the strings in the "Name" column returned from
   @visibility("read")
   duration?: int64;
 
+  @doc("Virtual user hours consumed by the test run.")
+  @visibility("read")
+  @added(APIVersions.v2024_07_01_preview)
+  virtualUserHours?: float64;
+
   @doc("Subnet ID on which the load test instances should run.")
   @visibility("read")
   subnetId?: string;
@@ -675,11 +802,23 @@ The region name must match one of the strings in the "Name" column returned from
   @visibility("read")
   kind?: TestKind;
 
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Request data collection level for test run")
+  requestDataLevel?: RequestDataLevel;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
+  debugLogsEnabled?: boolean;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   @visibility("read")
   publicIPDisabled?: boolean;
+
+  @added(APIVersions.v2024_07_01_preview)
+  @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
+  createdByType?: CreateByTypes;
 
   ...SystemMetaData;
 }
@@ -736,6 +875,36 @@ model TestRunStatistics {
   @doc("99 percentile response time.")
   @visibility("read")
   pct3ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("75 percentile response time.")
+  @visibility("read")
+  pct75ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("96 percentile response time.")
+  @visibility("read")
+  pct96ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("97 percentile response time.")
+  @visibility("read")
+  pct97ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("98 percentile response time.")
+  @visibility("read")
+  pct98ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.9 percentile response time.")
+  @visibility("read")
+  pct999ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.99 percentile response time.")
+  @visibility("read")
+  pct9999ResTime?: float64;
 
   @doc("Throughput.")
   @visibility("read")
@@ -796,6 +965,10 @@ model TestRunOutputArtifacts {
   @doc("The container for test run artifacts.")
   @added(APIVersions.v2023_04_01_preview)
   artifactsContainerInfo?: ArtifactsContainerInfo;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("The report file for the test run.")
+  reportFileInfo?: TestRunFileInfo;
 }
 
 @doc("Artifacts container info.")
@@ -853,9 +1026,9 @@ model MetricDefinition {
   unit?: MetricUnit;
 
   @doc("""
-Metric availability specifies the time grain (aggregation interval or
-frequency).
-""")
+    Metric availability specifies the time grain (aggregation interval or
+    frequency).
+    """)
   metricAvailabilities?: MetricAvailability[];
 }
 
@@ -871,20 +1044,20 @@ model NameAndDesc {
 @doc("Metric availability specifies the time grain (aggregation interval or frequency)")
 model MetricAvailability {
   @doc("""
-The time grain specifies the aggregation interval for the metric. Expressed as
-a duration 'PT1M', 'PT1H', etc.
-""")
+    The time grain specifies the aggregation interval for the metric. Expressed as
+    a duration 'PT1M', 'PT1H', etc.
+    """)
   timeGrain?: TimeGrain;
 }
 
 @doc("Filters to fetch the set of metric.")
 model MetricRequestPayload {
   @doc("""
-Get metrics for specific dimension values. Example: Metric contains dimension
-like SamplerName, Error. To retrieve all the time series data where SamplerName
-is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
-{\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
-""")
+    Get metrics for specific dimension values. Example: Metric contains dimension
+    like SamplerName, Error. To retrieve all the time series data where SamplerName
+    is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
+    {\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
+    """)
   filters?: DimensionFilter[];
 }
 
@@ -898,7 +1071,6 @@ model DimensionFilter {
 }
 
 @doc("The response to a metrics query.")
-@friendlyName("Metrics")
 // using friendlyName to change the name of the model due to issue in using projectedName '@encodedName("application/json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
@@ -958,20 +1130,19 @@ model MetricDimensionsRequest {
   metricNamespace: string;
 
   @doc("""
-  The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
-  """)
+    The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
+    """)
   @query
-  @clientName("time_interval", "python")
   timespan: string;
 }
 
 @doc("Test run app component")
 model TestRunAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test run identifier")
@@ -988,10 +1159,10 @@ model TestRunServerMetricConfig {
   testRunId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics?: Record<ResourceMetric>;
 
   ...SystemMetaData;
@@ -1000,11 +1171,11 @@ for metric id).
 @doc("Query parameters for list test run operation")
 model OldTestRunIdQueryParam {
   @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
+    Existing test run identifier that should be rerun, if this is provided, the
+    test will run with the JMX file, configuration and app components from the
+    existing test run. You can override the configuration values for new test run
+    in the request body.
+    """)
   @query
   oldTestRunId?: string;
 }
@@ -1012,17 +1183,17 @@ in the request body.
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
-asc. Supported fields - executedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+    asc. Supported fields - executedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - description,
-executedUser. For example, to search for a test run, with description 500 VUs,
-the search parameter can be 500.
-""")
+    Prefix based, case sensitive search on searchable fields - description,
+    executedUser. For example, to search for a test run, with description 500 VUs,
+    the search parameter can be 500.
+    """)
   @query
   search?: string;
 
@@ -1050,29 +1221,29 @@ the search parameter can be 500.
 @doc("Parameters for list test operation")
 model ListTestQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg:
-lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg:
+    lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - displayName,
-createdBy. For example, to search for a test, with display name is Login Test,
-the search parameter can be Login.
-""")
+    Prefix based, case sensitive search on searchable fields - displayName,
+    createdBy. For example, to search for a test, with display name is Login Test,
+    the search parameter can be Login.
+    """)
   @query
   search?: string;
 
   @doc("""
-Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedEndTime?: utcDateTime;
 
@@ -1120,6 +1291,18 @@ model TestRunIdPathParameter {
   @key
   @pattern("^[a-z0-9_-]*$")
   testRunId: string;
+}
+
+@added(APIVersions.v2024_05_01_preview)
+@doc("Request data collection level for test run")
+union RequestDataLevel {
+  string,
+
+  @doc("No request data will be collected")
+  NONE: "NONE",
+
+  @doc("Request data will be collected in case of failed requests")
+  ERRORS: "ERRORS",
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &

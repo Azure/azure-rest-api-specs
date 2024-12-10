@@ -48,12 +48,6 @@ namespace Microsoft.EventGrid {
 
   enum ServiceApiVersions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_06_01_preview: "2023-06-01-preview",
-
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    v2023_10_01_preview: "2023-10-01-preview",
-
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
@@ -189,29 +183,25 @@ namespace Microsoft.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be released.")
-  model ReleaseOptions {
+  alias ReleaseOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be acknowledged.")
-  model AcknowledgeOptions {
+  alias AcknowledgeOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be rejected.")
-  model RejectOptions {
+  alias RejectOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be renewed.")
-  model RenewLockOptions {
+  alias RenewLockOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
   @doc("Topic Resource.")
   @resource("topics")
@@ -304,9 +294,7 @@ namespace Microsoft.EventGrid {
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("AcknowledgeOptions.")
-      @bodyRoot
-      acknowledgeOptions: AcknowledgeOptions;
+      ...AcknowledgeOptions;
     },
     AcknowledgeResult
   >;
@@ -319,12 +307,8 @@ namespace Microsoft.EventGrid {
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("ReleaseOptions")
-      @bodyRoot
-      releaseOptions: ReleaseOptions;
+      ...ReleaseOptions;
 
-      @added(ServiceApiVersions.v2023_10_01_preview)
-      @removed(ServiceApiVersions.v2023_11_01)
       @added(ServiceApiVersions.v2024_06_01)
       @doc("Release cloud events with the specified delay in seconds.")
       @query
@@ -341,26 +325,20 @@ namespace Microsoft.EventGrid {
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("RejectOptions")
-      @bodyRoot
-      rejectOptions: RejectOptions;
+      ...RejectOptions;
     },
     RejectResult
   >;
 
   // RenewLock Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
-  @added(ServiceApiVersions.v2023_10_01_preview)
-  @removed(ServiceApiVersions.v2023_11_01)
   @added(ServiceApiVersions.v2024_06_01)
   @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("RenewLockOptions")
-      @bodyRoot
-      renewLockOptions: RenewLockOptions;
+      ...RenewLockOptions;
     },
     RenewCloudEventLocksResult
   >;

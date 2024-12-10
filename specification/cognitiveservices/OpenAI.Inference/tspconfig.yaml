@@ -13,7 +13,7 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
-    examples-directory: "{project-root}/examples"
+    emit-lro-options: "none"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
@@ -28,8 +28,9 @@ options:
     partial-update: true
     enable-sync-stack: true
     generate-tests: false
+    generate-samples: false
     custom-types-subpackage: "implementation.models"
-    custom-types: "FunctionCallPreset"
+    custom-types: "FunctionCallPreset,FileListResponse,OpenAIPageableListOfBatch"
     customization-class: customization/src/main/java/OpenAICustomizations.java
     flavor: azure
   "@azure-tools/typespec-ts":

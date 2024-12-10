@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -111,17 +113,6 @@
               "$ref": "#/definitions/KeyListResult"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.keyset+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
@@ -141,7 +132,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -373,17 +365,6 @@
               "$ref": "#/definitions/KeyValueListResult"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kvset+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -413,7 +394,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -741,17 +723,6 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -760,10 +731,10 @@
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
               },
-              "x-ms-client-request-id": {
+              "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -865,17 +836,6 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -956,17 +916,6 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -1244,17 +1193,6 @@
               "$ref": "#/definitions/LabelListResult"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.labelset+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
@@ -1274,7 +1212,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -1433,17 +1372,6 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -1532,17 +1460,6 @@
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kv+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -1753,17 +1670,6 @@
               "$ref": "#/definitions/KeyValueListResult"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.kvset+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -1787,7 +1693,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -2121,17 +2028,6 @@
               "$ref": "#/definitions/SnapshotListResult"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.snapshotset+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
@@ -2151,7 +2047,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink"
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
         }
       },
       "head": {
@@ -2348,17 +2245,6 @@
               "$ref": "#/definitions/Snapshot"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.snapshot+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -2371,10 +2257,10 @@
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
               },
-              "x-ms-client-request-id": {
+              "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -2450,17 +2336,6 @@
               "$ref": "#/definitions/Snapshot"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.snapshot+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."
@@ -2562,17 +2437,6 @@
               "$ref": "#/definitions/Snapshot"
             },
             "headers": {
-              "Content-Type": {
-                "type": "string",
-                "description": "Content-Type header",
-                "enum": [
-                  "application/vnd.microsoft.appconfig.snapshot+json",
-                  "application/problem+json"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              },
               "ETag": {
                 "type": "string",
                 "description": "A value representing the current state of the resource."

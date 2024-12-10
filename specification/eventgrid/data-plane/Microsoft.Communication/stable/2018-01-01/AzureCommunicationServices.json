@@ -37,6 +37,10 @@
           "description": "Signed incoming call context.",
           "type": "string"
         },
+        "onBehalfOfCallee": {
+          "description": "The communication identifier of the user on behalf of whom the call is made.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
         "correlationId": {
           "description": "CorrelationId (CallId).",
           "type": "string"
@@ -1480,11 +1484,10 @@
           "description": "Detailed information about the status if any",
           "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
         },
-        "deliveryAttemptTimeStamp": {
+        "deliveryAttemptTimestamp": {
           "description": "The time at which the email delivery report received timestamp",
           "format": "date-time",
-          "type": "string",
-          "x-ms-client-name": "deliveryAttemptTimestamp"
+          "type": "string"
         }
       }
     },
@@ -1504,11 +1507,10 @@
           "description": "The Id of the email that has been sent",
           "type": "string"
         },
-        "userActionTimeStamp": {
+        "userActionTimestamp": {
           "description": "The time at which the user interacted with the email",
           "format": "date-time",
-          "type": "string",
-          "x-ms-client-name": "userActionTimestamp"
+          "type": "string"
         },
         "engagementContext": {
           "description": "The context of the type of engagement user had with email",
@@ -2336,7 +2338,7 @@
           "type": "string"
         },
         "description": {
-          "description": "The sescription of the selected row",
+          "description": "The description of the selected row",
           "type": "string"
         }
       }

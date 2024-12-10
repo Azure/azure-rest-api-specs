@@ -18,32 +18,32 @@ union StringIndexType {
   string,
 
   @doc("""
-  User-perceived display character, or grapheme cluster, as defined by Unicode
-  8.0.0.
-  """)
+    User-perceived display character, or grapheme cluster, as defined by Unicode
+    8.0.0.
+    """)
   textElements: "textElements",
 
   @doc("Character unit represented by a single unicode code point.  Used by Python 3.")
   unicodeCodePoint: "unicodeCodePoint",
 
   @doc("""
-  Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
-  Java, and .NET.
-  """)
+    Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
+    Java, and .NET.
+    """)
   utf16CodeUnit: "utf16CodeUnit",
 }
 
 @doc("Format of the content in analyzed result.")
-union ContentFormat {
+union DocumentContentFormat {
   string,
 
   @doc("Plain text representation of the document content without any formatting.")
   text: "text",
 
   @doc("""
-  Markdown representation of the document content with section headings, tables,
-  etc.
-  """)
+    Markdown representation of the document content with section headings, tables,
+    etc.
+    """)
   markdown: "markdown",
 }
 
@@ -52,25 +52,25 @@ union DocumentAnalysisFeature {
   string,
 
   @doc("Perform OCR at a higher resolution to handle documents with fine print.")
-  "ocrHighResolution",
+  ocrHighResolution: "ocrHighResolution",
 
   @doc("Enable the detection of the text content language.")
-  "languages",
+  languages: "languages",
 
   @doc("Enable the detection of barcodes in the document.")
-  "barcodes",
+  barcodes: "barcodes",
 
   @doc("Enable the detection of mathematical expressions in the document.")
-  "formulas",
+  formulas: "formulas",
 
   @doc("Enable the detection of general key value pairs (form fields) in the document.")
-  "keyValuePairs",
+  keyValuePairs: "keyValuePairs",
 
   @doc("Enable the recognition of various font styles.")
-  "styleFont",
+  styleFont: "styleFont",
 
   @doc("Enable the extraction of additional fields via the queryFields query parameter.")
-  "queryFields",
+  queryFields: "queryFields",
 }
 
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
@@ -85,9 +85,9 @@ union DocumentSelectionMarkState {
   string,
 
   @doc("""
-  The selection mark is selected, often indicated by a check ✓ or cross X inside
-  the selection mark.
-  """)
+    The selection mark is selected, often indicated by a check ✓ or cross X inside
+    the selection mark.
+    """)
   "selected",
 
   @doc("The selection mark is not selected.")
@@ -190,14 +190,14 @@ union DocumentTableCellKind {
 }
 
 @doc("Font style.")
-union FontStyle {
+union DocumentFontStyle {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are visually slanted to the right.") "italic",
 }
 
 @doc("Font weight.")
-union FontWeight {
+union DocumentFontWeight {
   string,
   @doc("Characters are represented normally.") "normal",
   @doc("Characters are represented with thicker strokes.") "bold",
@@ -249,7 +249,6 @@ union DocumentFieldType {
   @doc("Boolean value, normalized to true or false.")
   boolean: "boolean",
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Array of selected string values.")
   selectionGroup: "selectionGroup",
 }
@@ -264,8 +263,12 @@ union DocumentSignatureType {
 @doc("Custom document model build mode.")
 union DocumentBuildMode {
   string,
-  @doc("Target documents with similar visual templates.") "template",
-  @doc("Support documents with diverse visual templates.") "neural",
+
+  @doc("Target documents with similar visual templates.")
+  "template",
+
+  @doc("Support documents with diverse visual templates.")
+  "neural",
 }
 
 @doc("Type of operation.")
@@ -279,10 +282,16 @@ union OperationKind {
   documentModelCompose: "documentModelCompose",
 
   @doc("""
-  Copy an existing document model to potentially a different resource, region, or
-  subscription.
-  """)
+    Copy an existing document model to potentially a different resource, region, or
+    subscription.
+    """)
   documentModelCopyTo: "documentModelCopyTo",
+
+  @doc("""
+    Copy an existing document classifier to potentially a different resource, region, or
+    subscription.
+    """)
+  documentClassifierCopyTo: "documentClassifierCopyTo",
 
   @doc("Build a new custom classifier model.")
   documentClassifierBuild: "documentClassifierBuild",
@@ -304,7 +313,7 @@ union SplitMode {
 
 @lroStatus
 @doc("Operation status.")
-union OperationStatus {
+union DocumentIntelligenceOperationStatus {
   string,
 
   @doc("The operation has not started yet.")
@@ -321,14 +330,13 @@ union OperationStatus {
   @lroSucceeded
   succeeded: "succeeded",
 
-  @added(Versions.v2024_02_29_preview)
-  @doc("The operation has completed.")
-  @lroSucceeded
-  completed: "completed",
-
   @doc("The operation has been canceled.")
   @lroCanceled
   canceled: "canceled",
+
+  @doc("The operation has been skipped.")
+  @lroCanceled
+  skipped: "skipped",
 }
 
 @doc("Type of content source.")
@@ -336,16 +344,27 @@ union ContentSourceKind {
   string,
 
   @doc("Content at a specific URL.")
-  "url",
+  url: "url",
 
   @doc("Content represented via Base64 encoding.")
-  "base64",
+  base64: "base64",
 
   @doc("Files in a path within an Azure Blob Storage container.")
-  "azureBlob",
+  azureBlob: "azureBlob",
 
   @doc("A file list specifying individual files in an Azure Blob Storage container.")
-  "azureBlobFileList",
+  azureBlobFileList: "azureBlobFileList",
+}
+
+@doc("Additional output to generate during analysis.")
+union AnalyzeOutputOption {
+  string,
+
+  @doc("Generate searchable PDF output.")
+  "pdf",
+
+  @doc("Generate cropped images of detected figures.")
+  "figures",
 }
 
 @doc("Document analysis parameters.")
@@ -354,22 +373,45 @@ model AnalyzeDocumentRequest {
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to analyze.  Either urlSource or base64Source
-  must be specified.
-  """)
+    Base64 encoding of the document to analyze.  Either urlSource or base64Source
+    must be specified.
+    """)
   base64Source?: bytes;
+}
+
+@doc("Batch document analysis parameters.")
+model AnalyzeBatchDocumentsRequest {
+  @doc("""
+    Azure Blob Storage location containing the batch documents.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  azureBlobSource?: AzureBlobContentSource;
+
+  @doc("""
+    Azure Blob Storage file list specifying the batch documents.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  azureBlobFileListSource?: AzureBlobFileListContentSource;
+
+  @doc("Azure Blob Storage container URL where analyze result files will be stored.")
+  resultContainerUrl: url;
+
+  @doc("Blob name prefix of result files.")
+  resultPrefix?: string;
+
+  @doc("Overwrite existing analyze result files?")
+  overwriteExisting?: boolean = false;
 }
 
 @doc("Error response object.")
 @error
-model ErrorResponse {
+model DocumentIntelligenceErrorResponse {
   @doc("Error info.")
-  error: Error;
+  error: DocumentIntelligenceError;
 }
 
 @doc("The error object.")
-@clientName("DocumentIntelligenceError", "csharp")
-model Error {
+model DocumentIntelligenceError {
   @doc("One of a server-defined set of error codes.")
   code: string;
 
@@ -380,29 +422,27 @@ model Error {
   target?: string;
 
   @doc("An array of details about specific errors that led to this reported error.")
-  details?: Error[];
+  details?: DocumentIntelligenceError[];
 
   @doc("An object containing more specific information than the current object about the error.")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
 @doc("An object containing more specific information about the error.")
-model InnerError {
+model DocumentIntelligenceInnerError {
   @doc("One of a server-defined set of error codes.")
   code?: string;
 
   @doc("A human-readable representation of the error.")
   message?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
-  @clientName("InnerErrorObject", "csharp")
-  innererror?: InnerError;
+  innererror?: DocumentIntelligenceInnerError;
 }
 
 @doc("The error object.")
-@clientName("DocumentIntelligenceWarning", "csharp")
-model Warning {
+model DocumentIntelligenceWarning {
   @doc("One of a server-defined set of warning codes.")
   code: string;
 
@@ -414,9 +454,9 @@ model Warning {
 }
 
 @doc("Status and result of the analyze operation.")
-model AnalyzeResultOperation {
+model AnalyzeOperation {
   @doc("Operation status.  notStarted, running, succeeded, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
   createdDateTime: utcDateTime;
@@ -425,11 +465,68 @@ model AnalyzeResultOperation {
   lastUpdatedDateTime: utcDateTime;
 
   @doc("Encountered error during document analysis.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 
   @lroResult
   @doc("Document analysis result.")
   analyzeResult?: AnalyzeResult;
+}
+
+@doc("Status and result of the analyze batch operation.")
+model AnalyzeBatchOperation {
+  @doc("Analyze batch operation result ID.")
+  resultId?: uuid;
+
+  @doc("Operation status.  notStarted, running, succeeded, or failed")
+  status: DocumentIntelligenceOperationStatus;
+
+  @doc("Date and time (UTC) when the operation was submitted.")
+  createdDateTime: utcDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: utcDateTime;
+
+  @doc("Operation progress (0-100).")
+  @minValue(0)
+  @maxValue(100)
+  percentCompleted?: int32;
+
+  @doc("Encountered error during batch document analysis.")
+  error?: DocumentIntelligenceError;
+
+  @lroResult
+  @doc("Batch document analysis result.")
+  result?: AnalyzeBatchResult;
+}
+
+@doc("Batch document analysis result.")
+model AnalyzeBatchResult {
+  @doc("Number of documents that completed with status succeeded.")
+  succeededCount: int32;
+
+  @doc("Number of documents that completed with status failed.")
+  failedCount: int32;
+
+  @doc("Number of documents that completed with status skipped.")
+  skippedCount: int32;
+
+  @doc("Operation detail for each document in the batch.")
+  details?: AnalyzeBatchOperationDetail[];
+}
+
+@doc("Operation detail for a document in a batch analysis.")
+model AnalyzeBatchOperationDetail {
+  @doc("Analyze status.  succeeded, failed, or skipped")
+  status: DocumentIntelligenceOperationStatus;
+
+  @doc("URL of the source document.")
+  sourceUrl: url;
+
+  @doc("URL of the analyze result JSON.")
+  resultUrl?: url;
+
+  @doc("Encountered error.")
+  error?: DocumentIntelligenceError;
 }
 
 @doc("Document analysis result.")
@@ -445,12 +542,12 @@ model AnalyzeResult {
   stringIndexType: StringIndexType;
 
   @doc("Format of the analyze result top-level content.")
-  contentFormat?: ContentFormat;
+  contentFormat?: DocumentContentFormat;
 
   @doc("""
-  Concatenate string representation of all textual and visual elements in reading
-  order.
-  """)
+    Concatenate string representation of all textual and visual elements in reading
+    order.
+    """)
   content: string;
 
   @doc("Analyzed pages.")
@@ -465,9 +562,6 @@ model AnalyzeResult {
   @doc("Extracted figures.")
   figures?: DocumentFigure[];
 
-  @doc("Extracted lists.")
-  lists?: DocumentList[];
-
   @doc("Extracted sections.")
   sections?: DocumentSection[];
 
@@ -481,7 +575,10 @@ model AnalyzeResult {
   languages?: DocumentLanguage[];
 
   @doc("Extracted documents.")
-  documents?: Document[];
+  documents?: AnalyzedDocument[];
+
+  @doc("List of warnings encountered.")
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Content and layout elements extracted from a page from the input.")
@@ -491,9 +588,9 @@ model DocumentPage {
   pageNumber: int32;
 
   @doc("""
-  The general orientation of the content in clockwise direction, measured in
-  degrees between (-180, 180].
-  """)
+    The general orientation of the content in clockwise direction, measured in
+    degrees between (-180, 180].
+    """)
   @minValueExclusive(-180)
   @maxValue(180)
   angle?: float32;
@@ -507,9 +604,9 @@ model DocumentPage {
   height?: float32;
 
   @doc("""
-  The unit used by the width, height, and polygon properties. For images, the
-  unit is \"pixel\". For PDF, the unit is \"inch\".
-  """)
+    The unit used by the width, height, and polygon properties. For images, the
+    unit is \"pixel\". For PDF, the unit is \"inch\".
+    """)
   unit?: LengthUnit;
 
   @doc("Location of the page in the reading order concatenated content.")
@@ -522,9 +619,9 @@ model DocumentPage {
   selectionMarks?: DocumentSelectionMark[];
 
   @doc("""
-  Extracted lines from the page, potentially containing both textual and visual
-  elements.
-  """)
+    Extracted lines from the page, potentially containing both textual and visual
+    elements.
+    """)
   lines?: DocumentLine[];
 
   @doc("Extracted barcodes from the page.")
@@ -535,9 +632,9 @@ model DocumentPage {
 }
 
 @doc("""
-Contiguous region of the concatenated content property, specified as an offset
-and length.
-""")
+  Contiguous region of the concatenated content property, specified as an offset
+  and length.
+  """)
 model DocumentSpan {
   @doc("Zero-based index of the content represented by the span.")
   @minValue(0)
@@ -549,21 +646,21 @@ model DocumentSpan {
 }
 
 @doc("""
-A word object consisting of a contiguous sequence of characters.  For non-space
-delimited languages, such as Chinese, Japanese, and Korean, each character is
-represented as its own word.
-""")
+  A word object consisting of a contiguous sequence of characters.  For non-space
+  delimited languages, such as Chinese, Japanese, and Korean, each character is
+  represented as its own word.
+  """)
 model DocumentWord {
   @doc("Text content of the word.")
   content: string;
 
   // FIXME: No way to specify constraints on array elements without creating new scalar types.
   @doc("""
-  Bounding polygon of the word, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the word, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the word in the reading order concatenated content.")
@@ -576,19 +673,19 @@ model DocumentWord {
 }
 
 @doc("""
-A selection mark object representing check boxes, radio buttons, and other
-elements indicating a selection.
-""")
+  A selection mark object representing check boxes, radio buttons, and other
+  elements indicating a selection.
+  """)
 model DocumentSelectionMark {
   @doc("State of the selection mark.")
   state: DocumentSelectionMarkState;
 
   @doc("""
-  Bounding polygon of the selection mark, with coordinates specified relative
-  to the top-left of the page. The numbers represent the x, y values of the
-  polygon vertices, clockwise from the left (-180 degrees inclusive) relative
-  to the element orientation.
-  """)
+    Bounding polygon of the selection mark, with coordinates specified relative
+    to the top-left of the page. The numbers represent the x, y values of the
+    polygon vertices, clockwise from the left (-180 degrees inclusive) relative
+    to the element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the selection mark in the reading order concatenated content.")
@@ -601,19 +698,19 @@ model DocumentSelectionMark {
 }
 
 @doc("""
-A content line object consisting of an adjacent sequence of content elements,
-such as words and selection marks.
-""")
+  A content line object consisting of an adjacent sequence of content elements,
+  such as words and selection marks.
+  """)
 model DocumentLine {
   @doc("Concatenated content of the contained elements in reading order.")
   content: string;
 
   @doc("""
-  Bounding polygon of the line, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the line, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the line in the reading order concatenated content.")
@@ -629,11 +726,11 @@ model DocumentBarcode {
   value: string;
 
   @doc("""
-  Bounding polygon of the barcode, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the barcode, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the barcode in the reading order concatenated content.")
@@ -654,11 +751,11 @@ model DocumentFormula {
   value: string;
 
   @doc("""
-  Bounding polygon of the formula, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the formula, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the formula in the reading order concatenated content.")
@@ -671,9 +768,9 @@ model DocumentFormula {
 }
 
 @doc("""
-A paragraph object consisting with contiguous lines generally with common
-alignment and spacing.
-""")
+  A paragraph object consisting with contiguous lines generally with common
+  alignment and spacing.
+  """)
 model DocumentParagraph {
   @doc("Semantic role of the paragraph.")
   role?: ParagraphRole;
@@ -695,11 +792,11 @@ model BoundingRegion {
   pageNumber: int32;
 
   @doc("""
-  Bounding polygon on the page, or the entire page if not specified.
-  Coordinates specified relative to the top-left of the page. The numbers
-  represent the x, y values of the polygon vertices, clockwise from the left
-  (-180 degrees inclusive) relative to the element orientation.
-  """)
+    Bounding polygon on the page, or the entire page if not specified.
+    Coordinates specified relative to the top-left of the page. The numbers
+    represent the x, y values of the polygon vertices, clockwise from the left
+    (-180 degrees inclusive) relative to the element orientation.
+    """)
   polygon: float32[];
 }
 
@@ -778,34 +875,9 @@ model DocumentFigure {
 
   @doc("List of footnotes associated with the figure.")
   footnotes?: DocumentFootnote[];
-}
 
-@doc("An object representing a list in the document.")
-model DocumentList {
-  @doc("Location of the list in the reading order concatenated content.")
-  spans: DocumentSpan[];
-
-  @doc("Items in the list.")
-  items: DocumentListItem[];
-}
-
-@doc("An object representing a list item in the document.")
-model DocumentListItem {
-  @doc("Level of the list item (1-indexed).")
-  @minValue(1)
-  level: int32;
-
-  @doc("Content of the list item.")
-  content: string;
-
-  @doc("Bounding regions covering the list item.")
-  boundingRegions?: BoundingRegion[];
-
-  @doc("Location of the list item in the reading order concatenated content.")
-  spans: DocumentSpan[];
-
-  @doc("Child elements of the list item.")
-  elements?: DocumentElement[];
+  @doc("Figure ID.")
+  id?: string;
 }
 
 @doc("An object representing a section in the document.")
@@ -848,15 +920,15 @@ model DocumentFootnote {
 }
 
 @doc("""
-An JSON pointer referencing an element of the document, such as paragraph,
-table, section, etc.
-""")
+  An JSON pointer referencing an element of the document, such as paragraph,
+  table, section, etc.
+  """)
 scalar DocumentElement extends string;
 
 @doc("""
-An object representing a form field with distinct field label (key) and field
-value (may be empty).
-""")
+  An object representing a form field with distinct field label (key) and field
+  value (may be empty).
+  """)
 model DocumentKeyValuePair {
   @doc("Field label of the key-value pair.")
   key: DocumentKeyValueElement;
@@ -888,16 +960,16 @@ model DocumentStyle {
   isHandwritten?: boolean;
 
   @doc("""
-  Visually most similar font from among the set of supported font families, with
-  fallback fonts following CSS convention (ex. 'Arial, sans-serif').
-  """)
+    Visually most similar font from among the set of supported font families, with
+    fallback fonts following CSS convention (ex. 'Arial, sans-serif').
+    """)
   similarFontFamily?: string;
 
   @doc("Font style.")
-  fontStyle?: FontStyle;
+  fontStyle?: DocumentFontStyle;
 
   @doc("Font weight.")
-  fontWeight?: FontWeight;
+  fontWeight?: DocumentFontWeight;
 
   @doc("Foreground color in #rrggbb hexadecimal format.")
   @pattern("^#[0-9a-f]{6}$")
@@ -919,15 +991,15 @@ model DocumentStyle {
 @doc("An object representing the detected language for a given text span.")
 model DocumentLanguage {
   @doc("""
-  Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")
-  or BCP 47 language tag (ex. \"zh-Hans\").
-  """)
+    Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")
+    or BCP 47 language tag (ex. \"zh-Hans\").
+    """)
   locale: string;
 
   @doc("""
-  Location of the text elements in the concatenated content the language applies
-  to.
-  """)
+    Location of the text elements in the concatenated content the language applies
+    to.
+    """)
   spans: DocumentSpan[];
 
   @doc("Confidence of correctly identifying the language.")
@@ -937,8 +1009,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@clientName("AnalyzedDocument", "csharp")
-model Document {
+model AnalyzedDocument {
   @doc("Document type.")
   @minLength(2)
   @maxLength(64)
@@ -1006,7 +1077,6 @@ model DocumentField {
   @doc("Boolean value.")
   valueBoolean?: boolean;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Selection group value.")
   valueSelectionGroup?: string[];
 
@@ -1067,9 +1137,9 @@ model AddressValue {
   unit?: string;
 
   @doc("""
-  Districts or boroughs within a city, such as Brooklyn in New York City or City
-  of Westminster in London.
-  """)
+    Districts or boroughs within a city, such as Brooklyn in New York City or City
+    of Westminster in London.
+    """)
   cityDistrict?: string;
 
   @doc("Second-level administrative division used in certain locales.")
@@ -1099,19 +1169,25 @@ model BuildDocumentModelRequest {
   buildMode: DocumentBuildMode;
 
   @doc("""
-  Azure Blob Storage location containing the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage location containing the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage file list specifying the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
+
+  @doc("Max number of V100-equivalent GPU hours to use for model training.  Default=0.5.")
+  maxTrainingHours?: float32 = 0.5;
+
+  @doc("Allow overwriting an existing model with the same name.")
+  allowOverwrite?: boolean = false;
 }
 
 @doc("Azure Blob Storage content.")
@@ -1142,19 +1218,17 @@ model ComposeDocumentModelRequest {
   @maxLength(4096)
   description?: string;
 
-  @doc("List of component document models to compose.")
-  componentModels: ComponentDocumentModelDetails[];
+  @doc("Custom classifier to split and classify the input file.")
+  classifierId: string;
+
+  @doc("File splitting behavior.")
+  split?: SplitMode = SplitMode.none;
+
+  @doc("Dictionary mapping supported docTypes to the corresponding document models.")
+  docTypes: Record<DocumentTypeDetails>;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
-}
-
-@doc("A component of a composed document model.")
-model ComponentDocumentModelDetails {
-  @doc("Unique document model name.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-  @maxLength(64)
-  modelId: string;
 }
 
 @doc("Request body to authorize document model copy.")
@@ -1172,18 +1246,17 @@ model AuthorizeCopyRequest {
 }
 
 @doc("""
-Authorization to copy a document model to the specified target resource and
-modelId.
-""")
-model CopyAuthorization {
+  Authorization to copy a document model to the specified target resource and
+  modelId.
+  """)
+model ModelCopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
-  @extension("x-ms-azure-resource", true)
   targetResourceId: string;
 
   @doc("""
-  Location of the target Azure resource where the document model should be copied
-  to.
-  """)
+    Location of the target Azure resource where the document model should be copied
+    to.
+    """)
   targetResourceRegion: string;
 
   @doc("Identifier of the target document model.")
@@ -1200,17 +1273,59 @@ model CopyAuthorization {
   expirationDateTime: utcDateTime;
 }
 
+@doc("Request body to authorize document classifier copy.")
+model AuthorizeClassifierCopyRequest {
+  @doc("Unique document classifier name.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  classifierId: string;
+
+  @doc("Document classifier description.")
+  @maxLength(4096)
+  description?: string;
+
+  @doc("List of key-value tag attributes associated with the document classifier.")
+  tags?: Record<string>;
+}
+
+@doc("""
+  Authorization to copy a document classifier to the specified target resource and
+  classifierId.
+  """)
+model ClassifierCopyAuthorization {
+  @doc("ID of the target Azure resource where the document classifier should be copied to.")
+  targetResourceId: string;
+
+  @doc("""
+    Location of the target Azure resource where the document classifier should be copied
+    to.
+    """)
+  targetResourceRegion: string;
+
+  @doc("Identifier of the target document classifier.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  targetClassifierId: string;
+
+  @doc("URL of the copied document classifier in the target account.")
+  targetClassifierLocation: url;
+
+  @doc("Token used to authorize the request.")
+  accessToken: string;
+
+  @doc("Date/time when the access token expires.")
+  expirationDateTime: utcDateTime;
+}
+
 @doc("Operation info.")
 @resource("operations")
 @discriminator("kind")
-model OperationDetails {
+model DocumentIntelligenceOperationDetails {
   @doc("Operation ID")
   @key
   @visibility("read", "create")
   operationId: string;
 
   @doc("Operation status.  notStarted, running, completed, or failed")
-  status: OperationStatus;
+  status: DocumentIntelligenceOperationStatus;
 
   @doc("Operation progress (0-100).")
   @minValue(0)
@@ -1236,7 +1351,7 @@ model OperationDetails {
   tags?: Record<string>;
 
   @doc("Encountered error.")
-  error?: Error;
+  error?: DocumentIntelligenceError;
 }
 
 @resource("documentModels")
@@ -1253,38 +1368,59 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
+  @visibility("read")
   createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document model will expire.")
+  @visibility("read")
   expirationDateTime?: utcDateTime;
 
+  @doc("Date and time (UTC) when the document model was last modified.")
+  @visibility("read")
+  modifiedDateTime?: utcDateTime;
+
   @doc("API version used to create this document model.")
+  @visibility("read")
   apiVersion?: string;
 
   @doc("List of key-value tag attributes associated with the document model.")
   tags?: Record<string>;
 
   @doc("Custom document model build mode.")
+  @visibility("read")
   buildMode?: DocumentBuildMode;
 
   @doc("""
-  Azure Blob Storage location containing the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage location containing the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  @visibility("read")
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage file list specifying the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
+  @visibility("read")
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
+  @doc("For composed models, the custom classifier to split and classify the input file.")
+  classifierId?: string;
+
+  @doc("For composed models, the file splitting behavior.")
+  split?: SplitMode = SplitMode.none;
+
   @doc("Supported document types.")
+  @visibility("read")
   docTypes?: Record<DocumentTypeDetails>;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("List of warnings encountered while building the model.")
-  warnings?: Warning[];
+  @visibility("read")
+  warnings?: DocumentIntelligenceWarning[];
+
+  @doc("Number of V100-equivalent GPU hours consumed for model training.")
+  @visibility("read")
+  trainingHours?: float32;
 }
 
 @doc("Document type info.")
@@ -1297,11 +1433,27 @@ model DocumentTypeDetails {
   buildMode?: DocumentBuildMode;
 
   @doc("Description of the document semantic schema using a JSON Schema style syntax.")
-  fieldSchema: Record<DocumentFieldSchema>;
+  fieldSchema?: Record<DocumentFieldSchema>;
 
   @doc("Estimated confidence for each field.")
-  // FIXME: Cannot specify range
   fieldConfidence?: Record<float32>;
+
+  @doc("Document model to use for analyzing documents with specified type.")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+  @maxLength(64)
+  modelId?: string;
+
+  @doc("Only perform analysis if docType confidence is above threshold.")
+  confidenceThreshold?: float32;
+
+  @doc("List of optional analysis features.")
+  features?: DocumentAnalysisFeature[];
+
+  @doc("List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"")
+  queryFields?: string[];
+
+  @doc("Maximum number of documents of specified type to analyze.  Default=all.")
+  maxDocumentsToAnalyze?: int32;
 }
 
 @doc("Description of the field semantic schema using a JSON Schema style syntax.")
@@ -1333,13 +1485,15 @@ model BuildDocumentClassifierRequest {
   @maxLength(4096)
   description?: string;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Base classifierId on top of which to train the classifier.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   baseClassifierId?: string;
 
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
+
+  @doc("Allow overwriting an existing classifier with the same name.")
+  allowOverwrite?: boolean = false;
 }
 
 @doc("Classifier document type info.")
@@ -1348,17 +1502,17 @@ model ClassifierDocumentTypeDetails {
   sourceKind?: ContentSourceKind;
 
   @doc("""
-  Azure Blob Storage location containing the training data for a classifier
-  document type.  Either azureBlobSource or azureBlobFileListSource must be
-  specified.
-  """)
+    Azure Blob Storage location containing the training data for a classifier
+    document type.  Either azureBlobSource or azureBlobFileListSource must be
+    specified.
+    """)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data for a classifier
-  document type.  Either azureBlobSource or azureBlobFileListSource must be
-  specified.
-  """)
+    Azure Blob Storage file list specifying the training data for a classifier
+    document type.  Either azureBlobSource or azureBlobFileListSource must be
+    specified.
+    """)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 }
 
@@ -1382,10 +1536,13 @@ model DocumentClassifierDetails {
   @doc("Date and time (UTC) when the document classifier will expire.")
   expirationDateTime?: utcDateTime;
 
+  @doc("Date and time (UTC) when the document model was last modified.")
+  @visibility("read")
+  modifiedDateTime?: utcDateTime;
+
   @doc("API version used to create this document classifier.")
   apiVersion: string;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("Base classifierId on top of which the classifier was trained.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
   baseClassifierId?: string;
@@ -1393,9 +1550,8 @@ model DocumentClassifierDetails {
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 
-  @added(Versions.v2024_02_29_preview)
   @doc("List of warnings encountered while building the classifier.")
-  warnings?: Warning[];
+  warnings?: DocumentIntelligenceWarning[];
 }
 
 @doc("Document classification parameters.")
@@ -1404,19 +1560,16 @@ model ClassifyDocumentRequest {
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to classify.  Either urlSource or base64Source
-  must be specified.
-  """)
+    Base64 encoding of the document to classify.  Either urlSource or base64Source
+    must be specified.
+    """)
   base64Source?: bytes;
 }
 
 @doc("General information regarding the current resource.")
-model ResourceDetails {
+model DocumentIntelligenceResourceDetails {
   @doc("Details regarding custom document models.")
   customDocumentModels: CustomDocumentModelsDetails;
-
-  @doc("Quota used, limit, and next reset date/time.")
-  customNeuralDocumentModelBuilds: QuotaDetails;
 }
 
 @doc("Details regarding custom document models.")
@@ -1428,20 +1581,9 @@ model CustomDocumentModelsDetails {
   limit: int32;
 }
 
-@doc("Quota used, limit, and next reset date/time.")
-model QuotaDetails {
-  @doc("Amount of the resource quota used.")
-  used: int32;
-
-  @doc("Resource quota limit.")
-  quota: int32;
-
-  @doc("Date/time when the resource quota usage will be reset.")
-  quotaResetDateTime: utcDateTime;
-}
-
 @doc("Get Operation response object.")
-model DocumentModelBuildOperationDetails extends OperationDetails {
+model DocumentModelBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1451,7 +1593,8 @@ model DocumentModelBuildOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelComposeOperationDetails extends OperationDetails {
+model DocumentModelComposeOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1461,7 +1604,8 @@ model DocumentModelComposeOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentModelCopyToOperationDetails extends OperationDetails {
+model DocumentModelCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentModelDetails;
@@ -1471,7 +1615,19 @@ model DocumentModelCopyToOperationDetails extends OperationDetails {
 }
 
 @doc("Get Operation response object.")
-model DocumentClassifierBuildOperationDetails extends OperationDetails {
+model DocumentClassifierCopyToOperationDetails
+  extends DocumentIntelligenceOperationDetails {
+  @doc("Operation result upon success.")
+  @lroResult
+  result?: DocumentClassifierDetails;
+
+  @doc("Type of operation.")
+  kind: OperationKind.documentClassifierCopyTo;
+}
+
+@doc("Get Operation response object.")
+model DocumentClassifierBuildOperationDetails
+  extends DocumentIntelligenceOperationDetails {
   @doc("Operation result upon success.")
   @lroResult
   result?: DocumentClassifierDetails;

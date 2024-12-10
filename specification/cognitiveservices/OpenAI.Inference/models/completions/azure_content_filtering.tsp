@@ -15,32 +15,32 @@ union ContentFilterSeverity {
   string,
 
   @doc("""
-  Content may be related to violence, self-harm, sexual, or hate categories but the terms
-  are used in general, journalistic, scientific, medical, and similar professional contexts,
-  which are appropriate for most audiences.
-  """)
+    Content may be related to violence, self-harm, sexual, or hate categories but the terms
+    are used in general, journalistic, scientific, medical, and similar professional contexts,
+    which are appropriate for most audiences.
+    """)
   safe: "safe",
 
   @doc("""
-  Content that expresses prejudiced, judgmental, or opinionated views, includes offensive
-  use of language, stereotyping, use cases exploring a fictional world (for example, gaming,
-  literature) and depictions at low intensity.
-  """)
+    Content that expresses prejudiced, judgmental, or opinionated views, includes offensive
+    use of language, stereotyping, use cases exploring a fictional world (for example, gaming,
+    literature) and depictions at low intensity.
+    """)
   low: "low",
 
   @doc("""
-  Content that uses offensive, insulting, mocking, intimidating, or demeaning language
-  towards specific identity groups, includes depictions of seeking and executing harmful
-  instructions, fantasies, glorification, promotion of harm at medium intensity.
-  """)
+    Content that uses offensive, insulting, mocking, intimidating, or demeaning language
+    towards specific identity groups, includes depictions of seeking and executing harmful
+    instructions, fantasies, glorification, promotion of harm at medium intensity.
+    """)
   medium: "medium",
 
   @doc("""
-  Content that displays explicit and severe harmful instructions, actions,
-  damage, or abuse; includes endorsement, glorification, or promotion of severe
-  harmful acts, extreme or illegal forms of harm, radicalization, or non-consensual
-  power exchange or abuse.
-  """)
+    Content that displays explicit and severe harmful instructions, actions,
+    damage, or abuse; includes endorsement, glorification, or promotion of severe
+    harmful acts, extreme or illegal forms of harm, radicalization, or non-consensual
+    power exchange or abuse.
+    """)
   high: "high",
 }
 
@@ -60,32 +60,32 @@ alias FilteredResultBase = {
 
 alias ContentFilterResultsBase = {
   @doc("""
-  Describes language related to anatomical organs and genitals, romantic relationships,
-   acts portrayed in erotic or affectionate terms, physical sexual acts, including
-   those portrayed as an assault or a forced sexual violent act against one’s will,
-   prostitution, pornography, and abuse.
-  """)
+    Describes language related to anatomical organs and genitals, romantic relationships,
+     acts portrayed in erotic or affectionate terms, physical sexual acts, including
+     those portrayed as an assault or a forced sexual violent act against one’s will,
+     prostitution, pornography, and abuse.
+    """)
   sexual?: ContentFilterResult;
 
   @doc("""
-  Describes language related to physical actions intended to hurt, injure, damage, or
-  kill someone or something; describes weapons, etc.
-  """)
+    Describes language related to physical actions intended to hurt, injure, damage, or
+    kill someone or something; describes weapons, etc.
+    """)
   violence?: ContentFilterResult;
 
   @doc("""
-  Describes language attacks or uses that include pejorative or discriminatory language
-  with reference to a person or identity group on the basis of certain differentiating
-  attributes of these groups including but not limited to race, ethnicity, nationality,
-  gender identity and expression, sexual orientation, religion, immigration status, ability
-  status, personal appearance, and body size.
-  """)
+    Describes language attacks or uses that include pejorative or discriminatory language
+    with reference to a person or identity group on the basis of certain differentiating
+    attributes of these groups including but not limited to race, ethnicity, nationality,
+    gender identity and expression, sexual orientation, religion, immigration status, ability
+    status, personal appearance, and body size.
+    """)
   hate?: ContentFilterResult;
 
   @doc("""
-  Describes language related to physical actions intended to purposely hurt, injure,
-  or damage one’s body, or kill oneself.
-  """)
+    Describes language related to physical actions intended to purposely hurt, injure,
+    or damage one’s body, or kill oneself.
+    """)
   @encodedName("application/json", "self_harm")
   selfHarm?: ContentFilterResult;
 
@@ -103,9 +103,9 @@ alias ContentFilterResultsBase = {
   customBlocklists?: ContentFilterDetailedResults;
 
   @doc("""
-  Describes an error returned if the content filtering system is
-  down or otherwise unable to complete the operation in time.
-  """)
+    Describes an error returned if the content filtering system is
+    down or otherwise unable to complete the operation in time.
+    """)
   error?: Azure.Core.Foundations.Error;
 };
 
@@ -138,12 +138,17 @@ model ContentFilterResultsForChoice {
   @encodedName("application/json", "protected_material_code")
   @doc("Information about detection of protected code material.")
   protectedMaterialCode?: ContentFilterCitedDetectionResult;
+
+  @added(ServiceApiVersions.v2024_10_01_Preview)
+  @encodedName("application/json", "ungrounded_material")
+  @doc("Information about detection of ungrounded material.")
+  ungroundedMaterial?: ContentFilterCompletionTextSpanResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @doc("""
-Content filtering results for a single prompt in the request.
-""")
+  Content filtering results for a single prompt in the request.
+  """)
 model ContentFilterResultsForPrompt {
   @doc("The index of this prompt in the set of prompt results")
   @encodedName("application/json", "prompt_index")
@@ -173,7 +178,32 @@ model ContentFilterCitedDetectionResult {
   url?: url;
 
   @doc("The license description associated with the detection.")
-  license: string;
+  license?: string;
+}
+
+@added(ServiceApiVersions.v2024_10_01_Preview)
+@doc("Describes a span within generated completion text.")
+model ContentFilterCompletionTextSpanResult {
+  ...ContentFilterDetectionResult;
+
+  @doc("The collection of completion text spans.")
+  details: ContentFilterCompletionTextSpan[];
+}
+
+@added(ServiceApiVersions.v2024_10_01_Preview)
+@doc("Describes a span within generated completion text. Offset 0 is the first UTF32 code point of the completion text.")
+model ContentFilterCompletionTextSpan {
+  @doc("Offset of the UTF32 code point which begins the span.")
+  @encodedName("application/json", "completion_start_offset")
+  completionStartOffset: int32;
+
+  @doc("""
+    Offset of the first UTF32 code point which is excluded from the span. 
+    This field is always equal to completion_start_offset for empty spans. 
+    This field is always larger than completion_start_offset for non-empty spans.
+    """)
+  @encodedName("application/json", "completion_end_offset")
+  completionEndOffset: int32;
 }
 
 @doc("Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.")
@@ -191,5 +221,6 @@ model ContentFilterDetailedResults {
   ...FilteredResultBase;
 
   @doc("The collection of detailed blocklist result information.")
+  @madeRequired(ServiceApiVersions.v2024_10_01_Preview)
   details: ContentFilterBlocklistIdResult[];
 }

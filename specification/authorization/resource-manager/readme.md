@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01-preview
+tag: package-2024-09-01-preview
 ```
 
 ### Suppression
@@ -93,6 +93,57 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+### Tag: package-2024-09-01-preview
+
+These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01-preview'
+input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
+
+### Tag: package-2024-02-01-preview
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-01-preview'
+input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+```
 
 ### Tag: package-2022-05-01-preview-only
 

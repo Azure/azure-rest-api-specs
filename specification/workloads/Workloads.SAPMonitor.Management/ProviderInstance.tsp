@@ -29,7 +29,12 @@ interface ProviderInstances {
   /**
    * Creates a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.
    */
-  create is ArmResourceCreateOrReplaceAsync<ProviderInstance>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    ProviderInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Deletes a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.
@@ -39,7 +44,7 @@ interface ProviderInstances {
   /**
    * Gets a list of provider instances in the specified SAP monitor. The operations returns various properties of each provider instances.
    */
-  list is ArmResourceListByParent<ProviderInstance>;
+  listByMonitor is ArmResourceListByParent<ProviderInstance>;
 }
 
 @@doc(ProviderInstances.create::parameters.resource,

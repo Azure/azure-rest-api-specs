@@ -36,7 +36,12 @@ interface SAPDiscoverySites {
   /**
    * Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.
    */
-  create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    SAPDiscoverySite,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates a SAP Migration discovery site resource.

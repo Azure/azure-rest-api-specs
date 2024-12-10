@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -64,6 +78,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input documents to analyze.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
@@ -366,9 +381,6 @@
           "description": "Parameters for the Abstractive Summarization task."
         }
       },
-      "required": [
-        "parameters"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROTask"

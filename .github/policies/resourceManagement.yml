@@ -1983,7 +1983,7 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - wonner
+            - wanyang7
             - yanjungao718
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
@@ -2530,18 +2530,6 @@ configuration:
       - removeLabel:
           label: no-recent-activity
       description: 
-    - if:
-      - payloadType: Issue_Comment
-      - and:
-        - isPullRequest
-      then:
-      - if:
-        - commentContains:
-            pattern: "^/pr RequestMerge$"
-            isRegex: true
-        then:
-        - addLabel:
-            label: MergeRequested
     - if:
       - payloadType: Pull_Request
       then:

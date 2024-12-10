@@ -10,15 +10,15 @@ using Azure.ClientGenerator.Core;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
-extension.
-""")
+  A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+  extension.
+  """)
 model ElasticsearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Elasticsearch®.
-  """)
+    The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+    default value for Elasticsearch®.
+    """)
   type: AzureChatExtensionType.elasticsearch;
 
   @doc("The parameters to use when configuring Elasticsearch®.")
@@ -29,6 +29,16 @@ model ElasticsearchChatExtensionConfiguration
 @doc("Parameters to use when configuring Elasticsearch® as an Azure OpenAI chat extension. The supported authentication types are KeyAndKeyId and EncodedAPIKey.")
 model ElasticsearchChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
 
   @doc("The endpoint of Elasticsearch®.")
   endpoint: url;
@@ -86,8 +96,8 @@ model ElasticsearchIndexFieldMappingOptions {
 }
 
 @doc("""
-The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.
-""")
+  The type of Elasticsearch® retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union ElasticsearchQueryType {
   string,

@@ -1022,6 +1022,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BgpPeer": {
       "type": "object",
       "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1029,11 +1034,7 @@
         "properties": {
           "$ref": "#/definitions/BgpPeerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1186,11 +1187,7 @@
         "properties": {
           "$ref": "#/definitions/LoadBalancerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1486,7 +1483,7 @@
       "description": "Properties for the service resource",
       "properties": {
         "rpObjectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object id of the service principal of the RP provisioned in the tenant",
           "readOnly": true
         },
@@ -1504,11 +1501,7 @@
         "properties": {
           "$ref": "#/definitions/ServiceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1714,11 +1707,7 @@
         "properties": {
           "$ref": "#/definitions/StorageClassProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

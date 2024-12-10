@@ -13,14 +13,17 @@ model PrivateEndpointConnectionResource
 @armResourceOperations(PrivateEndpointConnectionResource)
 interface PrivateEndpointConnections {
   /** List existing private connections */
-  listConnections is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  listByMongoCluster is ArmResourceListByParent<PrivateEndpointConnectionResource>;
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnectionResource,
-    Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource> | ArmResourceCreatedResponse<
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionResource> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource> | ArmResourceCreatedResponse<
       PrivateEndpointConnectionResource,
       LroHeaders = {}
     >
@@ -38,5 +41,5 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 @armResourceOperations(PrivateLinkResource)
 interface PrivateLinks {
   /** list private links on the given resource */
-  list is ArmResourceListByParent<PrivateLinkResource>;
+  listByMongoCluster is ArmResourceListByParent<PrivateLinkResource>;
 }
