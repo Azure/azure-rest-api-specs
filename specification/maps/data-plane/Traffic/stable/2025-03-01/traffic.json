@@ -90,7 +90,7 @@
           {
             "name": "incidentType",
             "in": "query",
-            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. For example, '&incidentType=Accident,Construction'. Will return all the available incident types if not specified.",
+            "description": "Specifies the type of traffic incident to return. Values are case sensitive. Multiple incident types are allowed. \n\nFor example, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
             "required": false,
             "type": "string",
             "enum": [
@@ -229,7 +229,7 @@
       "type": "object",
       "properties": {
         "description": {
-          "description": "A description of the incident. \n\n Examples: \n\n• W 95th St between Switzer Rd and Bluejacket Dr - construction \n• WB Johnson Dr at I-435 - bridge repair",
+          "description": "A description of the incident. \n\n Examples: \n\n• W 95th St between Switzer Rd and Bluejacket Dr - construction \n\n• WB Johnson Dr at I-435 - bridge repair",
           "type": "string"
         },
         "startTime": {
@@ -259,7 +259,7 @@
           "format": "int32"
         },
         "type": {
-          "description": "Specifies the type of incident. \n\n• Accident \n• Congestion \n• DisabledVehicle \n• MassTransit \n• Miscellaneous \n• OtherNews \n• PlannedEvent \n• RoadHazard \n• Construction \n• Alert \n• Weather",
+          "description": "Specifies the type of incident. \n\n• Accident \n\n• Congestion \n\n• DisabledVehicle \n\n• MassTransit \n\n• Miscellaneous \n\n• OtherNews \n\n• PlannedEvent \n\n• RoadHazard \n\n• Construction \n\n• Alert \n\n• Weather",
           "type": "string"
         },
         "title": {
