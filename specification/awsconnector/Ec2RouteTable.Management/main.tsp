@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- Ec2RouteTables ----------------------------------------------
@@ -100,7 +100,7 @@ model Tag {
 interface Ec2RouteTables {
   get is ArmResourceRead<Ec2RouteTable>;
   @doc("Create a Ec2RouteTable. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2RouteTable>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2RouteTable>;
   update is ArmCustomPatchAsync<
     Ec2RouteTable,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2RouteTable>
