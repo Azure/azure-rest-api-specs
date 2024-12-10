@@ -585,9 +585,11 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeDocumentsJobState.tasks, "Actions", "csharp");
 
 @@clientName(AnalyzeDocumentsLROResult,
-  "AnalyzeDocumentsOperationResult",
+  "AnalyzeDocumentsOperation  Result",
   "csharp"
 );
+
+@@clientName(PiiLROTask, "PiiEntityRecognitionOperationAction", "csharp");
 
 @@clientName(AbstractiveSummarizationLROTask,
   "AbstractiveSummarizationOperationAction",
