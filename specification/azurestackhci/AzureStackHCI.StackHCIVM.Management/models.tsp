@@ -1317,6 +1317,14 @@ model VirtualHardDiskUploadStatus {
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
   progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
 
 @doc("The virtual hard disk resource patch definition.")
