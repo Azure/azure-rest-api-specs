@@ -5894,12 +5894,14 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the target dataset time series that resulted in drift detection."
+          "description": "The start time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the target dataset time series that resulted in drift detection."
+          "description": "The end time of the target dataset time series that resulted in drift detection.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -5908,7 +5910,9 @@
         "runId",
         "baseDatasetId",
         "targetDatasetId",
-        "driftCoefficient"
+        "driftCoefficient",
+        "startTime",
+        "endTime"
       ]
     },
     "MachineLearningServicesModelDeployedEventData": {

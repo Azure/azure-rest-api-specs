@@ -85,10 +85,14 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
   driftCoefficient: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
-  startTime?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "In source code if the value is null, they stringify it to null"
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  startTime: utcDateTime | null;
 
   /** The end time of the target dataset time series that resulted in drift detection. */
-  endTime?: utcDateTime;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "In source code if the value is null, they stringify it to null"
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  endTime: utcDateTime | null;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
