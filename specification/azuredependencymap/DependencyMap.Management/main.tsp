@@ -17,6 +17,7 @@ using Azure.Core;
 })
 @doc("Microsoft.DependencyMap management service")
 @versioned(Microsoft.DependencyMap.Versions)
+@armCommonTypesVersion("v3")
 namespace Microsoft.DependencyMap;
 
 /** The available API versions. */
