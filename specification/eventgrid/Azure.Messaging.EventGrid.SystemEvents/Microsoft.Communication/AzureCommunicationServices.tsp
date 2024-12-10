@@ -1189,7 +1189,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   content?: string;
 
   /** WhatsApp message type */
-  messageType?: string;
+  messageType: string;
 
   /** The message channel type */
   channelType: AcsMessageChannelKind;
@@ -1207,7 +1207,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   button: AcsMessageButtonContent;
 
   /** The received message interactive content */
-  interactive: AcsMessageInteractiveContent;
+  interactive?: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
@@ -1231,10 +1231,10 @@ model AcsMessageMediaContent {
 /** Message Reaction Content */
 model AcsMessageReactionContent {
   /** WhatsApp message ID of message you want to apply the emoji to. */
-  messageId?: string;
+  messageId: string;
 
   /** Unicode escape sequence of the emoji. */
-  emoji?: string;
+  emoji: string;
 }
 
 /** Message Context */
