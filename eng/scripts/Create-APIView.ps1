@@ -379,6 +379,7 @@ function New-TypeSpecAPIViewTokens {
   $currentBranch = git rev-parse --abbrev-ref HEAD
 
   $typeSpecAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtifactsStagingDirectory, $APIViewArtifactsDirectoryName)
+  New-Item -ItemType Directory -Path $typeSpecAPIViewArtifactsDirectory -Force | Out-Null
 
   try {
     # Generate TypeSpec APIView Tokens
