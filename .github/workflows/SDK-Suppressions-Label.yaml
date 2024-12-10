@@ -60,7 +60,7 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
           $changedFiles = @(Get-ChangedFiles)
-          echo "Changed files: $changedFiles"
+          echo "PR Changed files: $changedFiles"
           echo "::set-output name=changedFiles::$changedFiles"
 
       - name: Setup Node and run `npm ci`
