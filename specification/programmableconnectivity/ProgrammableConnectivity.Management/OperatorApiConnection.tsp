@@ -217,9 +217,9 @@ model DataRegions {
   commercialActivity: boolean;
 
   /**
-   * URL to the organization or governmental data privacy framework.
+   * URL of the organization or governmental data privacy framework.
    */
-  dataPrivacyFrameworkUrl: string;
+  dataPrivacyFrameworkUrl: url;
 }
 
 /**

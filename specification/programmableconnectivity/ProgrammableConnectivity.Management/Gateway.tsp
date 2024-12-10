@@ -140,7 +140,7 @@ model ApplicationOwnerProperties {
   /**
    * URL for the organization's privacy policy.
    */
-  privacyPolicyUrl: string;
+  privacyPolicyUrl: url;
 
   /**
    * List of local representatives.
