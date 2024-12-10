@@ -36,7 +36,7 @@ export function validateSdkSuppressionsFile(suppressionContent: string | object 
   if (!suppressionContent) {
     return {
       result: false,
-      message: 'This suppression file is not a valid yaml.'
+      message: 'This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.'
     };
   }
 

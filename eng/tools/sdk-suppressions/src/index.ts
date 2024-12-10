@@ -4,7 +4,11 @@ import { updateSdkSuppressionsLabels, PullRequestContext } from "./updateSdkSupp
 
 function getUsage(): string {
     return (
-      "parameter missing! \n"
+      "Parameter missing! \n" + 
+      "\n" +
+      "Check GITHUB_TOKEN is setting in spec repo setting for action which named SPEC_REPO_TOKEN ! referenece https://docs.github.com/zh/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions\n" +
+      "Check GITHUB_PULL_REQUEST_CONTEXT where defined in step: Get GitHub PullRequest Context" +
+      "Check OUTPUT_FILE in step env: Run get suppressions label script "
     );
   }
 

@@ -24,7 +24,7 @@ jobs:
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
-        id: Fetch-PullRequest-Context
+        id: fetch-pullRequest-context
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -57,7 +57,7 @@ jobs:
       - name: Run get suppressions label script
         id: run-suppressions-script
         env:
-          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.Fetch-PullRequest-Context.outputs.result }}
+          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
           GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
           OUTPUT_FILE: "output.json"
         run: |
@@ -80,7 +80,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact-name }}  # Artifact name from matrix
+          name: ${{ matrix.artifact-name }}
           path: ${{ runner.temp }}/empty.txt
           if-no-files-found: error
           overwrite: true
