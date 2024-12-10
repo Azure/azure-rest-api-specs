@@ -7,7 +7,8 @@ model AppConfigurationKeyValueModifiedEventData {
   key: string;
 
   /** The label, if any, used to identify the key-value that was modified. */
-  label: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "This property does return null."
+  label: string | null;
 
   /** The etag representing the new state of the key-value. */
   etag: string;
