@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-08-01",
+    "version": "2023-08-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -45,7 +45,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance."
+            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -90,7 +93,10 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance."
+            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
