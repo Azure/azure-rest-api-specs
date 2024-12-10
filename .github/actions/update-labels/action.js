@@ -33,6 +33,8 @@ module.exports = async ({ github, context, core }) => {
 
     artifactNames = artifacts.data.artifacts.map((a) => a.name);
   } else {
+    // TODO: List all artifacts of all workflows associated with issue_number
+    throw new Error("Required input 'run_id' not found in env or context");
   }
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
@@ -82,7 +84,6 @@ module.exports = async ({ github, context, core }) => {
   if (labelsToRemove.length > 0) {
     // Must loop over labelsToRemove ourselves, since GitHub doesn't expose a REST API to remove in bulk. 
     for (const name of labelsToRemove) {
-      core.info(`labelsToRemove-name333, ${name}`)
       try {
         await github.rest.issues.removeLabel({
           owner: owner,
