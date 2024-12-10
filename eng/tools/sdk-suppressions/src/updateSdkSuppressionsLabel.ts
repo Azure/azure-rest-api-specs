@@ -218,7 +218,7 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
       auth: githubToken
   });
   console.log('process env', process.env.GITHUB_PULL_REQUEST_CHANGE_FILES);
-  console.log('json parse process env', JSON.parse(process.env.GITHUB_PULL_REQUEST_CHANGE_FILES as string).split(' '));
+  console.log('json parse process env', (process.env.GITHUB_PULL_REQUEST_CHANGE_FILES as string).split(' '));
 
   console.log('Pull Request Context', pr);
   const sdkNames = await getSdkSuppressionsSdkNames(appClient, pr);
