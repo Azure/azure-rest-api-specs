@@ -9233,29 +9233,6 @@
           "type": "string",
           "description": "Description of the workspace."
         },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The kind of workspace.",
-          "enum": [
-            "KubernetesManaged",
-            "Default"
-          ],
-          "x-ms-enum": {
-            "name": "WorkspaceKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Default",
-                "description": "Configuration of APIs in workspace is managed through Azure Resource Manager (ARM)."
-              },
-              {
-                "value": "KubernetesManaged",
-                "description": "Configuration of traffic routes in workspace is managed by Kubernetes resources."
-              }              
-            ]
-          }
-        },
         "configurationApi": {
           "type": "object",
           "properties": {
