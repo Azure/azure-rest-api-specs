@@ -40,7 +40,7 @@ model OwnershipVoucherPublicKeyProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Details of public key type")

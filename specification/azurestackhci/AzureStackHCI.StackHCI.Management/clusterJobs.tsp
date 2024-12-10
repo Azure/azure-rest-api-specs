@@ -13,22 +13,28 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+@doc("Cluster details.")
+model Cluster is Azure.ResourceManager.TrackedResource<{}> {
+  ...ResourceNameParameter<
+    Resource = Cluster,
+    KeyName = "clusterName",
+    SegmentName = "clusters",
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Cluster Jobs resource")
 @parentResource(Cluster)
-@discriminator("kind")
-model ClusterJob is Azure.ResourceManager.ProxyResource<{}> {
+model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
   ...ResourceNameParameter<
     Resource = ClusterJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
     NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @doc("Edge Solution type to support polymorphic resource.")
-  @visibility("read", "create")
-  kind: EdgeSolutionType;
 }
 
 @armResourceOperations
@@ -68,17 +74,6 @@ union EceSecrets {
 }
 
 @doc("ClusterJob Type supported.")
-union AzureLinuxJobType {
-  string,
-
-  @doc("Job to add a server to the cluster.")
-  AddServer: "AddServer",
-
-  @doc("Job to repair a server in the cluster.")
-  RepairServer: "RepairServer",
-}
-
-@doc("ClusterJob Type supported.")
 union HciJobType {
   string,
 
@@ -96,28 +91,9 @@ union HciJobType {
 
   @doc("Job to add a network intent to the cluster.")
   AddNetworkIntent: "AddNetworkIntent",
-}
 
-@doc("Properties for adding a server to the cluster.")
-model AddServerJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("List of protected parameters to pass to trigger the job for the cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
-  secrets?: EceDeploymentSecrets[];
-
-  @doc("Details of servers to be added to the cluster")
-  @extension("x-ms-identifiers", [])
-  addServerJobServerDetails: AddServerJobServerDetails[];
-
-  @doc("Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'")
-  witnessType?: string;
-
-  @doc("Specify the fileshare path for the local witness for your Azure Stack HCI cluster.")
-  witnessPath?: string;
-
-  @doc("Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster.")
-  cloudAccountName?: string;
+  @doc("Job to configure arc gateway for the cluster.")
+  ConfigureArcGateway: "ConfigureArcGateway",
 }
 
 @doc("Protected parameters list stored in keyvault.")
@@ -133,7 +109,12 @@ model EceDeploymentSecrets {
 }
 
 @doc("Cluster Job properties")
+@discriminator("jobType")
 model ClusterJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  @visibility("create", "read")
+  jobType: HciJobType;
+
   @doc("Deployment mode to trigger job.")
   deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
 
@@ -162,61 +143,6 @@ model ClusterJobProperties {
   reportedProperties?: JobReportedProperties;
 }
 
-@doc("Properties for adding a server in Azure Linux cluster job.")
-model AzureLinuxAddServerJobProperties extends AzureLinuxClusterJobProperties {
-  ...AddServerJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  jobType: AzureLinuxJobType.AddServer;
-}
-
-@discriminator("jobType")
-@doc("Cluster Job properties")
-model AzureLinuxClusterJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
-  jobType: AzureLinuxJobType;
-}
-
-@doc("Cluster job for Azure Linux solution.")
-model AzureLinuxJob extends ClusterJob {
-  @doc("Cluster Job properties")
-  properties: AzureLinuxClusterJobProperties;
-
-  @doc("Edge Solution type to support polymorphic resource.")
-  kind: EdgeSolutionType.AzureLinux;
-}
-
-@doc("Properties for repairing a server in the cluster.")
-model AzureLinuxRepairServerJobProperties
-  extends AzureLinuxClusterJobProperties {
-  ...RepairServerJobProperties;
-
-  @doc("ClusterJob Type to support polymorphic resource.")
-  jobType: AzureLinuxJobType.RepairServer;
-}
-
-@doc("Cluster job for Azure Stack HCI solution.")
-model AzureStackHciJob extends ClusterJob {
-  @doc("HCI Cluster Job properties")
-  properties: HciClusterJobProperties;
-
-  @doc("Edge Solution type to support polymorphic resource.")
-  kind: EdgeSolutionType.WindowsServer;
-}
-
-@doc("HCI Cluster Job properties")
-@discriminator("jobType")
-model HciClusterJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
-  jobType: HciJobType;
-}
-
 @doc("Details of servers to be added to the cluster")
 model AddServerJobServerDetails {
   @doc("Name of server to be added to cluster.")
@@ -230,49 +156,64 @@ model AddServerJobServerDetails {
 }
 
 @doc("Properties for adding a server in the cluster.")
-model HciAddServerJobProperties extends HciClusterJobProperties {
-  ...AddServerJobProperties;
+model HciAddServerJobProperties extends ClusterJobProperties {
+  @doc("List of protected parameters to pass to trigger the job for the cluster.")
+  @extension("x-ms-identifiers", ["secretName"])
+  secrets?: EceDeploymentSecrets[];
+
+  @doc("Details of servers to be added to the cluster")
+  @extension("x-ms-identifiers", [])
+  addServerJobServerDetails: AddServerJobServerDetails[];
+
+  @doc("Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'")
+  witnessType?: string;
+
+  @doc("Specify the fileshare path for the local witness for your Azure Stack HCI cluster.")
+  witnessPath?: string;
+
+  @doc("Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster.")
+  cloudAccountName?: string;
 
   @doc("Job Type to support polymorphic resource.")
   jobType: HciJobType.AddServer;
 }
 
 @doc("Properties for pausing a server in the cluster.")
-model HciPauseServerJobProperties extends HciClusterJobProperties {
-  ...PauseServerJobProperties;
+model HciPauseServerJobProperties extends ClusterJobProperties {
+  @doc("Details of servers to be paused in the cluster")
+  @extension("x-ms-identifiers", [])
+  pauseServerJobServerDetails: PauseServerJobServerDetails[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
   jobType: HciJobType.PauseServer;
 }
 
 @doc("Properties for repairing a server in the cluster.")
-model HciRepairServerJobProperties extends HciClusterJobProperties {
-  ...RepairServerJobProperties;
+model HciRepairServerJobProperties extends ClusterJobProperties {
+  @doc("Details of servers to be repaired in the cluster")
+  @extension("x-ms-identifiers", [])
+  repairServerJobServerDetails: RepairServerJobServerDetails[];
+
+  @doc("List of protected parameters to pass to trigger job for cluster.")
+  @extension("x-ms-identifiers", ["secretName"])
+  secrets?: EceDeploymentSecrets[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
   jobType: HciJobType.RepairServer;
 }
 
 @doc("Properties for resuming a server in the cluster.")
-model HciResumeServerJobProperties extends HciClusterJobProperties {
-  ...ResumeServerJobProperties;
+model HciResumeServerJobProperties extends ClusterJobProperties {
+  @doc("Details of servers to be resumed in the cluster")
+  @extension("x-ms-identifiers", [])
+  resumeServerJobServerDetails: ResumeServerJobServerDetails[];
 
   @doc("ClusterJob Type to support polymorphic resource.")
   jobType: HciJobType.ResumeServer;
 }
 
 @doc("Properties for adding network intent to a cluster.")
-model HciAddNetworkIntentJobProperties extends HciClusterJobProperties {
-  ...AddNetworkIntentJobProperties;
-
-  @doc("ClusterJob Type to support polymorphic resource.")
-  jobType: HciJobType.AddNetworkIntent;
-}
-
-@doc("Properties for adding network intent to a cluster.")
-model AddNetworkIntentJobProperties {
-  ...ClusterJobProperties;
-
+model HciAddNetworkIntentJobProperties extends ClusterJobProperties {
   @doc("List of protected parameters to pass to trigger job for cluster.")
   @extension("x-ms-identifiers", ["secretName"])
   secrets?: EceDeploymentSecrets[];
@@ -280,6 +221,15 @@ model AddNetworkIntentJobProperties {
   @doc("Host and Network details for which the intent has to be added.")
   @extension("x-ms-identifiers", [])
   addNetworkIntentJobDetails: AddNetworkIntentJobDetails[];
+
+  @doc("ClusterJob Type to support polymorphic resource.")
+  jobType: HciJobType.AddNetworkIntent;
+}
+
+@doc("Properties for configuring arc gateway to a cluster.")
+model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
+  @doc("ClusterJob Type to support polymorphic resource.")
+  jobType: HciJobType.ConfigureArcGateway;
 }
 
 @doc("Host and Network details for which the intent has to be added.")
@@ -300,15 +250,6 @@ model PauseServerJobServerDetails {
   arcNodeResourceId?: Azure.Core.armResourceIdentifier;
 }
 
-@doc("Properties for pausing a server in the cluster.")
-model PauseServerJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("Details of servers to be paused in the cluster")
-  @extension("x-ms-identifiers", [])
-  pauseServerJobServerDetails: PauseServerJobServerDetails[];
-}
-
 @doc("Details of servers to be repaired in the cluster")
 model RepairServerJobServerDetails {
   @doc("Name of server to be repaired in cluster.")
@@ -318,19 +259,6 @@ model RepairServerJobServerDetails {
   arcNodeResourceId?: Azure.Core.armResourceIdentifier;
 }
 
-@doc("Properties for repairing a server in the cluster.")
-model RepairServerJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("Details of servers to be repaired in the cluster")
-  @extension("x-ms-identifiers", [])
-  repairServerJobServerDetails: RepairServerJobServerDetails[];
-
-  @doc("List of protected parameters to pass to trigger job for cluster.")
-  @extension("x-ms-identifiers", ["secretName"])
-  secrets?: EceDeploymentSecrets[];
-}
-
 @doc("Details of servers to be resumes in the cluster")
 model ResumeServerJobServerDetails {
   @doc("Name of server to be resume in cluster.")
@@ -338,13 +266,4 @@ model ResumeServerJobServerDetails {
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
   arcNodeResourceId?: Azure.Core.armResourceIdentifier;
-}
-
-@doc("Properties for resuming a server in the cluster.")
-model ResumeServerJobProperties {
-  ...ClusterJobProperties;
-
-  @doc("Details of servers to be resumed in the cluster")
-  @extension("x-ms-identifiers", [])
-  resumeServerJobServerDetails: ResumeServerJobServerDetails[];
 }

@@ -6,15 +6,12 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The Network Tap resource definition.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The Network Tap resource definition.")
 @includeInapplicableMetadataInPayload(false)
 model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the Network Tap.
-   */
+  @doc("Name of the Network Tap.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkTapName")
@@ -28,49 +25,33 @@ model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
 
 @armResourceOperations
 interface NetworkTaps {
-  /**
-   * Retrieves details of this Network Tap.
-   */
+  @doc("Retrieves details of this Network Tap.")
   get is ArmResourceRead<NetworkTap>;
 
-  /**
-   * Creates a Network Tap.
-   */
+  @doc("Creates a Network Tap.")
   create is ArmResourceCreateOrReplaceAsync<NetworkTap>;
 
-  /**
-   * API to update certain properties of the Network Tap resource.
-   */
+  @doc("API to update certain properties of the Network Tap resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<NetworkTap, NetworkTapPatch>;
 
-  /**
-   * Deletes Network Tap.
-   */
+  @doc("Deletes Network Tap.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkTap>;
 
-  /**
-   * Displays Network Taps list by resource group GET method.
-   */
+  @doc("Displays Network Taps list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<NetworkTap>;
 
-  /**
-   * Displays Network Taps list by subscription GET method.
-   */
+  @doc("Displays Network Taps list by subscription GET method.")
   listBySubscription is ArmListBySubscription<NetworkTap>;
 
-  /**
-   * Implements the operation to the underlying resources.
-   */
+  @doc("Implements the operation to the underlying resources.")
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkTap,
     UpdateAdministrativeState,
     CommonPostActionResponseForDeviceUpdate
   >;
 
-  /**
-   * Implements the operation to the underlying resources.
-   */
+  @doc("Implements the operation to the underlying resources.")
   resync is ArmResourceActionAsync<
     NetworkTap,
     void,

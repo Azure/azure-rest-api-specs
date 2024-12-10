@@ -501,6 +501,32 @@
           "type": "string"
         }
       }
+    },
+    "ConfidentialVmIntent": {
+      "type": "string",
+      "description": "Customer Intent to update the ConfidentialVm intent on the cluster or edgeDevice",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "default": "Enable",
+      "x-ms-enum": {
+        "name": "ConfidentialVmIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable ConfidentialVM on cluster or EdgeDevice"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable ConfidentialVM on cluster or EdgeDevice"
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {}
