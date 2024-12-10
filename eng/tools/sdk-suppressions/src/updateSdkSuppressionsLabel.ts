@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { writeFileSync } from "fs";
-import { Octokit, RestEndpointMethodTypes } from "@octokit/rest";
+import { Octokit } from "@octokit/rest";
 import { OctokitResponse, ReposGetContentResponseData } from "@octokit/types";
 import { sdkLabels, SdkName } from './sdk.js';
 import { 
@@ -43,15 +43,11 @@ export type PullRequestContext = {
  */
 export async function getSdkSuppressionsSdkNames(
   appClient: Octokit,
-  pr: PullRequestContext
+  pr: PullRequestContext,
+  prChangeFiles: string
 ): Promise<SdkName[]> {
-  // Get changed files paths
-  const filesChangedPaths: string[] = await listChangedFilePaths(appClient, {
-    owner: pr.base.owner,
-    repo: pr.base.repo,
-    pull_number: pr.number,
-  });
-
+  
+  const filesChangedPaths = prChangeFiles.split(' ');
   // Get suppression file list
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
 
@@ -114,11 +110,6 @@ export async function getSdkSuppressionsSdkNames(
   }
 
   return [...new Set(sdkNameList)];
-}
-
-export async function getSdkSuppressionsLabels(appClient: Octokit, pr: PullRequestContext): Promise<string[]> {
-  const sdkNameList = await getSdkSuppressionsSdkNames(appClient, pr);
-  return sdkNameList.map((sdkName) => sdkLabels[sdkName].breakingChangeSuppression) as string[];
 }
 
 async function getSdkSuppressionsFileContent(
@@ -213,15 +204,13 @@ export function getSdkNamesWithChangedSuppressions(
  * 2. It removes the label if the PR no longer contains the suppression file.
  * 3. It leaves the label unchanged if the PR already has both the suppression and the suppression approved labels.
  */
-export async function updateSdkSuppressionsLabels(pr: PullRequestContext, githubToken: string, outputFile: string): Promise<{labelsToAdd: String[], labelsToRemove: String[]}> {
+export async function updateSdkSuppressionsLabels(pr: PullRequestContext, githubToken: string, prChangeFiles:string, outputFile: string): Promise<{labelsToAdd: String[], labelsToRemove: String[]}> {
   const appClient: Octokit = new Octokit({
       auth: githubToken
   });
-  console.log('process env', process.env.GITHUB_PULL_REQUEST_CHANGE_FILES);
-  console.log('json parse process env', (process.env.GITHUB_PULL_REQUEST_CHANGE_FILES as string).split(' '));
 
   console.log('Pull Request Context', pr);
-  const sdkNames = await getSdkSuppressionsSdkNames(appClient, pr);
+  const sdkNames = await getSdkSuppressionsSdkNames(appClient, pr, prChangeFiles);
   console.log('Changed SdkNames', sdkNames);
   
   console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} Get the required suppressions label based on compared SDK List ${sdkNames.join(", ")}`);
@@ -279,15 +268,6 @@ export async function updateSdkSuppressionsLabels(pr: PullRequestContext, github
 function logSuppressionFileInfo(pr: { owner: string, repo: string, ref: string, path: string }) {
   console.log(`updateSdkSuppressionsLabels: Will get suppressions content from ${pr.owner}/${pr.repo}#${pr.ref} for ${pr.path}`);
 }
-
-const listChangedFilePaths = async (
-  github: Octokit,
-  args: RestEndpointMethodTypes["pulls"]["listFiles"]["parameters"]
-): Promise<string[]> => {
-  const changedFiles = await github.paginate("GET /repos/:owner/:repo/pulls/:pull_number/files", args) as { filename: string }[];
-
-  return changedFiles.map(it => it.filename);
-};
 
 /**
  * 
