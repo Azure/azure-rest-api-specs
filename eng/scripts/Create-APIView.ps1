@@ -379,32 +379,34 @@ function New-TypeSpecAPIViewTokens {
 
   $typeSpecAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtifactsStagingDirectory, $APIViewArtifactsDirectoryName)
 
-  # Generate TypeSpec APIView Tokens
-  foreach ($typeSpecProject in $typeSpecProjects) {
-    $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
-    New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
+  try {
+    # Generate TypeSpec APIView Tokens
+    foreach ($typeSpecProject in $typeSpecProjects) {
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
+      New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
 
-    # Generate New APIView Token using default tag on base branch
-    git checkout $SourceCommitId
-    Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+      # Generate New APIView Token using default tag on base branch
+      git checkout $SourceCommitId
+      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
 
-    # Generate BaseLine APIView Token using same tag on target branch
-    git checkout $TargetCommitId
-    
-    # Skip Baseline APIView Token for new projects
-    if (!(Test-Path -Path $typeSpecProject)) {
-      Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
-    }
-    else {
-      Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
+      # Generate BaseLine APIView Token using same tag on target branch
+      git checkout $TargetCommitId
+      
+      # Skip Baseline APIView Token for new projects
+      if (!(Test-Path -Path $typeSpecProject)) {
+        Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+      }
+      else {
+        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
+      }
     }
   }
-
-  git checkout $currentBranch
-
-  LogGroupStart " See all generated TypeSpec APIView Artifacts..."
-  Get-ChildItem -Path $typeSpecAPIViewArtifactsDirectory -Recurse
-  LogGroupEnd
+  finally {
+    git checkout $currentBranch
+    LogGroupStart " See all generated TypeSpec APIView Artifacts..."
+    Get-ChildItem -Path $typeSpecAPIViewArtifactsDirectory -Recurse
+    LogGroupEnd
+  }
 }
 
 <#
