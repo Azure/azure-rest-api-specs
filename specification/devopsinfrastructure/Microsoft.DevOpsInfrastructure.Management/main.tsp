@@ -21,10 +21,10 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-04-04-preview preview version */
+  /** 2024-10-19 version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2024-04-04-preview`,
+  `2024-10-19`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -63,6 +63,7 @@ model PoolProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -134,6 +135,7 @@ union AzureDevOpsPermissionType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -261,6 +263,7 @@ model OsProfile {
   @doc("Determines how the service should be run. By default, this will be set to Service.")
   logonType?: LogonType;
 }
+
 @doc("The secret management settings of the machines in the pool.")
 model SecretsManagementSettings {
   @doc("Where to store certificates on the machine.")
@@ -272,6 +275,7 @@ model SecretsManagementSettings {
   @doc("Defines if the key of the certificates should be exportable.")
   keyExportable: boolean;
 }
+
 @doc("Determines how the service should be run.")
 union LogonType {
   string,
@@ -315,6 +319,7 @@ model Stateful extends AgentProfile {
   @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
   gracePeriodTimeSpan?: string;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
 
@@ -416,6 +421,12 @@ interface Pools {
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
+
+  @doc("Checks that the pool name is valid and is not already in use.")
+  checkNameAvailability is checkGlobalNameAvailability<
+    CheckNameAvailability,
+    CheckNameAvailabilityResult
+  >;
 }
 
 @parentResource(Pool)
@@ -650,6 +661,7 @@ model Location is ProxyResource<LocationProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of a location.")
 model LocationProperties {}
 
@@ -716,7 +728,25 @@ model Image is ProxyResource<ImageProperties> {
   name: string;
 }
 
+@doc("The type of resource.")
+union DevOpsInfrastructureResourceType {
+  string,
+
+  @doc("DevOpsInfrastructure pool resource.")
+  "Microsoft.DevOpsInfrastructure/pools",
+}
+
+@doc("The parameters used to check the availability of a resource.")
+model CheckNameAvailability {
+  @doc("The name of the resource.")
+  name: string;
+
+  @doc("The type of resource that is used as the scope of the availability check.")
+  type: DevOpsInfrastructureResourceType;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 @doc("Properties of an image.")
 model ImageProperties {}
 
@@ -742,4 +772,42 @@ model ImageVersionProperties {
 @armResourceOperations
 interface ImageVersions {
   listByImage is ArmResourceListByParent<ImageVersion>;
+}
+
+@doc("The reason code explaining why the name is unavailable. Will be null if the name is available.")
+union CheckNameAvailabilityReason {
+  string,
+
+  @doc("The name is invalid.")
+  "Invalid",
+
+  @doc("The name already exists.")
+  "AlreadyExists",
+}
+
+@doc("AvailabilityStatus of a name.")
+union AvailabilityStatus {
+  string,
+
+  @doc("The name is available.")
+  "Available",
+
+  @doc("The name is unavailable")
+  "Unavailable",
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("The CheckNameAvailability operation response.")
+model CheckNameAvailabilityResult {
+  @doc("Availability status of the name.")
+  available: AvailabilityStatus;
+
+  @doc("A message explaining why the name is unavailable. Will be null if the name is available.")
+  message: string;
+
+  @doc("The name whose availability was checked.")
+  name: string;
+
+  @doc("The reason code explaining why the name is unavailable. Will be null if the name is available.")
+  reason: CheckNameAvailabilityReason;
 }

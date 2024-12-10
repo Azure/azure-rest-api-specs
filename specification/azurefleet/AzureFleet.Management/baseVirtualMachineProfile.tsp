@@ -390,7 +390,7 @@ model WinRMListener {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  certificateUrl?: string;
+  certificateUrl?: url;
 }
 
 /**
@@ -558,7 +558,7 @@ model VaultCertificate {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
-  certificateUrl?: string;
+  certificateUrl?: url;
 
   /**
    * For Windows VMs, specifies the certificate store on the Virtual Machine to
@@ -777,7 +777,7 @@ model VirtualHardDisk {
   /**
    * Specifies the virtual hard disk's uri.
    */
-  uri?: string;
+  uri?: url;
 }
 
 /**
@@ -1350,7 +1350,7 @@ model BootDiagnostics {
    * screenshot. If storageUri is not specified while enabling boot diagnostics,
    * managed storage will be used.
    */
-  storageUri?: string;
+  storageUri?: url;
 }
 
 /**
@@ -1434,14 +1434,15 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or
    * protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @visibility("create", "update")
   @OpenAPI.extension("x-ms-secret", true)
   protectedSettings?: Record<unknown>;
@@ -1479,7 +1480,7 @@ model KeyVaultSecretReference {
   /**
    * The URL referencing a secret in a Key Vault.
    */
-  secretUrl: string;
+  secretUrl: url;
 
   /**
    * The relative URL of the Key Vault containing the secret.
@@ -2094,7 +2095,7 @@ union NetworkApiVersion {
   /**
    * Initial version supported. Later versions are supported as well.
    */
-  `2020-11-01`: "2020-11-01",
+  v2020_11_01: "2020-11-01",
 }
 
 /**

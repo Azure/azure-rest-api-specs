@@ -30,9 +30,16 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-06
+tag: package-2024-10
 ```
 
+
+### Tag: package-2024-10
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.CognitiveServices/stable/2024-10-01/cognitiveservices.json
+```
 
 ### Tag: package-preview-2024-06
 
@@ -168,20 +175,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cognitive_services']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CognitiveServices
-  output-folder: $(csharp-sdks-folder)/cognitiveservices/Microsoft.Azure.Management.CognitiveServices/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

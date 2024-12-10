@@ -103,6 +103,7 @@ model DashboardProperties {
   /**
    * The dashboard metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   metadata?: {};
 }
 
@@ -124,6 +125,7 @@ model DashboardLens {
   /**
    * The dashboard len's metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   metadata?: {};
 }
 
@@ -169,6 +171,7 @@ model DashboardPartsPosition {
   /**
    * The dashboard part's metadata.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   metadata?: {};
 }
 
@@ -199,6 +202,7 @@ model PatchableDashboard {
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -232,6 +236,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
   /**
    * Input to dashboard part.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @OpenAPI.extension("x-ms-identifiers", [])
   inputs?: {}[];
 

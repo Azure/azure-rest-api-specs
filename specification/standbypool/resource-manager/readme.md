@@ -27,10 +27,11 @@ These are the global settings for the standbypool.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-03
+tag: package-2024-03
 ```
 
 ### Suppression
+
 ``` yaml
 suppressions:
   - code: OperationIdNounVerb
@@ -42,6 +43,7 @@ suppressions:
 modelerfour:
   flatten-models: false
 ```
+
 ### Tag: package-2024-03
 
 These settings apply only when `--tag=package-2024-03` is specified on the command line.
@@ -81,7 +83,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-resource-manager-schemas
-  - repo: azure-sdk-for-net
   - repo: azure-cli-extensions
   - repo: azure-powershell
   - repo: azure-sdk-for-go

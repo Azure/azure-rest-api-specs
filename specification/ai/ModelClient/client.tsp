@@ -59,10 +59,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python,csharp");
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python,csharp");
 
-// The operators need to be hidden, since we hand-write the public versions of those to
-// 1. Add chat completions streaming (to getChatCompletions operator)
-// 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
-// 3. Cache model info (to getModelInfo, all clients, Python only)
+// The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal, "python");
 @@access(AI.Model.getImageEmbeddings, Access.internal, "python");
