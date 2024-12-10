@@ -27,9 +27,24 @@ These are the global settings for devcenter.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-08
+tag: package-preview-2024-10
 ```
 
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.DevCenter/preview/2024-10-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2024-10-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2024-10-01-preview/vdi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: vdi.json
+    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
+```
 
 ### Tag: package-preview-2024-08
 

@@ -45,28 +45,29 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-09'
 input-file:
-- Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
-- Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Tables.json
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPacks.json
-- Microsoft.OperationalInsights/stable/2019-09-01/QueryPackQueries.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
-- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
-- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
-- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
-- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
-- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
-- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
-- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
-- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
-- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
-- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2022-10-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/QueryPacks.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/QueryPackQueries.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataExports.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/DataSources.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Gateways.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedServices.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SavedSearches.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Schema.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/SharedKeys.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Usages.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/stable/2023-09-01/Workspaces.json
 ```
+
 ### Tag: package-2015-11-preview
 
 These settings apply only when `--tag=package-2015-11-preview` is specified on the command line.
@@ -336,22 +337,6 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated using AutoRest.1.0.0-Nightly20170126
-  azure-arm: true
-  namespace: Microsoft.Azure.Management.OperationalInsights
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/operationalinsights/Microsoft.Azure.Management.OperationalInsights/src/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -371,4 +356,7 @@ directive:
   - from: OperationalInsights.json
     suppress: R3006  # BodyTopLevelProperties/R3006/RPCViolation
     reason: properties etag defined as eTag in model
+  - suppress: GuidUsage
+    from: Clusters.json
+    reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
