@@ -1,0 +1,34 @@
+name: Check Spelling
+
+on:
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - typespec-next
+
+jobs:
+  check-spelling:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # Fetch the entire history of the repository. Attempting to check out
+          # the merge commit and the base branch does not save any time.
+          fetch-depth: 0
+
+      - name: Run spelling check
+        run: |
+          $targetCommittish = git rev-parse origin/${{ github.base_ref }}
+          ./eng/common/scripts/check-spelling-in-changed-files.ps1 `
+              -CSpellConfigPath 'cspell.json' `
+              -SourceCommittish '${{ github.sha }}' `
+              -TargetCommittish  $targetCommittish `
+              -ExitWithError
+          if ($LASTEXITCODE) {
+            Write-Host "Spelling errors found in changed files. See https://aka.ms/ci-fix#spell-check"
+            exit $LASTEXITCODE
+          }
+        shell: pwsh
