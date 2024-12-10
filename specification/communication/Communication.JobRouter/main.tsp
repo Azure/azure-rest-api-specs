@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
 @service({
   title: "Azure Communication Routing Service",
 })
