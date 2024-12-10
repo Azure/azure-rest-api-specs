@@ -26,7 +26,7 @@ export async function main() {
   } else {
     console.error(getUsage());
     exit(1);
-  }
+  } 
 }
 
 export { getSuppressions, Suppression };
