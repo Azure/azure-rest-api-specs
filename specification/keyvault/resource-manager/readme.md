@@ -29,11 +29,11 @@ openapi-type: arm
 tag: package-preview-2024-12-01
 ```
 
-### Tag: package-preview-2024-12-01-preview
+### Tag: package-preview-2024-12
 
-These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-12-01-preview'
+```yaml $(tag) == 'package-preview-2024-12'
 input-file:
   - Microsoft.KeyVault/preview/2024-12-01-preview/common.json
   - Microsoft.KeyVault/preview/2024-12-01-preview/keys.json
