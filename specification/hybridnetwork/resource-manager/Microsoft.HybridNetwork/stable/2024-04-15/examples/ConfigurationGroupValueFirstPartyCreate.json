@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "configurationGroupValueName": "testConfigurationGroupValue",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "configurationGroupSchemaResourceReference": {
+          "id": "/subscriptions/subid/resourcegroups/testRG/providers/microsoft.hybridnetwork/publishers/testPublisher/configurationGroupSchemas/testConfigurationGroupSchemaName",
+          "idType": "Secret"
+        },
+        "configurationType": "Open",
+        "configurationValue": "{\"interconnect-groups\":{\"stripe-one\":{\"name\":\"Stripe one\",\"international-interconnects\":[\"france\",\"germany\"],\"domestic-interconnects\":[\"birmingham\",\"edinburgh\"]},\"stripe-two\":{\"name\":\"Stripe two\",\"international-interconnects\":[\"germany\",\"italy\"],\"domestic-interconnects\":[\"edinburgh\",\"london\"]}},\"interconnect-group-assignments\":{\"ssc-one\":{\"ssc\":\"SSC 1\",\"interconnects\":\"stripe-one\"},\"ssc-two\":{\"ssc\":\"SSC 2\",\"interconnects\":\"stripe-two\"}}}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testConfigurationGroupValue",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/configurationGroupValues/testConfigurationGroupValue",
+        "type": "Microsoft.HybridNetwork/configurationGroupValues",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publisherName": "testPublisher",
+          "publisherScope": "Private",
+          "configurationGroupSchemaName": "testConfigurationGroupSchemaName",
+          "configurationGroupSchemaOfferingLocation": "eastus",
+          "configurationType": "Open",
+          "configurationGroupSchemaResourceReference": {
+            "idType": "Secret"
+          },
+          "configurationValue": "{\"interconnect-groups\":{\"stripe-one\":{\"name\":\"Stripe one\",\"international-interconnects\":[\"france\",\"germany\"],\"domestic-interconnects\":[\"birmingham\",\"edinburgh\"]},\"stripe-two\":{\"name\":\"Stripe two\",\"international-interconnects\":[\"germany\",\"italy\"],\"domestic-interconnects\":[\"edinburgh\",\"london\"]}},\"interconnect-group-assignments\":{\"ssc-one\":{\"ssc\":\"SSC 1\",\"interconnects\":\"stripe-one\"},\"ssc-two\":{\"ssc\":\"SSC 2\",\"interconnects\":\"stripe-two\"}}}"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testConfigurationGroup",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/configurationGroups/testConfigurationGroup",
+        "type": "Microsoft.HybridNetwork/configurationGroups",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publisherName": "testPublisher",
+          "publisherScope": "Private",
+          "configurationGroupSchemaName": "testConfigurationGroupSchemaName",
+          "configurationGroupSchemaOfferingLocation": "eastus",
+          "configurationType": "Open",
+          "configurationGroupSchemaResourceReference": {
+            "idType": "Secret"
+          },
+          "configurationValue": "{\"interconnect-groups\":{\"stripe-one\":{\"name\":\"Stripe one\",\"international-interconnects\":[\"france\",\"germany\"],\"domestic-interconnects\":[\"birmingham\",\"edinburgh\"]},\"stripe-two\":{\"name\":\"Stripe two\",\"international-interconnects\":[\"germany\",\"italy\"],\"domestic-interconnects\":[\"edinburgh\",\"london\"]}},\"interconnect-group-assignments\":{\"ssc-one\":{\"ssc\":\"SSC 1\",\"interconnects\":\"stripe-one\"},\"ssc-two\":{\"ssc\":\"SSC 2\",\"interconnects\":\"stripe-two\"}}}"
+        }
+      }
+    }
+  }
+}

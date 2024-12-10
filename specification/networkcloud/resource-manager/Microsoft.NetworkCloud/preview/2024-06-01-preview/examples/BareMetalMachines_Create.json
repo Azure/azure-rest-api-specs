@@ -1,0 +1,225 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "bareMetalMachineName": "bareMetalMachineName",
+    "bareMetalMachineParameters": {
+      "location": "location",
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      },
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+      },
+      "properties": {
+        "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+        "machineSkuId": "684E-3B16-399E",
+        "rackSlot": 1,
+        "machineName": "r01c001",
+        "bootMacAddress": "00:00:4e:00:58:af",
+        "bmcMacAddress": "00:00:4f:00:57:00",
+        "bmcCredentials": {
+          "username": "bmcuser",
+          "password": "{password}"
+        },
+        "bmcConnectionString": "bmcconnectionstring",
+        "machineDetails": "User-provided machine details.",
+        "serialNumber": "BM1219XXX"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+        "name": "bareMetalMachineName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/bareMetalMachines",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+          "machineSkuId": "684E-3B16-399E",
+          "rackSlot": 1,
+          "machineName": "r01c001",
+          "bootMacAddress": "00:00:4e:00:58:af",
+          "bmcMacAddress": "00:00:4f:00:57:00",
+          "bmcCredentials": {
+            "username": "bmcuser"
+          },
+          "bmcConnectionString": "bmcconnectionstring",
+          "machineDetails": "User-provided machine details.",
+          "serialNumber": "BM1219XXX",
+          "provisioningState": "Succeeded",
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "readyState": "True",
+          "cordonStatus": "Uncordoned",
+          "powerState": "On",
+          "hardwareInventory": {
+            "interfaces": [
+              {
+                "name": "networkInterfaceName",
+                "macAddress": "2C:54:91:88:C9:E3",
+                "linkStatus": "Up",
+                "networkInterfaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName/networkInterfaces/networkInterfaceName"
+              }
+            ],
+            "additionalHostInformation": "Machine specific information..."
+          },
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "DetailedStatusMessage",
+          "serviceTag": "ST1219XXX",
+          "kubernetesNodeName": "node01",
+          "kubernetesVersion": "1.28.3",
+          "machineClusterVersion": "3.8.7",
+          "osImage": "v20220805e",
+          "oamIpv4Address": "192.0.2.1",
+          "oamIpv6Address": "0:0:0:0:0:FFFF:7F00:0001",
+          "hardwareValidationStatus": {
+            "result": "Pass",
+            "lastValidationTime": "2022-09-30T13:27:03.008Z"
+          },
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "machineRoles": [
+            "platform.afo-nc.microsoft.com/management-plane=true"
+          ],
+          "runtimeProtectionStatus": {
+            "scanScheduledTime": "2023-10-01T13:00:00.000Z",
+            "scanStartedTime": "2023-09-30T13:00:03.008Z",
+            "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+            "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
+            "definitionsVersion": "1.2.3"
+          },
+          "secretRotationStatus": [
+            {
+              "secretType": "Bare Metal Machine Identity - console",
+              "lastRotationTime": "2023-09-30T13:27:23.103Z",
+              "rotationPeriodDays": 60,
+              "expirePeriodDays": 90,
+              "secretArchiveReference": {
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-console-credential-manager-ffffffff",
+                "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/bareMetalMachines/bareMetalMachineName",
+        "name": "bareMetalMachineName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/bareMetalMachines",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "rackId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/racks/rackName",
+          "machineSkuId": "684E-3B16-399E",
+          "rackSlot": 1,
+          "machineName": "r01c001",
+          "bootMacAddress": "00:00:4e:00:58:af",
+          "bmcMacAddress": "00:00:4f:00:57:00",
+          "bmcCredentials": {
+            "username": "bmcuser"
+          },
+          "bmcConnectionString": "bmcconnectionstring",
+          "machineDetails": "User-provided machine details.",
+          "serialNumber": "BM1219XXX",
+          "provisioningState": "Accepted",
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "readyState": "True",
+          "cordonStatus": "Uncordoned",
+          "powerState": "On",
+          "hardwareInventory": {
+            "interfaces": [
+              {
+                "name": "networkInterfaceName",
+                "macAddress": "2C:54:91:88:C9:E3",
+                "linkStatus": "Up",
+                "networkInterfaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName/networkInterfaces/networkInterfaceName"
+              }
+            ],
+            "additionalHostInformation": "Machine specific information..."
+          },
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "DetailedStatusMessage",
+          "serviceTag": "ST1219XXX",
+          "kubernetesNodeName": "node01",
+          "kubernetesVersion": "1.28.3",
+          "machineClusterVersion": "3.8.7",
+          "osImage": "v20220805e",
+          "oamIpv4Address": "192.0.2.1",
+          "oamIpv6Address": "0:0:0:0:0:FFFF:7F00:0001",
+          "hardwareValidationStatus": {
+            "result": "Pass",
+            "lastValidationTime": "2022-09-30T13:27:03.008Z"
+          },
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "machineRoles": [
+            "platform.afo-nc.microsoft.com/management-plane=true"
+          ],
+          "runtimeProtectionStatus": {
+            "scanScheduledTime": "2023-10-01T13:00:00.000Z",
+            "scanStartedTime": "2023-09-30T13:00:03.008Z",
+            "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+            "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
+            "definitionsVersion": "1.2.3"
+          },
+          "secretRotationStatus": [
+            {
+              "secretType": "Bare Metal Machine Identity - console",
+              "lastRotationTime": "2023-09-30T13:27:23.103Z",
+              "rotationPeriodDays": 60,
+              "expirePeriodDays": 90,
+              "secretArchiveReference": {
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-console-credential-manager-ffffffff",
+                "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+              }
+            }
+          ]
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}

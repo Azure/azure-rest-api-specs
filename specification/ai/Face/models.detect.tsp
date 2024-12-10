@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 namespace Face;
 
 alias FaceDetectionOptions = {
-  @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")
+  @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'. 'detection_03' is recommended since its accuracy is improved on smaller faces (64x64 pixels) and rotated face orientations.")
   @query
   detectionModel?: DetectionModel = "detection_01";
 

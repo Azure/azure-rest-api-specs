@@ -118,6 +118,11 @@ model CreateFileSearchToolResourceVectorStoreOptions {
   @maxItems(10000)
   fileIds: string[];
 
+  /** The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy. */
+  @encodedName("application/json", "chunking_strategy")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  chunkingStrategy: VectorStoreChunkingStrategyRequest;
+
   /** Set of 16 key-value pairs that can be attached to a vector store. This can be useful for storing additional information
    * about the vector store in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of
    *  512 characters long. */
