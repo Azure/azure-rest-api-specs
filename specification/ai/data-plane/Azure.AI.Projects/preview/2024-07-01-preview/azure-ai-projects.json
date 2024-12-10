@@ -6595,7 +6595,7 @@
         },
         "file_search": {
           "type": "array",
-          "description": "The results of the file search.",
+          "description": "For now, this is always going to be an empty object.",
           "items": {
             "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults"
           },
@@ -6614,7 +6614,7 @@
       ],
       "x-ms-discriminator-value": "file_search"
     },
-    "Agents.RunStepFileSearchToolCallResults": {
+    "Agents.RunStepFileSearchToolCallResult": {
       "type": "object",
       "description": "  File search tool call result.",
       "properties": {
@@ -6648,6 +6648,28 @@
         "file_id",
         "file_name",
         "score"
+      ]
+    },
+    "Agents.RunStepFileSearchToolCallResults": {
+      "type": "object",
+      "description": "The results of the file search.",
+      "properties": {
+        "ranking_options": {
+          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "description": "Ranking options for file search.",
+          "x-ms-client-name": "rankingOptions"
+        },
+        "results": {
+          "type": "array",
+          "description": "The array of a file search results",
+          "items": {
+            "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "results"
       ]
     },
     "Agents.RunStepFunctionToolCall": {
