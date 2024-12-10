@@ -29,6 +29,16 @@ union BgpMultiHopState {
   Disabled: "Disabled",
 }
 
+@doc("Kubernetes Label Definition")
+@added(Versions.v2024_08_01)
+model Label {
+  @doc("Label name")
+  name: string;
+
+  @doc("Label value")
+  value: string;
+}
+
 @doc("Details of the BgpPeer.")
 model BgpPeerProperties {
   @doc("My ASN")
@@ -63,7 +73,8 @@ model BgpPeerProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The type of the field is a record because it is a mapping of labels in the customer cluster"
   @doc("A dynamic label mapping to select related nodes to peer with. For instance, if you want to create a BGP peer only for nodes with label \"a=b\", then please specify {\"a\": \"b\"} in the field.")
   @added(Versions.v2024_08_01)
-  nodeSelector?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  nodeSelector?: Label[];
 
   @visibility("read")
   @doc("Resource provision state")
