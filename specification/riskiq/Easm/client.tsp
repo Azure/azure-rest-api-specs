@@ -64,6 +64,7 @@ interface EasmClient {
   runTask is Easm.Tasks.runTask;
   downloadTask is Easm.Tasks.downloadTask;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   getCisaCves is Easm.CisaCves.getCisaCves;
   getCisaCve is Easm.CisaCves.getCisaCve;
 
