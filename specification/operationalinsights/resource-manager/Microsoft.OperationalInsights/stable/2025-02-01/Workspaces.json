@@ -591,6 +591,15 @@
         "defaultDataCollectionRuleResourceId": {
           "type": "string",
           "description": "The resource ID of the default Data Collection Rule to use for this workspace. Expected format is - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/{dcrName}."
+        },
+        "replication": {
+          "$ref": "#/definitions/WorkspaceReplicationProperties",
+          "description": "workspace replication properties."
+        },
+        "failover" : {
+          "$ref": "#/definitions/WorkspaceFailoverProperties",
+          "description": "workspace failover properties."
+
         }
       },
       "description": "Workspace properties."
@@ -701,6 +710,80 @@
         }
       },
       "description": "The private link scope resource reference."
+    },
+    "WorkspaceReplicationProperties": {
+      "type": "object",
+      "description": "Workspace replication properties.",
+      "properties": {
+        "location": {
+          "description": "The location of the replication.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location.",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the replication.",
+          "enum": [
+            "Succeeded",
+            "EnableRequested",
+            "Enabling",
+            "DisableRequested",
+            "Disabling",
+            "RollbackRequested",
+            "RollingBack",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceReplicationState",
+            "modelAsString": true
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The last time when the replication was enabled.",
+          "readOnly": true
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time when the replication was updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled",
+        "location"
+      ]
+    },
+    "WorkspaceFailoverProperties": {
+      "type": "object",
+      "description": "The failover state of the replication.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The failover state of the replication.",
+          "enum": [
+            "Inactive",
+            "Activating",
+            "Active",
+            "Deactivating",
+            "Failed"          
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceFailoverState",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time when the failover state was updated.",
+          "readOnly": true
+        }
+      }
     },
     "Workspace": {
       "type": "object",

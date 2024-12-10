@@ -400,6 +400,10 @@
         "capacityReservationProperties": {
           "$ref": "#/definitions/CapacityReservationProperties",
           "description": "Additional properties for capacity reservation"
+        },
+        "replication" : {
+          "$ref": "#/definitions/ClusterReplicationProperties",
+          "description": "Cluster's replication properties."
         }
       },
       "description": "Cluster properties."
@@ -616,6 +620,57 @@
           "format": "int64"
         }
       }
+    },
+    "ClusterReplicationProperties": {
+      "type": "object",
+      "description": "Cluster replication properties.",
+      "properties": {
+        "location": {
+          "description": "The secondary location of the replication.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Specifies whether the replication is enabled or not. When true the cluster is replicate to the specified location.",
+          "type": "boolean"
+        },
+        "isAvailabilityZonesEnabled" :{
+          "description": "Should enable AvailabilityZones for the given replicated cluster",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the cluster replication.",
+          "enum": [
+            "Succeeded",
+            "EnableRequested",
+            "Enabling",
+            "DisableRequested",
+            "Disabling",
+            "RollbackRequested",
+            "RollingBack",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterReplicationState",
+            "modelAsString": true
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The cluster's replication creation time",
+          "readOnly": true
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time the cluster's replication was updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled",
+        "location"
+      ]
     }
   },
   "parameters": {}
