@@ -6594,13 +6594,9 @@
           "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
         },
         "file_search": {
-          "type": "array",
+          "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults",
           "description": "For now, this is always going to be an empty object.",
-          "items": {
-            "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults"
-          },
-          "x-ms-client-name": "fileSearch",
-          "x-ms-identifiers": []
+          "x-ms-client-name": "fileSearch"
         }
       },
       "required": [

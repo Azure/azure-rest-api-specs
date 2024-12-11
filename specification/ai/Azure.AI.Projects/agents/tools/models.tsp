@@ -284,7 +284,7 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
 
   @doc("For now, this is always going to be an empty object.")
   @encodedName("application/json", "file_search")
-  fileSearch: RunStepFileSearchToolCallResults[];
+  fileSearch: RunStepFileSearchToolCallResults;
 }
 
 @doc("The results of the file search.")
