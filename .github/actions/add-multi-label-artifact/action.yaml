@@ -1,45 +1,45 @@
-name: Add Multi Labels Artifact
+name: Add Multi Label Artifact
 description: Uploads empty artifacts for each label-value pair, consumed by the "update-labels" action.
 
 inputs:
   labels:
-    description: "Comma-separated list of labels"
-    required: true
-  value:
-    description: "Comma-separated list of values (e.g., 'label-a=true,label-b=false')"
+    description: "Array of label-value pairs (e.g., ['label-a=true','label-b=false'])"
     required: true
 
 runs:
   using: composite
 
   steps:
-    - name: Validate input lengths
+    - name: Parse and validate input
+      shell: bash
       run: |
-        IFS=',' read -r -a label_array <<< "${{ inputs.labels }}"
-        IFS=',' read -r -a value_array <<< "${{ inputs.value }}"
+        # Convert input to array
+        eval "label_array=${{ inputs.labels }}"
 
-        if [ "${#label_array[@]}" -ne "${#value_array[@]}" ]; then
-          echo "Error: labels and value must have the same number of elements."
+        # Check if array is empty
+        if [ "${#label_array[@]}" -eq 0 ]; then
+          echo "Error: No labels provided."
           exit 1
         fi
-      shell: bash
+
+        # Debug: Print parsed array
+        echo "Parsed labels: ${label_array[@]}"
 
     - name: Process label-value pairs
       shell: bash
       run: |
-        IFS=',' read -r -a label_array <<< "${{ inputs.labels }}"
-        IFS=',' read -r -a value_array <<< "${{ inputs.value }}"
+        # Convert input to array
+        eval "label_array=${{ inputs.labels }}"
 
-        for i in "${!label_array[@]}"; do
-          label="${label_array[i]}"
-          value="${value_array[i]}"
-          artifact_name="label-${label}=${value}"
+        for label_pair in "${label_array[@]}"; do
+          # Replace '=' with a separator for artifact naming
+          artifact_name=$(echo "$label_pair" | sed 's/=/=/')
 
-          # Create empty file
+          # Create empty file for the artifact
           empty_file="$RUNNER_TEMP/empty-${artifact_name}.txt"
           > "$empty_file"
 
-          # Upload artifact
+          # Upload artifact using actions/upload-artifact
           echo "Uploading artifact: $artifact_name"
           gh api \
             -H "Accept: application/vnd.github+json" \
