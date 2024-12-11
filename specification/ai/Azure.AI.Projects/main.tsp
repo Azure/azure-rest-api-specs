@@ -43,7 +43,7 @@ namespace Azure.AI {
   "{endpoint}/agents/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{projectName}",  // This URL is for the Agents API.
   "Azure AI",
   {
-    @doc("The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.")
+    @doc("The Azure AI Foundry project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.")
     endpoint: string,
 
     @doc("The Azure subscription ID.")
@@ -52,7 +52,7 @@ namespace Azure.AI {
     @doc("The name of the Azure Resource Group.")
     resourceGroupName: string,
 
-    @doc("The Azure AI Studio project name.")
+    @doc("The Azure AI Foundry project name.")
     projectName: string,
   }
 )
