@@ -425,25 +425,25 @@ union ScalingHostPoolType {
 union ScalingScheduleDaysOfWeekItem {
   string,
 
-  /** Sunday */
+  /** Day of Week Sunday */
   Sunday: "Sunday",
 
-  /** Monday */
+  /** Day of Week Monday */
   Monday: "Monday",
 
-  /** Tuesday */
+  /** Day of Week Tuesday */
   Tuesday: "Tuesday",
 
-  /** Wednesday */
+  /** Day of Week Wednesday */
   Wednesday: "Wednesday",
 
-  /** Thursday */
+  /** Day of Week Thursday */
   Thursday: "Thursday",
 
-  /** Friday */
+  /** Day of Week Friday */
   Friday: "Friday",
 
-  /** Saturday */
+  /** Day of Week Saturday */
   Saturday: "Saturday",
 }
 
@@ -1959,8 +1959,13 @@ model WorkspaceProperties {
  * Schema for updatable App Attach Package properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AppAttachPackagePatch
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model AppAttachPackagePatch extends Resource {
+  /**
+   * tags to be updated
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
+  tags?: Record<string>;
+
   /**
    * Detailed properties for App Attach Package
    */
