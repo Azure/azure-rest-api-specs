@@ -31,6 +31,8 @@ runs:
 
     - name: Process label-value pairs
       shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
       run: |
         # Convert input to array
         eval "label_array=${{ inputs.labels }}"
@@ -39,7 +41,6 @@ runs:
           # Replace '=' with a separator for artifact naming
           artifact_name=$(echo "$label_pair" | sed 's/=/=/')
 
-          token="${{ inputs.token }}"
           # Create empty file for the artifact
           empty_file="$RUNNER_TEMP/empty-${artifact_name}.txt"
           > "$empty_file"
@@ -48,7 +49,7 @@ runs:
           echo "Uploading artifact: $artifact_name"
           gh api \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token $token" \
+            -H "Authorization: token $GH_TOKEN" \
             /repos/${{ github.repository }}/actions/artifacts \
             -X POST \
             -F name="$artifact_name" \
