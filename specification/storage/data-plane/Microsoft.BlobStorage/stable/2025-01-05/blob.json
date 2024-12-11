@@ -1700,11 +1700,11 @@
         "operationId": "Blob_Query",
         "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
         "produces": [
-          "application/octet-stream",
+          "application/xml",
           "application/json"
         ],
         "consumes": [
-          "application/octet-stream"
+          "application/xml"
         ],
         "parameters": [
           {
@@ -4729,7 +4729,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextMarker"
+          "nextLinkName": "nextMarker",
+          "itemName": "blobItems"
         }
       }
     },
@@ -13470,7 +13471,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextMarker"
+          "nextLinkName": "NextMarker",
+          "itemName": "containerItems"
         }
       }
     },
@@ -15211,7 +15213,7 @@
           "type": "string",
           "description": "The marker of the containers."
         },
-        "maxxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
           "description": "The max results of the containers."
