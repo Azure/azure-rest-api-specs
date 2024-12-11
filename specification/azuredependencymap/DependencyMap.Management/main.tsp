@@ -251,6 +251,6 @@ interface DiscoverySources {
   >;
   //update is ArmTagsPatchSync<DiscoverySourceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoverySourceResource>;
-  listByResourceGroup is ArmResourceListByParent<DiscoverySourceResource>;
+  listByMapsResource is ArmResourceListByParent<DiscoverySourceResource>;
   listBySubscription is ArmListBySubscription<DiscoverySourceResource>;
 }
