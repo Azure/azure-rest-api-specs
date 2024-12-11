@@ -1,4 +1,4 @@
-name: Manage SDK Breakingchange Suppressions Labels Workflow
+name: SDK Suppression Labeler
 
 on:
   pull_request:
@@ -15,6 +15,8 @@ jobs:
   process-sdk-suppressions-labels:
     name: breakingchange suppressions label Workflow
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       process-sdk-suppressions-output: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
     
@@ -24,6 +26,18 @@ jobs:
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
           fetch-depth: 2
+
+      - name: Setup Node and run `npm ci`
+        uses: ./.github/actions/setup-node-npm-ci
+
+      - name: Get GitHub PullRequest Changed Files
+        shell: pwsh
+        id: get-changedFiles
+        run: |
+          . eng/scripts/ChangedFiles-Functions.ps1
+          $changedFiles = @(Get-ChangedFiles)
+          echo "PR Changed files: $changedFiles"
+          echo "::set-output name=changedFiles::$changedFiles"
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
@@ -54,23 +68,11 @@ jobs:
             return JSON.stringify(prContext);
           result-encoding: string
 
-      - name: Get GitHub PullRequest Changed Files
-        shell: pwsh
-        id: get-changedFiles
-        run: |
-          . eng/scripts/ChangedFiles-Functions.ps1
-          $changedFiles = @(Get-ChangedFiles)
-          echo "PR Changed files: $changedFiles"
-          echo "::set-output name=changedFiles::$changedFiles"
-
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
-      
       - name: Run get suppressions label script
         id: run-suppressions-script
         env:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
-          GITHUB_TOKEN: ${{ secrets.SPEC_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
         run: |
@@ -79,21 +81,27 @@ jobs:
           echo "Script output labels: $OUTPUT"
           echo "::set-output name=suppressions-result-output::$OUTPUT"
 
-  update-sdk-suppressions-labels:
-    runs-on: ubuntu-latest
-    needs: process-sdk-suppressions-labels
-    strategy:
-      matrix:
-        artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
-    steps:
-      - name: Create empty file to upload artifacts
-        run: "> $RUNNER_TEMP/empty.txt"
-        shell: bash
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - uses: ./.github/actions/add-multi-label-artifact
+        name: Upload artifact with results
         with:
-          name: ${{ matrix.artifact-name }}
-          path: ${{ runner.temp }}/empty.txt
-          if-no-files-found: error
-          overwrite: true
+          name: "labels"
+          value: "${{ fromJson(steps.run-suppressions-script.outputs.suppressions-result-output) }}"
+
+  # update-sdk-suppressions-labels:
+  #   runs-on: ubuntu-latest
+  #   needs: process-sdk-suppressions-labels
+  #   strategy:
+  #     matrix:
+  #       artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
+  #   steps:
+  #     - name: Create empty file to upload artifacts
+  #       run: "> $RUNNER_TEMP/empty.txt"
+  #       shell: bash
+
+  #     - name: Upload artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ matrix.artifact-name }}
+  #         path: ${{ runner.temp }}/empty.txt
+  #         if-no-files-found: error
+  #         overwrite: true
