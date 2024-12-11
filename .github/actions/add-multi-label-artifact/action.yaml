@@ -5,6 +5,9 @@ inputs:
   labels:
     description: "Array of label-value pairs (e.g., ['label-a=true','label-b=false'])"
     required: true
+  token: 
+    description: "GitHub token"
+    required: true
 
 
 runs:
@@ -28,8 +31,6 @@ runs:
 
     - name: Process label-value pairs
       shell: bash
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # Convert input to array
         eval "label_array=${{ inputs.labels }}"
@@ -46,7 +47,7 @@ runs:
           echo "Uploading artifact: $artifact_name"
           gh api \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Authorization: token $token" \
             /repos/${{ github.repository }}/actions/artifacts \
             -X POST \
             -F name="$artifact_name" \

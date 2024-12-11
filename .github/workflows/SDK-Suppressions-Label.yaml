@@ -84,6 +84,7 @@ jobs:
       - uses: ./.github/actions/add-multi-label-artifact
         name: Upload artifact with results
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           labels: "['label-aaa=true','label-bbb=true']"
 
   # update-sdk-suppressions-labels:
