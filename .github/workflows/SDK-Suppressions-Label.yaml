@@ -79,13 +79,21 @@ jobs:
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
+
+          if [[ "$output" == "[]" ]]; then
+          echo "has-output=false" >> $GITHUB_ENV
+          else
+          echo "has-output=true" >> $GITHUB_ENV
+          fi
+
           echo "::set-output name=suppressions-result-output::$OUTPUT"
+          echo "::set-output name=has-output::$(echo $has-output)"
 
   update-sdk-suppressions-labels:
     name: upd-sdk-labels
     runs-on: ubuntu-latest
     needs: process-sdk-suppressions-labels
-    if: ${{ needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output && fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) != [] }}
+    if: ${{ needs.process-sdk-suppressions-labels.outputs.has-output == 'true' }}
     strategy:
       matrix:
         artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
