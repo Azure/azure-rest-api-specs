@@ -294,6 +294,7 @@ union PrivateEndpointServiceConnectionStatus {
 /**
  * The current provisioning state.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 union PrivateEndpointConnectionProvisioningState {
   string,
 
@@ -884,6 +885,7 @@ union SessionHandlingOperation {
 /**
  * Day of the week.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "There is no need for an extensible enum for Days of the Week"
 enum DayOfWeek {
   Monday,
   Tuesday,
@@ -1039,6 +1041,7 @@ model AppAttachPackageProperties {
   /**
    * URL path to certificate name located in keyVault
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URL is a valid acronym"
   keyVaultURL?: string;
 
   /**
@@ -1173,6 +1176,7 @@ model MsixPackageApplications {
   /**
    * Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is a valid acronym"
   appUserModelID?: string;
 
   /**
@@ -1233,6 +1237,7 @@ model ApplicationGroupList is Azure.Core.Page<ApplicationGroup>;
 /**
  * Schema for ApplicationGroup properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model ApplicationGroupProperties {
   /**
    * ObjectId of ApplicationGroup. (internal use)
@@ -1323,6 +1328,7 @@ model ResourceModelWithAllowedPropertySet
  * The resource model definition containing the full set of allowed properties for a resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
 model ResourceModelWithAllowedPropertySetIdentity extends Identity {}
 
 /**
@@ -1351,6 +1357,7 @@ model Identity {
  * Resource model definition representing SKU and Properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
 model ResourceModelWithAllowedPropertySetSku extends Sku {}
 
 /**
@@ -1387,6 +1394,7 @@ model Sku {
  * Resource model definition representing Plan and Properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
 model ResourceModelWithAllowedPropertySetPlan extends Plan {}
 
 /**
@@ -1427,6 +1435,7 @@ model HostPoolList is Azure.Core.Page<HostPool>;
 /**
  * Properties of HostPool.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model HostPoolProperties {
   /**
    * ObjectId of HostPool. (internal use)
@@ -1529,6 +1538,7 @@ model HostPoolProperties {
   /**
    * The flag to turn on/off StartVMOnConnect feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
   startVMOnConnect?: boolean;
 
   /**
@@ -1556,21 +1566,25 @@ model HostPoolProperties {
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
 }
 
@@ -1713,6 +1727,7 @@ model ScalingPlanList is Azure.Core.Page<ScalingPlan>;
 /**
  * Scaling plan properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model ScalingPlanProperties {
   /**
    * ObjectId of scaling plan. (internal use)
@@ -1748,11 +1763,13 @@ model ScalingPlanProperties {
   /**
    * List of ScalingPlanPooledSchedule definitions.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -1897,6 +1914,7 @@ model WorkspaceList is Azure.Core.Page<Workspace>;
 /**
  * Schema for Workspace properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model WorkspaceProperties {
   /**
    * ObjectId of Workspace. (internal use)
@@ -1941,7 +1959,8 @@ model WorkspaceProperties {
  * Schema for updatable App Attach Package properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AppAttachPackagePatch extends Resource {
+model AppAttachPackagePatch
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Detailed properties for App Attach Package
    */
@@ -1965,6 +1984,7 @@ model AppAttachPackagePatchProperties {
   /**
    * URL path to certificate name located in keyVault
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URL is a valid acronym"
   keyVaultURL?: string;
 
   /**
@@ -1981,6 +2001,7 @@ model ApplicationGroupPatch extends Resource {
   /**
    * tags to be updated
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
   tags?: Record<string>;
 
   /**
@@ -2017,6 +2038,7 @@ model ApplicationList is Azure.Core.Page<Application>;
 /**
  * Schema for Application properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
 model ApplicationProperties {
   /**
    * ObjectId of Application. (internal use)
@@ -2173,6 +2195,7 @@ model DesktopList is Azure.Core.Page<Desktop>;
 /**
  * Schema for Desktop properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
 model DesktopProperties {
   /**
    * ObjectId of Desktop. (internal use)
@@ -2282,6 +2305,7 @@ model HostPoolPatch extends Resource {
   /**
    * tags to be updated
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is a valid record"
   tags?: Record<string>;
 
   /**
@@ -2372,6 +2396,7 @@ model HostPoolPatchProperties {
   /**
    * The flag to turn on/off StartVMOnConnect feature.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
   startVMOnConnect?: boolean;
 
   /**
@@ -2387,21 +2412,25 @@ model HostPoolPatchProperties {
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
 }
 
@@ -2465,6 +2494,7 @@ model MaintenanceWindowPatchProperties {
 /**
  * Represents URI referring to MSIX Image
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "URI is a valid acronym"
 model MsixImageURI {
   /**
    * URI to Image
@@ -2551,12 +2581,12 @@ model ExpandMsixImageProperties {
   /**
    * Date Package was last updated, found in the appxmanifest.xml.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 
   /**
    * List of package applications.
    */
+  @OpenAPI.extension("x-ms-identifiers", ["appId"])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -2671,6 +2701,7 @@ model SessionHostList is Azure.Core.Page<SessionHost>;
 /**
  * Schema for SessionHost properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model SessionHostProperties {
   /**
    * ObjectId of SessionHost. (internal use)
@@ -2730,7 +2761,6 @@ model SessionHostProperties {
    * The timestamp of the status.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   statusTimestamp?: utcDateTime;
 
   /**
@@ -2741,6 +2771,7 @@ model SessionHostProperties {
   /**
    * The version of the side by side stack on the session host.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SxS is a valid acronym"
   sxSStackVersion?: string;
 
   /**
@@ -2854,6 +2885,7 @@ model UserSessionList is Azure.Core.Page<UserSession>;
 /**
  * Schema for UserSession properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model UserSessionProperties {
   /**
    * ObjectId of user session. (internal use)
@@ -2910,6 +2942,7 @@ model ScalingPlanPatch {
   /**
    * tags to be updated
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type is valid for tags"
   tags?: Record<string>;
 
   /**
@@ -2964,6 +2997,7 @@ model ScalingPlanPersonalScheduleList
 /**
  * A ScalingPlanPersonalSchedule.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
@@ -2983,6 +3017,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
   rampUpStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
@@ -3013,6 +3048,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
   peakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
@@ -3043,6 +3079,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
   rampDownStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
@@ -3073,6 +3110,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
   offPeakStartVMOnConnect?: SetStartVMOnConnect;
 
   /**
@@ -3115,6 +3153,7 @@ model ScalingPlanPooledScheduleList
 /**
  * A ScalingPlanPooledSchedule.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
@@ -3226,6 +3265,7 @@ model WorkspacePatch {
   /**
    * tags to be updated
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags can be Record"
   tags?: Record<string>;
 
   /**
@@ -3267,6 +3307,7 @@ model MsixPackageList is Azure.Core.Page<MsixPackage>;
 /**
  * Schema for MSIX Package properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model MsixPackageProperties {
   /**
    * VHD/CIM image path on Network Share.
