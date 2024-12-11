@@ -19,7 +19,7 @@ jobs:
       contents: read
     outputs:
       process-sdk-suppressions-output: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
-    
+      has-output: ${{ steps.run-suppressions-script.outputs.has-output }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
