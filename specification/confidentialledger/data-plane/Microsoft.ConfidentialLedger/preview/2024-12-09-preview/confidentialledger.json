@@ -814,6 +814,150 @@
         }
       }
     },
+    "/app/userDefinedFunctions": {
+      "put": {
+        "operationId": "CreateUserDefinedFunction",
+        "x-ms-examples": {
+          "CreateUserDefinedFunction": {
+            "$ref": "./examples/ledger/CreateUserDefinedFunction.json"
+          }
+        },
+        "summary": "Creates a user defined function.",
+        "description": "Creates the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The user defined function is created.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "ListUserDefinedFunctions",
+        "x-ms-examples": {
+          "GetUserDefinedFunctions": {
+            "$ref": "./examples/ledger/ListUserDefinedFunctions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "userDefinedFunctions",
+          "nextLinkName": "nextLink"
+        },
+        "summary": "Retrieves a list of user defined functions present in the Confidential Ledger",
+        "description": "User defined functions stored in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user defined functions",
+            "schema": {
+              "$ref": "#/definitions/PagedUserDefinedFunctions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionName}": {
+      "get": {
+        "operationId": "GetUserDefinedFunction",
+        "x-ms-examples": {
+          "GetUserDefinedFunction": {
+            "$ref": "./examples/ledger/GetUserDefinedFunction.json"
+          }
+        },
+        "summary": "Gets a user defined function.",
+        "description": "Returns the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the user defined function.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
+    "/app/userDefinedFunctions/{functionName}:execute": {
+      "post": {
+        "operationId": "ExecuteUserDefinedFunction",
+        "x-ms-examples": {
+          "CreateUserDefinedFunction": {
+            "$ref": "./examples/ledger/ExecuteUserDefinedFunction.json"
+          }
+        },
+        "summary": "Executes a user defined function.",
+        "description": "Executes the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionExecutionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user defined function is executed.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunctionExecutionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      }
+    },
     "/app/roles": {
       "get": {
         "operationId": "GetUserDefinedRole",
@@ -1159,6 +1303,14 @@
         "transactionId": {
           "$ref": "#/definitions/TransactionId",
           "readOnly": true
+        },
+        "preTriggers": {
+          "description": "List of user defined function triggers to be executed before the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionTriggers"
+        },
+        "postTriggers": {
+          "description": "List of user defined function triggers to be executed after the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionTriggers"
         }
       },
       "type": "object"
@@ -1428,6 +1580,25 @@
         }
       }
     },
+    "PagedUserDefinedFunctions": {
+      "description": "Paginated user defined functions returned in response to a query.",
+      "type": "object",
+      "required": [
+        "userDefinedFunctions"
+      ],
+      "properties": {
+        "userDefinedFunctions": {
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunction"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "Path from which to retrieve the next page of results.",
+          "type": "string"
+        }
+      }
+    },
     "PagedUsers": {
       "description": "Paginated users returned in response to a query.",
       "type": "object",
@@ -1681,7 +1852,7 @@
       "type": "object"
     },
     "JSRuntimeOptions": {
-      "description": "JS runtime options for user defined endpoints",
+      "description": "JS runtime options for user defined endpoints and functions",
       "properties": {
         "log_exception_details": {
           "$ref": "#/definitions/boolean"
@@ -1746,6 +1917,91 @@
         "roleActions"
       ],
       "type": "string"
+    },
+    "UserDefinedFunction": {
+      "description": "A user defined function in the ledger.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "body": {
+          "type": "string",
+          "description": "Body of the user defined function in JavaScript code."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the user defined function."
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionProperties": {
+      "description": "The properties for executing a user defined function.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "Runtime arguments of the user defined function."
+        },
+        "runtimeOptions": {
+          "$ref": "#/definitions/JSRuntimeOptions"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionStatus": {
+      "type": "string",
+      "description": "Represents the status of a user defined function execution.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UserDefinedFunctionExecutionStatus",
+        "modelAsString": true
+      }
+    },
+    "UserDefinedFunctionExecutionResult": {
+      "description": "The result of executing a user defined function.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error returned when executing the user defined function in case of failure."
+        },
+        "result": {
+          "type": "string",
+          "description": "Return value of the user defined function in case of success."
+        },
+        "status": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionStatus"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionTrigger": {
+      "description": "Trigger for a user defined function execution.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the user defined function to execute."
+        },
+        "properties": {
+          "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionTriggers": {
+      "description": "List of user defined function triggers.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/UserDefinedFunctionTrigger"
+      }
     }
   },
   "parameters": {
@@ -1789,6 +2045,34 @@
       "x-ms-parameter-location": "method",
       "description": "Specify the last transaction ID in a range.",
       "type": "string"
+    },
+    "UserDefinedFunctionNameParameter": {
+      "name": "functionName",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "Identifies a user defined function.",
+      "type": "string"
+    },
+    "UserDefinedFunctionParameter": {
+      "name": "userDefinedFunction",
+      "description": "Specify a user defined function of a Confidential Ledger.",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedFunction"
+      }
+    },
+    "UserDefinedFunctionExecutionParameter": {
+      "name": "userDefinedFunctionExecutionProperties",
+      "description": "Specify user defined function execution properties.",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
+      }
     },
     "UserDetailsParameter": {
       "name": "userDetails",
