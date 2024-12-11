@@ -249,7 +249,7 @@ model SchemaGroups {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
+  @nextLink
   NextLink?: string;
 }
 
@@ -265,7 +265,7 @@ model SchemaVersions {
 
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
-  @Azure.Core.nextLink
+  @nextLink
   NextLink?: string;
 }
 
