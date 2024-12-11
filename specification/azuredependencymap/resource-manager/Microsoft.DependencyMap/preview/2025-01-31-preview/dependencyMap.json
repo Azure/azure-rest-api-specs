@@ -365,7 +365,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MapsResourceUpdate"
+              "$ref": "#/definitions/MapsResourceTagsUpdate"
             }
           }
         ],
@@ -693,7 +693,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiscoverySourceResourceUpdate"
+              "$ref": "#/definitions/DiscoverySourceResourceTagsUpdate"
             }
           }
         ],
@@ -1078,24 +1078,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "DateTimeFilter": {
       "type": "object",
       "description": "UTC DateTime filter for dependency map visualization apis",
@@ -1195,26 +1177,18 @@
         "sourceId"
       ]
     },
-    "DiscoverySourceResourcePropertiesUpdate": {
+    "DiscoverySourceResourceTagsUpdate": {
       "type": "object",
-      "description": "The properties of Discovery Source resource",
-      "discriminator": "sourceType"
-    },
-    "DiscoverySourceResourceUpdate": {
-      "type": "object",
-      "description": "A Discovery Source resource",
+      "description": "The type used for updating tags in DiscoverySourceResource resources.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiscoverySourceResourcePropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ExportDependenciesRequest": {
       "type": "object",
@@ -1342,21 +1316,18 @@
         }
       }
     },
-    "MapsResourceUpdate": {
+    "MapsResourceTagsUpdate": {
       "type": "object",
-      "description": "A Maps resource",
+      "description": "The type used for updating tags in MapsResource resources.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/MapsResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "OffAzureDiscoverySourceResourceProperties": {
       "type": "object",
@@ -1364,16 +1335,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/DiscoverySourceResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "OffAzure"
-    },
-    "OffAzureDiscoverySourceResourcePropertiesUpdate": {
-      "type": "object",
-      "description": "OffAzure discovery source resource properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscoverySourceResourcePropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "OffAzure"

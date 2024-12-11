@@ -85,7 +85,7 @@ interface Maps {
   get is ArmResourceRead<MapsResource>;
   //create is ArmResourceCreateOrUpdateAsync<MapsResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MapsResource>;
-  update is ArmResourcePatchAsync<MapsResource, MapsResourceProperties>;
+  update is ArmTagsPatchAsync<MapsResource>;
   //update is ArmTagsPatchSync<MapsResource>;
   delete is ArmResourceDeleteWithoutOkAsync<MapsResource>;
   listByResourceGroup is ArmResourceListByParent<MapsResource>;
@@ -245,10 +245,7 @@ interface DiscoverySources {
   get is ArmResourceRead<DiscoverySourceResource>;
   //create is ArmResourceCreateOrUpdateAsync<DiscoverySourceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiscoverySourceResource>;
-  update is ArmResourcePatchAsync<
-    DiscoverySourceResource,
-    DiscoverySourceResourceProperties
-  >;
+  update is ArmTagsPatchAsync<DiscoverySourceResource>;
   //update is ArmTagsPatchSync<DiscoverySourceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoverySourceResource>;
   listByMapsResource is ArmResourceListByParent<DiscoverySourceResource>;
