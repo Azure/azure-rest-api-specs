@@ -20,7 +20,7 @@ const MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExam
     properties: #{
       targetResourceId: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/virtualMachines/{vm-name}",
       targetResourceType: "Microsoft.Compute/virtualMachines",
-      occurredTime: "2023-07-24T19:20:37.9245071Z",
+      occurredTime: utcDateTime.fromISO("2023-07-24T19:20:37.9245071Z"),
       previousAvailabilityState: "Unavailable",
       availabilityState: "Available",
     },
@@ -49,7 +49,7 @@ const MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample: Res
     properties: #{
       targetResourceId: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Compute/virtualMachines/{vm-name}",
       targetResourceType: "Microsoft.Compute/virtualMachines",
-      occurredTime: "2023-07-24T19:20:37.9245071Z",
+      occurredTime: utcDateTime.fromISO("2023-07-24T19:20:37.9245071Z"),
       annotationName: "VirtualMachineDeallocationInitiated",
       reason: "Stopping and deallocating",
       summary: "This virtual machine is stopped and deallocated as requested by an authorized user or process.",

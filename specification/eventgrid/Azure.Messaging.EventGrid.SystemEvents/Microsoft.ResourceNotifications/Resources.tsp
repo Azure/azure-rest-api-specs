@@ -36,19 +36,19 @@ const MicrosoftResourceNotificationsResourcesCreatedOrUpdatedExample: ResourceNo
           file: #{
             keyType: "Account",
             enabled: 1,
-            lastEnabledTime: "2023-07-28T20:12:50.6380308Z",
+            lastEnabledTime: utcDateTime.fromISO("2023-07-28T20:12:50.6380308Z"),
           },
           blob: #{
             keyType: "Account",
             enabled: 1,
-            lastEnabledTime: "2023-07-28T20:12:50.6380308Z",
+            lastEnabledTime: utcDateTime.fromISO("2023-07-28T20:12:50.6380308Z"),
           },
         },
         keySource: "Microsoft.Storage",
       },
       accessTier: "Hot",
       provisioningState: "Succeeded",
-      creationTime: "2023-07-28T20:12:50.4661564Z",
+      creationTime: utcDateTime.fromISO("2023-07-28T20:12:50.4661564Z"),
       primaryEndpoints: #{
         dfs: "https://{storageAccount-name}.dfs.core.windows.net/",
         web: "https://{storageAccount-name}.z13.web.core.windows.net/",

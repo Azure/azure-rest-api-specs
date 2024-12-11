@@ -12,222 +12,67 @@ namespace Microsoft.EventGrid.SystemEvents {
     action: AppAction;
   }
 
-  const MicrosoftWebAppUpdatedExample: WebAppUpdatedEventData = #{
-    appEventTypeDetail: #{ action: "Stopped" },
-    name: "{site-name}",
-    clientRequestId: "64a5e0aa-7cee-4ff1-9093-b9197b820014",
-    correlationRequestId: "25bb36a5-8f6c-4f04-b615-e9a0ee045756",
-    requestId: "f2e8eb3f-b190-42de-b99e-6acefe587374",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/stop",
-    verb: "POST",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event. */
-  @example(MicrosoftWebAppUpdatedExample)
   model WebAppUpdatedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebBackupOperationStartedExample: WebBackupOperationStartedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "None",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event. */
-  @example(MicrosoftWebBackupOperationStartedExample)
   model WebBackupOperationStartedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebBackupOperationCompletedExample: WebBackupOperationCompletedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "None",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event. */
-  @example(MicrosoftWebBackupOperationCompletedExample)
   model WebBackupOperationCompletedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebBackupOperationFailedExample: WebBackupOperationFailedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "None",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event. */
-  @example(MicrosoftWebBackupOperationFailedExample)
   model WebBackupOperationFailedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebRestoreOperationStartedExample: WebRestoreOperationStartedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "POST",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event. */
-  @example(MicrosoftWebRestoreOperationStartedExample)
   model WebRestoreOperationStartedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebRestoreOperationCompletedExample: WebRestoreOperationCompletedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "POST",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event. */
-  @example(MicrosoftWebRestoreOperationCompletedExample)
   model WebRestoreOperationCompletedEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebRestoreOperationFailedExample: WebRestoreOperationFailedEventData = #{
-    appEventTypeDetail: #{ action: "Started" },
-    name: "{site-name}",
-    clientRequestId: "None",
-    correlationRequestId: "None",
-    requestId: "292f499d-04ee-4066-994d-c2df57b99198",
-    address: "None",
-    verb: "POST",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event. */
-  @example(MicrosoftWebRestoreOperationFailedExample)
   model WebRestoreOperationFailedEventData {
     ...WebAppBaseEventData;
   }
 
-  // TODO source slot and target slot are not required in the schema
-  const MicrosoftWebSlotSwapStartedExample: WebSlotSwapStartedEventData = #{
-    appEventTypeDetail: null,
-    name: "{site-name}",
-    clientRequestId: "922f4841-20d9-4dd6-8c5b-23f0d85e5592",
-    correlationRequestId: "9ac46505-2b8a-4e06-834c-05ffbe2e8c3a",
-    requestId: "765117aa-eaf8-4bd2-a644-1dbf69c7b0fd",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/slots?Command=SWAP&targetSlot=production",
-    verb: "POST",
-    // sourceSlot: "staging",
-    // targetSlot: "production",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event. */
-  @example(MicrosoftWebSlotSwapStartedExample)
   model WebSlotSwapStartedEventData {
     ...WebAppBaseEventData;
   }
 
-  // TODO source slot and target slot are not required in the schema
-  const MicrosoftWebSlotSwapCompletedExample: WebSlotSwapCompletedEventData = #{
-    appEventTypeDetail: null,
-    name: "{site-name}",
-    clientRequestId: "922f4841-20d9-4dd6-8c5b-23f0d85e5592",
-    correlationRequestId: "9ac46505-2b8a-4e06-834c-05ffbe2e8c3a",
-    requestId: "765117aa-eaf8-4bd2-a644-1dbf69c7b0fd",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/slots?Command=SWAP&targetSlot=production",
-    verb: "POST",
-    // sourceSlot: "staging",
-    // targetSlot: "production",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event. */
-  @example(MicrosoftWebSlotSwapCompletedExample)
   model WebSlotSwapCompletedEventData {
     ...WebAppBaseEventData;
   }
 
-  // TODO source slot and target slot are not required in the schema
-  const MicrosoftWebSlotSwapFailedExample: WebSlotSwapFailedEventData = #{
-    appEventTypeDetail: null,
-    name: "{site-name}",
-    clientRequestId: "922f4841-20d9-4dd6-8c5b-23f0d85e5592",
-    correlationRequestId: "9ac46505-2b8a-4e06-834c-05ffbe2e8c3a",
-    requestId: "765117aa-eaf8-4bd2-a644-1dbf69c7b0fd",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/slots?Command=SWAP&targetSlot=production",
-    verb: "POST",
-    // sourceSlot: "staging",
-    // targetSlot: "production",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event. */
-  @example(MicrosoftWebSlotSwapFailedExample)
   model WebSlotSwapFailedEventData {
     ...WebAppBaseEventData;
   }
 
-  // TODO source slot and target slot are not required in the schema
-  const MicrosoftWebSlotSwapWithPreviewStartedExample: WebSlotSwapWithPreviewStartedEventData = #{
-    appEventTypeDetail: null,
-    name: "{site-name}",
-    clientRequestId: "922f4841-20d9-4dd6-8c5b-23f0d85e5592",
-    correlationRequestId: "9ac46505-2b8a-4e06-834c-05ffbe2e8c3a",
-    requestId: "765117aa-eaf8-4bd2-a644-1dbf69c7b0fd",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/slots?Command=SWAP&targetSlot=production",
-    verb: "POST",
-    // sourceSlot: "staging",
-    // targetSlot: "production",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event. */
-  @example(MicrosoftWebSlotSwapWithPreviewStartedExample)
   model WebSlotSwapWithPreviewStartedEventData {
     ...WebAppBaseEventData;
   }
 
-  // TODO source slot and target slot are not required in the schema
-  const MicrosoftWebSlotSwapWithPreviewCancelledExample: WebSlotSwapWithPreviewCancelledEventData = #{
-    appEventTypeDetail: null,
-    name: "{site-name}",
-    clientRequestId: "922f4841-20d9-4dd6-8c5b-23f0d85e5592",
-    correlationRequestId: "9ac46505-2b8a-4e06-834c-05ffbe2e8c3a",
-    requestId: "765117aa-eaf8-4bd2-a644-1dbf69c7b0fd",
-    address: "/websystems/WebSites/web/subscriptions/{subscription-id}/webspaces/{webspace}/sites/{site-name}/slots?Command=SWAP&targetSlot=production",
-    verb: "POST",
-    // sourceSlot: "staging",
-    // targetSlot: "production",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event. */
-  @example(MicrosoftWebSlotSwapWithPreviewCancelledExample)
   model WebSlotSwapWithPreviewCancelledEventData {
     ...WebAppBaseEventData;
   }
 
-  const MicrosoftWebAppServicePlanUpdatedExample: WebAppServicePlanUpdatedEventData = #{
-    appServicePlanEventTypeDetail: #{
-      stampKind: "Public",
-      action: "Updated",
-      status: "Started",
-    },
-    sku: #{
-      name: "P1v2",
-      tier: "PremiumV2",
-      size: "P1v2",
-      family: "Pv2",
-      capacity: "1",
-    },
-    clientRequestId: "8f880321-a991-45c7-b743-6ff63fe4c004",
-    correlationRequestId: "1995c3be-ba7f-4ccf-94af-516df637ec8a",
-    requestId: "b973a8e6-6949-4783-b44c-ac778be831bb",
-    address: "/websystems/WebSites/serverfarms/subscriptions/{subscription-id}/webspaces/{webspace-id}/serverfarms/{plan-name}/async",
-    verb: "PUT",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event. */
-  @example(MicrosoftWebAppServicePlanUpdatedExample)
   model WebAppServicePlanUpdatedEventData {
     /** Detail of action on the app service plan. */
     appServicePlanEventTypeDetail: AppServicePlanEventTypeDetail;
@@ -330,7 +175,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias WebAppBaseEventData = {
     /** Detail of action on the app. */
-    appEventTypeDetail: AppEventTypeDetail | null;
+    appEventTypeDetail: AppEventTypeDetail;
 
     /** name of the web site that had this event. */
     name?: string;
@@ -357,15 +202,19 @@ namespace Microsoft.EventGrid.SystemEvents {
     name?: string;
 
     /** tier of app service plan sku. */
-    tier?: string;
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
+    Tier?: string;
 
     /** size of app service plan sku. */
-    size?: string;
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
+    Size?: string;
 
     /** family of app service plan sku. */
-    family?: string;
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
+    Family?: string;
 
     /** capacity of app service plan sku. */
-    capacity?: string;
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
+    Capacity?: string;
   }
 }

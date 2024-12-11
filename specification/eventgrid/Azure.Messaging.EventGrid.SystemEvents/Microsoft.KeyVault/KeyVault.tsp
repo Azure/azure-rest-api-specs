@@ -38,8 +38,8 @@ namespace Microsoft.EventGrid.SystemEvents {
     ObjectType: "Secret",
     ObjectName: "newsecret",
     Version: "ee059b2bb5bc48398a53b168c6cdcb10",
-    NBF: duration.fromISO("1559081980"),
-    EXP: duration.fromISO("1559082102"),
+    NBF: "1559081980",
+    EXP: "1559082102",
   };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event. */
   @example(MicrosoftKeyVaultSecretNewVersionCreatedExample)

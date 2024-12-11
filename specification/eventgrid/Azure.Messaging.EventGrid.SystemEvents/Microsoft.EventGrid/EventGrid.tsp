@@ -62,7 +62,7 @@ model SubscriptionValidationEventData {
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationUrl: string;
+  validationUrl?: string;
 }
 
 /**
@@ -92,9 +92,7 @@ const MicrosoftEventGridMQTTClientCreatedOrUpdatedExample: EventGridMQTTClientCr
   clientName: "client1",
   clientAuthenticationName: "client1",
   state: "Enabled",
-  attributes: #{
-    attribute1: "value1",
-  },
+  attributes: #{ attribute1: "value1" },
 };
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
@@ -134,7 +132,7 @@ long, and supports UTF-8 characters.
   clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
-  clientName: string;
+  clientName?: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
   namespaceName: string;
