@@ -391,29 +391,32 @@
           {
             "name": "instanceId",
             "in": "body",
-            "required": true,
-            "type": "integer",
+            "required":true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceId"
+            },
             "description": "Specifies a virtual machine instance ID from the Network Virtual Appliance VM instances."
           },
           {
             "name": "serialConsoleStorageSasUrl",
             "in": "body",
             "required": false,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/SerialConsoleStorageSasUrl"
+            },
             "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
           },
           {
             "name": "consoleScreenshotStorageSasUrl",
             "in": "body",
             "required": false,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/ConsoleScreenshotStorageSasUrl"
+            },
             "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
           }         
         ],
         "responses": {
-          "200": {
-            "description": "Request successful. The operation gets the boot diagnostic logs for a Network Virtual Appliance VM instance."
-          },
           "202": {
             "description": "Request accepted. The operation gets the boot diagnostic logs for a Network Virtual Appliance VM instance.",
             "headers": {
@@ -421,6 +424,9 @@
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceId"
             }
           },
           "default": {
@@ -1668,6 +1674,36 @@
         }
       },
       "description": "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
+    },
+    "NetworkVirtualApplianceInstanceId": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "type": "integer",
+          "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
+        }
+      },
+      "description": "Specifies a virtual machine instance ID from the Network Virtual Appliance VM instances."
+    },
+    "SerialConsoleStorageSasUrl": {
+      "type": "object",
+      "properties": {
+        "serialConsoleStorageSasUrl": {
+          "type": "string",
+          "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
+        }
+      },
+      "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
+    },
+    "ConsoleScreenshotStorageSasUrl": {
+      "type": "object",
+      "properties": {
+        "consoleScreenshotStorageSasUrl": {
+          "type": "string",
+          "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
+        }
+      },
+      "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
     }
   }
 }
