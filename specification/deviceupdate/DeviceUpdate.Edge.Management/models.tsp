@@ -423,7 +423,7 @@ model DeviceEnrollmentScope {
   /**
    * Subscription or resource group used for device enrollment.
    */
-  id: string;
+  scopeId: string;
 
   /**
    * The scope type
