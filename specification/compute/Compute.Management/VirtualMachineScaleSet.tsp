@@ -430,6 +430,7 @@ interface VirtualMachineScaleSets {
    * Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("osRollingUpgrade")
   @operationId("VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade")
   startOSUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
@@ -441,6 +442,7 @@ interface VirtualMachineScaleSets {
    * Cancels the current virtual machine scale set rolling upgrade.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("rollingUpgrades/cancel")
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
   cancel is ComputeResourceActionAsync<VirtualMachineScaleSet, void, void>;
 }

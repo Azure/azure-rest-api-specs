@@ -169,6 +169,13 @@ interface VirtualMachineImagesEdgeZoneOperations {
       publisherName: string;
 
       /**
+       * artifacttypes/vmimage
+       */
+      @path
+      @segment("artifacttypes")
+      vmimage: "vmimage";
+
+      /**
        * A valid image publisher offer.
        */
       @path
@@ -205,6 +212,13 @@ interface VirtualMachineImagesEdgeZoneOperations {
       @path
       @segment("publishers")
       publisherName: string;
+
+      /**
+       * artifacttypes/vmimage
+       */
+      @path
+      @segment("artifacttypes")
+      vmimage: "vmimage";
 
       /**
        * A valid image publisher offer.
@@ -371,6 +385,13 @@ interface VirtualMachineImagesOperations {
       publisherName: string;
 
       /**
+       * artifacttypes/vmimage
+       */
+      @path
+      @segment("artifacttypes")
+      vmimage: "vmimage";
+
+      /**
        * A valid image publisher offer.
        */
       @path
@@ -400,6 +421,13 @@ interface VirtualMachineImagesOperations {
       @path
       @segment("publishers")
       publisherName: string;
+
+      /**
+       * artifacttypes/vmimage
+       */
+      @path
+      @segment("artifacttypes")
+      vmimage: "vmimage";
 
       /**
        * A valid image publisher offer.
