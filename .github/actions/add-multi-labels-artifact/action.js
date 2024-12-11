@@ -10,8 +10,7 @@ module.exports = async ({ github, context, core }, args) => {
     const path = require('path');
 
     /** @type {string[]} */
-    // const labels = JSON.parse(args.labels);
-    const labels = ['label-aaa=true', 'label-bbb=false'];
+    const labels = JSON.parse(args.labels);
 
     try {
         const artifactClient = new DefaultArtifactClient()
