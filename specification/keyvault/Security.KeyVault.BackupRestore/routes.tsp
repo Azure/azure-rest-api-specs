@@ -19,7 +19,7 @@ namespace KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/backup/{jobId}/pending")
 @get
-op fullBackupStatus is Azure.Core.Foundations.Operation<
+op fullBackupStatus is KeyVaultOperation<
   {
     /**
      * The id returned as part of the backup request
@@ -27,9 +27,7 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  FullBackupOperation,
-  {},
-  KeyVaultError
+  FullBackupOperation
 >;
 
 /**
@@ -41,7 +39,7 @@ op fullBackupStatus is Azure.Core.Foundations.Operation<
 @useFinalStateVia("azure-async-operation")
 @route("/backup")
 @post
-op fullBackup is Azure.Core.Foundations.Operation<
+op fullBackup is KeyVaultOperation<
   {
     /**
      * Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.
@@ -67,9 +65,7 @@ op fullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  },
-  {},
-  KeyVaultError
+  }
 >;
 
 /**
@@ -82,7 +78,7 @@ op fullBackup is Azure.Core.Foundations.Operation<
 @useFinalStateVia("azure-async-operation")
 @route("/prebackup")
 @post
-op preFullBackup is Azure.Core.Foundations.Operation<
+op preFullBackup is KeyVaultOperation<
   {
     /** Optional parameters to validate prior to performing a full backup operation. */
     @body preBackupOperationParameters?: PreBackupOperationParameters;
@@ -106,9 +102,7 @@ op preFullBackup is Azure.Core.Foundations.Operation<
      * The backup operation.
      */
     @body response: FullBackupOperation;
-  },
-  {},
-  KeyVaultError
+  }
 >;
 
 /**
@@ -118,7 +112,7 @@ op preFullBackup is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
 @route("/restore/{jobId}/pending")
 @get
-op restoreStatus is Azure.Core.Foundations.Operation<
+op restoreStatus is KeyVaultOperation<
   {
     /**
      * The Job Id returned part of the restore operation
@@ -126,9 +120,7 @@ op restoreStatus is Azure.Core.Foundations.Operation<
     @path
     jobId: string;
   },
-  RestoreOperation,
-  {},
-  KeyVaultError
+  RestoreOperation
 >;
 
 /**
@@ -141,7 +133,7 @@ op restoreStatus is Azure.Core.Foundations.Operation<
 @useFinalStateVia("azure-async-operation")
 @route("/prerestore")
 @put
-op preFullRestoreOperation is Azure.Core.Foundations.Operation<
+op preFullRestoreOperation is KeyVaultOperation<
   {
     /** Optional pre restore parameters to validate prior to performing a full restore operation. */
     @body preRestoreOperationParameters?: PreRestoreOperationParameters;
@@ -165,9 +157,7 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  },
-  {},
-  KeyVaultError
+  }
 >;
 
 /**
@@ -179,7 +169,7 @@ op preFullRestoreOperation is Azure.Core.Foundations.Operation<
 @useFinalStateVia("azure-async-operation")
 @route("/restore")
 @put
-op fullRestoreOperation is Azure.Core.Foundations.Operation<
+op fullRestoreOperation is KeyVaultOperation<
   {
     /** The Azure blob SAS token pointing to a folder where the previous successful full backup was stored. */
     @body restoreBlobDetails?: RestoreOperationParameters;
@@ -203,9 +193,7 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: RestoreOperation;
-  },
-  {},
-  KeyVaultError
+  }
 >;
 
 /**
@@ -217,7 +205,7 @@ op fullRestoreOperation is Azure.Core.Foundations.Operation<
 @useFinalStateVia("azure-async-operation")
 @route("/keys/{keyName}/restore")
 @put
-op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
+op selectiveKeyRestoreOperation is KeyVaultOperation<
   {
     /**
      * The name of the key to be restored from the user supplied backup
@@ -250,7 +238,5 @@ op selectiveKeyRestoreOperation is Azure.Core.Foundations.Operation<
      * The restore operation.
      */
     @body response: SelectiveKeyRestoreOperation;
-  },
-  {},
-  KeyVaultError
+  }
 >;

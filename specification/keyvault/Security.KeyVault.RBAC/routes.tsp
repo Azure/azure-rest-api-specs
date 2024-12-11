@@ -15,7 +15,7 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is KeyVaultOperation<
     {
       /**
        * The scope of the role definition to delete. Managed HSM only supports '/'.
@@ -28,9 +28,7 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition,
-    {},
-    KeyVaultError
+    RoleDefinition
   >;
 
   /**
@@ -38,7 +36,7 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @put
-  createOrUpdate is Azure.Core.Foundations.Operation<
+  createOrUpdate is KeyVaultOperation<
     {
       /**
        * The scope of the role definition to create or update. Managed HSM only supports '/'.
@@ -57,9 +55,7 @@ interface RoleDefinitions {
       @body
       parameters: RoleDefinitionCreateParameters;
     },
-    CreatedResponse & RoleDefinition,
-    {},
-    KeyVaultError
+    CreatedResponse & RoleDefinition
   >;
 
   /**
@@ -67,7 +63,7 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is KeyVaultOperation<
     {
       /**
        * The scope of the role definition to get. Managed HSM only supports '/'.
@@ -80,9 +76,7 @@ interface RoleDefinitions {
       @path
       roleDefinitionName: string;
     },
-    RoleDefinition,
-    {},
-    KeyVaultError
+    RoleDefinition
   >;
 
   /**
@@ -90,7 +84,7 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
-  list is Azure.Core.Foundations.Operation<
+  list is KeyVaultOperation<
     {
       /**
        * The scope of the role definition.
@@ -103,9 +97,7 @@ interface RoleDefinitions {
       @query("$filter")
       $filter?: string;
     },
-    RoleDefinitionListResult,
-    {},
-    KeyVaultError
+    RoleDefinitionListResult
   >;
 }
 
@@ -116,7 +108,7 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is KeyVaultOperation<
     {
       /**
        * The scope of the role assignment to delete.
@@ -129,9 +121,7 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment,
-    {},
-    KeyVaultError
+    RoleAssignment
   >;
 
   /**
@@ -139,7 +129,7 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @put
-  create is Azure.Core.Foundations.Operation<
+  create is KeyVaultOperation<
     {
       /**
        * The scope of the role assignment to create.
@@ -158,9 +148,7 @@ interface RoleAssignments {
       @body
       parameters: RoleAssignmentCreateParameters;
     },
-    CreatedResponse & RoleAssignment,
-    {},
-    KeyVaultError
+    CreatedResponse & RoleAssignment
   >;
 
   /**
@@ -168,7 +156,7 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}")
   @get
-  get is Azure.Core.Foundations.Operation<
+  get is KeyVaultOperation<
     {
       /**
        * The scope of the role assignment.
@@ -181,9 +169,7 @@ interface RoleAssignments {
       @path
       roleAssignmentName: string;
     },
-    RoleAssignment,
-    {},
-    KeyVaultError
+    RoleAssignment
   >;
 
   /**
@@ -191,7 +177,7 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
-  listForScope is Azure.Core.Foundations.Operation<
+  listForScope is KeyVaultOperation<
     {
       /**
        * The scope of the role assignments.
@@ -204,8 +190,6 @@ interface RoleAssignments {
       @query("$filter")
       $filter?: string;
     },
-    RoleAssignmentListResult,
-    {},
-    KeyVaultError
+    RoleAssignmentListResult
   >;
 }

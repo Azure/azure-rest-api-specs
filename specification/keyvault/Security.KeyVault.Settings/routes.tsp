@@ -20,7 +20,7 @@ namespace KeyVault;
 @summary("Updates key vault account setting, stores it, then returns the setting name and value to the client.")
 @route("/settings/{setting-name}")
 @patch
-op updateSetting is Azure.Core.Foundations.Operation<
+op updateSetting is KeyVaultOperation<
   {
     ...SettingNameParameter;
 
@@ -32,9 +32,7 @@ op updateSetting is Azure.Core.Foundations.Operation<
     @body
     parameters: UpdateSettingRequest;
   },
-  Setting,
-  {},
-  KeyVaultError
+  Setting
 >;
 
 /**
@@ -44,13 +42,11 @@ op updateSetting is Azure.Core.Foundations.Operation<
 @summary("Get specified account setting object.")
 @route("/settings/{setting-name}")
 @get
-op getSetting is Azure.Core.Foundations.Operation<
+op getSetting is KeyVaultOperation<
   {
     ...SettingNameParameter;
   },
-  Setting,
-  {},
-  KeyVaultError
+  Setting
 >;
 
 /**
@@ -60,9 +56,4 @@ op getSetting is Azure.Core.Foundations.Operation<
 @summary("List account settings.")
 @route("/settings")
 @get
-op getSettings is Azure.Core.Foundations.Operation<
-  {},
-  SettingsListResult,
-  {},
-  KeyVaultError
->;
+op getSettings is KeyVaultOperation<{}, SettingsListResult>;
