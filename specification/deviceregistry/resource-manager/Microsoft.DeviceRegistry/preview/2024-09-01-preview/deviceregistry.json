@@ -382,11 +382,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get_OperationStatus": {
-            "$ref": "./examples/Get_OperationStatus.json"
-          }
         }
       }
     },
@@ -2757,7 +2752,6 @@
         },
         "manufacturerUri": {
           "type": "string",
-          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {
@@ -2978,7 +2972,6 @@
         },
         "manufacturerUri": {
           "type": "string",
-          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {
@@ -3164,10 +3157,6 @@
         }
       }
     },
-    "Azure.Core.eTag": {
-      "type": "string",
-      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
-    },
     "BillingContainer": {
       "type": "object",
       "description": "billingContainer Model as Azure resource whose sole purpose is to keep track of billables resources under a subscription.",
@@ -3178,7 +3167,7 @@
           "x-ms-client-flatten": true
         },
         "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
+          "type": "string",
           "description": "Resource ETag",
           "readOnly": true
         }
@@ -3550,7 +3539,6 @@
         },
         "manufacturerUri": {
           "type": "string",
-          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {
@@ -3655,7 +3643,6 @@
         },
         "manufacturerUri": {
           "type": "string",
-          "format": "uri",
           "description": "Asset manufacturer URI."
         },
         "model": {

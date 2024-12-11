@@ -75,7 +75,7 @@ model AssetProperties {
   manufacturer?: string;
 
   @doc("Asset manufacturer URI.")
-  manufacturerUri?: url;
+  manufacturerUri?: string;
 
   @doc("Asset model name.")
   `model`?: string;
