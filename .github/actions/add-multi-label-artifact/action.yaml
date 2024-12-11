@@ -20,7 +20,7 @@ runs:
 
         label_string="${{ inputs.labels }}"
         label_string="${label_string//[\[\] ]/}"
-        IFS=',' read -r -a label_array <<< "$label_string
+        IFS=',' read -r -a label_array <<< "$label_string"
         for label_pair in "${label_array[@]}"; do
           echo "Processing label pair: $label_pair"
           uses: actions/upload-artifact@v4
