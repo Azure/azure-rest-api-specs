@@ -10,11 +10,10 @@ module.exports = async ({ github, context, core }, args) => {
     const path = require('path');
 
     /** @type {string[]} */
-    const labels = JSON.parse(args.labels);
+    const labels = args.labels;
 
     try {
         const artifactClient = new DefaultArtifactClient()
-        // const artifactClient = artifact.create();
     
         for (const label of labels) {
           const filePath = path.join(__dirname, `empty-${label}.txt`);
