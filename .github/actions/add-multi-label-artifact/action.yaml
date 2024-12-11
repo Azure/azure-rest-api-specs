@@ -1,0 +1,50 @@
+name: Add Multi Labels Artifact
+description: Uploads empty artifacts for each label-value pair, consumed by the "update-labels" action.
+
+inputs:
+  labels:
+    description: "Comma-separated list of labels"
+    required: true
+  value:
+    description: "Comma-separated list of values (e.g., 'label-a=true,label-b=false')"
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Validate input lengths
+      run: |
+        IFS=',' read -r -a label_array <<< "${{ inputs.labels }}"
+        IFS=',' read -r -a value_array <<< "${{ inputs.value }}"
+
+        if [ "${#label_array[@]}" -ne "${#value_array[@]}" ]; then
+          echo "Error: labels and value must have the same number of elements."
+          exit 1
+        fi
+      shell: bash
+
+    - name: Process label-value pairs
+      shell: bash
+      run: |
+        IFS=',' read -r -a label_array <<< "${{ inputs.labels }}"
+        IFS=',' read -r -a value_array <<< "${{ inputs.value }}"
+
+        for i in "${!label_array[@]}"; do
+          label="${label_array[i]}"
+          value="${value_array[i]}"
+          artifact_name="label-${label}=${value}"
+
+          # Create empty file
+          empty_file="$RUNNER_TEMP/empty-${artifact_name}.txt"
+          > "$empty_file"
+
+          # Upload artifact
+          echo "Uploading artifact: $artifact_name"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/actions/artifacts \
+            -X POST \
+            -F name="$artifact_name" \
+            -F file=@"$empty_file"
+        done
