@@ -46,7 +46,6 @@ model SchedulerProperties {
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler")
-  @visibility("read")
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
