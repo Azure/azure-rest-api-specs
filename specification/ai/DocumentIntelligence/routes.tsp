@@ -260,7 +260,7 @@ interface DocumentModels {
 
       @doc("Analyze request parameters.")
       @bodyRoot
-      analyzeRequest?: AnalyzeDocumentRequest;
+      analyzeRequest: AnalyzeDocumentRequest;
     },
     AnalyzeOperation
   >;
@@ -299,7 +299,7 @@ interface DocumentModels {
 
       @doc("Analyze batch request parameters.")
       @body
-      analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
+      analyzeBatchRequest: AnalyzeBatchDocumentsRequest;
     },
     AnalyzeBatchOperation
   >;
