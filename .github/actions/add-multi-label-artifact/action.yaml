@@ -20,7 +20,7 @@ runs:
         # Loop through each label-value pair
         for label_pair in "${{ inputs.labels[@] }}"; do
           # Upload the artifact using actions/upload-artifact
-          echo "Uploading artifact: $label=$value"
+          echo "Processing label pair: $label_pair"
           uses: actions/upload-artifact@v4
           with:
             name: "$label_pair"
