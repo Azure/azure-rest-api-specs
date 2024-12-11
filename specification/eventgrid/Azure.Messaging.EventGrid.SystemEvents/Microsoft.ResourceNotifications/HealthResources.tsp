@@ -30,6 +30,7 @@ const MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExam
   },
   apiVersion: "2023-12-01",
 };
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(
   MicrosoftResourceNotificationsHealthResourcesAvailabilityStatusChangedExample
@@ -62,6 +63,7 @@ const MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample: Res
   },
   apiVersion: "2022-08-01",
 };
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsHealthResourcesResourceAnnotatedExample)
 model ResourceNotificationsHealthResourcesAnnotatedEventData

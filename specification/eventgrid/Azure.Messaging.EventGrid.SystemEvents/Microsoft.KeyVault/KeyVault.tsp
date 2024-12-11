@@ -32,17 +32,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...KeyVaultCertificateBase;
   }
 
-  const MicrosoftKeyVaultSecretNewVersionCreatedExample: KeyVaultSecretNewVersionCreatedEventData = #{
-    Id: "https://sample-kv.vault.azure.net/secrets/newsecret/ee059b2bb5bc48398a53b168c6cdcb10",
-    VaultName: "sample-kv",
-    ObjectType: "Secret",
-    ObjectName: "newsecret",
-    Version: "ee059b2bb5bc48398a53b168c6cdcb10",
-    NBF: "1559081980",
-    EXP: "1559082102",
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.SecretNewVersionCreated event. */
-  @example(MicrosoftKeyVaultSecretNewVersionCreatedExample)
   model KeyVaultSecretNewVersionCreatedEventData {
     ...KeyVaultCertificateBase;
   }
