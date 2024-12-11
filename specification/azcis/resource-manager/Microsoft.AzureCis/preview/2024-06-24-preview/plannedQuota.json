@@ -284,6 +284,28 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "FulfilledPlan": {
+      "type": "object",
+      "description": "Fulfilled Plan details after fulfilling the quota of the plan.",
+      "properties": {
+        "arm": {
+          "type": "object",
+          "description": "Same as the \"arm\" node in the plan for the corresponding Subscription."
+        },
+        "rdfe": {
+          "type": "object",
+          "description": "Same as the \"rdfe\" node in the plan for the corresponding Subscription."
+        },
+        "isAzEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether AZ is enabled."
+        }
+      }
+    },
     "PlannedQuotaProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -381,8 +403,8 @@
           "type": "string",
           "description": "Stage name"
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "planVersion": {
@@ -403,7 +425,17 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PlannedQuotaProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "fulfilledPlan": {
+          "$ref": "#/definitions/FulfilledPlan",
+          "description": "Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "alternatives": {
+          "type": "object",
+          "description": "Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },
@@ -411,7 +443,7 @@
         "plannedQuotaName",
         "contactEmail",
         "subscriptionNameInPlan",
-        "armLocation"
+        "azureLocation"
       ]
     },
     "PropertyBinding": {

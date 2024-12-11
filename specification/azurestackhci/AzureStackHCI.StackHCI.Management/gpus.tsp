@@ -16,6 +16,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 @doc("GPU resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
