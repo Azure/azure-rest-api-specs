@@ -1,0 +1,30 @@
+name: 'Upload Artifacts Based on Labels'
+description: 'Loops over a list of label=value pairs and uploads corresponding artifacts'
+
+inputs:
+  labels:
+    description: 'A list of label=value pairs'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+  
+    - name: Create empty file to upload artifact
+      run: "> $RUNNER_TEMP/empty.txt"
+      shell: bash
+
+    - name: Process each label-value pair and upload artifact
+      shell: bash
+      run: |
+        # Loop through each label-value pair
+        for label_pair in "${{ inputs.labels[@] }}"; do
+          # Upload the artifact using actions/upload-artifact
+          echo "Uploading artifact: $label=$value"
+          uses: actions/upload-artifact@v4
+          with:
+            name: "$label_pair"
+            path: ${{ runner.temp }}/empty.txt
+            if-no-files-found: error
+            overwrite: true
+        done
