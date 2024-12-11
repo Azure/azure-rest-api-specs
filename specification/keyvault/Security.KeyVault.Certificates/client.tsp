@@ -8,6 +8,21 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
+// Java configuration
+@@usage(CertificateIssuerItem, Usage.input, "java");
+@@usage(CertificateOperation, Usage.input, "java");
+@@usage(IssuerBundle, Usage.input, "java");
+@@clientName(AdministratorDetails, "AdministratorContact", "java");
+@@clientName(AdministratorDetails.EmailAddress, "email", "java");
+@@clientName(CertificateAttributes.recoveryLevel, "adminContacts", "java");
+@@clientName(Contact, "CertificateContact", "java");
+@@clientName(Contact.EmailAddress, "email", "java");
+@@clientName(Error, "CertificateOperationError", "java");
+@@clientName(JsonWebKeyCurveName, "CertificateKeyCurveName", "java");
+@@clientName(JsonWebKeyType, "CertificateKeyType", "java");
+@@clientName(KeyUsageType, "CertificateKeyUsage", "java");
+@@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
+
 // rename Go operations
 @@clientName(setCertificateContacts, "SetContacts", "go");
 
