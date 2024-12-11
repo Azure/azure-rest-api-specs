@@ -81,9 +81,9 @@ jobs:
           echo "Script output labels: $OUTPUT"
           echo "::set-output name=suppressions-result-output::$OUTPUT"
           
-          has-output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? false : true);")
-          echo "Script has-output: $has-output"
-          echo "::set-output name=has-output::$has-output"
+          has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
+          echo "Script has-output: $has_output"
+          echo "::set-output name=has-output::$has_output"
 
   update-sdk-suppressions-labels:
     name: Update labels
