@@ -8,6 +8,7 @@ module.exports = async ({ github, context, core }, args) => {
 
     const { DefaultArtifactClient } = require('@actions/artifact')
     const fs = require('fs');
+    const path = require('path');
 
     // const path = `${process.env.RUNNER_TEMP}/test-file.txt`;
     /** @type {string[]} */
