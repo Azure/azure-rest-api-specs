@@ -84,30 +84,24 @@ jobs:
           has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
           echo "Script has-output: $has_output"
           echo "::set-output name=has-output::$has_output"
+          
+  update-sdk-suppressions-labels:
+    name: Update labels
+    runs-on: ubuntu-latest
+    needs: process-sdk-suppressions-labels
+    if: ${{ needs.process-sdk-suppressions-labels.outputs.has-output == 'true' }}
+    strategy:
+      matrix:
+        artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
+    steps:
+      - name: Create empty file to upload artifacts
+        run: "> $RUNNER_TEMP/empty.txt"
+        shell: bash
 
-      - name: Add label artifact
-        uses: ./.github/actions/add-multi-label-artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          labels: "['label-aaa=true', 'label-bbb=false']"
-
-          # labels: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
-  # update-sdk-suppressions-labels:
-  #   name: Update labels
-  #   runs-on: ubuntu-latest
-  #   needs: process-sdk-suppressions-labels
-  #   if: ${{ needs.process-sdk-suppressions-labels.outputs.has-output == 'true' }}
-  #   strategy:
-  #     matrix:
-  #       artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
-  #   steps:
-  #     - name: Create empty file to upload artifacts
-  #       run: "> $RUNNER_TEMP/empty.txt"
-  #       shell: bash
-
-  #     - name: Upload artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ${{ matrix.artifact-name }}
-  #         path: ${{ runner.temp }}/empty.txt
-  #         if-no-files-found: error
-  #         overwrite: true
+          name: ${{ matrix.artifact-name }}
+          path: ${{ runner.temp }}/empty.txt
+          if-no-files-found: error
+          overwrite: true
