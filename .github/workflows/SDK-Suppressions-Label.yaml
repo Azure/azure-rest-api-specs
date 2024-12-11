@@ -84,8 +84,7 @@ jobs:
       - uses: ./.github/actions/add-multi-label-artifact
         name: Upload artifact with results
         with:
-          name: "labels"
-          value: "${{ fromJson(steps.run-suppressions-script.outputs.suppressions-result-output) }}"
+          labels: "['label-aaa=true','label-bbb=true']"
 
   # update-sdk-suppressions-labels:
   #   runs-on: ubuntu-latest
