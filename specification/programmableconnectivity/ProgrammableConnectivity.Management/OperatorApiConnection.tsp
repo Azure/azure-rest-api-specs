@@ -225,7 +225,6 @@ model DataRegions {
 /**
  * Valid values for the frequency based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Frequency {
   dpvContinuousFrequency: "Continuous",
@@ -238,7 +237,6 @@ union Frequency {
 /**
  * Valid values for the duration based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Duration {
   dpvEndlessDuration: "Endless",
@@ -253,7 +251,6 @@ union Duration {
 /**
  * Valid values for the context based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Context {
   dpvAlgorithmicLogic: "Algorithmic logic",
@@ -371,7 +368,6 @@ union Context {
 /**
  * Valid values for the processing operation based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union ProcessingOperation {
   dpvAccess: "Access",
@@ -432,7 +428,6 @@ union ProcessingOperation {
 /**
  * Valid values for the purpose based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Purpose {
   dpvAcademicResearch: "Academic Research",

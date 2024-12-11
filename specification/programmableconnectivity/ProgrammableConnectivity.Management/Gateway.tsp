@@ -193,7 +193,7 @@ model ApplicationProperties {
    * URL for the organization's privacy policy.
    */
   @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
-  privacyPolicyUrl: string;
+  privacyPolicyUrl: url;
 
   /**
    * Legal name of the organization owning the application.
@@ -295,7 +295,9 @@ model LocalRepresentative {
   localRepresentativePerson: Person;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+/**
+ * Valid values for category based on https://www.tmforum.org/oda/open-apis/directory/open-gateway-onboarding-and-ordering-component-suite-TMF931
+ */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Category {
   agriculture: "Agriculture",
@@ -345,7 +347,9 @@ union Category {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+/**
+ * Valid values for the Organization Type based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
+ */
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union OrganizationType {
   dpvAcademicScientificOrganisation: "Academic scientific organization",
