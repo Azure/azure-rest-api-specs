@@ -15,7 +15,8 @@ module.exports = async ({ github, context, core }, args) => {
     const labels = ['label-aaa=true', 'label-bbb=false'];
 
     try {
-        const artifactClient = artifact.create();
+        const artifactClient = new DefaultArtifactClient()
+        // const artifactClient = artifact.create();
     
         for (const label of labels) {
           const filePath = path.join(__dirname, `empty-${label}.txt`);
