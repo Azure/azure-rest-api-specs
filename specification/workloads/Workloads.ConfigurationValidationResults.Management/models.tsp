@@ -12,64 +12,64 @@ using Azure.ResourceManager.Foundations;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 namespace Microsoft.Workloads;
 
-@doc("The types of quality checks that can be performed.")
-union QualityCheckType {
+@doc("The types of configuration checks that can be performed.")
+union ConfigurationCheckType {
   /**
-   * Represents the default Platform defined (First Party) quality check type.
+   * Represents the default Platform defined (First Party) configuration check type.
    * This is typically a Platform defined(First Party) check, adhering to general best practices.
    */
-  @doc("The default Platform defined(First Party) quality check type.")
+  @doc("The default Platform defined(First Party) configuration check type.")
   Default: "Default",
 
   /**
-   * Represents a custom quality check type.
+   * Represents a custom configuration check type.
    * Users can define their own custom checks to meet specific requirements.
    */
-  @doc("The custom quality check type.")
+  @doc("The custom configuration check type.")
   Custom: "Custom",
 
   string,
 }
 
-@doc("The level of impact associated with a quality check.")
-union QualityCheckImpactLevel {
+@doc("The level of impact associated with a configuration check.")
+union ConfigurationCheckImpactLevel {
   /**
-   * Critical-impact quality checks highlight the most severe issues that require urgent and
+   * Critical-impact configuration checks highlight the most severe issues that require urgent and
    * immediate resolution to prevent major disruptions or downtime.
    */
-  @doc("Critical-impact quality checks represent the highest level of severity and demand immediate attention.")
+  @doc("Critical-impact configuration checks represent the highest level of severity and demand immediate attention.")
   Critical: "Critical",
 
   /**
-   * High-impact quality checks indicate significant issues that, if not resolved promptly, can lead to
+   * High-impact configuration checks indicate significant issues that, if not resolved promptly, can lead to
    * major performance degradation.
    */
-  @doc("High-impact quality checks represent serious issues requiring quick action.")
+  @doc("High-impact configuration checks represent serious issues requiring quick action.")
   High: "High",
 
   /**
-   * Medium-impact quality checks highlight issues that, while important, may not be urgent but
+   * Medium-impact configuration checks highlight issues that, while important, may not be urgent but
    * still require resolution to maintain optimal performance.
    */
-  @doc("Medium-impact quality checks signal important but not immediately critical issues.")
+  @doc("Medium-impact configuration checks signal important but not immediately critical issues.")
   Medium: "Medium",
 
   /**
-   * Low-impact quality checks refer to issues that have minimal impact on the workload's
+   * Low-impact configuration checks refer to issues that have minimal impact on the workload's
    * performance or functionality but may still require attention over time.
    */
-  @doc("Low-impact quality checks highlight issues with limited effect on performance.")
+  @doc("Low-impact configuration checks highlight issues with limited effect on performance.")
   Low: "Low",
 
   /**
-   * Minor-impact quality checks identify very small issues that have negligible effects and do not
+   * Minor-impact configuration checks identify very small issues that have negligible effects and do not
    * usually require urgent action.
    */
-  @doc("Minor-impact quality checks represent trivial issues with little to no impact.")
+  @doc("Minor-impact configuration checks represent trivial issues with little to no impact.")
   Minor: "Minor",
 
   /**
-   * Informational-impact quality checks provide useful insights or best practices but do not
+   * Informational-impact configuration checks provide useful insights or best practices but do not
    * indicate any problems or issues with the workload.
    */
   @doc("Informational checks offer insights or suggestions without highlighting any problems.")
@@ -78,25 +78,25 @@ union QualityCheckImpactLevel {
   string,
 }
 
-@doc("The execution layer of a quality check.")
-union QualityCheckExecutionLayer {
+@doc("The execution layer of a configuration check.")
+union ConfigurationCheckExecutionLayer {
   /**
-   * The quality check is executed at the Azure Resource Manager (ARM) level.
+   * The configuration check is executed at the Azure Resource Manager (ARM) level.
    */
-  @doc("The Azure Resource Manager execution layer for quality checks.")
+  @doc("The Azure Resource Manager execution layer for configuration checks.")
   AzureResourceManager: "AzureResourceManager",
 
   /**
-   * The quality check is executed at the operating system level.
+   * The configuration check is executed at the operating system level.
    */
-  @doc("The operating system execution layer for quality checks.")
+  @doc("The operating system execution layer for configuration checks.")
   OperatingSystem: "OperatingSystem",
 
   string,
 }
 
-@doc("Defines the deviation status for a quality check configuration.")
-union QualityCheckConfigurationDeviation {
+@doc("Defines the deviation status for a configuration check configuration.")
+union ConfigurationCheckConfigurationDeviation {
   /**
    * Indicates that there is a deviation between the actual and recommended/customized state.
    */
@@ -111,13 +111,28 @@ union QualityCheckConfigurationDeviation {
   No: "No",
 
   /**
-   * Used when the deviation status cannot be determined due to the quality checks not being
+   * Used when the deviation status cannot be determined due to the configuration checks not being
    * evaluated.
    */
-  @doc("The deviation status is unknown as the quality checks couldn't be evaluated.")
+  @doc("The deviation status is unknown as the configuration checks couldn't be evaluated.")
   Unknown: "Unknown",
 
   @doc("Allows for custom or additional deviation states.")
+  string,
+}
+
+@doc("The type of evaluation performed on the configuration checks.")
+union ConfigurationChecksEvaluationType {
+  /**
+   * Indicates that the configuration checks are evaluated on-demand.
+   */
+  OnDemand: "OnDemand",
+
+  /**
+   * Indicates that the configuration checks are evaluated on a schedule.
+   */
+  Scheduled: "Scheduled",
+
   string,
 }
 
@@ -162,26 +177,47 @@ union ValidationConfigurationResultsProvisioningState {
   string,
 }
 
-@doc("Represents the results of configuration quality checks on a resource.")
-model ConfigurationResults {
+@doc("Represents the configuration check recommendation details.")
+model ConfigurationCheckRecommendation {
   /**
-   * The name of the quality check being executed.
+   * The reason for the recommended action.
    */
-  @doc("The name of the quality check.")
+  @doc("The reason for the recommended action.")
+  reason: string;
+
+  /**
+   * The recommended action to bring the resource into compliance with the recommended state.
+   */
+  @doc("The recommended action to bring the resource into compliance.")
+  action: string;
+
+  /**
+   * Additional details explaining the reasoning behind the configuration check recommendation.
+   */
+  @doc("Detailed information about the recommended action.")
+  details: string;
+}
+
+@doc("Represents the results of configuration checks on a resource.")
+model EvaluationResults {
+  /**
+   * The name of the configuration check being executed.
+   */
+  @doc("The name of the configuration check.")
   name: string;
 
   /**
    * Indicates the layer in the system (e.g., azure resource manager(ARM) or operating system) where
    * the check was executed.
    */
-  @doc("The execution layer where the quality check was performed.")
-  executionLayer: QualityCheckExecutionLayer;
+  @doc("The execution layer where the configuration check was performed.")
+  executionLayer: ConfigurationCheckExecutionLayer;
 
   /**
    * The configuration state that is recommended for optimal performance or compliance.It is
    * determined by predefined rules or best practices.
    */
-  @doc("The configuration recommended state for the quality check.")
+  @doc("The configuration recommended state for the check.")
   recommendedState: string;
 
   /**
@@ -192,7 +228,7 @@ model ConfigurationResults {
   customizedState?: string;
 
   /**
-   * Reflects the current configuration state of the resource when the quality check was executed.
+   * Reflects the current configuration state of the resource when the check was executed.
    */
   @doc("The actual state of the resource.")
   actualStateOnResource: string;
@@ -201,67 +237,61 @@ model ConfigurationResults {
    * Describes any deviatiobns between the recommended/customized state and the actual state.
    */
   @doc("Describes the deviation from the recommended state.")
-  configurationDeviation: QualityCheckConfigurationDeviation;
+  configurationDeviation: ConfigurationCheckConfigurationDeviation;
 
   /**
    * Provides actions or steps recommended to bring the resource into compliance with the
    * recommended state/customised state.
    */
   @doc("The mitigation steps to follow best practices.")
-  recommendedAction: string;
+  recommendation: ConfigurationCheckRecommendation;
 
   /**
-   * Additional details explaining the reasoning behind the quality check recommendation.
-   */
-  @doc("Detailed explanation of the recommendation.")
-  recommendationDetails: string;
-
-  /**
-   * Specifies the type of quality check performed, such as default or customised.
+   * Specifies the type of configuration check performed, such as default or customised.
    * This helps categorize the check for better tracking and reporting.
    */
-  @doc("The type of quality check.")
-  checkType: QualityCheckType;
+  @doc("The type of configuration check.")
+  checkType: ConfigurationCheckType;
 
   /**
-   * The category of the quality check, such as reliability, operational excellence, or security,
-   * etc. which helps to classify the validation.
+   * The category of the configuration check, such as reliability, operational excellence, or
+   * security, etc. which helps to classify the validation.
    */
-  @doc("The category of the quality check.")
+  @doc("The category of the configuration check.")
   checkCategory: string;
 
   /**
-   * The quality check version.
+   * The configuration check version.
    */
-  @doc("The version of the quality check.")
+  @doc("The version of the configuration check.")
   checkVersion: string;
 
   /**
-   * The level of impact this quality check has on the resource. This can have the values
+   * The level of impact this configuration check has on the resource. This can have the values
    * low, medium and high.
    */
-  @doc("The impact level of the quality check.")
-  impactLevel: QualityCheckImpactLevel;
+  @doc("The impact level of the configuration check.")
+  impactLevel: ConfigurationCheckImpactLevel;
 }
 
 @doc("The configuration validation results error details.")
 model ErrorDetails {
   /**
-   * The quality checks execution error code.
+   * The configuration checks execution error code.
    */
-  @doc("The error code generated by the quality check execution.")
+  @doc("The error code generated by the configuration check execution.")
   @visibility("read")
   code: string;
 
   /**
-   * The quality checks execution error category.
+   * The configuration checks execution error category.
    */
   @doc("The category of the error.")
   @visibility("read")
   category: string;
 
   /**
-   * The quality checks execution error details.
+   * The configuration checks execution error details.
    */
   @doc("Detailed information about the error.")
   @visibility("read")
@@ -301,16 +331,28 @@ model ConfigurationValidationResultsProperties {
   resourceArmIds: string[];
 
   /**
-   * The template ID of the quality checks being applied to the workload instance.
+   * The template ID of the configuration checks being applied to the workload instance.
    */
-  @doc("The template ID of the quality checks being applied.")
-  qualityChecksTemplateId?: string;
+  @doc("The template ID of the configuration checks being applied.")
+  configurationChecksTemplateId?: string;
 
   /**
-   * Contains detailed information about errors encountered during the execution of the quality
-   * checks.
+   * The type of evaluation performed on the configuration checks.
    */
-  @doc("Error details related to the quality check execution.")
+  @doc("The type of evaluation performed on the configuration checks.")
+  evaluationType: ConfigurationChecksEvaluationType;
+
+  /**
+   * The timestamp when the evaluation was performed.
+   */
+  @doc("The timestamp when the evaluation was performed.")
+  evaluationTimestamp: utcDateTime;
+
+  /**
+   * Contains detailed information about errors encountered during the execution of the
+   * configuration checks.
+   */
+  @doc("Error details related to the configuration check execution.")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
   errorDetails?: ErrorDetails[];
@@ -321,7 +363,7 @@ model ConfigurationValidationResultsProperties {
    */
   @doc("The results of the configuration validation.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  configurationResults: ConfigurationResults[];
+  evaluationResults: EvaluationResults[];
 
   /**
    * The provisioning state of the validation results resource.
