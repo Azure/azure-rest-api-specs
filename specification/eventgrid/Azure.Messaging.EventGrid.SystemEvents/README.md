@@ -67,7 +67,7 @@ A few things to keep in mind when formatting a TypeSpec example:
 2. When defining a dictionary or an array you must preface it with a `#`.
 3. For properties and keys that have a wording style that TypeSpec does not agree with, for example `iothub-encoding-value`, you can surround the key with ` indicators. 
 
-More on `@example` can be found [here]https://typespec.io/docs/standard-library/examples/#define-typed-examples-using-const)
+More on `@example` can be found [here](https://typespec.io/docs/standard-library/examples/#define-typed-examples-using-const)
 
 # For Service System Events PR Approval
 
