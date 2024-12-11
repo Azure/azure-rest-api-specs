@@ -97,7 +97,6 @@ input-file:
   - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
 ```
 ### Tag: package-2021-08
 
