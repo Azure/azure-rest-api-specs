@@ -4,13 +4,11 @@
  */
 module.exports = async ({ github, context, core }, args) => {
     core.info(`actionjs result: ${args.labels}`);
-    // core.info('actionjs result', JSON.parse(args.labels));
 
     const { DefaultArtifactClient } = require('@actions/artifact')
     const fs = require('fs');
     const path = require('path');
 
-    // const path = `${process.env.RUNNER_TEMP}/test-file.txt`;
     /** @type {string[]} */
     // const labels = JSON.parse(args.labels);
     const labels = ['label-aaa=true', 'label-bbb=false'];
