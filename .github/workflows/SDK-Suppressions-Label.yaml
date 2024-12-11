@@ -72,9 +72,9 @@ jobs:
         id: run-suppressions-script
         env:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
@@ -85,6 +85,7 @@ jobs:
     name: upd-sdk-labels
     runs-on: ubuntu-latest
     needs: process-sdk-suppressions-labels
+    if: ${{ needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output && fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) != [] }}
     strategy:
       matrix:
         artifact-name: ${{ fromJson(needs.process-sdk-suppressions-labels.outputs.process-sdk-suppressions-output) }}
