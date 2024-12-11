@@ -1,0 +1,39 @@
+name: Upload Multi Artifacts Based on Labels
+description: 'Loops over a list of label=value pairs and uploads corresponding artifacts'
+
+inputs:
+  labels:
+    description: 'A list of label=value pairs'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: update multi artifacts
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const action = require('./.github/actions/add-multi-labels-artifact/action.js')
+          await action({ github, context, core }, labels: ${{ inputs.labels }});
+
+
+    # - name: Create empty file to upload artifact
+    #   run: "> $RUNNER_TEMP/empty.txt"
+    #   shell: bash
+
+    # - name: Process each label-value pair and upload artifact
+    #   shell: bash
+    #   run: |
+    #     label_string="${{ inputs.labels }}"
+    #     label_string="${label_string//[\[\] ]/}"
+    #     IFS=',' read -r -a label_array <<< "$label_string"
+    #     for label_pair in "${label_array[@]}"; do
+    #       echo "Processing label pair: $label_pair"
+    #       uses: actions/upload-artifact@v4
+    #       with:
+    #         name: "$label_pair"
+    #         path: ${{ runner.temp }}/empty.txt
+    #         if-no-files-found: error
+    #         overwrite: true
+    #     done
