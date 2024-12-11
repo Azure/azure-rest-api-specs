@@ -3789,8 +3789,29 @@
       "description": "An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.\nIf `text` the model can return text or any value needed.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.ResponseFormat",
-          "description": "Must be one of `text` or `json_object`."
+          "type": "string",
+          "description": "Must be one of `text` or `json_object`.",
+          "default": "text",
+          "enum": [
+            "text",
+            "json_object"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "text",
+                "value": "text",
+                "description": "`text` format should be used for requests involving any sort of ToolCall."
+              },
+              {
+                "name": "jsonObject",
+                "value": "json_object",
+                "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+              }
+            ]
+          }
         }
       }
     },
@@ -5766,7 +5787,30 @@
         "id"
       ]
     },
-    "Agents.ResponseFormat": {},
+    "Agents.ResponseFormat": {
+      "type": "string",
+      "description": "Possible API response formats.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "`text` format should be used for requests involving any sort of ToolCall."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+          }
+        ]
+      }
+    },
     "Agents.ResponseFormatJsonSchema": {
       "type": "object",
       "description": "A description of what the response format is for, used by the model to determine how to respond in the format.",

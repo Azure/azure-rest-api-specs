@@ -111,6 +111,9 @@ union AgentsApiResponseFormatOption {
 
   /** Sets the format of the output of the model when a ToolCall is returned. */
   AgentsApiResponseFormat,
+
+  /** Using `json_schema` format will provide a description of what the response format is for. */
+  ResponseFormatJsonSchemaType,
 }
 
 /** Represents the mode in which the model will handle the return format of a tool call. */
@@ -143,9 +146,6 @@ union ResponseFormat {
 
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
-
-  /** Using `json_schema` format will provide a description of what the response format is for. */
-  jsonSchema: ResponseFormatJsonSchemaType,
 }
 
 /**
