@@ -24,7 +24,7 @@ module.exports = async ({ github, context, core }, args) => {
     
           fs.writeFileSync(filePath, `Artifact for label: ${label}`);
     
-          core.log(`Uploading artifact: ${label}`);
+          core.info(`Uploading artifact: ${label}`);
           const uploadResponse = await artifactClient.uploadArtifact(
             label,
             [filePath],
@@ -32,7 +32,7 @@ module.exports = async ({ github, context, core }, args) => {
             { overwrite: true }
           );
     
-          core.log(`Upload complete for ${label}: ${uploadResponse}`);
+          core.info(`Upload complete for ${label}: ${uploadResponse}`);
           
           fs.unlinkSync(filePath);
         }
