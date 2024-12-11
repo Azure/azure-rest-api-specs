@@ -3,6 +3,7 @@ parameters:
     default: "sdk/cognitivelanguage"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-python"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -19,3 +20,9 @@ options:
     model-namespace: false
     namespace: "Azure.AI.Language.Documents"
     flavor: azure
+  "@azure-tools/typespec-python":
+    package-name: "azure-ai-language-documents"
+    package-dir: "azure-ai-language-documents"
+    flavor: azure
+    generate-test: true
+    generate-sample: true    
