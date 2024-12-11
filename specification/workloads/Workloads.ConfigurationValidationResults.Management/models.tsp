@@ -8,11 +8,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 namespace Microsoft.Workloads;
 
 @doc("The types of configuration checks that can be performed.")
+@renamedFrom(Versions.v2024_11_01_preview, "QualityCheckType")
 union ConfigurationCheckType {
   /**
    * Represents the default Platform defined (First Party) configuration check type.
@@ -32,6 +34,7 @@ union ConfigurationCheckType {
 }
 
 @doc("The level of impact associated with a configuration check.")
+@renamedFrom(Versions.v2024_11_01_preview, "QualityCheckImpactLevel")
 union ConfigurationCheckImpactLevel {
   /**
    * Critical-impact configuration checks highlight the most severe issues that require urgent and
@@ -79,6 +82,7 @@ union ConfigurationCheckImpactLevel {
 }
 
 @doc("The execution layer of a configuration check.")
+@renamedFrom(Versions.v2024_11_01_preview, "QualityCheckExecutionLayer")
 union ConfigurationCheckExecutionLayer {
   /**
    * The configuration check is executed at the Azure Resource Manager (ARM) level.
@@ -96,6 +100,7 @@ union ConfigurationCheckExecutionLayer {
 }
 
 @doc("Defines the deviation status for a configuration check configuration.")
+@renamedFrom(Versions.v2024_11_01_preview, "QualityCheckConfigurationDeviation")
 union ConfigurationCheckConfigurationDeviation {
   /**
    * Indicates that there is a deviation between the actual and recommended/customized state.
@@ -122,6 +127,7 @@ union ConfigurationCheckConfigurationDeviation {
 }
 
 @doc("The type of evaluation performed on the configuration checks.")
+@added(Versions.v2024_11_01_preview)
 union ConfigurationChecksEvaluationType {
   /**
    * Indicates that the configuration checks are evaluated on-demand.
@@ -178,6 +184,7 @@ union ValidationConfigurationResultsProvisioningState {
 }
 
 @doc("Represents the configuration check recommendation details.")
+@added(Versions.v2024_11_01_preview)
 model ConfigurationCheckRecommendation {
   /**
    * The reason for the recommended action.
@@ -199,6 +206,7 @@ model ConfigurationCheckRecommendation {
 }
 
 @doc("Represents the results of configuration checks on a resource.")
+@renamedFrom(Versions.v2024_11_01_preview, "ConfigurationResults")
 model EvaluationResults {
   /**
    * The name of the configuration check being executed.
@@ -244,6 +252,22 @@ model EvaluationResults {
    * recommended state/customised state.
    */
   @doc("The mitigation steps to follow best practices.")
+  @removed(Versions.v2024_11_01_preview)
+  recommendedAction: string;
+
+  /**
+   * Additional details explaining the reasoning behind the quality check recommendation.
+   */
+  @doc("Detailed explanation of the recommendation.")
+  @removed(Versions.v2024_11_01_preview)
+  recommendationDetails: string;
+
+  /**
+   * Provides actions or steps recommended to bring the resource into compliance with the
+   * recommended state/customised state.
+   */
+  @doc("The mitigation steps to follow best practices.")
+  @added(Versions.v2024_11_01_preview)
   recommendation: ConfigurationCheckRecommendation;
 
   /**
@@ -334,18 +358,21 @@ model ConfigurationValidationResultsProperties {
    * The template ID of the configuration checks being applied to the workload instance.
    */
   @doc("The template ID of the configuration checks being applied.")
+  @renamedFrom(Versions.v2024_11_01_preview, "qualityChecksTemplateId")
   configurationChecksTemplateId?: string;
 
   /**
    * The type of evaluation performed on the configuration checks.
    */
   @doc("The type of evaluation performed on the configuration checks.")
+  @added(Versions.v2024_11_01_preview)
   evaluationType: ConfigurationChecksEvaluationType;
 
   /**
    * The timestamp when the evaluation was performed.
    */
   @doc("The timestamp when the evaluation was performed.")
+  @added(Versions.v2024_11_01_preview)
   evaluationTimestamp: utcDateTime;
 
   /**
@@ -363,6 +390,7 @@ model ConfigurationValidationResultsProperties {
    */
   @doc("The results of the configuration validation.")
   @OpenAPI.extension("x-ms-identifiers", [])
+  @renamedFrom(Versions.v2024_11_01_preview, "configurationResults")
   evaluationResults: EvaluationResults[];
 
   /**
