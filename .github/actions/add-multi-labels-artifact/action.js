@@ -5,9 +5,9 @@ const { extractInputs } = require("../context");
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-module.exports = async ({ github, context, core }, labels) => {
-    console.log('actionjs result', labels);
-    console.log('actionjs result', JSON.parse(labels));
+module.exports = async ({ github, context, core }, args) => {
+    console.log('actionjs result', args.labels);
+    console.log('actionjs result', JSON.parse(args.labels));
 //   let owner = process.env.OWNER;
 //   let repo = process.env.REPO;
 //   let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
