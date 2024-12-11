@@ -6,7 +6,16 @@ using Microsoft.DeviceRegistry;
 
 @@access(OperationStatus.get, Access.internal, "csharp");
 
+@@clientNamespace(Microsoft.DeviceRegistry,
+  "com.azure.resourcemanager.deviceregistry",
+  "java"
+);
 @@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
+
+@@clientName(Microsoft.DeviceRegistry,
+  "DeviceRegistryManagementClient",
+  "java"
+);
 
 @@clientName(Asset, "DeviceRegistryAsset", "csharp");
 @@clientName(AssetStatus, "DeviceRegistryAssetStatus", "csharp");
