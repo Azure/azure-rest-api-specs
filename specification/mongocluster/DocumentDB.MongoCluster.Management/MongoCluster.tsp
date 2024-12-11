@@ -152,6 +152,10 @@ model MongoClusterProperties {
   @added(Versions.v2024_07_01)
   backup?: BackupProperties;
 
+  /** The Data API properties of the mongo cluster. */
+  @added(Versions.v2024_10_01_preview)
+  dataApi?: DataApiProperties;
+
   /** List of private endpoint connections. */
   @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
@@ -462,4 +466,23 @@ model AdministratorProperties {
   @visibility("create", "update")
   @secret
   password?: string;
+}
+
+/** Data API properties. */
+@added(Microsoft.DocumentDB.Versions.v2024_10_01_preview)
+model DataApiProperties {
+  /** The mode to indicate whether the Mongo Data API is enabled for a cluster. */
+  mode?: DataApiMode;
+}
+
+/** The mode to apply to the Mongo Data API. */
+@added(Microsoft.DocumentDB.Versions.v2024_10_01_preview)
+union DataApiMode {
+  string,
+
+  /** Mongo Data API is enabled for the cluster. */
+  "Enabled",
+
+  /** Mongo Data API is disabled for the cluster. */
+  "Disabled",
 }
