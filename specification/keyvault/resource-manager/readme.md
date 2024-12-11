@@ -26,7 +26,7 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-12-01
+tag: package-preview-2024-12
 ```
 
 ### Tag: package-preview-2024-12
