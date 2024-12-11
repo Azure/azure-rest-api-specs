@@ -39,6 +39,7 @@ runs:
           # Replace '=' with a separator for artifact naming
           artifact_name=$(echo "$label_pair" | sed 's/=/=/')
 
+          token="${{ inputs.token }}"
           # Create empty file for the artifact
           empty_file="$RUNNER_TEMP/empty-${artifact_name}.txt"
           > "$empty_file"
