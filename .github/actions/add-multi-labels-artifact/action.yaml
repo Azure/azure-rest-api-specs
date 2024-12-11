@@ -15,7 +15,7 @@ runs:
       with:
         script: |
           const action = require('./.github/actions/add-multi-labels-artifact/action.js')
-          await action({ github, context, core }, labels: ${{ inputs.labels }});
+          await action({ github, context, core }, {labels: ${{ inputs.labels }}});
 
 
     # - name: Create empty file to upload artifact
