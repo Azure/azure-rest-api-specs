@@ -11,7 +11,8 @@ module.exports = async ({ github, context, core, artifact }, args) => {
 
     // const path = `${process.env.RUNNER_TEMP}/test-file.txt`;
     /** @type {string[]} */
-    const labels = args.labels;
+    // const labels = JSON.parse(args.labels);
+    const labels = ['label-aaa=true', 'label-bbb=false'];
 
     try {
         const artifactClient = artifact.create();
