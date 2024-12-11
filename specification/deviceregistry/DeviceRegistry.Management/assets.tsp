@@ -90,7 +90,7 @@ model AssetProperties {
   softwareRevision?: string;
 
   @doc("Reference to the documentation.")
-  documentationUri?: url;
+  documentationUri?: string;
 
   @doc("Asset serial number.")
   serialNumber?: string;
