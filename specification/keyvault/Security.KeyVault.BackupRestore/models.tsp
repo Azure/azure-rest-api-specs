@@ -83,7 +83,7 @@ model FullBackupOperation {
    * The end time of the backup operation in UTC
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to mark this as nullable"
-  @OpenAPI.extension("x-ms-nullable", true)
+  @OpenAPI.extension("x-nullable", true)
   @encode("unixTimestamp", int32)
   endTime?: utcDateTime;
 
@@ -169,7 +169,7 @@ model RestoreOperation {
    * The end time of the restore operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to mark this as nullable"
-  @OpenAPI.extension("x-ms-nullable", true)
+  @OpenAPI.extension("x-nullable", true)
   @encode("unixTimestamp", int32)
   endTime?: utcDateTime;
 }
@@ -238,7 +238,7 @@ model SelectiveKeyRestoreOperation {
    * The end time of the restore operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to mark this as nullable"
-  @OpenAPI.extension("x-ms-nullable", true)
+  @OpenAPI.extension("x-nullable", true)
   @encode("unixTimestamp", int32)
   endTime?: utcDateTime;
 }

@@ -1,6 +1,12 @@
+import "@typespec/openapi";
+
+using TypeSpec.OpenAPI;
+
 /**
  * The key vault server error.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to mark this as nullable"
+@OpenAPI.extension("x-nullable", true)
 model Error {
   /**
    * The error code.
