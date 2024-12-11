@@ -48,7 +48,6 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 ```yaml $(tag) == 'package-preview-2024-11'
 input-file:
   - preview/2024-11-01-preview/ConfigurationValidationResults.json
-  - ../operations/preview/2024-11-01-preview/operations.json
 ```
 
 ---
