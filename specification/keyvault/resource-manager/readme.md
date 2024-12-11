@@ -26,7 +26,22 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-07
+tag: package-2024-11-01
+```
+
+### Tag: package-2024-11-01
+
+These settings apply only when `--tag=package-2024-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01'
+input-file:
+  - Microsoft.KeyVault/stable/2024-11-01/common.json
+  - Microsoft.KeyVault/stable/2024-11-01/keys.json
+  - Microsoft.KeyVault/stable/2024-11-01/keysManagedHsm.json
+  - Microsoft.KeyVault/stable/2024-11-01/keyvault.json
+  - Microsoft.KeyVault/stable/2024-11-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2024-11-01/providers.json
+  - Microsoft.KeyVault/stable/2024-11-01/secrets.json
 ```
 
 ### Tag: package-preview-2024-04
