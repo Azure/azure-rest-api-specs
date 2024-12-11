@@ -3783,9 +3783,8 @@
       "required": [
         "id",
         "timestamp",
-        "action",
-        "location",
-        "target"
+        "target",
+        "connectedRegistry"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -4508,7 +4507,6 @@
       },
       "required": [
         "clientAuthenticationName",
-        "clientName",
         "namespaceName"
       ]
     },
@@ -7307,7 +7305,7 @@
     },
     "ResourceNotificationsHealthResourcesAnnotatedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.ResourceAnnotated event.",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
@@ -7316,7 +7314,7 @@
     },
     "ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged\nevent.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.HealthResources.AvailabilityStatusChanged event.",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
@@ -7382,7 +7380,7 @@
     },
     "ResourceNotificationsResourceManagementCreatedOrUpdatedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.CreatedOrUpdated event.",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceNotificationsResourceUpdatedEventData"
@@ -7391,7 +7389,7 @@
     },
     "ResourceNotificationsResourceManagementDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.ResourceNotifications.Resources.Deleted event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.Resources.Deleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/ResourceNotificationsResourceDeletedEventData"
@@ -7432,9 +7430,7 @@
         }
       },
       "required": [
-        "id",
-        "name",
-        "type"
+        "properties"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -8641,8 +8637,7 @@
         }
       },
       "required": [
-        "validationCode",
-        "validationUrl"
+        "validationCode"
       ]
     },
     "SubscriptionValidationResponse": {
