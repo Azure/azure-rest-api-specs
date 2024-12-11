@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 /**
  * Workloads client provides access to various workload operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations Swagger is common for all RTs and is created as a separate file having it's own folder."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
 @service({
   title: "Workloads Client",
@@ -41,3 +41,6 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_11_01_preview: "2024-11-01-preview",
 }
+
+@added(Versions.v2024_11_01_preview)
+interface Operations extends Azure.ResourceManager.Operations {}
