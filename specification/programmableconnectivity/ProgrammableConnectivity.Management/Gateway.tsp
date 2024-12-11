@@ -298,6 +298,7 @@ model LocalRepresentative {
 /**
  * Valid values for category based on https://www.tmforum.org/oda/open-apis/directory/open-gateway-onboarding-and-ordering-component-suite-TMF931
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union Category {
   agriculture: "Agriculture",
@@ -350,6 +351,7 @@ union Category {
 /**
  * Valid values for the Organization Type based on W3C Data Privacy Vocabulary v2 https://w3c.github.io/dpv/2.0/dpv/.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
 @TypeSpec.Versioning.added(Versions.v2024_11_01_preview)
 union OrganizationType {
   dpvAcademicScientificOrganisation: "Academic scientific organization",
