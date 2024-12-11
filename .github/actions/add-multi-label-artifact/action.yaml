@@ -29,7 +29,7 @@ runs:
     - name: Process label-value pairs
       shell: bash
       env:
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # Convert input to array
         eval "label_array=${{ inputs.labels }}"
