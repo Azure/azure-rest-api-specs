@@ -68,24 +68,24 @@ jobs:
             return JSON.stringify(prContext);
           result-encoding: string
 
-      - name: Run get suppressions label script
-        id: run-suppressions-script
-        env:
-          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
-          OUTPUT_FILE: "output.json"
-          GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
-          OUTPUT=$(cat $OUTPUT_FILE)
-          echo "Script output labels: $OUTPUT"
-          echo "::set-output name=suppressions-result-output::$OUTPUT"
+    #   - name: Run get suppressions label script
+    #     id: run-suppressions-script
+    #     env:
+    #       GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
+    #       OUTPUT_FILE: "output.json"
+    #       GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     run: |
+    #       node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+    #       OUTPUT=$(cat $OUTPUT_FILE)
+    #       echo "Script output labels: $OUTPUT"
+    #       echo "::set-output name=suppressions-result-output::$OUTPUT"
           
-          has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
-          echo "Script has-output: $has_output"
-          echo "::set-output name=has-output::$has_output"
+    #       has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
+    #       echo "Script has-output: $has_output"
+    #       echo "::set-output name=has-output::$has_output"
           
-      - name: Add label artifact
+      - name: Upload artifact dependes on labels
         uses: ./.github/actions/add-multi-labels-artifact
         with:
           labels: "['label-aaa=true', 'label-bbb=false']"
