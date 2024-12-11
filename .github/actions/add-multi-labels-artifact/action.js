@@ -2,7 +2,7 @@
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-module.exports = async ({ github, context, core, artifact }, args) => {
+module.exports = async ({ github, context, core }, args) => {
     core.info(`actionjs result: ${args.labels}`);
     // core.info('actionjs result', JSON.parse(args.labels));
 
