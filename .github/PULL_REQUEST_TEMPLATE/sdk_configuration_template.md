@@ -2,7 +2,7 @@
 
 ## Purpose of this PR
 
-- [ ] Add or update only SDK configuration where there are no changes to the API spec and therefore there is no need for an ARM or Stewardship Board API review.
+- [ ] Make changes to the SDK configuration only when there are no modifications to the API specification, eliminating the need for an ARM or Stewardship Board API review.
 
 ## Due diligence checklist
 
