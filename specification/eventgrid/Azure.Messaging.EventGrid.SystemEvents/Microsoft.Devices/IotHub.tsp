@@ -109,54 +109,16 @@ model DeviceConnectionStateEventInfo {
   sequenceNumber: string;
 }
 
-// TODO thumbprint is null?
-const MicrosoftDevicesDeviceCreatedExample: IotHubDeviceCreatedEventData = #{
-  twin: #{
-    deviceId: "LogicAppTestDevice",
-    etag: "AAAAAAAAAAE=",
-    etag: "null",
-    status: "enabled",
-    statusUpdateTime: "0001-01-01T00:00:00",
-    connectionState: "Disconnected",
-    lastActivityTime: "0001-01-01T00:00:00",
-    cloudToDeviceMessageCount: 0,
-    authenticationType: "sas",
-    x509Thumbprint: #{ primaryThumbprint: null, secondaryThumbprint: null },
-    version: 2,
-    properties: #{
-      desired: #{
-        metadata: #{ lastUpdated: "2018-01-02T19:17:44.4383997Z" },
-        version: 1,
-      },
-      reported: #{
-        metadata: #{ lastUpdated: "2018-01-02T19:17:44.4383997Z" },
-        version: 1,
-      },
-    },
-  },
-  hubName: "egtesthub1",
-  deviceId: "LogicAppTestDevice",
-};
 /** Event data for Microsoft.Devices.DeviceCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftDevicesDeviceCreatedExample)
 model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
 /** Event data for Microsoft.Devices.DeviceDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
-const MicrosoftDevicesDeviceConnectedExample: IotHubDeviceConnectedEventData = #{
-  deviceConnectionStateEventInfo: #{
-    sequenceNumber: "000000000000000001D4132452F67CE200000002000000000000000000000001",
-  },
-  hubName: "egtesthub1",
-  deviceId: "LogicAppTestDevice",
-  moduleId: "DeviceModuleID",
-};
 /** Event data for Microsoft.Devices.DeviceConnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftDevicesDeviceConnectedExample)
 model IotHubDeviceConnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
@@ -165,15 +127,8 @@ model IotHubDeviceConnectedEventData
 model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
-//TODO dashes caused issues on sysproperties
-const MicrosoftDevicesDeviceTelemetryExample: IotHubDeviceTelemetryEventData = #{
-  body: #{ Weather: #{ Temperature: 900 }, Location: "USA" },
-  properties: #{ Status: "Active" },
-  systemProperties: #{},
-};
 /** Event data for Microsoft.Devices.DeviceTelemetry event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(MicrosoftDevicesDeviceTelemetryExample)
 model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
 /** The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate. */

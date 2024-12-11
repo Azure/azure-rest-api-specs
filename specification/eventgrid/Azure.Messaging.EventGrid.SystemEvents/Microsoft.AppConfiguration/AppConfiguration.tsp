@@ -6,7 +6,7 @@ const MicrosoftAppConfigurationKeyValueModifiedExample: AppConfigurationKeyValue
   key: "Foo",
   label: "FizzBuzz",
   etag: "FnUExLaj2moIi4tJX9AXn9sakm0",
-  syncToken: "fakeSyncToken",
+  syncToken: "zAJw6V16=Njo1IzUxNjQ2NzM=;sn=5164673",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
 @example(MicrosoftAppConfigurationKeyValueModifiedExample)
@@ -29,7 +29,7 @@ const MicrosoftAppConfigurationKeyValueDeletedExample: AppConfigurationKeyValueD
   key: "Foo",
   label: "FizzBuzz",
   etag: "FnUExLaj2moIi4tJX9AXn9sakm0",
-  syncToken: "fakeSyncToken",
+  syncToken: "zAJw6V16=Njo1IzUxNjQ2NzM=;sn=5164673",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event. */
 @example(MicrosoftAppConfigurationKeyValueDeletedExample)
@@ -62,7 +62,7 @@ model AppConfigurationSnapshotEventData {
 const MicrosoftAppConfigurationSnapshotCreatedExample: AppConfigurationSnapshotCreatedEventData = #{
   name: "Foo",
   etag: "FnUExLaj2moIi4tJX9AXn9sakm0",
-  syncToken: "fakeSyncToken",
+  syncToken: "zAJw6V16=Njo1IzUxNjQ2NzM=;sn=5164673",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
@@ -73,7 +73,7 @@ model AppConfigurationSnapshotCreatedEventData
 const MicrosoftAppConfigurationSnapshotModifiedExample: AppConfigurationSnapshotModifiedEventData = #{
   name: "Foo",
   etag: "FnUExLaj2moIi4tJX9AXn9sakm0",
-  syncToken: "fakeSyncToken",
+  syncToken: "zAJw6V16=Njo1IzUxNjQ2NzM=;sn=5164673",
 };
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."

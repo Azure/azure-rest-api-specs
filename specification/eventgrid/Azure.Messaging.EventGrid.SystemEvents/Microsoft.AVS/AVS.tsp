@@ -32,7 +32,6 @@ model AvsClusterDeletedEventData extends AvsClusterEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsClusterUpdatingEventData extends AvsClusterEventData {}
 
-//TODO: invalid escape sequence
 const MicrosoftAVSClusterUpdatedExample: AvsClusterUpdatedEventData = #{
   addedHostNames: #["esx17-r04.p01.431cc\\u00e2\\u20ac\\u00a6"],
   removedHostNames: #["esx15-r01.p01.431cc\\u00e2\\u20ac\\u00a6"],

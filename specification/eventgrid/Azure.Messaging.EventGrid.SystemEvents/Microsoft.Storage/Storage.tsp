@@ -22,22 +22,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     string,
   }
 
-  const MicrosoftStorageBlobCreatedExample: StorageBlobCreatedEventData = #{
-    api: "PutBlob",
-    clientRequestId: "89bc72c2-5dfe-4d9f-9706-43612c1bd01b",
-    requestId: "beb21a5e-401e-002b-3749-928517000000",
-    eTag: "0x8D96060BDA19D9D",
-    contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    contentLength: 17555,
-    blobType: "BlockBlob",
-    accessTier: "Hot",
-    url: "https://jolovstorage.blob.core.windows.net/gaocontainer/Template1.xlsx",
-    sequencer: "0000000000000000000000000000B00D0000000005b058d3",
-    storageDiagnostics: #{ batchId: "23f68872-a006-0065-0049-9240f2000000" },
-  };
-
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
-  @example(MicrosoftStorageBlobCreatedExample)
   model StorageBlobCreatedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -75,24 +60,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  // TODO etag and contentLength are commented out because they are not present in the swagger
-  const MicrosoftStorageBlobDeletedExample: StorageBlobDeletedEventData = #{
-    api: "DeleteBlob",
-    requestId: "3626e710-c01e-005c-794a-920056000000",
-
-    //eTag: "0x8D96061B33FE1D2",
-    contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-
-    //contentLength: 17555,
-    blobType: "BlockBlob",
-
-    url: "https://jolovstorage.blob.core.windows.net/gaocontainer/Template1.xlsx",
-    sequencer: "0000000000000000000000000000B00D0000000005b29696",
-    storageDiagnostics: #{ batchId: "24045172-a006-0065-004a-9240f2000000" },
-  };
-
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobDeleted event. */
-  @example(MicrosoftStorageBlobDeletedExample)
   model StorageBlobDeletedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -118,32 +86,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  // TODO DirectoryProperties and blobUrl are commented out because they are not present in the swagger
-  const MicrosoftStorageDirectoryCreatedExample: StorageDirectoryCreatedEventData = #{
-    api: "CreateDirectory",
-    requestId: "d706a817-d01f-0002-3e60-92fcb5000000",
-    eTag: "0x8D96077BE69372E",
-
-    // directoryProperties: #[
-    //   #{
-    //     acl: #[
-    //       #{
-    //         access: "u::rwx,g::rx,o::",
-    //         permission: "0750",
-    //         owner: "$superuser",
-    //         group: "$superuser"
-    //       }
-    //     ]
-    //   }
-    // ],
-    // blobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/gaodir",
-    url: "https://jolovdfs.dfs.core.windows.net/gaocontainer/gaodir",
-
-    sequencer: "00000000000000000000000000000102000000000001e192",
-    storageDiagnostics: #{ batchId: "e4b5c5d5-b727-4429-b35f-babb83eb15f1" },
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event. */
-  @example(MicrosoftStorageDirectoryCreatedExample)
   model StorageDirectoryCreatedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -166,20 +109,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  // TODO blobUrl is commented out because it is not present in the swagger
-  const MicrosoftStorageDirectoryDeletedExample: StorageDirectoryDeletedEventData = #{
-    api: "DeleteDirectory",
-    requestId: "45a3a9fa-001f-0001-1b60-921dd1000000",
-
-    // blobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/gaodir",
-    url: "https://jolovdfs.dfs.core.windows.net/gaocontainer/gaodir",
-
-    recursive: "false",
-    sequencer: "00000000000000000000000000000102000000000001e1a4",
-    storageDiagnostics: #{ batchId: "c41d46e2-dfa5-4dd1-832a-9a63bed28ebc" },
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event. */
-  @example(MicrosoftStorageDirectoryDeletedExample)
   model StorageDirectoryDeletedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -202,21 +132,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  // TODO destinationBlobUrl and sourceBlobUrl are commented out because they are not present in the swagger
-  const MicrosoftStorageBlobRenamedExample: StorageBlobRenamedEventData = #{
-    api: "RenameFile",
-    requestId: "707665f1-a01f-0037-799a-9490a1000000",
-
-    // destinationBlobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/newname",
-    // sourceBlobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/metrics.txt",
-    destinationUrl: "https://jolovdfs.dfs.core.windows.net/gaocontainer/newname",
-
-    sourceUrl: "https://jolovdfs.dfs.core.windows.net/gaocontainer/metrics.txt",
-    sequencer: "0000000000000000000000000000010200000000000364db",
-    storageDiagnostics: #{ batchId: "69bbaf93-267f-4752-9267-b575e61e0d5d" },
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event. */
-  @example(MicrosoftStorageBlobRenamedExample)
   model StorageBlobRenamedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -239,21 +155,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  // TODO destinationBlobUrl and sourceBlobUrl are commented out because they are not present in the swagger
-  const MicrosoftStorageDirectoryRenamedExample: StorageDirectoryRenamedEventData = #{
-    api: "RenameDirectory",
-    requestId: "45a3aa46-001f-0001-2d60-921dd1000000",
-
-    // destinationBlobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/gaonewdir",
-    // sourceBlobUrl: "https://jolovdfs.blob.core.windows.net/gaocontainer/gaoname",
-    destinationUrl: "https://jolovdfs.dfs.core.windows.net/gaocontainer/gaonewdir",
-
-    sourceUrl: "https://jolovdfs.dfs.core.windows.net/gaocontainer/gaoname",
-    sequencer: "00000000000000000000000000000102000000000001e1c6",
-    storageDiagnostics: #{ batchId: "5f991456-5dcf-4b1b-9d49-562ee2b0757f" },
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event. */
-  @example(MicrosoftStorageDirectoryRenamedExample)
   model StorageDirectoryRenamedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -315,24 +217,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     completionStatus: StorageLifecycleCompletionStatus;
   }
 
-  // TODO etag commented out bc not in swagger
-  const MicrosoftStorageBlobTierChangedExample: StorageBlobTierChangedEventData = #{
-    api: "SetBlobTier",
-    requestId: "5ed67fc9-401e-0009-354c-92eb21000000",
-
-    // eTag: "0x8D9606211320D17",
-    contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-
-    contentLength: 17555,
-    blobType: "BlockBlob",
-    accessTier: "Hot",
-    previousTier: "Cool",
-    url: "https://jolovstorage.blob.core.windows.net/gaocontainer/Template1.xlsx",
-    sequencer: "0000000000000000000000000000B00D0000000005b7c63a",
-    storageDiagnostics: #{ batchId: "24231d1f-a006-0065-004c-9240f2000000" },
-  };
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event. */
-  @example(MicrosoftStorageBlobTierChangedExample)
   model StorageBlobTierChangedEventData {
     /** The name of the API/operation that triggered this event. */
     api?: string;
@@ -396,17 +281,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...StorageBaseEventData;
   }
 
-  const MicrosoftStorageBlobInventoryPolicyCompletedExample: StorageBlobInventoryPolicyCompletedEventData = #{
-    scheduleDateTime: utcDateTime.fromISO("2021-08-20T22:04:55Z"),
-    accountName: "jolovstorage",
-    ruleName: "gao8.20",
-    policyRunStatus: "Succeeded",
-    policyRunStatusMessage: "Inventory run succeeded, refer manifest file for inventory details.",
-    policyRunId: "83e7c94c-6973-4fbc-acdc-88277e448bf5",
-    manifestBlobUrl: "https://jolovstorage.blob.core.windows.net/gaoaugcontainer/2021/08/20/22-04-55/gao8.20/gao8.20-manifest.json",
-  };
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event. */
-  @example(MicrosoftStorageBlobInventoryPolicyCompletedExample)
   model StorageBlobInventoryPolicyCompletedEventData {
     /** The time at which inventory policy was scheduled. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -431,15 +306,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     manifestBlobUrl?: string;
   }
 
-  const MicrosoftStorageStorageTaskCompletedExample: StorageTaskCompletedEventData = #{
-    status: "Succeeded",
-    completedDateTime: utcDateTime.fromISO("2023-03-23T16:52:58Z"),
-    taskExecutionId: "deletetest-2023-03-23T16:42:33.8658256Z_2023-03-23T16:42:58.8983000Z",
-    taskName: "delete123",
-    summaryReportBlobUrl: "https://shulinstcanest2.blob.core.windows.net/report/delete123_deletetest_2023-03-23T16:43:50/SummaryReport.json",
-  };
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event. */
-  @example(MicrosoftStorageStorageTaskCompletedExample)
   model StorageTaskCompletedEventData {
     /** The status for a storage task. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -459,12 +326,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     summaryReportBlobUrl: url;
   }
 
-  const MicrosoftStorageStorageTaskQueuedExample: StorageTaskQueuedEventData = #{
-    queuedDateTime: utcDateTime.fromISO("2023-03-23T16:43:50Z"),
-    taskExecutionId: "deletetest-2023-03-23T16:42:33.8658256Z_2023-03-23T16:42:58.8983000Z",
-  };
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event. */
-  @example(MicrosoftStorageStorageTaskQueuedExample)
   model StorageTaskQueuedEventData {
     /** The time at which a storage task was queued. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -474,12 +336,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskExecutionId?: string;
   }
 
-  const MicrosoftStorageStorageTaskAssignmentQueuedExample: StorageTaskAssignmentQueuedEventData = #{
-    queuedDateTime: utcDateTime.fromISO("2023-11-27T21:17:53Z"),
-    taskExecutionId: "testtest2-2023-11-27T21:16:43.4491131Z",
-  };
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentQueued event. */
-  @example(MicrosoftStorageStorageTaskAssignmentQueuedExample)
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
@@ -490,15 +347,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     taskExecutionId?: string;
   }
 
-  const MicrosoftStorageStorageTaskAssignmentCompletedExample: StorageTaskAssignmentCompletedEventData = #{
-    status: "Succeeded",
-    completedDateTime: utcDateTime.fromISO("2023-11-27T23:09:21Z"),
-    taskExecutionId: "testtest2-2023-11-27T21:16:43.4491131Z",
-    taskName: "dizbbcanary2",
-    summaryReportBlobUrl: "https://canaryfns.blob.core.windows.net/reports/dizbbcanary2/testtest2/2023-11-27T21:17:53/SummaryReport.json",
-  };
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event. */
-  @example(MicrosoftStorageStorageTaskAssignmentCompletedExample)
   model StorageTaskAssignmentCompletedEventData {
     /** The status for a storage task. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
