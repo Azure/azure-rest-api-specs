@@ -1595,7 +1595,6 @@ model RegistrationInfo {
   /**
    * Expiration time of registration token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
