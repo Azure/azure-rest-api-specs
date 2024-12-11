@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
     "version": "2023-04-01",
-    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms. The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -20,7 +20,7 @@
       {
         "name": "Endpoint",
         "in": "path",
-        "description": "Supported Cognitive Services endpoint (e.g.,\nhttps://<resource-name>.api.cognitiveservices.azure.com).",
+        "description": "Supported Cognitive Services endpoint e.g., https://<resource-name>.api.cognitiveservices.azure.com.",
         "required": true,
         "type": "string",
         "format": "url"
@@ -162,7 +162,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions"
             }
           }
         ],
@@ -251,7 +251,7 @@
           {
             "name": "stringIndexType",
             "in": "query",
-            "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+            "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
             "required": true,
             "type": "string",
             "enum": [
@@ -264,7 +264,7 @@
                 {
                   "name": "Utf16CodeUnit",
                   "value": "Utf16CodeUnit",
-                  "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+                  "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
                 }
               ]
             }
@@ -279,7 +279,7 @@
           {
             "name": "trainedModelLabel",
             "in": "query",
-            "description": "Trained model label to export. If the trainedModelLabel is null, the default\nbehavior is to export the current working copy.",
+            "description": "Trained model label to export. If the trainedModelLabel is null, the default behavior is to export the current working copy.",
             "required": false,
             "type": "string"
           }
@@ -313,7 +313,7 @@
     "/authoring/analyze-text/projects/{projectName}/:import": {
       "post": {
         "operationId": "TextAnalysisAuthoring_Import",
-        "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+        "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -382,7 +382,7 @@
             "description": "The training input parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TrainingJobOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringTrainingJobOptions"
             }
           }
         ],
@@ -680,7 +680,7 @@
             "description": "The job object to swap two deployments.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SwapDeploymentsOptions"
+              "$ref": "#/definitions/TextAnalysisAuthoringSwapDeploymentsOptions"
             }
           }
         ],
@@ -757,7 +757,7 @@
     "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetExportStatus",
-        "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+        "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1026,7 +1026,7 @@
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetModelEvaluationResults",
-        "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+        "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1085,7 +1085,7 @@
     "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
         "operationId": "TextAnalysisAuthoring_GetModelEvaluationSummary",
-        "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+        "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1448,46 +1448,6 @@
     }
   },
   "definitions": {
-    "CreateProjectOptions": {
-      "type": "object",
-      "description": "Represents the options used to create or update a project.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "The project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "The project settings."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The new project name."
-        },
-        "multilingual": {
-          "type": "boolean",
-          "description": "Whether the project would be used for multiple languages or not."
-        },
-        "description": {
-          "type": "string",
-          "description": "The project description."
-        },
-        "language": {
-          "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
-        }
-      },
-      "required": [
-        "projectKind",
-        "storageInputContainerName",
-        "projectName",
-        "language"
-      ]
-    },
     "Error": {
       "type": "object",
       "description": "The error object.",
@@ -1514,7 +1474,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
+          "description": "An object containing more specific information than the current object about the error."
         }
       },
       "required": [
@@ -1650,7 +1610,7 @@
           {
             "name": "percentage",
             "value": "percentage",
-            "description": "Split the data into training and test sets according to user-defined\npercentages."
+            "description": "Split the data into training and test sets according to user-defined percentages."
           },
           {
             "name": "manual",
@@ -1658,26 +1618,6 @@
             "description": "Split the data according to the chosen dataset for every example in the data."
           }
         ]
-      }
-    },
-    "EvaluationOptions": {
-      "type": "object",
-      "description": "Represents the options used running the evaluation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EvaluationKind",
-          "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
-        },
-        "trainingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        },
-        "testingSplitPercentage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
-        }
       }
     },
     "ExportedProject": {
@@ -1690,10 +1630,10 @@
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
-          "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+          "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets."
         },
         "metadata": {
-          "$ref": "#/definitions/CreateProjectOptions",
+          "$ref": "#/definitions/TextAnalysisAuthoringCreateProjectOptions",
           "description": "Represents the project metadata."
         },
         "assets": {
@@ -1804,7 +1744,7 @@
     },
     "InnerErrorModel": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "$ref": "#/definitions/InnerErrorCode",
@@ -1827,7 +1767,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
+          "description": "An object containing more specific information than the current object about the error."
         }
       },
       "required": [
@@ -2049,17 +1989,17 @@
           {
             "name": "CustomSingleLabelClassification",
             "value": "CustomSingleLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
+            "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
             "name": "CustomMultiLabelClassification",
             "value": "CustomMultiLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
+            "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
             "name": "CustomEntityRecognition",
             "value": "CustomEntityRecognition",
-            "description": "For building an extraction model to identify your domain categories using your\nown data."
+            "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]
       }
@@ -2071,7 +2011,7 @@
         "confidenceThreshold": {
           "type": "number",
           "format": "float",
-          "description": "The threshold of the class with the highest confidence, at which the prediction\nwill automatically be changed to \"None\". The value of the threshold should be\nbetween 0 and 1 inclusive."
+          "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive."
         }
       }
     },
@@ -2087,28 +2027,10 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
       }
-    },
-    "SwapDeploymentsOptions": {
-      "type": "object",
-      "description": "Represents the options for swapping two deployments together.",
-      "properties": {
-        "firstDeploymentName": {
-          "type": "string",
-          "description": "Represents the first deployment name."
-        },
-        "secondDeploymentName": {
-          "type": "string",
-          "description": "Represents the second deployment name."
-        }
-      },
-      "required": [
-        "firstDeploymentName",
-        "secondDeploymentName"
-      ]
     },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
@@ -2155,9 +2077,49 @@
         "trainedModelLabel"
       ]
     },
+    "TextAnalysisAuthoringCreateProjectOptions": {
+      "type": "object",
+      "description": "Represents the options used to create or update a project.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "The project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The storage container name."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "The project settings."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The new project name."
+        },
+        "multilingual": {
+          "type": "boolean",
+          "description": "Whether the project would be used for multiple languages or not."
+        },
+        "description": {
+          "type": "string",
+          "description": "The project description."
+        },
+        "language": {
+          "type": "string",
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+        }
+      },
+      "required": [
+        "projectKind",
+        "storageInputContainerName",
+        "projectName",
+        "language"
+      ]
+    },
     "TextAnalysisAuthoringCustomEntityRecognitionDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
+      "description": "Represents the document evaluation result for a custom entity recognition project.",
       "properties": {
         "customEntityRecognitionResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentEntityRecognitionEvaluationResult",
@@ -2195,7 +2157,7 @@
     },
     "TextAnalysisAuthoringCustomMultiLabelClassificationDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
+      "description": "Represents the document evaluation result for a custom multi-label classification project.",
       "properties": {
         "customMultiLabelClassificationResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult",
@@ -2214,7 +2176,7 @@
     },
     "TextAnalysisAuthoringCustomMultiLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom multi-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom multi-label classification project.",
       "properties": {
         "customMultiLabelClassificationEvaluation": {
           "$ref": "#/definitions/TextAnalysisAuthoringMultiLabelClassificationEvaluationSummary",
@@ -2233,7 +2195,7 @@
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationDocumentEvaluationResult": {
       "type": "object",
-      "description": "Represents the document evaluation result for a custom single-label\nclassification project.",
+      "description": "Represents the document evaluation result for a custom single-label classification project.",
       "properties": {
         "customSingleLabelClassificationResult": {
           "$ref": "#/definitions/TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult",
@@ -2252,7 +2214,7 @@
     },
     "TextAnalysisAuthoringCustomSingleLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom single-label classification project.",
       "properties": {
         "customSingleLabelClassificationEvaluation": {
           "$ref": "#/definitions/TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary",
@@ -2275,7 +2237,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2364,7 +2327,7 @@
     },
     "TextAnalysisAuthoringDocumentEntityRegionEvaluationResult": {
       "type": "object",
-      "description": "Represents the evaluation comparison between the expected and predicted\nentities of a document region.",
+      "description": "Represents the evaluation comparison between the expected and predicted entities of a document region.",
       "properties": {
         "expectedEntities": {
           "type": "array",
@@ -2406,7 +2369,8 @@
       "properties": {
         "projectKind": {
           "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
+          "description": "Represents the project kind.",
+          "readOnly": true
         },
         "location": {
           "type": "string",
@@ -2414,7 +2378,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "discriminator": "projectKind",
@@ -2426,7 +2390,7 @@
     },
     "TextAnalysisAuthoringDocumentMultiLabelClassificationEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
+      "description": "Represents the comparison between the expected and predicted classes that are result from the evaluation operation.",
       "properties": {
         "expectedClasses": {
           "type": "array",
@@ -2450,7 +2414,7 @@
     },
     "TextAnalysisAuthoringDocumentSingleLabelClassificationEvaluationResult": {
       "type": "object",
-      "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
+      "description": "Represents the comparison between the expected and predicted class that result from an evaluation operation.",
       "properties": {
         "expectedClass": {
           "type": "string",
@@ -2522,7 +2486,7 @@
       "properties": {
         "confusionMatrix": {
           "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted."
         },
         "entities": {
           "type": "object",
@@ -2539,12 +2503,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -2554,12 +2518,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -2573,6 +2537,26 @@
         "macroRecall"
       ]
     },
+    "TextAnalysisAuthoringEvaluationOptions": {
+      "type": "object",
+      "description": "Represents the options used running the evaluation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EvaluationKind",
+          "description": "Represents the evaluation kind. By default, the evaluation kind is set to percentage."
+        },
+        "trainingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the training dataset split percentage. Only needed in case the evaluation kind is percentage."
+        },
+        "testingSplitPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Represents the testing dataset split percentage. Only needed in case the evaluation kind is percentage."
+        }
+      }
+    },
     "TextAnalysisAuthoringEvaluationSummary": {
       "type": "object",
       "description": "Represents the summary for an evaluation operation.",
@@ -2582,7 +2566,7 @@
           "description": "Represents the project type that the evaluation ran on."
         },
         "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         }
       },
@@ -2598,7 +2582,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2675,7 +2660,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2729,7 +2714,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2767,7 +2752,7 @@
     },
     "TextAnalysisAuthoringExportedCustomSingleLabelClassificationDocument": {
       "type": "object",
-      "description": "Represents an exported document for a custom single-label classification\nproject.",
+      "description": "Represents an exported document for a custom single-label classification project.",
       "properties": {
         "class": {
           "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentClass",
@@ -2779,7 +2764,7 @@
         },
         "language": {
           "type": "string",
-          "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish\netc."
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         },
         "dataset": {
           "type": "string",
@@ -2884,7 +2869,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2935,7 +2921,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -2982,7 +2969,7 @@
     },
     "TextAnalysisAuthoringMultiLabelClassEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary of a class in a multi-label classification\nproject.",
+      "description": "Represents the evaluation summary of a class in a multi-label classification project.",
       "properties": {
         "f1": {
           "type": "number",
@@ -3049,12 +3036,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -3064,12 +3051,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -3088,7 +3075,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3139,7 +3127,8 @@
       "properties": {
         "deploymentName": {
           "type": "string",
-          "description": "Represents deployment name."
+          "description": "Represents deployment name.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -3212,7 +3201,8 @@
         },
         "projectName": {
           "type": "string",
-          "description": "The new project name."
+          "description": "The new project name.",
+          "readOnly": true
         },
         "multilingual": {
           "type": "boolean",
@@ -3224,7 +3214,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -3242,7 +3232,8 @@
       "properties": {
         "label": {
           "type": "string",
-          "description": "The trained model label."
+          "description": "The trained model label.",
+          "readOnly": true
         },
         "modelId": {
           "type": "string",
@@ -3284,7 +3275,7 @@
     },
     "TextAnalysisAuthoringSingleLabelClassEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a class in a single-label classification project.",
       "properties": {
         "f1": {
           "type": "number",
@@ -3334,11 +3325,11 @@
     },
     "TextAnalysisAuthoringSingleLabelClassificationEvaluationSummary": {
       "type": "object",
-      "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+      "description": "Represents the evaluation summary for a custom single-label classification project.",
       "properties": {
         "confusionMatrix": {
           "$ref": "#/definitions/TextAnalysisAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
+          "description": "Represents the confusion matrix between two classes (the two classes can be the same). The matrix is between the class that was labelled and the class that was predicted."
         },
         "classes": {
           "type": "object",
@@ -3355,12 +3346,12 @@
         "microPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "microRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the micro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive."
         },
         "macroF1": {
           "type": "number",
@@ -3370,12 +3361,12 @@
         "macroPrecision": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro precision. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive."
         },
         "macroRecall": {
           "type": "number",
           "format": "float",
-          "description": "Represents the macro recall. Expected value is a float between 0 and 1\ninclusive."
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive."
         }
       },
       "required": [
@@ -3424,11 +3415,12 @@
       "properties": {
         "languageName": {
           "type": "string",
-          "description": "The language name."
+          "description": "The language name.",
+          "readOnly": true
         },
         "languageCode": {
           "type": "string",
-          "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+          "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
         }
       },
       "required": [
@@ -3442,7 +3434,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3487,13 +3480,32 @@
         "status"
       ]
     },
+    "TextAnalysisAuthoringSwapDeploymentsOptions": {
+      "type": "object",
+      "description": "Represents the options for swapping two deployments together.",
+      "properties": {
+        "firstDeploymentName": {
+          "type": "string",
+          "description": "Represents the first deployment name."
+        },
+        "secondDeploymentName": {
+          "type": "string",
+          "description": "Represents the second deployment name."
+        }
+      },
+      "required": [
+        "firstDeploymentName",
+        "secondDeploymentName"
+      ]
+    },
     "TextAnalysisAuthoringTrainingConfigVersion": {
       "type": "object",
       "description": "Represents a training config version.",
       "properties": {
         "trainingConfigVersion": {
           "type": "string",
-          "description": "Represents the version of the config."
+          "description": "Represents the version of the config.",
+          "readOnly": true
         },
         "modelExpirationDate": {
           "type": "string",
@@ -3504,6 +3516,28 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
+      ]
+    },
+    "TextAnalysisAuthoringTrainingJobOptions": {
+      "type": "object",
+      "description": "Represents the options for starting a new training job.",
+      "properties": {
+        "modelLabel": {
+          "type": "string",
+          "description": "Represents the output model label."
+        },
+        "trainingConfigVersion": {
+          "type": "string",
+          "description": "Represents training config version."
+        },
+        "evaluationOptions": {
+          "$ref": "#/definitions/TextAnalysisAuthoringEvaluationOptions",
+          "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
+        }
+      },
+      "required": [
+        "modelLabel",
+        "trainingConfigVersion"
       ]
     },
     "TextAnalysisAuthoringTrainingJobResult": {
@@ -3544,7 +3578,8 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "The job ID."
+          "description": "The job ID.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
@@ -3611,28 +3646,6 @@
         "code",
         "message"
       ]
-    },
-    "TrainingJobOptions": {
-      "type": "object",
-      "description": "Represents the options for starting a new training job.",
-      "properties": {
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents the output model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "evaluationOptions": {
-          "$ref": "#/definitions/EvaluationOptions",
-          "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
-        }
-      },
-      "required": [
-        "modelLabel",
-        "trainingConfigVersion"
-      ]
     }
   },
   "parameters": {
@@ -3692,17 +3705,17 @@
           {
             "name": "CustomSingleLabelClassification",
             "value": "CustomSingleLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile will have only one label. For example, file 1 is classified as A and file\n2 is classified as B."
+            "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B."
           },
           {
             "name": "CustomMultiLabelClassification",
             "value": "CustomMultiLabelClassification",
-            "description": "For building a classification model to classify text using your own data. Each\nfile can have one or many labels. For example, file 1 is classified as A, B,\nand C and file 2 is classified as B and C."
+            "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C."
           },
           {
             "name": "CustomEntityRecognition",
             "value": "CustomEntityRecognition",
-            "description": "For building an extraction model to identify your domain categories using your\nown data."
+            "description": "For building an extraction model to identify your domain categories using your own data."
           }
         ]
       },
@@ -3712,7 +3725,7 @@
     "StringIndexTypeQueryParameter": {
       "name": "stringIndexType",
       "in": "query",
-      "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets.",
+      "description": "Specifies the method used to interpret string offsets. For additional information see https://aka.ms/text-analytics-offsets.",
       "required": true,
       "type": "string",
       "enum": [
@@ -3725,7 +3738,7 @@
           {
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
-            "description": "The offset and length values will correspond to UTF-16 code units. Use this\noption if your application is written in a language that support Unicode, for\nexample Java, JavaScript."
+            "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
           }
         ]
       },
