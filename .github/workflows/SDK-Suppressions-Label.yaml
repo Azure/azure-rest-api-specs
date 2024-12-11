@@ -79,15 +79,10 @@ jobs:
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
-
-          if [[ "$OUTPUT" == "[]" ]]; then
-            has-output=false"
-          else
-            has-output=true
-          fi
-
-          echo "Script output labels: $has-output"
           echo "::set-output name=suppressions-result-output::$OUTPUT"
+          
+          has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
+          echo "Script has-output: $has-output"
           echo "::set-output name=has-output::$has-output"
 
   update-sdk-suppressions-labels:
