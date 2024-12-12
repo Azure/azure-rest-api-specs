@@ -10,7 +10,7 @@ import {
   SdkPackageSuppressionsEntry,
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
-import { base64ToString, parseYamlContent } from "./common.js";
+import { parseYamlContent } from "./common.js";
 
 export type PullRequestContext = {
   labels: string[];
@@ -86,9 +86,9 @@ async function getSdkSuppressionsFileContent(
   try {
     const suppressionFileContent = await runGitCommand(`git show ${ref}:${path}`);
     console.log("suppressionFileContent", suppressionFileContent);
-    const suppressionContentString = base64ToString(suppressionFileContent);
-    console.log("suppressionContentString", suppressionContentString);
-    return parseYamlContent(suppressionContentString, path).result;
+    // const suppressionContentString = base64ToString(suppressionFileContent);
+    // console.log("suppressionContentString", suppressionContentString);
+    return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
     console.log(`Not found content in ${ref}#${path}`);
     return null;
