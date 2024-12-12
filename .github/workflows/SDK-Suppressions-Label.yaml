@@ -78,13 +78,47 @@ jobs:
           labelsToRemove=$(echo "$OUTPUT" | grep -oP '"labelsToRemove":\s*\[\K[^\]]+' | tr -d '" ,')
 
           for label in $labelsToAdd; do
+            echo "Label to add: $label"
+            echo "::set-output name=has-$label::true"
             echo "::set-output name=$label::true"
           done
 
           for label in $labelsToRemove; do
+            echo "Label to remove: $label"
+            echo "::set-output name=has-$label::true"
             echo "::set-output name=$label::false"
           done
+      
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results-go
+        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Go-Sdk-Suppression == 'true' }}
+        with:
+          name: "BreakingChange-Go-Sdk-Suppression"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression }}"
           
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results java
+        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Java-Sdk-Suppression == 'true' }}
+        with:
+          name: "BreakingChange-Java-Sdk-Suppression"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression }}"
+          
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results js
+        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-JavaScript-Sdk-Suppression == 'true' }}
+        with:
+          name: "BreakingChange-JavaScript-Sdk-Suppression"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression }}"
+          
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results python
+        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Python-Sdk-Suppression == 'true' }}
+        with:
+          name: "BreakingChange-Python-Sdk-Suppression"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}"
+
+      
+
       # - name: Use outputs from previous step
       #   run: |
       #     echo "Labels to Add: ${{ steps.run-suppressions-script.outputs.labelsToAdd }}"
