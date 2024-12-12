@@ -38,6 +38,18 @@
                   "initialDelaySeconds": 5,
                   "periodSeconds": 3
                 }
+              ],
+              "volumeMounts": [
+                {
+                  "volumeName": "azurefile",
+                  "mountPath": "/mnt/path1",
+                  "subPath": "subPath1"
+                },
+                {
+                  "volumeName": "nfsazurefile",
+                  "mountPath": "/mnt/path2",
+                  "subPath": "subPath2"
+                }
               ]
             }
           ],
@@ -56,6 +68,18 @@
                 "-c",
                 "while true; do echo hello; sleep 10;done"
               ]
+            }
+          ],
+          "volumes": [
+            {
+              "name": "azurefile",
+              "storageType": "AzureFile",
+              "storageName": "storage"
+            },
+            {
+              "name": "nfsazurefile",
+              "storageType": "NfsAzureFile",
+              "storageName": "nfsStorage"
             }
           ]
         }
@@ -107,6 +131,18 @@
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
                 ]
               }
             ],
@@ -125,6 +161,18 @@
                   "-c",
                   "while true; do echo hello; sleep 10;done"
                 ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
               }
             ]
           },
@@ -178,6 +226,18 @@
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
                 ]
               }
             ],
@@ -197,6 +257,18 @@
                   "while true; do echo hello; sleep 10;done"
                 ]
               }
+            ],
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
             ]
           },
           "eventStreamEndpoint": "testEndpoint"
@@ -205,4 +277,3 @@
     }
   }
 }
-
