@@ -210,7 +210,7 @@ function Invoke-TypeSpecAPIViewParser {
     Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json"
     npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
     if ($LASTEXITCODE) {
-      throw
+      throw "Compilation error when running: 'npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json'"
     }
     Pop-Location
     
@@ -220,6 +220,7 @@ function Invoke-TypeSpecAPIViewParser {
     Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
   } catch {
     LogError " Failed to generate '$Type' APIView Tokens on '$ProjectPath' for '$resourceProvider', please check the detail log and make sure TypeSpec compiler version is the latest."
+    LogError $_
     throw
   } finally {
     if (Test-Path -Path $tempWorkingDirectoryPath) {
