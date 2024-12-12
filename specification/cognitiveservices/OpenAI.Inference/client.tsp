@@ -11,6 +11,21 @@ using Azure.ClientGenerator.Core;
 )
 namespace Client;
 
+@@clientNamespace(Client, "com.azure.ai.openai", "java");
+@@clientNamespace(Azure.OpenAI, "com.azure.ai.openai", "java");
+@@clientNamespace(Azure.OpenAI.FunctionCallPreset,
+  "com.azure.ai.openai.implementation",
+  "java"
+);
+@@clientNamespace(Azure.OpenAI.FileListResponse,
+  "com.azure.ai.openai.implementation",
+  "java"
+);
+@@clientNamespace(Azure.OpenAI.OpenAIPageableListOf,
+  "com.azure.ai.openai.implementation",
+  "java"
+);
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @client({
   name: "OpenAIClient",
