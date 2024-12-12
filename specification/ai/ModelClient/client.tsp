@@ -16,6 +16,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
+// Necessary for autogenerating options objects while the clients specify spread parameters. Necessary for the languages that want the options class.
 @@usage(AI.Model.ChatCompletionsOptions, Usage.input);
 @@usage(AI.Model.EmbeddingsOptions, Usage.input);
 
