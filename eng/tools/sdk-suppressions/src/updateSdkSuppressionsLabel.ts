@@ -238,10 +238,7 @@ export async function updateSdkSuppressionsLabels(
     labelsToAdd: addSdkSuppressionsLabels,
     labelsToRemove: removeSdkSuppressionsLabels,
   };
-  writeFileSync(outputFile, JSON.stringify({
-    labelsToAdd: [],
-    labelsToRemove: ['aaa', 'bbb'],
-  }));
+  writeFileSync(outputFile, JSON.stringify(result));
   console.log("JSON output saved to output.json");
 
   return result;
