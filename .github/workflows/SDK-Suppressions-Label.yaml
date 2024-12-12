@@ -74,8 +74,8 @@ jobs:
           echo "Script has-output: $has_output"
           echo "::set-output name=has-output::$has_output"
 
-          labelsToAdd=$(echo "$OUTPUT" | grep -oP '"labelsToAdd":\s*\[\K[^\]]+' | tr -d '" ,')
-          labelsToRemove=$(echo "$OUTPUT" | grep -oP '"labelsToRemove":\s*\[\K[^\]]+' | tr -d '" ,')
+          labelsToAdd=$(echo "$OUTPUT" | grep -oP '"labelsToAdd":\s*\[\K[^\]]+' | tr -d '", ' | tr '\n' ' ')
+          labelsToRemove=$(echo "$OUTPUT" | grep -oP '"labelsToRemove":\s*\[\K[^\]]+' | tr -d '", ' | tr '\n' ' ')
 
           for label in $labelsToAdd; do
             echo "Label to add: $label"
@@ -90,14 +90,14 @@ jobs:
           done
       
       - uses: ./.github/actions/add-label-artifact
-        name: Upload artifact with results-aaa
+        name: Upload artifact with results aaa
         if: ${{ steps.run-suppressions-script.outputs.has-aaa == 'true' }}
         with:
           name: "aaa"
           value: "${{ steps.run-suppressions-script.outputs.aaa }}"
           
       - uses: ./.github/actions/add-label-artifact
-        name: Upload artifact with results-bbb
+        name: Upload artifact with results bbb
         if: ${{ steps.run-suppressions-script.outputs.has-bbb == 'true' }}
         with:
           name: "bbb"
