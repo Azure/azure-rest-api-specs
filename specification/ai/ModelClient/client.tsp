@@ -18,7 +18,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 
 @@usage(AI.Model.ChatCompletionsOptions, Usage.input);
 @@usage(AI.Model.EmbeddingsOptions, Usage.input);
-@@usage(AI.Model.ImageEmbeddingsOptions, Usage.input);
 
 // Since we made all operator methods internal, we need to expliclty
 // say we still want the models they use to be public.
