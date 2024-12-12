@@ -23,7 +23,7 @@ directive:
 - from: CommonDefinitions.json
   where: $.definitions.Certificate
   transform:
-    $["properties"]["x-ms-client-name"] = "AppCertificateProperties"
+    $["properties"]["properties"]["x-ms-client-name"] = "AppCertificateProperties"
 - from: CommonDefinitions.json
   where: $.definitions.CertificateCollection
   transform:
