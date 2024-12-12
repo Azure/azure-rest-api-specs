@@ -15,8 +15,15 @@ using Azure.Core.Traits;
 using Autorest;
 
 @server(
-  "https://api.playwright-int.io",
-  "Azure Playwright Service API Endpoint"
+  "{endpoint}",
+  "Microsoft Azure Playwright Service API Endpoint",
+  {
+    @doc("""
+Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+  https://{region}.api.playwright.microsoft.com).
+""")
+    endpoint: string,
+  }
 )
 @useAuth(
   [
@@ -24,7 +31,7 @@ using Autorest;
       {
         type: OAuth2FlowType.implicit,
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://preview.playwright-int.io/.default"],
+        scopes: ["https://playwright.microsoft.com/.default"],
       }
     ]>
   ]
@@ -37,14 +44,14 @@ namespace Microsoft.PlaywrightTesting.AuthManager;
 
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
-  @doc("Version 2023-10-01-preview")
+  @doc("Version 2024-12-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2023-10-01-preview`,
+  `2024-12-01`,
 }
 
 // Models ////////////////////
 
-@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.")
+@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an Azure resource.")
 @resource("accounts")
 model Account {
   @key("accountId")
@@ -52,7 +59,7 @@ model Account {
   @visibility("read")
   id: string;
 
-  @doc("The ARM fully-qualified resource id for the account.")
+  @doc("The fully-qualified Azure resource id for the account.")
   @visibility("read")
   resourceId: string;
 
@@ -64,11 +71,11 @@ model Account {
   @visibility("read")
   state: AccountState;
 
-  @doc("The ARM-based subscription id for the account.")
+  @doc("The Azure subscription id for the account.")
   @visibility("read")
   subscriptionId: uuid;
 
-  @doc("The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @doc("The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
   @visibility("read")
   subscriptionState: SubscriptionState;
 
@@ -76,7 +83,7 @@ model Account {
   @visibility("read")
   tenantId: uuid;
 
-  @doc("The account resource ARM location, for eg. eastus, southeastasia.")
+  @doc("The account resource location in Azure, for eg. eastus, southeastasia.")
   @visibility("read")
   location: string;
 
@@ -90,7 +97,11 @@ model Account {
 
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   @visibility("read")
-  reporting?: EnablementStatus = EnablementStatus.Disabled;
+  reporting?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
+  @visibility("read")
+  localAuth?: EnablementStatus = EnablementStatus.Disabled;
 }
 
 @doc("The account state.")
@@ -104,7 +115,7 @@ union AccountState {
   "Inactive",
 }
 
-@doc("The ARM-based subscription state.")
+@doc("The Azure subscription state.")
 union SubscriptionState {
   string,
 
@@ -146,7 +157,7 @@ model AccessToken {
 
   @doc("The access-token createdAt utcDateTime.")
   @visibility("read")
-  createdAt?: utcDateTime;
+  createdAt: utcDateTime;
 
   @doc("The access-token expiryAt utcDateTime.")
   @visibility("read", "create")
@@ -154,7 +165,7 @@ model AccessToken {
 
   @doc("The access-token state - Active | Expired.")
   @visibility("read")
-  state?: AccessTokenState;
+  state: AccessTokenState;
 }
 
 @doc("The access-token state.")
@@ -162,10 +173,10 @@ union AccessTokenState {
   string,
 
   @doc("The access-token is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The access-token is Expired.")
-  "Expired",
+  Expired: "Expired",
 }
 
 @doc("The enablement status of a feature.")
@@ -179,6 +190,17 @@ union EnablementStatus {
   Disabled: "Disabled",
 }
 
+@doc("The os to configure for remote test runs.")
+union OS {
+  string,
+
+  @doc("Linux OS.")
+  Linux: "linux",
+
+  @doc("Windows OS.")
+  Windows: "windows",
+}
+
 // Operations ////////////////////
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -189,23 +211,66 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface AccessTokens {
   // AccessToken Operations
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @example("./AccessTokens_Create.json", "AccessTokens_Create")
+  create is Operations.ResourceCreateOrReplace<AccessToken>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @doc("Creates an access-token with given access-token id in guid format.")
-  createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
+  @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @example("./AccessTokens_Get.json", "AccessTokens_Get")
+  get is Operations.ResourceRead<AccessToken>;
 
-  @doc("Get an access-token for given access-token id in guid format.")
-  getAccessToken is Operations.ResourceRead<AccessToken>;
+  @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @example("./AccessTokens_Delete.json", "AccessTokens_Delete")
+  delete is Operations.ResourceDelete<AccessToken>;
 
-  @doc("Revoke an access-token with given access-token id in guid format.")
-  deleteAccessToken is Operations.ResourceDelete<AccessToken>;
+  @doc("Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @example("./AccessTokens_List.json", "AccessTokens_List")
+  list is Operations.ResourceList<AccessToken>;
 
-  @doc("List access-tokens for a given accountId.")
-  listAccessTokens is Operations.ResourceList<AccessToken>;
+  @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
+  @example("./AccessTokens_Validate.json", "AccessTokens_Validate")
+  @actionSeparator("/")
+  validate is Operations.ResourceCollectionAction<AccessToken, {}, {}>;
 }
+
+alias GetBrowsersParams = {
+  @query
+  @doc("The run id provided by client for corresponding remote test run.")
+  runId?: string;
+
+  @query
+  @doc("The os provided by client for remote test runs.")
+  os?: OS = OS.Linux;
+
+  @path
+  @doc("The account id.")
+  accountId: string;
+};
+
+alias GetBrowsersResponse = {
+  @statusCode
+  _: 302;
+
+  @header
+  @doc("The redirect target URL to run test on remote browsers.")
+  location: url;
+};
 
 interface Accounts {
   // Accounts Operations
-  @doc("Get details of the ARM resource mapped to an account for the given accountId.")
-  getAccount is Operations.ResourceRead<Account>;
+
+  @doc("Get details of the Azure resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @example("./Accounts_Get.json", "Accounts_Get")
+  get is Operations.ResourceRead<Account>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
+  @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
+  @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
+  @route("/accounts/{accountId}/browsers")
+  getBrowsers is RpcOperation<
+    GetBrowsersParams,
+    GetBrowsersResponse,
+    ServiceTraits
+  >;
 }

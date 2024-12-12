@@ -12,7 +12,19 @@
   "schemes": [
     "https"
   ],
-  "host": "api.playwright-int.io",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.api.playwright.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -22,7 +34,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://preview.playwright-int.io/.default"
+        "https://playwright.microsoft.com/.default"
       ]
     }
   ],
@@ -32,7 +44,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://preview.playwright-int.io/.default": ""
+        "https://playwright.microsoft.com/.default": ""
       }
     }
   },
@@ -40,8 +52,8 @@
   "paths": {
     "/accounts/{accountId}": {
       "get": {
-        "operationId": "Accounts_GetAccount",
-        "description": "Get details of the ARM resource mapped to an account for the given accountId.",
+        "operationId": "Accounts_Get",
+        "description": "Get details of the Azure resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -85,16 +97,16 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_GetAccount": {
-            "$ref": "./examples/Accounts_GetAccount.json"
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get copy.json"
           }
         }
       }
     },
     "/accounts/{accountId}/access-tokens": {
       "get": {
-        "operationId": "AccessTokens_ListAccessTokens",
-        "description": "List access-tokens for a given accountId.",
+        "operationId": "AccessTokens_List",
+        "description": "Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -138,8 +150,8 @@
           }
         },
         "x-ms-examples": {
-          "AccessTokens_ListAccessTokens": {
-            "$ref": "./examples/AccessTokens_ListAccessTokens.json"
+          "AccessTokens_List": {
+            "$ref": "./examples/AccessTokens_List.json"
           }
         },
         "x-ms-pageable": {
@@ -149,8 +161,8 @@
     },
     "/accounts/{accountId}/access-tokens/{accessTokenId}": {
       "get": {
-        "operationId": "AccessTokens_GetAccessToken",
-        "description": "Get an access-token for given access-token id in guid format.",
+        "operationId": "AccessTokens_Get",
+        "description": "Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -202,14 +214,14 @@
           }
         },
         "x-ms-examples": {
-          "AccessTokens_GetAccessToken": {
-            "$ref": "./examples/AccessTokens_GetAccessToken.json"
+          "AccessTokens_Get": {
+            "$ref": "./examples/AccessTokens_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AccessTokens_CreateAccessToken",
-        "description": "Creates an access-token with given access-token id in guid format.",
+        "operationId": "AccessTokens_Create",
+        "description": "Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -283,14 +295,14 @@
           }
         },
         "x-ms-examples": {
-          "AccessTokens_CreateAccessToken": {
-            "$ref": "./examples/AccessTokens_CreateAccessToken.json"
+          "AccessTokens_Create": {
+            "$ref": "./examples/AccessTokens_Create.json"
           }
         }
       },
       "delete": {
-        "operationId": "AccessTokens_DeleteAccessToken",
-        "description": "Revoke an access-token with given access-token id in guid format.",
+        "operationId": "AccessTokens_Delete",
+        "description": "Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -339,8 +351,148 @@
           }
         },
         "x-ms-examples": {
-          "AccessTokens_DeleteAccessToken": {
-            "$ref": "./examples/AccessTokens_DeleteAccessToken.json"
+          "AccessTokens_Delete": {
+            "$ref": "./examples/AccessTokens_Delete.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/access-tokens/validate": {
+      "post": {
+        "operationId": "AccessTokens_Validate",
+        "description": "Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_Validate": {
+            "$ref": "./examples/AccessTokens_Validate.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/browsers": {
+      "get": {
+        "operationId": "Accounts_GetBrowsers",
+        "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "The run id provided by client for corresponding remote test run.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "os",
+            "in": "query",
+            "description": "The os provided by client for remote test runs.",
+            "required": false,
+            "type": "string",
+            "default": "linux",
+            "enum": [
+              "linux",
+              "windows"
+            ],
+            "x-ms-enum": {
+              "name": "OS",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Linux",
+                  "value": "linux",
+                  "description": "Linux OS."
+                },
+                {
+                  "name": "Windows",
+                  "value": "windows",
+                  "description": "Windows OS."
+                }
+              ]
+            }
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirection",
+            "headers": {
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The redirect target URL to run test on remote browsers."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_GetBrowsers": {
+            "$ref": "./examples/Accounts_GetBrowsers.json"
           }
         }
       }
@@ -396,7 +548,9 @@
       "required": [
         "id",
         "name",
-        "expiryAt"
+        "createdAt",
+        "expiryAt",
+        "state"
       ]
     },
     "AccessTokenState": {
@@ -425,7 +579,7 @@
     },
     "Account": {
       "type": "object",
-      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.",
+      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an Azure resource.",
       "properties": {
         "id": {
           "type": "string",
@@ -434,7 +588,7 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "The ARM fully-qualified resource id for the account.",
+          "description": "The fully-qualified Azure resource id for the account.",
           "readOnly": true
         },
         "name": {
@@ -449,12 +603,12 @@
         },
         "subscriptionId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ARM-based subscription id for the account.",
+          "description": "The Azure subscription id for the account.",
           "readOnly": true
         },
         "subscriptionState": {
           "$ref": "#/definitions/SubscriptionState",
-          "description": "The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
+          "description": "The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
           "readOnly": true
         },
         "tenantId": {
@@ -464,7 +618,7 @@
         },
         "location": {
           "type": "string",
-          "description": "The account resource ARM location, for eg. eastus, southeastasia.",
+          "description": "The account resource location in Azure, for eg. eastus, southeastasia.",
           "readOnly": true
         },
         "regionalAffinity": {
@@ -522,6 +676,32 @@
         "reporting": {
           "type": "string",
           "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -670,7 +850,7 @@
     },
     "SubscriptionState": {
       "type": "string",
-      "description": "The ARM-based subscription state.",
+      "description": "The Azure subscription state.",
       "enum": [
         "Registered",
         "Warned",
@@ -734,4 +914,3 @@
     }
   }
 }
-
