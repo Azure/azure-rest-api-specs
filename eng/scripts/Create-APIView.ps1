@@ -168,6 +168,68 @@ function Invoke-SwaggerAPIViewParser {
 
 <#
 .DESCRIPTION
+  Invoke the TypeSpec parser to generate APIView tokens.
+
+.PARAMETER Type
+  New or Baseline TypeSpec APIView tokens.
+
+.PARAMETER ProjectPath
+  The TypeSpec Project path.
+
+.PARAMETER ResourceProvider
+  The ResourceProvider Name.
+
+.PARAMETER Tag
+  The Tag to use for generating the APIView Tokens.
+
+.PARAMETER TokenDirectory
+  The directory to store the generated APIView Tokens.
+
+.OUTPUTS
+  The resource provider name.
+#>
+function Invoke-TypeSpecAPIViewParser {
+  param (
+      [ValidateSet("New", "Baseline")]
+      [Parameter(Mandatory = $true)]
+      [string]$Type,
+      [Parameter(Mandatory = $true)]
+      [string]$ProjectPath,
+      [Parameter(Mandatory = $true)]
+      [string]$ResourceProvider,
+      [Parameter(Mandatory = $true)]
+      [string]$TokenDirectory
+  )
+  $tempWorkingDirectoryName = [guid]::NewGuid().ToString()
+  $tempWorkingDirectoryPath = [System.IO.Path]::Combine($TempDirectory, $tempWorkingDirectoryName)
+  New-Item -ItemType Directory -Path $tempWorkingDirectoryPath > $null
+
+  try {
+    Write-Host "Compiling files and generating '$Type' APIView for '$resourceProvider'..."
+    Push-Location $ProjectPath
+    Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json"
+    npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
+    if ($LASTEXITCODE) {
+      throw
+    }
+    Pop-Location
+    
+    $generatedAPIViewTokenFile = Get-ChildItem -File $tempWorkingDirectoryPath/output/apiview.json | Select-Object -First 1
+    $apiViewTokensFilePath = [System.IO.Path]::Combine($TokenDirectory, "$resourceProvider.$Type.json")
+    Write-Host "Moving generated APIView Token file to '$apiViewTokensFilePath'"
+    Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
+  } catch {
+    LogError " Failed to generate '$Type' APIView Tokens on '$ProjectPath' for '$resourceProvider', please check the detail log and make sure TypeSpec compiler version is the latest."
+    throw
+  } finally {
+    if (Test-Path -Path $tempWorkingDirectoryPath) {
+      Remove-Item -Path $tempWorkingDirectoryPath -Recurse -Force > $null
+    }
+  }
+}
+
+<#
+.DESCRIPTION
   Generate New and Baseline APIView tokens for the changed swagger files in the PR.
   Detects the swagger files changed in the PR and generates APIView tokens for the swagger files.
   New APIView tokens are generated using the default tag on the base branch.
@@ -177,7 +239,7 @@ function Invoke-SwaggerAPIViewParser {
 .PARAMETER TempDirectory
   Temporary directory for files being processed. Use $(Agent.TempDirectory) on DevOps
 
-.PARAMETER ArtiFactsStagingDirectory
+.PARAMETER ArtifactsStagingDirectory
   The directory where the APIView tokens will be stored. Use $(Build.ArtifactStagingDirectory) on DevOps
 
 .PARAMETER APIViewArtifactsDirectoryName
@@ -188,7 +250,7 @@ function New-SwaggerAPIViewTokens {
     [Parameter(Mandatory = $true)]
     [string]$TempDirectory,
     [Parameter(Mandatory = $true)]
-    [string]$ArtiFactsStagingDirectory,
+    [string]$ArtifactsStagingDirectory,
     [Parameter(Mandatory = $true)]
     [string]$APIViewArtifactsDirectoryName
   )
@@ -230,7 +292,7 @@ function New-SwaggerAPIViewTokens {
 
   $currentBranch = git rev-parse --abbrev-ref HEAD
 
-  $swaggerAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
+  $swaggerAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtifactsStagingDirectory, $APIViewArtifactsDirectoryName)
 
   # Generate Swagger APIView Tokens
   foreach ($entry in $autoRestConfigInfo.GetEnumerator()) {
@@ -275,9 +337,85 @@ function New-SwaggerAPIViewTokens {
 
 <#
 .DESCRIPTION
+  Generate New and Baseline APIView tokens for the changed TypeSpec files in the PR.
+  Detects the TypeSpec files changed in the PR and generates APIView tokens for the TypeSpec files.
+  New APIView tokens are generated using the default tag on the base branch.
+  Baseline APIView tokens are generated using the same tag on the target branch.
+  Script asumes that the merge commit is checked out. Such that Source commit = HEAD^ and Target commit = HEAD.
+
+.PARAMETER TempDirectory
+  Temporary directory for files being processed. Use $(Agent.TempDirectory) on DevOps
+
+.PARAMETER ArtifactsStagingDirectory
+  The directory where the APIView tokens will be stored. Use $(Build.ArtifactStagingDirectory) on DevOps
+
+.PARAMETER APIViewArtifactsDirectoryName
+  Name for the subdirectory where the APIView tokens will be stored.
+#>
+function New-TypeSpecAPIViewTokens {
+  param (
+    [Parameter(Mandatory = $true)]
+    [string]$TempDirectory,
+    [Parameter(Mandatory = $true)]
+    [string]$ArtifactsStagingDirectory,
+    [Parameter(Mandatory = $true)]
+    [string]$APIViewArtifactsDirectoryName
+  )
+
+  $SourceCommitId = $(git rev-parse HEAD^)
+  $TargetCommitId = $(git rev-parse HEAD)
+
+  $typeSpecProjects, $null = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+    -IgnoreCoreFiles:$true `
+    -BaseCommitish:$SourceCommitId `
+    -TargetCommitish:$TargetCommitId
+
+  LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
+  $typeSpecProjects | ForEach-Object {
+    LogInfo " - $_"
+  }
+  LogGroupEnd
+
+  $currentBranch = git rev-parse --abbrev-ref HEAD
+
+  $typeSpecAPIViewArtifactsDirectory = [System.IO.Path]::Combine($ArtifactsStagingDirectory, $APIViewArtifactsDirectoryName)
+  New-Item -ItemType Directory -Path $typeSpecAPIViewArtifactsDirectory -Force | Out-Null
+
+  try {
+    # Generate TypeSpec APIView Tokens
+    foreach ($typeSpecProject in $typeSpecProjects) {
+      $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
+      New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
+
+      # Generate New APIView Token using default tag on base branch
+      git checkout $SourceCommitId
+      Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+
+      # Generate BaseLine APIView Token using same tag on target branch
+      git checkout $TargetCommitId
+      
+      # Skip Baseline APIView Token for new projects
+      if (!(Test-Path -Path $typeSpecProject)) {
+        Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+      }
+      else {
+        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
+      }
+    }
+  }
+  finally {
+    git checkout $currentBranch
+    LogGroupStart " See all generated TypeSpec APIView Artifacts..."
+    Get-ChildItem -Path $typeSpecAPIViewArtifactsDirectory -Recurse
+    LogGroupEnd
+  }
+}
+
+<#
+.DESCRIPTION
   Create APIView for the published packages. Send DevOps artifacts information to APIView to create APIView for the published packages.
 
-.PARAMETER ArtiFactsStagingDirectory
+.PARAMETER ArtifactsStagingDirectory
   The DevOps artifacts staging directory. Use $(Build.ArtifactStagingDirectory) on DevOps
 .PARAMETER APIViewArtifactsDirectoryName
  Temporary Directory for processing the APIView artifacts
@@ -292,14 +430,14 @@ TGhe BuildId of the Run
 .PARAMETER PullRequestNumber
   The PR number
 .PARAMETER Language
-  The language of the resource provider `Swagger`
+  The language of the resource provider
 .PARAMETER CommitSha
   The commit sha of the current branch. Uusally the merge commit of the PR.
 #>
 function New-RestSpecsAPIViewReviews {
   param (
     [Parameter(Mandatory = $true)]
-    [string]$ArtiFactsStagingDirectory,
+    [string]$ArtifactsStagingDirectory,
     [Parameter(Mandatory = $true)]
     [string]$APIViewArtifactsDirectoryName,
     [Parameter(Mandatory = $true)]
@@ -318,7 +456,7 @@ function New-RestSpecsAPIViewReviews {
     [string]$CommitSha
   )
 
-  $apiViewArtifactsDirectory = [System.IO.Path]::Combine($ArtiFactsStagingDirectory, $APIViewArtifactsDirectoryName)
+  $apiViewArtifactsDirectory = [System.IO.Path]::Combine($ArtifactsStagingDirectory, $APIViewArtifactsDirectoryName)
   $publishedPackages = Get-ChildItem -Path $apiViewArtifactsDirectory -Directory -ErrorAction SilentlyContinue
 
   Write-Host "Published packages: $publishedPackages"
