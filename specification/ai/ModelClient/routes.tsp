@@ -39,7 +39,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
-    embeddingsOptions: EmbeddingsOptions;
+    ...EmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
@@ -53,7 +53,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
-    imageEmbeddingsOptions: ImageEmbeddingsOptions;
+    ...ImageEmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
