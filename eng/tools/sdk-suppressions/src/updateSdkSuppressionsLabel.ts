@@ -239,7 +239,7 @@ export async function updateSdkSuppressionsLabels(
     labelsToRemove: removeSdkSuppressionsLabels,
   };
   writeFileSync(outputFile, JSON.stringify({
-    labelsToAdd: ['aaa'],
+    labelsToAdd: ['aaa', 'bbb'],
     labelsToRemove: ['bbbb'],
   }));
   //   const willSaveOutput = [
