@@ -26,10 +26,19 @@ These are the global settings for the playwrighttesting.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2023-10-01-preview
+tag: package-2024-12-01
 title: [[Title]]
 security: AADToken
 security-scopes: [[SecurityScopes]]
+```
+
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - Microsoft.PlaywrightTesting.AuthManager/stable/2024-12-01/playwrighttesting.json
 ```
 
 ### Tag: package-2023-10-01-preview
