@@ -1,8 +1,6 @@
 import _ from "lodash";
 import { writeFileSync } from "fs";
 import { sdkLabels, SdkName } from "./sdk.js";
-import { exec } from "child_process";
-import { promisify } from "util";
 import {
   SdkSuppressionsYml,
   SdkSuppressionsSection,
@@ -10,22 +8,12 @@ import {
   SdkPackageSuppressionsEntry,
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
-import { parseYamlContent } from "./common.js";
+import { parseYamlContent, runGitCommand } from "./common.js";
 
 export type PullRequestContext = {
   labels: string[];
   number: number;
   html_url: string;
-  head: {
-    owner: string;
-    repo: string;
-    ref: string;
-  };
-  base: {
-    owner: string;
-    repo: string;
-    ref: string;
-  };
 };
 
 /**
@@ -42,11 +30,8 @@ export async function getSdkSuppressionsSdkNames(
   prChangeFiles: string,
 ): Promise<SdkName[]> {
   const filesChangedPaths = prChangeFiles.split(" ");
-  // Get suppression file list
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
-
   let sdkNameList: SdkName[] = [];
-  // Get suppression file Content
   if (suppressionFileList.length > 0) {
     for (const suppressionFile of suppressionFileList) {
       let baseSuppressionContent = await getSdkSuppressionsFileContent("HEAD^", suppressionFile);
@@ -85,9 +70,6 @@ async function getSdkSuppressionsFileContent(
 ): Promise<string | object | undefined | null> {
   try {
     const suppressionFileContent = await runGitCommand(`git show ${ref}:${path}`);
-    console.log("suppressionFileContent", suppressionFileContent);
-    // const suppressionContentString = base64ToString(suppressionFileContent);
-    // console.log("suppressionContentString", suppressionContentString);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
     console.log(`Not found content in ${ref}#${path}`);
@@ -179,25 +161,6 @@ export function getSdkNamesWithChangedSuppressions(
   return [...new Set(sdkNamesWithChangedSuppressions)];
 }
 
-// Promisify the exec function
-const execAsync = promisify(exec);
-
-async function runGitCommand(command: string): Promise<string> {
-  try {
-    const { stdout, stderr } = await execAsync(command);
-
-    if (stderr) {
-      console.error("Error Output:", stderr);
-      throw new Error(stderr);
-    }
-
-    return stdout.trim();
-  } catch (error) {
-    console.error("Failed to execute Git command:", error);
-    throw error;
-  }
-}
-
 /**
  *
  * @param pr
@@ -275,11 +238,15 @@ export async function updateSdkSuppressionsLabels(
     labelsToAdd: addSdkSuppressionsLabels,
     labelsToRemove: removeSdkSuppressionsLabels,
   };
-  const willSaveOutput = [
-    ...result.labelsToAdd.map((label) => `label-${label}=true`),
-    ...result.labelsToRemove.map((label) => `label-${label}=false`),
-  ];
-  writeFileSync(outputFile, JSON.stringify(willSaveOutput));
+  writeFileSync(outputFile, JSON.stringify({
+    labelsToAdd: ['aaa'],
+    labelsToRemove: ['bbbb'],
+  }));
+  //   const willSaveOutput = [
+  //     ...result.labelsToAdd.map((label) => `label-${label}=true`),
+  //     ...result.labelsToRemove.map((label) => `label-${label}=false`),
+  //   ];
+  //   writeFileSync(outputFile, JSON.stringify(willSaveOutput));
   console.log("JSON output saved to output.json");
 
   return result;

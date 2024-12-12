@@ -2,6 +2,8 @@
 import pkg from 'js-yaml';
 const { load } = pkg;
 
+import { exec } from "child_process";
+import { promisify } from "util";
 
 /**
  * @param yamlContent 
@@ -43,10 +45,22 @@ export function parseYamlContent(yamlContent: string, path: string): {
   
   }
   
-  export function base64ToString(base64: string): string {
-    return Buffer.from(base64, "base64").toString();
-  };
-  
-  export function stringToBase64(base: string): string {
-    return Buffer.from(base).toString("base64");
-  };
+
+// Promisify the exec function
+const execAsync = promisify(exec);
+
+export async function runGitCommand(command: string): Promise<string> {
+  try {
+    const { stdout, stderr } = await execAsync(command);
+
+    if (stderr) {
+      console.error("Error Output:", stderr);
+      throw new Error(stderr);
+    }
+
+    return stdout.trim();
+  } catch (error) {
+    console.error("Failed to execute Git command:", error);
+    throw error;
+  }
+}
