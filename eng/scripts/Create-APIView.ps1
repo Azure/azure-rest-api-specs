@@ -210,7 +210,7 @@ function Invoke-TypeSpecAPIViewParser {
     Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json"
     npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
     if ($LASTEXITCODE) {
-      throw
+      throw "Compilation error when running: 'npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json'"
     }
     Pop-Location
     
@@ -220,6 +220,7 @@ function Invoke-TypeSpecAPIViewParser {
     Move-Item -Path $generatedAPIViewTokenFile.FullName -Destination $apiViewTokensFilePath -Force > $null
   } catch {
     LogError " Failed to generate '$Type' APIView Tokens on '$ProjectPath' for '$resourceProvider', please check the detail log and make sure TypeSpec compiler version is the latest."
+    LogError $_
     throw
   } finally {
     if (Test-Path -Path $tempWorkingDirectoryPath) {
@@ -370,6 +371,8 @@ function New-TypeSpecAPIViewTokens {
     -BaseCommitish:$SourceCommitId `
     -TargetCommitish:$TargetCommitId
 
+  $typeSpecProjects = $typeSpecProjects | Where-Object {Test-Path -Path "$_/main.tsp"}
+
   LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
   $typeSpecProjects | ForEach-Object {
     LogInfo " - $_"
@@ -382,21 +385,28 @@ function New-TypeSpecAPIViewTokens {
   New-Item -ItemType Directory -Path $typeSpecAPIViewArtifactsDirectory -Force | Out-Null
 
   try {
-    # Generate TypeSpec APIView Tokens
+    npm --version --loglevel info
+    
+    # Generate New TypeSpec APIView Tokens
+    git checkout $SourceCommitId
+    Write-Host "Installing required dependencies to generate New API review"
+    npm ci
+    npm ls -a
     foreach ($typeSpecProject in $typeSpecProjects) {
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
-
-      # Generate New APIView Token using default tag on base branch
-      git checkout $SourceCommitId
       Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+    }
 
-      # Generate BaseLine APIView Token using same tag on target branch
-      git checkout $TargetCommitId
-      
+    # Generate Baseline TypeSpec APIView Tokens 
+    git checkout $TargetCommitId
+    Write-Host "Installing required dependencies to generate Baseline API review"
+    npm ci
+    npm ls -a
+    foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
       if (!(Test-Path -Path $typeSpecProject)) {
-        Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+        Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
         Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
