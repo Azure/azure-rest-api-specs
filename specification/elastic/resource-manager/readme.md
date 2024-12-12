@@ -93,82 +93,6 @@ input-file:
   - Microsoft.Elastic/preview/2022-09-01-preview/elastic.json
 ```
 
-### Tag: package-2023-02-01-preview
-
-These settings apply only when `--tag=package-2023-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-02-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-02-01-preview/elastic.json
-```
-
-### Tag: package-2023-05-01-preview
-
-These settings apply only when `--tag=package-2023-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-05-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-05-01-preview/elastic.json
-```
-
-### Tag: package-2023-06-01
-
-These settings apply only when `--tag=package-2023-06-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-06-01'
-input-file:
-  - Microsoft.Elastic/stable/2023-06-01/elastic.json
-```
-
-### Tag: package-2023-06-15-preview
-
-These settings apply only when `--tag=package-2023-06-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-06-15-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-06-15-preview/elastic.json
-```
-
-### Tag: package-2023-07-01-preview
-
-These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-07-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-07-01-preview/elastic.json
-```
-
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-10-01-preview/elastic.json
-```
-
-### Tag: package-2023-11-01-preview
-
-These settings apply only when `--tag=package-2023-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-11-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2023-11-01-preview/elastic.json
-```
-
-### Tag: package-2024-01-01-preview
-
-These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2024-01-01-preview/elastic.json
-suppressions:
-  - code: ResourceNameRestriction
-    from: elastic.json
-    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
-```
-
 ### Tag: package-2024-03-01
 
 These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
@@ -180,24 +104,6 @@ suppressions:
   - code: ResourceNameRestriction
     from: elastic.json
     reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
-```
-
-### Tag: package-2024-05-01-preview
-
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-05-01-preview'
-input-file:
-  - Microsoft.Elastic/preview/2024-05-01-preview/elastic.json
-```
-
-### Tag: package-2024-06-15-preview
-
-These settings apply only when `--tag=package-2024-06-15-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-06-15-preview'
-input-file:
-  - Microsoft.Elastic/preview/2024-06-15-preview/elastic.json
 ```
 
 ### Tag: package-2024-10-01-preview
