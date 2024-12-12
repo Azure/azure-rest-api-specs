@@ -3962,6 +3962,96 @@
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
+    "Agents.AzureFunctionBinding": {
+      "type": "object",
+      "description": "The structure for keeping storage queue name and URI.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of binding, which is always 'storage_queue'.",
+          "enum": [
+            "storage_queue"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "storage_queue": {
+          "$ref": "#/definitions/Agents.AzureFunctionStorageQueue",
+          "description": "Storage queue.",
+          "x-ms-client-name": "storageQueue"
+        }
+      },
+      "required": [
+        "type",
+        "storage_queue"
+      ]
+    },
+    "Agents.AzureFunctionDefinition": {
+      "type": "object",
+      "description": "The definition of Azure function.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/Agents.FunctionDefinition",
+          "description": "The definition of azure function and its parameters."
+        },
+        "input_binding": {
+          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it.",
+          "x-ms-client-name": "inputBinding"
+        },
+        "output_binding": {
+          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "description": "Output storage queue. The function writes output to this queue when the input items are processed.",
+          "x-ms-client-name": "outputBinding"
+        }
+      },
+      "required": [
+        "function",
+        "input_binding",
+        "output_binding"
+      ]
+    },
+    "Agents.AzureFunctionStorageQueue": {
+      "type": "object",
+      "description": "The structure for keeping storage queue name and URI.",
+      "properties": {
+        "queue_service_endpoint": {
+          "type": "string",
+          "description": "URI to the Azure Storage Queue service allowing you to manipulate a queue.",
+          "x-ms-client-name": "storageServiceEndpoint"
+        },
+        "queue_name": {
+          "type": "string",
+          "description": "The name of an Azure function storage queue.",
+          "x-ms-client-name": "queueName"
+        }
+      },
+      "required": [
+        "queue_service_endpoint",
+        "queue_name"
+      ]
+    },
+    "Agents.AzureFunctionToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a azure function tool as used to configure an agent.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/Agents.AzureFunctionDefinition",
+          "description": "The definition of the concrete function that the function tool should call.",
+          "x-ms-client-name": "azureFunction"
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "Agents.BingGroundingToolDefinition": {
       "type": "object",
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
@@ -5583,7 +5673,7 @@
     },
     "Agents.OpenApiAuthType": {
       "type": "string",
-      "description": "Type of chunking strategy",
+      "description": "  Authentication type for OpenApi endpoint. Allowed types are:\n  - Anonymous (no authentication required)\n  - Connection (requires connection_id to endpoint, as setup in AI Foundry)\n  - Managed_Identity (requires audience for identity based auth)",
       "enum": [
         "anonymous",
         "connection",
