@@ -251,6 +251,10 @@ export async function updateSdkSuppressionsLabels(
   try {
     const status = await runGitCommand("git status");
     console.log("Git Status:", status);
+    const HEADContent = await runGitCommand("git show HEAD^:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json");
+    console.log("Git HEADContent:", HEADContent);
+    const baseContent = await runGitCommand("git show HEAD:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json");
+    console.log("Git BASEContent:", baseContent);
   } catch (err) {
     console.error("Error running git command:", err);
   }
