@@ -14,6 +14,8 @@ cli:
       disabled: true
     - name: /Certificates/put/Create Or Update Certificate
       disabled: true
+    - name: /SiteCertificates/put/Create Or Update Certificate
+      disabled: true
     - name: /StaticSites/put/Creates or updates the function app settings of a static site.
       disabled: true
     - name: /StaticSites/put/Create or update a custom domain for a static site
@@ -144,12 +146,16 @@ cli:
       disabled: true
     - name: /Certificates/get/Get Certificate
       disabled: true
+    - name: /SiteCertificates/get/Get Certificate
+      disabled: true
     - name: /ResourceHealthMetadata/get/List ResourceHealthMetadata for a resource group
       disabled: true
     - name: /StaticSites/get/Get details for a static site
       disabled: true
     - name: /AppServicePlans/get/Get App Service plan
     - name: /Certificates/get/List Certificates by resource group
+      disabled: true
+    - name: /SiteCertificates/get/List Certificates by resource group
       disabled: true
     - name: /StaticSites/get/Get static sites for a resource group
       disabled: true
@@ -247,6 +253,8 @@ cli:
     - name: /StaticSites/delete/Delete a static site build
       disabled: true
     - name: /Certificates/delete/Delete Certificate
+      disabled: true
+    - name: /SiteCertificates/get/List Certificates by resource group
       disabled: true
     - name: /AppServicePlans/delete/Delete App Service plan
     - name: /StaticSites/delete/Delete a static site
