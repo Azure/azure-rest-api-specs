@@ -1,7 +1,5 @@
 import _ from "lodash";
 import { writeFileSync } from "fs";
-import { Octokit } from "@octokit/rest";
-import { OctokitResponse, ReposGetContentResponseData } from "@octokit/types";
 import { sdkLabels, SdkName } from "./sdk.js";
 import { exec } from "child_process";
 import { promisify } from "util";
