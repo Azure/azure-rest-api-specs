@@ -308,9 +308,52 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
 
-  @doc("Reserved for future use.")
+  @doc("The ID of the tool call. This ID must be referenced when you submit tool outputs.")
+  id: string;
+
+  @doc("For now, this is always going to be an empty object.")
   @encodedName("application/json", "file_search")
-  fileSearch: Record<string>;
+  fileSearch: RunStepFileSearchToolCallResults;
+}
+
+@doc("The results of the file search.")
+model RunStepFileSearchToolCallResults {
+  @doc("Ranking options for file search.")
+  @encodedName("application/json", "ranking_options")
+  rankingOptions?: FileSearchRankingOptions;
+
+  @doc("The array of a file search results")
+  results: RunStepFileSearchToolCallResult[];
+}
+
+@doc("""
+    File search tool call result.
+  """)
+model RunStepFileSearchToolCallResult {
+  @doc("The ID of the file that result was found in.")
+  @encodedName("application/json", "file_id")
+  fileId: string;
+
+  @doc("The name of the file that result was found in.")
+  @encodedName("application/json", "file_name")
+  fileName: string;
+
+  @doc("The score of the result. All values must be a floating point number between 0 and 1.")
+  @minValue(0)
+  @maxValue(1)
+  score: float32;
+
+  @doc("The content of the result that was found. The content is only included if requested via the include query parameter.")
+  content?: FileSearchToolCallContent[];
+}
+
+@doc("The file search result content object.")
+model FileSearchToolCallContent {
+  @doc("The type of the content.")
+  type: "text";
+
+  @doc("The text content of the file.")
+  text: string;
 }
 
 @doc("""

@@ -1895,6 +1895,32 @@
             "type": "string"
           },
           {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -2099,6 +2125,32 @@
             "type": "string"
           },
           {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
@@ -2242,6 +2294,32 @@
             "description": "Identifier of the run step.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
           }
         ],
         "responses": {
@@ -3719,7 +3797,7 @@
             "json_object"
           ],
           "x-ms-enum": {
-            "name": "ApiResponseFormat",
+            "name": "ResponseFormat",
             "modelAsString": true,
             "values": [
               {
@@ -3854,30 +3932,6 @@
             "name": "azureAISearch",
             "value": "azure_ai_search",
             "description": "Tool type `azure_ai_search`"
-          }
-        ]
-      }
-    },
-    "Agents.ApiResponseFormat": {
-      "type": "string",
-      "description": "Possible API response formats.",
-      "enum": [
-        "text",
-        "json_object"
-      ],
-      "x-ms-enum": {
-        "name": "ApiResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "`text` format should be used for requests involving any sort of ToolCall."
-          },
-          {
-            "name": "jsonObject",
-            "value": "json_object",
-            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
           }
         ]
       }
@@ -4599,6 +4653,30 @@
       "required": [
         "ranker",
         "score_threshold"
+      ]
+    },
+    "Agents.FileSearchToolCallContent": {
+      "type": "object",
+      "description": "The file search result content object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the content.",
+          "enum": [
+            "text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the file."
+        }
+      },
+      "required": [
+        "type",
+        "text"
       ]
     },
     "Agents.FileSearchToolDefinition": {
@@ -5799,6 +5877,94 @@
         "id"
       ]
     },
+    "Agents.ResponseFormat": {
+      "type": "string",
+      "description": "Possible API response formats.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "`text` format should be used for requests involving any sort of ToolCall."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+          }
+        ]
+      }
+    },
+    "Agents.ResponseFormatJsonSchema": {
+      "type": "object",
+      "description": "A description of what the response format is for, used by the model to determine how to respond in the format.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of a schema."
+        },
+        "schema": {
+          "description": "The JSON schema object, describing the response format."
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
+    },
+    "Agents.ResponseFormatJsonSchemaType": {
+      "type": "object",
+      "description": "The type of response format being defined: `json_schema`",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type",
+          "enum": [
+            "json_schema"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "json_schema": {
+          "$ref": "#/definitions/Agents.ResponseFormatJsonSchema",
+          "description": "The JSON schema, describing response format.",
+          "x-ms-client-name": "jsonSchema"
+        }
+      },
+      "required": [
+        "type",
+        "json_schema"
+      ]
+    },
+    "Agents.RunAdditionalFieldList": {
+      "type": "string",
+      "description": "A list of additional fields to include in the response.",
+      "enum": [
+        "step_details.tool_calls[*].file_search.results[*].content"
+      ],
+      "x-ms-enum": {
+        "name": "RunAdditionalFieldList",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FileSearchContents",
+            "value": "step_details.tool_calls[*].file_search.results[*].content",
+            "description": "File search result content."
+          }
+        ]
+      }
+    },
     "Agents.RunCompletionUsage": {
       "type": "object",
       "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
@@ -6557,16 +6723,18 @@
       "type": "object",
       "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
+        },
         "file_search": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults",
+          "description": "For now, this is always going to be an empty object.",
           "x-ms-client-name": "fileSearch"
         }
       },
       "required": [
+        "id",
         "file_search"
       ],
       "allOf": [
@@ -6575,6 +6743,64 @@
         }
       ],
       "x-ms-discriminator-value": "file_search"
+    },
+    "Agents.RunStepFileSearchToolCallResult": {
+      "type": "object",
+      "description": "  File search tool call result.",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "The ID of the file that result was found in.",
+          "x-ms-client-name": "fileId"
+        },
+        "file_name": {
+          "type": "string",
+          "description": "The name of the file that result was found in.",
+          "x-ms-client-name": "fileName"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The score of the result. All values must be a floating point number between 0 and 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "content": {
+          "type": "array",
+          "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
+          "items": {
+            "$ref": "#/definitions/Agents.FileSearchToolCallContent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "file_id",
+        "file_name",
+        "score"
+      ]
+    },
+    "Agents.RunStepFileSearchToolCallResults": {
+      "type": "object",
+      "description": "The results of the file search.",
+      "properties": {
+        "ranking_options": {
+          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "description": "Ranking options for file search.",
+          "x-ms-client-name": "rankingOptions"
+        },
+        "results": {
+          "type": "array",
+          "description": "The array of a file search results",
+          "items": {
+            "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "results"
+      ]
     },
     "Agents.RunStepFunctionToolCall": {
       "type": "object",
@@ -8278,34 +8504,28 @@
       "type": "string",
       "description": "Error code variants for vector store file processing",
       "enum": [
-        "internal_error",
-        "file_not_found",
-        "parsing_error",
-        "unhandled_mime_type"
+        "server_error",
+        "invalid_file",
+        "unsupported_file"
       ],
       "x-ms-enum": {
         "name": "VectorStoreFileErrorCode",
         "modelAsString": true,
         "values": [
           {
-            "name": "internalError",
-            "value": "internal_error",
-            "description": "An internal error occurred."
+            "name": "serverError",
+            "value": "server_error",
+            "description": "An server error occurred."
           },
           {
-            "name": "fileNotFound",
-            "value": "file_not_found",
-            "description": "The file was not found."
+            "name": "invalidFile",
+            "value": "invalid_file",
+            "description": "The file is not valid."
           },
           {
-            "name": "parsingError",
-            "value": "parsing_error",
-            "description": "The file could not be parsed."
-          },
-          {
-            "name": "unhandledMimeType",
-            "value": "unhandled_mime_type",
-            "description": "The file has an unhandled mime type."
+            "name": "unsupportedFile",
+            "value": "unsupported_file",
+            "description": "The file is of unsupported type."
           }
         ]
       }

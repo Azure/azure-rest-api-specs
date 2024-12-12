@@ -341,3 +341,11 @@ model RunStepDeltaCodeInterpreterImageOutputObject {
   @encodedName("application/json", "file_id")
   fileId?: string;
 }
+
+/** A list of additional fields to include in the response. */
+union RunAdditionalFieldList {
+  string,
+
+  /** File search result content. */
+  FileSearchContents: "step_details.tool_calls[*].file_search.results[*].content",
+}
