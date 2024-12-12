@@ -90,6 +90,20 @@ jobs:
           done
       
       - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results-aaa
+        if: ${{ steps.run-suppressions-script.outputs.has-aaa == 'true' }}
+        with:
+          name: "aaa"
+          value: "${{ steps.run-suppressions-script.outputs.aaa }}"
+          
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results-bbb
+        if: ${{ steps.run-suppressions-script.outputs.has-bbb == 'true' }}
+        with:
+          name: "bbb"
+          value: "${{ steps.run-suppressions-script.outputs.bbb }}"
+
+      - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
         if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Go-Sdk-Suppression == 'true' }}
         with:
