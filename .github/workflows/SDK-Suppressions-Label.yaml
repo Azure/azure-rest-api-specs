@@ -17,9 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    # outputs:
-      # process-sdk-suppressions-output: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
-      # has-output: ${{ steps.run-suppressions-script.outputs.has-output }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -88,20 +85,6 @@ jobs:
             echo "::set-output name=has-$label::true"
             echo "::set-output name=$label::false"
           done
-      
-      - uses: ./.github/actions/add-label-artifact
-        name: Upload artifact with results aaa
-        if: ${{ steps.run-suppressions-script.outputs.has-aaa == 'true' }}
-        with:
-          name: "aaa"
-          value: "${{ steps.run-suppressions-script.outputs.aaa }}"
-          
-      - uses: ./.github/actions/add-label-artifact
-        name: Upload artifact with results bbb
-        if: ${{ steps.run-suppressions-script.outputs.has-bbb == 'true' }}
-        with:
-          name: "bbb"
-          value: "${{ steps.run-suppressions-script.outputs.bbb }}"
 
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
@@ -130,16 +113,3 @@ jobs:
         with:
           name: "BreakingChange-Python-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}"
-
-      
-
-      # - name: Use outputs from previous step
-      #   run: |
-      #     echo "Labels to Add: ${{ steps.run-suppressions-script.outputs.labelsToAdd }}"
-      #     echo "Labels to Remove: ${{ steps.run-suppressions-script.outputs.labelsToRemove }}"
-
-      # - name: Upload artifact dependes on labels
-      #   uses: ./.github/actions/add-multi-labels-artifact
-      #   if: ${{ steps.run-suppressions-script.outputs.has-output == 'true' }}
-      #   with:
-      #     labels: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
