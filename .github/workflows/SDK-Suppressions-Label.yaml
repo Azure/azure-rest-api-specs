@@ -34,7 +34,9 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
           $changedFiles = @(Get-ChangedFiles)
           echo "PR Changed files: $changedFiles"
-          echo "changedFiles=$changedFiles" >> $GITHUB_OUTPUT
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$changedFiles"
+          # echo "changedFiles=$changedFiles" >> $GITHUB_OUTPUT
+          # echo "::set-output name=changedFiles::$changedFiles"
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
