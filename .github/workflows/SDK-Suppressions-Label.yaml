@@ -74,8 +74,8 @@ jobs:
           echo "Script has-output: $has_output"
           echo "::set-output name=has-output::$has_output"
 
-          labelsToAdd=$(echo "$OUTPUT" | grep -oP '"labelsToAdd":\s*\[\K[^\]]+' | tr -d '", ' | tr '\n' ' ')
-          labelsToRemove=$(echo "$OUTPUT" | grep -oP '"labelsToRemove":\s*\[\K[^\]]+' | tr -d '", ' | tr '\n' ' ')
+          labelsToAdd=$(echo "$OUTPUT" | sed -n 's/.*"labelsToAdd": \[\([^]]*\)\].*/\1/p' | tr -d '" ' | tr ',' '\n')
+          labelsToRemove=$(echo "$OUTPUT" | sed -n 's/.*"labelsToRemove": \[\([^]]*\)\].*/\1/p' | tr -d '" ' | tr ',' '\n')
 
           for label in $labelsToAdd; do
             echo "Label to add: $label"
