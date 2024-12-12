@@ -1155,7 +1155,7 @@
             },
             "provisioningState": {
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1203,7 +1203,7 @@
           "properties": {
             "provisioningState": {
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1328,7 +1328,7 @@
       "properties": {
         "properties": {
           "description": "Group Quota properties for the specified resource.",
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/GroupQuotaDetails"
             }
@@ -1388,7 +1388,7 @@
         },
         "allocatedToSubscriptions": {
           "readOnly": true,
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/AllocatedQuotaToSubscriptionList"
             }
@@ -1410,7 +1410,7 @@
           "properties": {
             "provisioningState": {
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1456,7 +1456,7 @@
             "provisioningState": {
               "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1504,7 +1504,7 @@
             "provisioningState": {
               "description": "Status of this subscriptionId being associated with the GroupQuotasEntity.",
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1572,11 +1572,11 @@
       "properties": {
         "properties": {
           "description": "Quota properties for the specified resource.",
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/SubscriptionQuotaDetails"
             }
-          ]      
+          ]
         }
       }
     },
@@ -1634,7 +1634,7 @@
           "properties": {
             "requestedResource": {
               "description": "Requested Resource.",
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/GroupQuotaRequestBase"
                 }
@@ -1648,7 +1648,7 @@
             },
             "provisioningState": {
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
@@ -1714,11 +1714,11 @@
           "properties": {
             "provisioningState": {
               "readOnly": true,
-              "allOf":[
+              "allOf": [
                 {
                   "$ref": "#/definitions/RequestState"
                 }
-              ]            
+              ]
             },
             "value": {
               "type": "array",
@@ -1837,7 +1837,7 @@
         "provisioningState": {
           "description": "Provisioning state of the operation.",
           "readOnly": true,
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/RequestState"
             }
@@ -1856,7 +1856,7 @@
         "provisioningState": {
           "description": "Provisioning state of the operation.",
           "readOnly": true,
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/RequestState"
             }
@@ -1876,7 +1876,7 @@
         "properties": {
           "title": "Properties",
           "type": "object",
-          "allOf":[
+          "allOf": [
             {
               "$ref": "#/definitions/GroupQuotasEntityBasePatch"
             }
@@ -1885,28 +1885,28 @@
       }
     },
     "GroupQuotasEntity": {
-    "type": "object",
-    "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-      },
-      {
-        "type": "object",
-        "properties": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        },
+        {
+          "type": "object",
           "properties": {
-            "title": "Properties",
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/definitions/GroupQuotasEntityBase"
-              }
-            ]
+            "properties": {
+              "title": "Properties",
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/GroupQuotasEntityBase"
+                }
+              ]
+            }
           }
         }
-      }
-    ]
-  },
+      ]
+    },
     "GroupQuotaList": {
       "type": "object",
       "description": "List of Group Quotas at MG level.",
