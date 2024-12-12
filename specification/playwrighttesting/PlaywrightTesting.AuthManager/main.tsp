@@ -213,23 +213,23 @@ interface AccessTokens {
   // AccessToken Operations
   // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./AccessTokens_Create.json", "AccessTokens_Create")
+  @Autorest.example("./AccessTokens_Create.json", "AccessTokens_Create")
   create is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./AccessTokens_Get.json", "AccessTokens_Get")
+  @Autorest.example("./AccessTokens_Get.json", "AccessTokens_Get")
   get is Operations.ResourceRead<AccessToken>;
 
   @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./AccessTokens_Delete.json", "AccessTokens_Delete")
+  @Autorest.example("./AccessTokens_Delete.json", "AccessTokens_Delete")
   delete is Operations.ResourceDelete<AccessToken>;
 
   @doc("Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./AccessTokens_List.json", "AccessTokens_List")
+  @Autorest.example("./AccessTokens_List.json", "AccessTokens_List")
   list is Operations.ResourceList<AccessToken>;
 
   @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
-  @example("./AccessTokens_Validate.json", "AccessTokens_Validate")
+  @Autorest.example("./AccessTokens_Validate.json", "AccessTokens_Validate")
   @actionSeparator("/")
   validate is Operations.ResourceCollectionAction<AccessToken, {}, {}>;
 }
@@ -261,12 +261,12 @@ interface Accounts {
   // Accounts Operations
 
   @doc("Get details of the Azure resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./Accounts_Get.json", "Accounts_Get")
+  @Autorest.example("./Accounts_Get.json", "Accounts_Get")
   get is Operations.ResourceRead<Account>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
-  @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
+  @Autorest.example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
   @route("/accounts/{accountId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
