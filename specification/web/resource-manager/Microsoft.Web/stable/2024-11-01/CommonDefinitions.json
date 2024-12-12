@@ -673,6 +673,321 @@
         }
       }
     },
+    "Certificate": {
+      "description": "SSL certificate for an app.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Certificate resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-secret": true
+            },
+            "friendlyName": {
+              "description": "Friendly name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Host names the certificate applies to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pfxBlob": {
+              "format": "byte",
+              "description": "Pfx blob.",
+              "type": "string"
+            },
+            "siteName": {
+              "description": "App name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "selfLink": {
+              "description": "Self link.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "cerBlob": {
+              "format": "byte",
+              "description": "Raw bytes of .cer file",
+              "type": "string",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the certificate.",
+              "readOnly": true
+            },
+            "keyVaultId": {
+              "description": "Azure Key Vault Csm resource Id.",
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": [
+                {
+                  "type": "Microsoft.KeyVault/vaults"
+                }
+              ]
+            },
+            "keyVaultSecretName": {
+              "description": "Azure Key Vault secret name.",
+              "type": "string"
+            },
+            "keyVaultSecretStatus": {
+              "description": "Status of the Key Vault secret.",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "ExternalPrivateKey",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan.",
+              "type": "string",
+              "format": "arm-id",
+              "x-ms-arm-id-details": [
+                {
+                  "type": "Microsoft.Web/serverfarms"
+                }
+              ]
+            },
+            "canonicalName": {
+              "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CertificateCollection": {
+      "description": "Collection of certificates.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificatePatchResource": {
+      "description": "ARM resource for a certificate.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CertificatePatchResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "password": {
+              "description": "Certificate password.",
+              "type": "string",
+              "x-ms-mutability": [
+                "read"
+              ]
+            },
+            "friendlyName": {
+              "description": "Friendly name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "subjectName": {
+              "description": "Subject name of the certificate.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostNames": {
+              "description": "Host names the certificate applies to.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pfxBlob": {
+              "format": "byte",
+              "description": "Pfx blob.",
+              "type": "string"
+            },
+            "siteName": {
+              "description": "App name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "selfLink": {
+              "description": "Self link.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issuer": {
+              "description": "Certificate issuer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "issueDate": {
+              "format": "date-time",
+              "description": "Certificate issue Date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "format": "date-time",
+              "description": "Certificate expiration date.",
+              "type": "string",
+              "readOnly": true
+            },
+            "thumbprint": {
+              "description": "Certificate thumbprint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "valid": {
+              "description": "Is the certificate valid?.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "cerBlob": {
+              "format": "byte",
+              "description": "Raw bytes of .cer file",
+              "type": "string",
+              "readOnly": true
+            },
+            "publicKeyHash": {
+              "description": "Public key hash.",
+              "type": "string",
+              "readOnly": true
+            },
+            "hostingEnvironmentProfile": {
+              "$ref": "#/definitions/HostingEnvironmentProfile",
+              "description": "Specification for the App Service Environment to use for the certificate.",
+              "readOnly": true
+            },
+            "keyVaultId": {
+              "description": "Key Vault Csm resource Id.",
+              "type": "string"
+            },
+            "keyVaultSecretName": {
+              "description": "Key Vault secret name.",
+              "type": "string"
+            },
+            "keyVaultSecretStatus": {
+              "description": "Status of the Key Vault secret.",
+              "enum": [
+                "Initialized",
+                "WaitingOnCertificateOrder",
+                "Succeeded",
+                "CertificateOrderFailed",
+                "OperationNotPermittedOnKeyVault",
+                "AzureServiceUnauthorizedToAccessKeyVault",
+                "KeyVaultDoesNotExist",
+                "KeyVaultSecretDoesNotExist",
+                "UnknownError",
+                "ExternalPrivateKey",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "KeyVaultSecretStatus",
+                "modelAsString": false
+              }
+            },
+            "serverFarmId": {
+              "description": "Resource ID of the associated App Service plan, formatted as: \"/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}\".",
+              "type": "string"
+            },
+            "canonicalName": {
+              "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "CipherSuites": {
       "description": "Describes valid TLS cipher suites.",
       "type": "object",
