@@ -382,21 +382,28 @@ function New-TypeSpecAPIViewTokens {
   New-Item -ItemType Directory -Path $typeSpecAPIViewArtifactsDirectory -Force | Out-Null
 
   try {
-    # Generate TypeSpec APIView Tokens
+    npm --version --loglevel info
+    
+    # Generate New TypeSpec APIView Tokens
+    git checkout $SourceCommitId
+    Write-Host "Installing required dependencies to generate New API review"
+    npm ci
+    npm ls -a
     foreach ($typeSpecProject in $typeSpecProjects) {
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
-
-      # Generate New APIView Token using default tag on base branch
-      git checkout $SourceCommitId
       Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory
+    }
 
-      # Generate BaseLine APIView Token using same tag on target branch
-      git checkout $TargetCommitId
-      
+    # Generate Baseline TypeSpec APIView Tokens 
+    git checkout $TargetCommitId
+    Write-Host "Installing required dependencies to generate Baseline API review"
+    npm ci
+    npm ls -a
+    foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
       if (!(Test-Path -Path $typeSpecProject)) {
-        Write-Host "TypeSpec project $typeSpecProjectDir is not found in pull request target branch. API review will not have a baseline revision."
+        Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
       }
       else {
         Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $($typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1]) -TokenDirectory $tokenDirectory | Out-Null
