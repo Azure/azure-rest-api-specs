@@ -65,6 +65,7 @@ jobs:
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
         run: |
           echo "Pull Request Context: $GITHUB_PULL_REQUEST_CONTEXT"
+          echo "Pull Request CHANGE_FILES: $GITHUB_PULL_REQUEST_CHANGE_FILES"
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
