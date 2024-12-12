@@ -77,13 +77,13 @@ jobs:
           labelsToAdd=$(echo "$OUTPUT" | sed -n 's/.*"labelsToAdd":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
           labelsToRemove=$(echo "$OUTPUT" | sed -n 's/.*"labelsToRemove":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
 
-          for label in $labelsToAdd; do
+          for label in $(echo $labelsToAdd | tr ',' '\n'); do
             echo "Label to add: $label"
             echo "::set-output name=has-$label::true"
             echo "::set-output name=$label::true"
           done
 
-          for label in $labelsToRemove; do
+          for label in $(echo $labelsToRemove | tr ',' '\n'); do
             echo "Label to remove: $label"
             echo "::set-output name=has-$label::true"
             echo "::set-output name=$label::false"
