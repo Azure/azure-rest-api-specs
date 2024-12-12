@@ -52,20 +52,19 @@ jobs:
               html_url: pr.html_url,
               labels: pr.labels.map(label => label.name)
             };
-            return JSON.stringify(prContext);
+            echo "prContext=${prContextStr}" >> $GITHUB_OUTPUT;
           result-encoding: string
 
       - name: Run get suppressions label script
         id: run-suppressions-script
         env:
-          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
+          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.prContext }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
-          echo "changedFiles=$suppressions-result-output" >> $GITHUB_OUTPUT
           
           has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
           echo "Script has-output: $has_output"
