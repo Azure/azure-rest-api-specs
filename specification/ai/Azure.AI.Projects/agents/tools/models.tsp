@@ -89,7 +89,6 @@ model OpenApiToolDefinition extends ToolDefinition {
   openapi: OpenApiFunctionDefinition;
 }
 
-
 // Definition details: File Search
 
 /**
@@ -111,6 +110,16 @@ model FileSearchToolDefinitionDetails {
    */
   @encodedName("application/json", "ranking_options")
   rankingOptions?: FileSearchRankingOptions;
+}
+
+@doc("The input definition information for a azure function tool as used to configure an agent.")
+model AzureFunctionToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("The definition of the concrete function that the function tool should call.")
+  @encodedName("application/json", "azure_function")
+  azureFunction: AzureFunctionDefinition;
 }
 
 /**
@@ -140,6 +149,20 @@ model FunctionDefinition {
   parameters: unknown;
 }
 
+@doc("The definition of Azure function.")
+model AzureFunctionDefinition {
+  @doc("The definition of azure function and its parameters.")
+  function: FunctionDefinition;
+
+  @doc("Input storage queue. The queue storage trigger runs a function as messages are added to it.")
+  @encodedName("application/json", "input_binding")
+  inputBinding: AzureFunctionBinding;
+
+  @doc("Output storage queue. The function writes output to this queue when the input items are processed.")
+  @encodedName("application/json", "output_binding")
+  outputBinding: AzureFunctionBinding;
+}
+
 // Definition details: OpenAPI
 
 @doc("The input definition information for an openapi function.")
@@ -158,7 +181,12 @@ model OpenApiFunctionDefinition {
   auth: OpenApiAuthDetails;
 }
 
-/** Type of chunking strategy */
+@doc("""
+    Authentication type for OpenApi endpoint. Allowed types are:
+    - Anonymous (no authentication required)
+    - Connection (requires connection_id to endpoint, as setup in AI Foundry)
+    - Managed_Identity (requires audience for identity based auth)
+  """)
 union OpenApiAuthType {
   anonymous: "anonymous",
   connection: "connection",
@@ -515,4 +543,25 @@ model ToolConnection {
    */
   @encodedName("application/json", "connection_id")
   connectionId: string;
+}
+
+@doc("The structure for keeping storage queue name and URI.")
+model AzureFunctionBinding {
+  @doc("The type of binding, which is always 'storage_queue'.")
+  type: "storage_queue";
+
+  @doc("Storage queue.")
+  @encodedName("application/json", "storage_queue")
+  storageQueue: AzureFunctionStorageQueue;
+}
+
+@doc("The structure for keeping storage queue name and URI.")
+model AzureFunctionStorageQueue {
+  @doc("URI to the Azure Storage Queue service allowing you to manipulate a queue.")
+  @encodedName("application/json", "queue_service_endpoint")
+  storageServiceEndpoint: string;
+
+  @doc("The name of an Azure function storage queue.")
+  @encodedName("application/json", "queue_name")
+  queueName: string;
 }
