@@ -41,6 +41,7 @@ jobs:
         id: fetch-pullRequest-context
         with:
           script: |
+            const core = require('@actions/core'); 
             const pr = context.payload.pull_request;
             if (!pr) {
               throw new Error("This workflow must run in the context of a pull request.");
@@ -52,7 +53,9 @@ jobs:
               html_url: pr.html_url,
               labels: pr.labels.map(label => label.name)
             };
-            echo "prContext=${prContextStr}" >> $GITHUB_OUTPUT;
+            const prContextStr = JSON.stringify(prContext);
+            console.log("PR Context:", prContextStr);
+            core.setOutput("prContext", prContextStr);
           result-encoding: string
 
       - name: Run get suppressions label script
