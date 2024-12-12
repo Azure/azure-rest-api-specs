@@ -32,7 +32,6 @@ export type PullRequestContext = {
 
 /**
  *
- * @param appClient
  * @param pr
  * @returns SdkName list
  * This part compares the suppression files of the head branch and the base branch.
@@ -41,7 +40,6 @@ export type PullRequestContext = {
  * on the other hand that the sdkName list will return an empty array if it does not have a suppression file or if the file is blank.
  */
 export async function getSdkSuppressionsSdkNames(
-  appClient: Octokit,
   pr: PullRequestContext,
   prChangeFiles: string,
 ): Promise<SdkName[]> {
@@ -53,32 +51,8 @@ export async function getSdkSuppressionsSdkNames(
   // Get suppression file Content
   if (suppressionFileList.length > 0) {
     for (const suppressionFile of suppressionFileList) {
-      logSuppressionFileInfo({
-        owner: pr.base.owner,
-        repo: pr.base.repo,
-        ref: pr.base.ref,
-        path: suppressionFile,
-      });
-      let baseSuppressionContent = await getSdkSuppressionsFileContent(
-        appClient,
-        pr.base.owner,
-        pr.base.repo,
-        pr.base.ref,
-        suppressionFile,
-      );
-      logSuppressionFileInfo({
-        owner: pr.head.owner,
-        repo: pr.head.repo,
-        ref: pr.head.ref,
-        path: suppressionFile,
-      });
-      const headSuppressionContent = await getSdkSuppressionsFileContent(
-        appClient,
-        pr.head.owner,
-        pr.head.repo,
-        pr.head.ref,
-        suppressionFile,
-      );
+      let baseSuppressionContent = await getSdkSuppressionsFileContent("HEAD^", suppressionFile);
+      const headSuppressionContent = await getSdkSuppressionsFileContent("HEAD", suppressionFile);
 
       // if the head suppression file is present but anything is wrong like schema error with it return
       const validateSdkSuppressionsFileResult =
@@ -108,24 +82,17 @@ export async function getSdkSuppressionsSdkNames(
 }
 
 async function getSdkSuppressionsFileContent(
-  appClient: Octokit,
-  owner: string,
-  repo: string,
   ref: string,
   path: string,
 ): Promise<string | object | undefined | null> {
   try {
-    const { data: suppressionFileContent }: OctokitResponse<ReposGetContentResponseData> =
-      await appClient.repos.getContent({
-        repo,
-        owner,
-        ref,
-        path,
-      });
-    const suppressionContentString = base64ToString(suppressionFileContent.content);
+    const suppressionFileContent = await runGitCommand(`git show ${ref}:${path}`);
+    console.log("suppressionFileContent", suppressionFileContent);
+    const suppressionContentString = base64ToString(suppressionFileContent);
+    console.log("suppressionContentString", suppressionContentString);
     return parseYamlContent(suppressionContentString, path).result;
   } catch (error) {
-    console.log(`Not found ${path} in ${owner}/${repo}#${ref}`);
+    console.log(`Not found content in ${ref}#${path}`);
     return null;
   }
 }
@@ -235,7 +202,6 @@ async function runGitCommand(command: string): Promise<string> {
 
 /**
  *
- * @param appClient
  * @param pr
  * This code segment is responsible for managing the sdk suppression label (e.g. BreakingChange-Go-Sdk-Suppression) for PRs.
  * 1. It applies the label automatically when a PR includes a new suppression file.
@@ -244,27 +210,25 @@ async function runGitCommand(command: string): Promise<string> {
  */
 export async function updateSdkSuppressionsLabels(
   pr: PullRequestContext,
-  githubToken: string,
   prChangeFiles: string,
   outputFile: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
     const status = await runGitCommand("git status");
     console.log("Git Status:", status);
-    const HEADContent = await runGitCommand("git show HEAD^:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json");
+    const baseContent = await runGitCommand(
+      "git show HEAD^:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
+    );
+    console.log("Git baseContent:", baseContent);
+    const HEADContent = await runGitCommand(
+      "git show HEAD:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
+    );
     console.log("Git HEADContent:", HEADContent);
-    const baseContent = await runGitCommand("git show HEAD:specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json");
-    console.log("Git BASEContent:", baseContent);
   } catch (err) {
     console.error("Error running git command:", err);
   }
 
-  const appClient: Octokit = new Octokit({
-    auth: githubToken,
-  });
-
-  console.log("Pull Request Context", pr);
-  const sdkNames = await getSdkSuppressionsSdkNames(appClient, pr, prChangeFiles);
+  const sdkNames = await getSdkSuppressionsSdkNames(pr, prChangeFiles);
   console.log("Changed SdkNames", sdkNames);
 
   console.log(
@@ -329,12 +293,6 @@ export async function updateSdkSuppressionsLabels(
   console.log("JSON output saved to output.json");
 
   return result;
-}
-
-function logSuppressionFileInfo(pr: { owner: string; repo: string; ref: string; path: string }) {
-  console.log(
-    `updateSdkSuppressionsLabels: Will get suppressions content from ${pr.owner}/${pr.repo}#${pr.ref} for ${pr.path}`,
-  );
 }
 
 /**
