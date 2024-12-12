@@ -371,6 +371,8 @@ function New-TypeSpecAPIViewTokens {
     -BaseCommitish:$SourceCommitId `
     -TargetCommitish:$TargetCommitId
 
+  $typeSpecProjects = $typeSpecProjects | Where-Object {Test-Path -Path "$_/main.tsp"}
+
   LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
   $typeSpecProjects | ForEach-Object {
     LogInfo " - $_"
