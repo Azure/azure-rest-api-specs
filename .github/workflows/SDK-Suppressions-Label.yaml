@@ -53,16 +53,6 @@ jobs:
               number: pr.number,
               title: pr.title,
               html_url: pr.html_url,
-              base: {
-                owner: pr.base.repo.owner.login,
-                repo: pr.base.repo.name,
-                ref: pr.base.ref
-              },
-              head: {
-                owner: pr.head.repo.owner.login,
-                repo: pr.head.repo.name,
-                ref: pr.head.ref
-              },
               labels: pr.labels.map(label => label.name)
             };
             return JSON.stringify(prContext);
@@ -74,7 +64,6 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.result }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
@@ -84,9 +73,25 @@ jobs:
           has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
           echo "Script has-output: $has_output"
           echo "::set-output name=has-output::$has_output"
+
+          labelsToAdd=$(echo "$OUTPUT" | grep -oP '"labelsToAdd":\s*\[\K[^\]]+' | tr -d '" ,')
+          labelsToRemove=$(echo "$OUTPUT" | grep -oP '"labelsToRemove":\s*\[\K[^\]]+' | tr -d '" ,')
+
+          for label in $labelsToAdd; do
+            echo "::set-output name=$label::true"
+          done
+
+          for label in $labelsToRemove; do
+            echo "::set-output name=$label::false"
+          done
           
-      - name: Upload artifact dependes on labels
-        uses: ./.github/actions/add-multi-labels-artifact
-        if: ${{ steps.run-suppressions-script.outputs.has-output == 'true' }}
-        with:
-          labels: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
+      # - name: Use outputs from previous step
+      #   run: |
+      #     echo "Labels to Add: ${{ steps.run-suppressions-script.outputs.labelsToAdd }}"
+      #     echo "Labels to Remove: ${{ steps.run-suppressions-script.outputs.labelsToRemove }}"
+
+      # - name: Upload artifact dependes on labels
+      #   uses: ./.github/actions/add-multi-labels-artifact
+      #   if: ${{ steps.run-suppressions-script.outputs.has-output == 'true' }}
+      #   with:
+      #     labels: ${{ steps.run-suppressions-script.outputs.suppressions-result-output }}
