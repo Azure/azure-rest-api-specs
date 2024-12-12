@@ -263,7 +263,7 @@ interface DocumentModels {
       @doc("Analyze request parameters.")
       @bodyRoot
       @clientName("body", "python")
-      analyzeRequest?: AnalyzeDocumentRequest;
+      analyzeRequest: AnalyzeDocumentRequest;
     },
     AnalyzeOperation
   >;
@@ -303,7 +303,7 @@ interface DocumentModels {
       @doc("Analyze batch request parameters.")
       @body
       @clientName("body", "python")
-      analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
+      analyzeBatchRequest: AnalyzeBatchDocumentsRequest;
     },
     AnalyzeBatchOperation
   >;
