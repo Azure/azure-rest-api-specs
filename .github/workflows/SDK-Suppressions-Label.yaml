@@ -41,7 +41,6 @@ jobs:
         id: fetch-pullRequest-context
         with:
           script: |
-            const core = require('@actions/core'); 
             const pr = context.payload.pull_request;
             if (!pr) {
               throw new Error("This workflow must run in the context of a pull request.");
