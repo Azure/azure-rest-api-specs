@@ -181,7 +181,12 @@ model OpenApiFunctionDefinition {
   auth: OpenApiAuthDetails;
 }
 
-/** Type of chunking strategy */
+@doc("""
+      Authentication type for OpenApi endpoint. Allowed types are:
+      - Anonymous (no authentication required)
+      - Connection (requires connection_id to endpoint, as setup in AI Foundry)
+      - Managed_Identity (requires audience for identity based auth)
+  """)
 union OpenApiAuthType {
   anonymous: "anonymous",
   connection: "connection",
