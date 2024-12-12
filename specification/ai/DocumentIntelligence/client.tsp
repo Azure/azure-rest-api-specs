@@ -77,6 +77,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "java");
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "java");
 @@clientName(AnalyzeBatchDocumentsRequest, "AnalyzeBatchDocumentsOptions", "java");
+@@clientName(ComposeDocumentModelRequest, "ComposeDocumentModelOptions", "java");
 @@clientName(AuthorizeCopyRequest, "AuthorizeModelCopyOptions", "java");
 @@clientName(AnalyzeOutputOption, "AnalyzeOutputFormat", "java");
 
@@ -102,6 +103,8 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeBatchOperation.lastUpdatedDateTime, "lastUpdatedOn", "java");
 
 @@clientName(StringIndexType.utf16CodeUnit, "utf16_CodeUnit", "java");
+@@clientName(DocumentBarcodeKind.QRCode, "QR_Code", "java");
+@@clientName(DocumentBarcodeKind.MicroQRCode, "MICRO_QR_CODE", "java");
 
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsContent",
