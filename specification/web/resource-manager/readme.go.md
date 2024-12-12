@@ -16,22 +16,15 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 directive:
-- from: CommonDefinitions.json
-  where: $.definitions.Certificate
-  transform:
-    $["x-ms-client-name"] = "AppCertificate"
-- from: CommonDefinitions.json
-  where: $.definitions.Certificate
-  transform:
-    $["properties"]["properties"]["x-ms-client-name"] = "AppCertificateProperties"
-- from: CommonDefinitions.json
-  where: $.definitions.CertificateCollection
-  transform:
-    $["x-ms-client-name"] = "AppCertificateCollection"
-- from: CommonDefinitions.json
-  where: $.definitions.CertificatePatchResource
-  transform:
-    $["x-ms-client-name"] = "AppCertificatePatchResource"
+  - rename-model:
+      from: "Certificate"
+      to: "AppCertificate"
+  - rename-model:
+      from: "CertificateCollection"
+      to: "AppCertificateCollection"
+  - rename-model:
+      from: "CertificatePatchResource"
+      to: "AppCertificatePatchResource"
 ```
 
 ### Go multi-api
