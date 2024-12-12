@@ -119,7 +119,7 @@ model KeyListResult {
   items?: Key[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @nextLink
+  @Azure.Core.nextLink
   `@nextLink`?: string;
 }
 
@@ -162,7 +162,7 @@ model KeyValueListResult {
   etag?: string;
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @nextLink
+  @Azure.Core.nextLink
   `@nextLink`?: string;
 }
 
@@ -207,7 +207,7 @@ model SnapshotListResult {
   items?: Snapshot[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @nextLink
+  @Azure.Core.nextLink
   `@nextLink`?: string;
 }
 
@@ -304,7 +304,7 @@ model LabelListResult {
   items?: Label[];
 
   @doc("The URI that can be used to request the next set of paged results.")
-  @nextLink
+  @Azure.Core.nextLink
   `@nextLink`?: string;
 }
 

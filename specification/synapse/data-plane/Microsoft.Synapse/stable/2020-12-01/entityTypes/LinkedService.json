@@ -1596,6 +1596,34 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "allowZeroDateTime": {
+          "type": "object",
+          "description": "This allows the special “zero” date value 0000-00-00 to be retrieved from the database. Type: boolean."
+        },
+        "connectionTimeout": {
+          "type": "object",
+          "description": "The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error. Type: integer."
+        },
+        "convertZeroDateTime": {
+          "type": "object",
+          "description": "True to return DateTime.MinValue for date or datetime columns that have disallowed values. Type: boolean."
+        },
+        "guidFormat": {
+          "type": "object",
+          "description": "Determines which column type (if any) should be read as a GUID. Type: string. None: No column types are automatically read as a Guid; Char36: All CHAR(36) columns are read/written as a Guid using lowercase hex with hyphens, which matches UUID."
+        },
+        "sslCert": {
+          "type": "object",
+          "description": "The path to the client’s SSL certificate file in PEM format. SslKey must also be specified. Type: string."
+        },
+        "sslKey": {
+          "type": "object",
+          "description": "The path to the client’s SSL private key in PEM format. SslCert must also be specified. Type: string."
+        },
+        "treatTinyAsBoolean": {
+          "type": "object",
+          "description": "When set to true, TINYINT(1) values are returned as booleans. Type: bool."
         }
       }
     },
@@ -4421,6 +4449,50 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string."
+        },
+        "sslMode": {
+          "type": "object",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer."
+        },
+        "timeout": {
+          "type": "object",
+          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer."
+        },
+        "trustServerCertificate": {
+          "type": "object",
+          "description": "Whether to trust the server certificate without validating it. Type: boolean."
+        },
+        "readBufferSize": {
+          "type": "object",
+          "description": "Determines the size of the internal buffer uses when reading. Increasing may improve performance if transferring large values from the database. Type: integer."
+        },
+        "timezone": {
+          "type": "object",
+          "description": "Gets or sets the session timezone. Type: string."
+        },
+        "encoding": {
+          "type": "object",
+          "description": "Gets or sets the .NET encoding that will be used to encode/decode PostgreSQL string data. Type: string"
         },
         "password": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
