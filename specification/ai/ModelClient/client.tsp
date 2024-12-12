@@ -16,6 +16,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
+@@usage(AI.Model.ChatCompletionsOptions, Usage.input);
+
 // Since we made all operator methods internal, we need to expliclty
 // say we still want the models they use to be public.
 @@access(AI.Model.ChatChoice, Access.public);
