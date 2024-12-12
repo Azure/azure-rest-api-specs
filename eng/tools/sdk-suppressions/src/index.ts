@@ -5,7 +5,6 @@ import { updateSdkSuppressionsLabels, PullRequestContext } from "./updateSdkSupp
 function getUsage(): string {
     return (
       "Parameter missing! \n" + 
-      "\n" +
       "Check GITHUB_PULL_REQUEST_CONTEXT where defined in step: Get GitHub PullRequest Context" +
       "Check OUTPUT_FILE in step env: Run get suppressions label script " +
       "Check The pr has change files in GITHUB_PULL_REQUEST_CHANGE_FILES "
