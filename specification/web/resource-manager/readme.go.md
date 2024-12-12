@@ -21,9 +21,9 @@ directive:
   transform:
     $["x-ms-client-name"] = "AppCertificate"
 - from: CommonDefinitions.json
-  where: $.definitions.CertificateProperties
+  where: $.definitions.Certificate
   transform:
-    $["x-ms-client-name"] = "AppCertificateProperties"
+    $["properties"]["x-ms-client-name"] = "AppCertificateProperties"
 - from: CommonDefinitions.json
   where: $.definitions.CertificateCollection
   transform:
