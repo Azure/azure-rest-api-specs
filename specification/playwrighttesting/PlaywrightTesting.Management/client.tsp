@@ -5,9 +5,18 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzurePlaywrightService;
 
+@@clientNamespace(Microsoft.AzurePlaywrightService,
+  "com.azure.resourcemanager.playwrighttesting",
+  "java"
+);
+
 @@clientName(Microsoft.AzurePlaywrightService,
   "PlaywrightTestingMgmt",
   "python"
+);
+@@clientName(Microsoft.AzurePlaywrightService,
+  "PlaywrightTestingMgmtClient",
+  "java"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
