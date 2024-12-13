@@ -4,3 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
+@@clientName(Microsoft.DeviceRegistry,
+  "DeviceRegistryManagementClient",
+  "javascript"
+);
