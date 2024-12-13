@@ -62,7 +62,7 @@ model SubscriptionValidationEventData {
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationUrl?: string;
+  validationUrl: string;
 }
 
 /**
@@ -85,19 +85,9 @@ model SubscriptionDeletedEventData {
   eventSubscriptionId: string;
 }
 
-const MicrosoftEventGridMQTTClientCreatedOrUpdatedExample: EventGridMQTTClientCreatedOrUpdatedEventData = #{
-  createdOn: utcDateTime.fromISO("2023-07-29T01:14:34.2048108Z"),
-  updatedOn: utcDateTime.fromISO("2023-07-29T01:14:34.2048108Z"),
-  namespaceName: "myns",
-  clientName: "client1",
-  clientAuthenticationName: "client1",
-  state: "Enabled",
-  attributes: #{ attribute1: "value1" },
-};
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@example(MicrosoftEventGridMQTTClientCreatedOrUpdatedExample)
 model EventGridMQTTClientCreatedOrUpdatedEventData
   extends EventGridMQTTClientEventData {
   /** Configured state of the client. The value could be Enabled or Disabled */
@@ -132,34 +122,21 @@ long, and supports UTF-8 characters.
   clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
-  clientName?: string;
+  clientName: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
   namespaceName: string;
 }
 
-const MicrosoftEventGridMQTTClientDeletedExample: EventGridMQTTClientDeletedEventData = #{
-  namespaceName: "myns",
-  clientName: "client1",
-  clientAuthenticationName: "client1",
-};
 /** Event data for Microsoft.EventGrid.MQTTClientDeleted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@example(MicrosoftEventGridMQTTClientDeletedExample)
 model EventGridMQTTClientDeletedEventData
   extends EventGridMQTTClientEventData {}
 
-const MicrosoftEventGridMQTTClientSessionConnectedExample: EventGridMQTTClientSessionConnectedEventData = #{
-  namespaceName: "myns",
-  clientAuthenticationName: "client1",
-  clientSessionName: "session1",
-  sequenceNumber: 1,
-};
 /** Event data for Microsoft.EventGrid.MQTTClientSessionConnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@example(MicrosoftEventGridMQTTClientSessionConnectedExample)
 model EventGridMQTTClientSessionConnectedEventData
   extends EventGridMQTTClientEventData {
   /** 
@@ -177,17 +154,9 @@ than the previous event.
   sequenceNumber: int64;
 }
 
-const MicrosoftEventGridMQTTClientSessionDisconnectedExample: EventGridMQTTClientSessionDisconnectedEventData = #{
-  namespaceName: "myns",
-  clientAuthenticationName: "client1",
-  clientSessionName: "session1",
-  sequenceNumber: 1,
-  disconnectionReason: "ClientInitiatedDisconnect",
-};
 /** Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Following Swagger Inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MQTT is an acronym and should be all caps"
-@example(MicrosoftEventGridMQTTClientSessionDisconnectedExample)
 model EventGridMQTTClientSessionDisconnectedEventData
   extends EventGridMQTTClientEventData {
   /**
