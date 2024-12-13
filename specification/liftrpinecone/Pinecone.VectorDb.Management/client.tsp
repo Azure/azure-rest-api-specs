@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Pinecone.VectorDb, "PineconeVectorDBMgmt", "python");
+@@clientName(Pinecone.VectorDb, "PineconeVectorDbMgmt", "python");
