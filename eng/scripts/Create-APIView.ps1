@@ -86,6 +86,27 @@ function Get-ResourceProviderFromReadMePath {
     return $null
 }
 
+function Get-ImpactedTypespecProjects {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$TypeSpecFile
+    )
+    $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
+    $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
+    $typeSpecProjectBaseDirectory = $filePathParts[0..$($filePathParts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
+    $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse
+    if ($configFilesInTypeSpecProjects) {
+      foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
+        $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp" 
+        if ($entryPointFile) {
+          $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName) | Out-Null
+          Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+        }
+      }
+    }
+    return $projectRootPaths
+}
+
 <#
 .DESCRIPTION
   Invoke the swagger parset to generate APIView tokens.
@@ -366,12 +387,32 @@ function New-TypeSpecAPIViewTokens {
   $SourceCommitId = $(git rev-parse HEAD^2)
   $TargetCommitId = $(git rev-parse HEAD^1)
 
-  $typeSpecProjects, $null = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
-    -IgnoreCoreFiles:$true `
-    -BaseCommitish:$SourceCommitId `
-    -TargetCommitish:$TargetCommitId
+  LogInfo " Getting changed TypeSpec files in PR, between $SourceCommitId and $TargetCommitId"
+  $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
+  $changedTypeSpecFiles = Get-ChangedTypeSpecFiles -changedFiles $changedFiles
 
-  $typeSpecProjects = $typeSpecProjects | Where-Object {Test-Path -Path "$_/main.tsp"}
+  if ($changedTypeSpecFiles.Count -eq 0) {
+    LogWarning " There are no changes to TypeSpec files in the current PR..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
+
+  LogGroupStart " Pullrequest has changes in these TypeSpec files..."
+  $changedTypeSpecFiles | ForEach-Object {
+    LogInfo " - $_"
+  }
+  LogGroupEnd
+  
+  # Get impacted TypeSpec projects
+  $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
+  $changedTypeSpecFiles | ForEach-Object {
+    $tspProjs = Get-ImpactedTypespecProjects -TypeSpecFile "$_"
+    if ($tspProjs) {
+      foreach ($tspProj in $tspProjs) {
+        $typeSpecProjects.Add($tspProj) | Out-Null
+      }
+    }
+  }
 
   LogGroupStart " TypeSpec APIView Tokens will be generated for the following configuration files..."
   $typeSpecProjects | ForEach-Object {
