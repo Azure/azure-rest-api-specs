@@ -30,7 +30,7 @@
                 }
               },
               "configurationApi": {
-                "hostname": "standard-gw-1.westus.configuration.gateway.azure-api.net"
+                "hostname": "standard-gw-1.configuration.westus-01.azure-api.net"
               }
             },
             "sku": {
@@ -64,10 +64,37 @@
               "name": "WorkspaceGatewayPremium",
               "capacity": 1
             }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/kube-managed-gw-1",
+            "name": "kube-managed-gw-1",
+            "type": "Microsoft.ApiManagement/gateways",
+            "tags": {
+              "Owner": "vitaliik"
+            },
+            "location": "East US",
+            "etag": "AAAAAAAWKwo=",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetProvisioningState": "",
+              "createdAtUtc": "2021-06-16T09:40:00.9453556Z",
+              "frontend": {
+                "defaultHostname": "kube-managed-gw-1.eastus.gateway.azure-api.net"
+              },
+              "backend": {
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn2/subnets/sn2"
+                }
+              }
+            },
+            "kind": "KubernetesManaged",
+            "sku": {
+              "name": "WorkspaceGatewayPremium",
+              "capacity": 1
+            }
           }
         ]
       }
     }
   }
 }
-
