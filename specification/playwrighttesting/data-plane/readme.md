@@ -27,9 +27,9 @@ These are the global settings for the playwrighttesting.
 ```yaml
 openapi-type: data-plane
 tag: package-2024-12-01
-title: [[Title]]
+title: PlaywrightTestingClient
 security: AADToken
-security-scopes: [[SecurityScopes]]
+#security-scopes: [[SecurityScopes]]
 ```
 
 ### Tag: package-2024-12-01
