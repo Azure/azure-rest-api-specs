@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -18,10 +18,12 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
-model ReportResource extends ProxyResourceBase {
+model ReportResource extends Foundations.ProxyResource {
   /**
    * Report Name.
    */
@@ -39,6 +41,10 @@ model ReportResource extends ProxyResourceBase {
   @Azure.ClientGenerator.Core.flattenProperty
   @extension("x-ms-client-name", "properties")
   properties: ReportProperties;
+
+  @added(Versions.v2024_12_15_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -65,7 +71,6 @@ interface ReportResources {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility("read")
   @operationId("Reports_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
@@ -168,6 +173,7 @@ interface ReportResources {
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
 @@encodedName(ReportResources.update::parameters.properties,
   "application/json",
   "parameters"
