@@ -25,4 +25,8 @@ directive:
   - from: swagger-document
     where: $
     transform: $.host = "management.azure.com"
+  
+  - from: swagger-document
+    where: $
+    transform: $.schemes = ["https"]
 ```
