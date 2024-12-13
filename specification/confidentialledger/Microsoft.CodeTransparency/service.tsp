@@ -1,17 +1,19 @@
-using Azure.Core;
-using Azure.Core.Traits;
-using TypeSpec.Rest;
-using TypeSpec.Http;
-
-namespace Microsoft.CodeTransparency;
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
+@route("/.well-known/transparency-configuration")
+@get
+op getTransparencyConfig is Foundations.Operation<{}, TransparencyConfiguration, ServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get service parameters")
 @route("/parameters")
 @get
 op getParameters is Foundations.Operation<{}, ParametersResult, ServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get the DID configuration file.")
 @route("/.well-known/did.json")
 @get

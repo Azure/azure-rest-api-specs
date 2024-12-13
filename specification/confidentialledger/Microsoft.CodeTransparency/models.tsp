@@ -1,10 +1,4 @@
-using Azure.Core;
-using Azure.Core.Traits;
-using TypeSpec.Rest;
-using TypeSpec.Http;
-
-namespace Microsoft.CodeTransparency;
-
+// TODO errors must use RFC9290
 @doc("Service temporarily unavailable")
 @error
 model ServiceUnavailableError {
@@ -19,15 +13,23 @@ model ServiceUnavailableError {
   ...Foundations.ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@removed(Versions.`2025-01-31-preview`)
 @doc("The Response body of the service parameters")
 model ParametersResult {
+  @doc("Service certificate used in TLS and for receipt verification")
   serviceCertificate: string;
+  
+  @doc("Service identifier")
   serviceId: string;
+
+  @doc("Signature algorithm used in receipts")
   signatureAlgorithm: string;
+
+  @doc("Tree algorithm used in receipts")
   treeAlgorithm: string;
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("Response of entry submission containing the operationId.")
 model CreateEntryResult {
   @doc("String representing the operation id submitted")
@@ -35,30 +37,85 @@ model CreateEntryResult {
   operationId: string;
 }
 
-@doc("An Entry in Cose format")
-model CoseEntry {
-  // defaults to json in the post method
+@added(Versions.`2025-01-31-preview`)
+@doc("Response of entry submission if the response can be served immediatelly, see IETF SCITT SCRAPI draft")
+model CreateEntryCreated {
+  @doc("Status code")
+  @statusCode
+  statusCode: 201;
+
   @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature.")
-  @header
+  @header("Content-Type")
   contentType: "application/cose";
 
-  @doc("A raw CoseSign1 signature")
+  @doc("Location of the transparent statement")
+  @header("Location")
+  location: string;
+
+  @doc("Transparent statement")
   @bodyRoot
   body: bytes;
 }
 
-@doc("A Raw Entry in cbor format")
-model RawEntry {
-  @doc("The MIME content type for raw receipt is application/cbor.")
-  @header
+@added(Versions.`2025-01-31-preview`)
+@doc("Response of entry submission containing the transparent statement id, see IETF SCITT SCRAPI draft")
+model CreateEntryPending {
+  @doc("Status code")
+  @statusCode
+  statusCode: 202;
+
+  @doc("Response content is CBOR")
+  @header("Content-Type")
   contentType: "application/cbor";
+
+  @doc("Location of the transparent statement")
+  @header("Location")
+  location: string;
+
+  @doc("Response contains the identifier")
+  @bodyRoot
+  body: bytes;
+}
+
+@doc("Signed statement")
+model SignedStatement {
+  @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature, see IETF SCITT draft")
+  @header("Content-Type")
+  contentType: "application/cose";
+
+  @doc("CoseSign1 signature envelope")
+  @bodyRoot
+  body: bytes;
+}
+
+@doc("Transparent statement")
+model TransparentStatement {
+  @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature, see IETF SCITT draft")
+  @header("Content-Type")
+  contentType: "application/cose";
+
+  @doc("CoseSign1 signature envelope with the receipt embedded in the unprotected header")
+  @bodyRoot
+  body: bytes;
+}
+
+@doc("A ledger receipt, see IETF SCITT draft")
+model ReceiptEntry {
+  @doc("The MIME content type for raw receipt is application/cbor.")
+  @removed(Versions.`2025-01-31-preview`)
+  @header("Content-Type")
+  contentTypeCbor: "application/cbor";
+
+  @doc("The MIME content type for receipt is application/cose.")
+  @added(Versions.`2025-01-31-preview`)
+  @header("Content-Type")
+  contentTypeCose: "application/cose";
 
   @doc("A raw CBOR content")
   @bodyRoot
   body: bytes;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("A List of Entry IDs")
 @pagedResult
 model EntryIds {
@@ -101,6 +158,7 @@ model TransactionsRange {
   to?: int64;
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("The OperationId parameter.")
 model OperationIdParameter {
   @doc("ID of the operation to retrieve.")
@@ -109,12 +167,14 @@ model OperationIdParameter {
   operationId: string;
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("The Response body of the ListOperations API")
 model ListOperationResult {
   @doc("List of operations")
   operations: GetOperationResult[];
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("The Response body of the GetOperationId API.")
 model GetOperationResult {
   @doc("ID of the transaction. Only if status is Succeeded.")
@@ -133,6 +193,7 @@ model GetOperationResult {
   status: OperationStatus;
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("Possible statuses of the operation.")
 @lroStatus
 union OperationStatus {
@@ -142,6 +203,19 @@ union OperationStatus {
   @lroSucceeded @doc("Operation succeeded.") "succeeded",
 }
 
+@added(Versions.`2025-01-31-preview`)
+@doc("Tranparency configuration as per, see IETF SCITT SCRAPI draft.")
+model TransparencyConfiguration {
+  @doc("The MIME content type for configuration is application/cbor.")
+  @header("ContentType")
+  contentType: "application/cbor";
+
+  @doc("CBOR content of the configuration object")
+  @bodyRoot
+  body: bytes;
+}
+
+@removed(Versions.`2025-01-31-preview`)
 @doc("A DID issuer")
 model DidIssuer {
   @doc("String representing a DID issuer.")
@@ -149,6 +223,7 @@ model DidIssuer {
   issuer: string;
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("A DID document")
 model DidDocument {
   @doc("String representing a DID issuer.")
@@ -158,6 +233,7 @@ model DidDocument {
   assertionMethod: DidDocumentKey[];
 }
 
+@removed(Versions.`2025-01-31-preview`)
 @doc("A DID document key")
 model DidDocumentKey {
   @doc("Key identifier.")
@@ -228,44 +304,85 @@ model JsonWebKey {
   y?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("The Response body of the Version API.")
 model VersionResult {
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
   @doc("Version of the CodeTransparency service")
   scitt_version: string;
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Version of the CodeTransparency service")
+  version: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
+
 @doc("The Response body of the Configuration API.")
 model CodeTransparencyConfiguration {
+  @doc("Policy configuration")
   policy?: CodeTransparencyConfigurationPolicy;
+
+  @doc("Authentication configuration")
   authentication?: CodeTransparencyConfigurationAuthentication;
 
-  @doc("did:web identifier")
-  @pattern("^did:web:.+$")
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
+  @doc("Issuer used in receipts")
   service_identifier?: string;
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Issuer used in receipts")
+  serviceIssuer?: string;
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Feed name used in receipts")
+  serviceFeed?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
 @doc("Configuration of CCF authentication.")
 model CodeTransparencyConfigurationAuthentication {
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
+  @doc("Disable API authentication and rely on signed statement verification only")
   allow_unauthenticated: boolean;
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Disable API authentication and rely on signed statement verification only")
+  allowUnauthenticated: boolean;
+
+  @doc("JWT requirements if authentication is enabled")
   jwt?: CodeTransparencyConfigurationAuthenticationJwt;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Configuration of JWT claims")
 model CodeTransparencyConfigurationAuthenticationJwt {
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
+  @doc("Claims that must be present in the JWT")
   required_claims: Record<string>;
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Claims that must be present in the JWT")
+  requiredClaims: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "MUST fix in next update"
-@doc("Configuration of CCF Authentication policies.")
+@doc("Policy configuration listing accepted algorithms and the the policy script")
 model CodeTransparencyConfigurationPolicy {
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
+  @doc("Accepted COSE signature algorithms when verifying signed statements")
+
   accepted_algorithms?: string[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @removed(Versions.`2025-01-31-preview`)
+  @doc("Accepted COSE signature did:web issuers when verifying signed statements")
   accepted_did_issuers?: string[];
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("Accepted COSE signature algorithms when verifying signed statements")
+  acceptedAlgorithms?: string[];
+
+  @added(Versions.`2025-01-31-preview`)
+  @doc("COSE signature verification script in Javascript")
+  policyScript: string;
 }

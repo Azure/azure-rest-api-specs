@@ -1,24 +1,29 @@
-using Azure.Core;
-using Azure.Core.Traits;
-using TypeSpec.Rest;
-using TypeSpec.Http;
-
-namespace Microsoft.CodeTransparency;
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Post an entry to be registered on the CodeTransparency instance.")
 @post
+@sharedRoute
 @route("/entries")
 op createEntry is Foundations.Operation<
-  CoseEntry,
+  SignedStatement,
   CreateEntryResult,
   ServiceTraits
 >;
 
-// Operations moved under the Entries interface
-// as otherwise the generator separates those into
-// separate clients
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Post an entry to be registered on the CodeTransparency instance, see IETF SCITT SCRAPI draft")
+@post
+@sharedRoute
+@route("/entries")
+op createEntryChanged is Foundations.Operation<
+  SignedStatement,
+  CreateEntryCreated | CreateEntryPending,
+  ServiceTraits
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get the status the entry operation")
 @route("/operations/{operationId}")
 op getEntryStatus is Foundations.Operation<
@@ -29,6 +34,7 @@ op getEntryStatus is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get the status of all entries operations")
 @route("/operations")
 op listEntryStatuses is Foundations.Operation<
@@ -42,7 +48,7 @@ op listEntryStatuses is Foundations.Operation<
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
   EmbedReceiptParameter,
-  CoseEntry,
+  SignedStatement | TransparentStatement,
   ServiceTraits
 >;
 
@@ -51,7 +57,17 @@ op getEntry is Foundations.Operation<
 @route("/entries/{entryId}/receipt")
 op getEntryReceipt is Foundations.Operation<
   EntryIdParameter,
-  RawEntry,
+  ReceiptEntry,
+  ServiceTraits
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get the receipt of an entry given a specific entry id.")
+@route("/entries/{entryId}/statement")
+op getEntryStatement is Foundations.Operation<
+  EntryIdParameter,
+  TransparentStatement,
   ServiceTraits
 >;
 
