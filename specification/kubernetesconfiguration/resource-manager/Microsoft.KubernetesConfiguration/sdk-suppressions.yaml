@@ -3,3 +3,7 @@ suppressions:
     - package: '@azure/arm-kubernetesconfiguration'
       breaking-changes:
       - Type of parameter postBuild of interface KustomizationPatchDefinition is changed from PostBuildDefinition to PostBuildPatchDefinition
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/kubernetesconfiguration/armkubernetesconfiguration'
+      breaking-changes:
+      - Type of `KustomizationPatchDefinition.PostBuild` has been changed from `*PostBuildDefinition` to `*PostBuildPatchDefinition`
