@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1",
+            "type": "Microsoft.ApiManagement/service/workspaces",
+            "name": "wks1",
+            "properties": {
+              "description": "workspace 1",
+              "displayName": "my workspace"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks2",
+            "type": "Microsoft.ApiManagement/service/workspaces",
+            "name": "wks1",
+            "properties": {
+              "description": "workspace 2",
+              "displayName": "my workspace"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks3",
+            "type": "Microsoft.ApiManagement/service/workspaces",
+            "name": "wks1",
+            "properties": {
+              "description": "workspace 3",
+              "displayName": "my workspace",
+              "configurationApi": {
+                "hostname": "tenant1.configuration.eastus-01.azure-api.net"
+              }
+            }
+          }
+        ],
+        "count": 3,
+        "nextLink": ""
+      }
+    }
+  }
+}
