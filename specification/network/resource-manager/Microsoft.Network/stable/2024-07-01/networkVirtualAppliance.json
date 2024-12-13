@@ -417,6 +417,12 @@
           }         
         ],
         "responses": {
+          "200": {
+            "description": "Request successful. The operation retrieves boot diagnostic logs for a Network Virtual Appliance VM resource.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceId"
+            }
+          },
           "202": {
             "description": "Request accepted. The operation gets the boot diagnostic logs for a Network Virtual Appliance VM instance.",
             "headers": {
@@ -1690,6 +1696,7 @@
       "properties": {
         "serialConsoleStorageSasUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
         }
       },
@@ -1700,6 +1707,7 @@
       "properties": {
         "consoleScreenshotStorageSasUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
         }
       },
