@@ -896,6 +896,8 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
+  /** Recipient mail server */
+  recipientMailServer?: string;
 }
 
 /** Schema of common properties of all chat thread events */
