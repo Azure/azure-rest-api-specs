@@ -526,6 +526,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/azureTrafficCollectors": {
+      "get": {
+        "tags": [
+          "AzureTrafficCollectors"
+        ],
+        "operationId": "AzureTrafficCollectorsByCircuit_List",
+        "description": "Gets all azure traffic collector ids in a specified express route circuit.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the express route circuit."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of azure traffic collector ids.",
+            "schema": {
+              "$ref": "#/definitions/AzureTrafficCollectorByCircuitListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List of Traffic Collectors by circuit": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
       "delete": {
         "tags": [
