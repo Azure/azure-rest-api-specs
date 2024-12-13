@@ -6,7 +6,6 @@ import "../SharedEnums.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-@visibility("public")
 namespace SkillContext
 {
 
@@ -304,6 +303,7 @@ namespace SkillContext
 		source: SkillSource;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a chat completion request.")
 	model ChatCompletionRequest extends BaseCompletionRequest {
 	  @doc("The messages associated with the request.")
@@ -325,6 +325,7 @@ namespace SkillContext
 	  ParallelToolCalls?: boolean;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents the base completion request with common parameters.")
 	model BaseCompletionRequest {
 	  @doc("The maximum number of tokens to generate.")
@@ -367,6 +368,7 @@ namespace SkillContext
 	  ResponseFormat: unknown;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a message in the chat.")
 	model Message {
 	  @doc("The content of the message.")
@@ -388,6 +390,7 @@ namespace SkillContext
 	  ToolCallId?: string;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a function call.")
 	model FunctionCall {
 	  @doc("The name of the function.")
@@ -397,6 +400,7 @@ namespace SkillContext
 	  Arguments?: Record<string>;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a tool call.")
 	model ToolCall {
 	  @doc("The id of the tool call.")
@@ -409,6 +413,7 @@ namespace SkillContext
 	  Function: ToolFunctionCall;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a tool function call.")
 	model ToolFunctionCall {
 	  @doc("The name of the tool function.")
@@ -418,6 +423,7 @@ namespace SkillContext
 	  Arguments: string;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a GPT function definition.")
 	model GPTFunction {
 	  @doc("The name of the GPT function.")
@@ -433,6 +439,7 @@ namespace SkillContext
 	  Result: FunctionResult;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents parameters for a function.")
 	model FunctionParameter {
 	  @doc("The type of the parameter.")
@@ -445,6 +452,7 @@ namespace SkillContext
 	  Required: Array<string>;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents parameters properties for a function.")
 	model FunctionParameterProperty {
 	  @doc("The type of the parameter property.")
@@ -457,13 +465,14 @@ namespace SkillContext
 	  Enum: Array<string>;
 	}
 
-
+	@defaultVisibility("public")
 	@doc("Represents the result of a function.")
 	model FunctionResult {
 	  @doc("The type of the result.")
 	  Type: string;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a tool.")
 	model Tools {
 	  @doc("The type of the tool.")
@@ -473,6 +482,7 @@ namespace SkillContext
 	  Function: FunctionDefinition;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents the definition of a function.")
 	model FunctionDefinition {
 	  @doc("The description of the function.")
@@ -485,6 +495,7 @@ namespace SkillContext
 	  Parameters: unknown;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents the Azure OpenAI execution context.")
 	model AzureOpenAIExecutionContext {
 	  @doc("The API version.")
@@ -512,6 +523,7 @@ namespace SkillContext
 	  ReportingProperties?: Record<string>;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a request to create a chat completion.")
 	model CreateChatCompletionRequest {
 	  @doc("The deployment ID.")
@@ -524,6 +536,7 @@ namespace SkillContext
 	  openAiExecutionContext?: AzureOpenAIExecutionContext;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents the base completion response.")
 	model BaseCompletionResponse {
 	  @doc("The unique identifier for the response.")
@@ -545,6 +558,7 @@ namespace SkillContext
 	  PromptFilterResults: Array<PromptAnnotation>;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a prompt annotation.")
 	model PromptAnnotation {
 	  @doc("The index of the prompt.")
@@ -554,6 +568,7 @@ namespace SkillContext
 	  ContentFilterResults: ContentFilterResults;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents content filter results.")
 	model ContentFilterResults {
 	  @doc("Filter result for hate content.")
@@ -581,6 +596,7 @@ namespace SkillContext
 	  Jailbreak?: ContentFilterResult;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents a content filter result.")
 	model ContentFilterResult {
 	  @doc("Indicates whether the content is filtered.")
@@ -596,6 +612,7 @@ namespace SkillContext
 	  Citation?: CodeCitation;
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents the usage statistics for a response.")
 	model Usage {
 	  @doc("The number of tokens in the prompt.")
@@ -608,6 +625,7 @@ namespace SkillContext
 	  TotalTokens: int32;
 	}
 
+	@defaultVisibility("public")
 	@doc("Defines the severity levels for content filtering.")
 	enum FilterSeverity {
 	  safe,
@@ -616,6 +634,7 @@ namespace SkillContext
 	  high,
 	}
 
+	@defaultVisibility("public")
 	@doc("Represents details of a code citation.")
 	model CodeCitation {
 	  @doc("The URL of the cited source.")
@@ -625,7 +644,7 @@ namespace SkillContext
 	  License: string;
 	}
 
-	// Define the base choice
+	@defaultVisibility("public")
 	model BaseChoice {
 	  Index: int32;
 	  @doc("Log probabilities for this choice.")
@@ -641,13 +660,13 @@ namespace SkillContext
 	  ContentFilterError?: ContentFilterError;
 	}
 
-	// Define ContentFilterError
+	@defaultVisibility("public")
 	model ContentFilterError {
 	  @doc("Details about the error in the content filter.")
 	  Error?: ContentFilterResultError;
 	}
 
-	// Define ContentFilterResultError
+	@defaultVisibility("public")
 	model ContentFilterResultError {
 	  @doc("The error code.")
 	  Code?: string;
@@ -656,13 +675,13 @@ namespace SkillContext
 	  Message?: string;
 	}
 
-	// Define ChatChoice, inheriting from BaseChoice
+	@defaultVisibility("public")
 	model ChatChoice extends BaseChoice {
 	  @doc("The message associated with the chat choice.")
 	  Message: Message;
 	}
 
-	// Define ChatCompletionResponse, inheriting from BaseCompletionResponse
+	@defaultVisibility("public")
 	model ChatCompletionResponse extends BaseCompletionResponse {
 	  @doc("List of choices in the chat completion response.")
 	  Choices: Array<ChatChoice>;
