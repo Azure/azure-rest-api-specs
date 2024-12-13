@@ -121,20 +121,3 @@ op createChatCompletion(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 @body request  : CreateChatCompletionRequest,
 ): ChatCompletionResponse;
-
-@post
-@route("/medeinaOpenAI/createCompletion")
-@doc("Executes an OpenAI completion request")
-op createCompletion(
-@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body request  : CreateCompletionRequest,
-): CompletionResponse;
-
-@post
-@route("/medeinaOpenAI/CreateEmbedding")
-@doc("Creates embeddings for the prompt messages based on the model chosen.")
-op CreateEmbedding(
-@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body request  : CreateEmbeddingRequest,
-): EmbeddingResponse;
-  

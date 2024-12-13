@@ -8,6 +8,9 @@ using TypeSpec.Rest;
 
 namespace SkillContext;
 
+@codegen("csharp", {
+  useInternalConstructors: false
+})
 
 @doc("SkillContext object containing properties of the current session relevant to the invoked skill")
 model SkillContextResponse {
@@ -303,201 +306,370 @@ model AddSourceRequest {
 	source: SkillSource;
 }
 
-
-@doc("CreateChatCompletionRequest")
-model CreateChatCompletionRequest {
-	deploymentId?: string;
-	chatCompletionRequest: ChatCompletionRequest;
-	openAiExecutionContext?: AzureOpenAIExecutionContext; 
-}
-
-@doc("CreateCompletionRequest")
-model CreateCompletionRequest {
-	deploymentId?: string;
-	completionRequest: CompletionRequest;
-	openAiExecutionContext?: AzureOpenAIExecutionContext; 
-}
-
-@doc("CreateEmbeddingRequest")
-model CreateEmbeddingRequest {
-	deploymentId?: string;
-	embeddingRequest: EmbeddingRequest;
-	openAiExecutionContext?: AzureOpenAIExecutionContext; 
-}
-
+@doc("Represents a chat completion request.")
 model ChatCompletionRequest extends BaseCompletionRequest {
-	Messages: Array<Message>;
-	Functions: Array<GPTFunction>;
-	FunctionCall: string;
-	Tools?: Array<Tools>;
-	ToolChoice?: string;
-	ParallelToolCalls?: boolean;
+  @doc("The messages associated with the request.")
+  Messages: Array<Message>;
+
+  @doc("The functions associated with the request.")
+  Functions: Array<GPTFunction>;
+
+  @doc("Specifies the function to call.")
+  FunctionCall: string;
+
+  @doc("The tools available for this request.")
+  Tools?: Array<Tools>;
+
+  @doc("The selected tool for execution.")
+  ToolChoice?: string;
+
+  @doc("Indicates whether tools can be called in parallel.")
+  ParallelToolCalls?: boolean;
 }
 
-model Message {
-	Content?: string;
-	Role: string;
-	Name?: string;
-	FunctionCall?: FunctionCall;
-	ToolCalls?: Array<ToolCall>;
-	ToolCallId?: string;
-
-}
-
-model FunctionCall {
-	Name: string;
-	Arguments?: Record<string>;
-}
-
-model ToolCall {
-	Id: string;
-	Type: string;
-	Function: ToolFunctionCall;
-}
-
-model ToolFunctionCall {
-	Name: string;
-	Arguments: string;
-}
-
-model GPTFunction {
-	Name: string;
-	Description: string;
-	Parameters: FunctionParameter;
-	Result: FunctionResult;
-}
-
-model FunctionParameter {
-	Type: string;
-	Properties: Record<FunctionParameterProperty>;
-	Required: Array<string>;
-}
-
-model FunctionParameterProperty {
-	Type: string;
-	Description: string;
-	Enum: Array<string>;
-}
-
-model FunctionResult {
-	Type: string;
-}
-
-model Tools {
-	Type: string;
-	Function: FunctionDefinition;
-}
-
-model FunctionDefinition {
-	Description: string;
-	Name: string;
-	Parameters: unknown;
-}
-
-model AzureOpenAIExecutionContext {
-	ApiVersion: string | "2024-06-01";
-	Environment: string;
-	IsGPUProxyEnabled: boolean | false;
-	GpuProcessingGeo: string;
-	CustomerAllowCrossGeoCompute: boolean | false;
-	EcsAllowCrossGeoCompute: boolean | false;
-	ContentFilterProperties: Record<string>;
-	ReportingProperties: Record<string>;
-
-}
-
+@doc("Represents the base completion request with common parameters.")
 model BaseCompletionRequest {
-	MaxTokens?: numeric;
-	Temperature?: numeric;
-	TopP?: numeric;
-	N?: numeric;
-	Stream?: boolean;
-	Logprobs?: numeric;
-	Echo?: boolean;
-	Stop: Array<string>;
-	PresencePenalty?: numeric;
-	FrequencyPenalty?: numeric;
-	BestOf?: numeric;
-	LogitBias: Record<numeric>;
-	ResponseFormat: unknown;
+  @doc("The maximum number of tokens to generate.")
+  MaxTokens?: int32;
 
+  @doc("The sampling temperature to use.")
+  Temperature?: float64;
+
+  @doc("The nucleus sampling parameter.")
+  TopP?: float64;
+
+  @doc("The number of completions to generate.")
+  N?: int32;
+
+  @doc("Specifies whether to stream the response.")
+  Stream?: boolean;
+
+  @doc("The number of log probabilities to include.")
+  Logprobs?: int32;
+
+  @doc("Whether to include the prompt in the output.")
+  Echo?: boolean;
+
+  @doc("Stop sequences to terminate generation.")
+  Stop: Array<string>;
+
+  @doc("The penalty for repeating words in the presence.")
+  PresencePenalty?: float64;
+
+  @doc("The penalty for repeating tokens.")
+  FrequencyPenalty?: float64;
+
+  @doc("The number of completions to choose the best from.")
+  BestOf?: int32;
+
+  @doc("Adjusts likelihood of specific tokens.")
+  LogitBias: Record<int32>;
+
+  @doc("The response format specification.")
+  ResponseFormat: unknown;
 }
 
-model CompletionRequest extends BaseCompletionRequest {
-	Prompt: string;
+@doc("Represents a message in the chat.")
+model Message {
+  @doc("The content of the message.")
+  Content?: string;
+
+  @doc("The role of the message sender.")
+  Role: string;
+
+  @doc("The name of the message sender.")
+  Name?: string;
+
+  @doc("The function call information.")
+  FunctionCall?: FunctionCall;
+
+  @doc("The tool calls associated with the message.")
+  ToolCalls?: Array<ToolCall>;
+
+  @doc("The identifier for the tool call.")
+  ToolCallId?: string;
 }
 
-model EmbeddingRequest {
-	Input: unknown;
+@doc("Represents a function call.")
+model FunctionCall {
+  @doc("The name of the function.")
+  Name: string;
+
+  @doc("The arguments passed to the function.")
+  Arguments?: Record<string>;
 }
 
+@doc("Represents a tool call.")
+model ToolCall {
+  @doc("The id of the tool call.")
+  Id: string;
+
+  @doc("The type of the tool call.")
+  Type: string;
+
+  @doc("The function for the tool call.")
+  Function: ToolFunctionCall;
+}
+
+@doc("Represents a tool function call.")
+model ToolFunctionCall {
+  @doc("The name of the tool function.")
+  Name: string;
+
+  @doc("The arguments for the tool function.")
+  Arguments: string;
+}
+
+@doc("Represents a GPT function definition.")
+model GPTFunction {
+  @doc("The name of the GPT function.")
+  Name: string;
+
+  @doc("The description of the GPT function.")
+  Description: string;
+
+  @doc("The parameters required by the GPT function.")
+  Parameters: FunctionParameter;
+
+  @doc("The result of the GPT function.")
+  Result: FunctionResult;
+}
+
+@doc("Represents parameters for a function.")
+model FunctionParameter {
+  @doc("The type of the parameter.")
+  Type: string;
+
+  @doc("The properties of the parameter.")
+  Properties: Record<FunctionParameterProperty>;
+
+  @doc("The list of required properties.")
+  Required: Array<string>;
+}
+
+@doc("Represents parameters properties for a function.")
+model FunctionParameterProperty {
+  @doc("The type of the parameter property.")
+  Type: string;
+
+  @doc("The description of property of the parameter.")
+  Description: string;
+
+  @doc("The list of enums.")
+  Enum: Array<string>;
+}
+
+
+@doc("Represents the result of a function.")
+model FunctionResult {
+  @doc("The type of the result.")
+  Type: string;
+}
+
+@doc("Represents a tool.")
+model Tools {
+  @doc("The type of the tool.")
+  Type: string;
+
+  @doc("The function definition for the tool.")
+  Function: FunctionDefinition;
+}
+
+@doc("Represents the definition of a function.")
+model FunctionDefinition {
+  @doc("The description of the function.")
+  Description: string;
+
+  @doc("The name of the function.")
+  Name: string;
+
+  @doc("The parameters for the function.")
+  Parameters: unknown;
+}
+
+@doc("Represents the Azure OpenAI execution context.")
+model AzureOpenAIExecutionContext {
+  @doc("The API version.")
+  ApiVersion: string = "2024-06-01";
+
+  @doc("The environment where the request is being made.")
+  Environment: string;
+
+  @doc("Determines if the GPU proxy is enabled.")
+  IsGPUProxyEnabled: boolean = false;
+
+  @doc("The geographic location where the GPU processing is being done.")
+  GpuProcessingGeo?: string;
+
+  @doc("Whether the customer allows cross-geo compute in their workspace capacity.")
+  CustomerAllowCrossGeoCompute: boolean = false;
+
+  @doc("ECS controlled flag to allow cross-geo compute.")
+  EcsAllowCrossGeoCompute: boolean = false;
+
+  @doc("Properties used to add content prompt and content filter details from the response.")
+  ContentFilterProperties?: Record<string>;
+
+  @doc("Properties used to report information about the skill invocation. Must not contain customer content.")
+  ReportingProperties?: Record<string>;
+}
+
+@doc("Represents a request to create a chat completion.")
+model CreateChatCompletionRequest {
+  @doc("The deployment ID.")
+  deploymentId?: string;
+
+  @doc("The chat completion request details.")
+  chatCompletionRequest: ChatCompletionRequest;
+
+  @doc("The Azure OpenAI execution context.")
+  openAiExecutionContext?: AzureOpenAIExecutionContext;
+}
+
+@doc("Represents the base completion response.")
 model BaseCompletionResponse {
-	Id: string;
-	Object: string;
-	Created: utcDateTime;
-	Model: string;
-	Usage: Usage;
-	PromptFilterResults: Array<unknown>;
+  @doc("The unique identifier for the response.")
+  Id: string;
+
+  @doc("The object type.")
+  Object: string;
+
+  @doc("The creation timestamp.")
+  Created: utcDateTime; 
+
+  @doc("The model used for completion.")
+  Model: string;
+
+  @doc("The usage statistics for the response.")
+  Usage: Usage;
+
+  @doc("The results of prompt filtering.")
+  PromptFilterResults: Array<PromptAnnotation>;
 }
 
-model Usage {
-	PromptTokens: numeric;
-	CompletionTokens: numeric;
-	TotalTokens: numeric;
+@doc("Represents a prompt annotation.")
+model PromptAnnotation {
+  @doc("The index of the prompt.")
+  PromptIndex: int32;
+
+  @doc("The content filter results.")
+  ContentFilterResults: ContentFilterResults;
 }
 
-model CodeCitation {
-	Url: string;
-	License: string;
+@doc("Represents content filter results.")
+model ContentFilterResults {
+  @doc("Filter result for hate content.")
+  Hate?: ContentFilterResult;
+
+  @doc("Filter result for self-harm content.")
+  SelfHarm?: ContentFilterResult;
+
+  @doc("Filter result for sexual content.")
+  Sexual?: ContentFilterResult;
+
+  @doc("Filter result for violent content.")
+  Violence?: ContentFilterResult;
+
+  @doc("Filter result for profanity.")
+  Profanity?: ContentFilterResult;
+
+  @doc("Filter result for protected material code.")
+  ProtectedMaterialCode?: ContentFilterResult;
+
+  @doc("Filter result for protected material text.")
+  ProtectedMaterialText?: ContentFilterResult;
+
+  @doc("Filter result for jailbreak content.")
+  Jailbreak?: ContentFilterResult;
 }
 
-enum FilterSeverity {
-	safe,
-	low,
-	medium,
-	high,
-}
-
+@doc("Represents a content filter result.")
 model ContentFilterResult {
-	Filtered: boolean;
-	Detected?: boolean;
-	Severity?: FilterSeverity;
-	Citation?: CodeCitation;
+  @doc("Indicates whether the content is filtered.")
+  Filtered: boolean;
+
+  @doc("Indicates whether the content was detected.")
+  Detected?: boolean;
+
+  @doc("The severity of the content filter.")
+  Severity?: FilterSeverity;
+
+  @doc("Citation details for the filtered content.")
+  Citation?: CodeCitation;
 }
 
-model ChatCompletionResponse extends BaseCompletionResponse {
-	Choices: Array<ChatChoice>;
+@doc("Represents the usage statistics for a response.")
+model Usage {
+  @doc("The number of tokens in the prompt.")
+  PromptTokens: int32;
+
+  @doc("The number of tokens in the completion.")
+  CompletionTokens: int32;
+
+  @doc("The total number of tokens used.")
+  TotalTokens: int32;
 }
 
+@doc("Defines the severity levels for content filtering.")
+enum FilterSeverity {
+  safe,
+  low,
+  medium,
+  high"
+}
+
+@doc("Represents details of a code citation.")
+model CodeCitation {
+  @doc("The URL of the cited source.")
+  Url: string;
+
+  @doc("The license of the cited content.")
+  License: string;
+}
+
+// Define the base choice
 model BaseChoice {
-	Index: numeric;
-	LogProbs: unknown;
-	FinishReason: string;
-	ContentFilterResults?: unknown;
-	ContentFilterError?: unknown;
+  Index: int32;
+  @doc("Log probabilities for this choice.")
+  @json("log_probs")
+  LogProbs: unknown;
+
+  @doc("The reason why the operation finished.")
+  @json("finish_reason")
+  FinishReason: string;
+
+  @doc("This object contains the list of content filter annotations.")
+  @json("content_filter_results")
+  ContentFilterResults?: ContentFilterResults;
+
+  @doc("This indicates when the content filtering system does not run on the chat completion.")
+  @json("content_filter_result")
+  ContentFilterError?: ContentFilterError;
 }
 
+// Define ContentFilterError
+model ContentFilterError {
+  @doc("Details about the error in the content filter.")
+  Error?: ContentFilterResultError;
+}
+
+// Define ContentFilterResultError
+model ContentFilterResultError {
+  @doc("The error code.")
+  Code?: string;
+
+  @doc("The error message.")
+  Message?: string;
+}
+
+// Define ChatChoice, inheriting from BaseChoice
 model ChatChoice extends BaseChoice {
-	Message: Message;
+  @doc("The message associated with the chat choice.")
+  Message: Message;
 }
 
-model CompletionResponse extends BaseCompletionResponse {
-	Choices: Array<Choice>;
-}
-
-model Choice extends BaseChoice {
-	Text: string;
-}
-
-model EmbeddingData {
-	Embedding: Array<numeric>;
-	Index: numeric;
-	Object: string;
-}
-
-model EmbeddingResponse {
-	Data: Array<EmbeddingData>;
-	Model: string;
-	Object: string;
-	Usage: Usage;
+// Define ChatCompletionResponse, inheriting from BaseCompletionResponse
+model ChatCompletionResponse extends BaseCompletionResponse {
+  @doc("List of choices in the chat completion response.")
+  Choices: Array<ChatChoice>;
 }
