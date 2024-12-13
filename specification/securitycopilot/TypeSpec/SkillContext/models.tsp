@@ -462,7 +462,6 @@ namespace SkillContext
 	  Type: string;
 	}
 
-	@defaultVisibility("public")
 	@doc("Represents a tool.")
 	model Tools {
 	  @doc("The type of the tool.")
