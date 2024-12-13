@@ -136,10 +136,7 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentField.valueObject, "valueMap", "java");
 @@clientName(AnalyzeBatchOperation, "AnalyzeBatchOperationDetails", "java");
 @@clientName(AnalyzeOperation, "AnalyzeOperationDetails", "java");
-@@clientName(AnalyzeBatchOperationDetail,
-  "AnalyzeBatchResultDetails",
-  "java"
-);
+@@clientName(AnalyzeBatchOperationDetail, "AnalyzeBatchResultDetails", "java");
 
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsOptions",
