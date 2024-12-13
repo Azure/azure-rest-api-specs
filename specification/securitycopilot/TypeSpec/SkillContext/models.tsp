@@ -597,13 +597,13 @@ namespace SkillContext
 	@doc("Represents the usage statistics for a response.")
 	model Usage {
 	  @doc("The number of tokens in the prompt.")
-	  PromptTokens: int32;
+	  PromptTokens: uint32;
 
 	  @doc("The number of tokens in the completion.")
-	  CompletionTokens: int32;
+	  CompletionTokens: uint32;
 
 	  @doc("The total number of tokens used.")
-	  TotalTokens: int32;
+	  TotalTokens: uint32;
 	}
 
 	@doc("Defines the severity levels for content filtering.")
