@@ -80,7 +80,7 @@ interface Pools {
         start time of the last aggregation interval currently available.
         """)
       @query
-      @clientName("starttime", "!autorest")
+      @clientName("starttime", "csharp,python,javascript,go")
       startTime?: utcDateTime;
 
       @doc("""
