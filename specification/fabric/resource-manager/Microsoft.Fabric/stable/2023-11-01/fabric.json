@@ -192,7 +192,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RpUsageAndQuotaDetailsForExistingResource"
+              "$ref": "#/definitions/RpUsageAndQuotaEnumerationForExistingResourceResult"
             }
           },
           "default": {
@@ -201,6 +201,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List quota usages for a subscription": {
+            "$ref": "./examples/FabricCapacities_ListUsagesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1136,6 +1144,27 @@
       "required": [
         "currentValue",
         "limit"
+      ]
+    },
+    "RpUsageAndQuotaEnumerationForExistingResourceResult": {
+      "type": "object",
+      "description": "An object that represents enumerating usage and quota details for existing resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The usage and quota details",
+          "items": {
+            "$ref": "#/definitions/RpUsageAndQuotaDetailsForExistingResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url for the next page.  Null if no more pages available"
+        }
+      },
+      "required": [
+        "value"
       ]
     }
   },
