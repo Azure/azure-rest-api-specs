@@ -93,7 +93,7 @@ function Get-ImpactedTypespecProjects {
     )
     $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
     $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
-    $typeSpecProjectBaseDirectory = $filePathParts[0..$($filePathParts.IndexOf("specification")+2)] -join [IO.Path]::DirectorySeparatorChar
+    $typeSpecProjectBaseDirectory = $filePathParts[0..($($filePathParts.Length)-2)] -join [IO.Path]::DirectorySeparatorChar
     $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse
     if ($configFilesInTypeSpecProjects) {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
@@ -101,6 +101,9 @@ function Get-ImpactedTypespecProjects {
         if ($entryPointFile) {
           $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName) | Out-Null
           Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+        }
+        else {
+          Write-Host "Did not find main.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
         }
       }
     }
