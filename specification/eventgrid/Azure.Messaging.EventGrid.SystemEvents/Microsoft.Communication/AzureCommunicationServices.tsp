@@ -260,6 +260,9 @@ model AcsEmailDeliveryReportReceivedEventData {
   /** The recipient Email Address */
   recipient?: string;
 
+  /** The Internet Message Id of the email been sent */
+  internetMessageId?: string;
+
   /** The Id of the email been sent */
   messageId?: string;
 
