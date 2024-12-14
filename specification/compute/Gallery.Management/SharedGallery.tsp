@@ -13,30 +13,16 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the Shared Gallery that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-model SharedGallery
-  is Azure.ResourceManager.ProxyResource<SharedGalleryProperties> {
-  ...ResourceNameParameter<
+model SharedGallery is ProxyResourceShared<SharedGalleryProperties> {
+  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
     Resource = SharedGallery,
     KeyName = "galleryUniqueName",
     SegmentName = "sharedGalleries",
     NamePattern = ""
   >;
-
-  /**
-   * The identifier information of community gallery.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  identifier?: CommunityGalleryIdentifier;
-
-  /**
-   * Resource location
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  location?: string;
 }
 
 @armResourceOperations
@@ -52,7 +38,7 @@ interface SharedGalleries {
   /**
    * List shared galleries by subscription id or tenant id.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.LegacyOperations.ArmResourceListByParent<
     SharedGallery,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
