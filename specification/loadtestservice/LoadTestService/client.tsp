@@ -34,6 +34,11 @@ interface AdministrationOperations {
   uploadTestFile is LoadTestAdministration.uploadTestFile;
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
+
+  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+  getTestProfile is TestProfileAdministration.getTestProfile;
+  listTestProfiles is TestProfileAdministration.listTestProfiles;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -63,32 +68,11 @@ interface TestRunOperations {
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-}
 
-// NOTE: `LoadTestAdministrationClient` will contain all administration operations and `LoadTestRunClient` will contain all run based operations
-// A separate interface is made to just segregate the operations by resource type
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-@client({
-  name: "LoadTestAdministrationClient",
-  service: Microsoft.LoadTestService,
-})
-interface TestProfileAdministrationOperations {
-  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-  getTestProfile is TestProfileAdministration.getTestProfile;
-  listTestProfiles is TestProfileAdministration.listTestProfiles;
-}
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-@client({
-  name: "LoadTestRunClient",
-  service: Microsoft.LoadTestService,
-})
-interface TestProfileRunOperations {
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  stop is TestProfileRunAdministration.stop;
+  stopTestProfileRun is TestProfileRunAdministration.stop;
 }
