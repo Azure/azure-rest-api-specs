@@ -68,11 +68,19 @@ interface TestRunOperations {
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
+}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+@client({
+  name: "LoadTestRunClient",
+  service: Microsoft.LoadTestService,
+})
+interface TestProfileRunOperations {
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  stopTestProfileRun is TestProfileRunAdministration.stop;
+  stop is TestProfileRunAdministration.stop;
 }
