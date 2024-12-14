@@ -77,6 +77,7 @@ interface TestRunOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestProfileRunOperations {
+  @clientName("BeginTestProfileRun", "python")
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
