@@ -3,10 +3,19 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(KeyVault, "Key", "java");
 @@clientName(KeyVault, "Client", "go");
 
 using KeyVault;
 
+// Java configuration
+@@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");
+@@clientName(KeyReleaseResult, "ReleaseKeyResult", "java");
+@@clientName(JsonWebKeyCurveName, "KeyCurveName", "java");
+@@clientName(JsonWebKeyOperation, "KeyOperation", "java");
+@@clientName(JsonWebKeyType, "KeyType", "java");
+
+// Go configuration
 @@clientName(KeyCreateParameters, "CreateKeyParameters", "go");
 @@clientName(KeyExportParameters, "ExportKeyParameters", "go");
 @@clientName(KeyImportParameters, "ImportKeyParameters", "go");

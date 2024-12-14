@@ -22,8 +22,18 @@ options:
     "package-dir": "azure-keyvault-keys"
     "package-name": "azure-keyvault-keys"
     "output-path": "./azure/keyvault/keys/_generated"
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
+  "@azure-tools/typespec-java":
+    flavor: azure
+    "package-dir": "azure-security-keyvault-keys"
+    "namespace": "com.azure.security.keyvault.keys"
+    "models-subpackage": "implementation.models"
+    "custom-types": "KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
+    "custom-types-subpackage": "models"
+    "customization-class": "swagger/src/main/java/KeysCustomizations.java"
+    "partial-update": true
+    "generate-tests": false
+    "generate-samples": false
+    "include-api-view-properties": false
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
