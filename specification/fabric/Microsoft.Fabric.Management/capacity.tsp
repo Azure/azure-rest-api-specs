@@ -85,4 +85,14 @@ interface FabricCapacities {
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
   ): RpSkuEnumerationForNewResourceResult | ErrorResponse;
+
+  @get
+  @doc("List the current consumption and limit in this location for the provided subscription")
+  @segment("usages")
+  listUsages(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
+    ...LocationParameter,
+  ): RpUsageAndQuotaEnumerationForExistingResourceResult | ErrorResponse;
 }

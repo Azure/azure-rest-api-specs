@@ -170,6 +170,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/locations/{location}/usages": {
+      "get": {
+        "operationId": "FabricCapacities_ListUsages",
+        "tags": [
+          "FabricCapacities"
+        ],
+        "description": "List the current consumption and limit in this location for the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RpUsageAndQuotaEnumerationForExistingResourceResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota usages for a subscription": {
+            "$ref": "./examples/FabricCapacities_ListUsagesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/skus": {
       "get": {
         "operationId": "FabricCapacities_ListSkus",
@@ -1083,6 +1125,47 @@
           }
         ]
       }
+    },
+    "RpUsageAndQuotaDetailsForExistingResource": {
+      "type": "object",
+      "description": "An object that represents usage and quota details for existing resources",
+      "properties": {
+        "currentValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current consumption value"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quota limit"
+        }
+      },
+      "required": [
+        "currentValue",
+        "limit"
+      ]
+    },
+    "RpUsageAndQuotaEnumerationForExistingResourceResult": {
+      "type": "object",
+      "description": "An object that represents enumerating usage and quota details for existing resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The usage and quota details",
+          "items": {
+            "$ref": "#/definitions/RpUsageAndQuotaDetailsForExistingResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url for the next page.  Null if no more pages available"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {
