@@ -28,6 +28,7 @@ using Azure.Core;
   "Analyze harmful content",
   {
     @doc("""
+      test
       Supported Cognitive Services endpoints (protocol and hostname, for example:
       https://<resource-name>.cognitiveservices.azure.com).
       """)
