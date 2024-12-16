@@ -64,7 +64,7 @@
             "name": "azureStorageBlobContainerUri",
             "in": "body",
             "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SASTokenParameter"
             }
@@ -162,7 +162,7 @@
             "name": "restoreBlobDetails",
             "in": "body",
             "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SelectiveKeyRestoreOperationParameters"
             }
@@ -216,7 +216,7 @@
             "name": "preBackupOperationParameters",
             "in": "body",
             "description": "Optional parameters to validate prior to performing a full backup operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PreBackupOperationParameters"
             }
@@ -270,7 +270,7 @@
             "name": "preRestoreOperationParameters",
             "in": "body",
             "description": "Optional pre restore parameters to validate prior to performing a full restore operation.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PreRestoreOperationParameters"
             }
@@ -324,7 +324,7 @@
             "name": "restoreBlobDetails",
             "in": "body",
             "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RestoreOperationParameters"
             }
