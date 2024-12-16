@@ -899,6 +899,7 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
+  
   /** Recipient mail server */
   recipientMailServer?: string;
 }
