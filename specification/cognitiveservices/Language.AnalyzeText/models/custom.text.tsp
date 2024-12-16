@@ -30,7 +30,14 @@ model CustomEntitiesLROTask extends AnalyzeTextLROTask {
 model CustomEntitiesResult is CustomResult {
   /** Enumeration of the document results. */
   @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
-  documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
+  documents: Array<CustomEntitiesDocumentResultWithDetectedLanguage>;
+}
+
+/** Contains the entity recognition task result for the document with detected language. */
+@added(Versions.v2024_11_15_preview)
+model CustomEntitiesDocumentResultWithDetectedLanguage {
+  ...EntitiesDocumentResult;
+  ...DocumentDetectedLanguage;
 }
 
 /** Supported parameters for a Custom Single Classification task. */

@@ -899,6 +899,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
 
+@@clientName(CustomEntitiesDocumentResultWithDetectedLanguage,
+  "CustomEntityActionResult",
+  "csharp"
+);
 @@clientName(EntitiesDocumentResultWithDetectedLanguage,
   "EntityActionResult",
   "csharp"

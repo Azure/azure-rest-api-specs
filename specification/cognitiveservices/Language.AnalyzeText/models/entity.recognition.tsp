@@ -81,7 +81,7 @@ model EntitiesResult is PreBuiltResult {
 @added(Versions.v2024_11_15_preview)
 model EntitiesWithMetadataAutoResult is PreBuiltResult {
   /** Response by document */
-  documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
+  documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
 /** Contains the entity recognition task result for the document. */
@@ -93,14 +93,7 @@ model EntitiesDocumentResult is DocumentResult {
 /** Contains the entity recognition task result for the document with detected language. */
 @added(Versions.v2024_11_15_preview)
 model EntitiesDocumentResultWithDetectedLanguage {
-  ...EntitiesDocumentResult;
-  ...DocumentDetectedLanguage;
-}
-
-/** Contains the entity recognition task result for the document with metadata and detected language. */
-@added(Versions.v2024_11_15_preview)
-model EntitiesDocumentResultWithMetadataDetectedLanguage
-  is EntitiesDocumentResultWithMetadata {
+  ...EntitiesDocumentResultWithMetadata;
   ...DocumentDetectedLanguage;
 }
 
