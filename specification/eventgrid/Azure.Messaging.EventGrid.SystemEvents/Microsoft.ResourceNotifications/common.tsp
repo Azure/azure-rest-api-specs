@@ -28,7 +28,7 @@ model ResourceNotificationsResourceUpdatedDetails {
 
   /** properties in the payload of the resource for which the event is being emitted */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties object"
-  properties: Record<unknown>;
+  properties?: Record<unknown>;
 }
 
 /** details of operational info */
