@@ -34,7 +34,7 @@ model EnvironmentResourceProperties {
   @added(Versions.v2024_06_24_preview)
   azureLocation?: azureLocation;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: EnvironmentProvisioningState;
 }
