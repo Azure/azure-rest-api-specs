@@ -360,6 +360,78 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/reimage": {
+      "post": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NetworkVirtualAppliances_Reimage",
+        "description": "Reimages one VM belonging to the specified Network Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "NetworkVirtualApplianceInstanceIds",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
+            },
+            "description": "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation reimages one or more Network Virtual Appliance VM resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceInstanceIds"
+            }
+          },
+          "202": {
+            "description": "Request accepted. The operation reimages one or more Network Virtual Appliance VM resources.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reimages Specific NetworkVirtualAppliance VMs in VM Scale Set": {
+            "$ref": "./examples/NetworkVirtualApplianceSpecificReimage.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances": {
       "get": {
         "tags": [
