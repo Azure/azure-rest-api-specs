@@ -29,9 +29,11 @@ openapi-type: arm
 tag: package-2024-08-12-preview
 suppressions:
   - code: AvoidAdditionalProperties
-    reason: Our use of additionalProperties is valid according to review from ARM team
+    reason: We require additionalProperties (map) because the keys (platformWorkloadIdentity) can change according to OpenShift version, and we don’t want to bind the key to a specific API version. This was noted as a valid use case by the ARM team.
+    where: $.definitions.PlatformWorkloadIdentityProfile.properties
   - code: PatchBodyParametersSchema
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: $.definitions.OpenShiftClusterUpdate.properties
 ```
 
 ### Tag: package-2020-04-30
