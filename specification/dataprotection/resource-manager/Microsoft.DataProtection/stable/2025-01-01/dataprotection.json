@@ -8263,6 +8263,19 @@
       "title": "ValidateForBackupRequest",
       "type": "object"
     },
+    "ValidateForModifyBackupRequest": {
+      "description": "Validate for modify backup request",
+      "properties": {
+        "backupInstance": {
+          "$ref": "#/definitions/BackupInstance"
+        }
+      },
+      "required": [
+        "backupInstance"
+      ],
+      "title": "ValidateForModifyBackupRequest",
+      "type": "object"
+    },
     "ValidateRestoreRequestObject": {
       "description": "Validate restore request object",
       "properties": {
@@ -8491,6 +8504,18 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    }
+  },
+    "RestrictedVaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the backup vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$",
+      "minLength": 2,
+      "maxLength": 50
     }
   },
   "securityDefinitions": {
