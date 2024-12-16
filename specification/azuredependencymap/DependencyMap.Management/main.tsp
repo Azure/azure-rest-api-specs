@@ -80,12 +80,30 @@ union ProvisioningState {
   string,
 }
 
+@doc("Tags resource")
+model TagsResource {
+  @doc("Tags to be updated")
+  tags: string;
+}
+
+@doc("Discovery Source Properties to be updated")
+model DiscoverySourceResourceUpdate {
+  @doc("Tags to be updated")
+  tags: TagsResource;
+}
+
+@doc("Maps Properties to be updated")
+model MapsResourceUpdate {
+  @doc("Tags to be updated")
+  tags: TagsResource;
+}
+
 @armResourceOperations
 interface Maps {
   get is ArmResourceRead<MapsResource>;
   //create is ArmResourceCreateOrUpdateAsync<MapsResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MapsResource>;
-  update is ArmTagsPatchAsync<MapsResource>;
+  update is ArmCustomPatchAsync<MapsResource, MapsResourceUpdate>;
   //update is ArmTagsPatchSync<MapsResource>;
   delete is ArmResourceDeleteWithoutOkAsync<MapsResource>;
   listByResourceGroup is ArmResourceListByParent<MapsResource>;
@@ -245,7 +263,10 @@ interface DiscoverySources {
   get is ArmResourceRead<DiscoverySourceResource>;
   //create is ArmResourceCreateOrUpdateAsync<DiscoverySourceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiscoverySourceResource>;
-  update is ArmTagsPatchAsync<DiscoverySourceResource>;
+  update is ArmCustomPatchAsync<
+    DiscoverySourceResource,
+    DiscoverySourceResourceUpdate
+  >;
   //update is ArmTagsPatchSync<DiscoverySourceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoverySourceResource>;
   listByMapsResource is ArmResourceListByParent<DiscoverySourceResource>;
