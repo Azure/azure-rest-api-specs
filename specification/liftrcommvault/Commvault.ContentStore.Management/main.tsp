@@ -24,7 +24,7 @@ namespace Commvault.ContentStore;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Versions.v2024_08_27)
   v1_preview: "2024-10-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -79,7 +79,7 @@ model StorageProperties {
   location: string;
 
   @doc("The type of Commvault Storage")
-  storageType: "Air_Gap_Protect";
+  storageType: StorageType;
 
   @doc("The vendor of Commvault Storage")
   vendor: Vendor;
@@ -92,6 +92,14 @@ model StorageProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@doc("Storage Type of Commvault Storage")
+union StorageType {
+  @doc("Air Gap Protect")
+  AirGapProtect: "Air_Gap_Protect",
+
+  string,
+}
+
 @doc("Vendor of Commvault Storage")
 union Vendor {
   @doc("Azure Blob Storage")
@@ -102,8 +110,8 @@ union Vendor {
 
 @doc("Class of Commvault Storage")
 union StorageClassType {
-  @doc("Cool storage class")
-  Cool: "COOL",
+  @doc("Cold storage class")
+  Cool: "COLD",
 
   @doc("Hot storage class")
   Hot: "HOT",
@@ -156,10 +164,7 @@ model PlanProperties {
 
   @doc("The Commvault Plan Retention")
   @visibility("read", "create", "update")
-  retention: Retention;
-
-  @doc("Details of the user.")
-  user: UserDetails;
+  retention?: Retention;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
@@ -170,6 +175,9 @@ model PlanProperties {
 model StoragePlan {
   @doc("The name of the Storage resource")
   name: string;
+
+  @doc("Id of the Storage Pool")
+  storagePoolId?: string;
 
   @doc("Copy Name from Commvault")
   copyName?: string;
@@ -186,11 +194,9 @@ model StoragePlan {
   @doc("Backup Rule Type")
   backupRuleType?: BackupRuleType;
 
-  @doc("Indicates the monthlyFull retention time valid only if the type of retention chosen in CUSTOM")
-  monthlyRetention?: int32;
-
-  @doc("Indicates the yearly Full retention time valid only if the type of retention chosen in CUSTOM")
-  yearlyRetention?: int32;
+  @doc("Extended Retention Policy")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  extendedRetention?: ExtendedRetentionTime[];
 }
 
 @doc("Extended Retention Time")
@@ -200,6 +206,9 @@ model ExtendedRetentionTime {
 
   @doc("Retention period for Extended Retention")
   retentionPeriod?: int32;
+
+  @doc("Backup Rule Type for Extended Retention")
+  backupRuleType?: BackupRuleType;
 }
 
 @doc("The type of backup rule")
@@ -250,15 +259,6 @@ model Schedule {
   @doc("Type of Backup")
   backupType: BackUpType;
 
-  @doc("Full BackUp Details")
-  fullBackUpDetails?: ScheduleDetails;
-
-  @doc("Incremental BackUp Details")
-  incrementalBackUpDetails?: ScheduleDetails;
-
-  @doc("Type of Retention")
-  retentionType?: RetentionType;
-
   @doc("Frequency of Retention")
   frequency?: Frequency;
 
@@ -279,19 +279,6 @@ union BackUpType {
 
   @doc("Both incremental and full backups")
   Both: "BOTH",
-
-  string,
-}
-@doc("The retention type for Commvault Plan")
-union RetentionType {
-  @doc("Standard retention type")
-  Standard: "STANDARD",
-
-  @doc("Extended retention type")
-  Extended: "EXTENDED",
-
-  @doc("Custom retention type")
-  Custom: "CUSTOM",
 
   string,
 }
@@ -332,10 +319,6 @@ model Retention {
   @doc("Number of Snapshots")
   @visibility("read", "create", "update")
   numberOfSnapshots?: int32;
-
-  @doc("Type of retention")
-  @visibility("read", "create", "update")
-  type?: RetentionType;
 }
 
 @armResourceOperations
