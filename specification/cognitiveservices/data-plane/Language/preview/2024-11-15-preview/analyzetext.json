@@ -6732,26 +6732,7 @@
         ]
       }
     },
-    "PiiEntityRecognitionLROResult": {
-      "type": "object",
-      "description": "Contains the PII LRO results.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/PiiResult",
-          "description": "The list of pii results"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
-    },
-    "PiiEntityWithTags": {
+    "PiiEntity": {
       "type": "object",
       "description": "Entity object with tags.",
       "properties": {
@@ -6816,6 +6797,25 @@
         "length",
         "confidenceScore"
       ]
+    },
+    "PiiEntityRecognitionLROResult": {
+      "type": "object",
+      "description": "Contains the PII LRO results.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PiiResult",
+          "description": "The list of pii results"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
     "PiiLROTask": {
       "type": "object",
@@ -6894,7 +6894,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/PiiEntityWithTags"
+            "$ref": "#/definitions/PiiEntity"
           },
           "x-ms-identifiers": []
         },

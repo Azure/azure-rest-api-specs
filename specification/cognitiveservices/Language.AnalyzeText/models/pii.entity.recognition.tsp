@@ -131,7 +131,7 @@ union PiiDomain {
 
 /** Entity object with tags. */
 @added(Versions.v2024_11_15_preview)
-model PiiEntityWithTags is Entity {
+model PiiEntity is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
   type?: string;
 
@@ -156,7 +156,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
 
   /** Recognized entities in the document. */
   @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
-  entities: Array<PiiEntityWithTags>;
+  entities: Array<PiiEntity>;
 }
 
 /** Contains the PII results with detected language. */
