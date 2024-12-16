@@ -63,15 +63,75 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "x-ms-error-code": {
+              "ContentType": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               }
             }
           }
@@ -154,15 +214,75 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "x-ms-error-code": {
+              "ContentType": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               }
             }
           }
@@ -271,15 +391,75 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "x-ms-error-code": {
+              "ContentType": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
               }
             }
           }
@@ -341,6 +521,97 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink",
           "itemName": "transactionIds"
+        }
+      }
+    },
+    "/jwks": {
+      "get": {
+        "operationId": "GetPublicKeys",
+        "description": "Get the service public keys",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JwksDocument"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            },
+            "headers": {
+              "ContentType": {
+                "type": "string",
+                "description": "The MIME content type for error, see RFC9290",
+                "enum": [
+                  "application/concise-problem-details+cbor"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -513,6 +784,10 @@
         "policyScript"
       ]
     },
+    "ConciseProblemDetailsCbor": {
+      "type": "object",
+      "description": "CBOR error body"
+    },
     "CreateEntryCreated": {
       "type": "object",
       "description": "Response of entry submission if the response can be served immediatelly, see IETF SCITT SCRAPI draft",
@@ -641,6 +916,36 @@
         "kty"
       ]
     },
+    "JwksDocument": {
+      "type": "object",
+      "description": "A JWKS like document",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "List of public keys used for receipt verification.",
+          "items": {
+            "$ref": "#/definitions/JsonWebKey"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "NotFoundErrorCborResponse": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ReceiptEntry": {
       "type": "object",
       "description": "A ledger receipt, see IETF SCITT draft",
@@ -655,6 +960,19 @@
         "body"
       ]
     },
+    "ServerErrorCborResponse": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ServiceUnavailableError": {
       "type": "object",
       "description": "Service temporarily unavailable",
@@ -662,6 +980,19 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ServiceUnavailableErrorCborResponse": {
+      "type": "object",
+      "description": "Service unavailable error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "description": "CBOR content of the error object"
         }
       },
       "required": [
@@ -694,6 +1025,19 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "ValidationErrorCborResponse": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "VersionResult": {

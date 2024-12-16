@@ -49,7 +49,24 @@ alias ServiceTraits = SupportsClientRequestId;
 @doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
 @route("/.well-known/transparency-configuration")
 @get
-op getTransparencyConfig is Foundations.Operation<{}, TransparencyConfiguration, ServiceTraits>;
+op getTransparencyConfig is Foundations.Operation<
+  {},
+  TransparencyConfiguration,
+  ServiceTraits,
+  CborErrors
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get the service public keys")
+@route("/jwks")
+@get
+op getPublicKeys is Foundations.Operation<
+  {},
+  JwksDocument,
+  ServiceTraits,
+  CborErrors
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
@@ -110,7 +127,8 @@ op createEntry is Foundations.Operation<
 op createEntryChanged is Foundations.Operation<
   SignedStatement,
   CreateEntryCreated | CreateEntryPending,
-  ServiceTraits
+  ServiceTraits,
+  CborErrors
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -159,7 +177,8 @@ op getEntryReceipt is Foundations.Operation<
 op getEntryStatement is Foundations.Operation<
   EntryIdParameter,
   TransparentStatement,
-  ServiceTraits
+  ServiceTraits,
+  CborErrors
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -196,7 +215,7 @@ model ServiceUnavailableError {
 model ParametersResult {
   @doc("Service certificate used in TLS and for receipt verification")
   serviceCertificate: string;
-  
+
   @doc("Service identifier")
   serviceId: string;
 
@@ -427,6 +446,13 @@ model DidDocumentKey {
   publicKeyJwk: JsonWebKey;
 }
 
+@added(Versions.`2025-01-31-preview`)
+@doc("A JWKS like document")
+model JwksDocument {
+  @doc("List of public keys used for receipt verification.")
+  keys: JsonWebKey[];
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
 model JsonWebKey {
@@ -494,7 +520,6 @@ model VersionResult {
   version: string;
 }
 
-
 @doc("The Response body of the Configuration API.")
 model CodeTransparencyConfiguration {
   @doc("Policy configuration")
@@ -549,8 +574,8 @@ model CodeTransparencyConfigurationPolicy {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @removed(Versions.`2025-01-31-preview`)
   @doc("Accepted COSE signature algorithms when verifying signed statements")
-
   accepted_algorithms?: string[];
+
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @removed(Versions.`2025-01-31-preview`)
   @doc("Accepted COSE signature did:web issuers when verifying signed statements")
@@ -564,3 +589,85 @@ model CodeTransparencyConfigurationPolicy {
   @doc("COSE signature verification script in Javascript")
   policyScript: string;
 }
+
+// -----------------------------------------------------------------
+// Error responses as per IETF SCRAPI draft
+// -----------------------------------------------------------------
+
+@added(Versions.`2025-01-31-preview`)
+@doc("CBOR error body")
+@error
+model ConciseProblemDetailsCbor {
+  // cannot set type of this model to bytes
+  // cannot use bytes instead because need to use @error decorator and need a model
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Not found error response")
+model NotFoundErrorCborResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 404;
+
+  @doc("The MIME content type for error, see RFC9290")
+  @header("ContentType")
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Validation error response")
+model ValidationErrorCborResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 400;
+
+  @doc("The MIME content type for error, see RFC9290")
+  @header("ContentType")
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Server error response")
+model ServerErrorCborResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 500;
+
+  @doc("The MIME content type for error, see RFC9290")
+  @header("ContentType")
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Service unavailable error response")
+model ServiceUnavailableErrorCborResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 503;
+
+  @doc("The MIME content type for error, see RFC9290")
+  @header("ContentType")
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+alias CborErrors =
+  | NotFoundErrorCborResponse
+  | ValidationErrorCborResponse
+  | ServerErrorCborResponse
+  | ServiceUnavailableErrorCborResponse;
