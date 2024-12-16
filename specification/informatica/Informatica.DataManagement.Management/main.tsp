@@ -362,6 +362,7 @@ model MarketplaceDetails {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
+  @visibility("read")
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
@@ -746,6 +747,7 @@ model MarketplaceDetailsUpdate {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
+  @visibility("read")
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
