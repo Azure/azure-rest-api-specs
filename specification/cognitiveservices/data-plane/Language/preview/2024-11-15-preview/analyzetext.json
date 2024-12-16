@@ -1640,45 +1640,6 @@
       ],
       "x-ms-discriminator-value": "CurrencyMetadata"
     },
-    "CustomEntitiesDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the entity recognition task result for the document with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityWithMetadata"
-          },
-          "x-ms-identifiers": []
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
-      ]
-    },
     "CustomEntitiesLROTask": {
       "type": "object",
       "description": "Contains the custom text LRO task.",
@@ -1722,7 +1683,7 @@
           "type": "array",
           "description": "Enumeration of the document results.",
           "items": {
-            "$ref": "#/definitions/CustomEntitiesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
         }
       },
