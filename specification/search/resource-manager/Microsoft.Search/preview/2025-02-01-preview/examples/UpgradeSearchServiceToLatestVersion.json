@@ -3,25 +3,7 @@
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
     "api-version": "2025-02-01-preview",
-    "subscriptionId": "subid",
-    "service": {
-      "properties": {
-        "replicaCount": 3,
-        "partitionCount": 1,
-        "publicNetworkAccess": "enabled",
-        "networkRuleSet": {
-          "ipRules": [
-            {
-              "value": "123.4.5.6"
-            },
-            {
-              "value": "123.4.6.0/18"
-            }
-          ],
-          "bypass": "AzurePortal"
-        }
-      }
-    }
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -38,20 +20,16 @@
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 3,
+          "replicaCount": 1,
           "partitionCount": 1,
-          "status": "running",
+          "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": [
-              {
-                "value": "10.2.3.4"
-              }
-            ],
-            "bypass": "AzurePortal"
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
@@ -65,8 +43,8 @@
           },
           "disabledDataExfiltrationOptions": [],
           "upgradeAvailable": false,
-          "serviceCreatedDate": "2025-02-01T00:00:00Z",
-          "serviceUpgradedDate": null
+          "serviceCreatedDate": "2020-01-01T00:00:00Z",
+          "serviceUpgradedDate": "2025-02-01T00:00:00Z"
         }
       }
     }
