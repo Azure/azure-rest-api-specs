@@ -316,6 +316,42 @@ namespace Azure.ResourceManager.Legacy {
       @bodyRoot
       body: Request,
     ): Response | ErrorType;
+
+    /**
+     * A resource list operation, at the scope of the resource's parent
+     * @template Resource the resource being patched
+     * @template BaseParameters Optional. Allows overriding the operation parameters
+     * @template ParentName Optional. The name of the parent resource
+     * @template ParentFriendlyName Optional. The friendly name of the parent resource
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The success response for the list operation
+     * @template Error Optional. The error response, if non-standard.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    @get
+    @autoRoute
+    @listsResource(Resource)
+    @segmentOf(Resource)
+    @Private.armRenameListByOperation(
+      Resource,
+      ParentName,
+      ParentFriendlyName,
+      false
+    ) // This must come before @armResourceList!
+    @armResourceList(Resource)
+    ArmResourceListByParent<
+      Resource extends {},
+      BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+      ParentName extends valueof string = "",
+      ParentFriendlyName extends valueof string = "",
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+      Error extends {} = ErrorResponse
+    > is Azure.ResourceManager.Foundations.ArmReadOperation<
+      ResourceParentParameters<Resource, BaseParameters> & Parameters,
+      Response,
+      Error
+    >;
   }
   /**
    * @dev Get the provider namespace key-value pair
@@ -331,4 +367,39 @@ namespace Azure.ResourceManager.Legacy {
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider;
   };
+
+  /**
+   * The dynamic parameters of a list call for a resource instance - pass in the proper base type to indicate
+   * where the list should take place.  The default is in a resource group
+   * @template Resource The resource to get parameters for
+   * @template BaseParameters The parameters representing the base Uri of the resource
+   */
+  model ResourceParentParameters<
+    Resource extends {},
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>
+  > {
+    ...BaseParameters;
+    ...ProviderNamespace<Resource>;
+    ...ParentKeysOf<Resource>;
+  }
+
+  model ResourceNameParameter<
+    Resource extends {},
+    KeyName extends valueof string = "",
+    SegmentName extends valueof string = "",
+    NamePattern extends valueof string = "^[a-zA-Z0-9-]{3,24}$",
+    Type extends string = string
+  > {
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    @doc("The name of the {name}", Resource)
+    @pattern(NamePattern)
+    @Azure.ResourceManager.Private.defaultResourceKeySegmentName(
+      Resource,
+      KeyName,
+      SegmentName
+    )
+    @path
+    @visibility("read")
+    name: Type;
+  }
 }

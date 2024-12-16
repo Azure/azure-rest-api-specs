@@ -540,83 +540,6 @@ model Resource {
 }
 
 /**
- * An error response from the Compute service.
- */
-@error
-model CloudError {
-  /**
-   * Api error.
-   */
-  error?: ApiError;
-}
-
-/**
- * Api error.
- */
-model ApiError {
-  /**
-   * The Api error details
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
-  details?: ApiErrorBase[];
-
-  /**
-   * The Api inner error
-   */
-  innererror?: InnerError;
-
-  /**
-   * The error code.
-   */
-  code?: string;
-
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-
-  /**
-   * The error message.
-   */
-  message?: string;
-}
-
-/**
- * Api error base.
- */
-model ApiErrorBase {
-  /**
-   * The error code.
-   */
-  code?: string;
-
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-
-  /**
-   * The error message.
-   */
-  message?: string;
-}
-
-/**
- * Inner error details.
- */
-model InnerError {
-  /**
-   * The exception type.
-   */
-  exceptiontype?: string;
-
-  /**
-   * The internal error message or exception dump.
-   */
-  errordetail?: string;
-}
-
-/**
  * Specifies information about the Shared Image Gallery that you want to update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -2274,4 +2197,56 @@ model LatestGalleryImageVersion {
    * region of the Gallery Image Version.
    */
   location?: string;
+}
+
+/**
+ * Concrete proxy resource types can be created by aliasing this type using a specific property type.
+ *
+ * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
+ * @template Properties A model containing the provider-specific properties for this resource
+ * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
+ */
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.customAzureResource
+model ProxyResourceCommunity<
+  Properties extends {},
+  PropertiesOptional extends valueof boolean = true
+> extends PirCommunityGalleryResource {
+  @doc("The resource-specific properties for this resource.")
+  properties?: Properties;
+
+  /**
+   * The name of the parent resource.
+   */
+  @path
+  @visibility("read")
+  @segment("parents")
+  parentName: string;
+}
+
+/**
+ * Concrete proxy resource types can be created by aliasing this type using a specific property type.
+ *
+ * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
+ * @template Properties A model containing the provider-specific properties for this resource
+ * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
+ */
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
+@includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.customAzureResource
+model ProxyResourceShared<
+  Properties extends {},
+  PropertiesOptional extends valueof boolean = true
+> extends PirSharedGalleryResource {
+  @doc("The resource-specific properties for this resource.")
+  properties?: Properties;
+
+  /**
+   * The name of the parent resource.
+   */
+  @path
+  @visibility("read")
+  @segment("parents")
+  parentName: string;
 }

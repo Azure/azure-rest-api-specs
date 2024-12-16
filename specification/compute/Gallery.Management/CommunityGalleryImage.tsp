@@ -14,29 +14,16 @@ namespace Microsoft.Compute;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(CommunityGallery)
 model CommunityGalleryImage
-  is Azure.ResourceManager.ProxyResource<CommunityGalleryImageProperties> {
-  ...ResourceNameParameter<
+  is ProxyResourceCommunity<CommunityGalleryImageProperties> {
+  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
     Resource = CommunityGalleryImage,
     KeyName = "galleryImageName",
     SegmentName = "images",
     NamePattern = ""
   >;
-
-  /**
-   * The identifier information of community gallery.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  identifier?: CommunityGalleryIdentifier;
-
-  /**
-   * Resource location
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  location?: string;
 }
 
 @armResourceOperations
@@ -49,7 +36,7 @@ interface CommunityGalleryImages {
   /**
    * List community gallery images inside a gallery.
    */
-  list is ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.LegacyOperations.ArmResourceListByParent<
     CommunityGalleryImage,
     Response = CommunityGalleryImageList
   >;
