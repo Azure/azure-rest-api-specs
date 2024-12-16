@@ -3361,8 +3361,10 @@
         }
       },
       "required": [
-        "target",
-        "connectedRegistry"
+        "id",
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryArtifactEventTarget": {
@@ -3398,7 +3400,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3436,7 +3442,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3481,11 +3490,10 @@
         }
       },
       "required": [
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "id",
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3512,7 +3520,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3562,7 +3575,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -6895,7 +6912,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -6969,8 +6991,9 @@
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "id",
+        "name",
+        "type"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -6994,7 +7017,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7356,7 +7380,11 @@
           "type": "string",
           "description": "The user Id of connected client connection."
         }
-      }
+      },
+      "required": [
+        "hubName",
+        "connectionId"
+      ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
       "type": "object",
@@ -7383,7 +7411,11 @@
           "type": "string",
           "description": "The message of error that cause the client connection disconnected."
         }
-      }
+      },
+      "required": [
+        "hubName",
+        "connectionId"
+      ]
     },
     "StampKind": {
       "type": "string",
