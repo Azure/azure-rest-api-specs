@@ -3426,9 +3426,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryArtifactEventTarget": {
@@ -3464,7 +3466,11 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3502,7 +3508,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3547,12 +3556,11 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
-        "target",
-        "request",
-        "actor",
-        "source",
-        "connectedRegistry"
+        "action",
+        "location",
+        "target"
       ]
     },
     "ContainerRegistryEventRequest": {
@@ -3579,7 +3587,12 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "host",
+        "method"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3629,7 +3642,11 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "repository"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -7022,7 +7039,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -7096,8 +7118,9 @@
         }
       },
       "required": [
-        "tags",
-        "properties"
+        "id",
+        "name",
+        "type"
       ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
@@ -7121,7 +7144,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7485,7 +7509,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
@@ -7515,7 +7541,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId"
       ]
     },
     "StampKind": {
