@@ -903,6 +903,10 @@ namespace Language.AnalyzeTextClientCustomizations;
   "EntityActionResult",
   "csharp"
 );
+@@clientName(EntitiesDocumentResultWithMetadata,
+  "EntityActionResultWithMetadata",
+  "csharp"
+);
 @@clientName(ClassificationDocumentResultWithDetectedLanguage,
   "ClassificationActionResult",
   "csharp"
@@ -930,6 +934,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
   "HealthcareActionResult",
+  "csharp"
+);
+@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+  "CustomEntityActionResult",
   "csharp"
 );
 @@clientName(PiiEntityWithTags, "PiiEntity", "csharp");
