@@ -264,3 +264,4 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");
 @@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");
 @@clientName(DocumentFieldSchema.items, "itemsSchema", "python");
+@@clientName(AnalyzeFromStreamRequestParams.input, "body", "python");
