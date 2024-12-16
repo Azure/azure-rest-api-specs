@@ -56,6 +56,16 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
 
   /** Results for entity recognition. */
+  results: EntitiesResult;
+}
+
+/** Contains the entity recognition job task result. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+model EntityRecognitionLROResult extends AnalyzeTextLROResult {
+  /** Kind of the task. */
+  kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
+
+  /** Results for the task. */
   @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesResult)
   results: EntitiesWithMetadataAutoResult;
 }
@@ -113,16 +123,6 @@ model Entity {
 
   /** Confidence score between 0 and 1 of the extracted entity. */
   confidenceScore: float64;
-}
-
-/** Contains the entity recognition job task result. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-model EntityRecognitionLROResult extends AnalyzeTextLROResult {
-  /** Kind of the task. */
-  kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
-
-  /** Results for the task. */
-  results: EntitiesResult;
 }
 
 /** Contains all the entity categories detected by entity recognition. */
