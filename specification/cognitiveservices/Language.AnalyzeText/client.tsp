@@ -899,7 +899,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
 
-@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+@@clientName(EntitiesDocumentResultWithMetadataDetectedLanguage,
   "EntityActionResult",
   "csharp"
 );
@@ -932,3 +932,4 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HealthcareActionResult",
   "csharp"
 );
+@@clientName(PiiEntityWithTags, "PiiEntity", "csharp");
