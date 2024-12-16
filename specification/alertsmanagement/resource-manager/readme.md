@@ -47,18 +47,6 @@ openapi-type: arm
 tag: package-2023-03
 ```
 
-### Tag: package-preview-2024-03
-
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-03'
-input-file:
-  - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
-suppressions:
-  - code: OperationsAPIImplementation
-    from: AlertProcessingRules.json
-    reason: Aleady implemented in AlertsManagement.json.
-```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -82,14 +70,6 @@ These settings apply only when `--tag=package-preview-2023-07` is specified on t
 ```yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.AlertsManagement/preview/2023-07-12-preview/AlertsManagement.json  
-```
-### Tag: package-preview-2023-05
-
-These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-05'
-input-file:
-  - Microsoft.AlertsManagement/preview/2023-05-01-preview/AlertProcessingRules.json
 ```
 ### Tag: package-preview-2023-04
 
@@ -117,7 +97,7 @@ input-file:
   - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2024-03-01-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
 ```
 ### Tag: package-2021-08
 
