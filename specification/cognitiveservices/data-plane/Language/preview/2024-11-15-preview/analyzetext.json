@@ -1640,6 +1640,45 @@
       ],
       "x-ms-discriminator-value": "CurrencyMetadata"
     },
+    "CustomEntitiesDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Contains the entity recognition task result for the document with detected language.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/EntityWithMetadata"
+          },
+          "x-ms-identifiers": []
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
     "CustomEntitiesLROTask": {
       "type": "object",
       "description": "Contains the custom text LRO task.",
@@ -1683,7 +1722,7 @@
           "type": "array",
           "description": "Enumeration of the document results.",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/CustomEntitiesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -2135,80 +2174,6 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
-      ]
-    },
-    "EntitiesDocumentResultWithMetadata": {
-      "type": "object",
-      "description": "Entity documents result with metadata.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityWithMetadata"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
-      ]
-    },
-    "EntitiesDocumentResultWithMetadataDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the entity recognition task result for the document with metadata and detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
             "$ref": "#/definitions/EntityWithMetadata"
           },
           "x-ms-identifiers": []
@@ -2263,7 +2228,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithMetadata"
+            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
         }
       },
@@ -2360,79 +2325,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
-    },
-    "EntitiesWithMetadataAutoResult": {
-      "type": "object",
-      "description": "Contains the entity recognition task result.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithMetadataDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
-    },
-    "Entity": {
-      "type": "object",
-      "description": "Defines the detected entity object containing the entity category and entity text detected, etc.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "type": "string",
-          "description": "Entity type."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        }
-      },
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ]
     },
     "EntityCategory": {
       "type": "string",
@@ -2956,7 +2848,7 @@
       "description": "Contains the entity recognition job task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesWithMetadataAutoResult",
+          "$ref": "#/definitions/EntitiesResult",
           "description": "Results for the task."
         }
       },

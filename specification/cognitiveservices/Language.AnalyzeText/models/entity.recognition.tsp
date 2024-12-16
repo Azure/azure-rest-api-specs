@@ -66,15 +66,14 @@ model EntityRecognitionLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
 
   /** Results for the task. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesResult)
-  results: EntitiesWithMetadataAutoResult;
+  results: EntitiesResult;
 }
 
 /** Contains the entity recognition task result. */
 model EntitiesResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2024_11_01, Array<EntitiesDocumentResult>)
-  documents: Array<EntitiesDocumentResultWithMetadata>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
+  documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
 /** Contains the entity recognition task result. */
@@ -87,7 +86,8 @@ model EntitiesWithMetadataAutoResult is PreBuiltResult {
 /** Contains the entity recognition task result for the document. */
 model EntitiesDocumentResult is DocumentResult {
   /** Recognized entities in the document. */
-  entities: Array<Entity>;
+  @typeChangedFrom(Versions.v2024_11_01, Array<Entity>)
+  entities: Array<EntityWithMetadata>;
 }
 
 /** Contains the entity recognition task result for the document with detected language. */
