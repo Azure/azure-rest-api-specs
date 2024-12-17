@@ -391,29 +391,11 @@
           {
             "name": "instanceId",
             "in": "body",
-            "required":true,
+            "required":false,
             "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceInstanceId"
+              "$ref": "#/definitions/NetworkVirtualApplianceBootDiagnosticParameters"
             },
             "description": "Specifies a virtual machine instance ID from the Network Virtual Appliance VM instances."
-          },
-          {
-            "name": "serialConsoleStorageSasUrl",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/SerialConsoleStorageSasUrl"
-            },
-            "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
-          },
-          {
-            "name": "consoleScreenshotStorageSasUrl",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ConsoleScreenshotStorageSasUrl"
-            },
-            "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
           }         
         ],
         "responses": {
@@ -430,9 +412,6 @@
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceInstanceId"
             }
           },
           "default": {
@@ -443,7 +422,7 @@
           }
         },
         "x-ms-examples": {
-          "Restart All NetworkVirtualAppliance VMs in VM Scale Set": {
+          "Retrieve Boot Diagnostic logs for a given NVA VMSS instance": {
             "$ref": "./examples/NetworkVirtualApplianceBootDiagnostics.json"
           }
         },
@@ -1686,32 +1665,30 @@
       "properties": {
         "instanceId": {
           "type": "integer",
+          "format": "int32",
           "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
         }
-      },
-      "description": "Specifies a virtual machine instance ID from the Network Virtual Appliance VM instances."
+      }
     },
-    "SerialConsoleStorageSasUrl": {
+    "NetworkVirtualApplianceBootDiagnosticParameters": {
       "type": "object",
       "properties": {
+        "instanceId": {
+          "type": "integer",
+          "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
+        },
         "serialConsoleStorageSasUrl": {
           "type": "string",
           "format": "uri",
           "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
-        }
-      },
-      "description": "Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written"
-    },
-    "ConsoleScreenshotStorageSasUrl": {
-      "type": "object",
-      "properties": {
+        },
         "consoleScreenshotStorageSasUrl": {
           "type": "string",
           "format": "uri",
           "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
         }
       },
-      "description": "Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written"
+      "description": "Specifies input parameters required to retrieve the boot diagnostic logs for an NVA instance"
     }
   }
 }
