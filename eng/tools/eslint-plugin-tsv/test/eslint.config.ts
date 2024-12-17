@@ -1,7 +1,7 @@
-const eslintPluginTsv = require("../dist/src/eslint-plugin-tsv.js");
-const parser = require("yaml-eslint-parser");
+import eslintPluginTsv from "../src/eslint-plugin-tsv.js";
+import parser from "yaml-eslint-parser";
 
-module.exports = [
+export const config = [
   {
     plugins: { tsv: eslintPluginTsv },
     files: ["*.yaml", "**/*.yaml"],
@@ -13,3 +13,5 @@ module.exports = [
     },
   },
 ];
+
+export default config;
