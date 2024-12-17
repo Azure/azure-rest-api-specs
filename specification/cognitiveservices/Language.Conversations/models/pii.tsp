@@ -230,7 +230,7 @@ union ConversationPiiCategoriesExclude {
   NumericIdentifier: "NumericIdentifier",
 
   /** Phone category */
-  PhoneNumber: "Phone",
+  Phone: "Phone",
 
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
