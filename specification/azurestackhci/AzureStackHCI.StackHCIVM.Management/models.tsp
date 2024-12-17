@@ -847,6 +847,34 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility("read")
+  @added(Versions.v2024_10_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
