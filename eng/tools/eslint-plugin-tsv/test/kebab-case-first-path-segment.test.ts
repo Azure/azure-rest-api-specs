@@ -3,7 +3,7 @@ import { test } from "vitest";
 
 import kebabCaseFirstPathSegment from "../src/kebab-case-first-path-segment.js";
 
-test(kebabCaseFirstPathSegment.meta.name, async ({ expect }) => {
+test(kebabCaseFirstPathSegment.meta.name, () => {
   const ruleTester = new RuleTester();
 
   ruleTester.run(
