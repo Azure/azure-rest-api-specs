@@ -9,7 +9,6 @@ export const config = [
       parser,
     },
     rules: {
-      "tsv/enforce-foo-bar": "error",
       "tsv/kebab-case-first-path-segment": "error",
     },
   },
