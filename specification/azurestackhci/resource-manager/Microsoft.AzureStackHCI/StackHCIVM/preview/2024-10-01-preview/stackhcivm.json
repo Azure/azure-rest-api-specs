@@ -2207,7 +2207,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaceTagsUpdate"
+              "$ref": "#/definitions/NetworkInterfacesUpdateRequest"
             }
           }
         ],
@@ -5216,19 +5216,6 @@
         "status": {
           "$ref": "#/definitions/Status",
           "description": "The status of the operation performed on the network interface [Succeeded, Failed, InProgress]"
-        }
-      }
-    },
-    "NetworkInterfaceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in NetworkInterface resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
