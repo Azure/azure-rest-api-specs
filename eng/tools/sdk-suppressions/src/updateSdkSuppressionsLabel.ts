@@ -70,6 +70,7 @@ async function getSdkSuppressionsFileContent(
 ): Promise<string | object | undefined | null> {
   try {
     const suppressionFileContent = await runGitCommand(`git show ${ref}:${path}`);
+    console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
     console.log(`Not found content in ${ref}#${path}`);

@@ -1,10 +1,10 @@
 /**
  * This file contains types for the contents of the SDK suppressions file, sdk-suppressions.yml.
- * For details, see: 
+ * For details, see:
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
-import Ajv from 'ajv';
+import Ajv from "ajv";
 import { SdkName, sdkLabels } from "./sdk.js";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
@@ -22,50 +22,56 @@ export type SdkPackageSuppressionsEntry = {
   "breaking-changes": string[];
 };
 
-export function validateSdkSuppressionsFile(suppressionContent: string | object | undefined | null): {
-  result: boolean,
-  message: string
+export function validateSdkSuppressionsFile(
+  suppressionContent: string | object | undefined | null,
+): {
+  result: boolean;
+  message: string;
 } {
   if (suppressionContent === null) {
+    const message = "This suppression file is a empty file";
+    console.error(message);
     return {
       result: false,
-      message: 'This suppression file is a empty file'
+      message: message,
     };
   }
 
   if (!suppressionContent) {
+    const message =
+      "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.";
     return {
       result: false,
-      message: 'This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.'
+      message: message,
     };
   }
 
   const suppressionFileSchema = {
-    type: 'object',
+    type: "object",
     properties: {
       suppressions: {
-        type: 'object',
+        type: "object",
         propertyNames: {
-          enum: Object.keys(sdkLabels)
+          enum: Object.keys(sdkLabels),
         },
         patternProperties: {
           "^.*$": {
-            type: 'array',
+            type: "array",
             items: {
-              type: 'object',
+              type: "object",
               properties: {
-                package: { type: 'string' },
-                "breaking-changes": { type: 'array', items: { type: 'string' } }
+                package: { type: "string" },
+                "breaking-changes": { type: "array", items: { type: "string" } },
               },
-              required: ['package', 'breaking-changes'],
-              additionalProperties: false
-            }
-          }
-        }
-      }
+              required: ["package", "breaking-changes"],
+              additionalProperties: false,
+            },
+          },
+        },
+      },
     },
-    required: ['suppressions'],
-    additionalProperties: false
+    required: ["suppressions"],
+    additionalProperties: false,
   };
 
   const suppressionAjv = new Ajv({ allErrors: true });
@@ -76,14 +82,16 @@ export function validateSdkSuppressionsFile(suppressionContent: string | object 
   if (isValid) {
     return {
       result: true,
-      message: 'This suppression file is a valid yaml.'
+      message: "This suppression file is a valid yaml.",
     };
   } else {
-    const message = 'This suppression file is a valid yaml but the schema is wrong: ' + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: '\n' });
-    console.error(message)
+    const message =
+      "This suppression file is a valid yaml but the schema is wrong: " +
+      suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" });
+    console.error(message);
     return {
       result: false,
-      message: message
+      message: message,
     };
   }
 }
