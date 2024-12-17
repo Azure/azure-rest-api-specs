@@ -218,7 +218,7 @@ union ConversationPiiCategoriesExclude {
   Address: "Address",
 
   /** Credit card category */
-  CreditCardNumber: "CreditCard",
+  CreditCard: "CreditCard",
 
   /** Email category */
   Email: "Email",
