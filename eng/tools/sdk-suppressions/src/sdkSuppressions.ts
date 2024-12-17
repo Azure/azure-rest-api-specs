@@ -79,9 +79,11 @@ export function validateSdkSuppressionsFile(suppressionContent: string | object 
       message: 'This suppression file is a valid yaml.'
     };
   } else {
+    const message = 'This suppression file is a valid yaml but the schema is wrong: ' + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: '\n' });
+    console.error(message)
     return {
       result: false,
-      message: 'This suppression file is a valid yaml but the schema is wrong: ' + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: '\n' })
+      message: message
     };
   }
 }
