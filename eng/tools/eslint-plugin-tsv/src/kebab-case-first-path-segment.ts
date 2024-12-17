@@ -1,3 +1,5 @@
+// TODO: Add types
+
 export const rule = {
   meta: {
     type: "problem",
