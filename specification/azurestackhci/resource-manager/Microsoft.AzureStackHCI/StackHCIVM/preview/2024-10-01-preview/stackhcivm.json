@@ -106,6 +106,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListVirtualMachineInstances": {
+            "$ref": "./examples/VirtualMachineInstances_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -138,6 +143,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualMachineInstance": {
+            "$ref": "./examples/VirtualMachineInstances_Get.json"
           }
         }
       },
@@ -177,10 +187,6 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -193,6 +199,23 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutVirtualMachineInstanceWithGalleryImage": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithGpu": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gpu.json"
+          },
+          "PutVirtualMachineInstanceWithMarketplaceGalleryImage": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Marketplace_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithOsDisk": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Os_Disk.json"
+          },
+          "PutVirtualMachineInstanceWithVMConfigAgent": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Vm_Config_Agent.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -251,6 +274,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -295,6 +323,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -329,6 +362,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAttestationStatus": {
+            "$ref": "./examples/AttestationStatuses_Get.json"
+          }
         }
       }
     },
@@ -359,6 +397,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgentListByVirtualMachineInstances": {
+            "$ref": "./examples/GuestAgents_ListByVirtualMachineInstance.json"
           }
         },
         "x-ms-pageable": {
@@ -393,6 +436,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GuestAgents_Get.json"
           }
         }
       },
@@ -432,10 +480,6 @@
               "$ref": "#/definitions/GuestAgent"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -448,6 +492,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/GuestAgents_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -494,6 +543,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/GuestAgents_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -529,6 +583,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachineInstances": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachineInstance.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -561,6 +620,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadataGroup_Get.json"
           }
         }
       }
@@ -600,6 +664,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PauseVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Pause.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -645,6 +714,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RestartVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Restart.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -686,6 +760,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SaveVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Save.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -731,6 +810,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Start.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -774,6 +858,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "StopVirtualMachine": {
+            "$ref": "./examples/VirtualMachineInstances_Stop.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -807,6 +896,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListGalleryImageBySubscription": {
+            "$ref": "./examples/GalleryImages_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -843,6 +937,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListLogicalNetworkBySubscription": {
+            "$ref": "./examples/LogicalNetworks_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -875,6 +974,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListMarketplaceGalleryImageBySubscription": {
+            "$ref": "./examples/MarketplaceGalleryImages_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -911,6 +1015,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListNetworkInterfaceBySubscription": {
+            "$ref": "./examples/NetworkInterfaces_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -943,6 +1052,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all network security groups": {
+            "$ref": "./examples/NetworkSecurityGroups_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -979,6 +1093,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListStorageContainerBySubscription": {
+            "$ref": "./examples/StorageContainers_ListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1011,6 +1130,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualHardDiskBySubscription": {
+            "$ref": "./examples/VirtualHardDisks_ListAll.json"
           }
         },
         "x-ms-pageable": {
@@ -1048,6 +1172,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListGalleryImageByResourceGroup": {
+            "$ref": "./examples/GalleryImages_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1093,6 +1222,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetGalleryImage": {
+            "$ref": "./examples/GalleryImages_Get.json"
           }
         }
       },
@@ -1143,10 +1277,6 @@
               "$ref": "#/definitions/GalleryImage"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1159,6 +1289,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutGalleryImage": {
+            "$ref": "./examples/GalleryImages_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1228,6 +1363,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateGalleryImage": {
+            "$ref": "./examples/GalleryImages_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1283,6 +1423,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteGalleryImage": {
+            "$ref": "./examples/GalleryImages_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1319,6 +1464,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListLogicalNetworkByResourceGroup": {
+            "$ref": "./examples/LogicalNetworks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1364,6 +1514,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Get.json"
           }
         }
       },
@@ -1414,10 +1569,6 @@
               "$ref": "#/definitions/LogicalNetwork"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1430,6 +1581,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1499,6 +1655,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1554,6 +1715,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteLogicalNetwork": {
+            "$ref": "./examples/LogicalNetworks_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1590,6 +1756,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListMarketplaceGalleryImageByResourceGroup": {
+            "$ref": "./examples/MarketplaceGalleryImages_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1635,6 +1806,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Get.json"
           }
         }
       },
@@ -1685,10 +1861,6 @@
               "$ref": "#/definitions/MarketplaceGalleryImage"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1701,6 +1873,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1770,6 +1947,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1825,6 +2007,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteMarketplaceGalleryImage": {
+            "$ref": "./examples/MarketplaceGalleryImages_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1861,6 +2048,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListNetworkInterfaceByResourceGroup": {
+            "$ref": "./examples/NetworkInterfaces_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1906,6 +2098,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Get.json"
           }
         }
       },
@@ -1956,10 +2153,6 @@
               "$ref": "#/definitions/NetworkInterface"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1972,6 +2165,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2041,6 +2239,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2096,6 +2299,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteNetworkInterface": {
+            "$ref": "./examples/NetworkInterfaces_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2132,6 +2340,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List network security groups in resource group": {
+            "$ref": "./examples/NetworkSecurityGroups_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2177,6 +2390,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get network security group": {
+            "$ref": "./examples/NetworkSecurityGroups_Get.json"
           }
         }
       },
@@ -2227,10 +2445,6 @@
               "$ref": "#/definitions/NetworkSecurityGroup"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2243,6 +2457,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateNetworkSecurityGroup": {
+            "$ref": "./examples/NetworkSecurityGroups_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2312,6 +2531,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update network security group tags": {
+            "$ref": "./examples/NetworkSecurityGroups_UpdateTags.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2367,6 +2591,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete network security group": {
+            "$ref": "./examples/NetworkSecurityGroups_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2411,6 +2640,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List network security rules in network security group": {
+            "$ref": "./examples/SecurityRules_ListByNetworkSecurityGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2464,6 +2698,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get network security rule in network security group": {
+            "$ref": "./examples/SecurityRules_Get.json"
           }
         }
       },
@@ -2522,10 +2761,6 @@
               "$ref": "#/definitions/SecurityRule"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2538,6 +2773,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SecurityRulesCreateOrUpdate": {
+            "$ref": "./examples/SecurityRules_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2603,6 +2843,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SecurityRulesDelete": {
+            "$ref": "./examples/SecurityRules_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2639,6 +2884,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageContainerByResourceGroup": {
+            "$ref": "./examples/StorageContainers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2684,6 +2934,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetStorageContainer": {
+            "$ref": "./examples/StorageContainers_Get.json"
           }
         }
       },
@@ -2734,10 +2989,6 @@
               "$ref": "#/definitions/StorageContainer"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2750,6 +3001,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutStorageContainer": {
+            "$ref": "./examples/StorageContainers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2819,6 +3075,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateStorageContainer": {
+            "$ref": "./examples/StorageContainers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2874,6 +3135,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteStorageContainer": {
+            "$ref": "./examples/StorageContainers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2910,6 +3176,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualHardDiskByResourceGroup": {
+            "$ref": "./examples/VirtualHardDisks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2955,6 +3226,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Get.json"
           }
         }
       },
@@ -3005,10 +3281,6 @@
               "$ref": "#/definitions/VirtualHardDisk"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3021,6 +3293,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PutVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3090,6 +3367,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UpdateVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -3143,6 +3425,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3212,6 +3499,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3402,7 +3694,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AttestationStatusProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3679,7 +3972,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3968,7 +4262,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GuestAgentProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4141,7 +4436,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HybridIdentityMetadataProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4450,7 +4746,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4629,7 +4926,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MarketplaceGalleryImageProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4799,7 +5097,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4885,11 +5184,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local network interface or if one should be created.",
-          "default": false
         }
       }
     },
@@ -4985,7 +5279,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityGroupProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5392,7 +5687,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityRuleProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5728,7 +6024,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageContainerProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6024,7 +6321,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualHardDiskProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6121,15 +6419,6 @@
           "format": "password",
           "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
           "x-ms-secret": true
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local hard disk or if one should be created.",
-          "default": false
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemTypes",
-          "description": "Operating system type of the OS disk. Possible values are: Windows, Linux."
         },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
@@ -6323,7 +6612,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6427,11 +6717,6 @@
         "resourceUid": {
           "type": "string",
           "description": "Unique identifier defined by ARC to identify the guest of the VM."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local virtual machine or if one should be created.",
-          "default": false
         }
       }
     },
