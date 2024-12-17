@@ -53,7 +53,7 @@
     "/accounts/{accountId}": {
       "get": {
         "operationId": "Accounts_Get",
-        "description": "Get details of the Azure resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Get details of the Azure resource mapped to an account for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -106,7 +106,7 @@
     "/accounts/{accountId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_List",
-        "description": "Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -410,7 +410,7 @@
     "/accounts/{accountId}/browsers": {
       "get": {
         "operationId": "Accounts_GetBrowsers",
-        "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
+        "description": "Gets remote browsers corresponding to given account id and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

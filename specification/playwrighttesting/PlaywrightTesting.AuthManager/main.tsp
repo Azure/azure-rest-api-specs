@@ -219,7 +219,7 @@ interface AccessTokens {
   @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   delete is Operations.ResourceDelete<AccessToken>;
 
-  @doc("Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.")
   list is Operations.ResourceList<AccessToken>;
 
   @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
@@ -253,11 +253,11 @@ alias GetBrowsersResponse = {
 interface Accounts {
   // Accounts Operations
 
-  @doc("Get details of the Azure resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Get details of the Azure resource mapped to an account for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
   get is Operations.ResourceRead<Account>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
-  @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
+  @doc("Gets remote browsers corresponding to given account id and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
   @route("/accounts/{accountId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,

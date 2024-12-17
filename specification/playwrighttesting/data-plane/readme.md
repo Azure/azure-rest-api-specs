@@ -39,6 +39,12 @@ These settings apply only when `--tag=package-2024-12-01` is specified on the co
 ```yaml $(tag) == 'package-2024-12-01'
 input-file:
   - Microsoft.PlaywrightTesting.AuthManager/stable/2024-12-01/playwrighttesting.json
+suppressions:
+  - code: ValidResponseCodeRequired
+    from: playwrighttesting.json
+    reason: Need 302 response code as a product requirement to redirect the client for test execution on remote browsers provided by the service.
+    where:
+      - $.paths["/accounts/{accountId}/browsers"].get
 ```
 
 ### Tag: package-2023-10-01-preview
