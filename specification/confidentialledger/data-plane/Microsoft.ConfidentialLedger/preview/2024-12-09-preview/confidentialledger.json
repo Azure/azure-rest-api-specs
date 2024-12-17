@@ -887,7 +887,35 @@
         }
       }
     },
-    "/app/userDefinedFunctions/{functionName}": {
+    "/app/userDefinedFunctions/{functionId}": {
+      "delete": {
+        "operationId": "DeleteUserDefinedFunction",
+        "x-ms-examples": {
+          "DeleteUserDefinedFunction": {
+            "$ref": "./examples/ledger/DeleteUserDefinedFunction.json"
+          }
+        },
+        "summary": "Deletes a user defined functuon from the Confidential Ledger.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The specified user defined function is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
       "get": {
         "operationId": "GetUserDefinedFunction",
         "x-ms-examples": {
@@ -902,7 +930,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UserDefinedFunctionNameParameter"
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
           }
         ],
         "responses": {
@@ -921,7 +949,7 @@
         }
       }
     },
-    "/app/userDefinedFunctions/{functionName}:execute": {
+    "/app/userDefinedFunctions/{functionId}:execute": {
       "post": {
         "operationId": "ExecuteUserDefinedFunction",
         "x-ms-examples": {
@@ -936,7 +964,7 @@
             "$ref": "common.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UserDefinedFunctionNameParameter"
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
           },
           {
             "$ref": "#/parameters/UserDefinedFunctionExecutionParameter"
@@ -1921,16 +1949,16 @@
     "UserDefinedFunction": {
       "description": "A user defined function in the ledger.",
       "required": [
-        "name"
+        "id"
       ],
       "properties": {
         "body": {
           "type": "string",
-          "description": "Body of the user defined function in JavaScript code."
+          "description": "Body of the user defined function in JavaScript."
         },
-        "name": {
+        "id": {
           "type": "string",
-          "description": "Name of the user defined function."
+          "description": "ID of the user defined function."
         }
       },
       "type": "object"
@@ -1941,6 +1969,10 @@
         "arguments": {
           "type": "string",
           "description": "Runtime arguments of the user defined function."
+        },
+        "entrypoint": {
+          "type": "string",
+          "description": "Entrypoint function name in the body of the user defined function."
         },
         "runtimeOptions": {
           "$ref": "#/definitions/JSRuntimeOptions"
@@ -1983,12 +2015,12 @@
     "UserDefinedFunctionTrigger": {
       "description": "Trigger for a user defined function execution.",
       "required": [
-        "name"
+        "id"
       ],
       "properties": {
-        "name": {
+        "id": {
           "type": "string",
-          "description": "Name of the user defined function to execute."
+          "description": "ID of the user defined function to execute."
         },
         "properties": {
           "$ref": "#/definitions/UserDefinedFunctionExecutionProperties"
@@ -2046,8 +2078,8 @@
       "description": "Specify the last transaction ID in a range.",
       "type": "string"
     },
-    "UserDefinedFunctionNameParameter": {
-      "name": "functionName",
+    "UserDefinedFunctionIdParameter": {
+      "name": "functionId",
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method",
