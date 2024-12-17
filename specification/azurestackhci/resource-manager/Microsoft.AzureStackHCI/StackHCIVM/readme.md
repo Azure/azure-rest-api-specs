@@ -62,6 +62,15 @@ suppressions:
       - stackhcivm.json
 ```
 
+### Tag: package-preview-2024-10-01-preview
+
+These settings apply only when `--tag=package-preview-2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10-01-preview'
+input-file:
+  - preview/2024-10-01-preview/stackhcivm.json
+```
+
 ### Tag: package-preview-2024-08
 
 These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
