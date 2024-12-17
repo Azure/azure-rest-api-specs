@@ -61,3 +61,7 @@ using Microsoft.StandbyPool;
   "javascript"
 );
 @@clientName(Microsoft.StandbyPool, "StandbyPoolMgmtClient", "python");
+@@clientNamespace(Microsoft.StandbyPool,
+  "com.azure.resourcemanager.standbypool",
+  "java"
+);
