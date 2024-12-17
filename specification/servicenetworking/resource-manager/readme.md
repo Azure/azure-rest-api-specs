@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == '2025-01-01'
 input-file:
-  - Microsoft.ServiceNetworking/preview/2025-01-01/TrafficController.json
+  - Microsoft.ServiceNetworking/stable/2025-01-01/TrafficController.json
 openapi-type: arm
 tag: package-2025-01-01
 ```
