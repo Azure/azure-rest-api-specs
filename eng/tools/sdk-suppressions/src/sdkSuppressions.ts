@@ -22,6 +22,11 @@ export type SdkPackageSuppressionsEntry = {
   "breaking-changes": string[];
 };
 
+function errorAndExist(error: string): never {
+    console.error("Error:", error);
+    process.exit(1);
+}
+
 export function validateSdkSuppressionsFile(
   suppressionContent: string | object | undefined | null,
 ): {
@@ -29,21 +34,11 @@ export function validateSdkSuppressionsFile(
   message: string;
 } {
   if (suppressionContent === null) {
-    const message = "This suppression file is a empty file";
-    console.error(message);
-    return {
-      result: false,
-      message: message,
-    };
+    errorAndExist("This suppression file is a empty file");
   }
 
   if (!suppressionContent) {
-    const message =
-      "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.";
-    return {
-      result: false,
-      message: message,
-    };
+    errorAndExist("This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.");
   }
 
   const suppressionFileSchema = {
@@ -85,13 +80,6 @@ export function validateSdkSuppressionsFile(
       message: "This suppression file is a valid yaml.",
     };
   } else {
-    const message =
-      "This suppression file is a valid yaml but the schema is wrong: " +
-      suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" });
-    console.error(message);
-    return {
-      result: false,
-      message: message,
-    };
+    errorAndExist("This suppression file is a valid yaml but the schema is wrong: " + suppressionAjv.errorsText(suppressionAjvCompile.errors, { separator: "\n" }));
   }
 }

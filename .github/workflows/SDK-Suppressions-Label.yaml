@@ -57,7 +57,7 @@ jobs:
             core.setOutput("prContext", prContextStr);
           result-encoding: string
 
-      - name: Run get suppressions label script
+      - name: Run Get suppressions label script
         id: run-suppressions-script
         env:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.prContext }}
