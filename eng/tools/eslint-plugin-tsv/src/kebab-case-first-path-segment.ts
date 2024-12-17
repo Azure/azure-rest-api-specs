@@ -2,6 +2,7 @@
 
 export const rule = {
   meta: {
+    name: "kebab-case-first-path-segment",
     type: "problem",
     docs: {
       description: "Requires first path segment after 'specification' to use kebab-case",
