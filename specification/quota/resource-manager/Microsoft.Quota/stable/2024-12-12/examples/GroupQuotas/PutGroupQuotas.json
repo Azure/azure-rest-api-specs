@@ -3,10 +3,17 @@
   "parameters": {
     "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "api-version": "2024-12-12",
+    "api-version": "2024-10-15-preview",
     "GroupQuotaPutRequestBody": {
       "properties": {
-        "displayName": "GroupQuota1"
+        "displayName": "GroupQuota1",
+        "additionalAttributes": {
+          "groupId": {
+            "groupingIdType": "ServiceTreeId",
+            "value": "yourServiceTreeIdHere"
+          },
+          "environment": "Production"
+        }
       }
     }
   },
@@ -18,6 +25,13 @@
         "name": "groupquota1",
         "properties": {
           "displayName": "GroupQuota1",
+          "additionalAttributes": {
+            "groupId": {
+              "groupingIdType": "ServiceTreeId",
+              "value": "yourServiceTreeIdHere"
+            },
+            "environment": "Production"
+          },
           "provisioningState": "Accepted"
         }
       }
