@@ -1,4 +1,4 @@
-import eslintPluginTsv from "../../src/eslint-plugin-tsv.js";
+import eslintPluginTsv from "../../../src/eslint-plugin-tsv.js";
 import parser from "yaml-eslint-parser";
 
 export const config = [
