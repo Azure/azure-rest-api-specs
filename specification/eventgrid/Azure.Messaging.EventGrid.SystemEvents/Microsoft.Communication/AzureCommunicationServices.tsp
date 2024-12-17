@@ -260,10 +260,10 @@ model AcsEmailDeliveryReportReceivedEventData {
   /** The recipient Email Address */
   recipient?: string;
 
-  /** The Internet Message Id of the email been sent */
-  internetMessageId?: string;
+  /** The Internet Message Id of the email that has been sent */
+  internetMessageId: string;
 
-  /** The Id of the email been sent */
+  /** The Id of the email that has been sent */
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
@@ -899,7 +899,7 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
-  
+
   /** Recipient mail server */
   recipientMailServer?: string;
 }
