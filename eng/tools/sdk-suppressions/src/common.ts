@@ -62,7 +62,6 @@ export async function runGitCommand(command: string): Promise<string> {
   } catch (error:any) {
     console.error("Command failed:", error.message);
     console.error("Error details:", error.stderr || error);
-    console.error("Failed to execute Git command:", error);
     throw error;
   }
 }
