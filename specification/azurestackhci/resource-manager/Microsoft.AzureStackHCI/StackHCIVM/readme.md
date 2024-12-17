@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-preview-2024-10-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-10-01-preview'
 input-file:
   - preview/2024-10-01-preview/stackhcivm.json
+  - ../operations/preview/2024-10-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-08
