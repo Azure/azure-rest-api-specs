@@ -1,5 +1,3 @@
-// TODO: Convert to TS
-
 module.exports = {
   meta: {
     type: "problem",
@@ -10,8 +8,10 @@ module.exports = {
     fixable: "code",
     schema: [],
   },
+  // @ts-ignore
   create(context) {
     return {
+      // @ts-ignore
       YAMLPair(node) {
         if (node.key.value == "foo" && node.value.value != "bar") {
           context.report({
@@ -21,6 +21,7 @@ module.exports = {
             data: {
               notBar: node.value.value,
             },
+            // @ts-ignore
             fix(fixer) {
               return fixer.replaceText(node.value, 'bar');
             },

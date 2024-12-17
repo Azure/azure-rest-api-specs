@@ -1,4 +1,4 @@
-const eslintPluginTsv = require("../src/eslint-plugin-tsv.cjs");
+const eslintPluginTsv = require("../dist/src/eslint-plugin-tsv.js");
 const parser = require("yaml-eslint-parser");
 
 module.exports = [

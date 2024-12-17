@@ -1,5 +1,5 @@
-// TODO: Convert to TS
+// @ts-ignore
+import enforceFooBar from "./enforce-foo-bar";
 
-const enforceFooBar = require("./enforce-foo-bar.cjs");
 const plugin = { rules: { "enforce-foo-bar": enforceFooBar } };
 module.exports = plugin;
