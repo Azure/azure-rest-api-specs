@@ -60,7 +60,6 @@ export async function runGitCommand(command: string): Promise<string> {
 
     return stdout.trim();
   } catch (error:any) {
-    console.error("Command failed:", error.message);
     console.error("Error details:", error.stderr || error);
     throw error;
   }
