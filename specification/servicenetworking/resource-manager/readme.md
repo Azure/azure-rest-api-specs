@@ -26,14 +26,14 @@ These are the global settings for the servicenetworking.
 
 ```yaml
 openapi-type: arm
-tag: 2025-01-01
+tag: package-2025-01-01
 ```
 
 ### Tag: package-2025-01-01
 
 These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
 
-```yaml $(tag) == '2025-01-01'
+```yaml $(tag) == 'package-2025-01-01'
 input-file:
   - Microsoft.ServiceNetworking/stable/2025-01-01/TrafficController.json
 openapi-type: arm
