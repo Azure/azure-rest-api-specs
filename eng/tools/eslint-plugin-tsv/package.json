@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "tsc --build",
+    "test":"node dist/test/kebab-case-first-path-segment.test.js",
     "test:e2e": "npm run build && npm run test:e2e:contoso && npm run test:e2e:not-kebab-case",
     "test:e2e:contoso": "eslint --config dist/test/specification/eslint.config.js test/e2e/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     "test:e2e:not-kebab-case": "eslint --config dist/test/specification/eslint.config.js test/e2e/specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml"
