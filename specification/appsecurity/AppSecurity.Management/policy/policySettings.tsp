@@ -17,37 +17,41 @@ model PolicySettings {
   @doc("If action type is redirect, this field represents redirect URL for the client")
   @minLength(MinRedirectUrlLength)
   @maxLength(MaxRedirectUrlLength)
-  redirectUrl?: string; // TODO - didn't find a url built-in type in /workspace/src/API/node_modules/@typespec/compiler/lib/lib.tsp
+  redirectUrl?: string; // TODO - didn't find a url built-in type in src/API/node_modules/@typespec/compiler/lib/lib.tsp
 
   @doc("Custom block response configuration, if action type is block")
   customBlockResponse?: CustomBlockResponse;
 
   @doc("Request body inspection settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  requestBodyInspections?: RequestBodyInspection[];
+  requestBodyInspections?: RequestBodyInspection[] = #[];
 
   @doc("Request body size limitation settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  requestBodySizeLimitations?: RequestBodySizeLimitation[];
+  requestBodySizeLimitations?: RequestBodySizeLimitation[] = #[];
 
   @doc("File upload size limitation settings overrides for endpoint types")
   @extension("x-ms-identifiers", ["endpointType"])
-  fileUploadSizeLimitations?: FileUploadSizeLimitation[];
+  fileUploadSizeLimitations?: FileUploadSizeLimitation[] = #[];
 }
 
 @doc("Supported policy modes")
-enum PolicyMode {
+union PolicyMode {
+  string,
+
   @doc("The policy is in prevention mode. Requests are inspected and blocked accordingly")
-  Prevention,
+  Prevention: "Prevention",
 
   @doc("The policy is in detection mode. Requests are inspected but not blocked")
-  Detection,
+  Detection: "Detection",
 }
 
 @doc("Custom block response configuration, if action type is block")
 model CustomBlockResponse {
   @doc("Response status code")
-  statusCode: HttpStatusCodeType;
+  @minValue(100)
+  @maxValue(999)
+  statusCode: int32;
 
   @doc("Response body. The body must be specified in base64 encoding")
   @pattern(CustomBlockResponsePattern)
@@ -88,22 +92,4 @@ model FileUploadSizeLimitation {
 
   @doc("Maximum allowed upload size in MB")
   maxSizeInMb?: int32;
-}
-
-@doc("HTTP response status codes")
-enum HttpStatusCodeType {
-  @doc("The request has succeeded")
-  Ok: 200,
-
-  @doc("The client does not have access rights to the content")
-  Forbidden: 403,
-
-  @doc("The request method is known by the server but is not supported by the target resource")
-  MethodNotAllowed: 405,
-
-  @doc("This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content that conforms to the criteria given by the user agent")
-  NotAcceptable: 406,
-
-  @doc("The user has sent too many requests in a given amount of time")
-  TooManyRequests: 429,
 }

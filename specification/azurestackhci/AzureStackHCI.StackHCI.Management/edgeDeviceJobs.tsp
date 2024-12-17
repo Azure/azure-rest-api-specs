@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-
 import "./hciCommon.tsp";
 
 using TypeSpec.Rest;
@@ -13,11 +12,14 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+// these contains OS Provisioning Job
+
 @doc("A EdgeDevice")
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDevice,
@@ -28,6 +30,7 @@ model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 @doc("EdgeDevice Jobs resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
@@ -70,6 +73,9 @@ union ProvisioningOsType {
 
   @doc("AzureLinux OS.")
   AzureLinux: "AzureLinux",
+
+  @doc("HCI OS.")
+  HCI: "HCI",
 }
 
 @doc("Job Type supported by Azure Linux Edge Devices.")
@@ -100,6 +106,9 @@ union HciEdgeDeviceJobType {
 
   @doc("Job to provide remote support to the device.")
   RemoteSupport: "RemoteSupport",
+
+  @doc("Job to update confidential VM support to the device.")
+  UpdateConfidentialVm: "UpdateConfidentialVm",
 }
 
 @doc("Common Job Types supported.")
@@ -127,17 +136,7 @@ model AzureLinuxCollectLogJobProperties
 
 @doc("Represents the reported properties of a log collection job.")
 model LogCollectionReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
+  ...JobReportedProperties;
 
   @doc("Details of the log collection session.")
   @visibility("read")
@@ -237,25 +236,6 @@ model EdgeDeviceJobProperties {
   @doc("Status of Edge device job.")
   @visibility("read")
   status?: JobStatus;
-
-  @doc("Reported properties for job")
-  @visibility("read")
-  reportedProperties?: EdgeDeviceJobReportedProperties;
-}
-
-@doc("Reported Properties for  job triggered from cloud.")
-model EdgeDeviceJobReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
 }
 
 @doc("Edge device job for Azure Linux solution.")
@@ -293,6 +273,14 @@ model AzureLinuxRoeProvisionOsJobProperties
 
   @doc("Os Provisioning request.")
   provisioningRequest: ProvisioningRequest;
+
+  @doc("Reported Properties for Provision Os job")
+  reportedProperties?: ProvisionOsReportedProperties;
+}
+
+@doc("Reported Properties for Provision Os job")
+model ProvisionOsReportedProperties {
+  ...JobReportedProperties;
 }
 
 @discriminator("target")
@@ -307,6 +295,24 @@ model ProvisioningRequest {
 model AzureLinuxProvisioningRequest extends ProvisioningRequest {
   @doc("Target operating system type to support polymorphic resource.")
   target: ProvisioningOsType.AzureLinux;
+
+  @doc("Operating system profile.")
+  osProfile: OsProfile;
+
+  @doc("User configuration.")
+  userConfiguration: UserConfiguration;
+
+  @doc("Onboarding configuration.")
+  onboardingConfiguration: OnboardingConfiguration;
+
+  @doc("Device configuration.")
+  deviceConfiguration: DeviceConfiguration;
+}
+
+@doc("HCI provisioning request.")
+model HciProvisioningRequest extends ProvisioningRequest {
+  @doc("Target operating system type to support polymorphic resource.")
+  target: ProvisioningOsType.HCI;
 
   @doc("Operating system profile.")
   osProfile: OsProfile;
@@ -475,17 +481,7 @@ model TimeConfiguration {
 
 @doc("Represents the reported properties of a remote support job.")
 model RemoteSupportReportedProperties {
-  @doc("The percentage of the job that is complete.")
-  @visibility("read")
-  percentComplete?: int32;
-
-  @doc("Validation status of job.")
-  @visibility("read")
-  validationStatus?: EceActionStatus;
-
-  @doc("Deployment status of job.")
-  @visibility("read")
-  deploymentStatus?: EceActionStatus;
+  ...JobReportedProperties;
 
   @doc("Optional settings for configuring the node for remote support.")
   @visibility("read")
@@ -568,6 +564,15 @@ model HciCollectLogJobProperties extends HciEdgeDeviceJobProperties {
   jobType: HciEdgeDeviceJobType.CollectLog;
 }
 
+@doc("Represents the properties of an HCI Update Confidential Vm job.")
+model HciUpdateConfidentialVmProperties extends HciEdgeDeviceJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: HciEdgeDeviceJobType.UpdateConfidentialVm;
+
+  @doc("Defines the customer's intent for updating confidential VM properties")
+  confidentialVmIntent: ConfidentialVmIntent;
+}
+
 @discriminator("jobType")
 @doc("HCI Edge device job properties")
 model HciEdgeDeviceJobProperties {
@@ -609,4 +614,13 @@ model RemoteSupportJobProperties {
   @doc("log collection job reported properties.")
   @visibility("read")
   reportedProperties?: RemoteSupportReportedProperties;
+}
+
+@doc("Defines the customer's intent for updating confidential VM properties")
+union ConfidentialVmIntent {
+  @doc("Intent provided as a string.")
+  string,
+
+  @doc("Enable confidential VM properties on device")
+  Enable: "Enable",
 }

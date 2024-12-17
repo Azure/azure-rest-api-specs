@@ -417,6 +417,23 @@
         ]
       }
     },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "IGVM status will be enabled if machine is CVM supported.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "array",
+          "description": "The status of the IGVM components",
+          "items": {
+            "$ref": "#/definitions/StatusDetail"
+          }
+        }
+      }
+    },
     "DeviceConfiguration": {
       "type": "object",
       "description": "The device Configuration for edge device.",
@@ -923,6 +940,32 @@
           "type": "string",
           "description": "The status of NIC, up, disconnected.",
           "readOnly": true
+        },
+        "rdmaCapability": {
+          "type": "string",
+          "description": "Describes the RDMA capability of the network adapter.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "RdmaCapability",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              }
+            ]
+          },
+          "readOnly": true
         }
       }
     },
@@ -1057,6 +1100,36 @@
           "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
           "readOnly": true
         }
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "IGVM status that refer if Confidential VM  is supported on device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "IGVM status is unknown."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM status is enabled that  refers Confidential VM is supported on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disable that refers Confidential VM is not supported on this device."
+          }
+        ]
       }
     },
     "Intents": {
@@ -1220,6 +1293,11 @@
           "format": "date-time",
           "description": "Most recent edge device sync timestamp.",
           "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "Confidential VM support details for edge device.",
+          "readOnly": true
         }
       }
     },
@@ -1240,6 +1318,21 @@
         "sbeManifest": {
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "StatusDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains status.",
           "readOnly": true
         }
       }

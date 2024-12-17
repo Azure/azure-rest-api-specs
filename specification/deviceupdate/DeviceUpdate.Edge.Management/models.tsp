@@ -877,7 +877,7 @@ model DeploymentStatus {
   /**
    * The error details of the Failed state.  This is not present if the deployment state is not Failed.
    */
-  error?: ErrorResponse;
+  error?: ErrorDetail;
 
   /**
    * The collection of device class subgroup status objects
@@ -903,7 +903,7 @@ model DeviceClassSubgroupDeploymentStatus {
   /**
    * The error details of the Failed state.  This is not present if the deployment state is not Failed.
    */
-  error?: ErrorResponse;
+  error?: ErrorDetail;
 
   /**
    * The total number of devices in the deployment.
@@ -1186,6 +1186,7 @@ model Step {
   /**
    * Parameters to be passed to handler during execution.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   handlerProperties?: {};
 
   /**

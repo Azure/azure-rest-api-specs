@@ -7,17 +7,14 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * Defines the NetworkInterface resource.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
 @Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
 @includeInapplicableMetadataInPayload(false)
 model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
-  /**
-   * Name of the Network Interface.
-   */
+  @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkInterfaceName")
@@ -32,35 +29,23 @@ model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 interface NetworkInterfaces {
-  /**
-   * Get the Network Interface resource details.
-   */
+  @doc("Get the Network Interface resource details.")
   get is ArmResourceRead<NetworkInterface>;
 
-  /**
-   * Create a Network Interface resource.
-   */
+  @doc("Create a Network Interface resource.")
   create is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
-  /**
-   * Update certain properties of the Network Interface resource.
-   */
+  @doc("Update certain properties of the Network Interface resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<NetworkInterface, NetworkInterfacePatch>;
 
-  /**
-   * Delete the Network Interface resource.
-   */
+  @doc("Delete the Network Interface resource.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
 
-  /**
-   * List all the Network Interface resources in a given resource group.
-   */
+  @doc("List all the Network Interface resources in a given resource group.")
   listByNetworkDevice is ArmResourceListByParent<NetworkInterface>;
 
-  /**
-   * Update the admin state of the Network Interface.
-   */
+  @doc("Update the admin state of the Network Interface.")
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkInterface,
     UpdateAdministrativeState,

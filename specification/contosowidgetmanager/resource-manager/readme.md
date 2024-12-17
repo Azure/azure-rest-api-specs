@@ -23,23 +23,16 @@ These are the global settings for the containerstorage.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
-tag: 2021-10-01-preview
+tag: package-2021-10-01-preview
 ```
 
 ### Tag: package-2021-10-01-preview
 
 These settings apply only when `--tag=package-2021-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-01-preview'
+```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
   - Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
 ```
 
 ---
-
-``` yaml
-suppressions:
-  - code: BodyTopLevelProperties
-    reason: This lintdiff error showing is bug, same issue raised on https://github.com/Azure/azure-openapi-validator/issues/722
-```

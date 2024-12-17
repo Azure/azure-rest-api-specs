@@ -189,6 +189,19 @@ model DeploymentIntents {
   adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
 }
 
+@doc("Local Availability Zone information for HCI cluster")
+model LocalAvailabilityZones {
+  @doc("Local Availability Zone name for HCI cluster")
+  localAvailabilityZoneName?: string;
+
+  @doc("Local Availability Zone Mode for HCI cluster. Can be active or passive.")
+  localAvailabilityZoneMode?: LocalAvailabilityZoneMode;
+
+  @doc("Nodes belonging to a particular zone")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  nodes?: string[];
+}
+
 @doc("The VirtualSwitchConfigurationOverrides of a cluster.")
 model DeploymentVirtualSwitchConfigurationOverrides {
   @doc("Enable IoV for Virtual Switch")
@@ -332,4 +345,55 @@ union EdgeSolutionType {
 
   @doc("Edge solution for Azure linux edge devices.")
   AzureLinux: "AzureLinux",
+}
+
+@doc("Local Availability Zone Mode for HCI cluster.")
+union LocalAvailabilityZoneMode {
+  string,
+
+  @doc("Local Availability Zone in active mode.")
+  Active: "Active",
+
+  @doc("Local Availability Zone in passive mode.")
+  Passive: "Passive",
+}
+
+@doc("Supported Storage Type for HCI Cluster")
+union ClusterPattern {
+  string,
+
+  @doc("Standard Cluster.")
+  Standard: "Standard",
+
+  @doc("Stretch Cluster.")
+  Stretch: "Stretch",
+
+  @doc("RackAware Cluster.")
+  RackAware: "RackAware",
+}
+
+@doc("Identity Provider for the cluster")
+union IdentityProvider {
+  string,
+
+  @doc("Active Directory as the Identity Provider. This is the default option.")
+  ActiveDirectory: "ActiveDirectory",
+
+  @doc("Use local identity with Azure Keyvault")
+  LocalIdentity: "LocalIdentity",
+}
+
+@doc("Reported Properties for job triggered from cloud.")
+model JobReportedProperties {
+  @doc("The percentage of the job that is complete.")
+  @visibility("read")
+  percentComplete?: int32;
+
+  @doc("Validation status of job.")
+  @visibility("read")
+  validationStatus?: EceActionStatus;
+
+  @doc("Deployment status of job.")
+  @visibility("read")
+  deploymentStatus?: EceActionStatus;
 }

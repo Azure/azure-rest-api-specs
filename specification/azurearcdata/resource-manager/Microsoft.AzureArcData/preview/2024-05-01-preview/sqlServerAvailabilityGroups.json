@@ -1153,10 +1153,16 @@
       }
     },
     "databases": {
-      "type": "array",
       "description": "List of database names.",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "List of database names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "ArcSqlServerAvailabilityGroupListResult": {

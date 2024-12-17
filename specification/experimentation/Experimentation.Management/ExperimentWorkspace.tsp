@@ -18,8 +18,7 @@ model ExperimentWorkspace
   ...ResourceNameParameter<
     Resource = ExperimentWorkspace,
     KeyName = "experimentWorkspaceName",
-    SegmentName = "experimentWorkspaces",
-    NamePattern = "^[a-z0-9]{3,14}$"
+    SegmentName = "experimentWorkspaces"
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The standard ManagedServiceIdentityProperty does not supports just UserAssigned identity"

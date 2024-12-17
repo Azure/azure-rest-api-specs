@@ -1,0 +1,628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ConfigServiceDeliveryChannels"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/configServiceDeliveryChannels": {
+      "get": {
+        "operationId": "ConfigServiceDeliveryChannels_ListBySubscription",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "List ConfigServiceDeliveryChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_ListBySubscription": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceDeliveryChannels": {
+      "get": {
+        "operationId": "ConfigServiceDeliveryChannels_ListByResourceGroup",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "List ConfigServiceDeliveryChannel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_ListByResourceGroup": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/configServiceDeliveryChannels/{name}": {
+      "get": {
+        "operationId": "ConfigServiceDeliveryChannels_Get",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "Get a ConfigServiceDeliveryChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceDeliveryChannel",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_Get": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigServiceDeliveryChannels_CreateOrReplace",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "Create a ConfigServiceDeliveryChannel. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceDeliveryChannel",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConfigServiceDeliveryChannel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConfigServiceDeliveryChannel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_CreateOrReplace": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ConfigServiceDeliveryChannels_Update",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "Update a ConfigServiceDeliveryChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceDeliveryChannel",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannelTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_Update": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConfigServiceDeliveryChannels_Delete",
+        "tags": [
+          "ConfigServiceDeliveryChannels"
+        ],
+        "description": "Delete a ConfigServiceDeliveryChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ConfigServiceDeliveryChannel",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigServiceDeliveryChannels_Delete": {
+            "$ref": "./examples/ConfigServiceDeliveryChannels_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsConfigServiceDeliveryChannelProperties": {
+      "type": "object",
+      "description": "Definition of awsConfigServiceDeliveryChannel",
+      "properties": {
+        "configSnapshotDeliveryProperties": {
+          "$ref": "#/definitions/ConfigSnapshotDeliveryProperties",
+          "description": "<p>The options for how often Config delivers configuration snapshots to the Amazon S3 bucket.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the delivery channel. By default, Config assigns the name 'default' when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.</p>"
+        },
+        "s3BucketName": {
+          "type": "string",
+          "description": "<p>The name of the Amazon S3 bucket to which Config delivers configuration snapshots and configuration history files.</p> <p>If you specify a bucket that belongs to another Amazon Web Services account, that bucket must have policies that grant access permissions to Config. For more information, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html'>Permissions for the Amazon S3 Bucket</a> in the <i>Config Developer Guide</i>.</p>"
+        },
+        "s3KeyPrefix": {
+          "type": "string",
+          "description": "<p>The prefix for the specified Amazon S3 bucket.</p>"
+        },
+        "s3KmsKeyArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS ) KMS key (KMS key) used to encrypt objects delivered by Config. Must belong to the same Region as the destination S3 bucket.</p>"
+        },
+        "snsTopicARN": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which Config sends notifications about configuration changes.</p> <p>If you choose a topic from another account, the topic must have policies that grant access permissions to Config. For more information, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html'>Permissions for the Amazon SNS Topic</a> in the <i>Config Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "ConfigServiceDeliveryChannel": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigServiceDeliveryChannelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConfigServiceDeliveryChannelListResult": {
+      "type": "object",
+      "description": "The response of a ConfigServiceDeliveryChannel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigServiceDeliveryChannel items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigServiceDeliveryChannel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigServiceDeliveryChannelProperties": {
+      "type": "object",
+      "description": "Definition of ConfigServiceDeliveryChannel",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsConfigServiceDeliveryChannelProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigServiceDeliveryChannelTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ConfigServiceDeliveryChannel resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConfigSnapshotDeliveryProperties": {
+      "type": "object",
+      "description": "Definition of ConfigSnapshotDeliveryProperties",
+      "properties": {
+        "deliveryFrequency": {
+          "$ref": "#/definitions/MaximumExecutionFrequencyEnumValue",
+          "description": "<p>The frequency with which Config delivers configuration snapshots.</p>"
+        }
+      }
+    },
+    "MaximumExecutionFrequency": {
+      "type": "string",
+      "description": "MaximumExecutionFrequency enum",
+      "enum": [
+        "One_Hour",
+        "Six_Hours",
+        "Three_Hours",
+        "Twelve_Hours",
+        "TwentyFour_Hours"
+      ],
+      "x-ms-enum": {
+        "name": "MaximumExecutionFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "One_Hour",
+            "value": "One_Hour",
+            "description": "MaximumExecutionFrequency enum One_Hour"
+          },
+          {
+            "name": "Six_Hours",
+            "value": "Six_Hours",
+            "description": "MaximumExecutionFrequency enum Six_Hours"
+          },
+          {
+            "name": "Three_Hours",
+            "value": "Three_Hours",
+            "description": "MaximumExecutionFrequency enum Three_Hours"
+          },
+          {
+            "name": "Twelve_Hours",
+            "value": "Twelve_Hours",
+            "description": "MaximumExecutionFrequency enum Twelve_Hours"
+          },
+          {
+            "name": "TwentyFour_Hours",
+            "value": "TwentyFour_Hours",
+            "description": "MaximumExecutionFrequency enum TwentyFour_Hours"
+          }
+        ]
+      }
+    },
+    "MaximumExecutionFrequencyEnumValue": {
+      "type": "object",
+      "description": "Definition of MaximumExecutionFrequencyEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/MaximumExecutionFrequency",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

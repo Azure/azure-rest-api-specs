@@ -1,0 +1,728 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ec2SecurityGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ec2SecurityGroups": {
+      "get": {
+        "operationId": "Ec2SecurityGroups_ListBySubscription",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "List Ec2SecurityGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_ListBySubscription": {
+            "$ref": "./examples/Ec2SecurityGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2SecurityGroups": {
+      "get": {
+        "operationId": "Ec2SecurityGroups_ListByResourceGroup",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "List Ec2SecurityGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_ListByResourceGroup": {
+            "$ref": "./examples/Ec2SecurityGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ec2SecurityGroups/{name}": {
+      "get": {
+        "operationId": "Ec2SecurityGroups_Get",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "Get a Ec2SecurityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2SecurityGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_Get": {
+            "$ref": "./examples/Ec2SecurityGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Ec2SecurityGroups_CreateOrReplace",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "Create a Ec2SecurityGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2SecurityGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Ec2SecurityGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'Ec2SecurityGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_CreateOrReplace": {
+            "$ref": "./examples/Ec2SecurityGroups_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Ec2SecurityGroups_Update",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "Update a Ec2SecurityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2SecurityGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Ec2SecurityGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_Update": {
+            "$ref": "./examples/Ec2SecurityGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Ec2SecurityGroups_Delete",
+        "tags": [
+          "Ec2SecurityGroups"
+        ],
+        "description": "Delete a Ec2SecurityGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Ec2SecurityGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Ec2SecurityGroups_Delete": {
+            "$ref": "./examples/Ec2SecurityGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsEc2SecurityGroupProperties": {
+      "type": "object",
+      "description": "Definition of awsEc2SecurityGroup",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>A description of the security group.</p>"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "<p>The ID of the security group.</p>"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "<p>The name of the security group.</p>"
+        },
+        "ipPermissions": {
+          "type": "array",
+          "description": "<p>The inbound rules associated with the security group.</p>",
+          "items": {
+            "$ref": "#/definitions/IpPermission"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipPermissionsEgress": {
+          "type": "array",
+          "description": "<p>The outbound rules associated with the security group.</p>",
+          "items": {
+            "$ref": "#/definitions/IpPermission"
+          },
+          "x-ms-identifiers": []
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "<p>The Amazon Web Services account ID of the owner of the security group.</p>"
+        },
+        "tags": {
+          "type": "array",
+          "description": "<p>Any tags assigned to the security group.</p>",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The ID of the VPC for the security group.</p>"
+        }
+      }
+    },
+    "Ec2SecurityGroup": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Ec2SecurityGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Ec2SecurityGroupListResult": {
+      "type": "object",
+      "description": "The response of a Ec2SecurityGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Ec2SecurityGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/Ec2SecurityGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Ec2SecurityGroupProperties": {
+      "type": "object",
+      "description": "Definition of Ec2SecurityGroup",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEc2SecurityGroupProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Ec2SecurityGroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Ec2SecurityGroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IpPermission": {
+      "type": "object",
+      "description": "Definition of IpPermission",
+      "properties": {
+        "fromPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).</p>"
+        },
+        "ipProtocol": {
+          "type": "string",
+          "description": "<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number (see <a href='http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml'>Protocol Numbers</a>).</p> <p>Use <code>-1</code> to specify all protocols. When authorizing security group rules, specifying <code>-1</code> or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>icmpv6</code> allows traffic on all ports, regardless of any port range you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For <code>icmpv6</code>, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.</p>"
+        },
+        "ipRanges": {
+          "type": "array",
+          "description": "<p>The IPv4 address ranges.</p>",
+          "items": {
+            "$ref": "#/definitions/IpRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "ipv6Ranges": {
+          "type": "array",
+          "description": "<p>The IPv6 address ranges.</p>",
+          "items": {
+            "$ref": "#/definitions/Ipv6Range"
+          },
+          "x-ms-identifiers": []
+        },
+        "prefixListIds": {
+          "type": "array",
+          "description": "<p>The prefix list IDs.</p>",
+          "items": {
+            "$ref": "#/definitions/PrefixListId"
+          },
+          "x-ms-identifiers": []
+        },
+        "toPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>"
+        },
+        "userIdGroupPairs": {
+          "type": "array",
+          "description": "<p>The security group and Amazon Web Services account ID pairs.</p>",
+          "items": {
+            "$ref": "#/definitions/UserIdGroupPair"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IpRange": {
+      "type": "object",
+      "description": "Definition of IpRange",
+      "properties": {
+        "cidrIp": {
+          "type": "string",
+          "description": "<p>The IPv4 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
+        }
+      }
+    },
+    "Ipv6Range": {
+      "type": "object",
+      "description": "Definition of Ipv6Range",
+      "properties": {
+        "cidrIpv6": {
+          "type": "string",
+          "description": "<p>The IPv6 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.</p>"
+        },
+        "description": {
+          "type": "string",
+          "description": "<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
+        }
+      }
+    },
+    "PrefixListId": {
+      "type": "object",
+      "description": "Definition of PrefixListId",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>A description for the security group rule that references this prefix list ID.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
+        },
+        "prefixListId": {
+          "type": "string",
+          "description": "<p>The ID of the prefix.</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
+        }
+      }
+    },
+    "UserIdGroupPair": {
+      "type": "object",
+      "description": "Definition of UserIdGroupPair",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "<p>A description for the security group rule that references this user ID group pair.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "<p>The ID of the security group.</p>"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "<p>[Default VPC] The name of the security group. For a security group in a nondefault VPC, use the security group ID. </p> <p>For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.</p>"
+        },
+        "peeringStatus": {
+          "type": "string",
+          "description": "<p>The status of a VPC peering connection, if applicable.</p>"
+        },
+        "userId": {
+          "type": "string",
+          "description": "<p>The ID of an Amazon Web Services account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p>"
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "<p>The ID of the VPC for the referenced security group, if applicable.</p>"
+        },
+        "vpcPeeringConnectionId": {
+          "type": "string",
+          "description": "<p>The ID of the VPC peering connection, if applicable.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

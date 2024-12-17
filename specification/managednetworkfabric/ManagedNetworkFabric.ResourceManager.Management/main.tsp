@@ -26,6 +26,7 @@ import "./models/NetworkRack.tsp";
 import "./models/NetworkTapRule.tsp";
 import "./models/NetworkTap.tsp";
 import "./models/RoutePolicy.tsp";
+import "./models/NetworkMonitor.tsp";
 import "./resources/AccessControlList.tsp";
 import "./resources/InternetGatewayRule.tsp";
 import "./resources/InternetGateway.tsp";
@@ -49,6 +50,7 @@ import "./resources/NetworkRack.tsp";
 import "./resources/NetworkTapRule.tsp";
 import "./resources/NetworkTap.tsp";
 import "./resources/RoutePolicy.tsp";
+import "./resources/NetworkMonitor.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -73,4 +75,7 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-02-15-preview")
   v2024_02_15_preview: "2024-02-15-preview",
+
+  @doc("2024-06-15-preview")
+  v2024_06_15_preview: "2024-06-15-preview",
 }

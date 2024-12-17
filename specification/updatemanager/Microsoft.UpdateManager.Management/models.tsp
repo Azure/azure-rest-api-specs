@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.UpdateManager;
 
@@ -17,7 +18,13 @@ model UpdateRule is TrackedResource<UpdateRuleProperties> {
 @doc("Update rule set properties.")
 model UpdateRuleProperties {
   @doc("reboot settings.")
+  @added(Versions.v2024_11_01_preview)
+  @removed(Versions.v2024_12_01_preview)
   rebootSettings?: rebootSettings;
+
+  @doc("reboot settings.")
+  @added(Versions.v2024_12_01_preview)
+  rebootSetting: rebootSettings;
 
   @doc("windows parameter.")
   windowsParameters?: WindowsParameters;
@@ -25,10 +32,8 @@ model UpdateRuleProperties {
   @doc("linux parameter.")
   linuxParameters?: LinuxParameters;
 
-  @doc("Approve patches after days.")
-  @minValue(0)
-  @maxValue(35)
-  approvePatchesAfterDays?: int32;
+  @doc("policies properties.")
+  policies?: Policies;
 
   @doc("The status of the last operation.")
   @visibility("read")
@@ -78,6 +83,33 @@ model WindowsParameters {
 
   @doc("Exclude KBs requiring reboot.")
   excludeKbsRequiringReboot?: boolean;
+}
+
+@doc("Policies properties.")
+model Policies {
+  @doc("The availability policy.")
+  availability?: Availability;
+
+  @doc("Approve windows patches after the mentioned date.")
+  @pattern(
+    "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(([1-9]|1[0-4])(?!\\d))(?!\\w)",
+    "The value must be in the format of '2Tuesday+OffsetY' or 'DaysY' only"
+  )
+  installWindowsPatchesAfter?: string;
+}
+
+@doc("Availability policy.")
+model Availability {
+  @doc("The availability set.")
+  vmAvailabilitySet?: VMAvailabilitySet;
+}
+
+@doc("VMAvailabilitySet property.")
+union VMAvailabilitySet {
+  @doc("Bypass the availability set.")
+  Bypass: "Bypass",
+
+  string,
 }
 
 @lroStatus

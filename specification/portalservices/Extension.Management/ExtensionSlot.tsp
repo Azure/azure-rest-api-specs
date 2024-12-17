@@ -24,7 +24,7 @@ model ExtensionSlot
    */
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-zA-Z0-9]+$")
+  @pattern("^[a-zA-Z0-9_]+$")
   @path
   @key("slotName")
   @segment("slots")

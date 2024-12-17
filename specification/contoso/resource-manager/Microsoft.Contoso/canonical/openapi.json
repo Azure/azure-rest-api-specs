@@ -7,7 +7,9 @@
     "x-canonical-included-versions": [
       "2021-10-01-preview",
       "2022-10-01-preview",
-      "2023-10-01-preview"
+      "2023-10-01-preview",
+      "2023-11-01-preview",
+      "2023-12-01-preview"
     ],
     "x-typespec-generated": [
       {
@@ -49,6 +51,9 @@
     },
     {
       "name": "Employees"
+    },
+    {
+      "name": "Students"
     }
   ],
   "paths": {
@@ -103,6 +108,40 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EmployeeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Contoso/students": {
+      "get": {
+        "operationId": "Students_ListBySubscription",
+        "tags": [
+          "Students"
+        ],
+        "description": "List Student resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentListResult"
             }
           },
           "default": {
@@ -369,6 +408,259 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/students": {
+      "get": {
+        "operationId": "Students_ListByResourceGroup",
+        "tags": [
+          "Students"
+        ],
+        "description": "List Student resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StudentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/students/{studentName}": {
+      "get": {
+        "operationId": "Students_Get",
+        "tags": [
+          "Students"
+        ],
+        "description": "Get a Student",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentName",
+            "in": "path",
+            "description": "The name of the Student",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Students_CreateOrUpdate",
+        "tags": [
+          "Students"
+        ],
+        "description": "Create a Student",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentName",
+            "in": "path",
+            "description": "The name of the Student",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Student' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "201": {
+            "description": "Resource 'Student' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Students_Update",
+        "tags": [
+          "Students"
+        ],
+        "description": "Update a Student",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentName",
+            "in": "path",
+            "description": "The name of the Student",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StudentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Students_Delete",
+        "tags": [
+          "Students"
+        ],
+        "description": "Delete a Student",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "studentName",
+            "in": "path",
+            "description": "The name of the Student",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -528,6 +820,95 @@
         ]
       },
       "readOnly": true
+    },
+    "Student": {
+      "type": "object",
+      "description": "Student resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StudentListResult": {
+      "type": "object",
+      "description": "The response of a Student list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Student items on this page",
+          "items": {
+            "$ref": "#/definitions/Student"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StudentProperties": {
+      "type": "object",
+      "description": "Student properties",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age of Student"
+        },
+        "studentId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Student id of Student"
+        },
+        "hometown": {
+          "type": "string",
+          "description": "Hometown of Student"
+        },
+        "profile": {
+          "type": "string",
+          "format": "base64url",
+          "description": "Profile of Student"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "major": {
+          "type": "string",
+          "description": "Major of Student."
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "description": "The date of birth of the Student."
+        }
+      }
+    },
+    "StudentUpdate": {
+      "type": "object",
+      "description": "Student resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StudentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     }
   },
   "parameters": {}

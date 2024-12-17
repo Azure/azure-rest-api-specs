@@ -1,4 +1,5 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -28,6 +29,22 @@ model AccessControlListProperties {
   @doc("The last synced timestamp.")
   @visibility("read")
   lastSyncedTime?: utcDateTime;
+
+  @doc("Access Control List (ACL) Type")
+  @added(Versions.v2024_06_15_preview)
+  aclType?: AclType;
+
+  @doc("Device Role")
+  @added(Versions.v2024_06_15_preview)
+  deviceRole?: DeviceRole;
+
+  @doc("Global Access Control List (ACL) actions")
+  @added(Versions.v2024_06_15_preview)
+  globalAccessControlListActions?: GlobalAccessControlListActionProperties;
+
+  @doc("Internet Control Message Protocol (ICMP) configuration")
+  @added(Versions.v2024_06_15_preview)
+  icmpConfiguration?: IcmpConfigurationProperties;
 
   @doc("Configuration state of the resource.")
   @visibility("read")
@@ -146,6 +163,14 @@ model AccessControlListMatchConditionPatch {
 
   @doc("Defines the port condition that needs to be matched.")
   portCondition?: AccessControlListPortConditionPatch;
+
+  @doc("Protocol neighbors that need to be matched.")
+  @added(Versions.v2024_06_15_preview)
+  protocolNeighbors?: string[];
+
+  @doc("Internet Control Management Protocol (ICMP) types that need to be matched.")
+  @added(Versions.v2024_06_15_preview)
+  icmpTypes?: string[];
 }
 
 @doc("Defines the port condition that needs to be matched.")
@@ -172,6 +197,14 @@ model AccessControlListAction {
   @doc("Name of the counter block to get match count information.")
   @minLength(1)
   counterName?: string;
+
+  @doc("Remark comment")
+  @added(Versions.v2024_06_15_preview)
+  remarkComment?: string;
+
+  @doc("Police rate configuration")
+  @added(Versions.v2024_06_15_preview)
+  policeRateConfiguration?: PoliceRateConfigurationProperties;
 }
 
 @doc("Action that need to be performed")
@@ -206,6 +239,22 @@ model AccessControlListPatchProperties {
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
 
+  @doc("Access Control List (ACL) Type")
+  @added(Versions.v2024_06_15_preview)
+  aclType?: AclType;
+
+  @doc("Device Role")
+  @added(Versions.v2024_06_15_preview)
+  deviceRole?: DeviceRole;
+
+  @doc("Global Access Control List (ACL) actions")
+  @added(Versions.v2024_06_15_preview)
+  globalAccessControlListActions?: GlobalAccessControlListActionPatchProperties;
+
+  @doc("Internet Control Message Protocol (ICMP) configuration")
+  @added(Versions.v2024_06_15_preview)
+  icmpConfiguration?: IcmpConfigurationPatchProperties;
+
   ...AnnotationResource;
 }
 
@@ -219,6 +268,137 @@ union AclActionType {
 
   @doc("AclActionType Log")
   Log: "Log",
+
+  @doc("AclActionType Remark")
+  @added(Versions.v2024_06_15_preview)
+  Remark: "Remark",
+
+  @doc("AclActionType PoliceRate")
+  @added(Versions.v2024_06_15_preview)
+  PoliceRate: "PoliceRate",
+
+  string,
+}
+
+@doc("Access Control List (ACL) Type")
+@added(Versions.v2024_06_15_preview)
+union AclType {
+  @doc("AclType Control Plane Traffic Policy")
+  Cp: "ControlPlaneTrafficPolicy",
+
+  @doc("AclType Tenant")
+  Tenant: "Tenant",
+
+  @doc("AclType Management")
+  Management: "Management",
+
+  string,
+}
+
+@doc("Device Role")
+@added(Versions.v2024_06_15_preview)
+union DeviceRole {
+  @doc("DeviceRole - Customer Edge (CE)")
+  CE: "CE",
+
+  @doc("DeviceRole - Top of Rack (ToR)")
+  ToR: "ToR",
+
+  @doc("DeviceRole - Network Packet Broker (NPB)")
+  NPB: "NPB",
+
+  @doc("Device Role Management Switch")
+  ManagementSwitch: "ManagementSwitch",
+
+  string,
+}
+
+@doc("Global Access Control List actions properties")
+@added(Versions.v2024_06_15_preview)
+model GlobalAccessControlListActionProperties {
+  @doc("Configuration to enable or disable ACL action count.")
+  enableCount?: BooleanEnumProperty = BooleanEnumProperty.False;
+}
+
+@doc("Global Access Control List actions patch properties")
+@added(Versions.v2024_06_15_preview)
+@withoutDefaultValues
+model GlobalAccessControlListActionPatchProperties
+  is GlobalAccessControlListActionProperties;
+
+@doc("Internet Control Message Protocol (ICMP) configuration")
+@added(Versions.v2024_06_15_preview)
+model IcmpConfigurationProperties {
+  @doc("Internet Control Message Protocol (ICMP) types")
+  icmpTypes?: string[];
+}
+
+@doc("Internet Control Message Protocol (ICMP) configuration patch properties")
+@added(Versions.v2024_06_15_preview)
+model IcmpConfigurationPatchProperties is IcmpConfigurationProperties;
+
+@doc("Police rate configuration properties")
+@added(Versions.v2024_06_15_preview)
+model PoliceRateConfigurationProperties {
+  @doc("Rate limit in bits per second.")
+  bitRate?: BitRate;
+
+  @doc("Burst size in packets.")
+  burstSize?: BurstSize;
+}
+
+@doc("Bit rate in bits per second.")
+@added(Versions.v2024_06_15_preview)
+model BitRate {
+  @doc("Bitrate.")
+  rate?: int64;
+
+  @doc("Bitrate unit.")
+  unit?: BitRateUnit;
+}
+
+@doc("Bit rate unit.")
+@added(Versions.v2024_06_15_preview)
+union BitRateUnit {
+  @doc("Bit rate unit in bits per second.")
+  bps: "bps",
+
+  @doc("Bit rate unit in kilobits per second.")
+  Kbps: "Kbps",
+
+  @doc("Bit rate unit in megabits per second.")
+  Mbps: "Mbps",
+
+  @doc("Bit rate unit in gigabits per second.")
+  Gbps: "Gbps",
+
+  string,
+}
+
+@doc("Burst size in packets.")
+@added(Versions.v2024_06_15_preview)
+model BurstSize {
+  @doc("Burst size.")
+  size?: int64;
+
+  @doc("Burst size unit.")
+  unit?: BurstSizeUnit;
+}
+
+@doc("Burst size unit in packets.")
+@added(Versions.v2024_06_15_preview)
+union BurstSizeUnit {
+  @doc("Burst size unit in bytes.")
+  Bytes: "Bytes",
+
+  @doc("Burst size unit in kilobytes.")
+  KBytes: "KBytes",
+
+  @doc("Burst size unit in megabytes.")
+  MBytes: "MBytes",
+
+  @doc("Burst size unit in gigabytes.")
+  GBytes: "GBytes",
 
   string,
 }
