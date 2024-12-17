@@ -86,8 +86,8 @@
               "$ref": "#/definitions/CodeTransparencyConfiguration"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
@@ -97,6 +97,23 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -259,10 +276,22 @@
               "$ref": "#/definitions/EntryIds"
             }
           },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
           "503": {
             "description": "Service temporarily unavailable",
             "schema": {
-              "$ref": "#/definitions/ServiceUnavailableError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "Retry-After": {
@@ -275,18 +304,6 @@
               }
             },
             "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         },
         "x-ms-examples": {
@@ -427,8 +444,8 @@
               "$ref": "#/definitions/VersionResult"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
@@ -438,6 +455,23 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -808,6 +842,19 @@
         "operations"
       ]
     },
+    "NotFoundErrorJsonResponse": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "OperationStatus": {
       "type": "string",
       "description": "Possible statuses of the operation.",
@@ -880,13 +927,26 @@
         "body"
       ]
     },
+    "ServerErrorJsonResponse": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ServiceUnavailableError": {
       "type": "object",
       "description": "Service temporarily unavailable",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
         }
       },
       "required": [
@@ -905,6 +965,19 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "ValidationErrorJsonResponse": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "VersionResult": {

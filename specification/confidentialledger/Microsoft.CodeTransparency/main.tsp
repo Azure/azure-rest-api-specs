@@ -47,13 +47,35 @@ alias ServiceTraits = SupportsClientRequestId;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
 @doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
+@sharedRoute
 @route("/.well-known/transparency-configuration")
 @get
-op getTransparencyConfig is Foundations.Operation<
-  {},
-  TransparencyConfiguration,
+op getTransparencyConfigCbor is Foundations.Operation<
+  {
+    @doc("Accpect header")
+    @header
+    accept: "application/cbor";
+  },
+  TransparencyConfigurationCbor,
   ServiceTraits,
-  CborErrors
+  CborServerErrors
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
+@sharedRoute
+@route("/.well-known/transparency-configuration")
+@get
+op getTransparencyConfigJson is Foundations.Operation<
+  {
+    @doc("Accpect header")
+    @header
+    accept: "application/json";
+  },
+  TransparencyConfigurationJson,
+  ServiceTraits,
+  JsonServerErrors
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -65,7 +87,7 @@ op getPublicKeys is Foundations.Operation<
   {},
   JwksDocument,
   ServiceTraits,
-  CborErrors
+  JsonServerErrors
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -89,7 +111,8 @@ op getDidConfig is Foundations.Operation<{}, DidDocument, ServiceTraits>;
 op getCodeTransparencyConfig is Foundations.Operation<
   {},
   CodeTransparencyConfiguration,
-  ServiceTraits
+  ServiceTraits,
+  JsonServerErrors
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -99,7 +122,8 @@ op getCodeTransparencyConfig is Foundations.Operation<
 op getCodeTransparencyVersion is Foundations.Operation<
   {},
   VersionResult,
-  ServiceTraits
+  ServiceTraits,
+  JsonServerErrors
 >;
 
 // -----------------------------------------------------------------
@@ -128,7 +152,7 @@ op createEntryChanged is Foundations.Operation<
   SignedStatement,
   CreateEntryCreated | CreateEntryPending,
   ServiceTraits,
-  CborErrors
+  AnyCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -153,7 +177,9 @@ op listEntryStatuses is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get Entry with or without receipt embedded in its unprotected header")
+@sharedRoute
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
   EmbedReceiptParameter,
@@ -162,7 +188,21 @@ op getEntry is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get Entry with or without receipt embedded in its unprotected header")
+@sharedRoute
+@route("/entries/{entryId}")
+op getEntryChanged is Foundations.Operation<
+  EmbedReceiptParameter,
+  SignedStatement | TransparentStatement,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@removed(Versions.`2025-01-31-preview`)
 @doc("Get the receipt of an entry given a specific entry id.")
+@sharedRoute
 @route("/entries/{entryId}/receipt")
 op getEntryReceipt is Foundations.Operation<
   EntryIdParameter,
@@ -173,12 +213,24 @@ op getEntryReceipt is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
 @doc("Get the receipt of an entry given a specific entry id.")
+@sharedRoute
+@route("/entries/{entryId}/receipt")
+op getEntryReceiptChanged is Foundations.Operation<
+  EntryIdParameter,
+  ReceiptEntry,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2025-01-31-preview`)
+@doc("Get the receipt of an entry given a specific entry id.")
 @route("/entries/{entryId}/statement")
 op getEntryStatement is Foundations.Operation<
   EntryIdParameter,
   TransparentStatement,
   ServiceTraits,
-  CborErrors
+  AnyCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -188,27 +240,12 @@ op listEntryIds is Foundations.Operation<
   TransactionsRange,
   EntryIds,
   ServiceTraits,
-  ServiceUnavailableError | Foundations.ErrorResponse
+  JsonServerErrors
 >;
 
 // -----------------------------------------------------------------
 // Service models
 // -----------------------------------------------------------------
-
-// TODO errors must use RFC9290
-@doc("Service temporarily unavailable")
-@error
-model ServiceUnavailableError {
-  @doc("Retry the same request after a suggested number of seconds")
-  @header("Retry-After")
-  retryAfter?: string;
-
-  @doc("Status code is always 503 when service is unavailable")
-  @statusCode
-  statusCode: 503;
-
-  ...Foundations.ErrorResponse;
-}
 
 @removed(Versions.`2025-01-31-preview`)
 @doc("The Response body of the service parameters")
@@ -401,15 +438,31 @@ union OperationStatus {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Tranparency configuration as per, see IETF SCITT SCRAPI draft.")
-model TransparencyConfiguration {
-  @doc("The MIME content type for configuration is application/cbor.")
-  @header("ContentType")
+@doc("Tranparency configuration, see IETF SCITT SCRAPI draft.")
+model TransparencyConfigurationCbor {
+  @doc("Default content type is application/cbor.")
+  @header
   contentType: "application/cbor";
 
   @doc("CBOR content of the configuration object")
-  @bodyRoot
+  @body
   body: bytes;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Tranparency configuration, see IETF SCITT SCRAPI draft.")
+model TransparencyConfigurationJson {
+  @doc("Content type header")
+  @header
+  contentType: "application/json";
+
+  @doc("Configured issuer string")
+  @example("https://transparency.example")
+  issuer: string;
+
+  @doc("Location of the JWKS document")
+  @example("https://transparency.example/jwks")
+  jwksUri: string;
 }
 
 @removed(Versions.`2025-01-31-preview`)
@@ -594,12 +647,28 @@ model CodeTransparencyConfigurationPolicy {
 // Error responses as per IETF SCRAPI draft
 // -----------------------------------------------------------------
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is CBOR example model for visibility"
 @added(Versions.`2025-01-31-preview`)
-@doc("CBOR error body")
+@doc("CBOR error body, see RFC9290")
 @error
 model ConciseProblemDetailsCbor {
   // cannot set type of this model to bytes
   // cannot use bytes instead because need to use @error decorator and need a model
+  @doc("title")
+  @example("Bad Signature Algorithm")
+  `-1`: string;
+
+  @doc("detail")
+  @example("Signed Statement contained an algorithm that is not supported")
+  `-2`: string;
+
+  @doc("instance")
+  @example("urn:ietf:params:scitt:error:badSignatureAlgorithm")
+  `-3`: string;
+
+  @doc("response code")
+  @example(400)
+  `-4`: int16;
 }
 
 @added(Versions.`2025-01-31-preview`)
@@ -609,8 +678,8 @@ model NotFoundErrorCborResponse {
   @statusCode
   statusCode: 404;
 
-  @doc("The MIME content type for error, see RFC9290")
-  @header("ContentType")
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
@@ -625,8 +694,8 @@ model ValidationErrorCborResponse {
   @statusCode
   statusCode: 400;
 
-  @doc("The MIME content type for error, see RFC9290")
-  @header("ContentType")
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
@@ -641,8 +710,8 @@ model ServerErrorCborResponse {
   @statusCode
   statusCode: 500;
 
-  @doc("The MIME content type for error, see RFC9290")
-  @header("ContentType")
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
@@ -653,12 +722,16 @@ model ServerErrorCborResponse {
 @added(Versions.`2025-01-31-preview`)
 @doc("Service unavailable error response")
 model ServiceUnavailableErrorCborResponse {
+  @doc("Retry the same request after a suggested number of seconds")
+  @header("Retry-After")
+  retryAfter?: string;
+
   @doc("Status code")
   @statusCode
   statusCode: 503;
 
   @doc("The MIME content type for error, see RFC9290")
-  @header("ContentType")
+  @header
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
@@ -666,8 +739,81 @@ model ServiceUnavailableErrorCborResponse {
   error: ConciseProblemDetailsCbor;
 }
 
-alias CborErrors =
+alias AnyCborError =
   | NotFoundErrorCborResponse
   | ValidationErrorCborResponse
   | ServerErrorCborResponse
   | ServiceUnavailableErrorCborResponse;
+alias CborServerErrors = ServerErrorCborResponse | ServiceUnavailableErrorCborResponse;
+
+@doc("Not found error response")
+model NotFoundErrorJsonResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 404;
+
+  @doc("Content type header application/json")
+  @header
+  contentType: "application/json";
+
+  @doc("Error response")
+  @bodyRoot
+  error: ErrorResponse;
+}
+
+@doc("Validation error response")
+model ValidationErrorJsonResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 400;
+
+  @doc("Content type header application/json")
+  @header
+  contentType: "application/json";
+
+  @doc("Error response")
+  @bodyRoot
+  error: ErrorResponse;
+}
+
+@doc("Server error response")
+model ServerErrorJsonResponse {
+  @doc("Status code")
+  @statusCode
+  statusCode: 500;
+
+  @doc("Content type header application/json")
+  @header
+  contentType: "application/json";
+
+  @doc("Error response")
+  @bodyRoot
+  error: ErrorResponse;
+}
+
+@doc("Service temporarily unavailable")
+@error
+model ServiceUnavailableError {
+  @doc("Retry the same request after a suggested number of seconds")
+  @header("Retry-After")
+  retryAfter?: string;
+
+  @doc("Status code is always 503 when service is unavailable")
+  @statusCode
+  statusCode: 503;
+
+  @doc("Content type header application/json")
+  @header
+  contentType: "application/json";
+
+  @doc("Error response")
+  @bodyRoot
+  error: ErrorResponse;
+}
+
+alias AnyJsonError =
+  | NotFoundErrorJsonResponse
+  | ValidationErrorJsonResponse
+  | ServerErrorJsonResponse
+  | ServiceUnavailableError;
+alias JsonServerErrors = ServerErrorJsonResponse | ServiceUnavailableError;

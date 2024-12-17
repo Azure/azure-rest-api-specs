@@ -36,85 +36,41 @@
   "paths": {
     "/.well-known/transparency-configuration": {
       "get": {
-        "operationId": "GetTransparencyConfig",
+        "operationId": "GetTransparencyConfigCbor",
         "description": "Get the transparency configuration file, see IETF SCITT SCRAPI draft",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "description": "Accpect header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/cbor"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Tranparency configuration as per, see IETF SCITT SCRAPI draft.",
+            "description": "Tranparency configuration, see IETF SCITT SCRAPI draft.",
             "schema": {
-              "type": "string",
-              "format": "byte"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for configuration is application/cbor.",
-                "enum": [
-                  "application/cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error response",
-            "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found error response",
-            "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
+              "type": "file"
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "503": {
@@ -123,15 +79,9 @@
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "ContentType": {
+              "Retry-After": {
                 "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -154,8 +104,8 @@
               "$ref": "#/definitions/CodeTransparencyConfiguration"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
@@ -165,6 +115,23 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -176,7 +143,7 @@
         "produces": [
           "application/cose",
           "application/cbor",
-          "application/json"
+          "application/concise-problem-details+cbor"
         ],
         "consumes": [
           "application/cose"
@@ -218,54 +185,18 @@
             "description": "Validation error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "503": {
@@ -274,15 +205,9 @@
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "ContentType": {
+              "Retry-After": {
                 "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -291,11 +216,11 @@
     },
     "/entries/{entryId}": {
       "get": {
-        "operationId": "GetEntry",
+        "operationId": "GetEntryChanged",
         "description": "Get Entry with or without receipt embedded in its unprotected header",
         "produces": [
           "application/cose",
-          "application/json"
+          "application/concise-problem-details+cbor"
         ],
         "parameters": [
           {
@@ -315,15 +240,33 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Retry-After": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -332,11 +275,11 @@
     },
     "/entries/{entryId}/receipt": {
       "get": {
-        "operationId": "GetEntryReceipt",
+        "operationId": "GetEntryReceiptChanged",
         "description": "Get the receipt of an entry given a specific entry id.",
         "produces": [
           "application/cose",
-          "application/json"
+          "application/concise-problem-details+cbor"
         ],
         "parameters": [
           {
@@ -353,15 +296,33 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Retry-After": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -374,7 +335,7 @@
         "description": "Get the receipt of an entry given a specific entry id.",
         "produces": [
           "application/cose",
-          "application/json"
+          "application/concise-problem-details+cbor"
         ],
         "parameters": [
           {
@@ -395,54 +356,18 @@
             "description": "Validation error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
             }
           },
           "503": {
@@ -451,15 +376,9 @@
               "$ref": "#/definitions/ConciseProblemDetailsCbor"
             },
             "headers": {
-              "ContentType": {
+              "Retry-After": {
                 "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -488,10 +407,22 @@
               "$ref": "#/definitions/EntryIds"
             }
           },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
           "503": {
             "description": "Service temporarily unavailable",
             "schema": {
-              "$ref": "#/definitions/ServiceUnavailableError"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "Retry-After": {
@@ -504,18 +435,6 @@
               }
             },
             "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         },
         "x-ms-pageable": {
@@ -540,77 +459,34 @@
               "$ref": "#/definitions/JwksDocument"
             }
           },
-          "400": {
-            "description": "Validation error response",
-            "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found error response",
-            "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
-            },
-            "headers": {
-              "ContentType": {
-                "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
-              "ContentType": {
+              "x-ms-error-code": {
                 "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
+                "description": "String error code indicating what went wrong."
               }
             }
           },
           "503": {
-            "description": "Service unavailable error response",
+            "description": "Service temporarily unavailable",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
-              "ContentType": {
+              "Retry-After": {
                 "type": "string",
-                "description": "The MIME content type for error, see RFC9290",
-                "enum": [
-                  "application/concise-problem-details+cbor"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
-            }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -631,8 +507,8 @@
               "$ref": "#/definitions/VersionResult"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
@@ -642,6 +518,86 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/.well-known/transparency-configuration?_overload=getTransparencyConfigJson": {
+      "get": {
+        "operationId": "GetTransparencyConfigJson",
+        "description": "Get the transparency configuration file, see IETF SCITT SCRAPI draft",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "description": "Accpect header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransparencyConfigurationJson"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -786,7 +742,32 @@
     },
     "ConciseProblemDetailsCbor": {
       "type": "object",
-      "description": "CBOR error body"
+      "description": "CBOR error body, see RFC9290",
+      "properties": {
+        "-1": {
+          "type": "string",
+          "description": "title"
+        },
+        "-2": {
+          "type": "string",
+          "description": "detail"
+        },
+        "-3": {
+          "type": "string",
+          "description": "instance"
+        },
+        "-4": {
+          "type": "integer",
+          "format": "int16",
+          "description": "response code"
+        }
+      },
+      "required": [
+        "-1",
+        "-2",
+        "-3",
+        "-4"
+      ]
     },
     "CreateEntryCreated": {
       "type": "object",
@@ -946,6 +927,19 @@
         "error"
       ]
     },
+    "NotFoundErrorJsonResponse": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ReceiptEntry": {
       "type": "object",
       "description": "A ledger receipt, see IETF SCITT draft",
@@ -973,13 +967,26 @@
         "error"
       ]
     },
+    "ServerErrorJsonResponse": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ServiceUnavailableError": {
       "type": "object",
       "description": "Service temporarily unavailable",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
         }
       },
       "required": [
@@ -999,9 +1006,9 @@
         "error"
       ]
     },
-    "TransparencyConfiguration": {
+    "TransparencyConfigurationCbor": {
       "type": "object",
-      "description": "Tranparency configuration as per, see IETF SCITT SCRAPI draft.",
+      "description": "Tranparency configuration, see IETF SCITT SCRAPI draft.",
       "properties": {
         "body": {
           "type": "string",
@@ -1011,6 +1018,24 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "TransparencyConfigurationJson": {
+      "type": "object",
+      "description": "Tranparency configuration, see IETF SCITT SCRAPI draft.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "Configured issuer string"
+        },
+        "jwksUri": {
+          "type": "string",
+          "description": "Location of the JWKS document"
+        }
+      },
+      "required": [
+        "issuer",
+        "jwksUri"
       ]
     },
     "TransparentStatement": {
@@ -1034,6 +1059,19 @@
         "error": {
           "$ref": "#/definitions/ConciseProblemDetailsCbor",
           "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ValidationErrorJsonResponse": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "Error response"
         }
       },
       "required": [
