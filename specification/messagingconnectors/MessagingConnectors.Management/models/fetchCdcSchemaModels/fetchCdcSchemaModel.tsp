@@ -11,6 +11,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+@versioned(Versions)
+namespace Microsoft.MessagingConnectors;
+
 @doc("Connector Schema Config")
 @discriminator("connectorType")
 model ConnectorSchemaConfig {
