@@ -13,7 +13,7 @@ on:
   
 jobs:
   process-sdk-suppressions-labels:
-    name: Process Sup
+    name: Sdk Suppression Labeling
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -67,10 +67,6 @@ jobs:
           node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
-          
-          has_output=$(node -e "const fs = require('fs'); const data = JSON.parse(fs.readFileSync('$OUTPUT_FILE', 'utf8')); console.log(data.length === 0 ? 'false' : 'true');")
-          echo "Script has-output: $has_output"
-          echo "has-output=$has_output" >> $GITHUB_OUTPUT
 
           labelsToAdd=$(echo "$OUTPUT" | sed -n 's/.*"labelsToAdd":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
           labelsToRemove=$(echo "$OUTPUT" | sed -n 's/.*"labelsToRemove":\[\([^]]*\)\].*/\1/p' | tr -d '" ')
