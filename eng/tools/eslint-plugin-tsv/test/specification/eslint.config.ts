@@ -10,7 +10,7 @@ export const config = [
     },
     rules: {
       "tsv/enforce-foo-bar": "error",
-      "tsv/top-level-folder-lowercase": "error",
+      "tsv/no-uppercase-under-specification": "error",
     },
   },
 ];
