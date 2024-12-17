@@ -1709,7 +1709,6 @@
         }
       },
       "additionalProperties": {
-        "type": "object"
       }
     },
     "PipelineExternalComputeScaleProperties": {
@@ -1738,7 +1737,6 @@
         }
       },
       "additionalProperties": {
-        "type": "object"
       }
     },
     "IntegrationRuntimeVNetProperties": {
@@ -2103,7 +2101,15 @@
         },
         "selfContainedInteractiveAuthoringEnabled": {
           "type": "boolean",
-          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
+          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.",
+          "enum": [
+            true,
+            false
+          ],
+          "x-ms-enum": {
+            "name": "SelfContainedInteractiveAuthoringState",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -2536,7 +2542,15 @@
         "selfContainedInteractiveAuthoringEnabled": {
           "type": "boolean",
           "readOnly": true,
-          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay."
+          "description": "An alternative option to ensure interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.",
+          "enum": [
+            true,
+            false
+          ],
+          "x-ms-enum": {
+            "name": "SelfContainedInteractiveAuthoringState",
+            "modelAsString": false
+          }
         }
       }
     },
