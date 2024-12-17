@@ -51,6 +51,22 @@ directive:
     suppress: PutResponseCodes
     reason: This is an existing RP which has the same pattern, 202 response code for async PUT, in stable API version
     approved-by: "@ramoka178"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages"]
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages/{fileServiceUsagesName}"]
+    suppress: PathResourceTypeNameCamelCase
+    reason: The {FileServicesName} is an existing resource type used for the above two new API's ListFileServiceUsages and GetFileServiceUsage.
+
+  - where:
+    - $.definitions.AccountLimits.properties.maxProvisionedIOPS
+    - $.definitions.FileShareLimits.properties.minProvisionedIOPS
+    - $.definitions.FileShareLimits.properties.maxProvisionedIOPS
+    - $.definitions.FileShareRecommendations.properties.baseIOPS
+    - $.definitions.BurstingConstants.properties.burstFloorIOPS
+    - $.definitions.AccountUsageElements.properties.provisionedIOPS
+    suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The GetFileServiceUsage API has properties with "IOPS" in its response body. The names need to match feature spec and server code, so cannot be changed now per camel case rule in swagger.
 ```
 
 ### Tag: package-2023-05
