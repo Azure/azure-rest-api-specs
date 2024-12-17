@@ -1023,6 +1023,7 @@ model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
   @added(Versions.v2024_10_01_preview)
   @doc("Defines the resource properties for the update.")
   properties?: LogicalNetworkUpdateProperties;
@@ -1031,29 +1032,29 @@ model LogicalNetworksUpdateRequest {
 @added(Versions.v2024_10_01_preview)
 @doc("Properties under the logical network resource")
 model LogicalNetworkUpdateProperties {
-@doc("Subnet - list of subnets under the logical network")
-@OpenAPI.extension("x-ms-identifiers", [])
-subnets?: SubnetUpdate[];
+  @doc("Subnet - list of subnets under the logical network")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  subnets?: SubnetUpdate[];
 }
 
 @added(Versions.v2024_10_01_preview)
 @doc("Subnet resource")
 model SubnetUpdate {
-#suppress "deprecated" "Legacy flattening"
-@doc("Properties of the subnet.")
-@Azure.ClientGenerator.Core.flattenProperty
-properties?: SubnetUpdateProperties;
+  #suppress "deprecated" "Legacy flattening"
+  @doc("Properties of the subnet.")
+  @Azure.ClientGenerator.Core.flattenProperty
+  properties?: SubnetUpdateProperties;
 
-@doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
-@pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
-name?: string;
+  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  name?: string;
 }
 
 @added(Versions.v2024_10_01_preview)
 @doc("Properties of the subnet.")
 model SubnetUpdateProperties {
-@doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-networkSecurityGroup?: NetworkSecurityGroupArmReference;
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1136,6 +1137,7 @@ model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
   @added(Versions.v2024_10_01_preview)
   @doc("Defines the resource properties for the update.")
   properties?: NetworkInterfacesUpdateProperties;

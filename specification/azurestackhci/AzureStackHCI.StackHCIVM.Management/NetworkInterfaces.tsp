@@ -54,7 +54,10 @@ interface NetworkInterfaces {
   @parameterVisibility
   @added(Versions.v2024_10_01_preview)
   @sharedRoute
-  update is ArmCustomPatchAsync<NetworkInterface, NetworkInterfacesUpdateRequest>;
+  update is ArmCustomPatchAsync<
+    NetworkInterface,
+    NetworkInterfacesUpdateRequest
+  >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
