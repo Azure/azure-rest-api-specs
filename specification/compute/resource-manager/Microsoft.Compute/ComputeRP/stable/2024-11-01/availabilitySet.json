@@ -408,6 +408,234 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/startMigrationToVirtualMachineScaleSet": {
+      "post": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_StartMigrationToVirtualMachineScaleSet",
+        "description": "Start a Migration from an existing availability set to Virtual Machine Scale Set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateToVirtualMachineScaleSetInput"
+            },
+            "description": "Parameters supplied to the migrate operation on the availability set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "AvailabilitySet_StartMigrationToVirtualMachineScaleSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_StartMigrationToVirtualMachineScaleSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/cancelMigrationToVirtualMachineScaleSet": {
+      "post": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_CancelMigrationToVirtualMachineScaleSet",
+        "description": "Cancel the migration for provided Availability Set and bring Availability Set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "AvailabilitySet_ListAvailableSizes_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_CancelMigrationToVirtualMachineScaleSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/validateMigrationToVirtualMachineScaleSet": {
+      "post": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_ValidateMigrationToVirtualMachineScaleSet",
+        "description": "Validate an existing Availability Set migration to Virtual Machine Scale Set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateToVirtualMachineScaleSetInput"
+            },
+            "description": "Parameters supplied to the migrate operation on the availability set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "AvailabilitySet_ListAvailableSizes_MaximumSet_Gen": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_ValidateMigrationToVirtualMachineScaleSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/convertToNewVirtualMachineScaleSet": {
+      "post": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_convertToNewVirtualMachineScaleSet",
+        "description": "Convert Availability Set to Flexible Virtual Machine Scale Set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConvertToVirtualMachineScaleSetInput"
+            },
+            "description": "Parameters supplied to the migrate operation on the availability set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "VirtualMachineScaleSet_Reimage_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/AvailabilitySet_ConvertToNewVirtualMachineScaleSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -446,6 +674,10 @@
         "scheduledEventsPolicy": {
           "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsPolicy",
           "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the availability set."
+        },
+        "vmssMigrationProperties": {
+          "$ref": "#/definitions/VmssMigrationProperties",
+          "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
         }
       },
       "description": "The instance view of a resource."
@@ -516,6 +748,40 @@
         "value"
       ],
       "description": "The List Availability Set operation response."
+    },
+    "MigrateToVirtualMachineScaleSetInput": {
+      "properties": {
+        "virtualMachineScaleSetFlexible": {
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "Specifies information about the Virtual Machine Scale Set that the Availability Set should be migrated to. Minimum api‐version: 2024‐11‐01."
+        }
+      },
+      "required": [
+        "virtualMachineScaleSetFlexible"
+      ],
+      "description": "Describes the Virtual Machine Scale Set to migrate from Availability Set."
+    },
+    "VmssMigrationProperties": {
+      "properties": {
+        "constrainedMaximumCapacity": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Indicate if Availability Set has constrained maximum capacity."
+        }
+      },
+      "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
+    },
+    "ConvertToVirtualMachineScaleSetInput": {
+      "properties": {
+        "virtualMachineScaleSetName": {
+          "type": "string",
+          "description": "Specifies information about the Virtual Machine Scale Set that the Availability Set should be converted to."
+        }
+      },
+      "required": [
+        "virtualMachineScaleSetName"
+      ],
+      "description": "Describes the Virtual Machine Scale Set to convert from Availability Set."
     }
   }
 }
