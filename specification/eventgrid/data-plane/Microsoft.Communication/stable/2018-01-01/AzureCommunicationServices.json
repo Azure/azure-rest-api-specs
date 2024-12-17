@@ -1572,11 +1572,14 @@
         },
         "media": {
           "description": "The received message media content",
-          "$ref": "#/definitions/AcsMessageMediaContent"
+          "$ref": "#/definitions/AcsMessageMediaContent",
+          "type": "object",
+          "x-ms-client-name": "mediaContent"
         },
         "reaction": {
           "description": "The received message reaction content",
-          "$ref": "#/definitions/AcsMessageReactionContent"
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "type": "object"
         },
         "context": {
           "description": "The received message context",
@@ -2258,7 +2261,11 @@
           "description": "Unicode escape sequence of the emoji.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "emoji"
+      ]
     },
     "AcsMessageContext": {
       "description": "Message Context",
