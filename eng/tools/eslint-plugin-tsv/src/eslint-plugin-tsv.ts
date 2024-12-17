@@ -1,11 +1,11 @@
 // @ts-ignore
 import enforceFooBar from "./enforce-foo-bar.js";
-import noUppercaseUnderSpecification from "./no-uppercase-under-specification.js";
+import kebabCaseFirstPathSegment from "./kebab-case-first-path-segment.js";
 
 export const plugin = {
   rules: {
     "enforce-foo-bar": enforceFooBar,
-    "no-uppercase-under-specification": noUppercaseUnderSpecification,
+    "kebab-case-first-path-segment": kebabCaseFirstPathSegment,
   },
 };
 export default plugin;

@@ -10,7 +10,7 @@ export const config = [
     },
     rules: {
       "tsv/enforce-foo-bar": "error",
-      "tsv/no-uppercase-under-specification": "error",
+      "tsv/kebab-case-first-path-segment": "error",
     },
   },
 ];
