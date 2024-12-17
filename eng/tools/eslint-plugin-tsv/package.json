@@ -18,8 +18,8 @@
     "build": "tsc --build",
     "test": "eslint --config dist/test/test.eslint.config.js test/test.yaml",
     "test:contoso": "eslint --config dist/test/specification/eslint.config.js test/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
-    "test:top-level-folder-mixed-case": "eslint --config dist/test/specification/eslint.config.js test/specification/InvalidCase/Contoso.WidgetManager/tspconfig.yaml",
-    "test:all": "npm run build; npm run test; npm run test:contoso; npm run test:top-level-folder-mixed-case"
+    "test:not-kebab-case": "eslint --config dist/test/specification/eslint.config.js test/specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml",
+    "test:all": "npm run build; npm run test; npm run test:contoso; npm run test:not-kebab-case"
   },
   "engines": {
     "node": ">= 18.0.0"
