@@ -638,10 +638,21 @@
           "x-nullable": true
         },
         "syndicatedRegistries": {
-          "description": "Dictionary of syndicated registries. Key is Guid and value is a SyndicatedRegistry",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/SyndicatedRegistry",
+          "description": "List of tuples containing Guid and SyndicatedRegistry",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Item1": {
+                "description": "The Guid of the syndicated registry",
+                "type": "string",
+                "x-nullable": true
+              },
+              "Item2": {
+                "$ref": "#/definitions/SyndicatedRegistry",
+                "x-nullable": true
+              }
+            },
             "x-nullable": true
           },
           "x-nullable": true
