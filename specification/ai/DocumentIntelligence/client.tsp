@@ -130,6 +130,14 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentBarcodeKind.QRCode, "QR_Code", "java");
 @@clientName(DocumentBarcodeKind.MicroQRCode, "MICRO_QR_CODE", "java");
 
+@@clientName(DocumentIntelligenceError.innererror, "innerError", "java");
+@@clientName(DocumentIntelligenceInnerError.innererror, "innerError", "java");
+@@clientName(DocumentField.valueArray, "valueList", "java");
+@@clientName(DocumentField.valueObject, "valueMap", "java");
+@@clientName(AnalyzeBatchOperation, "AnalyzeBatchOperationDetails", "java");
+@@clientName(AnalyzeOperation, "AnalyzeOperationDetails", "java");
+@@clientName(AnalyzeBatchOperationDetail, "AnalyzeBatchResultDetails", "java");
+
 @@clientName(AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsOptions",
   "csharp"
