@@ -2,7 +2,7 @@ import { Rule, RuleTester } from "eslint";
 import parser from "yaml-eslint-parser";
 import { test } from "vitest";
 
-import kebabCaseOrg from "../src/kebab-case-org.js";
+import kebabCaseOrg from "../../src/rules/kebab-case-org.js";
 
 test("tsv/" + kebabCaseOrg.meta.name, () => {
   const ruleTester = new RuleTester({

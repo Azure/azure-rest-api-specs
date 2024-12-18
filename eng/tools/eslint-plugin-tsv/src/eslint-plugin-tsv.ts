@@ -1,4 +1,4 @@
-import kebabCaseOrg from "./kebab-case-org.js";
+import kebabCaseOrg from "./rules/kebab-case-org.js";
 import parser from "yaml-eslint-parser";
 
 const pluginName = "tsv";
