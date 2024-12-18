@@ -281,6 +281,30 @@
         }
       }
     },
+    "FeaturesEndpointLink": {
+      "description": "The is the pagination links of the features returned. If it's the last page, the field will not exist. For more details about link relations, please visit the [OGC API - Features - Part 1](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1#_link_relations) standard.",
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "description": "The link target.",
+          "type": "string",
+          "format": "uri"
+        },
+        "rel": {
+          "description": "The relation type, such as next, prev, and self",
+          "type": "string",
+          "example": "next"
+        },
+        "title": {
+          "description": "Used to label the destination of a link such that it can be used as a human-readable identifier.",
+          "type": "string",
+          "example": "Azure Maps Features"
+        }
+      }
+    },
     "TrafficIncidentFeaturesItem": {
       "type": "object",
       "description": "GeoJSON feature object that contains Geometry object and additional properties of traffic incidents.",
@@ -297,6 +321,9 @@
             },
             "properties": {
               "$ref": "#/definitions/TrafficIncidentFeatureProperties"
+            },
+            "links": {
+            "$ref": "#/definitions/FeaturesEndpointLink"
             }
           }
         }
