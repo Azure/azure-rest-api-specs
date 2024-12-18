@@ -275,7 +275,7 @@ model SecretListResult {
   /**
    * The URL to get the next set of secrets.
    */
-  @Azure.Core.nextLink
+  @nextLink
   @visibility("read")
   nextLink?: string;
 }
@@ -326,7 +326,7 @@ model DeletedSecretListResult {
   /**
    * The URL to get the next set of deleted secrets.
    */
-  @Azure.Core.nextLink
+  @nextLink
   @visibility("read")
   nextLink?: string;
 }
