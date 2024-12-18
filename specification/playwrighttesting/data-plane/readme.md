@@ -44,7 +44,7 @@ suppressions:
     from: playwrighttesting.json
     reason: Need 302 response code as a product requirement to redirect the client for test execution on remote browsers provided by the service.
     where:
-      - $.paths["/accounts/{accountId}/browsers"].get
+      - $.paths["/accounts/{accountId}/browsers"].get.responses
 ```
 
 ### Tag: package-2023-10-01-preview
