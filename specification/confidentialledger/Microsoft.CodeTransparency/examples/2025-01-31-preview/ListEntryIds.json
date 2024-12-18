@@ -1,15 +1,20 @@
 {
-  "title": "GetTransparencyConfigJson_MaximumSet",
-  "operationId": "GetTransparencyConfigJson",
+  "title": "ListEntryIds",
+  "operationId": "ListEntryIds",
   "parameters": {
     "api-version": "2025-01-31-preview",
-    "accept": "application/json"
+    "from": 0,
+    "to": 20
   },
   "responses": {
     "200": {
-      "body": { 
-        "issuer": "pqscs", 
-        "jwksUri": "bhyqhansqgnqkgsxttcwlmtiplql" 
+      "body": {
+        "transactionIds": [
+          "2.131",
+          "2.132",
+          "2.133"
+        ],
+        "nextLink": "/entries/txIds?from=20&to=40"
       }
     },
     "500": {
@@ -21,7 +26,7 @@
       }
     },
     "503": {
-      "error": {
+      "body": {
         "error": {
           "code": "zdjbm",
           "message": "wftvioyvxidsm"

@@ -1,13 +1,17 @@
 {
-  "title": "GetEntryReceiptChanged_MaximumSet",
-  "operationId": "GetEntryReceiptChanged",
+  "title": "CreateEntryChanged",
+  "operationId": "CreateEntryChanged",
   "parameters": {
     "api-version": "2025-01-31-preview",
-    "entryId": "Replace this value with a string matching RegExp ^[0-9]+\\.[0-9]+$"
+    "body": "{binary}",
+    "Content-Type": "application/cose"
   },
   "responses": {
-    "200": {
-      "body": {}
+    "201": {
+      "body": "{binary}"
+    },
+    "202": {
+      "body": "{binary}"
     },
     "400": {
       "body": "{binary}"
