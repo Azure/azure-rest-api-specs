@@ -366,7 +366,7 @@
           "NetworkVirtualAppliances"
         ],
         "operationId": "NetworkVirtualAppliances_GetBootDiagnosticLogs",
-        "description": "Gets the boot diagnostic logs for a VM instance belonging to the specified Network Virtual Appliance.",
+        "description": "Retrieves the boot diagnostic logs for a VM instance belonging to the specified Network Virtual Appliance.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -380,6 +380,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": ".*",
             "description": "The name of Network Virtual Appliance."
           },
           {
@@ -1675,6 +1676,7 @@
       "properties": {
         "instanceId": {
           "type": "integer",
+          "format": "int32",
           "description": "The network virtual appliance instance id for which boot diagnostic logs is being requested"
         },
         "serialConsoleStorageSasUrl": {
