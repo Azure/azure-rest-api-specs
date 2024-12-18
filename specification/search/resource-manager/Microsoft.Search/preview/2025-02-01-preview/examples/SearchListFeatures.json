@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "regions": [
+          {
+            "regionName": "East US",
+            "features": [
+              {
+                "name": "semanticRanker"
+              },
+              {
+                "name": "queryRewriting"
+              }
+            ],
+            "skus": [
+              {
+                "name": "standard",
+                "limits": {
+                  "partitionStorageInGigabytes": 160,
+                  "partitionVectorStorageInGigabytes": 35
+                }
+              },
+              {
+                "name": "premium",
+                "limits": {
+                  "partitionStorageInGigabytes": 500,
+                  "partitionVectorStorageInGigabytes": 100
+                }
+              }
+            ]
+          },
+          {
+            "regionName": "West Europe",
+            "features": [
+              {
+                "name": "grok"
+              },
+              {
+                "name": "imageVectorization"
+              }
+            ],
+            "skus": [
+              {
+                "name": "standard",
+                "limits": {
+                  "partitionStorageInGigabytes": 150,
+                  "partitionVectorStorageInGigabytes": 30
+                }
+              },
+              {
+                "name": "enterprise",
+                "limits": {
+                  "partitionStorageInGigabytes": 1000,
+                  "partitionVectorStorageInGigabytes": 200
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

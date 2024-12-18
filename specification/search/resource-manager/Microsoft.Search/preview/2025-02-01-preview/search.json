@@ -70,6 +70,42 @@
         }
       }
     },
+    "/providers/Microsoft.Search/features": {
+      "get": {
+        "tags": [
+          "Features"
+        ],
+        "description": "Lists all of the available features and SKUs of the Azure AI Search service.",
+        "operationId": "Features_List",
+        "x-ms-examples": {
+          "SearchListFeatures": {
+            "$ref": "./examples/SearchListFeatures.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of features and skus.",
+            "schema": {
+              "$ref": "#/definitions/FeatureListResult"
+            }
+          },
+          "default": {
+            "description": "Features API failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
       "post": {
         "tags": [
@@ -3212,6 +3248,62 @@
         }
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
+    },
+    "FeatureListResult": {
+      "type": "object",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regionName": {
+                "type": "string",
+                "description": "The name of the region."
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the feature available in this region."
+                    }
+                  }
+                }
+              },
+              "skus": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the SKU available in this region."
+                    },
+                    "limits": {
+                      "type": "object",
+                      "properties": {
+                        "partitionStorageInGigabytes": {
+                          "type": "integer",
+                          "description": "The maximum partition storage in Gigabytes available in this region."
+                        },
+                        "partitionVectorStorageInGigabytes": {
+                          "type": "integer",
+                          "description": "The maximum partition vector storage in Gigabytes available in this region."
+                        }
+                      },
+                      "description": "The limits associated with this SKU in this region."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "The response containing a list of features and SKUs available in various regions."
     }
   },
   "parameters": {
