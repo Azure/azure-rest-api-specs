@@ -46,7 +46,7 @@ alias ServiceTraits = SupportsClientRequestId;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
+@doc("Get the transparency configuration file, see IETF SCITT draft")
 @sharedRoute
 @route("/.well-known/transparency-configuration")
 @get
@@ -63,7 +63,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the transparency configuration file, see IETF SCITT SCRAPI draft")
+@doc("Get the transparency configuration file, see IETF SCITT draft")
 @sharedRoute
 @route("/.well-known/transparency-configuration")
 @get
@@ -144,7 +144,7 @@ op createEntry is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Post an entry to be registered on the CodeTransparency instance, see IETF SCITT SCRAPI draft")
+@doc("Post an entry to be registered on the CodeTransparency instance, see IETF SCITT draft")
 @post
 @sharedRoute
 @route("/entries")
@@ -272,7 +272,7 @@ model CreateEntryResult {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission if the response can be served immediately, see IETF SCITT SCRAPI draft")
+@doc("Response of entry submission if the response can be served immediately, see IETF SCITT draft")
 model CreateEntryCreated {
   @doc("Status code")
   @statusCode
@@ -292,7 +292,7 @@ model CreateEntryCreated {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission containing the transparent statement id, see IETF SCITT SCRAPI draft")
+@doc("Response of entry submission containing the transparent statement id, see IETF SCITT draft")
 model CreateEntryPending {
   @doc("Status code")
   @statusCode
@@ -438,7 +438,7 @@ union OperationStatus {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Tranparency configuration, see IETF SCITT SCRAPI draft.")
+@doc("Transparency configuration, see IETF SCITT draft.")
 model TransparencyConfigurationCbor {
   @doc("Default content type is application/cbor.")
   @header
@@ -450,7 +450,7 @@ model TransparencyConfigurationCbor {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Tranparency configuration, see IETF SCITT SCRAPI draft.")
+@doc("Transparency configuration, see IETF SCITT draft.")
 model TransparencyConfigurationJson {
   @doc("Content type header")
   @header
@@ -644,7 +644,7 @@ model CodeTransparencyConfigurationPolicy {
 }
 
 // -----------------------------------------------------------------
-// Error responses as per IETF SCRAPI draft
+// Error responses as per IETF draft
 // -----------------------------------------------------------------
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is CBOR example model for visibility"
