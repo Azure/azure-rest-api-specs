@@ -255,10 +255,10 @@ model AcsRecordingFileStatusUpdatedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
-  sender?: string;
+  sender: string;
 
   /** The recipient Email Address */
-  recipient?: string;
+  recipient: string;
 
   /** The Internet Message Id of the email that has been sent */
   internetMessageId: string;
