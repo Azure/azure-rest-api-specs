@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2023-01-01"
+    "version": "2023-10-20"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -498,7 +498,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2023-01-01 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2023-10-20 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -830,6 +830,51 @@
         "x-ms-examples": {
           "Monitors_Delete": {
             "$ref": "./examples/Monitors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getBillingInfo": {
+      "post": {
+        "tags": [
+          "ConnectedResources"
+        ],
+        "summary": "Get marketplace and organization info mapped to the given monitor.",
+        "operationId": "BillingInfo_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BillingInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingInfo_Get": {
+            "$ref": "./examples/BillingInfo_Get.json"
           }
         }
       }
@@ -1755,6 +1800,10 @@
         "id": {
           "description": "The ARM id of the linked resource.",
           "type": "string"
+        },
+        "location": {
+          "description": "The location of the linked resource.",
+          "type": "string"
         }
       }
     },
@@ -1814,6 +1863,64 @@
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "BillingInfoResponse": {
+      "description": "Marketplace Subscription and Organization details to which resource gets billed into.",
+      "type": "object",
+      "properties": {
+        "marketplaceSaasInfo": {
+          "description": "Marketplace Subscription details",
+          "$ref": "#/definitions/MarketplaceSaaSInfo"
+        },
+        "partnerBillingEntity": {
+          "description": "Partner Billing Entity details: Organization Info",
+          "$ref": "#/definitions/PartnerBillingEntity"
+        }
+      }
+    },
+    "MarketplaceSaaSInfo": {
+      "description": "Marketplace SAAS Info of the resource.",
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "description": "Marketplace Subscription Id. This is a GUID-formatted string.",
+          "type": "string"
+        },
+        "marketplaceName": {
+          "description": "Marketplace Subscription Details: SAAS Name",
+          "type": "string"
+        },
+        "marketplaceStatus": {
+          "description": "Marketplace Subscription Details: SaaS Subscription Status",
+          "type": "string"
+        },
+        "billedAzureSubscriptionId": {
+          "description": "The Azure Subscription ID to which the Marketplace Subscription belongs and gets billed into.",
+          "type": "string"
+        },
+        "subscribed": {
+          "description": "Flag specifying if the Marketplace status is subscribed or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "PartnerBillingEntity": {
+      "description": "Partner Billing details associated with the resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Datadog Organization Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Datadog Organization Name.",
+          "type": "string"
+        },
+        "partnerEntityUri": {
+          "description": "Link to the datadog organization page",
           "type": "string"
         }
       }
@@ -2389,6 +2496,10 @@
         },
         "automuting": {
           "description": "Configuration to enable/disable auto-muting flag",
+          "type": "boolean"
+        },
+        "customMetrics": {
+          "description": "Configuration to enable/disable custom metrics. If enabled, custom metrics from app insights will be sent.",
           "type": "boolean"
         }
       }
