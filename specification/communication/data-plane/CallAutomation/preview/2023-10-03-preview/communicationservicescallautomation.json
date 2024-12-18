@@ -1350,6 +1350,7 @@
           {
             "name": "addParticipantRequest",
             "in": "body",
+            "description": "The add participant request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AddParticipantRequest"
@@ -1932,9 +1933,9 @@
           "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the source of the call"
         },
-        "opsSource": {
+        "teamsAppSource": {
           "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
-          "description": "The identifier of the source in an OPS call"
+          "description": "The identifier of the source for creating call with Teams resource account ID."
         },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
@@ -1983,17 +1984,28 @@
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationUserIdentifierModel"
     },
-    "AzureOpenAIDialogUpdate": {
-      "description": "Azure Open AI Dialog for UpdateDialog API Call",
-      "required": [],
+    "PowerVirtualAgentsDialog": {
+      "description": "Power Virtual Agents Dialog",
+      "required": [
+        "botAppId"
+      ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DialogUpdateBase"
+          "$ref": "#/definitions/BaseDialog"
         }
       ],
-      "properties": {},
-      "x-ms-discriminator-value": "azureOpenAI"
+      "properties": {
+        "botAppId": {
+          "description": "Bot identifier.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
@@ -2132,28 +2144,8 @@
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
-    "PowerVirtualAgentsDialog": {
-      "description": "Power Virtual Agents Dialog",
-      "required": [
-        "botAppId"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDialog"
-        }
-      ],
-      "properties": {
-        "botAppId": {
-          "description": "Bot identifier.",
-          "type": "string"
-        },
-        "language": {
-          "description": "Language.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "powerVirtualAgents"
+    "CommunicationError": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationError"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -3148,14 +3140,14 @@
       "type": "object",
       "properties": {
         "targetParticipants": {
-          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
+          "description": "Gets or sets participants to be muted from the call.\r\nOnly ACS Users are supported.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
         "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "description": "Gets or sets context used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
@@ -3534,6 +3526,11 @@
           "type": "string",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3558,6 +3555,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -3666,6 +3668,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -3771,6 +3778,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -3933,7 +3941,7 @@
           "readOnly": true
         }
       }
-    },    
+    },
     "RecordingStateChanged": {
       "type": "object",
       "properties": {
@@ -3953,6 +3961,11 @@
         },
         "recordingKind": {
           "$ref": "#/definitions/RecordingKind"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
+          "readOnly": true
         },
         "callConnectionId": {
           "description": "Call connection ID.",
@@ -4040,6 +4053,11 @@
     "PlayCanceled": {
       "type": "object",
       "properties": {
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
+          "readOnly": true
+        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
@@ -4218,6 +4236,11 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Result information defines the code, subcode and message",
           "readOnly": true
         },
         "callConnectionId": {
@@ -4712,7 +4735,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services.",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         },
         "callConnectionId": {
@@ -5167,6 +5190,18 @@
           "readOnly": true
         }
       }
+    },
+    "AzureOpenAIDialogUpdate": {
+      "description": "Azure Open AI Dialog for UpdateDialog API Call",
+      "required": [],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DialogUpdateBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "azureOpenAI"
     }
   },
   "parameters": {
