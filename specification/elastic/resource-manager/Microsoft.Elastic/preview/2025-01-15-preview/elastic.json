@@ -2523,6 +2523,48 @@
         }
       }
     },
+    "ServerlessProjectDetails": {
+      "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
+      "type": "object",
+      "properties": {
+        "projectType": {
+          "description": "Project type; ex: Search / Observability / Security",
+          "$ref": "#/definitions/ServerlessProjectType"
+        },
+        "configurationType": {
+          "description": "Publisher ID of the plan",
+          "$ref": "#/definitions/ServerlessProjectConfigurationType"
+        }
+      }
+    },
+    "ServerlessProjectType": {
+      "enum": [
+        "Search",
+        "Observability",
+        "Security",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServerlessProjectType"
+      },
+      "readOnly": true
+    },
+    "ServerlessProjectConfigurationType": {
+      "enum": [
+        "GeneralPurpose",
+        "VectorOptimized",
+        "TimeSeriesOptimized",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServerlessProjectConfigurationType"
+      },
+      "readOnly": true
+    },
     "LiftrResourceCategories": {
       "enum": [
         "Unknown",
@@ -2594,6 +2636,10 @@
         "generateApiKey": {
           "description": "Flag to determine if User API Key has to be generated and shared.",
           "type": "boolean"
+        },
+        "serverlessProjectDetails": {
+          "description": "Project details of the monitor resource IF it belongs to Serverless offer kind.",
+          "$ref": "#/definitions/ServerlessProjectDetails"
         }
       }
     },
