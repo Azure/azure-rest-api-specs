@@ -537,7 +537,7 @@ namespace SkillContext
 	  Model: string;
 
 	  @doc("The usage statistics for the response.")
-	  Usage: Usage;
+	  Usage: unknown;
 
 	  @doc("The results of prompt filtering.")
 	  PromptFilterResults: Array<PromptAnnotation>;
@@ -592,18 +592,6 @@ namespace SkillContext
 
 	  @doc("Citation details for the filtered content.")
 	  Citation?: CodeCitation;
-	}
-
-	@doc("Represents the usage statistics for a response.")
-	model Usage {
-	  @doc("The number of tokens in the prompt.")
-	  PromptTokens: unknown;
-
-	  @doc("The number of tokens in the completion.")
-	  CompletionTokens: unknown;
-
-	  @doc("The total number of tokens used.")
-	  TotalTokens: unknown;
 	}
 
 	@doc("Defines the severity levels for content filtering.")
