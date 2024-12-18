@@ -2813,14 +2813,14 @@
       "type": "object",
       "description": "Model that represents a Experiment resource.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/ExperimentProperties",
           "description": "The properties of the experiment resource.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "required": [

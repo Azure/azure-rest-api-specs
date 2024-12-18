@@ -13,8 +13,11 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Experiment resource.
  */
-model Experiment
-  is Azure.ResourceManager.TrackedResource<ExperimentProperties, false> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
+@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
+@includeInapplicableMetadataInPayload(false)
+model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Experiment,
     KeyName = "experimentName",
@@ -22,6 +25,12 @@ model Experiment
     NamePattern = "^[^<>%&:?#/\\\\]+$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required implementation to avoid breaking .NET SDK changes"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties?: ExperimentProperties;
 }
 
 @armResourceOperations
