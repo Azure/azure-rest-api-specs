@@ -1,6 +1,8 @@
 parameters:
   "service-dir":
-    default: "sdk/qumulo"
+    default: "sdk/liftrqumulo"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-net/"
 output-dir: "{project-root}/"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -25,7 +27,9 @@ options:
     packageDetails:
       name: "@azure/arm-qumulo"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/qumulo/{namespace}/src"
     package-dir: "Azure.ResourceManager.Qumulo"
+    service-dir: "sdk/qumulo"
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
