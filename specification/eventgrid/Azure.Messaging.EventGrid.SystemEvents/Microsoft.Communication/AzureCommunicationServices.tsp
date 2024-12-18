@@ -900,8 +900,8 @@ model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
 
-  /** Recipient mail server */
-  recipientMailServer?: string;
+  /** Recipient mail server host name */
+  recipientMailServerHostName?: string;
 }
 
 /** Schema of common properties of all chat thread events */
