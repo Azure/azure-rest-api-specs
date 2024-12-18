@@ -647,29 +647,7 @@ model CodeTransparencyConfigurationPolicy {
 // Error responses as per IETF draft
 // -----------------------------------------------------------------
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is CBOR example model for visibility"
-@added(Versions.`2025-01-31-preview`)
-@doc("CBOR error body, see RFC9290")
-@error
-model ConciseProblemDetailsCbor {
-  // cannot set type of this model to bytes
-  // cannot use bytes instead because need to use @error decorator and need a model
-  @doc("title")
-  @example("Bad Signature Algorithm")
-  `-1`: string;
-
-  @doc("detail")
-  @example("Signed Statement contained an algorithm that is not supported")
-  `-2`: string;
-
-  @doc("instance")
-  @example("urn:ietf:params:scitt:error:badSignatureAlgorithm")
-  `-3`: string;
-
-  @doc("response code")
-  @example(400)
-  `-4`: int16;
-}
+alias ConciseProblemDetailsCbor = bytes;
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Not found error response")

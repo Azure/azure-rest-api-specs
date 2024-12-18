@@ -70,13 +70,13 @@
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "503": {
             "description": "Service unavailable error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             },
             "headers": {
               "Retry-After": {
@@ -194,25 +194,25 @@
           "400": {
             "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "503": {
             "description": "Service unavailable error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             },
             "headers": {
               "Retry-After": {
@@ -258,25 +258,25 @@
           "400": {
             "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "503": {
             "description": "Service unavailable error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             },
             "headers": {
               "Retry-After": {
@@ -319,25 +319,25 @@
           "400": {
             "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "503": {
             "description": "Service unavailable error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             },
             "headers": {
               "Retry-After": {
@@ -380,25 +380,25 @@
           "400": {
             "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "404": {
             "description": "Not found error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "500": {
             "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             }
           },
           "503": {
             "description": "Service unavailable error response",
             "schema": {
-              "$ref": "#/definitions/ConciseProblemDetailsCbor"
+              "type": "file"
             },
             "headers": {
               "Retry-After": {
@@ -790,35 +790,6 @@
         "policyScript"
       ]
     },
-    "ConciseProblemDetailsCbor": {
-      "type": "object",
-      "description": "CBOR error body, see RFC9290",
-      "properties": {
-        "-1": {
-          "type": "string",
-          "description": "title"
-        },
-        "-2": {
-          "type": "string",
-          "description": "detail"
-        },
-        "-3": {
-          "type": "string",
-          "description": "instance"
-        },
-        "-4": {
-          "type": "integer",
-          "format": "int16",
-          "description": "response code"
-        }
-      },
-      "required": [
-        "-1",
-        "-2",
-        "-3",
-        "-4"
-      ]
-    },
     "CreateEntryCreated": {
       "type": "object",
       "description": "Response of entry submission if the response can be served immediately, see IETF SCITT draft",
@@ -969,7 +940,8 @@
       "description": "Not found error response",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "type": "string",
+          "format": "byte",
           "description": "CBOR content of the error object"
         }
       },
@@ -1009,7 +981,8 @@
       "description": "Server error response",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "type": "string",
+          "format": "byte",
           "description": "CBOR content of the error object"
         }
       },
@@ -1048,7 +1021,8 @@
       "description": "Service unavailable error response",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "type": "string",
+          "format": "byte",
           "description": "CBOR content of the error object"
         }
       },
@@ -1107,7 +1081,8 @@
       "description": "Validation error response",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ConciseProblemDetailsCbor",
+          "type": "string",
+          "format": "byte",
           "description": "CBOR content of the error object"
         }
       },
