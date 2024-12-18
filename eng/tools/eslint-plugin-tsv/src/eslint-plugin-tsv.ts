@@ -3,7 +3,6 @@ import parser from "yaml-eslint-parser";
 
 const pluginName = "tsv";
 
-// TODO: Add types
 export const plugin = {
   configs: { },
   rules: {
