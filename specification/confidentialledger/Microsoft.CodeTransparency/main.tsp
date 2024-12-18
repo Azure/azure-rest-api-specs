@@ -178,7 +178,7 @@ op listEntryStatuses is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Get Entry with or without receipt embedded in its unprotected header")
+@doc("Get signed statement with or without receipt embedded in its unprotected header")
 @sharedRoute
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
@@ -189,7 +189,7 @@ op getEntry is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get Entry with or without receipt embedded in its unprotected header")
+@doc("Get signed statement with or without receipt embedded in its unprotected header")
 @sharedRoute
 @route("/entries/{entryId}")
 op getEntryChanged is Foundations.Operation<
@@ -335,7 +335,7 @@ model TransparentStatement {
 
 @doc("A ledger receipt, see IETF SCITT draft")
 model ReceiptEntry {
-  @doc("The MIME content type for raw receipt is application/cbor.")
+  @doc("The MIME content type for receipt is application/cbor.")
   @removed(Versions.`2025-01-31-preview`)
   @header("Content-Type")
   contentTypeCbor: "application/cbor";
