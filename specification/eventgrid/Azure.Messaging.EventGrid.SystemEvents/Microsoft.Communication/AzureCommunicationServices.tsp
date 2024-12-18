@@ -223,7 +223,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   receivedTimestamp: utcDateTime;
 
   /** Number of segments in the message */
-  segmentCount?: int32;
+  segmentCount: int32;
 }
 
 //TODO: This might need some fixing
