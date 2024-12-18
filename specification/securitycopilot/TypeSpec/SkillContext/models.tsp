@@ -546,7 +546,7 @@ namespace SkillContext
 	@doc("Represents a prompt annotation.")
 	model PromptAnnotation {
 	  @doc("The index of the prompt.")
-	  PromptIndex: int32;
+	  PromptIndex: unknown;
 
 	  @doc("The content filter results.")
 	  ContentFilterResults: ContentFilterResults;
