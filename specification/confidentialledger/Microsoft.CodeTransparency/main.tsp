@@ -52,7 +52,7 @@ alias ServiceTraits = SupportsClientRequestId;
 @get
 op getTransparencyConfigCbor is Foundations.Operation<
   {
-    @doc("Accpect header")
+    @doc("Accept header")
     @header
     accept: "application/cbor";
   },
@@ -69,7 +69,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
 @get
 op getTransparencyConfigJson is Foundations.Operation<
   {
-    @doc("Accpect header")
+    @doc("Accept header")
     @header
     accept: "application/json";
   },
@@ -80,7 +80,7 @@ op getTransparencyConfigJson is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get the service public keys")
+@doc("Get the public keys used by the service to sign receipts")
 @route("/jwks")
 @get
 op getPublicKeys is Foundations.Operation<
@@ -272,7 +272,7 @@ model CreateEntryResult {
 }
 
 @added(Versions.`2025-01-31-preview`)
-@doc("Response of entry submission if the response can be served immediatelly, see IETF SCITT SCRAPI draft")
+@doc("Response of entry submission if the response can be served immediately, see IETF SCITT SCRAPI draft")
 model CreateEntryCreated {
   @doc("Status code")
   @statusCode

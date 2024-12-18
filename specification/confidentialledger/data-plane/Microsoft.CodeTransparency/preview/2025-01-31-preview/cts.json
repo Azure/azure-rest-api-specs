@@ -49,7 +49,7 @@
           {
             "name": "accept",
             "in": "header",
-            "description": "Accpect header",
+            "description": "Accept header",
             "required": true,
             "type": "string",
             "enum": [
@@ -158,7 +158,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Response of entry submission if the response can be served immediatelly, see IETF SCITT SCRAPI draft",
+            "description": "Response of entry submission if the response can be served immediately, see IETF SCITT SCRAPI draft",
             "schema": {
               "type": "file"
             },
@@ -446,7 +446,7 @@
     "/jwks": {
       "get": {
         "operationId": "GetPublicKeys",
-        "description": "Get the service public keys",
+        "description": "Get the public keys used by the service to sign receipts",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -552,7 +552,7 @@
           {
             "name": "accept",
             "in": "header",
-            "description": "Accpect header",
+            "description": "Accept header",
             "required": true,
             "type": "string",
             "enum": [
@@ -771,7 +771,7 @@
     },
     "CreateEntryCreated": {
       "type": "object",
-      "description": "Response of entry submission if the response can be served immediatelly, see IETF SCITT SCRAPI draft",
+      "description": "Response of entry submission if the response can be served immediately, see IETF SCITT SCRAPI draft",
       "properties": {
         "body": {
           "type": "string",
