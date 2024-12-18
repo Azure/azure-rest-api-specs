@@ -366,6 +366,7 @@ model EntryIds {
 model EntryIdParameter {
   @doc("ID of the entry to retrieve.")
   @path
+  @maxLength(100)
   @pattern("^[0-9]+\\.[0-9]+$")
   entryId: string;
 }
