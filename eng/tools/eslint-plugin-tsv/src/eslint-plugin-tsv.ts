@@ -1,8 +1,8 @@
-import kebabCaseFirstPathSegment from "./kebab-case-first-path-segment.js";
+import kebabCaseOrg from "./kebab-case-org.js";
 
 export const plugin = {
   rules: {
-    [kebabCaseFirstPathSegment.meta.name]: kebabCaseFirstPathSegment,
+    [kebabCaseOrg.meta.name]: kebabCaseOrg,
   },
 };
 

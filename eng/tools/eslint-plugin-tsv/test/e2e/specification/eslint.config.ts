@@ -9,7 +9,7 @@ export const config = [
       parser,
     },
     rules: {
-      "tsv/kebab-case-first-path-segment": "error",
+      "tsv/kebab-case-org": "error",
     },
   },
 ];

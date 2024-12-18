@@ -12,16 +12,18 @@
   "devDependencies": {
     "@types/node": "^18.19.31",
     "eslint": "^9.17.0",
+    "rimraf": "^6.0.1",
     "typescript": "~5.6.2",
     "vitest": "^2.0.4"
   },
   "scripts": {
     "build": "tsc --build",
+    "clean": "rimraf ./dist ./temp",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose",
-    "test:e2e": "npm run build && npm run test:e2e:contoso && npm run test:e2e:not-kebab-case",
-    "test:e2e:contoso": "eslint --config dist/test/specification/eslint.config.js test/e2e/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
-    "test:e2e:not-kebab-case": "eslint --config dist/test/specification/eslint.config.js test/e2e/specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml"
+    "test:e2e": "npm run clean && npm run build && npm run test:e2e:contoso && npm run test:e2e:not-kebab-case",
+    "test:e2e:contoso": "eslint --config dist/test/e2e/specification/eslint.config.js test/e2e/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+    "test:e2e:not-kebab-case": "eslint --config dist/test/e2e/specification/eslint.config.js test/e2e/specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml"
   },
   "engines": {
     "node": ">= 18.0.0"
