@@ -1,5 +1,3 @@
-// TODO: Add types
-
 import path from "path";
 
 export const rule = {
@@ -16,8 +14,7 @@ export const rule = {
         "Organization name (first path segment after 'specification') does not use kebab-case: '{{orgName}}'",
     },
   },
-  // @ts-ignore
-  create(context) {
+  create(context: any) {
     const filename = context.getFilename() as string;
 
     const pathSegments = filename.split(path.sep);
@@ -30,8 +27,7 @@ export const rule = {
     const orgNameKebabCase = orgName.match(kebabCaseRegex);
 
     return {
-      // @ts-ignore
-      Program(node) {
+      Program(node: any) {
         if (!orgNameKebabCase) {
           context.report({
             node,
