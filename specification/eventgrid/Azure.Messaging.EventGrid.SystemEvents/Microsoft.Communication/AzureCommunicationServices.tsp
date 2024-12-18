@@ -221,6 +221,9 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimestamp: utcDateTime;
+
+  /** Number of segments in the message */
+  segmentCount: int32;
 }
 
 //TODO: This might need some fixing
