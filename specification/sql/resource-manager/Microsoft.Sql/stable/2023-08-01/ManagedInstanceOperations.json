@@ -373,6 +373,7 @@
           "type": "string"
         },
         "status": {
+          "description": "The operation state.",
           "enum": [
             "NotStarted",
             "InProgress",
@@ -381,7 +382,12 @@
             "Failed",
             "Canceled"
           ],
-          "type": "string"
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ManagementOperationStepState",
+            "modelAsString": true
+          }
         }
       }
     }
