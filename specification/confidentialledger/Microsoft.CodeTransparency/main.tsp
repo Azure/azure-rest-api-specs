@@ -92,14 +92,14 @@ op getPublicKeys is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Get service parameters")
+@doc("Get service parameters (deprecated)")
 @route("/parameters")
 @get
 op getParameters is Foundations.Operation<{}, ParametersResult, ServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Get the DID configuration file.")
+@doc("Get the DID configuration file (deprecated)")
 @route("/.well-known/did.json")
 @get
 op getDidConfig is Foundations.Operation<{}, DidDocument, ServiceTraits>;
@@ -132,7 +132,7 @@ op getCodeTransparencyVersion is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Post an entry to be registered on the CodeTransparency instance.")
+@doc("Post an entry to be registered on the CodeTransparency instance (deprecated)")
 @post
 @sharedRoute
 @route("/entries")
@@ -157,7 +157,7 @@ op createEntryChanged is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Get the status the entry operation")
+@doc("Get the status the entry operation (deprecated)")
 @route("/operations/{operationId}")
 op getEntryStatus is Foundations.Operation<
   OperationIdParameter,
@@ -168,7 +168,7 @@ op getEntryStatus is Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @removed(Versions.`2025-01-31-preview`)
-@doc("Get the status of all entries operations")
+@doc("Get the status of all entries operations (deprecated)")
 @route("/operations")
 op listEntryStatuses is Foundations.Operation<
   {},
