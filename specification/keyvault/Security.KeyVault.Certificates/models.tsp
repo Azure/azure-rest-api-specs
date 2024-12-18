@@ -155,7 +155,7 @@ model CertificateListResult {
   /**
    * The URL to get the next set of certificates.
    */
-  @Azure.Core.nextLink
+  @nextLink
   @visibility("read")
   nextLink?: string;
 }
@@ -639,7 +639,7 @@ model CertificateIssuerListResult {
   /**
    * The URL to get the next set of certificate issuers.
    */
-  @Azure.Core.nextLink
+  @nextLink
   @visibility("read")
   nextLink?: string;
 }
@@ -1035,7 +1035,7 @@ model DeletedCertificateListResult {
   /**
    * The URL to get the next set of deleted certificates.
    */
-  @Azure.Core.nextLink
+  @nextLink
   @visibility("read")
   nextLink?: string;
 }
