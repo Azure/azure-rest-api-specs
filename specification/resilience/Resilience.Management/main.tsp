@@ -32,6 +32,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-11-01-preview")
   v2024_11_01_preview: "2024-11-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2025-01-01-preview")
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 alias ProviderName = "Microsoft.Resilience";
@@ -166,6 +172,14 @@ union EvaluationResult {
 
 @doc("Resilience states")
 union ResilienceState {
+  @added(Versions.v2025_01_01_preview)
+  @doc("Undefined state.")
+  Undefined: "Undefined",
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("Region not Availability Zone ready.")
+  NonAZRegion: "NonAZRegion",
+
   @doc("Not Applicable state.")
   NotApplicable: "NotApplicable",
 
