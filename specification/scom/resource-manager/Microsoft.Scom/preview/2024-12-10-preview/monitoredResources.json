@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure API for managing SCOM managed instances and monitored resources.",
-    "version": "2024-07-15-preview"
+    "version": "2024-12-10-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -249,7 +249,7 @@
       "description": "A monitored resource.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "scom.json#/definitions/NexusMonitoredResource"
         }
       ],
       "properties": {
@@ -265,8 +265,7 @@
       "properties": {
         "resourceId": {
           "description": "ArmId of the monitored resource.",
-          "type": "string",
-          "format": "arm-id"
+          "type": "string"
         },
         "resourceLocation": {
           "description": "Location of the monitored resource.",

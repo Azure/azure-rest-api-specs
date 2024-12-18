@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure API for managing SCOM managed instances and monitored resources.",
     "description": "Azure Monitor Operations Manager Managed Instance (SCOM MI) management APIs",
-    "version": "2024-07-15-preview",
+    "version": "2024-12-10-preview",
     "x-ms-code-generation-settings": {
       "name": "scomClient"
     }
@@ -1303,6 +1303,16 @@
           "description": "Operation message",
           "type": "string",
           "readOnly": true
+        },
+        "lastModifiedAt": {
+          "description": "Last Modified time of the operation",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "description": "Operation progress percentage",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1766,6 +1776,34 @@
         }
       }
     },
+    "NexusMonitoredResource": {
+      "title": "NexusMonitoredResource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "GetResourcesListResponseProperties": {
       "type": "object",
       "description": "ResourceList based on filters.",
@@ -1790,7 +1828,7 @@
       "description": "Resource properties.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/NexusMonitoredResource"
         }
       ],
       "properties": {
