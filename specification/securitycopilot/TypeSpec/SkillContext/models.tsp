@@ -573,20 +573,7 @@ namespace SkillContext
 	  ContentFilterResults?: unknown;
 
 	  @doc("This indicates when the content filtering system does not run on the chat completion.")
-	  ContentFilterError?: ContentFilterError;
-	}
-
-	model ContentFilterError {
-	  @doc("Details about the error in the content filter.")
-	  Error?: ContentFilterResultError;
-	}
-
-	model ContentFilterResultError {
-	  @doc("The error code.")
-	  Code?: string;
-
-	  @doc("The error message.")
-	  Message?: string;
+	  ContentFilterError?: unknown;
 	}
 
 	model ChatChoice extends BaseChoice {
