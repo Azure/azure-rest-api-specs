@@ -34,11 +34,11 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-preview-2024-12-18-preview
+### Tag: package-2024-12-18-preview
 
-These settings apply only when `--tag=package-preview-2024-12-18-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-18-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-12-18-preview'
+```yaml $(tag) == 'package-2024-12-18-preview'
 input-file:
   - Microsoft.Quota/preview/2024-12-18-preview/groupquota.json
   - Microsoft.Quota/preview/2024-12-18-preview/quota.json
