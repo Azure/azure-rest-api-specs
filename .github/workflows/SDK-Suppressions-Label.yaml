@@ -52,6 +52,7 @@ jobs:
             const prContextStr = JSON.stringify(prContext);
             console.log("PR Context:", prContextStr);
             core.setOutput("prContext", prContextStr);
+            core.setOutput("prLabels", pr.labels.map(label => label.name));
           result-encoding: string
 
       - name: Run Get suppressions label script
@@ -60,8 +61,9 @@ jobs:
           GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.prContext }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
+          GITHUB_PULL_REQUEST_Labels: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
         run: |
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD $GITHUB_PULL_REQUEST_CHANGE_FILES  $GITHUB_PULL_REQUEST_Labels
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
 
