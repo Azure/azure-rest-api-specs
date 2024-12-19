@@ -149,7 +149,6 @@ suppressions:
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
       - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
-      - $.definitions.Registry.properties.syndicatedRegistries
   - code: GuidUsage
     reason: This property has always been a GUID, we just didn't mark its format before,
        this can't be change without breaking the customer.
@@ -232,7 +231,6 @@ suppressions:
     reason: There is a similar usage in existing jobs.
     where:
       - $.definitions["FineTuningJob"].properties["outputs"]
-      - $.definitions["Registry"].properties["syndicatedRegistries"]
   - code: GuidUsage
     reason: valid usage of UUID format since it is in the AAD objectId
     where:
