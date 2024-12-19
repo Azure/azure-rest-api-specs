@@ -10,12 +10,6 @@ import {
 } from "./sdkSuppressions.js";
 import { parseYamlContent, runGitCommand } from "./common.js";
 
-// export type PullRequestContext = {
-//   labels: string[];
-//   number: number;
-//   html_url: string;
-// };
-
 /**
  *
  * @param pr
@@ -32,7 +26,9 @@ export async function getSdkSuppressionsSdkNames(
 ): Promise<SdkName[]> {
   console.log(`Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`);
   const filesChangedPaths = prChangeFiles.split(" ");
+  console.log(`The pr origin changed files: ${filesChangedPaths.join(", ")}`);
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
+  console.log(`Will compare sdk-suppression.yaml files: ${suppressionFileList.join(", ")}`);
   let sdkNameList: SdkName[] = [];
   if (suppressionFileList.length > 0) {
     for (const suppressionFile of suppressionFileList) {
@@ -173,7 +169,7 @@ export function getSdkNamesWithChangedSuppressions(
  * 3. It leaves the label unchanged if the PR already has both the suppression and the suppression approved labels.
  */
 export async function updateSdkSuppressionsLabels(
-  prLabels: string[],
+  prLabels: string,
   prChangeFiles: string,
   outputFile: string,
   baseCommitHash: string,
@@ -194,8 +190,8 @@ export async function updateSdkSuppressionsLabels(
   );
   let addSdkSuppressionsLabels: string[] = [];
   let removeSdkSuppressionsLabels: string[] = [];
-  console.log(`updateSdkSuppressionsLabels: Present labels: ${prLabels.join(", ")}`);
-  const presentLabels = [...prLabels];
+  const presentLabels = JSON.parse(prLabels);
+  console.log(`updateSdkSuppressionsLabels: Present labels: ${presentLabels.join(", ")}`);
   // The sdkNames indicates whether any suppression files have been modified. If it is empty
   // then check if the suppression label was previously applied and remove it if so. Otherwise, no action is needed.
   if (sdkNames.length === 0) {
