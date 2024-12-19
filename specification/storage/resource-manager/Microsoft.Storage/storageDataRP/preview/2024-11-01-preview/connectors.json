@@ -1,0 +1,1065 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Storage Data Resource Provider",
+    "version": "2024-11-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Connectors"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Storage/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/connectors": {
+      "get": {
+        "operationId": "Connectors_ListByStorageAccount",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "List all Storage Connectors in a Storage Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListConnectors": {
+            "$ref": "./examples/Connectors_ListByStorageAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/connectors/{connectorName}": {
+      "get": {
+        "operationId": "Connectors_Get",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Get the specified Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConnector": {
+            "$ref": "./examples/Connectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connectors_CreateOrReplace",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Create or update a Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Connector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "201": {
+            "description": "Resource 'Connector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateConnector": {
+            "$ref": "./examples/Connectors_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Connectors_Update",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Update a Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateConnector": {
+            "$ref": "./examples/Connectors_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Connectors_Delete",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Delete a Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteConnector": {
+            "$ref": "./examples/Connectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/connectors/{connectorName}/existingConnectionTest": {
+      "post": {
+        "operationId": "Connectors_ExistingConnectionTest",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "This method is used to verify that the connection to the backing data store works. This API is designed to be used for monitoring and debugging purposes. From the caller’s perspective, this method does the following: Calls List on the backing data store, attempting to list up to one blob/object/etc. If the above succeeds, and if a blob/object/etc is found, calls Get on that object, attempting to download one byte.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExistingConnectionTestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestConnectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExistingConnectionTest": {
+            "$ref": "./examples/Connectors_ExistingConnectionTest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/connectors/{connectorName}/proposedConnectionTest": {
+      "post": {
+        "operationId": "Connectors_ProposedConnectionTest",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "This method is used to verify that a proposed connection to the backing data store will work, if Create Connector is called with the same Connector information provided in the body of this API request. This API is designed to be used in the initialization flow, where a new user would call Storage Connector Test Proposed Connection, and upon getting a successful response, then call Storage Connector Create with the same input.  See above API “Storage Connectors – Test Existing Connection” for an API designed to be called for monitoring and debugging, once a Connector is created.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the connector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestConnectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposedConnectionTest": {
+            "$ref": "./examples/Connectors_ProposedConnectionTest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessKeyProperties": {
+      "type": "object",
+      "description": "The access key properties for bucket connection.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string",
+          "description": "Access key ID for the backing data store."
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "description": "Secret access key. Redacted when read via a Get or List API."
+        },
+        "signingRegion": {
+          "type": "string",
+          "description": "Region to use in the signing algorithm.  If not provided, defaults to us-east-1."
+        }
+      },
+      "required": [
+        "accessKeyId",
+        "secretAccessKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "AuthProperties": {
+      "type": "object",
+      "description": "The auth properties for bucket connection.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthType"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthType": {
+      "type": "string",
+      "description": "The auth type supported for bucket connection.",
+      "enum": [
+        "AccessKey"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessKey",
+            "value": "AccessKey",
+            "description": "Access Key auth type"
+          }
+        ]
+      }
+    },
+    "BucketSource": {
+      "type": "object",
+      "description": "The properties of the backing data store.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/Connection",
+          "description": "Details for how to connect to the backing data store."
+        },
+        "authProperties": {
+          "$ref": "#/definitions/AuthProperties",
+          "description": "Details for how to authenticate to the backing data store."
+        },
+        "hostOverride": {
+          "type": "string",
+          "description": "The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection."
+        }
+      },
+      "required": [
+        "connection",
+        "authProperties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Source"
+        }
+      ],
+      "x-ms-discriminator-value": "Bucket"
+    },
+    "Connection": {
+      "type": "object",
+      "description": "Details related to the type of bucket connection",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "Type of the connection – Endpoint or PrivateLink. Controls the type of the connection object."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The connection type for bucket connection",
+      "enum": [
+        "Endpoint",
+        "PrivateLink"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Endpoint",
+            "value": "Endpoint",
+            "description": "Endpoint connection type"
+          },
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink",
+            "description": "Private Link connection type"
+          }
+        ]
+      }
+    },
+    "Connector": {
+      "type": "object",
+      "description": "A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConnectorListResult": {
+      "type": "object",
+      "description": "The response of a Connector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connector items on this page",
+          "items": {
+            "$ref": "#/definitions/Connector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorProperties": {
+      "type": "object",
+      "description": "Details of the Storage Connector.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "System-generated identifier for the Storage Connector. Not a valid input parameter when creating.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "State – Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Whether the connector is enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Whether the connector is disabled"
+              }
+            ]
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "System-generated creation time for the Storage Connector. Not a valid input parameter when creating.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
+          "maxLength": 250
+        },
+        "source": {
+          "$ref": "#/definitions/Source",
+          "description": "Information about how to communicate with and authenticate to the backing data store."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "ConnectorUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Connector.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectorUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ConnectorUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Connector.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State – Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Whether the connector is enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Whether the connector is disabled"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
+          "maxLength": 250
+        },
+        "source": {
+          "$ref": "#/definitions/Source",
+          "description": "Information about how to communicate with and authenticate to the backing data store."
+        }
+      }
+    },
+    "EndpointConnection": {
+      "type": "object",
+      "description": "Details related to endpoint based bucket connection",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname ."
+        },
+        "tlsVerification": {
+          "type": "string",
+          "description": "Options – Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.",
+          "default": "Perform",
+          "enum": [
+            "Perform",
+            "AllowSelfSignedCerts"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVerification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Perform",
+                "value": "Perform",
+                "description": "Perform TLS Verification"
+              },
+              {
+                "name": "AllowSelfSignedCerts",
+                "value": "AllowSelfSignedCerts",
+                "description": "Use AllowSelfSignedCerts as TlsVerification"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Connection"
+        }
+      ],
+      "x-ms-discriminator-value": "Endpoint"
+    },
+    "ExistingConnectionTestRequest": {
+      "type": "object",
+      "description": "The test connection related properties.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "The uniqueId of the connector as returned by the server."
+        }
+      },
+      "required": [
+        "uniqueId"
+      ]
+    },
+    "PrivateLinkConnection": {
+      "type": "object",
+      "description": "Details related to private link based bucket connection",
+      "properties": {
+        "privateLinkIdType": {
+          "$ref": "#/definitions/PrivateLinkIdType",
+          "description": "Options – Resource Id or Alias. Determines whether the “privateLinkId” field is an ARM Resource ID of a Private Link, or a Private Link alias."
+        },
+        "privateLinkId": {
+          "type": "string",
+          "description": "The identifier of the Private Link resource, over which the backing data store can be accessed. Depending on the “privateLinkIdType”, should either be an ARM Resource ID or an Private Link alias."
+        },
+        "privateLinkGroupId": {
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "type": "string",
+          "description": "Azure region of the private link."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The message to send to the owner of the private link via a manual request, when Azure Storage is creating a Private Endpoint to communicate with the Private Link."
+        },
+        "privateLinkStatus": {
+          "$ref": "#/definitions/PrivateLinkStatus",
+          "description": "Options – Approved or Disconnected or Pending or Rejected or Timeout. Not settable by callers. The state of the connection to the Private Link resource.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: Storage Account: https://myaccount.blob.core.windows.net/containername Bucket: https://data.contoso.com/bucketname Note that this will be the endpoint as seen by the target of the Private Link in HTTP(s) requests. It is not a Private Endpoint used to connect to the Private Link."
+        },
+        "tlsVerification": {
+          "type": "string",
+          "description": "Options – Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.",
+          "default": "Perform",
+          "enum": [
+            "Perform",
+            "AllowSelfSignedCerts"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVerification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Perform",
+                "value": "Perform",
+                "description": "Perform TLS Verification"
+              },
+              {
+                "name": "AllowSelfSignedCerts",
+                "value": "AllowSelfSignedCerts",
+                "description": "Use AllowSelfSignedCerts as TlsVerification"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "privateLinkIdType",
+        "privateLinkId",
+        "privateLinkGroupId",
+        "privateLinkLocation",
+        "requestMessage",
+        "privateLinkStatus",
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Connection"
+        }
+      ],
+      "x-ms-discriminator-value": "PrivateLink"
+    },
+    "PrivateLinkIdType": {
+      "type": "string",
+      "description": "The supported PrivateLinkId types",
+      "enum": [
+        "ResourceId",
+        "Alias"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceId",
+            "value": "ResourceId",
+            "description": "ResourceId for PrivateLink ID"
+          },
+          {
+            "name": "Alias",
+            "value": "Alias",
+            "description": "Alias for Private Link"
+          }
+        ]
+      }
+    },
+    "PrivateLinkStatus": {
+      "type": "string",
+      "description": "The status of the private link",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Private Link in pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Private Link is approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Private Link in rejected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Private Link is disconnected"
+          },
+          {
+            "name": "Timeout",
+            "value": "Timeout",
+            "description": "Private Link Provisioning timed out"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Source": {
+      "type": "object",
+      "description": "The type of backing data source",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SourceType",
+          "description": "Type of the Storage Connector – Bucket. Not mutable once the Storage Connector is created."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "SourceType": {
+      "type": "string",
+      "description": "The type of the backing data source",
+      "enum": [
+        "Bucket"
+      ],
+      "x-ms-enum": {
+        "name": "SourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bucket",
+            "value": "Bucket",
+            "description": "Source type - Bucket"
+          }
+        ]
+      }
+    },
+    "TestConnectionResponse": {
+      "type": "object",
+      "description": "The test connection response",
+      "properties": {
+        "storageConnectorMethodName": {
+          "type": "string",
+          "description": "Which request attempt failed. Valid values are List and GetBlob."
+        },
+        "storageConnectorErrorMessage": {
+          "type": "string",
+          "description": "A string representing the error received from the backing data store. Format will vary depending on the data store type.  This will be capped at 1 MB in size."
+        },
+        "storageConnectorRequestId": {
+          "type": "string",
+          "description": "The request ID associated with the request sent to the backing data store for validation."
+        }
+      },
+      "required": [
+        "storageConnectorMethodName",
+        "storageConnectorErrorMessage",
+        "storageConnectorRequestId"
+      ]
+    }
+  },
+  "parameters": {}
+}
