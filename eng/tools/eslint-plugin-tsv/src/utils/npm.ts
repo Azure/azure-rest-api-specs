@@ -6,15 +6,11 @@ import { stat, access } from "fs/promises";
 export class Npm {
   // Simulates `npm prefix` by finding the nearest parent directory containing `package.json` or `node_modules`.
   // If neither exist in any parent directories, returns the directory containing the path itself.
+  // Always returns an absolute path.
   static async prefix(path: string): Promise<string> {
-    const stats = await stat(path);
+    path = resolve(path);
 
-    let initialDir: string;
-    if (stats.isDirectory()) {
-      initialDir = resolve(path);
-    } else {
-      initialDir = dirname(path);
-    }
+    const initialDir = (await stat(path)).isDirectory() ? path : dirname(path);
 
     for (
       var currentDir = initialDir;

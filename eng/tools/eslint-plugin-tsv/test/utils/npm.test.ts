@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { vol } from "memfs";
-import { normalize } from "path";
+import { resolve } from "path";
 import { Npm } from "../../src/utils/npm.js";
 
 vi.mock("fs/promises", async () => {
@@ -24,7 +24,7 @@ describe("prefix", () => {
         "/foo/bar/tspconfig.yaml": "",
       });
 
-      expect(await Npm.prefix(path)).toBe(normalize(expected));
+      expect(await Npm.prefix(path)).toBe(resolve(expected));
     });
   });
 
@@ -50,7 +50,7 @@ describe("prefix", () => {
         "/pj/pj/nm/node_modules": null,
       });
 
-      expect(await Npm.prefix(path)).toBe(normalize(expected));
+      expect(await Npm.prefix(path)).toBe(resolve(expected));
     });
   });
 });
