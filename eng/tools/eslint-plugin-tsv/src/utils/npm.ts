@@ -1,8 +1,6 @@
 import { dirname, join, resolve } from "path";
 import { stat, access } from "fs/promises";
 
-// TODO: Add @types/eslint
-
 export class Npm {
   // Simulates `npm prefix` by finding the nearest parent directory containing `package.json` or `node_modules`.
   // If neither exist in any parent directories, returns the directory containing the path itself.
