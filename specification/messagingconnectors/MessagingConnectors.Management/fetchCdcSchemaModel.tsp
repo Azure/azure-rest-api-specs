@@ -11,14 +11,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-@doc("Microsoft.MessagingConnectors Resource Provider management API.")
-@armProviderNamespace
-@service({
-  title: "Microsoft.MessagingConnectors management service",
-})
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
-
 @doc("Connector Schema Config")
 @discriminator("connectorType")
 model ConnectorSchemaConfig {
