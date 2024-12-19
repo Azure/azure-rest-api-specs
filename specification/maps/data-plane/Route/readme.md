@@ -46,6 +46,10 @@ These settings apply only when `--tag=package-2025-01` is specified on the comma
 ```yaml $(tag) == 'package-2025-01'
 input-file:
   - stable/2025-01-01/route.json
+
+suppressions:
+  - code: OperationIdNounVerb
+    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
 ### Tag: package-preview-2024-7
