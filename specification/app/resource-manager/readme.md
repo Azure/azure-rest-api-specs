@@ -40,7 +40,7 @@ directive:
   - suppress: PatchBodyParametersSchema
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
-    reason: It is a false alarm for azure-openapi-validator, public issue here: https://github.com/Azure/azure-openapi-validator/issues/751
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
 ```
 
 ### Tag: package-2025-01-01
