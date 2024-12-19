@@ -65,7 +65,7 @@ model Account {
   @key("accountId")
   @doc("The account id.")
   @maxLength(64)
-  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
+  @pattern("[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+")
   @visibility("read")
   id: string;
 
@@ -152,7 +152,7 @@ model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
   @maxLength(64)
-  @pattern("^[a-zA-Z0-9]{1,63}$")
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility("read")
   id: uuid;
 

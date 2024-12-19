@@ -45,6 +45,19 @@ suppressions:
     reason: Need 302 response code as a product requirement to redirect the client for test execution on remote browsers provided by the service.
     where:
       - $.paths["/accounts/{accountId}/browsers"].get.responses
+  - code: SecurityDefinitionDescription
+    from: playwrighttesting.json
+    reason: Seems like a tool bug, as the description is added in the TypeSpec already.
+  - code: PathParameterSchema
+    from: playwrighttesting.json
+    reason: No provision to define path parameter schema for custom routes of rpc operations in Typespec.
+    where:
+      - $.paths["/accounts/{accountId}/browsers"].get.parameters
+  - code: OperationId
+    from: playwrighttesting.json
+    reason: Inconsistency with Typespec nomenclature to use create and replace for put while update is used for patch api.
+    where:
+      - $.paths["/accounts/{accountId}/access-tokens/{accessTokenId}"].put.operationId
 ```
 
 ### Tag: package-2023-10-01-preview

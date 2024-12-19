@@ -66,7 +66,7 @@
             "required": true,
             "type": "string",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -121,7 +121,7 @@
             "required": true,
             "type": "string",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -179,7 +179,7 @@
             "required": true,
             "type": "string",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -189,7 +189,7 @@
             "type": "string",
             "format": "uuid",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]{1,63}$"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -242,7 +242,7 @@
             "required": true,
             "type": "string",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -252,7 +252,7 @@
             "type": "string",
             "format": "uuid",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]{1,63}$"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -327,7 +327,7 @@
             "required": true,
             "type": "string",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -337,7 +337,7 @@
             "type": "string",
             "format": "uuid",
             "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9]{1,63}$"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -474,7 +474,7 @@
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The access-token id.",
           "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9]{1,63}$",
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "name": {
@@ -554,7 +554,7 @@
           "type": "string",
           "description": "The account id.",
           "maxLength": 64,
-          "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$",
+          "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "resourceId": {
