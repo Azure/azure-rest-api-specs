@@ -577,6 +577,20 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
+@@clientName(AnalyzeDocumentsJobState,
+  "AnalyzeDocumentsOperationState",
+  "csharp"
+);
+
+@@clientName(AnalyzeDocumentsJobState.tasks, "Actions", "csharp");
+
+@@clientName(AnalyzeDocumentsLROResult,
+  "AnalyzeDocumentsOperation  Result",
+  "csharp"
+);
+
+@@clientName(PiiLROTask, "PiiEntityRecognitionOperationAction", "csharp");
+
 @@clientName(AbstractiveSummarizationLROTask,
   "AbstractiveSummarizationOperationAction",
   "csharp"
