@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Secret", "java");
+@@clientName(KeyVault, "Secret", "rust");
 
 using KeyVault;
 
