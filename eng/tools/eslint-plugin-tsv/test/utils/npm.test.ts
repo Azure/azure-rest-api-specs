@@ -24,7 +24,7 @@ describe("prefix", () => {
         "/foo/bar/tspconfig.yaml": "",
       });
 
-      expect(await Npm.prefix(path)).toBe(expected);
+      expect(await Npm.prefix(path)).toBe(normalize(expected));
     });
   });
 
