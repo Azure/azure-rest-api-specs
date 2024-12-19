@@ -300,7 +300,7 @@ namespace SkillContext
 	@doc("AddSourceRequest")
 	model AddSourceRequest {
 		@doc("SkillSource")
-		source: SkillSource;
+		SkillSource: SkillSource;
 	}
 
 	@doc("Represents a chat completion request.")
@@ -540,59 +540,9 @@ namespace SkillContext
 	  Usage: unknown;
 
 	  @doc("The results of prompt filtering.")
-	  PromptFilterResults: Array<PromptAnnotation>;
+	  PromptFilterResults: Array<unknown>;
 	}
 
-	@doc("Represents a prompt annotation.")
-	model PromptAnnotation {
-	  @doc("The index of the prompt.")
-	  PromptIndex: unknown;
-
-	  @doc("The content filter results.")
-	  ContentFilterResults: ContentFilterResults;
-	}
-
-	@doc("Represents content filter results.")
-	model ContentFilterResults {
-	  @doc("Filter result for hate content.")
-	  Hate?: ContentFilterResult;
-
-	  @doc("Filter result for self-harm content.")
-	  SelfHarm?: ContentFilterResult;
-
-	  @doc("Filter result for sexual content.")
-	  Sexual?: ContentFilterResult;
-
-	  @doc("Filter result for violent content.")
-	  Violence?: ContentFilterResult;
-
-	  @doc("Filter result for profanity.")
-	  Profanity?: ContentFilterResult;
-
-	  @doc("Filter result for protected material code.")
-	  ProtectedMaterialCode?: ContentFilterResult;
-
-	  @doc("Filter result for protected material text.")
-	  ProtectedMaterialText?: ContentFilterResult;
-
-	  @doc("Filter result for jailbreak content.")
-	  Jailbreak?: ContentFilterResult;
-	}
-
-	@doc("Represents a content filter result.")
-	model ContentFilterResult {
-	  @doc("Indicates whether the content is filtered.")
-	  Filtered: boolean;
-
-	  @doc("Indicates whether the content was detected.")
-	  Detected?: boolean;
-
-	  @doc("The severity of the content filter.")
-	  Severity?: FilterSeverity;
-
-	  @doc("Citation details for the filtered content.")
-	  Citation?: CodeCitation;
-	}
 
 	@doc("Defines the severity levels for content filtering.")
 	enum FilterSeverity {
@@ -620,7 +570,7 @@ namespace SkillContext
 	  FinishReason: string;
 
 	  @doc("This object contains the list of content filter annotations.")
-	  ContentFilterResults?: ContentFilterResults;
+	  ContentFilterResults?: unknown;
 
 	  @doc("This indicates when the content filtering system does not run on the chat completion.")
 	  ContentFilterError?: ContentFilterError;
