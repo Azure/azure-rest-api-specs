@@ -13,11 +13,11 @@ function getArgsError(args: string[]): string {
 
 export async function main() {
   const args: string[] = process.argv.slice(2);
-  if (args.length > 0) {
+  if (args.length === 4) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
     const changeFiles: string = args[2];
-    const lables: string[] = args[3] as unknown as string[];
+    const lables: string = args[3];
     const outputFile = process.env.OUTPUT_FILE as string;
     const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(lables, changeFiles, outputFile, baseCommitHash, headCommitHash);
     console.log(JSON.stringify(changedLabels));
