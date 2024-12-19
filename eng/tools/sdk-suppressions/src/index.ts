@@ -10,12 +10,12 @@ function getArgsError(): string {
 }
 
 export async function main() {
-  const args: string[] = process.argv.slice(2);
-  if (args.length === 2) {
+  const args: string[] = process.argv.slice(4);
+  if (args.length === 4) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
-    const changeFiles: string = args[3];
-    const lables: string[] = args[4] as unknown as string[];
+    const changeFiles: string = args[2];
+    const lables: string[] = args[3] as unknown as string[];
     const outputFile = process.env.OUTPUT_FILE as string;
     // const prChangeFiles = process.env.GITHUB_PULL_REQUEST_CHANGE_FILES as string;
     // const pullRequestContext = process.env.GITHUB_PULL_REQUEST_CONTEXT as string;
