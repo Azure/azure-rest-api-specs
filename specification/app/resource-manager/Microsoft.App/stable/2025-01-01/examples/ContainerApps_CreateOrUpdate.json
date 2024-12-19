@@ -117,6 +117,18 @@
                   "initialDelaySeconds": 3,
                   "periodSeconds": 3
                 }
+              ],
+              "volumeMounts": [
+                {
+                  "volumeName": "azurefile",
+                  "mountPath": "/mnt/path1",
+                  "subPath": "subPath1"
+                },
+                {
+                  "volumeName": "nfsazurefile",
+                  "mountPath": "/mnt/path2",
+                  "subPath": "subPath2"
+                }
               ]
             }
           ],
@@ -179,6 +191,18 @@
             {
               "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService",
               "name": "redisService"
+            }
+          ],
+          "volumes": [
+            {
+              "name": "azurefile",
+              "storageType": "AzureFile",
+              "storageName": "storage"
+            },
+            {
+              "name": "nfsazurefile",
+              "storageType": "NfsAzureFile",
+              "storageName": "nfsStorage"
             }
           ]
         }
@@ -278,6 +302,18 @@
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
                 ]
               }
             ],
@@ -334,7 +370,19 @@
                   }
                 }
               ]
-            }
+            },
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
+            ]
           },
           "eventStreamEndpoint": "testEndpoint"
         }
@@ -401,6 +449,18 @@
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
+                  }
                 ]
               }
             ],
@@ -457,7 +517,19 @@
                   }
                 }
               ]
-            }
+            },
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
+            ]
           },
           "eventStreamEndpoint": "testEndpoint"
         }

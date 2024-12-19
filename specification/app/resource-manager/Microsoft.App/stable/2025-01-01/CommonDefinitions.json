@@ -672,7 +672,8 @@
           "enum": [
             "AzureFile",
             "EmptyDir",
-            "Secret"
+            "Secret",
+            "NfsAzureFile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -695,7 +696,7 @@
           ]
         },
         "mountOptions": {
-          "description": "Mount options used while mounting the AzureFile. Must be a comma-separated string.",
+          "description": "Mount options used while mounting the Azure file share or NFS Azure file share. Must be a comma-separated string.",
           "type": "string"
         }
       }
@@ -925,6 +926,32 @@
         },
         "shareName": {
           "description": "Azure file share name.",
+          "type": "string"
+        }
+      }
+    },
+    "NfsAzureFileProperties": {
+      "description": "NFS Azure File Properties.",
+      "type": "object",
+      "properties": {
+        "server": {
+          "description": "Server for NFS azure file. Specify the Azure storage account server address.",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "Access mode for storage",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        },
+        "shareName": {
+          "description": "NFS Azure file share name.",
           "type": "string"
         }
       }
