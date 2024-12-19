@@ -1,4 +1,4 @@
-import { ESLint, Rule } from "eslint";
+import { ESLint, Linter, Rule } from "eslint";
 
 // ESLint with names for convenience
 
@@ -10,6 +10,7 @@ export namespace NamedRule {
 
 export namespace NamedESLint {
   export interface Plugin extends ESLint.Plugin {
+    configs: { recommended: Linter.Config };
     name: string;
     rules?: Record<string, NamedRule.RuleModule>;
   }
