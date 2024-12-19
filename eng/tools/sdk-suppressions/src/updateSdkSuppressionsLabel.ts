@@ -47,9 +47,10 @@ export async function getSdkSuppressionsSdkNames(
       }
 
       console.log(
-        `updateSdkSuppressionsLabels: Will compare base suppressions content: ${JSON.stringify(
-          baseSuppressionContent,
-        )} and head suppressions content: ${JSON.stringify(headSuppressionContent)} to get different SDK.`,
+        `updateSdkSuppressionsLabels: Will compare base suppressions content : \n 
+        ${JSON.stringify(baseSuppressionContent)} \n 
+        and head suppressions content: \n 
+        ${JSON.stringify(headSuppressionContent)} to get different SDK. \n`,
       );
 
       sdkNameList = getSdkNamesWithChangedSuppressions(
