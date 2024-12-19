@@ -1,4 +1,4 @@
-name: SDK Suppression Label
+name: SDK Suppressions
 
 on:
   pull_request:
@@ -6,16 +6,10 @@ on:
       - main
       - RPSaaSMaster
       - release*
-    types:
-      - opened
-      - synchronize
-      - reopened
-
-  workflow_dispatch:
   
 jobs:
   process-sdk-suppressions-labels:
-    name: Sdk Suppression Labeling
+    name: Sdk Suppressions
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -75,40 +69,34 @@ jobs:
 
           for label in $(echo $labelsToAdd | tr ',' '\n'); do
             echo "Label to add: $label"
-            echo "has-$label=true" >> $GITHUB_OUTPUT
             echo "$label=true" >> $GITHUB_OUTPUT
           done
 
           for label in $(echo $labelsToRemove | tr ',' '\n'); do
             echo "Label to remove: $label"
-            echo "has-$label=true" >> $GITHUB_OUTPUT
             echo "$label=false" >> $GITHUB_OUTPUT
           done
 
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
-        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Go-Sdk-Suppression == 'true' }}
         with:
           name: "BreakingChange-Go-Sdk-Suppression"
-          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression }}"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results java
-        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Java-Sdk-Suppression == 'true' }}
         with:
           name: "BreakingChange-Java-Sdk-Suppression"
-          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression }}"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results js
-        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-JavaScript-Sdk-Suppression == 'true' }}
         with:
           name: "BreakingChange-JavaScript-Sdk-Suppression"
-          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression }}"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results python
-        if: ${{ steps.run-suppressions-script.outputs.has-BreakingChange-Python-Sdk-Suppression == 'true' }}
         with:
           name: "BreakingChange-Python-Sdk-Suppression"
-          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}"
+          value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression == 'true' }}"
