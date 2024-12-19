@@ -1,8 +1,9 @@
 import path from "path";
+import { NamedRule } from "../named-eslint.js";
 
-export const rule = {
+export const rule: NamedRule.RuleModule = {
+  name: "kebab-case-org",
   meta: {
-    name: "kebab-case-org",
     type: "problem",
     docs: {
       description:
@@ -14,7 +15,7 @@ export const rule = {
         "Organization name (first path segment after 'specification') does not use kebab-case: '{{orgName}}'",
     },
   },
-  create(context: any) {
+  create(context) {
     const filename = path.resolve(context.filename as string);
 
     const pathSegments = filename.split(path.sep);
@@ -27,7 +28,7 @@ export const rule = {
     const orgNameKebabCase = orgName.match(kebabCaseRegex);
 
     return {
-      Program(node: any) {
+      Program(node) {
         if (!orgNameKebabCase) {
           context.report({
             node,

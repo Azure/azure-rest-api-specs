@@ -1,31 +1,30 @@
-import kebabCaseOrg from "./rules/kebab-case-org.js";
+import { Linter } from "eslint";
 import parser from "yaml-eslint-parser";
+import { NamedESLint } from "./named-eslint.js";
+import kebabCaseOrg from "./rules/kebab-case-org.js";
 
-const pluginName = "tsv";
-
-export const plugin = {
-  configs: { },
+const plugin: NamedESLint.Plugin = {
+  name: "tsv",
   rules: {
-    [kebabCaseOrg.meta.name]: kebabCaseOrg,
+    [kebabCaseOrg.name]: kebabCaseOrg,
   },
 };
 
-// assign configs here so we can reference `plugin`
-Object.assign(plugin.configs, {
-  recommended: [
-    {
-      plugins: {
-        [pluginName]: plugin,
-      },
-      files: ["*.yaml", "**/*.yaml"],
-      rules: {
-        [`${pluginName}/${kebabCaseOrg.meta.name}`]: "error",
-      },
-      languageOptions: {
-        parser: parser,
-      },
+const configs: Record<string, Linter.Config> = {
+  recommended: {
+    plugins: {
+      [plugin.name]: plugin,
     },
-  ],
-});
+    files: ["*.yaml", "**/*.yaml"],
+    rules: {
+      [`${plugin.name}/${kebabCaseOrg.name}`]: "error",
+    },
+    languageOptions: {
+      parser: parser,
+    },
+  },
+};
+
+plugin.configs = configs;
 
 export default plugin;

@@ -1,7 +1,7 @@
 import eslintPluginTsv from "../../../src/eslint-plugin-tsv.js";
 
 export const config = [
-  ...(eslintPluginTsv.configs as any).recommended,
+  ...eslintPluginTsv.configs.recommended,
 ];
 
 export default config;
