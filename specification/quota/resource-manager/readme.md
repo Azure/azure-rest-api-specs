@@ -26,7 +26,7 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-12-18
+tag: package-2024-12-18-preview
 ```
 
 ``` yaml !$(csharp)
