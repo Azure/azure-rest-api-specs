@@ -4141,6 +4141,32 @@
         "url"
       ]
     },
+    "ValidatedSolutionRecipeContent": {
+      "type": "object",
+      "description": "Represents contents of a validated solution recipe resource.",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/ValidatedSolutionRecipeInfo",
+          "description": "Represents information about a validated solution recipe."
+        },
+        "capabilities": {
+          "$ref": "#/definitions/ValidatedSolutionRecipeCapabilities",
+          "description": "Represents capabilities available in a validated solution recipe."
+        },
+        "components": {
+          "type": "array",
+          "description": "Represents components available in a validated solution recipe.",
+          "items": {
+            "$ref": "#/definitions/ValidatedSolutionRecipeComponent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "info",
+        "components"
+      ]
+    },
     "ValidatedSolutionRecipeInfo": {
       "type": "object",
       "description": "Represents information about a validated solution recipe.",
@@ -4152,16 +4178,11 @@
         "version": {
           "type": "string",
           "description": "Represents the version for which this validated solution recipe is applicable."
-        },
-        "ring": {
-          "type": "string",
-          "description": "Represents the ring for which this validated solution recipe is applicable."
         }
       },
       "required": [
         "solutionType",
-        "version",
-        "ring"
+        "version"
       ]
     },
     "ValidatedSolutionRecipeListResult": {
@@ -4189,26 +4210,13 @@
       "type": "object",
       "description": "Represents properties of a validated solution recipe resource.",
       "properties": {
-        "info": {
-          "$ref": "#/definitions/ValidatedSolutionRecipeInfo",
-          "description": "Represents information about a validated solution recipe."
-        },
-        "capabilities": {
-          "$ref": "#/definitions/ValidatedSolutionRecipeCapabilities",
-          "description": "Represents capabilities available in a validated solution recipe."
-        },
-        "components": {
-          "type": "array",
-          "description": "Represents components available in a validated solution recipe.",
-          "items": {
-            "$ref": "#/definitions/ValidatedSolutionRecipeComponent"
-          },
-          "x-ms-identifiers": []
+        "recipeContent": {
+          "$ref": "#/definitions/ValidatedSolutionRecipeContent",
+          "description": "Represents contents of a validated solution recipe."
         }
       },
       "required": [
-        "info",
-        "components"
+        "recipeContent"
       ]
     },
     "WebProxyConfiguration": {
