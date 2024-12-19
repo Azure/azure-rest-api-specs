@@ -10,11 +10,11 @@ import {
 } from "./sdkSuppressions.js";
 import { parseYamlContent, runGitCommand } from "./common.js";
 
-export type PullRequestContext = {
-  labels: string[];
-  number: number;
-  html_url: string;
-};
+// export type PullRequestContext = {
+//   labels: string[];
+//   number: number;
+//   html_url: string;
+// };
 
 /**
  *
@@ -26,7 +26,6 @@ export type PullRequestContext = {
  * on the other hand that the sdkName list will return an empty array if it does not have a suppression file or if the file is blank.
  */
 export async function getSdkSuppressionsSdkNames(
-  pr: PullRequestContext,
   prChangeFiles: string,
   baseCommitHash: string,
   headCommitHash: string
@@ -52,7 +51,7 @@ export async function getSdkSuppressionsSdkNames(
       }
 
       console.log(
-        `updateSdkSuppressionsLabels: PR: ${pr.html_url} Will compare base suppressions content: ${JSON.stringify(
+        `updateSdkSuppressionsLabels: Will compare base suppressions content: ${JSON.stringify(
           baseSuppressionContent,
         )} and head suppressions content: ${JSON.stringify(headSuppressionContent)} to get different SDK.`,
       );
@@ -174,7 +173,7 @@ export function getSdkNamesWithChangedSuppressions(
  * 3. It leaves the label unchanged if the PR already has both the suppression and the suppression approved labels.
  */
 export async function updateSdkSuppressionsLabels(
-  pr: PullRequestContext,
+  prLabels: string[],
   prChangeFiles: string,
   outputFile: string,
   baseCommitHash: string,
@@ -187,15 +186,16 @@ export async function updateSdkSuppressionsLabels(
     console.error("Error running git command:", err);
   }
 
-  const sdkNames = await getSdkSuppressionsSdkNames(pr, prChangeFiles, baseCommitHash, headCommitHash);
+  const sdkNames = await getSdkSuppressionsSdkNames(prChangeFiles, baseCommitHash, headCommitHash);
   console.log("Changed SdkNames", sdkNames);
 
   console.log(
-    `updateSdkSuppressionsLabels: PR: ${pr.html_url} Get the required suppressions label based on compared SDK List ${sdkNames.join(", ")}`,
+    `updateSdkSuppressionsLabels: Get the required suppressions label based on compared SDK List ${sdkNames.join(", ")}`,
   );
   let addSdkSuppressionsLabels: string[] = [];
   let removeSdkSuppressionsLabels: string[] = [];
-  const presentLabels = pr.labels;
+  console.log(`updateSdkSuppressionsLabels: Present labels: ${prLabels.join(", ")}`);
+  const presentLabels = [...prLabels];
   // The sdkNames indicates whether any suppression files have been modified. If it is empty
   // then check if the suppression label was previously applied and remove it if so. Otherwise, no action is needed.
   if (sdkNames.length === 0) {
@@ -209,7 +209,7 @@ export async function updateSdkSuppressionsLabels(
             ?.breakingChangeSuppressionApproved || "";
         if (!presentLabels.includes(sdkSuppressionsApprovedLabel)) {
           console.log(
-            `updateSdkSuppressionsLabels: PR: ${pr.html_url} To remove the existed suppression label if there are no difference between head commit and base commit for the suppression content.`,
+            `updateSdkSuppressionsLabels: To remove the existed suppression label if there are no difference between head commit and base commit for the suppression content.`,
           );
           removeSdkSuppressionsLabels.push(prLabel);
         }
@@ -217,10 +217,10 @@ export async function updateSdkSuppressionsLabels(
     }
     if (removeSdkSuppressionsLabels.length > 0) {
       console.log(
-        `updateSdkSuppressionsLabels: PR: ${pr.html_url} Remove label: ${removeSdkSuppressionsLabels.join(", ")}`,
+        `updateSdkSuppressionsLabels: Remove label: ${removeSdkSuppressionsLabels.join(", ")}`,
       );
     } else {
-      console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} No Remove label`);
+      console.log(`updateSdkSuppressionsLabels: No Remove label`);
     }
   } else {
     // The presence of sdkNames indicates that the suppression file has changed between the head and base branch. The suppression label should be added if it is missing.
@@ -233,10 +233,10 @@ export async function updateSdkSuppressionsLabels(
     }
     if (addSdkSuppressionsLabels.length > 0) {
       console.log(
-        `updateSdkSuppressionsLabels: PR: ${pr.html_url} add label: ${addSdkSuppressionsLabels.join(", ")}`,
+        `updateSdkSuppressionsLabels: add label: ${addSdkSuppressionsLabels.join(", ")}`,
       );
     } else {
-      console.log(`updateSdkSuppressionsLabels: PR: ${pr.html_url} no add label`);
+      console.log(`updateSdkSuppressionsLabels: no add label`);
     }
   }
 
