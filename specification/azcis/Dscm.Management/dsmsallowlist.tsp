@@ -34,9 +34,14 @@ model DsmsAllowlistResourceProperties {
   @added(Versions.v2024_06_24_preview)
   azureLocation?: azureLocation;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: DscmProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Request ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  requestId?: string;
 }
 
 @doc("dsmsAllowlist Resource")
