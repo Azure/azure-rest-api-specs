@@ -6,7 +6,6 @@ on:
       - main
       - RPSaaSMaster
       - release*
-      - jacktn/suppression-action
   
 jobs:
   process-sdk-suppressions-labels:
@@ -43,22 +42,12 @@ jobs:
               throw new Error("This workflow must run in the context of a pull request.");
             }
             console.log("This action trigger by ", context.eventName);
-            const prContext = {
-              number: pr.number,
-              title: pr.title,
-              html_url: pr.html_url,
-              labels: pr.labels.map(label => label.name)
-            };
-            const prContextStr = JSON.stringify(prContext);
-            console.log("PR Context:", prContextStr);
-            core.setOutput("prContext", prContextStr);
             core.setOutput("prLabels", pr.labels.map(label => label.name));
           result-encoding: string
 
       - name: Run Get suppressions label script
         id: run-suppressions-script
         env:
-          GITHUB_PULL_REQUEST_CONTEXT: ${{ steps.fetch-pullRequest-context.outputs.prContext }}
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
           GITHUB_PULL_REQUEST_LABELS: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
