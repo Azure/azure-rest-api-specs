@@ -80,24 +80,28 @@ jobs:
 
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
+        if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression }}
         with:
           name: "BreakingChange-Go-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results java
+        if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression }}
         with:
           name: "BreakingChange-Java-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Java-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results js
+        if: ${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression }}
         with:
           name: "BreakingChange-JavaScript-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-JavaScript-Sdk-Suppression == 'true' }}"
           
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results python
+        if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression }}
         with:
           name: "BreakingChange-Python-Sdk-Suppression"
           value: "${{ steps.run-suppressions-script.outputs.BreakingChange-Python-Sdk-Suppression == 'true' }}"
