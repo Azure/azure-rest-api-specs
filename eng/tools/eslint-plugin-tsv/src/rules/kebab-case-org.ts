@@ -15,7 +15,7 @@ export const rule = {
     },
   },
   create(context: any) {
-    const filename = context.getFilename() as string;
+    const filename = path.resolve(context.filename as string);
 
     const pathSegments = filename.split(path.sep);
 
