@@ -41,11 +41,12 @@
   "securityDefinitions": {
     "OAuth2Auth": {
       "type": "oauth2",
-      "flow": "implicit",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://playwright.microsoft.com/.default": ""
-      }
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
     }
   },
   "tags": [],
@@ -63,7 +64,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -116,7 +119,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -172,7 +177,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
           },
           {
             "name": "accessTokenId",
@@ -180,7 +187,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]{1,63}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -231,7 +240,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
           },
           {
             "name": "accessTokenId",
@@ -239,7 +250,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]{1,63}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -312,7 +325,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$"
           },
           {
             "name": "accessTokenId",
@@ -320,7 +335,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]{1,63}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -357,60 +374,10 @@
         }
       }
     },
-    "/accounts/{accountId}/access-tokens/validate": {
-      "post": {
-        "operationId": "AccessTokens_Validate",
-        "description": "Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AccessTokens_Validate": {
-            "$ref": "./examples/AccessTokens_Validate.json"
-          }
-        }
-      }
-    },
     "/accounts/{accountId}/browsers": {
       "get": {
         "operationId": "Accounts_GetBrowsers",
-        "description": "Gets remote browsers corresponding to given account id and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
+        "description": "Gets remote browsers corresponding to given account id and redirects the client for running Playwright tests. Authorization required is Bearer JWT Access token provided by EntraID or Microsoft Playwright Testing Service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -506,6 +473,8 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The access-token id.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9]{1,63}$",
           "readOnly": true
         },
         "name": {
@@ -584,6 +553,8 @@
         "id": {
           "type": "string",
           "description": "The account id.",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$",
           "readOnly": true
         },
         "resourceId": {

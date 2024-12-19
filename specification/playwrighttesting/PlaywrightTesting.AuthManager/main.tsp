@@ -28,7 +28,17 @@ using Azure.Core.Traits;
     OAuth2Auth<[
       {
         type: OAuth2FlowType.implicit,
+        description: "We can use OAuth2 Implicit flow to get the auth token for calling the APIs.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+        scopes: ["https://playwright.microsoft.com/.default"],
+      }
+    ]>,
+    OAuth2Auth<[
+      {
+        type: OAuth2FlowType.authorizationCode,
+        description: "We can use OAuth2 Authorization Code flow to get the auth token for calling the APIs.",
+        authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+        tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
         scopes: ["https://playwright.microsoft.com/.default"],
       }
     ]>
@@ -54,6 +64,8 @@ enum Versions {
 model Account {
   @key("accountId")
   @doc("The account id.")
+  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
   @visibility("read")
   id: string;
 
@@ -139,6 +151,8 @@ union SubscriptionState {
 model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9]{1,63}$")
   @visibility("read")
   id: uuid;
 
@@ -209,7 +223,6 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface AccessTokens {
   // AccessToken Operations
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   createOrReplace is Operations.ResourceCreateOrReplace<AccessToken>;
 
@@ -221,10 +234,6 @@ interface AccessTokens {
 
   @doc("Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.")
   list is Operations.ResourceList<AccessToken>;
-
-  @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
-  @actionSeparator("/")
-  validate is Operations.ResourceCollectionAction<AccessToken, {}, {}>;
 }
 
 alias GetBrowsersParams = {
@@ -257,7 +266,7 @@ interface Accounts {
   get is Operations.ResourceRead<Account>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
-  @doc("Gets remote browsers corresponding to given account id and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
+  @doc("Gets remote browsers corresponding to given account id and redirects the client for running Playwright tests. Authorization required is Bearer JWT Access token provided by EntraID or Microsoft Playwright Testing Service.")
   @route("/accounts/{accountId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
