@@ -63,7 +63,7 @@ export async function getSdkSuppressionsSdkNames(
   return [...new Set(sdkNameList)];
 }
 
-async function getSdkSuppressionsFileContent(
+export async function getSdkSuppressionsFileContent(
   ref: string,
   path: string,
 ): Promise<string | object | undefined | null> {
@@ -199,6 +199,7 @@ export async function updateSdkSuppressionsLabels(
 
   return result;
 }
+
 /**
  * 
  * @param presentLabels 
