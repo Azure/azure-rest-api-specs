@@ -586,14 +586,6 @@ model CodeTransparencyConfiguration {
   @removed(Versions.`2025-01-31-preview`)
   @doc("Issuer used in receipts")
   service_identifier?: string;
-
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Issuer used in receipts")
-  serviceIssuer?: string;
-
-  @added(Versions.`2025-01-31-preview`)
-  @doc("Feed name used in receipts")
-  serviceFeed?: string;
 }
 
 @doc("Configuration of CCF authentication.")
