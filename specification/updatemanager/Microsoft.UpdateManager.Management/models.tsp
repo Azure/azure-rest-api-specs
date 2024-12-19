@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.UpdateManager;
 
@@ -17,7 +18,7 @@ model UpdateRule is TrackedResource<UpdateRuleProperties> {
 @doc("Update rule set properties.")
 model UpdateRuleProperties {
   @doc("reboot settings.")
-  rebootSettings?: rebootSettings;
+  rebootSetting: rebootSettings;
 
   @doc("windows parameter.")
   windowsParameters?: WindowsParameters;

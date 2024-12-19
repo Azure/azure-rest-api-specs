@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./models/connectorModels.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -25,6 +25,8 @@ namespace Microsoft.MessagingConnectors;
 model MessagingConnector is TrackedResource<ResourceProperties> {
   @doc("Name of the Connector resource.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]")
+  @maxLength(64)
+  @minLength(5)
   @path
   @key("name")
   @segment("connectors")
