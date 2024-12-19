@@ -33,6 +33,13 @@ model CustomEntitiesResult is CustomResult {
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
+/** Contains the entity recognition task result for the document with detected language. */
+@added(Versions.v2024_11_15_preview)
+model EntitiesDocumentResultWithDetectedLanguage {
+  ...EntitiesDocumentResult;
+  ...DocumentDetectedLanguage;
+}
+
 /** Supported parameters for a Custom Single Classification task. */
 model CustomSingleLabelClassificationTaskParameters is CustomTaskParameters;
 
