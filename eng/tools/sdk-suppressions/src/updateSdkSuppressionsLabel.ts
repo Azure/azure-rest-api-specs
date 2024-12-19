@@ -28,14 +28,17 @@ export type PullRequestContext = {
 export async function getSdkSuppressionsSdkNames(
   pr: PullRequestContext,
   prChangeFiles: string,
+  baseCommitHash: string,
+  headCommitHash: string
 ): Promise<SdkName[]> {
+  console.log(`Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`);
   const filesChangedPaths = prChangeFiles.split(" ");
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
   let sdkNameList: SdkName[] = [];
   if (suppressionFileList.length > 0) {
     for (const suppressionFile of suppressionFileList) {
-      let baseSuppressionContent = await getSdkSuppressionsFileContent("HEAD^", suppressionFile);
-      const headSuppressionContent = await getSdkSuppressionsFileContent("HEAD", suppressionFile);
+      let baseSuppressionContent = await getSdkSuppressionsFileContent(baseCommitHash, suppressionFile);
+      const headSuppressionContent = await getSdkSuppressionsFileContent(headCommitHash, suppressionFile);
 
       // if the head suppression file is present but anything is wrong like schema error with it return
       const validateSdkSuppressionsFileResult =
@@ -174,6 +177,8 @@ export async function updateSdkSuppressionsLabels(
   pr: PullRequestContext,
   prChangeFiles: string,
   outputFile: string,
+  baseCommitHash: string,
+  headCommitHash: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
     const status = await runGitCommand("git status");
@@ -182,7 +187,7 @@ export async function updateSdkSuppressionsLabels(
     console.error("Error running git command:", err);
   }
 
-  const sdkNames = await getSdkSuppressionsSdkNames(pr, prChangeFiles);
+  const sdkNames = await getSdkSuppressionsSdkNames(pr, prChangeFiles, baseCommitHash, headCommitHash);
   console.log("Changed SdkNames", sdkNames);
 
   console.log(

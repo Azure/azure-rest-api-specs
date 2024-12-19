@@ -61,7 +61,7 @@ jobs:
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
         run: |
-          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js
+          node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js HEAD^ HEAD
           OUTPUT=$(cat $OUTPUT_FILE)
           echo "Script output labels: $OUTPUT"
 
