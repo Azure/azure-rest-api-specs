@@ -2,8 +2,9 @@
 import { exit } from "process";
 import { updateSdkSuppressionsLabels } from "./updateSdkSuppressionsLabel.js";
 
-function getArgsError(): string {
+function getArgsError(argsLen: number): string {
   return (
+    "Get args lengths: " + argsLen + "\n" +
     "Usage: node eng/tools/sdk-suppressions/cmd/sdk-suppressions-label.js baseCommitHash headCommitHash\n" +
     "Returns: {labelsToAdd: [label1, label2],labelsToRemove: [lable3, label4]}\n" 
   );
@@ -24,7 +25,7 @@ export async function main() {
     console.log(JSON.stringify(changedLabels));
     exit(0);
   } else {
-    console.error(getArgsError());
+    console.error(getArgsError(args.length));
     exit(1);
   }
 
