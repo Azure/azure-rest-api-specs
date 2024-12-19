@@ -159,3 +159,31 @@ These settings apply only when `--tag=package-2024-08-22-preview-identity` is sp
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-08-22-preview/identityservice.json
 ```
+
+### Tag: package-2025-01-31-preview-codetransparency
+
+These settings apply only when `--tag=package-2025-01-31-preview-codetransparency` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-31-preview-codetransparency'
+input-file:
+  - Microsoft.CodeTransparency/preview/2025-01-31-preview/cts.json
+suppressions:
+  - code: LroExtension
+    from: cts.json
+    reason: Following RFC
+  - code: LroHeaders
+    from: cts.json
+    reason: Following RFC
+  - code: DefaultResponse
+    from: cts.json
+    reason: TypeSpec did not generate this
+  - code: Post201Response
+    from: cts.json
+    reason: Following RFC
+  - code: HeaderDisallowed
+    from: cts.json
+    reason: Content negation is done with the header in typespec
+  - code: ErrorResponse
+    from: cts.json
+    reason: No way to express when using CBOR
+```
