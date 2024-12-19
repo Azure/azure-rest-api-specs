@@ -13,38 +13,37 @@ import { promisify } from "util";
  * if the file parse error, return {result: undefined, message: string
  */
 export function parseYamlContent(yamlContent: string, path: string): {
-    result: string | object | undefined | null;
-    message: string;
-  } {
-    let content = undefined;
-    // if yaml file is not a valid yaml, catch error and return undefined
-    try {
-      content = load(yamlContent);
-    } catch (error) {
-      console.error(`The file parsing failed in the ${path}. Details: ${error}`);
-      return {
-        result: content,
-        message: `The file parsing failed in the ${path}. Details: ${error}`
-      };;
-    }
-  
-    // if yaml file is empty, run yaml.safeload success but get undefined
-    // to identify whether it is empty return null to distinguish.
-    if (!content) {
-      console.info(`The file in the ${path} has been successfully parsed, but it is an empty file.`)
-      return {
-        result: null,
-        message: `The file in the ${path} has been successfully parsed, but it is an empty file.`
-      };;
-    }
-  
+  result: string | object | undefined | null;
+  message: string;
+}{
+  let content = undefined;
+  // if yaml file is not a valid yaml, catch error and return undefined
+  try {
+    content = load(yamlContent);
+  } catch (error) {
+    console.error(`The file parsing failed in the ${path}. Details: ${error}`);
     return {
       result: content,
-      message: 'The file has been successfully parsed.'
-    };
-  
+      message: `The file parsing failed in the ${path}. Details: ${error}`
+    };;
   }
   
+  // if yaml file is empty, run yaml.safeload success but get undefined
+  // to identify whether it is empty return null to distinguish.
+  if (!content) {
+    console.info(`The file in the ${path} has been successfully parsed, but it is an empty file.`)
+    return {
+      result: null,
+      message: `The file in the ${path} has been successfully parsed, but it is an empty file.`
+    };;
+  }
+  
+  return {
+    result: content,
+    message: 'The file has been successfully parsed.'
+  };
+  
+}
 
 // Promisify the exec function
 const execAsync = promisify(exec);
