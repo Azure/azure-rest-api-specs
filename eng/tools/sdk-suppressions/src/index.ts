@@ -11,7 +11,7 @@ function getArgsError(argsLen: number): string {
 }
 
 export async function main() {
-  const args: string[] = process.argv.slice(4);
+  const args: string[] = process.argv.slice(2);
   if (args.length === 4) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
