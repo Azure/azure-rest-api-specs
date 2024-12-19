@@ -37,11 +37,6 @@ directive:
     from: JavaComponents.json
     reason: |
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
-  - suppress: PatchBodyParametersSchema
-    from: ManagedEnvironments.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch
-    reason: |
-      It might be a false alarm. There is no required property in ManagedEnvironments.
 ```
 
 ### Tag: package-2025-01-01
