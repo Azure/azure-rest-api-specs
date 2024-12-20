@@ -13,6 +13,14 @@ package-version: 11.0.0b1
 clear-output-folder: true
 ```
 
+```yaml
+directive:
+  from: swagger-document
+  where: $.definitions.RaiBlocklistItemsBulkDeleteRequest
+  transform: >
+    $["type"]="array"
+```
+
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/cognitiveservices/azure-mgmt-cognitiveservices/azure/mgmt/cognitiveservices
