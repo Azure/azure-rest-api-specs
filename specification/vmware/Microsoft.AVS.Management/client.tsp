@@ -26,6 +26,9 @@ using Microsoft.AVS;
 @useDependency(Microsoft.AVS.Versions.v2023_09_01)
 namespace Customization;
 
+@@clientName(Microsoft.AVS, "AzureVMwareSolutionAPI", "javascript");
+@@clientName(Microsoft.AVS, "AVS", "python");
+
 // operation group per interface
 #suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"

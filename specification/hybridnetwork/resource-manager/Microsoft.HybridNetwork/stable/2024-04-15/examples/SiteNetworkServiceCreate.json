@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "siteNetworkServiceName": "testSiteNetworkServiceName",
+    "parameters": {
+      "location": "westUs2",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "siteReference": {
+          "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/sites/testSite"
+        },
+        "networkServiceDesignVersionResourceReference": {
+          "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.0",
+          "idType": "Open"
+        },
+        "desiredStateConfigurationGroupValueReferences": {
+          "MyVM_Configuration": {
+            "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/configurationgroupvalues/MyVM_Configuration1"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testSiteNetworkServiceName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testSiteNetworkServiceName",
+        "type": "Microsoft.HybridNetwork/siteNetworkServices",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "westUs2",
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "siteReference": {
+            "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/sites/testSite"
+          },
+          "publisherName": "testPublisher",
+          "publisherScope": "Public",
+          "networkServiceDesignGroupName": "testNetworkServiceDesignGroupName",
+          "networkServiceDesignVersionName": "1.0.1",
+          "networkServiceDesignVersionOfferingLocation": "eastus",
+          "networkServiceDesignVersionResourceReference": {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/testPublisher/networkServiceDesignGroups/testNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.1",
+            "idType": "Open"
+          },
+          "desiredStateConfigurationGroupValueReferences": {
+            "MyVM_Configuration": {
+              "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/configurationgroupvalues/MyVM_Configuration1"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testSiteNetworkServiceName",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HybridNetwork/siteNetworkServices/testSiteNetworkServiceName",
+        "type": "Microsoft.HybridNetwork/siteNetworkServices",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "westUs2",
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "siteReference": {
+            "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/sites/testSite"
+          },
+          "publisherName": "testPublisher",
+          "publisherScope": "Public",
+          "networkServiceDesignGroupName": "testNetworkServiceDesignGroupName",
+          "networkServiceDesignVersionName": "1.0.1",
+          "networkServiceDesignVersionOfferingLocation": "eastus",
+          "networkServiceDesignVersionResourceReference": {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/testPublisher/networkServiceDesignGroups/testNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.1",
+            "idType": "Open"
+          },
+          "desiredStateConfigurationGroupValueReferences": {
+            "MyVM_Configuration": {
+              "id": "/subscriptions/subid/resourcegroups/contosorg1/providers/microsoft.hybridnetwork/configurationgroupvalues/MyVM_Configuration1"
+            }
+          }
+        }
+      }
+    }
+  }
+}

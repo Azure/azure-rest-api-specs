@@ -1,0 +1,969 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Macie2JobSummaries"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/macie2JobSummaries": {
+      "get": {
+        "operationId": "Macie2JobSummaries_ListBySubscription",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "List Macie2JobSummary resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_ListBySubscription": {
+            "$ref": "./examples/Macie2JobSummaries_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/macie2JobSummaries": {
+      "get": {
+        "operationId": "Macie2JobSummaries_ListByResourceGroup",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "List Macie2JobSummary resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummaryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_ListByResourceGroup": {
+            "$ref": "./examples/Macie2JobSummaries_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/macie2JobSummaries/{name}": {
+      "get": {
+        "operationId": "Macie2JobSummaries_Get",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "Get a Macie2JobSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Macie2JobSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_Get": {
+            "$ref": "./examples/Macie2JobSummaries_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Macie2JobSummaries_CreateOrReplace",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "Create a Macie2JobSummary. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Macie2JobSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Macie2JobSummary' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummary"
+            }
+          },
+          "201": {
+            "description": "Resource 'Macie2JobSummary' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummary"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_CreateOrReplace": {
+            "$ref": "./examples/Macie2JobSummaries_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Macie2JobSummaries_Update",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "Update a Macie2JobSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Macie2JobSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummaryTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Macie2JobSummary"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_Update": {
+            "$ref": "./examples/Macie2JobSummaries_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Macie2JobSummaries_Delete",
+        "tags": [
+          "Macie2JobSummaries"
+        ],
+        "description": "Delete a Macie2JobSummary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of Macie2JobSummary",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Macie2JobSummaries_Delete": {
+            "$ref": "./examples/Macie2JobSummaries_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsMacie2JobSummaryProperties": {
+      "type": "object",
+      "description": "Definition of awsMacie2JobSummary",
+      "properties": {
+        "bucketCriteria": {
+          "$ref": "#/definitions/S3BucketCriteriaForJob",
+          "description": "<p>The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.</p>"
+        },
+        "bucketDefinitions": {
+          "type": "array",
+          "description": "<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>",
+          "items": {
+            "$ref": "#/definitions/S3BucketDefinitionForJob"
+          },
+          "x-ms-identifiers": []
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time, in UTC and extended ISO 8601 format, when the job was created.</p>"
+        },
+        "jobId": {
+          "type": "string",
+          "description": "<p>The unique identifier for the job.</p>"
+        },
+        "jobStatus": {
+          "$ref": "#/definitions/JobStatusEnumValue",
+          "description": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
+        },
+        "jobType": {
+          "$ref": "#/definitions/JobTypeEnumValue",
+          "description": "<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job runs only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>"
+        },
+        "lastRunErrorStatus": {
+          "$ref": "#/definitions/LastRunErrorStatus",
+          "description": "<p>Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The custom name of the job.</p>"
+        },
+        "userPausedDetails": {
+          "$ref": "#/definitions/UserPausedDetails",
+          "description": "<p>If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.</p>"
+        }
+      }
+    },
+    "CriteriaBlockForJob": {
+      "type": "object",
+      "description": "Definition of CriteriaBlockForJob",
+      "properties": {
+        "and": {
+          "type": "array",
+          "description": "<p>An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
+          "items": {
+            "$ref": "#/definitions/CriteriaForJob"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CriteriaForJob": {
+      "type": "object",
+      "description": "Definition of CriteriaForJob",
+      "properties": {
+        "simpleCriterion": {
+          "$ref": "#/definitions/SimpleCriterionForJob",
+          "description": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding buckets from the job.</p>"
+        },
+        "tagCriterion": {
+          "$ref": "#/definitions/TagCriterionForJob",
+          "description": "<p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding buckets from the job.</p>"
+        }
+      }
+    },
+    "JobComparator": {
+      "type": "string",
+      "description": "JobComparator enum",
+      "enum": [
+        "CONTAINS",
+        "EQ",
+        "GT",
+        "GTE",
+        "LT",
+        "LTE",
+        "NE",
+        "STARTS_WITH"
+      ],
+      "x-ms-enum": {
+        "name": "JobComparator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CONTAINS",
+            "value": "CONTAINS",
+            "description": "JobComparator enum CONTAINS"
+          },
+          {
+            "name": "EQ",
+            "value": "EQ",
+            "description": "JobComparator enum EQ"
+          },
+          {
+            "name": "GT",
+            "value": "GT",
+            "description": "JobComparator enum GT"
+          },
+          {
+            "name": "GTE",
+            "value": "GTE",
+            "description": "JobComparator enum GTE"
+          },
+          {
+            "name": "LT",
+            "value": "LT",
+            "description": "JobComparator enum LT"
+          },
+          {
+            "name": "LTE",
+            "value": "LTE",
+            "description": "JobComparator enum LTE"
+          },
+          {
+            "name": "NE",
+            "value": "NE",
+            "description": "JobComparator enum NE"
+          },
+          {
+            "name": "STARTS_WITH",
+            "value": "STARTS_WITH",
+            "description": "JobComparator enum STARTS_WITH"
+          }
+        ]
+      }
+    },
+    "JobComparatorEnumValue": {
+      "type": "object",
+      "description": "Definition of JobComparatorEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/JobComparator",
+          "description": "Property value"
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "JobStatus enum",
+      "enum": [
+        "CANCELLED",
+        "COMPLETE",
+        "IDLE",
+        "PAUSED",
+        "RUNNING",
+        "USER_PAUSED"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CANCELLED",
+            "value": "CANCELLED",
+            "description": "JobStatus enum CANCELLED"
+          },
+          {
+            "name": "COMPLETE",
+            "value": "COMPLETE",
+            "description": "JobStatus enum COMPLETE"
+          },
+          {
+            "name": "IDLE",
+            "value": "IDLE",
+            "description": "JobStatus enum IDLE"
+          },
+          {
+            "name": "PAUSED",
+            "value": "PAUSED",
+            "description": "JobStatus enum PAUSED"
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "JobStatus enum RUNNING"
+          },
+          {
+            "name": "USER_PAUSED",
+            "value": "USER_PAUSED",
+            "description": "JobStatus enum USER_PAUSED"
+          }
+        ]
+      }
+    },
+    "JobStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of JobStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "JobType": {
+      "type": "string",
+      "description": "JobType enum",
+      "enum": [
+        "ONE_TIME",
+        "SCHEDULED"
+      ],
+      "x-ms-enum": {
+        "name": "JobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ONE_TIME",
+            "value": "ONE_TIME",
+            "description": "JobType enum ONE_TIME"
+          },
+          {
+            "name": "SCHEDULED",
+            "value": "SCHEDULED",
+            "description": "JobType enum SCHEDULED"
+          }
+        ]
+      }
+    },
+    "JobTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of JobTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/JobType",
+          "description": "Property value"
+        }
+      }
+    },
+    "LastRunErrorStatus": {
+      "type": "object",
+      "description": "Definition of LastRunErrorStatus",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/LastRunErrorStatusCodeEnumValue",
+          "description": "<p>Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job's most recent run. Possible values are:</p> <ul><li><p>ERROR - One or more errors occurred. Amazon Macie didn't process all the data specified for the job.</p></li> <li><p>NONE - No errors occurred. Macie processed all the data specified for the job.</p></li></ul>"
+        }
+      }
+    },
+    "LastRunErrorStatusCode": {
+      "type": "string",
+      "description": "LastRunErrorStatusCode enum",
+      "enum": [
+        "ERROR",
+        "NONE"
+      ],
+      "x-ms-enum": {
+        "name": "LastRunErrorStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ERROR",
+            "value": "ERROR",
+            "description": "LastRunErrorStatusCode enum ERROR"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "LastRunErrorStatusCode enum NONE"
+          }
+        ]
+      }
+    },
+    "LastRunErrorStatusCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of LastRunErrorStatusCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/LastRunErrorStatusCode",
+          "description": "Property value"
+        }
+      }
+    },
+    "Macie2JobSummary": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Macie2JobSummaryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Macie2JobSummaryListResult": {
+      "type": "object",
+      "description": "The response of a Macie2JobSummary list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Macie2JobSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/Macie2JobSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Macie2JobSummaryProperties": {
+      "type": "object",
+      "description": "Definition of Macie2JobSummary",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsMacie2JobSummaryProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Macie2JobSummaryTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Macie2JobSummary resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "S3BucketCriteriaForJob": {
+      "type": "object",
+      "description": "Definition of S3BucketCriteriaForJob",
+      "properties": {
+        "excludes": {
+          "$ref": "#/definitions/CriteriaBlockForJob",
+          "description": "<p>The property- and tag-based conditions that determine which buckets to exclude from the job.</p>"
+        },
+        "includes": {
+          "$ref": "#/definitions/CriteriaBlockForJob",
+          "description": "<p>The property- and tag-based conditions that determine which buckets to include in the job.</p>"
+        }
+      }
+    },
+    "S3BucketDefinitionForJob": {
+      "type": "object",
+      "description": "Definition of S3BucketDefinitionForJob",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "<p>The unique identifier for the Amazon Web Services account that owns the buckets.</p>"
+        },
+        "buckets": {
+          "type": "array",
+          "description": "<p>An array that lists the names of the buckets.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SimpleCriterionForJob": {
+      "type": "object",
+      "description": "Definition of SimpleCriterionForJob",
+      "properties": {
+        "comparator": {
+          "$ref": "#/definitions/JobComparatorEnumValue",
+          "description": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>"
+        },
+        "key": {
+          "$ref": "#/definitions/SimpleCriterionKeyForJobEnumValue",
+          "description": "<p>The property to use in the condition.</p>"
+        },
+        "values": {
+          "type": "array",
+          "description": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href='https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission'>BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href='https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess'>BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SimpleCriterionKeyForJob": {
+      "type": "string",
+      "description": "SimpleCriterionKeyForJob enum",
+      "enum": [
+        "ACCOUNT_ID",
+        "S3_BUCKET_EFFECTIVE_PERMISSION",
+        "S3_BUCKET_NAME",
+        "S3_BUCKET_SHARED_ACCESS"
+      ],
+      "x-ms-enum": {
+        "name": "SimpleCriterionKeyForJob",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACCOUNT_ID",
+            "value": "ACCOUNT_ID",
+            "description": "SimpleCriterionKeyForJob enum ACCOUNT_ID"
+          },
+          {
+            "name": "S3_BUCKET_EFFECTIVE_PERMISSION",
+            "value": "S3_BUCKET_EFFECTIVE_PERMISSION",
+            "description": "SimpleCriterionKeyForJob enum S3_BUCKET_EFFECTIVE_PERMISSION"
+          },
+          {
+            "name": "S3_BUCKET_NAME",
+            "value": "S3_BUCKET_NAME",
+            "description": "SimpleCriterionKeyForJob enum S3_BUCKET_NAME"
+          },
+          {
+            "name": "S3_BUCKET_SHARED_ACCESS",
+            "value": "S3_BUCKET_SHARED_ACCESS",
+            "description": "SimpleCriterionKeyForJob enum S3_BUCKET_SHARED_ACCESS"
+          }
+        ]
+      }
+    },
+    "SimpleCriterionKeyForJobEnumValue": {
+      "type": "object",
+      "description": "Definition of SimpleCriterionKeyForJobEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SimpleCriterionKeyForJob",
+          "description": "Property value"
+        }
+      }
+    },
+    "TagCriterionForJob": {
+      "type": "object",
+      "description": "Definition of TagCriterionForJob",
+      "properties": {
+        "comparator": {
+          "$ref": "#/definitions/JobComparatorEnumValue",
+          "description": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>"
+        },
+        "tagValues": {
+          "type": "array",
+          "description": "<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>",
+          "items": {
+            "$ref": "#/definitions/TagCriterionPairForJob"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TagCriterionPairForJob": {
+      "type": "object",
+      "description": "Definition of TagCriterionPairForJob",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>The value for the tag key to use in the condition.</p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>The tag value to use in the condition.</p>"
+        }
+      }
+    },
+    "UserPausedDetails": {
+      "type": "object",
+      "description": "Definition of UserPausedDetails",
+      "properties": {
+        "jobExpiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time, in UTC and extended ISO 8601 format, when the job or job run will expire and be cancelled if you don't resume it first.</p>"
+        },
+        "jobImminentExpirationHealthEventArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name (ARN) of the Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.</p>"
+        },
+        "jobPausedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time, in UTC and extended ISO 8601 format, when you paused the job.</p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
