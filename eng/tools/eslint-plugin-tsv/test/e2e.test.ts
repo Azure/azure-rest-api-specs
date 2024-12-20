@@ -49,4 +49,14 @@ describe("lint-files", () => {
     expect(results[0].filePath).toBe(filePath);
     expect(results[0].messages).toHaveLength(0);
   });
+
+  it("contosowidgetmanager/Contso.Management", async () => {
+    const eslint = createESLint();
+    const filePath = join(specsFolder, "contosowidgetmanager/Contoso.Management/tspconfig.yaml");
+    const results = await eslint.lintFiles(filePath);
+
+    expect(results).toHaveLength(1);
+    expect(results[0].filePath).toBe(filePath);
+    expect(results[0].messages).toHaveLength(0);
+  });
 });
