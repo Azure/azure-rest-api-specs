@@ -107,7 +107,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeDocumentsLROTask {
   kind: AnalyzeDocumentsLROTaskKind.AbstractiveSummarization;
 
   /** Parameters for the Abstractive Summarization task. */
-  parameters: AbstractiveSummarizationTaskParameters;
+  parameters?: AbstractiveSummarizationTaskParameters;
 }
 
 /** Supported parameters for the pre-built Abstractive Summarization task. */
