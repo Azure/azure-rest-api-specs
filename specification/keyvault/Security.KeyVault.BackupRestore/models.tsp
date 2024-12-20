@@ -71,6 +71,7 @@ model FullBackupOperation {
   /**
    * Error encountered, if any, during the full backup operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   error?: Error;
 
   /**
@@ -151,6 +152,7 @@ model RestoreOperation {
   /**
    * Error encountered, if any, during the restore operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   error?: Error;
 
   /**
@@ -219,6 +221,7 @@ model SelectiveKeyRestoreOperation {
   /**
    * Error encountered, if any, during the selective key restore operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   error?: Error;
 
   /**
