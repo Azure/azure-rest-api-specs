@@ -21,6 +21,7 @@ describe("lint-text", () => {
     expect(results).toHaveLength(1);
     expect(results[0].filePath).toBe(filePath);
     expect(results[0].messages[0].ruleId).toBe("tsv/kebab-case-org");
+    expect(results[0].messages[0].messageId).toBe("kebab");
   });
 
   it("Not-Kebab-Case-Disabled/Not.KebabCase", async () => {
