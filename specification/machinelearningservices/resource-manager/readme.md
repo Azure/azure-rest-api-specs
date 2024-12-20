@@ -42,6 +42,18 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceRP.json
 suppressions:
+  ### Tag: package-preview-2025-01-01-preview
+
+These settings apply only when `--tag=package-preview-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-01-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2025-01-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2025-01-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2025-01-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceRP.json
+suppressions:
   - code: DeleteResponseCodes
     reason: Existing API behavior in 2024-10-01-preview.
     where:
@@ -51,8 +63,8 @@ suppressions:
   - code: PatchIdentityProperty
     reason: Existing API behavior in 2024-10-01-preview.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].patch.parameters
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].patch.parameters
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].patch.parameters[6]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].patch.parameters[6]
   - code: PathForResourceAction
     reason: Existing API behavior in 2024-10-01-preview.
     where:
@@ -76,15 +88,15 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters.schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
   - code: PatchBodyParametersSchema
     reason: Existing API behavior, the whole property is not required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters.schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
   - code: PatchBodyParametersSchema
     reason: The required part is within a property, the whole property itself is not required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters.schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
   - code: LroLocationHeader
     reason: Existing API behavior
     where:
