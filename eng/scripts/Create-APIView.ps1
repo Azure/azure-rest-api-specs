@@ -91,23 +91,25 @@ function Get-ImpactedTypespecProjects {
         [Parameter(Mandatory = $true)]
         [string]$TypeSpecFile
     )
-    $projectRootPaths = [System.Collections.Generic.HashSet[string]]::new()
     $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
-    $typeSpecProjectBaseDirectory = $filePathParts[0..($($filePathParts.Length)-2)] -join [IO.Path]::DirectorySeparatorChar
-    $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml" -Recurse
+    while ($filePathParts.Length -and !$configFilesInTypeSpecProjects) {
+      $filePathParts = $filePathParts | Select-Object -SkipLast 1
+      $typeSpecProjectBaseDirectory = $filePathParts -join [IO.Path]::DirectorySeparatorChar
+      $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml"
+    }
+    
     if ($configFilesInTypeSpecProjects) {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
         $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp" 
         if ($entryPointFile) {
-          $projectRootPaths.Add($configFilesInTypeSpecProject.Directory.FullName) | Out-Null
           Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+          return $configFilesInTypeSpecProject.Directory.FullName
         }
         else {
           Write-Host "Did not find main.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
         }
       }
     }
-    return $projectRootPaths
 }
 
 <#
@@ -409,11 +411,9 @@ function New-TypeSpecAPIViewTokens {
   # Get impacted TypeSpec projects
   $typeSpecProjects = [System.Collections.Generic.HashSet[string]]::new()
   $changedTypeSpecFiles | ForEach-Object {
-    $tspProjs = Get-ImpactedTypespecProjects -TypeSpecFile "$_"
-    if ($tspProjs) {
-      foreach ($tspProj in $tspProjs) {
-        $typeSpecProjects.Add($tspProj) | Out-Null
-      }
+    $tspProj = Get-ImpactedTypespecProjects -TypeSpecFile "$_"
+    if ($tspProj) {
+      $typeSpecProjects.Add($tspProj) | Out-Null
     }
   }
 
