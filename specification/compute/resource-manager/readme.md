@@ -234,7 +234,7 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $.definitions.VirtualMachine.properties.placement
+      - $.definitions.VirtualMachine
     suppress:
       - BodyTopLevelProperties
   - where:
