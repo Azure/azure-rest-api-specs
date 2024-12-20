@@ -3,15 +3,7 @@
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
     "api-version": "2025-02-01-preview",
-    "subscriptionId": "subid",
-    "service": {
-      "sku": {
-        "name": "standard"
-      },
-      "identity": {
-        "type": "None"
-      }
-    }
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -20,18 +12,20 @@
         "name": "mysearchservice",
         "location": "westus",
         "type": "Microsoft.Search/searchServices",
-        "tags": {},
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        },
         "sku": {
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 3,
+          "replicaCount": 1,
           "partitionCount": 1,
-          "endpoint": "https://mysearchservice.search.windows.net/",
-          "status": "running",
+          "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
             "ipRules": [],
