@@ -11,9 +11,12 @@ namespace ClientCustomizations;
   service: KeyVault,
 })
 interface Client {
-  FullBackup is KeyVault.fullBackup;
-  FullRestore is KeyVault.fullRestoreOperation;
-  SelectiveKeyRestore is KeyVault.selectiveKeyRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  fullBackup is KeyVault.fullBackup;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  fullRestore is KeyVault.fullRestoreOperation;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  selectiveKeyRestore is KeyVault.selectiveKeyRestoreOperation;
 }
 
 @@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
