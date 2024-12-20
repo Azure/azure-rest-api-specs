@@ -24,7 +24,7 @@ export async function main() {
     const changeFiles: string = args[2];
     const lables: string = args[3];
     const outputFile = process.env.OUTPUT_FILE as string;
-    const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(lables, changeFiles, outputFile, baseCommitHash, headCommitHash);
+    const changedLabels: {labelsToAdd: String[], labelsToRemove: String[]} = await updateSdkSuppressionsLabels(lables, changeFiles, baseCommitHash, headCommitHash, outputFile);
     console.log(JSON.stringify(changedLabels));
     exit(0);
   } else {

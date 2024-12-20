@@ -12,7 +12,9 @@ import { parseYamlContent, runGitCommand } from "./common.js";
 
 /**
  *
- * @param pr
+ * @param prChangeFiles
+ * @param baseCommitHash
+ * @param headCommitHash
  * @returns SdkName list
  * This part compares the suppression files of the head branch and the base branch.
  * To get the SDK, we need to identify which package name, SDK name, or breaking changes are different and apply the SDK suppression label accordingly in the next step.
@@ -72,7 +74,7 @@ export async function getSdkSuppressionsFileContent(
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
-    console.log(`Not found content in ${ref}#${path}`);
+    console.log(`Not found content in ${ref}#${path}, Error: ${error}`);
     return null;
   }
 }
@@ -80,6 +82,15 @@ export async function getSdkSuppressionsFileContent(
 function getSdksWithSuppressionsDefined(suppressions: SdkSuppressionsSection): SdkName[] {
   return _.keys(suppressions) as SdkName[];
 }
+
+/**
+ * 
+ * @param headSuppressionFile 
+ * @param baseSuppressionFile 
+ * @returns SdkName[]
+ * 
+ * Analyze the suppression files across three dimensions: language, package, and breaking-change. Finally, determine the outermost sdkName.
+ */
 
 export function getSdkNamesWithChangedSuppressions(
   headSuppressionFile: SdkSuppressionsYml,
@@ -163,18 +174,22 @@ export function getSdkNamesWithChangedSuppressions(
 
 /**
  *
- * @param pr
- * This code segment is responsible for managing the sdk suppression label (e.g. BreakingChange-Go-Sdk-Suppression) for PRs.
- * 1. It applies the label automatically when a PR includes a new suppression file.
- * 2. It removes the label if the PR no longer contains the suppression file.
- * 3. It leaves the label unchanged if the PR already has both the suppression and the suppression approved labels.
+ * @param prLabels
+ * @param prChangeFiles
+ * @param baseCommitHash
+ * @param headCommitHash
+ * @param outputFile
+ * @returns { labelsToAdd: String[]; labelsToRemove: String[] }
+ * This code performs two key functions:
+ * First, it retrieves the corresponding SDKNames based on the differences between the two sdk-suppression files.
+ * Second, it compares the SDKNames obtained in the previous step with the existing PR labels and processes the PR labels accordingly.
  */
 export async function updateSdkSuppressionsLabels(
   prLabels: string,
   prChangeFiles: string,
-  outputFile: string,
   baseCommitHash: string,
   headCommitHash: string,
+  outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
     const status = await runGitCommand("git status");
@@ -194,8 +209,10 @@ export async function updateSdkSuppressionsLabels(
 
   const result = processLabels(presentLabels, sdkNames);
 
-  writeFileSync(outputFile, JSON.stringify(result));
-  console.log(`😊 JSON output saved to ${outputFile}`);
+  if(outputFile){
+    writeFileSync(outputFile, JSON.stringify(result));
+    console.log(`😊 JSON output saved to ${outputFile}`);
+  }
 
   return result;
 }
@@ -205,6 +222,8 @@ export async function updateSdkSuppressionsLabels(
  * @param presentLabels 
  * @param sdkNames 
  * @returns {labelsToAdd: String[], labelsToRemove: String[]}
+ * 
+ * Based on the various sdknames and existing labels, process the suppression label of PR.
  * 
  * Add logic:    If the breakingChangeSuppression label corresponding to an SDK in sdkNames is not in the current presentLabels list, 
  *               add the label to labelsToAdd.
