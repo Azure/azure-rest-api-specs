@@ -23,9 +23,12 @@ test("RuleTester", () => {
       {
         code: "",
         filename: "/specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml",
-        errors: [
-          "Organization name (first path segment after 'specification') does not use kebab-case: 'Not-Kebab-Case'",
-        ],
+        errors: [{ messageId: "kebab" }],
+      },
+      {
+        code: "",
+        filename: "tspconfig.yaml",
+        errors: [{ messageId: "invalid" }],
       },
     ],
   });
