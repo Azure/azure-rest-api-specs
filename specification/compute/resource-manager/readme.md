@@ -233,6 +233,18 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.Placement
+    suppress:
+      - BodyTopLevelProperties
+  - where:
+      - $.definitions.Placement
+    suppress:
+      - MissingTypeObject
+  - where:
+      - $.definitions.StorageProfile.alignRegionalDisksToVMZone
+    suppress:
+      - EnumInsteadOfBoolean
   - suppress: APIVersionPattern
     from:
       - common.json
