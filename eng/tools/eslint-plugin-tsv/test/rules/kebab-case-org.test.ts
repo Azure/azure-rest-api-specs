@@ -4,7 +4,7 @@ import parser from "yaml-eslint-parser";
 
 import kebabCaseOrg from "../../src/rules/kebab-case-org.js";
 
-test("tsv/" + kebabCaseOrg.name, () => {
+test("RuleTester", () => {
   const ruleTester = new RuleTester({
     languageOptions: {
       parser: parser,
