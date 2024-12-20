@@ -585,4 +585,59 @@ namespace SkillContext
 	  @doc("List of choices in the chat completion response.")
 	  Choices: Array<ChatChoice>;
 	}
+
+	@doc("Represents a request to create embedding.")
+	model CreateEmbeddingRequest {
+	  @doc("The deployment ID.")
+	  deploymentId?: string;
+
+	  @doc("The embedding request details.")
+	  embeddingRequest: EmbeddingRequest;
+
+	  @doc("The Azure OpenAI execution context.")
+	  openAiExecutionContext?: AzureOpenAIExecutionContext;
+	}
+
+	model EmbeddingRequest {
+	  @doc("The object to embed.")
+	  Input: unknown;
+	}
+
+	model EmbeddingData {
+		Embedding: Array<float32>;
+		Index: int32;
+		Object: string;
+	}
+
+	model EmbeddingResponse {
+		Data: Array<EmbeddingData>;
+		Model: string;
+		Object: string;
+		Usage: unknown;
+	}
+
+	@doc("Represents a request to create a chat completion.")
+	model CreateCompletionRequest {
+	  @doc("The deployment ID.")
+	  deploymentId?: string;
+
+	  @doc("The chat completion request details.")
+	  completionRequest: CompletionRequest;
+
+	  @doc("The Azure OpenAI execution context.")
+	  openAiExecutionContext?: AzureOpenAIExecutionContext;
+	}
+
+	model CompletionRequest extends BaseCompletionRequest {
+  
+		Prompt: string;
+	}
+
+	model CompletionResponse extends BaseCompletionResponse {
+		Choices: Array<Choice>;
+	}
+
+	model Choice extends BaseChoice {
+		Text: string;
+	}
 }
