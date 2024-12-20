@@ -1,5 +1,5 @@
 import path from "path";
-import { NamedRule } from "../named-eslint.js";
+import { NamedRule } from "../interfaces/named-eslint.js";
 
 export const rule: NamedRule.RuleModule = {
   name: "kebab-case-org",

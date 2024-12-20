@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     coverage: {
       include: ["src"],
-      exclude: ["src/named-eslint.ts"],
+      exclude: ["src/interfaces"],
     },
   },
 });

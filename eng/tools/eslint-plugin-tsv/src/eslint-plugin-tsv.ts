@@ -1,5 +1,5 @@
 import parser from "yaml-eslint-parser";
-import { NamedESLint } from "./named-eslint.js";
+import { NamedESLint } from "./interfaces/named-eslint.js";
 import kebabCaseOrg from "./rules/kebab-case-org.js";
 
 const plugin: NamedESLint.Plugin = {
