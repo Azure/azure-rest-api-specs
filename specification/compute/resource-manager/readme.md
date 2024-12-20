@@ -234,7 +234,7 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
-      - $.definitions.Placement
+      - $.definitions.VirtualMachine.placement
     suppress:
       - BodyTopLevelProperties
   - where:
@@ -242,7 +242,7 @@ directive:
     suppress:
       - MissingTypeObject
   - where:
-      - $.definitions.StorageProfile.alignRegionalDisksToVMZone
+      - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
   - suppress: APIVersionPattern
