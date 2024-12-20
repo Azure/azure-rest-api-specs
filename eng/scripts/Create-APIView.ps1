@@ -435,7 +435,9 @@ function New-TypeSpecAPIViewTokens {
     git checkout $SourceCommitId
     Write-Host "Installing required dependencies to generate New API review"
     npm ci
+    LogGroupStart "npm ls -a" 
     npm ls -a
+    LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       $tokenDirectory = [System.IO.Path]::Combine($typeSpecAPIViewArtifactsDirectory, $typeSpecProject.split([IO.Path]::DirectorySeparatorChar)[-1])
       New-Item -ItemType Directory -Path $tokenDirectory -Force | Out-Null
@@ -446,7 +448,9 @@ function New-TypeSpecAPIViewTokens {
     git checkout $TargetCommitId
     Write-Host "Installing required dependencies to generate Baseline API review"
     npm ci
+    LogGroupStart "npm ls -a" 
     npm ls -a
+    LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects
       if (!(Test-Path -Path $typeSpecProject)) {
