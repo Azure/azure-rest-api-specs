@@ -10,7 +10,6 @@ namespace ClientCustomizations;
   name: "Client",
   service: KeyVault,
 })
-
 interface Client {
   DeleteRoleDefinition is KeyVault.RoleDefinitions.delete;
   DeleteRoleAssignment is KeyVault.RoleAssignments.delete;

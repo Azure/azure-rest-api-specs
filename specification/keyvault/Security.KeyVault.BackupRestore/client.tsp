@@ -10,7 +10,6 @@ namespace ClientCustomizations;
   name: "Client",
   service: KeyVault,
 })
-
 interface Client {
   FullBackup is KeyVault.fullBackup;
   FullRestore is KeyVault.fullRestoreOperation;
@@ -18,5 +17,11 @@ interface Client {
 }
 
 @@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
-@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters, "SASTokenParameters", "go");
-@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters, "SASTokenParameters", "go");
+@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters,
+  "SASTokenParameters",
+  "go"
+);
+@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters,
+  "SASTokenParameters",
+  "go"
+);
