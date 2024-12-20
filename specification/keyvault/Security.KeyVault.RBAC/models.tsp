@@ -346,7 +346,7 @@ model RoleDefinitionListResult {
   /**
    * The URL to use for getting the next set of results.
    */
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -437,7 +437,7 @@ model RoleAssignmentListResult {
   /**
    * The URL to use for getting the next set of results.
    */
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
