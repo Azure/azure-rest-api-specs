@@ -55,7 +55,7 @@ interface PrivateClouds {
     ...CreatedResponse;
 
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updated private cloud.")
