@@ -3821,9 +3821,9 @@
                 "type": "string",
                 "description": "**o1 models only** \n\n Constrains effort on reasoning for \n[reasoning models](https://platform.openai.com/docs/guides/reasoning).\n\nCurrently supported values are `low`, `medium`, and `high`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.",
                 "enum": [
-                    "low",
-                    "medium",
-                    "high"
+                  "low",
+                  "medium",
+                  "high"
                 ],
                 "default": "medium"
               },
@@ -4020,7 +4020,7 @@
           "end_user_tenant_id": {
             "type": "string",
             "format": "uuid",
-            "description": "The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multitenant."
+            "description": "The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant."
           },
           "source_ip": {
             "type": "string",
@@ -4073,7 +4073,8 @@
           },
           {
             "$ref": "#/components/schemas/chatCompletionRequestSystemMessage"
-          },          {
+          },
+          {
             "$ref": "#/components/schemas/chatCompletionRequestUserMessage"
           },
           {
@@ -4359,7 +4360,8 @@
             "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
           }
         ]
-      },      "chatCompletionRequestUserMessageContentPart": {
+      },
+      "chatCompletionRequestUserMessageContentPart": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/chatCompletionRequestMessageContentPartText"
