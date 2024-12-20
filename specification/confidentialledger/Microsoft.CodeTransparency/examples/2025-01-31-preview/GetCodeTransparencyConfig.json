@@ -2,15 +2,25 @@
   "title": "GetCodeTransparencyConfig",
   "operationId": "GetCodeTransparencyConfig",
   "parameters": {
-    "api-version": "2024-01-11-preview"
+    "api-version": "2025-01-31-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "authentication": {
-          "allow_unauthenticated": true
+        "policy": {
+          "acceptedAlgorithms": [
+            "mysstgzi"
+          ],
+          "policyScript": "mavgmuevwunvchqmkrjdk"
         },
-        "service_identifier": "did:web:servicename.confidential-ledger.azure.com"
+        "authentication": {
+          "allowUnauthenticated": true,
+          "jwt": {
+            "requiredClaims": {
+              "key3817": "vfhk"
+            }
+          }
+        }
       }
     },
     "500": {

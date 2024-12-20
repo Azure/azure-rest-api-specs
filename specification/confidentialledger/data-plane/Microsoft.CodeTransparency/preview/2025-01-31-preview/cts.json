@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Code Transparency Service",
-    "version": "2024-01-11-preview",
+    "version": "2025-01-31-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -34,38 +34,61 @@
   ],
   "tags": [],
   "paths": {
-    "/.well-known/did.json": {
+    "/.well-known/transparency-configuration": {
       "get": {
-        "operationId": "GetDidConfig",
-        "description": "Get the DID configuration file (deprecated)",
+        "operationId": "GetTransparencyConfigCbor",
+        "description": "Get the transparency configuration file, see IETF SCITT draft",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "description": "Accept header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/cbor"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Transparency configuration, see IETF SCITT draft.",
             "schema": {
-              "$ref": "#/definitions/DidDocument"
+              "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Retry-After": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
         },
         "x-ms-examples": {
-          "GetDidConfig": {
-            "$ref": "./examples/GetDidConfig.json"
+          "GetTransparencyConfigCbor": {
+            "$ref": "./examples/GetTransparencyConfigCbor.json"
           }
         }
       }
@@ -125,8 +148,13 @@
     },
     "/entries": {
       "post": {
-        "operationId": "CreateEntry",
-        "description": "Post an entry to be registered on the CodeTransparency instance (deprecated)",
+        "operationId": "CreateEntryChanged",
+        "description": "Post an entry to be registered on the CodeTransparency instance, see IETF SCITT draft",
+        "produces": [
+          "application/cose",
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
         "consumes": [
           "application/cose"
         ],
@@ -139,39 +167,75 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "Response of entry submission if the response can be served immediately, see IETF SCITT draft",
             "schema": {
-              "$ref": "#/definitions/CreateEntryResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "type": "file"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Location": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Location of the transparent statement"
+              }
+            }
+          },
+          "202": {
+            "description": "Response of entry submission containing the transparent statement id, see IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the transparent statement"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
         },
         "x-ms-examples": {
-          "CreateEntry": {
-            "$ref": "./examples/CreateEntry.json"
+          "CreateEntryChanged": {
+            "$ref": "./examples/CreateEntryChanged.json"
           }
         }
       }
     },
     "/entries/{entryId}": {
       "get": {
-        "operationId": "GetEntry",
+        "operationId": "GetEntryChanged",
         "description": "Get signed statement with or without receipt embedded in its unprotected header",
         "produces": [
           "application/cose",
-          "application/json"
+          "application/concise-problem-details+cbor"
         ],
         "parameters": [
           {
@@ -191,33 +255,51 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Retry-After": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
         },
         "x-ms-examples": {
-          "GetEntry": {
-            "$ref": "./examples/GetEntry.json"
+          "GetEntryChanged": {
+            "$ref": "./examples/GetEntryChanged.json"
           }
         }
       }
     },
     "/entries/{entryId}/receipt": {
       "get": {
-        "operationId": "GetEntryReceipt",
+        "operationId": "GetEntryReceiptChanged",
         "description": "Get the receipt of an entry given a specific entry id.",
         "produces": [
-          "application/cbor",
-          "application/json"
+          "application/cose",
+          "application/concise-problem-details+cbor"
         ],
         "parameters": [
           {
@@ -234,22 +316,101 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "400": {
+            "description": "Validation error response",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
             },
             "headers": {
-              "x-ms-error-code": {
+              "Retry-After": {
                 "type": "string",
-                "description": "String error code indicating what went wrong."
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
         },
         "x-ms-examples": {
-          "GetEntryReceipt": {
-            "$ref": "./examples/GetEntryReceipt.json"
+          "GetEntryReceiptChanged": {
+            "$ref": "./examples/GetEntryReceiptChanged.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}/statement": {
+      "get": {
+        "operationId": "GetEntryStatement",
+        "description": "Get the receipt of an entry given a specific entry id.",
+        "produces": [
+          "application/cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparent statement",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntryStatement": {
+            "$ref": "./examples/GetEntryStatement.json"
           }
         }
       }
@@ -317,10 +478,10 @@
         }
       }
     },
-    "/operations": {
+    "/jwks": {
       "get": {
-        "operationId": "ListEntryStatuses",
-        "description": "Get the status of all entries operations (deprecated)",
+        "operationId": "GetPublicKeys",
+        "description": "Get the public keys used by the service to sign receipts",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -330,11 +491,11 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListOperationResult"
+              "$ref": "#/definitions/JwksDocument"
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "500": {
+            "description": "Server error response",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
@@ -344,86 +505,28 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListEntryStatuses": {
-            "$ref": "./examples/ListEntryStatuses.json"
-          }
-        }
-      }
-    },
-    "/operations/{operationId}": {
-      "get": {
-        "operationId": "GetEntryStatus",
-        "description": "Get the status the entry operation (deprecated)",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          {
-            "$ref": "#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/GetOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
+          "503": {
+            "description": "Service temporarily unavailable",
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
               "x-ms-error-code": {
                 "type": "string",
                 "description": "String error code indicating what went wrong."
               }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetEntryStatus": {
-            "$ref": "./examples/GetEntryStatus.json"
-          }
-        }
-      }
-    },
-    "/parameters": {
-      "get": {
-        "operationId": "GetParameters",
-        "description": "Get service parameters (deprecated)",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ParametersResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "GetParameters": {
-            "$ref": "./examples/GetParameters.json"
+          "GetPublicKeys": {
+            "$ref": "./examples/GetPublicKeys.json"
           }
         }
       }
@@ -477,6 +580,74 @@
         "x-ms-examples": {
           "GetCodeTransparencyVersion": {
             "$ref": "./examples/GetCodeTransparencyVersion.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/.well-known/transparency-configuration?_overload=getTransparencyConfigJson": {
+      "get": {
+        "operationId": "GetTransparencyConfigJson",
+        "description": "Get the transparency configuration file, see IETF SCITT draft",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "description": "Accept header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransparencyConfigurationJson"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
+          "503": {
+            "description": "Service temporarily unavailable",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "GetTransparencyConfigJson": {
+            "$ref": "./examples/GetTransparencyConfigJson.json"
           }
         }
       }
@@ -555,10 +726,6 @@
         "authentication": {
           "$ref": "#/definitions/CodeTransparencyConfigurationAuthentication",
           "description": "Authentication configuration"
-        },
-        "service_identifier": {
-          "type": "string",
-          "description": "Issuer used in receipts"
         }
       }
     },
@@ -566,7 +733,7 @@
       "type": "object",
       "description": "Configuration of CCF authentication.",
       "properties": {
-        "allow_unauthenticated": {
+        "allowUnauthenticated": {
           "type": "boolean",
           "description": "Disable API authentication and rely on signed statement verification only"
         },
@@ -576,14 +743,14 @@
         }
       },
       "required": [
-        "allow_unauthenticated"
+        "allowUnauthenticated"
       ]
     },
     "CodeTransparencyConfigurationAuthenticationJwt": {
       "type": "object",
       "description": "Configuration of JWT claims",
       "properties": {
-        "required_claims": {
+        "requiredClaims": {
           "type": "object",
           "description": "Claims that must be present in the JWT",
           "additionalProperties": {
@@ -592,109 +759,55 @@
         }
       },
       "required": [
-        "required_claims"
+        "requiredClaims"
       ]
     },
     "CodeTransparencyConfigurationPolicy": {
       "type": "object",
       "description": "Policy configuration listing accepted algorithms and the the policy script",
       "properties": {
-        "accepted_algorithms": {
+        "acceptedAlgorithms": {
           "type": "array",
           "description": "Accepted COSE signature algorithms when verifying signed statements",
           "items": {
             "type": "string"
           }
         },
-        "accepted_did_issuers": {
-          "type": "array",
-          "description": "Accepted COSE signature did:web issuers when verifying signed statements",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "CreateEntryResult": {
-      "type": "object",
-      "description": "Response of entry submission containing the operationId.",
-      "properties": {
-        "operationId": {
+        "policyScript": {
           "type": "string",
-          "description": "String representing the operation id submitted",
-          "pattern": "^[0-9]+\\.[0-9]+$"
+          "description": "COSE signature verification script in Javascript"
         }
       },
       "required": [
-        "operationId"
+        "policyScript"
       ]
     },
-    "DidDocument": {
+    "CreateEntryCreated": {
       "type": "object",
-      "description": "A DID document",
+      "description": "Response of entry submission if the response can be served immediately, see IETF SCITT draft",
       "properties": {
-        "id": {
+        "body": {
           "type": "string",
-          "description": "String representing a DID issuer."
-        },
-        "assertionMethod": {
-          "type": "array",
-          "description": "List of public keys used for receipt endorsement verification.",
-          "items": {
-            "$ref": "#/definitions/DidDocumentKey"
-          }
+          "format": "byte",
+          "description": "Transparent statement"
         }
       },
       "required": [
-        "id",
-        "assertionMethod"
+        "body"
       ]
     },
-    "DidDocumentKey": {
+    "CreateEntryPending": {
       "type": "object",
-      "description": "A DID document key",
+      "description": "Response of entry submission containing the transparent statement id, see IETF SCITT draft",
       "properties": {
-        "id": {
+        "body": {
           "type": "string",
-          "description": "Key identifier."
-        },
-        "controller": {
-          "type": "string",
-          "description": "Key controller - similar to DID issuer."
-        },
-        "type": {
-          "type": "string",
-          "description": "Key type.",
-          "enum": [
-            "JsonWebKey2020"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "publicKeyJwk": {
-          "$ref": "#/definitions/JsonWebKey",
-          "description": "Serialized public key in JWK format."
+          "format": "byte",
+          "description": "Response contains the identifier"
         }
       },
       "required": [
-        "id",
-        "controller",
-        "type",
-        "publicKeyJwk"
-      ]
-    },
-    "DidIssuer": {
-      "type": "object",
-      "description": "A DID issuer",
-      "properties": {
-        "issuer": {
-          "type": "string",
-          "description": "String representing a DID issuer."
-        }
-      },
-      "required": [
-        "issuer"
+        "body"
       ]
     },
     "EntryIds": {
@@ -715,34 +828,6 @@
       },
       "required": [
         "transactionIds"
-      ]
-    },
-    "GetOperationResult": {
-      "type": "object",
-      "description": "The Response body of the GetOperationId API.",
-      "properties": {
-        "entryId": {
-          "type": "string",
-          "description": "ID of the transaction. Only if status is Succeeded.",
-          "pattern": "^[0-9]+\\.[0-9]+$"
-        },
-        "error": {
-          "type": "string",
-          "description": "Error in json format. Only if Status is Failed."
-        },
-        "operationId": {
-          "type": "string",
-          "description": "OperationId",
-          "pattern": "^[0-9]+\\.[0-9]+$"
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus",
-          "description": "Status of the operation."
-        }
-      },
-      "required": [
-        "operationId",
-        "status"
       ]
     },
     "JsonWebKey": {
@@ -825,21 +910,35 @@
         "kty"
       ]
     },
-    "ListOperationResult": {
+    "JwksDocument": {
       "type": "object",
-      "description": "The Response body of the ListOperations API",
+      "description": "A JWKS like document",
       "properties": {
-        "operations": {
+        "keys": {
           "type": "array",
-          "description": "List of operations",
+          "description": "List of public keys used for receipt verification.",
           "items": {
-            "$ref": "#/definitions/GetOperationResult"
+            "$ref": "#/definitions/JsonWebKey"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
-        "operations"
+        "keys"
+      ]
+    },
+    "NotFoundErrorCborResponse": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "NotFoundErrorJsonResponse": {
@@ -855,64 +954,6 @@
         "error"
       ]
     },
-    "OperationStatus": {
-      "type": "string",
-      "description": "Possible statuses of the operation.",
-      "enum": [
-        "running",
-        "failed",
-        "succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "running",
-            "value": "running",
-            "description": "Operation is still running."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "Operation failed."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "Operation succeeded."
-          }
-        ]
-      }
-    },
-    "ParametersResult": {
-      "type": "object",
-      "description": "The Response body of the service parameters",
-      "properties": {
-        "serviceCertificate": {
-          "type": "string",
-          "description": "Service certificate used in TLS and for receipt verification"
-        },
-        "serviceId": {
-          "type": "string",
-          "description": "Service identifier"
-        },
-        "signatureAlgorithm": {
-          "type": "string",
-          "description": "Signature algorithm used in receipts"
-        },
-        "treeAlgorithm": {
-          "type": "string",
-          "description": "Tree algorithm used in receipts"
-        }
-      },
-      "required": [
-        "serviceCertificate",
-        "serviceId",
-        "signatureAlgorithm",
-        "treeAlgorithm"
-      ]
-    },
     "ReceiptEntry": {
       "type": "object",
       "description": "A ledger receipt, see IETF SCITT draft",
@@ -925,6 +966,20 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "ServerErrorCborResponse": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "ServerErrorJsonResponse": {
@@ -953,6 +1008,52 @@
         "error"
       ]
     },
+    "ServiceUnavailableErrorCborResponse": {
+      "type": "object",
+      "description": "Service unavailable error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "TransparencyConfigurationCbor": {
+      "type": "object",
+      "description": "Transparency configuration, see IETF SCITT draft.",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the configuration object"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TransparencyConfigurationJson": {
+      "type": "object",
+      "description": "Transparency configuration, see IETF SCITT draft.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "Configured issuer string"
+        },
+        "jwksUri": {
+          "type": "string",
+          "description": "Location of the JWKS document"
+        }
+      },
+      "required": [
+        "issuer",
+        "jwksUri"
+      ]
+    },
     "TransparentStatement": {
       "type": "object",
       "description": "Transparent statement",
@@ -965,6 +1066,20 @@
       },
       "required": [
         "body"
+      ]
+    },
+    "ValidationErrorCborResponse": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
       ]
     },
     "ValidationErrorJsonResponse": {
@@ -984,13 +1099,13 @@
       "type": "object",
       "description": "The Response body of the Version API.",
       "properties": {
-        "scitt_version": {
+        "version": {
           "type": "string",
           "description": "Version of the CodeTransparency service"
         }
       },
       "required": [
-        "scitt_version"
+        "version"
       ]
     }
   },
@@ -1021,15 +1136,6 @@
       "required": true,
       "type": "string",
       "maxLength": 100,
-      "pattern": "^[0-9]+\\.[0-9]+$",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "description": "ID of the operation to retrieve.",
-      "required": true,
-      "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+$",
       "x-ms-parameter-location": "method"
     },
