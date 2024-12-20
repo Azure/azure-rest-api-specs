@@ -387,8 +387,8 @@ function New-TypeSpecAPIViewTokens {
     [string]$APIViewArtifactsDirectoryName
   )
 
-  $SourceCommitId = $(git rev-parse HEAD^)
-  $TargetCommitId = $(git rev-parse HEAD)
+  $SourceCommitId = $(git rev-parse HEAD^2)
+  $TargetCommitId = $(git rev-parse HEAD^1)
 
   LogInfo " Getting changed TypeSpec files in PR, between $SourceCommitId and $TargetCommitId"
   $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
