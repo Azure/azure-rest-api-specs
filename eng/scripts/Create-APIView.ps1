@@ -393,7 +393,7 @@ function New-TypeSpecAPIViewTokens {
   $TargetCommitId = $(git rev-parse HEAD^1)
 
   LogInfo " Getting changed TypeSpec files in PR, between $SourceCommitId and $TargetCommitId"
-  $changedFiles = Get-ChangedFiles -baseCommitish $SourceCommitId -targetCommitish $TargetCommitId
+  $changedFiles = Get-ChangedFiles
   $changedTypeSpecFiles = Get-ChangedTypeSpecFiles -changedFiles $changedFiles
 
   if ($changedTypeSpecFiles.Count -eq 0) {
