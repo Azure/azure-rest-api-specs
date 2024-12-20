@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for PostgreSqlSourceConnector")
-model PostgreSqlSourceConnectorProperties extends ConnectorProperties {
+model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of PostgreSqlSourceConnector")
   connectorType: ConnectorType.PostgreSqlSource;
 

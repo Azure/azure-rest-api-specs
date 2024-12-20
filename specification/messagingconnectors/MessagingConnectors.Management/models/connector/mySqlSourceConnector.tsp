@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for MySqlSourceConnector")
-model MySqlSourceConnectorProperties extends ConnectorProperties {
+model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of MySqlSourceConnector")
   connectorType: ConnectorType.MySqlSource;
 

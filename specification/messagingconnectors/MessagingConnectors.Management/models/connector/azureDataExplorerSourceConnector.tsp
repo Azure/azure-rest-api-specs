@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for AzureDataExplorerSourceConnector")
-model AzureDataExplorerSourceConnectorProperties extends ConnectorProperties {
+model AzureDataExplorerSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of AzureDataExplorerSourceConnector")
   connectorType: ConnectorType.AzureDataExplorerSource;
 

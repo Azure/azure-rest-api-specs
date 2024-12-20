@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for SolacePubsubSource")
-model SolacePubsubSourceConnectorProperties extends ConnectorProperties {
+model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of SolacePubsubSourceConnector")
   connectorType: ConnectorType.SolacePubsubSource;
 
