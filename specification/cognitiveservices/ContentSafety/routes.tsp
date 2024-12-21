@@ -464,26 +464,26 @@ interface TextCustomizedCategoryOperations {
 }
 
 @added(Versions.v2024_12_15_Preview)
-interface SafetyPolicyAnalyzeOperations {
-@summary("Safety Policy Analysis")
-@doc("A synchronous API for the safety policy analysis of input content")
-@route("/analyzeBySafetyPolicy")
-@post
-analyzeBySafetyPolicy is Azure.Core.RpcOperation<
-  {
-    @body
-    @doc("The safety policy analyze request.")
-    @clientName("options", "csharp")
-    @clientName("options", "python")
-    @clientName("options", "java")
-    body: SafetyPolicyAnalyzeOption;
-  },
-  SafetyPolicyAnalyzeResponse
->;
+interface RaiPolicyAnalyzeOperations {
+  @summary("Rai Policy Analysis")
+  @doc("A synchronous API for the rai policy analysis of input content")
+  @route("/analyzeWithRaiPolicy")
+  @post
+  analyzeByRaiPolicy is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The rai policy analyze request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: RaiPolicyAnalyzeOption;
+    },
+    RaiPolicyAnalyzeResponse
+  >;
 }
 
 @added(Versions.v2024_12_15_Preview)
-interface SafetyPolicyOps
+interface RaiPolicyOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
@@ -491,20 +491,20 @@ interface SafetyPolicyOps
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
 
 @added(Versions.v2024_12_15_Preview)
-interface SafetyPolicyManagement {
-  @summary("Create Or Update Safety Policy")
-  @doc("Updates a safety policy. If the policyName does not exist, a new safety policy will be created.")
-  createOrUpdateSafetyPolicy is SafetyPolicyOps.ResourceCreateOrUpdate<SafetyPolicy>;
+interface RaiPolicyManagement {
+  @summary("Create Or Update Rai Policy")
+  @doc("Updates a rai policy. If the policyName does not exist, a new rai policy will be created.")
+  createOrUpdateRaiPolicy is RaiPolicyOps.ResourceCreateOrUpdate<RaiPolicy>;
 
-  @summary("Delete A Safety Policy By policyName")
-  @doc("Deletes a safety policy.")
-  deleteSafetyPolicy is SafetyPolicyOps.ResourceDelete<SafetyPolicy>;
+  @summary("Delete A Rai Policy By policyName")
+  @doc("Deletes a rai policy.")
+  deleteRaiPolicy is RaiPolicyOps.ResourceDelete<RaiPolicy>;
 
-  @summary("Get Safety Policy By policyName")
-  @doc("Returns safety policy details.")
-  getSafetyPolicy is SafetyPolicyOps.ResourceRead<SafetyPolicy>;
+  @summary("Get Rai Policy By policyName")
+  @doc("Returns rai policy details.")
+  getRaiPolicy is RaiPolicyOps.ResourceRead<RaiPolicy>;
 
-  @summary("Get All Safety Policies")
-  @doc("Get all safety policies details.")
-  listSafetyPolicies is SafetyPolicyOps.ResourceList<SafetyPolicy>;
+  @summary("Get All Rai Policies")
+  @doc("Get all rai policies details.")
+  listRaiPolicies is RaiPolicyOps.ResourceList<RaiPolicy>;
 }

@@ -1055,10 +1055,24 @@ union TaskType {
   "customHarmCategory",
 }
 
+@doc("The blocking criteria kind.")
+union BlockingCriteriaKind {
+  string,
+
+  @doc("The severity type.")
+  "severity",
+
+  @doc("The risk level type.")
+  "riskLevel",
+
+  @doc("The is detected type.")
+  "isDetected",
+}
+
 @doc("Unify content model.")
 model UnifyContent {
-  @doc("The modality of the content.")
-  modality: Modality;
+  @doc("The kind of the content.")
+  kind: Modality;
 
   @doc("The text content.")
   text?: string;
@@ -1088,7 +1102,7 @@ model AppliedFor {
   role: RoleType;
 
   @doc("The source type applied for.")
-  sourceType: SourceType;
+  source: SourceType;
 }
 
 @doc("Harm category task setting model.")
@@ -1120,6 +1134,12 @@ model CustomHarmCategoryTaskSetting {
 
 @doc("Blocking criteria model.")
 model BlockingCriteria {
+  @doc("Indicates if blocking criteria is enabled.")
+  enabled: boolean;
+
+  @doc("The blocking criteria kind.")
+  kind: BlockingCriteriaKind;
+
   @doc("The allowed severity level.")
   allowedSeverity: int32;
 
@@ -1127,7 +1147,7 @@ model BlockingCriteria {
   isDetected: boolean;
 
   @doc("The risk level.")
-  riskLevel: RiskLevel;
+  allowedRiskLevel: RiskLevel;
 }
 
 @doc("Task setting model.")
@@ -1142,7 +1162,7 @@ model TaskSetting {
   appliedFor: AppliedFor[];
 
   @doc("The task type.")
-  type: TaskType;
+  kind: TaskType;
 
   @doc("The harm category task setting.")
   harmCategoryTaskSetting?: HarmCategoryTaskSetting;
@@ -1156,19 +1176,16 @@ model TaskSetting {
   @doc("The custom harm category task setting.")
   customHarmCategoryTaskSetting?: CustomHarmCategoryTaskSetting;
 
-  @doc("Indicates if blocking criteria is enabled.")
-  blockingCriteriaEnabled: boolean;
-
   @doc("The blocking criteria.")
   blockingCriteria: BlockingCriteria;
 }
 
-@resource("safetyPolicies")
-@doc("Safety policy model.")
-model SafetyPolicy {
-  @doc("The safety policy name.")
+@resource("raiPolicies")
+@doc("Rai policy model.")
+model RaiPolicy {
+  @doc("The rai policy name.")
   @pattern("^[0-9A-Za-z._~-]+$")
-  @key("safetyPolicyName")
+  @key("raiPolicyName")
   @visibility("read", "create", "query")
   @maxLength(64)
   name: string;
@@ -1177,16 +1194,16 @@ model SafetyPolicy {
   taskSettings: TaskSetting[];
 }
 
-@doc("Defines the options for analyzing content with a safety policy.")
-model SafetyPolicyAnalyzeOption {
+@doc("Defines the options for analyzing content with a rai policy.")
+model RaiPolicyAnalyzeOption {
   @doc("The messages to be analyzed.")
   messages: UnifyMessage[];
 
-  @doc("The inline safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided.")
-  safetyPolicyInline?: SafetyPolicy;
+  @doc("The inline rai policy to be applied during analysis. One of `raiPolicyName` or `raiPolicyInline` must be provided.")
+  raiPolicyInline?: RaiPolicy;
 
-  @doc("The name of a predefined safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided.")
-  safetyPolicyName?: string;
+  @doc("The name of a predefined rai policy to be applied during analysis. One of `raiPolicyName` or `raiPolicyInline` must be provided.")
+  raiPolicyName?: string;
 }
 
 @doc("The result code.")
@@ -1232,8 +1249,8 @@ model HarmCategoryTaskResult {
   @doc("The risk level.")
   riskLevel: RiskLevel;
 
-  @doc("Advanced results.")
-  advanced?: PromptInjectionDetail;
+  @doc("Result details.")
+  details?: PromptInjectionDetail;
 }
 
 @doc("Blocklist task result model.")
@@ -1277,8 +1294,8 @@ model TaskResult {
   @doc("Indicates if blocking criteria is met.")
   isBlockingCriteriaMet: boolean;
 
-  @doc("The task type.")
-  taskType: TaskType;
+  @doc("The task kind.")
+  kind: TaskType;
 
   @doc("The harm category task result.")
   harmCategoryTaskResult?: HarmCategoryTaskResult;
@@ -1293,36 +1310,8 @@ model TaskResult {
   customCategoryTaskResult?: CustomCategoryTaskResult;
 }
 
-@doc("The result.")
-union Result {
-  string,
-
-  @doc("No criteria met result.")
-  "noCriteriaMet",
-
-  @doc("Blocking criteria met result.")
-  "blockingCriteriaMet",
-}
-
-@doc("The state.")
-union State {
-  string,
-
-  @doc("All analysis succeeded state.")
-  "analysisAllSucceed",
-
-  @doc("Not all analysis succeeded state.")
-  "analysisNotAllSucceed",
-}
-
-@doc("Represents the analysis response obtained by applying a safety policy.")
-model SafetyPolicyAnalyzeResponse {
-  @doc("The state of the analysis.")
-  state: State;
-
-  @doc("The result of the analysis.")
-  result: Result;
-
+@doc("Represents the analysis response obtained by applying a rai policy.")
+model RaiPolicyAnalyzeResponse {
   @doc("The task results of the analysis.")
   taskResults: TaskResult[];
 }

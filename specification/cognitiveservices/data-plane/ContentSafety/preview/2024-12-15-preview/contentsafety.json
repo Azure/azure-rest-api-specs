@@ -59,11 +59,11 @@
   },
   "tags": [],
   "paths": {
-    "/analyzeBySafetyPolicy": {
+    "/analyzeWithRaiPolicy": {
       "post": {
-        "operationId": "SafetyPolicyAnalyzeOperations_AnalyzeBySafetyPolicy",
-        "summary": "Safety Policy Analysis",
-        "description": "A synchronous API for the safety policy analysis of input content",
+        "operationId": "RaiPolicyAnalyzeOperations_AnalyzeByRaiPolicy",
+        "summary": "Rai Policy Analysis",
+        "description": "A synchronous API for the rai policy analysis of input content",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -71,10 +71,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The safety policy analyze request.",
+            "description": "The rai policy analyze request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SafetyPolicyAnalyzeOption"
+              "$ref": "#/definitions/RaiPolicyAnalyzeOption"
             }
           }
         ],
@@ -82,7 +82,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SafetyPolicyAnalyzeResponse"
+              "$ref": "#/definitions/RaiPolicyAnalyzeResponse"
             }
           },
           "default": {
@@ -823,11 +823,11 @@
         }
       }
     },
-    "/safetyPolicies": {
+    "/raiPolicies": {
       "get": {
-        "operationId": "SafetyPolicyManagement_ListSafetyPolicies",
-        "summary": "Get All Safety Policies",
-        "description": "Get all safety policies details.",
+        "operationId": "RaiPolicyManagement_ListRaiPolicies",
+        "summary": "Get All Rai Policies",
+        "description": "Get all rai policies details.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -837,7 +837,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSafetyPolicy"
+              "$ref": "#/definitions/PagedRaiPolicy"
             }
           },
           "default": {
@@ -858,19 +858,19 @@
         }
       }
     },
-    "/safetyPolicies/{safetyPolicyName}": {
+    "/raiPolicies/{raiPolicyName}": {
       "get": {
-        "operationId": "SafetyPolicyManagement_GetSafetyPolicy",
-        "summary": "Get Safety Policy By policyName",
-        "description": "Returns safety policy details.",
+        "operationId": "RaiPolicyManagement_GetRaiPolicy",
+        "summary": "Get Rai Policy By policyName",
+        "description": "Returns rai policy details.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "safetyPolicyName",
+            "name": "raiPolicyName",
             "in": "path",
-            "description": "The safety policy name.",
+            "description": "The rai policy name.",
             "required": true,
             "type": "string",
             "maxLength": 64,
@@ -881,7 +881,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SafetyPolicy"
+              "$ref": "#/definitions/RaiPolicy"
             }
           },
           "default": {
@@ -899,9 +899,9 @@
         }
       },
       "patch": {
-        "operationId": "SafetyPolicyManagement_CreateOrUpdateSafetyPolicy",
-        "summary": "Create Or Update Safety Policy",
-        "description": "Updates a safety policy. If the policyName does not exist, a new safety policy will be created.",
+        "operationId": "RaiPolicyManagement_CreateOrUpdateRaiPolicy",
+        "summary": "Create Or Update Rai Policy",
+        "description": "Updates a rai policy. If the policyName does not exist, a new rai policy will be created.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -910,9 +910,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "safetyPolicyName",
+            "name": "raiPolicyName",
             "in": "path",
-            "description": "The safety policy name.",
+            "description": "The rai policy name.",
             "required": true,
             "type": "string",
             "maxLength": 64,
@@ -924,7 +924,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SafetyPolicyCreateOrUpdate"
+              "$ref": "#/definitions/RaiPolicyCreateOrUpdate"
             }
           }
         ],
@@ -932,13 +932,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SafetyPolicy"
+              "$ref": "#/definitions/RaiPolicy"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/SafetyPolicy"
+              "$ref": "#/definitions/RaiPolicy"
             }
           },
           "default": {
@@ -956,17 +956,17 @@
         }
       },
       "delete": {
-        "operationId": "SafetyPolicyManagement_DeleteSafetyPolicy",
-        "summary": "Delete A Safety Policy By policyName",
-        "description": "Deletes a safety policy.",
+        "operationId": "RaiPolicyManagement_DeleteRaiPolicy",
+        "summary": "Delete A Rai Policy By policyName",
+        "description": "Deletes a rai policy.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "safetyPolicyName",
+            "name": "raiPolicyName",
             "in": "path",
-            "description": "The safety policy name.",
+            "description": "The rai policy name.",
             "required": true,
             "type": "string",
             "maxLength": 64,
@@ -3068,14 +3068,14 @@
           "$ref": "#/definitions/RoleType",
           "description": "The role applied for."
         },
-        "sourceType": {
+        "source": {
           "$ref": "#/definitions/SourceType",
           "description": "The source type applied for."
         }
       },
       "required": [
         "role",
-        "sourceType"
+        "source"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -3185,6 +3185,14 @@
       "type": "object",
       "description": "Blocking criteria model.",
       "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if blocking criteria is enabled."
+        },
+        "kind": {
+          "$ref": "#/definitions/BlockingCriteriaKind",
+          "description": "The blocking criteria kind."
+        },
         "allowedSeverity": {
           "type": "integer",
           "format": "int32",
@@ -3194,16 +3202,48 @@
           "type": "boolean",
           "description": "Indicates if it is detected."
         },
-        "riskLevel": {
+        "allowedRiskLevel": {
           "$ref": "#/definitions/RiskLevel",
           "description": "The risk level."
         }
       },
       "required": [
+        "enabled",
+        "kind",
         "allowedSeverity",
         "isDetected",
-        "riskLevel"
+        "allowedRiskLevel"
       ]
+    },
+    "BlockingCriteriaKind": {
+      "type": "string",
+      "description": "The blocking criteria kind.",
+      "enum": [
+        "severity",
+        "riskLevel",
+        "isDetected"
+      ],
+      "x-ms-enum": {
+        "name": "BlockingCriteriaKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "severity",
+            "value": "severity",
+            "description": "The severity type."
+          },
+          {
+            "name": "riskLevel",
+            "value": "riskLevel",
+            "description": "The risk level type."
+          },
+          {
+            "name": "isDetected",
+            "value": "isDetected",
+            "description": "The is detected type."
+          }
+        ]
+      }
     },
     "BlocklistTaskResult": {
       "type": "object",
@@ -3607,9 +3647,9 @@
           "$ref": "#/definitions/RiskLevel",
           "description": "The risk level."
         },
-        "advanced": {
+        "details": {
           "$ref": "#/definitions/PromptInjectionDetail",
-          "description": "Advanced results."
+          "description": "Result details."
         }
       },
       "required": [
@@ -4113,15 +4153,15 @@
         "value"
       ]
     },
-    "PagedSafetyPolicy": {
+    "PagedRaiPolicy": {
       "type": "object",
-      "description": "Paged collection of SafetyPolicy items",
+      "description": "Paged collection of RaiPolicy items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SafetyPolicy items on this page",
+          "description": "The RaiPolicy items on this page",
           "items": {
-            "$ref": "#/definitions/SafetyPolicy"
+            "$ref": "#/definitions/RaiPolicy"
           },
           "x-ms-identifiers": []
         },
@@ -4272,6 +4312,100 @@
         "query"
       ]
     },
+    "RaiPolicy": {
+      "type": "object",
+      "description": "Rai policy model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The rai policy name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "taskSettings": {
+          "type": "array",
+          "description": "The task settings.",
+          "items": {
+            "$ref": "#/definitions/TaskSetting"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "taskSettings"
+      ]
+    },
+    "RaiPolicyAnalyzeOption": {
+      "type": "object",
+      "description": "Defines the options for analyzing content with a rai policy.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The messages to be analyzed.",
+          "items": {
+            "$ref": "#/definitions/UnifyMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "raiPolicyInline": {
+          "$ref": "#/definitions/RaiPolicy",
+          "description": "The inline rai policy to be applied during analysis. One of `raiPolicyName` or `raiPolicyInline` must be provided."
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of a predefined rai policy to be applied during analysis. One of `raiPolicyName` or `raiPolicyInline` must be provided."
+        }
+      },
+      "required": [
+        "messages"
+      ]
+    },
+    "RaiPolicyAnalyzeResponse": {
+      "type": "object",
+      "description": "Represents the analysis response obtained by applying a rai policy.",
+      "properties": {
+        "taskResults": {
+          "type": "array",
+          "description": "The task results of the analysis.",
+          "items": {
+            "$ref": "#/definitions/TaskResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "taskResults"
+      ]
+    },
+    "RaiPolicyCreateOrUpdate": {
+      "type": "object",
+      "description": "Rai policy model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The rai policy name.",
+          "maxLength": 64,
+          "pattern": "^[0-9A-Za-z._~-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "taskSettings": {
+          "type": "array",
+          "description": "The task settings.",
+          "items": {
+            "$ref": "#/definitions/TaskSetting"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "RemoveImageIncidentSamplesOptions": {
       "type": "object",
       "description": "The request to remove incident samples from an Image Incident.",
@@ -4319,30 +4453,6 @@
       "required": [
         "incidentSampleIds"
       ]
-    },
-    "Result": {
-      "type": "string",
-      "description": "The result.",
-      "enum": [
-        "noCriteriaMet",
-        "blockingCriteriaMet"
-      ],
-      "x-ms-enum": {
-        "name": "Result",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "noCriteriaMet",
-            "value": "noCriteriaMet",
-            "description": "No criteria met result."
-          },
-          {
-            "name": "blockingCriteriaMet",
-            "value": "blockingCriteriaMet",
-            "description": "Blocking criteria met result."
-          }
-        ]
-      }
     },
     "ResultCode": {
       "type": "string",
@@ -4489,110 +4599,6 @@
         "name"
       ]
     },
-    "SafetyPolicy": {
-      "type": "object",
-      "description": "Safety policy model.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The safety policy name.",
-          "maxLength": 64,
-          "pattern": "^[0-9A-Za-z._~-]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "taskSettings": {
-          "type": "array",
-          "description": "The task settings.",
-          "items": {
-            "$ref": "#/definitions/TaskSetting"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "name",
-        "taskSettings"
-      ]
-    },
-    "SafetyPolicyAnalyzeOption": {
-      "type": "object",
-      "description": "Defines the options for analyzing content with a safety policy.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "The messages to be analyzed.",
-          "items": {
-            "$ref": "#/definitions/UnifyMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "safetyPolicyInline": {
-          "$ref": "#/definitions/SafetyPolicy",
-          "description": "The inline safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided."
-        },
-        "safetyPolicyName": {
-          "type": "string",
-          "description": "The name of a predefined safety policy to be applied during analysis. One of `safetyPolicyName` or `safetyPolicyInline` must be provided."
-        }
-      },
-      "required": [
-        "messages"
-      ]
-    },
-    "SafetyPolicyAnalyzeResponse": {
-      "type": "object",
-      "description": "Represents the analysis response obtained by applying a safety policy.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "The state of the analysis."
-        },
-        "result": {
-          "$ref": "#/definitions/Result",
-          "description": "The result of the analysis."
-        },
-        "taskResults": {
-          "type": "array",
-          "description": "The task results of the analysis.",
-          "items": {
-            "$ref": "#/definitions/TaskResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "state",
-        "result",
-        "taskResults"
-      ]
-    },
-    "SafetyPolicyCreateOrUpdate": {
-      "type": "object",
-      "description": "Safety policy model.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The safety policy name.",
-          "maxLength": 64,
-          "pattern": "^[0-9A-Za-z._~-]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "taskSettings": {
-          "type": "array",
-          "description": "The task settings.",
-          "items": {
-            "$ref": "#/definitions/TaskSetting"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "ShieldPromptOptions": {
       "type": "object",
       "description": "The request of analyzing potential direct or indirect injection attacks.",
@@ -4652,30 +4658,6 @@
         ]
       }
     },
-    "State": {
-      "type": "string",
-      "description": "The state.",
-      "enum": [
-        "analysisAllSucceed",
-        "analysisNotAllSucceed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "analysisAllSucceed",
-            "value": "analysisAllSucceed",
-            "description": "All analysis succeeded state."
-          },
-          {
-            "name": "analysisNotAllSucceed",
-            "value": "analysisNotAllSucceed",
-            "description": "Not all analysis succeeded state."
-          }
-        ]
-      }
-    },
     "TaskResult": {
       "type": "object",
       "description": "Task result model.",
@@ -4696,9 +4678,9 @@
           "type": "boolean",
           "description": "Indicates if blocking criteria is met."
         },
-        "taskType": {
+        "kind": {
           "$ref": "#/definitions/TaskType",
-          "description": "The task type."
+          "description": "The task kind."
         },
         "harmCategoryTaskResult": {
           "$ref": "#/definitions/HarmCategoryTaskResult",
@@ -4722,7 +4704,7 @@
         "resultCode",
         "resultCodeDetail",
         "isBlockingCriteriaMet",
-        "taskType"
+        "kind"
       ]
     },
     "TaskSetting": {
@@ -4745,7 +4727,7 @@
           },
           "x-ms-identifiers": []
         },
-        "type": {
+        "kind": {
           "$ref": "#/definitions/TaskType",
           "description": "The task type."
         },
@@ -4765,10 +4747,6 @@
           "$ref": "#/definitions/CustomHarmCategoryTaskSetting",
           "description": "The custom harm category task setting."
         },
-        "blockingCriteriaEnabled": {
-          "type": "boolean",
-          "description": "Indicates if blocking criteria is enabled."
-        },
         "blockingCriteria": {
           "$ref": "#/definitions/BlockingCriteria",
           "description": "The blocking criteria."
@@ -4778,8 +4756,7 @@
         "settingId",
         "settingEnabled",
         "appliedFor",
-        "type",
-        "blockingCriteriaEnabled",
+        "kind",
         "blockingCriteria"
       ]
     },
@@ -5232,9 +5209,9 @@
       "type": "object",
       "description": "Unify content model.",
       "properties": {
-        "modality": {
+        "kind": {
           "$ref": "#/definitions/Modality",
-          "description": "The modality of the content."
+          "description": "The kind of the content."
         },
         "text": {
           "type": "string",
@@ -5250,7 +5227,7 @@
         }
       },
       "required": [
-        "modality"
+        "kind"
       ]
     },
     "UnifyMessage": {
