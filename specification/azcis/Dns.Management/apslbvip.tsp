@@ -22,9 +22,13 @@ model ApSlbVipResourceProperties {
   @doc("The Azure location")
   azureLocation?: azureLocation;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: ApSlbVipProvisioningState;
+
+  @doc("IP address of an Ap Dns; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  assignedVip?: string;
 }
 
 @doc("Autopilot software load balance VIP Resource")

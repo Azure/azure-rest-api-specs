@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for CosmosDbSourceConnector")
-model CosmosDbSourceConnectorProperties extends ConnectorProperties {
+model CosmosDbSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of CosmosDbSourceConnector")
   connectorType: ConnectorType.CosmosDbSource;
 
