@@ -4,12 +4,12 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 
-export class TspConfigJavaNamespaceValidRule implements Rule {
+export class TspConfigJavaNamespaceRule implements Rule {
   readonly name = "tspconfig-java-namespace";
   readonly description =
-    '"options.@azure-tools/typespec-java.namespace" must match "/^com\.azure(\.\w+)+$/", i.e. start with "com.azure", where each subsequent segment must consist of word characters, separated by dots (.).';
+    '"options.@azure-tools/typespec-java.namespace" must match "/^com.azure(.w+)+$/", i.e. start with "com.azure", where each subsequent segment must consist of word characters, separated by dots (.).';
   readonly action =
-    'Please update "options.@azure-tools/typespec-java.namespace" to match "/^com\.azure(\.\w+)+$/" in "tspconfig.yaml". For example: "com.azure.test.sample".';
+    'Please update "options.@azure-tools/typespec-java.namespace" to match "/^com.azure(.w+)+$/" in "tspconfig.yaml". For example: "com.azure.test.sample".';
   // TODO: provide link to the rule details and full sample
   readonly link = "";
 
