@@ -1,5 +1,5 @@
 {
-  "swagger": "3.0",
+  "openapi": "3.0",
   "info": {
     "title": "Azure AI Health Insights",
     "version": "2024-10-01",
@@ -10,9 +10,15 @@
       }
     ]
   },
+ "servers": [
+        {
+            "url": "https://eastus.api.cognitive.microsoft.com/"
+        }
+    ], 
   "schemes": [
     "https"
   ],
+   
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}/health-insights",
     "useSchemePrefix": false,
@@ -70,11 +76,7 @@
       "name": "TrialMatcher"
     }
   ],
-  "servers": [
-        {
-            "url": "https://eastus.api.cognitive.microsoft.com/"
-        }
-    ],  
+ 
   "paths": {
     "/radiology-insights/jobs/{id}": {
       "get": {
