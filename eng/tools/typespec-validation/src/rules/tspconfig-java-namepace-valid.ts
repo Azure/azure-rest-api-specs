@@ -42,7 +42,7 @@ export class TspConfigJavaNamespaceValidRule implements Rule {
     if (!pattern.test(namespace)) {
       return this.createFailedResult(`Namespace "${namespace}" does not match "${pattern}"`);
     }
-    return { success: true, stdOutput: `[${this.name}]: Validation passed.` };
+    return { success: true, stdOutput: `[${this.name}]: validation passed.` };
   }
 
   createFailedResult(errorMessage: string): RuleResult {
