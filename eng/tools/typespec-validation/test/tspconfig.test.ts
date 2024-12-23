@@ -1,6 +1,6 @@
 import { describe, it } from "vitest";
 import { join } from "path";
-import { TspConfigJavaNamespaceRule } from "../src/rules/tspconfig-java-namepace-valid.js";
+import { TspConfigJavaNamespaceRule } from "../src/rules/tspconfig-java-namepace.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert, strictEqual } from "node:assert";
 import { Rule } from "../src/rule.js";
