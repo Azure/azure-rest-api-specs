@@ -38,15 +38,20 @@ model StorageDiscoveryWorkspaceProperties {
   @doc("The state of storage discovery data export")
   exportState: DataExportState;
 
+  @doc("The view level storage discovery data estate")
+  storageEstateViewLevel: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+      scopes: ["tenant", "subscription", "resourceGroup"];
+    }
+  ]>;
+
   @doc("The description of the storage discovery workspace.")
   description?: string;
 
-  @doc("The scope of the storage discovery workspace.")
+  @doc("The storage discovery resource collections")
   @extension("x-ms-identifiers", ["displayName"])
-  scopes: StorageDiscoveryScope[];
-
-  @doc("The destinations to which the storage workspace rule sends data.")
-  destinations: StorageDiscoveryDestination;
+  storageCollections: StorageDiscoveryCollection[];
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -78,41 +83,26 @@ union StorageDiscoveryTier {
   string,
 }
 
-@doc("Storage Discovery Scope")
-model StorageDiscoveryScope {
-  @doc("Display name of the scope")
+@doc("Storage Discovery Collection")
+model StorageDiscoveryCollection {
+  @doc("Display name of the collection")
   displayName: string;
 
-  @doc("Resource types for the scope")
-  resourceTypes: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Storage/storageAccounts";
-    }
-  ]>[];
+  @doc("Resource types for the collection")
+  resourceTypes: StorageDiscoveryResourceType[];
 
-  @doc("ARM scope URIs for the scope")
-  armScopes: string[];
-
-  @doc("Storage resource filters for the scope")
-  storageAccountFilters: StorageDiscoveryResourceFilter;
-}
-
-@doc("Storage resource filters for the scope")
-model StorageDiscoveryResourceFilter {
-  @doc("The storage account locations to filter.")
-  locations: string[];
+  @doc("The storage account tags keys to filter")
+  tagKeysOnly?: string[];
 
   ...ArmTagsProperty;
 }
 
-@doc("Destinations for storage discovery data.")
-model StorageDiscoveryDestination {
-  @doc("The ADX destination sink for analytics data")
-  storageAccountArmId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Storage/storageAccounts";
-    }
-  ]>;
+@doc("Storage Discovery Resource Type")
+union StorageDiscoveryResourceType {
+  @doc("Storage Account Resource Type")
+  StorageAccounts: "Microsoft.Storage/storageAccounts",
+
+  string,
 }
 
 /** The available API versions. */
