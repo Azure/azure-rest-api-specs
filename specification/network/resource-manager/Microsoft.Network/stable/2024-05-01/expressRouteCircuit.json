@@ -532,7 +532,7 @@
           "AzureTrafficCollectors"
         ],
         "operationId": "AzureTrafficCollectorsByCircuit_List",
-        "description": "Gets all azure traffic collector ids in a specified express route circuit.",
+        "description": "Gets all azure traffic collector for a specified express route circuit.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -557,7 +557,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of azure traffic collector ids.",
+            "description": "Request successful. The operation returns a list of azure traffic collector objects.",
             "schema": {
               "$ref": "#/definitions/AzureTrafficCollectorByCircuitListResult"
             }
@@ -574,7 +574,7 @@
         },
         "x-ms-examples": {
           "List of Traffic Collectors by circuit": {
-            "$ref": "./examples/ExpressRouteCircuitPeeringList.json"
+            "$ref": "./examples/AzureTrafficCollectorsByCircuitList.json"
           }
         }
       }
