@@ -183,6 +183,11 @@ union ResilienceState {
   @doc("Not Applicable state.")
   NotApplicable: "NotApplicable",
 
+  @added(Versions.v2025_01_01_preview)
+  @doc("Non-zone-resilient state.")
+  NonZoneResilient: "NonZoneResilient",
+
+  @removed(Versions.v2025_01_01_preview)
   @doc("Non-resilient state.")
   NonResilient: "NonResilient",
 
