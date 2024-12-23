@@ -44,7 +44,7 @@ alias ImageEmbeddingsOptions = {
 @doc("Represents an image with optional text.")
 model ImageEmbeddingInput {
   @doc("""
-    The input image, in PNG format.
+    The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`.
     """)
   image: string;
 
