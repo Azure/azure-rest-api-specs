@@ -159,7 +159,15 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted response definition."
+            "description": "Accepted response definition (Long running operation).",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-asyncoperation": {
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "OK response definition.",
@@ -314,7 +322,15 @@
             }
           },
           "202": {
-            "description": "Accepted response definition."
+            "description": "Accepted response definition (Long running operation).",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-asyncoperation": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -646,7 +662,8 @@
             "Disabling",
             "RollbackRequested",
             "RollingBack",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ClusterReplicationState",
