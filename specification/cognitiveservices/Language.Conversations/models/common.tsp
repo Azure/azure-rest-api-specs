@@ -604,7 +604,7 @@ model RegexKey extends BaseExtraInformation {
   /** The key of the regex pattern used in extracting the entity. */
   key?: string;
 
-  /** The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions. */
+  /** The .NET regex pattern used in extracting the entity. Please visit https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions. */
   regexPattern?: string;
 }
 
