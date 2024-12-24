@@ -54,8 +54,8 @@ interface SitesBySubscription {
 alias TenantParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
 interface SitesByTenant {
-   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For changing operation id"
-  @operationId("List_by_Tenant")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For changing operation id"
+  @operationId("List_byTenant")
   list is ArmResourceListAtScope<Site, BaseParameters = TenantParameters>;
   get is ArmResourceRead<Site, BaseParameters = TenantParameters>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -67,8 +67,5 @@ interface SitesByTenant {
     SiteUpdate,
     BaseParameters = TenantParameters
   >;
-  delete is ArmResourceDeleteSync<
-    Site,
-    BaseParameters = TenantParameters
-  >;
+  delete is ArmResourceDeleteSync<Site, BaseParameters = TenantParameters>;
 }
