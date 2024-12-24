@@ -365,7 +365,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MapsResourceUpdate"
+              "$ref": "#/definitions/MapsResourceTagsUpdate"
             }
           }
         ],
@@ -693,7 +693,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiscoverySourceResourceUpdate"
+              "$ref": "#/definitions/DiscoverySourceResourceTagsUpdate"
             }
           }
         ],
@@ -1177,13 +1177,16 @@
         "sourceId"
       ]
     },
-    "DiscoverySourceResourceUpdate": {
+    "DiscoverySourceResourceTagsUpdate": {
       "type": "object",
-      "description": "Discovery Source Properties to be updated",
+      "description": "The type used for updating tags in DiscoverySourceResource resources.",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/TagsResource",
-          "description": "Tags to be updated"
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1313,13 +1316,16 @@
         }
       }
     },
-    "MapsResourceUpdate": {
+    "MapsResourceTagsUpdate": {
       "type": "object",
-      "description": "Maps Properties to be updated",
+      "description": "The type used for updating tags in MapsResource resources.",
       "properties": {
         "tags": {
-          "$ref": "#/definitions/TagsResource",
-          "description": "Tags to be updated"
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1449,16 +1455,6 @@
             "description": "OffAzure source type"
           }
         ]
-      }
-    },
-    "TagsResource": {
-      "type": "object",
-      "description": "Tags resource",
-      "properties": {
-        "tags": {
-          "type": "string",
-          "description": "Tags to be updated"
-        }
       }
     }
   },
