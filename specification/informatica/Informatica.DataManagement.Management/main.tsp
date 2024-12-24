@@ -677,13 +677,13 @@ union MarketplaceSubscriptionStatus {
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
   @doc("Marketplace subscription is activated")
-  Subscribed: "Subscribed",
+  Subscribe: "Subscribe",
 
   @doc("This state indicates that a customer's payment for the Marketplace service was not received")
-  Suspended: "Suspended",
+  Suspend: "Suspend",
 
   @doc("Customer has cancelled the subscription")
-  Unsubscribed: "Unsubscribed",
+  Unsubscribe: "Unsubscribe",
 }
 
 @doc("Various application types of the Serverless Runtime environments")
