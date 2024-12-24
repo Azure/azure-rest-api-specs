@@ -22,21 +22,30 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the storageinsights.
+These are the global settings for the storagediscovery.
 
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-01-preview
+tag: package-2025-01-01-preview
 ```
 
-### Tag: package-2023-08-01-preview
+### Tag: package-2024-12-01-preview
 
 These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
   - Microsoft.StorageDiscovery/preview/2024-12-01-preview/storageDiscoveryWorkspace.json
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - Microsoft.StorageDiscovery/preview/2025-01-01-preview/storageDiscoveryWorkspace.json
 ```
 
 ---
