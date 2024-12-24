@@ -32,7 +32,7 @@ model PartnerOrganizationProperties {
   organizationId?: string;
 
   @doc("Organization name in partner's system")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
   @minLength(1)
   @maxLength(50)
   organizationName: string;
