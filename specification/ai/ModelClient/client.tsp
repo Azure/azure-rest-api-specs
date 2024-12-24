@@ -40,7 +40,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.CompletionsFinishReason, Access.public);
 @@access(AI.Model.CompletionsUsage, Access.public);
 @@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
-@@access(AI.Model.EmbeddingInput, Access.public, "python");
+@@access(AI.Model.ImageEmbeddingInput, Access.public, "python");
 @@access(AI.Model.EmbeddingInputType, Access.public, "python");
 @@access(AI.Model.EmbeddingItem, Access.public, "python");
 @@access(AI.Model.EmbeddingsResult, Access.public, "python");
