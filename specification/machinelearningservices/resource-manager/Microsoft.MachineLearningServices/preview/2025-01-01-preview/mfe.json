@@ -9,6 +9,57 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/availableQuota": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "summary": "List available MaaS PTU quota.",
+        "operationId": "PTUQuota_ListAvailable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableQuotaArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available MaaS PTU quota.": {
+            "$ref": "./examples/PTUQuota/listAvailable.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/availableQuota/default": {
       "get": {
         "tags": [
