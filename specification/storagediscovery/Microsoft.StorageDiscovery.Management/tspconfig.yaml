@@ -1,4 +1,6 @@
-output-dir: "{project-root}/"
+parameters:
+  "service-dir":
+    default: "sdk/storagediscovery"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -10,6 +12,19 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storageDiscoveryWorkspace.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    flavor: azure
+    examples-directory: "{project-root}/examples"
+    generateSample: true
+    package-dir: "arm-storagediscovery"
+    packageDetails:
+      name: "@azure/arm-storagediscovery"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
