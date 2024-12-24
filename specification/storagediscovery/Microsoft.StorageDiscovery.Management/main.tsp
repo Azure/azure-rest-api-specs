@@ -61,6 +61,10 @@ model StorageDiscoveryWorkspaceProperties {
   @added(ApiVersion.v2025_01_01_preview)
   storageCollections: StorageDiscoveryCollection[];
 
+  @doc("The destinations to which the storage workspace rule sends data.")
+  @removed(ApiVersion.v2025_01_01_preview)
+  destinations: StorageDiscoveryDestination;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
@@ -121,6 +125,7 @@ model StorageDiscoveryResourceFilter {
 }
 
 @doc("Storage Discovery Collection")
+@added(ApiVersion.v2025_01_01_preview)
 model StorageDiscoveryCollection {
   @doc("Display name of the collection")
   displayName: string;
@@ -135,11 +140,23 @@ model StorageDiscoveryCollection {
 }
 
 @doc("Storage Discovery Resource Type")
+@added(ApiVersion.v2025_01_01_preview)
 union StorageDiscoveryResourceType {
   @doc("Storage Account Resource Type")
   StorageAccounts: "Microsoft.Storage/storageAccounts",
 
   string,
+}
+
+@doc("Destinations for storage discovery data.")
+@removed(ApiVersion.v2025_01_01_preview)
+model StorageDiscoveryDestination {
+  @doc("The ADX destination sink for analytics data")
+  storageAccountArmId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
 }
 
 /** The available API versions. */

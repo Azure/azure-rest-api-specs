@@ -415,6 +415,24 @@
         ]
       }
     },
+    "StorageDiscoveryDestination": {
+      "type": "object",
+      "description": "Destinations for storage discovery data.",
+      "properties": {
+        "storageAccountArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ADX destination sink for analytics data",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        }
+      }
+    },
     "StorageDiscoveryResourceFilter": {
       "type": "object",
       "description": "Storage resource filters for the scope",
@@ -563,13 +581,17 @@
           },
           "x-ms-identifiers": ["displayName"]
         },
+        "destinations": {
+          "$ref": "#/definitions/StorageDiscoveryDestination",
+          "description": "The destinations to which the storage workspace rule sends data."
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
       },
-      "required": ["tier", "exportState", "scopes"]
+      "required": ["tier", "exportState", "scopes", "destinations"]
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
@@ -594,6 +616,10 @@
             "$ref": "#/definitions/StorageDiscoveryScope"
           },
           "x-ms-identifiers": ["displayName"]
+        },
+        "destinations": {
+          "$ref": "#/definitions/StorageDiscoveryDestination",
+          "description": "The destinations to which the storage workspace rule sends data."
         }
       }
     },
