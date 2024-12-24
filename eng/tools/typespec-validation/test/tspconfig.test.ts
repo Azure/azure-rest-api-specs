@@ -1,6 +1,6 @@
 import { describe, it } from "vitest";
 import { join } from "path";
-import { TspConfigJavaNamespaceRule } from "../src/rules/tspconfig-java-namepace.js";
+import { TspConfigJavaPackageDirectoryRule } from "../src/rules/tspconfig-java-package-dir.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert, strictEqual } from "node:assert";
 import { Rule } from "../src/rule.js";
@@ -15,38 +15,38 @@ interface TestCase {
 
 const testCases: TestCase[] = [
   {
-    rule: new TspConfigJavaNamespaceRule(),
+    rule: new TspConfigJavaPackageDirectoryRule(),
     folder: TsvTestHost.folder,
-    when: "namespace is valid",
+    when: "package-dir \"azure-abc\" is valid",
     tspconfig: `
 options:
   "@azure-tools/typespec-java":
-    namespace: com.azure.test
+    package-dir: azure-abc
 `,
     expectedResult: true,
   },
   {
-    rule: new TspConfigJavaNamespaceRule(),
+    rule: new TspConfigJavaPackageDirectoryRule(),
     folder: TsvTestHost.folder,
     when: "tspconfig.yaml is not a valid yaml",
     tspconfig: `aaa`,
     expectedResult: false,
   },
   {
-    rule: new TspConfigJavaNamespaceRule(),
+    rule: new TspConfigJavaPackageDirectoryRule(),
     folder: TsvTestHost.folder,
     when: "java emitter has no options",
     tspconfig: `
 options:
   "@azure-tools/typespec-ts":
-    namespace: com.azure.test
+    package-dir: com.azure.test
 `,
     expectedResult: false,
   },
   {
-    rule: new TspConfigJavaNamespaceRule(),
+    rule: new TspConfigJavaPackageDirectoryRule(),
     folder: TsvTestHost.folder,
-    when: "java emitter options have no namespace",
+    when: "java emitter options have no package-dir",
     tspconfig: `
 options:
   "@azure-tools/typespec-java":
@@ -55,13 +55,24 @@ options:
     expectedResult: false,
   },
   {
-    rule: new TspConfigJavaNamespaceRule(),
+    rule: new TspConfigJavaPackageDirectoryRule(),
     folder: TsvTestHost.folder,
-    when: "namespace is invalid",
+    when: "package-dir \"azure.test\" is invalid",
     tspconfig: `
 options:
   "@azure-tools/typespec-java":
-    namespace: x.com.azure.test
+    package-dir: azure.test
+`,
+    expectedResult: false,
+  },
+  {
+    rule: new TspConfigJavaPackageDirectoryRule(),
+    folder: TsvTestHost.folder,
+    when: "package-dir \"azure-\" is invalid",
+    tspconfig: `
+options:
+  "@azure-tools/typespec-java":
+    package-dir: azure-
 `,
     expectedResult: false,
   },

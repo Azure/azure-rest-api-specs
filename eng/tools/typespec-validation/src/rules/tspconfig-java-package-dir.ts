@@ -4,15 +4,16 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 
-export class TspConfigJavaNamespaceRule implements Rule {
-  readonly name = "tspconfig-java-namespace";
+export class TspConfigJavaPackageDirectoryRule implements Rule {
+  pattern = new RegExp(/^azure(-\w+)+$/);
+  
+  readonly name = "tspconfig-java-package-dir";
   readonly description =
-    '"options.@azure-tools/typespec-java.namespace" must match "/^com.azure(.w+)+$/", i.e. start with "com.azure", where each subsequent segment must consist of word characters, separated by dots (.).';
+    `"options.@azure-tools/typespec-java.package-dir" must match ${this.pattern}.`;
   readonly action =
-    'Please update "options.@azure-tools/typespec-java.namespace" to match "/^com.azure(.w+)+$/" in "tspconfig.yaml". For example: "com.azure.test.sample".';
+    `Please update "options.@azure-tools/typespec-java.package-dir" to start with "azure", followed by one or more "-<word>" segments. Each <word> should consist of letters, digits, or underscores. For example: "azure-test".`;
   // TODO: provide link to the rule details and full sample
   readonly link = "";
-
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
@@ -32,15 +33,14 @@ export class TspConfigJavaNamespaceRule implements Rule {
     if (!javaEmitterOptions)
       return this.createFailedResult(`Failed to find "options.@azure-tools/typespec-java"`);
 
-    const namespace = javaEmitterOptions?.namespace;
-    if (!namespace)
+    const packageDir = javaEmitterOptions?.["package-dir"];
+    if (!packageDir)
       return this.createFailedResult(
-        `Failed to find "options.@azure-tools/typespec-java.namespace"`,
+        `Failed to find "options.@azure-tools/typespec-java.package-dir"`,
       );
 
-    const pattern = new RegExp(/^com\.azure(\.\w+)+$/);
-    if (!pattern.test(namespace)) {
-      return this.createFailedResult(`Namespace "${namespace}" does not match "${pattern}"`);
+    if (!this.pattern.test(packageDir)) {
+      return this.createFailedResult(`package-dir "${packageDir}" does not match "${this.pattern}"`);
     }
     return { success: true, stdOutput: `[${this.name}]: validation passed.` };
   }
