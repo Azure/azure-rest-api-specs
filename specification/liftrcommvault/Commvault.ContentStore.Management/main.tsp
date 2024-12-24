@@ -364,6 +364,10 @@ model ProtectionGroupProperties {
   @visibility("read")
   numberOfProtectedItems: int32;
 
+  @doc("The Commvault Protection Group backup time")
+  @visibility("read")
+  lastBackUpTime: int64;
+
   @doc("Details of the user.")
   user: UserDetails;
 
