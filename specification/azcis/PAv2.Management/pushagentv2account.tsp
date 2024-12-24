@@ -56,7 +56,7 @@ model PushAgentV2AccountResourceProperties {
   @doc("Tenant ID of the Subscription.")
   tenantId: string;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: PushAgentV2AccountProvisioningState;
 }
