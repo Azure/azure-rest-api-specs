@@ -4,7 +4,7 @@
   "parameters": {
     "storageDiscoveryWorkspaceName": "sampleworkspace",
     "resourceGroupName": "sample-rg",
-    "api-version": "2024-12-01-preview",
+    "api-version": "2025-01-01-preview",
     "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
   },
   "responses": {
@@ -22,27 +22,27 @@
           "provisioningState": "Succeeded",
           "exportState": "Running",
           "tier": "Standard",
-          "scopes": [
+          "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+          "description": "Sample Storage Discovery Workspace",
+          "storageCollections": [
             {
-              "displayName": "Sample Scope",
-              "resourceTypes": [
-                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
-              ],
-              "armScopes": [
-                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
-              ],
-              "storageAccountFilters": {
-                "tags": {
-                  "filterTag1": "value1",
-                  "filterTag2": "value2"
-                },
-                "locations": ["westeurope"]
+              "displayName": "Sample Collection 1",
+              "resourceTypes": ["Microsoft.Storage/storageAccounts"],
+              "tagKeysOnly": ["filterTag1", "filterTag2"],
+              "tags": {
+                "filterTag1": "value1",
+                "filterTag2": "value2"
+              }
+            },
+            {
+              "displayName": "Sample Collection 2",
+              "resourceTypes": ["Microsoft.Storage/storageAccounts"],
+              "tagKeysOnly": ["filterTag3"],
+              "tags": {
+                "filterTag3": "value3"
               }
             }
-          ],
-          "destinations": {
-            "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
-          }
+          ]
         },
         "systemData": {
           "createdBy": "iewyxsnriqktsvp",

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StorageDiscoveryClient",
-    "version": "2024-12-01-preview",
+    "version": "2025-01-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -415,13 +415,24 @@
         ]
       }
     },
-    "StorageDiscoveryResourceFilter": {
+    "StorageDiscoveryCollection": {
       "type": "object",
-      "description": "Storage resource filters for the scope",
+      "description": "Storage Discovery Collection",
       "properties": {
-        "locations": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the collection"
+        },
+        "resourceTypes": {
           "type": "array",
-          "description": "The storage account locations to filter.",
+          "description": "Resource types for the collection",
+          "items": {
+            "$ref": "#/definitions/StorageDiscoveryResourceType"
+          }
+        },
+        "tagKeysOnly": {
+          "type": "array",
+          "description": "The storage account tags keys to filter",
           "items": {
             "type": "string"
           }
@@ -434,50 +445,23 @@
           }
         }
       },
-      "required": ["locations"]
+      "required": ["displayName", "resourceTypes"]
     },
-    "StorageDiscoveryScope": {
-      "type": "object",
-      "description": "Storage Discovery Scope",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the scope"
-        },
-        "resourceTypes": {
-          "type": "array",
-          "description": "Resource types for the scope",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Storage/storageAccounts"
-                }
-              ]
-            }
+    "StorageDiscoveryResourceType": {
+      "type": "string",
+      "description": "Storage Discovery Resource Type",
+      "enum": ["Microsoft.Storage/storageAccounts"],
+      "x-ms-enum": {
+        "name": "StorageDiscoveryResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccounts",
+            "value": "Microsoft.Storage/storageAccounts",
+            "description": "Storage Account Resource Type"
           }
-        },
-        "armScopes": {
-          "type": "array",
-          "description": "ARM scope URIs for the scope",
-          "items": {
-            "type": "string"
-          }
-        },
-        "storageAccountFilters": {
-          "$ref": "#/definitions/StorageDiscoveryResourceFilter",
-          "description": "Storage resource filters for the scope"
-        }
-      },
-      "required": [
-        "displayName",
-        "resourceTypes",
-        "armScopes",
-        "storageAccountFilters"
-      ]
+        ]
+      }
     },
     "StorageDiscoveryTier": {
       "type": "string",
@@ -555,11 +539,24 @@
           "type": "string",
           "description": "The description of the storage discovery workspace."
         },
-        "scopes": {
+        "storageEstateViewLevel": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The view level storage discovery data estate",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts",
+                "scopes": ["tenant", "subscription", "resourceGroup"]
+              }
+            ]
+          }
+        },
+        "storageCollections": {
           "type": "array",
-          "description": "The scope of the storage discovery workspace.",
+          "description": "The storage discovery resource collections",
           "items": {
-            "$ref": "#/definitions/StorageDiscoveryScope"
+            "$ref": "#/definitions/StorageDiscoveryCollection"
           },
           "x-ms-identifiers": ["displayName"]
         },
@@ -569,7 +566,12 @@
           "readOnly": true
         }
       },
-      "required": ["tier", "exportState", "scopes"]
+      "required": [
+        "tier",
+        "exportState",
+        "storageEstateViewLevel",
+        "storageCollections"
+      ]
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
@@ -587,11 +589,24 @@
           "type": "string",
           "description": "The description of the storage discovery workspace."
         },
-        "scopes": {
+        "storageEstateViewLevel": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The view level storage discovery data estate",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts",
+                "scopes": ["tenant", "subscription", "resourceGroup"]
+              }
+            ]
+          }
+        },
+        "storageCollections": {
           "type": "array",
-          "description": "The scope of the storage discovery workspace.",
+          "description": "The storage discovery resource collections",
           "items": {
-            "$ref": "#/definitions/StorageDiscoveryScope"
+            "$ref": "#/definitions/StorageDiscoveryCollection"
           },
           "x-ms-identifiers": ["displayName"]
         }

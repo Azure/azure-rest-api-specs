@@ -2,7 +2,7 @@
   "operationId": "StorageDiscoveryWorkspaces_ListBySubscription",
   "title": "List StorageDiscoveryWorkspaces by Subscription",
   "parameters": {
-    "api-version": "2024-12-01-preview",
+    "api-version": "2025-01-01-preview",
     "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
   },
   "responses": {
@@ -30,27 +30,19 @@
               "provisioningState": "Succeeded",
               "exportState": "Running",
               "tier": "Standard",
-              "scopes": [
+              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+              "description": "Sample Storage Discovery Workspace",
+              "storageCollections": [
                 {
-                  "displayName": "Sample Scope 1",
-                  "resourceTypes": [
-                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1/providers/Microsoft.Storage/storageAccounts/sample-storageAccount1"
-                  ],
-                  "armScopes": [
-                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1"
-                  ],
-                  "storageAccountFilters": {
-                    "tags": {
-                      "filterTag1": "value1",
-                      "filterTag2": "value2"
-                    },
-                    "locations": ["westeurope"]
+                  "displayName": "Sample Collection 1",
+                  "resourceTypes": ["Microsoft.Storage/storageAccounts"],
+                  "tagKeysOnly": ["filterTag1", "filterTag2"],
+                  "tags": {
+                    "filterTag1": "value1",
+                    "filterTag2": "value2"
                   }
                 }
-              ],
-              "destinations": {
-                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1/providers/Microsoft.Storage/storageAccounts/sample-storageAccount1"
-              }
+              ]
             }
           },
           {
@@ -58,6 +50,10 @@
             "name": "sampleworkspace2",
             "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
             "location": "westeurope",
+            "tags": {
+              "tag3": "value1",
+              "tag4": "value2"
+            },
             "systemData": {
               "createdBy": "iewyxsnriqktsvp",
               "createdByType": "User",
@@ -66,35 +62,22 @@
               "lastModifiedByType": "User",
               "lastModifiedAt": "2023-05-19T00:28:48.610Z"
             },
-            "tags": {
-              "tag3": "value1",
-              "tag4": "value2"
-            },
             "properties": {
               "provisioningState": "Succeeded",
               "exportState": "Running",
               "tier": "Premium",
-              "scopes": [
+              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+              "description": "Sample Storage Discovery Workspace",
+              "storageCollections": [
                 {
-                  "displayName": "Sample Scope 2",
-                  "resourceTypes": [
-                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
-                  ],
-                  "armScopes": [
-                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2"
-                  ],
-                  "storageAccountFilters": {
-                    "tags": {
-                      "filterTag3": "value1",
-                      "filterTag4": "value2"
-                    },
-                    "locations": ["westeurope"]
+                  "displayName": "Sample Collection 2",
+                  "resourceTypes": ["Microsoft.Storage/storageAccounts"],
+                  "tagKeysOnly": ["filterTag3"],
+                  "tags": {
+                    "filterTag3": "value3"
                   }
                 }
-              ],
-              "destinations": {
-                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
-              }
+              ]
             }
           }
         ]

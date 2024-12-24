@@ -10,21 +10,27 @@
       "properties": {
         "exportState": "Stopped",
         "tier": "Premium",
-        "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
-        "description": "Updated Sample Storage Discovery Workspace",
-        "storageCollections": [
+        "scopes": [
           {
-            "displayName": "Updated Sample Collection",
+            "displayName": "Updated Sample Scope",
             "resourceTypes": [
               "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
             ],
-            "tagKeysOnly": ["updated-filtertag1", "updated-filtertag2"],
-            "tags": {
-              "updated-filtertag1": "updated-value1",
-              "updated-filtertag2": "updated-value2"
+            "armScopes": [
+              "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+            ],
+            "storageAccountFilters": {
+              "tags": {
+                "updated-filtertag1": "",
+                "updated-filtertag2": ""
+              },
+              "locations": ["eastus"]
             }
           }
-        ]
+        ],
+        "destinations": {
+          "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
+        }
       }
     }
   },
@@ -35,29 +41,31 @@
         "name": "sampleworkspace",
         "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
         "location": "westeurope",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
           "provisioningState": "Succeeded",
           "exportState": "Stopped",
           "tier": "Premium",
-          "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
-          "description": "Updated Sample Storage Discovery Workspace",
-          "storageCollections": [
+          "scopes": [
             {
-              "displayName": "Updated Sample Collection",
+              "displayName": "Updated Sample Scope",
               "resourceTypes": [
                 "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
               ],
-              "tagKeysOnly": ["updated-filtertag1", "updated-filtertag2"],
-              "tags": {
-                "updated-filtertag1": "updated-value1",
-                "updated-filtertag2": "updated-value2"
+              "armScopes": [
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+              ],
+              "storageAccountFilters": {
+                "tags": {
+                  "updated-filtertag1": "",
+                  "updated-filtertag2": ""
+                },
+                "locations": ["eastus"]
               }
             }
-          ]
+          ],
+          "destinations": {
+            "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
+          }
         }
       }
     }

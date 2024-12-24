@@ -11,6 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
+// The Azure Storage Management API.
 @armProviderNamespace
 @service({
   title: "StorageDiscoveryClient",
@@ -38,7 +39,11 @@ model StorageDiscoveryWorkspaceProperties {
   @doc("The state of storage discovery data export")
   exportState: DataExportState;
 
+  @doc("The description of the storage discovery workspace.")
+  description?: string;
+
   @doc("The view level storage discovery data estate")
+  @added(ApiVersion.v2025_01_01_preview)
   storageEstateViewLevel: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -46,11 +51,14 @@ model StorageDiscoveryWorkspaceProperties {
     }
   ]>;
 
-  @doc("The description of the storage discovery workspace.")
-  description?: string;
+  @doc("The scope of the storage discovery workspace.")
+  @extension("x-ms-identifiers", ["displayName"])
+  @removed(ApiVersion.v2025_01_01_preview)
+  scopes: StorageDiscoveryScope[];
 
   @doc("The storage discovery resource collections")
   @extension("x-ms-identifiers", ["displayName"])
+  @added(ApiVersion.v2025_01_01_preview)
   storageCollections: StorageDiscoveryCollection[];
 
   @visibility("read")
@@ -83,6 +91,35 @@ union StorageDiscoveryTier {
   string,
 }
 
+@doc("Storage Discovery Scope")
+@removed(ApiVersion.v2025_01_01_preview)
+model StorageDiscoveryScope {
+  @doc("Display name of the scope")
+  displayName: string;
+
+  @doc("Resource types for the scope")
+  resourceTypes: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>[];
+
+  @doc("ARM scope URIs for the scope")
+  armScopes: string[];
+
+  @doc("Storage resource filters for the scope")
+  storageAccountFilters: StorageDiscoveryResourceFilter;
+}
+
+@doc("Storage resource filters for the scope")
+@removed(ApiVersion.v2025_01_01_preview)
+model StorageDiscoveryResourceFilter {
+  @doc("The storage account locations to filter.")
+  locations: string[];
+
+  ...ArmTagsProperty;
+}
+
 @doc("Storage Discovery Collection")
 model StorageDiscoveryCollection {
   @doc("Display name of the collection")
@@ -112,6 +149,12 @@ enum ApiVersion {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_12_01_preview: "2024-12-01-preview",
+
+  /** 2025-01-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 @armResourceOperations

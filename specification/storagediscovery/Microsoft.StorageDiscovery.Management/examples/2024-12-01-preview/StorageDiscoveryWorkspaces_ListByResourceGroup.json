@@ -23,19 +23,27 @@
               "provisioningState": "Succeeded",
               "exportState": "Running",
               "tier": "Standard",
-              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
-              "description": "Sample Storage Discovery Workspace",
-              "storageCollections": [
+              "scopes": [
                 {
-                  "displayName": "Sample Collection 1",
-                  "resourceTypes": ["Microsoft.Storage/storageAccounts"],
-                  "tagKeysOnly": ["filterTag1", "filterTag2"],
-                  "tags": {
-                    "filterTag1": "value1",
-                    "filterTag2": "value2"
+                  "displayName": "Sample Scope 1",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount1"
+                  ],
+                  "armScopes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+                  ],
+                  "storageAccountFilters": {
+                    "tags": {
+                      "filterTag1": "value1",
+                      "filterTag2": "value2"
+                    },
+                    "locations": ["westeurope"]
                   }
                 }
-              ]
+              ],
+              "destinations": {
+                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount1"
+              }
             }
           },
           {
@@ -51,18 +59,27 @@
               "provisioningState": "Succeeded",
               "exportState": "Running",
               "tier": "Premium",
-              "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
-              "description": "Sample Storage Discovery Workspace",
-              "storageCollections": [
+              "scopes": [
                 {
-                  "displayName": "Sample Collection 2",
-                  "resourceTypes": ["Microsoft.Storage/storageAccounts"],
-                  "tagKeysOnly": ["filterTag3"],
-                  "tags": {
-                    "filterTag3": "value3"
+                  "displayName": "Sample Scope 2",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
+                  ],
+                  "armScopes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg"
+                  ],
+                  "storageAccountFilters": {
+                    "tags": {
+                      "filterTag3": "value1",
+                      "filterTag4": "value2"
+                    },
+                    "locations": ["westeurope"]
                   }
                 }
-              ]
+              ],
+              "destinations": {
+                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
+              }
             }
           }
         ]
