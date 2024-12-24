@@ -60,7 +60,7 @@ interface PrivateEndpointConnections {
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
       @bodyRoot _: PrivateEndpointConnection;
     })
   >;

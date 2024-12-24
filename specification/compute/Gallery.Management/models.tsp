@@ -2250,3 +2250,36 @@ model ProxyResourceShared<
   @segment("parents")
   parentName: string;
 }
+@@doc(CommunityGalleryImageList.value, "A list of community gallery images.");
+@@doc(CommunityGalleryImageVersionList.value,
+  "A list of community gallery image versions."
+);
+@@doc(CommunityGalleryImageVersionList.nextLink,
+  "The URI to fetch the next page of community gallery image versions. Call ListNext() with this to fetch the next page of community gallery image versions."
+);
+@@doc(GalleryApplicationVersionList.value,
+  "A list of gallery Application Versions."
+);
+@@doc(GalleryApplicationVersionList.nextLink,
+  "The uri to fetch the next page of gallery Application Versions. Call ListNext() with this to fetch the next page of gallery Application Versions."
+);
+@@doc(GalleryImageList.value, "A list of Shared Image Gallery images.");
+@@doc(GalleryImageList.nextLink,
+  "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions."
+);
+@@doc(GalleryImageVersionList.nextLink,
+  "The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions."
+);
+@@doc(GalleryImageVersionList.value, "A list of gallery image versions.");
+@@doc(GalleryList.nextLink,
+  "The uri to fetch the next page of galleries. Call ListNext() with this to fetch the next page of galleries."
+);
+@@doc(GalleryList.value, "A list of galleries.");
+@@doc(SharedGalleryImageList.value, "A list of shared gallery images.");
+@@doc(SharedGalleryImageList.nextLink,
+  "The uri to fetch the next page of shared gallery images. Call ListNext() with this to fetch the next page of shared gallery images."
+);
+@@doc(SharedGalleryList.nextLink,
+  "The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries."
+);
+@@doc(SharedGalleryList.value, "A list of shared galleries.");

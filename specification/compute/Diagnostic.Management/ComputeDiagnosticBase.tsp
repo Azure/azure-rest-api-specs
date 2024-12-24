@@ -95,3 +95,7 @@ interface ComputeDiagnosticBases {
 @@doc(ComputeDiagnosticBases.register::parameters.body,
   "Storage Configuration object supplied in the body of the Post to cache storageAccount for a given subscription."
 );
+@@doc(ComputeDiagnosticsList.value,
+  "The collection of available Compute diagnostics returned by the listing operation."
+);
+@@doc(ComputeDiagnosticsList.nextLink, "The continuation token.");

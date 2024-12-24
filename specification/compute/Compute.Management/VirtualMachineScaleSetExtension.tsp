@@ -23,13 +23,6 @@ model VirtualMachineScaleSetExtension
     SegmentName = "extensions",
     NamePattern = ""
   >;
-
-  /**
-   * Resource type
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
-  type?: string;
 }
 
 @armResourceOperations
@@ -51,7 +44,10 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to create or update an extension.
    */
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineScaleSetExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    VirtualMachineScaleSetExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update an extension.
@@ -59,7 +55,12 @@ interface VirtualMachineScaleSetExtensions {
   @parameterVisibility
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
-    VirtualMachineScaleSetExtensionUpdate
+    VirtualMachineScaleSetExtensionUpdate,
+    Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<
+      VirtualMachineScaleSetExtension,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**

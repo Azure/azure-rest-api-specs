@@ -55,7 +55,7 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceCreatedResponse<Snapshot> | ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse & {
       @bodyRoot _: Snapshot;
     })
   >;

@@ -1919,3 +1919,11 @@ model ResourceWithOptionalLocation {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
+
+@@doc(SnapshotList.value, "A list of snapshots.");
+@@doc(ResourceUriList.nextLink,
+  "The uri to fetch the next page of encrypted resources. Call ListNext() with this to fetch the next page of encrypted resources."
+);
+@@doc(ResourceUriList.value,
+  "A list of IDs or Owner IDs of resources which are encrypted with the disk encryption set."
+);

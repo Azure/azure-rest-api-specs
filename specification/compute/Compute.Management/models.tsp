@@ -1457,6 +1457,12 @@ model VirtualMachineSizeListResult {
   @items
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   value?: VirtualMachineSize[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -7152,6 +7158,12 @@ model DedicatedHostSizeListResult {
   @items
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   value?: string[];
+
+  /**
+   * The link to the next page of items.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

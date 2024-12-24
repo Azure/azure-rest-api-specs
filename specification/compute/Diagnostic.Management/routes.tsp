@@ -41,8 +41,8 @@ interface SpotPlacementRecommenderOperations {
   @operationId("SpotPlacementRecommender_Get")
   @get
   @action("diagnostics/spotPlacementRecommender")
-  get is ArmProviderActionAsync<
-    Response = ComputeDiagnosticBase,
+  get is ArmProviderActionSync<
+    Response = ArmResourceUpdatedResponse<ComputeDiagnosticBase>,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -53,7 +53,7 @@ interface SpotPlacementRecommenderOperations {
   @operationId("SpotPlacementRecommender_Post")
   @post
   @action("diagnostics/spotPlacementRecommender/generate")
-  post is ArmProviderActionAsync<
+  post is ArmProviderActionSync<
     Response = SpotPlacementRecommenderResponse,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -70,7 +70,7 @@ interface SpotPlacementScoresOperations {
   @operationId("SpotPlacementScores_Get")
   @get
   @action("placementScores/spot")
-  get is ArmProviderActionAsync<
+  get is ArmProviderActionSync<
     Response = ComputeDiagnosticBase,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
@@ -82,10 +82,17 @@ interface SpotPlacementScoresOperations {
   @operationId("SpotPlacementScores_Post")
   @post
   @action("placementScores/spot/generate")
-  post is ArmProviderActionAsync<
+  post is ArmProviderActionSync<
     Response = SpotPlacementScoresResponse,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
     Request = SpotPlacementScoresInput
   >;
 }
+
+@@doc(SpotPlacementRecommenderOperations.post::parameters.body,
+  "SpotPlacementRecommender object supplied in the body of the Post spot placement recommender operation."
+);
+@@doc(SpotPlacementScoresOperations.post::parameters.body,
+  "SpotPlacementScores object supplied in the body of the Post spot placement scores operation."
+);
