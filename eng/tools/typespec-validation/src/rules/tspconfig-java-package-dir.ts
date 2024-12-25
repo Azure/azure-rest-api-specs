@@ -6,12 +6,10 @@ import { TsvHost } from "../tsv-host.js";
 
 export class TspConfigJavaPackageDirectoryRule implements Rule {
   pattern = new RegExp(/^azure(-\w+)+$/);
-  
+
   readonly name = "tspconfig-java-package-dir";
-  readonly description =
-    `"options.@azure-tools/typespec-java.package-dir" must match ${this.pattern}.`;
-  readonly action =
-    `Please update "options.@azure-tools/typespec-java.package-dir" to start with "azure", followed by one or more "-<word>" segments. Each <word> should consist of letters, digits, or underscores. For example: "azure-test".`;
+  readonly description = `"options.@azure-tools/typespec-java.package-dir" must match ${this.pattern}.`;
+  readonly action = `Please update "options.@azure-tools/typespec-java.package-dir" to start with "azure", followed by one or more "-<word>" segments. Each segment can contains letters, digits, or underscores. For example: "azure-test".`;
   // TODO: provide link to the rule details and full sample
   readonly link = "";
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
@@ -40,7 +38,9 @@ export class TspConfigJavaPackageDirectoryRule implements Rule {
       );
 
     if (!this.pattern.test(packageDir)) {
-      return this.createFailedResult(`package-dir "${packageDir}" does not match "${this.pattern}"`);
+      return this.createFailedResult(
+        `package-dir "${packageDir}" does not match "${this.pattern}"`,
+      );
     }
     return { success: true, stdOutput: `[${this.name}]: validation passed.` };
   }
