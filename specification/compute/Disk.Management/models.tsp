@@ -1482,7 +1482,7 @@ model CustomPage<Resource extends string> {
   value: Resource[];
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: url;
 }
 

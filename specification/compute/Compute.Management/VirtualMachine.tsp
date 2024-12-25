@@ -275,7 +275,11 @@ interface VirtualMachines {
   /**
    * The operation to perform maintenance on a virtual machine.
    */
-  performMaintenance is ComputeResourceActionAsync<VirtualMachine, void, void>;
+  performMaintenance is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse
+  >;
 
   /**
    * The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.
@@ -283,7 +287,7 @@ interface VirtualMachines {
   powerOff is ComputeResourceActionAsync<
     VirtualMachine,
     void,
-    void,
+    OkResponse,
     Parameters = {
       /**
        * The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified
@@ -314,7 +318,7 @@ interface VirtualMachines {
        */
       @bodyRoot parameters?: VirtualMachineReimageParameters;
     },
-    NoContentResponse
+    OkResponse
   >;
 
   /**
@@ -350,7 +354,7 @@ interface VirtualMachines {
   /**
    * The operation to start a virtual machine.
    */
-  start is ComputeResourceActionAsync<VirtualMachine, void, void>;
+  start is ComputeResourceActionAsync<VirtualMachine, void, OkResponse>;
 
   /**
    * Lists all available virtual machine sizes to which the specified virtual machine can be resized.
