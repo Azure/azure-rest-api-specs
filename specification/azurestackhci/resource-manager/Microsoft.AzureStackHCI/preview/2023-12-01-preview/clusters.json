@@ -1580,6 +1580,22 @@
           },
           "readOnly": true
         },
+        "nodeState": {
+          "description": "State of the cluster node.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NodeUp",
+            "NodeDown",
+            "NodePaused",
+            "NodeJoining"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "ehcResourceId": {
           "description": "Edge Hardware Center Resource Id",
           "type": "string",

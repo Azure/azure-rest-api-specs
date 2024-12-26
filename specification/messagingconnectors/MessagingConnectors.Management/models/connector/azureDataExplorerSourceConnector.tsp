@@ -1,0 +1,40 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Versioning;
+using Azure.Core;
+using TypeSpec.OpenAPI;
+
+@versioned(Versions)
+namespace Microsoft.MessagingConnectors;
+
+@doc("Configuration for AzureDataExplorerSourceConnector")
+model AzureDataExplorerSourceConnectorProperties extends DataSourceProperties {
+  @doc("Type of AzureDataExplorerSourceConnector")
+  connectorType: ConnectorType.AzureDataExplorerSource;
+
+  @doc("Direction of the Source Connector.")
+  connectorDirection?: Direction = Direction.Source;
+
+  @doc("Url of AzureDataExplorer cluster.")
+  clusterUrl: string;
+
+  @doc("Database name for AzureDataExplorer.")
+  database: string;
+
+  @doc("AzureDataExplorer table names use commas to separate multiple tables.")
+  tableNames: string;
+
+  @doc("The uniquely identifies your application in the Microsoft identity platform.")
+  applicationClientId: string;
+
+  @doc("A secret string that the application uses to prove its identity when requesting a token.")
+  @secret
+  applicationSecret: string;
+
+  @doc("AAD tenant Id GUID or microsoft.com")
+  aadAuthorityId: string;
+}
