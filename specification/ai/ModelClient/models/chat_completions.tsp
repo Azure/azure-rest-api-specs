@@ -80,7 +80,7 @@ alias ChatCompletionsOptions = {
   @doc("""
   An object specifying the format that the model must output.
 
-  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema..
+  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.
 
   Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
 
@@ -280,7 +280,7 @@ model ChatResponseFormatJsonSchema extends ChatResponseFormat {
     schema?: Record<unknown>;
 
     @doc("""
-      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
+      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
       """)
     strict?: boolean | null = false;
   };
