@@ -78,10 +78,14 @@ alias ChatCompletionsOptions = {
   max_tokens?: int32;
 
   @doc("""
-    The format that the model must output. Use this to enable JSON mode instead of the default text mode.
-    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
-    via a system or user message.
-    """)
+  An object specifying the format that the model must output.
+
+  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema..
+
+  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+
+  **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+  """)
   response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
@@ -114,17 +118,6 @@ alias ChatCompletionsOptions = {
     ID of the specific AI model to use, if more than one model is available on the endpoint.
     """)
   `model`?: string;
-
-  @doc("""
-  An object specifying the format that the model must output.
-
-  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema..
-
-  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
-
-  **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
-  """)
-  response_format?: ChatResponseFormat;
 
   ...Record<unknown>;
 };
@@ -266,9 +259,31 @@ model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
   Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
   via a system or user message.
   """)
-model ChatCompletionsResponseFormatJSON extends ChatCompletionsResponseFormat {
+model ChatCompletionsResponseFormatJsonObject extends ChatCompletionsResponseFormat {
   @doc("Response format type: always 'json_object' for this object.")
   type: "json_object";
+}
+
+model ChatResponseFormatJsonSchema extends ChatResponseFormat {
+  @doc("""
+    The type of response format being defined: `json_schema`
+    """)
+  type: "json_schema";
+
+  json_schema: {
+    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+    description?: string;
+
+    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+    name: string;
+
+    schema?: Record<unknown>;
+
+    @doc("""
+      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
+      """)
+    strict?: boolean | null = false;
+  };
 }
 
 alias ChatChoiceCommon = {
@@ -565,47 +580,3 @@ union ChatMessageImageDetailLevel {
     """)
   high: "high",
 }
-
-@discriminator("type")
-model ChatResponseFormat {
-  type: string;;
-}
-
-model ChatResponseFormatText extends ChatResponseFormat {
-  @doc("""
-    The type of response format being defined: `text`
-    """)
-  type: "text";
-}
-
-model ChatResponseFormatJsonObject extends ChatResponseFormat {
-  @doc("""
-    The type of response format being defined: `json_object`
-    """)
-  type: "json_object";
-}
-
-model ChatResponseFormatJsonSchema extends ChatResponseFormat {
-  @doc("""
-    The type of response format being defined: `json_schema`
-    """)
-  type: "json_schema";
-
-  json_schema: {
-    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
-    description?: string;
-
-    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
-    name: string;
-
-    schema?: ResponseFormatJsonSchemaSchema;
-
-    @doc("""
-      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
-      """)
-    strict?: boolean | null = false;
-  };
-}
-
-/** The schema for the response format, described as a JSON Schema object. */
-model ResponseFormatJsonSchemaSchema is Record<unknown>;
