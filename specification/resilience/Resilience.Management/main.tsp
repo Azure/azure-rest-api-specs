@@ -113,6 +113,10 @@ model ResourceResilienceProfile {
 
   @doc("Resilience State of the resource.")
   resilienceState: ResilienceState;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("Reasons for the resilience state of the resource.")
+  resilienceStateReasons: string[];
 }
 
 @doc("Azores Classification tags applied for resource exclusion/assertion.")
@@ -175,10 +179,6 @@ union ResilienceState {
   @added(Versions.v2025_01_01_preview)
   @doc("Undefined state.")
   Undefined: "Undefined",
-
-  @added(Versions.v2025_01_01_preview)
-  @doc("Region not Availability Zone ready.")
-  NonAZRegion: "NonAZRegion",
 
   @doc("Not Applicable state.")
   NotApplicable: "NotApplicable",

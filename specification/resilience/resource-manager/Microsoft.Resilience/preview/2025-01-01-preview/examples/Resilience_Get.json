@@ -11,7 +11,7 @@
       "body": {
         "properties": {
           "eventType": "Write",
-          "resilienceState": "ZoneAligned",
+          "resilienceState": "NonZoneResilient",
           "tenantId": "2d9dcb31-72d3-4f69-a884-2ca04841181d",
           "resilienceProfiles": [
             {
@@ -37,7 +37,8 @@
                   "result": "Succeeded"
                 }
               ],
-              "resilienceState": "ZoneAligned"
+              "resilienceState": "ZoneAligned",
+              "resilienceStateReasons": []
             },
             {
               "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Compute/disks/arntestvm1_disk1",
@@ -69,7 +70,10 @@
                   "result": "Failed"
                 }
               ],
-              "resilienceState": "NonResilient"
+              "resilienceState": "NonResilient",
+              "resilienceStateReasons": [
+                "ZonesNotAligned"
+              ]
             },
             {
               "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Network/publicIPAddresses/arntestvm1-ip",
@@ -99,7 +103,8 @@
                   "result": "Succeeded"
                 }
               ],
-              "resilienceState": "ZoneAligned"
+              "resilienceState": "ZoneAligned",
+              "resilienceStateReasons": []
             }
           ],
           "provisioningState": "Succeeded"

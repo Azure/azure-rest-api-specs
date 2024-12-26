@@ -393,7 +393,6 @@
       "description": "Resilience states",
       "enum": [
         "Undefined",
-        "NonAZRegion",
         "NotApplicable",
         "NonZoneResilient",
         "ZoneAligned",
@@ -408,11 +407,6 @@
             "name": "Undefined",
             "value": "Undefined",
             "description": "Undefined state."
-          },
-          {
-            "name": "NonAZRegion",
-            "value": "NonAZRegion",
-            "description": "Region not Availability Zone ready."
           },
           {
             "name": "NotApplicable",
@@ -496,6 +490,13 @@
         "resilienceState": {
           "$ref": "#/definitions/ResilienceState",
           "description": "Resilience State of the resource."
+        },
+        "resilienceStateReasons": {
+          "type": "array",
+          "description": "Reasons for the resilience state of the resource.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -507,7 +508,8 @@
         "azoresClassification",
         "creationDate",
         "resilienceEvaluations",
-        "resilienceState"
+        "resilienceState",
+        "resilienceStateReasons"
       ]
     }
   },
