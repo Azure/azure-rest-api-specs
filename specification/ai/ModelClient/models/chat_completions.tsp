@@ -83,14 +83,14 @@ model ChatCompletionsOptions {
   max_tokens?: int32;
 
   @doc("""
-    An object specifying the format that the model must output.
+  An object specifying the format that the model must output.
 
-    Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema..
+  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.
 
-    Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
 
-    **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
-    """)
+  **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+  """)
   response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
@@ -269,7 +269,7 @@ model ChatCompletionsResponseFormatJsonObject extends ChatCompletionsResponseFor
   type: "json_object";
 }
 
-model ChatCompletionsResponseFormatJsonSchema extends ChatCompletionsResponseFormat {
+model ChatResponseFormatJsonSchema extends ChatResponseFormat {
   @doc("""
     The type of response format being defined: `json_schema`
     """)
@@ -285,14 +285,11 @@ model ChatCompletionsResponseFormatJsonSchema extends ChatCompletionsResponseFor
     schema?: Record<unknown>;
 
     @doc("""
-      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the [Structured Outputs guide](/docs/guides/structured-outputs).
+      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
       """)
     strict?: boolean | null = false;
   };
 }
-
-/** The schema for the response format, described as a JSON Schema object. */
-model ResponseFormatJsonSchemaSchema is Record<unknown>;
 
 alias ChatChoiceCommon = {
   @doc("The ordered index associated with this chat completions choice.")

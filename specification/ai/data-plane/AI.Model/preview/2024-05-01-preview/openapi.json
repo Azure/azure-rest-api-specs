@@ -381,7 +381,7 @@
                   "type": "array",
                   "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
                   "items": {
-                    "$ref": "#/definitions/EmbeddingInput"
+                    "$ref": "#/definitions/ImageEmbeddingInput"
                   },
                   "x-ms-identifiers": []
                 },
@@ -1135,23 +1135,6 @@
         ]
       }
     },
-    "EmbeddingInput": {
-      "type": "object",
-      "description": "Represents an image with optional text.",
-      "properties": {
-        "image": {
-          "type": "string",
-          "description": "The input image, in PNG format."
-        },
-        "text": {
-          "type": "string",
-          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
-        }
-      },
-      "required": [
-        "image"
-      ]
-    },
     "EmbeddingInputType": {
       "type": "string",
       "description": "Represents the input types used for embedding search.",
@@ -1320,6 +1303,23 @@
         "name"
       ]
     },
+    "ImageEmbeddingInput": {
+      "type": "object",
+      "description": "Represents an image with optional text.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`."
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
     "ModelInfo": {
       "type": "object",
       "description": "Represents some basic information about the AI model.",
@@ -1352,7 +1352,7 @@
         "text_generation",
         "image_embeddings",
         "audio_generation",
-        "chat"
+        "chat_completion"
       ],
       "x-ms-enum": {
         "name": "ModelType",
@@ -1361,32 +1361,32 @@
           {
             "name": "embeddings",
             "value": "embeddings",
-            "description": "Embeddings."
+            "description": "A model capable of generating embeddings from a text"
           },
           {
             "name": "image_generation",
             "value": "image_generation",
-            "description": "Image generation"
+            "description": "A model capable of generating images from an image and text description"
           },
           {
             "name": "text_generation",
             "value": "text_generation",
-            "description": "Text generation"
+            "description": "A text generation model"
           },
           {
             "name": "image_embeddings",
             "value": "image_embeddings",
-            "description": "Image embeddings"
+            "description": "A model capable of generating embeddings from an image"
           },
           {
             "name": "audio_generation",
             "value": "audio_generation",
-            "description": "Audio generation"
+            "description": "A text-to-audio generative model"
           },
           {
-            "name": "chat",
-            "value": "chat",
-            "description": "Chat completions"
+            "name": "chat_completion",
+            "value": "chat_completion",
+            "description": "A model capable of taking chat-formatted messages and generate responses"
           }
         ]
       }
