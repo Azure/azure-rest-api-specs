@@ -25,7 +25,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormatJSON, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonObject, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormatText, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
@@ -64,6 +64,9 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getEmbeddings, Access.internal);
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
+
+// Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema, Access.internal, "csharp");
 
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
