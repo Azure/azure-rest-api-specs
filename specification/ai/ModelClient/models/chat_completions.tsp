@@ -266,6 +266,27 @@ model ChatCompletionsResponseFormatJsonObject
 }
 
 @doc("""
+  The definition of the required JSON schema in the response, and associated metadata.
+  """)
+model ChatCompletionsResponseFormatJsonSchemaDefinition {
+  /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+  name: string;
+
+  /** The definition of the JSON schema */
+  schema: Record<unknown>;
+
+  /** A description of the response format, used by the AI model to determine how to generate responses in this format. */
+  description?: string;
+
+  @doc("""
+    Whether to enable strict schema adherence when generating the output.
+    If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of
+    JSON Schema is supported when `strict` is `true`.
+    """)
+  strict?: boolean = false;
+}
+
+@doc("""
   A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a
   JSON schema specified by the caller.
   """)
@@ -276,20 +297,8 @@ model ChatCompletionsResponseFormatJsonSchema
     """)
   type: "json_schema";
 
-  json_schema: {
-    /** A description of the response format, used by the AI model to determine how to generate responses in this format. */
-    description?: string;
-
-    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
-    name: string;
-
-    schema?: Record<unknown>;
-
-    @doc("""
-      Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
-      """)
-    strict?: boolean = false;
-  };
+  /** The definition of the required JSON schema in the response, and associated metadata. */
+  json_schema: ChatCompletionsResponseFormatJsonSchemaDefinition;
 }
 
 alias ChatChoiceCommon = {

@@ -672,29 +672,8 @@
       "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a\nJSON schema specified by the caller.",
       "properties": {
         "json_schema": {
-          "type": "object",
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "A description of the response format, used by the AI model to determine how to generate responses in this format."
-            },
-            "name": {
-              "type": "string",
-              "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
-            },
-            "schema": {
-              "type": "object",
-              "additionalProperties": {}
-            },
-            "strict": {
-              "type": "boolean",
-              "description": "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.",
-              "default": false
-            }
-          },
-          "required": [
-            "name"
-          ]
+          "$ref": "#/definitions/ChatCompletionsResponseFormatJsonSchemaDefinition",
+          "description": "The definition of the required JSON schema in the response, and associated metadata."
         }
       },
       "required": [
@@ -706,6 +685,34 @@
         }
       ],
       "x-ms-discriminator-value": "json_schema"
+    },
+    "ChatCompletionsResponseFormatJsonSchemaDefinition": {
+      "type": "object",
+      "description": "The definition of the required JSON schema in the response, and associated metadata.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The definition of the JSON schema",
+          "additionalProperties": {}
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the response format, used by the AI model to determine how to generate responses in this format."
+        },
+        "strict": {
+          "type": "boolean",
+          "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of\nJSON Schema is supported when `strict` is `true`.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
     },
     "ChatCompletionsResponseFormatText": {
       "type": "object",
