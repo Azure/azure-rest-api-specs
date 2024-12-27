@@ -66,7 +66,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
 // Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
-@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema, Access.internal, "csharp");
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
+  Access.internal,
+  "csharp"
+);
 
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
