@@ -383,6 +383,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "runId",
             "in": "query",
             "description": "The run id provided by client for corresponding remote test run.",
@@ -395,10 +402,10 @@
             "description": "The os provided by client for remote test runs.",
             "required": false,
             "type": "string",
-            "default": "linux",
+            "default": "Linux",
             "enum": [
-              "linux",
-              "windows"
+              "Linux",
+              "Windows"
             ],
             "x-ms-enum": {
               "name": "OS",
@@ -406,23 +413,16 @@
               "values": [
                 {
                   "name": "Linux",
-                  "value": "linux",
+                  "value": "Linux",
                   "description": "Linux OS."
                 },
                 {
                   "name": "Windows",
-                  "value": "windows",
+                  "value": "Windows",
                   "description": "Windows OS."
                 }
               ]
             }
-          },
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "The account id.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"

@@ -207,10 +207,10 @@ union OS {
   string,
 
   @doc("Linux OS.")
-  Linux: "linux",
+  Linux: "Linux",
 
   @doc("Windows OS.")
-  Windows: "windows",
+  Windows: "Windows",
 }
 
 // Operations ////////////////////
@@ -237,6 +237,10 @@ interface AccessTokens {
 }
 
 alias GetBrowsersParams = {
+  @path
+  @doc("The account id.")
+  accountId: string;
+
   @query
   @doc("The run id provided by client for corresponding remote test run.")
   runId?: string;
@@ -244,10 +248,6 @@ alias GetBrowsersParams = {
   @query
   @doc("The os provided by client for remote test runs.")
   os?: OS = OS.Linux;
-
-  @path
-  @doc("The account id.")
-  accountId: string;
 };
 
 alias GetBrowsersResponse = {
