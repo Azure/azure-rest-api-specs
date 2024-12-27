@@ -11,9 +11,7 @@ namespace LiftrBase;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v1_preview: "2024-08-01-preview",
-
-  v2_preview: "2024-12-22-preview",
+  v1_preview: "2024-12-22-preview",
 }
 
 @doc("Marketplace subscription status of a resource.")
