@@ -286,6 +286,9 @@
           "Create a scale set with Security Posture Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityPostureReference.json"
           },
+          "Create a scale set with Automatic Zone Rebalancing enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticZoneRebalancingPolicy.json"
+          },
           "Create a scale set with Resilient VM Creation enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMCreationPolicy.json"
           },
@@ -3923,6 +3926,10 @@
     "ResiliencyPolicy": {
       "type": "object",
       "properties": {
+        "automaticZoneRebalancingPolicy": {
+          "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
+          "description": "The configuration parameters used while performing automatic AZ balancing."
+        },
         "resilientVMCreationPolicy": {
           "$ref": "#/definitions/ResilientVMCreationPolicy",
           "description": "The configuration parameters used while performing resilient VM creation."
@@ -3932,7 +3939,56 @@
           "description": "The configuration parameters used while performing resilient VM deletion."
         }
       },
-      "description": "Describes an resiliency policy - resilientVMCreationPolicy and/or resilientVMDeletionPolicy."
+      "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy."
+    },
+    "AutomaticZoneRebalancingPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether Automatic AZ Balancing should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "rebalanceStrategy": {
+          "type": "string",
+          "description": "Type of rebalance strategy that will be used for rebalancing virtual machines in the scale set across availability zones. Default and only supported value for now is Recreate.",
+          "enum": [
+            "Recreate"
+          ],
+          "x-ms-enum": {
+            "name": "RebalanceStrategy",
+            "modelAsString": true
+          }
+        },
+        "rebalanceBehavior": {
+          "type": "string",
+          "description": "Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.",
+          "enum": [
+            "CreateBeforeDelete"
+          ],
+          "x-ms-enum": {
+            "name": "RebalanceBehavior",
+            "modelAsString": true
+          }
+        },
+        "automaticExpansionPolicy": {
+          "$ref": "#/definitions/AutomaticExpansionPolicy",
+          "description": "Optional property used for performing automatic expansion. If defined, the scale set will grow to minTargetZonalInstanceCount. Until then, automatic rebalancing will not take effect."            
+        }
+      },
+      "description": "The configuration parameters used while performing automatic AZ balancing."
+    },
+    "AutomaticExpansionPolicy": {
+      "type": "object",
+      "properties": {
+        "minTargetZonalInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,          
+          "description": "Specifies the minimum number of zonal VMs that will be gradually provisioned to the scale set."
+        }
+      },
+      "description": "The configuration parameters used by Automatic AZ Balancing for expanding the scale set to a target zonal instance count."
     },
     "ResilientVMCreationPolicy": {
       "type": "object",
