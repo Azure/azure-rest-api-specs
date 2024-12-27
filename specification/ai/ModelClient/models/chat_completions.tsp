@@ -265,6 +265,10 @@ model ChatCompletionsResponseFormatJsonObject
   type: "json_object";
 }
 
+@doc("""
+  A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a
+  JSON schema specified by the caller.
+  """)
 model ChatCompletionsResponseFormatJsonSchema
   extends ChatCompletionsResponseFormat {
   @doc("""
