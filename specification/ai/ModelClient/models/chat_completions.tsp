@@ -277,7 +277,7 @@ model ChatCompletionsResponseFormatJsonSchema
   type: "json_schema";
 
   json_schema: {
-    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+    /** A description of the response format, used by the AI model to determine how to generate responses in this format. */
     description?: string;
 
     /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
