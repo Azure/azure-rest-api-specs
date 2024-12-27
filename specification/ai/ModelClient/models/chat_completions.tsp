@@ -269,7 +269,7 @@ model ChatCompletionsResponseFormatJsonObject extends ChatCompletionsResponseFor
   type: "json_object";
 }
 
-model ChatResponseFormatJsonSchema extends ChatResponseFormat {
+model ChatCompletionsResponseFormatJsonSchema extends ChatCompletionsResponseFormat {
   @doc("""
     The type of response format being defined: `json_schema`
     """)
