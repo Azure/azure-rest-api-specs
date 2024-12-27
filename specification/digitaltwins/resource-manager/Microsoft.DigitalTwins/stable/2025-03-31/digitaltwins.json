@@ -1827,8 +1827,7 @@
     "EventGrid": {
       "description": "Properties related to EventGrid.",
       "required": [
-        "TopicEndpoint",
-        "accessKey1"
+        "TopicEndpoint"
       ],
       "x-ms-discriminator-value": "EventGrid",
       "type": "object",
@@ -1839,18 +1838,18 @@
       ],
       "properties": {
         "TopicEndpoint": {
-          "description": "EventGrid Topic Endpoint.",
+          "description": "EventGrid Topic Endpoint for key-based or identity-based authentication.",
           "type": "string"
         },
         "accessKey1": {
           "x-ms-secret": true,
-          "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+          "description": "EventGrid primary accesskey for key-based authentication. Will be obfuscated during read.",
           "type": "string",
           "x-nullable": true
         },
         "accessKey2": {
           "x-ms-secret": true,
-          "description": "EventGrid secondary accesskey. Will be obfuscated during read.",
+          "description": "EventGrid secondary accesskey for key-based authentication. Will be obfuscated during read.",
           "type": "string",
           "x-nullable": true
         }
