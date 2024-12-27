@@ -282,7 +282,7 @@ model ChatCompletionsResponseFormatJsonSchema extends ChatCompletionsResponseFor
     /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
     name: string;
 
-    schema?: unknown;
+    schema?: Record<unknown>;
 
     @doc("""
       Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
@@ -486,7 +486,7 @@ model FunctionDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 }
 
 @doc("""
