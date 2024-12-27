@@ -284,7 +284,7 @@ model ChatCompletionsResponseFormatJsonSchema
     @doc("""
       Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`.
       """)
-    strict?: boolean | null = false;
+    strict?: boolean = false;
   };
 }
 
@@ -359,7 +359,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content?: string | null;
+  content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
@@ -376,7 +376,7 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content: string | null;
+  content?: string;
 
   @encodedName("application/json", "tool_call_id")
   @doc("The ID of the tool call resolved by the provided content.")
