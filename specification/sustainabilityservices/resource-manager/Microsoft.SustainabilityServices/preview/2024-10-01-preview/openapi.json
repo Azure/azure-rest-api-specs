@@ -494,24 +494,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "AzureFrontDoorProfile": {
       "type": "object",
       "description": "The properties related to Azure FrontDoor Resource",
@@ -636,15 +618,79 @@
           "$ref": "#/definitions/AzureFrontDoorProfile",
           "description": "Profile of Azure FrontDoor Resource Created.",
           "readOnly": true
+        },
+        "cachingType": {
+          "type": "string",
+          "description": "Caching Type.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enablePublicEndpoint": {
+          "type": "boolean",
+          "description": "Enable Public Access.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Configuration of the managed resource group associated with the resource.",
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
+        },
+        "denyAssignmentExclusions": {
+          "type": "array",
+          "description": "Deny Assignments exclusion list.",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentExclusion"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       },
       "required": [
         "tokenClaimsApplicationId"
       ]
     },
-    "CalculationResourcePropertiesUpdate": {
+    "CalculationResourceUpdate": {
       "type": "object",
-      "description": "Details of the SustainabilityServices Calculations.",
+      "description": "The type used for update operations of the CalculationResource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculationResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "CalculationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CalculationResource.",
       "properties": {
         "version": {
           "type": "string",
@@ -654,30 +700,110 @@
             "update",
             "create"
           ]
+        },
+        "cachingType": {
+          "type": "string",
+          "description": "Caching Type.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enablePublicEndpoint": {
+          "type": "boolean",
+          "description": "Enable Public Access.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "denyAssignmentExclusions": {
+          "type": "array",
+          "description": "Deny Assignments exclusion list.",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentExclusion"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       }
     },
-    "CalculationResourceUpdate": {
+    "DenyAssignmentExclusion": {
       "type": "object",
-      "description": "A SustainabilityServicesProviderHub resource",
+      "description": "The properties related to Deny Assignment Exclusions",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CalculationResourcePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+        "id": {
+          "type": "string",
+          "description": "Object Id of Identity",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        "type": {
+          "type": "string",
+          "description": "Type of Identity",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "ManagedOnBehalfOfConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed on behalf of resource.",
+      "properties": {
+        "moboBrokerResources": {
+          "type": "array",
+          "description": "Associated MoboBrokerResources.",
+          "items": {
+            "$ref": "#/definitions/MoboBrokerResource"
+          },
+          "readOnly": true
         }
+      },
+      "required": [
+        "moboBrokerResources"
+      ]
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed resource group associated with the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource group location."
+        }
+      },
+      "required": [
+        "name",
+        "location"
+      ]
+    },
+    "MoboBrokerResource": {
+      "type": "object",
+      "description": "MoboBroker resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "MonitoringProfile": {

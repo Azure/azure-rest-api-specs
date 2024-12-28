@@ -116,6 +116,26 @@ model CalculationResourceProperties {
   @visibility("read")
   @doc("Profile of Azure FrontDoor Resource Created.")
   azureFrontDoorProfile?: AzureFrontDoorProfile;
+
+  @doc("Caching Type.")
+  @visibility("read", "create", "update")
+  cachingType?: string;
+
+  @visibility("read", "create", "update")
+  @doc("Enable Public Access.")
+  enablePublicEndpoint?: boolean;
+
+  @visibility("read")
+  @doc("Configuration of the managed resource group associated with the resource.")
+  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+
+  @visibility("read")
+  @doc("Managed On Behalf Of Configuration.")
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+
+  @doc("Deny Assignments exclusion list.")
+  @visibility("read", "update")
+  denyAssignmentExclusions?: DenyAssignmentExclusion[];
 }
 
 @doc("The properties related to Storage Resource")
@@ -160,14 +180,47 @@ model AzureFrontDoorProfile {
   id?: string;
 }
 
+@doc("Configuration of the managed resource group associated with the resource.")
+model ManagedResourceGroupConfiguration {
+  @doc("The resource group name.")
+  name: string;
+
+  @doc("The resource group location.")
+  location: string;
+}
+
+@doc("Configuration of the managed on behalf of resource.")
+model ManagedOnBehalfOfConfiguration {
+    @visibility("read")
+    @doc("Associated MoboBrokerResources.")
+    moboBrokerResources: MoboBrokerResource[];
+}
+
+@doc("MoboBroker resource.")
+model MoboBrokerResource {
+  @visibility("read")
+  id: string;
+}
+
+@doc("The properties related to Deny Assignment Exclusions")
+model DenyAssignmentExclusion {
+  @doc("Object Id of Identity")
+  @visibility("read", "update")
+  id: string;
+
+  @doc("Type of Identity")
+  @visibility("read", "update")
+  type: string;
+}
+
 @armResourceOperations(CalculationResource)
 interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
-  update is ArmResourcePatchAsync<
-    CalculationResource,
-    CalculationResourceProperties
-  >;
+  update is ArmCustomPatchAsync<CalculationResource,Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  CalculationResource,
+  CalculationResourceProperties
+  >>;
   delete is ArmResourceDeleteWithoutOkAsync<CalculationResource>;
   listByResourceGroup is ArmResourceListByParent<CalculationResource>;
   listBySubscription is ArmListBySubscription<CalculationResource>;
