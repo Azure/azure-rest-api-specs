@@ -191,9 +191,9 @@ model ManagedResourceGroupConfiguration {
 
 @doc("Configuration of the managed on behalf of resource.")
 model ManagedOnBehalfOfConfiguration {
-    @visibility("read")
-    @doc("Associated MoboBrokerResources.")
-    moboBrokerResources: MoboBrokerResource[];
+  @visibility("read")
+  @doc("Associated MoboBrokerResources.")
+  moboBrokerResources: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
@@ -218,10 +218,13 @@ model DenyAssignmentExclusion {
 interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
-  update is ArmCustomPatchAsync<CalculationResource,Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  CalculationResource,
-  CalculationResourceProperties
-  >>;
+  update is ArmCustomPatchAsync<
+  +    CalculationResource,
+  +    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  +      CalculationResource,
+  +      CalculationResourceProperties
+  +    >
+  +  >;
   delete is ArmResourceDeleteWithoutOkAsync<CalculationResource>;
   listByResourceGroup is ArmResourceListByParent<CalculationResource>;
   listBySubscription is ArmListBySubscription<CalculationResource>;
