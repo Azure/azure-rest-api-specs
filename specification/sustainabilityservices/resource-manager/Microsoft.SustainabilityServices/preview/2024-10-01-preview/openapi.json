@@ -665,12 +665,8 @@
     },
     "CalculationResourceUpdate": {
       "type": "object",
-      "description": "A SustainabilityServicesProviderHub resource",
+      "description": "The type used for update operations of the CalculationResource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CalculationResourcePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
@@ -678,17 +674,23 @@
         "sku": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CalculationResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
-    "CalculationResourcePropertiesUpdate": {
+    "CalculationResourceUpdateProperties": {
       "type": "object",
-      "description": "Details of the SustainabilityServices Calculations.",
+      "description": "The updatable properties of the CalculationResource.",
       "properties": {
         "version": {
           "type": "string",
@@ -797,6 +799,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "description": "Mobo Broker Resource Id",
           "readOnly": true
         }
       },

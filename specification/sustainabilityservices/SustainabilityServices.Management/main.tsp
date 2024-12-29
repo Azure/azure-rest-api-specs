@@ -198,6 +198,7 @@ model ManagedOnBehalfOfConfiguration {
 
 @doc("MoboBroker resource.")
 model MoboBrokerResource {
+  @doc("Mobo Broker Resource Id")
   @visibility("read")
   id: string;
 }
