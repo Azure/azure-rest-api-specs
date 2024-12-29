@@ -219,12 +219,12 @@ interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
   update is ArmCustomPatchAsync<
-  +    CalculationResource,
-  +    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  +      CalculationResource,
-  +      CalculationResourceProperties
-  +    >
-  +  >;
+       CalculationResource,
+       Azure.ResourceManager.Foundations.ResourceUpdateModel<
+         CalculationResource,
+         CalculationResourceProperties
+       >
+     >;
   delete is ArmResourceDeleteWithoutOkAsync<CalculationResource>;
   listByResourceGroup is ArmResourceListByParent<CalculationResource>;
   listBySubscription is ArmListBySubscription<CalculationResource>;
