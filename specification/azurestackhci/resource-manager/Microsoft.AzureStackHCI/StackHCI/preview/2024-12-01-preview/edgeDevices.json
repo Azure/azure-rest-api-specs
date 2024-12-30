@@ -857,6 +857,18 @@
         }
       }
     },
+    "HciStorageProfile": {
+      "type": "object",
+      "description": "Storage configurations for HCI device.",
+      "properties": {
+        "poolableDisksCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of storage disks in the device with $CanPool as true.",
+          "readOnly": true
+        }
+      }
+    },
     "HciReportedProperties": {
       "type": "object",
       "description": "The device Configuration for HCI device.",
@@ -874,6 +886,11 @@
         "sbeDeploymentPackageInfo": {
           "$ref": "#/definitions/SbeDeploymentPackageInfo",
           "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/HciStorageProfile",
+          "description": "Hci device storage specific information.",
           "readOnly": true
         }
       },
