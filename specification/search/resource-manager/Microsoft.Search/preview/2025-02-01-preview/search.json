@@ -2444,6 +2444,31 @@
             ]
           }
         },
+        "computeType": {
+          "type": "string",
+          "default": "default",
+          "description": "You can set this property to back the search service with Azure Confidential Compute.",
+          "enum": [
+            "default",
+            "confidential"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "default",
+                "name": "Default",
+                "description": "Create the service with the default compute."
+              },
+              {
+                "value": "confidential",
+                "name": "Confidential",
+                "description": "Create the service with Azure Confidential Compute."
+              }
+            ]
+          }
+        },
         "publicNetworkAccess": {
           "type": "string",
           "default": "enabled",
