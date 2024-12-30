@@ -122,7 +122,7 @@ model TestsNotificationRule extends NotificationRule {
   @doc("Scope of type Tests.")
   scope: NotificationScopeType.Tests;
 
-  @doc("The test ids to include. If not provided, the notification will be sent for all testIds.")
+  @doc("The test ids to include. If not provided, notification will be sent for all testIds.")
   testIds?: string[];
 
   @doc("""
