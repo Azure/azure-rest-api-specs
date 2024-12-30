@@ -52,7 +52,7 @@ suppressions:
     from: playwrighttesting.json
     reason: No provision to define path parameter schema for custom routes of rpc operations in Typespec.
     where:
-      - $.paths["/accounts/{accountId}/browsers"].get.parameters[3]
+      - $.paths["/accounts/{accountId}/browsers"].get.parameters[1]
   - code: OperationId
     from: playwrighttesting.json
     reason: Inconsistency with Typespec nomenclature to use create and replace for put while update is used for patch api.
