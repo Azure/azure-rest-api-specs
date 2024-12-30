@@ -854,6 +854,11 @@
           "type": "string",
           "description": "Version of assembly present on device",
           "readOnly": true
+        },
+        "cvmCpuType": {
+          "type": "string",
+          "description": "Cpu type to be used for CVM identification",
+          "readOnly": true
         }
       }
     },
@@ -865,6 +870,17 @@
           "type": "integer",
           "format": "int64",
           "description": "Number of storage disks in the device with $CanPool as true.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciHardwareProfile": {
+      "type": "object",
+      "description": "Hardware configurations for HCI device.",
+      "properties": {
+        "processorType": {
+          "type": "string",
+          "description": "Process type of the device",
           "readOnly": true
         }
       }
@@ -891,6 +907,11 @@
         "storageProfile": {
           "$ref": "#/definitions/HciStorageProfile",
           "description": "Hci device storage specific information.",
+          "readOnly": true
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HciHardwareProfile",
+          "description": "Hci device hardware specific information.",
           "readOnly": true
         }
       },
