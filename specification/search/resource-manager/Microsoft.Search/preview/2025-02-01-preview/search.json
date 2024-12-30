@@ -2447,7 +2447,7 @@
         "computeType": {
           "type": "string",
           "default": "default",
-          "description": "You can set this property to back the search service with Azure Confidential Compute.",
+          "description": "Configure this property to support the search service using either the default compute or Azure Confidential Compute.",
           "enum": [
             "default",
             "confidential"
@@ -3315,13 +3315,33 @@
                     "limits": {
                       "type": "object",
                       "properties": {
+                        "indexes": {
+                          "type": "integer",
+                          "description": "The maximum number of indexes available for this SKU."
+                        },
+                        "indexers": {
+                          "type": "integer",
+                          "description": "The maximum number of indexers available for this SKU."
+                        },
                         "partitionStorageInGigabytes": {
                           "type": "integer",
-                          "description": "The maximum partition storage in Gigabytes available in this region."
+                          "description": "The maximum storage size in Gigabytes available for this SKU per partition."
                         },
                         "partitionVectorStorageInGigabytes": {
                           "type": "integer",
-                          "description": "The maximum partition vector storage in Gigabytes available in this region."
+                          "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
+                        },
+                        "searchUnits": {
+                          "type": "integer",
+                          "description": "The maximum number of search units available for this SKU."
+                        },
+                        "replicas": {
+                          "type": "integer",
+                          "description": "The maximum number of replicas available for this SKU."
+                        },
+                        "partitions": {
+                          "type": "integer",
+                          "description": "The maximum number of partitions available for this SKU."
                         }
                       },
                       "description": "The limits associated with this SKU in this region."
