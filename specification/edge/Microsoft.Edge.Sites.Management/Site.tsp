@@ -55,7 +55,6 @@ interface SitesBySubscription {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
 interface SitesByServiceGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
-  @operationId("SitesBy_ServiceGroup")
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
   listByServiceGroup(
