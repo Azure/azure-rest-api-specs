@@ -714,6 +714,18 @@
         "modelAsString": true
       }
     },
+    "ApplicationType": {
+      "type": "string",
+      "description": "Object representing the application type of the Confidential Ledger. Defaults to ConfidentialLedger.",
+      "enum": [
+        "ConfidentialLedger",
+        "CodeTransparency"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationType",
+        "modelAsString": true
+      }
+    },
     "LedgerProperties": {
       "type": "object",
       "description": "Additional Confidential Ledger properties.",
@@ -810,9 +822,14 @@
           "description": "Number of additional threads processing incoming client requests in the enclave (modify with care!)"
         },
         "enclavePlatform": {
-          "description": "Enclave platform of Confidential Ledger.",
+          "description": "Enclave platform of the Confidential Ledger.",
           "readOnly": false,
           "$ref": "#/definitions/EnclavePlatform"
+        },
+        "applicationType": {
+          "description": "Application type of the Confidential Ledger.",
+          "readOnly": false,
+          "$ref": "#/definitions/ApplicationType"
         }
       }
     },
