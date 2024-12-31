@@ -2759,7 +2759,7 @@
             "description": "Represents an environment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdate"
+              "$ref": "#/definitions/EnvironmentPatchProperties"
             }
           }
         ],
@@ -4161,10 +4161,7 @@
         "localAdministrator": {
           "$ref": "#/definitions/LocalAdminStatus",
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -5029,6 +5026,17 @@
         }
       }
     },
+    "EnvironmentPatchProperties": {
+      "type": "object",
+      "description": "Properties of an environment. These properties can be updated via PATCH after the resource has been created.",
+      "properties": {
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
+        }
+      }
+    },
     "EnvironmentProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the environment.",
@@ -5298,22 +5306,6 @@
             "description": "The environment type is not enabled for use in the project."
           }
         ]
-      }
-    },
-    "EnvironmentUpdate": {
-      "type": "object",
-      "description": "Properties of an environment.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
       }
     },
     "HardwareProfile": {
