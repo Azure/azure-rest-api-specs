@@ -63,7 +63,7 @@ interface SitesByServiceGroup {
     @path
     @doc("The name of the service group")
     servicegroupName: string,
-  ): ArmResponse<Site> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
 
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @doc("Get Site at SG scope")
@@ -72,10 +72,12 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
     @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     siteName: string,
   ): ArmResponse<Site> | ErrorResponse;
 
@@ -88,10 +90,12 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
     @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     siteName: string,
 
     @body
@@ -111,10 +115,12 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
     @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     siteName: string,
 
     @body
@@ -131,10 +137,12 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
     @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     siteName: string,
   ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
 }
