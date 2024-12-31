@@ -1,5 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;

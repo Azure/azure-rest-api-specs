@@ -4,10 +4,6 @@
  * Version: 0.8.2
  * Date: 2024-08-12T15:37:41.195Z
  */
-import "@typespec/rest";
-import "@typespec/http";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
