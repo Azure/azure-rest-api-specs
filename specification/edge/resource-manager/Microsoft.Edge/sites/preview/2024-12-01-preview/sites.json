@@ -136,7 +136,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Site"
+              "$ref": "#/definitions/SiteListResult"
             }
           },
           "default": {
@@ -150,6 +150,9 @@
           "SitesByServiceGroup_ListByServiceGroup": {
             "$ref": "./examples/SitesByServiceGroup_ListByServiceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -166,14 +169,16 @@
             "in": "path",
             "description": "The name of the service group",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "The name of the site",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -208,14 +213,16 @@
             "in": "path",
             "description": "The name of the service group",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "The name of the site",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "resource",
@@ -280,14 +287,16 @@
             "in": "path",
             "description": "The name of the service group",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "The name of the site",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "properties",
@@ -331,14 +340,16 @@
             "in": "path",
             "description": "The name of the service group",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           },
           {
             "name": "siteName",
             "in": "path",
             "description": "The name of the site",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
