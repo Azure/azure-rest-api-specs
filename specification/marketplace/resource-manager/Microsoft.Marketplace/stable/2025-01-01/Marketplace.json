@@ -867,7 +867,7 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStoreCollectionOffersWithPrivatePlans_List",
+        "operationId": "PrivateStoreCollectionOffersWithContextsPlans_List",
         "description": "Get a list of offers in the given private store and collection including private plans.",
         "parameters": [
           {
@@ -880,7 +880,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/GetCollectionOffersWithPrivatePlansProperties"
+              "$ref": "#/definitions/GetCollectionOffersWithContextsPlansProperties"
             }
           }
         ],
@@ -902,8 +902,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetCollectionOffersWithPrivatePlans": {
-            "$ref": "./examples/GetCollectionOffersWithPrivatePlans.json"
+          "GetCollectionOffersWithContextsPlans": {
+            "$ref": "./examples/GetCollectionOffersWithContextsPlans.json"
           }
         }
       }
@@ -2253,18 +2253,18 @@
         }
       }
     },
-    "GetCollectionOffersWithPrivatePlansProperties": {
+    "GetCollectionOffersWithContextsPlansProperties": {
       "description": "List of offer IDs and list of subscriptions IDs to get the offers' details",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GetCollectionOffersWithPrivatePlansDetails",
+          "$ref": "#/definitions/GetCollectionOffersWithContextsPlansDetails",
           "description": "List of offer IDs and list of subscriptions IDs to get the offers' details",
           "x-ms-client-flatten": true
         }
       }
     },
-    "GetCollectionOffersWithPrivatePlansDetails": {
+    "GetCollectionOffersWithContextsPlansDetails": {
       "description": "List of offers IDs and list of subscriptions IDs to get the private plans besides the public plans",
       "type": "object",
       "properties": {
