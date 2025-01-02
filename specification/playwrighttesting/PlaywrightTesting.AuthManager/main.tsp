@@ -5,26 +5,41 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Autorest;
 
 @server(
-  "https://api.playwright-int.io",
-  "Azure Playwright Service API Endpoint"
+  "{endpoint}",
+  "Microsoft Azure Playwright Service API Endpoint",
+  {
+    @doc("""
+      Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+        https://{region}.api.playwright.microsoft.com).
+      """)
+    endpoint: string,
+  }
 )
 @useAuth(
   [
     OAuth2Auth<[
       {
         type: OAuth2FlowType.implicit,
+        description: "We can use OAuth2 Implicit flow to get the auth token for calling the APIs.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://preview.playwright-int.io/.default"],
+        scopes: ["https://playwright.microsoft.com/.default"],
+      }
+    ]>,
+    OAuth2Auth<[
+      {
+        type: OAuth2FlowType.authorizationCode,
+        description: "We can use OAuth2 Authorization Code flow to get the auth token for calling the APIs.",
+        authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+        tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+        scopes: ["https://playwright.microsoft.com/.default"],
       }
     ]>
   ]
@@ -37,22 +52,24 @@ namespace Microsoft.PlaywrightTesting.AuthManager;
 
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
-  @doc("Version 2023-10-01-preview")
+  @doc("Version 2024-12-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2023-10-01-preview`,
+  `2024-12-01`,
 }
 
 // Models ////////////////////
 
-@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.")
+@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an Azure resource.")
 @resource("accounts")
 model Account {
   @key("accountId")
   @doc("The account id.")
+  @maxLength(64)
+  @pattern("[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+")
   @visibility("read")
   id: string;
 
-  @doc("The ARM fully-qualified resource id for the account.")
+  @doc("The fully-qualified Azure resource id for the account.")
   @visibility("read")
   resourceId: string;
 
@@ -64,11 +81,11 @@ model Account {
   @visibility("read")
   state: AccountState;
 
-  @doc("The ARM-based subscription id for the account.")
+  @doc("The Azure subscription id for the account.")
   @visibility("read")
   subscriptionId: uuid;
 
-  @doc("The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @doc("The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
   @visibility("read")
   subscriptionState: SubscriptionState;
 
@@ -76,7 +93,7 @@ model Account {
   @visibility("read")
   tenantId: uuid;
 
-  @doc("The account resource ARM location, for eg. eastus, southeastasia.")
+  @doc("The account resource location in Azure, for eg. eastus, southeastasia.")
   @visibility("read")
   location: string;
 
@@ -90,7 +107,11 @@ model Account {
 
   @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
   @visibility("read")
-  reporting?: EnablementStatus = EnablementStatus.Disabled;
+  reporting?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
+  @visibility("read")
+  localAuth?: EnablementStatus = EnablementStatus.Disabled;
 }
 
 @doc("The account state.")
@@ -104,7 +125,7 @@ union AccountState {
   "Inactive",
 }
 
-@doc("The ARM-based subscription state.")
+@doc("The Azure subscription state.")
 union SubscriptionState {
   string,
 
@@ -130,6 +151,8 @@ union SubscriptionState {
 model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
+  @maxLength(64)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility("read")
   id: uuid;
 
@@ -146,7 +169,7 @@ model AccessToken {
 
   @doc("The access-token createdAt utcDateTime.")
   @visibility("read")
-  createdAt?: utcDateTime;
+  createdAt: utcDateTime;
 
   @doc("The access-token expiryAt utcDateTime.")
   @visibility("read", "create")
@@ -154,7 +177,7 @@ model AccessToken {
 
   @doc("The access-token state - Active | Expired.")
   @visibility("read")
-  state?: AccessTokenState;
+  state: AccessTokenState;
 }
 
 @doc("The access-token state.")
@@ -162,10 +185,10 @@ union AccessTokenState {
   string,
 
   @doc("The access-token is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The access-token is Expired.")
-  "Expired",
+  Expired: "Expired",
 }
 
 @doc("The enablement status of a feature.")
@@ -179,6 +202,17 @@ union EnablementStatus {
   Disabled: "Disabled",
 }
 
+@doc("The os to configure for remote test runs.")
+union OS {
+  string,
+
+  @doc("Linux OS.")
+  Linux: "Linux",
+
+  @doc("Windows OS.")
+  Windows: "Windows",
+}
+
 // Operations ////////////////////
 
 alias ServiceTraits = NoRepeatableRequests &
@@ -189,23 +223,54 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface AccessTokens {
   // AccessToken Operations
+  @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  createOrReplace is Operations.ResourceCreateOrReplace<AccessToken>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @doc("Creates an access-token with given access-token id in guid format.")
-  createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
+  @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  get is Operations.ResourceRead<AccessToken>;
 
-  @doc("Get an access-token for given access-token id in guid format.")
-  getAccessToken is Operations.ResourceRead<AccessToken>;
+  @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  delete is Operations.ResourceDelete<AccessToken>;
 
-  @doc("Revoke an access-token with given access-token id in guid format.")
-  deleteAccessToken is Operations.ResourceDelete<AccessToken>;
-
-  @doc("List access-tokens for a given accountId.")
-  listAccessTokens is Operations.ResourceList<AccessToken>;
+  @doc("Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.")
+  list is Operations.ResourceList<AccessToken>;
 }
+
+alias GetBrowsersParams = {
+  @path
+  @doc("The account id.")
+  accountId: string;
+
+  @query
+  @doc("The run id provided by client for corresponding remote test run.")
+  runId?: string;
+
+  @query
+  @doc("The os provided by client for remote test runs.")
+  os?: OS = OS.Linux;
+};
+
+alias GetBrowsersResponse = {
+  @statusCode
+  _: 302;
+
+  @header
+  @doc("The redirect target URL to run test on remote browsers.")
+  location: url;
+};
 
 interface Accounts {
   // Accounts Operations
-  @doc("Get details of the ARM resource mapped to an account for the given accountId.")
-  getAccount is Operations.ResourceRead<Account>;
+
+  @doc("Get details of the Azure resource mapped to an account for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  get is Operations.ResourceRead<Account>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
+  @doc("Gets remote browsers corresponding to given account id and redirects the client for running Playwright tests. Authorization required is Bearer JWT Access token provided by EntraID or Microsoft Playwright Testing Service.")
+  @route("/accounts/{accountId}/browsers")
+  getBrowsers is RpcOperation<
+    GetBrowsersParams,
+    GetBrowsersResponse,
+    ServiceTraits
+  >;
 }
