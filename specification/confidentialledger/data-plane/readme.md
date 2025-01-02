@@ -12,7 +12,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 > see https://aka.ms/autorest
 
 ``` yaml
-tag: package-2024-08-22-preview-ledger
+tag: package-preview-2024-12-09
 openapi-type: data-plane
 ```
 
@@ -158,4 +158,22 @@ These settings apply only when `--tag=package-2024-08-22-preview-identity` is sp
 ```yaml $(tag) == 'package-2024-08-22-preview-identity'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-08-22-preview/identityservice.json
+```
+
+### Tag: package-2024-12-09-preview-ledger
+
+These settings apply only when `--tag=package-2024-12-09-preview-ledger` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-ledger'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+```
+
+### Tag: package-2024-12-09-preview-identity
+
+These settings apply only when `--tag=package-2024-12-09-preview-identity` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-identity'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json
 ```
