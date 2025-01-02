@@ -126,10 +126,6 @@ model CalculationResourceProperties {
   enablePublicEndpoint?: boolean;
 
   @visibility("read")
-  @doc("Configuration of the managed resource group associated with the resource.")
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-
-  @visibility("read")
   @doc("Managed On Behalf Of Configuration.")
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
@@ -178,15 +174,6 @@ model AzureFrontDoorProfile {
   @doc("Resource Id of AzureFrontDoor Resource")
   @visibility("read")
   id?: string;
-}
-
-@doc("Configuration of the managed resource group associated with the resource.")
-model ManagedResourceGroupConfiguration {
-  @doc("The resource group name.")
-  name: string;
-
-  @doc("The resource group location.")
-  location: string;
 }
 
 @doc("Configuration of the managed on behalf of resource.")

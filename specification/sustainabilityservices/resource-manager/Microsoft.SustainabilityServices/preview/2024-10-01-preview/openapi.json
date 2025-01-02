@@ -637,11 +637,6 @@
             "create"
           ]
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Configuration of the managed resource group associated with the resource.",
-          "readOnly": true
-        },
         "managedOnBehalfOfConfiguration": {
           "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
           "description": "Managed On Behalf Of Configuration.",
@@ -773,24 +768,6 @@
       },
       "required": [
         "moboBrokerResources"
-      ]
-    },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "Configuration of the managed resource group associated with the resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The resource group name."
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource group location."
-        }
-      },
-      "required": [
-        "name",
-        "location"
       ]
     },
     "MoboBrokerResource": {
