@@ -93,7 +93,7 @@ interface Pools {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -127,7 +127,7 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -350,7 +350,7 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -370,7 +370,7 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -582,7 +582,7 @@ interface Jobs {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -613,7 +613,7 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -654,7 +654,7 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -863,7 +863,7 @@ interface JobSchedules {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -925,7 +925,7 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1199,7 +1199,7 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1519,7 +1519,7 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
         """)
       @query
       @clientName("filter", "!autorest")
@@ -1653,7 +1653,7 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
         """)
       @query
       @clientName("filter", "!autorest")

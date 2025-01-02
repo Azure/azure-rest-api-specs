@@ -29,7 +29,7 @@ union AzureLargeInstanceHardwareTypeNamesEnum {
   "SDFLEX",
 }
 
-@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://docs.microsoft.com/azure/sap/large-instances/hana-available-skus")
+@doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/azure/sap/large-instances/hana-available-skus")
 union AzureLargeInstanceSizeNamesEnum {
   string,
 
