@@ -868,64 +868,7 @@
             "enableMetrics": {
               "description": "Enable jmx core metrics for the java app",
               "type": "boolean"
-            },
-            "javaAgent": {
-              "description": "Diagnostic capabilities achieved by java agent",
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "description": "Enable java agent injection for the java app.",
-                  "type": "boolean"
-                },
-                "logging": {
-                  "description": "Capabilities on the java logging scenario.",
-                  "type": "object",
-                  "properties": {
-                    "loggerSettings": {
-                      "description": "Settings of the logger for the java app.",
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/LoggerSetting"
-                      },
-                      "x-ms-identifiers": [
-                        "logger",
-                        "level"
-                      ]
-                    }
-                  }
-                }
-              }
             }
-          }
-        }
-      }
-    },
-    "LoggerSetting": {
-      "description": "Logger settings for java workloads.",
-      "type": "object",
-      "required": [
-        "logger",
-        "level"
-      ],
-      "properties": {
-        "logger": {
-          "description": "Logger name.",
-          "type": "string"
-        },
-        "level": {
-          "description": "The specified logger's log level.",
-          "enum": [
-            "off",
-            "error",
-            "info",
-            "debug",
-            "trace",
-            "warn"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "level",
-            "modelAsString": true
           }
         }
       }
