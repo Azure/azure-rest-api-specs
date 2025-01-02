@@ -161,19 +161,6 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.GuestConfiguration
-  output-folder: $(csharp-sdks-folder)/guestconfiguration/Microsoft.Azure.Management.GuestConfiguration/src/Generated
-  clear-output-folder: true
-```
 
 
 
