@@ -27,7 +27,7 @@ model OnlineExperimentWorkspaceProperties {
     /**
      * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
      */
-    logAnalyticsWorkspaceResourceId?: Azure.Core.armResourceIdentifier<[
+    logAnalyticsWorkspaceResourceId: Azure.Core.armResourceIdentifier<[
         {
             type: "Microsoft.OperationalInsights/workspaces";
         }
@@ -36,7 +36,7 @@ model OnlineExperimentWorkspaceProperties {
     /**
      * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
      */
-    logsExporterStorageAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    logsExporterStorageAccountResourceId: Azure.Core.armResourceIdentifier<[
         {
             type: "Microsoft.Storage/storageAccounts";
         }
