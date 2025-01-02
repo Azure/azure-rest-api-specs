@@ -111,7 +111,8 @@ model FileSystemResourceUpdate {
   /**
    * Resource tags.
    */
-  tags?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 
   /**
    * The updatable properties of the FileSystemResource.
@@ -131,7 +132,8 @@ model ManagedServiceIdentityUpdate {
   /**
    * The identities assigned to this resource by the user.
    */
-  userAssignedIdentities?: UserAssignedIdentity;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**

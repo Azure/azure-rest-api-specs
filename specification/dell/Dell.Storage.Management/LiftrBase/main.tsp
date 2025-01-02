@@ -134,5 +134,7 @@ model UserDetails {
   /**
    * User Email
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
+  @extension("x-ms-secret", true)
   email: string;
 }

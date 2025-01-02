@@ -657,8 +657,11 @@
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
-          "type": "string",
-          "description": "Resource tags."
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdateProperties",
@@ -690,8 +693,11 @@
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-          "description": "The identities assigned to this resource by the user."
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },
@@ -701,7 +707,8 @@
       "properties": {
         "email": {
           "type": "string",
-          "description": "User Email"
+          "description": "User Email",
+          "x-ms-secret": true
         }
       },
       "required": [
