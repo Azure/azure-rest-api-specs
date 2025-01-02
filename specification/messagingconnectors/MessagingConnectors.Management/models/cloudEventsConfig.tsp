@@ -12,10 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("CloudEvents types")
-union CloudEventsTypes {
-  @doc("Do not use CloudEventsConfig")
-  None: "None",
-
+union CloudEventsType {
   @doc("CatalogCloudEventsConfig")
   Catalog: "Catalog",
 
@@ -26,7 +23,7 @@ union CloudEventsTypes {
 @discriminator("type")
 model CloudEventsConfig {
   @doc("Type of CloudEventsConfig.")
-  type: CloudEventsTypes;
+  type: CloudEventsType;
 }
 
 @doc("Catalog schema id config")
@@ -44,7 +41,7 @@ model CatalogSchemaId {
 @doc("Catalog cloud events transform config.")
 model CatalogCloudEventsConfig extends CloudEventsConfig {
   @doc("Type of CatalogCloudEventsConfig.")
-  type: CloudEventsTypes.Catalog;
+  type: CloudEventsType.Catalog;
 
   @doc("Whether auto-register new schemas.")
   autoRegisterSchemas: boolean;

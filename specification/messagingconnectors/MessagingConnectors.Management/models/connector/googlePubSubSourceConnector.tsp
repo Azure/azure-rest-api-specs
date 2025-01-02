@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for GooglePubSubSourceConnector")
-model GooglePubSubSourceConnectorProperties extends ConnectorProperties {
+model GooglePubSubSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of GooglePubSubSourceConnector")
   connectorType: ConnectorType.GooglePubSubSource;
 

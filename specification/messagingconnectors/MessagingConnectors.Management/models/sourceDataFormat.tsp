@@ -12,15 +12,12 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Source data format Types")
-union SourceDataFormatTypes {
-  @doc("Do not use SourceDataFormat feature.")
-  None: "None",
+union SourceDataFormatType {
+  @doc("Json format")
+  Json: "Json",
 
-  @doc("JSON format")
-  JSON: "JSON",
-
-  @doc("CSV format")
-  CSV: "CSV",
+  @doc("Csv format")
+  Csv: "Csv",
 
   @doc("ConfluentAvro format")
   ConfluentAvro: "ConfluentAvro",
@@ -32,20 +29,20 @@ union SourceDataFormatTypes {
 @discriminator("type")
 model SourceDataFormat {
   @doc("Type of data format")
-  type: SourceDataFormatTypes;
+  type: SourceDataFormatType;
 }
 
 @doc("JSON source data format model")
 model JsonSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
-  type: SourceDataFormatTypes.JSON;
+  type: SourceDataFormatType.Json;
 
   @doc("Charset supported by Java language")
   textCharset: string;
 }
 
 @doc("Delimiter for csv")
-union CsvDelimiters {
+union CsvDelimiter {
   @doc("Pipe delimiter")
   Pipe: "Pipe",
 
@@ -65,7 +62,7 @@ union CsvDelimiters {
 }
 
 @doc("CsvHeader types")
-union CsvHeaderTypes {
+union CsvHeaderType {
   @doc("include CSV header")
   IncludeHeader: "IncludeHeader",
 
@@ -78,13 +75,13 @@ union CsvHeaderTypes {
 @doc("CSV Source data format model")
 model CsvSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
-  type: SourceDataFormatTypes.CSV;
+  type: SourceDataFormatType.Csv;
 
   @doc("CSV header type")
-  header: CsvHeaderTypes;
+  header: CsvHeaderType;
 
   @doc("CSV Delimiter")
-  delimiter: CsvDelimiters;
+  delimiter: CsvDelimiter;
 
   @doc("Charset supported by Java language")
   textCharset: string;
@@ -93,7 +90,7 @@ model CsvSourceDataFormat extends SourceDataFormat {
 @doc("ConfluentAvro Source data format model")
 model ConfluentAvroSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
-  type: SourceDataFormatTypes.ConfluentAvro;
+  type: SourceDataFormatType.ConfluentAvro;
 
   @doc("Registry url for Confluent.")
   schemaRegistryUrl: url;
