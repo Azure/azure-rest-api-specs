@@ -134,6 +134,5 @@ model UserDetails {
     /**
      * User Email
      */
-    @extension("x-ms-secret", true)
     email: string;
 }

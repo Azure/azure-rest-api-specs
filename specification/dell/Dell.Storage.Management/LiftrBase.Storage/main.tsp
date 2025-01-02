@@ -66,6 +66,7 @@ model FileSystemResourceProperties {
     /**
      * Private IPs of the resource
      */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
     privateIPs?: string[];
 }
 
@@ -110,7 +111,7 @@ model FileSystemResourceUpdate {
     /**
      * Resource tags.
      */
-    tags?: Record<string>;
+    tags?: string;
 
     /**
      * The updatable properties of the FileSystemResource.
@@ -130,7 +131,7 @@ model ManagedServiceIdentityUpdate {
     /**
      * The identities assigned to this resource by the user.
      */
-    userAssignedIdentities?: Record<UserAssignedIdentity>;
+    userAssignedIdentities?: UserAssignedIdentity;
 }
 
 /**
