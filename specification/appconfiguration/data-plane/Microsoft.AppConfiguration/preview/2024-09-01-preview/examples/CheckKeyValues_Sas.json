@@ -1,0 +1,18 @@
+{
+  "operationId": "CheckKeyValues",
+  "title": "Requests the headers and status of the given resource using SAS token authentication.",
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2024-09-01-preview",
+    "Authorization": "SAS sas=res=kv;rp=key;rp=label;rp=tags;exp=2024-09-01T00:00:00.0000000Z;ccma=3600;kind=primary;oid=<ObjectId>;tid=<TenantId>;p=read;sig=<signature>"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/vnd.microsoft.appconfig.kvset+json",
+        "ETag": "W/\"L10qpBghN693OaxydgTkLmrBbV5\"",
+        "Cache-Control": "max-age=3600"
+      }
+    }
+  }
+}

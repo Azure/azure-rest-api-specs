@@ -32,6 +32,12 @@ alias syncTokenHeader = {
   syncToken?: string;
 };
 
+alias cacheControlHeader = {
+  @doc("This optional response header may contain max-age directive to specify the maximum time (in seconds) that a response is considered fresh after the response is generated.")
+  @header("Cache-Control")
+  cacheControl?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
@@ -186,7 +192,8 @@ op getKeyValues is Foundations.ResourceList<
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">  &
+    cacheControlHeader,
   {},
   Error
 >;
@@ -258,7 +265,7 @@ op checkKeyValues is appConfigOperation<
     @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders & cacheControlHeader
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -299,12 +306,21 @@ op getKeyValue is Foundations.ResourceOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    @doc("""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
+
     ...ClientRequestIdHeader;
   },
   Response = Body<KeyValue> & {
     ...RequestIdResponseHeader;
     ...AppConfigResponseHeaders;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
+    ...cacheControlHeader
   },
   Traits = {},
   ErrorResponse = Error
@@ -437,8 +453,16 @@ op checkKeyValue is appConfigOperation<
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: KeyValueFields[];
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    @doc("""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
-  OkResponse & AppConfigResponseHeaders
+  OkResponse & AppConfigResponseHeaders & cacheControlHeader
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
@@ -471,6 +495,9 @@ op getSnapshots is Foundations.ResourceList<
   },
   SnapshotListResult & {
     ...syncTokenHeader;
+
+    ...cacheControlHeader;
+
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   {},
@@ -495,6 +522,8 @@ op checkSnapshots is appConfigOperation<
   },
   OkResponse & {
     ...syncTokenHeader;
+
+    ...cacheControlHeader;
   }
 >;
 
@@ -530,6 +559,8 @@ op getSnapshot is standardOps.ResourceRead<
       @doc("Includes links to related resources.")
       @header("Link")
       link?: string;
+
+      ...cacheControlHeader;
 
       ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     } & RequestIdResponseHeader>
@@ -650,6 +681,8 @@ op checkSnapshot is appConfigOperation<
   },
   OkResponse & {
     ...AppConfigResponseHeaders;
+
+    ...cacheControlHeader;
 
     @doc("Includes links to related resources.")
     @header("Link")
