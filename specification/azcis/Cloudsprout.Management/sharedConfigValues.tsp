@@ -53,7 +53,7 @@ model Scope {
   geoValue: string;
 
   @doc("EnvType. The valid value are Prod, PPE, Test, Dev.")
-  envType: string;
+  envType?: string;
 }
 
 @armResourceOperations
