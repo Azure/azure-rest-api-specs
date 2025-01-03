@@ -1,0 +1,42 @@
+{
+  "operationId": "Operations_List",
+  "title": "ListOperations",
+  "parameters": {
+    "api-version": "2021-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Storage/storageAccounts/read",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Accounts",
+              "operation": "Read Storage Account",
+              "description": "Reads the properties of a storage account."
+            }
+          },
+          {
+            "name": "Microsoft.Storage/storageAccounts/write",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Accounts",
+              "operation": "Write Storage Account",
+              "description": "Creates or updates a storage account."
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred."
+        }
+      }
+    }
+  }
+}

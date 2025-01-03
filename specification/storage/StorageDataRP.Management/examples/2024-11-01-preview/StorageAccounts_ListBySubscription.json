@@ -1,0 +1,34 @@
+{
+  "operationId": "StorageAccounts_ListBySubscription",
+  "title": "ListStorageAccountsBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/mystorageaccount1",
+            "name": "mystorageaccount1",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/mystorageaccount2",
+            "name": "mystorageaccount2",
+            "type": "Microsoft.Storage/storageAccounts",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

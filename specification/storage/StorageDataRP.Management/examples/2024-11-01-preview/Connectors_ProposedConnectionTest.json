@@ -1,0 +1,38 @@
+{
+  "operationId": "Connectors_ProposedConnectionTest",
+  "title": "ProposedConnectionTest",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2021-08-01-preview",
+    "ConnectorName": "Jack",
+    "resource": {
+      "name": "Jack",
+      "properties": {
+        "state": "Enabled",
+        "description": "Example connector",
+        "source": {
+          "type": "Bucket",
+          "connection": {
+            "type": "Endpoint",
+            "endpoint": "https://example.com/bucket"
+          },
+          "authProperties": {
+            "type": "AccessKey",
+            "accessKeyId": "exampleKeyId",
+            "secretAccessKey": "exampleSecret"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storageConnectorMethodName": "List",
+        "storageConnectorErrorMessage": "",
+        "storageConnectorRequestId": "request-id-123"
+      }
+    }
+  }
+}
