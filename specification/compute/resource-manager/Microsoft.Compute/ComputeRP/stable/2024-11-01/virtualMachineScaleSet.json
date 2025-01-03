@@ -3926,10 +3926,6 @@
     "ResiliencyPolicy": {
       "type": "object",
       "properties": {
-        "automaticZoneRebalancingPolicy": {
-          "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
-          "description": "The configuration parameters used while performing automatic AZ balancing."
-        },
         "resilientVMCreationPolicy": {
           "$ref": "#/definitions/ResilientVMCreationPolicy",
           "description": "The configuration parameters used while performing resilient VM creation."
@@ -3937,9 +3933,33 @@
         "resilientVMDeletionPolicy": {
           "$ref": "#/definitions/ResilientVMDeletionPolicy",
           "description": "The configuration parameters used while performing resilient VM deletion."
+        },
+        "automaticZoneRebalancingPolicy": {
+          "$ref": "#/definitions/AutomaticZoneRebalancingPolicy",
+          "description": "The configuration parameters used while performing automatic AZ balancing."
         }
       },
       "description": "Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy."
+    },
+    "ResilientVMCreationPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM creation should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM creation."
+    },
+    "ResilientVMDeletionPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM deletion."
     },
     "AutomaticZoneRebalancingPolicy": {
       "type": "object",
@@ -3989,26 +4009,6 @@
         }
       },
       "description": "The configuration parameters used by Automatic AZ Balancing for expanding the scale set to a target zonal instance count."
-    },
-    "ResilientVMCreationPolicy": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Specifies whether resilient VM creation should be enabled on the virtual machine scale set. The default value is false."
-        }
-      },
-      "description": "The configuration parameters used while performing resilient VM creation."
-    },
-    "ResilientVMDeletionPolicy": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false."
-        }
-      },
-      "description": "The configuration parameters used while performing resilient VM deletion."
     },
     "RollingUpgradePolicy": {
       "properties": {
