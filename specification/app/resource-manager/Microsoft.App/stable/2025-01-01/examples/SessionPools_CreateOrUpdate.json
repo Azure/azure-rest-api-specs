@@ -18,7 +18,7 @@
           "readySessionInstances": 100
         },
         "dynamicPoolConfiguration": {
-          "LifecycleConfiguration": {
+          "lifecycleConfiguration": {
             "type": "OnContainerExit",
             "maxAlivePeriodInSeconds": 86400
           }
@@ -80,7 +80,7 @@
             "readySessionInstances": 100
           },
           "dynamicPoolConfiguration": {
-            "LifecycleConfiguration": {
+            "lifecycleConfiguration": {
               "type": "OnContainerExit",
               "maxAlivePeriodInSeconds": 86400
             }
@@ -140,8 +140,10 @@
             "readySessionInstances": 100
           },
           "dynamicPoolConfiguration": {
-            "executionType": "Timed",
-            "cooldownPeriodInSeconds": 600
+            "lifecycleConfiguration": {
+              "type": "OnContainerExit",
+              "maxAlivePeriodInSeconds": 86400
+            }
           },
           "customContainerTemplate": {
             "containers": [
