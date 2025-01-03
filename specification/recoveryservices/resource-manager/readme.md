@@ -89,6 +89,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2024-04-01/vaults.json
   - Microsoft.RecoveryServices/stable/2024-04-01/vaultusages.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
