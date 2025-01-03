@@ -13,6 +13,7 @@ namespace Microsoft.ApiCenter;
 
 @added(Versions.v2024_12_15_preview)
 @doc("API analyzer configuration.")
+@parentResource(Workspace)
 model AnalyzerConfig is ProxyResource<AnalyzerConfigProperties> {
   @doc("The name of the configuration.")
   @maxLength(90)
