@@ -382,19 +382,35 @@
       "description": "Dynamic pool configuration.",
       "type": "object",
       "properties": {
-        "executionType": {
-          "description": "The execution type of the session pool.",
+        "LifecycleConfiguration": {
+          "description": "The lifecycle configuration of a session in the dynamic session pool",
+          "$ref": "#/definitions/LifecycleConfiguration"
+        }
+      }
+    },
+    "LifecycleConfiguration": {
+      "description": "The lifecycle configuration properties of a session in the dynamic session pool",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The lifecycle type of the session pool.",
           "enum": [
-            "Timed"
+            "Timed",
+            "OnContainerExit"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ExecutionType",
+            "name": "LifecycleType",
             "modelAsString": true
           }
         },
         "cooldownPeriodInSeconds": {
-          "description": "The cooldown period of a session in seconds.",
+          "description": "The cooldown period of a session in seconds when the lifecycle type is 'Timed'.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAlivePeriodInSeconds": {
+          "description": "The maximum alive period of a session in seconds when the lifecycle type is 'OnContainerExit'.",
           "type": "integer",
           "format": "int32"
         }
