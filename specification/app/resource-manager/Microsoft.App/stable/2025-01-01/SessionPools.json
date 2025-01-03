@@ -384,31 +384,23 @@
       "properties": {
         "lifecycleConfiguration": {
           "description": "The lifecycle configuration of a session in the dynamic session pool",
-          "type": "object",
-          "properties": {
-            "type": {
-              "description": "The lifecycle type of the session pool.",
-              "enum": [
-                "Timed",
-                "OnContainerExit"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "LifecycleType",
-                "modelAsString": true
-              }
-            },
-            "cooldownPeriodInSeconds": {
-              "description": "The cooldown period of a session in seconds when the lifecycle type is 'Timed'.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "maxAlivePeriodInSeconds": {
-              "description": "The maximum alive period of a session in seconds when the lifecycle type is 'OnContainerExit'.",
-              "type": "integer",
-              "format": "int32"
-            }
-          }
+          "$ref": "#/definitions/LifecycleConfiguration"
+        }
+      }
+    },
+    "LifecycleConfiguration": {
+      "description": "The lifecycle configuration properties of a session in the dynamic session pool",
+      "type": "object",
+      "properties": {
+        "cooldownPeriodInSeconds": {
+          "description": "The cooldown period of a session in seconds when the lifecycle type is 'Timed'.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAlivePeriodInSeconds": {
+          "description": "The maximum alive period of a session in seconds when the lifecycle type is 'OnContainerExit'.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
