@@ -66,7 +66,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
-@@access(AI.Model.getImageEmbeddings, Access.internal, "python");
+@@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
 // Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
@@ -121,7 +121,7 @@ interface Client2 {
     name: "ImageEmbeddingsClient",
     service: AI.Model,
   },
-  "python"
+  "python,csharp"
 )
 interface Client3 {
   embed is AI.Model.getImageEmbeddings;
