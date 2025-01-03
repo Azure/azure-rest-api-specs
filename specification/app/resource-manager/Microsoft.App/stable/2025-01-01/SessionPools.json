@@ -249,7 +249,7 @@
             "name": "sessionPoolEnvelope",
             "in": "body",
             "description": "Properties used to create a session pool",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SessionPoolUpdatableProperties"
             }
@@ -392,7 +392,7 @@
       "description": "The lifecycle configuration properties of a session in the dynamic session pool",
       "type": "object",
       "properties": {
-        "lifecycleType": {
+        "type": {
           "description": "The lifecycle type of the session pool.",
           "enum": [
             "Timed",
