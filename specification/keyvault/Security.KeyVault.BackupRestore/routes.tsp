@@ -197,11 +197,29 @@ op fullRestoreOperation is KeyVaultOperation<
 >;
 
 /**
+ * Returns the status of the selective key restore operation
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@route("/restore/{jobID}/pending")
+@get
+op selectiveKeyRestoreStatus is KeyVaultOperation<
+  {
+    /**
+     * The Job Id returned part of the restore operation
+     */
+    @path
+    jobID: string;
+  },
+  SelectiveKeyRestoreOperation
+>;
+
+/**
  * Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@pollingOperation(restoreStatus)
-@finalOperation(restoreStatus)
+@pollingOperation(selectiveKeyRestoreStatus)
+@finalOperation(selectiveKeyRestoreStatus)
 @useFinalStateVia("azure-async-operation")
 @route("/keys/{keyName}/restore")
 @put
