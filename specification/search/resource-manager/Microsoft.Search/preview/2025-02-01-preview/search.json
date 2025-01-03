@@ -1584,14 +1584,8 @@
               "$ref": "#/definitions/SearchService"
             }
           },
-          "400": {
-            "description": "There is not upgrade available for the current service."
-          },
-          "404": {
-            "description": "The subscription or resource group could not be found."
-          },
           "default": {
-            "description": "An unexpected error occurred during the operation.",
+            "description": "HTTP 400 (Bad Request): There is not upgrade available for the current service. HTTP 404 (Not Found): The subscription or resource group could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
