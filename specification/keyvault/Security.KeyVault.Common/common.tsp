@@ -1,3 +1,6 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
+
 using Azure.Core;
 using TypeSpec.OpenAPI;
 

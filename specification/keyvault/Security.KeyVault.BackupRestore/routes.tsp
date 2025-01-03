@@ -1,3 +1,7 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Http;
