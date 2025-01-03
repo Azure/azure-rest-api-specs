@@ -42,6 +42,29 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2024-10
+
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-10-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2024-10-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2024-10-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2024-10-01/vaultusages.json
+```
+-
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/registeredidentities.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/replicationusages.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaults.json
+  - Microsoft.RecoveryServices/preview/2024-09-30-preview/vaultusages.json
+```
 
 ### Tag: package-2024-10
 
@@ -78,6 +101,7 @@ input-file:
   - Microsoft.RecoveryServices/stable/2024-04-01/vaults.json
   - Microsoft.RecoveryServices/stable/2024-04-01/vaultusages.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
