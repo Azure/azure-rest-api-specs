@@ -5,7 +5,7 @@
   "responses": {
     "200": {
       "body": {
-        "regions": [
+        "value": [
           {
             "regionName": "East US",
             "features": [
@@ -18,7 +18,9 @@
             ],
             "skus": [
               {
-                "name": "standard",
+                "sku": {
+                  "name": "standard"
+                },
                 "limits": {
                   "indexes": 50,
                   "indexers": 50,
@@ -30,12 +32,14 @@
                 }
               },
               {
-                "name": "premium",
+                "sku": {
+                  "name": "standard2"
+                },
                 "limits": {
                   "indexes": 200,
                   "indexers": 200,
-                  "partitionStorageInGigabytes": 1000,
-                  "partitionVectorStorageInGigabytes": 200,
+                  "partitionStorageInGigabytes": 512,
+                  "partitionVectorStorageInGigabytes": 150,
                   "searchUnits": 36,
                   "replicas": 12,
                   "partitions": 12
@@ -55,22 +59,37 @@
             ],
             "skus": [
               {
-                "name": "standard",
+                "sku": {
+                  "name": "standard"
+                },
                 "limits": {
-                  "partitionStorageInGigabytes": 150,
-                  "partitionVectorStorageInGigabytes": 30
+                  "indexes": 50,
+                  "indexers": 50,
+                  "partitionStorageInGigabytes": 160,
+                  "partitionVectorStorageInGigabytes": 35,
+                  "searchUnits": 36,
+                  "replicas": 12,
+                  "partitions": 12
                 }
               },
               {
-                "name": "enterprise",
+                "sku": {
+                  "name": "standard2"
+                },
                 "limits": {
-                  "partitionStorageInGigabytes": 1000,
-                  "partitionVectorStorageInGigabytes": 200
+                  "indexes": 200,
+                  "indexers": 200,
+                  "partitionStorageInGigabytes": 512,
+                  "partitionVectorStorageInGigabytes": 150,
+                  "searchUnits": 36,
+                  "replicas": 12,
+                  "partitions": 12
                 }
               }
             ]
           }
-        ]
+        ],
+        "nextLink": null
       }
     }
   }
