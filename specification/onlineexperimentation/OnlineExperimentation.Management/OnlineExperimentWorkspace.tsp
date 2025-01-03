@@ -31,16 +31,28 @@ interface OnlineExperimentWorkspaces {
   /**
    * Gets an experiment workspace
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_Get.json",
+    "Get a single Online Experiment Workspace."
+  )
   get is ArmResourceRead<OnlineExperimentWorkspace>;
 
   /**
    * Create an experiment workspace, or update an existing workspace
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_CreateOrUpdate.json",
+    "Create or update an Online Experiment Workspace."
+  )
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OnlineExperimentWorkspace>;
 
   /**
    * Patch an experiment workspace
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_Update.json",
+    "Update an Online Experiment Workspace."
+  )
   update is ArmResourcePatchAsync<
     OnlineExperimentWorkspace,
     OnlineExperimentWorkspaceProperties
@@ -49,15 +61,27 @@ interface OnlineExperimentWorkspaces {
   /**
    * Deletes an experiment workspace
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_Delete.json",
+    "Deletes an Online Experiment Workspace."
+  )
   delete is ArmResourceDeleteWithoutOkAsync<OnlineExperimentWorkspace>;
 
   /**
    * Gets all experiment workspaces in a resource group.
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_ListByResourceGroup.json",
+    "List Online Experiment Workspaces on a resource group."
+  )
   listByResourceGroup is ArmResourceListByParent<OnlineExperimentWorkspace>;
 
   /**
    * Gets all experiment workspaces in the specified subscription.
    */
+  @Autorest.example(
+    "./examples/OnlineExperimentWorkspaces_ListBySubscription.json",
+    "List Online Experiment Workspaces on a subscription."
+  )
   listBySubscription is ArmListBySubscription<OnlineExperimentWorkspace>;
 }
