@@ -14,31 +14,31 @@ namespace Microsoft.OnlineExperimentation;
  * The properties of an online experiment workspace.
  */
 model OnlineExperimentWorkspaceProperties {
-    /** The Id of the workspace. */
-    @visibility("read")
-    workspaceId?: string;
+  /** The Id of the workspace. */
+  @visibility("read")
+  workspaceId?: string;
 
-    /**
-     * The provisioning state for the resource
-     */
-    @visibility("read")
-    provisioningState?: ResourceProvisioningState;
+  /**
+   * The provisioning state for the resource
+   */
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 
-    /**
-     * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
-     */
-    logAnalyticsWorkspaceResourceId: Azure.Core.armResourceIdentifier<[
-        {
-            type: "Microsoft.OperationalInsights/workspaces";
-        }
-    ]>;
+  /**
+   * The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.
+   */
+  logAnalyticsWorkspaceResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OperationalInsights/workspaces";
+    }
+  ]>;
 
-    /**
-     * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
-     */
-    logsExporterStorageAccountResourceId: Azure.Core.armResourceIdentifier<[
-        {
-            type: "Microsoft.Storage/storageAccounts";
-        }
-    ]>;
+  /**
+   * The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.
+   */
+  logsExporterStorageAccountResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
 }
