@@ -429,6 +429,9 @@
           },
           "SearchCreateOrUpdateWithSemanticSearch": {
             "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
+          },
+          "SearchCreateWithComputeTypeConfidential": {
+            "$ref": "./examples/SearchCreateWithComputeTypeConfidential.json"
           }
         },
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
@@ -2385,6 +2388,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata of the search service containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2429,6 +2437,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2488,7 +2501,6 @@
         },
         "computeType": {
           "type": "string",
-          "default": "default",
           "description": "Configure this property to support the search service using either the default compute or Azure Confidential Compute.",
           "enum": [
             "default",
@@ -2681,11 +2693,6 @@
           "readOnly": true,
           "type": "boolean",
           "description": "Indicates whether or not the search service has an upgrade available."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "description": "Properties of the search service."
@@ -3332,80 +3339,102 @@
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     },
     "FeatureListResult": {
-      "type": "object",
+      "description": "The response containing a list of features and SKUs available in various regions.",
       "properties": {
-        "regions": {
+        "value": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "regionName": {
-                "type": "string",
-                "description": "The name of the region."
-              },
-              "features": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "The name of the feature available in this region."
-                    }
-                  }
-                }
-              },
-              "skus": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "The name of the SKU available in this region."
-                    },
-                    "limits": {
-                      "type": "object",
-                      "properties": {
-                        "indexes": {
-                          "type": "integer",
-                          "description": "The maximum number of indexes available for this SKU."
-                        },
-                        "indexers": {
-                          "type": "integer",
-                          "description": "The maximum number of indexers available for this SKU."
-                        },
-                        "partitionStorageInGigabytes": {
-                          "type": "integer",
-                          "description": "The maximum storage size in Gigabytes available for this SKU per partition."
-                        },
-                        "partitionVectorStorageInGigabytes": {
-                          "type": "integer",
-                          "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
-                        },
-                        "searchUnits": {
-                          "type": "integer",
-                          "description": "The maximum number of search units available for this SKU."
-                        },
-                        "replicas": {
-                          "type": "integer",
-                          "description": "The maximum number of replicas available for this SKU."
-                        },
-                        "partitions": {
-                          "type": "integer",
-                          "description": "The maximum number of partitions available for this SKU."
-                        }
-                      },
-                      "description": "The limits associated with this SKU in this region."
-                    }
-                  }
-                }
-              }
-            }
-          }
+            "$ref": "#/definitions/AvailableFeaturesAndSkus"
+          },
+          "description": "The list of regions with their respective features and SKUs."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of feature list results, if any."
         }
-      },
-      "description": "The response containing a list of features and SKUs available in various regions."
+      }
+    },
+    "AvailableFeaturesAndSkus": {
+      "type": "object",
+      "properties": {
+        "regionName": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableFeature"
+          },
+          "description": "The list of features available in this region."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableSku"
+          },
+          "description": "The list of SKUs available in this region."
+        }
+      }
+    },
+    "AvailableFeature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature available in this region."
+        }
+      }
+    },
+    "AvailableSku": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "indexes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexes available for this SKU."
+            },
+            "indexers": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of indexers available for this SKU."
+            },
+            "partitionStorageInGigabytes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum storage size in Gigabytes available for this SKU per partition."
+            },
+            "partitionVectorStorageInGigabytes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum vector storage size in Gigabytes available for this SKU per partition."
+            },
+            "searchUnits": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of search units available for this SKU."
+            },
+            "replicas": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of replicas available for this SKU."
+            },
+            "partitions": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of partitions available for this SKU."
+            }
+          },
+          "description": "The limits associated with this SKU in this region."
+        }
+      }
     }
   },
   "parameters": {
