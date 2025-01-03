@@ -249,7 +249,7 @@
             "name": "sessionPoolEnvelope",
             "in": "body",
             "description": "Properties used to create a session pool",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SessionPoolUpdatableProperties"
             }
@@ -725,10 +725,6 @@
               "x-ms-identifiers": [
                 "name"
               ]
-            },
-            "dynamicPoolConfiguration": {
-              "description": "The pool configuration if the poolManagementType is dynamic.",
-              "$ref": "#/definitions/DynamicPoolConfiguration"
             },
             "customContainerTemplate": {
               "description": "The custom container configuration if the containerType is CustomContainer.",
