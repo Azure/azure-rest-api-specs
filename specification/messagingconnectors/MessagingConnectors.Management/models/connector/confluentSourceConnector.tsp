@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for ConfluentSourceConnector")
-model ConfluentSourceConnectorProperties extends ConnectorProperties {
+model ConfluentSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of ConfluentSourceConnector")
   connectorType: ConnectorType.ConfluentSource;
 

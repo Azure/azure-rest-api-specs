@@ -46,6 +46,29 @@ model SqlServerSourceConnectorSchemaConfig extends ConnectorSchemaConfig {
   tables: string;
 }
 
+@doc("Schema format Types")
+union SchemaFormatType {
+  @doc("Avro format")
+  Avro: "Avro",
+
+  @doc("Json format")
+  Json: "Json",
+
+  @doc("Protobuf format")
+  Protobuf: "Protobuf",
+
+  string,
+}
+
+@doc("Schema format")
+model SchemaFormat {
+  @doc("type of schema")
+  type: SchemaFormatType;
+
+  @doc("version of schema")
+  version: string;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("properties of fetch Schema")
 model SchemaRequestProperties {
@@ -53,13 +76,13 @@ model SchemaRequestProperties {
   connectorSchemaConfig: ConnectorSchemaConfig;
 
   @doc("Schema Format")
-  format: string;
+  format: SchemaFormat;
 }
 
 @doc("Schema Properties Types")
 union SchemaPropertiesType {
   @doc("change data capture(CDC) Schema Properties Types")
-  CDC: "CDC",
+  Cdc: "Cdc",
 
   string,
 }
@@ -81,25 +104,34 @@ union CdcEventType {
   string,
 }
 
+@doc("cdc table name")
+model TableId {
+  @doc("database name of table")
+  databaseName: string;
+
+  @doc("schema name of table")
+  schemaName: string;
+
+  @doc("table name of table")
+  tableName: string;
+}
+
 @doc("cdc connector SchemaProperties")
 model CdcSchemaProperties extends SchemaProperties {
   @doc("cdc SchemaProperties type")
-  type: SchemaPropertiesType.CDC;
-
-  @doc("cdc table name")
-  tableName: string;
+  type: SchemaPropertiesType.Cdc;
 
   @doc("cdc event type")
   cdcEventType: CdcEventType;
 
-  @doc("cdc database name")
-  databaseName: string;
+  @doc("table id")
+  tableId: TableId;
 }
 
 @doc("Response item of Schema")
 model Schema {
   @doc("Schema format")
-  schemaFormat: string;
+  schemaFormat: SchemaFormat;
 
   @doc("Schema content")
   schemaJson: string;

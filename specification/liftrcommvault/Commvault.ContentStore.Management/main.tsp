@@ -360,6 +360,14 @@ model ProtectionGroupProperties {
   @visibility("read")
   protectionStatus: ProtectionStatus; //Check what values can it have
 
+  @doc("The number of ProtectedItems under the Protection Group")
+  @visibility("read")
+  numberOfProtectedItems: int32;
+
+  @doc("The Commvault Protection Group backup time")
+  @visibility("read")
+  lastBackUpTime: int64;
+
   @doc("Details of the user.")
   user: UserDetails;
 
@@ -370,11 +378,23 @@ model ProtectionGroupProperties {
 
 @doc("The Protection Status")
 union ProtectionStatus {
-  @doc("The protection group is active")
-  Active: "active",
+  @doc("The protection group status is All")
+  All: "all",
 
-  @doc("The protection group is inactive")
-  Inactive: "inactive",
+  @doc("The protection group status is Protected")
+  Protected: "protected",
+
+  @doc("The protection group status is Not Protected")
+  Not_Protected: "not_protected",
+
+  @doc("The protection group status is Pending")
+  Pending: "pending",
+
+  @doc("The protection group status is backed_up_with_error")
+  Backed_up_with_error: "backed_up_with_error",
+
+  @doc("The protection group status is discovered")
+  Discovered: "discovered",
 
   string,
 }
@@ -445,15 +465,6 @@ union RuleProperty {
   @doc("The status of the rule")
   Status: "status",
 
-  @doc("The power state of the rule")
-  PowerState: "powerState",
-
-  @doc("The virtual machine of the rule")
-  VirtualMachine: "virtualMachine",
-
-  @doc("The virtual machine pattern of the rule")
-  VirtualMachinePattern: "virtualMachinePattern",
-
   string,
 }
 
@@ -514,7 +525,7 @@ interface ProtectionGroups {
 @parentResource(ProtectionGroup)
 model ProtectedItem is ProxyResource<ProtectedItemProperties> {
   @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
-  @doc("The protectedItem name")
+  @doc("The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid")
   @segment("protectedItems")
   @key("protectedItemName")
   @visibility("read")
@@ -525,13 +536,40 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("The properties of Commvault Protected Item")
 model ProtectedItemProperties {
+  @doc("The Name of the commvault protected item")
+  @visibility("read")
+  resourceName: "string";
+
   @doc("The Commvault Protected Item backup time")
   @visibility("read")
-  lastBackUpTime: utcDateTime;
+  lastBackUpTime: int64;
+
+  @doc("The resource group of the protected item")
+  @visibility("read")
+  resourceGroup: string;
+
+  @doc("The location of the protected item")
+  @visibility("read")
+  location: string;
 }
 
 @armResourceOperations
 interface ProtectedItems {
   get is ArmResourceRead<ProtectedItem>;
   listByProtectionGroup is ArmResourceListByParent<ProtectedItem>;
+
+  @doc("Limits used for creation of resources.")
+  @armResourceAction(ProtectedItem)
+  @action("getRestorePoints")
+  @post
+  getRestorePoints(
+    ...ResourceInstanceParameters<ProtectedItem>,
+  ): ArmResponse<RestorePoints> | ErrorResponse;
+}
+
+@doc("Restore points of a Protected Item")
+model RestorePoints {
+  @doc("The Commvault Protected Item Restore points")
+  @visibility("read")
+  restoreTimes: int64[];
 }

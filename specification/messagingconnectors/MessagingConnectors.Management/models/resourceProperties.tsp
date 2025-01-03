@@ -17,27 +17,6 @@ model ResourceProperties {
   @doc("Properties of one Connector")
   connectorProperties: ConnectorProperties;
 
-  @doc("Direction of the Connector.")
-  connectorDirection?: Direction;
-
-  @doc("Max Tasks count of the Connector.")
-  maxTasks: int32;
-
-  @doc("Type of the Connector.")
-  valueConverter: ConverterType;
-
-  @doc("Type of the Connector.")
-  converterConfig: ConverterConfig;
-
-  @doc("connectionString of the EventHub.")
-  eventHubConfig: EventHubConfig;
-
-  @doc("Data format of the data source")
-  sourceDataFormat?: SourceDataFormat;
-
-  @doc("Cloud events config")
-  cloudEventsConfig?: CloudEventsConfig;
-
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
 
@@ -64,8 +43,39 @@ union ConnectorProvisioningState {
 }
 
 @doc("Basic info for Connector")
-@discriminator("connectorType")
+@discriminator("direction")
 model ConnectorProperties {
+  @doc("Direction of connector")
+  direction: Direction;
+
+  @doc("Max Tasks count of the Connector.")
+  maxTasks: int32;
+}
+
+@doc("Base properties for Source Connector")
+model SourceConnectorProperties extends ConnectorProperties {
+  @doc("Source Connector")
+  direction: Direction.Source;
+
+  @doc("Type of the Connector.")
+  converterConfig: ConverterConfig;
+
+  @doc("connectionString of the EventHub.")
+  eventHubConfig: EventHubConfig;
+
+  @doc("Data format of the data source")
+  sourceDataFormat?: SourceDataFormat;
+
+  @doc("Cloud events config")
+  cloudEventsConfig?: CloudEventsConfig;
+
+  @doc("Special properties for source.")
+  dataSourceProperties: DataSourceProperties;
+}
+
+@doc("Base properties for source.")
+@discriminator("connectorType")
+model DataSourceProperties {
   @doc("Type of the Connector.")
   connectorType: ConnectorType;
 }
@@ -107,9 +117,6 @@ union ConnectorState {
 
 @doc("Enum of Directions of Connector")
 union Direction {
-  @doc("Unknown direction")
-  Unknown: "Unknown",
-
   @doc("Source Connector")
   Source: "Source",
 
@@ -121,9 +128,6 @@ union Direction {
 
 @doc("Enum of the type of Connector")
 union ConnectorType {
-  @doc("Unknown source connector.")
-  Unknown: "Unknown",
-
   @doc("Google pub sub source connector.")
   GooglePubSubSource: "GooglePubSubSource",
 
@@ -138,12 +142,6 @@ union ConnectorType {
 
   @doc("Cosmos db source connector.")
   CosmosDbSource: "CosmosDbSource",
-
-  @doc("BitCoin source connector.")
-  BitCoinSource: "BitCoinSource",
-
-  @doc("Kafka source connector.")
-  KafkaSource: "KafkaSource",
 
   @doc("Confluent source connector.")
   ConfluentSource: "ConfluentSource",

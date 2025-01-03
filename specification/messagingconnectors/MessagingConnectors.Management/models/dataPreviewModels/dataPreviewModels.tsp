@@ -17,9 +17,6 @@ namespace Microsoft.MessagingConnectors;
 
 @doc("Type of DataRange")
 union DataRangeType {
-  @doc("Unknown type")
-  Unknown: "Unknown",
-
   @doc("Max limit range type")
   Limit: "Limit",
 
@@ -45,11 +42,20 @@ model DataRangeLimit extends DataRangeBaseConfig {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
-  @doc("Properties of one Connector Source")
-  connectorProperties: ConnectorProperties;
+  @doc("Properties for the source")
+  dataSourceProperties: DataSourceProperties;
 
   @doc("DataRange for DataPreview")
   dataRange: DataRangeBaseConfig;
+
+  @doc("Type of the Connector.")
+  converterConfig: ConverterConfig;
+
+  @doc("Data format of the data source")
+  sourceDataFormat?: SourceDataFormat;
+
+  @doc("Cloud events config")
+  cloudEventsConfig?: CloudEventsConfig;
 }
 
 @doc("Properties of DataPreview results")

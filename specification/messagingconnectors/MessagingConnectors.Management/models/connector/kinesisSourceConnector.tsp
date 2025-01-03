@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for KinesisSourceConnector")
-model KinesisSourceConnectorProperties extends ConnectorProperties {
+model KinesisSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of KinesisSourceConnector")
   connectorType: ConnectorType.KinesisSource;
 

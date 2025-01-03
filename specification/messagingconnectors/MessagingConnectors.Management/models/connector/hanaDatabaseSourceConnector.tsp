@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for HanaDatabaseSourceConnector")
-model HanaDatabaseSourceConnectorProperties extends ConnectorProperties {
+model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of HanaDatabaseSourceConnector")
   connectorType: ConnectorType.HanaDatabaseSource;
 

@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for AzureServiceBusSourceConnector")
-model AzureServiceBusSourceConnectorProperties extends ConnectorProperties {
+model AzureServiceBusSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of AzureServiceBusSource")
   connectorType: ConnectorType.AzureServiceBusSource;
 
