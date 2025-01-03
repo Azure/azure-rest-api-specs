@@ -16,6 +16,7 @@ interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+  analyzeWithRaiPolicy is ContentSafety.RaiPolicyAnalyzeOperations.analyzeByRaiPolicy;
 }
 
 @client({
@@ -34,3 +35,14 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+
+@client({
+  name: "RaiPolicyClient",
+  service: ContentSafety,
+})
+interface RaiPolicyClient {
+  createOrUpdateRaiPolicy is ContentSafety.RaiPolicyManagement.createOrUpdateRaiPolicy;
+  deleteRaiPolicy is ContentSafety.RaiPolicyManagement.deleteRaiPolicy;
+  getRaiPolicy is ContentSafety.RaiPolicyManagement.getRaiPolicy;
+  listRaiPolicies is ContentSafety.RaiPolicyManagement.listRaiPolicies;
+}
