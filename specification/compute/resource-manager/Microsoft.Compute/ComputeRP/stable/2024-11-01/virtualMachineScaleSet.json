@@ -265,6 +265,9 @@
           "Create a scale set with sku profile": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile.json"
           },
+          "Create a scale set with sku profile and prioritized allocation strategy": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile_Prioritized.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -4076,7 +4079,8 @@
           "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
           "enum": [
             "LowestPrice",
-            "CapacityOptimized"
+            "CapacityOptimized",
+            "Prioritized"
           ],
           "x-ms-enum": {
             "name": "AllocationStrategy",
@@ -4092,6 +4096,12 @@
         "name": {
           "type": "string",
           "description": "Specifies the name of the VM Size."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Specifies the rank (a.k.a priority) associated with the VM Size."
         }
       },
       "description": "Specifies the VM Size."
