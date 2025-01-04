@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 @service({
-  title: "Workloads Client",
+  title: "Workloads Client test",
 })
 @versioned(Versions)
 namespace Microsoft.Workloads;
