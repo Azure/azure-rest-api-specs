@@ -14539,21 +14539,17 @@
           "description": "The properties of the container."
         },
         "metadata": {
-          "$ref": "#/definitions/ContainerMetadata",
-          "description": "The metadata of the container."
+          "type": "object",
+          "description": "The metadata of the container.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "name",
         "properties"
       ]
-    },
-    "ContainerMetadata": {
-      "type": "object",
-      "description": "The metadata of a container.",
-      "additionalProperties": {
-        "type": "string"
-      }
     },
     "ContainerProperties": {
       "type": "object",
