@@ -154,6 +154,7 @@ model AccessKeyProperties extends AuthProperties {
   accessKeyId: string;
 
   @doc("Secret access key. Redacted when read via a Get or List API.")
+  @secret
   secretAccessKey: string;
 
   @doc("Region to use in the signing algorithm.  If not provided, defaults to us-east-1.")

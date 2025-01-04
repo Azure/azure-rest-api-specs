@@ -2,28 +2,37 @@
   "operationId": "Operations_List",
   "title": "ListOperations",
   "parameters": {
-    "api-version": "2021-08-01-preview"
+    "api-version": "2024-11-01-preview"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "Microsoft.Storage/storageAccounts/read",
+            "name": "Microsoft.Storage/storageAccounts/connectors/read",
             "display": {
               "provider": "Microsoft Storage",
-              "resource": "Storage Accounts",
-              "operation": "Read Storage Account",
-              "description": "Reads the properties of a storage account."
+              "resource": "Storage Connector",
+              "operation": "Read Storage Connector",
+              "description": "Reads the properties of a storage connector."
             }
           },
           {
-            "name": "Microsoft.Storage/storageAccounts/write",
+            "name": "Microsoft.Storage/storageAccounts/connectors/write",
             "display": {
               "provider": "Microsoft Storage",
-              "resource": "Storage Accounts",
-              "operation": "Write Storage Account",
-              "description": "Creates or updates a storage account."
+              "resource": "Storage Connector",
+              "operation": "Write Storage Connector",
+              "description": "Creates or updates a storage connector."
+            }
+          },
+          {
+            "name": "Microsoft.Storage/storageAccounts/connectors/delete",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Delete",
+              "operation": "Delete Storage Connector",
+              "description": "Deletes a storage connector."
             }
           }
         ],

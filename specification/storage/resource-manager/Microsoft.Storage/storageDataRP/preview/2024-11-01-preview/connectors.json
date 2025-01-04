@@ -536,7 +536,9 @@
         },
         "secretAccessKey": {
           "type": "string",
-          "description": "Secret access key. Redacted when read via a Get or List API."
+          "format": "password",
+          "description": "Secret access key. Redacted when read via a Get or List API.",
+          "x-ms-secret": true
         },
         "signingRegion": {
           "type": "string",
