@@ -14,9 +14,6 @@ using Azure.Portal;
 
 namespace Microsoft.OnlineExperimentation;
 
-/*
-An online experiment workspace resource
-*/
 @about({
   icon: {
     filePath: "./icon.svg",
@@ -46,6 +43,7 @@ An online experiment workspace resource
   apiVersion: Versions.v2025_05_31_preview,
   autoUpdate: true,
 })
+@doc("An Online experiment workspace resource.")
 model OnlineExperimentWorkspace
   is Azure.ResourceManager.TrackedResource<OnlineExperimentWorkspaceProperties> {
   ...ResourceNameParameter<
