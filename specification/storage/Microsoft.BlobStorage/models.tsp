@@ -72,7 +72,9 @@ model FilterBlobSegment {
   @Xml.name("Blobs") blobs: FilterBlobItem[];
 
   /** The next marker of the blobs. */
-  @Xml.name("NextMarker") nextMarker?: string;
+  @continuationToken
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /** The filter blob item. */
@@ -189,6 +191,7 @@ model ListContainersSegmentResponse {
 
   /** The next marker of the containers. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
+  @continuationToken
   @Azure.Core.nextLink
   @Xml.name("NextMarker")
   NextMarker?: string;
@@ -880,6 +883,7 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
+  @continuationToken
   @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
@@ -902,6 +906,7 @@ model PageList {
   @Xml.name("ClearRange") clearRange?: ClearRange[];
 
   /** The next marker. */
+  @continuationToken
   @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
@@ -1965,6 +1970,7 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
+  @continuationToken
   @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
@@ -2088,7 +2094,9 @@ alias MaxResultsParameter = {
 /** The marker parameter. */
 alias MarkerParameter = {
   /** A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client. */
-  @query marker?: string;
+  @continuationToken
+  @query
+  marker?: string;
 };
 
 /** The prefix parameter. */
