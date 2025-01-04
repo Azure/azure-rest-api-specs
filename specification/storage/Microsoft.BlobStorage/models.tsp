@@ -213,7 +213,7 @@ model ContainerItem {
   @Xml.name("Properties") properties: ContainerProperties;
 
   /** The metadata of the container. */
-  @Xml.name("Metadata") metadata?: ContainerMetadata;
+  @Xml.name("Metadata") metadata?: Record<string>;
 }
 
 /** The properties of a container. */
@@ -265,11 +265,6 @@ model ContainerProperties {
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   immutableStorageWithVersioningEnabled?: boolean;
 }
-
-/** The metadata of a container. */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
-@Xml.name("Metadata")
-model ContainerMetadata is Record<string>;
 
 /** Stats for the storage service. */
 model StorageServiceStats {
@@ -521,6 +516,7 @@ model BlobItemInternal {
   @Xml.name("BlobTags") blobTags?: BlobTags;
 
   /** The object replication metadata of the blob. */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
   @Xml.name("ObjectReplicationMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
@@ -2036,6 +2032,7 @@ alias ContainerNamePathParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Record string will help generate"
   @header("x-ms-meta") metadata?: Record<string>;
 };
 
