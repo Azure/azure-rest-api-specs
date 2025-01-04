@@ -201,7 +201,7 @@ op fullRestoreOperation is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@route("/restore/{jobID}/pending")
+@route("/restore/{jobId}/pending")
 @get
 op selectiveKeyRestoreStatus is KeyVaultOperation<
   {
@@ -209,7 +209,7 @@ op selectiveKeyRestoreStatus is KeyVaultOperation<
      * The Job Id returned part of the restore operation
      */
     @path
-    jobID: string;
+    jobId: string;
   },
   SelectiveKeyRestoreOperation
 >;
