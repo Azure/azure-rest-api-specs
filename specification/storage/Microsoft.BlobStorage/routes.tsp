@@ -867,6 +867,7 @@ interface Blob {
 
   /** Undelete a blob that was previously soft deleted */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=undelete")
@@ -881,6 +882,7 @@ interface Blob {
 
   /** Set the expiration time of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=expiry")
@@ -1568,6 +1570,7 @@ interface PageBlob {
 
   /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=page&update&fromUrl")
@@ -1623,6 +1626,7 @@ interface PageBlob {
 
   /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/{containerName}/{blob}?comp=pagelist")
   getPageRanges is StorageOperation<
@@ -1648,6 +1652,7 @@ interface PageBlob {
 
   /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("/{containerName}/{blob}?comp=pagelist&diff")
   getPageRangesDiff is StorageOperation<
