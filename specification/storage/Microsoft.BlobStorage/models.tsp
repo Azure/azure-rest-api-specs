@@ -55,7 +55,6 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
 }
 
-// TODO: looks like this is a pagedResult
 /** The result of a Filter Blobs API call */
 @Xml.name("EnumerationResults")
 model FilterBlobSegment {
@@ -72,7 +71,6 @@ model FilterBlobSegment {
   @Xml.name("Blobs") blobs: FilterBlobItem[];
 
   /** The next marker of the blobs. */
-  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -192,7 +190,6 @@ model ListContainersSegmentResponse {
   /** The next marker of the containers. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
   @continuationToken
-  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   NextMarker?: string;
 }
@@ -880,7 +877,6 @@ model ListBlobsFlatSegmentResponse {
 
   /** The next marker of the blobs. */
   @continuationToken
-  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -903,7 +899,6 @@ model PageList {
 
   /** The next marker. */
   @continuationToken
-  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -1967,7 +1962,6 @@ model ListBlobsHierarchySegmentResponse {
 
   /** The next marker of the blobs. */
   @continuationToken
-  @Azure.Core.nextLink
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
