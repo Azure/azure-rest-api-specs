@@ -4,7 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "./main.tsp";
 import "./models/code-execution.tsp";
 import "./models/code-execution-file.tsp";
+import "./models/session.tsp";
 import "./models/common.tsp";
+import "./models/sessionpool-metadata.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -94,4 +96,36 @@ interface SessionResourceFiles {
       @body _: bytes;
     }
   >;
+}
+
+@route("/session")
+interface SessionManagement {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
+  @doc("Get the session.")
+  @get
+  get is Foundations.Operation<SessionIdentifier, Session>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
+  @doc("Delete the session.")
+  @delete
+  delete is Foundations.Operation<
+    SessionIdentifier,
+    TypeSpec.Http.NoContentResponse
+  >;
+}
+
+@route("/sessions")
+interface ListSessions {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
+  @doc("List the sessions.")
+  @get
+  get is Foundations.Operation<{}, SessionsListResponse>;
+}
+
+interface SessionPoolMetadata {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
+  @doc("Get the metadata information.")
+  @route("/metadata")
+  @get
+  get is Foundations.Operation<{}, SessionPoolMetadataResponse>;
 }
