@@ -706,6 +706,11 @@
     "SessionPoolUpdatableProperties": {
       "description": "Container App session pool updatable properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "identity": {
           "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
