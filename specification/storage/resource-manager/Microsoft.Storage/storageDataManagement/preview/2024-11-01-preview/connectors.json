@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Storage Data Resource Provider",
+    "title": "Storage Data Management Resource Provider",
     "version": "2024-11-01-preview",
     "x-typespec-generated": [
       {
@@ -185,7 +185,7 @@
         }
       },
       "put": {
-        "operationId": "Connectors_CreateOrReplace",
+        "operationId": "Connectors_CreateOrUpdate",
         "tags": [
           "Connectors"
         ],
@@ -256,11 +256,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateConnector": {
-            "$ref": "./examples/Connectors_CreateOrReplace.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -271,7 +266,7 @@
         "tags": [
           "Connectors"
         ],
-        "description": "Update a Storage Connector.",
+        "description": "Update a Storage Connector. This API only allows updating the connector tags.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -303,7 +298,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorUpdate"
+              "$ref": "#/definitions/ConnectorUpdateProperties"
             }
           }
         ],
@@ -312,20 +307,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Connector"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -339,11 +320,7 @@
           "UpdateConnector": {
             "$ref": "./examples/Connectors_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Connectors_Delete",
@@ -745,60 +722,16 @@
         "source"
       ]
     },
-    "ConnectorUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Connector.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectorUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
     "ConnectorUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the Connector.",
+      "description": "Details for Storage Connector Update",
       "properties": {
-        "state": {
-          "type": "string",
-          "description": "State – Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "State",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Whether the connector is enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Whether the connector is disabled"
-              }
-            ]
+        "tags": {
+          "type": "array",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.",
+          "items": {
+            "type": "string"
           }
-        },
-        "description": {
-          "type": "string",
-          "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
-          "maxLength": 250
-        },
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Information about how to communicate with and authenticate to the backing data store."
         }
       }
     },

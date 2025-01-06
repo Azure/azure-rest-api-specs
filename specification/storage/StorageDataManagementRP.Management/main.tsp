@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.Storage")
 @service({
-  title: "Storage Data Resource Provider",
+  title: "Storage Data Management Resource Provider",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -42,16 +42,10 @@ interface Connectors {
   get is ArmResourceRead<Connector>;
 
   @doc("Create or update a Storage Connector.")
-  createOrReplace is ArmResourceCreateOrReplaceAsync<Connector>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
 
-  @doc("Update a Storage Connector.")
-  update is ArmCustomPatchAsync<
-    Connector,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Connector,
-      ConnectorProperties
-    >
-  >;
+  @doc("Update a Storage Connector. This API only allows updating the connector tags.")
+  update is ArmCustomPatchSync<Connector, ConnectorUpdateProperties>;
 
   @doc("Delete a Storage Connector.")
   delete is ArmResourceDeleteSync<Connector>;
@@ -307,4 +301,11 @@ model ConnectorProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+// Connection Update Properties
+@doc("Details for Storage Connector Update")
+model ConnectorUpdateProperties {
+  @doc("Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.")
+  tags?: string[];
 }
