@@ -29,8 +29,3 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-
-@@Autorest.example(Operations.list,
-  "./examples/OnlineExperimentWorkspaces_OperationsList.json",
-  "List Online Experiment Workspaces operations."
-);
