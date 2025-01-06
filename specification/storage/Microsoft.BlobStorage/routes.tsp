@@ -12,6 +12,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
+alias ApiVersionHeader = {
+  /** Specifies the version of the operation to use for this request. */
+  @apiVersion
+  @header("x-ms-version")
+  version: string;
+};
+
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
@@ -25,10 +32,7 @@ op StorageOperation<
   @header("Content-Type")
   contentType: MediaType,
 
-  /** Specifies the version of the operation to use for this request. */
-  @header("x-ms-version")
-  version: string,
-
+  ...ApiVersionHeader,
   ...TParams,
   ...ClientRequestIdHeader,
 ): (TResponse & {
@@ -129,10 +133,7 @@ interface Service {
     @header("Content-Type")
     multipartContentType: "multipart/mixed",
 
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
@@ -389,11 +390,7 @@ interface Container {
 
     ...ContentLengthParameter,
     ...TimeoutParameter,
-
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...ClientRequestIdHeader,
   ): ({
     @statusCode statusCode: 202;
@@ -605,10 +602,7 @@ interface Blob {
   @get
   @route("/{containerName}/{blob}")
   download(
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...ClientRequestIdHeader,
     ...ContainerNamePathParameter,
     ...BlobPathParameter,
