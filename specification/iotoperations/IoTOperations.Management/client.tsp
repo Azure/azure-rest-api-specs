@@ -11,5 +11,6 @@ namespace Microsoft.IoTOperations {
   @@access(Operations.list, Access.internal);
 
   @@clientName(CertManagerCertOptions, "CertManagerCertConfig", "csharp");
-  // @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
+  @@clientName(DataflowOperation, "DataflowConfig", "csharp");
+  @@clientName(PrincipalDefinition, "PrincipalConfig", "csharp");
 }
