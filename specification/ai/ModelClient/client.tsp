@@ -62,6 +62,27 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
 
+@@clientName(AI.Model.ChatCompletionsResponseFormat,
+  "ChatCompletionsResponseFormatInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatText,
+  "ChatCompletionsResponseFormatTextInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJsonObjectInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchema,
+  "ChatCompletionsResponseFormatJsonSchemaInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  "ChatCompletionsResponseFormatJsonSchemaDefinitionInternal",
+  "python"
+);
+
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
 @@clientName(AI.Model.ChatRequestUserMessage, "UserMessage", "python");
