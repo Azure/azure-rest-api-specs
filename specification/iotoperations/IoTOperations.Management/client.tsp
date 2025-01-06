@@ -8,8 +8,8 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Microsoft.IoTOperations {
-    @@access(Operations.list, Access.internal);
+  @@access(Operations.list, Access.internal);
 
-    @@clientName(CertManagerCertOptions, "CertManagerCertConfig", "csharp");
-    // @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
+  @@clientName(CertManagerCertOptions, "CertManagerCertConfig", "csharp");
+  // @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
 }
