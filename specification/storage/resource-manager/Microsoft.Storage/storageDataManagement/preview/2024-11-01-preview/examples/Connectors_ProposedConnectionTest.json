@@ -1,0 +1,39 @@
+{
+  "operationId": "Connectors_ProposedConnectionTest",
+  "title": "ProposedConnectionTest",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2024-11-01-preview",
+    "connectorName": "testconnector",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "state": "Enabled",
+        "description": "Example connector",
+        "source": {
+          "type": "Bucket",
+          "connection": {
+            "type": "Endpoint",
+            "endpoint": "https://example.com/bucket"
+          },
+          "authProperties": {
+            "type": "AccessKey",
+            "accessKeyId": "exampleKeyId",
+            "secretAccessKey": "exampleSecret"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storageConnectorMethodName": "List",
+        "storageConnectorErrorMessage": "ConnectorErrorMessage",
+        "storageConnectorRequestId": "request-id-123"
+      }
+    }
+  }
+}
