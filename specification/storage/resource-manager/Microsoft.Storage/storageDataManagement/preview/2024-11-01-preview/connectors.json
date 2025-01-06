@@ -123,7 +123,7 @@
           }
         },
         "x-ms-examples": {
-          "ListConnectors": {
+          "ListConnectorsByStorageAccount": {
             "$ref": "./examples/Connectors_ListByStorageAccount.json"
           }
         },
@@ -257,6 +257,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateConnector": {
+            "$ref": "./examples/Connectors_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -520,7 +525,9 @@
         },
         "secretAccessKey": {
           "type": "string",
-          "description": "Secret access key. Redacted when read via a Get or List API."
+          "format": "password",
+          "description": "Secret access key. Redacted when read via a Get or List API.",
+          "x-ms-secret": true
         },
         "signingRegion": {
           "type": "string",
