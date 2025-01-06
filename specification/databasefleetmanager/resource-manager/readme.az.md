@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: db
-    namespace: azure.mgmt.db
-    package-name: azure-mgmt-db
-az-output-folder: $(azure-cli-extension-folder)/src/db
-python-sdk-output-folder: "$(az-output-folder)/azext_db/vendored_sdks/db"
+    extensions: databasefleetmanager
+    namespace: azure.mgmt.databasefleetmanager
+    package-name: azure-mgmt-databasefleetmanager
+az-output-folder: $(azure-cli-extension-folder)/src/databasefleetmanager
+python-sdk-output-folder: "$(az-output-folder)/azext_databasefleetmanager/vendored_sdks/databasefleetmanager"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_db/vendored_sdks/db"
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: db
-  namespace: azure.mgmt.db
-  package-name: azure-mgmt-db
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/db
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/db"
+  extensions: databasefleetmanager
+  namespace: azure.mgmt.databasefleetmanager
+  package-name: azure-mgmt-databasefleetmanager
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/databasefleetmanager
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/databasefleetmanager"
 ``` 
