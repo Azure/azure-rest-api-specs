@@ -16,8 +16,9 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
-// Since we made all operator methods internal, we need to expliclty
-// say we still want the models they use to be public.
+// Since we made all operator methods internal, we need to explicity
+// say we still want the models they use to be generated.
+// Note that for some programming languages, we will make some of these classes internal (see below)
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
@@ -25,8 +26,9 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormatJsonObject, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormatText, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonObject, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
@@ -65,10 +67,42 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
-// Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
+// Hide the Response Format related classes favor of a factory method on the ChatCompletionsResponseFormat class
+@@access(AI.Model.ChatCompletionsResponseFormat, Access.internal, "python");
+@@access(AI.Model.ChatCompletionsResponseFormatText, Access.internal, "python");
+@@access(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  Access.internal,
+  "python"
+);
 @@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
   Access.internal,
-  "csharp"
+  "csharp,python"
+);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  Access.internal,
+  "python"
+);
+
+// Add "Internal" suffix to the internal Response Format classes, as we hand-code a new public class named ChatCompletionsResponseFormat.
+@@clientName(AI.Model.ChatCompletionsResponseFormat,
+  "ChatCompletionsResponseFormatInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatText,
+  "ChatCompletionsResponseFormatTextInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJsonObjectInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchema,
+  "ChatCompletionsResponseFormatJsonSchemaInternal",
+  "python"
+);
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  "ChatCompletionsResponseFormatJsonSchemaDefinitionInternal",
+  "python"
 );
 
 // We use shorter names in the Python client library
