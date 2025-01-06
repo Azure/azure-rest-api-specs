@@ -404,6 +404,45 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/restore/{jobId}/pending?_overload=selectiveKeyRestoreStatus": {
+      "get": {
+        "operationId": "SelectiveKeyRestoreStatus",
+        "description": "Returns the status of the selective key restore operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The Job Id returned part of the restore operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a selective restore operation": {
+            "$ref": "./examples/SelectiveRestore-pending-example.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "Error": {
       "type": "object",
