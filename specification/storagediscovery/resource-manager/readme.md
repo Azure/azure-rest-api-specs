@@ -66,6 +66,8 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storageactions']
 ```
 
 ## Az
