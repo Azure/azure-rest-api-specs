@@ -110,6 +110,7 @@ op preFullBackup is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@sharedRoute
 @route("/restore/{jobId}/pending")
 @get
 op restoreStatus is KeyVaultOperation<
@@ -201,6 +202,7 @@ op fullRestoreOperation is KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@sharedRoute
 @route("/restore/{jobId}/pending")
 @get
 op selectiveKeyRestoreStatus is KeyVaultOperation<
