@@ -31,15 +31,6 @@ openapi-subtype: providerHub
 tag: package-preview-2024-10-01
 ```
 
-### Tag: package-preview-2024-10-01-preview
-
-These settings apply only when `--tag=package-preview-2024-10-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-10-01-preview'
-input-file:
-  - Microsoft.DatabaseFleetManager/preview/2024-10-01-preview/databasefleetmanager.json
-```
-
 ### Tag: package-2024-10-01-preview
 
 These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
@@ -60,7 +51,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
+  - repo: azure-java
 ```
 
 ## C#
@@ -78,6 +69,10 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Suppression
 
