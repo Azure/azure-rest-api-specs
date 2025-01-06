@@ -64,24 +64,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
-// Hide Response Format related derived classes in favor of a factory method on ChatCompletionsResponseFormat.
-@@access(AI.Model.ChatCompletionsResponseFormatText,
-  Access.internal,
-  "csharp,python"
-);
-@@access(AI.Model.ChatCompletionsResponseFormatJsonObject,
-  Access.internal,
-  "csharp,python"
-);
-@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
-  Access.internal,
-  "csharp,python"
-);
-@@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
-  Access.internal,
-  "csharp,python"
-);
-
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
 @@clientName(AI.Model.ChatRequestUserMessage, "UserMessage", "python");
