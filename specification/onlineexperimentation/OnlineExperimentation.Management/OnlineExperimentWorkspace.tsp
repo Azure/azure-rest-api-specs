@@ -45,14 +45,14 @@ namespace Microsoft.OnlineExperimentation;
 })
 @doc("An Online experiment workspace resource.")
 model OnlineExperimentWorkspace
-  is Azure.ResourceManager.TrackedResource<OnlineExperimentWorkspaceProperties> {
+  is TrackedResource<OnlineExperimentWorkspaceProperties> {
   ...ResourceNameParameter<
     Resource = OnlineExperimentWorkspace,
     KeyName = "workspaceName",
     SegmentName = "workspaces"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.ResourceSkuProperty;
+  ...ManagedServiceIdentityProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations
