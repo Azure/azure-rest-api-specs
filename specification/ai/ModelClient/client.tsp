@@ -67,8 +67,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
-// Hide the Response Format related classes favor of a factory method on the ChatCompletionsResponseFormat class
-@@access(AI.Model.ChatCompletionsResponseFormat, Access.internal, "python");
+// Hide Response Format related derived classes in favor of a factory method on ChatCompletionsResponseFormat.
 @@access(AI.Model.ChatCompletionsResponseFormatText, Access.internal, "python");
 @@access(AI.Model.ChatCompletionsResponseFormatJsonObject,
   Access.internal,
@@ -80,28 +79,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 );
 @@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   Access.internal,
-  "python"
-);
-
-// Add "Internal" suffix to the internal Response Format classes, as we hand-code a new public class named ChatCompletionsResponseFormat.
-@@clientName(AI.Model.ChatCompletionsResponseFormat,
-  "ChatCompletionsResponseFormatInternal",
-  "python"
-);
-@@clientName(AI.Model.ChatCompletionsResponseFormatText,
-  "ChatCompletionsResponseFormatTextInternal",
-  "python"
-);
-@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
-  "ChatCompletionsResponseFormatJsonObjectInternal",
-  "python"
-);
-@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchema,
-  "ChatCompletionsResponseFormatJsonSchemaInternal",
-  "python"
-);
-@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
-  "ChatCompletionsResponseFormatJsonSchemaDefinitionInternal",
   "python"
 );
 
