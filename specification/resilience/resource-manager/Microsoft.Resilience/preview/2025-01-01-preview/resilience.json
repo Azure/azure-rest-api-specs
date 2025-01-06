@@ -436,6 +436,78 @@
         ]
       }
     },
+    "ResilienceStateReason": {
+      "type": "string",
+      "description": "Resilience state reasons",
+      "enum": [
+        "PlatformError",
+        "RelatedResourceEvaluationFailed",
+        "SkuNonAZ",
+        "SkuCapacityLessThanThree",
+        "RegionNonAZ",
+        "ZonesCountNotOne",
+        "ZonesCountLessThanTwo",
+        "ZonesCountLessThanThree",
+        "ZonesFlagNotSet",
+        "ZonesNotAligned"
+      ],
+      "x-ms-enum": {
+        "name": "ResilienceStateReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlatformError",
+            "value": "PlatformError",
+            "description": "Platform Error."
+          },
+          {
+            "name": "RelatedResourceEvaluationFailed",
+            "value": "RelatedResourceEvaluationFailed",
+            "description": "Related resource evaluation Failed."
+          },
+          {
+            "name": "SkuNonAZ",
+            "value": "SkuNonAZ",
+            "description": "SKU doesn't support Availability Zones."
+          },
+          {
+            "name": "SkuCapacityLessThanThree",
+            "value": "SkuCapacityLessThanThree",
+            "description": "Sku capacity is not configured to support zone resilient deployment."
+          },
+          {
+            "name": "RegionNonAZ",
+            "value": "RegionNonAZ",
+            "description": "Region doesn't support Availability Zones."
+          },
+          {
+            "name": "ZonesCountNotOne",
+            "value": "ZonesCountNotOne",
+            "description": "Zones count is not one."
+          },
+          {
+            "name": "ZonesCountLessThanTwo",
+            "value": "ZonesCountLessThanTwo",
+            "description": "Zones count is less than two."
+          },
+          {
+            "name": "ZonesCountLessThanThree",
+            "value": "ZonesCountLessThanThree",
+            "description": "Zones count is less than three."
+          },
+          {
+            "name": "ZonesFlagNotSet",
+            "value": "ZonesFlagNotSet",
+            "description": "Zones flag is not set."
+          },
+          {
+            "name": "ZonesNotAligned",
+            "value": "ZonesNotAligned",
+            "description": "Zones not aligned."
+          }
+        ]
+      }
+    },
     "ResourceResilienceProfile": {
       "type": "object",
       "description": "Resilience Profile for a resource.",
@@ -495,7 +567,7 @@
           "type": "array",
           "description": "Reasons for the resilience state of the resource.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ResilienceStateReason"
           }
         }
       },

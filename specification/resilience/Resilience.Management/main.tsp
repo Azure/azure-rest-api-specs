@@ -116,7 +116,7 @@ model ResourceResilienceProfile {
 
   @added(Versions.v2025_01_01_preview)
   @doc("Reasons for the resilience state of the resource.")
-  resilienceStateReasons: string[];
+  resilienceStateReasons: ResilienceStateReason[];
 }
 
 @doc("Azores Classification tags applied for resource exclusion/assertion.")
@@ -199,6 +199,42 @@ union ResilienceState {
 
   @doc("Always Available state.")
   AlwaysAvailable: "AlwaysAvailable",
+
+  string,
+}
+
+@added(Versions.v2025_01_01_preview)
+@doc("Resilience state reasons")
+union ResilienceStateReason {
+  @doc("Platform Error.")
+  PlatformError: "PlatformError",
+
+  @doc("Related resource evaluation Failed.")
+  RelatedResourceEvaluationFailed: "RelatedResourceEvaluationFailed",
+
+  @doc("SKU doesn't support Availability Zones.")
+  SkuNonAZ: "SkuNonAZ",
+
+  @doc("Sku capacity is not configured to support zone resilient deployment.")
+  SkuCapacityLessThanThree: "SkuCapacityLessThanThree",
+
+  @doc("Region doesn't support Availability Zones.")
+  RegionNonAZ: "RegionNonAZ",
+
+  @doc("Zones count is not one.")
+  ZonesCountNotOne: "ZonesCountNotOne",
+
+  @doc("Zones count is less than two.")
+  ZonesCountLessThanTwo: "ZonesCountLessThanTwo",
+
+  @doc("Zones count is less than three.")
+  ZonesCountLessThanThree: "ZonesCountLessThanThree",
+
+  @doc("Zones flag is not set.")
+  ZonesFlagNotSet: "ZonesFlagNotSet",
+
+  @doc("Zones not aligned.")
+  ZonesNotAligned: "ZonesNotAligned",
 
   string,
 }
