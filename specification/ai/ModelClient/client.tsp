@@ -16,9 +16,14 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
+// The operators need to be hidden, since we hand-write the public versions of those
+@@access(AI.Model.getChatCompletions, Access.internal);
+@@access(AI.Model.getEmbeddings, Access.internal);
+@@access(AI.Model.getImageEmbeddings, Access.internal);
+@@access(AI.Model.getModelInfo, Access.internal, "python");
+
 // Since we made all operator methods internal, we need to explicity
 // say we still want the models they use to be public, since they will be used by hand-written operator methods.
-// Note that for some programming languages, we will make some of these classes internal (see below)
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
@@ -57,12 +62,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
 @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
-
-// The operators need to be hidden, since we hand-write the public versions of those
-@@access(AI.Model.getChatCompletions, Access.internal);
-@@access(AI.Model.getEmbeddings, Access.internal);
-@@access(AI.Model.getImageEmbeddings, Access.internal);
-@@access(AI.Model.getModelInfo, Access.internal, "python");
 
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
