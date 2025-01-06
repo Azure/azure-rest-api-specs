@@ -4,20 +4,18 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2021-08-01-preview",
-    "ConnectorName": "Jack",
-    "resource": {
-      "properties": {
-        "description": "Updated example connector"
-      }
-    }
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2024-11-01-preview",
+    "connectorName": "testconnector",
+    "properties": {}
   },
   "responses": {
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/connectors/Jack",
-        "name": "Jack",
+        "name": "testconnector",
         "type": "Microsoft.Storage/connectors",
+        "location": "eastus",
         "properties": {
           "uniqueId": "12345",
           "state": "Enabled",
@@ -31,8 +29,7 @@
             },
             "authProperties": {
               "type": "AccessKey",
-              "accessKeyId": "exampleKeyId",
-              "secretAccessKey": "exampleSecret"
+              "accessKeyId": "exampleKeyId"
             }
           },
           "provisioningState": "Succeeded"

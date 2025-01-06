@@ -4,10 +4,11 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2021-08-01-preview",
-    "ConnectorName": "Jack",
-    "resource": {
-      "name": "Jack",
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2024-11-01-preview",
+    "connectorName": "testconnector",
+    "body": {
+      "location": "eastus",
       "properties": {
         "state": "Enabled",
         "description": "Example connector",
@@ -30,7 +31,7 @@
     "200": {
       "body": {
         "storageConnectorMethodName": "List",
-        "storageConnectorErrorMessage": "",
+        "storageConnectorErrorMessage": "ConnectorErrorMessage",
         "storageConnectorRequestId": "request-id-123"
       }
     }
