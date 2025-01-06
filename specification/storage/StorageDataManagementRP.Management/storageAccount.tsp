@@ -18,6 +18,7 @@ namespace Microsoft.Storage;
 model StorageAccount {
   /** The name */
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   @key("storageAccountName")
   @segment("storageAccounts")
