@@ -1,0 +1,36 @@
+{
+  "operationId": "Connectors_ProposedConnectionTest",
+  "title": "ProposedConnectionTest",
+  "parameters": {
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/accounts/teststorageaccount",
+    "api-version": "2025-01-01-preview",
+    "connectorName": "testconnector",
+    "body": {
+      "properties": {
+        "state": "Enabled",
+        "description": "Example connector",
+        "source": {
+          "type": "Bucket",
+          "connection": {
+            "type": "Endpoint",
+            "endpoint": "https://example.com/bucket"
+          },
+          "authProperties": {
+            "type": "AccessKey",
+            "accessKeyId": "exampleKeyId",
+            "secretAccessKey": "exampleSecret"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storageConnectorMethodName": "List",
+        "storageConnectorErrorMessage": "ConnectorErrorMessage",
+        "storageConnectorRequestId": "request-id-123"
+      }
+    }
+  }
+}

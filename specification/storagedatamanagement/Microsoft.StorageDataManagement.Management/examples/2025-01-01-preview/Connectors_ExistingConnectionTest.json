@@ -1,0 +1,21 @@
+{
+  "operationId": "Connectors_ExistingConnectionTest",
+  "title": "ExistingConnectionTest",
+  "parameters": {
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/accounts/teststorageaccount",
+    "api-version": "2025-01-01-preview",
+    "connectorName": "testconnector",
+    "body": {
+      "uniqueId": "12345"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "storageConnectorMethodName": "List",
+        "storageConnectorErrorMessage": "ConnectionErrorMessage",
+        "storageConnectorRequestId": "request-id-123"
+      }
+    }
+  }
+}

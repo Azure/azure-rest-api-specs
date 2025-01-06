@@ -1,0 +1,62 @@
+{
+  "operationId": "Connectors_ListByStorageAccount",
+  "title": "ListConnectorsByStorageAccount",
+  "parameters": {
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/accounts/teststorageaccount",
+    "api-version": "2025-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/accounts/teststorageaccount/providers/Microsoft.StorageDataManagement/connectors/testconnector",
+            "name": "testconnector1",
+            "type": "Microsoft.Storage/connectors",
+            "properties": {
+              "uniqueId": "12345",
+              "state": "Enabled",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "Endpoint",
+                  "endpoint": "https://example.com/bucket"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/accounts/teststorageaccount/providers/Microsoft.StorageDataManagement/connectors/testconnector",
+            "name": "testconnector2",
+            "type": "Microsoft.Storage/connectors",
+            "properties": {
+              "uniqueId": "67890",
+              "state": "Enabled",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector 2",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "Endpoint",
+                  "endpoint": "https://example.com/bucket2"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId2"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
