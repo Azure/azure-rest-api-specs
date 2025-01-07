@@ -22,8 +22,16 @@
         "properties": {
           "platformFaultDomainCount": 2,
           "platformUpdateDomainCount": 20,
-          "vmssMigrationProperties": {
-            "constrainedMaximumCapacity":  false
+          "virtualMachineScaleSetMigrationInfo": {
+            "defaultVirtualMachineScaleSetInfo": {
+              "defaultVirtualMachineScaleSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+              },
+              "constrainedMaximumCapacity": false
+            },
+            "migrateToVirtualMachineScaleSet": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+            }
           }
         },
         "location": "westus",

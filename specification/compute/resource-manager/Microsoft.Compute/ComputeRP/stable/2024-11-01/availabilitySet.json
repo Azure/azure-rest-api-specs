@@ -675,8 +675,9 @@
           "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsPolicy",
           "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the availability set."
         },
-        "vmssMigrationProperties": {
-          "$ref": "#/definitions/VmssMigrationProperties",
+        "virtualMachineScaleSetMigrationInfo": {
+          "$ref": "#/definitions/virtualMachineScaleSetMigrationInfo",
+          "readOnly": true,
           "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
         }
       },
@@ -761,15 +762,35 @@
       ],
       "description": "Describes the Virtual Machine Scale Set to migrate from Availability Set."
     },
-    "VmssMigrationProperties": {
+    "VirtualMachineScaleSetMigrationInfo": {
+      "properties": {
+        "defaultVirtualMachineScaleSetInfo": {
+          "$ref": "#/definitions/DefaultVirtualMachineScaleSetInfo",
+          "readOnly": true,
+          "description": "Indicates the target Virtual Machine ScaleSet properties upon triggering a seamless migration without downtime of the VMs via the ConvertToVirtualMachineScaleSet API."
+        },
+        "migrateToVirtualMachineScaleSet": {
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "readOnly": true,
+          "description": "Specifies the Virtual Machine Scale Set that the Availability Set is migrated to."
+        }
+      },
+      "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
+    },
+    "DefaultVirtualMachineScaleSetInfo": {
       "properties": {
         "constrainedMaximumCapacity": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Indicate if Availability Set has constrained maximum capacity."
+          "description": " Indicates if the the maximum capacity of the default migrated Virtual Machine Scale Set after its migration will be constrained to a limited number of VMs."
+        },
+        "defaultVirtualMachineScaleSet": {
+          "readOnly": true,
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "description": " The default Virtual Machine ScaleSet Uri that the Availability Set will be moved to upon triggering a seamless migration via the ConvertToVirtualMachineScaleSet API."
         }
       },
-      "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
+      "description": "Indicates the target Virtual Machine ScaleSet properties upon triggering a seamless migration without downtime of the VMs via the ConvertToVirtualMachineScaleSet API."
     },
     "ConvertToVirtualMachineScaleSetInput": {
       "properties": {
