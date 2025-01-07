@@ -16,9 +16,6 @@ model PostgreSqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of PostgreSqlSourceConnector")
   connectorType: ConnectorType.PostgreSqlSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("HostName for PostgreSql Server.")
   hostName: string;
 
