@@ -350,6 +350,7 @@ directive:
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```
 
+
 ## AzureOpenAI 2024-08-01-preview
 These settings apply only when `--tag=release_2024_08_01_preview` is specified on the command line.
 
@@ -396,6 +397,26 @@ These settings apply only when `--tag=release_2024_10_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2024_10_01_preview'
 input-file: preview/2024-10-01-preview/azureopenai.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Existing external API uses property names like n_epochs, created_at, not following naming/casing guidelines from azure. 
+  - suppress: ValidFormats
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+```
+
+## AzureOpenAI 2024-10-21
+These settings apply only when `--tag=release_2024_10_21` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_10_21'
+input-file: stable/2024-10-21/azureopenai.json
 ```
 
 AutoRest-Linter Suppressions

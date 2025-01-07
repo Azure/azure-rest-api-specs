@@ -27,6 +27,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "azure-health-deidentification"
+    title: DeidentificationClient
     generateMetadata: true
     generateTest: true
     packageDetails:
@@ -36,6 +37,8 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-health-deidentification"
     namespace: "com.azure.health.deidentification"
+    service-name: Deidentification
+    customization-class: "customization/src/main/java/ListJobsCustomization.java"
     flavor: azure
 linter:
   extends:

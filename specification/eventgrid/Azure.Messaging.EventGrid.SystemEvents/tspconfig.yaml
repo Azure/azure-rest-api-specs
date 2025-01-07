@@ -31,3 +31,16 @@ options:
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure
     api-version: "2018-01-01"
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "eventgrid-system-events"
+    packageDetails:
+      name: "@azure/eventgrid-system-events"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/azsystemevents"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    slice-elements-byval: true

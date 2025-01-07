@@ -12,6 +12,13 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
+alias ApiVersionHeader = {
+  /** Specifies the version of the operation to use for this request. */
+  @apiVersion
+  @header("x-ms-version")
+  version: string;
+};
+
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 op StorageOperation<
@@ -25,10 +32,7 @@ op StorageOperation<
   @header("Content-Type")
   contentType: MediaType,
 
-  /** Specifies the version of the operation to use for this request. */
-  @header("x-ms-version")
-  version: string,
-
+  ...ApiVersionHeader,
   ...TParams,
   ...ClientRequestIdHeader,
 ): (TResponse & {
@@ -111,10 +115,7 @@ interface Service {
     @header("Content-Type")
     multipartContentType: "multipart/mixed",
 
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
@@ -371,11 +372,7 @@ interface Container {
 
     ...ContentLengthParameter,
     ...TimeoutParameter,
-
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...ClientRequestIdHeader,
   ): ({
     @statusCode statusCode: 202;
@@ -549,10 +546,7 @@ interface Blob {
   @get
   @route("/{containerName}/{blob}")
   download(
-    /** Specifies the version of the operation to use for this request. */
-    @header("x-ms-version")
-    version: string,
-
+    ...ApiVersionHeader,
     ...ClientRequestIdHeader,
     ...ContainerNamePathParameter,
     ...BlobPathParameter,
@@ -811,6 +805,7 @@ interface Blob {
 
   /** Undelete a blob that was previously soft deleted */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=undelete")
@@ -825,6 +820,7 @@ interface Blob {
 
   /** Set the expiration time of a blob */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=expiry")
@@ -1512,6 +1508,7 @@ interface PageBlob {
 
   /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @route("/{containerName}/{blob}?comp=page&update&fromUrl")
@@ -1563,6 +1560,67 @@ interface PageBlob {
       ...EncryptionScopeResponseHeader;
     },
     "application/octet-stream"
+  >;
+
+  /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("/{containerName}/{blob}?comp=pagelist")
+  getPageRanges is StorageOperation<
+    {
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
+      ...SnapshotParameter;
+      ...TimeoutParameter;
+      ...RangeParameter;
+      ...LeaseIdOptionalParameter;
+      ...ConditionalRequestHeaders;
+      ...IfTagsParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+    },
+    PageList & {
+      ...LastModifiedResponseHeader;
+      ...EtagResponseHeader;
+      ...BlobContentLengthRequired;
+      ...DateResponseHeader;
+    }
+  >;
+
+  /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("/{containerName}/{blob}?comp=pagelist&diff")
+  getPageRangesDiff is StorageOperation<
+    {
+      ...ContainerNamePathParameter;
+      ...BlobPathParameter;
+      ...SnapshotParameter;
+      ...TimeoutParameter;
+
+      /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
+      @query
+      prevsnapshot?: string;
+
+      /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
+      @header("x-ms-previous-snapshot-url")
+      prevSnapshotUrl?: string;
+
+      ...RangeParameter;
+      ...LeaseIdOptionalParameter;
+      ...ConditionalRequestHeaders;
+      ...IfTagsParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+    },
+    PageList & {
+      ...LastModifiedResponseHeader;
+      ...EtagResponseHeader;
+      ...BlobContentLengthRequired;
+      ...DateResponseHeader;
+    }
   >;
 
   /** The Resize operation increases the size of the page blob to the specified size. */

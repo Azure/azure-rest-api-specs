@@ -54,7 +54,6 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
 }
 
-// TODO: looks like this is a pagedResult
 /** The result of a Filter Blobs API call */
 @Xml.name("EnumerationResults")
 model FilterBlobSegment {
@@ -71,7 +70,8 @@ model FilterBlobSegment {
   @Xml.name("Blobs") blobs: FilterBlobItem[];
 
   /** The next marker of the blobs. */
-  @Xml.name("NextMarker") nextMarker?: string;
+  @Xml.name("NextMarker")
+  nextMarker?: string;
 }
 
 /** The filter blob item. */
@@ -182,11 +182,13 @@ model ListContainersSegmentResponse {
 
   /** The container segment. */
   // TODO: should this be unwrapped? The swagger shows it as wrapped. Example in docs: https://learn.microsoft.com/en-us/rest/api/storageservices/list-containers2?tabs=microsoft-entra-id#response-body
-  @Xml.name("Containers") containerItems: ContainerItem[];
+  @Azure.Core.items
+  @Xml.name("Containers")
+  containerItems: ContainerItem[];
 
   /** The next marker of the containers. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @nextLink
+  @continuationToken
   @Xml.name("NextMarker")
   NextMarker?: string;
 }
@@ -207,7 +209,7 @@ model ContainerItem {
   @Xml.name("Properties") properties: ContainerProperties;
 
   /** The metadata of the container. */
-  @Xml.name("Metadata") metadata?: ContainerMetadata;
+  @Xml.name("Metadata") metadata?: Record<string>;
 }
 
 /** The properties of a container. */
@@ -259,11 +261,6 @@ model ContainerProperties {
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   immutableStorageWithVersioningEnabled?: boolean;
 }
-
-/** The metadata of a container. */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
-@Xml.name("Metadata")
-model ContainerMetadata is Record<string>;
 
 /** Stats for the storage service. */
 model StorageServiceStats {
@@ -515,6 +512,7 @@ model BlobItemInternal {
   @Xml.name("BlobTags") blobTags?: BlobTags;
 
   /** The object replication metadata of the blob. */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
   @Xml.name("ObjectReplicationMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
@@ -877,7 +875,7 @@ model ListBlobsFlatSegmentResponse {
   @Xml.name("Segment") segment: BlobFlatListSegment;
 
   /** The next marker of the blobs. */
-  @nextLink
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -899,7 +897,7 @@ model PageList {
   @Xml.name("ClearRange") clearRange?: ClearRange[];
 
   /** The next marker. */
-  @nextLink
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -1923,7 +1921,9 @@ model BlobPrefix {
 @Xml.name("Blobs")
 model BlobHierarchyListSegment {
   /** The blob items */
-  @Xml.name("BlobItems") blobItems: BlobItemInternal[];
+  @Azure.Core.items
+  @Xml.name("BlobItems")
+  blobItems: BlobItemInternal[];
 
   /** The blob prefixes. */
   @Xml.name("BlobPrefixes") blobPrefixes?: BlobPrefix[];
@@ -1960,7 +1960,7 @@ model ListBlobsHierarchySegmentResponse {
   @Xml.name("Segment") segment: BlobHierarchyListSegment;
 
   /** The next marker of the blobs. */
-  @nextLink
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -2025,6 +2025,7 @@ alias ContainerNamePathParameter = {
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
 alias MetadataHeaders = {
   /** The metadata headers. */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Record string will help generate"
   @header("x-ms-meta") metadata?: Record<string>;
 };
 
@@ -2083,7 +2084,9 @@ alias MaxResultsParameter = {
 /** The marker parameter. */
 alias MarkerParameter = {
   /** A string value that identifies the portion of the list of containers to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all containers remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client. */
-  @query marker?: string;
+  @continuationToken
+  @query
+  marker?: string;
 };
 
 /** The prefix parameter. */

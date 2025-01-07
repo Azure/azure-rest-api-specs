@@ -31,7 +31,7 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
 
 function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionStatus ) {
     # Get the current tag date
-    $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<apiVersion>(?<date>\d{4}-\d{2}-\d{2})|(?<version>\d+\.\d+))'
+    $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)|(?<version>\d+\.\d+))'
     if ($currentTag = $Matches['date']) {
         $latestVersionDate = [datetime]($currentTag -replace '-preview', '')
 
@@ -54,7 +54,7 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionS
         }
     }
 
-    $tagVersion = $newApiVersion -match '(?<apiVersion>(?<date>\d{4}-\d{2}-\d{2})|(?<version>\d+\.\d+)(-preview(\.\d+)?)?)'
+    $tagVersion = $newApiVersion -match '(?<apiVersion>(?<date>\d{4}-\d{2}(-\d{2})?)|(?<version>\d+\.\d+)(-preview(\.\d+)?)?)'
     $tagVersion = $Matches['apiVersion']
     if ($newApiVersionStatus -eq "preview") {
         $tagVersion = "preview-" + $tagVersion

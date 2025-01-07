@@ -1700,11 +1700,11 @@
         "operationId": "Blob_Query",
         "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
         "produces": [
-          "application/octet-stream",
+          "application/xml",
           "application/json"
         ],
         "consumes": [
-          "application/octet-stream"
+          "application/xml"
         ],
         "parameters": [
           {
@@ -4541,9 +4541,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -4727,9 +4724,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -9504,9 +9498,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -9679,9 +9670,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextMarker"
         }
       }
     },
@@ -13468,9 +13456,6 @@
               "$ref": "#/definitions/StorageError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "NextMarker"
         }
       }
     },
@@ -14537,21 +14522,17 @@
           "description": "The properties of the container."
         },
         "metadata": {
-          "$ref": "#/definitions/ContainerMetadata",
-          "description": "The metadata of the container."
+          "type": "object",
+          "description": "The metadata of the container.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "name",
         "properties"
       ]
-    },
-    "ContainerMetadata": {
-      "type": "object",
-      "description": "The metadata of a container.",
-      "additionalProperties": {
-        "type": "string"
-      }
     },
     "ContainerProperties": {
       "type": "object",
@@ -15211,7 +15192,7 @@
           "type": "string",
           "description": "The marker of the containers."
         },
-        "maxxResults": {
+        "maxResults": {
           "type": "integer",
           "format": "int32",
           "description": "The max results of the containers."

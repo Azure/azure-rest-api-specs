@@ -1,0 +1,38 @@
+{
+  "operationId": "AnalyzeTextSubmitJob",
+  "title": "SuccessfulHealthcareDocumentTypePostRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "{Job ID}",
+    "body": {
+      "analysisInput": {
+        "documents": [
+          {
+            "text": "Prescribed 100mg ibuprofen, taken twice daily.",
+            "id": "1",
+            "language": "en"
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "kind": "Healthcare",
+          "parameters": {
+            "modelVersion": "latest",
+            "fhirVersion": "4.0.1",
+            "documentType": "DischargeSummary"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{Endpoint}/language/analyze-text/jobs/{jobId}?api-version=2024-11-15-preview"
+      }
+    }
+  }
+}

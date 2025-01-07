@@ -1,0 +1,69 @@
+{
+  "operationId": "Services_CreateOrUpdate",
+  "title": "Services_CreateOrUpdate",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "api-version": "2024-06-01-preview",
+    "resource": {
+      "properties": {},
+      "tags": {},
+      "location": "East US",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso",
+        "type": "Microsoft.ApiCenter/services",
+        "name": "contoso",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso",
+        "type": "Microsoft.ApiCenter/services",
+        "name": "contoso",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      }
+    }
+  }
+}
