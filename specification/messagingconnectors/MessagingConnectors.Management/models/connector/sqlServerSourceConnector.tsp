@@ -16,9 +16,6 @@ model SqlServerSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of SqlServerSqlSourceConnector")
   connectorType: ConnectorType.SqlServerSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("HostName for SqlServer.")
   hostName: string;
 
