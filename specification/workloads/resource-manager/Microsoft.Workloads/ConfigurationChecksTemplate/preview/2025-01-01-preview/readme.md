@@ -36,6 +36,7 @@ tag: package-preview-2025-01
 These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2025-01'
+title: Workloads Client
 input-file:
   - ConfigurationChecksTemplate.json
   - examples/ConfigurationChecksTemplate_Get.json
