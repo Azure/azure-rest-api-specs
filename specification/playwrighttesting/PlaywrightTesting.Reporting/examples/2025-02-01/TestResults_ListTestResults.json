@@ -1,0 +1,70 @@
+{
+  "title": "TestResults_ListTestResults",
+  "operationId": "TestResults_ListTestResults",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "accountId": "sampleAccountId",
+    "testRunId": "123e4567-e89b-12d3-a456-426614174000",
+    "top": 10,
+    "skip": 0,
+    "filter": "status eq 'PASSED'",
+    "orderby": "startTime desc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "testExecutionId": "123e4567-e89b-12d3-a456-426614174001",
+            "testId": "test-id-001",
+            "testCombinationId": "comb-id-001",
+            "runId": "run-id-001",
+            "shardId": "shard-id-001",
+            "accountId": "sampleAccountId",
+            "suiteId": "suite-id-001",
+            "testTitle": "Sample Test 1",
+            "suiteTitle": "Sample Suite",
+            "fileName": "testFile.js",
+            "lineNumber": 42,
+            "retry": 0,
+            "status": "PASSED",
+            "webTestConfig": {
+              "jobName": "TestJob",
+              "projectName": "SampleProject",
+              "browserType": "CHROMIUM",
+              "os": "WINDOWS"
+            },
+            "ciConfig": {
+              "ciProviderName": "GITHUB",
+              "branch": "main",
+              "author": "developer@example.com",
+              "commitId": "commit-id-123",
+              "revisionUrl": "https://github.com/repo/commit-id-123"
+            },
+            "resultsSummary": {
+              "status": "PASSED",
+              "duration": 120,
+              "startTime": "2024-01-02T12:30:00Z",
+              "attachmentsMetadata": "Attachment details"
+            },
+            "previousRetries": [
+              {
+                "testExecutionId": "123e4567-e89b-12d3-a456-426614174002",
+                "retry": 1,
+                "status": "FAILED",
+                "duration": 110,
+                "startTime": "2024-01-02T12:20:00Z",
+                "attachmentsMetadata": "Retry attachment",
+                "artifactsPath": ["artifact1", "artifact2"]
+              }
+            ],
+            "tags": ["tag1", "tag2"],
+            "annotations": ["annotation1", "annotation2"],
+            "artifactsPath": "artifactPathSample"
+          }
+        ],
+        "nextLink": "https://example.azure.com/api/testresults?nextPageToken=xyz"
+      }
+    }
+  }
+}

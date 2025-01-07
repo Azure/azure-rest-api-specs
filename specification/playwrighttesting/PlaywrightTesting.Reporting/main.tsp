@@ -1,0 +1,926 @@
+// cheat-sheet - https://microsoft.github.io/typespec/standard-library/http/cheat-sheet
+// tsp compile main.tsp --emit @azure-tools/typespec-autorest
+
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+using Autorest;
+
+@server(
+  "https://eastus.api.playwright.microsoft.com",
+  "Azure Playwright Service API Endpoint"
+)
+@useAuth(
+  [
+    OAuth2Auth<[
+      {
+        type: OAuth2FlowType.implicit,
+        authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+        scopes: ["https://preview.playwright-int.io/.default"],
+      }
+    ]>
+  ]
+)
+@service({
+  title: "Microsoft PlaywrightTesting Data Plane API",
+})
+@versioned(Microsoft.PlaywrightTesting.DataPlane.Versions)
+namespace Microsoft.PlaywrightTesting.DataPlane;
+
+@doc("The PlaywrightTesting Data Plane service version.")
+enum Versions {
+  @doc("Version 2025-01-02-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2025-01-02-preview`,
+}
+
+// Models ////////////////////
+
+@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.")
+@resource("accounts")
+model Account {
+  @key("accountId")
+  @doc("The account id.")
+  @visibility("read")
+  id: string;
+
+  @doc("The ARM fully-qualified resource id for the account.")
+  @visibility("read")
+  resourceId: string;
+
+  @doc("The account name.")
+  @visibility("read")
+  name: string;
+
+  @doc("The state of account - Active | Inactive")
+  @visibility("read")
+  state: AccountState;
+
+  @doc("The ARM-based subscription id for the account.")
+  @visibility("read")
+  subscriptionId: uuid;
+
+  @doc("The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @visibility("read")
+  subscriptionState: SubscriptionState;
+
+  @doc("The Azure tenant id of the account.")
+  @visibility("read")
+  tenantId: uuid;
+
+  @doc("The account resource ARM location, for eg. eastus, southeastasia.")
+  @visibility("read")
+  location: string;
+
+  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  @visibility("read")
+  regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
+  @visibility("read")
+  scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
+  @visibility("read")
+  reporting?: EnablementStatus = EnablementStatus.Disabled;
+}
+
+@doc("The account state.")
+union AccountState {
+  string,
+
+  @doc("The account is Active.")
+  "Active",
+
+  @doc("The account is Inactive.")
+  "Inactive",
+}
+
+@doc("The ARM-based subscription state.")
+union SubscriptionState {
+  string,
+
+  @doc("The subscription state is Registered.")
+  "Registered",
+
+  @doc("The subscription state is Warned.")
+  "Warned",
+
+  @doc("The subscription state is Suspended.")
+  "Suspended",
+
+  @doc("The subscription state is Deleted.")
+  "Deleted",
+
+  @doc("The subscription state is Unregistered.")
+  "Unregistered",
+}
+
+// Enums converted to unions with string variant
+@doc("Status of the test run.")
+union TestRunStatus {
+  string,
+
+  @doc("The test run is currently running.")
+  "RUNNING",
+
+  @doc("The test run completed on the client side.")
+  "CLIENT_COMPLETE",
+
+  @doc("The test run completed on the server side.")
+  "SERVER_COMPLETE",
+}
+
+@doc("Access levels for test results URI.")
+union AccessLevel {
+  string,
+
+  @doc("Read access.")
+  "Read",
+
+  @doc("Write access.")
+  "Write",
+
+  @doc("Read and write access.")
+  "ReadWrite",
+
+  @doc("Read, add, create, and write access.")
+  "ReadAddCreateWrite",
+}
+
+@doc("Supported Test SDK Language.")
+union TestSdkLanguage {
+  string,
+
+  @doc("JavaScript.")
+  "JAVASCRIPT",
+
+  @doc("TypeScript")
+  "TYPESCRIPT",
+
+  @doc("Csharp")
+  "CSHARP",
+}
+
+// Models with unions
+@doc("Model representing client configuration.")
+model TestRunConfig {
+  @doc("Number of retry attempts.")
+  @visibility("read", "create")
+  retries?: int32;
+
+  @doc("Interval between repeated test runs.")
+  @visibility("read", "create")
+  repeatEach?: int32;
+
+  @doc("Number of worker instances.")
+  @visibility("read", "create")
+  workers?: int32;
+
+  @doc("Details of the test framework used.")
+  @visibility("read", "create")
+  testFramework?: TestFramework;
+
+  @doc("Details of the shards used in the test.")
+  @visibility("read", "create")
+  shards?: Shard;
+
+  @doc("Timeout duration for test execution.")
+  @visibility("read", "create")
+  timeout: int32;
+
+  // Added Fields
+  @doc("Type of test being executed (default: WebTest).")
+  @visibility("read", "create")
+  @maxLength(200)
+  testType?: string = "WebTest";
+
+  @doc("Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'")
+  @visibility("read", "create")
+  testSdkLanguage: TestSdkLanguage;
+
+  //TODO pattern check
+  @doc("Version of the reporter package.")
+  @visibility("read", "create")
+  reporterPackageVersion?: string;
+}
+
+@doc("Supported Runner Types for tests")
+union RunnerType {
+  string,
+
+  @doc("MSTEST")
+  "MSTEST",
+
+  @doc("NUNIT")
+  "NUNIT",
+
+  @doc("PLAYRIGHT")
+  "PLAYRIGHT",
+}
+
+@doc("Supported Framework")
+union TestFrameworkName {
+  string,
+
+  @doc("PLAYRIGHT")
+  "PLAYRIGHT",
+}
+
+@doc("Model representing a test framework.")
+model TestFramework {
+  //TODO- validate values of framework
+  @doc("Name of the test framework. Supported Frameworks are Playwright")
+  @maxLength(200)
+  name: TestFrameworkName;
+
+  @doc("Version of the test framework.")
+  //TODO add pattern for playwright version
+  version: string;
+
+  @doc("Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT")
+  runnerName: RunnerType;
+}
+
+@doc("Model representing a shard.")
+model Shard {
+  @doc("Total number of shards.")
+  @maxValue(1000)
+  total: int32;
+}
+
+@doc("Supported CI provider for tests")
+union CiProviderName {
+  string,
+
+  @doc("GitHub")
+  "GITHUB",
+
+  @doc("Ado")
+  "ADO",
+
+  @doc("default")
+  "DEFAULT",
+}
+
+@doc("Model representing continuous integration (CI) configuration. ")
+model CiConfig {
+  @doc("Name of the CI provider.  GitHub | ADO")
+  @maxLength(200)
+  ciProviderName?: CiProviderName;
+
+  @maxLength(500)
+  @doc("Branch name in the source code repository.")
+  branch?: string;
+
+  @maxLength(500)
+  @doc("Author of the commit triggering the test run.")
+  author?: string;
+
+  @maxLength(500)
+  @doc("ID of the commit triggering the test run.")
+  commitId?: string;
+
+  @maxLength(1000)
+  @doc("URL linking to the revision details.")
+  revisionUrl?: string;
+}
+
+@doc("Model representing summary of test run results.")
+model TestRunResultsSummary {
+  @doc("Total number of tests executed.")
+  @visibility("read")
+  numTotalTests: int32;
+
+  @doc("Number of tests that passed.")
+  @visibility("read")
+  numPassedTests: int32;
+
+  @doc("Number of tests that failed.")
+  @visibility("read")
+  numFailedTests: int32;
+
+  @doc("Number of tests that were skipped.")
+  @visibility("read")
+  numSkippedTests: int32;
+
+  @doc("Number of tests that were flaky.")
+  @visibility("read")
+  numFlakyTests: int32;
+
+  @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
+  @visibility("read")
+  status: TestStatus;
+}
+
+@doc("Model representing summary information about a test run.")
+model TestRunSummary {
+  @doc("Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
+  @visibility("read")
+  status: TestRunStatus;
+
+  @doc("Start time of the test run in datetime(RFC 3339 literal format).")
+  @visibility("read")
+  startTime: string;
+
+  @doc("End time of the test run.")
+  @visibility("read")
+  endTime: string;
+
+  @doc("Billable time for the test run. Available after testRun Ends")
+  @visibility("read")
+  billableTime: int32;
+
+  @doc("Total time taken for the test run.")
+  @visibility("read")
+  totalTime: int32;
+
+  @doc("Number of browser sessions used in the test run.")
+  @visibility("read")
+  numBrowserSessions: int32;
+
+  @doc("List of jobs associated with the test run.")
+  @visibility("read")
+  jobs: string[];
+
+  @doc("List of projects associated with the test run.")
+  @visibility("read")
+  projects: string[];
+
+  @doc("List of tags associated with the test run.")
+  @visibility("read")
+  tags: string[];
+
+  @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
+  @maxItems(1000)
+  errorMessages?: string[];
+
+  @doc("Metadata related to test run uploads.")
+  uploadMetadata?: UploadMetadata;
+}
+
+@doc("Model to update shard result.")
+model UpdateShardExecutionSummary {
+  @doc("Start time of the test run in datetime(RFC 3339 literal format).")
+  @visibility("read")
+  startTime: string;
+
+  @doc("End time of the test run.")
+  @visibility("read")
+  endTime: string;
+
+  @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
+  @maxItems(1000)
+  errorMessages?: string[];
+
+  @doc("Metadata related to test run uploads.")
+  uploadMetadata?: UploadMetadata;
+}
+
+@doc("Model representing upload metadata.")
+model UploadMetadata {
+  @doc("Total number of test results uploaded.")
+  numTestResults: int32;
+
+  @doc("Total number of attachments uploaded.")
+  numTotalAttachments: int32;
+
+  @doc("Total size of attachments uploaded in Bytes.")
+  sizeTotalAttachments: int64;
+}
+
+@doc("Model representing a test results URI.")
+model TestResultsUri {
+  @doc("URI for accessing test results.")
+  @visibility("read")
+  uri: string;
+
+  @doc("Creation timestamp of the test results URI- RFC 3339 literal format")
+  @visibility("read")
+  createdAt: string;
+
+  @doc("Expiration timestamp of the test results URI- RFC 3339 literal format")
+  @visibility("read")
+  expiresAt: string;
+
+  @doc("Access level for the test results URI.")
+  @visibility("read")
+  accessLevel: AccessLevel;
+}
+
+@doc("Model representing detailed information about a test run.")
+@resource("test-runs")
+@parentResource(Account)
+model TestRun {
+  @doc("Identifier of the test run.")
+  @key
+  @visibility("read")
+  testRunId: string;
+
+  @doc("Display name of the test run, unicode characters allowed.")
+  @maxLength(200)
+  displayName?: string;
+
+  @doc("Start time of the test run -RFC 3339 literal format")
+  @visibility("read", "create")
+  startTime: string;
+
+  @doc("Creator's identifier.")
+  @visibility("read")
+  creatorId: string;
+
+  @doc("Creator's name.")
+  @visibility("read")
+  creatorName: string;
+
+  @doc("Summary of the test run.")
+  @visibility("read")
+  summary: TestRunSummary;
+
+  @doc("Summary of test run results.")
+  @visibility("read")
+  resultsSummary: TestRunResultsSummary;
+
+  @doc("Continuous integration configuration.")
+  @visibility("read", "create")
+  ciConfig?: CiConfig;
+
+  @doc("Client configuration for the test run.")
+  @visibility("read", "create")
+  testRunConfig: TestRunConfig;
+
+  @doc("URI for accessing test results.")
+  @visibility("read")
+  testResultsUri: TestResultsUri;
+
+  @doc("Flag indicating if cloud run is enabled.")
+  @visibility("read")
+  isCloudRunEnabled: boolean;
+
+  @doc("Must be set to true when Customers want to use Reporting Feature ")
+  @visibility("read", "create")
+  isCloudReportingEnabled: boolean;
+}
+
+@doc("DTO representing a Test Run Shard.")
+@resource("shards")
+@parentResource(TestRun)
+model TestRunShardDto {
+  @doc("Shard Id for the shard")
+  @key
+  @visibility("read", "create")
+  shardId: string;
+
+  @doc("Summary of the test run shard.")
+  @visibility("read", "create", "update")
+  summary: UpdateShardExecutionSummary;
+
+  @doc("number of workers used by playwright client.")
+  @visibility("read", "create")
+  workers: int32;
+
+  @doc("Flag indicating if upload is completed for the shard.")
+  @visibility("create", "read", "update")
+  isUploadCompleted?: boolean;
+}
+
+@doc("Model of an access-token linked to an account.")
+@resource("access-tokens")
+@parentResource(Account)
+model AccessToken {
+  @key("accessTokenId")
+  @doc("The access-token id.")
+  @visibility("read")
+  id: uuid;
+
+  @minLength(3)
+  @maxLength(64)
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
+  @doc("The access-token name.")
+  @visibility("read", "create")
+  name: string;
+
+  @doc("The access-token value in JWT format.")
+  @visibility("read")
+  jwtToken?: string;
+
+  @doc("The access-token createdAt utcDateTime.")
+  @visibility("read")
+  createdAt?: utcDateTime;
+
+  @doc("The access-token expiryAt utcDateTime.")
+  @visibility("read", "create")
+  expiryAt: utcDateTime;
+
+  @doc("The access-token state - Active | Expired.")
+  @visibility("read")
+  state?: AccessTokenState;
+}
+
+@doc("The access-token state.")
+union AccessTokenState {
+  string,
+
+  @doc("The access-token is Active.")
+  "Active",
+
+  @doc("The access-token is Expired.")
+  "Expired",
+}
+
+@doc("The enablement status of a feature.")
+union EnablementStatus {
+  string,
+
+  @doc("The feature is Enabled.")
+  Enabled: "Enabled",
+
+  @doc("The feature is Disabled.")
+  Disabled: "Disabled",
+}
+
+// Import necessary libraries and define namespaces as per your typespec file.
+
+@doc("status of a test execution")
+union TestStatus {
+  string,
+
+  @doc("The test passed successfully.")
+  "PASSED",
+
+  @doc("The test failed.")
+  "FAILED",
+
+  @doc("The test was skipped.")
+  "SKIPPED",
+
+  @doc("The test was interrupted.")
+  "INTERRUPTED",
+
+  @doc("The test timed out.")
+  "TIMEDOUT",
+}
+
+// Model representing UploadTestResultsRequest
+@doc("Request object for uploading test results.")
+@parentResource(TestResult)
+model UploadTestResultsRequest {
+  @doc("List of test results.")
+  @maxItems(100)
+  value: TestResult[];
+}
+
+// Model representing details of a single test result
+@doc("Details of a single test result.")
+@resource("test-results")
+@parentResource(Account)
+model TestResult {
+  @doc("Identifier of the test execution.")
+  @key
+  @visibility("read", "create")
+  @maxLength(200)
+  testExecutionId: string;
+
+  @doc("Identifier of the test.")
+  @visibility("read", "create")
+  @maxLength(200)
+  testId: string;
+
+  @doc("Identifier of the test combination.")
+  @visibility("read", "create")
+  @maxLength(200)
+  testCombinationId: string;
+
+  @doc("Identifier of the test run.")
+  @visibility("read", "create")
+  @maxLength(200)
+  runId: string;
+
+  @doc("Identifier of the shard.")
+  @visibility("read", "create")
+  @maxLength(200)
+  shardId: string;
+
+  @doc("Identifier of the account.")
+  @visibility("read", "create")
+  @maxLength(200)
+  accountId: string;
+
+  @doc("Identifier of the suite.")
+  @visibility("read", "create")
+  @maxLength(200)
+  suiteId: string;
+
+  @doc("Title of the test.")
+  @visibility("read", "create")
+  @maxLength(500)
+  testTitle: string;
+
+  @doc("Title of the suite.")
+  @visibility("read", "create")
+  @maxLength(500)
+  suiteTitle: string;
+
+  @doc("Name of the file.")
+  @visibility("read", "create")
+  @maxLength(300)
+  fileName: string;
+
+  @doc("Line number.")
+  @visibility("read", "create")
+  lineNumber: uint32;
+
+  @doc("Number of retry attempts. max retry is 20. After which testresults metadata will not be stored")
+  @visibility("read", "create")
+  retry: uint32;
+
+  @doc("Status of the test.")
+  @visibility("read", "create")
+  status: TestStatus;
+
+  @doc("Configuration for the web test.")
+  @visibility("read", "create")
+  webTestConfig?: WebTestConfig;
+
+  @doc("Continuous integration configuration.")
+  @visibility("read", "create")
+  ciConfig?: CiConfig;
+
+  @doc("Summary of test results.")
+  @visibility("read", "create")
+  resultsSummary: TestResultsSummary;
+
+  @doc("Previous retry summaries.")
+  @visibility("read")
+  previousRetries?: PreviousRetrySummary[];
+
+  @doc("List of tags associated with the test result.")
+  @visibility("read", "create")
+  @maxItems(100)
+  tags?: string[];
+
+  @doc("List of annotations.")
+  @visibility("read", "create")
+  @maxItems(100)
+  annotations?: string[];
+
+  @doc("Relative path in Storage for all the artifacts of this test")
+  @visibility("read", "create")
+  artifactsPath: string;
+}
+
+@doc("Supported browser Types for tests")
+union BrowserType {
+  string,
+
+  @doc("Chromium")
+  "CHROMIUM",
+
+  @doc("Webkit")
+  "WEBKIT",
+
+  @doc("Safari")
+  "FIREFOX",
+}
+
+@doc("Supported OS  for tests")
+union OsType {
+  string,
+
+  @doc("Windows")
+  "WINDOWS",
+
+  @doc("Linux")
+  "LINUX",
+
+  @doc("MAC")
+  "MAC",
+}
+
+// Model representing web test configuration
+@doc("Configuration details for the web test.")
+model WebTestConfig {
+  @doc("Name of the job.")
+  @maxLength(500)
+  jobName: string;
+
+  @doc("Name of the project.")
+  @maxLength(500)
+  projectName: string;
+
+  @doc("Name of the browser.")
+  browserType: BrowserType;
+
+  @doc("Operating system details.")
+  os: OsType;
+}
+
+// Model representing test results summary
+@doc("Summary of test results.")
+model TestResultsSummary {
+  @doc("Status of the test results.")
+  status: TestStatus;
+
+  @doc("Duration of the test execution in milliseconds.")
+  duration: int64;
+
+  @doc("Start time of the test execution.- (RFC 3339 literal format)")
+  startTime: string;
+
+  @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
+  attachmentsMetadata?: string;
+}
+
+// Model representing summary of previous retries
+@doc("Summary of previous retries.")
+model PreviousRetrySummary {
+  @doc("Identifier of the test execution.")
+  testExecutionId: string;
+
+  @doc("Number of retry attempts.")
+  retry: uint32;
+
+  @doc("Status of the test execution.")
+  status: string;
+
+  @doc("Duration of the test execution.")
+  duration: int64;
+
+  @doc("Start time of the test execution- RFC 3339 literal format ")
+  startTime: string;
+
+  @doc("Metadata related to attachments.")
+  attachmentsMetadata: string;
+
+  @doc("List of artifacts paths.")
+  artifactsPath?: string[];
+}
+
+@doc("Count of a specific status such as PASSED for a run ")
+model StatusSummary {
+  @doc(" Status of a testrun or test ")
+  status: string;
+
+  @doc(" Count  of the specified status")
+  count: int32;
+}
+
+// Model representing summary statistics of tests
+@doc("Summary statistics of tests.")
+model StatusSummaryList {
+  @doc("Model to represent status of testrun/test")
+  statusSummary: StatusSummary[];
+}
+
+// Model representing summary statistics of tests
+@doc("Metadata for  testruns/builds.")
+model TestRunsMetadata {
+  @doc("List of CI branches for a testrun")
+  branches: string[];
+}
+
+// Model representing summary statistics of tests
+@doc("Summary statistics of tests.")
+model TestSummary {
+  @doc("Total number of tests.")
+  @key
+  @visibility("read")
+  id: "summary";
+
+  @doc("Total number of tests.")
+  @visibility("read")
+  total: int64;
+
+  @doc("Number of tests that passed.")
+  @visibility("read")
+  passed: int64;
+
+  @doc("Number of tests that failed.")
+  @visibility("read")
+  failed: int64;
+
+  @doc("Number of tests that were skipped.")
+  @visibility("read")
+  skipped: int64;
+
+  @doc("Number of tests that were flaky.")
+  @visibility("read")
+  flaky: int64;
+}
+
+// Operations and interfaces for API endpoints remain unchanged
+
+// Operations ////////////////////
+
+alias ServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  SupportsClientRequestId;
+
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+
+@tag("accounts")
+interface Accounts {
+  // Accounts Operations
+  @doc("Get details of the ARM resource mapped to an account for the given accountId.")
+  getAccount is Operations.ResourceRead<Account>;
+}
+
+@tag("test-run")
+interface TestRuns {
+  // TestRuns Operations
+
+  @doc("Creates or updates a testrun.")
+  createOrUpdateTestRun is Operations.ResourceCreateOrUpdate<TestRun>;
+
+  @doc("Gets a testrun.")
+  getTestRuns is Operations.ResourceRead<TestRun>;
+
+  @doc("List testruns.")
+  listTestRuns is Operations.ResourceList<
+    TestRun,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      FilterQueryParameter &
+      OrderByQueryParameter>
+  >;
+
+  @doc("Get TestResults Upload Uri.")
+  createArtifactsUploadBaseUri is Operations.ResourceAction<
+    TestRun,
+    {},
+    TestResultsUri
+  >;
+
+  updateShardExecutionStatus is Operations.ResourceAction<
+    TestRun,
+    TestRunShardDto,
+    {}
+  >;
+
+  @doc("Get TestRun summary for an Odata filter.")
+  @action("summary")
+  @actionSeparator("/")
+  getTestRunSummary is Operations.ResourceCollectionAction<
+    TestRun,
+    {},
+    StatusSummaryList,
+    QueryParametersTrait<StandardListQueryParameters &
+      FilterQueryParameter &
+      OrderByQueryParameter>
+  >;
+
+  @doc("Get TestRun metadata for an Odata filter.")
+  @action("metadata")
+  @actionSeparator("/")
+  getTestRunMetadata is Operations.ResourceCollectionAction<
+    TestRun,
+    {},
+    TestRunsMetadata,
+    QueryParametersTrait<StandardListQueryParameters &
+      FilterQueryParameter &
+      OrderByQueryParameter>
+  >;
+}
+
+@tag("test-result")
+interface TestResults {
+  // TestResults Operations
+
+  @doc("Upload Test Results.")
+  //@example(
+  //   "./TestResults_Create.json",
+  //   "TestResults_Create"
+  // )
+  uploadBatch is Operations.ResourceCollectionAction<
+    TestResult,
+    UploadTestResultsRequest,
+    {}
+  >;
+
+  @doc("List Testresults.")
+  listTestResults is Operations.ResourceList<
+    TestResult,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      FilterQueryParameter &
+      OrderByQueryParameter>
+  >;
+
+  @doc("Get Testresults summary.")
+  @action("summary")
+  @actionSeparator("/")
+  getTestResultsSummary is Operations.ResourceCollectionAction<
+    TestResult,
+    {},
+    StatusSummaryList,
+    QueryParametersTrait<StandardListQueryParameters &
+      FilterQueryParameter &
+      OrderByQueryParameter>
+  >;
+}

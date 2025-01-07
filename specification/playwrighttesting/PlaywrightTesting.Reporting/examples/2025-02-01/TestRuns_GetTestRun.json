@@ -1,0 +1,41 @@
+{
+  "title": "TestRuns_GetTestRun",
+  "operationId": "TestRuns_GetTestRun",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "accountId": "sampleAccountId",
+    "testRunId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "testRunId": "123e4567-e89b-12d3-a456-426614174000",
+        "displayName": "Sample Test Run",
+        "startTime": "2024-09-28T12:32:33Z",
+        "endTime": "2024-09-28T14:32:33Z",
+        "createdAt": "2024-09-01T12:00:00Z",
+        "updatedAt": "2024-09-28T12:32:33Z",
+        "state": "Completed",
+        "isCloudRunEnabled": true,
+        "isCloudReportingEnabled": true,
+        "totalTests": 100,
+        "passedTests": 90,
+        "failedTests": 10,
+        "testRunConfig": {
+          "retries": 3,
+          "repeatEach": 5000,
+          "workers": 5,
+          "testFramework": "JUnit",
+          "shards": {
+            "total": 5,
+            "shardIndex": 2
+          },
+          "timeout": 60000,
+          "testType": "WebTest",
+          "testSdkLanguage": "JavaScript",
+          "reporterPackageVersion": "1.0.0"
+        }
+      }
+    }
+  }
+}

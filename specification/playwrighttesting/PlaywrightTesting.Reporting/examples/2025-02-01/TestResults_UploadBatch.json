@@ -1,0 +1,92 @@
+{
+  "title": "TestResults_UploadBatch",
+  "operationId": "TestResults_UploadBatch",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "accountId": "sampleAccountId",
+    "testResults": [
+      {
+        "testExecutionId": "123e4567-e89b-12d3-a456-426614174000",
+        "testId": "test-001",
+        "testCombinationId": "combo-01",
+        "runId": "run-001",
+        "shardId": "shard-001",
+        "accountId": "sampleAccountId",
+        "suiteId": "suite-001",
+        "testTitle": "Login Test",
+        "suiteTitle": "Login Suite",
+        "fileName": "loginTest.js",
+        "lineNumber": 45,
+        "retry": 0,
+        "status": "PASSED",
+        "webTestConfig": {
+          "jobName": "CIJob1",
+          "projectName": "TestProject1",
+          "browserType": "CHROMIUM",
+          "os": "WINDOWS"
+        },
+        "ciConfig": {
+          "ciProviderName": "GITHUB",
+          "branch": "main",
+          "author": "john.doe",
+          "commitId": "abc123def456",
+          "revisionUrl": "https://github.com/test/repo/commit/abc123"
+        },
+        "resultsSummary": {
+          "status": "PASSED",
+          "duration": 1234,
+          "startTime": "2024-01-01T10:00:00Z",
+          "attachmentsMetadata": "IMAGE, VIDEO"
+        },
+        "tags": ["critical", "login"],
+        "annotations": ["Needs review", "Flaky test"],
+        "artifactsPath": "tests/artifacts/test-001"
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "testExecutionId": "123e4567-e89b-12d3-a456-426614174000",
+            "testId": "test-001",
+            "testCombinationId": "combo-01",
+            "runId": "run-001",
+            "shardId": "shard-001",
+            "accountId": "sampleAccountId",
+            "suiteId": "suite-001",
+            "testTitle": "Login Test",
+            "suiteTitle": "Login Suite",
+            "fileName": "loginTest.js",
+            "lineNumber": 45,
+            "retry": 0,
+            "status": "PASSED",
+            "webTestConfig": {
+              "jobName": "CIJob1",
+              "projectName": "TestProject1",
+              "browserType": "CHROMIUM",
+              "os": "WINDOWS"
+            },
+            "ciConfig": {
+              "ciProviderName": "GITHUB",
+              "branch": "main",
+              "author": "john.doe",
+              "commitId": "abc123def456",
+              "revisionUrl": "https://github.com/test/repo/commit/abc123"
+            },
+            "resultsSummary": {
+              "status": "PASSED",
+              "duration": 1234,
+              "startTime": "2024-01-01T10:00:00Z",
+              "attachmentsMetadata": "IMAGE, VIDEO"
+            },
+            "tags": ["critical", "login"],
+            "annotations": ["Needs review", "Flaky test"],
+            "artifactsPath": "tests/artifacts/test-001"
+          }
+        ]
+      }
+    }
+  }
+}
