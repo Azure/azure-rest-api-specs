@@ -7,7 +7,7 @@ using TypeSpec.Http;
 
 using Azure.ClientGenerator.Core;
 
-namespace AI.Model;
+namespace ModelInference;
 
 @doc("""
   The configuration information for a chat completions request.

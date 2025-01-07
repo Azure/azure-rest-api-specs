@@ -4,97 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AI.Model;
-
-@doc("Represents the input types used for embedding search.")
-union EmbeddingInputType {
-  string,
-
-  @doc("Indicates the input is a general text input.")
-  text: "text",
-
-  @doc("Indicates the input represents a search query to find the most relevant documents in your vector database.")
-  query: "query",
-
-  @doc("Indicates the input represents a document that is stored in a vector database.")
-  document: "document",
-}
-
-@doc("""
-  The format of the embeddings result.
-  Returns a 422 error if the model doesn't support the value or parameter.
-  """)
-union EmbeddingEncodingFormat {
-  string,
-
-  @doc("Base64")
-  base64: "base64",
-
-  @doc("Binary")
-  binary: "binary",
-
-  @doc("Floating point")
-  float: "float",
-
-  @doc("Signed 8-bit integer")
-  int8: "int8",
-
-  @doc("ubinary")
-  ubinary: "ubinary",
-
-  @doc("Unsigned 8-bit integer")
-  uint8: "uint8",
-}
-
-@doc("""
-  Representation of the response data from an embeddings request.
-  Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
-  recommendations, and other similar scenarios.
-  """)
-model EmbeddingsResult {
-  @doc("Unique identifier for the embeddings result.")
-  id: string;
-
-  @doc("Embedding values for the prompts submitted in the request.")
-  data: EmbeddingItem[];
-
-  @doc("Usage counts for tokens input using the embeddings API.")
-  usage: EmbeddingsUsage;
-
-  //@doc("The object type of the embeddings result. Will always be `list`.")
-  //object: string;
-
-  @doc("The model ID used to generate this result.")
-  `model`: string;
-}
-
-@doc("Representation of a single embeddings relatedness comparison.")
-model EmbeddingItem {
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Unions with different types are not supported in OpenAPI v2."
-  @doc("""
-    List of embedding values for the input prompt. These represent a measurement of the
-    vector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.
-    """)
-  embedding: string | float32[];
-
-  @doc("Index of the prompt to which the EmbeddingItem corresponds.")
-  index: int32;
-
-  //@doc("The object type of this embeddings item. Will always be `embedding`.")
-  //object: string;
-}
-
-@doc("Measurement of the amount of tokens used in this request and response.")
-model EmbeddingsUsage {
-  @doc("Number of tokens in the request.")
-  prompt_tokens: int32;
-
-  @doc("""
-    Total number of tokens transacted in this request/response. Should equal the
-    number of tokens in the request.
-    """)
-  total_tokens: int32;
-}
+namespace ModelInference;
 
 @doc("Represents some basic information about the AI model.")
 model ModelInfo {
@@ -115,20 +25,8 @@ union ModelType {
   @doc("A model capable of generating embeddings from a text")
   embeddings: "embeddings",
 
-  @doc("A model capable of generating images from an image and text description")
-  image_generation: "image_generation",
-
-  @doc("A text generation model")
-  text_generation: "text_generation",
-
-  @doc("A model capable of generating embeddings from an image")
-  image_embeddings: "image_embeddings",
-
-  @doc("A text-to-audio generative model")
-  audio_generation: "audio_generation",
-
   @doc("A model capable of taking chat-formatted messages and generate responses")
-  chat_completion: "chat_completion",
+  chat_completion: "chat-completion",
 }
 
 alias AdditionalRequestHeaders = {

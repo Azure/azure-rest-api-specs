@@ -21,8 +21,8 @@ using Azure.Core;
 @service({
   title: "AI Model Inference",
 })
-@versioned(AI.Model.Versions)
-namespace AI.Model;
+@versioned(ModelInference.Versions)
+namespace ModelInference;
 
 @doc("The AI.Model service versions.")
 enum Versions {
