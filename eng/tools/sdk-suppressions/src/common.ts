@@ -1,6 +1,4 @@
-// import { load } from "js-yaml";
-import pkg from 'js-yaml';
-const { load } = pkg;
+import { parse as yamlParse } from "yaml";
 
 import { exec } from "child_process";
 import { promisify } from "util";
@@ -19,7 +17,7 @@ export function parseYamlContent(yamlContent: string, path: string): {
   let content = undefined;
   // if yaml file is not a valid yaml, catch error and return undefined
   try {
-    content = load(yamlContent);
+    content = yamlParse(yamlContent);
   } catch (error) {
     console.error(`The file parsing failed in the ${path}. Details: ${error}`);
     return {
