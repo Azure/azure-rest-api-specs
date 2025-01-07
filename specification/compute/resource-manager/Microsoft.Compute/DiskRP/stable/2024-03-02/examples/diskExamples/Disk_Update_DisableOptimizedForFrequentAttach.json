@@ -11,6 +11,20 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Succeeded",
+          "optimizedForFrequentAttach": false
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
     "202": {
       "headers": {
         "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk?api-version=2024-03-02"
@@ -27,20 +41,8 @@
         "location": "West US",
         "name": "myDisk"
       }
-    },
-    "200": {
-      "body": {
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Succeeded",
-          "optimizedForFrequentAttach": false
-        },
-        "location": "West US",
-        "name": "myDisk"
-      }
     }
-  }
+  },
+  "operationId": "Disks_Update",
+  "title": "update a managed disk to disable optimizedForFrequentAttach."
 }
