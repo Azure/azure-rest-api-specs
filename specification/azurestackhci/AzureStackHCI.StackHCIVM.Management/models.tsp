@@ -1321,7 +1321,6 @@ model VirtualHardDiskUploadStatus {
   errorMessage?: string;
 }
 
-
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
