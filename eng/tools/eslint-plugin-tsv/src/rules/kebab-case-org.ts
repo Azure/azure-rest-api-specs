@@ -1,6 +1,9 @@
 import path from "path";
 import { NamedRule } from "../interfaces/named-eslint.js";
 
+// Valid:   /specification/kebab-case/Kebab.Case/tspconfig.yaml
+// Invalid: /specification/Not-Kebab-Case/Not.KebabCase/tspconfig.yaml
+
 export const rule: NamedRule.RuleModule = {
   name: "kebab-case-org",
   meta: {
