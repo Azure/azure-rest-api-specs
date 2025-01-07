@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- Ec2KeyPairs ----------------------------------------------
@@ -134,7 +134,7 @@ union KeyType {
 interface Ec2KeyPairs {
   get is ArmResourceRead<Ec2KeyPair>;
   @doc("Create a Ec2KeyPair. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Ec2KeyPair>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<Ec2KeyPair>;
   update is ArmCustomPatchAsync<
     Ec2KeyPair,
     Azure.ResourceManager.Foundations.TagsUpdateModel<Ec2KeyPair>

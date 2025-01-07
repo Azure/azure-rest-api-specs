@@ -29,9 +29,9 @@ namespace Microsoft.AwsConnector;
 
 /** Api versions */
 enum Versions {
-  /** 2024-08-01-preview api version */
+  /** 2024-12-01 api version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-08-01-preview`,
+  `2024-12-01`,
 }
 
 //---------------------------------------------- NetworkFirewallRuleGroups ----------------------------------------------
@@ -191,7 +191,18 @@ model RulesSource {
 @doc("Definition of StatefulRuleOptions")
 model StatefulRuleOptions {
   @doc("Property ruleOrder")
-  ruleOrder?: string;
+  ruleOrder?: StatefulRuleOptionsRuleOrder;
+}
+
+@doc("StatefulRuleOptionsRuleOrder enum")
+union StatefulRuleOptionsRuleOrder {
+  @doc("StatefulRuleOptionsRuleOrder enum DEFAULT_ACTION_ORDER")
+  DEFAULT_ACTION_ORDER: "DEFAULT_ACTION_ORDER",
+
+  @doc("StatefulRuleOptionsRuleOrder enum STRICT_ORDER")
+  STRICT_ORDER: "STRICT_ORDER",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -233,7 +244,7 @@ model PortSet {
 @doc("Definition of RulesSourceList")
 model RulesSourceList {
   @doc("Property generatedRulesType")
-  generatedRulesType?: string;
+  generatedRulesType?: RulesSourceListGeneratedRulesType;
 
   @doc("Property targetTypes")
   @extension("x-ms-identifiers", [])
@@ -242,6 +253,17 @@ model RulesSourceList {
   @doc("Property targets")
   @extension("x-ms-identifiers", [])
   targets?: string[];
+}
+
+@doc("RulesSourceListGeneratedRulesType enum")
+union RulesSourceListGeneratedRulesType {
+  @doc("RulesSourceListGeneratedRulesType enum ALLOWLIST")
+  ALLOWLIST: "ALLOWLIST",
+
+  @doc("RulesSourceListGeneratedRulesType enum DENYLIST")
+  DENYLIST: "DENYLIST",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -550,7 +572,7 @@ model TCPFlagField {
 interface NetworkFirewallRuleGroups {
   get is ArmResourceRead<NetworkFirewallRuleGroup>;
   @doc("Create a NetworkFirewallRuleGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<NetworkFirewallRuleGroup>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NetworkFirewallRuleGroup>;
   update is ArmCustomPatchAsync<
     NetworkFirewallRuleGroup,
     Azure.ResourceManager.Foundations.TagsUpdateModel<NetworkFirewallRuleGroup>

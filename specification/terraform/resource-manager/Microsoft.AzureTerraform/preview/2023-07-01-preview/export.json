@@ -107,8 +107,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/BaseExportModel"
-            },
-            "x-ms-parameter-location": "method"
+            }
           }
         ],
         "responses": {
@@ -176,7 +175,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "InProgress operation status",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             },
@@ -231,7 +230,19 @@
           ],
           "x-ms-enum": {
             "name": "targetProvider",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "azurerm",
+                "value": "azurerm",
+                "description": "https://registry.terraform.io/providers/hashicorp/azurerm/latest"
+              },
+              {
+                "name": "azapi",
+                "value": "azapi",
+                "description": "https://registry.terraform.io/providers/Azure/azapi/latest"
+              }
+            ]
           }
         },
         "fullProperties": {
@@ -421,8 +432,22 @@
         "ExportQuery"
       ],
       "x-ms-enum": {
-        "name": "parameterType",
-        "modelAsString": true
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExportResource",
+            "value": "ExportResource"
+          },
+          {
+            "name": "ExportResourceGroup",
+            "value": "ExportResourceGroup"
+          },
+          {
+            "name": "ExportQuery",
+            "value": "ExportQuery"
+          }
+        ]
       }
     }
   },

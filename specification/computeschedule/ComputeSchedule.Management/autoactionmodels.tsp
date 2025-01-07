@@ -202,10 +202,13 @@ model NotificationProperties {
 
   @doc("The language the notification should be sent on.")
   language: Language;
+
+  @doc("Tells if the notification is enabled or not.")
+  disabled?: boolean = false;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-scalar validAutoActionResourceId
+scalar ValidAutoActionResourceId
   extends armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachines",
@@ -220,12 +223,22 @@ scalar validAutoActionResourceId
 @doc("Represents an auto action resource metadata.")
 model AutoActionResource {
   @doc("The ARM Id of the resource.")
-  resourceId: validAutoActionResourceId;
+  resourceId: ValidAutoActionResourceId;
 
   @doc("The desired notification settings for the specified resource.")
   @OpenAPI.extension("x-ms-identifiers", ["destination"])
-  @visibility("read")
-  notificationSettings?: NotificationProperties[];
+  notificationSettings?: Array<NotificationProperties>;
+}
+
+@doc("Provisioning state")
+@lroStatus
+union ProvisioningState {
+  ResourceProvisioningState,
+
+  @doc("Resource is being deleted.")
+  Deleting: "Deleting",
+
+  string,
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
@@ -245,29 +258,98 @@ model AutoActionProperties {
   @doc("The time when the auto action is supposed to stop scheduling")
   endTime?: offsetDateTime;
 
-  @doc("The list of the resources the auto action is supposed to perform the actions on")
-  @visibility("create", "update")
-  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
-  resources: AutoActionResource[];
-
   @doc("The schedule the auto action is supposed to follow")
   schedule: AutoActionSchedule;
 
   @doc("The notification settings for the auto action")
   @OpenAPI.extension("x-ms-identifiers", ["destination"])
-  notificationSettings: NotificationProperties[];
+  notificationSettings: Array<NotificationProperties>;
 
   @doc("Tell if the auto action is disabled or not")
-  @visibility("read")
-  isDisabled: boolean;
+  disabled?: boolean = false;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model to attach a list of auto action resources.")
+model AutoActionResourceAttachRequest {
+  @doc("List of resources to be attached/patched")
+  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  resources: Array<AutoActionResource>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model to detach a list of auto action resources.")
+model AutoActionResourceDetachRequest {
+  @doc("List of resources to be detached")
+  resources: Array<ValidAutoActionResourceId>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("Request model perform a resource operation in a list of resources")
+model AutoActionResourcePatchRequest {
+  @doc("The list of resources we watch to patch")
+  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  resources: Array<AutoActionResource>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The request to cancel an occurrence.")
+model CancelOccurrenceRequest {
+  @doc("The resources the cancellation should act on. If no resource is passed in the list, Auto Action will cancel the occurrence for all resources.")
+  resourceIds: Array<ValidAutoActionResourceId>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The state the resource is on after the resource operation is applied")
+union ResourceOperationStatus {
+  @doc("The resource operation was successful")
+  Succeeded: "Succeeded",
+
+  @doc("The resource operation has failed.")
+  Failed: "Failed",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The status of a resource after a resource level operation was performed")
+model ResourceStatus {
+  @doc("The arm identifier of the resource")
+  resourceId: ValidAutoActionResourceId;
+
+  @doc("The state the resource is currently on")
+  status: ResourceOperationStatus;
+
+  @doc("Errors encountered while trying to perform")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The response from auto action resource requests, which contains the status of each resource")
+model AutoActionResourceOperationResponse {
+  @doc("The total number of resources operated on")
+  totalResources: int32;
+
+  @doc("The resource status of for each resource")
+  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  resourcesStatuses: Array<ResourceStatus>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The auto action resource")
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The auto action extension")
+model AutoActionResources is ExtensionResource<AutoActionProperties> {
+  ...ResourceNameParameter<AutoActionResources>;
 }

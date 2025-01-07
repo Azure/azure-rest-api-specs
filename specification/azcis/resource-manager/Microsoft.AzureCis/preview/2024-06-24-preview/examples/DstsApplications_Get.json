@@ -1,0 +1,77 @@
+{
+  "title": "Get DstsApplication",
+  "operationId": "DstsApplications_Get",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2024-06-24-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/dstsApplications/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/dstsApplications",
+        "properties": {
+          "applicationAccount": {
+            "dstsInstance": "Instance 1",
+            "applicationAccountName": "Application 1",
+            "realms": [
+              "realm1",
+              "realm2"
+            ],
+            "servicePrincipalNames": [
+              "name1",
+              "name2"
+            ],
+            "replyToAddresses": [
+              "address1",
+              "address2"
+            ],
+            "groupId": "9aa8c2f2-ef5b-459f-9c10-613768430a44",
+            "groupName": "Group1",
+            "isMfaEnabled": true,
+            "sawDeviceEnforcement": "SAWFull",
+            "isElevatedAccess": true,
+            "isProduction": true,
+            "claimRules": [
+              {
+                "clientIdentifier": {
+                  "type": "http://sts.msft.net/user/Group",
+                  "value": "GroupName"
+                },
+                "claim": {
+                  "type": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "value": "PlatformServiceViewer"
+                },
+                "clientIdentityOrigin": "MSIT-ADFS-Federation",
+                "isRegionalEnforced": true
+              }
+            ],
+            "applicationClientIdentity": {
+              "dmsiInfo": {
+                "path": "/path/to/dmsi",
+                "region": "asiaeast-dsms.dsms.core.windows.net",
+                "subscriptions": [
+                  "ef06429b-d53b-4362-92b9-b5fff2d27320"
+                ]
+              },
+              "type": "Dsmi",
+              "clientTokenIpRangeRestrictions": [
+                {
+                  "fromIpAddress": "10.10.10.0",
+                  "toIpAddress": "10.10.10.10"
+                }
+              ]
+            },
+            "azureLocation": "useast"
+          },
+          "provisioningState": "Succeeded",
+          "requestId": "359a4430-8c8b-42f9-b62e-173747d76994",
+          "applicationGroupId": "9aa8c2f2-ef5b-459f-9c10-613768430a44"
+        }
+      }
+    }
+  }
+}

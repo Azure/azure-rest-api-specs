@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./models/connectorModels.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -22,9 +22,11 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")
-model MessagingConnector is TrackedResource<ResourceProperties> {
+model MessagingConnector is TrackedResource<ConnectorProperties> {
   @doc("Name of the Connector resource.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]")
+  @maxLength(64)
+  @minLength(5)
   @path
   @key("name")
   @segment("connectors")
@@ -43,10 +45,10 @@ interface ConnectorOperations {
   delete is ArmResourceDeleteSync<MessagingConnector>;
 
   @doc("Pause one Connector to paused status")
-  pause is ArmResourceActionNoContentSync<MessagingConnector, {}>;
+  pause is ArmResourceActionNoContentSync<MessagingConnector, void>;
 
   @doc("Resume one Connector to running status")
-  resume is ArmResourceActionNoContentSync<MessagingConnector, {}>;
+  resume is ArmResourceActionNoContentSync<MessagingConnector, void>;
 
   @doc("List Connector By ResourceGroup and Subscription")
   listByResourceGroup is ArmResourceListByParent<MessagingConnector>;

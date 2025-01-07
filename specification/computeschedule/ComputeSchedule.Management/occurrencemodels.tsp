@@ -80,12 +80,14 @@ model OccurrenceResource is AutoActionResource {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
-  @doc("The amount of delay the occurrence should have")
+  @doc("The amount of delay the occurrence should apply")
   delay: duration;
 
-  @doc("The resources that should be delayed. If empty, the delay will apply to the whole occurrence.")
-  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
-  resources: OccurrenceResource[];
+  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
+  resourceIds: Array<ValidAutoActionResourceId>;
 }

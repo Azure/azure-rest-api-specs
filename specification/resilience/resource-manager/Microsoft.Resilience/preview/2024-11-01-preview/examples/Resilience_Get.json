@@ -1,0 +1,121 @@
+{
+  "title": "Resilience_Get",
+  "operationId": "Resilience_Get",
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceUri": "subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Compute/virtualMachines/arntestvm1",
+    "resilienceState": "azResilienceState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "eventType": "Write",
+          "resilienceState": "ZoneAligned",
+          "tenantId": "2d9dcb31-72d3-4f69-a884-2ca04841181d",
+          "resilienceProfiles": [
+            {
+              "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Compute/virtualMachines/arntestvm1",
+              "type": "Microsoft.Compute/virtualMachines",
+              "location": "eastus",
+              "zones": [
+                "1"
+              ],
+              "sku": {
+                "name": "Standard_DS1_v2"
+              },
+              "azoresClassification": {
+                "classification": "Non-Service Critical",
+                "categorization": "ManagementPlane",
+                "usage": ""
+              },
+              "creationDate": "2024-03-14T23:42:41.0270000Z",
+              "resilienceEvaluations": [
+                {
+                  "id": "ccfa5fe7-0022-47c5-a7c2-8849bb7c3f05",
+                  "targetState": "ZoneAligned",
+                  "result": "Succeeded"
+                }
+              ],
+              "resilienceState": "ZoneAligned"
+            },
+            {
+              "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Compute/disks/arntestvm1_disk1",
+              "type": "Microsoft.Compute/disks",
+              "location": "eastus",
+              "zones": [
+                "2"
+              ],
+              "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium",
+                "capacity": 30
+              },
+              "azoresClassification": {
+                "classification": "Non-Service Critical",
+                "categorization": "ManagementPlane",
+                "usage": ""
+              },
+              "creationDate": "2024-03-14T23:42:41.0270000Z",
+              "resilienceEvaluations": [
+                {
+                  "id": "5433c235-a1dc-402d-803d-70131e7f7ed0",
+                  "targetState": "ZoneRedundant",
+                  "result": "Failed"
+                },
+                {
+                  "id": "62b492ec-1dc2-486c-8a10-fcad5d97f400",
+                  "targetState": "ZoneAligned",
+                  "result": "Failed"
+                }
+              ],
+              "resilienceState": "NonResilient"
+            },
+            {
+              "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Network/publicIPAddresses/arntestvm1-ip",
+              "type": "Microsoft.Network/publicIPAddresses",
+              "location": "eastus",
+              "zones": [
+                "1"
+              ],
+              "sku": {
+                "name": "Standard"
+              },
+              "azoresClassification": {
+                "classification": "Non-Service Critical",
+                "categorization": "ManagementPlane",
+                "usage": ""
+              },
+              "creationDate": "0001-01-01T12:00:00.000Z",
+              "resilienceEvaluations": [
+                {
+                  "id": "4f7b716a-79d6-4339-afdd-c765273b39e6",
+                  "targetState": "ZoneRedundant",
+                  "result": "Failed"
+                },
+                {
+                  "id": "290ad347-e940-4ccf-8694-d5caace8cc76",
+                  "targetState": "ZoneAligned",
+                  "result": "Succeeded"
+                }
+              ],
+              "resilienceState": "ZoneAligned"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/2d9dcb31-72d3-4f69-a884-2ca04841181d/resourceGroups/test-azores-rg/providers/Microsoft.Compute/virtualMachines/arntestvm1/providers/Microsoft.Resilience/resilienceStates/azResilienceState",
+        "name": "resilienceState",
+        "type": "Microsoft.Resilience/resilienceStates",
+        "systemData": {
+          "createdBy": "lizchslbolr",
+          "createdByType": "User",
+          "createdAt": "2024-04-22T21:30:05.206Z",
+          "lastModifiedBy": "jckjietnvdyusx",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-04-22T21:30:05.207Z"
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -37,9 +39,28 @@ model AadApplicationResourceProperties {
   @doc("List of the certificates paths for an AAD Application resource.")
   certificates?: Array<string>;
 
-  @doc("Provisioning state")
+  @added(Versions.v2024_06_24_preview)
+  @doc("The Azure location")
+  azureLocation?: azureLocation;
+
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: AadApplicationProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Application ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  applicationId?: string;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Object ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  objectId?: string;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Service Principal Object ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  servicePrincipalObjectId?: string;
 }
 
 @doc("AadApplication Resource")

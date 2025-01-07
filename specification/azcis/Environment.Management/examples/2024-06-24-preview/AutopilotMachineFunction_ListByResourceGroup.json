@@ -1,0 +1,54 @@
+{
+  "title": "ListByResourceGroup AutopilotMachineFunction",
+  "operationId": "AutopilotMachineFunction_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-06-24-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/autopilotMachineFunctions/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCis/autopilotMachineFunctions",
+            "properties": {
+              "machineFunctions": [
+                {
+                  "machineFunctionName": "ZeusCore",
+                  "allocationType": "LegacyMachine",
+                  "requestedNodeLabels": "IPv4Reuse:False|SKU:WCS-G6-i26c{24core}",
+                  "numberOfMachines": "2",
+                  "additionalFields": [
+                    "NumberOfScaleUnits=1",
+                    "FailingLimit=20,20"
+                  ]
+                },
+                {
+                  "machineFunctionName": "ZeusHost",
+                  "allocationType": "LogicalMachine",
+                  "requestedNodeLabels": "IPv4Reuse:False|SKU:WCS-G6-i26c{24core}",
+                  "numberOfMachines": "3",
+                  "additionalFields": [
+                    "NumberOfScaleUnits=1",
+                    "FailingLimit=20,20"
+                  ]
+                }
+              ],
+              "environmentName": "Zeus",
+              "clusterName": "DSM04P",
+              "sourceEnvironment": "AzureUnallocated-Prod-DSM04P",
+              "sourceManaTree": "PilotFish.CEG.AzureUnallocated",
+              "targetManaTree": "PilotFish.CEG.AzureCompute.SMD",
+              "requestedNodeLabels": "IPv4Reuse:False|SKU:WCS-G6-i26c{24core}",
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

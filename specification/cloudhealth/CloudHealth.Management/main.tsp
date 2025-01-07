@@ -30,8 +30,8 @@ enum Versions {
 
 alias ProviderName = "Microsoft.CloudHealth";
 
-// Regex for all our resource name validations. Up to 60 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
-alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
+// Regex for all our resource name validations. Up to 260 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
+alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
 @doc("String with regex validation to match the resource name requirements")
@@ -102,13 +102,13 @@ model SignalDefinitionProperties {
 
   @doc("Display name")
   @minLength(1)
-  @maxLength(100)
+  @maxLength(260)
   displayName?: string;
 
   @doc("Kind of the signal definition")
   signalKind: SignalKind;
 
-  @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
+  @doc("Interval in which the signal is being evaluated. Defaults to PT1M (1 minute).")
   refreshInterval?: RefreshInterval = "PT1M";
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
@@ -346,7 +346,7 @@ model AuthenticationSettingProperties {
 
   @doc("Display name")
   @minLength(1)
-  @maxLength(100)
+  @maxLength(260)
   displayName?: string;
 
   @doc("Kind of the authentication setting")
@@ -383,8 +383,13 @@ model EntityProperties {
 
   @doc("Display name")
   @minLength(1)
-  @maxLength(100)
+  @maxLength(260)
   displayName?: string;
+
+  @doc("Entity kind")
+  @minLength(1)
+  @maxLength(260)
+  kind?: string = "Default";
 
   @doc("Positioning of the entity on the model canvas")
   canvasPosition?: EntityCoordinates;
@@ -442,10 +447,10 @@ model AlertConfiguration {
   @minLength(1)
   description?: string;
 
-  @doc("List of action group resource IDs to be notified when the alert is triggered.")
+  @doc("Optional list of action group resource IDs to be notified when the alert is triggered.")
   @maxItems(5)
   @minItems(1)
-  actionGroupIds: armResourceIdentifier<[
+  actionGroupIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/actionGroups";
     }
@@ -496,15 +501,31 @@ model SignalGroup {
   @doc("Azure Monitor Workspace Signal Group")
   azureMonitorWorkspace?: AzureMonitorWorkspaceSignalGroup;
 
-  @doc("Settings for dependent entities, i.e. child entities")
-  dependentEntities?: DependentEntitiesSignalGroup;
+  @doc("Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity.")
+  dependencies?: DependenciesSignalGroup;
 }
 
 @doc("Properties for dependent entities, i.e. child entities")
-model DependentEntitiesSignalGroup {
-  @doc("Minimum number of children entities that need to be healthy in order for this entity to be considered healthy.")
-  @minValue(1)
-  requiredHealthyChildren?: int32;
+model DependenciesSignalGroup {
+  @doc("Aggregation type for child dependencies.")
+  aggregationType: DependenciesAggregationType = DependenciesAggregationType.WorstOf;
+
+  @doc("Degraded threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered degraded when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'.")
+  degradedThreshold?: string;
+
+  @doc("Unhealthy threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered unhealthy when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'.")
+  unhealthyThreshold?: string;
+}
+
+@doc("Aggregation type for child dependencies.")
+union DependenciesAggregationType {
+  string,
+
+  @doc("Default behavior: Worst child health state is propagated.")
+  WorstOf: "WorstOf",
+
+  @doc("Based on configurable thresholds.")
+  Thresholds: "Thresholds",
 }
 
 @doc("A grouping of signal assignments and link to a data source")
@@ -620,7 +641,7 @@ model RelationshipProperties {
 
   @doc("Display name")
   @minLength(1)
-  @maxLength(100)
+  @maxLength(260)
   displayName?: string;
 
   @doc("Resource name of the parent entity")
@@ -662,7 +683,7 @@ model DiscoveryRuleProperties {
 
   @doc("Display name")
   @minLength(1)
-  @maxLength(100)
+  @maxLength(260)
   displayName?: string;
 
   @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
@@ -680,7 +701,7 @@ model DiscoveryRuleProperties {
   addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
   @visibility("read")
-  @doc("Date when the discovery rule was (soft-)deleted")
+  @doc("Date when the discovery rule was (soft-)deleted.")
   deletionDate?: utcDateTime;
 
   @visibility("read")
@@ -690,6 +711,10 @@ model DiscoveryRuleProperties {
   @visibility("read")
   @doc("Number of discovered entities in the last discovery operation.")
   numberOfDiscoveredEntities?: int32;
+
+  @visibility("read")
+  @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
+  entityName: string;
 }
 
 @doc("Discovery rule relationship discovery behavior")

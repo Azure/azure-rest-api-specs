@@ -28,6 +28,30 @@ model NetworkDeviceProperties {
   @doc("The device's preferred IP address")
   preferredIp: string;
 
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The datacenter short code's ARM Id string")
+  dcCodeArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The device's IPv4 address's ARM Id string")
+  loopbackIpV4ArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The device's IPv6 address's ARM Id string")
+  loopbackIpV6ArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The management console's IPv4 address's ARM Id string")
+  managementIpV4ArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The management console's IPv6 address's ARM Id string")
+  managementIpV6ArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The device's preferred IP address's ARM Id string")
+  preferredIpArmId: string;
+
   @doc("The device's hardware SKU")
   hardwareSku: string;
 
@@ -37,6 +61,10 @@ model NetworkDeviceProperties {
   @doc("The cluster the device belongs to")
   cluster: string;
 
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The cluster's ARM Id string")
+  clusterArmId: string;
+
   @doc("The cloud the device is in")
   cloudType: string;
 
@@ -45,6 +73,22 @@ model NetworkDeviceProperties {
 
   @doc("The device's rack location")
   dcRackLocation: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The device's rack location's ARM Id string")
+  dcRackLocationArmId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("The device owner's Service Tree Id")
+  serviceTreeId: string;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("Additional Device Interface IP addresses")
+  additionalIps: Array<string>;
+
+  @Versioning.added(Versions.v2024_09_01_preview)
+  @doc("Additional Device Interface IP address ARM Ids")
+  additionalIpsArmId: Array<string>;
 
   @doc("Provisioning state")
   @visibility("read")

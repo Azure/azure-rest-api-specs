@@ -1407,7 +1407,8 @@
         "AzureResource",
         "ConfluentBootstrapServer",
         "ConfluentSchemaRegistry",
-        "SelfHostedServer"
+        "SelfHostedServer",
+        "FabricPlatform"
       ],
       "x-ms-enum": {
         "name": "targetServiceType",
@@ -1513,6 +1514,22 @@
       "x-ms-discriminator-value": "ConfluentBootstrapServer",
       "type": "object",
       "description": "The service properties when target service type is ConfluentBootstrapServer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetServiceBase"
+        }
+      ],
+      "properties": {
+        "endpoint": {
+          "description": "The endpoint of service.",
+          "type": "string"
+        }
+      }
+    },
+    "FabricPlatform": {
+      "x-ms-discriminator-value": "FabricPlatform",
+      "type": "object",
+      "description": "The service properties when target service type is FabricPlatform",
       "allOf": [
         {
           "$ref": "#/definitions/TargetServiceBase"

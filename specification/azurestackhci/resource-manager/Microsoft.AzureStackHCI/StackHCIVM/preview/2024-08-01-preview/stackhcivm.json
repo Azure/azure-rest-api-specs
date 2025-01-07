@@ -4023,8 +4023,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -4104,6 +4103,10 @@
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         },
+        "vmImageRepositoryCredentials": {
+          "$ref": "#/definitions/VmImageRepositoryCredentials",
+          "description": "The credentials used to login to the image repository that has access to the specified image"
+        },
         "identifier": {
           "$ref": "#/definitions/GalleryImageIdentifier",
           "description": "This is the gallery image definition identifier."
@@ -4164,8 +4167,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "GalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4567,8 +4569,7 @@
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "IPConfigurationProperties": {
       "type": "object",
@@ -4793,8 +4794,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "LogicalNetworkArmReference": {
       "type": "object",
@@ -4808,6 +4808,18 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l2Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l3Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               }
             ]
           }
@@ -4896,8 +4908,7 @@
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "LogicalNetworkStatusProvisioningStatus": {
       "type": "object",
@@ -4944,8 +4955,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "MarketplaceGalleryImageListResult": {
       "type": "object",
@@ -5044,8 +5054,7 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "MarketplaceGalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -5116,8 +5125,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
@@ -5191,11 +5199,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local network interface or if one should be created.",
-          "default": false
         }
       }
     },
@@ -5215,8 +5218,7 @@
           "$ref": "#/definitions/NetworkInterfaceStatusProvisioningStatus",
           "description": "Network interface provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "NetworkInterfaceStatusProvisioningStatus": {
       "type": "object",
@@ -5919,7 +5921,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
         }
       }
     },
@@ -6033,8 +6035,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "StorageContainerArmReference": {
       "type": "object",
@@ -6124,8 +6125,7 @@
           "$ref": "#/definitions/StorageContainerStatusProvisioningStatus",
           "description": "Storage container's provisioning status"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "StorageContainerStatusProvisioningStatus": {
       "type": "object",
@@ -6305,8 +6305,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
@@ -6392,15 +6391,6 @@
           "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
           "x-ms-secret": true
         },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local hard disk or if one should be created.",
-          "default": false
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemTypes",
-          "description": "Operating system type of the OS disk. Possible values are: Windows, Linux."
-        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6457,8 +6447,7 @@
           "$ref": "#/definitions/VirtualHardDiskUploadStatus",
           "description": "The upload status of the virtual hard disk"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6610,8 +6599,7 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true
+      "x-ms-azure-resource": true
     },
     "VirtualMachineInstanceListResult": {
       "type": "object",
@@ -6699,11 +6687,6 @@
         "resourceUid": {
           "type": "string",
           "description": "Unique identifier defined by ARC to identify the guest of the VM."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local virtual machine or if one should be created.",
-          "default": false
         }
       }
     },
@@ -7139,8 +7122,7 @@
           "$ref": "#/definitions/VirtualMachineInstanceStatusProvisioningStatus",
           "description": "Provisioning status of the virtual machine instance"
         }
-      },
-      "x-ms-client-flatten": true
+      }
     },
     "VirtualMachineInstanceStatusProvisioningStatus": {
       "type": "object",
@@ -7201,6 +7183,26 @@
           "description": "The VM Config Agent running on the virtual machine."
         }
       }
+    },
+    "VmImageRepositoryCredentials": {
+      "type": "object",
+      "description": "The credentials used to login to the image repository that has access to the specified image",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username for accessing image repository"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for accessing image repository",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
     },
     "VmSizeEnum": {
       "type": "string",
