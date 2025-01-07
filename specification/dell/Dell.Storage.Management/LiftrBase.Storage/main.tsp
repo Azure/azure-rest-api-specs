@@ -133,7 +133,7 @@ model ManagedServiceIdentityUpdate {
    * The identities assigned to this resource by the user.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
+  userAssignedIdentities?: Record<UserAssignedIdentity | null>;
 }
 
 /**
