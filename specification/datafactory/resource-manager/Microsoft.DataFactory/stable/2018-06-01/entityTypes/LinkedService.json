@@ -5381,11 +5381,14 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "authenticationType": {
-          "x-ms-format": "dfe-string",
           "type": "string",
           "enum": [
             "Basic"
           ],
+          "x-ms-enum": {
+            "name": "GreenplumAuthenticationType",
+            "modelAsString": true
+          },
           "description": "The authentication type to use. Type: string. Only used for V2."
         },
         "host": {
