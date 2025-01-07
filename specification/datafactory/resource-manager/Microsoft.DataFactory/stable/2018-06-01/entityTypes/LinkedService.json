@@ -5381,8 +5381,11 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "authenticationType": {
-          "type": "object",
           "x-ms-format": "dfe-string",
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
           "description": "The authentication type to use. Type: string. Only used for V2."
         },
         "host": {
@@ -5421,7 +5424,7 @@
           "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer. Only used for V2."
         },
         "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of password in connection string. Type: string. Only used for V2."
         }
       }
