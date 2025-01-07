@@ -3248,21 +3248,9 @@
               "$ref": "#/definitions/SiteDnsConfig",
               "description": "Property to configure various DNS related settings for a site."
             },
-            "vnetRouteAllEnabled": {
-              "description": "Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.",
-              "type": "boolean"
-            },
-            "vnetImagePullEnabled": {
-              "description": "To enable pulling image over Virtual Network",
-              "type": "boolean"
-            },
-            "vnetContentShareEnabled": {
-              "description": "To enable accessing content over virtual network",
-              "type": "boolean"
-            },
-            "vnetBackupRestoreEnabled": {
-              "description": "To enable Backup and Restore operations over virtual network",
-              "type": "boolean"
+            "outboundVnetRouting": {
+              "$ref": "#/definitions/OutboundVnetRouting",
+              "description": "Property to configure various outbound traffic routing options over virtual network for a site"
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
@@ -4225,6 +4213,31 @@
           "description": "Indicates that sites using Virtual network custom DNS servers are still sorting the list of DNS servers. Read-Only.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "OutboundVnetRouting": {
+      "type": "object",
+      "properties": {
+        "allTraffic": {
+          "description": "Enables all other routing options defined in OutboundVnetRouting if this setting is set to true.",
+          "type": "bool"
+        },
+        "applicationTraffic": {
+          "description": "This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied. Previously called VnetRouteAllEnabled.",
+          "type": "bool"
+        },
+        "contentShareTraffic": {
+          "description": "Enables accessing content over virtual network. Previously called VnetContentShareEnabled",
+          "type": "bool"
+        },
+        "imagePullTraffic": {
+          "description": "Enables pulling image over Virtual Network. Previously called VnetImagePullEnabled.",
+          "type": "bool"
+        },
+        "backupRestoreTraffic": {
+          "description": "Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled",
+          "type": "bool"
         }
       }
     },
