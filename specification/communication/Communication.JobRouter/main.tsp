@@ -4,13 +4,16 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 
-#suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
+@useAuth(AadOauth2Auth<["https://communication.azure.com/.default"]>)
 @service({
   title: "Azure Communication Routing Service",
 })
