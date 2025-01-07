@@ -61,8 +61,8 @@ model EmbeddingsResult {
   @doc("Usage counts for tokens input using the embeddings API.")
   usage: EmbeddingsUsage;
 
-  //@doc("The object type of the embeddings result. Will always be `list`.")
-  //object: string;
+  @doc("The object type of the embeddings result. Will always be `list`.")
+  object: "list";
 
   @doc("The model ID used to generate this result.")
   `model`: string;
@@ -80,8 +80,8 @@ model EmbeddingItem {
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   index: int32;
 
-  //@doc("The object type of this embeddings item. Will always be `embedding`.")
-  //object: string;
+  @doc("The object type of this embeddings item. Will always be `embedding`.")
+  object: "embedding";
 }
 
 @doc("Measurement of the amount of tokens used in this request and response.")
