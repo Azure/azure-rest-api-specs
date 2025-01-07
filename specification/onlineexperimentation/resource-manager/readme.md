@@ -28,6 +28,12 @@ These are the global settings for the OnlineExperimentWorkspace.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-05-31-preview
+suppressions:
+    - code: AvoidAnonymousTypes
+      where: 
+        - $.definitions["ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
+      reason: 
+        Issue with common-types
 ```
 
 ### Tag: package-2025-05-31-preview
