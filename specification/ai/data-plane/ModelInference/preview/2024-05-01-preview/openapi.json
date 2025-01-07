@@ -1093,11 +1093,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of this embeddings item. Will always be `embedding`.",
+          "enum": [
+            "embedding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
         "embedding",
-        "index"
+        "index",
+        "object"
       ]
     },
     "EmbeddingsOptions": {
@@ -1154,6 +1165,16 @@
           "$ref": "#/definitions/EmbeddingsUsage",
           "description": "Usage counts for tokens input using the embeddings API."
         },
+        "object": {
+          "type": "string",
+          "description": "The object type of the embeddings result. Will always be `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "model": {
           "type": "string",
           "description": "The model ID used to generate this result."
@@ -1163,6 +1184,7 @@
         "id",
         "data",
         "usage",
+        "object",
         "model"
       ]
     },
