@@ -26,12 +26,22 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-12-18
+tag: package-2025-04-01
 ```
 
 ``` yaml !$(csharp)
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - Microsoft.Quota/stable/2025-04-01/groupquota.json
+  - Microsoft.Quota/stable/2025-04-01/quota.json
 ```
 
 ### Tag: package-preview-2024-12-18-preview
