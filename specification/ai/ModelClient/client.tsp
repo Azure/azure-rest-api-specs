@@ -16,6 +16,14 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
+@@usage(AI.Model.ChatCompletionsResponseFormat, Usage.input);
+@@usage(AI.Model.ChatCompletionsResponseFormatText, Usage.input);
+@@usage(AI.Model.ChatCompletionsResponseFormatJsonObject, Usage.input);
+@@usage(AI.Model.ChatCompletionsResponseFormatJsonSchema, Usage.input);
+@@usage(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  Usage.input
+);
+
 // The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
@@ -64,23 +72,23 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 
 @@clientName(AI.Model.ChatCompletionsResponseFormat,
   "ChatCompletionsResponseFormatInternal",
-  "python"
+  "python,csharp"
 );
 @@clientName(AI.Model.ChatCompletionsResponseFormatText,
   "ChatCompletionsResponseFormatTextInternal",
-  "python"
+  "python,csharp"
 );
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
   "ChatCompletionsResponseFormatJsonObjectInternal",
-  "python"
+  "python,csharp"
 );
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchema,
   "ChatCompletionsResponseFormatJsonSchemaInternal",
-  "python"
+  "python,csharp"
 );
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "ChatCompletionsResponseFormatJsonSchemaDefinitionInternal",
-  "python"
+  "python,csharp"
 );
 
 // We use shorter names in the Python client library
