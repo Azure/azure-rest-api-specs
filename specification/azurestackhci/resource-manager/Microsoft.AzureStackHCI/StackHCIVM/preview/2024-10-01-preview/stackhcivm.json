@@ -6386,6 +6386,15 @@
           "type": "integer",
           "format": "int64",
           "description": "The downloaded sized of the virtual hard disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]"
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The progress of the operation in percentage"
         }
       }
     },
@@ -6578,6 +6587,19 @@
         "status": {
           "$ref": "#/definitions/Status",
           "description": "The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]"
+        },
+        "progressPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The progress of the operation in percentage"
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "VirtualHardDisk upload error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive upload error message"
         }
       }
     },

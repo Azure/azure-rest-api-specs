@@ -1288,6 +1288,14 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1299,7 +1307,20 @@ model VirtualHardDiskUploadStatus {
 
   @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
   status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
+
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
