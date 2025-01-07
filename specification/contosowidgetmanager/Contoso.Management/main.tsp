@@ -29,3 +29,5 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+// Trivial seplling errrrror
