@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationIdentityClient",
     "description": "Azure Communication Identity Service",
-    "version": "2022-10-01"
+    "version": "2023-08-01"
   },
   "paths": {
     "/identities": {
@@ -22,6 +22,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
+            "type": "string",
+            "format": "date-time"
           },
           {
             "in": "body",
@@ -43,11 +57,17 @@
             "description": "Created - Returns the created identity.",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Result of idempotent request. Present only in case of idempotent processing.",
+                "type": "string"
+              }
             }
           }
         },
         "x-ms-examples": {
-          "Create an Identity and optionally an access token with custom expiration time within the [60-1440] minutes range. If expiration time is not specified, the default value of 1440 minutes (24 hours) will be used.": {
+          "Create an Identity and optionally an access token with custom expiration time within the [60-1440] minutes range. If expiration time is not specified, the default value of 1440 minutes (24 hours) will be used. You can also specify optional idempotent processing using Repeatability-Request-ID and Repeatability-First-Sent headers. If the headers are not provided, the request will be processed in a non-idempotent way which can lead to more identities being created than intended on a retry.": {
             "$ref": "./examples/CreateIdentity.json"
           }
         }
@@ -73,6 +93,20 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -83,7 +117,13 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Result of idempotent request. Present only in case of idempotent processing.",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -113,6 +153,20 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "responses": {
@@ -123,11 +177,17 @@
             }
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content",
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Result of idempotent request. Present only in case of idempotent processing.",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
-          "Revoke access tokens": {
+          "Revoke access tokens with optional idempotent processing using Repeatability-Request-ID and Repeatability-First-Sent headers. If the headers are not provided, the request will be processed in a non-idempotent way which can lead to more tokens being revoked than intended on a retry.": {
             "$ref": "./examples/RevokeAccessTokens.json"
           }
         }
@@ -151,6 +211,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Request payload for the token exchange.",
@@ -171,6 +245,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Result of idempotent request. Present only in case of idempotent processing.",
+                "type": "string"
+              }
             }
           }
         },
@@ -206,6 +286,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
+            "in": "header",
+            "name": "Repeatability-Request-ID",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs. Internal identifiers shouldn't be used. The value should be an opaque meaningless string in UUID format.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "header",
+            "name": "Repeatability-First-Sent",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "Requested scopes for the new token.",
@@ -226,6 +320,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "description": "Result of idempotent request. Present only in case of idempotent processing.",
+                "type": "string"
+              }
             }
           }
         },
