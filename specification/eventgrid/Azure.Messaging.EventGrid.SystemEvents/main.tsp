@@ -29,7 +29,7 @@ import "./Microsoft.ResourceNotifications/ContainerServiceEventResources.tsp";
 
 import "./propertyNameOverride.tsp";
 
-/** Azure Messaging EventGrid SystemEvents */
+/** Azure Messaging EventGrid SystemEvents test*/
 #suppress "@azure-tools/typespec-azure-core/auth-required" "!!FIXME!!"
 @service({
   title: "Azure.Messaging.SystemEvents",
@@ -37,9 +37,10 @@ import "./propertyNameOverride.tsp";
 @versioned(ServiceApiVersions)
 namespace Microsoft.EventGrid.SystemEvents {
   using TypeSpec.Versioning;
-
+//
   enum ServiceApiVersions {
     v2018_01_01: "2018-01-01",
     v2024_01_01: "2024-01-01",
   }
+//
 }
