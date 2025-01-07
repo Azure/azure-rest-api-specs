@@ -342,6 +342,16 @@
           "type": "string",
           "description": "A unique identifier associated with this chat completions response."
         },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`.",
+          "enum": [
+            "chat.completion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "created": {
           "type": "integer",
           "format": "unixtime",
@@ -367,6 +377,7 @@
       },
       "required": [
         "id",
+        "object",
         "created",
         "model",
         "usage",
@@ -1325,6 +1336,16 @@
           "type": "string",
           "description": "A unique identifier associated with this chat completions response."
         },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`.",
+          "enum": [
+            "chat.completion"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "created": {
           "type": "integer",
           "format": "unixtime",
@@ -1350,6 +1371,7 @@
       },
       "required": [
         "id",
+        "object",
         "created",
         "model",
         "usage",

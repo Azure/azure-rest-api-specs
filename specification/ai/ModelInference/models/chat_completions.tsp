@@ -131,8 +131,8 @@ alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
   id: string;
 
-  //@doc("The response object type, which is always `chat.completion`.")
-  //object: string;
+  @doc("The response object type, which is always `chat.completion`.")
+  object: "chat.completion";
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
