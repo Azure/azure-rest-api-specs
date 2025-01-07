@@ -2,19 +2,21 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The network interface resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -38,7 +40,19 @@ interface NetworkInterfaces {
 
   @doc("The operation to update a network interface.")
   @parameterVisibility
-  update is ArmCustomPatchAsync<NetworkInterface>;
+  @removed(Versions.v2024_10_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2024_10_01_preview, "update")
+  updateOld is ArmCustomPatchAsync<NetworkInterface>;
+
+  @doc("The operation to update a network interface.")
+  @parameterVisibility
+  @added(Versions.v2024_10_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<
+    NetworkInterface,
+    NetworkInterfacesUpdateRequest
+  >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;

@@ -186,7 +186,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -200,7 +200,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Not found error: resource does not exist",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -231,7 +231,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -271,7 +271,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Validation error: required parameters are missing",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -306,7 +306,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -343,7 +343,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Validation error: required parameters are missing",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -378,7 +378,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -440,7 +440,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -490,7 +490,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -498,7 +498,7 @@
           {
             "name": "taskHubName",
             "in": "path",
-            "description": "Task Hub name",
+            "description": "The name of the TaskHub",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -512,7 +512,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Not found error: resource does not exist",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -543,7 +543,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -551,7 +551,7 @@
           {
             "name": "taskHubName",
             "in": "path",
-            "description": "Task Hub name",
+            "description": "The name of the TaskHub",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -577,10 +577,21 @@
             "description": "Resource 'TaskHub' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/TaskHub"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Validation error: required parameters are missing",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -590,69 +601,11 @@
           "TaskHubs_CreateOrUpdate": {
             "$ref": "./examples/TaskHubs_CreateOrUpdate.json"
           }
-        }
-      },
-      "patch": {
-        "operationId": "TaskHubs_Update",
-        "tags": [
-          "TaskHubs"
-        ],
-        "description": "Update a Task Hub",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "taskHubName",
-            "in": "path",
-            "description": "Task Hub name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TaskHubUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TaskHub"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
-        "x-ms-examples": {
-          "TaskHubs_Update": {
-            "$ref": "./examples/TaskHubs_Update.json"
-          }
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "TaskHubs_Delete",
@@ -673,7 +626,7 @@
           {
             "name": "namespaceName",
             "in": "path",
-            "description": "The name of the service",
+            "description": "The name of the never",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -681,7 +634,7 @@
           {
             "name": "taskHubName",
             "in": "path",
-            "description": "Task Hub name",
+            "description": "The name of the TaskHub",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
@@ -710,9 +663,27 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Namespace": {
       "type": "object",
-      "description": "A DurableTaskService resource",
+      "description": "A Durable Task Scheduler namespace resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
@@ -774,39 +745,24 @@
         }
       }
     },
-    "NamespacePropertiesUpdate": {
-      "type": "object",
-      "description": "The template for adding optional properties.",
-      "properties": {
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "NamespaceUpdate": {
       "type": "object",
-      "description": "Update namespace",
+      "description": "A Durable Task Scheduler namespace resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "RP-specific properties"
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "The status of the current operation.",
+      "description": "The status of the current operation",
       "enum": [
         "Succeeded",
         "Failed",
@@ -859,20 +815,37 @@
       },
       "readOnly": true
     },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The state of the resource redundancy",
+      "enum": [
+        "None",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The resource is not redundant"
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "The resource is zone redundant"
+          }
+        ]
+      }
+    },
     "TaskHub": {
       "type": "object",
-      "description": "An Task Hub resource belonging to the namespace.",
+      "description": "A Task Hub resource belonging to the namespace",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TaskHubProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -908,21 +881,14 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
+          "description": "The status of the last operation",
           "readOnly": true
-        }
-      }
-    },
-    "TaskHubUpdate": {
-      "type": "object",
-      "description": "Update Task Hub",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        },
+        "dashboardUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the durable task scheduler dashboard",
+          "readOnly": true
         }
       }
     }

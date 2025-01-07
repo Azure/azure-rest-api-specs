@@ -34,6 +34,7 @@ interface VmmServers {
   @summary("Implements VmmServers PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VmmServer>;
   /** Updates the VmmServers resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements VmmServers PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -43,6 +44,7 @@ interface VmmServers {
   )
   update is ArmTagsPatchAsync<VmmServer>;
   /** Removes the SCVmm fabric from Azure. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Implements VmmServers DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",

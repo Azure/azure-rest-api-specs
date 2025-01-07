@@ -1,0 +1,676 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "MacieAllowLists"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/macieAllowLists": {
+      "get": {
+        "operationId": "MacieAllowLists_ListBySubscription",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "List MacieAllowList resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_ListBySubscription": {
+            "$ref": "./examples/MacieAllowLists_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/macieAllowLists": {
+      "get": {
+        "operationId": "MacieAllowLists_ListByResourceGroup",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "List MacieAllowList resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_ListByResourceGroup": {
+            "$ref": "./examples/MacieAllowLists_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/macieAllowLists/{name}": {
+      "get": {
+        "operationId": "MacieAllowLists_Get",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "Get a MacieAllowList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of MacieAllowList",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_Get": {
+            "$ref": "./examples/MacieAllowLists_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MacieAllowLists_CreateOrReplace",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "Create a MacieAllowList. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of MacieAllowList",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MacieAllowList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MacieAllowList' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowList"
+            }
+          },
+          "201": {
+            "description": "Resource 'MacieAllowList' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowList"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_CreateOrReplace": {
+            "$ref": "./examples/MacieAllowLists_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MacieAllowLists_Update",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "Update a MacieAllowList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of MacieAllowList",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MacieAllowListTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MacieAllowList"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_Update": {
+            "$ref": "./examples/MacieAllowLists_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MacieAllowLists_Delete",
+        "tags": [
+          "MacieAllowLists"
+        ],
+        "description": "Delete a MacieAllowList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of MacieAllowList",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MacieAllowLists_Delete": {
+            "$ref": "./examples/MacieAllowLists_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsMacieAllowListProperties": {
+      "type": "object",
+      "description": "Definition of awsMacieAllowList",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "AllowList ARN."
+        },
+        "criteria": {
+          "$ref": "#/definitions/Criteria",
+          "description": "AllowList criteria. The regex or s3 object to use for the AllowList."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of AllowList."
+        },
+        "id": {
+          "type": "string",
+          "description": "AllowList ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of AllowList."
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "AllowList status. The status for the AllowList"
+        },
+        "tags": {
+          "type": "array",
+          "description": "A collection of tags associated with a resource",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Criteria": {
+      "type": "object",
+      "description": "Definition of Criteria",
+      "properties": {
+        "regex": {
+          "type": "string",
+          "description": "The S3 object key for the AllowList."
+        },
+        "s3WordsList": {
+          "$ref": "#/definitions/S3WordsList",
+          "description": "The S3 location for the AllowList."
+        }
+      }
+    },
+    "MacieAllowList": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MacieAllowListProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MacieAllowListListResult": {
+      "type": "object",
+      "description": "The response of a MacieAllowList list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MacieAllowList items on this page",
+          "items": {
+            "$ref": "#/definitions/MacieAllowList"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MacieAllowListProperties": {
+      "type": "object",
+      "description": "Definition of MacieAllowList",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsMacieAllowListProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "MacieAllowListTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in MacieAllowList resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "S3WordsList": {
+      "type": "object",
+      "description": "Definition of S3WordsList",
+      "properties": {
+        "bucketName": {
+          "type": "string",
+          "description": "Property bucketName"
+        },
+        "objectKey": {
+          "type": "string",
+          "description": "Property objectKey"
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "OK",
+        "S3_OBJECT_ACCESS_DENIED",
+        "S3_OBJECT_EMPTY",
+        "S3_OBJECT_NOT_FOUND",
+        "S3_OBJECT_OVERSIZE",
+        "S3_THROTTLED",
+        "S3_USER_ACCESS_DENIED",
+        "UNKNOWN_ERROR"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OK",
+            "value": "OK",
+            "description": "Status enum OK"
+          },
+          {
+            "name": "S3_OBJECT_ACCESS_DENIED",
+            "value": "S3_OBJECT_ACCESS_DENIED",
+            "description": "Status enum S3_OBJECT_ACCESS_DENIED"
+          },
+          {
+            "name": "S3_OBJECT_EMPTY",
+            "value": "S3_OBJECT_EMPTY",
+            "description": "Status enum S3_OBJECT_EMPTY"
+          },
+          {
+            "name": "S3_OBJECT_NOT_FOUND",
+            "value": "S3_OBJECT_NOT_FOUND",
+            "description": "Status enum S3_OBJECT_NOT_FOUND"
+          },
+          {
+            "name": "S3_OBJECT_OVERSIZE",
+            "value": "S3_OBJECT_OVERSIZE",
+            "description": "Status enum S3_OBJECT_OVERSIZE"
+          },
+          {
+            "name": "S3_THROTTLED",
+            "value": "S3_THROTTLED",
+            "description": "Status enum S3_THROTTLED"
+          },
+          {
+            "name": "S3_USER_ACCESS_DENIED",
+            "value": "S3_USER_ACCESS_DENIED",
+            "description": "Status enum S3_USER_ACCESS_DENIED"
+          },
+          {
+            "name": "UNKNOWN_ERROR",
+            "value": "UNKNOWN_ERROR",
+            "description": "Status enum UNKNOWN_ERROR"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The tag's key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The tag's value."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

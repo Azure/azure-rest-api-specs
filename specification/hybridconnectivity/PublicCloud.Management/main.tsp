@@ -302,10 +302,14 @@ union CloudNativeType {
 //------------------- Shared -------------------
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "will move to a more structured model when stable/GA"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
 
 //---------------------------------------------- Operations ----------------------------------------------
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
+alias GenerateAwsTemplatePostResponse = Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/")
@@ -323,7 +327,7 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+  ): GenerateAwsTemplatePostResponse;
 }
 
 @armResourceOperations

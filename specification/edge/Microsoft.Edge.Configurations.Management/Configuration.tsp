@@ -32,17 +32,49 @@ interface Configurations {
   get is ArmResourceRead<Configuration>;
 
   @doc("Create or update a Configuration Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Configuration>;
 
   @doc("Update a Configuration Resource")
   update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
 
   @doc("Delete a Configuration Resource")
-  delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
+  delete is ArmResourceDeleteSync<Configuration>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Configuration>;
 
   @doc("List by subscription")
   listBySubscription is ArmListBySubscription<Configuration>;
+}
+
+@doc("ConfigurationReference Resource")
+model ConfigurationReference
+  is ExtensionResource<ConfigurationReferenceProperties> {
+  ...ResourceNameParameter<ConfigurationReference, NamePattern = "^default$">;
+}
+
+@doc("Properties for ConfigurationReference Resource")
+model ConfigurationReferenceProperties {
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("ArmId of Configuration resource")
+  configurationResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Configurations";
+    }
+  ]>;
+}
+
+@armResourceOperations
+interface ConfigurationReferences {
+  get is ArmResourceRead<ConfigurationReference>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ConfigurationReference>;
+  update is ArmResourcePatchSync<
+    ConfigurationReference,
+    ConfigurationReferenceProperties
+  >;
+  delete is ArmResourceDeleteSync<ConfigurationReference>;
+  list is ArmResourceListByParent<ConfigurationReference>;
 }

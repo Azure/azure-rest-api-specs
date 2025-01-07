@@ -2888,14 +2888,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Customer requested week of month for mcc install of auto update cycle",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 5
         },
         "autoUpdateRequestedDay": {
           "type": "integer",
           "format": "int32",
           "description": "Customer requested day of week for mcc install of auto update cycle",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 7
         },
         "autoUpdateRequestedTime": {
@@ -2980,9 +2980,9 @@
           "$ref": "#/definitions/CacheNodeOldResponse",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3298,9 +3298,9 @@
           "$ref": "#/definitions/CacheNodeProperty",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3339,9 +3339,9 @@
           "$ref": "#/definitions/CustomerProperty",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3380,9 +3380,9 @@
           "$ref": "#/definitions/CacheNodeOldResponse",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3421,9 +3421,9 @@
           "$ref": "#/definitions/CacheNodeProperty",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3462,9 +3462,9 @@
           "$ref": "#/definitions/CustomerProperty",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
-            "create",
+            "read",
             "update",
-            "read"
+            "create"
           ]
         }
       },
@@ -3607,7 +3607,8 @@
             "description": "Deleting state of the provisioning state"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ProxyRequired": {
       "type": "string",

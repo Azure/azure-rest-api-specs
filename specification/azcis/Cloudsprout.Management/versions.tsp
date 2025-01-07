@@ -12,8 +12,8 @@ namespace Microsoft.AzureCis;
 
 @doc("Supported versions.")
 enum Versions {
-  @doc("API version 2024-06-11-preview")
+  @doc("API version 2024-11-20-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_06_11_preview: "2024-06-11-preview",
+  v2024_11_20_preview: "2024-11-20-preview",
 }

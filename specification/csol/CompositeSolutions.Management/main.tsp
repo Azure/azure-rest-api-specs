@@ -198,6 +198,7 @@ model ParameterValue {
 
   //TODO: "value is removed when generate Models because of a bug, but added back when generating openapi.json
   /** Value of the Parameter */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   value: {};
 }
 
@@ -245,9 +246,11 @@ model Parameter {
   @doc("Display name of the parameter")
   displayName: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   @doc("The default value of the parameter")
   default?: {};
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Legacy"
   @doc("Allowed values")
   @OpenAPI.extension("x-ms-identifiers", [])
   allowedValues?: Array<{}>;

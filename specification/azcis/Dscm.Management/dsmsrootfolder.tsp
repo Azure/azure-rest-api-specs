@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -22,11 +23,16 @@ model DsmsRootFolderResourceProperties {
 
   @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
-  armLocation?: string;
+  azureLocation?: azureLocation;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: DscmProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Request ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  requestId?: string;
 }
 
 @doc("dsmsRootFolder Resource")

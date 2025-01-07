@@ -2,9 +2,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./edgeDeviceJobs.tsp";
-import "./clusterJobs.tsp";
-import "./cluster.tsp";
+import "./edgeMachine.tsp";
+import "./devicePool.tsp";
+import "./edgeMachineJobs.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -26,9 +26,9 @@ namespace Microsoft.AzureStackHCI;
 @doc("The available API versions.")
 enum Versions {
   /**
-   * The 2024-06-01-preview API version.
+   * The 2024-11-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_07_01_preview: "2024-07-01-preview",
+  v2024_11_01_preview: "2024-11-01-preview",
 }

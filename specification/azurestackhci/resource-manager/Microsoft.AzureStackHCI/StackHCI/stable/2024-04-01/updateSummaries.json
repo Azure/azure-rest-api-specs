@@ -1,18 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-04-01",
     "title": "AzureStackHCI",
+    "version": "2024-04-01",
     "description": "Azure Stack HCI management service"
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,9 +25,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -77,9 +77,9 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default": {
-      "delete": {
-        "operationId": "UpdateSummaries_Delete",
-        "description": "Delete Update Summaries",
+      "get": {
+        "operationId": "UpdateSummaries_Get",
+        "description": "Get all Update summaries under the HCI cluster",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -96,19 +96,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "ACCEPTED",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UpdateSummaries"
             }
-          },
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -117,13 +108,9 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
-          "Delete an Update": {
-            "$ref": "./examples/DeleteUpdateSummaries.json"
+          "Get Update summaries under cluster resource": {
+            "$ref": "./examples/GetUpdateSummaries.json"
           }
         }
       },
@@ -173,9 +160,9 @@
           }
         }
       },
-      "get": {
-        "operationId": "UpdateSummaries_Get",
-        "description": "Get all Update summaries under the HCI cluster",
+      "delete": {
+        "operationId": "UpdateSummaries_Delete",
+        "description": "Delete Update Summaries",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -192,10 +179,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/UpdateSummaries"
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL to query for status of the operation."
+              }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -205,65 +201,103 @@
           }
         },
         "x-ms-examples": {
-          "Get Update summaries under cluster resource": {
-            "$ref": "./examples/GetUpdateSummaries.json"
+          "Delete an Update": {
+            "$ref": "./examples/DeleteUpdateSummaries.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "UpdateSummariesList": {
-      "description": "List of Update Summaries",
+    "HealthState": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Success",
+        "Failure",
+        "Warning",
+        "Error",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true
+      }
+    },
+    "PackageVersionInfo": {
       "type": "object",
+      "description": "Current version of each updatable component.",
+      "properties": {
+        "packageType": {
+          "type": "string",
+          "description": "Package type"
+        },
+        "version": {
+          "type": "string",
+          "description": "Package version"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time this component was updated."
+        }
+      }
+    },
+    "UpdateSummaries": {
+      "type": "object",
+      "description": "Get the update summaries for the cluster",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateSummariesProperties",
+          "type": "object",
+          "description": "Update summaries properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpdateSummariesList": {
+      "type": "object",
+      "description": "List of Update Summaries",
       "properties": {
         "value": {
-          "description": "List of Update Summaries",
           "type": "array",
+          "description": "List of Update Summaries",
           "items": {
             "$ref": "#/definitions/UpdateSummaries"
           },
           "x-ms-identifiers": []
         },
         "nextLink": {
-          "description": "Link to the next set of results.",
           "type": "string",
+          "description": "Link to the next set of results.",
           "readOnly": true
         }
       }
     },
-    "UpdateSummaries": {
-      "description": "Get the update summaries for the cluster",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        },
-        "properties": {
-          "description": "Update summaries properties",
-          "type": "object",
-          "$ref": "#/definitions/UpdateSummariesProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "UpdateSummariesProperties": {
-      "description": "Properties of Update summaries",
       "type": "object",
+      "description": "Properties of Update summaries",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state of the UpdateSummaries proxy resource.",
           "type": "string",
+          "description": "Provisioning state of the UpdateSummaries proxy resource.",
           "enum": [
             "Succeeded",
             "Failed",
@@ -278,20 +312,20 @@
           "readOnly": true
         },
         "oemFamily": {
-          "description": "OEM family name.",
-          "type": "string"
+          "type": "string",
+          "description": "OEM family name."
         },
         "currentOemVersion": {
-          "description": "Current OEM Version.",
-          "type": "string"
+          "type": "string",
+          "description": "Current OEM Version."
         },
         "hardwareModel": {
-          "description": "Name of the hardware model.",
-          "type": "string"
+          "type": "string",
+          "description": "Name of the hardware model."
         },
         "packageVersions": {
-          "description": "Current version of each updatable component.",
           "type": "array",
+          "description": "Current version of each updatable component.",
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
@@ -301,32 +335,32 @@
           ]
         },
         "currentVersion": {
-          "description": "Current Solution Bundle version of the stamp.",
-          "type": "string"
+          "type": "string",
+          "description": "Current Solution Bundle version of the stamp."
         },
         "currentSbeVersion": {
-          "description": "Current Sbe version of the stamp.",
-          "type": "string"
+          "type": "string",
+          "description": "Current Sbe version of the stamp."
         },
         "lastUpdated": {
-          "description": "Last time an update installation completed successfully.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Last time an update installation completed successfully."
         },
         "lastChecked": {
-          "description": "Last time the update service successfully checked for updates",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Last time the update service successfully checked for updates"
         },
         "healthState": {
-          "description": "Overall health state for update-specific health checks.",
-          "type": "object",
           "$ref": "#/definitions/HealthState",
+          "type": "object",
+          "description": "Overall health state for update-specific health checks.",
           "x-ms-client-flatten": true
         },
         "healthCheckResult": {
-          "description": "An array of pre-check result objects.",
           "type": "array",
+          "description": "An array of pre-check result objects.",
           "items": {
             "$ref": "./hciCommon.json#/definitions/PrecheckResult"
           },
@@ -336,13 +370,13 @@
           ]
         },
         "healthCheckDate": {
-          "description": "Last time the package-specific checks were run.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Last time the package-specific checks were run."
         },
         "state": {
-          "description": "Overall update state of the stamp.",
           "type": "string",
+          "description": "Overall update state of the stamp.",
           "enum": [
             "Unknown",
             "AppliedSuccessfully",
@@ -359,49 +393,15 @@
           }
         }
       }
-    },
-    "PackageVersionInfo": {
-      "description": "Current version of each updatable component.",
-      "type": "object",
-      "properties": {
-        "packageType": {
-          "description": "Package type",
-          "type": "string"
-        },
-        "version": {
-          "description": "Package version",
-          "type": "string"
-        },
-        "lastUpdated": {
-          "description": "Last time this component was updated.",
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "HealthState": {
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "Success",
-        "Failure",
-        "Warning",
-        "Error",
-        "InProgress"
-      ],
-      "x-ms-enum": {
-        "name": "HealthState",
-        "modelAsString": true
-      }
     }
   },
   "parameters": {
     "ClusterNameParameter": {
       "name": "clusterName",
       "in": "path",
+      "description": "The name of the cluster.",
       "required": true,
       "type": "string",
-      "description": "The name of the cluster.",
       "x-ms-parameter-location": "method"
     }
   }

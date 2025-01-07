@@ -1,4 +1,4 @@
-import "./versions.tsp";
+import "../versions.tsp";
 import "./genericgenevaactions.tsp";
 
 using TypeSpec.Versioning;

@@ -28,6 +28,12 @@ model DeploymentTargetProperties {
   @extension("x-ms-identifiers", [])
   capabilities: Capability[];
 
+  @doc("Hierarchy level at which the deployment target needs to be created")
+  hierarchyLevel: string;
+
+  @doc("Scope of the deployment resource")
+  scope?: string;
+
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ProvisioningState;

@@ -47,7 +47,7 @@ model PrivateLinkResourceProperties {
 interface PrivateLinkResources {
   @doc("Get private link resource")
   get is ArmResourceRead<PrivateLinkResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @doc("List private link resources of private link service for Fabric")
   @operationId("PrivateLinkResources_List")
   list is ArmResourceListByParent<PrivateLinkResource>;

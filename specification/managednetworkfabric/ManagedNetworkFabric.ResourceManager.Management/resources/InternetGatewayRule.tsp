@@ -7,16 +7,13 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * The Internet Gateway Rule resource definition.
- */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
+@doc("The Internet Gateway Rule resource definition.")
 @includeInapplicableMetadataInPayload(false)
 model InternetGatewayRule
   extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * Name of the Internet Gateway rule.
-   */
+  @doc("Name of the Internet Gateway rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("internetGatewayRuleName")
@@ -30,35 +27,23 @@ model InternetGatewayRule
 
 @armResourceOperations
 interface InternetGatewayRules {
-  /**
-   * Gets an Internet Gateway Rule resource.
-   */
+  @doc("Gets an Internet Gateway Rule resource.")
   get is ArmResourceRead<InternetGatewayRule>;
 
-  /**
-   * Creates an Internet Gateway rule resource.
-   */
+  @doc("Creates an Internet Gateway rule resource.")
   create is ArmResourceCreateOrReplaceAsync<InternetGatewayRule>;
 
-  /**
-   * API to update certain properties of the Internet Gateway Rule resource.
-   */
+  @doc("API to update certain properties of the Internet Gateway Rule resource.")
   @parameterVisibility
   update is ArmCustomPatchAsync<InternetGatewayRule, InternetGatewayRulePatch>;
 
-  /**
-   * Implements Internet Gateway Rules DELETE method.
-   */
+  @doc("Implements Internet Gateway Rules DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<InternetGatewayRule>;
 
-  /**
-   * Implements Internet Gateway Rules list by resource group GET method.
-   */
+  @doc("Implements Internet Gateway Rules list by resource group GET method.")
   listByResourceGroup is ArmResourceListByParent<InternetGatewayRule>;
 
-  /**
-   * List all Internet Gateway rules in the given subscription.
-   */
+  @doc("List all Internet Gateway rules in the given subscription.")
   listBySubscription is ArmListBySubscription<InternetGatewayRule>;
 }
 

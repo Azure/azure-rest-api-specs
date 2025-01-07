@@ -71,6 +71,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_22_preview: "2024-07-22-preview",
+
+  /**
+   * The 2024-11-29-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_11_29_preview: "2024-11-29-preview",
 }
 
 @armResourceOperations
@@ -302,6 +309,8 @@ model InformaticaServerlessRuntimeResource
   @doc("Name of the Serverless Runtime resource")
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
@@ -351,6 +360,11 @@ model CompanyDetails {
 model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
   marketplaceSubscriptionId?: string;
+
+  @added(Versions.v2024_11_29_preview)
+  @visibility("read")
+  @doc("Marketplace subscription status of a resource")
+  marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
   @doc("Marketplace offer details.")
   offerDetails: OfferDetails;
@@ -654,6 +668,24 @@ union ProvisioningState {
   NotSpecified: "NotSpecified",
 }
 
+@added(Versions.v2024_11_29_preview)
+@doc("Marketplace subscription status of a resource.")
+union MarketplaceSubscriptionStatus {
+  string,
+
+  @doc("Purchased but not yet activated")
+  PendingFulfillmentStart: "PendingFulfillmentStart",
+
+  @doc("Marketplace subscription is activated")
+  Subscribe: "Subscribe",
+
+  @doc("This state indicates that a customer's payment for the Marketplace service was not received")
+  Suspend: "Suspend",
+
+  @doc("Customer has cancelled the subscription")
+  Unsubscribe: "Unsubscribe",
+}
+
 @doc("Various application types of the Serverless Runtime environments")
 union ApplicationType {
   string,
@@ -713,6 +745,11 @@ model OrganizationPropertiesCustomUpdate {
 model MarketplaceDetailsUpdate {
   @doc("Marketplace Subscription Id")
   marketplaceSubscriptionId?: string;
+
+  @added(Versions.v2024_11_29_preview)
+  @visibility("read")
+  @doc("Marketplace subscription status of a resource")
+  marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
   @doc("Marketplace offer details.")
   offerDetails?: OfferDetailsUpdate;

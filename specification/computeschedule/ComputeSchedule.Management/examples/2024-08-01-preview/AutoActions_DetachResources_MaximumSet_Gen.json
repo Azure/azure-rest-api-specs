@@ -1,18 +1,37 @@
 {
-  "title": "AutoActions_DetachResources",
+  "title": "AutoActions_DetachResources_MaximumSet",
   "operationId": "AutoActions_DetachResources",
   "parameters": {
     "api-version": "2024-08-01-preview",
-    "subscriptionId": "8F752160-46BE-46CC-A8E0-8BCCE3A5FC09",
+    "subscriptionId": "E8DD5C3E-B5E9-4828-848D-2F377C67DA87",
     "resourceGroupName": "rgcomputeschedule",
-    "autoActionName": "myAutoAction",
-    "body": [
-      {
-        "resourceId": "/subscriptions/995E403C-F0EF-4CDE-9F9E-8095229F1EEF/resourceGroups/vmRg/providers/Microsoft.Compute/virtualMachines/myVm"
-      }
-    ]
+    "autoActionName": "qUbvSI0sBkb",
+    "body": {
+      "resources": [
+        "/subscriptions/EE1B7B71-0578-409C-B0A9-DDC2AE937A78/resourceGroups/myRg/providers/resourceProviderNamespace/myResourceType/myResource"
+      ]
+    }
   },
   "responses": {
-    "204": {}
+    "200": {
+      "body": {
+        "totalResources": 6,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/EE1B7B71-0578-409C-B0A9-DDC2AE937A78/resourceGroups/myRg/providers/resourceProviderNamespace/myResourceType/myResource",
+            "status": "Succeeded",
+            "error": {
+              "code": "ewexbxtzhgryuyzj",
+              "message": "mnjwgroezsmxkc",
+              "target": "gaepetiyv",
+              "details": [],
+              "innererror": {
+                "code": "gxmeatpx"
+              }
+            }
+          }
+        ]
+      }
+    }
   }
 }
