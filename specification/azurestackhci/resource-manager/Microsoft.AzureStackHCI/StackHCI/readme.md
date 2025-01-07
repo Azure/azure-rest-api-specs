@@ -108,6 +108,18 @@ suppressions:
     from:
       - hci.json
 
+  - code: PatchBodyParametersSchema
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/devicePools/{devicePoolName}"].patch.parameters[4].schema.properties.identity
+
+  - code: PatchBodyParametersSchema
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}"].patch.parameters[4].schema.properties.identity
+
   - code: PutResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
     from:
@@ -211,6 +223,30 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - preview/2024-11-01-preview/arcSettings.json
+  - preview/2024-11-01-preview/clusters.json
+  - preview/2024-11-01-preview/deploymentSettings.json
+  - preview/2024-11-01-preview/edgeDevices.json
+  - preview/2024-11-01-preview/edgeDeviceJobs.json
+  - preview/2024-11-01-preview/hci.json
+  - preview/2024-11-01-preview/extensions.json
+  - preview/2024-11-01-preview/hciCommon.json
+  - preview/2024-11-01-preview/offers.json
+  - ../operations/preview/2024-11-01-preview/operations.json
+  - preview/2024-11-01-preview/publishers.json
+  - preview/2024-11-01-preview/securitySettings.json
+  - preview/2024-11-01-preview/skus.json
+  - preview/2024-11-01-preview/updateRuns.json
+  - preview/2024-11-01-preview/updateSummaries.json
+  - preview/2024-11-01-preview/updates.json
 ```
 
 ### Tag: package-preview-2024-12-01-preview
