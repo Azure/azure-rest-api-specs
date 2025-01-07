@@ -28,9 +28,12 @@ describe("lint-text", () => {
     const filePath = "/specification/Not-Kebab-Case-Disabled/Not.KebabCase/tspconfig.yaml";
     const eslint = createESLint();
 
-    const results = await eslint.lintText("# eslint-disable tsv/kebab-case-org", {
-      filePath: filePath,
-    });
+    const results = await eslint.lintText(
+      "# eslint-disable tsv/kebab-case-org, tsv/emit-autorest\n",
+      {
+        filePath: filePath,
+      },
+    );
 
     expect(results).toHaveLength(1);
     expect(results[0].filePath).toBe(filePath);

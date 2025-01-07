@@ -1,3 +1,8 @@
+import { Ajv } from "ajv";
+import { Rule } from "eslint";
+import { AST, getStaticYAMLValue } from "yaml-eslint-parser";
+import { TypeSpecConfigJsonSchema } from "../config/config-schema.js";
+import { TypeSpecConfig } from "../config/types.js";
 import { NamedRule } from "../interfaces/named-eslint.js";
 
 export const rule: NamedRule.RuleModule = {
@@ -10,35 +15,42 @@ export const rule: NamedRule.RuleModule = {
     },
     schema: [],
     messages: {
-      disabled: "Path does not match format '.*/specification/{orgName}/': ''{{filename}}'",
-      autorestDiff: "Emitted autorest does not match content in repo",
+      invalid: "tspconfig.yaml is invalid per the schema: {{errors}}",
+      missing:
+        'tspconfig.yaml must include the following emitter by default:\n\nemit:\n  - "@azure-tools/typespec-autorest"',
+      // disabled: "Path does not match format '.*/specification/{orgName}/': ''{{filename}}'",
+      // autorestDiff: "Emitted autorest does not match content in repo",
     },
   },
   create(context) {
     return {
-      Program(node) {
-        // const filename = path.resolve(context.filename as string);
-        // const pathSegments = filename.split(path.sep);
-        // const specificationIndex = pathSegments.indexOf("specification");
-        // const pathValid = specificationIndex >= 0 && specificationIndex < pathSegments.length - 1;
-        // if (!pathValid) {
-        //   context.report({
-        //     node,
-        //     messageId: "invalid",
-        //     data: { filename: filename },
-        //   });
-        //   return;
-        // }
-        // const orgName = pathSegments[specificationIndex + 1];
-        // const kebabCaseRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-        // const orgNameKebabCase = orgName.match(kebabCaseRegex);
-        // if (!orgNameKebabCase) {
-        //   context.report({
-        //     node,
-        //     messageId: "kebab",
-        //     data: { orgName: orgName },
-        //   });
-        // }
+      YAMLDocument(node: Rule.Node) {
+        const yamlDocument = node as unknown as AST.YAMLDocument;
+
+        // If config yaml is empty, use empty object instead of "null"
+        const config = getStaticYAMLValue(yamlDocument) || {};
+
+        const ajv = new Ajv();
+        const valid = ajv.validate(TypeSpecConfigJsonSchema, config);
+
+        if (!valid) {
+          context.report({
+            node,
+            messageId: "invalid",
+            data: { errors: ajv.errorsText(ajv.errors) },
+          });
+          return;
+        }
+
+        const typedConfig = config as unknown as TypeSpecConfig;
+        if (!typedConfig.emit?.includes("@azure-tools/typespec-autorest")) {
+          // TODO: Move error message to "emit:" node
+          context.report({
+            node,
+            messageId: "missing",
+          });
+          return;
+        }
       },
     };
   },
