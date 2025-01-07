@@ -25,5 +25,5 @@ namespace Microsoft.Workloads;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_01_12_preview: "2024-01-12-preview",
+  v2025_01_01_preview: "2025-01-01-preview",
 }
