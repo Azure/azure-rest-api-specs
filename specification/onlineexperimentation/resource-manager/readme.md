@@ -31,7 +31,7 @@ tag: package-2025-05-31-preview
 suppressions:
     - code: AvoidAnonymousTypes
       where: 
-        - $.definitions["ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
+        - $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
       reason: 
         Issue with common-types
 ```
