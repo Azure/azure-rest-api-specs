@@ -28,7 +28,7 @@ op StorageOperation<
   TError = StorageError
 >(
   /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existng API"
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: MediaType,
 
@@ -37,7 +37,7 @@ op StorageOperation<
   ...ClientRequestIdHeader,
 ): (TResponse & {
   /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existng API"
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: MediaType;
 
@@ -136,7 +136,7 @@ interface Service {
     ...BodyParameter,
   ): (BodyParameter & {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-    #suppress "@typespec/http/content-type-ignored" "Template for existng API"
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
     contentType: "multipart/mixed";
 
