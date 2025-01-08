@@ -28,7 +28,7 @@ op StorageOperation<
   TError = StorageError
 >(
   /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: MediaType,
 
@@ -37,13 +37,9 @@ op StorageOperation<
   ...ClientRequestIdHeader,
 ): (TResponse & {
   /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
   @header("Content-Type")
   contentType: MediaType;
-
-  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-  @header("x-ms-version")
-  version: string;
 
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
@@ -122,13 +118,9 @@ interface Service {
     ...BodyParameter,
   ): (BodyParameter & {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-    #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
     contentType: "multipart/mixed";
-
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -381,10 +373,6 @@ interface Container {
     @header("Content-Type")
     multipartContentType: "multipart/mixed";
 
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
-
     ...RequestIdResponseHeader;
   } & BodyParameter) | StorageError;
 
@@ -574,10 +562,6 @@ interface Blob {
     ...IfTagsParameter,
     ...ConditionalRequestHeaders,
   ): (BodyParameter & {
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
-
     /** The media type of the body of the response. */
     @header("Content-Type")
     contentType: "application/octet-stream";
@@ -628,10 +612,6 @@ interface Blob {
   }) | (BodyParameter & {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 206;
-
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
 
     /** The media type of the body of the response. */
     @header("Content-Type")

@@ -163,8 +163,9 @@ union SkuName {
   string,
 }
 
-/** The list container segement response */
-@pagedResult
+/** The list container segment response */
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListContainersSegmentResponse {
   /** The service endpoint. */
@@ -602,7 +603,7 @@ model BlobPropertiesInternal {
   /** Whether the blog is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
-  /** The name of the desination snapshot. */
+  /** The name of the destination snapshot. */
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The time the blob was deleted. */
@@ -849,7 +850,8 @@ model RetentionPolicy {
 // List Blobs
 
 /** An enumeration of blobs. */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsFlatSegmentResponse {
   /** The service endpoint. */
@@ -889,7 +891,8 @@ model BlobFlatListSegment {
 }
 
 /** Represents a page list. */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 model PageList {
   /** The page ranges. */
   @Xml.name("PageRange") pageRange?: PageRange[];
@@ -1252,7 +1255,7 @@ alias ObjectReplicationPolicyIdResponseHeader = {
   objectReplicationPolicyId?: string;
 };
 
-/** The if seuqnce number equal to parameter. */
+/** The if sequence number equal to parameter. */
 alias IfSequenceNumberEqualToParameter = {
   /** Specify this header value to operate only on a blob if it has the specified sequence number. */
   @header("x-ms-if-sequence-number-eq")
@@ -1279,7 +1282,7 @@ union BlockListType {
   Committed: "committed",
 
   /** The list of uncommitted blocks. */
-  Uncomitted: "uncommitted",
+  Uncommitted: "uncommitted",
 
   /** Both lists together. */
   All: "all",
@@ -1931,7 +1934,8 @@ model BlobHierarchyListSegment {
 }
 
 /** An enumeration of blobs */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
