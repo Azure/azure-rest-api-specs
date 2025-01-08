@@ -134,6 +134,7 @@ alias ChatCompletionsCommon = {
   @doc("The response object type, which is always `chat.completion`.")
   object: "chat.completion";
 
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "Format is present but rule only allow int32 or int64."
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
