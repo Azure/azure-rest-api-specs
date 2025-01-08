@@ -785,7 +785,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Delete",
-        "description": "The operation to delete a virtual machine. NOTE: As of version 2024-11-01, we are rolling out a feature where if the forceDeletion parameter is unspecified OR not explicitly set to false, AND the VM meets the relevant criteria, then the VM will be force deleted. The criteria is 1) All disks must be marked with the delete option and 2) VM must be on Merlin Fast Path. To avoid defaulting to force delete, ensure that the forceDeletion parameter is explicitly set to false.",
+        "description": "The operation to delete a virtual machine. NOTE: As of version 2024-11-01, we are rolling out a feature where if the forceDeletion parameter is unspecified OR not explicitly set to false, AND the VM meets the relevant criteria, then the VM will be force deleted. The criteria is that all disks including the OS disk must be marked with the delete option. To avoid defaulting to force delete, ensure that the forceDeletion parameter is explicitly set to false. This feature is expected to rollout by end of March 2025.",
         "parameters": [
           {
             "name": "resourceGroupName",
