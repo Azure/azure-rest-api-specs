@@ -42,7 +42,7 @@ model BlockLookupList {
 }
 
 /** Represents an array of signed identifiers */
-// TODO: do the array elements need xml.unwrapped?
+@Xml.name("SignedIdentifiers")
 model SignedIdentifiers is Array<SignedIdentifier>;
 
 /** The signed identifier. */
