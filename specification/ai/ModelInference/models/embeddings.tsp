@@ -39,7 +39,7 @@ union EmbeddingEncodingFormat {
   @doc("Signed 8-bit integer")
   int8: "int8",
 
-  @doc("ubinary")
+  @doc("Unsigned binary")
   ubinary: "ubinary",
 
   @doc("Unsigned 8-bit integer")
