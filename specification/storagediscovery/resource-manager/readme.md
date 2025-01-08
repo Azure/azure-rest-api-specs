@@ -1,8 +1,8 @@
-# storagediscovery
+# Storage Discovery
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for storagediscovery.
+This is the AutoRest configuration file for storage discovery.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the storagediscovery.
+These are the global settings for the storage discovery.
 
 ```yaml
 openapi-type: arm
@@ -67,7 +67,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storageactions']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagediscovery']
 ```
 
 ## Az
