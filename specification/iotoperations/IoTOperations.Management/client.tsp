@@ -8,9 +8,7 @@ using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Microsoft.IoTOperations {
-  @@access(Operations.list, Access.internal);
-
   @@clientName(CertManagerCertOptions, "CertManagerCertConfig", "csharp");
-  @@clientName(DataflowOperation, "DataflowConfig", "csharp");
+  @@clientName(DataflowOperation, "DataflowAction", "csharp");
   @@clientName(PrincipalDefinition, "PrincipalConfig", "csharp");
 }
