@@ -4467,6 +4467,14 @@
       "type": "object",
       "description": "API analyzer configuration properties.",
       "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the analyzer configuration, e.g. \"Spectral (OpenAPI)\"."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the analyzer configuration."
+        },
         "analyzerType": {
           "$ref": "#/definitions/AnalyzerType",
           "description": "The type of API analyzer."
@@ -4478,6 +4486,8 @@
         }
       },
       "required": [
+        "title",
+        "description",
         "analyzerType"
       ]
     },

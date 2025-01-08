@@ -715,6 +715,16 @@ union AnalyzerRulesetState {
 @doc("API analyzer configuration properties.")
 model AnalyzerConfigProperties {
   /**
+   * The title of the analyzer configuration, e.g. "Spectral (OpenAPI)".
+   */
+  title: string;
+
+  /**
+   * The description of the analyzer configuration.
+   */
+  description: string;
+
+  /**
    * The type of API analyzer.
    */
   analyzerType: AnalyzerType;
