@@ -22,7 +22,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")
-model MessagingConnector is TrackedResource<ResourceProperties> {
+model MessagingConnector is TrackedResource<ConnectorProperties> {
   @doc("Name of the Connector resource.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]")
   @maxLength(64)
