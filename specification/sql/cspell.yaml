@@ -1,0 +1,103 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - activedirectory
+  - adal
+  - armsql
+  - azurecli
+  - azuresqldbkeyrotation
+  - backoff
+  - bacpac
+  - byok
+  - cmkdw
+  - cmkhs
+  - cmwis
+  - columnstore
+  - cutover
+  - datamasking
+  - datawarehouse
+  - datetimeoffset
+  - dbcc
+  - dbcmk
+  - droppeded
+  - dtcs
+  - dtus
+  - exfiltration
+  - failovers
+  - filegroup
+  - freemium
+  - gzrs
+  - hierarchyid
+  - hyperscale
+  - logio
+  - msdb
+  - msdtc's
+  - msdtcdns
+  - nonclustered
+  - nonreadable
+  - ntext
+  - pitr
+  - polybase
+  - prms
+  - reprovision
+  - reprovisioned
+  - reprovisioning
+  - retriable
+  - retryable
+  - revalidates
+  - revertable
+  - sawa
+  - smalldatetime
+  - smallmoney
+  - sqlmi
+  - synapselink
+  - sysname
+  - tempdb
+  - timestep
+  - topqueries
+  - topquery
+  - uniqueidentifier
+  - unrestorable
+  - vcore
+  - vcores
+  - virtualclusters
+  - virutal
+  - vldb
+overrides:
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/backups.json
+    words:
+      - droppeded
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/DistributedAvailabilityGroups.json
+    words:
+      - freemium
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstances.json
+    words:
+      - freemium
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/ServerTrustCertificates.json
+    words:
+      - freemium
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstanceDtcs.json
+    words:
+      - msdtc's
+      - msdtcdns
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/TimeZones.json
+    words:
+      - freemium
+  - filename: >-
+      **/specification/sql/resource-manager/Microsoft.Sql/preview/**/ElasticPools.json
+    words:
+      - prms
+

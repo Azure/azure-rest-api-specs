@@ -1,0 +1,143 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - actuals
+  - antimeridian
+  - armmaps
+  - azureblob
+  - boundingbox
+  - boundingzoom
+  - chademo
+  - chttp
+  - customermanagedkeys
+  - dataregistry
+  - datasetid
+  - dewpoint
+  - dwgconversion
+  - dwgzippackage
+  - einsteinweg
+  - epsg
+  - fcontoso
+  - featurestate
+  - fpushpins
+  - freeflow
+  - geobias
+  - geocode
+  - geocoded
+  - geocodes
+  - geocodingresponse
+  - geofence
+  - geofences
+  - geofencing
+  - geospatial
+  - getclosestpoint
+  - getitems
+  - getmaptile
+  - grayscale
+  - haag
+  - hecto
+  - isochrone
+  - keyname
+  - kmph
+  - linestring
+  - locationally
+  - mapbox
+  - mapconfiguration
+  - mapconfigurations
+  - maptileset
+  - maputnik
+  - maxcoordinates
+  - maxzoom
+  - mincoordinates
+  - minkowski
+  - minzoom
+  - mountainview
+  - multipoint
+  - multipoints
+  - neighbourhood
+  - ngeofence
+  - notstrict
+  - nowcasts
+  - openlr
+  - overviewbox
+  - overviewzoom
+  - postbuffer
+  - postclosestpoint
+  - restrant
+  - routeset
+  - routesets
+  - rstrnt
+  - scame
+  - searchaddressresult
+  - searchaddressreverseresponse
+  - searchbuffer
+  - stateset
+  - statesets
+  - statetile
+  - subcause
+  - subpackage
+  - tepco's
+  - tilejson
+  - tileset
+  - tilesetconfiguration
+  - tilesets
+  - timeframe
+  - tpeg
+  - trafficmodelid
+  - travelled
+  - travelling
+  - typeahead
+  - udid
+  - udids
+  - unitless
+  - unittype
+  - unregistering
+  - usertime
+  - uturn
+  - viewp
+  - wayfind
+  - wayfinding
+  - windingness
+  - xstr
+  - yazaki
+overrides:
+  - filename: '**/specification/maps/data-plane/Weather/stable/1.1/weather.json'
+    words:
+      - locationally
+      - unittype
+  - filename: >-
+      **/specification/maps/data-plane/Microsoft.Maps/Render/preview/1.0/render.json
+    words:
+      - chttp
+      - fcontoso
+      - fpushpins
+  - filename: '**/specification/maps/data-plane/Render/preview/1.0/render.json'
+    words:
+      - chttp
+      - fcontoso
+      - fpushpins
+  - filename: '**/specification/maps/data-plane/Render/stable/2022-08-01/render.json'
+    words:
+      - maptileset
+  - filename: '**/specification/maps/data-plane/Spatial/stable/2022-08-01/spatial.json'
+    words:
+      - getbuffer
+      - getclosestpoint
+      - postbuffer
+      - postclosestpoint
+  - filename: '**/specification/maps/data-plane/Search/**'
+    words:
+      - geocodingresponse
+      - searchaddressresult
+      - searchaddressreverseresponse
+  - filename: '**/specification/maps/data-plane/Route/**'
+    words:
+      - modelerfour
+

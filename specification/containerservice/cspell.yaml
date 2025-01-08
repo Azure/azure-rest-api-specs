@@ -1,0 +1,112 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - acnstls
+  - actuser
+  - agentpool
+  - ahub
+  - aksadvancednetworking
+  - apiserver
+  - aspnet
+  - autoscaler
+  - autoupgradeprofile
+  - azpodpolicy
+  - capacityreservationgroups
+  - conntrack
+  - containerd
+  - containerservice
+  - containerservicefleet
+  - cuda
+  - daemonset
+  - dcos
+  - defrag
+  - dnszones
+  - ebpf
+  - fleetmember
+  - gmsa
+  - gpumig
+  - hugepages
+  - iloveyou
+  - imds
+  - ingressgateway
+  - intvl
+  - ipvs
+  - istio
+  - karpenter
+  - kata
+  - keda
+  - krustlet
+  - kubeconfig
+  - kubeconfigs
+  - kubelet
+  - kubeletidentity
+  - kubelogin
+  - kubenet
+  - kubenet's
+  - loadbalancer
+  - lockdown
+  - madvise
+  - managedclusters
+  - mshv
+  - netdev
+  - netfilter
+  - nodepool
+  - noreuse
+  - numa
+  - ochestrator
+  - oidc
+  - optmem
+  - ossku
+  - pdbs
+  - pids
+  - rebalance
+  - reimaged
+  - reimaging
+  - restype
+  - rmem
+  - schedulable
+  - seccomp
+  - snat
+  - ssword
+  - sysctls
+  - tcpkeepalive
+  - trustedlaunch
+  - undrainable
+  - vhds
+  - vtpm
+  - wmem
+overrides:
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-03-30/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/stable/2016-09-30/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerInstance/stable/2021-10-01/containerInstance.json
+    words:
+      - noreuse
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/**/*json
+    words:
+      - acnstls
+      - aksadvancednetworking
+      - kubeletidentity
+      - pdbs
+      - trustedlaunch
+      - undrainable
+      - vtpm
+  - filename: >-
+      **/specification/containerservice/resource-manager/Microsoft.ContainerService/**/*.json
+    words:
+      - containerd
+
