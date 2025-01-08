@@ -74,7 +74,7 @@ interface AzureLargeStorageInstances {
     """)
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(AzureLargeStorageInstances.update::parameters.properties,
   "application/json",
   "tagsParameter"

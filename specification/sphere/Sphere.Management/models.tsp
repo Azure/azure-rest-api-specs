@@ -1,3 +1,5 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -341,6 +343,7 @@ model CatalogUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -418,12 +421,14 @@ model ProofOfPossessionNonceRequest {
  * Result of the action to generate a proof of possession nonce
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
 /**
  * Response to the action call for count devices in a catalog.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model CountDevicesResponse extends CountElementsResponse {}
 
 /**
@@ -701,7 +706,8 @@ model ProductUpdate {
   /**
    * The updatable properties of the Product.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ProductUpdateProperties;
 }
 
@@ -722,7 +728,8 @@ model DeviceGroupUpdate {
   /**
    * The updatable properties of the DeviceGroup.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -773,7 +780,8 @@ model DeviceUpdate {
   /**
    * The updatable properties of the Device.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceUpdateProperties;
 }
 
@@ -812,6 +820,7 @@ model SignedCapabilityImageResponse {
  * Response to the action call for count devices in a catalog (preview API).
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model CountDeviceResponse extends CountElementsResponse {}
 
 /**
