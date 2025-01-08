@@ -2015,43 +2015,6 @@
       ],
       "x-ms-discriminator-value": "SqlMi"
     },
-    "SqlVmTargetProperties": {
-      "type": "object",
-      "description": "The properties specific to Azure SQL VM targets.",
-      "properties": {
-        "sqlVmResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of an Azure SQL VM target.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
-              }
-            ]
-          }
-        },
-        "connectionTcpPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target.",
-          "default": 1433
-        },
-        "sqlNamedInstanceName": {
-          "type": "string",
-          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target."
-        }
-      },
-      "required": [
-        "sqlVmResourceId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TargetProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "SqlVm"
-    },
     "Target": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",

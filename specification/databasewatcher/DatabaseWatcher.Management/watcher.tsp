@@ -78,8 +78,6 @@ model WatcherProperties {
 
   @doc("The resource ID of a user-assigned managed identity that will be assigned to a new alert rule.")
   @added(Versions.v2024_07_19_preview)
-  @added(Versions.v2024_10_01_preview)
-  @added(Versions.v2025_01_02)
   defaultAlertRuleIdentityResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
