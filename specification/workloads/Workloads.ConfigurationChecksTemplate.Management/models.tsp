@@ -221,7 +221,7 @@ model CheckConfiguration {
    */
   @doc("The origin of how the check applied at the role level in the virtual instance.")
   @visibility("read")
-  checkOriginType: CheckOriginType;
+  checkOriginType?: CheckOriginType;
 
   /**
    * The flag to enable (or) disable the check execution.

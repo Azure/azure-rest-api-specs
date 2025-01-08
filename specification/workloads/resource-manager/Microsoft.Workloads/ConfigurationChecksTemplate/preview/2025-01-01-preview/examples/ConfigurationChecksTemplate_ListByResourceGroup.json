@@ -2,117 +2,189 @@
   "parameters": {
     "api-version": "2025-01-01-preview",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c",
+    "resourceUri" : "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}"
   },
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "location": "southeastasia",
-            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/virtualInstances/MySql-DatabaseApp/providers/Microsoft.Workloads/ConfigurationChecksTemplates/DefaultValidationChecks",
-            "name": "DefaultValidationChecks",
-            "type": "Private.Workloads/ConfigurationChecksTemplates",
-            "properties": {
-              "templateId": "GUID",
-              "executionInterval": "1:00:00",
-              "provisioningState": "Succeeded",
-              "configuration": {
-                "workloadType": "SAP",
-                "environmentType": "Production",
-                "components": [
-                  {
-                    "name": "Application",
-                    "roles": [
-                      {
-                        "roleName": "WebServer",
-                        "checks": [
-                          {
-                            "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
-                            "checkOriginType": "TemplateDefinition",
-                            "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
-                            "Enabled": true
-                          },
-                          {
-                            "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
-                            "checkOriginType": "TemplateDefinition",
-                            "Enabled": false,
-                            "outputParameters": [
-                              {
-                                "condition": "Equals",
-                                "dataType": "integer",
-                                "unit": "Minutes",
-                                "value": "30"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Database",
-                    "roles": [
-                      {
-                        "roleName": "ODB",
-                        "checks": [
-                          {
-                            "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
-                            "checkOriginType": "Manual",
-                            "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
-                            "Enabled": false
-                          },
-                          {
-                            "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
-                            "checkOriginType": "TemplateDefinition",
-                            "Enabled": true,
-                            "outputParameters": [
-                              {
-                                "condition": "Equals",
-                                "dataType": "integer",
-                                "unit": "Minutes",
-                                "value": "30"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ],
-                "commonChecks": [
-                  {
-                    "checkId": "Azure-Compute-Instance-AvailableMemory-SizeCheck",
-                    "Enabled": true,
-                    "inputParameters": [
-                      {
-                        "name": "instanceMemoryLimit",
-                        "dataType": "integer",
-                        "unit": "MB",
-                        "value": "128"
-                      }
-                    ],
-                    "outputParameters": [
-                      {
-                        "condition": "GreaterThanOrEqual",
-                        "dataType": "integer",
-                        "unit": "GB",
-                        "value": "96"
-                      }
-                    ]
-                  },
-                  {
-                    "checkId": "Azure-Compute-Instance-AvailableCPU-CountCheck",
-                    "Enabled": false
-                  }
-                ]
+        "configurationCheckTemplate": {
+          "value": [
+            {
+              "name": "DefaultValidationChecks",
+              "properties": {
+                "executionInterval": "01:00:00",
+                "provisioningState": "Succeeded",
+                "configuration": {
+                  "workloadType": "SAP",
+                  "environmentType": "Production",
+                  "components": [
+                    {
+                      "name": "Application",
+                      "roles": [
+                        {
+                          "roleName": "WebServer",
+                          "checks": [
+                            {
+                              "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
+                              "checkOriginType": "TemplateDefinition",
+                              "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
+                              "enabled": true,
+                              "inputParameters": [
+                                {
+                                  "name": "instanceType",
+                                  "dataType": "String",
+                                  "unit": "",
+                                  "value": "Standard_D4s_v3"
+                                }
+                              ],
+                              "outputParameters": [
+                                {
+                                  "name": "resiliencyStatus",
+                                  "condition": "Equals",
+                                  "parameters": [
+                                    {
+                                      "name": "instanceType",
+                                      "dataType": "String",
+                                      "unit": "",
+                                      "value": "Standard_D4s_v3"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
+                              "checkOriginType": "TemplateDefinition",
+                              "enabled": false,
+                              "inputParameters": [
+                                {
+                                  "name": "idleTimeout",
+                                  "dataType": "Integer",
+                                  "unit": "Minutes",
+                                  "value": "30"
+                                }
+                              ],
+                              "outputParameters": [
+                                {
+                                  "name": "idleTimeout",
+                                  "condition": "Equals",
+                                  "parameters": [
+                                    {
+                                      "name": "idleTimeout",
+                                      "dataType": "Integer",
+                                      "unit": "Minutes",
+                                      "value": "30"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Database",
+                      "roles": [
+                        {
+                          "roleName": "ODB",
+                          "checks": [
+                            {
+                              "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
+                              "checkOriginType": "Manual",
+                              "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
+                              "enabled": false,
+                              "inputParameters": [
+                                {
+                                  "name": "instanceType",
+                                  "dataType": "String",
+                                  "unit": "",
+                                  "value": "Standard_D4s_v3"
+                                }
+                              ],
+                              "outputParameters": [
+                                {
+                                  "condition": "Equals",
+                                  "parameters": [
+                                    {
+                                      "dataType": "String",
+                                      "name": "resiliencyStatus",
+                                      "value": "Compliant",
+                                      "unit": ""
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
+                              "checkOriginType": "TemplateDefinition",
+                              "enabled": true,
+                              "inputParameters": [
+                                {
+                                  "name": "idleTimeout",
+                                  "dataType": "Integer",
+                                  "unit": "Minutes",
+                                  "value": "30"
+                                }
+                              ],
+                              "outputParameters": [
+                                {
+                                  "name": "idleTimeout",
+                                  "condition": "Equals",
+                                  "parameters": [
+                                    {
+                                      "name": "idleTimeout",
+                                      "dataType": "Integer",
+                                      "unit": "Minutes",
+                                      "value": "30"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "commonChecks": [
+                    {
+                      "checkId": "Azure-Compute-Instance-AvailableMemory-SizeCheck",
+                      "enabled": true,
+                      "inputParameters": [
+                        {
+                          "name": "instanceMemoryLimit",
+                          "dataType": "Integer",
+                          "unit": "MB",
+                          "value": "128"
+                        }
+                      ],
+                      "outputParameters": [
+                        {
+                          "name": "instanceMemoryLimit",
+                          "condition": "GreaterThanOrEqual",
+                          "parameters": [
+                            {
+                              "name": "instanceMemoryLimit",
+                              "dataType": "Integer",
+                              "unit": "GB",
+                              "value": "96"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
               }
             }
-          }
-        ]
+          ]
+        }
       }
     }
   },
-  "operationId": "ConfigurationChecksTemplate_ListByResourceGroup",
+  "operationId": "ConfigurationChecksTemplateOperations_ListByResourceGroup",
   "title": "ConfigurationChecksTemplate_ListByResourceGroup"
 }
