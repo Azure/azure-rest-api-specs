@@ -163,7 +163,7 @@ union SkuName {
   string,
 }
 
-/** The list container segement response */
+/** The list container segment response */
 @pagedResult
 @Xml.name("EnumerationResults")
 model ListContainersSegmentResponse {
@@ -602,7 +602,7 @@ model BlobPropertiesInternal {
   /** Whether the blog is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
-  /** The name of the desination snapshot. */
+  /** The name of the destination snapshot. */
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The time the blob was deleted. */
@@ -1252,7 +1252,7 @@ alias ObjectReplicationPolicyIdResponseHeader = {
   objectReplicationPolicyId?: string;
 };
 
-/** The if seuqnce number equal to parameter. */
+/** The if sequence number equal to parameter. */
 alias IfSequenceNumberEqualToParameter = {
   /** Specify this header value to operate only on a blob if it has the specified sequence number. */
   @header("x-ms-if-sequence-number-eq")
@@ -1279,7 +1279,7 @@ union BlockListType {
   Committed: "committed",
 
   /** The list of uncommitted blocks. */
-  Uncomitted: "uncommitted",
+  Uncommitted: "uncommitted",
 
   /** Both lists together. */
   All: "all",
