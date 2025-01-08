@@ -8,7 +8,6 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using Azure.Core;
 
-
 @versioned(Microsoft.PlaywrightTesting.Shared.Versions)
 namespace Microsoft.PlaywrightTesting.Shared;
 
