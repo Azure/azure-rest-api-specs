@@ -164,7 +164,8 @@ union SkuName {
 }
 
 /** The list container segment response */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListContainersSegmentResponse {
   /** The service endpoint. */
@@ -849,7 +850,8 @@ model RetentionPolicy {
 // List Blobs
 
 /** An enumeration of blobs. */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsFlatSegmentResponse {
   /** The service endpoint. */
@@ -889,7 +891,8 @@ model BlobFlatListSegment {
 }
 
 /** Represents a page list. */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 model PageList {
   /** The page ranges. */
   @Xml.name("PageRange") pageRange?: PageRange[];
@@ -1931,7 +1934,8 @@ model BlobHierarchyListSegment {
 }
 
 /** An enumeration of blobs */
-@pagedResult
+// FIXME: non-standard paging operation, should we have a @pagedResult decorator here?
+// @pagedResult
 @Xml.name("EnumerationResults")
 model ListBlobsHierarchySegmentResponse {
   /** The service endpoint. */
