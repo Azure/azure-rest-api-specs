@@ -20,7 +20,7 @@ namespace Microsoft.OnlineExperimentation;
   },
   displayNames: {
     singular: "Online Experiment Workspace",
-    plural: "Online Experiment Workspace - A Microsoft premium service",
+    plural: "Online Experiment Workspaces - A Microsoft premium service",
   },
   learnMoreDocs: [
     {
@@ -43,7 +43,7 @@ namespace Microsoft.OnlineExperimentation;
   apiVersion: Versions.v2025_05_31_preview,
   autoUpdate: true,
 })
-@doc("An Online experiment workspace resource.")
+@doc("An online experiment workspace resource.")
 model OnlineExperimentWorkspace
   is TrackedResource<OnlineExperimentWorkspaceProperties> {
   ...ResourceNameParameter<
