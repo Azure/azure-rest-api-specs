@@ -41,10 +41,6 @@ op StorageOperation<
   @header("Content-Type")
   contentType: MediaType;
 
-  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-  @header("x-ms-version")
-  version: string;
-
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
 }) | TError;
@@ -143,10 +139,6 @@ interface Service {
     #suppress "@typespec/http/content-type-ignored" "Template for exisitng API"
     @header("Content-Type")
     contentType: "multipart/mixed";
-
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -399,10 +391,6 @@ interface Container {
     @header("Content-Type")
     multipartContentType: "multipart/mixed";
 
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
-
     ...RequestIdResponseHeader;
   } & BodyParameter) | StorageError;
 
@@ -630,10 +618,6 @@ interface Blob {
     ...IfTagsParameter,
     ...ConditionalRequestHeaders,
   ): (BodyParameter & {
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
-
     /** The media type of the body of the response. */
     @header("Content-Type")
     contentType: "application/octet-stream";
@@ -684,10 +668,6 @@ interface Blob {
   }) | (BodyParameter & {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 206;
-
-    /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
-    @header("x-ms-version")
-    version: string;
 
     /** The media type of the body of the response. */
     @header("Content-Type")
