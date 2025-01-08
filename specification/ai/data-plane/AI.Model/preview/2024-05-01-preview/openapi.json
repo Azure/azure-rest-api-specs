@@ -688,15 +688,15 @@
     },
     "ChatCompletionsResponseFormatJsonSchemaDefinition": {
       "type": "object",
-      "description": "The definition of the required JSON schema in the response, and associated metadata.",
+      "description": "The definition of a JSON schema, used to define the output format of a chat completion message. The AI model\nwill need to adhere to this schema when generating completions.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+          "description": "A name that labels this JSON schema. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
         },
         "schema": {
           "type": "object",
-          "description": "The definition of the JSON schema",
+          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\n  Note that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation\n  to determine what is supported.",
           "additionalProperties": {}
         },
         "description": {
@@ -705,7 +705,7 @@
         },
         "strict": {
           "type": "boolean",
-          "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of\nJSON Schema is supported when `strict` is `true`.",
+          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\n  not supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\n  If false, and the provided JSON schema contains keywords not supported\n  by the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.",
           "default": false
         }
       },
