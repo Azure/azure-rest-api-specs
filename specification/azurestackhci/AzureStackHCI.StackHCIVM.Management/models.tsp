@@ -1295,6 +1295,8 @@ model VirtualHardDiskDownloadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
   progressPercentage?: int64;
 }
 
@@ -1310,6 +1312,8 @@ model VirtualHardDiskUploadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
   progressPercentage?: int64;
 
   @added(Versions.v2024_10_01_preview)
