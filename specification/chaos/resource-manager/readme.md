@@ -469,7 +469,7 @@ directive:
     where: $.definitions.target
     from: targets.json
     reason: |-
-      we defined the toplevelresourcelistbysubscription here:
+      we defined the the top level resource list here:
 
       https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
   - suppress: EnumInsteadOfBoolean
