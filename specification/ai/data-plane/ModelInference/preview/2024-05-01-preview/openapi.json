@@ -1087,7 +1087,12 @@
       "description": "Representation of a single embeddings relatedness comparison.",
       "properties": {
         "embedding": {
-          "description": "List of embedding values for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector."
+          "type": "array",
+          "description": "List of embedding values for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input. Or a base64 encoded string of the embedding vector.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
         },
         "index": {
           "type": "integer",

@@ -139,7 +139,7 @@ alias ChatCompletionsCommon = {
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   created: utcDateTime;
 
   @doc("The model used for the chat completion.")
