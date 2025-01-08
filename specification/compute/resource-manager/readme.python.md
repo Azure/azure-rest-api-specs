@@ -38,7 +38,7 @@ multiapi: true
 default-api-version: "2024-11-04"
 clear-output-folder: true
 batch:
-  - tag: package-2024-11-04-onl
+  - tag: package-2024-11-04-only
   - tag: package-2024-07-01-only
   - tag: package-2024-03-02-only
   - tag: package-2023-10-02-only
