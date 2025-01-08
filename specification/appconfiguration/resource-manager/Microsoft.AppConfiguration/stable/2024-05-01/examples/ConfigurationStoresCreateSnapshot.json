@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "api-version": "2024-05-01",
+    "snapshotName": "mySnapshot",
+    "body": {
+      "properties": {
+        "filters": [
+          {
+            "key": "app1/*",
+            "label": "Production"
+          }
+        ],
+        "retentionPeriod": 3600
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores/snapshots",
+        "properties": {
+          "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
+          "provisioningState": "Succeeded",
+          "filters": [
+            {
+              "key": "app1/*",
+              "label": "Production"
+            }
+          ],
+          "compositionType": "All",
+          "created": "2022-08-01T22:19:40+00:00",
+          "size": 100000,
+          "itemsCount": 71,
+          "retentionPeriod": 3600,
+          "tags": {}
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/snapshots/mySnapshot",
+        "name": "mySnapshot"
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores/snapshots",
+        "properties": {
+          "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
+          "provisioningState": "Creating",
+          "filters": [
+            {
+              "key": "app1/*",
+              "label": "Production"
+            }
+          ],
+          "compositionType": "All",
+          "created": "2022-08-01T22:19:40+00:00",
+          "size": 0,
+          "itemsCount": 0,
+          "retentionPeriod": 3600,
+          "tags": {}
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/snapshots/mySnapshot",
+        "name": "mySnapshot"
+      }
+    }
+  }
+}

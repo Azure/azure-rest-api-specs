@@ -1,0 +1,128 @@
+{
+  "operationId": "Builders_CreateOrUpdate",
+  "title": "Builders_CreateOrUpdate_0",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg",
+    "builderName": "testBuilder",
+    "api-version": "2024-08-02-preview",
+    "builderEnvelope": {
+      "identity": {
+        "type": "SystemAssigned,UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+        }
+      },
+      "properties": {
+        "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+        "containerRegistries": [
+          {
+            "containerRegistryServer": "test.azurecr.io",
+            "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+          },
+          {
+            "containerRegistryServer": "test2.azurecr.io",
+            "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+          }
+        ]
+      },
+      "tags": {
+        "company": "Microsoft"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder",
+        "name": "testBuilder",
+        "type": "Microsoft.App/builders",
+        "location": "eastus",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+          "containerRegistries": [
+            {
+              "containerRegistryServer": "test.azurecr.io",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+            },
+            {
+              "containerRegistryServer": "test2.azurecr.io",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
+          "lastModifiedBy": "sample@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+        },
+        "tags": {
+          "company": "Microsoft"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.App/locations/{location}/operationStatuses/{operationId}"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder",
+        "name": "testBuilder",
+        "type": "Microsoft.App/builders",
+        "location": "eastus",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+          "containerRegistries": [
+            {
+              "containerRegistryServer": "test.azurecr.io",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+            },
+            {
+              "containerRegistryServer": "test2.azurecr.io",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
+          "lastModifiedBy": "sample@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+        },
+        "tags": {
+          "company": "Microsoft"
+        }
+      }
+    }
+  }
+}

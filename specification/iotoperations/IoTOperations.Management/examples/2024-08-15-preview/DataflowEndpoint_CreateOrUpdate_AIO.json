@@ -11,16 +11,16 @@
       "properties": {
         "endpointType": "Mqtt",
         "mqttSettings": {
-          "host": "aio-mq-dmqtt-frontend:8883",
+          "host": "aio-broker:18883",
           "authentication": {
             "method": "Kubernetes",
             "serviceAccountTokenSettings": {
-              "audience": "aio-mq"
+              "audience": "aio-internal"
             }
           },
           "tls": {
             "mode": "Enabled",
-            "trustedCaCertificateConfigMapRef": "aio-ca-trust-bundle-test-only"
+            "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
           }
         }
       },
@@ -36,16 +36,16 @@
         "properties": {
           "endpointType": "Mqtt",
           "mqttSettings": {
-            "host": "aio-mq-dmqtt-frontend:8883",
+            "host": "aio-broker:18883",
             "authentication": {
               "method": "Kubernetes",
               "serviceAccountTokenSettings": {
-                "audience": "aio-mq"
+                "audience": "aio-internal"
               }
             },
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "aio-ca-trust-bundle-test-only"
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
             }
           },
           "provisioningState": "Succeeded"
@@ -75,16 +75,16 @@
         "properties": {
           "endpointType": "Mqtt",
           "mqttSettings": {
-            "host": "aio-mq-dmqtt-frontend:8883",
+            "host": "aio-broker:18883",
             "authentication": {
               "method": "Kubernetes",
               "serviceAccountTokenSettings": {
-                "audience": "aio-mq"
+                "audience": "aio-internal"
               }
             },
             "tls": {
               "mode": "Enabled",
-              "trustedCaCertificateConfigMapRef": "aio-ca-trust-bundle-test-only"
+              "trustedCaCertificateConfigMapRef": "azure-iot-operations-aio-ca-trust-bundle"
             }
           },
           "provisioningState": "Succeeded"

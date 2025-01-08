@@ -23,8 +23,7 @@ model AutonomousDatabaseNationalCharacterSet
 @doc("AutonomousDatabaseNationalCharacterSet resource model")
 model AutonomousDatabaseNationalCharacterSetProperties {
   @doc("The Oracle Autonomous Database supported national character sets.")
-  @visibility("read")
   @minLength(1)
   @maxLength(255)
-  characterSet?: string;
+  characterSet: string;
 }

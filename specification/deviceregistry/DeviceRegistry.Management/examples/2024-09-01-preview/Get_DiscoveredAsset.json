@@ -1,0 +1,93 @@
+{
+  "title": "Get_DiscoveredAsset",
+  "operationId": "DiscoveredAssets_Get",
+  "description": "Get a Discovered Asset",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "discoveredAssetName": "my-discoveredasset"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/discoveredAssets/my-discoveredasset",
+        "name": "my-discoveredasset",
+        "type": "Microsoft.DeviceRegistry/discoveredAssets",
+        "location": "West Europe",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+        },
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "assetEndpointProfileRef": "myAssetEndpointProfile",
+          "discoveryId": "11111111-1111-1111-1111-111111111111",
+          "version": 73766,
+          "manufacturer": "Contoso",
+          "manufacturerUri": "https://www.contoso.com/manufacturerUri",
+          "model": "ContosoModel",
+          "productCode": "SA34VDG",
+          "hardwareRevision": "1.0",
+          "softwareRevision": "2.0",
+          "documentationUri": "https://www.example.com/manual",
+          "serialNumber": "64-103816-519918-8",
+          "defaultDatasetsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+          "defaultTopic": {
+            "path": "/path/defaultTopic",
+            "retain": "Keep"
+          },
+          "datasets": [
+            {
+              "name": "dataset1",
+              "datasetConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+              "topic": {
+                "path": "/path/dataset1",
+                "retain": "Keep"
+              },
+              "dataPoints": [
+                {
+                  "name": "dataPoint1",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1",
+                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
+                },
+                {
+                  "name": "dataPoint2",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt2",
+                  "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "event1",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+              "topic": {
+                "path": "/path/event1",
+                "retain": "Keep"
+              },
+              "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
+            },
+            {
+              "name": "event2",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
+              "lastUpdatedOn": "2024-04-09T14:20:00.52Z"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

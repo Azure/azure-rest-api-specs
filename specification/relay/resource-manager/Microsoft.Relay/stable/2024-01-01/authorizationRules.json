@@ -1,0 +1,1034 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Relay API",
+    "description": "Use these API to manage Azure Relay resources through Azure Resource Manager.",
+    "version": "2024-01-01",
+    "x-ms-code-generation-settings": {
+      "name": "RelayManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Authorization rules for a namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleCreate": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an authorization rule for a namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            },
+            "description": "The authorization rule parameters."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to create namespace authorization rule succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleDelete": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a namespace authorization rule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to delete namespace authorization rule succeeded."
+          },
+          "204": {
+            "description": "No content. The request has been accepted but the namespace authorization rule was not found."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleGet": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Authorization rule for a namespace by name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace Authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListKeys",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleListKey": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Primary and secondary connection strings to the namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_RegenerateKeys",
+        "x-ms-examples": {
+          "RelayNameSpaceAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings to the namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate authorization rule."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_ListAuthorizationRules",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleListAll": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Authorization rules for a hybrid connection.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleCreate": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an authorization rule for a hybrid connection.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            },
+            "description": "The authorization rule parameters."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hybrid connection authorization rule created.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleDelete": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a hybrid connection authorization rule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hybrid connection authorization rule deleted."
+          },
+          "204": {
+            "description": "Authorization rule does not exist."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleGet": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Hybrid connection authorization rule for a hybrid connection by name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hybrid connection authorization rule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_ListKeys",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleListKey": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Primary and secondary connection strings to the hybrid connection.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to retrieve connection strings to the hybrid connection succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/hybridConnections/{hybridConnectionName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "HybridConnections"
+        ],
+        "operationId": "HybridConnections_RegenerateKeys",
+        "x-ms-examples": {
+          "RelayHybridConnectionAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/HybridConnection/RelayHybridConnectionAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings to the hybrid connection.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/HybridConnectionNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate authorization rule."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to regenerate connection strings to hybrid connection succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_ListAuthorizationRules",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleListAll": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Authorization rules for a WCF relay.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorization rules successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleCreate": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an authorization rule for a WCF relay.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            },
+            "description": "The authorization rule parameters."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WCF relay authorization rule created.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleDelete": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes a WCF relay authorization rule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to delete WCF relay authorization rule succeeded."
+          },
+          "204": {
+            "description": "Request accepted but the authorization rule does not exist."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_GetAuthorizationRule",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleGet": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Get authorizationRule for a WCF relay by name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request for WCF relay authorization rule succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_ListKeys",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleListKey.json": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Primary and secondary connection strings to the WCF relay.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_RegenerateKeys",
+        "x-ms-examples": {
+          "RelayAuthorizationRuleRegenerateKey.json": {
+            "$ref": "./examples/Relay/RelayAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings to the WCF relay.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/RelayNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate authorization rule."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthorizationRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationRule"
+          },
+          "description": "Result of the list authorization rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of authorization rules."
+        }
+      },
+      "description": "The response from the list namespace operation."
+    },
+    "AuthorizationRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "rights": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ],
+                "x-ms-enum": {
+                  "name": "AccessRights",
+                  "modelAsString": true
+                }
+              },
+              "description": "The rights associated with the rule."
+            }
+          },
+          "required": [
+            "rights"
+          ],
+          "description": "Properties supplied to create or update AuthorizationRule"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Single item in a List or Get AuthorizationRule operation"
+    },
+    "AccessKeys": {
+      "type": "object",
+      "properties": {
+        "primaryConnectionString": {
+          "type": "string",
+          "description": "Primary connection string of the created namespace authorization rule."
+        },
+        "secondaryConnectionString": {
+          "type": "string",
+          "description": "Secondary connection string of the created namespace authorization rule."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "A base64-encoded 256-bit secondary key for signing and validating the SAS token."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "A string that describes the authorization rule."
+        }
+      },
+      "description": "Namespace/Relay Connection String"
+    },
+    "RegenerateAccessKeyParameters": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The access key to regenerate.",
+          "enum": [
+            "PrimaryKey",
+            "SecondaryKey"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          }
+        },
+        "key": {
+          "type": "string",
+          "description": "Optional. If the key value is provided, this is set to key type, or autogenerated key value set for key type."
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Parameters supplied to the regenerate authorization rule operation, specifies which key needs to be reset."
+    }
+  },
+  "parameters": {}
+}

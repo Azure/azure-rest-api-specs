@@ -524,7 +524,7 @@
         "max_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tokens to generate.",
+          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
           "x-ms-client-name": "maxTokens"
         },
         "temperature": {
@@ -587,6 +587,10 @@
       "required": [
         "messages"
       ]
+    },
+    "ChatMessageContent": {
+      "type": "string",
+      "x-nullable": false
     },
     "ChatRequestAssistantMessage": {
       "type": "object",
@@ -654,6 +658,7 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
+          "$ref": "#/definitions/ChatMessageContent",
           "description": "The contents of the user message, with available input types varying by selected model."
         },
         "name": {

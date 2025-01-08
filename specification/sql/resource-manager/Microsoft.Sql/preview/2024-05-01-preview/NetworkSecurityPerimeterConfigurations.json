@@ -1,0 +1,394 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for a server.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configs.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 NullResource - Request body is empty\n\n * 400 NullProperties - Properties collection is not included in request body\n\n * 400 NullNSP - NetworkSecurityPerimeter property is not present in request body\n\n * 400 NullNSPId - NetworkSecurityPerimeter is missing the ID property\n\n * 400 MalformedNSPId - NetworkSecurityPerimeter ID is not correctly formatted\n\n * 400 NullNSPImmutableId - NetworkSecurityPerimeter is missing the ImmutableId property\n\n * 400 MalformedNSPImmutableId - NetworkSecurityPerimeter Immutable ID is not a GUID\n\n * 400 NullLocation - NetworkSecurityPerimeter is missing the location property\n\n * 400 NullNetworkProfile - NetworkProfile is not present in the request body\n\n * 400 NullNetworkProfileName - NetworkProfile is missing the Name property\n\n * 400 NullAccessMode - Access Mode is not present in the request body\n\n * 400 InvalidAccessMode - Supported Access Modes are enforced, audit and learning\n\n * 400 InvalidClient - Client with id '{0}' is not allowed to interact with this resource\n\n * 400 TooManyAssociations - A SQL Server may only be associated with one NSP\n\n * 400 MalformedAssociationProxyName - AssociationProxy name is not formed like {perimeterGuid}.{associationName}\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List NSP configs by server": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsListByServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "nspConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the config.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 NullResource - Request body is empty\n\n * 400 NullProperties - Properties collection is not included in request body\n\n * 400 NullNSP - NetworkSecurityPerimeter property is not present in request body\n\n * 400 NullNSPId - NetworkSecurityPerimeter is missing the ID property\n\n * 400 MalformedNSPId - NetworkSecurityPerimeter ID is not correctly formatted\n\n * 400 NullNSPImmutableId - NetworkSecurityPerimeter is missing the ImmutableId property\n\n * 400 MalformedNSPImmutableId - NetworkSecurityPerimeter Immutable ID is not a GUID\n\n * 400 NullLocation - NetworkSecurityPerimeter is missing the location property\n\n * 400 NullNetworkProfile - NetworkProfile is not present in the request body\n\n * 400 NullNetworkProfileName - NetworkProfile is missing the Name property\n\n * 400 NullAccessMode - Access Mode is not present in the request body\n\n * 400 InvalidAccessMode - Supported Access Modes are enforced, audit and learning\n\n * 400 InvalidClient - Client with id '{0}' is not allowed to interact with this resource\n\n * 400 TooManyAssociations - A SQL Server may only be associated with one NSP\n\n * 400 MalformedAssociationProxyName - AssociationProxy name is not formed like {perimeterGuid}.{associationName}\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an NSP config by name": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for SQL Resource Provider",
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "nspConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP Configuration operation successful",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Reconcile NSP Configuration operation accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Reconcile NSP Config": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurationsReconcile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "NSP Configuration for a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of NSP configurations for a server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of an NSP config.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPConfigAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPConfigAccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
+        }
+      }
+    },
+    "NSPConfigAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+          }
+        },
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NSPConfigAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessMode": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigNetworkSecurityPerimeterRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

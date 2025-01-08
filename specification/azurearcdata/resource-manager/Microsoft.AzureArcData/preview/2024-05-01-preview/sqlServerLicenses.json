@@ -1,0 +1,259 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "SqlServerLicense": {
+      "description": "Describe SQL Server license resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerLicenseProperties",
+          "description": "SQL Server license properties",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlServerLicenseProperties": {
+      "description": "Properties of SQL Server License.",
+      "type": "object",
+      "properties": {
+        "billingPlan": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "enum": [
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "billingPlan",
+            "modelAsString": true
+          }
+        },
+        "physicalCores": {
+          "type": "integer",
+          "format": "int32",
+          "multipleOf": 2,
+          "minimum": 16,
+          "description": "The number of total cores of the license covers."
+        },
+        "licenseCategory": {
+          "type": "string",
+          "description": "This property represents the choice between SQL Server Core and ESU licenses.",
+          "enum": [
+            "Core"
+          ],
+          "x-ms-enum": {
+            "name": "licenseCategory",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "activationState": {
+          "type": "string",
+          "description": "The activation state of the license.",
+          "enum": [
+            "Activated",
+            "Deactivated"
+          ],
+          "x-ms-enum": {
+            "name": "activationState",
+            "modelAsString": true
+          }
+        },
+        "scopeType": {
+          "type": "string",
+          "description": "The Azure scope to which the license will apply.",
+          "enum": [
+            "Tenant",
+            "Subscription",
+            "ResourceGroup"
+          ],
+          "x-ms-enum": {
+            "name": "scopeType",
+            "modelAsString": true
+          }
+        },
+        "lastActivatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent activation of the SqlServerLicense.",
+          "readOnly": true
+        },
+        "lastDeactivatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent deactivation of the SqlServerLicense.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId the SQL Server license resource subscription resides in.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "billingPlan",
+        "physicalCores",
+        "licenseCategory",
+        "scopeType",
+        "activationState"
+      ]
+    },
+    "SqlServerLicenseUpdateProperties": {
+      "description": "Properties of update SqlServerLicense.",
+      "type": "object",
+      "properties": {
+        "billingPlan": {
+          "type": "string",
+          "description": "SQL Server license type.",
+          "enum": [
+            "PAYG",
+            "Paid"
+          ],
+          "x-ms-enum": {
+            "name": "billingPlan",
+            "modelAsString": true
+          }
+        },
+        "physicalCores": {
+          "type": "integer",
+          "format": "int32",
+          "multipleOf": 2,
+          "minimum": 16,
+          "description": "The number of total cores of the license covers."
+        },
+        "licenseCategory": {
+          "type": "string",
+          "description": "This property represents the choice between SQL Server Core and ESU licenses.",
+          "enum": [
+            "Core"
+          ],
+          "x-ms-enum": {
+            "name": "licenseCategory",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "activationState": {
+          "type": "string",
+          "description": "The activation state of the license.",
+          "enum": [
+            "Activated",
+            "Deactivated"
+          ],
+          "x-ms-enum": {
+            "name": "activationState",
+            "modelAsString": true
+          }
+        },
+        "scopeType": {
+          "type": "string",
+          "description": "The Azure scope to which the license will apply.",
+          "enum": [
+            "Tenant",
+            "Subscription",
+            "ResourceGroup"
+          ],
+          "x-ms-enum": {
+            "name": "scopeType",
+            "modelAsString": true
+          }
+        },
+        "lastActivatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent activation of the SqlServerLicense.",
+          "readOnly": true
+        },
+        "lastDeactivatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent deactivation of the SqlServerLicense.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId the SQL Server license resource subscription resides in.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerLicenseUpdate": {
+      "description": "An update to a SQL Server license resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlServerLicenseUpdateProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlServerLicenseListResult": {
+      "description": "A list of SQL Server licenses.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerLicense"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

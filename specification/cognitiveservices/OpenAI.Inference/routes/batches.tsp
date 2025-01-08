@@ -19,7 +19,7 @@ namespace Azure.OpenAI;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @added(ServiceApiVersions.v2024_07_01_Preview)
@@ -42,7 +42,7 @@ op listBatches(
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @added(ServiceApiVersions.v2024_07_01_Preview)
@@ -60,7 +60,7 @@ op createBatch(
  * @returns The requested existing batch job.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
@@ -80,7 +80,7 @@ op getBatch(
  * @returns The updated batch job that was canceled.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @post

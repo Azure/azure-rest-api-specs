@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "licenseProfileName": "default",
+    "api-version": "2024-07-31-preview",
+    "parameters": {
+      "properties": {
+        "softwareAssurance": {
+          "softwareAssuranceCustomer": true
+        },
+        "esuProfile": {
+          "assignedLicense": "{LicenseResourceId}"
+        },
+        "productProfile": {
+          "subscriptionStatus": "Enable",
+          "productType": "WindowsServer",
+          "productFeatures": [
+            {
+              "name": "Hotpatch",
+              "subscriptionStatus": "Enable"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
+        "name": "default",
+        "type": "Microsoft.HybridCompute/machines/licenseProfiles",
+        "location": "eastus2euap",
+        "properties": {
+          "softwareAssurance": {
+            "softwareAssuranceCustomer": true
+          },
+          "esuProfile": {
+            "assignedLicense": "{LicenseResourceId}",
+            "esuEligibility": "Eligible",
+            "serverType": "Standard",
+            "esuKeyState": "Inactive",
+            "esuKeys": [
+              {
+                "sku": "skuNumber1",
+                "licenseStatus": 1
+              },
+              {
+                "sku": "skuNumber2",
+                "licenseStatus": 1
+              }
+            ]
+          },
+          "productProfile": {
+            "subscriptionStatus": "Enabling",
+            "productType": "WindowsServer",
+            "enrollmentDate": "2023-10-05T20:36:49.745Z",
+            "billingStartDate": "2023-10-05T20:36:49.745Z",
+            "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+            "billingEndDate": "2023-11-05T20:36:49.745Z",
+            "productFeatures": [
+              {
+                "name": "Hotpatch",
+                "subscriptionStatus": "Enabling",
+                "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                "billingStartDate": "2023-10-05T20:36:49.745Z",
+                "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                "billingEndDate": "2023-11-05T20:36:49.745Z"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}

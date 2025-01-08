@@ -57,7 +57,6 @@ input-file:
   - Common/stable/2023-06-01/common.json
   - DataRegistry/stable/2023-06-01/dataregistry.json
   - Geolocation/preview/1.0/geolocation.json
-  - Data/preview/2.0/data.json
   - Render/stable/2022-08-01/render.json
   - Route/preview/1.0/route.json
   - Search/stable/2023-06-01/search.json
@@ -73,7 +72,6 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 
 ```yaml $(tag) == 'package-stable-1.0'
 input-file:
-  - Data/preview/1.0/data.json
   - Render/preview/1.0/render.json
   - Search/preview/1.0/search.json
 ```
@@ -106,7 +104,9 @@ These settings apply only when `--tag=package-deprecated` is specified on the co
 input-file:
   - Microsoft.Maps/Alias/preview/2.0/alias.json
   - Microsoft.Maps/Data/preview/1.0/data.json
+  - Data/preview/2.0/data.json
   - Microsoft.Maps/Data/preview/2.0/data.json
+  - Data/preview/1.0/data.json
   - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json
   - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json

@@ -14,8 +14,7 @@ export class CompileRule implements Rule {
 
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npm exec --no -- tsp compile . --warn-as-error`,
-        folder,
+        `npm exec --no -- tsp compile --warn-as-error ${folder}`,
       );
       if (
         stdout.toLowerCase().includes("no emitter was configured") ||
@@ -31,10 +30,11 @@ export class CompileRule implements Rule {
       stdOutput += stdout;
       errorOutput += stderr;
     }
-    if (await host.checkFileExists(path.join(folder, "client.tsp"))) {
+
+    const clientTsp = path.join(folder, "client.tsp");
+    if (await host.checkFileExists(clientTsp)) {
       let [err, stdout, stderr] = await host.runCmd(
-        `npm exec --no -- tsp compile client.tsp --no-emit --warn-as-error`,
-        folder,
+        `npm exec --no -- tsp compile --no-emit --warn-as-error ${clientTsp}`,
       );
       if (err) {
         success = false;

@@ -1,0 +1,30 @@
+{
+  "operationId": "ApiDefinitions_ImportSpecification",
+  "title": "ApiDefinitions_ImportSpecification",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "workspaceName": "default",
+    "apiName": "echo-api",
+    "versionName": "2023-01-01",
+    "definitionName": "openapi",
+    "api-version": "2024-06-01-preview",
+    "payload": {
+      "format": "link",
+      "value": "https://...",
+      "specification": {
+        "name": "openapi",
+        "version": "3.0.1"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://..."
+      }
+    }
+  }
+}

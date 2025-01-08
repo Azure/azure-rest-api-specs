@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/networkanalytics"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -13,7 +16,6 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/networkanalytics.json"
-    examples-directory: "{project-root}/examples"
   "@azure-tools/cadl-python":
     "basic-setup-py": true
     "package-version": 1.0.0b1
@@ -23,3 +25,20 @@ options:
     clear-output-folder: true
     namespace: Microsoft.NetworkAnalytics
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    package-dir: "arm-networkanalytics"
+    flavor: "azure"
+    packageDetails:
+      name: "@azure/arm-networkanalytics"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-networkanalytics"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true

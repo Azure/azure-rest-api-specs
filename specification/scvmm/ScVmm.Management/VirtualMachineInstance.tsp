@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -36,7 +37,8 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 
@@ -65,6 +67,7 @@ interface VirtualMachineInstances {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** The operation to update a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -77,6 +80,7 @@ interface VirtualMachineInstances {
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -102,7 +106,11 @@ interface VirtualMachineInstances {
   @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    StopVirtualMachineOptions
+    {
+      /** The content of the action request */
+      @body
+      body?: StopVirtualMachineOptions;
+    }
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")

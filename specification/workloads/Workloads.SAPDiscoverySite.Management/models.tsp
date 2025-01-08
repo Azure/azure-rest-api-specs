@@ -1,3 +1,5 @@
+import "@azure-tools/typespec-client-generator-core";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -199,7 +201,8 @@ model SAPMigrateError {
   /**
    * The SAP Discovery site resource error body.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ErrorDefinition;
 }
 

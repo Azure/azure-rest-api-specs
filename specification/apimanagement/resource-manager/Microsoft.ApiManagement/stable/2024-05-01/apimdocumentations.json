@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on Documentation entity.",
+    "version": "2024-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/documentations": {
+      "get": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_ListByService",
+        "description": "Lists all Documentations of the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementListApis": {
+            "$ref": "./examples/ApiManagementListDocumentations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter | eq |  contains |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paged Result response of Documentations.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/DocumentationContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/documentations/{documentationId}": {
+      "head": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Documentation by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementHeadDocumentation": {
+            "$ref": "./examples/ApiManagementHeadDocumentation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_Get",
+        "description": "Gets the details of the Documentation specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetDocumentation": {
+            "$ref": "./examples/ApiManagementGetDocumentation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Documentation entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_CreateOrUpdate",
+        "description": "Creates a new Documentation or updates an existing one.",
+        "x-ms-examples": {
+          "ApiManagementCreateDocumentation": {
+            "$ref": "./examples/ApiManagementCreateDocumentation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Documentation was successfully created.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "Documentation was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_Update",
+        "description": "Updates the details of the Documentation for an API specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementUpdateDocumentation": {
+            "$ref": "./examples/ApiManagementUpdateDocumentation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationUpdateContract"
+            },
+            "description": "Documentation Update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Documentation was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Documentation"
+        ],
+        "operationId": "Documentation_Delete",
+        "description": "Deletes the specified Documentation from an API.",
+        "x-ms-examples": {
+          "ApiManagementDeleteDocumentation": {
+            "$ref": "./examples/ApiManagementDeleteDocumentation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Documentation successfully removed"
+          },
+          "204": {
+            "description": "Documentation successfully removed by previous request or does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

@@ -33,7 +33,7 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
 model BrokerListenerProperties {
   @doc("Kubernetes Service name of this listener.")
-  serviceName?: string = "aio-mq-dmqtt-frontend";
+  serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
   @OpenAPI.extension("x-ms-identifiers", ["port"])

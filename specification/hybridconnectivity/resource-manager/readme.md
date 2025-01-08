@@ -30,13 +30,13 @@ openapi-subtype: rpaas
 tag: package-2024-12
 ```
 
-
 ### Tag: package-2024-12
 
 These settings apply only when `--tag=package-2024-12` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-12'
 input-file:
+  - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
   - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
 ```
 
@@ -64,6 +64,29 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
   - Microsoft.HybridConnectivity/preview/2022-05-01-preview/hybridconnectivity.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property solutionSettings for Solution Configurations settings previously defined like this
+    from: publicCloud.json
+    where:
+      - $.definitions.SolutionConfigurationPropertiesUpdate.properties.solutionSettings
+      - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
+      - $.definitions.SolutionTypeSettings.properties.solutionSettings
+      - $.definitions.SolutionSettings
+
+  - suppress: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties violation is a false positive which you can suppress for now
+    from: publicCloud.json
+    where:
+      - $.definitions.InventoryResourceListResult
+      - $.definitions.PublicCloudConnectorListResult
+      - $.definitions.SolutionConfigurationListResult
+      - $.definitions.SolutionTypeResourceListResult
 ```
 
 ---

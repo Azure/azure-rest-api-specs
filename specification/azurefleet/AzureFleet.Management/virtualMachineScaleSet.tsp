@@ -27,7 +27,7 @@ model VirtualMachineScaleSet {
     "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
     """)
   @visibility("read")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("Type of the virtualMachineScaleSet")
   @visibility("read")

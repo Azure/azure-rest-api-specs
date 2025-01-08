@@ -1,0 +1,1263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Edge Devices",
+    "version": "2024-09-01-preview",
+    "description": "Azure Arc-enabled Edge Device."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EdgeDevices"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices": {
+      "get": {
+        "operationId": "EdgeDevices_List",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "List EdgeDevice resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Edge Devices": {
+            "$ref": "./examples/ListEdgeDevices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}": {
+      "get": {
+        "operationId": "EdgeDevices_Get",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "Get a EdgeDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Edge Device": {
+            "$ref": "./examples/GetEdgeDevices.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeDevices_CreateOrUpdate",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "Create a EdgeDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDevice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDevice"
+            }
+          },
+          "201": {
+            "description": "Resource successfully created.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDevice"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create HCI Edge Device": {
+            "$ref": "./examples/CreateHciEdgeDevice.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EdgeDevices_Delete",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "Delete a EdgeDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Edge Devices": {
+            "$ref": "./examples/DeleteEdgeDevices.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/validate": {
+      "post": {
+        "operationId": "EdgeDevices_Validate",
+        "tags": [
+          "EdgeDevices"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "edgeDeviceName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "ValidateRequest",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate Edge Devices": {
+            "$ref": "./examples/ValidateEdgeDevices.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The AdapterPropertyOverrides of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'",
+          "readOnly": true
+        }
+      }
+    },
+    "ArcExtensionState": {
+      "type": "string",
+      "description": "Arc extension installation state.",
+      "enum": [
+        "NotSpecified",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Moving",
+        "Deleting",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ArcExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Arc extension state is not specified."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Arc extension state is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Arc extension state is Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Arc extension state is Canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Arc extension state is Accepted when extension installation triggered."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Arc extension is in Creating State."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Arc extension is in Updating State."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Arc extension is in Moving State."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Arc extension is in Deleting State."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Arc extension is in Deleted State."
+          }
+        ]
+      }
+    },
+    "DeviceConfiguration": {
+      "type": "object",
+      "description": "The device Configuration for edge device.",
+      "properties": {
+        "nicDetails": {
+          "type": "array",
+          "description": "NIC Details of device",
+          "items": {
+            "$ref": "#/definitions/NicDetail"
+          },
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
+        },
+        "deviceMetadata": {
+          "type": "string",
+          "description": "Device metadata details."
+        }
+      }
+    },
+    "DeviceKind": {
+      "type": "string",
+      "description": "Edge device kind.",
+      "enum": [
+        "HCI"
+      ],
+      "default": "HCI",
+      "x-ms-enum": {
+        "name": "DeviceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HCI",
+            "value": "HCI",
+            "description": "Arc-enabled edge device with HCI OS."
+          }
+        ]
+      }
+    },
+    "DeviceState": {
+      "type": "string",
+      "description": "The edge device state.",
+      "enum": [
+        "NotSpecified",
+        "Connected",
+        "Disconnected",
+        "Repairing",
+        "Draining",
+        "InMaintenance",
+        "Resuming",
+        "Processing"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The edge device state is not specified."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The edge device state is in connected state."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The edge device state is in disconnected state."
+          },
+          {
+            "name": "Repairing",
+            "value": "Repairing",
+            "description": "The edge device state is in repairing state."
+          },
+          {
+            "name": "Draining",
+            "value": "Draining",
+            "description": "The edge device state is in draining state."
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "The edge device state is in maintenance state."
+          },
+          {
+            "name": "Resuming",
+            "value": "Resuming",
+            "description": "The edge device state is in resuming state."
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "The edge device state is in processing state."
+          }
+        ]
+      }
+    },
+    "EdgeDevice": {
+      "type": "object",
+      "description": "Edge device resource.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DeviceKind",
+          "description": "Device kind to support polymorphic resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeDeviceListResult": {
+      "type": "object",
+      "description": "The response of a EdgeDevice list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeDevice items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeDevice"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeDeviceProperties": {
+      "type": "object",
+      "description": "Edge Device properties",
+      "properties": {
+        "deviceConfiguration": {
+          "$ref": "#/definitions/DeviceConfiguration",
+          "description": "Device Configuration"
+        },
+        "provisioningState": {
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "Provisioning state of edgeDevice resource",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "details of validation failure",
+      "properties": {
+        "exception": {
+          "type": "string",
+          "description": "Exception details while installing extension.",
+          "readOnly": true
+        }
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "Arc extension installed on edge device.",
+      "properties": {
+        "extensionName": {
+          "type": "string",
+          "description": "Arc extension name installed on edge device.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ArcExtensionState",
+          "description": "Arc extension state from arc machine extension.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "Error details while installing Arc extension.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "extensionResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Arc Extension Azure resource id.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Extension version installed.",
+          "readOnly": true
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "Extension managed by user or Azure.",
+          "default": "Azure",
+          "enum": [
+            "User",
+            "Azure"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionManagedBy",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionManagedBy": {
+      "type": "string",
+      "description": "Arc extension managed by Azure or User.",
+      "enum": [
+        "User",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionManagedBy",
+        "modelAsString": true
+      }
+    },
+    "ExtensionProfile": {
+      "type": "object",
+      "description": "Extensions details for edge device.",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "description": "List of Arc extensions installed on edge device.",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "HciEdgeDevice": {
+      "type": "object",
+      "description": "Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HciEdgeDeviceProperties",
+          "description": "properties for Arc-enabled edge device with HCI OS."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDevice"
+        }
+      ],
+      "x-ms-discriminator-value": "HCI"
+    },
+    "HciEdgeDeviceProperties": {
+      "type": "object",
+      "description": "properties for Arc-enabled edge device with HCI OS.",
+      "properties": {
+        "reportedProperties": {
+          "$ref": "#/definitions/HciReportedProperties",
+          "description": "The instance view of all current configurations on HCI device.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeDeviceProperties"
+        }
+      ]
+    },
+    "HciNetworkProfile": {
+      "type": "object",
+      "description": "The network profile of a device.",
+      "properties": {
+        "nicDetails": {
+          "type": "array",
+          "description": "List of NIC Details of device.",
+          "items": {
+            "$ref": "#/definitions/HciNicDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
+        },
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch details for edge device.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        },
+        "hostNetwork": {
+          "$ref": "#/definitions/HostNetwork",
+          "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "HciNicDetail": {
+      "type": "object",
+      "description": "The NIC Detail of a device.",
+      "properties": {
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name of NIC",
+          "readOnly": true
+        },
+        "interfaceDescription": {
+          "type": "string",
+          "description": "Interface Description of NIC",
+          "readOnly": true
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component Id of NIC",
+          "readOnly": true
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "Driver Version of NIC",
+          "readOnly": true
+        },
+        "ip4Address": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "defaultGateway": {
+          "type": "string",
+          "description": "Default Gateway of NIC",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers for NIC",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "defaultIsolationId": {
+          "type": "string",
+          "description": "Default Isolation of Management NIC",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address information of NIC.",
+          "readOnly": true
+        },
+        "slot": {
+          "type": "string",
+          "description": "The slot attached to the NIC.",
+          "readOnly": true
+        },
+        "switchName": {
+          "type": "string",
+          "description": "The switch attached to the NIC, if any.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "The type of NIC, physical, virtual, management.",
+          "readOnly": true
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "The VLAN ID of the physical NIC.",
+          "readOnly": true
+        },
+        "nicStatus": {
+          "type": "string",
+          "description": "The status of NIC, up, disconnected.",
+          "readOnly": true
+        },
+        "rdmaCapability": {
+          "type": "string",
+          "description": "Describes the RDMA capability of the network adapter.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "RdmaCapability",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HciOsProfile": {
+      "type": "object",
+      "description": "OS configurations for HCI device.",
+      "properties": {
+        "bootType": {
+          "type": "string",
+          "description": "The boot type of the device. e.g. UEFI, Legacy etc",
+          "readOnly": true
+        },
+        "assemblyVersion": {
+          "type": "string",
+          "description": "Version of assembly present on device",
+          "readOnly": true
+        }
+      }
+    },
+    "HciReportedProperties": {
+      "type": "object",
+      "description": "The device Configuration for HCI device.",
+      "properties": {
+        "networkProfile": {
+          "$ref": "#/definitions/HciNetworkProfile",
+          "description": "HCI device network information.",
+          "readOnly": true
+        },
+        "osProfile": {
+          "$ref": "#/definitions/HciOsProfile",
+          "description": "HCI device OS specific information.",
+          "readOnly": true
+        },
+        "sbeDeploymentPackageInfo": {
+          "$ref": "#/definitions/SbeDeploymentPackageInfo",
+          "description": "Solution builder extension (SBE) deployment package information.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportedProperties"
+        }
+      ]
+    },
+    "HostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/Intents"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "intentName"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageNetworks"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less.",
+          "readOnly": true
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "readOnly": true
+        }
+      }
+    },
+    "Intents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "scope": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Scope for host network intent.",
+          "readOnly": true
+        },
+        "intentType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "IntentType for host network intent.",
+          "readOnly": true
+        },
+        "isComputeIntentSet": {
+          "type": "boolean",
+          "description": "IsComputeIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isStorageIntentSet": {
+          "type": "boolean",
+          "description": "IsStorageIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isOnlyStorage": {
+          "type": "boolean",
+          "description": "IntentType for host network intent.",
+          "readOnly": true
+        },
+        "isManagementIntentSet": {
+          "type": "boolean",
+          "description": "IsManagementIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isStretchIntentSet": {
+          "type": "boolean",
+          "description": "IsStretchIntentSet for host network intent.",
+          "readOnly": true
+        },
+        "isOnlyStretch": {
+          "type": "boolean",
+          "description": "IsOnlyStretch for host network intent.",
+          "readOnly": true
+        },
+        "isNetworkIntentType": {
+          "type": "boolean",
+          "description": "IsNetworkIntentType for host network intent.",
+          "readOnly": true
+        },
+        "intentName": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create.",
+          "readOnly": true
+        },
+        "intentAdapters": {
+          "type": "array",
+          "description": "Array of adapters used for the network intent.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster.",
+          "readOnly": true
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "qosPolicyOverrides": {
+          "$ref": "./deploymentSettings.json#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster.",
+          "readOnly": true
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "readOnly": true
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/AdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "NicDetail": {
+      "type": "object",
+      "description": "The NIC Detail of a device.",
+      "properties": {
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name of NIC"
+        },
+        "interfaceDescription": {
+          "type": "string",
+          "description": "Interface Description of NIC"
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component Id of NIC"
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "Driver Version of NIC"
+        },
+        "ip4Address": {
+          "type": "string",
+          "description": "Subnet Mask of NIC"
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet Mask of NIC"
+        },
+        "defaultGateway": {
+          "type": "string",
+          "description": "Default Gateway of NIC"
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers for NIC",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultIsolationId": {
+          "type": "string",
+          "description": "Default Isolation of Management NIC"
+        }
+      }
+    },
+    "ReportedProperties": {
+      "type": "object",
+      "description": "Reported properties pushed from edge device.",
+      "properties": {
+        "deviceState": {
+          "$ref": "#/definitions/DeviceState",
+          "description": "edge device state.",
+          "readOnly": true
+        },
+        "extensionProfile": {
+          "$ref": "#/definitions/ExtensionProfile",
+          "description": "Extensions details for edge device.",
+          "readOnly": true
+        }
+      }
+    },
+    "SbeDeploymentPackageInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) deployment package information.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "SBE deployment validation code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains the SBE package validation result.",
+          "readOnly": true
+        },
+        "sbeManifest": {
+          "type": "string",
+          "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name.",
+          "readOnly": true
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network.",
+          "readOnly": true
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter.",
+          "readOnly": true
+        },
+        "storageVlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic. ",
+          "readOnly": true
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "SwitchDetail": {
+      "type": "object",
+      "description": "List of switch details for edge device.",
+      "properties": {
+        "switchName": {
+          "type": "string",
+          "description": "The name of the switch.",
+          "readOnly": true
+        },
+        "switchType": {
+          "type": "string",
+          "description": "The type of the switch. e.g. external, internal.",
+          "readOnly": true
+        },
+        "extensions": {
+          "type": "array",
+          "description": "This represents extensions installed on virtualSwitch.",
+          "items": {
+            "$ref": "#/definitions/SwitchExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "SwitchExtension": {
+      "type": "object",
+      "description": "This represents extensions installed on virtualSwitch.",
+      "properties": {
+        "switchId": {
+          "type": "string",
+          "description": "Unique identifier for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "This will show extension name for virtualSwitch.",
+          "readOnly": true
+        },
+        "extensionEnabled": {
+          "type": "boolean",
+          "description": "This represents whether extension is enabled on virtualSwitch.",
+          "readOnly": true
+        }
+      }
+    },
+    "ValidateRequest": {
+      "type": "object",
+      "description": "The validate request for Edge Device.",
+      "properties": {
+        "edgeDeviceIds": {
+          "type": "array",
+          "description": "Node Ids against which, current node has to be validated.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "Additional info required for validation."
+        }
+      },
+      "required": [
+        "edgeDeviceIds"
+      ]
+    },
+    "ValidateResponse": {
+      "type": "object",
+      "description": "An Accepted response with an Operation-Location header.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "edge device validation status",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
+      "properties": {
+        "enableIov": {
+          "type": "string",
+          "description": "Enable IoV for Virtual Switch",
+          "readOnly": true
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string",
+          "description": "Load Balancing Algorithm for Virtual Switch",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

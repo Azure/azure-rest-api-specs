@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "policyStatesResource": "latest",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
+    "api-version": "2024-10-01",
+    "$from": "2019-10-05T18:00:00Z",
+    "$filter": "IsCompliant eq false and (PolicyDefinitionAction ne 'audit' and PolicyDefinitionAction ne 'append')",
+    "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId))",
+    "$top": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/enable monitoring in azure security center",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed",
+            "policyDefinitionAction": "auditifnotexists",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.network/virtualnetworks/vnet"
+          },
+          {
+            "@odata.id": null,
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/89b27f38-e9e4-4468-ab81-801c84b8c017",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed",
+            "policyDefinitionAction": "auditifnotexists",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.network/virtualnetworks/vnet"
+          }
+        ]
+      }
+    }
+  }
+}

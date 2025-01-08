@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "linkedServiceName": "Cluster",
+    "workspaceName": "TestLinkWS",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-00000000000/providers/Microsoft.OperaitonalInsights/locations/eastus/operationstatuses/62e4d893-d233-4005-988e-a428d9f77076?api-version=2023-09-01"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "writeAccessResourceId": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/clusters/testcluster",
+          "provisioningState": "Deleting"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourcegroups/mms-eus/providers/microsoft.operationalinsights/workspaces/testlinkws/linkedservices/cluster",
+        "name": "TestLinkWS/Cluster",
+        "type": "Microsoft.OperationalInsights/workspaces/linkedServices"
+      }
+    },
+    "204": {}
+  }
+}
