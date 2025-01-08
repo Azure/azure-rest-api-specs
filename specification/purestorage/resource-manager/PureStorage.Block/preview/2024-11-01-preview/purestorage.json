@@ -488,7 +488,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "Limits used for creation of resources.",
+        "description": "Limits constraining certain resource properties.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -576,55 +576,6 @@
         "x-ms-examples": {
           "Reservations_GetUsageDetails_MaximumSet": {
             "$ref": "./examples/Reservations_GetUsageDetails_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getUsageUiDetails": {
-      "post": {
-        "operationId": "Reservations_GetUsageUiDetails",
-        "tags": [
-          "Reservations"
-        ],
-        "description": "This endpoint provides said data crunched into a format designed to provide more understandable explanations, useful for UI.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "reservationName",
-            "in": "path",
-            "description": "The name of the reservation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReservationBillingStatusUiDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reservations_GetUsageUiDetails_MaximumSet": {
-            "$ref": "./examples/Reservations_GetUsageUiDetails_MaximumSet_Gen.json"
           }
         }
       }
@@ -2993,130 +2944,6 @@
         "max"
       ]
     },
-    "BillingDetailsAlertBox": {
-      "type": "object",
-      "description": "A text box with some additional information and icon.",
-      "properties": {
-        "icon": {
-          "$ref": "#/definitions/Icon",
-          "description": "Which icon to show on the alert box."
-        },
-        "lines": {
-          "type": "array",
-          "description": "Text lines to show. A line break should be inserted between two separate lines.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsLine"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "icon",
-        "lines"
-      ]
-    },
-    "BillingDetailsInfoBox": {
-      "type": "object",
-      "description": "A text box with some additional information.",
-      "properties": {
-        "lines": {
-          "type": "array",
-          "description": "Text lines to show. A line break should be inserted between two separate lines.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsLine"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "lines"
-      ]
-    },
-    "BillingDetailsLine": {
-      "type": "object",
-      "description": "A text line to show.",
-      "properties": {
-        "spans": {
-          "type": "array",
-          "description": "Text spans to show.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsSpan"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "spans"
-      ]
-    },
-    "BillingDetailsRow": {
-      "type": "object",
-      "description": "Single informational row containing some text to show along with additional formatting directives.",
-      "properties": {
-        "label": {
-          "type": "array",
-          "description": "Array of variably formatted text spans to show in the label column.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsSpan"
-          },
-          "x-ms-identifiers": []
-        },
-        "value": {
-          "type": "array",
-          "description": "Array of variably formatted text spans to show in the value column.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsSpan"
-          },
-          "x-ms-identifiers": []
-        },
-        "indent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Row indentation. Any value > 0 should include some formatting to make it clear it derives from a previous less indented line, for example a '↳' icon."
-        },
-        "info": {
-          "$ref": "#/definitions/BillingDetailsInfoBox",
-          "description": "Tooltip meant to be used with 'ⓘ' icon."
-        },
-        "alert": {
-          "$ref": "#/definitions/BillingDetailsAlertBox",
-          "description": "Information boxes under the properties. The ones with '⚠' icon (warning) in Figma."
-        }
-      },
-      "required": [
-        "label",
-        "value",
-        "indent"
-      ]
-    },
-    "BillingDetailsSpan": {
-      "type": "object",
-      "description": "Formatted text span.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Actual text to show. UTF-8."
-        },
-        "bold": {
-          "type": "boolean",
-          "description": "If true the textual span should be rendered bold."
-        },
-        "italic": {
-          "type": "boolean",
-          "description": "If true the textual span should be rendered italic."
-        },
-        "strikethrough": {
-          "type": "boolean",
-          "description": "If true the textual span should be rendered struck through."
-        }
-      },
-      "required": [
-        "text",
-        "bold",
-        "italic",
-        "strikethrough"
-      ]
-    },
     "HealthDetails": {
       "type": "object",
       "description": "Health metrics reported for a given resource.",
@@ -3179,36 +3006,6 @@
         "health",
         "alerts"
       ]
-    },
-    "Icon": {
-      "type": "string",
-      "description": "Which icon to show on the alert box.",
-      "enum": [
-        "info",
-        "alert",
-        "error"
-      ],
-      "x-ms-enum": {
-        "name": "Icon",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "info",
-            "value": "info",
-            "description": "information icon"
-          },
-          {
-            "name": "alert",
-            "value": "alert",
-            "description": "alert icon"
-          },
-          {
-            "name": "error",
-            "value": "error",
-            "description": "error icon"
-          }
-        ]
-      }
     },
     "IopsUsage": {
       "type": "object",
@@ -3477,7 +3274,7 @@
     },
     "LimitDetails": {
       "type": "object",
-      "description": "Limits used for creation of resources.",
+      "description": "Limits constraining certain resource properties.",
       "properties": {
         "storagePool": {
           "$ref": "#/definitions/StoragePoolLimits",
@@ -3692,23 +3489,6 @@
         "totalPerformanceReported",
         "totalPerformanceIncludedPlan",
         "totalPerformanceOverage"
-      ]
-    },
-    "ReservationBillingStatusUiDetails": {
-      "type": "object",
-      "description": "Reinterpreted billing statistics for resources billed under a given reservation.The format is designed for UI-based rendering. Text is UTF-8.",
-      "properties": {
-        "rows": {
-          "type": "array",
-          "description": "Rows of text to list.",
-          "items": {
-            "$ref": "#/definitions/BillingDetailsRow"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "rows"
       ]
     },
     "ReservationListResult": {

@@ -60,20 +60,6 @@ interface Reservations<
   listBySubscription is ArmListBySubscription<TReservation>;
 }
 
-@resource("/reservations/{reservationName}/usage")
-model ReservationUsage {
-  @key name: string; // The unique identifier for this sub-resource, typically a fixed value in the resource's path
-  properties: ReservationBillingStatus; // This links to your model
-}
-
-@doc("Various recent statistics for resources billed via a given reservation")
-model ReservationBillingStatus {
-  @doc("The time this usage was updated, in RFC 3339 format.")
-  timestamp: string;
-
-  @doc("Total used capacity as reported by associated storage pools. In bytes.")
-  totalUsedCapacityReported: int64;
-}
 @doc("Properties of a Reservation resource.")
 model ReservationProperties<TProperties extends Model = BaseResourceProperties> {
   @doc("Internal ID of Reservation.")
