@@ -740,7 +740,8 @@
           "description": "Instruct the system how to handle and charge the logs ingested to this table.",
           "enum": [
             "Basic",
-            "Analytics"
+            "Analytics",
+            "Auxiliary"
           ],
           "x-ms-enum": {
             "name": "TablePlanEnum",
@@ -753,6 +754,10 @@
               {
                 "value": "Analytics",
                 "description": "Logs  that allow monitoring and analytics."
+              },
+              {
+                "value": "Auxiliary",
+                "description": "Logs that are adjusted to support high volume low value verbose logs."
               }
             ]
           }

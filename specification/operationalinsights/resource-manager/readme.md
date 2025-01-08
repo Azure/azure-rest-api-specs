@@ -64,6 +64,7 @@ input-file:
   - Microsoft.OperationalInsights/preview/2023-01-01-preview/StorageInsightConfigs.json
   - Microsoft.OperationalInsights/preview/2023-01-01-preview/Tables.json
   - Microsoft.OperationalInsights/preview/2023-01-01-preview/Usages.json
+  - Microsoft.OperationalInsights/preview/2023-01-01-preview/SummaryLogs.json
   - Microsoft.OperationalInsights/preview/2023-01-01-preview/WorkspacePurge.json
   - Microsoft.OperationalInsights/preview/2023-01-01-preview/Workspaces.json
 ```
