@@ -25728,6 +25728,28 @@
         }
       }
     },
+    "ErrorPage": {
+      "description": "A custom error page for a specific status returned by a web app.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "The status code for which the error page will be used",
+          "type": "integer"
+        },
+        "content": {
+          "description": "The content of the error page",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "The content type of the error page",
+          "type": "string"
+        },
+        "alwaysUse": {
+          "description": "If true, the error page will be shown for all requests with a matching status code, regardless of whether they failed on the App Service FrontEnd load balancer or on the app itself.",
+          "type": "boolean"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.",
       "type": "object",
