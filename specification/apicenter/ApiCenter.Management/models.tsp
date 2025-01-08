@@ -722,7 +722,7 @@ model AnalyzerConfigProperties {
   /**
    * The description of the analyzer configuration.
    */
-  description: string;
+  description?: string;
 
   /**
    * The type of API analyzer.
