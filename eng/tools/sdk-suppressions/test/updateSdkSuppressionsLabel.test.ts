@@ -108,7 +108,7 @@ test("test validateSdkSuppressionsFile for error structor file", () => {
   };
 
   expect(() => validateSdkSuppressionsFile(suppressionContent)).toThrow("process.exit called");
-  expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a valid yaml but the schema is wrong: data.suppressions['azure-sdk-for-go'][0] should have required property 'breaking-changes'");
+  expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'");
   expect(mockProcessExit).toHaveBeenCalledWith(1);
 
   consoleSpy.mockRestore();

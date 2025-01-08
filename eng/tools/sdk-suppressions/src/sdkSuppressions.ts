@@ -4,7 +4,7 @@
  * - https://microsoftapc-my.sharepoint.com/:w:/g/personal/raychen_microsoft_com/EbOAA9SkhQhGlgxtf7mc0kUB-25bFue0EFbXKXS3TFLTQA
  */
 
-import Ajv from "ajv";
+import { Ajv } from "ajv";
 import { SdkName, sdkLabels } from "./sdk.js";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
