@@ -1952,9 +1952,9 @@
         "id"
       ],
       "properties": {
-        "body": {
+        "code": {
           "type": "string",
-          "description": "Body of the user defined function in JavaScript."
+          "description": "Code of the user defined function in JavaScript."
         },
         "id": {
           "type": "string",
@@ -1963,16 +1963,22 @@
       },
       "type": "object"
     },
+    "UserDefinedFunctionExecutionArgument": {
+        "type": "string"
+    },
     "UserDefinedFunctionExecutionProperties": {
       "description": "The properties for executing a user defined function.",
       "properties": {
         "arguments": {
-          "type": "string",
-          "description": "Runtime arguments of the user defined function."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunctionExecutionArgument"
+          },
+          "description": "Runtime arguments of the user defined function. Defaults to an empty list."
         },
-        "entrypoint": {
+        "exportedFunctionName": {
           "type": "string",
-          "description": "Entrypoint function name in the body of the user defined function."
+          "description": "Name of the exported function to execute in the code of the user defined function. Defaults to main."
         },
         "runtimeOptions": {
           "$ref": "#/definitions/JSRuntimeOptions"
