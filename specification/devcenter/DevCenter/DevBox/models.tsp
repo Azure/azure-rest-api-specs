@@ -326,6 +326,10 @@ union DevBoxActionType {
   @doc("The action will stop the Dev Box.")
   Stop: "Stop",
 
+  @doc("The action will delete the Dev Box.")
+  @added(APIVersions.v2025_03_01_preview)
+  Delete: "Delete",
+
   string,
 }
 
@@ -337,6 +341,10 @@ union DevBoxActionSourceType {
 
   @doc("The action was triggered by a Dev Box schedule.")
   Schedule: "Schedule",
+
+  @doc("The action was triggered by a Dev Box admin.")
+  @added(APIVersions.v2025_03_01_preview)
+  Admin: "Admin",
 
   string,
 }

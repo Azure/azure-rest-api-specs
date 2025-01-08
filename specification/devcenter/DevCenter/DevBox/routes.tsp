@@ -452,4 +452,15 @@ interface DevBoxes {
     {},
     OperationStatus
   >;
+
+  @doc("Creates an action to schedule the deletion of a Dev Box")
+  @added(APIVersions.v2025_03_01_preview)
+  @action("scheduledDelete")
+  scheduledDeleteAction is StandardResourceOperations.ResourceAction<
+    DevBox,
+    {
+      ...DeleteAtQueryParameter;
+    },
+    DevBoxAction
+  >;
 }

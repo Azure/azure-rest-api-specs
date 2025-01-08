@@ -39,3 +39,11 @@ model DevBoxNameParameter {
   @path
   devBoxName: string;
 }
+
+@doc("The scheduled delete datetime query parameter.")
+@added(APIVersions.v2025_03_01_preview)
+model DeleteAtQueryParameter {
+  @doc("The scheduled deletion time of the Dev Box, in RFC3339 format.")
+  @query("deleteAt")
+  deleteAt: utcDateTime;
+}
