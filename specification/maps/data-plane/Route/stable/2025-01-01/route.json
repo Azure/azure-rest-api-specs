@@ -1620,6 +1620,14 @@
               "items": {
                 "$ref": "#/definitions/Leg"
               }
+            },
+            "optimizedWaypoints": {
+              "description": "Optimized sequence of waypoints. It shows the index from the user provided waypoint sequence for the original and optimized lists.",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/OptimizedWaypoint"
+              }
             }
           }
         }
@@ -3013,6 +3021,22 @@
           "description": "System-optimized waypoint and viaWaypoint index.",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "OptimizedWaypoint": {
+      "description": "Optimized way point object.",
+      "type": "object",
+      "properties": {
+        "inputIndex": {
+          "description": "Way point index provided by the user.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "optimizedIndex": {
+          "description": "Optimized way point index from the system.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
