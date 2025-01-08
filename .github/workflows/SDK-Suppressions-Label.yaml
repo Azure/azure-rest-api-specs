@@ -70,6 +70,11 @@ jobs:
             echo "$label=false" >> $GITHUB_OUTPUT
           done
 
+      # No Action or Add/Remove label ​​according to step run-suppressions-script output
+      # e.g. 
+      #     If the output of the step does not include the BreakingChange-Go-Sdk-Suppression, no action will be taken.
+      #     If the step's output is "BreakingChange-Go-Sdk-Suppression='true'", the label "BreakingChange-Go-Sdk-Suppression" will be applied to the PR.
+      #     If the step's output is "BreakingChange-Go-Sdk-Suppression='false'", the label "BreakingChange-Go-Sdk-Suppression" will be removed from the PR.
       - uses: ./.github/actions/add-label-artifact
         name: Upload artifact with results-go
         if: ${{ steps.run-suppressions-script.outputs.BreakingChange-Go-Sdk-Suppression }}
