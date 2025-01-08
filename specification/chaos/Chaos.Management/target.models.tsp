@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./common.models.tsp";
 import "./capabilityType.models.tsp";
-import "./TargetType.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
