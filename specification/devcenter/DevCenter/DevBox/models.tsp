@@ -1056,3 +1056,83 @@ model DevBoxSnapshot {
   @added(APIVersions.v2024_10_01_preview)
   snapshotType: SnapshotType;
 }
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("A Dev Box addon.")
+@resource("addons")
+@parentResource(DevBox)
+@discriminator("type")
+model DevBoxAddOn {
+  @key("devBoxAddOnName")
+  @doc("Name of the dev box addon.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read", "create")
+  name: string;
+
+  @doc("The type of the Dev Box addon.")
+  @visibility("read")
+  type: DevBoxAddOnType;
+
+  @doc("Whether the Dev Box addon is enabled or not.")
+  enabled: boolean;
+
+  @doc("""
+    The current action state of the Dev Box addon. This state is based on previous
+    action performed by user.
+    """)
+  @visibility("read")
+  actionState?: string;
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("The types of Dev Box addon.")
+union DevBoxAddOnType {
+  @doc("The Dev Box Tunnel addon.")
+  DevBoxTunnel: "DevBoxTunnel",
+
+  string,
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("The Dev Box Tunnel addon.")
+model DevBoxTunnel extends DevBoxAddOn {
+  @doc("The type of the Dev Box addon.")
+  type: DevBoxAddOnType.DevBoxTunnel;
+
+  @doc("The tunnel status.")
+  @visibility("read")
+  status: DevBoxTunnelStatus;
+
+  @doc("The backing dev tunnel's id.")
+  @visibility("read")
+  devTunnelId: string;
+
+  @doc("The backing dev tunnel cluster id.")
+  @visibility("read")
+  clusterId: string;
+
+  @doc("The code tunnel name.")
+  @visibility("read")
+  codeTunnelName: string;
+
+  @doc("The code tunnel's url.")
+  @visibility("read")
+  codeTunnelUrl: string;
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("The detailed status of Dev Box Tunnel addon.")
+union DevBoxTunnelStatus {
+  @doc("The tunnel is active and can be connected.")
+  Enabled: "Enabled",
+
+  @doc("The tunnel is inactive and can't be connected.")
+  Disabled: "Disabled",
+
+  @doc("The tunnel is suspended due to hibernation or other reasons.")
+  Suspended: "Suspended",
+
+  string,
+}

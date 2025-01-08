@@ -2349,6 +2349,417 @@
         }
       }
     },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons": {
+      "get": {
+        "operationId": "DevBoxes_ListDevBoxAddons",
+        "description": "Lists addons for this Dev Box.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBoxAddOn"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}": {
+      "get": {
+        "operationId": "DevBoxes_GetDevBoxAddons",
+        "description": "Gets a Dev Box addon by Dev Box addon id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "devBoxAddOnName",
+            "in": "path",
+            "description": "Name of the dev box addon.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxAddOn"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DevBoxes_CreateDevBoxAddOn",
+        "description": "Creates a Dev Box addon.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxAddOnNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents the body request of a Dev Box addon creation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevBoxAddOn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxAddOn"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxAddOn"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DevBoxes_DeleteDevBoxAddOn",
+        "description": "Deletes a Dev Box addon.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxAddOnNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Operation-Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}:enable": {
+      "post": {
+        "operationId": "DevBoxes_EnableDevBoxAddOn",
+        "description": "Enable a Dev Box addon.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "devBoxAddOnName",
+            "in": "path",
+            "description": "Name of the dev box addon.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}:disable": {
+      "post": {
+        "operationId": "DevBoxes_DisableDevBoxAddOn",
+        "description": "Disable a Dev Box addon.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Name of the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$"
+          },
+          {
+            "name": "devBoxName",
+            "in": "path",
+            "description": "Display name for the Dev Box.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "devBoxAddOnName",
+            "in": "path",
+            "description": "Name of the dev box addon.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups": {
       "get": {
         "operationId": "DevBoxes_ListCustomizationGroups",
@@ -4761,6 +5172,61 @@
         ]
       }
     },
+    "DevBoxAddOn": {
+      "type": "object",
+      "description": "A Dev Box addon.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dev box addon.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "$ref": "#/definitions/DevBoxAddOnType",
+          "description": "The type of the Dev Box addon.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the Dev Box addon is enabled or not."
+        },
+        "actionState": {
+          "type": "string",
+          "description": "The current action state of the Dev Box addon. This state is based on previous\naction performed by user.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "name",
+        "type",
+        "enabled"
+      ]
+    },
+    "DevBoxAddOnType": {
+      "type": "string",
+      "description": "The types of Dev Box addon.",
+      "enum": [
+        "DevBoxTunnel"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxAddOnType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DevBoxTunnel",
+            "value": "DevBoxTunnel",
+            "description": "The Dev Box Tunnel addon."
+          }
+        ]
+      }
+    },
     "DevBoxCaptureSnapshotOperation": {
       "type": "object",
       "description": "Information about a snapshot creation operation on a Dev Box.",
@@ -5114,6 +5580,80 @@
         }
       ],
       "x-ms-discriminator-value": "Stop"
+    },
+    "DevBoxTunnel": {
+      "type": "object",
+      "description": "The Dev Box Tunnel addon.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/DevBoxTunnelStatus",
+          "description": "The tunnel status.",
+          "readOnly": true
+        },
+        "devTunnelId": {
+          "type": "string",
+          "description": "The backing dev tunnel's id.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The backing dev tunnel cluster id.",
+          "readOnly": true
+        },
+        "codeTunnelName": {
+          "type": "string",
+          "description": "The code tunnel name.",
+          "readOnly": true
+        },
+        "codeTunnelUrl": {
+          "type": "string",
+          "description": "The code tunnel's url.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "devTunnelId",
+        "clusterId",
+        "codeTunnelName",
+        "codeTunnelUrl"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxAddOn"
+        }
+      ],
+      "x-ms-discriminator-value": "DevBoxTunnel"
+    },
+    "DevBoxTunnelStatus": {
+      "type": "string",
+      "description": "The detailed status of Dev Box Tunnel addon.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxTunnelStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The tunnel is active and can be connected."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The tunnel is inactive and can't be connected."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The tunnel is suspended due to hibernation or other reasons."
+          }
+        ]
+      }
     },
     "Environment": {
       "type": "object",
@@ -6136,6 +6676,28 @@
           "description": "The DevBoxActionDelayResult items on this page",
           "items": {
             "$ref": "#/definitions/DevBoxActionDelayResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDevBoxAddOn": {
+      "type": "object",
+      "description": "Paged collection of DevBoxAddOn items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DevBoxAddOn items on this page",
+          "items": {
+            "$ref": "#/definitions/DevBoxAddOn"
           },
           "x-ms-identifiers": []
         },
@@ -7230,6 +7792,17 @@
       "required": true,
       "type": "string",
       "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "DevBoxAddOnNameParameter": {
+      "name": "devBoxAddOnName",
+      "in": "path",
+      "description": "The name of the Dev Box addon.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "x-ms-parameter-location": "method"
     },
     "DevBoxNameParameter": {
