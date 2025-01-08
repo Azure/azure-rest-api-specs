@@ -11,11 +11,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-/** Workloads Client Resource Provider management API. */
+/** Configuration checks template management API. */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
 @service({
-  title: "Workloads Client",
+  title: "Configuration checks template",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

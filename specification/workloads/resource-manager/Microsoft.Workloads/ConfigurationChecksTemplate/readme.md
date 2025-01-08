@@ -23,6 +23,7 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
+title: Configuration checks template
 tag: package-preview-2025-01
 ```
 
@@ -33,8 +34,6 @@ These settings apply only when `--tag=package-preview-2025-01` is specified on t
 ```yaml $(tag) == 'package-preview-2025-01'
 input-file:
   - preview/2025-01-01-preview/ConfigurationChecksTemplate.json
-  - preview/2025-01-01-preview/examples/ConfigurationChecksTemplate_Get.json
-  - preview/2025-01-01-preview/examples/ConfigurationChecksTemplate_ListByResourceGroup.json
   - ../operations/preview/2025-01-01-preview/operations.json
 ```
 

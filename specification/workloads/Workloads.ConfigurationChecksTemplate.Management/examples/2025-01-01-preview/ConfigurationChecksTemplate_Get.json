@@ -27,7 +27,6 @@
                       {
                         "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
                         "checkOriginType": "TemplateDefinition",
-                        "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
                         "enabled": true,
                         "inputParameters": [
                           {
@@ -41,14 +40,12 @@
                           {
                             "name": "resiliencyStatus",
                             "condition": "Equals",
-                            "parameters": [
-                              {
-                                "name": "instanceType",
-                                "dataType": "String",
-                                "unit": "",
-                                "value": "Standard_D4s_v3"
-                              }
-                            ]
+                            "parameters": {
+                              "name": "instanceType",
+                              "dataType": "String",
+                              "unit": "",
+                              "value": "Standard_D4s_v3"
+                            }
                           }
                         ]
                       },
@@ -68,14 +65,12 @@
                           {
                             "name": "idleTimeout",
                             "condition": "Equals",
-                            "parameters": [
-                              {
-                                "name": "idleTimeout",
-                                "dataType": "Integer",
-                                "unit": "Minutes",
-                                "value": "30"
-                              }
-                            ]
+                            "parameters": {
+                              "name": "idleTimeout",
+                              "dataType": "Integer",
+                              "unit": "Minutes",
+                              "value": "30"
+                            }
                           }
                         ]
                       }
@@ -92,7 +87,6 @@
                       {
                         "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
                         "checkOriginType": "Manual",
-                        "checkSpecificGalleryLocation": "configurationchecks-azure-resiliency",
                         "enabled": false,
                         "inputParameters": [
                           {
@@ -104,15 +98,14 @@
                         ],
                         "outputParameters": [
                           {
+                            "name": "instanceType",
                             "condition": "Equals",
-                            "parameters": [
-                              {
-                                "dataType": "String",
-                                "name": "resiliencyStatus",
-                                "value": "Compliant",
-                                "unit": ""
-                              }
-                            ]
+                            "parameters": {
+                              "dataType": "String",
+                              "name": "resiliencyStatus",
+                              "value": "Compliant",
+                              "unit": ""
+                            }
                           }
                         ]
                       },
@@ -132,14 +125,12 @@
                           {
                             "name": "idleTimeout",
                             "condition": "Equals",
-                            "parameters": [
-                              {
-                                "name": "idleTimeout",
-                                "dataType": "Integer",
-                                "unit": "Minutes",
-                                "value": "30"
-                              }
-                            ]
+                            "parameters": {
+                              "name": "idleTimeout",
+                              "dataType": "Integer",
+                              "unit": "Minutes",
+                              "value": "30"
+                            }
                           }
                         ]
                       }
@@ -164,14 +155,12 @@
                   {
                     "name": "instanceMemoryLimit",
                     "condition": "GreaterThanOrEqual",
-                    "parameters": [
-                      {
-                        "name": "instanceMemoryLimit",
-                        "dataType": "Integer",
-                        "unit": "GB",
-                        "value": "96"
-                      }
-                    ]
+                    "parameters": {
+                      "name": "instanceMemoryLimit",
+                      "dataType": "Integer",
+                      "unit": "GB",
+                      "value": "96"
+                    }
                   }
                 ]
               }
