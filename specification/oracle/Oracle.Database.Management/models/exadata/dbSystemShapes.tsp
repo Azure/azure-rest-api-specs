@@ -1,6 +1,7 @@
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
@@ -22,6 +23,12 @@ model DbSystemShapeProperties {
   @minLength(1)
   @maxLength(255)
   shapeFamily?: string;
+
+  @added(Versions.v20241201_preview)
+  @doc("The shape used for the DB system.")
+  @minLength(1)
+  @maxLength(255)
+  shapeName: string;
 
   @doc("The maximum number of CPU cores that can be enabled on the DB system for this shape.")
   availableCoreCount: int32;
@@ -79,4 +86,12 @@ model DbSystemShapeProperties {
 
   @doc("The maximum number of CPU cores per database node that can be enabled for this shape. Only applicable to the flex Exadata shape and ExaCC Elastic shapes.")
   availableCoreCountPerNode?: int32;
+}
+
+@added(Versions.v20241201_preview)
+@doc("Provides GiMinorVersion query parameter for list operations.")
+model DbSystemShapeFilter {
+  @query
+  @doc("Filters the result for the given Azure Availability Zone")
+  zone?: string;
 }
