@@ -2,8 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
-import "./TargetType.tsp";
+import "./capabilityType.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,19 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * Model that represents a Capability Type resource.
- */
-@parentResource(TargetType)
-model CapabilityType
-  is Azure.ResourceManager.ProxyResource<CapabilityTypeProperties> {
-  ...ResourceNameParameter<
-    Resource = CapabilityType,
-    KeyName = "capabilityTypeName",
-    SegmentName = "capabilityTypes",
-    NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
-  >;
-}
 
 @armResourceOperations
 interface CapabilityTypes {

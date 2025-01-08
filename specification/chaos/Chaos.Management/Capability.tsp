@@ -2,8 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
-import "./Target.tsp";
+import "./capability.models.tsp";
+import "./target.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,21 +12,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * Model that represents a Capability resource.
- */
-@parentResource(Target)
-model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
-  ...ResourceNameParameter<
-    Resource = Capability,
-    KeyName = "capabilityName",
-    SegmentName = "capabilities",
-    NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
-  >;
-}
-
-alias CapabilityParentResourceParameters = BaseParameters<Capability> &
-  ParentResourceParameters;
 
 @armResourceOperations
 interface Capabilities {

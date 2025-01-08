@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./experiment.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -10,28 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * Model that represents a Experiment resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
-@Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
-@includeInapplicableMetadataInPayload(false)
-model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
-  ...ResourceNameParameter<
-    Resource = Experiment,
-    KeyName = "experimentName",
-    SegmentName = "experiments",
-    NamePattern = "^[^<>%&:?#/\\\\]+$"
-  >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required implementation to avoid breaking .NET SDK changes"
-  @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
-  properties?: ExperimentProperties;
-}
 
 @armResourceOperations
 interface Experiments {

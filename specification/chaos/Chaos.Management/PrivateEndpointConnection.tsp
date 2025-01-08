@@ -2,8 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
-import "./PrivateAccess.tsp";
+import "./privateEndpointConnection.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,19 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * The private endpoint connection resource.
- */
-@parentResource(PrivateAccess)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = "^[^<>%&:?#/\\\\]+$"
-  >;
-}
 
 @armResourceOperations
 interface PrivateEndpointConnections {

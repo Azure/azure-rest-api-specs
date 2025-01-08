@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./targetType.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -10,20 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * Model that represents a Target Type resource.
- */
-@subscriptionResource
-@parentResource(SubscriptionLocationResource)
-model TargetType
-  is Azure.ResourceManager.ProxyResource<TargetTypeProperties, false> {
-  ...ResourceNameParameter<
-    Resource = TargetType,
-    KeyName = "targetTypeName",
-    SegmentName = "targetTypes",
-    NamePattern = "^[a-zA-Z0-9_\\-\\.]+$"
-  >;
-}
 
 @armResourceOperations
 interface TargetTypes {

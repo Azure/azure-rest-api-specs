@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./privateAccess.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -10,18 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * PrivateAccesses tracked resource.
- */
-model PrivateAccess
-  is Azure.ResourceManager.TrackedResource<PrivateAccessProperties, false> {
-  ...ResourceNameParameter<
-    Resource = PrivateAccess,
-    KeyName = "privateAccessName",
-    SegmentName = "privateAccesses",
-    NamePattern = "^[^<>%&:?#/\\\\]+$"
-  >;
-}
 
 @armResourceOperations
 interface PrivateAccesses {

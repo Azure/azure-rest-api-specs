@@ -2,8 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
-import "./Experiment.tsp";
+import "./experiment.tsp";
+import "./experimentExecution.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,19 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
-/**
- * Model that represents the execution of a Experiment.
- */
-@parentResource(Experiment)
-model ExperimentExecution
-  is Azure.ResourceManager.ProxyResource<ExperimentExecutionProperties> {
-  ...ResourceNameParameter<
-    Resource = ExperimentExecution,
-    KeyName = "executionId",
-    SegmentName = "executions",
-    NamePattern = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-  >;
-}
 
 @armResourceOperations
 interface ExperimentExecutions {
