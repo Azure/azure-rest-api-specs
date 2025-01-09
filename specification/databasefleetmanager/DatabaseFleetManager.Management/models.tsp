@@ -542,7 +542,7 @@ model FleetTierProperties {
   poolNumOfDatabasesMax?: int32;
 
   /**
-   * Number of high availaibility replicas for databases in this tier.
+   * Number of high availability replicas for databases in this tier.
    */
   @visibility("read", "create")
   highAvailabilityReplicaCount?: int32;
