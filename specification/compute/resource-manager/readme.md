@@ -326,12 +326,7 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
   - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
   - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
@@ -374,12 +369,7 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/GalleryRP.json
   - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
@@ -429,12 +419,7 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/capacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/logAnalytic.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/runCommand.json 
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/GalleryRP.json
   - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
@@ -447,12 +432,7 @@ These settings apply only when `--tag=package-2024-03-02-only` is specified on t
 ```yaml $(tag) == 'package-2024-03-02-only'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
 ```
 
 ### Tag: package-2024-06-01-preview
