@@ -17704,7 +17704,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication. Use 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
+          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication.\r\nUse 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
@@ -17951,6 +17951,9 @@
             "create",
             "read"
           ]
+        },
+        "imageDetails": {
+          "$ref": "#/definitions/ImageDetails"
         },
         "inferenceConfig": {
           "description": "Defines configuration specific to inference.",
@@ -19523,6 +19526,45 @@
         }
       },
       "x-ms-discriminator-value": "ImageClassificationMultilabel",
+      "additionalProperties": false
+    },
+    "ImageDetails": {
+      "type": "object",
+      "properties": {
+        "exists": {
+          "type": "boolean"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageInfo",
+          "x-nullable": true
+        },
+        "vulnerabilityFindings": {
+          "$ref": "#/definitions/VulnerabilityFindings",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageInfo": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "hostname": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "repository": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "tag": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "ImageInstanceSegmentation": {
@@ -23486,6 +23528,28 @@
       "x-ms-discriminator-value": "OutputPath",
       "additionalProperties": false
     },
+    "PackageDetails": {
+      "type": "object",
+      "properties": {
+        "installPath": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "installedVersion": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "patchedVersion": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "PartialBatchDeployment": {
       "description": "Mutable batch inference settings per deployment.",
       "type": "object",
@@ -26906,6 +26970,149 @@
           {
             "value": "CocoVoc",
             "description": "CocoVoc metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityDetails": {
+      "type": "object",
+      "properties": {
+        "cve": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "cveUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "dueDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "packageDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageDetails"
+          },
+          "x-nullable": true
+        },
+        "patchable": {
+          "type": "boolean"
+        },
+        "providerId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "publishDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "risk": {
+          "$ref": "#/definitions/VulnerabilityRisk"
+        },
+        "solution": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "vendorId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "verdorUrl": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityFindings": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "criticalFindingsCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VulnerabilityDetails"
+          },
+          "x-nullable": true
+        },
+        "generatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "highFindingsCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lastScanDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "scanner": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "source": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "totalFindingsCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityRisk": {
+      "enum": [
+        "UNKNOWN",
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "VulnerabilityRisk",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UNKNOWN"
+          },
+          {
+            "value": "CRITICAL"
+          },
+          {
+            "value": "HIGH"
+          },
+          {
+            "value": "MEDIUM"
+          },
+          {
+            "value": "LOW"
           }
         ]
       },
