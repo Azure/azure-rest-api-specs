@@ -95,3 +95,4 @@ interface ServiceConfigurationResources {
 @@summary(ServiceConfigurationResources.listByEndpointResource,
   "Lists of all the services associated with endpoint resource."
 );
+@@path(ServiceConfigurationResource.name, #{ allowReserved: true });

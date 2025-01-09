@@ -158,3 +158,4 @@ interface EndpointResources {
 @@doc(EndpointResources.listManagedProxyDetails,
   "Fetches the managed proxy details "
 );
+@@path(EndpointResource.name, #{ allowReserved: true });
