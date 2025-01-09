@@ -194,7 +194,7 @@
     "EmailMessage": {
       "description": "Message payload for sending an email",
       "required": [
-        "senderAddress",
+        "sender",
         "content",
         "recipients"
       ],
@@ -207,10 +207,9 @@
             "type": "string"
           }
         },
-        "senderAddress": {
+        "sender": {
           "description": "Sender email address from a verified domain.",
-          "type": "string",
-          "example": "info@contoso.com"
+          "$ref": "#/definitions/EmailAddress"
         },
         "content": {
           "description": "Email content to be sent.",
@@ -388,4 +387,3 @@
     ]
   }
 }
-
