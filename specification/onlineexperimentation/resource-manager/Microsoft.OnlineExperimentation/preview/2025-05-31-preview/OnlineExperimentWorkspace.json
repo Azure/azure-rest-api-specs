@@ -600,11 +600,27 @@
               }
             ]
           }
+        },
+        "appConfigurationResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppConfiguration/configurationStores"
+              }
+            ]
+          }
         }
       },
       "required": [
         "logAnalyticsWorkspaceResourceId",
-        "logsExporterStorageAccountResourceId"
+        "logsExporterStorageAccountResourceId",
+        "appConfigurationResourceId"
       ]
     },
     "OnlineExperimentWorkspacePropertiesUpdate": {
