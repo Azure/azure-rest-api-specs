@@ -70,16 +70,16 @@
         }
       }
     },
-    "/providers/Microsoft.Search/features": {
+    "/providers/Microsoft.Search/resourceAvailabilities": {
       "get": {
         "tags": [
-          "Features"
+          "ResourceAvailabilities"
         ],
-        "description": "Lists all of the available features and SKUs of the Azure AI Search service.",
-        "operationId": "Features_List",
+        "description": "Lists all of the available resources such as features and SKUs of the Azure AI Search service by region.",
+        "operationId": "ResourceAvailabilities_List",
         "x-ms-examples": {
-          "SearchListFeatures": {
-            "$ref": "./examples/SearchListFeatures.json"
+          "SearchListResourceAvailabilities": {
+            "$ref": "./examples/SearchListResourceAvailabilities.json"
           }
         },
         "parameters": [
@@ -89,13 +89,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of features and skus.",
+            "description": "Success. The response describes the list of available resources such as features and SKUs.",
             "schema": {
-              "$ref": "#/definitions/FeatureListResult"
+              "$ref": "#/definitions/ResourceAvailabilityListResult"
             }
           },
           "default": {
-            "description": "Features API failed.",
+            "description": "Availabilities API failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1365,7 +1365,7 @@
             "$ref": "./examples/GetQuotaUsage.json"
           }
         },
-        "description": "Gets the quota usage for a search sku in the given subscription.",
+        "description": "Gets the quota usage for a search SKU in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1388,7 +1388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the quota usage of a search service sku for the given subscription.",
+            "description": "The operation succeeded. The response contains the quota usage of a search service SKU for the given subscription.",
             "schema": {
               "$ref": "#/definitions/QuotaUsageResult"
             }
@@ -3341,25 +3341,25 @@
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     },
-    "FeatureListResult": {
+    "ResourceAvailabilityListResult": {
       "type": "object",
-      "description": "The response containing a list of features and SKUs available in various regions.",
+      "description": "The response containing a list of available resources such as features and SKUs in various regions.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AvailableFeaturesAndSkus"
+            "$ref": "#/definitions/ResourceAvailablility"
           },
-          "description": "The list of regions with their respective features and SKUs."
+          "description": "The list of regions with their respective resource availability such as features and SKUs."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of feature list results, if any."
+          "description": "The URL to get the next set of resource availabilities, if any."
         }
       }
     },
-    "AvailableFeaturesAndSkus": {
+    "ResourceAvailablility": {
       "type": "object",
       "properties": {
         "regionName": {
@@ -3369,7 +3369,7 @@
         "features": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AvailableFeature"
+            "$ref": "#/definitions/FeatureAvailablility"
           },
           "description": "The list of features available in this region.",
           "x-ms-identifiers": []
@@ -3377,13 +3377,13 @@
         "skus": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AvailableSku"
+            "$ref": "#/definitions/SkuAvailablility"
           },
           "description": "The list of SKUs available in this region."
         }
       }
     },
-    "AvailableFeature": {
+    "FeatureAvailablility": {
       "type": "object",
       "properties": {
         "name": {
@@ -3392,7 +3392,7 @@
         }
       }
     },
-    "AvailableSku": {
+    "SkuAvailablility": {
       "type": "object",
       "properties": {
         "sku": {
