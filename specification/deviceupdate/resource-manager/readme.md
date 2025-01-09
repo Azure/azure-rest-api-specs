@@ -40,7 +40,7 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: deviceupdate.json
-    reason: Hash algorithm to hashed value map. Service validates the algorithms.
+    reason: Hash algorithm to hashed value map. Service validates the algorithms.Already approved in previous API version
     where:
       - $.definitions.UpdateFile.properties.hashes
       - $.definitions.ImportManifestMetadata.properties.hashes
@@ -57,9 +57,9 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
     reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
-  # - code: UnsupportedPatchProperties
-  #   from: deviceupdate.json
-  #   reason: False positive. Location is read-only.
+  - code: UnsupportedPatchProperties
+    from: deviceupdate.json
+    reason: False positive. Location is read-only.This has already been approved for previous API version
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
