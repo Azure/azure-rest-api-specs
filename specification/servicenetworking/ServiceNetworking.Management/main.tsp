@@ -21,6 +21,9 @@ enum Versions {
   /** 2024-05-01 preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_05_01_preview: "2024-05-01-preview",
+
+  /** 2025-01-01 stable version */
+  v2025_05_01: "2025-01-01",
 }
 
 using TypeSpec.Http;
@@ -100,7 +103,7 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
   @key("securityPolicyName")
   @visibility("read")
   @path
-  @segment("securityPolicy")
+  @segment("securityPolicies")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
 }
@@ -109,7 +112,7 @@ model SecurityPolicy is TrackedResource<SecurityPolicyProperties> {
 model SecurityPolicyProperties {
   /** Type of the Traffic Controller Security Policy */
   @visibility("read")
-  policyType: PolicyType;
+  policyType?: PolicyType;
 
   /** Web Application Firewall Policy of the Traffic Controller Security Policy */
   wafPolicy?: WafPolicy;
