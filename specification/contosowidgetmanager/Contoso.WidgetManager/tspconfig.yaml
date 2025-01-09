@@ -15,11 +15,12 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"
     package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Template.Contoso"

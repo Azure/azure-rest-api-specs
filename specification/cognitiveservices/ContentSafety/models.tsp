@@ -9,23 +9,37 @@ using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Text analyze category.")
+@doc("The harm category supported in Text content analysis.")
 union TextCategory {
   string,
+
+  @doc("The harm category for Text - Hate.")
   "Hate",
+
+  @doc("The harm category for Text - SelfHarm.")
   "SelfHarm",
+
+  @doc("The harm category for Text - Sexual.")
   "Sexual",
+
+  @doc("The harm category for Text - Violence.")
   "Violence",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Image analyze category.")
+@doc("The harm category supported in Image content analysis.")
 union ImageCategory {
   string,
+
+  @doc("The harm category for Image - Hate.")
   "Hate",
+
+  @doc("The harm category for Image - SelfHarm.")
   "SelfHarm",
+
+  @doc("The harm category for Image - Sexual.")
   "Sexual",
+
+  @doc("The harm category for Image - Violence.")
   "Violence",
 }
 
@@ -50,7 +64,7 @@ union AnalyzeImageOutputType {
 
 @doc("The text analysis request.")
 model AnalyzeTextOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
+  @doc("The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(10000)
   text: string;
 
@@ -102,7 +116,7 @@ model TextCategoriesAnalysis {
 
 @doc("The image analysis request.")
 model AnalyzeImageOptions {
-  @doc("The image needs to be analyzed.")
+  @doc("The image to be analyzed.")
   image: ImageData;
 
   @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
@@ -170,9 +184,13 @@ model TextBlocklistItem {
   @maxLength(1024)
   description?: string;
 
-  @doc("BlocklistItem content.")
+  @doc("BlocklistItem content. The length is counted using Unicode code point.")
   @maxLength(128)
   text: string;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @doc("An optional properties indicating whether this item is to be matched as a regular expression.")
+  isRegex?: boolean;
 }
 
 @doc("The request to add blocklistItems to a text blocklist.")
@@ -193,218 +211,57 @@ model RemoveTextBlocklistItemsOptions {
   blocklistItemIds: string[];
 }
 
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The protected material analysis request.")
-model AnalyzeTextProtectedMaterialOptions {
-  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
-  @maxLength(1000)
-  text: string;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The protected material analysis response.")
-model AnalyzeTextProtectedMaterialResult {
-  @doc("Analysis result for protected material.")
-  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text protected material analysis response.")
-model ProtectedMaterialAnalysisResult {
-  @doc("Analysis result for protected material..")
-  detected: boolean;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis request.")
-model AnalyzeTextJailbreakOptions {
-  @doc("The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
-  @maxLength(1000)
-  text: string;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis request.")
-model AnalyzeTextJailbreakResult {
-  @doc("Analysis result for jailbreak.")
-  jailbreakAnalysis: JailbreakAnalysisResult;
-}
-
-@added(ContentSafety.Versions.v2023_10_15_Preview)
-@doc("The text jailbreak analysis response.")
-model JailbreakAnalysisResult {
-  @doc("Analysis result for jailbreak.")
-  detected: boolean;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("Groundedness Domain.")
-union GroundednessDomain {
-  string,
-  Generic: "Generic",
-  Medical: "Medical",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("Groundedness Task type.")
-union GroundednessTask {
-  string,
-  Summarization: "Summarization",
-  QnA: "QnA",
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The request of QnA options.")
-model QnAOptions {
-  @doc("The user's question input in a QnA scenario.")
-  @maxLength(7500)
-  query: string;
-}
-
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("LLM resource type.")
-union LLMResourceType {
-  string,
-
-  @doc("Azure OpenAI resource type.")
-  AzureOpenAI: "AzureOpenAI",
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
-@added(Versions.v2024_02_15_Preview)
-@doc("Connection details for the LLM resource.")
-model LLMResource {
-  @doc("LLM resource type. The default value is AzureOpenAI.")
-  resourceType?: LLMResourceType = LLMResourceType.AzureOpenAI;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-  @doc("Endpoint for Azure OpenAI resource.")
-  azureOpenAIEndpoint: string;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
-  @doc("Deployment model name.")
-  azureOpenAIDeploymentName: string;
-}
-
-@added(Versions.v2024_02_15_Preview)
-@doc("The request of groundedness detection.")
-model AnalyzeTextGroundednessOptions {
-  @doc("""
-    The domain of the text for analysis. Allowed values: Medical, Generic.
-    This field is optional, with a default value of Generic.
-    """)
-  domain?: GroundednessDomain = GroundednessDomain.Generic;
-
-  @doc("""
-    The task type for the text analysis. Type of task: QnA, Summarization.
-    This field is optional, with a default value of Summarization.
-    """)
-  task?: GroundednessTask = GroundednessTask.Summarization;
-
-  @doc("""
-    The user's question input in a QnA scenario.
-    This field is optional, but if the task type is set to QnA, it becomes required.
-    """)
-  qna?: QnAOptions;
-
-  @doc("The specific text that needs to be checked.")
-  @maxLength(7500)
-  text: string;
-
-  @doc("""
-    Leverages a vast array of grounding sources to validate AI-generated text.
-    Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.
-    """)
-  groundingSources: string[];
-
-  @doc("""
-    A value indicating if the output includes an explanation for the identified groundedness.
-    This field is optional, with a default value of false.
-    """)
-  reasoning?: boolean;
-
-  @doc("""
-    Connection details for the LLM resource. 
-    This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
-    """)
-  llmResource?: LLMResource;
-}
-
-@added(Versions.v2024_02_15_Preview)
-@doc("The index details.")
-model IndexDetails {
-  @doc("Indicate the index when encoding is UTF-8.")
-  utf8: int64;
-
-  @doc("Indicate the index when encoding is UTF-16.")
-  utf16: int64;
-
-  @doc("Indicate the index with code point format.")
-  codePoint: int64;
-}
-
-@added(Versions.v2024_02_15_Preview)
-@doc("The detailed information about a text identified as ungroundedness.")
-model UngroundednessDetails {
-  @doc("The grounded text.")
-  text: string;
-
-  @doc("The offset when grounded text starts.")
-  offset: IndexDetails;
-
-  @doc("The length of the grounded text.")
-  length: IndexDetails;
-
-  @doc("""
-    The explanation for detected ungroundedness, enhancing understanding.
-    Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
-    """)
-  reason?: string;
-}
-
-@added(Versions.v2024_02_15_Preview)
-@doc("The response of groundedness detection.")
-model AnalyzeTextGroundednessResult {
-  @doc("Indicates whether the text exhibits ungroundedness.")
-  ungroundedDetected: boolean;
-
-  @doc("""
-    Specifies the proportion of the text identified as ungrounded, 
-    expressed as a decimal between 0 and 1,
-    where 0 indicates no grounded content and 1 indicates entirely grounded content..
-    """)
-  ungroundedPercentage: float32;
-
-  @doc("Provides insights into ungrounded content with specific examples and percentages.")
-  ungroundedDetails: UngroundednessDetails[];
-}
-
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text prompt injection attacks analysis request.")
-model AnalyzeTextPromptInjectionOptions {
-  @doc("The user prompt needs to be analyzed if it attempts to do direct injection attacks.")
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The request of analyzing potential direct or indirect injection attacks.")
+model ShieldPromptOptions {
+  @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
   userPrompt?: string;
 
-  @doc("The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.")
+  @doc("The documents to be analyzed, which may contain direct or indirect injection attacks.")
   documents?: string[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text injection attacks analysis response.")
-model AnalyzeTextPromptInjectionResult {
-  @doc("Direct injection analysis result for user prompt input.")
-  userPromptAnalysis?: TextPromptInjectionResult;
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The combined analysis results of potential direct or indirect injection attacks.")
+model ShieldPromptResult {
+  @doc("Direct injection attacks analysis result for the given user prompt.")
+  userPromptAnalysis?: UserPromptInjectionAnalysisResult;
 
-  @doc("Direct and indirect injection attacks analysis result for documents input.")
-  documentsAnalysis?: TextPromptInjectionResult[];
+  @doc("Direct and indirect injection attacks analysis result for the given documents.")
+  documentsAnalysis?: DocumentInjectionAnalysisResult[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("The text injection attacks analysis response.")
-model TextPromptInjectionResult {
-  @doc("Analysis result for whether the prompt is classified as an injection attack.")
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual analysis result of potential injection attacks in the given user prompt.")
+model UserPromptInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
   attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual analysis result of potential injection attacks in the given documents.")
+model DocumentInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
+  attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The request of detecting potential protected material present in the given text.")
+model DetectTextProtectedMaterialOptions {
+  @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The combined detection results of potential protected material.")
+model DetectTextProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: TextProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual detection result of potential protected material.")
+model TextProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
 }

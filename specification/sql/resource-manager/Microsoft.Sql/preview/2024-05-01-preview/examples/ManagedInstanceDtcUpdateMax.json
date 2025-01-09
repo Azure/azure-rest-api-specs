@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "testinstance",
+    "dtcName": "current",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "dtcEnabled": true,
+        "securitySettings": {
+          "transactionManagerCommunicationSettings": {
+            "allowInboundEnabled": false,
+            "allowOutboundEnabled": true,
+            "authentication": "NoAuth"
+          },
+          "xaTransactionsEnabled": false,
+          "snaLu6point2TransactionsEnabled": false,
+          "xaTransactionsDefaultTimeout": 1000,
+          "xaTransactionsMaximumTimeout": 3000
+        },
+        "externalDnsSuffixSearchList": [
+          "dns.example1.com",
+          "dns.example2.com"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "dtcEnabled": true,
+          "securitySettings": {
+            "transactionManagerCommunicationSettings": {
+              "allowInboundEnabled": false,
+              "allowOutboundEnabled": true,
+              "authentication": "NoAuth"
+            },
+            "xaTransactionsEnabled": false,
+            "snaLu6point2TransactionsEnabled": false,
+            "xaTransactionsDefaultTimeout": 1000,
+            "xaTransactionsMaximumTimeout": 3000
+          },
+          "externalDnsSuffixSearchList": [
+            "dns.example1.com",
+            "dns.example2.com"
+          ],
+          "dtcHostNameDnsSuffix": "dtcHostNameSuffixExample.com",
+          "provisioningState": "Updating"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance/dtc/current",
+        "name": "current",
+        "type": "Microsoft.Sql/managedInstances/dtc"
+      }
+    }
+  }
+}

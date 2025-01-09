@@ -1,0 +1,39 @@
+{
+  "operationId": "DiscoveryGroups_GetAssetChainSummary",
+  "title": "DiscoveryGroups_GetAssetChainSummary",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "body": {
+      "assetChainSource": "ASSET",
+      "sourceIds": [
+        "DOMAIN$$contoso.com"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "affectedAssetsSummary": [
+          {
+            "kind": "host",
+            "affectedCount": 1473
+          },
+          {
+            "kind": "page",
+            "affectedCount": 1235
+          }
+        ],
+        "affectedGroupsSummary": [
+          {
+            "id": "Contoso Corporation",
+            "name": "Contoso Corporation",
+            "displayName": "Contoso Corporation"
+          }
+        ]
+      }
+    }
+  }
+}

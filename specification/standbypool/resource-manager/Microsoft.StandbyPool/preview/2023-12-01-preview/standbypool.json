@@ -847,29 +847,6 @@
         "id"
       ]
     },
-    "ContainerGroupProfileUpdate": {
-      "type": "object",
-      "description": "Details of the ContainerGroupProfile.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Specifies container group profile id of standby container groups.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
-              }
-            ]
-          }
-        },
-        "revision": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies revision of container group profile."
-        }
-      }
-    },
     "ContainerGroupProperties": {
       "type": "object",
       "description": "Details of the ContainerGroupProperties.",
@@ -889,23 +866,6 @@
       "required": [
         "containerGroupProfile"
       ]
-    },
-    "ContainerGroupPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the ContainerGroupProperties.",
-      "properties": {
-        "containerGroupProfile": {
-          "$ref": "#/definitions/ContainerGroupProfileUpdate",
-          "description": "Specifies container group profile of standby container groups."
-        },
-        "subnetIds": {
-          "type": "array",
-          "description": "Specifies subnet Ids for container group.",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          }
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -981,23 +941,6 @@
       "required": [
         "maxReadyCapacity"
       ]
-    },
-    "StandbyContainerGroupPoolElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Specifies the elasticity profile of the standby container group pools.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups in the standby pool.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      }
     },
     "StandbyContainerGroupPoolResource": {
       "type": "object",
@@ -1082,11 +1025,11 @@
       "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
           "description": "Specifies elasticity profile of standby container group pools."
         },
         "containerGroupProperties": {
-          "$ref": "#/definitions/ContainerGroupPropertiesUpdate",
+          "$ref": "#/definitions/ContainerGroupProperties",
           "description": "Specifies container group properties of standby container group pools."
         }
       }
@@ -1106,19 +1049,6 @@
       "required": [
         "maxReadyCapacity"
       ]
-    },
-    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Details of the elasticity profile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
-          "minimum": 0,
-          "maximum": 2000
-        }
-      }
     },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
@@ -1217,7 +1147,7 @@
       "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
         "elasticityProfile": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
@@ -1284,7 +1214,11 @@
       "properties": {
         "virtualMachineResourceId": {
           "type": "string",
-          "description": "Resource id of the virtual machine."
+          "format": "arm-id",
+          "description": "Resource id of the virtual machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",

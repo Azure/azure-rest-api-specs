@@ -41,9 +41,9 @@ modelerfour:
 ### Suppression
 
 
-### Tag: package-2024-05
+### Tag: package-preview-2024-05
 
-These settings apply only when `--tag=package-2024-05` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:

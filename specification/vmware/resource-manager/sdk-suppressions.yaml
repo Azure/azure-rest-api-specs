@@ -2,10 +2,54 @@ suppressions:
   azure-sdk-for-python:
     - package: azure-mgmt-avs
       breaking-changes:
+        - Deleted or renamed method `WorkloadNetworksOperations.list_public_i_ps`
+        - Deleted or renamed model `ClusterProperties`
+        - Deleted or renamed model `CommonClusterProperties`
+        - Deleted or renamed model `LogSpecification`
+        - Deleted or renamed model `MetricDimension`
+        - Deleted or renamed model `MetricSpecification`
+        - Deleted or renamed model `OperationList`
+        - Deleted or renamed model `OperationProperties`
+        - Deleted or renamed model `PrivateCloudProperties`
+        - Deleted or renamed model `PrivateCloudUpdateProperties`
+        - Deleted or renamed model `ServiceSpecification`
+        - Deleted or renamed model `WorkloadNetworkName`
+        - Method `PrivateCloud.__init__` parameter `internet` changed default value from `str` to `none`
+        - Method `PrivateCloud.__init__` removed default value `None` from its parameter `location`
+        - Method `PrivateCloudIdentity.__init__` removed default value `None` from its parameter `type`
+        - Method `PrivateCloudUpdate.__init__` parameter `internet` changed default value from `str` to `none`
+        - Method `TrackedResource.__init__` removed default value `None` from its parameter `location`
+        - Method `WorkloadNetworksOperations.get` deleted or renamed its parameter `workload_network_name` of kind `positional_or_keyword`
+        - Model `Operation` deleted or renamed its instance variable `properties`
         - Model Operation no longer has parameter properties
         - Operation WorkloadNetworksOperations.get no longer has parameter workload_network_name
         - Parameter location of model PrivateCloud is now required
         - Parameter location of model TrackedResource is now required
+        - Parameter type of model PrivateCloudIdentity is now required
+        - Parameter value of model AddonList is now required
+        - Parameter value of model CloudLinkList is now required
+        - Parameter value of model ClusterList is now required
+        - Parameter value of model DatastoreList is now required
+        - Parameter value of model ExpressRouteAuthorizationList is now required
+        - Parameter value of model GlobalReachConnectionList is now required
+        - Parameter value of model HcxEnterpriseSiteList is now required
+        - Parameter value of model PlacementPoliciesList is now required
+        - Parameter value of model PrivateCloudList is now required
+        - Parameter value of model ScriptCmdletsList is now required
+        - Parameter value of model ScriptExecutionsList is now required
+        - Parameter value of model ScriptPackagesList is now required
+        - Parameter value of model VirtualMachinesList is now required
+        - Parameter value of model WorkloadNetworkDhcpList is now required
+        - Parameter value of model WorkloadNetworkDnsServicesList is now required
+        - Parameter value of model WorkloadNetworkDnsZonesList is now required
+        - Parameter value of model WorkloadNetworkGatewayList is now required
+        - Parameter value of model WorkloadNetworkList is now required
+        - Parameter value of model WorkloadNetworkPortMirroringList is now required
+        - Parameter value of model WorkloadNetworkPublicIPsList is now required
+        - Parameter value of model WorkloadNetworkSegmentsList is now required
+        - Parameter value of model WorkloadNetworkVMGroupsList is now required
+        - Parameter value of model WorkloadNetworkVirtualMachinesList is now required
+        - Removed operation WorkloadNetworksOperations.list_public_i_ps
   azure-sdk-for-go:
     - package: sdk/resourcemanager/avs/armavs
       breaking-changes:
@@ -82,7 +126,6 @@ suppressions:
   azure-sdk-for-js:
     - package: '@azure/arm-avs'
       breaking-changes:
-        - Interface Operation no longer has parameter properties
         - Operation WorkloadNetworks.beginUpdateDhcp has a new signature
         - Operation WorkloadNetworks.beginUpdateDhcpAndWait has a new signature
         - Operation WorkloadNetworks.beginUpdateDnsService has a new signature
@@ -95,10 +138,6 @@ suppressions:
         - Operation WorkloadNetworks.beginUpdateSegmentsAndWait has a new signature
         - Operation WorkloadNetworks.beginUpdateVMGroup has a new signature
         - Operation WorkloadNetworks.beginUpdateVMGroupAndWait has a new signature
-        - Operation WorkloadNetworks.get has a new signature
-        - Parameter location of interface TrackedResource is now required
-        - Removed Enum KnownResourceIdentityType
-        - Removed Enum KnownWorkloadNetworkName
-        - Type of parameter identity of interface PrivateCloud is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
-        - Type of parameter identity of interface PrivateCloudUpdate is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
-        - Type of parameter origin of interface Operation is changed from string to Origin
+        - Removed Enum KnownSystemAssignedServiceIdentityType
+        - Type of parameter identity of interface PrivateCloud is changed from SystemAssignedServiceIdentity to PrivateCloudIdentity
+        - Type of parameter identity of interface PrivateCloudUpdate is changed from SystemAssignedServiceIdentity to PrivateCloudIdentity

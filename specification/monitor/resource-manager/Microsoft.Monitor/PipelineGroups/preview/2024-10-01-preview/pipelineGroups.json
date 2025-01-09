@@ -1,0 +1,1438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Pipelines Control Plane API",
+    "version": "2024-10-01-preview",
+    "description": "Provides operations for working with Azure Monitor Pipelines",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PipelineGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/pipelineGroups": {
+      "get": {
+        "operationId": "PipelineGroups_ListBySubscription",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Lists all workspaces in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pipeline groups by subscription": {
+            "$ref": "./examples/PipelineGroupListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups": {
+      "get": {
+        "operationId": "PipelineGroups_ListByResourceGroup",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Lists all workspaces in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Pipeline groups by resource group": {
+            "$ref": "./examples/PipelineGroupListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}": {
+      "get": {
+        "operationId": "PipelineGroups_Get",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Returns the specific pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a PipelineGroup instance by name": {
+            "$ref": "./examples/PipelineGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PipelineGroups_CreateOrUpdate",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Create or update a pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PipelineGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'PipelineGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a PipelineGroup instance using UDP receiver": {
+            "$ref": "./examples/PipelineGroupCreateUdp.json"
+          },
+          "Create a PipelineGroup instance using a UDP receiver with json array mapper": {
+            "$ref": "./examples/PipelineGroupCreateUdpWithJsonArrayMapper.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver": {
+            "$ref": "./examples/PipelineGroupCreateSyslogs.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and cache.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PipelineGroups_Update",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Updates a pipeline group instance",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PipelineGroups_Delete",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "Delete a pipeline group instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types.",
+      "enum": [
+        "EdgeZone",
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "Azure Edge Zones location type"
+          },
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "Azure Custom Locations type"
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureMonitorWorkspaceLogsApiConfig": {
+      "type": "object",
+      "description": "Azure Monitor Workspace Logs Api configurations.",
+      "properties": {
+        "dataCollectionEndpointUrl": {
+          "type": "string",
+          "description": "Data collection endpoint ingestion url.",
+          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
+        },
+        "stream": {
+          "type": "string",
+          "description": "Stream name in destination. Azure Monitor stream is related to the destination table.",
+          "pattern": "^(?!-)[a-zA-Z0-9._-]{1,1000}[^-]$"
+        },
+        "dataCollectionRule": {
+          "type": "string",
+          "description": "Data Collection Rule (DCR) immutable id.",
+          "pattern": "^(?!-)[a-zA-Z0-9.-]{1,1000}[^-]$"
+        },
+        "schema": {
+          "$ref": "#/definitions/SchemaMap",
+          "description": "The schema mapping for incoming data."
+        }
+      },
+      "required": [
+        "dataCollectionEndpointUrl",
+        "stream",
+        "dataCollectionRule",
+        "schema"
+      ]
+    },
+    "AzureMonitorWorkspaceLogsExporter": {
+      "type": "object",
+      "description": "Azure Monitor Workspace Logs specific configurations.",
+      "properties": {
+        "api": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
+          "description": "API configurations for Azure Monitor workspace exporter."
+        },
+        "concurrency": {
+          "$ref": "#/definitions/ConcurrencyConfiguration",
+          "description": "Concurrency configuration for the exporter."
+        },
+        "cache": {
+          "$ref": "#/definitions/CacheConfiguration",
+          "description": "Cache configurations."
+        }
+      },
+      "required": [
+        "api"
+      ]
+    },
+    "BatchProcessor": {
+      "type": "object",
+      "description": "Batch processor.",
+      "properties": {
+        "batchSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the batch.",
+          "default": 8192,
+          "minimum": 10,
+          "maximum": 100000
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "default": 200,
+          "minimum": 10,
+          "maximum": 60000
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "type": "object",
+      "description": "Cache configurations.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in megabytes."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes."
+        }
+      }
+    },
+    "ConcurrencyConfiguration": {
+      "type": "object",
+      "description": "Concurrent publishing configuration.",
+      "properties": {
+        "workerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parallel workers processing the log queues.",
+          "default": 4
+        },
+        "batchQueueSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the queue for log batches.",
+          "default": 100
+        }
+      }
+    },
+    "Exporter": {
+      "type": "object",
+      "description": "Exporter Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExporterType",
+          "description": "The type of exporter."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of exporter.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "azureMonitorWorkspaceLogs": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
+          "description": "Azure Monitor Workspace Logs specific configurations."
+        },
+        "tcp": {
+          "$ref": "#/definitions/TcpExporter",
+          "description": "TCP based exporter. Used for pipelineGroup exporter."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ExporterType": {
+      "type": "string",
+      "description": "The exporter type.",
+      "enum": [
+        "AzureMonitorWorkspaceLogs",
+        "PipelineGroup"
+      ],
+      "x-ms-enum": {
+        "name": "ExporterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureMonitorWorkspaceLogs",
+            "value": "AzureMonitorWorkspaceLogs",
+            "description": "Export logs to Azure Monitor Workspace."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Export data to another pipeline group instance."
+          }
+        ]
+      }
+    },
+    "ExternalNetworkingMode": {
+      "type": "string",
+      "description": "The mode of the external networking.",
+      "enum": [
+        "LoadBalancerOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalNetworkingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LoadBalancerOnly",
+            "value": "LoadBalancerOnly",
+            "description": "Load balancer only."
+          }
+        ]
+      }
+    },
+    "JsonArrayMapper": {
+      "type": "object",
+      "description": "A component that allows parsing a value from sourceField as a json array, match a key to each parsed value from keys, and output the key-value map to destinationField field.",
+      "properties": {
+        "sourceField": {
+          "$ref": "#/definitions/JsonMapperSourceField",
+          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys."
+        },
+        "destinationField": {
+          "$ref": "#/definitions/JsonMapperDestinationField",
+          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements."
+        },
+        "keys": {
+          "type": "array",
+          "description": "Define the names of the keys in the resulting map. The input json array elements are mapped in order, one for every key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "JsonMapperDestinationField": {
+      "type": "object",
+      "description": "JsonArrayMapper destination field used to describe the field to which the parsed output will be written.",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map.",
+          "default": "attributes",
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "JsonMapperElement",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Body",
+                "value": "body",
+                "description": "Read or write the json array from or to the body of the message."
+              },
+              {
+                "name": "Attributes",
+                "value": "attributes",
+                "description": "Read or write the json array from or to the attributes of the message."
+              }
+            ]
+          }
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs."
+        }
+      }
+    },
+    "JsonMapperSourceField": {
+      "type": "object",
+      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read.",
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
+        }
+      }
+    },
+    "NetworkingConfiguration": {
+      "type": "object",
+      "description": "Networking configuration for the pipeline group instance.",
+      "properties": {
+        "externalNetworkingMode": {
+          "$ref": "#/definitions/ExternalNetworkingMode",
+          "description": "External networking mode."
+        },
+        "host": {
+          "type": "string",
+          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        },
+        "routes": {
+          "type": "array",
+          "description": "Networking routes configuration.",
+          "items": {
+            "$ref": "#/definitions/NetworkingRoute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "externalNetworkingMode",
+        "routes"
+      ]
+    },
+    "NetworkingRoute": {
+      "type": "object",
+      "description": "Networking route configuration.",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "description": "The name of the previously defined receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "description": "Route path.",
+          "pattern": "^[a-zA-Z0-9-/\\.]+$"
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Route subdomain.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        }
+      },
+      "required": [
+        "receiver"
+      ]
+    },
+    "OtlpReceiver": {
+      "type": "object",
+      "description": "OTLP Receiver.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "OTLP GRPC endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
+    "PersistenceConfigurations": {
+      "type": "object",
+      "description": "Persistence options to all pipelines in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      },
+      "required": [
+        "persistentVolumeName"
+      ]
+    },
+    "PersistenceConfigurationsUpdate": {
+      "type": "object",
+      "description": "Persistence options to all pipelines in the instance.",
+      "properties": {
+        "persistentVolumeName": {
+          "type": "string",
+          "description": "The name of the mounted persistent volume."
+        }
+      }
+    },
+    "Pipeline": {
+      "type": "object",
+      "description": "Pipeline Info.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the pipeline.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "type": {
+          "$ref": "#/definitions/PipelineType",
+          "description": "The type of pipeline"
+        },
+        "receivers": {
+          "type": "array",
+          "description": "Reference to receivers configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "Reference to processors configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "Reference to exporters configured for the pipeline.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "receivers",
+        "exporters"
+      ]
+    },
+    "PipelineGroup": {
+      "type": "object",
+      "description": "A pipeline group definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PipelineGroupListResult": {
+      "type": "object",
+      "description": "The response of a PipelineGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PipelineGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/PipelineGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PipelineGroupProperties": {
+      "type": "object",
+      "description": "Properties that need to be specified to create a new pipeline group instance.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the amount of replicas of the pipeline group instance."
+        },
+        "receivers": {
+          "type": "array",
+          "description": "The receivers specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "The exporters specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Exporter"
+          },
+          "x-ms-identifiers": []
+        },
+        "service": {
+          "$ref": "#/definitions/Service",
+          "description": "The service section for a given pipeline group instance."
+        },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "receivers",
+        "processors",
+        "exporters",
+        "service"
+      ]
+    },
+    "PipelineGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties that need to be specified to create a new pipeline group instance.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the amount of replicas of the pipeline group instance."
+        },
+        "receivers": {
+          "type": "array",
+          "description": "The receivers specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Receiver"
+          },
+          "x-ms-identifiers": []
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "x-ms-identifiers": []
+        },
+        "exporters": {
+          "type": "array",
+          "description": "The exporters specified for a pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/Exporter"
+          },
+          "x-ms-identifiers": []
+        },
+        "service": {
+          "$ref": "#/definitions/ServiceUpdate",
+          "description": "The service section for a given pipeline group instance."
+        },
+        "networkingConfigurations": {
+          "type": "array",
+          "description": "Networking configurations for the pipeline group instance.",
+          "items": {
+            "$ref": "#/definitions/NetworkingConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PipelineGroupUpdate": {
+      "type": "object",
+      "description": "A pipeline group definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "PipelineType": {
+      "type": "string",
+      "description": "The pipeline type.",
+      "enum": [
+        "Logs"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Logs",
+            "value": "Logs",
+            "description": "Pipeline for logs telemetry."
+          }
+        ]
+      }
+    },
+    "Processor": {
+      "type": "object",
+      "description": "Processor Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ProcessorType",
+          "description": "The type of processor."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of processor.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "batch": {
+          "$ref": "#/definitions/BatchProcessor",
+          "description": "Batch processor configurations."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ProcessorType": {
+      "type": "string",
+      "description": "The processor type.",
+      "enum": [
+        "Batch"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Batch",
+            "value": "Batch",
+            "description": "Batch processor."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Receiver": {
+      "type": "object",
+      "description": "Receiver Info.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ReceiverType",
+          "description": "The type of receiver."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "syslog": {
+          "$ref": "#/definitions/SyslogReceiver",
+          "description": "Syslog configurations. This field is mandatory for syslog type receivers."
+        },
+        "otlp": {
+          "$ref": "#/definitions/OtlpReceiver",
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+        },
+        "udp": {
+          "$ref": "#/definitions/UdpReceiver",
+          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ReceiverType": {
+      "type": "string",
+      "description": "The receiver type.",
+      "enum": [
+        "Syslog",
+        "Ama",
+        "PipelineGroup",
+        "OTLP",
+        "UDP"
+      ],
+      "x-ms-enum": {
+        "name": "ReceiverType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Syslog",
+            "value": "Syslog",
+            "description": "Linux syslog."
+          },
+          {
+            "name": "Ama",
+            "value": "Ama",
+            "description": "Receives data from azure monitor agent receiver."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Receives data from another pipeline group."
+          },
+          {
+            "name": "OTLP",
+            "value": "OTLP",
+            "description": "Receives data from a OTLP collector."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "Receives data from an UDP collector."
+          }
+        ]
+      }
+    },
+    "RecordMap": {
+      "type": "object",
+      "description": "Record map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Record Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Record Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ResourceMap": {
+      "type": "object",
+      "description": "Resource map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Resource Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Resource Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "SchemaMap": {
+      "type": "object",
+      "description": "Schema map for azure monitor for logs.",
+      "properties": {
+        "recordMap": {
+          "type": "array",
+          "description": "Record Map.",
+          "items": {
+            "$ref": "#/definitions/RecordMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceMap": {
+          "type": "array",
+          "description": "Resource Map captures information about the entity for which telemetry is recorded. For example, metrics exposed by a Kubernetes container can be linked to a resource that specifies the cluster, namespace, pod, and container name.Resource may capture an entire hierarchy of entity identification. It may describe the host in the cloud and specific container or an application running in the process.",
+          "items": {
+            "$ref": "#/definitions/ResourceMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "scopeMap": {
+          "type": "array",
+          "description": "A scope map is a logical unit of the application code with which the emitted telemetry can be associated.",
+          "items": {
+            "$ref": "#/definitions/ScopeMap"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "recordMap"
+      ]
+    },
+    "ScopeMap": {
+      "type": "object",
+      "description": "Scope map for schema in azure monitor.",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Scope Map Key."
+        },
+        "to": {
+          "type": "string",
+          "description": "Scope Map Value."
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "Service": {
+      "type": "object",
+      "description": "Service Info.",
+      "properties": {
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines belonging to a given pipeline group.",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          },
+          "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurations",
+          "description": "Persistence options to all pipelines in the instance.",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "pipelines"
+      ]
+    },
+    "ServiceUpdate": {
+      "type": "object",
+      "description": "Service Info.",
+      "properties": {
+        "pipelines": {
+          "type": "array",
+          "description": "Pipelines belonging to a given pipeline group.",
+          "items": {
+            "$ref": "#/definitions/Pipeline"
+          },
+          "x-ms-identifiers": []
+        },
+        "persistence": {
+          "$ref": "#/definitions/PersistenceConfigurationsUpdate",
+          "description": "Persistence options to all pipelines in the instance.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SyslogReceiver": {
+      "type": "object",
+      "description": "Base receiver using TCP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol to parse syslog messages. Default rfc3164",
+          "default": "rfc3164",
+          "enum": [
+            "rfc3164",
+            "rfc5424"
+          ],
+          "x-ms-enum": {
+            "name": "SyslogProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "rfc3164",
+                "value": "rfc3164",
+                "description": "rfc3164 protocol."
+              },
+              {
+                "name": "rfc5424",
+                "value": "rfc5424",
+                "description": "rfc5424 protocol."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    },
+    "TcpExporter": {
+      "type": "object",
+      "description": "Base exporter using TCP as transport protocol.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "TCP url to export.",
+          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "UdpReceiver": {
+      "type": "object",
+      "description": "Receiver using UDP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
+        },
+        "encoding": {
+          "type": "string",
+          "description": "The encoding of the stream being received.",
+          "default": "nop",
+          "enum": [
+            "nop",
+            "utf-8",
+            "utf-16le",
+            "utf-16be",
+            "ascii",
+            "big5"
+          ],
+          "x-ms-enum": {
+            "name": "StreamEncodingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "nop",
+                "value": "nop",
+                "description": "No encoding validation. Treats the file as a stream of raw bytes."
+              },
+              {
+                "name": "utf_8",
+                "value": "utf-8",
+                "description": "UTF-8 encoding."
+              },
+              {
+                "name": "utf_16le",
+                "value": "utf-16le",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "utf_16be",
+                "value": "utf-16be",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "ascii",
+                "value": "ascii",
+                "description": "ASCII encoding."
+              },
+              {
+                "name": "big5",
+                "value": "big5",
+                "description": "The Big5 Chinese character encoding."
+              }
+            ]
+          }
+        },
+        "readQueueLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max read queue length.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 100000
+        },
+        "jsonArrayMapper": {
+          "$ref": "#/definitions/JsonArrayMapper",
+          "description": "Json array mapper - allows this udp receiver to parse a value from a given source field as a json array, match a key to each parsed value and output the key-value map to a given output field."
+        }
+      },
+      "required": [
+        "endpoint"
+      ]
+    }
+  },
+  "parameters": {}
+}

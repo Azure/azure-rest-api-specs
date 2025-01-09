@@ -15,10 +15,7 @@ using Azure.Core;
 namespace ImageAnalysis;
 
 alias SharedAnalyzeQuery = {
-  @query({
-    name: "features",
-    format: "csv",
-  })
+  @query("features")
   @doc("""
     A list of visual features to analyze.
     Seven visual features are supported: Caption, DenseCaptions, Read (OCR), Tags, Objects, SmartCrops, and People.
@@ -44,10 +41,7 @@ alias SharedAnalyzeQuery = {
     """)
   genderNeutralCaption?: boolean = false;
 
-  @query({
-    name: "smartcrops-aspect-ratios",
-    format: "csv",
-  })
+  @query("smartcrops-aspect-ratios")
   @doc("""
     A list of aspect ratios to use for smart cropping.
     Aspect ratios are calculated by dividing the target crop width in pixels by the height in pixels.
