@@ -366,6 +366,29 @@ model FleetProperties {
 }
 
 /**
+ * A destination tier override.
+ */
+model DestinationTierOverride {
+  /**
+   * Resource type.
+   */
+  @visibility("read", "create")
+  resourceType: string;
+
+  /**
+   * Destination tier.
+   */
+  @visibility("read", "create")
+  destinationTier: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility("read", "create")
+  resourceName: string;
+}
+
+/**
  * A main principal.
  */
 model MainPrincipal {
@@ -454,9 +477,9 @@ model RegisterServerDefinition {
   /**
    * Destination tier overrides.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   @visibility("read", "create")
-  destinationTierOverrides?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers",[])
+  destinationTierOverrides?: DestinationTierOverride[];
 }
 
 /**

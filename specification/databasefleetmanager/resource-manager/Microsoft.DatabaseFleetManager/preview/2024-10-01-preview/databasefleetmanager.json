@@ -2603,6 +2603,41 @@
         }
       }
     },
+    "DestinationTierOverride": {
+      "type": "object",
+      "description": "A destination tier override.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "destinationTier": {
+          "type": "string",
+          "description": "Destination tier.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "destinationTier",
+        "resourceName"
+      ]
+    },
     "FirewallRule": {
       "type": "object",
       "description": "A firewall rule.",
@@ -3236,11 +3271,12 @@
           ]
         },
         "destinationTierOverrides": {
-          "type": "object",
+          "type": "array",
           "description": "Destination tier overrides.",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/DestinationTierOverride"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
