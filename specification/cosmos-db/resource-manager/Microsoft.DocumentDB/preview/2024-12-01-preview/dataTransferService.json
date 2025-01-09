@@ -472,17 +472,13 @@
       "x-ms-discriminator-value": "AzureBlobStorage"
     },
     "CosmosContainerEntity": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/CosmosCassandraContainerEntity"
-        },
-        {
-          "$ref": "#/definitions/CosmosSqlContainerEntity"
-        },
-        {
-          "$ref": "#/definitions/CosmosMongoContainerEntity"
+      "type": "object",
+      "description": "A CosmosDB container entity",
+      "properties": {
+        "properties": {
+          "type": "object"
         }
-      ]
+      }
     },
     "CosmosCassandraContainerEntity": {
       "type": "object",
@@ -556,7 +552,18 @@
         },
         "processedCount": {
           "type": "integer"
-        },
+        }
+      }
+    },
+    "CosmosDataTransferEntity": {
+      "type": "object",
+      "description": "A CosmosDB data transfer entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferEntity"
+        }
+      ],
+      "properties": {
         "source": {
           "$ref": "#/definitions/CosmosContainerEntity"
         },
