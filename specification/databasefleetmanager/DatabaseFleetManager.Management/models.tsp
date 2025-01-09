@@ -491,7 +491,7 @@ model RegisterServerDefinition {
    * Destination tier overrides.
    */
   @visibility("read", "create")
-  @OpenAPI.extension("x-ms-identifiers",[])
+  @OpenAPI.extension("x-ms-identifiers", [])
   destinationTierOverrides?: DestinationTierOverride[];
 }
 
