@@ -42,6 +42,19 @@ union PrincipalType {
 }
 
 /**
+ * Status of zone redundancy in a tier.
+ */
+union ZoneRedundancy {
+  string,
+
+  /** Enabled. */
+  Enabled: "Enabled",
+
+  /** Disabled. */
+  Disabled: "Disabled",
+}
+
+/**
  * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
  */
 union SQLUserType {
@@ -529,10 +542,16 @@ model FleetTierProperties {
   poolNumOfDatabasesMax?: int32;
 
   /**
-   * Number of empty preprovisioned databases for fast database provisioning.
+   * Number of high availaibility replicas for databases in this tier.
    */
   @visibility("read", "create")
-  numOfEmptyPreprovisionedDatabases?: int32;
+  highAvailabilityReplicaCount?: int32;
+
+  /**
+   * Enable zone redundancy for all databases in this tier.
+   */
+  @visibility("read", "create")
+  zoneRedundancy?: ZoneRedundancy;
 
   /**
    * Minimum allocated capacity per database, in units matching the specified service tier.

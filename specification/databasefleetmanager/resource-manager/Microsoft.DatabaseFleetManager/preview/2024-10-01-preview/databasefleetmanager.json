@@ -2999,10 +2999,18 @@
             "create"
           ]
         },
-        "numOfEmptyPreprovisionedDatabases": {
+        "highAvailabilityReplicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of empty preprovisioned databases for fast database provisioning.",
+          "description": "Number of high availaibility replicas for databases in this tier.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ZoneRedundancy",
+          "description": "Enable zone redundancy for all databases in this tier.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3346,6 +3354,30 @@
             "create"
           ]
         }
+      }
+    },
+    "ZoneRedundancy": {
+      "type": "string",
+      "description": "Status of zone redundancy in a tier.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneRedundancy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled."
+          }
+        ]
       }
     }
   },
