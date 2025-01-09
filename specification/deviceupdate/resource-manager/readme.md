@@ -43,32 +43,29 @@ suppressions:
     reason: Hash algorithm to hashed value map. Service validates the algorithms.
     where:
       - $.definitions.UpdateFile.properties.hashes
+      - $.definitions.ImportManifestMetadata.properties.hashes
+      - $.definitions.UpdateFileBase.properties.hashes
   - code: AvoidAdditionalProperties
     from: deviceupdate.json
     reason: Optional file properties (not consumed by service but pass-through to device).
     where:
       - $.definitions.UpdateFile.properties.properties
+      - $.definitions.AgentInfo.properties.compatibilityProperties
+      - $.definitions.DeviceClassInfo.properties.compatibilityProperties
+      - $.definitions.UpdateFileBase.properties.properties
+      - $.definitions.UpdateProperties.properties.compatibility.items
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
-    reason: False positive. Provisioning state is read-only.
-  - code: UnsupportedPatchProperties
-    from: deviceupdate.json
-    reason: False positive. Location is read-only.
+    reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
+  # - code: UnsupportedPatchProperties
+  #   from: deviceupdate.json
+  #   reason: False positive. Location is read-only.
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
     where: 
       - $.definitions.ManagedServiceIdentityUpdate.properties.userAssignedIdentities.additionalProperties
-  - code: AvoidAdditionalProperties
-    from: deviceupdate.json
-    reason: Optional file properties (not consumed by service but pass-through to device).
-    where:
-      - $.definitions.AgentInfo.properties.compatibilityProperties
-      - $.definitions.DeviceClassInfo.properties.compatibilityProperties
-      - $.definitions.ImportManifestMetadata.hashes
-      - $.definitions.UpdateFileBase.properties.hashes
-      - $.definitions.UpdateFileBase.properties.properties
-      - $.definitions.UpdateProperties.properties.compatibility.items
+      
 ```
 
 ### Tag: package-2024-10-01-preview
