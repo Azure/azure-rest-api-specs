@@ -48,9 +48,9 @@ suppressions:
     reason: Optional file properties (not consumed by service but pass-through to device).
     where:
       - $.definitions.UpdateFile.properties.properties
-  # - code: ProvisioningStateMustBeReadOnly
-  #   from: deviceupdate.json
-  #   reason: False positive. Provisioning state is read-only.
+   - code: ProvisioningStateMustBeReadOnly
+     from: deviceupdate.json
+     reason: False positive. Provisioning state is read-only.
   - code: UnsupportedPatchProperties
     from: deviceupdate.json
     reason: False positive. Location is read-only.
