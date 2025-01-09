@@ -63,12 +63,12 @@ suppressions:
     from: deviceupdate.json
     reason: Optional file properties (not consumed by service but pass-through to device).
     where:
-      - $.definitions.AgentInfo.properties
-      - $.definitions.DeviceClassInfo.properties
-      - $.definitions.ImportManifestMetadata.properties
+      - $.definitions.AgentInfo.properties.compatibilityProperties
+      - $.definitions.DeviceClassInfo.properties.compatibilityProperties
+      - $.definitions.ImportManifestMetadata.hashes
       - $.definitions.UpdateFileBase.properties.hashes
       - $.definitions.UpdateFileBase.properties.properties
-      - $.definitions.UpdateProperties.properties
+      - $.definitions.UpdateProperties.properties.compatibility.items
 ```
 
 ### Tag: package-2024-10-01-preview
