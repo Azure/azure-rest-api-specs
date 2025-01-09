@@ -62,6 +62,7 @@ model EndpointProperties {
   /**
    * The type of endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
   type: Type;
 
   /**

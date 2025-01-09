@@ -78,3 +78,5 @@ namespace Microsoft.HybridConnectivity;
   "javascript"
 );
 @@clientName(EndpointResources, "Endpoints", "javascript");
+
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");

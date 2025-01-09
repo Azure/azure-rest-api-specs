@@ -11,6 +11,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./EndpointResource.tsp";
 import "./ServiceConfigurationResource.tsp";
+import "./PublicCloud.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -22,24 +23,20 @@ using TypeSpec.Versioning;
  * REST API for Hybrid Connectivity
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
+@armCommonTypesVersion(CommonTypes.Versions.v5)
+@versioned(Versions)
 @service({
   title: "Hybrid Connectivity Management API",
 })
-@versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@doc("REST API for public clouds.")
 namespace Microsoft.HybridConnectivity;
 
-/**
- * The available API versions.
- */
+@doc("Hybrid Connectivity Management service version.")
 enum Versions {
-  /**
-   * The 2023-03-15 API version.
-   */
+  @doc("Version 2024-12-01")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_03_15: "2023-03-15",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_12_01: "2024-12-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
