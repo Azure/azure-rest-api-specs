@@ -1,0 +1,64 @@
+parameters:
+  - name: SpecRepoBranch
+    type: string
+    default: 'main'
+  - name: SpecRepoCommit
+    type: string
+    default: 'HEAD'
+  - name: SdkRepoBranch
+    type: string
+    default: 'main'
+  - name: ConfigType
+    type: string
+    values:
+      - 'TypeSpec'
+      - 'AutoRest'
+    default: 'TypeSpec'
+    displayName: 'Configuration Type'
+  - name: TspConfigPath
+    type: string
+    default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
+    displayName: 'Path to TypeSpec Configuration file'
+  - name: ReadmePath
+    type: string
+    default: 'specification/contosowidgetmanager/resource-manager/readme.md'
+    displayName: 'Path to AutoRest Configuration file (for OpenAPI)'
+  - name: ApiVersion
+    type: string
+    default: 'not-specified'
+    displayName: 'API Version of Spec to be used for SDK Generation'
+  - name: CodePushRequired
+    type: boolean
+    default: false
+    displayName: 'Push Changes to SDK Repo'
+  - name: SdkPrRequired
+    type: boolean
+    default: false
+    displayName: 'Create Pull Request for SDK Changes'
+  - name: ApiViewRequired
+    type: boolean
+    default: false
+    displayName: 'Create APIView'
+
+trigger: none
+pr:
+  branches:
+    include:
+      - 'main'
+
+extends:
+  template: /eng/common/pipelines/templates/jobs/sdk-generation.yml
+  parameters:
+    SpecRepoBranch: ${{ parameters.SpecRepoBranch }}
+    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
+    SdkRepoOwner: 'Azure'
+    SdkRepoName: 'azure-sdk-for-net'
+    SdkRepoNameForSpecGen: 'azure-sdk-for-net-track2'
+    SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
+    ConfigType: ${{ parameters.ConfigType }}
+    TspConfigPath: ${{ parameters.TspConfigPath }}
+    ReadmePath: ${{ parameters.ReadmePath }}
+    ApiVersion: ${{ parameters.ApiVersion }}
+    CodePushRequired: ${{ parameters.CodePushRequired }}
+    SdkPrRequired: ${{ parameters.SdkPrRequired }}
+    ApiViewRequired: ${{ parameters.ApiViewRequired }}
