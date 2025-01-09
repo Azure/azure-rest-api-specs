@@ -726,6 +726,56 @@
           ]
         },
         "enabled": {
+          "description": "Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location. If replication is been enabled, location must be provided.",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the replication.",
+          "enum": [
+            "Succeeded",
+            "EnableRequested",
+            "Enabling",
+            "DisableRequested",
+            "Disabling",
+            "RollbackRequested",
+            "RollingBack",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceReplicationState",
+            "modelAsString": true
+          }
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The last time when the replication was enabled.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the replication was updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceReplicationPatProperties": {
+      "type": "object",
+      "description": "Workspace replication properties.",
+      "properties": {
+        "location": {
+          "description": "The location of the replication.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enabled": {
           "description": "Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location.",
           "type": "boolean"
         },
@@ -761,11 +811,7 @@
           "description": "The last time when the replication was updated.",
           "readOnly": true
         }
-      },
-      "required": [
-        "enabled",
-        "location"
-      ]
+      }
     },
     "WorkspaceFailoverProperties": {
       "type": "object",

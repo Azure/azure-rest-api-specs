@@ -643,7 +643,7 @@
       "description": "Cluster replication properties.",
       "properties": {
         "location": {
-          "description": "The secondary location of the replication.",
+          "description": "The secondary location of the replication. If replication is being enabled, enabled must be provided.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -690,11 +690,7 @@
           "description": "The last time the cluster's replication was updated.",
           "readOnly": true
         }
-      },
-      "required": [
-        "enabled",
-        "location"
-      ]
+      }
     }
   },
   "parameters": {}
