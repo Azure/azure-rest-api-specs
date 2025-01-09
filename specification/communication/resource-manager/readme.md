@@ -40,6 +40,7 @@ input-file:
   - Microsoft.Communication/preview/2024-09-01-preview/Domains.json
   - Microsoft.Communication/preview/2024-09-01-preview/EmailServices.json
   - Microsoft.Communication/preview/2024-09-01-preview/SenderUsernames.json
+  - Microsoft.Communication/preview/2024-09-01-preview/SmtpUsernames.json
   - Microsoft.Communication/preview/2024-09-01-preview/SuppressionLists.json
 ```
 
