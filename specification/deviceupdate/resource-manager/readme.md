@@ -59,16 +59,16 @@ suppressions:
     reason: Type will not be shared
     where: 
       - $.definitions.ManagedServiceIdentityUpdate.properties.userAssignedIdentities.additionalProperties
-   - code: AvoidAdditionalProperties
-     from: deviceupdate.json
-     reason: Optional file properties (not consumed by service but pass-through to device).
-     where:
-       - $.definitions.AgentInfo.properties
-       - $.definitions.DeviceClassInfo.properties
-       - $.definitions.ImportManifestMetadata.properties
-       - $.definitions.UpdateFileBase.properties.hashes
-       - $.definitions.UpdateFileBase.properties.properties
-       - $.definitions.UpdateProperties.properties
+  - code: AvoidAdditionalProperties
+    from: deviceupdate.json
+    reason: Optional file properties (not consumed by service but pass-through to device).
+    where:
+      - $.definitions.AgentInfo.properties
+      - $.definitions.DeviceClassInfo.properties
+      - $.definitions.ImportManifestMetadata.properties
+      - $.definitions.UpdateFileBase.properties.hashes
+      - $.definitions.UpdateFileBase.properties.properties
+      - $.definitions.UpdateProperties.properties
 ```
 
 ### Tag: package-2024-10-01-preview
