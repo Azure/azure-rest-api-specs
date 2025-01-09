@@ -1881,12 +1881,14 @@ model Time {
    * The hour.
    */
   @maxValue(23)
+  @minValue(0)
   hour: int32;
 
   /**
    * The minute.
    */
   @maxValue(59)
+  @minValue(0)
   minute: int32;
 }
 
@@ -3053,7 +3055,7 @@ model ScalingPlanPersonalScheduleProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect;
+  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the peak period.

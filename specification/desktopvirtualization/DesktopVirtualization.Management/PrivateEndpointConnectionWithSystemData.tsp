@@ -19,6 +19,12 @@ namespace Microsoft.DesktopVirtualization;
 model PrivateEndpointConnectionWithSystemData
   is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<Resource = PrivateEndpointConnection>;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 alias PrivateEndpointParameter = {
@@ -27,6 +33,17 @@ alias PrivateEndpointParameter = {
   @segment("privateEndpointConnections")
   @key
   privateEndpointConnectionName: string;
+};
+
+alias PrivateEndpointListParameter = {
+  @query
+  pageSize?: int32;
+
+  @query
+  initialSkip?: int32;
+
+  @query
+  isDescending?: boolean;
 };
 
 @armResourceOperations
@@ -48,7 +65,10 @@ interface HostPoolPrivateEndpointConnectionOperations {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnection>;
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnection>;
-  listByHostPool is HostPoolOps.List<PrivateEndpointConnection>;
+  listByHostPool is HostPoolOps.List<
+    PrivateEndpointConnection,
+    Parameters = PrivateEndpointListParameter
+  >;
 }
 
 @armResourceOperations
@@ -56,5 +76,8 @@ interface WorkspacePrivateEndpointConnectionOperations {
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnection>;
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnection>;
-  listByWorkspace is WorkspaceOps.List<PrivateEndpointConnection>;
+  listByWorkspace is WorkspaceOps.List<
+    PrivateEndpointConnection,
+    Parameters = PrivateEndpointListParameter
+  >;
 }

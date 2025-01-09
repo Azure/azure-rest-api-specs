@@ -23,6 +23,12 @@ model UserSession
     SegmentName = "userSessions",
     NamePattern = ""
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -21,6 +22,12 @@ model ApplicationGroup
     SegmentName = "applicationGroups",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -98,6 +105,7 @@ interface ApplicationGroups {
    * List start menu items in the given application group.
    */
   @get
+  @action("startMenuItems")
   list is ArmResourceActionSync<
     ApplicationGroup,
     void,
@@ -124,6 +132,9 @@ interface ApplicationGroups {
   >;
 }
 
+@@Azure.ClientGenerator.Core.clientName(ApplicationGroups.createOrUpdate::parameters.resource,
+  "applicationGroup"
+);
 @@maxLength(ApplicationGroup.name, 64);
 @@minLength(ApplicationGroup.name, 3);
 @@doc(ApplicationGroup.name, "The name of the application group");

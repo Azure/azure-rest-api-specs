@@ -21,6 +21,12 @@ model ScalingPlan
     SegmentName = "scalingPlans",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations

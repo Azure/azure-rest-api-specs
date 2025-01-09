@@ -21,6 +21,12 @@ model HostPool
     SegmentName = "hostPools",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -203,6 +209,7 @@ interface HostPools {
    * List userSessions.
    */
   @get
+  @action("userSessions")
   userSessionsListByHostPool is ArmResourceActionSync<
     HostPool,
     void,

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -13,7 +14,8 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for MSIX Package properties.
  */
-@subscriptionResource
+// Manually switched@subscriptionResource
+@parentResource(HostPool)
 model MsixPackage
   is Azure.ResourceManager.ProxyResource<MsixPackageProperties, false> {
   ...ResourceNameParameter<
@@ -22,6 +24,12 @@ model MsixPackage
     SegmentName = "msixPackages",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations

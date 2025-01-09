@@ -22,6 +22,12 @@ model Desktop is Azure.ResourceManager.ProxyResource<DesktopProperties> {
     SegmentName = "desktops",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
+  ...ManagedServiceIdentityProperty;
+  ...EntityTagProperty;
+  ...ResourceKindProperty;
+  ...ManagedByProperty;
+  ...ResourcePlanProperty;
+  ...ResourceSkuProperty;
 }
 
 @armResourceOperations
