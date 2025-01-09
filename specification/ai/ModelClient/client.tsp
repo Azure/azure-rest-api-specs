@@ -11,20 +11,25 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // Are these needed?
 @@usage(AI.Model.ChatCompletions, Usage.output);
 @@usage(AI.Model.ModelInfo, Usage.output);
-@@usage(AI.Model.StreamingChatChoiceUpdate, Usage.output);
 @@usage(AI.Model.StreamingChatCompletionsUpdate, Usage.output);
+@@usage(AI.Model.StreamingChatChoiceUpdate, Usage.output);
+@@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
+@@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
 
-// Since we made all operator methods internal, we need to expliclty
-// say we still want the models they use to be public.
+// The operators need to be hidden, since we hand-write the public versions of those
+@@access(AI.Model.getChatCompletions, Access.internal);
+@@access(AI.Model.getEmbeddings, Access.internal);
+@@access(AI.Model.getImageEmbeddings, Access.internal);
+@@access(AI.Model.getModelInfo, Access.internal, "python");
+
+// Since we made all operator methods internal, we need to explicity
+// say we still want the models they use to be public, since they will be used by hand-written operator methods.
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormatJsonObject, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormatText, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
@@ -58,20 +63,14 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
 @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
 @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  Access.public,
+  "python"
+);
 
-// The operators need to be hidden, since we hand-write the public versions of those to
-// 1. Add chat completions streaming (to getChatCompletions operator)
-// 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
-// 3. Cache model info (to getModelInfo, all clients, Python only)
-@@access(AI.Model.getChatCompletions, Access.internal);
-@@access(AI.Model.getEmbeddings, Access.internal);
-@@access(AI.Model.getImageEmbeddings, Access.internal);
-@@access(AI.Model.getModelInfo, Access.internal, "python");
-
-// Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
-@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
-  Access.internal,
-  "csharp"
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  "JsonSchemaFormat",
+  "python"
 );
 
 // We use shorter names in the Python client library

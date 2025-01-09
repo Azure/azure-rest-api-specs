@@ -266,22 +266,32 @@ model ChatCompletionsResponseFormatJsonObject
 }
 
 @doc("""
-  The definition of the required JSON schema in the response, and associated metadata.
+  Defines the response format for chat completions as JSON with a given schema. The AI model
+  will need to adhere to this schema when generating completions.
   """)
 model ChatCompletionsResponseFormatJsonSchemaDefinition {
-  /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+  @doc("""
+    A name that labels this JSON schema. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+    """)
   name: string;
 
-  /** The definition of the JSON schema */
+  @doc("""
+    The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.
+    Note that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation
+    to determine what is supported.
+    """)
   schema: Record<unknown>;
 
-  /** A description of the response format, used by the AI model to determine how to generate responses in this format. */
+  @doc("""
+    A description of the response format, used by the AI model to determine how to generate responses in this format.
+    """)
   description?: string;
 
   @doc("""
-    Whether to enable strict schema adherence when generating the output.
-    If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of
-    JSON Schema is supported when `strict` is `true`.
+    If set to true, the service will error out if the provided JSON schema contains keywords
+    not supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.
+    If false, and the provided JSON schema contains keywords not supported
+    by the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.
     """)
   strict?: boolean = false;
 }
