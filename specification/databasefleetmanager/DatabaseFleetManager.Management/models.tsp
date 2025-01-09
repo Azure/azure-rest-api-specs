@@ -47,10 +47,10 @@ union PrincipalType {
 union ZoneRedundancy {
   string,
 
-  /** Enabled. */
+  /** ZR Enabled. */
   Enabled: "Enabled",
 
-  /** Disabled. */
+  /** ZR Disabled. */
   Disabled: "Disabled",
 }
 
