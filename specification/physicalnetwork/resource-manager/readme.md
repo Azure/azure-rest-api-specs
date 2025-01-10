@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
-  - Microsoft.PhysicalNetwork/preview/package-2025-01-01-preview/microsoftphysicalnetwork.json
+  - Microsoft.PhysicalNetwork/preview/2025-01-01-preview/microsoftphysicalnetwork.json
 ```
 
 ### Tag: package-2024-09-01-preview
