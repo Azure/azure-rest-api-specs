@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM",
+    "properties": {
+      "properties": {
+        "storageProfile": {
+          "dataDisks": [
+            {
+              "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/virtualMachineInstances",
+        "extendedLocation": {
+          "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default",
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/networkInterfaces/test-nic"
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "localadmin",
+            "computerName": "luamaster"
+          },
+          "provisioningState": "Accepted",
+          "storageProfile": {
+            "dataDisks": [
+              {
+                "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd"
+              }
+            ],
+            "imageReference": {
+              "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/galleryImages/test-gallery-image"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "VirtualMachineInstances_Update",
+  "title": "UpdateVirtualMachine"
+}

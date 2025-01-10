@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "0ca8cd24-0b47-4ad5-bc7e-d70e35c44adf",
+    "resourceGroupName": "rg_d1ef9eae-044d-4710-ba59-b82e84ad3157",
+    "serverName": "srv_9243d320-ac4e-4f97-8e06-b1167dae5f4c",
+    "databaseName": "db_7fe424c8-23cf-4ac3-bdc3-e21f424bdb68",
+    "extensionName": "Export",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "operationMode": "Export",
+        "storageKeyType": "ManagedIdentity",
+        "storageKey": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName",
+        "storageUri": "https://teststorage.blob.core.windows.net/testcontainer/Manifest.xml",
+        "administratorLogin": "/subscriptions/00000000-1111-2222-3333-444444444444/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName",
+        "authenticationType": "ManagedIdentity"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "requestId": "10000000-0000-0000-0000-000000000002",
+          "requestType": "Export",
+          "lastModifiedTime": "lastModifiedTime",
+          "serverName": "srv_9243d320-ac4e-4f97-8e06-b1167dae5f4c",
+          "databaseName": "db_7fe424c8-23cf-4ac3-bdc3-e21f424bdb68",
+          "status": "Completed",
+          "queuedTime": "09/10/2021 18:35:10",
+          "blobUri": "https://teststorage.blob.core.windows.net/testcontainer/samplebacpac.bacpac",
+          "privateEndpointConnections": []
+        },
+        "id": "10000000-0000-0000-0000-000000000002",
+        "name": "10000000-0000-0000-0000-000000000002",
+        "type": "Microsoft.Sql/servers/databases/extensions"
+      }
+    },
+    "202": {}
+  }
+}

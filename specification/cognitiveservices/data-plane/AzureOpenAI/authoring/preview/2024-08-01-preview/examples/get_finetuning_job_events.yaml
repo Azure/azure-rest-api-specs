@@ -1,0 +1,33 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: 2024-08-01-preview
+  fine-tuning-job-id: ft-72a2792ef7d24ba7b82c7fe4a37e379f
+responses:
+  200:
+    headers: {}
+    body:
+      has_more: false
+      data:
+        - id: ftevent-363dcd7cb4c74539bc53293c1dceef05
+          created_at: 1646126127
+          level: Info
+          message: Job enqueued. Waiting for jobs ahead to complete.
+          type: message
+          data:
+          object: fine_tuning.job.event
+        - id: ftevent-8c2a44999790437cb3230e543fa2cf0f
+          created_at: 1646126169
+          level: Info
+          message: Job started.
+          type: message
+          data:
+          object: fine_tuning.job.event
+        - id: ftevent-2d47d651d2f3484c8187c88c00078147
+          created_at: 1646126192
+          level: Info
+          message: Job succeeded.
+          type: message
+          data:
+          object: fine_tuning.job.event
+      object: list
