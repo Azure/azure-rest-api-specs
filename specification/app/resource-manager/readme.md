@@ -37,6 +37,10 @@ directive:
     from: JavaComponents.json
     reason: |
       Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
+  - suppress: PatchBodyParametersSchema
+    from: ManagedEnvironments.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 
 ### Tag: package-2025-01-01
