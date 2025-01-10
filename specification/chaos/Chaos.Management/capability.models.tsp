@@ -31,6 +31,7 @@ alias CapabilityParentResourceParameters = BaseParameters<Capability> &
 /**
  * Model that represents the Capability properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused for this resource."
 model CapabilityProperties {
   /**
    * String of the Publisher that this Capability extends.
@@ -63,12 +64,6 @@ model CapabilityProperties {
   @visibility("read")
   @maxLength(2048)
   urn?: string;
-
-  /**
-   * Resource provisioning state. Not currently in use because resource is created synchronously.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
