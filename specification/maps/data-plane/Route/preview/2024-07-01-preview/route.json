@@ -3085,9 +3085,9 @@
           "format": "date-time"
         },
         "isSimplifiedPolygon": {
-          "description": "Use this to specify if you need simplified polygons that reduces the number of polygon vertices while preserving the shape. The API returns high definition polygon by default.",
+          "description": "Use this to specify if you need simplified polygons that reduces the number of polygon vertices while preserving the shape. The API returns low definition polygon by default.",
           "type": "boolean",
-          "default": "false"
+          "default": "true"
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
@@ -3127,16 +3127,16 @@
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget specifies the maximum range in meters which can be travelled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 50,000,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
+          "description": "The distance budget specifies the maximum range in meters which can be travelled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 500,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
           "type": "number",
           "minimum": 0,
-          "maximum": 50000000
+          "maximum": 500000
         },
         "timeBudgetInSec": {
-          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 10,000,000 seconds.\n\nExample: \"timeBudgetInSec\":3600",
+          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 21,600 seconds.\n\nExample: \"timeBudgetInSec\":3600",
           "type": "number",
           "minimum": 0,
-          "maximum": 10000000
+          "maximum": 21600
         },
         "travelMode": {
           "description": "Specifies the travel profile to consider when calculating the range polygon. If not specified, the default value is \"driving\".\n\nExample: \"travelMode\":\"driving\"",
