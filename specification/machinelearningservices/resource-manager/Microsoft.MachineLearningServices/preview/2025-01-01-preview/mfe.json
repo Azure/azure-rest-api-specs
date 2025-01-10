@@ -1549,7 +1549,7 @@
           {
             "in": "query",
             "name": "$top",
-            "description": "Top count of results, top count cannot be greater than the page size.\r\n                If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size.\r\n                              If topCount > page size, results with be default page size count will be returned",
             "type": "integer",
             "format": "int32"
           },
@@ -5915,7 +5915,7 @@
           {
             "in": "query",
             "name": "$top",
-            "description": "Top count of results, top count cannot be greater than the page size.\r\n                If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size.\r\n                              If topCount > page size, results with be default page size count will be returned",
             "type": "integer",
             "format": "int32"
           },
@@ -13761,21 +13761,9 @@
     "ActualCapacityInfo": {
       "type": "object",
       "properties": {
-        "failed": {
+        "total": {
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedFailed": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedSucceeded": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
           "default": 0,
           "type": "integer"
         },
@@ -13785,9 +13773,21 @@
           "default": 0,
           "type": "integer"
         },
-        "total": {
+        "failed": {
           "format": "int32",
-          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedSucceeded": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedFailed": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
           "default": 0,
           "type": "integer"
         }
@@ -25288,9 +25288,7 @@
     },
     "ServerlessInferenceEndpointAuthMode": {
       "enum": [
-        "Key",
-        "AAD",
-        "KeyAndAAD"
+        "Key"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -25299,12 +25297,6 @@
         "values": [
           {
             "value": "Key"
-          },
-          {
-            "value": "AAD"
-          },
-          {
-            "value": "KeyAndAAD"
           }
         ]
       },
