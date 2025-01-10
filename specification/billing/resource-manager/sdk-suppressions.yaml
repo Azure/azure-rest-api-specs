@@ -1,7 +1,16 @@
 suppressions:
+  azure-sdk-for-python:
+    - package: "azure-mgmt-billing"
+      breaking-changes:
+        - Deleted or renamed client operation group `BillingManagementClient.billing_property`
+        - Deleted or renamed model `BillingPropertyOperations`
   azure-sdk-for-go:
     - package: sdk/resourcemanager/billing/armbilling
       breaking-changes:
+        - Function `*ClientFactory.NewPropertyClient` has been removed
+        - Function `*PropertyClient.Get` has been removed
+        - Function `*PropertyClient.Update` has been removed
+        - Function `NewPropertyClient` has been removed
         - Function `*AccountsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, AccountUpdateRequest, *AccountsClientBeginUpdateOptions)` to `(context.Context, string, AccountPatch, *AccountsClientBeginUpdateOptions)`
         - Function `*CustomersClient.Get` parameter(s) have been changed from `(context.Context, string, string, *CustomersClientGetOptions)` to `(context.Context, string, string, string, *CustomersClientGetOptions)`
         - Function `*EnrollmentAccountsClient.Get` parameter(s) have been changed from `(context.Context, string, *EnrollmentAccountsClientGetOptions)` to `(context.Context, string, string, *EnrollmentAccountsClientGetOptions)`
@@ -188,6 +197,8 @@ suppressions:
   azure-sdk-for-js:
     - package: "@azure/arm-billing"
       breaking-changes:
+        - Class BillingManagementClient no longer has parameter billingPropertyOperations
+        - Removed operation group BillingPropertyOperations
         - Removed operation group BillingPeriods
         - Removed operation group BillingRoleDefinitions
         - Removed operation group Instructions
