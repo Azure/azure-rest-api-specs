@@ -3573,9 +3573,8 @@
           "description": "Azure resource location."
         },
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/TargetProperties",
           "description": "The properties of the target resource.",
-          "additionalProperties": {},
           "x-ms-client-flatten": true
         }
       },
@@ -3608,6 +3607,11 @@
       "required": [
         "value"
       ]
+    },
+    "TargetProperties": {
+      "type": "object",
+      "description": "Target properties.",
+      "additionalProperties": {}
     },
     "TargetReference": {
       "type": "object",
