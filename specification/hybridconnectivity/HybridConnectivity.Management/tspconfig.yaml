@@ -1,16 +1,36 @@
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   "service-dir":
     default: "sdk/hybridconnectivity"
-output-dir: "{project-root}/../"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    emitter-output-dir: "{output-dir}"
-    output-file: "{azure-resource-provider-folder}/{service-name}/PublicCloud/{version-status}/{version}/publicCloud.json"
-    arm-types-dir: "../../../../../../common-types/resource-management"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/hybridconnectivity.json"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: "azure"
+    namespace: "Azure.ResourceManager.HybridConnectivity"
+    clear-output-folder: true
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-hybridconnectivity"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.hybridconnectivity"
+    service-name: "Hybrid Connectivity"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-hybridconnectivity"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
@@ -18,16 +38,12 @@ options:
     hierarchyClient: false
     experimentalExtensibleEnums: true
     enableOperationGroup: true
+    examples-directory: "{project-root}/examples"
+    generateSample: true
     package-dir: "arm-hybridconnectivity"
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-hybridconnectivity"
-  "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-hybridconnectivity"
-    package-name: "{package-dir}"
-    flavor: "azure"
-    generate-test: true
-    generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hybridconnectivity"
     package-dir: "armhybridconnectivity"
@@ -38,6 +54,4 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    remove-unreferenced-types: true
