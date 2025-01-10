@@ -787,18 +787,10 @@
       "properties": {
         "missingTokenAction": {
           "type": "string",
-          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny.",
-          "enum": [
-            "Audit",
-            "Deny"
-          ],
-          "x-ms-enum": {
-            "name": "missingTokenAction",
-            "modelAsString": true
-          }
+          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny."
         },
         "requireChangeReference": {
-          "type": "boolean",
+          "type": ["boolean", "string"],
           "description": "Whether the external evaluation requires a valid change reference to be provided when acquiring a token."
         },
         "resultLifespan": {
@@ -814,7 +806,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The role definition Ids the assignment's MSI will need in order to invoke the endpoint."
+          "description": "An array of the role definition Ids the assignment's MSI will need in order to invoke the endpoint."
         }
       },
       "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
