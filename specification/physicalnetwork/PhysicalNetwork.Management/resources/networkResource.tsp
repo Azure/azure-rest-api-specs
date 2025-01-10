@@ -50,9 +50,6 @@ model NetworkDeviceResource
   @path
   @pattern(resourceNameRegex)
   name: string;
-
-  // @doc("The resource snapshot tags. Used for Infra Service Tree & IcM routing info.")
-  // tags?: Record<string>;
 }
 
 @armResourceOperations

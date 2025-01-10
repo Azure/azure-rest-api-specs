@@ -87,6 +87,14 @@ model NetworkDeviceProperties {
   @doc("The device owner's platform Service Tree Id")
   platformServiceTreeId: string;
 
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's platform Service Tree Id")
+  infraServiceTreeId: string;
+
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's IcM Queue")
+  icmQueue: string;
+
   @Versioning.added(Versions.v2024_09_01_preview)
   @doc("Additional Device Interface IP addresses")
   additionalIps: Array<string>;
