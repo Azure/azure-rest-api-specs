@@ -61,6 +61,7 @@ input-file:
   - Microsoft.App/stable/2025-01-01/ContainerAppsRevisions.json
   - Microsoft.App/stable/2025-01-01/Diagnostics.json
   - Microsoft.App/stable/2025-01-01/Global.json
+  - Microsoft.App/stable/2025-01-01/JavaComponents.json
   - Microsoft.App/stable/2025-01-01/Jobs.json
   - Microsoft.App/stable/2025-01-01/ManagedEnvironments.json
   - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsDaprComponents.json
