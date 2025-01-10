@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft PlaywrightTesting Data Plane API",
+    "title": "Microsoft Playwright Service Reporting Data Plane API",
     "version": "2025-01-02-preview",
     "x-typespec-generated": [
       {
@@ -38,9 +38,6 @@
   },
   "tags": [
     {
-      "name": "accounts"
-    },
-    {
       "name": "test-run"
     },
     {
@@ -48,57 +45,6 @@
     }
   ],
   "paths": {
-    "/accounts/{accountId}": {
-      "get": {
-        "operationId": "Accounts_GetAccount",
-        "tags": [
-          "accounts"
-        ],
-        "description": "Get details of the ARM resource mapped to an account for the given accountId.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/accounts/{accountId}/test-results": {
       "get": {
         "operationId": "TestResults_ListTestResults",
@@ -115,7 +61,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -184,7 +132,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -250,7 +200,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -306,7 +258,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -375,7 +329,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "testRunId",
@@ -434,7 +390,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "testRunId",
@@ -514,7 +472,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "testRunId",
@@ -572,7 +532,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "name": "testRunId",
@@ -635,7 +597,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -701,7 +665,9 @@
             "in": "path",
             "description": "The account id.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -789,164 +755,6 @@
         ]
       }
     },
-    "Account": {
-      "type": "object",
-      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The account id.",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The ARM fully-qualified resource id for the account.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The account name.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/AccountState",
-          "description": "The state of account - Active | Inactive",
-          "readOnly": true
-        },
-        "subscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ARM-based subscription id for the account.",
-          "readOnly": true
-        },
-        "subscriptionState": {
-          "$ref": "#/definitions/SubscriptionState",
-          "description": "The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
-          "readOnly": true
-        },
-        "tenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Azure tenant id of the account.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The account resource ARM location, for eg. eastus, southeastasia.",
-          "readOnly": true
-        },
-        "regionalAffinity": {
-          "type": "string",
-          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "scalableExecution": {
-          "type": "string",
-          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "reporting": {
-          "type": "string",
-          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "resourceId",
-        "name",
-        "state",
-        "subscriptionId",
-        "subscriptionState",
-        "tenantId",
-        "location"
-      ]
-    },
-    "AccountState": {
-      "type": "string",
-      "description": "The account state.",
-      "enum": [
-        "Active",
-        "Inactive"
-      ],
-      "x-ms-enum": {
-        "name": "AccountState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "The account is Active."
-          },
-          {
-            "name": "Inactive",
-            "value": "Inactive",
-            "description": "The account is Inactive."
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1007,11 +815,6 @@
           "description": "Inner error."
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "BrowserType": {
       "type": "string",
@@ -1316,48 +1119,6 @@
       "required": [
         "statusSummary"
       ]
-    },
-    "SubscriptionState": {
-      "type": "string",
-      "description": "The ARM-based subscription state.",
-      "enum": [
-        "Registered",
-        "Warned",
-        "Suspended",
-        "Deleted",
-        "Unregistered"
-      ],
-      "x-ms-enum": {
-        "name": "SubscriptionState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Registered",
-            "value": "Registered",
-            "description": "The subscription state is Registered."
-          },
-          {
-            "name": "Warned",
-            "value": "Warned",
-            "description": "The subscription state is Warned."
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "The subscription state is Suspended."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "The subscription state is Deleted."
-          },
-          {
-            "name": "Unregistered",
-            "value": "Unregistered",
-            "description": "The subscription state is Unregistered."
-          }
-        ]
-      }
     },
     "TestFramework": {
       "type": "object",
