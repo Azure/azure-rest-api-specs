@@ -41,4 +41,14 @@ model OnlineExperimentWorkspaceProperties {
       type: "Microsoft.Storage/storageAccounts";
     }
   ]>;
+
+  /**
+   * The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.
+   */
+  @visibility("create", "read")
+  appConfigurationResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AppConfiguration/configurationStores";
+    }
+  ]>;
 }
