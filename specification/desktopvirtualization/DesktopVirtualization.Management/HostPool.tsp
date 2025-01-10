@@ -165,6 +165,7 @@ interface HostPools {
   /**
    * Expands and Lists MSIX packages in an Image, given the Image Path.
    */
+  @action("expandMSIXImage")
   expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
 
   /**

@@ -82,7 +82,13 @@ interface UserSessions {
   /**
    * Disconnect a userSession.
    */
-  disconnect is ArmResourceActionSync<UserSession, void, void>;
+  disconnect is ArmResourceActionSync<
+    UserSession,
+    void,
+    {
+      @statusCode _: 200;
+    }
+  >;
 
   /**
    * Send a message to a user.

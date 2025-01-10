@@ -36,12 +36,21 @@ alias PrivateEndpointParameter = {
 };
 
 alias PrivateEndpointListParameter = {
+  /**
+   * The number of items to return per page
+   */
   @query
   pageSize?: int32;
 
+  /**
+   * The number of items to skip before starting to return items.
+   */
   @query
   initialSkip?: int32;
 
+  /**
+   * Indicates whether the collection is descending.
+   */
   @query
   isDescending?: boolean;
 };
@@ -65,6 +74,7 @@ interface HostPoolPrivateEndpointConnectionOperations {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnection>;
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnection>;
+  @action("hostPool")
   listByHostPool is HostPoolOps.List<
     PrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
@@ -76,6 +86,7 @@ interface WorkspacePrivateEndpointConnectionOperations {
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnection>;
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnection>;
+  @action("workspace")
   listByWorkspace is WorkspaceOps.List<
     PrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
