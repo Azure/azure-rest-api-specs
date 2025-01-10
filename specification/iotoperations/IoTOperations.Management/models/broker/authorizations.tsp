@@ -7,15 +7,15 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations;
+namespace Microsoft.IoTOperations.Brokers;
 
 /**
  * broker authorization resource type model details.
  */
 @doc("Instance broker authorizations resource")
 @parentResource(BrokerResource)
-model BrokerAuthorizationResource
-  is ProxyResource<BrokerAuthorizationProperties> {
+model AuthorizationResource
+  is ProxyResource<AuthorizationProperties> {
   @doc("Name of Instance broker authorization resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("authorizationName")
@@ -32,8 +32,8 @@ model BrokerAuthorizationResource
   extendedLocation: ExtendedLocation;
 }
 
-@doc("BrokerAuthorization Resource properties")
-model BrokerAuthorizationProperties {
+@doc("Authorization Resource properties")
+model AuthorizationProperties {
   @doc("The list of authorization policies supported by the Authorization Resource.")
   authorizationPolicies: AuthorizationConfig;
 
