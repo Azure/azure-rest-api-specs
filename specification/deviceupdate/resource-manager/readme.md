@@ -59,9 +59,9 @@ suppressions:
     reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
   - code: UnsupportedPatchProperties
     from: deviceupdate.json
-    reason: "Location property can't be removed as it will be a breaking change.Property exists in GA version 
+    reason: Location property can't be removed as it will be a breaking change.Property exists in GA version 
     where:
-     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[4]                
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[4]                
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
