@@ -57,9 +57,13 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
     reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
+    where:
+      - $.definitions.ProvisioningState
   - code: UnsupportedPatchProperties
     from: deviceupdate.json
     reason: Cannot be removed as it will be a breaking change. Property exists in GA version. 
+    where:
+      - $.definitions.UpdateAccountUpdate.properties.location
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
