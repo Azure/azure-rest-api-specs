@@ -13,15 +13,18 @@ In order to automate the mapping of event definition with event type, please fol
 
 Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
 
-A sample valid event definition is shown below:
+A sample valid event definition is shown below with `required` and `optional` properties:
 ~~~ markdown
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
 model AcsChatMessageReceivedEventData {
   ...AcsChatMessageEventBaseProperties;
 
-  /** The body of the chat message. */
-  messageBody : string;
+  /** Required. Field is always present in the event. */
+  requiredProperty : string;    
+
+  /** Optional. Field may not be present in some events. */
+  optionalProperty ?: string;
 }
 ~~~
 
