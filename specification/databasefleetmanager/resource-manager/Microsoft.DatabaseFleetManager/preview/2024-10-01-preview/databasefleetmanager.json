@@ -2608,7 +2608,7 @@
       "description": "A destination tier override.",
       "properties": {
         "resourceType": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceType",
           "description": "Resource type.",
           "x-ms-mutability": [
             "read",
@@ -3290,6 +3290,30 @@
             "create"
           ]
         }
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "Resource type of the destination tier override.",
+      "enum": [
+        "Database",
+        "ElasticPool"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Database resource type."
+          },
+          {
+            "name": "ElasticPool",
+            "value": "ElasticPool",
+            "description": "Elastic pool resource type."
+          }
+        ]
       }
     },
     "SQLUserType": {

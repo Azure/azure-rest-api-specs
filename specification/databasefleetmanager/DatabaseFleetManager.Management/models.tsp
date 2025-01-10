@@ -42,6 +42,19 @@ union PrincipalType {
 }
 
 /**
+ * Resource type of the destination tier override.
+ */
+union ResourceType {
+  string,
+
+  /** Database resource type. */
+  Database: "Database",
+
+  /** Elastic pool resource type. */
+  ElasticPool: "ElasticPool",
+}
+
+/**
  * Status of zone redundancy in a tier.
  */
 union ZoneRedundancy {
@@ -386,7 +399,7 @@ model DestinationTierOverride {
    * Resource type.
    */
   @visibility("read", "create")
-  resourceType: string;
+  resourceType: ResourceType;
 
   /**
    * Destination tier.
