@@ -770,11 +770,13 @@
               "description": "Azure Key Vault Csm resource Id.",
               "type": "string",
               "format": "arm-id",
-              "x-ms-arm-id-details": [
-                {
-                  "type": "Microsoft.KeyVault/vaults"
-                }
-              ]
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.KeyVault/vaults"
+                  }
+                ]
+              }
             },
             "keyVaultSecretName": {
               "description": "Azure Key Vault secret name.",
