@@ -1960,6 +1960,7 @@ model WorkspaceProperties {
  * Schema for updatable App Attach Package properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model AppAttachPackagePatch extends Resource {
   /**
    * tags to be updated
@@ -2003,6 +2004,7 @@ model AppAttachPackagePatchProperties {
  * ApplicationGroup properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model ApplicationGroupPatch extends Resource {
   /**
    * tags to be updated
@@ -2307,6 +2309,7 @@ model StartMenuItemProperties {
  * HostPool properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model HostPoolPatch extends Resource {
   /**
    * tags to be updated
@@ -2944,6 +2947,7 @@ model SendMessage {
 /**
  * Scaling plan properties that can be patched.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model ScalingPlanPatch {
   /**
    * tags to be updated
@@ -3143,6 +3147,7 @@ model ScalingPlanPersonalScheduleProperties {
 /**
  * ScalingPlanPersonalSchedule properties that can be patched.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model ScalingPlanPersonalSchedulePatch {
   /**
    * Detailed properties for ScalingPlanPersonalSchedule
@@ -3257,6 +3262,7 @@ model ScalingPlanPooledScheduleProperties {
  * ScalingPlanPooledSchedule properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model ScalingPlanPooledSchedulePatch extends Resource {
   /**
    * Detailed properties for ScalingPlanPooledSchedule
@@ -3267,6 +3273,8 @@ model ScalingPlanPooledSchedulePatch extends Resource {
 /**
  * Workspace properties that can be patched.
  */
+/** A patch model */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model WorkspacePatch {
   /**
    * tags to be updated
@@ -3378,6 +3386,7 @@ model MsixPackageProperties {
  * MSIX Package properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model MsixPackagePatch extends Resource {
   /**
    * Detailed properties for MSIX Package
