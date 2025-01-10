@@ -20,10 +20,10 @@ A sample valid event definition is shown below with `required` and `optional` pr
 model AcsChatMessageReceivedEventData {
   ...AcsChatMessageEventBaseProperties;
 
-  /** Required as shown. */
+  /** Required. Field is always present in the event. */
   requiredProperty : string;    
 
-  /** Optional as shown */
+  /** Optional. Field may not be present in some events. */
   optionalProperty ?: string;
 }
 ~~~
