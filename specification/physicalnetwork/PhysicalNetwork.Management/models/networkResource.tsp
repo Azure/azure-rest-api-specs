@@ -78,11 +78,7 @@ model NetworkDeviceProperties {
   @doc("The device's rack location's ARM Id string")
   dcRackLocationArmId: string;
 
-  @Versioning.added(Versions.v2025_01_01_preview)
-  @doc("The device owner's Service Tree Id")
-  serviceTreeId: string;
-
-  @Versioning.added(Versions.v2025_01_01_preview)
+  @Versioning.renamedFrom(Versions.v2025_01_01_preview, serviceTreeId)
   @doc("The device owner's platform Service Tree Id")
   platformServiceTreeId: string;
 
