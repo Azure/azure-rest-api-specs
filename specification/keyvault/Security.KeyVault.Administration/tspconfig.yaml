@@ -1,6 +1,13 @@
 parameters:
   "service-dir":
     default: "sdk/keyvault"
+  "dependencies":
+    "additionalDirectories":
+      - "specification/keyvault/Security.KeyVault.BackupRestore/"
+      - "specification/keyvault/Security.KeyVault.Common/"
+      - "specification/keyvault/Security.KeyVault.RBAC/"
+      - "specification/keyvault/Security.KeyVault.Settings/"
+    default: ""
 
 emit:
   - "@azure-tools/typespec-autorest"
