@@ -9550,10 +9550,24 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether to enable the egress gateway."
-        }
-      },
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the Istio add-on egress gateway.",
+            "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*"
+          },
+        "namespace": {
+            "type": "string",
+            "description": "Namespace that the Istio add-on egress gateway should be deployed in. If unspecified, the default is aks-istio-egress."
+          },
+        "gatewayConfigurationName": { 
+            "type": "string", 
+            "description": "Name of the gateway configuration custom resource to configure the Istio egress routing. Must be specified when enabling the Istio egress gateway. Must be deployed in the same namespace that the Istio egress gateway will be deployed in." 
+          }
+        },
       "required": [
-        "enabled"
+        "enabled",
+        "name"
       ]
     },
     "MeshRevisionProfileList": {
