@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "api-version": "2023-06-01",
+    "api-version": "2025-01-01",
     "AzureKey": "[subscription-key]",
     "reverseGeocodingBatchRequestBody": {
       "batchItems": [
         {
           "coordinates": [
-            -122.128275,
-            47.639429
+            -122.138681,
+            47.630358
           ],
           "resultTypes": [
             "Address",
@@ -17,8 +17,8 @@
         },
         {
           "coordinates": [
-            -122.341979399674,
-            47.6095253501216
+            47.630358,
+            -122.138681
           ],
           "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
         }
@@ -40,7 +40,7 @@
                 "type": "Feature",
                 "properties": {
                   "type": "Address",
-                  "confidence": "High",
+                  "confidence": "Medium",
                   "matchCodes": [
                     "Good"
                   ],
@@ -48,10 +48,12 @@
                     "locality": "Redmond",
                     "adminDistricts": [
                       {
+                        "name": "Washington",
                         "shortName": "WA"
                       },
                       {
-                        "shortName": "King"
+                        "name": "King County",
+                        "shortName": "King Co."
                       }
                     ],
                     "countryRegion": {
@@ -59,8 +61,10 @@
                       "name": "United States"
                     },
                     "postalCode": "98052",
-                    "formattedAddress": "1 Microsoft Way, Redmond, WA 98052",
-                    "addressLine": "1 Microsoft Way"
+                    "formattedAddress": "2267 152nd Ave NE, Redmond, Washington 98052, United States",
+                    "streetName": "152nd Ave NE",
+                    "streetNumber": "2267",
+                    "addressLine": "2267 152nd Ave NE"
                   },
                   "geocodePoints": [
                     {
@@ -106,14 +110,15 @@
                   47.643291717570676
                 ]
               }
-            ]
+            ],
+            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
           },
           {
-            "optionalId": "3K5O3Y832J2YV6D7XNGUSM4ECCUGDEFN172CJQNN",
             "error": {
-              "code": "400 Bad Request",
-              "message": "The provided coordinates in query are invalid, out of range, or not in the expected format"
-            }
+              "code": "Bad Request",
+              "message": "The provided coordinates (-122.138681,47.630358) in coordinates field are invalid or out of range"
+            },
+            "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
           }
         ]
       }
