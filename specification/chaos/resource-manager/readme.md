@@ -39,6 +39,38 @@ These settings apply only when `--tag=package-preview-2024-11` is specified on t
 input-file:
   - Microsoft.Chaos/preview/2024-11-01-preview/openapi.json
 suppressions:
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/targetTypes/{targetTypeName}"]
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: PathForTrackedResourceTypes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/targetTypes/{targetTypeName}/capabilityTypes/{capabilityTypeName}"]
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.TargetType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes    
+  - code: AllTrackedResourcesMustHaveDelete
+    from: openapi.json
+    where: $.definitions.CapabilityType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes 
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.TargetType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.CapabilityType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcesMustHavePut
+    from: openapi.json
+    where: $.definitions.TargetType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcesMustHavePut
+    from: openapi.json
+    where: $.definitions.CapabilityType
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes         
   - code: TrackedExtensionResourcesAreNotAllowed
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
