@@ -78,9 +78,13 @@ model NetworkDeviceProperties {
   @doc("The device's rack location's ARM Id string")
   dcRackLocationArmId: string;
 
-  @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.deleted(Versions.v2025_01_01_preview)
   @doc("The device owner's Service Tree Id")
   serviceTreeId: string;
+
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's platform Service Tree Id")
+  platformServiceTreeId: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
   @doc("Additional Device Interface IP addresses")
