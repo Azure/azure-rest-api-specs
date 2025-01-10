@@ -35,20 +35,13 @@ model Target extends Azure.ResourceManager.Foundations.ProxyResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
   location?: azureLocation;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Target properties.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  properties: TargetProperties;
+  properties: Record<unknown>;
 }
-
-/**
- * Target properties.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Required to avoid SDK breaking change."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Required to avoid SDK breaking change."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-model TargetProperties is Record<unknown>;
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
   ParentResourceParameters;
