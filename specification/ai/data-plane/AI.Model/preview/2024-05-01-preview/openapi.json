@@ -584,10 +584,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -596,14 +592,18 @@
             "$ref": "#/definitions/ChatChoice"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
         "id",
         "created",
         "model",
-        "usage",
-        "choices"
+        "choices",
+        "usage"
       ]
     },
     "ChatCompletionsNamedToolChoice": {
@@ -688,7 +688,7 @@
     },
     "ChatCompletionsResponseFormatJsonSchemaDefinition": {
       "type": "object",
-      "description": "Defines the response format for chat completions as JSON with a given schema. The AI model\nwill need to adhere to this schema when generating completions.",
+      "description": "Defines the response format for chat completions as JSON with a given schema.\nThe AI model will need to adhere to this schema when generating completions.",
       "properties": {
         "name": {
           "type": "string",
@@ -696,7 +696,7 @@
         },
         "schema": {
           "type": "object",
-          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\nNote that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation\nto determine what is supported.",
+          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\nNote that AI models usually only support a subset of the keywords defined by JSON schema.\nConsult your AI model documentation to determine what is supported.",
           "additionalProperties": {}
         },
         "description": {
@@ -705,7 +705,7 @@
         },
         "strict": {
           "type": "boolean",
-          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\nnot supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\nIf false, and the provided JSON schema contains keywords not supported\nby the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.",
+          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\nnot supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\nIf false, and the provided JSON schema contains keywords not supported by the AI model,\nthe AI model will not error out. Instead it will ignore the unsupported keywords.",
           "default": false
         }
       },
@@ -1477,10 +1477,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -1489,13 +1485,16 @@
             "$ref": "#/definitions/StreamingChatChoiceUpdate"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
         "id",
         "created",
         "model",
-        "usage",
         "choices"
       ]
     },
