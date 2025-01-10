@@ -5,25 +5,29 @@ on: pull_request
 jobs:
   TypeSpec-Requirement:
     name: TypeSpec Requirement
-    strategy:
-      fail-fast: false
-      matrix:
-        spec-type: [data-plane, resource-manager]
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
-          fetch-depth: 2
+    - uses: actions/checkout@v4
+      with:
+        # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
+        fetch-depth: 2
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+    - name: Setup Node and run `npm ci`
+      uses: ./.github/actions/setup-node-npm-ci
 
-      - run: |
-          eng/scripts/TypeSpec-Requirement.ps1 `
-            -BaseCommitish HEAD^ `
-            -TargetCommitish HEAD `
-            -SpecType ${{ matrix.spec-type }}
-        shell: pwsh
+    - run: |
+        eng/scripts/TypeSpec-Requirement.ps1 `
+          -BaseCommitish HEAD^ `
+          -TargetCommitish HEAD `
+      id: tsr-ps1
+      shell: pwsh
+
+    # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
+    - uses: ./.github/actions/add-label-artifact
+      name: Upload artifact with results
+      with:
+        name: "brownfield"
+        value: "${{ steps.tsr-ps1.outputs.brownfield == 'true' }}"
+

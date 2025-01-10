@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/cognitivelanguage/authoring/analyzetext"
+    default: "sdk/cognitivelanguage"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -14,8 +14,8 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzetext-authoring.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Language.Authoring.Analyzetext"
+    package-dir: "Azure.AI.Language.Text.Authoring"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.AI.Language.Authoring.Analyzetext"
+    namespace: "Azure.AI.Language.Text.Authoring"
     flavor: azure

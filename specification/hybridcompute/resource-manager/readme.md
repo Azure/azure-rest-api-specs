@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-09
+tag: package-preview-2024-11
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -76,6 +76,16 @@ directive:
   # we don't want enable PATCH for run command
   - remove-operation: MachineRunCommands_Update
 
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-11-10-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -410,4 +420,8 @@ suppressions:
     from: HybridCompute.json
     where: $.definitions.AgentVersion
     reason: Previously approved and released, would require potentially breaking changes
+  - code: GetCollectionResponseSchema
+    from: HybridCompute.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions"]
+    reason: False positive. See https://github.com/Azure/azure-openapi-validator/issues/750
 ```

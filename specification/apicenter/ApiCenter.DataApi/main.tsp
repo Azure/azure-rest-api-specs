@@ -20,11 +20,14 @@ using Azure.Core;
   title: "Azure API Center Data API",
 })
 @server(
-  "https://{serviceName}.data.azure-apicenter.net",
+  "https://{serviceName}.data.{region}.azure-apicenter.ms",
   "Data API service endpoint",
   {
     @doc("Region-unique API Center service name")
     serviceName: string,
+
+    @doc("Region name")
+    region: string,
   }
 )
 @versioned(ApiCenter.DataApi.Versions)

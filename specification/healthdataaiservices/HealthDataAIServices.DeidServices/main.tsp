@@ -15,11 +15,11 @@ using Azure.Core.Traits;
   title: "Azure Health Data Services de-identification service",
 })
 @server(
-  "https://{endpoint}",
+  "{endpoint}",
   "De-identification Service service endpoint",
   {
     @doc("Url of your De-identification Service.")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(HealthDataAIServices.DeidServices.Versions)
@@ -38,7 +38,6 @@ model AadToken
 
 @doc("Azure Health Data Services de-identification service versions.")
 enum Versions {
-  @doc("Public preview release version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_07_12_preview: "2024-07-12-preview",
+  v2024_11_15: "2024-11-15",
 }
