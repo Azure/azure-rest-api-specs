@@ -10,13 +10,13 @@ namespace AI.Model;
 union EmbeddingInputType {
   string,
 
-  @doc("to do")
+  @doc("Indicates the input is a general text input.")
   text: "text",
 
-  @doc("to do")
+  @doc("Indicates the input represents a search query to find the most relevant documents in your vector database.")
   query: "query",
 
-  @doc("to do")
+  @doc("Indicates the input represents a document that is stored in a vector database.")
   document: "document",
 }
 
@@ -52,6 +52,9 @@ union EmbeddingEncodingFormat {
   recommendations, and other similar scenarios.
   """)
 model EmbeddingsResult {
+  @doc("Unique identifier for the embeddings result.")
+  id: string;
+
   @doc("Embedding values for the prompts submitted in the request.")
   data: EmbeddingItem[];
 
@@ -109,23 +112,23 @@ model ModelInfo {
 union ModelType {
   string,
 
-  @doc("Embeddings.")
+  @doc("A model capable of generating embeddings from a text")
   embeddings: "embeddings",
 
-  @doc("Image generation")
+  @doc("A model capable of generating images from an image and text description")
   image_generation: "image_generation",
 
-  @doc("Text generation")
+  @doc("A text generation model")
   text_generation: "text_generation",
 
-  @doc("Image embeddings")
+  @doc("A model capable of generating embeddings from an image")
   image_embeddings: "image_embeddings",
 
-  @doc("Audio generation")
+  @doc("A text-to-audio generative model")
   audio_generation: "audio_generation",
 
-  @doc("Chat completions")
-  chat: "chat",
+  @doc("A model capable of taking chat-formatted messages and generate responses")
+  chat_completion: "chat_completion",
 }
 
 alias AdditionalRequestHeaders = {
