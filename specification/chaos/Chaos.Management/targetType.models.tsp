@@ -9,22 +9,38 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Chaos;
 
 /**
  * Model that represents a Target Type resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
-model TargetType
-  is Azure.ResourceManager.ProxyResource<TargetTypeProperties, false> {
+@Azure.ResourceManager.Private.armResourceInternal(TargetTypeProperties)
+@includeInapplicableMetadataInPayload(false)
+model TargetType extends Azure.ResourceManager.Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = TargetType,
     KeyName = "targetTypeName",
     SegmentName = "targetTypes",
     NamePattern = "^[a-zA-Z0-9_\\-\\.]+$"
   >;
+
+  /**
+   * Azure resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: azureLocation;
+
+  /**
+   * Target type properties.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  properties: TargetTypeProperties;
 }
 
 /**

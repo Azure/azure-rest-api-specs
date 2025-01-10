@@ -2397,10 +2397,13 @@
       "type": "object",
       "description": "Model that represents a Capability Type resource.",
       "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location."
+        },
         "properties": {
           "$ref": "#/definitions/CapabilityTypeProperties",
-          "description": "The properties of the capability type resource.",
-          "x-ms-client-flatten": true
+          "description": "The properties of the capability type resource."
         }
       },
       "allOf": [
@@ -3106,16 +3109,16 @@
       "type": "object",
       "description": "Describes an experiment update.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -3563,17 +3566,19 @@
       "type": "object",
       "description": "Model that represents a Target resource.",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The properties of the target resource.",
-          "additionalProperties": {},
-          "x-ms-client-flatten": true
-        },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure resource location."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The properties of the target resource.",
+          "additionalProperties": {}
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -3642,10 +3647,13 @@
       "type": "object",
       "description": "Model that represents a Target Type resource.",
       "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Azure resource location."
+        },
         "properties": {
           "$ref": "#/definitions/TargetTypeProperties",
-          "description": "The properties of the target type resource.",
-          "x-ms-client-flatten": true
+          "description": "The properties of the target type resource."
         }
       },
       "required": [

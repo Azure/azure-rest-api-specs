@@ -8,21 +8,36 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Chaos;
 
 /**
  * Model that represents a Capability Type resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
 @parentResource(TargetType)
-model CapabilityType
-  is Azure.ResourceManager.ProxyResource<CapabilityTypeProperties> {
+@includeInapplicableMetadataInPayload(false)
+model CapabilityType extends Azure.ResourceManager.Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = CapabilityType,
     KeyName = "capabilityTypeName",
     SegmentName = "capabilityTypes",
     NamePattern = "^[a-zA-Z0-9\\-\\.]+-\\d\\.\\d$"
   >;
+
+  /**
+   * Azure resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: azureLocation;
+
+  /**
+   * Capability type properties.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  properties?: CapabilityTypeProperties;
 }
 
 /**

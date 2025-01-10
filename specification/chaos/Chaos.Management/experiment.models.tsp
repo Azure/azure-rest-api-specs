@@ -227,8 +227,8 @@ model CustomerDataStorageProperties {
  * Describes an experiment update.
  */
 model ExperimentUpdate {
-  ...Azure.ResourceManager.Foundations.TagsUpdateModel<Experiment>;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<Experiment>;
 }
 
 /**
