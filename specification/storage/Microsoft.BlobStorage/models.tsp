@@ -179,8 +179,6 @@ model ListContainersSegmentResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The container segment. */
-  // TODO: should this be unwrapped? The swagger shows it as wrapped. Example in docs: https://learn.microsoft.com/en-us/rest/api/storageservices/list-containers2?tabs=microsoft-entra-id#response-body
-  @Azure.Core.items
   @Xml.name("Containers")
   containerItems: ContainerItem[];
 
@@ -1021,7 +1019,6 @@ model ArrowField {
 }
 
 /** Represents the Parquet configuration. */
-// TODO: in swagger this was a type: object...is record unknown correct?
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model ParquetConfiguration is Record<unknown>;
 
@@ -1900,8 +1897,6 @@ model BlobName {
   @Xml.name("Encoded")
   encoded: boolean;
 
-  // FIXME: does this need the unwrapped decorator around it? Swagger specified this property as x-ms-text
-  // Related issue: https://github.com/microsoft/typespec/issues/2970
   /** The blob name. */
   @Xml.unwrapped content: string;
 }
