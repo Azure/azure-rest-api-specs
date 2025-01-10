@@ -217,68 +217,53 @@ model CiConfig {
 }
 
 @doc("Model representing summary of test run results.")
-model TestRunResultsSummary {
+model ReportingSummary {
   @doc("Total number of tests executed.")
-  @visibility("read")
   numTotalTests: int32;
 
   @doc("Number of tests that passed.")
-  @visibility("read")
   numPassedTests: int32;
 
   @doc("Number of tests that failed.")
-  @visibility("read")
   numFailedTests: int32;
 
   @doc("Number of tests that were skipped.")
-  @visibility("read")
   numSkippedTests: int32;
 
   @doc("Number of tests that were flaky.")
-  @visibility("read")
   numFlakyTests: int32;
 
   @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
-  @visibility("read")
   status: TestStatus;
 }
 
 @doc("Model representing summary information about a test run.")
-model TestRunSummary {
+model CloudRunSummary {
   @doc("Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
-  @visibility("read")
   status: TestRunStatus;
 
   @doc("Start time of the test run in datetime(RFC 3339 literal format).")
-  @visibility("read")
-  startTime: string;
+  startTime: utcDateTime;
 
   @doc("End time of the test run.")
-  @visibility("read")
-  endTime: string;
+  endTime: utcDateTime;
 
   @doc("Billable time for the test run. Available after testRun Ends")
-  @visibility("read")
   billableTime: int32;
 
   @doc("Total time taken for the test run.")
-  @visibility("read")
   totalTime: int32;
 
   @doc("Number of browser sessions used in the test run.")
-  @visibility("read")
   numBrowserSessions: int32;
 
   @doc("List of jobs associated with the test run.")
-  @visibility("read")
   jobs: string[];
 
   @doc("List of projects associated with the test run.")
-  @visibility("read")
   projects: string[];
 
   @doc("List of tags associated with the test run.")
-  @visibility("read")
   tags: string[];
 
   @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
@@ -292,12 +277,10 @@ model TestRunSummary {
 @doc("Model to update shard result.")
 model UpdateShardExecutionSummary {
   @doc("Start time of the test run in datetime(RFC 3339 literal format).")
-  @visibility("read")
-  startTime: string;
+  startTime: utcDateTime;
 
   @doc("End time of the test run.")
-  @visibility("read")
-  endTime: string;
+  endTime: utcDateTime;
 
   @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
   @maxItems(1000)
@@ -322,19 +305,15 @@ model UploadMetadata {
 @doc("Model representing a test results URI.")
 model TestResultsUri {
   @doc("URI for accessing test results.")
-  @visibility("read")
   uri: string;
 
   @doc("Creation timestamp of the test results URI- RFC 3339 literal format")
-  @visibility("read")
   createdAt: string;
 
   @doc("Expiration timestamp of the test results URI- RFC 3339 literal format")
-  @visibility("read")
   expiresAt: string;
 
   @doc("Access level for the test results URI.")
-  @visibility("read")
   accessLevel: AccessLevel;
 }
 
@@ -344,7 +323,7 @@ model TestResultsUri {
 model TestRun {
   @doc("Identifier of the test run.")
   @key
-  @visibility("read")
+  @visibility("read", "create")
   testRunId: string;
 
   @doc("Display name of the test run, unicode characters allowed.")
@@ -353,23 +332,19 @@ model TestRun {
 
   @doc("Start time of the test run -RFC 3339 literal format")
   @visibility("read", "create")
-  startTime: string;
+  startTime: utcDateTime;
 
   @doc("Creator's identifier.")
-  @visibility("read")
   creatorId: string;
 
   @doc("Creator's name.")
-  @visibility("read")
   creatorName: string;
 
   @doc("Summary of the test run.")
-  @visibility("read")
-  summary: TestRunSummary;
+  summary: CloudRunSummary;
 
   @doc("Summary of test run results.")
-  @visibility("read")
-  resultsSummary: TestRunResultsSummary;
+  resultsSummary: ReportingSummary;
 
   @doc("Continuous integration configuration.")
   @visibility("read", "create")
@@ -380,11 +355,9 @@ model TestRun {
   testRunConfig: TestRunConfig;
 
   @doc("URI for accessing test results.")
-  @visibility("read")
   testResultsUri: TestResultsUri;
 
   @doc("Flag indicating if cloud run is enabled.")
-  @visibility("read")
   isCloudRunEnabled: boolean;
 
   @doc("Must be set to true when Customers want to use Reporting Feature ")
@@ -526,7 +499,6 @@ model TestResult {
   resultsSummary: TestResultsSummary;
 
   @doc("Previous retry summaries.")
-  @visibility("read")
   previousRetries?: PreviousRetrySummary[];
 
   @doc("List of tags associated with the test result.")
@@ -600,7 +572,7 @@ model TestResultsSummary {
   duration: int64;
 
   @doc("Start time of the test execution.- (RFC 3339 literal format)")
-  startTime: string;
+  startTime: utcDateTime;
 
   @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
   attachmentsMetadata?: string;
@@ -622,7 +594,7 @@ model PreviousRetrySummary {
   duration: int64;
 
   @doc("Start time of the test execution- RFC 3339 literal format ")
-  startTime: string;
+  startTime: utcDateTime;
 
   @doc("Metadata related to attachments.")
   attachmentsMetadata: string;
@@ -652,35 +624,6 @@ model StatusSummaryList {
 model TestRunsMetadata {
   @doc("List of CI branches for a testrun")
   branches: string[];
-}
-
-// Model representing summary statistics of tests
-@doc("Summary statistics of tests.")
-model TestSummary {
-  @doc("Total number of tests.")
-  @key
-  @visibility("read")
-  id: "summary";
-
-  @doc("Total number of tests.")
-  @visibility("read")
-  total: int64;
-
-  @doc("Number of tests that passed.")
-  @visibility("read")
-  passed: int64;
-
-  @doc("Number of tests that failed.")
-  @visibility("read")
-  failed: int64;
-
-  @doc("Number of tests that were skipped.")
-  @visibility("read")
-  skipped: int64;
-
-  @doc("Number of tests that were flaky.")
-  @visibility("read")
-  flaky: int64;
 }
 
 // Operations and interfaces for API endpoints remain unchanged

@@ -906,6 +906,153 @@
         ]
       }
     },
+    "CloudRunSummary": {
+      "type": "object",
+      "description": "Model representing summary information about a test run.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TestRunStatus",
+          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the test run."
+        },
+        "billableTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Billable time for the test run. Available after testRun Ends"
+        },
+        "totalTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total time taken for the test run."
+        },
+        "numBrowserSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of browser sessions used in the test run."
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
+          "maxItems": 1000,
+          "items": {
+            "type": "string"
+          }
+        },
+        "uploadMetadata": {
+          "$ref": "#/definitions/UploadMetadata",
+          "description": "Metadata related to test run uploads."
+        }
+      },
+      "required": [
+        "status",
+        "startTime",
+        "endTime",
+        "billableTime",
+        "totalTime",
+        "numBrowserSessions",
+        "jobs",
+        "projects",
+        "tags"
+      ]
+    },
+    "CloudRunSummaryCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing summary information about a test run.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TestRunStatus",
+          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the test run."
+        },
+        "billableTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Billable time for the test run. Available after testRun Ends"
+        },
+        "totalTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total time taken for the test run."
+        },
+        "numBrowserSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of browser sessions used in the test run."
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
+          "maxItems": 1000,
+          "items": {
+            "type": "string"
+          }
+        },
+        "uploadMetadata": {
+          "$ref": "#/definitions/UploadMetadataCreateOrUpdate",
+          "description": "Metadata related to test run uploads."
+        }
+      }
+    },
     "OsType": {
       "type": "string",
       "description": "Supported OS  for tests",
@@ -1004,6 +1151,7 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Start time of the test execution- RFC 3339 literal format "
         },
         "attachmentsMetadata": {
@@ -1026,6 +1174,84 @@
         "startTime",
         "attachmentsMetadata"
       ]
+    },
+    "ReportingSummary": {
+      "type": "object",
+      "description": "Model representing summary of test run results.",
+      "properties": {
+        "numTotalTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tests executed."
+        },
+        "numPassedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that passed."
+        },
+        "numFailedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that failed."
+        },
+        "numSkippedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were skipped."
+        },
+        "numFlakyTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were flaky."
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        }
+      },
+      "required": [
+        "numTotalTests",
+        "numPassedTests",
+        "numFailedTests",
+        "numSkippedTests",
+        "numFlakyTests",
+        "status"
+      ]
+    },
+    "ReportingSummaryCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing summary of test run results.",
+      "properties": {
+        "numTotalTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tests executed."
+        },
+        "numPassedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that passed."
+        },
+        "numFailedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that failed."
+        },
+        "numSkippedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were skipped."
+        },
+        "numFlakyTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were flaky."
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        }
+      }
     },
     "RunnerType": {
       "type": "string",
@@ -1329,7 +1555,6 @@
           "items": {
             "$ref": "#/definitions/PreviousRetrySummary"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "tags": {
@@ -1398,6 +1623,7 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Start time of the test execution.- (RFC 3339 literal format)"
         },
         "attachmentsMetadata": {
@@ -1417,23 +1643,19 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "URI for accessing test results.",
-          "readOnly": true
+          "description": "URI for accessing test results."
         },
         "createdAt": {
           "type": "string",
-          "description": "Creation timestamp of the test results URI- RFC 3339 literal format",
-          "readOnly": true
+          "description": "Creation timestamp of the test results URI- RFC 3339 literal format"
         },
         "expiresAt": {
           "type": "string",
-          "description": "Expiration timestamp of the test results URI- RFC 3339 literal format",
-          "readOnly": true
+          "description": "Expiration timestamp of the test results URI- RFC 3339 literal format"
         },
         "accessLevel": {
           "$ref": "#/definitions/AccessLevel",
-          "description": "Access level for the test results URI.",
-          "readOnly": true
+          "description": "Access level for the test results URI."
         }
       },
       "required": [
@@ -1443,6 +1665,28 @@
         "accessLevel"
       ]
     },
+    "TestResultsUriCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing a test results URI.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI for accessing test results."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp of the test results URI- RFC 3339 literal format"
+        },
+        "expiresAt": {
+          "type": "string",
+          "description": "Expiration timestamp of the test results URI- RFC 3339 literal format"
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/AccessLevel",
+          "description": "Access level for the test results URI."
+        }
+      }
+    },
     "TestRun": {
       "type": "object",
       "description": "Model representing detailed information about a test run.",
@@ -1450,7 +1694,10 @@
         "testRunId": {
           "type": "string",
           "description": "Identifier of the test run.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
@@ -1459,6 +1706,7 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Start time of the test run -RFC 3339 literal format",
           "x-ms-mutability": [
             "read",
@@ -1467,23 +1715,19 @@
         },
         "creatorId": {
           "type": "string",
-          "description": "Creator's identifier.",
-          "readOnly": true
+          "description": "Creator's identifier."
         },
         "creatorName": {
           "type": "string",
-          "description": "Creator's name.",
-          "readOnly": true
+          "description": "Creator's name."
         },
         "summary": {
-          "$ref": "#/definitions/TestRunSummary",
-          "description": "Summary of the test run.",
-          "readOnly": true
+          "$ref": "#/definitions/CloudRunSummary",
+          "description": "Summary of the test run."
         },
         "resultsSummary": {
-          "$ref": "#/definitions/TestRunResultsSummary",
-          "description": "Summary of test run results.",
-          "readOnly": true
+          "$ref": "#/definitions/ReportingSummary",
+          "description": "Summary of test run results."
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
@@ -1503,13 +1747,11 @@
         },
         "testResultsUri": {
           "$ref": "#/definitions/TestResultsUri",
-          "description": "URI for accessing test results.",
-          "readOnly": true
+          "description": "URI for accessing test results."
         },
         "isCloudRunEnabled": {
           "type": "boolean",
-          "description": "Flag indicating if cloud run is enabled.",
-          "readOnly": true
+          "description": "Flag indicating if cloud run is enabled."
         },
         "isCloudReportingEnabled": {
           "type": "boolean",
@@ -1709,6 +1951,14 @@
       "type": "object",
       "description": "Model representing detailed information about a test run.",
       "properties": {
+        "testRunId": {
+          "type": "string",
+          "description": "Identifier of the test run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "displayName": {
           "type": "string",
           "description": "Display name of the test run, unicode characters allowed.",
@@ -1716,11 +1966,28 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Start time of the test run -RFC 3339 literal format",
           "x-ms-mutability": [
             "read",
             "create"
           ]
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "Creator's identifier."
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "Creator's name."
+        },
+        "summary": {
+          "$ref": "#/definitions/CloudRunSummaryCreateOrUpdate",
+          "description": "Summary of the test run."
+        },
+        "resultsSummary": {
+          "$ref": "#/definitions/ReportingSummaryCreateOrUpdate",
+          "description": "Summary of test run results."
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
@@ -1738,6 +2005,14 @@
             "create"
           ]
         },
+        "testResultsUri": {
+          "$ref": "#/definitions/TestResultsUriCreateOrUpdate",
+          "description": "URI for accessing test results."
+        },
+        "isCloudRunEnabled": {
+          "type": "boolean",
+          "description": "Flag indicating if cloud run is enabled."
+        },
         "isCloudReportingEnabled": {
           "type": "boolean",
           "description": "Must be set to true when Customers want to use Reporting Feature ",
@@ -1747,55 +2022,6 @@
           ]
         }
       }
-    },
-    "TestRunResultsSummary": {
-      "type": "object",
-      "description": "Model representing summary of test run results.",
-      "properties": {
-        "numTotalTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of tests executed.",
-          "readOnly": true
-        },
-        "numPassedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that passed.",
-          "readOnly": true
-        },
-        "numFailedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that failed.",
-          "readOnly": true
-        },
-        "numSkippedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were skipped.",
-          "readOnly": true
-        },
-        "numFlakyTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were flaky.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "numTotalTests",
-        "numPassedTests",
-        "numFailedTests",
-        "numSkippedTests",
-        "numFlakyTests",
-        "status"
-      ]
     },
     "TestRunShardDto": {
       "type": "object",
@@ -1872,92 +2098,6 @@
           }
         ]
       }
-    },
-    "TestRunSummary": {
-      "type": "object",
-      "description": "Model representing summary information about a test run.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/TestRunStatus",
-          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Start time of the test run in datetime(RFC 3339 literal format).",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "description": "End time of the test run.",
-          "readOnly": true
-        },
-        "billableTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Billable time for the test run. Available after testRun Ends",
-          "readOnly": true
-        },
-        "totalTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total time taken for the test run.",
-          "readOnly": true
-        },
-        "numBrowserSessions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of browser sessions used in the test run.",
-          "readOnly": true
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "errorMessages": {
-          "type": "array",
-          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
-          "maxItems": 1000,
-          "items": {
-            "type": "string"
-          }
-        },
-        "uploadMetadata": {
-          "$ref": "#/definitions/UploadMetadata",
-          "description": "Metadata related to test run uploads."
-        }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "billableTime",
-        "totalTime",
-        "numBrowserSessions",
-        "jobs",
-        "projects",
-        "tags"
-      ]
     },
     "TestRunsMetadata": {
       "type": "object",
@@ -2053,13 +2193,13 @@
       "properties": {
         "startTime": {
           "type": "string",
-          "description": "Start time of the test run in datetime(RFC 3339 literal format).",
-          "readOnly": true
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
         },
         "endTime": {
           "type": "string",
-          "description": "End time of the test run.",
-          "readOnly": true
+          "format": "date-time",
+          "description": "End time of the test run."
         },
         "errorMessages": {
           "type": "array",
@@ -2104,6 +2244,27 @@
         "numTotalAttachments",
         "sizeTotalAttachments"
       ]
+    },
+    "UploadMetadataCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing upload metadata.",
+      "properties": {
+        "numTestResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of test results uploaded."
+        },
+        "numTotalAttachments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of attachments uploaded."
+        },
+        "sizeTotalAttachments": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of attachments uploaded in Bytes."
+        }
+      }
     },
     "UploadTestResultsRequest": {
       "type": "object",
