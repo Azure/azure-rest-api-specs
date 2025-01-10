@@ -1,6 +1,7 @@
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
@@ -22,4 +23,30 @@ model GiVersionProperties {
   @minLength(1)
   @maxLength(255)
   version: string;
+}
+
+@added(Versions.v20241201_preview)
+@doc("Provides GiVersion query parameter for list operations.")
+model GiVersionFilter {
+  @query
+  @doc("If provided, filters the results for the given shape")
+  @minLength(1)
+  @maxLength(255)
+  shape?: SystemShapes;
+
+  @query
+  @doc("Filters the result for the given Azure Availability Zone")
+  zone?: string;
+}
+
+@added(Versions.v20241201_preview)
+@doc("Allowed values for GI Versions Shape filter")
+union SystemShapes {
+  @doc("Exadata X9M shape")
+  ExadataX9M: "Exadata.X9M",
+
+  @doc("Exadata DB on Exascale Infrastructure shape")
+  ExaDbXs: "ExaDbXS",
+
+  string,
 }
