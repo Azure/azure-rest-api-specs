@@ -61,7 +61,7 @@ suppressions:
     from: deviceupdate.json
     reason: Cannot be removed as it will be a breaking change. Property exists in GA version. 
     where:
-     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[5]                
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[4]                
   - code: AvoidAnonymousTypes
     from: deviceupdate.json
     reason: Type will not be shared
