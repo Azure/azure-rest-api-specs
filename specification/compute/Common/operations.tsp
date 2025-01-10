@@ -235,7 +235,7 @@ op ComputeResourceActionAsync<
   Error
 >;
 /** Custom ArmResourceActionAsync operation template with CloudError as Error */
-op DedicatedHostResourceActionAsync<
+op ComputeResourceActionAsyncBase<
   Resource extends Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,

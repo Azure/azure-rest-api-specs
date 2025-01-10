@@ -280,3 +280,4 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineRunCommands.createOrUpdate::parameters.body,
   "runCommand"
 );
+@@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
