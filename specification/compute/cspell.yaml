@@ -1,0 +1,96 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - actuser
+  - armcompute
+  - artifacttypes
+  - aspnet
+  - cdrp
+  - cloudservice
+  - colocation
+  - containerservice
+  - cscfg
+  - csdef
+  - datadisk
+  - dcos
+  - deallocates
+  - dscp
+  - errordetail
+  - exceptiontype
+  - hotpatching
+  - iloveyou
+  - imds
+  - ipconfiguration
+  - jumpbox
+  - kbid
+  - manualupgrade
+  - mesos
+  - nvme
+  - ochestrator
+  - osdisk
+  - osdiskforlinuxsimple
+  - osdiskforwindowssimple
+  - overprovision
+  - overprovisioned
+  - overridable
+  - paramter
+  - poweredoff
+  - poweroff
+  - reimage
+  - reimageall
+  - reimaged
+  - reimages
+  - reimaging
+  - reprovisioning
+  - rolledback
+  - salinuxvm
+  - sawinvm
+  - scaleset
+  - scalesets
+  - securestring
+  - sles
+  - ssdzrs
+  - sshkey
+  - ssword
+  - substatuses
+  - swappable
+  - templatelink
+  - uefi
+  - unattend
+  - uniquestring
+  - vhds
+  - vhdx
+  - virtualmachines
+  - vmextension
+  - vmimage
+  - vmimages
+  - vmos
+  - waagent
+overrides:
+  - filename: >-
+      **/specification/compute/resource-manager/Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/compute/resource-manager/Microsoft.ContainerService/stable/2016-03-30/containerService.json
+    words:
+      - ochestrator
+  - filename: >-
+      **/specification/compute/resource-manager/Microsoft.ContainerService/stable/2016-09-30/containerService.json
+    words:
+      - ochestrator
+  - filename: '**/specification/compute/resource-manager/readme.md'
+    words:
+      - cloudservice
+  - filename: '**/specification/compute/resource-manager/readme.python.md'
+    words:
+      - modelerfour
+      - multiapiscript
+

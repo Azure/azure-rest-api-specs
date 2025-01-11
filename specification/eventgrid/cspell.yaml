@@ -1,0 +1,69 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical so the file is easier to manage
+version: '0.2'
+import:
+  - ../../cspell.yaml
+words:
+  - acssms
+  - actiongroups
+  - aznamespaces
+  - backcompat
+  - byval
+  - clientsession
+  - cloudevents
+  - datacontenttype
+  - dataschema
+  - dataversion
+  - deadletter
+  - defintion
+  - dicom
+  - eventdata
+  - eventgrid
+  - eventsubscriptions
+  - eventtime
+  - fhir
+  - fileurl
+  - gcch
+  - geofence
+  - geofencing
+  - geopair
+  - jhon
+  - loglevel
+  - mqtt
+  - nonincreasing
+  - renewlock
+  - specversion
+  - tdigest
+  - tmedia
+  - trepository
+  - tsize
+  - ttag
+  - unversioned
+  - updation
+  - useragent
+overrides:
+  - filename: >-
+      **/specification/eventgrid/data-plane/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+    words:
+      - whatsapp
+  - filename: >-
+      **/specification/eventgrid/data-plane/Microsoft.EventGrid/stable/2018-01-01/SystemEvents.json
+    words:
+      - clientsession
+  - filename: >-
+      **/specification/eventgrid/data-plane/Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+    words:
+      - whatsapp
+  - filename: >-
+      **/specification/eventgrid/data-plane/Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
+    words:
+      - whatsapp
+  - filename: >-
+      **/specification/eventgrid/data-plane/Microsoft.EventGrid/**/EventGrid.json
+    words:
+      - renewlock
+
