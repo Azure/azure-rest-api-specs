@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
@@ -14,6 +15,7 @@ namespace Microsoft.Chaos;
 /**
  * PrivateAccesses tracked resource.
  */
+@removed(Versions.v2025_02_01)
 model PrivateAccess
   is Azure.ResourceManager.TrackedResource<PrivateAccessProperties, false> {
   ...ResourceNameParameter<
@@ -27,6 +29,7 @@ model PrivateAccess
 /**
  * Describes a private access update.
  */
+@removed(Versions.v2025_02_01)
 model PrivateAccessPatch {
   /**
    * The tags of the private access resource.
@@ -37,6 +40,7 @@ model PrivateAccessPatch {
 /**
  * The properties of a private access resource
  */
+@removed(Versions.v2025_02_01)
 model PrivateAccessProperties {
   /**
    * Most recent provisioning state for the given privateAccess resource.
@@ -59,6 +63,7 @@ model PrivateAccessProperties {
 /**
  * Public Network Access Control for PrivateAccess resource.
  */
+@removed(Versions.v2025_02_01)
 union PublicNetworkAccessOption {
   string,
 
@@ -76,4 +81,5 @@ union PublicNetworkAccessOption {
 /**
  * Model that represents a list of private access resources and a link for pagination.
  */
+@removed(Versions.v2025_02_01)
 model PrivateAccessListResult is Azure.Core.Page<PrivateAccess>;

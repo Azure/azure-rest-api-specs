@@ -7,6 +7,7 @@ import "./common.models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
@@ -16,6 +17,7 @@ namespace Microsoft.Chaos;
  * The private endpoint connection resource.
  */
 @parentResource(PrivateAccess)
+@removed(Versions.v2025_02_01)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
@@ -29,6 +31,7 @@ model PrivateEndpointConnection
 /**
  * Properties of the private endpoint connection.
  */
+@removed(Versions.v2025_02_01)
 model PrivateEndpointConnectionProperties {
   /**
    * The group ids for the private endpoint resource.
@@ -56,6 +59,7 @@ model PrivateEndpointConnectionProperties {
 /**
  * The private endpoint resource.
  */
+@removed(Versions.v2025_02_01)
 model PrivateEndpoint {
   /**
    * The ARM identifier for private endpoint.
@@ -67,6 +71,7 @@ model PrivateEndpoint {
 /**
  * A collection of information about the state of the connection between service consumer and provider.
  */
+@removed(Versions.v2025_02_01)
 model PrivateLinkServiceConnectionState {
   /**
    * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
@@ -87,6 +92,7 @@ model PrivateLinkServiceConnectionState {
 /**
  * The private endpoint connection status.
  */
+@removed(Versions.v2025_02_01)
 union PrivateEndpointServiceConnectionStatus {
   string,
 
@@ -109,12 +115,14 @@ union PrivateEndpointServiceConnectionStatus {
 /**
  * A list of private link resources
  */
+@removed(Versions.v2025_02_01)
 model PrivateEndpointConnectionListResult
   is Azure.Core.Page<PrivateEndpointConnection>;
 
 /**
  * A private link resource.
  */
+@removed(Versions.v2025_02_01)
 model PrivateLinkResource
   is Azure.ResourceManager.TrackedResource<
     PrivateLinkResourceProperties,
@@ -131,6 +139,7 @@ model PrivateLinkResource
 /**
  * Properties of a private link resource.
  */
+@removed(Versions.v2025_02_01)
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -159,4 +168,5 @@ model PrivateLinkResourceProperties {
 /**
  * A list of private link resources
  */
+@removed(Versions.v2025_02_01)
 model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;

@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./privateAccess.models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -12,6 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Chaos;
 
 @armResourceOperations
+@removed(Versions.v2025_02_01)
 interface PrivateAccesses {
   /**
    * Get a private access resource

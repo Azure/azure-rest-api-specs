@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
@@ -91,6 +92,13 @@ model CapabilityTypeProperties {
    */
   @visibility("read")
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
+
+  /**
+   * Required Role Definition's ID that can be used to execute the capability type.
+   */
+  @added(Versions.v2025_02_01)
+  @visibility("read")
+  requiredRoleDefinitionIds?: string[];
 }
 
 /**
