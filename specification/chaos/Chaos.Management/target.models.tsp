@@ -17,11 +17,7 @@ namespace Microsoft.Chaos;
 /**
  * Model that represents a Target resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
-@Azure.ResourceManager.Private.armResourceInternal(Record<unknown>)
-@includeInapplicableMetadataInPayload(false)
-model Target extends Azure.ResourceManager.Foundations.ProxyResource {
+model Target is Azure.ResourceManager.ProxyResource<Record<unknown>> {
   ...ResourceNameParameter<
     Resource = Target,
     KeyName = "targetName",
@@ -34,21 +30,7 @@ model Target extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
   location?: azureLocation;
-
-  /**
-   * Target properties.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change." 
-  properties: TargetProperties;
 }
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Required to avoid SDK breaking change."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Required to avoid SDK breaking change."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-/**
- * Target properties.
- */
-model TargetProperties is Record<unknown>;
 
 alias TargetParentResourceParameters = BaseParameters<Target> &
   ParentResourceParameters;

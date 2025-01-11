@@ -3568,19 +3568,17 @@
       "type": "object",
       "description": "Model that represents a Target resource.",
       "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of the target resource.",
+          "additionalProperties": {},
+          "x-ms-client-flatten": true
+        },
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure resource location."
-        },
-        "properties": {
-          "$ref": "#/definitions/TargetProperties",
-          "description": "The properties of the target resource.",
-          "x-ms-client-flatten": true
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -3607,11 +3605,6 @@
       "required": [
         "value"
       ]
-    },
-    "TargetProperties": {
-      "type": "object",
-      "description": "Target properties.",
-      "additionalProperties": {}
     },
     "TargetReference": {
       "type": "object",
