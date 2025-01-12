@@ -16334,10 +16334,35 @@
       ],
       "type": "object",
       "properties": {
+        "contentSafetyLevel": {
+          "description": "[Required] Specifies the current safety level for content safety.",
+          "$ref": "#/definitions/ContentSafetyLevel"
+        },
         "contentSafetyStatus": {
           "description": "[Required] Specifies the status of content safety.",
           "$ref": "#/definitions/ContentSafetyStatus"
         }
+      },
+      "additionalProperties": false
+    },
+    "ContentSafetyLevel": {
+      "description": "Specifies the current safety level for content safety.",
+      "enum": [
+        "Blocking",
+        "Deferred"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContentSafetyLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Blocking"
+          },
+          {
+            "value": "Deferred"
+          }
+        ]
       },
       "additionalProperties": false
     },
