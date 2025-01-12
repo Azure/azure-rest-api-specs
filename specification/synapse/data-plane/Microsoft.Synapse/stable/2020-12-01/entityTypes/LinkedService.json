@@ -4887,6 +4887,49 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "authenticationType": {
+          "type": "string",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "GreenplumAuthenticationType",
+            "modelAsString": true
+          },
+          "description": "The authentication type to use. Type: string. Only used for V2."
+        },
+        "host": {
+          "type": "object",
+          "description": "Host name for connection. Type: string. Only used for V2."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer. Only used for V2."
+        },
+        "username": {
+          "type": "object",
+          "description": "Username for authentication. Type: string. Only used for V2."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string. Only used for V2."
+        },
+        "sslMode": {
+          "type": "object",
+          "description": "SSL mode for connection. Type: integer. 0: disable, 1:allow, 2: prefer, 3: require, 4: verify-ca, 5: verify-full. Type: integer. Only used for V2."
+        },
+        "connectionTimeout": {
+          "type": "object",
+          "description": "The time to wait (in seconds) while trying to establish a connection before terminating the attempt and generating an error. Type: integer. Only used for V2."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "description": "The time to wait (in seconds) while trying to execute a command before terminating the attempt and generating an error. Set to zero for infinity. Type: integer. Only used for V2."
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of password in connection string. Type: string. Only used for V2."
         }
       }
     },
