@@ -4,3 +4,5 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmtClient", "Java");
