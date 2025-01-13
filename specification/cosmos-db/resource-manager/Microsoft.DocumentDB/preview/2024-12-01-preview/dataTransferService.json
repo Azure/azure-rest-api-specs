@@ -465,25 +465,26 @@
       "type": "object",
       "description": "The properties of a DataTransfer Job",
       "properties": {
-        "sourceComponent": {
+        "dataTransferType": {
           "type": "string",
           "enum": [
-            "CosmosDBCassandra",
-            "CosmosDBMongo",
-            "CosmosDBMongoVCore",
-            "CosmosDBSql",
-            "AzureBlobStorage"
+            "CosmosDBCassandraToCosmosDBCassandra",
+            "CosmosDBCassandraToAzureBlobStorage",
+            "AzureBlobStorageToCosmosDBCassandra",
+            "CosmosDBMongoToCosmosDBMongo",
+            "CosmosDBMongoToCosmosDBMongoVCore",
+            "CosmosDBNoSqlToCosmosDBNoSql"
           ],
-          "description": "Source DataStore component"
+          "description": "Date Transfer Type"
         }
       },
       "required": [
-        "sourceComponent"
+        "dataTransferType"
       ],
-      "discriminator": "sourceComponent"
+      "discriminator": "dataTransferType"
     },
-    "SourceBlobDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with Azure Blob Storage as source",
+    "SourceBlobDestinationCassandraDataTransferProperties": {
+      "description": "The properties of DataTransfer Job with Azure Blob Storage as source and CosmosDB Cassandra as destination",
       "type": "object",
       "allOf": [
         {
@@ -491,33 +492,10 @@
         }
       ],
       "properties": {
-        "destinationComponent": {
-          "type": "string",
-          "enum": [
-            "CosmosDBCassandra"
-          ]
-        },
         "sourceDetails": {
           "$ref": "#/definitions/AzureBlobDataTransferDataSourceSinkDetails",
           "description": "Azure Storage container DataStore details"
-        }
-      },
-      "required": [
-        "destinationComponent",
-        "sourceDetails"
-      ],
-      "discriminator": "destinationComponent",
-      "x-ms-discriminator-value": "AzureBlobStorage"
-    },
-    "SourceBlobDestinationCassandraDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with Azure Blob Storage as source and Cassandra as destination",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SourceBlobDataTransferProperties"
-        }
-      ],
-      "properties": {
+        },
         "destinationDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Destination Cassandra DataStore details"
@@ -549,12 +527,13 @@
         }
       },
       "required": [
+        "sourceDetails",
         "tasks"
       ],
-      "x-ms-discriminator-value": "CosmosDBCassandra"
+      "x-ms-discriminator-value": "AzureBlobStorageToCosmosDBCassandra"
     },
-    "SourceCassandraDataTransferProperties": {
-      "description": "The properties of a Cassandra source DataTransfer Job",
+    "SourceCassandraDestinationCassandraDataTransferProperties": {
+      "description": "The properties of DataTransfer Job with CosmosDB Cassandra as source and CosmosDB Cassandra as destination",
       "type": "object",
       "allOf": [
         {
@@ -562,34 +541,10 @@
         }
       ],
       "properties": {
-        "destinationComponent": {
-          "type": "string",
-          "enum": [
-            "CosmosDBCassandra",
-            "AzureBlobStorage"
-          ]
-        },
         "sourceDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Source Cassandra DataStore details"
-        }
-      },
-      "required": [
-        "destinationComponent",
-        "sourceDetails"
-      ],
-      "discriminator": "destinationComponent",
-      "x-ms-discriminator-value": "CosmosDBCassandra"
-    },
-    "SourceCassandraDestinationCassandraDataTransferProperties": {
-      "description": "The properties of a Cassandra destination DataTransfer Job",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SourceCassandraDataTransferProperties"
-        }
-      ],
-      "properties": {
+        },
         "destinationDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Destination Cassandra DataStore details"
@@ -623,20 +578,24 @@
       "required": [
         "tasks"
       ],
-      "x-ms-discriminator-value": "CosmosDBCassandra"
+      "x-ms-discriminator-value": "CosmosDBCassandraToCosmosDBCassandra"
     },
     "SourceCassandraDestinationBlobDataTransferProperties": {
-      "description": "The properties of a Cassandra destination DataTransfer Job",
+      "description": "The properties of DataTransfer Job with CosmosDB Cassandra as source and Azure Blob container as destination",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SourceCassandraDataTransferProperties"
+          "$ref": "#/definitions/BaseDataTransferProperties"
         }
       ],
       "properties": {
+        "sourceDetails": {
+          "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
+          "description": "Source Cassandra DataStore details"
+        },
         "destinationDetails": {
           "$ref": "#/definitions/AzureBlobDataTransferDataSourceSinkDetails",
-          "description": "Destination Blob DataStore details"
+          "description": "Destination Cassandra DataStore details"
         },
         "tasks": {
           "type": "array",
@@ -668,10 +627,10 @@
         "destinationDetails",
         "tasks"
       ],
-      "x-ms-discriminator-value": "AzureBlobStorage"
+      "x-ms-discriminator-value": "CosmosDBCassandraToAzureBlobStorage"
     },
-    "SourceMongoDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with CosmosDB Mongo (RU) as source",
+    "SourceMongoDestinationMongoDataTransferProperties": {
+      "description": "The properties of DataTransfer Job with CosmosDB Mongo (RU) as source and CosmosDB Mongo (RU) as destination",
       "type": "object",
       "allOf": [
         {
@@ -679,33 +638,10 @@
         }
       ],
       "properties": {
-        "destinationComponent": {
-          "type": "string",
-          "enum": [
-            "CosmosDBMongo",
-            "CosmosDBMongoVCore"
-          ]
-        },
         "sourceDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Source Mongo DataStore details"
-        }
-      },
-      "required": [
-        "destinationComponent"
-      ],
-      "discriminator": "destinationComponent",
-      "x-ms-discriminator-value": "CosmosDBMongo"
-    },
-    "SourceMongoDestinationMongoDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with CosmosDB Mongo (RU) as source and CosmosDB Mongo (RU) as destination",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SourceMongoDataTransferProperties"
-        }
-      ],
-      "properties": {
+        },
         "destinationDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Destination Mongo DataStore details"
@@ -739,20 +675,24 @@
       "required": [
         "tasks"
       ],
-      "x-ms-discriminator-value": "CosmosDBMongo"
+      "x-ms-discriminator-value": "CosmosDBMongoToCosmosDBMongo"
     },
     "SourceMongoDestinationMongoVCoreDataTransferProperties": {
       "description": "The properties of DataTransfer Job with CosmosDB Mongo (RU) as source and CosmosDB Mongo (vCore) as destination",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SourceMongoDataTransferProperties"
+          "$ref": "#/definitions/BaseDataTransferProperties"
         }
       ],
       "properties": {
+        "sourceDetails": {
+          "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
+          "description": "Source Mongo (RU) DataStore details"
+        },
         "destinationDetails": {
           "$ref": "#/definitions/MongoVCoreDataTransferDataSourceSinkDetails",
-          "description": "Destination Mongo vCore DataStore details"
+          "description": "Destination Mongo (vCore) DataStore details"
         },
         "tasks": {
           "type": "array",
@@ -784,10 +724,10 @@
         "destinationDetails",
         "tasks"
       ],
-      "x-ms-discriminator-value": "CosmosDBMongoVCore"
+      "x-ms-discriminator-value": "CosmosDBMongoToCosmosDBMongoVCore"
     },
-    "SourceSqlDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with CosmosDB noSQL as source",
+    "SourceSqlDestinationSqlDataTransferProperties": {
+      "description": "The properties of DataTransfer Job with CosmosDB noSQL as source and CosmosDB noSQL as destination",
       "type": "object",
       "allOf": [
         {
@@ -795,32 +735,10 @@
         }
       ],
       "properties": {
-        "destinationComponent": {
-          "type": "string",
-          "enum": [
-            "CosmosDBSql"
-          ]
-        },
         "sourceDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Source noSQL DataStore details"
-        }
-      },
-      "required": [
-        "destinationComponent"
-      ],
-      "discriminator": "destinationComponent",
-      "x-ms-discriminator-value": "CosmosDBSql"
-    },
-    "SourceSqlDestinationSqlDataTransferProperties": {
-      "description": "The properties of DataTransfer Job with CosmosDB noSQL as source and CosmosDB noSQL as destination",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SourceSqlDataTransferProperties"
-        }
-      ],
-      "properties": {
+        },
         "destinationDetails": {
           "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
           "description": "Destination noSQL DataStore details"
@@ -854,7 +772,7 @@
       "required": [
         "tasks"
       ],
-      "x-ms-discriminator-value": "CosmosDBSql"
+      "x-ms-discriminator-value": "CosmosDBSqlToCosmosDBSql"
     },
     "DataTransferJobProperties": {
       "description": "The properties of a DataTransfer Job",
