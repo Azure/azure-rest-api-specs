@@ -73,6 +73,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "python"
 );
 
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJSON",
+  "javascript"
+);
+
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatRequestSystemMessage, "SystemMessage", "python");
 @@clientName(AI.Model.ChatRequestUserMessage, "UserMessage", "python");
