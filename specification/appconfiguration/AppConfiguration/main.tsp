@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Connection String"> |OAuth2Auth<[
+  ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -34,5 +34,5 @@ namespace AzureAppConfiguration;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-09-01 API version")
-  v2024_09_01: "2024-09-01"
+  v2024_09_01: "2024-09-01",
 }
