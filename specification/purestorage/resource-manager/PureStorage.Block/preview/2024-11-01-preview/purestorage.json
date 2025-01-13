@@ -482,6 +482,50 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getBillingUsageReport": {
+      "post": {
+        "operationId": "Reservations_GetBillingUsageReport",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Provides a summarised report along with actions for resources billed via given reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationBillingUsageReport"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getResourceLimits": {
       "post": {
         "operationId": "Reservations_GetResourceLimits",
@@ -2944,6 +2988,50 @@
         "max"
       ]
     },
+    "BillingUsageProperty": {
+      "type": "object",
+      "description": "Represents an individual billing usage property.",
+      "properties": {
+        "propertyId": {
+          "type": "string",
+          "description": "Unique identifier for the billing usage property."
+        },
+        "propertyName": {
+          "type": "string",
+          "description": "Name of the billing usage property."
+        },
+        "currentValue": {
+          "type": "string",
+          "description": "Current value of the billing usage property."
+        },
+        "previousValue": {
+          "type": "string",
+          "description": "Previous value of the billing usage property."
+        },
+        "severity": {
+          "$ref": "#/definitions/UsageSeverity",
+          "description": "Severity level of the usage."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message for the billing usage against a property."
+        },
+        "subProperties": {
+          "type": "array",
+          "description": "Optional list of sub-properties providing additional details.",
+          "items": {
+            "$ref": "#/definitions/BillingUsageProperty"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "propertyId",
+        "propertyName",
+        "currentValue",
+        "severity"
+      ]
+    },
     "HealthDetails": {
       "type": "object",
       "description": "Health metrics reported for a given resource.",
@@ -3491,6 +3579,28 @@
         "totalPerformanceOverage"
       ]
     },
+    "ReservationBillingUsageReport": {
+      "type": "object",
+      "description": "Represents a billing usage report, including overall status and detailed properties.",
+      "properties": {
+        "billingUsageProperties": {
+          "type": "array",
+          "description": "A list of detailed billing usage properties.",
+          "items": {
+            "$ref": "#/definitions/BillingUsageProperty"
+          },
+          "x-ms-identifiers": []
+        },
+        "overallStatusMessage": {
+          "type": "string",
+          "description": "Overall status message of the billing usage report."
+        }
+      },
+      "required": [
+        "billingUsageProperties",
+        "overallStatusMessage"
+      ]
+    },
     "ReservationListResult": {
       "type": "object",
       "description": "The response of a Reservation list operation.",
@@ -3839,6 +3949,42 @@
           "format": "int64",
           "description": "Total bandwidth provisioned for the pool (in MB/s)."
         }
+      }
+    },
+    "UsageSeverity": {
+      "type": "string",
+      "description": "Severity levels for billing usage properties.",
+      "enum": [
+        "alert",
+        "information",
+        "warning",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "UsageSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALERT",
+            "value": "alert",
+            "description": "Indicates an alert condition."
+          },
+          {
+            "name": "INFORMATION",
+            "value": "information",
+            "description": "Provides informational details."
+          },
+          {
+            "name": "WARNING",
+            "value": "warning",
+            "description": "Indicates a warning condition."
+          },
+          {
+            "name": "NONE",
+            "value": "none",
+            "description": "Indicates no severity."
+          }
+        ]
       }
     },
     "UserDetails": {

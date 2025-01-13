@@ -101,6 +101,70 @@ interface Reservations
   getUsageDetails(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
+
+  @added(Versions.v5_preview)
+  @doc("Provides a summarised report along with actions for resources billed via given reservation")
+  @armResourceAction(Reservation)
+  @action("getBillingUsageReport")
+  @post
+  getBillingUsageReport(
+    ...ResourceInstanceParameters<Reservation>,
+  ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
+}
+
+@added(Versions.v5_preview)
+@doc("Represents a billing usage report, including overall status and detailed properties.")
+model ReservationBillingUsageReport {
+  @doc("A list of detailed billing usage properties.")
+  @extension("x-ms-identifiers", [])
+  billingUsageProperties: BillingUsageProperty[];
+
+  @doc("Overall status message of the billing usage report.")
+  overallStatusMessage: string;
+}
+
+@added(Versions.v5_preview)
+@doc("Represents an individual billing usage property.")
+model BillingUsageProperty {
+  @doc("Unique identifier for the billing usage property.")
+  propertyId: string;
+
+  @doc("Name of the billing usage property.")
+  propertyName: string;
+
+  @doc("Current value of the billing usage property.")
+  currentValue: string;
+
+  @doc("Previous value of the billing usage property.")
+  previousValue?: string;
+
+  @doc("Severity level of the usage.")
+  severity: UsageSeverity;
+
+  @doc("Status message for the billing usage against a property.")
+  statusMessage?: string;
+
+  @doc("Optional list of sub-properties providing additional details.")
+  @extension("x-ms-identifiers", [])
+  subProperties?: BillingUsageProperty[];
+}
+
+@added(Versions.v5_preview)
+@doc("Severity levels for billing usage properties.")
+union UsageSeverity {
+  @doc("Indicates an alert condition.")
+  ALERT: "alert",
+
+  @doc("Provides informational details.")
+  INFORMATION: "information",
+
+  @doc("Indicates a warning condition.")
+  WARNING: "warning",
+
+  @doc("Indicates no severity.")
+  NONE: "none",
+
+  string,
 }
 
 @added(Versions.v5_preview)
