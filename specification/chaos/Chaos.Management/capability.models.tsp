@@ -28,10 +28,10 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
 alias CapabilityParentResourceParameters = BaseParameters<Capability> &
   ParentResourceParameters;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 /**
  * Model that represents the Capability properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 model CapabilityProperties {
   /**
    * String of the Publisher that this Capability extends.

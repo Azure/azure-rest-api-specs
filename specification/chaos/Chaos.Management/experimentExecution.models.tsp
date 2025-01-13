@@ -26,10 +26,10 @@ model ExperimentExecution
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 /**
  * Model that represents the execution properties of an Experiment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 model ExperimentExecutionProperties {
   /**
    * The status of the execution.
