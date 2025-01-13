@@ -13899,33 +13899,21 @@
     "ActualCapacityInfo": {
       "type": "object",
       "properties": {
-        "total": {
+        "allocated": {
           "format": "int32",
-          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
+          "description": "Gets or sets the total number of instances for the group.",
           "default": 0,
           "type": "integer"
         },
-        "succeeded": {
+        "assignmentFailed": {
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state and target group payload.",
+          "description": "Gets or sets the number of instances which failed to successfully complete assignment.",
           "default": 0,
           "type": "integer"
         },
-        "failed": {
+        "assignmentSuccess": {
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedSucceeded": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedFailed": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
+          "description": "Gets or sets the number of instances which successfully completed assignment.",
           "default": 0,
           "type": "integer"
         }
@@ -17882,7 +17870,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication. Use 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
+          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication.\r\nUse 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
@@ -25421,7 +25409,9 @@
     },
     "ServerlessInferenceEndpointAuthMode": {
       "enum": [
-        "Key"
+        "Key",
+        "AAD",
+        "KeyAndAAD"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -25430,6 +25420,12 @@
         "values": [
           {
             "value": "Key"
+          },
+          {
+            "value": "AAD"
+          },
+          {
+            "value": "KeyAndAAD"
           }
         ]
       },
