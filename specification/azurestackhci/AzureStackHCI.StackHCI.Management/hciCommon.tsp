@@ -397,3 +397,93 @@ model JobReportedProperties {
   @visibility("read")
   deploymentStatus?: EceActionStatus;
 }
+
+@doc("Device configuration.")
+model DeviceConfiguration {
+  @doc("Network configuration.")
+  network?: NetworkConfiguration;
+
+  @doc("Hostname of the device.")
+  hostName?: string;
+
+  @doc("Web proxy configuration.")
+  webProxy?: WebProxyConfiguration;
+
+  @doc("Time configuration.")
+  time?: TimeConfiguration;
+}
+
+@doc("Network configuration.")
+model NetworkConfiguration {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("List of network adapters.")
+  networkAdapters: NetworkAdapter[];
+}
+
+@doc("Network adapter configuration.")
+model NetworkAdapter {
+  @doc("Type of IP assignment.")
+  ipAssignmentType: IpAssignmentType;
+
+  @doc("IP address.")
+  ipAddress?: string;
+
+  @doc("IP address range.")
+  ipAddressRange?: IpAddressRange;
+
+  @doc("Gateway id.")
+  gateway?: string;
+
+  @doc("Subnet mask.")
+  subnetMask?: string;
+
+  @doc("Array of DNS addresses.")
+  dnsAddressArray?: string[];
+
+  @doc("VLAN ID for the network setup.")
+  vlanId?: string;
+}
+
+@doc("IP assignment types")
+union IpAssignmentType {
+  string,
+
+  @doc("Automatic IP assignment")
+  Automatic: "Automatic",
+
+  @doc("Manual IP assignment")
+  Manual: "Manual",
+}
+
+@doc("IP address range configuration.")
+model IpAddressRange {
+  @doc("Start IP address.")
+  startIp: string;
+
+  @doc("End IP address.")
+  endIp: string;
+}
+
+@doc("Web proxy configuration.")
+model WebProxyConfiguration {
+  @doc("Connection URI of the web proxy.")
+  connectionUri?: string;
+
+  @doc("Port of the web proxy.")
+  port?: string;
+
+  @doc("Bypass list for the web proxy.")
+  bypassList?: string[];
+}
+
+@doc("Time configuration.")
+model TimeConfiguration {
+  @doc("Primary NTP server.")
+  primaryTimeServer?: string;
+
+  @doc("Secondary NTP server.")
+  secondaryTimeServer?: string;
+
+  @doc("Time zone.")
+  timeZone?: string;
+}

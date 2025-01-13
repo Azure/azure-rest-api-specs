@@ -108,7 +108,7 @@ model SignalDefinitionProperties {
   @doc("Kind of the signal definition")
   signalKind: SignalKind;
 
-  @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
+  @doc("Interval in which the signal is being evaluated. Defaults to PT1M (1 minute).")
   refreshInterval?: RefreshInterval = "PT1M";
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
