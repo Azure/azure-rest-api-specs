@@ -961,39 +961,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of browser sessions used in the test run."
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "errorMessages": {
-          "type": "array",
-          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
-          "maxItems": 1000,
-          "items": {
-            "type": "string"
-          }
-        },
-        "uploadMetadata": {
-          "$ref": "#/definitions/UploadMetadata",
-          "description": "Metadata related to test run uploads."
         }
       },
       "required": [
@@ -1002,10 +969,7 @@
         "endTime",
         "billableTime",
         "totalTime",
-        "numBrowserSessions",
-        "jobs",
-        "projects",
-        "tags"
+        "numBrowserSessions"
       ]
     },
     "CloudRunSummaryCreateOrUpdate": {
@@ -1040,39 +1004,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of browser sessions used in the test run."
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "errorMessages": {
-          "type": "array",
-          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
-          "maxItems": 1000,
-          "items": {
-            "type": "string"
-          }
-        },
-        "uploadMetadata": {
-          "$ref": "#/definitions/UploadMetadataCreateOrUpdate",
-          "description": "Metadata related to test run uploads."
         }
       }
     },
@@ -1230,6 +1161,27 @@
         "status": {
           "$ref": "#/definitions/TestStatus",
           "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1238,7 +1190,10 @@
         "numFailedTests",
         "numSkippedTests",
         "numFlakyTests",
-        "status"
+        "status",
+        "jobs",
+        "projects",
+        "tags"
       ]
     },
     "ReportingSummaryCreateOrUpdate": {
@@ -1273,6 +1228,27 @@
         "status": {
           "$ref": "#/definitions/TestStatus",
           "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1567,7 +1543,7 @@
           ]
         },
         "resultsSummary": {
-          "$ref": "#/definitions/TestResultsSummary",
+          "$ref": "#/definitions/TestResultSummary",
           "description": "Summary of test results.",
           "x-ms-mutability": [
             "read",
@@ -1633,7 +1609,7 @@
         "artifactsPath"
       ]
     },
-    "TestResultsSummary": {
+    "TestResultSummary": {
       "type": "object",
       "description": "Summary of test results.",
       "properties": {
@@ -1750,7 +1726,7 @@
           "$ref": "#/definitions/CloudRunSummary",
           "description": "Summary of the test run."
         },
-        "resultsSummary": {
+        "reportSummary": {
           "$ref": "#/definitions/ReportingSummary",
           "description": "Summary of test run results."
         },
@@ -1793,7 +1769,7 @@
         "creatorId",
         "creatorName",
         "summary",
-        "resultsSummary",
+        "reportSummary",
         "testRunConfig",
         "testResultsUri",
         "isCloudRunEnabled",
@@ -2010,7 +1986,7 @@
           "$ref": "#/definitions/CloudRunSummaryCreateOrUpdate",
           "description": "Summary of the test run."
         },
-        "resultsSummary": {
+        "reportSummary": {
           "$ref": "#/definitions/ReportingSummaryCreateOrUpdate",
           "description": "Summary of test run results."
         },
@@ -2226,14 +2202,6 @@
           "format": "date-time",
           "description": "End time of the test run."
         },
-        "errorMessages": {
-          "type": "array",
-          "description": "List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated",
-          "maxItems": 1000,
-          "items": {
-            "type": "string"
-          }
-        },
         "uploadMetadata": {
           "$ref": "#/definitions/UploadMetadata",
           "description": "Metadata related to test run uploads."
@@ -2269,27 +2237,6 @@
         "numTotalAttachments",
         "sizeTotalAttachments"
       ]
-    },
-    "UploadMetadataCreateOrUpdate": {
-      "type": "object",
-      "description": "Model representing upload metadata.",
-      "properties": {
-        "numTestResults": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of test results uploaded."
-        },
-        "numTotalAttachments": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of attachments uploaded."
-        },
-        "sizeTotalAttachments": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total size of attachments uploaded in Bytes."
-        }
-      }
     },
     "UploadTestResultsRequest": {
       "type": "object",

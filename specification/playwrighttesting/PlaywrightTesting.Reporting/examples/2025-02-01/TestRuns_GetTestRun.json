@@ -9,32 +9,57 @@
   "responses": {
     "200": {
       "body": {
-        "testRunId": "123e4567-e89b-12d3-a456-426614174000",
-        "displayName": "Sample Test Run",
-        "startTime": "2024-09-28T12:32:33Z",
-        "endTime": "2024-09-28T14:32:33Z",
-        "createdAt": "2024-09-01T12:00:00Z",
-        "updatedAt": "2024-09-28T12:32:33Z",
-        "state": "Completed",
-        "isCloudRunEnabled": true,
-        "isCloudReportingEnabled": true,
-        "totalTests": 100,
-        "passedTests": 90,
-        "failedTests": 10,
+        "testRunId": "2fd2f304-11f5-4102-af0d-e345b0c7a104",
+        "displayName": "updated and added test",
+        "startTime": "2025-01-09T12:20:28Z",
+        "creatorId": "ed4e3751-16c1-4a2f-806a-1cb31096739e",
+        "creatorName": "John Doe",
+        "cloudRunSummary": {
+          "status": "SERVER_COMPLETE",
+          "billableTime": 50,
+          "numBrowserSessions": 5,
+          "startTime": "2025-01-09T12:20:28Z",
+          "endTime": "2025-01-09T12:20:38Z",
+          "uploadMetadata": {
+            "numTestResults": 2,
+            "numTotalAttachments": 0,
+            "sizeTotalAttachments": 0
+          }
+        },
+        "reportSummary": {
+          "numTotalTests": 2,
+          "numPassedTests": 2,
+          "numFailedTests": 0,
+          "numSkippedTests": 0,
+          "numFlakyTests": 0,
+          "status": "PASSED"
+        },
+        "ciConfig": {
+          "ciProviderName": "DEFAULT",
+          "branch": null,
+          "author": null,
+          "commitId": null,
+          "revisionUrl": null
+        },
         "testRunConfig": {
-          "retries": 3,
-          "repeatEach": 5000,
-          "workers": 5,
-          "testFramework": "JUnit",
+          "retries": 0,
+          "repeatEach": 0,
+          "workers": 1,
+          "testFramework": {
+            "name": "PLAYWRIGHT",
+            "version": "3.1",
+            "runnerName": "NUNIT"
+          },
           "shards": {
-            "total": 5,
-            "shardIndex": 2
+            "total": 1
           },
           "timeout": 60000,
           "testType": "WebTest",
-          "testSdkLanguage": "JavaScript",
-          "reporterPackageVersion": "1.0.0"
-        }
+          "testSdkLanguage": "CSHARP",
+          "reporterPackageVersion": "1.0.0-beta.4"
+        },
+        "cloudRunEnabled": true,
+        "cloudReportingEnabled": true
       }
     }
   }

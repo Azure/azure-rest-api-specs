@@ -11,18 +11,28 @@
         "retries": 3,
         "repeatEach": 5000,
         "workers": 5,
-        "testFramework": "JUnit",
+        "testFramework": {
+          "name": "PLAYWRIGHT",
+          "version": "3.1",
+          "runnerName": "NUNIT"
+        },
         "shards": {
-          "total": 5,
-          "shardIndex": 2
+          "total": 5
+        },
+        "ciConfig": {
+          "ciProviderName": "ADO",
+          "branch": "main",
+          "author": "John Doe",
+          "commitId": null,
+          "revisionUrl": "https://github.com/azure-rest-api-specs/1234"
         },
         "timeout": 60000,
         "testType": "WebTest",
-        "testSdkLanguage": "JavaScript",
-        "reporterPackageVersion": "1.0.0"
+        "testSdkLanguage": "JAVASCRIPT",
+        "reporterPackageVersion": "1.0.0-beta.4"
       },
-      "isCloudRunEnabled": true,
-      "isCloudReportingEnabled": true
+      "cloudRunEnabled": true,
+      "cloudReportingEnabled": true
     }
   },
   "responses": {
@@ -35,18 +45,28 @@
           "retries": 3,
           "repeatEach": 5000,
           "workers": 5,
-          "testFramework": "JUnit",
+          "testFramework": {
+            "name": "PLAYWRIGHT",
+            "version": "3.1",
+            "runnerName": "NUNIT"
+          },
           "shards": {
-            "total": 5,
-            "shardIndex": 2
+            "total": 5
+          },
+          "ciConfig": {
+            "ciProviderName": "ADO",
+            "branch": "main",
+            "author": "John Doe",
+            "commitId": null,
+            "revisionUrl": "https://github.com/azure-rest-api-specs/1234"
           },
           "timeout": 60000,
           "testType": "WebTest",
-          "testSdkLanguage": "JavaScript",
-          "reporterPackageVersion": "1.0.0"
+          "testSdkLanguage": "JAVASCRIPT",
+          "reporterPackageVersion": "1.0.0-beta.4"
         },
-        "isCloudRunEnabled": true,
-        "isCloudReportingEnabled": true
+        "cloudRunEnabled": true,
+        "cloudReportingEnabled": true
       }
     }
   }

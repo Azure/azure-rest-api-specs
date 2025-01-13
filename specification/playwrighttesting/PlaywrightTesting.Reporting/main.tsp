@@ -235,6 +235,15 @@ model ReportingSummary {
 
   @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
   status: TestStatus;
+
+  @doc("List of jobs associated with the test run.")
+  jobs: string[];
+
+  @doc("List of projects associated with the test run.")
+  projects: string[];
+
+  @doc("List of tags associated with the test run.")
+  tags: string[];
 }
 
 @doc("Model representing summary information about a test run.")
@@ -256,22 +265,6 @@ model CloudRunSummary {
 
   @doc("Number of browser sessions used in the test run.")
   numBrowserSessions: int32;
-
-  @doc("List of jobs associated with the test run.")
-  jobs: string[];
-
-  @doc("List of projects associated with the test run.")
-  projects: string[];
-
-  @doc("List of tags associated with the test run.")
-  tags: string[];
-
-  @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
-  @maxItems(1000)
-  errorMessages?: string[];
-
-  @doc("Metadata related to test run uploads.")
-  uploadMetadata?: UploadMetadata;
 }
 
 @doc("Model to update shard result.")
@@ -281,10 +274,6 @@ model UpdateShardExecutionSummary {
 
   @doc("End time of the test run.")
   endTime: utcDateTime;
-
-  @doc("List of errorMessages encountered by  reporter client. Beyond the limit errorMessages will be truncated")
-  @maxItems(1000)
-  errorMessages?: string[];
 
   @doc("Metadata related to test run uploads.")
   uploadMetadata?: UploadMetadata;
@@ -344,7 +333,7 @@ model TestRun {
   summary: CloudRunSummary;
 
   @doc("Summary of test run results.")
-  resultsSummary: ReportingSummary;
+  reportSummary: ReportingSummary;
 
   @doc("Continuous integration configuration.")
   @visibility("read", "create")
@@ -496,7 +485,7 @@ model TestResult {
 
   @doc("Summary of test results.")
   @visibility("read", "create")
-  resultsSummary: TestResultsSummary;
+  resultsSummary: TestResultSummary;
 
   @doc("Previous retry summaries.")
   previousRetries?: PreviousRetrySummary[];
@@ -564,7 +553,7 @@ model WebTestConfig {
 
 // Model representing test results summary
 @doc("Summary of test results.")
-model TestResultsSummary {
+model TestResultSummary {
   @doc("Status of the test results.")
   status: TestStatus;
 
