@@ -213,8 +213,8 @@ components:
         - object
         - created
         - model
-        - usage
         - choices
+        - usage
       properties:
         id:
           type: string
@@ -233,10 +233,6 @@ components:
         model:
           type: string
           description: The model used for the chat completion.
-        usage:
-          allOf:
-            - $ref: '#/components/schemas/CompletionsUsage'
-          description: Usage information for tokens processed and generated as part of this completions operation.
         choices:
           type: array
           items:
@@ -246,6 +242,10 @@ components:
             The collection of completions choices associated with this completions response.
             Generally, `n` choices are generated per provided prompt with a default value of 1.
             Token limits and other settings may limit the number of choices generated.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/CompletionsUsage'
+          description: '  Usage information for tokens processed and generated as part of this completions operation.'
       description: |-
         Representation of the response data from a chat completions request.
         Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -1002,7 +1002,6 @@ components:
         - object
         - created
         - model
-        - usage
         - choices
       properties:
         id:
@@ -1022,10 +1021,6 @@ components:
         model:
           type: string
           description: The model used for the chat completion.
-        usage:
-          allOf:
-            - $ref: '#/components/schemas/CompletionsUsage'
-          description: Usage information for tokens processed and generated as part of this completions operation.
         choices:
           type: array
           items:
@@ -1035,6 +1030,10 @@ components:
             An update to the collection of completion choices associated with this completions response.
             Generally, `n` choices are generated per provided prompt with a default value of 1.
             Token limits and other settings may limit the number of choices generated.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/CompletionsUsage'
+          description: Usage information for tokens processed and generated as part of this completions operation.
       description: |-
         Represents a response update to a chat completions request, when the service is streaming updates 
         using Server Sent Events (SSE).

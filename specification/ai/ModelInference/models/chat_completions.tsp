@@ -144,11 +144,6 @@ alias ChatCompletionsCommon = {
 
   @doc("The model used for the chat completion.")
   `model`: string;
-
-  @doc("""
-    Usage information for tokens processed and generated as part of this completions operation.
-    """)
-  usage: CompletionsUsage;
 };
 
 @doc("""
@@ -166,6 +161,11 @@ model ChatCompletions {
     """)
   @minItems(1)
   choices: ChatChoice[];
+
+  @doc("""
+      Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage: CompletionsUsage;
 }
 
 @doc("""
@@ -184,6 +184,11 @@ model StreamingChatCompletionsUpdate {
     """)
   @minItems(1)
   choices: StreamingChatChoiceUpdate[];
+
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage?: CompletionsUsage;
 }
 
 @doc("""

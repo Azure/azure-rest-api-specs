@@ -361,10 +361,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -373,6 +369,10 @@
             "$ref": "#/definitions/ChatChoice"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "  Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
@@ -380,8 +380,8 @@
         "object",
         "created",
         "model",
-        "usage",
-        "choices"
+        "choices",
+        "usage"
       ]
     },
     "ChatCompletionsNamedToolChoice": {
@@ -1382,10 +1382,6 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
         "choices": {
           "type": "array",
           "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -1394,6 +1390,10 @@
             "$ref": "#/definitions/StreamingChatChoiceUpdate"
           },
           "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
@@ -1401,7 +1401,6 @@
         "object",
         "created",
         "model",
-        "usage",
         "choices"
       ]
     },
