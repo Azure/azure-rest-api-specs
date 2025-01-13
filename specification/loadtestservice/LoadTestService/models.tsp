@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
@@ -350,6 +348,14 @@ model Test {
   @added(APIVersions.v2024_07_01_preview)
   metricsReferenceIdentityId?: string;
 
+  @doc("Type of the managed identity built in load test engines")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityType?: ManagedIdentityType = ManagedIdentityType.SystemAssigned;
+
+  @doc("Resource Ids of the managed identity built in to load test engines. Required if engineBuiltInIdentityType is UserAssigned.")
+  @added(APIVersions.v2024_12_01_preview)
+  engineBuiltInIdentityIds?: string[];
+
   ...SystemMetaData;
 }
 
@@ -603,7 +609,7 @@ model TestAppComponents {
 }
 
 @doc("""
-  An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+  An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
   """)
 model AppComponent {
   @doc("""
@@ -641,7 +647,7 @@ model TestServerMetricConfig {
 
   @doc("""
     Azure resource metrics collection {metric id : metrics object} (Refer :
-    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
     for metric id).
     """)
   metrics: Record<ResourceMetric>;
@@ -652,7 +658,7 @@ model TestServerMetricConfig {
 @doc("""
   Associated metric definition for particular metrics of the azure resource (
   Refer :
-  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+  https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
   """)
 model ResourceMetric {
   @doc("Unique name for metric.")
@@ -1127,7 +1133,6 @@ model MetricDimensionsRequest {
     The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
     """)
   @query
-  @clientName("time_interval", "python")
   timespan: string;
 }
 
@@ -1155,7 +1160,7 @@ model TestRunServerMetricConfig {
 
   @doc("""
     Azure resource metrics collection {metric id : metrics object} (Refer :
-    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    https://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
     for metric id).
     """)
   metrics?: Record<ResourceMetric>;

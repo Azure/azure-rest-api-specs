@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "words": [
         "authnotrequired",
@@ -24,9 +24,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
-        "**/package-lock.json"
+        "**/package-lock.json",
+        "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -48,6 +51,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting",
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -60,12 +70,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -211,7 +215,8 @@
         {
             "filename": "**/specification/containerinstance/resource-manager/Microsoft.ContainerInstance/preview/**/containerInstance.json",
             "words": [
-                "ngroups"
+                "ngroups",
+                "TransactionOptimized"
             ]
         },
         {
@@ -223,7 +228,9 @@
                 "PDBs",
                 "undrainable",
                 "Undrainable",
-                "acnstls"
+                "acnstls",
+                "kubeletIdentity",
+                "kubeletidentity"
             ]
         },
         {
@@ -602,6 +609,12 @@
             ]
         },
         {
+            "filename": "**/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2024-08-01/costmanagement.pricesheets.json",
+            "words": [
+                "unitofmeasure"
+            ]
+        },
+        {
             "filename": "**/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/preview/2017-08-21-preview/iotdps.json",
             "words": [
                 "Messsage"
@@ -699,6 +712,18 @@
             "filename": "**/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json",
             "words": [
                 "Exprired"
+            ]
+        },
+        {
+            "filename": "**/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
+            ]
+        },
+        {
+            "filename": "**/specification/synapse/data-plane/Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
             ]
         },
         {
@@ -977,6 +1002,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1032,7 +1063,9 @@
         {
             "filename": "**/specification/confluent/resource-manager/Microsoft.Confluent/**/confluent.json",
             "words": [
-                "orgvalidate"
+                "orgvalidate",
+                "AZUREBLOBSOURCE",
+                "AZUREBLOBSINK"
             ]
         },
         {
@@ -1065,7 +1098,9 @@
         {
             "filename": "**/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/preview/**/*json",
             "words": [
-                "automigration"
+                "automigration",
+                "apsaradb",
+                "supabase"
             ]
         },
         {
@@ -1202,6 +1237,13 @@
             ]
         },
         {
+            "filename": "**/specification/securityinsights/resource-manager/Microsoft.SecurityInsights/stable/**/*.json",
+            "words": [
+                "Criterias",
+                "Mdti"
+            ]
+        },
+        {
             "filename": "**/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/**/*.json",
             "words": [
                 "flac",
@@ -1227,7 +1269,8 @@
             "filename": "**/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/**/*.json",
             "words": [
                 "keyvaultkeyuri",
-                "throughputpool"
+                "throughputpool",
+                "dotproduct"
             ]
         },
         {
@@ -1293,6 +1336,13 @@
         },
         {
             "filename": "**/specification/batch/data-plane/Microsoft.Batch/**/*.json",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
             "words": [
                 "upgradingos",
                 "TVMs"
@@ -1532,6 +1582,15 @@
             ]
         },
         {
+            "filename": "**/specification/cognitiveservices/data-plane/Language/**/**/*.json",
+            "words": [
+                "Meitei",
+                "Mtei",
+                "Olck",
+                "Shrd"
+            ]
+        },
+        {
             "filename": "**/specification/sqlvirtualmachine/resource-manager/Microsoft.SqlVirtualMachine/**/*.json",
             "words": [
                 "WUMU",
@@ -1539,7 +1598,7 @@
             ]
         },
         {
-            "filename": "**/specification/riskiq/data-plane/Microsoft.Easm/preview/2024-03-01-preview/easm.json",
+            "filename": "**/specification/riskiq/data-plane/Microsoft.Easm/preview/**/*.json",
             "words": [
                 "Cisa",
                 "cisa",
@@ -1573,6 +1632,12 @@
             ]
         },
         {
+            "filename": "**/specification/liftrpinecone/**/*.json",
+            "words": [
+                "organizationname"
+            ]
+        },
+        {
             "filename": "**/specification/developerhub/resource-manager/Microsoft.DevHub/**/*.json",
             "words": [
                 "iacProfiles",
@@ -1595,6 +1660,25 @@
             "filename": "**/specification/cognitiveservices/data-plane/AzureOpenAI/inference/preview/**/*.json",
             "words": [
                 "rerank"
+            ]
+        },
+        {
+            "filename": "**/specification/ai/data-plane/HealthInsights/stable/**/openapi.json",
+            "words": [
+                "Acrad",
+		        "acrad",
+		        "BIRADS",
+				"mednax",
+				"frax",
+				"extracolonic",
+				"ascvd",
+				"tyrer",
+				"cusick",
+				"agatston",
+				"ceus",
+				"HNPCC",
+				"kellgren",
+				"tonnis"
             ]
         },
         {
@@ -1640,7 +1724,9 @@
             "filename": "**/specification/servicefabricmanagedclusters/resource-manager/Microsoft.ServiceFabric/**/*.json",
             "words": [
                 "sfmc",
-                "sfmc's"
+                "sfmc's",
+                "regionname",
+                "sfmcdomain"
             ]
         },
         {
@@ -1655,6 +1741,13 @@
             "words": [
                 "billables"
             ]
+        },
+        {
+            "filename": "**/specification/storage/data-plane/Microsoft.FileStorage/**/*.json",
+            "words": [
+                "symboliclink",
+                "hardlink"
+             ]
         },
         {
             "filename": "**/specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2023-09-01/costmanagement.pricesheets.json",
@@ -1678,6 +1771,44 @@
         "filename": "**/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/**/*.json",
             "words": [
                 "SEVSNP"
+            ]
+        },
+        {
+            "filename": "**/specification/connectedcache/resource-manager/Microsoft.ConnectedCache/preview/**/*.json",
+            "words": [
+                "Eflow"
+            ]
+        },
+        {
+            "filename": "**/specification/communication/data-plane/Sms/preview/**/*.json",
+            "words": [
+                "optouts"
+            ]
+        },
+        {
+            "filename": "**/specification/azure-kusto/resource-manager/Microsoft.Kusto/**/*.json",
+            "words": [
+                "webapi",
+                "genevametrics"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
             ]
         }
     ],
