@@ -28,6 +28,7 @@ model Capability is Azure.ResourceManager.ProxyResource<CapabilityProperties> {
 alias CapabilityParentResourceParameters = BaseParameters<Capability> &
   ParentResourceParameters;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 /**
  * Model that represents the Capability properties model.
  */
@@ -63,12 +64,6 @@ model CapabilityProperties {
   @visibility("read")
   @maxLength(2048)
   urn?: string;
-
-  /**
-   * Resource provisioning state. Not currently in use because resource is created synchronously.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**

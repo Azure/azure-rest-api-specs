@@ -26,6 +26,7 @@ model ExperimentExecution
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 /**
  * Model that represents the execution properties of an Experiment.
  */
@@ -47,12 +48,6 @@ model ExperimentExecutionProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
-
-  /**
-   * Resource provisioning state. Not currently in use for executions.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -106,12 +101,6 @@ model ExperimentExecutionDetailsProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
-
-  /**
-   * Resource provisioning state. Not currently in use for executions.
-   */
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 
   /**
    * The reason why the execution failed.

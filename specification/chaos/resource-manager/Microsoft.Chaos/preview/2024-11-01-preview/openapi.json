@@ -2390,11 +2390,6 @@
           "description": "String of the URN for this Capability Type.",
           "maxLength": 2048,
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state. Not currently in use because resource is created synchronously.",
-          "readOnly": true
         }
       }
     },
@@ -2946,7 +2941,8 @@
         "properties": {
           "$ref": "#/definitions/ExperimentExecutionDetailsProperties",
           "description": "The properties of the experiment execution details.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2969,11 +2965,6 @@
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state. Not currently in use for executions.",
           "readOnly": true
         },
         "failureReason": {
@@ -3051,11 +3042,6 @@
           "type": "string",
           "format": "date-time",
           "description": "String that represents the stop date time.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Resource provisioning state. Not currently in use for executions.",
           "readOnly": true
         }
       }
