@@ -172,13 +172,6 @@
             }
           },
           {
-            "name": "x-ms-github-auxiliary",
-            "in": "header",
-            "description": "Github personal access token used for SourceControl.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -236,27 +229,6 @@
             "description": "Name of the Container App SourceControl.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-github-auxiliary",
-            "in": "header",
-            "description": "Github personal access token used for SourceControl.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "ignoreWorkflowDeletionFailure",
-            "in": "query",
-            "description": "Ignore Workflow Deletion Failure.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "deleteWorkflow",
-            "in": "query",
-            "description": "Delete workflow.",
-            "required": false,
-            "type": "boolean"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -350,10 +322,6 @@
           "description": "Context path",
           "type": "string"
         },
-        "dockerfilePath": {
-          "description": "Dockerfile path",
-          "type": "string"
-        },
         "githubPersonalAccessToken": {
           "description": "One time Github PAT to configure github environment",
           "type": "string",
@@ -382,16 +350,6 @@
         "runtimeVersion": {
           "description": "Runtime version",
           "type": "string"
-        },
-        "buildEnvironmentVariables": {
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVariable"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of environment variables to be passed to the build."
         }
       }
     },
