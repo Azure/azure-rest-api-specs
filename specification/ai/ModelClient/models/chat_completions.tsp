@@ -259,6 +259,7 @@ model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
   Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
   via a system or user message.
   """)
+@clientName("ChatCompletionsResponseFormatJSON", "javascript")
 model ChatCompletionsResponseFormatJsonObject
   extends ChatCompletionsResponseFormat {
   @doc("Response format type: always 'json_object' for this object.")
