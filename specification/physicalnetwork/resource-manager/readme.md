@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 This is the AutoRest configuration file for microsoftphysicalnetwork.
-
+// cspell:words
 ## Getting Started
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
