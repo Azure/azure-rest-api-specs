@@ -34,10 +34,22 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
 @@access(AI.Model.ChatRequestMessage, Access.public);
-@@access(AI.Model.ChatRequestAssistantMessage, Access.public, "csharp,java,javascript");
-@@access(AI.Model.ChatRequestSystemMessage, Access.public, "csharp,java,javascript");
-@@access(AI.Model.ChatRequestToolMessage, Access.public, "csharp,java,javascript");
-@@access(AI.Model.ChatRequestUserMessage, Access.public, "csharp,java,javascript");
+@@access(AI.Model.ChatRequestAssistantMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestSystemMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestToolMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestUserMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
 @@access(AI.Model.ChatResponseMessage, Access.public);
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
@@ -65,6 +77,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   Access.public,
   "python"
 );
+
+@@access(AI.Model.ChatRequestAssistantMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestSystemMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
 
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
