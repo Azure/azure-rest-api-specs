@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "vaultName": "testVault",
+    "api-version": "2022-02-01",
+    "$filter": "type eq 'BackupProtectedItemCountSummary'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "unit": "Count",
+            "currentValue": 7,
+            "limit": -1,
+            "name": {
+              "value": "AzureIaasVM",
+              "localizedValue": "Azure Virtual Machine"
+            }
+          },
+          {
+            "unit": "Count",
+            "currentValue": 3,
+            "limit": -1,
+            "name": {
+              "value": "MAB",
+              "localizedValue": "Azure Backup Agent"
+            }
+          },
+          {
+            "unit": "Count",
+            "currentValue": 1,
+            "limit": -1,
+            "name": {
+              "value": "AzureBackupServer",
+              "localizedValue": "Azure Backup Server"
+            }
+          },
+          {
+            "unit": "Count",
+            "currentValue": 2,
+            "limit": -1,
+            "name": {
+              "value": "AzureStorage",
+              "localizedValue": "Azure Storage (Azure Files)"
+            }
+          },
+          {
+            "unit": "Count",
+            "currentValue": 2,
+            "limit": -1,
+            "name": {
+              "value": "AzureWorkload",
+              "localizedValue": "SQL in Azure VM"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
