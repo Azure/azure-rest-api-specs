@@ -153,7 +153,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StatusSummaryList"
+              "$ref": "#/definitions/ResultsStats"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -677,7 +677,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StatusSummaryList"
+              "$ref": "#/definitions/AccountTestRunStats"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -739,6 +739,44 @@
           }
         ]
       }
+    },
+    "AccountTestRunStats": {
+      "type": "object",
+      "description": "Summary statistics of Testrun in an account.",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Passed  runs within an account"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed  runs within an account"
+        },
+        "flaky": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Flaky  runs within an account"
+        },
+        "all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total  runs within an account"
+        },
+        "cloudExecutionRuns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cloud Executed runs within an account"
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "flaky",
+        "all",
+        "cloudExecutionRuns"
+      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1238,6 +1276,44 @@
         }
       }
     },
+    "ResultsStats": {
+      "type": "object",
+      "description": "Summary statistics of testresults in a run.",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Passed test-results within a run"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed tests within a run"
+        },
+        "flaky": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Flaky tests within a run"
+        },
+        "skipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Skipped tests within a run"
+        },
+        "all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total tests within a run"
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "flaky",
+        "skipped",
+        "all"
+      ]
+    },
     "RunnerType": {
       "type": "string",
       "description": "Supported Runner Types for tests",
@@ -1294,42 +1370,6 @@
           "maximum": 1000
         }
       }
-    },
-    "StatusSummary": {
-      "type": "object",
-      "description": "Count of a specific status such as PASSED for a run ",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": " Status of a testrun or test "
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": " Count  of the specified status"
-        }
-      },
-      "required": [
-        "status",
-        "count"
-      ]
-    },
-    "StatusSummaryList": {
-      "type": "object",
-      "description": "Summary statistics of tests.",
-      "properties": {
-        "statusSummary": {
-          "type": "array",
-          "description": "Model to represent status of testrun/test",
-          "items": {
-            "$ref": "#/definitions/StatusSummary"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "statusSummary"
-      ]
     },
     "TestFramework": {
       "type": "object",

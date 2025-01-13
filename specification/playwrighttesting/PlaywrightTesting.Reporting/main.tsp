@@ -612,11 +612,41 @@ model StatusSummary {
   count: int32;
 }
 
+@doc("Summary statistics of Testrun in an account.")
+model AccountTestRunStats {
+  /** Passed  runs within an account */
+  passed: int32;
+
+  /** Failed  runs within an account */
+  failed: int32;
+
+  /** Flaky  runs within an account */
+  flaky: int32;
+
+  /** Total  runs within an account */
+  all: int32;
+
+  /** Cloud Executed runs within an account */
+  cloudExecutionRuns: int32;
+}
+
 // Model representing summary statistics of tests
-@doc("Summary statistics of tests.")
-model StatusSummaryList {
-  @doc("Model to represent status of testrun/test")
-  statusSummary: StatusSummary[];
+@doc("Summary statistics of testresults in a run.")
+model ResultsStats {
+  /** Passed test-results within a run */
+  passed: int32;
+
+  /** Failed tests within a run */
+  failed: int32;
+
+  /** Flaky tests within a run */
+  flaky: int32;
+
+  /** Skipped tests within a run */
+  skipped: int32;
+
+  /** Total tests within a run */
+  all: int32;
 }
 
 // Model representing summary statistics of tests
@@ -671,7 +701,7 @@ interface TestRuns {
   getTestRunSummary is Operations.ResourceCollectionAction<
     TestRun,
     {},
-    StatusSummaryList,
+    AccountTestRunStats,
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
@@ -713,7 +743,7 @@ interface TestResults {
   getTestResultsSummary is Operations.ResourceCollectionAction<
     TestResult,
     {},
-    StatusSummaryList,
+    ResultsStats,
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 }
