@@ -22,64 +22,61 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getImageEmbeddings, Access.internal);
 @@access(AI.Model.getModelInfo, Access.internal, "python");
 
-// SDK emitters now generate all Models as public, even if the operation using them is internal. So
-// we no longer need to explicity make all Models public.
-//
-// // Since we made all operator methods internal, we need to explicity
-// // say we still want the models they use to be public, since they will be used by hand-written operator methods.
-// @@access(AI.Model.ChatChoice, Access.public);
-// @@access(AI.Model.ChatCompletions, Access.public);
-// @@access(AI.Model.ChatCompletionsToolCall, Access.public);
-// @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
-// @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
-// @@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
-// @@access(AI.Model.ChatCompletionsToolCall, Access.public);
-// @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
-// @@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
-// @@access(AI.Model.ChatRequestMessage, Access.public);
-// @@access(AI.Model.ChatRequestAssistantMessage,
-//   Access.public,
-//   "csharp,java,javascript"
-// );
-// @@access(AI.Model.ChatRequestSystemMessage,
-//   Access.public,
-//   "csharp,java,javascript"
-// );
-// @@access(AI.Model.ChatRequestToolMessage,
-//   Access.public,
-//   "csharp,java,javascript"
-// );
-// @@access(AI.Model.ChatRequestUserMessage,
-//   Access.public,
-//   "csharp,java,javascript"
-// );
-// @@access(AI.Model.ChatResponseMessage, Access.public);
-// @@access(AI.Model.ChatRole, Access.public);
-// @@access(AI.Model.CompletionsFinishReason, Access.public);
-// @@access(AI.Model.CompletionsUsage, Access.public);
-// @@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
-// @@access(AI.Model.ImageEmbeddingInput, Access.public, "python");
-// @@access(AI.Model.EmbeddingInputType, Access.public, "python");
-// @@access(AI.Model.EmbeddingItem, Access.public, "python");
-// @@access(AI.Model.EmbeddingsResult, Access.public, "python");
-// @@access(AI.Model.EmbeddingsUsage, Access.public, "python");
-// @@access(AI.Model.FunctionCall, Access.public);
-// @@access(AI.Model.FunctionDefinition, Access.public);
-// @@access(AI.Model.ModelInfo, Access.public);
-// @@access(AI.Model.ModelType, Access.public);
-// @@access(AI.Model.ChatMessageContentItem, Access.public);
-// @@access(AI.Model.ChatMessageTextContentItem, Access.public);
-// @@access(AI.Model.ChatMessageImageContentItem, Access.public);
-// @@access(AI.Model.ChatMessageImageUrl, Access.public);
-// @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
-// @@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python");
-// @@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
-// @@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
-// @@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
-// @@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
-//   Access.public,
-//   "python"
-// );
+// Since we made all operator methods internal, we need to explicity
+// say we still want the models they use to be public, since they will be used by hand-written operator methods.
+@@access(AI.Model.ChatChoice, Access.public);
+@@access(AI.Model.ChatCompletions, Access.public);
+@@access(AI.Model.ChatCompletionsToolCall, Access.public);
+@@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
+@@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
+@@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
+@@access(AI.Model.ChatCompletionsToolCall, Access.public);
+@@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
+@@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
+@@access(AI.Model.ChatRequestMessage, Access.public, "csharp,java,javascript");
+@@access(AI.Model.ChatRequestAssistantMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestSystemMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestToolMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatRequestUserMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
+@@access(AI.Model.ChatResponseMessage, Access.public);
+@@access(AI.Model.ChatRole, Access.public);
+@@access(AI.Model.CompletionsFinishReason, Access.public);
+@@access(AI.Model.CompletionsUsage, Access.public);
+@@access(AI.Model.EmbeddingEncodingFormat, Access.public, "python");
+@@access(AI.Model.ImageEmbeddingInput, Access.public, "python");
+@@access(AI.Model.EmbeddingInputType, Access.public, "python");
+@@access(AI.Model.EmbeddingItem, Access.public, "python");
+@@access(AI.Model.EmbeddingsResult, Access.public, "python");
+@@access(AI.Model.EmbeddingsUsage, Access.public, "python");
+@@access(AI.Model.FunctionCall, Access.public);
+@@access(AI.Model.FunctionDefinition, Access.public);
+@@access(AI.Model.ModelInfo, Access.public);
+@@access(AI.Model.ModelType, Access.public);
+@@access(AI.Model.ChatMessageContentItem, Access.public);
+@@access(AI.Model.ChatMessageTextContentItem, Access.public);
+@@access(AI.Model.ChatMessageImageContentItem, Access.public);
+@@access(AI.Model.ChatMessageImageUrl, Access.public);
+@@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
+@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python");
+@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python");
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
+  Access.public,
+  "python"
+);
 
 // In Python we hand-write the 4 input message classes, so we make them internal here.
 // The base class ChatRequestMessage has to have the same access as the derived classes,
