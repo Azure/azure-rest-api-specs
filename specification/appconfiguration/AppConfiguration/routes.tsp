@@ -299,6 +299,14 @@ op getKeyValue is Foundations.ResourceOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    @doc("""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
+
     ...ClientRequestIdHeader;
   },
   Response = Body<KeyValue> & {
@@ -437,6 +445,14 @@ op checkKeyValue is appConfigOperation<
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: KeyValueFields[];
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+    @doc("""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
 >;
