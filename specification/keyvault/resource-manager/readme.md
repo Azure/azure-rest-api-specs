@@ -44,6 +44,21 @@ input-file:
   - Microsoft.KeyVault/stable/2024-11-01/secrets.json
 ```
 
+### Tag: package-preview-2024-12
+
+These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12'
+input-file:
+  - Microsoft.KeyVault/preview/2024-12-01-preview/common.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keysManagedHsm.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2024-12-01-preview/secrets.json
+```
+
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
