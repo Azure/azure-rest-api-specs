@@ -649,9 +649,7 @@ interface TestRuns {
   @doc("List testruns.")
   listTestRuns is Operations.ResourceList<
     TestRun,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      FilterQueryParameter &
-      OrderByQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
   @doc("Get TestResults Upload Uri.")
@@ -674,9 +672,7 @@ interface TestRuns {
     TestRun,
     {},
     StatusSummaryList,
-    QueryParametersTrait<StandardListQueryParameters &
-      FilterQueryParameter &
-      OrderByQueryParameter>
+    QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
   @doc("Get TestRun metadata for an Odata filter.")
@@ -686,9 +682,7 @@ interface TestRuns {
     TestRun,
     {},
     TestRunsMetadata,
-    QueryParametersTrait<StandardListQueryParameters &
-      FilterQueryParameter &
-      OrderByQueryParameter>
+    QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 }
 
@@ -710,9 +704,7 @@ interface TestResults {
   @doc("List Testresults.")
   listTestResults is Operations.ResourceList<
     TestResult,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      FilterQueryParameter &
-      OrderByQueryParameter>
+    ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
   @doc("Get Testresults summary.")
@@ -722,8 +714,6 @@ interface TestResults {
     TestResult,
     {},
     StatusSummaryList,
-    QueryParametersTrait<StandardListQueryParameters &
-      FilterQueryParameter &
-      OrderByQueryParameter>
+    QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 }
