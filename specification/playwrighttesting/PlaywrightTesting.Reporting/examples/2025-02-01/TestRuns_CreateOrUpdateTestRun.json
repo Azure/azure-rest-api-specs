@@ -1,0 +1,73 @@
+{
+  "title": "TestRuns_CreateOrUpdateTestRun",
+  "operationId": "TestRuns_CreateOrUpdateTestRun",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "accountId": "sampleAccountId",
+    "resource": {
+      "displayName": "Sample Test Run",
+      "startTime": "2024-09-28T12:32:33Z",
+      "testRunConfig": {
+        "retries": 3,
+        "repeatEach": 5000,
+        "workers": 5,
+        "testFramework": {
+          "name": "PLAYWRIGHT",
+          "version": "3.1",
+          "runnerName": "NUNIT"
+        },
+        "shards": {
+          "total": 5
+        },
+        "ciConfig": {
+          "ciProviderName": "ADO",
+          "branch": "main",
+          "author": "John Doe",
+          "commitId": null,
+          "revisionUrl": "https://github.com/azure-rest-api-specs/1234"
+        },
+        "timeout": 60000,
+        "testType": "WebTest",
+        "testSdkLanguage": "JAVASCRIPT",
+        "reporterPackageVersion": "1.0.0-beta.4"
+      },
+      "cloudRunEnabled": true,
+      "cloudReportingEnabled": true
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "testRunId": "123e4567-e89b-12d3-a456-426614174000",
+        "displayName": "Sample Test Run",
+        "startTime": "2024-09-28T12:32:33Z",
+        "testRunConfig": {
+          "retries": 3,
+          "repeatEach": 5000,
+          "workers": 5,
+          "testFramework": {
+            "name": "PLAYWRIGHT",
+            "version": "3.1",
+            "runnerName": "NUNIT"
+          },
+          "shards": {
+            "total": 5
+          },
+          "ciConfig": {
+            "ciProviderName": "ADO",
+            "branch": "main",
+            "author": "John Doe",
+            "commitId": null,
+            "revisionUrl": "https://github.com/azure-rest-api-specs/1234"
+          },
+          "timeout": 60000,
+          "testType": "WebTest",
+          "testSdkLanguage": "JAVASCRIPT",
+          "reporterPackageVersion": "1.0.0-beta.4"
+        },
+        "cloudRunEnabled": true,
+        "cloudReportingEnabled": true
+      }
+    }
+  }
+}
