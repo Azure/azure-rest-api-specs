@@ -26,16 +26,16 @@ These are the global settings for the AppConfiguration API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2023-11-01
+tag: package-2024-09-01
 ```
 
-### Tag: package-2024-09-01-preview
+### Tag: package-2024-09-01
 
-These settings apply only when `--tag=package-2024-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-09-01-preview'
+``` yaml $(tag) == 'package-2024-09-01'
 input-file:
-- Microsoft.AppConfiguration/preview/2024-09-01-preview/appconfiguration.json
+- Microsoft.AppConfiguration/preview/2024-09-01/appconfiguration.json
 ```
 
 ### Tag: package-2023-11-01
@@ -152,6 +152,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/file.json
 ```
 
