@@ -198,26 +198,32 @@
         },
         "dcCodeArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The datacenter short code's ARM Id string"
         },
         "loopbackIpV4ArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The device's IPv4 address's ARM Id string"
         },
         "loopbackIpV6ArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The device's IPv6 address's ARM Id string"
         },
         "managementIpV4ArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The management console's IPv4 address's ARM Id string"
         },
         "managementIpV6ArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The management console's IPv6 address's ARM Id string"
         },
         "preferredIpArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The device's preferred IP address's ARM Id string"
         },
         "hardwareSku": {
@@ -234,6 +240,7 @@
         },
         "clusterArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The cluster's ARM Id string"
         },
         "cloudType": {
@@ -250,6 +257,7 @@
         },
         "dcRackLocationArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The device's rack location's ARM Id string"
         },
         "platformServiceTreeId": {
@@ -275,7 +283,9 @@
           "type": "array",
           "description": "Additional Device Interface IP address ARM Ids",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "provisioningState": {
