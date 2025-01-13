@@ -336,11 +336,136 @@
     }
   },
   "definitions": {
-    "DataTransferDataSourceSink": {
+    "CosmosDataTransferDataSourceSinkDetails": {
       "type": "object",
-      "description": "Base class for all DataTransfer source/sink",
+      "description": "A base CosmosDB data source/sink details",
       "properties": {
-        "component": {
+        "remoteAccountName": {
+          "type": "string"
+        }
+      }
+    },
+    "MongoVCoreDataTransferDataSourceSinkDetails": {
+      "type": "object",
+      "description": "A CosmosDB Mongo vCore API data source/sink",
+      "properties": {
+        "hostName": {
+          "type": "string"
+        },
+        "connectionStringKeyVaultUri": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobDataTransferDataSourceSinkDetails": {
+      "type": "object",
+      "description": "An Azure Blob Storage data source/sink",
+      "properties": {
+        "endpointUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "CosmosCassandraContainerEntity": {
+      "type": "object",
+      "description": "A CosmosDB Cassandra container entity",
+      "properties": {
+        "keySpaceName": {
+          "type": "string"
+        },
+        "tableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "keySpaceName",
+        "tableName"
+      ]
+    },
+    "CosmosSqlContainerEntity": {
+      "type": "object",
+      "description": "A CosmosDB noSql container entity",
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseName",
+        "containerName"
+      ]
+    },
+    "CosmosMongoContainerEntity": {
+      "type": "object",
+      "description": "A CosmosDB Mongo container entity",
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseName",
+        "collectionName"
+      ]
+    },
+    "CosmosMongoVCoreContainerEntity": {
+      "type": "object",
+      "description": "A CosmosDB Mongo vCore container entity",
+
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "databaseName",
+        "collectionName"
+      ]
+    },
+    "AzureBlobStorageContainerEntity": {
+      "type": "object",
+      "description": "An Azure Blob container entity",
+      "properties": {
+        "containerName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "containerName"
+      ]
+    },
+    "BaseDataTransferTask": {
+      "type": "object",
+      "description": "The properties of a DataTransfer Task",
+      "properties": {
+        "totalCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Task level Total Count.",
+          "format": "int64"
+        },
+        "processedCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Task level Processed Count.",
+          "format": "int64"
+        }
+      }
+    },
+    "BaseDataTransferProperties": {
+      "type": "object",
+      "description": "The properties of a DataTransfer Job",
+      "properties": {
+        "sourceComponent": {
           "type": "string",
           "enum": [
             "CosmosDBCassandra",
@@ -349,163 +474,145 @@
             "CosmosDBSql",
             "AzureBlobStorage"
           ],
-          "x-ms-enum": {
-            "name": "DataTransferComponent",
-            "modelAsString": true
-          },
-          "default": "CosmosDBCassandra"
+          "description": "Source DataStore component"
         }
       },
-      "discriminator": "component",
       "required": [
-        "component"
-      ]
+        "sourceComponent"
+      ],
+      "discriminator": "sourceComponent"
     },
-    "BaseCosmosDataTransferDataSourceSink": {
+    "SourceCassandraDataTransferProperties": {
+      "description": "The properties of a Cassandra source DataTransfer Job",
       "type": "object",
-      "description": "A base CosmosDB data source/sink",
-      "properties": {
-        "remoteAccountName": {
-          "type": "string"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
-        }
-      ]
-    },
-    "CosmosCassandraDataTransferDataSourceSink": {
-      "type": "object",
-      "description": "A CosmosDB Cassandra API data source/sink",
-      "properties": {
-        "keyspaceName": {
-          "type": "string"
-        },
-        "tableName": {
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
+          "$ref": "#/definitions/BaseDataTransferProperties"
         }
       ],
+      "properties": {
+        "destinationComponent": {
+          "type": "string",
+          "enum": [
+            "CosmosDBCassandra",
+            "AzureBlobStorage"
+          ]
+        },
+        "sourceDetails": {
+          "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
+          "description": "Source Cassandra DataStore details"
+        }
+      },
       "required": [
-        "keyspaceName",
-        "tableName"
+        "destinationComponent",
+        "sourceDetails"
+      ],
+      "discriminator": "destinationComponent",
+      "x-ms-discriminator-value": "CosmosDBCassandra"
+    },
+    "SourceCassandraDestinationCassandraDataTransferProperties": {
+      "description": "The properties of a Cassandra destination DataTransfer Job",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceCassandraDataTransferProperties"
+        }
+      ],
+      "properties": {
+        "destinationDetails": {
+          "$ref": "#/definitions/CosmosDataTransferDataSourceSinkDetails",
+          "description": "Destination Cassandra DataStore details"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/BaseDataTransferTask"
+              }
+            ],
+            "properties": {
+              "source": {
+                "$ref": "#/definitions/CosmosCassandraContainerEntity",
+                "description": "Source Cassandra container entity"
+              },
+              "destination": {
+                "$ref": "#/definitions/CosmosCassandraContainerEntity",
+                "description": "Destination Cassandra container entity"
+              }
+            },
+            "required": [
+              "source",
+              "destination"
+            ],
+            "x-ms-discriminator-value": "CosmosDBCassandra"
+          }
+        }
+      },
+      "required": [
+        "destinationDetails"
       ],
       "x-ms-discriminator-value": "CosmosDBCassandra"
     },
-    "CosmosMongoDataTransferDataSourceSink": {
+    "SourceCassandraDestinationBlobDataTransferProperties": {
+      "description": "The properties of a Cassandra destination DataTransfer Job",
       "type": "object",
-      "description": "A CosmosDB Mongo API data source/sink",
-      "properties": {
-        "databaseName": {
-          "type": "string"
-        },
-        "collectionName": {
-          "type": "string"
-        }
-      },
       "allOf": [
         {
-          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
-        }
-      ],
-      "required": [
-        "databaseName",
-        "collectionName"
-      ],
-      "x-ms-discriminator-value": "CosmosDBMongo"
-    },
-    "CosmosMongoVCoreDataTransferDataSourceSink": {
-      "type": "object",
-      "description": "A CosmosDB Mongo vCore API data source/sink",
-      "properties": {
-        "databaseName": {
-          "type": "string"
-        },
-        "collectionName": {
-          "type": "string"
-        },
-        "hostName": {
-          "type": "string"
-        },
-        "connectionStringKeyVaultUri": {
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
-        }
-      ],
-      "required": [
-        "databaseName",
-        "collectionName"
-      ],
-      "x-ms-discriminator-value": "CosmosDBMongoVCore"
-    },
-    "CosmosSqlDataTransferDataSourceSink": {
-      "type": "object",
-      "description": "A CosmosDB No Sql API data source/sink",
-      "properties": {
-        "databaseName": {
-          "type": "string"
-        },
-        "containerName": {
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCosmosDataTransferDataSourceSink"
-        }
-      ],
-      "required": [
-        "databaseName",
-        "containerName"
-      ],
-      "x-ms-discriminator-value": "CosmosDBSql"
-    },
-    "AzureBlobDataTransferDataSourceSink": {
-      "type": "object",
-      "description": "An Azure Blob Storage data source/sink",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataTransferDataSourceSink"
+          "$ref": "#/definitions/SourceCassandraDataTransferProperties"
         }
       ],
       "properties": {
-        "containerName": {
-          "type": "string"
+        "destinationDetails": {
+          "$ref": "#/definitions/AzureBlobDataTransferDataSourceSinkDetails",
+          "description": "Destination Blob DataStore details"
         },
-        "endpointUrl": {
-          "type": "string"
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/definitions/BaseDataTransferTask"
+              }
+            ],
+            "properties": {
+              "source": {
+                "$ref": "#/definitions/CosmosCassandraContainerEntity",
+                "description": "Source Cassandra container entity"
+              },
+              "destination": {
+                "$ref": "#/definitions/AzureBlobStorageContainerEntity",
+                "description": "Destination Blob container entity"
+              }
+            },
+            "required": [
+              "source",
+              "destination"
+            ],
+            "x-ms-discriminator-value": "AzureBlobStorage"
+          }
         }
       },
       "required": [
-        "containerName"
+        "destinationDetails"
       ],
-      "x-ms-discriminator-value": "AzureBlobStorage"
+      "x-ms-discriminator-value": "CosmosDBCassandra"
     },
     "DataTransferJobProperties": {
       "description": "The properties of a DataTransfer Job",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseDataTransferProperties"
+        }
+      ],
       "properties": {
         "jobName": {
           "readOnly": true,
           "type": "string",
           "description": "Job Name"
-        },
-        "source": {
-          "$ref": "#/definitions/DataTransferDataSourceSink",
-          "description": "Source DataStore details"
-        },
-        "destination": {
-          "$ref": "#/definitions/DataTransferDataSourceSink",
-          "description": "Destination DataStore details"
         },
         "status": {
           "readOnly": true,
@@ -559,11 +666,7 @@
             "modelAsString": true
           }
         }
-      },
-      "required": [
-        "source",
-        "destination"
-      ]
+      }
     },
     "CreateJobRequest": {
       "description": "Parameters to create Data Transfer Job",
