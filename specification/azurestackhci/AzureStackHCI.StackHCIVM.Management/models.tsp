@@ -847,6 +847,34 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility("read")
+  @added(Versions.v2024_10_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
@@ -995,6 +1023,38 @@ model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: LogicalNetworkUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties under the logical network resource")
+model LogicalNetworkUpdateProperties {
+  @doc("Subnet - list of subnets under the logical network")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  subnets?: SubnetUpdate[];
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Subnet resource")
+model SubnetUpdate {
+  #suppress "deprecated" "Legacy flattening"
+  @doc("Properties of the subnet.")
+  @Azure.ClientGenerator.Core.flattenProperty
+  properties?: SubnetUpdateProperties;
+
+  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  name?: string;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties of the subnet.")
+model SubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1077,6 +1137,17 @@ model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: NetworkInterfacesUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Defines the resource properties for the update.")
+model NetworkInterfacesUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Tags object for patch operations.")
@@ -1217,6 +1288,14 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1228,6 +1307,18 @@ model VirtualHardDiskUploadStatus {
 
   @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
   status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
 
 @doc("The virtual hard disk resource patch definition.")
