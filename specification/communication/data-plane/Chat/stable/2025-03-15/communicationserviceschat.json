@@ -1194,185 +1194,6 @@
           }
         }
       }
-    },
-    "/chat/threads/{chatThreadId}/images": {
-      "post": {
-        "tags": [
-          "Images"
-        ],
-        "summary": "Upload an image in a thread, on behalf of a user.",
-        "operationId": "ChatThread_UploadChatImage",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "image-filename",
-            "description": "The file name of the image.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "Thread id where the uploaded image belongs to. (Teams meeting only)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "chatImageFile",
-            "description": "Image binary data, allowed image formats: jpeg, png, gif, heic, webp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatImageFile"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Uploaded successfully, the `Location` header contains the URL for the newly uploaded image.",
-            "schema": {
-              "$ref": "#/definitions/UploadChatImageResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Upload Image": {
-            "$ref": "./examples/Images_UploadChatImage.json"
-          }
-        }
-      }
-    },
-    "/chat/threads/{chatThreadId}/images/{imageId}/view/{imageViewType}": {
-      "get": {
-        "tags": [
-          "Images"
-        ],
-        "summary": "Get an image by view type.",
-        "operationId": "ChatThread_GetChatImage",
-        "produces": [
-          "application/json",
-          "image/gif",
-          "image/jpeg",
-          "image/png",
-          "image/bmp",
-          "image/tiff"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "The thread id to which the message was sent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "imageId",
-            "description": "The image id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "imageViewType",
-            "description": "The view type of image.",
-            "required": true,
-            "enum": [
-              "original",
-              "small"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ImageViewType",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Image binary data",
-            "schema": {
-              "$ref": "#/definitions/ChatImageFile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete message": {
-            "$ref": "./examples/Images_GetChatImage.json"
-          }
-        }
-      }
-    },
-    "/chat/threads/{chatThreadId}/images/{imageId}": {
-      "delete": {
-        "tags": [
-          "Images"
-        ],
-        "summary": "Deletes a image.",
-        "operationId": "ChatThread_DeleteChatImage",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "The thread id to which the message was sent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "imageId",
-            "description": "The image id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request successful."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete message": {
-            "$ref": "./examples/Images_DeleteChatImage.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1539,7 +1360,7 @@
         "content": {
           "description": "Chat message content.",
           "type": "string",
-          "example": "<p>Come one guys, lets go for lunch together.</p>"
+          "example": "Come one guys, lets go for lunch together."
         },
         "senderDisplayName": {
           "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
@@ -1554,13 +1375,6 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "attachments": {
-          "description": "The array of attachments",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatAttachment"
           }
         }
       }
@@ -1622,7 +1436,7 @@
       }
     },
     "ChatAttachment": {
-      "description": "An attachment in a chat message. Currently only supported in Teams Interop scenarios.",
+      "description": "An attachment in a chat message.",
       "required": [
         "id",
         "attachmentType"
@@ -1632,7 +1446,7 @@
         "id": {
           "description": "Id of the attachment",
           "type": "string",
-          "example": "f508ce15-e878-431f-b871-f530cac5331d"
+          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
         },
         "attachmentType": {
           "$ref": "#/definitions/ChatAttachmentType"
@@ -2093,34 +1907,6 @@
           "$ref": "#/definitions/ChatRetentionPolicy"
         }
       ]
-    },
-    "ChatImageFile": {
-      "description": "The image binary data.",
-      "type": "string",
-      "format": "binary",
-      "x-ms-media-kind": "image"
-    },
-    "UploadChatImageResult": {
-      "description": "Result payload for uploading an image.",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "A server-generated image id.",
-          "type": "string",
-          "example": "0-eus-d2-fb42e272282ebb6ef76a3aedd1974433"
-        },
-        "attachmentType": {
-          "$ref": "#/definitions/ChatAttachmentType"
-        },
-        "name": {
-          "description": "The name including file extension type of the attachment.",
-          "type": "string",
-          "example": "SomeImage.png"
-        }
-      }
     }
   },
   "parameters": {
