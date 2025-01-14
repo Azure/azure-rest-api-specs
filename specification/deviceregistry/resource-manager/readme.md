@@ -22,10 +22,71 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Azure Device Registry.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-07
+tag: package-preview-2024-10
+```
+
+### Tag: package-preview-2024-10
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2024-10-01-preview/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceBaseProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.assigned
+      - $.definitions.MessagingEndpoints.properties.unassigned
+      - $.definitions.MessagingEndpointsUpdate.properties.assigned
+      - $.definitions.MessagingEndpointsUpdate.properties.unassigned
+      - $.definitions.NamespaceDevicePropertiesUpdate.properties.attributes
+    reason: attributes is a customer-defined property of any shape
+  - code: PropertiesTypeObjectNoDefinition
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetPropertiesUpdate.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceBaseProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.assigned
+      - $.definitions.MessagingEndpoints.properties.unassigned
+      - $.definitions.MessagingEndpointsUpdate.properties.assigned
+      - $.definitions.MessagingEndpointsUpdate.properties.unassigned
+    reason: attributes is a customer-defined property of any shape
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
 ## Tag: package-preview-2024-07
@@ -47,6 +108,7 @@ suppressions:
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
       - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
@@ -62,6 +124,7 @@ suppressions:
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
       - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
@@ -96,6 +159,7 @@ suppressions:
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
       - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes
@@ -111,6 +175,7 @@ suppressions:
       - $.definitions.AssetUpdate.properties.properties.properties.attributes
       - $.definitions.AssetPropertiesUpdate.properties.attributes
       - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
       - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
       - $.definitions.DeviceProperties.properties.attributes
       - $.definitions.DeviceUpdate.properties.properties.properties.attributes

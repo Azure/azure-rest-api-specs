@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
 import "../shared/managedresourcegroupconfiguration.tsp";
+import "../shared/roleassignmentitem.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -110,6 +111,55 @@ model GovernedServiceItem {
   initiatives?: string[];
 }
 
+@added(Microsoft.Mission.Versions.v2024_11_01_preview)
+@doc("Approval Policy.")
+union ApprovalPolicy {
+  string,
+
+  @doc("Approval will be required for the specified action.")
+  Required: "Required",
+
+  @doc("Approval will not be required for the specified action.")
+  NotRequired: "NotRequired",
+}
+
+@added(Microsoft.Mission.Versions.v2024_11_01_preview)
+@doc("ApprovalSettings Properties")
+model ApprovalSettings {
+  @doc("Approval required for endpoint creation (Required or NotRequired).")
+  endpointCreation?: ApprovalPolicy;
+
+  @doc("Approval required for endpoint update (Required or NotRequired).")
+  endpointUpdate?: ApprovalPolicy;
+
+  @doc("Approval required for endpoint deletion (Required or NotRequired).")
+  endpointDeletion?: ApprovalPolicy;
+
+  @doc("Approval required for enclave connection creation (Required or NotRequired).")
+  connectionCreation?: ApprovalPolicy;
+
+  @doc("Approval required for enclave connection update (Required or NotRequired).")
+  connectionUpdate?: ApprovalPolicy;
+
+  @doc("Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).")
+  connectionUpdateMode?: "Automatic" | "Manual" | string;
+
+  @doc("Approval required for enclave connection deletion (Required or NotRequired).")
+  connectionDeletion?: ApprovalPolicy;
+
+  @doc("Approval required for virtual enclave creation (Required or NotRequired).")
+  enclaveCreation?: ApprovalPolicy;
+
+  @doc("Approval required for virtual enclave deletion (Required or NotRequired).")
+  enclaveDeletion?: ApprovalPolicy;
+
+  @doc("Approval required for toggling maintenance mode (Required or NotRequired).")
+  maintenanceMode?: ApprovalPolicy;
+
+  @doc("Approval required for deploying service catalog templates (Required or NotRequired).")
+  serviceCatalogDeployment?: ApprovalPolicy;
+}
+
 @doc("Community Resource Properties")
 model CommunityProperties {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
@@ -152,4 +202,17 @@ model CommunityProperties {
   @madeOptional(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("List of services governed by a community.")
   governedServiceList?: GovernedServiceItem[];
+
+  @added(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @madeOptional(Microsoft.Mission.Versions.v2024_10_01_preview)
+  @doc("Community role assignments")
+  communityRoleAssignments?: RoleAssignmentItem[];
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("Approval requirements for various actions on the community's resources.")
+  approvalSettings?: ApprovalSettings;
+
+  @added(Microsoft.Mission.Versions.v2024_11_01_preview)
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfiguration;
 }

@@ -1,0 +1,868 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CloudFormationStacks"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/cloudFormationStacks": {
+      "get": {
+        "operationId": "CloudFormationStacks_ListBySubscription",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "List CloudFormationStack resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_ListBySubscription": {
+            "$ref": "./examples/CloudFormationStacks_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudFormationStacks": {
+      "get": {
+        "operationId": "CloudFormationStacks_ListByResourceGroup",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "List CloudFormationStack resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_ListByResourceGroup": {
+            "$ref": "./examples/CloudFormationStacks_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/cloudFormationStacks/{name}": {
+      "get": {
+        "operationId": "CloudFormationStacks_Get",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "Get a CloudFormationStack",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStack",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStack"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_Get": {
+            "$ref": "./examples/CloudFormationStacks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudFormationStacks_CreateOrReplace",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "Create a CloudFormationStack. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStack",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStack"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudFormationStack' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStack"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudFormationStack' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStack"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_CreateOrReplace": {
+            "$ref": "./examples/CloudFormationStacks_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudFormationStacks_Update",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "Update a CloudFormationStack",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStack",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStackTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFormationStack"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_Update": {
+            "$ref": "./examples/CloudFormationStacks_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudFormationStacks_Delete",
+        "tags": [
+          "CloudFormationStacks"
+        ],
+        "description": "Delete a CloudFormationStack",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFormationStack",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFormationStacks_Delete": {
+            "$ref": "./examples/CloudFormationStacks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsCloudFormationStackProperties": {
+      "type": "object",
+      "description": "Definition of awsCloudFormationStack",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "Property capabilities",
+          "items": {
+            "$ref": "#/definitions/Capabilities"
+          },
+          "x-ms-identifiers": []
+        },
+        "changeSetId": {
+          "type": "string",
+          "description": "Property changeSetId"
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "Property creationTime"
+        },
+        "description": {
+          "type": "string",
+          "description": "Property description"
+        },
+        "disableRollback": {
+          "type": "boolean",
+          "description": "Property disableRollback"
+        },
+        "enableTerminationProtection": {
+          "type": "boolean",
+          "description": "Property enableTerminationProtection"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "Property lastUpdateTime"
+        },
+        "notificationARNs": {
+          "type": "array",
+          "description": "Property notificationARNs",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Property outputs",
+          "items": {
+            "$ref": "#/definitions/Output"
+          },
+          "x-ms-identifiers": []
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Property parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Property parentId"
+        },
+        "roleARN": {
+          "type": "string",
+          "description": "Property roleARN"
+        },
+        "rootId": {
+          "type": "string",
+          "description": "Property rootId"
+        },
+        "stackId": {
+          "type": "string",
+          "description": "Property stackId"
+        },
+        "stackName": {
+          "type": "string",
+          "description": "Property stackName"
+        },
+        "stackPolicyBody": {
+          "description": "Property stackPolicyBody"
+        },
+        "stackPolicyURL": {
+          "type": "string",
+          "description": "Property stackPolicyURL"
+        },
+        "stackStatus": {
+          "$ref": "#/definitions/StackStatus",
+          "description": "Property stackStatus"
+        },
+        "stackStatusReason": {
+          "type": "string",
+          "description": "Property stackStatusReason"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Property tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "templateBody": {
+          "description": "Property templateBody"
+        },
+        "templateURL": {
+          "type": "string",
+          "description": "Property templateURL"
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Property timeoutInMinutes"
+        }
+      }
+    },
+    "Capabilities": {
+      "type": "string",
+      "description": "Capabilities enum",
+      "enum": [
+        "CAPABILITY_AUTO_EXPAND",
+        "CAPABILITY_IAM",
+        "CAPABILITY_NAMED_IAM"
+      ],
+      "x-ms-enum": {
+        "name": "Capabilities",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CAPABILITY_AUTO_EXPAND",
+            "value": "CAPABILITY_AUTO_EXPAND",
+            "description": "Capabilities enum CAPABILITY_AUTO_EXPAND"
+          },
+          {
+            "name": "CAPABILITY_IAM",
+            "value": "CAPABILITY_IAM",
+            "description": "Capabilities enum CAPABILITY_IAM"
+          },
+          {
+            "name": "CAPABILITY_NAMED_IAM",
+            "value": "CAPABILITY_NAMED_IAM",
+            "description": "Capabilities enum CAPABILITY_NAMED_IAM"
+          }
+        ]
+      }
+    },
+    "CloudFormationStack": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudFormationStackProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudFormationStackListResult": {
+      "type": "object",
+      "description": "The response of a CloudFormationStack list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudFormationStack items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudFormationStack"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudFormationStackProperties": {
+      "type": "object",
+      "description": "Definition of CloudFormationStack",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsCloudFormationStackProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudFormationStackTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in CloudFormationStack resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Output": {
+      "type": "object",
+      "description": "Definition of Output",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Property description"
+        },
+        "exportName": {
+          "type": "string",
+          "description": "Property exportName"
+        },
+        "outputKey": {
+          "type": "string",
+          "description": "Property outputKey"
+        },
+        "outputValue": {
+          "type": "string",
+          "description": "Property outputValue"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StackStatus": {
+      "type": "string",
+      "description": "StackStatus enum",
+      "enum": [
+        "CREATE_COMPLETE",
+        "CREATE_FAILED",
+        "CREATE_IN_PROGRESS",
+        "DELETE_COMPLETE",
+        "DELETE_FAILED",
+        "DELETE_IN_PROGRESS",
+        "IMPORT_COMPLETE",
+        "IMPORT_IN_PROGRESS",
+        "IMPORT_ROLLBACK_COMPLETE",
+        "IMPORT_ROLLBACK_FAILED",
+        "IMPORT_ROLLBACK_IN_PROGRESS",
+        "REVIEW_IN_PROGRESS",
+        "ROLLBACK_COMPLETE",
+        "ROLLBACK_FAILED",
+        "ROLLBACK_IN_PROGRESS",
+        "UPDATE_COMPLETE",
+        "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+        "UPDATE_FAILED",
+        "UPDATE_IN_PROGRESS",
+        "UPDATE_ROLLBACK_COMPLETE",
+        "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+        "UPDATE_ROLLBACK_FAILED",
+        "UPDATE_ROLLBACK_IN_PROGRESS"
+      ],
+      "x-ms-enum": {
+        "name": "StackStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CREATE_COMPLETE",
+            "value": "CREATE_COMPLETE",
+            "description": "StackStatus enum CREATE_COMPLETE"
+          },
+          {
+            "name": "CREATE_FAILED",
+            "value": "CREATE_FAILED",
+            "description": "StackStatus enum CREATE_FAILED"
+          },
+          {
+            "name": "CREATE_IN_PROGRESS",
+            "value": "CREATE_IN_PROGRESS",
+            "description": "StackStatus enum CREATE_IN_PROGRESS"
+          },
+          {
+            "name": "DELETE_COMPLETE",
+            "value": "DELETE_COMPLETE",
+            "description": "StackStatus enum DELETE_COMPLETE"
+          },
+          {
+            "name": "DELETE_FAILED",
+            "value": "DELETE_FAILED",
+            "description": "StackStatus enum DELETE_FAILED"
+          },
+          {
+            "name": "DELETE_IN_PROGRESS",
+            "value": "DELETE_IN_PROGRESS",
+            "description": "StackStatus enum DELETE_IN_PROGRESS"
+          },
+          {
+            "name": "IMPORT_COMPLETE",
+            "value": "IMPORT_COMPLETE",
+            "description": "StackStatus enum IMPORT_COMPLETE"
+          },
+          {
+            "name": "IMPORT_IN_PROGRESS",
+            "value": "IMPORT_IN_PROGRESS",
+            "description": "StackStatus enum IMPORT_IN_PROGRESS"
+          },
+          {
+            "name": "IMPORT_ROLLBACK_COMPLETE",
+            "value": "IMPORT_ROLLBACK_COMPLETE",
+            "description": "StackStatus enum IMPORT_ROLLBACK_COMPLETE"
+          },
+          {
+            "name": "IMPORT_ROLLBACK_FAILED",
+            "value": "IMPORT_ROLLBACK_FAILED",
+            "description": "StackStatus enum IMPORT_ROLLBACK_FAILED"
+          },
+          {
+            "name": "IMPORT_ROLLBACK_IN_PROGRESS",
+            "value": "IMPORT_ROLLBACK_IN_PROGRESS",
+            "description": "StackStatus enum IMPORT_ROLLBACK_IN_PROGRESS"
+          },
+          {
+            "name": "REVIEW_IN_PROGRESS",
+            "value": "REVIEW_IN_PROGRESS",
+            "description": "StackStatus enum REVIEW_IN_PROGRESS"
+          },
+          {
+            "name": "ROLLBACK_COMPLETE",
+            "value": "ROLLBACK_COMPLETE",
+            "description": "StackStatus enum ROLLBACK_COMPLETE"
+          },
+          {
+            "name": "ROLLBACK_FAILED",
+            "value": "ROLLBACK_FAILED",
+            "description": "StackStatus enum ROLLBACK_FAILED"
+          },
+          {
+            "name": "ROLLBACK_IN_PROGRESS",
+            "value": "ROLLBACK_IN_PROGRESS",
+            "description": "StackStatus enum ROLLBACK_IN_PROGRESS"
+          },
+          {
+            "name": "UPDATE_COMPLETE",
+            "value": "UPDATE_COMPLETE",
+            "description": "StackStatus enum UPDATE_COMPLETE"
+          },
+          {
+            "name": "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+            "value": "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+            "description": "StackStatus enum UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
+          },
+          {
+            "name": "UPDATE_FAILED",
+            "value": "UPDATE_FAILED",
+            "description": "StackStatus enum UPDATE_FAILED"
+          },
+          {
+            "name": "UPDATE_IN_PROGRESS",
+            "value": "UPDATE_IN_PROGRESS",
+            "description": "StackStatus enum UPDATE_IN_PROGRESS"
+          },
+          {
+            "name": "UPDATE_ROLLBACK_COMPLETE",
+            "value": "UPDATE_ROLLBACK_COMPLETE",
+            "description": "StackStatus enum UPDATE_ROLLBACK_COMPLETE"
+          },
+          {
+            "name": "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+            "value": "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+            "description": "StackStatus enum UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
+          },
+          {
+            "name": "UPDATE_ROLLBACK_FAILED",
+            "value": "UPDATE_ROLLBACK_FAILED",
+            "description": "StackStatus enum UPDATE_ROLLBACK_FAILED"
+          },
+          {
+            "name": "UPDATE_ROLLBACK_IN_PROGRESS",
+            "value": "UPDATE_ROLLBACK_IN_PROGRESS",
+            "description": "StackStatus enum UPDATE_ROLLBACK_IN_PROGRESS"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

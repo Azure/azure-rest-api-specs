@@ -1,142 +1,103 @@
 import "./common.tsp";
 
+using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Network Device Properties defines the properties of the resource.
- */
+@doc("Network Device Properties defines the properties of the resource.")
 model NetworkDeviceProperties {
   ...AnnotationResource;
 
-  /**
-   * The host name of the device.
-   */
+  @doc("The host name of the device.")
   @minLength(1)
   hostName?: string;
 
-  /**
-   * Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.
-   */
+  @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   serialNumber: string;
 
-  /**
-   * Current version of the device as defined in SKU.
-   */
+  @doc("Current version of the device as defined in SKU.")
   @visibility("read")
   version?: string;
 
-  /**
-   * Network Device SKU name.
-   */
+  @doc("Network Device SKU name.")
   @visibility("read", "create")
   networkDeviceSku?: string;
 
-  /**
-   * NetworkDeviceRole is the device role: Example: CE | ToR.
-   */
+  @doc("NetworkDeviceRole is the device role: Example: CE | ToR.")
   @visibility("read")
   networkDeviceRole?: NetworkDeviceRole;
 
-  /**
-   * Reference to network rack resource id.
-   */
+  @doc("Reference to network rack resource id.")
   @visibility("read")
   networkRackId?: string;
 
-  /**
-   * Management IPv4 Address.
-   */
+  @doc("Management IPv4 Address.")
   @visibility("read")
   managementIpv4Address?: string;
 
-  /**
-   * Management IPv6 Address.
-   */
+  @doc("Management IPv6 Address.")
   @visibility("read")
   managementIpv6Address?: string;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("User configured read-write configuration applied on the network devices.")
+  @added(Versions.v2024_06_15_preview)
+  @visibility("read")
+  rwDeviceConfig?: string;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * The Network Device Patch Parameters defines the patch parameters of the resource.
- */
+@doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
 model NetworkDevicePatchParameters {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
-  /**
-   * Network Device Patch properties.
-   */
+  @doc("Network Device Patch properties.")
   properties?: NetworkDevicePatchParametersProperties;
 }
 
-/**
- * Network Device Patch properties.
- */
+@doc("Network Device Patch properties.")
 model NetworkDevicePatchParametersProperties {
   ...AnnotationResource;
 
-  /**
-   * The host name of the device.
-   */
+  @doc("The host name of the device.")
   @minLength(1)
   hostName?: string;
 
-  /**
-   * Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.
-   */
+  @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   serialNumber?: string;
 }
 
-/**
- * Reboot properties.
- */
+@doc("Reboot properties.")
 model RebootProperties {
-  /**
-   * Type of reboot to be performed. Example: GracefulRebootWithZTP
-   */
+  @doc("Type of reboot to be performed. Example: GracefulRebootWithZTP")
   rebootType?: RebootType;
 }
 
-/**
- * Update the administrative state on list of resources.
- */
+@doc("Update the administrative state on list of resources.")
 model UpdateDeviceAdministrativeState {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...EnableDisableOnResources;
 
-  /**
-   * Administrative state.
-   */
+  @doc("Administrative state.")
   state?: DeviceAdministrativeState;
 }
 
-/**
- * NetworkDeviceRole is the device role: Example: CE | ToR.
- */
+@doc("NetworkDeviceRole is the device role: Example: CE | ToR.")
 union NetworkDeviceRole {
   @doc("NetworkDeviceRole-CE(Customer Edge)")
   CE: "CE",
@@ -156,9 +117,7 @@ union NetworkDeviceRole {
   string,
 }
 
-/**
- * Type of reboot to be performed. Example: GracefulRebootWithZTP
- */
+@doc("Type of reboot to be performed. Example: GracefulRebootWithZTP")
 union RebootType {
   @doc("RebootType GracefulRebootWithZTP")
   GracefulRebootWithZTP: "GracefulRebootWithZTP",
@@ -175,18 +134,24 @@ union RebootType {
   string,
 }
 
-/**
- * Administrative state.
- */
+@doc("Administrative state.")
 union DeviceAdministrativeState {
   @doc("Device AdministrativeState-RMA")
   RMA: "RMA",
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("Device AdministrativeState-RMA(Return Material Authorization) Ungraceful")
+  UngracefulRMA: "UngracefulRMA",
 
   @doc("Device AdministrativeState-Resync")
   Resync: "Resync",
 
   @doc("Device AdministrativeState-GracefulQuarantine")
   GracefulQuarantine: "GracefulQuarantine",
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("Device AdministrativeState-UngracefulQuarantine")
+  UngracefulQuarantine: "UngracefulQuarantine",
 
   @doc("Device AdministrativeState-Quarantine")
   Quarantine: "Quarantine",
@@ -196,6 +161,10 @@ union DeviceAdministrativeState {
 
   @doc("Device AdministrativeState-Enable")
   Enable: "Enable",
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("Device AdministrativeState-Disable")
+  Disable: "Disable",
 
   string,
 }

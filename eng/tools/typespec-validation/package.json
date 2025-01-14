@@ -15,12 +15,11 @@
   "devDependencies": {
     "@types/node": "^18.19.31",
     "@vitest/coverage-v8": "^2.0.4",
-    "typescript": "~5.5.4",
+    "typescript": "~5.6.2",
     "vitest": "^2.0.4"
   },
   "scripts": {
-    "build": "tsc",
-    "postinstall": "cd ../suppressions && npm run build && cd ../typespec-validation && npm run build",
+    "build": "tsc --build",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },

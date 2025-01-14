@@ -11,8 +11,8 @@
         "plannedQuotaName": "PlannedQuota202310191",
         "contactEmail": "somemail@microsoft.com",
         "subscriptionNameInPlan": "DataSub1",
-        "armLocation": "useast",
         "stage": "GA",
+        "azureLocation": "useast",
         "skipUnsupportedSilently": false
       }
     }
@@ -20,7 +20,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/plannedQuotas/prodUSEastAzcis",
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/plannedQuotas/prodUSEastAzcis",
         "name": "prodUSEastAzcis",
         "type": "Microsoft.AzureCis/plannedQuotas",
         "properties": {
@@ -28,15 +28,35 @@
           "contactEmail": "somemail@microsoft.com",
           "subscriptionNameInPlan": "DataSub1",
           "stage": "GA",
-          "armLocation": "useast",
+          "azureLocation": "useast",
           "skipUnsupportedSilently": false,
-          "provisioningState": "Accepted"
+          "provisioningState": "Succeeded",
+          "fulfilledPlan": {
+            "arm": {
+              "vm": {
+                "cores": {
+                  "DV2F": 228,
+                  "EV3F": 212
+                }
+              }
+            },
+            "rdfe": {
+              "storage": {
+                "accounts": 100
+              }
+            },
+            "isAzEnabled": true
+          },
+          "alternatives": {
+            "DV2F": "DV3F",
+            "EV3F": "EV4F"
+          }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/plannedQuotas/prodUSEastAzcis",
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/plannedQuotas/prodUSEastAzcis",
         "name": "prodUSEastAzcis",
         "type": "Microsoft.AzureCis/plannedQuotas",
         "properties": {
@@ -44,9 +64,29 @@
           "contactEmail": "somemail@microsoft.com",
           "subscriptionNameInPlan": "DataSub1",
           "stage": "GA",
-          "armLocation": "useast",
+          "azureLocation": "useast",
           "skipUnsupportedSilently": false,
-          "provisioningState": "Accepted"
+          "provisioningState": "Succeeded",
+          "fulfilledPlan": {
+            "arm": {
+              "vm": {
+                "cores": {
+                  "DV2F": 228,
+                  "EV3F": 212
+                }
+              }
+            },
+            "rdfe": {
+              "storage": {
+                "accounts": 100
+              }
+            },
+            "isAzEnabled": true
+          },
+          "alternatives": {
+            "DV2F": "DV3F",
+            "EV3F": "EV4F"
+          }
         }
       }
     }

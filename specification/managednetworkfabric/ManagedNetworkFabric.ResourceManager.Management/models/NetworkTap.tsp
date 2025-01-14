@@ -1,19 +1,13 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Network Tap Properties defines the properties of the resource.
- */
+@doc("Network Tap Properties defines the properties of the resource.")
 model NetworkTapProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
-  /**
-   * ARM resource ID of the Network Packet Broker.
-   */
+  @doc("ARM resource ID of the Network Packet Broker.")
   @visibility("read", "create")
   networkPacketBrokerId: Azure.Core.armResourceIdentifier<[
     {
@@ -21,9 +15,7 @@ model NetworkTapProperties {
     }
   ]>;
 
-  /**
-   * Source Tap Rule Id. ARM Resource ID of the Network Tap Rule.
-   */
+  @doc("Source Tap Rule Id. ARM Resource ID of the Network Tap Rule.")
   @visibility("read")
   sourceTapRuleId?: Azure.Core.armResourceIdentifier<[
     {
@@ -31,54 +23,41 @@ model NetworkTapProperties {
     }
   ]>;
 
-  /**
-   * List of destinations to send the filter traffic.
-   */
+  @doc("List of destinations to send the filter traffic.")
   @OpenAPI.extension("x-ms-identifiers", [])
   destinations: DestinationProperties[];
 
-  /**
-   * Polling type.
-   */
+  @doc("Polling type.")
   pollingType?: PollingType = PollingType.Pull;
 
-  /**
-   * Gets the configurations state of the resource.
-   */
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Gets the configurations state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of Network Tap provisioning.
-   */
+  @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of Network Tap provisioning.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource. Example -Enabled/Disabled
-   */
+  @doc("Administrative state of the resource. Example -Enabled/Disabled")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * The network tap destination properties.
- */
+@doc("The network tap destination properties.")
 model DestinationProperties {
-  /**
-   * Destination name.
-   */
+  @doc("Destination name.")
   @minLength(1)
   name: string;
 
-  /**
-   * Type of destination. Input can be IsolationDomain or Direct.
-   */
+  @doc("Type of destination. Input can be IsolationDomain or Direct.")
   destinationType: DestinationType;
 
-  /**
-   * The destination Id. ARM Resource ID of either NNI or Internal Networks.
-   */
+  @doc("The destination Id. ARM Resource ID of either NNI or Internal Networks.")
   destinationId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkToNetworkInterconnects";
@@ -88,14 +67,10 @@ model DestinationProperties {
     }
   ]>;
 
-  /**
-   * Isolation Domain Properties.
-   */
+  @doc("Isolation Domain Properties.")
   isolationDomainProperties?: IsolationDomainProperties;
 
-  /**
-   * ARM Resource ID of destination Tap Rule that contains match configurations.
-   */
+  @doc("ARM Resource ID of destination Tap Rule that contains match configurations.")
   destinationTapRuleId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
@@ -103,24 +78,16 @@ model DestinationProperties {
   ]>;
 }
 
-/**
- * The network tap destination properties.
- */
+@doc("The network tap destination properties.")
 model DestinationPatchProperties {
-  /**
-   * Destination name.
-   */
+  @doc("Destination name.")
   @minLength(1)
   name?: string;
 
-  /**
-   * Type of destination. Input can be IsolationDomain or Direct.
-   */
+  @doc("Type of destination. Input can be IsolationDomain or Direct.")
   destinationType?: DestinationType;
 
-  /**
-   * The destination Id. ARM Resource ID of either NNI or Internal Networks.
-   */
+  @doc("The destination Id. ARM Resource ID of either NNI or Internal Networks.")
   destinationId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkToNetworkInterconnects";
@@ -130,14 +97,10 @@ model DestinationPatchProperties {
     }
   ]>;
 
-  /**
-   * Isolation Domain Properties.
-   */
+  @doc("Isolation Domain Properties.")
   isolationDomainProperties?: IsolationDomainPatchProperties;
 
-  /**
-   * ARM Resource ID of destination Tap Rule that contains match configurations.
-   */
+  @doc("ARM Resource ID of destination Tap Rule that contains match configurations.")
   destinationTapRuleId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkTapRules";
@@ -145,18 +108,12 @@ model DestinationPatchProperties {
   ]>;
 }
 
-/**
- * Isolation Domain Properties.
- */
+@doc("Isolation Domain Properties.")
 model IsolationDomainProperties {
-  /**
-   * Type of encapsulation.
-   */
+  @doc("Type of encapsulation.")
   encapsulation?: Encapsulation;
 
-  /**
-   * List of Neighbor Group IDs.
-   */
+  @doc("List of Neighbor Group IDs.")
   neighborGroupIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/neighborGroups";
@@ -167,45 +124,27 @@ model IsolationDomainProperties {
 @doc("Isolation Domain Properties.")
 model IsolationDomainPatchProperties is IsolationDomainProperties;
 
-/**
- * The NetworkFabric resource definition.
- */
+@doc("The NetworkFabric resource definition.")
 model NetworkTapPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   properties?: NetworkTapPatchProperties;
 }
 
-/**
- * The Network Tap resource patch definition.
- */
+@doc("The Network Tap resource patch definition.")
 model NetworkTapPatchProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
-  /**
-   * Polling type.
-   */
+  @doc("Polling type.")
   pollingType?: PollingType;
 
-  /**
-   * List of destination properties to send the filter traffic.
-   */
+  @doc("List of destination properties to send the filter traffic.")
   @OpenAPI.extension("x-ms-identifiers", [])
   destinations?: DestinationPatchProperties[];
 }
 
-/**
- * Type of destination. Input can be IsolationDomain or Direct.
- */
+@doc("Type of destination. Input can be IsolationDomain or Direct.")
 union DestinationType {
   @doc("DestinationType-IsolationDomain")
   IsolationDomain: "IsolationDomain",
@@ -216,9 +155,7 @@ union DestinationType {
   string,
 }
 
-/**
- * Type of encapsulation.
- */
+@doc("Type of encapsulation.")
 union Encapsulation {
   @doc("Encapsulation-None")
   None: "None",

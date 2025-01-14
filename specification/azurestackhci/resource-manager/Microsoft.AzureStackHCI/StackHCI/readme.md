@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-07
+tag: package-preview-2024-12-01-preview
 ```
 
 ## Suppression
@@ -72,6 +72,7 @@ suppressions:
       - updateSummaries.json
       - deploymentSettings.json
       - edgeDevices.json
+      - edgeDeviceJobs.json
       - securitySettings.json
       - edgeNodePool.json
 
@@ -106,6 +107,18 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - hci.json
+
+  - code: PatchBodyParametersSchema
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/devicePools/{devicePoolName}"].patch.parameters[4].schema.properties.identity
+
+  - code: PatchBodyParametersSchema
+    from: hci.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: 
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}"].patch.parameters[4].schema.properties.identity
 
   - code: PutResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -155,6 +168,7 @@ suppressions:
       - updates.json
       - deploymentSettings.json
       - securitySettings.json
+      - edgeDeviceJobs.json
 
   - code: XmsPageableForListCalls
     reason: already used in GA api version, fixing it will cause breaking change
@@ -204,9 +218,83 @@ suppressions:
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
+
+  - code: PatchBodyParametersSchema
+    from: 
+      - clusters.json
+    reason: Making the body optional now would cause a breaking change in backward compatibility
 ```
 
-### Tag: package-preview-2024-07
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - preview/2024-11-01-preview/arcSettings.json
+  - preview/2024-11-01-preview/clusters.json
+  - preview/2024-11-01-preview/deploymentSettings.json
+  - preview/2024-11-01-preview/edgeDevices.json
+  - preview/2024-11-01-preview/edgeDeviceJobs.json
+  - preview/2024-11-01-preview/hci.json
+  - preview/2024-11-01-preview/extensions.json
+  - preview/2024-11-01-preview/hciCommon.json
+  - preview/2024-11-01-preview/offers.json
+  - ../operations/preview/2024-11-01-preview/operations.json
+  - preview/2024-11-01-preview/publishers.json
+  - preview/2024-11-01-preview/securitySettings.json
+  - preview/2024-11-01-preview/skus.json
+  - preview/2024-11-01-preview/updateRuns.json
+  - preview/2024-11-01-preview/updateSummaries.json
+  - preview/2024-11-01-preview/updates.json
+```
+
+### Tag: package-preview-2024-12-01-preview
+
+These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12-01-preview'
+input-file:
+  - preview/2024-12-01-preview/arcSettings.json
+  - preview/2024-12-01-preview/clusters.json
+  - preview/2024-12-01-preview/deploymentSettings.json
+  - preview/2024-12-01-preview/edgeDeviceJobs.json
+  - preview/2024-12-01-preview/edgeDevices.json
+  - preview/2024-12-01-preview/extensions.json
+  - preview/2024-12-01-preview/hciCommon.json
+  - preview/2024-12-01-preview/offers.json
+  - ../operations/preview/2024-12-01-preview/operations.json
+  - preview/2024-12-01-preview/publishers.json
+  - preview/2024-12-01-preview/securitySettings.json
+  - preview/2024-12-01-preview/skus.json
+  - preview/2024-12-01-preview/updateRuns.json
+  - preview/2024-12-01-preview/updates.json
+  - preview/2024-12-01-preview/updateSummaries.json
+```
+
+### Tag: package-preview-2024-09
+
+These settings apply only when `--tag=package-preview-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-09'
+input-file:
+  - preview/2024-09-01-preview/arcSettings.json
+  - preview/2024-09-01-preview/clusters.json
+  - preview/2024-09-01-preview/deploymentSettings.json
+  - preview/2024-09-01-preview/edgeDevices.json
+  - preview/2024-09-01-preview/edgeDeviceJobs.json
+  - preview/2024-09-01-preview/extensions.json
+  - preview/2024-09-01-preview/hciCommon.json
+  - preview/2024-09-01-preview/offers.json
+  - ../operations/preview/2024-09-01-preview/operations.json
+  - preview/2024-09-01-preview/publishers.json
+  - preview/2024-09-01-preview/securitySettings.json
+  - preview/2024-09-01-preview/skus.json
+  - preview/2024-09-01-preview/updateRuns.json
+  - preview/2024-09-01-preview/updateSummaries.json
+  - preview/2024-09-01-preview/updates.json
+```
+
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
@@ -305,7 +393,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   #- repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
+  #- repo: azure-sdk-for-js
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurestackhci']
   - repo: azure-resource-manager-schemas

@@ -22,7 +22,7 @@ model Campaign is TrackedResource<CampaignProperties> {
   @doc("The name of the campaign.")
   @maxLength(90)
   @minLength(1)
-  @pattern("^[a-z0-9]+(\\.[a-z0-9]+)*$")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$")
   @path
   @key("campaignName")
   @segment("campaigns")
@@ -40,11 +40,11 @@ interface Campaigns {
   @doc("Returns the details of the campaign.")
   get is Azure.ResourceManager.ArmResourceRead<Campaign>;
   @doc("Creates a new or updates an existing campaign.")
-  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Campaign>;
+  createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Campaign>;
   @doc("Updates an existing campaign.")
-  update is ArmCustomPatchSync<Campaign>;
+  update is ArmCustomPatchAsync<Campaign>;
   @doc("Deletes a specified campaign.")
-  delete is ArmResourceDeleteSync<Campaign>;
+  delete is ArmResourceDeleteWithoutOkAsync<Campaign>;
   @doc("Returns a collection of campaigns within the resource group.")
   listByResourceGroup is Azure.ResourceManager.ArmResourceListByParent<Campaign>;
   @doc("Lists campaigns within an Azure subscription.")

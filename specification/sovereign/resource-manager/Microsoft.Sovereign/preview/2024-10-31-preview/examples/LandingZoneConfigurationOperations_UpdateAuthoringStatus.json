@@ -1,0 +1,27 @@
+{
+  "title": "LandingZoneConfigurationOperations_UpdateAuthoringStatus",
+  "operationId": "LandingZoneConfigurationOperations_UpdateAuthoringStatus",
+  "parameters": {
+    "api-version": "2024-10-31-preview",
+    "subscriptionId": "9B52DE5E-FE73-4C8B-8968-1E8F0097DDB8",
+    "resourceGroupName": "ExampleResourceGroup",
+    "landingZoneAccountName": "ExampleLZA",
+    "landingZoneConfigurationName": "ExampleLZC",
+    "body": {
+      "authoringStatus": "Authoring"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "landingZoneConfigurationName": "ExampleLZC",
+        "authoringStatus": "Authoring"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

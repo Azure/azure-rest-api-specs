@@ -1,14 +1,11 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Network Packet Broker Properties defines the properties of the resource.
- */
+@doc("Network Packet Broker Properties defines the properties of the resource.")
 model NetworkPacketBrokerProperties {
-  /**
-   * ARM resource ID of the Network Fabric.
-   */
+  @doc("ARM resource ID of the Network Fabric.")
   @visibility("read", "create")
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
@@ -16,9 +13,7 @@ model NetworkPacketBrokerProperties {
     }
   ]>;
 
-  /**
-   * List of ARM resource IDs of Network Devices [NPB].
-   */
+  @doc("List of ARM resource IDs of Network Devices [NPB].")
   @visibility("read")
   networkDeviceIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -26,9 +21,7 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
-  /**
-   * List of network interfaces across NPB devices that are used to mirror source traffic.
-   */
+  @doc("List of network interfaces across NPB devices that are used to mirror source traffic.")
   @visibility("read")
   sourceInterfaceIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -36,9 +29,7 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
-  /**
-   * List of network Tap IDs configured on NPB.
-   */
+  @doc("List of network Tap IDs configured on NPB.")
   @visibility("read")
   networkTapIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -46,9 +37,7 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
-  /**
-   * List of neighbor group IDs configured on NPB.
-   */
+  @doc("List of neighbor group IDs configured on NPB.")
   @visibility("read")
   neighborGroupIds?: Azure.Core.armResourceIdentifier<[
     {
@@ -56,14 +45,15 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-/**
- * The NetworkPacketBroker patch resource definition.
- */
+@doc("The NetworkPacketBroker patch resource definition.")
 model NetworkPacketBrokerPatch is TagsUpdate;

@@ -1174,6 +1174,10 @@
         "applicationClientIdentity": {
           "$ref": "#/definitions/ApplicationClientIdentity",
           "description": "Client identity when using the application as a client. Optional."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         }
       },
       "required": [
@@ -1330,6 +1334,10 @@
         "applicationClientIdentity": {
           "$ref": "#/definitions/ApplicationClientIdentity",
           "description": "Client identity when using the application as a client. Optional."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location"
         }
       },
       "required": [
@@ -1337,6 +1345,10 @@
         "applicationName",
         "cloudId"
       ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "CertificateBasedIdentity": {
       "type": "object",
@@ -1530,13 +1542,18 @@
             "type": "string"
           }
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Request ID; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },
@@ -1596,13 +1613,18 @@
           "type": "string",
           "description": "The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat"
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Request ID; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },
@@ -1664,7 +1686,17 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Request ID; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "applicationGroupId": {
+          "type": "string",
+          "description": "Application Group ID; a part of provisioning ResultData output.",
           "readOnly": true
         }
       }
@@ -1866,13 +1898,23 @@
             "type": "string"
           }
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state.",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Request ID; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "serviceAccountId": {
+          "type": "string",
+          "description": "Service Account ID; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },
@@ -1957,10 +1999,6 @@
           "type": "string",
           "description": "Gets or sets the GroupName of the account. This is case-insensitive. This is optional, and the service client identity is placed into default group when this is not specified. This can be the GroupName of an existing group, which can be found at dSCM web portal."
         },
-        "region": {
-          "type": "string",
-          "description": "Gets or sets the region for the SCI. This is optional. E.g. \"francec\" for France Central.."
-        },
         "subscriptions": {
           "type": "string",
           "description": "Gets or sets the subscriptions for the SCI. This is optional. E.g. \"5d711910-92ea-4ff9-b70d-1e61307faaac,a524674c-7024-40f1-afe9-127ab5a2e1b0\"."
@@ -1972,20 +2010,31 @@
             "type": "string"
           }
         },
-        "armLocation": {
-          "type": "string",
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The Azure location"
         },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Request ID; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "serviceClientIdentity": {
+          "type": "string",
+          "description": "Service Client Identity ID; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },
       "required": [
         "accountName",
         "dstsInstance",
-        "subjectNames"
+        "subjectNames",
+        "azureLocation"
       ]
     },
     "IpRange": {

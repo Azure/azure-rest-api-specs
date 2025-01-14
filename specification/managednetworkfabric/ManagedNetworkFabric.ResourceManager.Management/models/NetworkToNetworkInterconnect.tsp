@@ -1,102 +1,122 @@
 import "./common.tsp";
 
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+
 namespace Microsoft.ManagedNetworkFabric;
-/**
- * Configuration used to setup CE-PE connectivity.
- */
+
+@doc("Configuration used to setup CE-PE connectivity.")
 model NetworkToNetworkInterconnectProperties {
-  /**
-   * Type of NNI used. Example: CE | NPB
-   */
+  @doc("Type of NNI used. Example: CE | NPB")
   nniType?: NniType = NniType.CE;
 
-  /**
-   * Configuration to use NNI for Infrastructure Management. Example: True/False.
-   */
+  @doc("Configuration to use NNI for Infrastructure Management. Example: True/False.")
   isManagementType?: IsManagementType = IsManagementType.True;
 
-  /**
-   * Based on this option layer3 parameters are mandatory. Example: True/False
-   */
+  @doc("Based on this option layer3 parameters are mandatory. Example: True/False")
   useOptionB: BooleanEnumProperty;
 
-  /**
-   * Common properties for Layer2 Configuration.
-   */
+  @doc("Common properties for Layer2 Configuration.")
   layer2Configuration?: Layer2Configuration;
 
-  /**
-   * Common properties for Layer3Configuration.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Common properties for Layer3Configuration.")
   optionBLayer3Configuration?: OptionBLayer3Configuration;
 
-  /**
-   * NPB Static Route Configuration properties.
-   */
+  @doc("NPB Static Route Configuration properties.")
   npbStaticRouteConfiguration?: NpbStaticRouteConfiguration;
 
-  /**
-   * Import Route Policy configuration.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("Static Route Configuration.")
+  staticRouteConfiguration?: NniStaticRouteConfiguration;
+
+  @doc("Import Route Policy information.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicyInformation;
+
+  @doc("Import Route Policy information.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicyInformation;
 
-  /**
-   * Export Route Policy configuration.
-   */
+  @doc("Export Route Policy information")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicyInformation;
+
+  @doc("Export Route Policy information")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicyInformation;
 
-  /**
-   * Egress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * Ingress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * Configuration state of the resource.
-   */
+  @doc("Micro Bidirectional Forwarding Detection (BFD) enabled/disabled state.")
+  @added(Versions.v2024_06_15_preview)
+  microBfdState?: MicroBfdState;
+
+  @doc("Conditional Default Route Configuration properties.")
+  @added(Versions.v2024_06_15_preview)
+  conditionalDefaultRouteConfiguration?: ConditionalDefaultRouteProperties;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  /**
-   * Administrative state of the resource.
-   */
+  @doc("Administrative state of the resource.")
   @visibility("read")
   administrativeState?: AdministrativeState;
 }
 
-/**
- * Common properties for Layer2 Configuration.
- */
+@doc("Common properties for Layer2 Configuration.")
 model Layer2Configuration {
-  /**
-   * MTU of the packets between PE & CE.
-   */
+  @doc("MTU of the packets between PE & CE.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32 = 1500;
 
-  /**
-   * List of network device interfaces resource IDs.
-   */
+  @doc("List of network device interfaces resource IDs.")
   @minItems(1)
   interfaces?: Azure.Core.armResourceIdentifier<[
     {
@@ -105,20 +125,14 @@ model Layer2Configuration {
   ]>[];
 }
 
-/**
- * Common properties for Layer2 Configuration.
- */
+@doc("Common properties for Layer2 Configuration.")
 model Layer2ConfigurationPatch {
-  /**
-   * MTU of the packets between PE & CE.
-   */
+  @doc("MTU of the packets between PE & CE.")
   @maxValue(9200)
   @minValue(64)
   mtu?: int32;
 
-  /**
-   * List of network device interfaces resource IDs.
-   */
+  @doc("List of network device interfaces resource IDs.")
   @minItems(1)
   interfaces?: Azure.Core.armResourceIdentifier<[
     {
@@ -127,158 +141,195 @@ model Layer2ConfigurationPatch {
   ]>[];
 }
 
-/**
- * The Network To Network Interconnect resource patch definition.
- */
+@doc("The Network To Network Interconnect resource patch definition.")
 model NetworkToNetworkInterconnectPatch {
   ...ProxyResourceBase;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   properties?: NetworkToNetworkInterconnectPatchProperties;
 }
 
-/**
- * Network Tap Rule Patch properties.
- */
+@doc("Network Tap Rule Patch properties.")
 model NetworkToNetworkInterconnectPatchProperties {
-  /**
-   * Common properties for Layer2Configuration.
-   */
+  @doc("Common properties for Layer2Configuration.")
   layer2Configuration?: Layer2ConfigurationPatch;
 
-  /**
-   * Common properties for Layer3Configuration.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("Common properties for Layer3Configuration.")
   optionBLayer3Configuration?: OptionBLayer3ConfigurationPatchProperties;
 
-  /**
-   * NPB Static Route Configuration properties.
-   */
+  @doc("NPB Static Route Configuration properties.")
   npbStaticRouteConfiguration?: NpbStaticRouteConfigurationPatch;
 
-  /**
-   * Import Route Policy information.
-   */
+  @added(Versions.v2024_06_15_preview)
+  @doc("Static Route Configuration.")
+  staticRouteConfiguration?: NniStaticRoutePatchConfiguration;
+
+  @doc("Import Route Policy information.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "importRoutePolicy")
+  importRoutePolicyDeprecated?: ImportRoutePolicyInformationPatch;
+
+  @doc("Import Route Policy information.")
+  @added(Versions.v2024_06_15_preview)
   importRoutePolicy?: ImportRoutePolicyInformationPatch;
 
-  /**
-   * Export Route Policy information
-   */
+  @doc("Export Route Policy information")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "exportRoutePolicy")
+  exportRoutePolicyDeprecated?: ExportRoutePolicyInformationPatch;
+
+  @doc("Export Route Policy information")
+  @added(Versions.v2024_06_15_preview)
   exportRoutePolicy?: ExportRoutePolicyInformationPatch;
 
-  /**
-   * Egress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "egressAclId")
+  egressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Egress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   egressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
 
-  /**
-   * Ingress Acl. ARM resource ID of Access Control Lists.
-   */
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2024_06_15_preview, "ingressAclId")
+  ingressAclIdDeprecated?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>;
+
+  @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
+  @added(Versions.v2024_06_15_preview)
   ingressAclId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
+
+  @doc("Micro BFD enabled/disabled state.")
+  @added(Versions.v2024_06_15_preview)
+  microBfdState?: MicroBfdState;
 }
 
-/**
- * Common properties for Layer3Configuration.
- */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("Common properties for Layer3Configuration.")
 @withOptionalProperties
-model OptionBLayer3ConfigurationPatchProperties is OptionBLayer3Configuration;
+model OptionBLayer3ConfigurationPatchProperties {
+  ...Layer3IpPrefixPatchProperties;
 
-/**
- * OptionB Layer3 Configuration properties.
- */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
+  @maxValue(4294967295)
+  @minValue(1)
+  peerASN?: int64;
+
+  @doc("VLAN for CE/PE Layer 3 connectivity.Example : 501")
+  @maxValue(4094)
+  @minValue(100)
+  vlanId?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of CE devices for CE/PE connectivity.")
+  @visibility("read")
+  fabricASN?: int64;
+
+  @doc("Provider Edge (PE) Loopback IP Address.")
+  @added(Versions.v2024_06_15_preview)
+  peLoopbackIpAddress?: string[];
+
+  @doc("BGP Monitoring Protocol (BMP) Configuration.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: NniBmpPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("OptionB Layer3 prefix limit configuration.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  prefixLimits?: OptionBLayer3PrefixLimitPatchProperties[];
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("OptionB Layer3 Configuration properties.")
 model OptionBLayer3Configuration {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...Layer3IpPrefixProperties;
 
-  /**
-   * ASN of PE devices for CE/PE connectivity.Example : 28
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
   @maxValue(4294967295)
   @minValue(1)
   peerASN: int64;
 
-  /**
-   * VLAN for CE/PE Layer 3 connectivity.Example : 501
-   */
+  @doc("VLAN for CE/PE Layer 3 connectivity.Example : 501")
   @maxValue(4094)
   @minValue(100)
   vlanId: int32;
 
-  /**
-   * ASN of CE devices for CE/PE connectivity.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("ASN of CE devices for CE/PE connectivity.")
   @visibility("read")
   fabricASN?: int64;
+
+  @doc("Provider Edge (PE) Loopback IP Address.")
+  @added(Versions.v2024_06_15_preview)
+  peLoopbackIpAddress?: string[];
+
+  @doc("BGP Monitoring Protocol (BMP) Configuration.")
+  @added(Versions.v2024_06_15_preview)
+  bmpConfiguration?: NniBmpProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("OptionB Layer3 prefix limit configuration.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  prefixLimits?: OptionBLayer3PrefixLimitProperties[];
 }
 
-/**
- * NPB Static Route Configuration properties.
- */
+@doc("NPB Static Route Configuration properties.")
 model NpbStaticRouteConfiguration {
-  /**
-   * BFD Configuration properties.
-   */
+  @doc("BFD Configuration properties.")
   bfdConfiguration?: BfdConfiguration;
 
-  /**
-   * List of IPv4 Routes.
-   */
+  @doc("List of IPv4 Routes.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRouteProperties[];
 
-  /**
-   * List of IPv6 Routes.
-   */
+  @doc("List of IPv6 Routes.")
   @minItems(1)
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   ipv6Routes?: StaticRouteProperties[];
 }
 
-/**
- * NPB Static Route Configuration properties.
- */
+@doc("NPB Static Route Configuration properties.")
 model NpbStaticRouteConfigurationPatch {
-  /**
-   * BFD Configuration properties.
-   */
+  @doc("BFD Configuration properties.")
   bfdConfiguration?: BfdPatchConfiguration;
 
-  /**
-   * List of IPv4 Routes.
-   */
+  @doc("List of IPv4 Routes.")
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   @minItems(1)
   ipv4Routes?: StaticRoutePatchProperties[];
 
-  /**
-   * List of IPv6 Routes.
-   */
+  @doc("List of IPv6 Routes.")
   @minItems(1)
   @OpenAPI.extension("x-ms-identifiers", ["prefix"])
   ipv6Routes?: StaticRoutePatchProperties[];
 }
 
-/**
- * Type of NNI used. Example: CE | NPB
- */
+@doc("Type of NNI used. Example: CE | NPB")
 union NniType {
   @doc("NniType-CE(Customer Edge).")
   CE: "CE",
@@ -289,9 +340,7 @@ union NniType {
   string,
 }
 
-/**
- * Configuration to use NNI for Infrastructure Management. Example: True/False.
- */
+@doc("Configuration to use NNI for Infrastructure Management. Example: True/False.")
 union IsManagementType {
   @doc("IsManagementType-True")
   True: "True",
@@ -301,3 +350,120 @@ union IsManagementType {
 
   string,
 }
+
+@doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State request.")
+@added(Versions.v2024_06_15_preview)
+model NniBfdAdministrativeStateRequest {
+  @doc("Route Type. Choose either Static or OptionA.")
+  routeType?: RouteType;
+
+  @doc("State. Select either enable or disable.")
+  administrativeState?: BfdAdministrativeState;
+}
+
+@doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
+@added(Versions.v2024_06_15_preview)
+model NniBfdAdministrativeStateResponse {
+  @doc("Route Type. Choose either Static or OptionA.")
+  routeType?: RouteType;
+
+  @doc("State. Select either enable or disable.")
+  administrativeState?: BfdAdministrativeState;
+
+  ...ErrorResponse;
+}
+
+@added(Versions.v2024_06_15_preview)
+@doc("Route type to be used.")
+union RouteType {
+  @doc("RouteType-Static")
+  Static: "Static",
+
+  @doc("RouteType-OptionA")
+  OptionA: "OptionA",
+
+  string,
+}
+
+@doc("Static Route Configuration properties for NNI.")
+@added(Versions.v2024_06_15_preview)
+model NniStaticRouteConfiguration {
+  @doc("BFD configuration properties")
+  bfdConfiguration?: BfdConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRouteProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRouteProperties[];
+}
+
+@doc("Static Route Configuration properties for NNI.")
+@added(Versions.v2024_06_15_preview)
+model NniStaticRoutePatchConfiguration {
+  @doc("Bidirectional Forwarding Detection (BFD) configuration properties")
+  bfdConfiguration?: BfdPatchConfiguration;
+
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRoutePatchProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRoutePatchProperties[];
+}
+
+@doc("Micro Bidirectional Forwarding Detection (BFD) enabled/disabled state.")
+@added(Versions.v2024_06_15_preview)
+union MicroBfdState {
+  @doc("MicroBfdState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("MicroBfdState-Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Conditional Default Route Configuration properties.")
+@added(Versions.v2024_06_15_preview)
+model ConditionalDefaultRouteProperties {
+  @doc("List of IPv4 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv4Routes?: StaticRouteProperties[];
+
+  @doc("List of IPv6 Routes.")
+  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  ipv6Routes?: StaticRouteProperties[];
+}
+
+@doc("BGP Monitoring Protocol (BMP) properties.")
+@added(Versions.v2024_06_15_preview)
+model NniBmpProperties {
+  @doc("BGP Monitoring Protocol (BMP) Configuration State.")
+  configurationState: BmpConfigurationState = BmpConfigurationState.Disabled;
+}
+
+@doc("BGP Monitoring Protocol (BMP) patch properties.")
+@added(Versions.v2024_06_15_preview)
+model NniBmpPatchProperties {
+  @doc("(BGP Monitoring Protocol (BMP) configuration state.")
+  configurationState?: BmpConfigurationState;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("OptionB Layer3 prefix limit properties.")
+@added(Versions.v2024_06_15_preview)
+model OptionBLayer3PrefixLimitProperties {
+  @doc("Maximum number of routes allowed.")
+  @added(Versions.v2024_06_15_preview)
+  maximumRoutes?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("OptionB Layer3 prefix limit patch properties.")
+@added(Versions.v2024_06_15_preview)
+model OptionBLayer3PrefixLimitPatchProperties
+  is OptionBLayer3PrefixLimitProperties;

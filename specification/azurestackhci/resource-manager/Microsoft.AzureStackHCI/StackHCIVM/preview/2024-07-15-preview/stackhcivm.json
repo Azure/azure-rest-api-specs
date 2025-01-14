@@ -206,9 +206,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualMachineInstanceFromLocal": {
-            "$ref": "./examples/VirtualMachineInstances__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualMachineInstanceWithGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
           },
@@ -2195,9 +2192,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateNetworkInterfaceFromLocal": {
-            "$ref": "./examples/NetworkInterfaces__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutNetworkInterface": {
             "$ref": "./examples/NetworkInterfaces_CreateOrUpdate.json"
           }
@@ -3342,9 +3336,6 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualHardDiskFromLocal": {
-            "$ref": "./examples/VirtualHardDisks__CreateOrUpdate_CreateFromLocal.json"
-          },
           "PutVirtualHardDisk": {
             "$ref": "./examples/VirtualHardDisks_CreateOrUpdate.json"
           }
@@ -3479,80 +3470,6 @@
         "x-ms-examples": {
           "DeleteVirtualHardDisk": {
             "$ref": "./examples/VirtualHardDisks_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
-      "post": {
-        "operationId": "VirtualHardDisks_Upload",
-        "tags": [
-          "VirtualHardDisks"
-        ],
-        "description": "The operation to upload a virtual hard disk.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualHardDiskName",
-            "in": "path",
-            "description": "Name of the virtual hard disk",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDiskUploadRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDiskUploadResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UploadVirtualHardDisk": {
-            "$ref": "./examples/VirtualHardDisks_Upload.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4755,6 +4672,18 @@
             "allowedResources": [
               {
                 "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/cloudServicesNetworks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l2Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/l3Networks"
+              },
+              {
+                "type": "Microsoft.NetworkCloud/trunkedNetworks"
               }
             ]
           }
@@ -5134,11 +5063,6 @@
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local network interface or if one should be created.",
-          "default": false
         }
       }
     },
@@ -5843,7 +5767,7 @@
         },
         "keyData": {
           "type": "string",
-          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed)."
         }
       }
     },
@@ -6303,15 +6227,6 @@
           "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
           "x-ms-secret": true
         },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local hard disk or if one should be created.",
-          "default": false
-        },
-        "osType": {
-          "$ref": "#/definitions/OperatingSystemTypes",
-          "description": "Operating system type of the OS disk. Possible values are: Windows, Linux."
-        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6598,11 +6513,6 @@
         "resourceUid": {
           "type": "string",
           "description": "Unique identifier defined by ARC to identify the guest of the VM."
-        },
-        "createFromLocal": {
-          "type": "boolean",
-          "description": "Boolean indicating whether this is a local virtual machine or if one should be created.",
-          "default": false
         }
       }
     },

@@ -1,4 +1,7 @@
 using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.Frontdoor;
 
 @doc("Provisioning state enum")
 union ProvisioningState {
@@ -67,8 +70,8 @@ union Environment {
   Test: "Test",
 }
 
-@doc("AssetType enum")
-union AssetType {
+@doc("AssetTypeVM enum")
+union AssetTypeVM {
   string,
 
   @doc("AssetType enum BaremetalVM")

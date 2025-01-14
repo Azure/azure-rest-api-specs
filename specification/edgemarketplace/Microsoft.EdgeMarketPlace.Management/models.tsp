@@ -65,6 +65,13 @@ union OfferReleaseType {
   @doc("The offer in GA") GA: "GA",
 }
 
+@doc("Offer launch type Enum")
+union OfferLaunchType {
+  string,
+  @doc("The offer has been certified") Trusted: "Trusted",
+  @doc("The offer has not been certified") Unknown: "Unknown",
+}
+
 @doc("Publisher properties")
 model PublisherProperties {
   @doc("The resource provisioning state")
@@ -238,6 +245,9 @@ model MarketplaceSkuVersion {
 
   @doc("The stage name")
   stageName?: string;
+
+  @doc("The launch type")
+  launchType?: OfferLaunchType;
 }
 
 @doc("Access token request object")

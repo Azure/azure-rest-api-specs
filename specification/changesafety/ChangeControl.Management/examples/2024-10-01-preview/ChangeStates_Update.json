@@ -1,0 +1,69 @@
+{
+  "title": "ChangeStates_Update_MaximumSet",
+  "operationId": "ChangeStates_Update",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "26c33ec0-21f5-4889-8776-62038bf7881b",
+    "resourceGroupName": "rgopenapi",
+    "changeStateName": "demoChangeState",
+    "properties": {
+      "properties": {
+        "description": "updating the description",
+        "serviceCatalogReference": "https://microsoftservicetree.com/services/91949edc-8cae-421f-b8d5-f779ba3d52d3",
+        "workItemReference": "https://portal.microsofticm.com/imp/v3/incidents/incident/1234567/summary",
+        "state": "Abandoned",
+        "comments": "This change is no longer needed as we have migrated to AKS"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "Normal",
+          "description": "updating the description",
+          "stageMapResourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/rgopenapi/providers/Microsoft.ChangeSafety/stageMaps/ev2leafStageMap",
+          "changeArtifact": {
+            "name": "name1",
+            "artifactType": "TemplateSpec",
+            "artifactPayload": {
+              "resourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/rgopenapi/providers/Microsoft.Authorization/policyAssignments/demoPolicyAssignment"
+            }
+          },
+          "expirationDate": "2024-10-09T08:12:53.738Z",
+          "serviceCatalogReference": "https://microsoftservicetree.com/services/91949edc-8cae-421f-b8d5-f779ba3d52d3",
+          "workItemReference": null,
+          "state": "Abandoned",
+          "comments": "This change is no longer needed as we have migrated to AKS",
+          "stageParameters": {
+            "storageAccountType": {
+              "type": "string",
+              "defaultValue": "Standard_LRS",
+              "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_ZRS",
+                "Premium_LRS"
+              ],
+              "metadata": {
+                "description": "The type of storage account to create."
+              }
+            }
+          }
+        },
+        "id": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/AzureChangeControlPrivateRP/providers/Microsoft.ChangeSafety/changeStates/demoChangeState",
+        "name": "demoChangeState",
+        "type": "microsoft.azurechangesafety/changestate",
+        "systemData": {
+          "createdBy": "odkqcsvpyyjlcmiv",
+          "createdByType": "User",
+          "createdAt": "2024-10-18T07:47:46.738Z",
+          "lastModifiedBy": "hsvketwarcbjm",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-18T07:47:46.738Z"
+        }
+      }
+    }
+  }
+}

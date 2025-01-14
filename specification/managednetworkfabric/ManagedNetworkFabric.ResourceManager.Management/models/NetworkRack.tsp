@@ -1,30 +1,23 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Network Rack Properties defines the properties of the resource.
- */
+@doc("Network Rack Properties defines the properties of the resource.")
 model NetworkRackProperties {
   ...AnnotationResource;
 
-  /**
-   * Network Rack SKU name.
-   */
+  @doc("Network Rack SKU name.")
   networkRackType?: NetworkRackType;
 
-  /**
-   * ARM resource ID of the Network Fabric.
-   */
+  @doc("ARM resource ID of the Network Fabric.")
   networkFabricId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
     }
   ]>;
 
-  /**
-   * List of network device ARM resource IDs.
-   */
+  @doc("List of network device ARM resource IDs.")
   @visibility("read")
   networkDevices?: Azure.Core.armResourceIdentifier<[
     {
@@ -32,9 +25,12 @@ model NetworkRackProperties {
     }
   ]>[];
 
-  /**
-   * Provisioning state of the resource.
-   */
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
@@ -42,9 +38,7 @@ model NetworkRackProperties {
 @doc("Network Rack patch resource definition.")
 model NetworkRackPatch is TagsUpdate;
 
-/**
- * Network Rack SKU name.
- */
+@doc("Network Rack SKU name.")
 union NetworkRackType {
   @doc("NetworkRackType-Aggregate")
   Aggregate: "Aggregate",

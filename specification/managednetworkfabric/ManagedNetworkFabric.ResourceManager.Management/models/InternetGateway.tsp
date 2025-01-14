@@ -1,76 +1,64 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-/**
- * Internet Gateway Properties defines the properties of the resource.
- */
+@doc("Internet Gateway Properties defines the properties of the resource.")
 model InternetGatewayProperties {
   ...AnnotationResource;
 
-  /**
-   * ARM Resource ID of the Internet Gateway Rule.
-   */
+  @doc("ARM Resource ID of the Internet Gateway Rule.")
   internetGatewayRuleId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/internetGatewayRules";
     }
   ]>;
 
-  /**
-   * IPv4 Address of Internet Gateway.
-   */
+  @doc("IPv4 Address of Internet Gateway.")
   @visibility("read")
   ipv4Address?: string;
 
-  /**
-   * Port number of Internet Gateway.
-   */
+  @doc("Port number of Internet Gateway.")
   @visibility("read")
   port?: int32;
 
-  /**
-   * Gateway Type of the resource.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "This is a valid property name."
-  type: GatewayType;
+  @doc("Gateway Type of the resource.")
+  @madeOptional(Versions.v2024_06_15_preview)
+  type?: GatewayType;
 
-  /**
-   * ARM Resource ID of the Network Fabric Controller.
-   */
+  @doc("Gateway Type of the resource.")
+  @added(Versions.v2024_06_15_preview)
+  internetGatewayType?: GatewayType;
+
+  @doc("ARM Resource ID of the Network Fabric Controller.")
   networkFabricControllerId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabricControllers";
     }
   ]>;
 
-  /**
-   * Provisioning state of resource.
-   */
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
+  @doc("Provisioning state of resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-/**
- * The Internet Gateway patch resource definition.
- */
+@doc("The Internet Gateway patch resource definition.")
 model InternetGatewayPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   properties?: InternetGatewayPatchProperties;
 }
 
 @doc("PatchProperties for InternetGateway ")
 model InternetGatewayPatchProperties {
-  /**
-   * ARM Resource ID of the Internet Gateway Rule.
-   */
+  @doc("ARM Resource ID of the Internet Gateway Rule.")
   internetGatewayRuleId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/internetGatewayRules";
@@ -78,9 +66,7 @@ model InternetGatewayPatchProperties {
   ]>;
 }
 
-/**
- * Gateway Type of the resource.
- */
+@doc("Gateway Type of the resource.")
 union GatewayType {
   @doc("GatewayType Infrastructure")
   Infrastructure: "Infrastructure",
