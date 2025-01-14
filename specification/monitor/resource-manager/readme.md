@@ -256,6 +256,14 @@ input-file:
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
 ```
+### Tag: package-2023-06-01-preview-only
+
+These settings apply only when `--tag=package-2023-06-01-preview-only` is specified on the command line
+
+``` yaml $(tag) == 'package-2023-06-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2023-06-01-preview/privateLinkScopes_API.json
+```
 
 ### Tag: package-2023-05-01-preview-only
 
@@ -1435,10 +1443,31 @@ directive:
     from: privateLinkScopes_API.json
     where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
     reason: "This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''true'' or ''false'' options, so it fits boolean type."
-  - suppress: OperationsAPIImplementation
+  - suppress: GetCollectionOnlyHasValueAndNextLink
     from: privateLinkScopes_API.json
+    reason: "Updating the model would be a breaking change."
+  - suppress: XmsPageableForListCalls
+    from: privateLinkScopes_API.json
+    reason: "List scoped resources does not support pagination"
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: PutResponseCodes
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: DeleteResponseCodes
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: BodyTopLevelProperties
+    from: privateLinkScopes_API.json
+    reason: "This was based on older guidance for structuring long-running operations. Changing the contract would be a breaking change."
+  - suppress: OperationsAPIImplementation
     where: $.paths
-    reason: "Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)"
+    from: privateLinkScopes_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: ResourceNameRestriction
+    from: privateLinkScopes_API.json
+    reason: 'Updating the resource name restriction would be a breaking change.'
   - suppress: R3016
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
   - suppress: OperationsAPIImplementation
@@ -1521,7 +1550,10 @@ directive:
   - suppress: OperationsAPIImplementation
     from: actionGroups_API.json
     where: $.paths
-    reason: "Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)"
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: OperationsAPIImplementation
+    from: privateLinkScopes_API.json
+    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: metricDefinitions_API.json
     reason: "Breaking change to modify metricDefinitions now"
