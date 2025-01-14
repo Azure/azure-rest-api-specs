@@ -20,7 +20,7 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-interface AnalyzeConversationAuthoring {
+interface ConversationAuthoringAnalysis {
   /**
    * Lists the existing projects.
    */
@@ -62,7 +62,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}")
   @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getProjectDeletionStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getProjectDeletionStatus)
   deleteProject is Foundations.LongRunningOperation<
     {
       /**
@@ -97,7 +97,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getCopyProjectStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
@@ -125,7 +125,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getExportStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getExportStatus)
   export is Foundations.LongRunningOperation<
     {
       /**
@@ -171,7 +171,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getImportStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getImportStatus)
   `import` is Foundations.LongRunningOperation<
     {
       /**
@@ -205,7 +205,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getTrainingStatus)
   train is Foundations.LongRunningOperation<
     {
       /**
@@ -246,7 +246,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getSwapDeploymentsStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getSwapDeploymentsStatus)
   swapDeployments is Foundations.LongRunningOperation<
     {
       /**
@@ -279,7 +279,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @put
-  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getDeploymentStatus)
   deployProject is Foundations.LongRunningOperation<
     {
       /**
@@ -312,7 +312,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getDeploymentStatus)
   deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
@@ -340,7 +340,7 @@ interface AnalyzeConversationAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
   @post
   @pollingOperation(
-    AnalyzeConversationAuthoring.getDeploymentDeleteFromResourcesStatus
+    ConversationAuthoringAnalysis.getDeploymentDeleteFromResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
@@ -419,7 +419,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getEvaluationStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
@@ -453,7 +453,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getLoadSnapshotStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getLoadSnapshotStatus)
   loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
@@ -537,7 +537,7 @@ interface AnalyzeConversationAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(
-    AnalyzeConversationAuthoring.getAssignDeploymentResourcesStatus
+    ConversationAuthoringAnalysis.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
@@ -567,7 +567,7 @@ interface AnalyzeConversationAuthoring {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(
-    AnalyzeConversationAuthoring.getUnassignDeploymentResourcesStatus
+    ConversationAuthoringAnalysis.getUnassignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
@@ -642,7 +642,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getTrainingStatus)
   cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
@@ -854,7 +854,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -880,7 +880,7 @@ interface AnalyzeConversationAuthoring {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringAnalysis.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
