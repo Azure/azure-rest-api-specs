@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 import "./models.testprofile.tsp";
 import "./models.trigger.tsp";
+import "./models.notificationrule.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -528,5 +529,23 @@ interface TriggerAdministration {
   listTrigger is StandardResourceOperations.ResourceList<
     Trigger,
     ListQueryParametersTrait<ListTriggerQueryParams>
+  >;
+}
+
+@tag("NotificationRule")
+interface NotificationRuleAdministration {
+  @added(APIVersions.v2024_12_01_preview)
+  getNotificationRule is StandardResourceOperations.ResourceRead<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  createOrUpdateNotificationRule is StandardResourceOperations.ResourceCreateOrUpdate<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  deleteNotificationRule is StandardResourceOperations.ResourceDelete<NotificationRule>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  listNotificationRule is StandardResourceOperations.ResourceList<
+    NotificationRule,
+    ListQueryParametersTrait<ListNotificationRuleQueryParams>
   >;
 }
