@@ -24,10 +24,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
         "**/package-lock.json",
         "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -49,6 +51,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting",
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -61,12 +70,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -409,6 +412,12 @@
             "filename": "**/specification/keyvault/data-plane/Microsoft.KeyVault/**/keyvault.json",
             "words": [
                 "Regenerte"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/resource-manager/readme.go.md",
+            "words": [
+                "modelerfour"
             ]
         },
         {
@@ -999,6 +1008,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1327,6 +1342,13 @@
         },
         {
             "filename": "**/specification/batch/data-plane/Microsoft.Batch/**/*.json",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
             "words": [
                 "upgradingos",
                 "TVMs"
@@ -1768,6 +1790,25 @@
             "words": [
                 "webapi",
                 "genevametrics"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/**/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
             ]
         }
     ],
