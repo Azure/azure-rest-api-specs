@@ -38,6 +38,11 @@ model InternetGatewayProperties {
     }
   ]>;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Provisioning state of resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -45,9 +50,6 @@ model InternetGatewayProperties {
 
 @doc("The Internet Gateway patch resource definition.")
 model InternetGatewayPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("Resource properties.")

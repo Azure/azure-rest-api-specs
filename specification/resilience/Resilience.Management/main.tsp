@@ -32,6 +32,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-11-01-preview")
   v2024_11_01_preview: "2024-11-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2025-01-01-preview")
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 alias ProviderName = "Microsoft.Resilience";
@@ -107,6 +113,10 @@ model ResourceResilienceProfile {
 
   @doc("Resilience State of the resource.")
   resilienceState: ResilienceState;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("Reasons for the resilience state of the resource.")
+  resilienceStateReasons: ResilienceStateReason[];
 }
 
 @doc("Azores Classification tags applied for resource exclusion/assertion.")
@@ -166,9 +176,18 @@ union EvaluationResult {
 
 @doc("Resilience states")
 union ResilienceState {
+  @added(Versions.v2025_01_01_preview)
+  @doc("Undefined state.")
+  Undefined: "Undefined",
+
   @doc("Not Applicable state.")
   NotApplicable: "NotApplicable",
 
+  @added(Versions.v2025_01_01_preview)
+  @doc("Non-zone-resilient state.")
+  NonZoneResilient: "NonZoneResilient",
+
+  @removed(Versions.v2025_01_01_preview)
   @doc("Non-resilient state.")
   NonResilient: "NonResilient",
 
@@ -180,6 +199,42 @@ union ResilienceState {
 
   @doc("Always Available state.")
   AlwaysAvailable: "AlwaysAvailable",
+
+  string,
+}
+
+@added(Versions.v2025_01_01_preview)
+@doc("Resilience state reasons")
+union ResilienceStateReason {
+  @doc("Platform Error.")
+  PlatformError: "PlatformError",
+
+  @doc("Related resource evaluation Failed.")
+  RelatedResourceEvaluationFailed: "RelatedResourceEvaluationFailed",
+
+  @doc("SKU doesn't support Availability Zones.")
+  SkuNonAZ: "SkuNonAZ",
+
+  @doc("Sku capacity is not configured to support zone resilient deployment.")
+  SkuCapacityLessThanThree: "SkuCapacityLessThanThree",
+
+  @doc("Region doesn't support Availability Zones.")
+  RegionNonAZ: "RegionNonAZ",
+
+  @doc("Zones count is not one.")
+  ZonesCountNotOne: "ZonesCountNotOne",
+
+  @doc("Zones count is less than two.")
+  ZonesCountLessThanTwo: "ZonesCountLessThanTwo",
+
+  @doc("Zones count is less than three.")
+  ZonesCountLessThanThree: "ZonesCountLessThanThree",
+
+  @doc("Zones flag is not set.")
+  ZonesFlagNotSet: "ZonesFlagNotSet",
+
+  @doc("Zones not aligned.")
+  ZonesNotAligned: "ZonesNotAligned",
 
   string,
 }

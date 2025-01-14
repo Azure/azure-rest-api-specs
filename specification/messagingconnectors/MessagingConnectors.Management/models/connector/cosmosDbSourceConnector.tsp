@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for CosmosDbSourceConnector")
-model CosmosDbSourceConnectorProperties extends ConnectorProperties {
+model CosmosDbSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of CosmosDbSourceConnector")
   connectorType: ConnectorType.CosmosDbSource;
-
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
 
   @doc("PollIntervalInMs policy.")
   pollIntervalInMs: int32;

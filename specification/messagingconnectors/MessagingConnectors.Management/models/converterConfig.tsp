@@ -67,9 +67,6 @@ model JsonConverterConfig extends ConverterConfig {
 
 @doc("Enum of the type of Converter")
 union ConverterType {
-  @doc("Unknown converter.")
-  Unknown: "Unknown",
-
   @doc("This represents a converter for byte arrays format.")
   ByteArrayConverter: "ByteArrayConverter",
 

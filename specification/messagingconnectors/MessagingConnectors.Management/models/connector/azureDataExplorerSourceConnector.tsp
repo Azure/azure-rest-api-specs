@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for AzureDataExplorerSourceConnector")
-model AzureDataExplorerSourceConnectorProperties extends ConnectorProperties {
+model AzureDataExplorerSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of AzureDataExplorerSourceConnector")
   connectorType: ConnectorType.AzureDataExplorerSource;
-
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
 
   @doc("Url of AzureDataExplorer cluster.")
   clusterUrl: string;

@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for MqttSourceConnector")
-model MqttSourceConnectorProperties extends ConnectorProperties {
+model MqttSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of MqttSourceConnector")
   connectorType: ConnectorType.MqttSource;
-
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
 
   @doc("Mqtt server version.")
   serverVersion: MqttVersion;

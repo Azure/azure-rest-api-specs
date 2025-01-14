@@ -12,12 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("Configuration for SqlServerSqlSourceConnector")
-model SqlServerSourceConnectorProperties extends ConnectorProperties {
+model SqlServerSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of SqlServerSqlSourceConnector")
   connectorType: ConnectorType.SqlServerSource;
-
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
 
   @doc("HostName for SqlServer.")
   hostName: string;

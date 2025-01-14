@@ -5,7 +5,6 @@ import "./sourceDataFormat.tsp";
 import "./resourceProperties.tsp";
 import "./connector/azureDataExplorerSourceConnector.tsp";
 import "./connector/azureServiceBusSourceConnector.tsp";
-import "./connector/bitCoinSourceConnector.tsp";
 import "./connector/confluentSourceConnector.tsp";
 import "./connector/cosmosDbSourceConnector.tsp";
 import "./connector/googlePubSubSourceConnector.tsp";
