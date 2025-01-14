@@ -169,24 +169,30 @@ model CapacityNameParameter {
   capacityName: string;
 }
 
-@doc("An object that represents usage and quota details for existing resources")
-model RpUsageAndQuotaDetailsForExistingResource {
-  @doc("The current consumption value")
-  currentValue: int32;
+@doc("Describes Resource Quota")
+model Quota {
+  @doc("The name of the quota.")
+  @visibility("read")
+  name?: QuotaName;
 
-  @doc("The quota limit")
-  limit: int32;
+  @doc("Fully qualified ARM resource id")
+  id: armResourceIdentifier;
+
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
 }
 
-@doc("An object that represents enumerating usage and quota details for existing resources")
-@pagedResult
-model RpUsageAndQuotaEnumerationForExistingResourceResult {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
-  @doc("The usage and quota details")
-  @items
-  value: Array<RpUsageAndQuotaDetailsForExistingResource>;
+@doc("The Quota Names")
+model QuotaName {
+  @doc("The name of the resource.")
+  value?: string;
 
-  @doc("Url for the next page.  Null if no more pages available")
-  @Azure.Core.nextLink
-  nextLink?: string;
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
 }

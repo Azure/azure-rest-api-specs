@@ -86,6 +86,7 @@ interface FabricCapacities {
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
   ): RpSkuEnumerationForNewResourceResult | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @get
   @doc("List the current consumption and limit in this location for the provided subscription")
   @segment("usages")
@@ -94,5 +95,5 @@ interface FabricCapacities {
     ...SubscriptionIdParameter,
     ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
     ...LocationParameter,
-  ): RpUsageAndQuotaEnumerationForExistingResourceResult | ErrorResponse;
+  ): ArmResponse<Page<Quota>> | ErrorResponse;
 }

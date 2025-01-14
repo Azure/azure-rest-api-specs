@@ -190,9 +190,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RpUsageAndQuotaEnumerationForExistingResourceResult"
+              "$ref": "#/definitions/PagedQuota"
             }
           },
           "default": {
@@ -850,6 +850,27 @@
         }
       }
     },
+    "PagedQuota": {
+      "type": "object",
+      "description": "Paged collection of Quota items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the Fabric capacity resource.",
@@ -898,6 +919,56 @@
         ]
       },
       "readOnly": true
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Describes Resource Quota",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/QuotaName",
+          "description": "The name of the quota.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource id"
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of usage measurement."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        }
+      },
+      "required": [
+        "id",
+        "unit",
+        "currentValue",
+        "limit"
+      ]
+    },
+    "QuotaName": {
+      "type": "object",
+      "description": "The Quota Names",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      }
     },
     "ResourceState": {
       "type": "string",
@@ -1125,47 +1196,6 @@
           }
         ]
       }
-    },
-    "RpUsageAndQuotaDetailsForExistingResource": {
-      "type": "object",
-      "description": "An object that represents usage and quota details for existing resources",
-      "properties": {
-        "currentValue": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The current consumption value"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The quota limit"
-        }
-      },
-      "required": [
-        "currentValue",
-        "limit"
-      ]
-    },
-    "RpUsageAndQuotaEnumerationForExistingResourceResult": {
-      "type": "object",
-      "description": "An object that represents enumerating usage and quota details for existing resources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The usage and quota details",
-          "items": {
-            "$ref": "#/definitions/RpUsageAndQuotaDetailsForExistingResource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Url for the next page.  Null if no more pages available"
-        }
-      },
-      "required": [
-        "value"
-      ]
     }
   },
   "parameters": {
