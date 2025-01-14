@@ -30,6 +30,47 @@ model HostPool
 }
 
 @armResourceOperations
+interface MSIXImages {
+  /**
+   * Expands and Lists MSIX packages in an Image, given the Image Path.
+   */
+  @action("expandMSIXImage")
+  expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
+}
+
+@armResourceOperations
+interface PrivateLinkResources {
+  /**
+   * List the private link resources available for this hostpool.
+   */
+  @action("privateLinkResources")
+  @get
+  listByHostPool is ArmResourceActionSync<
+    HostPool,
+    void,
+    PrivateLinkResourceListResult,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
+}
+@armResourceOperations
 interface HostPools {
   /**
    * Get a host pool.
@@ -134,76 +175,12 @@ interface HostPools {
   >;
 
   /**
-   * List scaling plan associated with hostpool.
-   */
-  @get
-  listByHostPool is ArmResourceActionSync<
-    HostPool,
-    void,
-    ScalingPlanList,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
-  >;
-
-  /**
-   * Expands and Lists MSIX packages in an Image, given the Image Path.
-   */
-  @action("expandMSIXImage")
-  expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
-
-  /**
    * Gets information from a package given the path to the package.
    */
   importAppAttachPackageInfo is ArmResourceActionSync<
     HostPool,
     ImportPackageInfoRequest,
     AppAttachPackageList
-  >;
-
-  /**
-   * List the private link resources available for this hostpool.
-   */
-  @get
-  privateLinkResourcesListByHostPool is ArmResourceActionSync<
-    HostPool,
-    void,
-    PrivateLinkResourceListResult,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
   >;
 
   /**
@@ -255,7 +232,9 @@ interface HostPools {
 @@doc(HostPools.update::parameters.properties,
   "Object containing HostPool definitions."
 );
-@@doc(HostPools.expand::parameters.body, "Object containing URI to MSIX Image");
+@@doc(MSIXImages.expand::parameters.body,
+  "Object containing URI to MSIX Image"
+);
 @@doc(HostPools.importAppAttachPackageInfo::parameters.body,
   "Object containing URI to package image and other optional properties"
 );

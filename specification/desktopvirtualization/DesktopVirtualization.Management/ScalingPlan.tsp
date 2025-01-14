@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -104,6 +105,35 @@ interface ScalingPlans {
       initialSkip?: int32;
     },
     Response = ScalingPlanList
+  >;
+
+  /**
+   * List scaling plan associated with hostpool.
+   */
+  @get
+  listByHostPool is ArmResourceActionSync<
+    HostPool,
+    void,
+    ScalingPlanList,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
   >;
 }
 

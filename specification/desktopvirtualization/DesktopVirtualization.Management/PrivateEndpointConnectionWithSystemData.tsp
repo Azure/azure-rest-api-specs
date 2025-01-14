@@ -70,11 +70,10 @@ interface WorkspaceOps
     > {}
 
 @armResourceOperations
-interface HostPoolPrivateEndpointConnectionOperations {
+interface HostPoolPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnection>;
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnection>;
-  @action("hostPool")
   listByHostPool is HostPoolOps.List<
     PrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
@@ -82,11 +81,10 @@ interface HostPoolPrivateEndpointConnectionOperations {
 }
 
 @armResourceOperations
-interface WorkspacePrivateEndpointConnectionOperations {
+interface WorkspacePrivateEndpointConnection {
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnection>;
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnection>;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnection>;
-  @action("workspace")
   listByWorkspace is WorkspaceOps.List<
     PrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
