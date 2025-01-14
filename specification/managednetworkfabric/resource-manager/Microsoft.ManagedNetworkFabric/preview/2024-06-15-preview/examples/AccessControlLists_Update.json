@@ -61,9 +61,6 @@
                   "32"
                 ],
                 "portCondition": {
-                  "flags": [
-                    "established"
-                  ],
                   "portType": "SourcePort",
                   "layer4Protocol": "TCP",
                   "ports": [
@@ -71,6 +68,17 @@
                   ],
                   "portGroupNames": [
                     "example-portGroup"
+                  ],
+                  "flags": [
+                    "established"
+                  ]
+                },
+                "protocolNeighbors": [
+                  "example-neighbor"
+                ],
+                "icmpConfiguration": {
+                  "icmpTypes": [
+                    "echo"
                   ]
                 }
               }
@@ -127,11 +135,6 @@
         "deviceRole": "CE",
         "globalAccessControlListActions": {
           "enableCount": "True"
-        },
-        "icmpConfiguration": {
-          "icmpTypes": [
-            "echo"
-          ]
         },
         "annotation": "annotation"
       }
@@ -191,6 +194,9 @@
                   "dscpMarkings": [
                     "32"
                   ],
+                  "protocolNeighbors": [
+                    "example-neighbor"
+                  ],
                   "portCondition": {
                     "portType": "SourcePort",
                     "layer4Protocol": "TCP",
@@ -202,6 +208,11 @@
                     ],
                     "flags": [
                       "established"
+                    ]
+                  },
+                  "icmpConfiguration": {
+                    "icmpTypes": [
+                      "echo"
                     ]
                   }
                 }
@@ -260,10 +271,8 @@
           "globalAccessControlListActions": {
             "enableCount": "True"
           },
-          "icmpConfiguration": {
-            "icmpTypes": [
-              "echo"
-            ]
+          "lastOperation": {
+            "details": "Succeeded"
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
