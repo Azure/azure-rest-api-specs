@@ -46,10 +46,7 @@ namespace Microsoft.Fabric {
     "FabricCapacityAdministration",
     "csharp"
   );
-  @@clientName(RpUsageAndQuotaDetailsForExistingResource,
-    "FabricUsageAndQuotaDetailsForExistingResource",
-    "csharp"
-  );
+  @@clientName(Quota, "FabricQuota", "csharp");
 }
 
 @@clientName(Microsoft.Fabric, "FabricMgmtClient", "python");
