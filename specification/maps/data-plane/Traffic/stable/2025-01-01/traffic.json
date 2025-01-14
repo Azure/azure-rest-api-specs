@@ -91,8 +91,69 @@
             "in": "query",
             "description": "Specifies the type of traffic incident to return. Values are case sensitive. Multiple incident types are allowed. \n\nFor example, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/IncidentTypeEnum"
+            "type": "string",
+            "enum": [
+              "Accident",
+              "Congestion",
+              "DisabledVehicle",
+              "MassTransit",
+              "Miscellaneous",
+              "OtherNews",
+              "PlannedEvent",
+              "RoadHazard",
+              "Construction",
+              "Alert",
+              "Weather"
+            ],
+            "x-ms-enum": {
+              "name": "IncidentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Accident",
+                  "description": "Accident"
+                },
+                {
+                  "value": "Congestion",
+                  "description": "Congestion"
+                },
+                {
+                  "value": "DisabledVehicle",
+                  "description": "DisabledVehicle"
+                },
+                {
+                  "value": "MassTransit",
+                  "description": "MassTransit"
+                },
+                {
+                  "value": "Miscellaneous",
+                  "description": "Miscellaneous"
+                },
+                {
+                  "value": "OtherNews",
+                  "description": "OtherNews"
+                },
+                {
+                  "value": "PlannedEvent",
+                  "description": "PlannedEvent"
+                },
+                {
+                  "value": "RoadHazard",
+                  "description": "RoadHazard"
+                },
+                {
+                  "value": "Construction",
+                  "description": "Construction"
+                },
+                {
+                  "value": "Alert",
+                  "description": "Alert"
+                },
+                {
+                  "value": "Weather",
+                  "description": "Weather"
+                }
+              ]
             }
           },
           {
