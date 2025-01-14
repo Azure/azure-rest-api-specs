@@ -16,9 +16,9 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * The Private Endpoint Connection resource.
  */
-model PrivateEndpointConnectionWithSystemData
+model CustomPrivateEndpointConnection
   is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<Resource = PrivateEndpointConnection>;
+  ...ResourceNameParameter<Resource = CustomPrivateEndpointConnection>;
   ...ManagedServiceIdentityProperty;
   ...EntityTagProperty;
   ...ResourceKindProperty;
@@ -30,7 +30,7 @@ model PrivateEndpointConnectionWithSystemData
 alias PrivateEndpointParameter = {
   /** The name parameter for private endpoint */
   @path
-  @segment("privateEndpointConnections")
+  @segment("PrivateEndpointConnection")
   @key
   privateEndpointConnectionName: string;
 };
@@ -71,18 +71,18 @@ interface WorkspaceOps
 
 @armResourceOperations
 interface PrivateEndpointConnections {
-  getByHostPool is HostPoolOps.Read<PrivateEndpointConnection>;
-  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnection>;
-  deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnection>;
+  getByHostPool is HostPoolOps.Read<CustomPrivateEndpointConnection>;
+  updateByHostPool is HostPoolOps.CreateOrUpdateSync<CustomPrivateEndpointConnection>;
+  deleteByHostPool is HostPoolOps.DeleteSync<CustomPrivateEndpointConnection>;
   listByHostPool is HostPoolOps.List<
-    PrivateEndpointConnection,
+    CustomPrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
   >;
-  getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnection>;
-  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnection>;
-  deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnection>;
+  getByWorkspace is WorkspaceOps.Read<CustomPrivateEndpointConnection>;
+  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<CustomPrivateEndpointConnection>;
+  deleteByWorkspace is WorkspaceOps.DeleteSync<CustomPrivateEndpointConnection>;
   listByWorkspace is WorkspaceOps.List<
-    PrivateEndpointConnection,
+    CustomPrivateEndpointConnection,
     Parameters = PrivateEndpointListParameter
   >;
 }

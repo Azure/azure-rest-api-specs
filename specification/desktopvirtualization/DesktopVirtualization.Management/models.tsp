@@ -2662,7 +2662,7 @@ model RegistrationTokenMinimal {
  * List of private endpoint connection associated with the specified HostPool
  */
 model PrivateEndpointConnectionListResultWithSystemData
-  is Azure.Core.Page<PrivateEndpointConnectionWithSystemData>;
+  is Azure.Core.Page<CustomPrivateEndpointConnection>;
 
 /**
  * A list of private link resources
