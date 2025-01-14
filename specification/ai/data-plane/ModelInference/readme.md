@@ -20,4 +20,8 @@ These settings apply only when `--tag=2024-05-01-preview` is specified on the co
 ```yaml $(tag) == '2024-05-01-preview'
 input-file:
   - preview/2024-05-01-preview/openapi.json
+suppressions:
+- code: IntegerTypeMustHaveFormat
+  from: swagger-document
+  reason: OpenAI compatible API, which uses unixTimeStamp
 ```
