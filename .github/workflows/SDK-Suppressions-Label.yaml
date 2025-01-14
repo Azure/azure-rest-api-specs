@@ -29,8 +29,11 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
           $changedFiles = @(Get-ChangedFiles)
-          echo "PR Changed files: $changedFiles"
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$changedFiles"
+          $changedFilesArray = $changedFiles -split ' '
+          $yamlFilesArray = $changedFilesArray | Where-Object { $_ -match 'sdk-suppressions\.yaml$' }
+          $yamlFiles = $yamlFilesArray -join ' '
+          echo "PR Changed sdk-suppressions.yaml files: $yamlFiles"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "changedFiles=$yamlFiles"
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
