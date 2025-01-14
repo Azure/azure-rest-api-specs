@@ -449,10 +449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -577,12 +574,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/convertToNewVirtualMachineScaleSet": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/convertToVirtualMachineScaleSet": {
       "post": {
         "tags": [
           "AvailabilitySets"
         ],
-        "operationId": "AvailabilitySets_convertToNewVirtualMachineScaleSet",
+        "operationId": "AvailabilitySets_convertToVirtualMachineScaleSet",
         "description": "Convert Availability Set to Flexible Virtual Machine Scale Set.",
         "parameters": [
           {
@@ -617,10 +614,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
-            }
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -629,10 +626,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VirtualMachineScaleSet_Reimage_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineScaleSetExamples/AvailabilitySet_ConvertToNewVirtualMachineScaleSet_Gen.json"
+          "AvailabilitySet_ConvertToVirtualMachineScaleSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/AvailabilitySet_ConvertToVirtualMachineScaleSet_Gen.json"
           }
         }
       }
@@ -676,7 +673,7 @@
           "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the availability set."
         },
         "virtualMachineScaleSetMigrationInfo": {
-          "$ref": "#/definitions/virtualMachineScaleSetMigrationInfo",
+          "$ref": "#/definitions/VirtualMachineScaleSetMigrationInfo",
           "readOnly": true,
           "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
         }
