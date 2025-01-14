@@ -30,11 +30,11 @@ model HostPool
 }
 
 @armResourceOperations
-interface MSIXImages {
+interface MsixImages {
   /**
    * Expands and Lists MSIX packages in an Image, given the Image Path.
    */
-  @action("expandMSIXImage")
+  @action("expandMsixImage")
   expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
 }
 
@@ -232,7 +232,7 @@ interface HostPools {
 @@doc(HostPools.update::parameters.properties,
   "Object containing HostPool definitions."
 );
-@@doc(MSIXImages.expand::parameters.body,
+@@doc(MsixImages.expand::parameters.body,
   "Object containing URI to MSIX Image"
 );
 @@doc(HostPools.importAppAttachPackageInfo::parameters.body,
