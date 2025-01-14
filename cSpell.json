@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "words": [
         "authnotrequired",
@@ -24,9 +24,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
-        "**/package-lock.json"
+        "**/package-lock.json",
+        "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -48,6 +51,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting",
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -60,12 +70,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -411,6 +415,12 @@
             ]
         },
         {
+            "filename": "**/specification/keyvault/resource-manager/readme.go.md",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/eventgrid/data-plane/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json",
             "words": [
                 "whatsapp"
@@ -711,6 +721,18 @@
             ]
         },
         {
+            "filename": "**/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
+            ]
+        },
+        {
+            "filename": "**/specification/synapse/data-plane/Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json",
+            "words": [
+                "Multistatement"
+            ]
+        },
+        {
             "filename": "**/specification/synapse/resource-manager/Microsoft.Synapse/stable/2020-12-01/integrationRuntime.json",
             "words": [
                 "Exprired"
@@ -986,6 +1008,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1041,7 +1069,9 @@
         {
             "filename": "**/specification/confluent/resource-manager/Microsoft.Confluent/**/confluent.json",
             "words": [
-                "orgvalidate"
+                "orgvalidate",
+                "AZUREBLOBSOURCE",
+                "AZUREBLOBSINK"
             ]
         },
         {
@@ -1312,6 +1342,13 @@
         },
         {
             "filename": "**/specification/batch/data-plane/Microsoft.Batch/**/*.json",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
             "words": [
                 "upgradingos",
                 "TVMs"
@@ -1601,6 +1638,12 @@
             ]
         },
         {
+            "filename": "**/specification/liftrpinecone/**/*.json",
+            "words": [
+                "organizationname"
+            ]
+        },
+        {
             "filename": "**/specification/developerhub/resource-manager/Microsoft.DevHub/**/*.json",
             "words": [
                 "iacProfiles",
@@ -1747,6 +1790,25 @@
             "words": [
                 "webapi",
                 "genevametrics"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/**/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
             ]
         }
     ],
