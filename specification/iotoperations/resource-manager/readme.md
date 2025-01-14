@@ -25,25 +25,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.BrokerAuthenticatorMethodCustom.properties.headers
+    where: $.definitions.AuthenticatorMethodCustom.properties.headers
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.BrokerAuthenticatorMethodX509.properties.authorizationAttributes
+    where: $.definitions.AuthenticatorMethodX509.properties.authorizationAttributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodX509Attributes.properties.attributes
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.PrincipalDefinition.properties.attributes.items
+    where: $.definitions["Brokers.PrincipalDefinition"].properties.attributes.items
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimResourceRequirements.properties.limits
+    where: $.definitions["Brokers.VolumeClaimResourceRequirements"].properties.limits
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimResourceRequirements.properties.requests
+    where: $.definitions["Brokers.VolumeClaimResourceRequirements"].properties.requests
     reason: User defined properties that are not subject to any validations.
   - suppress: AvoidAdditionalProperties
-    where: $.definitions.VolumeClaimSpecSelector.properties.matchLabels
+    where: $.definitions["Brokers.VolumeClaimSpecSelector"].properties.matchLabels
     reason: User defined properties that are not subject to any validations.
   - suppress: BodyTopLevelProperties
     reason: Temporary suppression due to failing pipeline.
@@ -59,7 +59,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-01
+tag: package-2025-01-01-preview
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -95,4 +95,12 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 ```yaml $(tag) == 'package-2024-11-01'
 input-file:
   - Microsoft.IoTOperations/stable/2024-11-01/iotoperations.json
+```
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - Microsoft.IoTOperations/preview/2025-01-01-preview/iotoperations.json
 ```

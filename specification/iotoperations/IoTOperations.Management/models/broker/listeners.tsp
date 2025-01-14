@@ -7,13 +7,13 @@ using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations;
+namespace Microsoft.IoTOperations.Brokers;
 /**
  * broker listener resource type model details.
  */
 @doc("Instance broker resource")
 @parentResource(BrokerResource)
-model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
+model ListenerResource is ProxyResource<ListenerProperties> {
   @doc("Name of Instance broker listener resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("listenerName")
@@ -31,7 +31,7 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
 }
 
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
-model BrokerListenerProperties {
+model ListenerProperties {
   @doc("Kubernetes Service name of this listener.")
   serviceName?: string;
 
