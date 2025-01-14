@@ -149,7 +149,7 @@ union LoadBalancerType {
   DepthFirst: "DepthFirst",
 
   /**
-   * Maintains persistent conenctions.
+   * Maintains persistent connections.
    */
   Persistent: "Persistent",
 }
@@ -569,7 +569,7 @@ union AppAttachPackageArchitectures {
   Neutral: "Neutral",
 
   /**
-   * X86 CHPE for ARM64
+   * X86 Compiled Hybrid Portable Executable for ARM64
    */
   x86a64: "x86a64",
 
@@ -735,7 +735,7 @@ union HealthCheckName {
   MetaDataServiceCheck: "MetaDataServiceCheck",
 
   /**
-   * Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual deregistration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users. (Currently Enabled)
+   * Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual de-registration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users. (Currently Enabled)
    */
   AppAttachHealthCheck: "AppAttachHealthCheck",
 }
@@ -1309,7 +1309,7 @@ model ResourceModelWithAllowedPropertySet
   etag?: string;
 
   /**
-   * Resource Idenity
+   * Resource Identity
    */
   identity?: ResourceModelWithAllowedPropertySetIdentity;
 
