@@ -70,10 +70,7 @@
       "name": "Desktops"
     },
     {
-      "name": "HostPoolPrivateEndpointConnection"
-    },
-    {
-      "name": "WorkspacePrivateEndpointConnection"
+      "name": "PrivateEndpointConnections"
     },
     {
       "name": "SessionHosts"
@@ -2314,9 +2311,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections": {
       "get": {
-        "operationId": "HostPoolPrivateEndpointConnection_ListByHostPool",
+        "operationId": "PrivateEndpointConnections_ListByHostPool",
         "tags": [
-          "HostPoolPrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Get a PrivateEndpointConnection",
         "parameters": [
@@ -2377,6 +2374,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_ListByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByHostPool.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2384,9 +2386,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "HostPoolPrivateEndpointConnection_GetByHostPool",
+        "operationId": "PrivateEndpointConnections_GetByHostPool",
         "tags": [
-          "HostPoolPrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Get a PrivateEndpointConnection",
         "parameters": [
@@ -2430,12 +2432,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnections_GetByHostPool.json"
+          }
         }
       },
       "put": {
-        "operationId": "HostPoolPrivateEndpointConnection_UpdateByHostPool",
+        "operationId": "PrivateEndpointConnections_UpdateByHostPool",
         "tags": [
-          "HostPoolPrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Create a PrivateEndpointConnection",
         "parameters": [
@@ -2494,12 +2501,17 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_UpdateByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnections_UpdateByHostPool.json"
+          }
         }
       },
       "delete": {
-        "operationId": "HostPoolPrivateEndpointConnection_DeleteByHostPool",
+        "operationId": "PrivateEndpointConnections_DeleteByHostPool",
         "tags": [
-          "HostPoolPrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Delete a PrivateEndpointConnection",
         "parameters": [
@@ -2542,6 +2554,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_DeleteByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnections_DeleteByHostPool.json"
           }
         }
       }
@@ -4671,9 +4688,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
-        "operationId": "WorkspacePrivateEndpointConnection_ListByWorkspace",
+        "operationId": "PrivateEndpointConnections_ListByWorkspace",
         "tags": [
-          "WorkspacePrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Get a PrivateEndpointConnection",
         "parameters": [
@@ -4741,9 +4758,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "WorkspacePrivateEndpointConnection_GetByWorkspace",
+        "operationId": "PrivateEndpointConnections_GetByWorkspace",
         "tags": [
-          "WorkspacePrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Get a PrivateEndpointConnection",
         "parameters": [
@@ -4790,9 +4807,9 @@
         }
       },
       "put": {
-        "operationId": "WorkspacePrivateEndpointConnection_UpdateByWorkspace",
+        "operationId": "PrivateEndpointConnections_UpdateByWorkspace",
         "tags": [
-          "WorkspacePrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Create a PrivateEndpointConnection",
         "parameters": [
@@ -4854,9 +4871,9 @@
         }
       },
       "delete": {
-        "operationId": "WorkspacePrivateEndpointConnection_DeleteByWorkspace",
+        "operationId": "PrivateEndpointConnections_DeleteByWorkspace",
         "tags": [
-          "WorkspacePrivateEndpointConnection"
+          "PrivateEndpointConnections"
         ],
         "description": "Delete a PrivateEndpointConnection",
         "parameters": [
