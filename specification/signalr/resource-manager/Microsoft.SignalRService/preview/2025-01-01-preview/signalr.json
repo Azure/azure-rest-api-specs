@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2024-10-01-preview"
+    "version": "2025-01-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -3014,6 +3014,33 @@
         }
       }
     },
+    "RouteSettings": {
+      "description": "Route settings for the resource",
+      "type": "object",
+      "properties": {
+        "serverBalanceWeight": {
+          "format": "int32",
+          "description": "Gets or sets the server balance weight.\r\nA higher value means a greater balance of client connections across different app server instances.\r\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\r\nThe default value is 255.\r\nRecommended ```255``` for multiple app servers in same size.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "connectionBalanceWeight": {
+          "format": "int32",
+          "description": "Gets or sets the connection balance weight.\r\nA higher value means a greater balance of client connections across different server connections.\r\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\r\nThe default value is 255.\r\nRecommended ```255``` for all of the cases.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "latencyWeight": {
+          "format": "int32",
+          "description": "Gets or sets the weight for latency-based routing.\r\nA higher value increases the influence of latency-based routing.\r\nA value of 0 disables latency-based routing entirely, while a value of 255 enables it fully.\r\nThe default value is 0.\r\nRecommended ```255``` for replicas or app servers in different regions for disaster recovery.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
     "ScaleType": {
       "description": "The scale type applicable to the sku.",
       "enum": [
@@ -3429,6 +3456,9 @@
           "description": "Stop or start the resource.  Default to \"False\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
           "default": "false",
           "type": "string"
+        },
+        "routeSettings": {
+          "$ref": "#/definitions/RouteSettings"
         }
       }
     },
