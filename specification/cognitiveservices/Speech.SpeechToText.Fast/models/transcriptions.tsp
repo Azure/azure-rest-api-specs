@@ -48,7 +48,7 @@ model Transcription {
   @doc("The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\r\nallowed value length is 256 characters and the count of allowed entries is 10.")
   customProperties?: Record<string>;
 
-  @doc("The project refernce of the object")
+  @doc("The project reference of the object")
   @removed(ServiceApiVersions.V20241115)
   project?: EntityReference;
 

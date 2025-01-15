@@ -94,7 +94,7 @@ op getTranscription(
 op patchTranscription(
   @path @doc("The identifier of the transcription.") id: string,
 
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Only excatly those values are allowed."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Only exactly those values are allowed."
   @header
   @doc("request content type")
   contentType: "application/json" | "application/merge-patch+json",
