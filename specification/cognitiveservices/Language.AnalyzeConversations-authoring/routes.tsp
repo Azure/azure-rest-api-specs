@@ -20,10 +20,11 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+interface AnalyzeConversationAuthoring {
   /**
    * Lists the existing projects.
    */
-op listProjects is languageOperations.ResourceList<
+  listProjects is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -31,7 +32,7 @@ op listProjects is languageOperations.ResourceList<
   /**
    * Gets the details of a project.
    */
- op getProject is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectMetadata>;
+  getProject is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectMetadata>;
 
   /**
    * Creates a new project or updates an existing one.
@@ -40,7 +41,7 @@ op listProjects is languageOperations.ResourceList<
   @createsOrUpdatesResource(AnalyzeConversationAuthoringProjectMetadata)
   @parameterVisibility
   @patch
-op  createProject is Foundations.ResourceOperation<
+  createProject is Foundations.ResourceOperation<
     AnalyzeConversationAuthoringProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
@@ -61,8 +62,8 @@ op  createProject is Foundations.ResourceOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}")
   @delete
-  @pollingOperation(getProjectDeletionStatus)
-op  deleteProject is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getProjectDeletionStatus)
+  deleteProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -84,7 +85,7 @@ op  deleteProject is Foundations.LongRunningOperation<
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
-op  copyProjectAuthorization is languageOperations.ResourceAction<
+  copyProjectAuthorization is languageOperations.ResourceAction<
     AnalyzeConversationAuthoringProjectMetadata,
     AnalyzeConversationAuthoringCopyAuthorizationOptions,
     AnalyzeConversationAuthoringCopyProjectOptions
@@ -96,9 +97,9 @@ op  copyProjectAuthorization is languageOperations.ResourceAction<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
-  @pollingOperation(getCopyProjectStatus)
+  @pollingOperation(AnalyzeConversationAuthoring.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
-op  copyProject is Foundations.LongRunningOperation<
+  copyProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -124,8 +125,8 @@ op  copyProject is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
-  @pollingOperation(getExportStatus)
-op  export is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getExportStatus)
+  export is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -170,8 +171,8 @@ op  export is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
-  @pollingOperation(getImportStatus)
-op  `import` is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getImportStatus)
+  `import` is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -204,8 +205,8 @@ op  `import` is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
-  @pollingOperation(getTrainingStatus)
-op  train is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
+  train is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -229,12 +230,12 @@ op  train is Foundations.LongRunningOperation<
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
-op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopyProjectJobState>;
+  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
    */
-op  listDeployments is languageOperations.ResourceList<
+  listDeployments is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectDeployment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -245,8 +246,8 @@ op  listDeployments is languageOperations.ResourceList<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/:swap")
   @post
-  @pollingOperation(getSwapDeploymentsStatus)
-op  swapDeployments is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getSwapDeploymentsStatus)
+  swapDeployments is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -270,7 +271,7 @@ op  swapDeployments is Foundations.LongRunningOperation<
    * Gets the details of a deployment.
    */
   @get
-op  getDeployment is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectDeployment>;
+  getDeployment is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -278,8 +279,8 @@ op  getDeployment is languageOperations.ResourceRead<AnalyzeConversationAuthorin
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @put
-  @pollingOperation(getDeploymentStatus)
-op  deployProject is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
+  deployProject is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -311,8 +312,8 @@ op  deployProject is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}")
   @delete
-  @pollingOperation(getDeploymentStatus)
-op  deleteDeployment is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getDeploymentStatus)
+  deleteDeployment is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -339,10 +340,10 @@ op  deleteDeployment is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
   @post
   @pollingOperation(
-    getDeploymentDeleteFromResourcesStatus
+    AnalyzeConversationAuthoring.getDeploymentDeleteFromResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
- op deleteDeploymentFromResources is Foundations.LongRunningOperation<
+  deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -372,32 +373,32 @@ op  deleteDeployment is Foundations.LongRunningOperation<
    * Gets the status of an existing delete deployment from specific resources job.
    */
   @added(Versions.v2023_04_15_preview)
-op  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
- op getDeploymentStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentJobState>;
+  getDeploymentStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentJobState>;
 
   /**
    * Gets the status of an existing swap deployment job.
    */
-op  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project metadata, and assets.
    */
- op getExportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportProjectJobState>;
+  getExportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportProjectJobState>;
 
   /**
    * Gets the status for an import.
    */
-op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
+  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.
    */
- op listTrainedModels is languageOperations.ResourceList<
+  listTrainedModels is languageOperations.ResourceList<
     AnalyzeConversationAuthoringProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -405,12 +406,12 @@ op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthor
   /**
    * Gets the details of a trained model.
    */
-op  getTrainedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectTrainedModel>;
+  getTrainedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
- op deleteTrainedModel is languageOperations.ResourceDelete<AnalyzeConversationAuthoringProjectTrainedModel>;
+  deleteTrainedModel is languageOperations.ResourceDelete<AnalyzeConversationAuthoringProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -418,9 +419,9 @@ op  getTrainedModel is languageOperations.ResourceRead<AnalyzeConversationAuthor
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
-  @pollingOperation(getEvaluationStatus)
+  @pollingOperation(AnalyzeConversationAuthoring.getEvaluationStatus)
   @added(Versions.v2023_04_15_preview)
-op  evaluateModel is Foundations.LongRunningOperation<
+  evaluateModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -452,8 +453,8 @@ op  evaluateModel is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot")
   @post
-  @pollingOperation(getLoadSnapshotStatus)
-op  loadSnapshot is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getLoadSnapshotStatus)
+  loadSnapshot is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -477,13 +478,13 @@ op  loadSnapshot is Foundations.LongRunningOperation<
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2023_04_15_preview)
- op getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
+  getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-op  getModelEvaluationResults is languageOperations.ResourceList<
+  getModelEvaluationResults is languageOperations.ResourceList<
     AnalyzeConversationAuthoringUtteranceEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
       StringIndexTypeQueryParameter>
@@ -495,7 +496,7 @@ op  getModelEvaluationResults is languageOperations.ResourceList<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result")
   @get
-op  getModelEvaluationSummary is Foundations.Operation<
+  getModelEvaluationSummary is Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -518,13 +519,13 @@ op  getModelEvaluationSummary is Foundations.Operation<
   /**
    * Gets the status for loading a snapshot.
    */
-op  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
    */
   @added(Versions.v2023_04_15_preview)
-op  listDeploymentResources is languageOperations.ResourceList<
+  listDeploymentResources is languageOperations.ResourceList<
     AnalyzeConversationAuthoringAssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -536,10 +537,10 @@ op  listDeploymentResources is languageOperations.ResourceList<
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(
-    getAssignDeploymentResourcesStatus
+    AnalyzeConversationAuthoring.getAssignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-op  assignDeploymentResources is Foundations.LongRunningOperation<
+  assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -566,10 +567,10 @@ op  assignDeploymentResources is Foundations.LongRunningOperation<
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(
-    getUnassignDeploymentResourcesStatus
+    AnalyzeConversationAuthoring.getUnassignDeploymentResourcesStatus
   )
   @added(Versions.v2023_04_15_preview)
-op  unassignDeploymentResources is Foundations.LongRunningOperation<
+  unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -593,7 +594,7 @@ op  unassignDeploymentResources is Foundations.LongRunningOperation<
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-op  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
@@ -602,7 +603,7 @@ op  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<Analyz
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
   @added(Versions.v2023_04_15_preview)
-op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -625,7 +626,7 @@ op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
   /**
    * Lists the non-expired training jobs created for a project.
    */
-op  listTrainingJobs is languageOperations.ResourceList<
+  listTrainingJobs is languageOperations.ResourceList<
     AnalyzeConversationAuthoringTrainingJobState,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -633,7 +634,7 @@ op  listTrainingJobs is languageOperations.ResourceList<
   /**
    * Gets the status for a training job.
    */
-op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringTrainingJobState>;
+  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringTrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
@@ -641,8 +642,8 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(getTrainingStatus)
- op cancelTrainingJob is Foundations.LongRunningOperation<
+  @pollingOperation(AnalyzeConversationAuthoring.getTrainingStatus)
+  cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -668,7 +669,7 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}")
   @get
-op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
+  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     {
       /**
        * The job ID.
@@ -689,7 +690,7 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
   @route("/authoring/analyze-conversations/projects/global/deployments/resources")
   @get
   @added(Versions.v2023_04_15_preview)
- op listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
+  listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
     {
       /**
        * The maximum number of resources to return from the collection.
@@ -720,7 +721,7 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/global/languages")
   @get
-op  getSupportedLanguages is Azure.Core.Foundations.Operation<
+  getSupportedLanguages is Azure.Core.Foundations.Operation<
     {
       /**
        * The project kind.
@@ -758,7 +759,7 @@ op  getSupportedLanguages is Azure.Core.Foundations.Operation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
   @get
-op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
+  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     {
       /**
        * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
@@ -802,7 +803,7 @@ op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @route("/authoring/analyze-conversations/projects/global/training-config-versions")
   @get
- op listTrainingConfigVersions is Azure.Core.Foundations.Operation<
+  listTrainingConfigVersions is Azure.Core.Foundations.Operation<
     {
       /**
        * The project kind.
@@ -838,12 +839,12 @@ op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
- op getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
+  getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
   /**
    * Lists the exported models belonging to a project.
    */
   @added(Versions.v2024_11_15_preview)
- op listExportedModels is languageOperations.ResourceList<
+  listExportedModels is languageOperations.ResourceList<
     AnalyzeConversationAuthoringExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
@@ -853,9 +854,9 @@ op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(getExportedModelJobStatus)
+  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
-op  deleteExportedModel is Foundations.LongRunningOperation<
+  deleteExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -879,9 +880,9 @@ op  deleteExportedModel is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(getExportedModelJobStatus)
+  @pollingOperation(AnalyzeConversationAuthoring.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
-op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
+  createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -909,4 +910,5 @@ op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
    * Gets the status for an existing job to create or update an exported model.
    */
   @added(Versions.v2024_11_15_preview)
-op  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
+  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
+}
