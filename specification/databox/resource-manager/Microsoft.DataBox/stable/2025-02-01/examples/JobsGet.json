@@ -3,7 +3,7 @@
     "subscriptionId": "YourSubscriptionId",
     "resourceGroupName": "YourResourceGroupName",
     "jobName": "TestJobName1",
-    "api-version": "2023-12-01",
+    "api-version": "2025-02-01",
     "$expand": "details",
     "Accept-Language": [
       "en-US"
@@ -16,6 +16,7 @@
     "200": {
       "body": {
         "properties": {
+          "allDevicesLost": false,
           "transferType": "ImportToAzure",
           "isCancellable": true,
           "isDeletable": false,
@@ -35,17 +36,20 @@
               {
                 "stageName": "DevicePrepared",
                 "displayName": "Processed",
-                "stageStatus": "None"
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T12:50:40.1872217+05:30"
               },
               {
                 "stageName": "Dispatched",
                 "displayName": "Dispatched",
-                "stageStatus": "None"
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-08T10:50:40.1872217+05:30"
               },
               {
                 "stageName": "Delivered",
                 "displayName": "Delivered",
-                "stageStatus": "None"
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-09T10:50:40.1872217+05:30"
               },
               {
                 "stageName": "PickedUp",
@@ -137,6 +141,7 @@
               "kekType": "MicrosoftManaged"
             }
           },
+          "cancellationReason": "Issue reported by you. All device/s lost.",
           "deliveryType": "NonScheduled",
           "deliveryInfo": {
             "scheduledDateTime": "0001-01-01T05:30:00+05:30"
@@ -146,7 +151,8 @@
         "location": "westus",
         "tags": {},
         "sku": {
-          "name": "DataBox"
+          "name": "DataBox",
+          "model": "DataBox"
         },
         "identity": {
           "type": "None"

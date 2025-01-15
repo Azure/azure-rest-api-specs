@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-12-01",
+    "version": "2025-02-01",
     "title": "DataBoxManagementClient"
   },
   "host": "management.azure.com",
@@ -2179,6 +2179,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "Error, if any, in the stage",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateCreateOrderLimit"
@@ -2489,6 +2494,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -3442,6 +3452,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateDataTransferDetails"
@@ -3582,6 +3597,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -3889,11 +3909,11 @@
                 "description": "Active Order limit breached."
               },
               {
-                "value": "ActiveOrderLimitBreachedDelay",
+                "value": "HighDemandDelay",
                 "description": "High demand"
               },
               {
-                "value": "ActiveOrderLimitBreachedDelay",
+                "value": "LargeNumberOfFilesDelay",
                 "description": "Slow copy due to large number of files"
               }
             ]
@@ -4770,6 +4790,11 @@
           "description": "Flag to indicate cancellation of scheduled job.",
           "type": "boolean",
           "readOnly": true
+        },
+        "allDevicesLost": {
+          "description": "Flag to indicate if all devices associated with the job are lost.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -5640,6 +5665,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidatePreferences"
@@ -5861,6 +5891,11 @@
         "country": {
           "description": "Country in which storage location should be supported.",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "discriminator": "skuName"
@@ -6140,6 +6175,11 @@
         "family": {
           "description": "The sku family.",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -6220,6 +6260,11 @@
         "location": {
           "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateSkuAvailability"
@@ -6279,6 +6324,11 @@
         "maximum": {
           "description": "Maximum capacity in TB.",
           "type": "string",
+          "readOnly": true
+        },
+        "individualSkuUsable": {
+          "type": "string",
+          "description": "Maximum capacity per device in TB.",
           "readOnly": true
         }
       }
@@ -6740,6 +6790,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       }
     },
@@ -6943,6 +6998,11 @@
         "transportPreferences": {
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
+        },
+        "model": {
+          "$ref": "#/definitions/modelName",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateAddress"
@@ -7143,6 +7203,48 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "modelName": {
+      "enum": [
+        "DataBox",
+        "DataBoxDisk",
+        "DataBoxHeavy",
+        "DataBoxCustomerDisk",
+        "AzureDataBox120",
+        "AzureDataBox525"
+      ],
+      "type": "string",
+      "description": "The customer friendly name of the combination of version and capacity of the device. This field is necessary only at the time of ordering the newer generation device i.e. AzureDataBox120 and AzureDataBox525 as of Feb/2025",
+      "x-ms-enum": {
+        "name": "ModelName",
+        "modelAsExtensible": true,
+        "values": [
+          {
+            "value": "DataBox",
+            "description": "Data Box."
+          },
+          {
+            "value": "DataBoxDisk",
+            "description": "Data Box Disk."
+          },
+          {
+            "value": "DataBoxHeavy",
+            "description": "Data Box Heavy."
+          },
+          {
+            "value": "DataBoxCustomerDisk",
+            "description": "Data Box Customer Disk"
+          },
+          {
+            "value": "AzureDataBox120",
+            "description": "Data Box V2 with 125TB usable capacity."
+          },
+          {
+            "value": "AzureDataBox525",
+            "description": "Data Box V2 with 500TB usable capacity."
+          }
+        ]
       }
     }
   },
