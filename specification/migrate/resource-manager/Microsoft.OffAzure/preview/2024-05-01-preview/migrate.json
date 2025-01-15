@@ -12929,6 +12929,75 @@
         "machineResourceId"
       ]
     },
+    "ArcScopeProperties": {
+      "type": "object",
+      "description": "Properties for defining Arc scope.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations to discover Arc resources from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ArcScopeType",
+          "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
+        },
+        "subscriptionOrResourceGroupIds": {
+          "type": "array",
+          "description": "List of subscription or resource group ARM IDs. Allowed only if scopeType is SubscriptionOrResourceGroupIds.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "scopeType"
+      ]
+    },
+    "ArcScopePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties for defining Arc scope.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations to discover Arc resources from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ArcScopeType",
+          "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
+        },
+        "subscriptionOrResourceGroupIds": {
+          "type": "array",
+          "description": "List of subscription or resource group ARM IDs. Allowed only if scopeType is SubscriptionOrResourceGroupIds.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ArcScopeType": {
+      "type": "string",
+      "description": "Arc scope type.",
+      "enum": [
+        "SubscriptionOrResourceGroupIds"
+      ],
+      "x-ms-enum": {
+        "name": "ArcScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubscriptionOrResourceGroupIds",
+            "value": "SubscriptionOrResourceGroupIds",
+            "description": "Scope is based on Subscription or Resource Group IDs."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.Object": {
       "type": "object",
       "description": "object model"
@@ -17611,6 +17680,22 @@
           "$ref": "#/definitions/ArcDiscovery",
           "description": "Gets the data related to Azure arc discovery.",
           "readOnly": true
+        },
+        "discoverySource": {
+          "type": "string",
+          "description": "Gets or sets the discovery source of the server.",
+          "enum": [
+            "Arc"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "hypervisor": {
+          "type": "string",
+          "description": "Gets or sets the hypervisor type of the server.",
+          "readOnly": true
         }
       }
     },
@@ -17660,7 +17745,7 @@
       "description": "A ServerSiteResource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SitesProperties",
+          "$ref": "#/definitions/ServerSitesProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -17732,6 +17817,10 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopePropertiesUpdate",
+          "description": "Gets or sets the Arc scope properties for the server site."
         }
       }
     },
@@ -18281,6 +18370,47 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        }
+      }
+    },
+    "ServerSitesProperties": {
+      "type": "object",
+      "description": "The properties of SiteResource",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "description": "Gets the Master Site this site is linked to.",
+          "readOnly": true
+        },
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopeProperties",
+          "description": "Gets or sets the Arc scope properties for the server site."
         }
       }
     },
@@ -19715,6 +19845,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "provisioning state enum",
           "readOnly": true
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopeProperties",
+          "description": "Gets or sets the Arc scope properties for the sql site."
         }
       }
     },
@@ -19777,6 +19911,10 @@
         "discoveryScenario": {
           "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopePropertiesUpdate",
+          "description": "Gets or sets the Arc scope properties for the sql site."
         }
       }
     },
