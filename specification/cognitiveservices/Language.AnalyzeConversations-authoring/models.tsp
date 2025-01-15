@@ -1557,12 +1557,12 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: CompositionMode;
+  compositionMode?: CompositionMode;
 
   /**
    * The list component of the entity.
    */
-  list?: AnalyzeConversationAuthoringExportedEntityList;
+  entities?: AnalyzeConversationAuthoringExportedEntityList;
 
   /**
    * The prebuilt entities components.
