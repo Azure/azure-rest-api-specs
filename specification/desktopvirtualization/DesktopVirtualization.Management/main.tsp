@@ -22,6 +22,7 @@ import "./UserSession.tsp";
 import "./ScalingPlanPersonalSchedule.tsp";
 import "./ScalingPlanPooledSchedule.tsp";
 import "./MsixPackage.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -220,7 +220,7 @@ interface HostPools {
   >;
 
   /**
-   * List userSessions.
+   * List MSIX Packages.
    */
   @get
   msixPackages is ArmResourceActionSync<

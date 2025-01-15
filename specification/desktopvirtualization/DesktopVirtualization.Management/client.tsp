@@ -1,5 +1,6 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "./AppAttachPackage.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -11,3 +12,5 @@ using Microsoft.DesktopVirtualization;
 @@clientName(CustomPrivateEndpointConnection,
   "CustomPrivateEndpointConnection"
 );
+
+@@clientName(AppAttachPackages, "AppAttachPackage");

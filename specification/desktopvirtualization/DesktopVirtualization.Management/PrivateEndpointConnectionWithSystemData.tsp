@@ -30,7 +30,7 @@ model CustomPrivateEndpointConnection
 alias PrivateEndpointParameter = {
   /** The name parameter for private endpoint */
   @path
-  @segment("PrivateEndpointConnection")
+  @segment("PrivateEndpointConnections")
   @key
   privateEndpointConnectionName: string;
 };

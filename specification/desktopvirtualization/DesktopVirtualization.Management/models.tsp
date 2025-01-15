@@ -422,9 +422,8 @@ union ScalingHostPoolType {
 /**
  * Days of Week that the Scaling Schedule is active.
  */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "There are no more days of the week"
 union ScalingScheduleDaysOfWeekItem {
-  string,
-
   /** Day of Week Sunday */
   Sunday: "Sunday",
 

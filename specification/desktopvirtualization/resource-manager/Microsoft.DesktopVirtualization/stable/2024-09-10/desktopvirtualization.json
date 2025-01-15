@@ -122,7 +122,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
-        "operationId": "AppAttachPackages_ListBySubscription",
+        "operationId": "AppAttachPackage_ListBySubscription",
         "tags": [
           "AppAttachPackages"
         ],
@@ -154,6 +154,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppAttachPackage_ListBySubscription": {
+            "$ref": "./examples/AppAttachPackage_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -661,7 +666,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
-        "operationId": "AppAttachPackages_ListByResourceGroup",
+        "operationId": "AppAttachPackage_ListByResourceGroup",
         "tags": [
           "AppAttachPackages"
         ],
@@ -698,6 +703,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AppAttachPackage_ListByResourceGroup": {
+            "$ref": "./examples/AppAttachPackage_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -705,7 +715,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
       "get": {
-        "operationId": "AppAttachPackages_Get",
+        "operationId": "AppAttachPackage_Get",
         "tags": [
           "AppAttachPackages"
         ],
@@ -744,10 +754,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "AppAttachPackage_Get": {
+            "$ref": "./examples/AppAttachPackage_Get.json"
+          }
         }
       },
       "put": {
-        "operationId": "AppAttachPackages_CreateOrUpdate",
+        "operationId": "AppAttachPackage_CreateOrUpdate",
         "tags": [
           "AppAttachPackages"
         ],
@@ -801,10 +816,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "AppAttachPackage_Create": {
+            "$ref": "./examples/AppAttachPackage_CreateOrUpdate.json"
+          }
         }
       },
       "patch": {
-        "operationId": "AppAttachPackages_Update",
+        "operationId": "AppAttachPackage_Update",
         "tags": [
           "AppAttachPackages"
         ],
@@ -852,10 +872,15 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "AppAttachPackage_Update": {
+            "$ref": "./examples/AppAttachPackage_Update.json"
+          }
         }
       },
       "delete": {
-        "operationId": "AppAttachPackages_Delete",
+        "operationId": "AppAttachPackage_Delete",
         "tags": [
           "AppAttachPackages"
         ],
@@ -893,6 +918,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppAttachPackage_Delete": {
+            "$ref": "./examples/AppAttachPackage_Delete.json"
           }
         }
       }
@@ -2068,7 +2098,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/PrivateEndpointConnection/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/PrivateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_GetByHostPool",
         "tags": [
@@ -2569,7 +2599,7 @@
         "tags": [
           "HostPools"
         ],
-        "description": "List userSessions.",
+        "description": "List MSIX Packages.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4693,7 +4723,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/PrivateEndpointConnection/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/PrivateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_GetByWorkspace",
         "tags": [
