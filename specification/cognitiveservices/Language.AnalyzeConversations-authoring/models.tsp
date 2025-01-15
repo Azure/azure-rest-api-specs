@@ -217,22 +217,22 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  createdDateTime: utcDateTime;
+  createdOn: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  lastModifiedDateTime: utcDateTime;
+  lastModifiedOn: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  lastTrainedDateTime?: utcDateTime;
+  lastTrainedOn?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  lastDeployedDateTime?: utcDateTime;
+  lastDeployedOn?: utcDateTime;
 
   /**
    * Represents the project kind.
@@ -576,17 +576,17 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  createdDateTime: utcDateTime;
+  createdOn: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  lastUpdatedDateTime: utcDateTime;
+  lastUpdatedOn: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  expirationDateTime?: utcDateTime;
+  expiresOn?: utcDateTime;
 
   /**
    * The job status.
@@ -658,12 +658,12 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedDateTime: utcDateTime;
+  lastDeployedOn: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
@@ -835,7 +835,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * The duration of the model's last training request in seconds.
@@ -1394,7 +1394,7 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  estimatedEndDateTime?: utcDateTime;
+  estimatedEndOn?: utcDateTime;
 }
 
 /**
@@ -1410,12 +1410,12 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  startDateTime?: utcDateTime;
+  startedOn?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  endDateTime?: utcDateTime;
+  endedOn?: utcDateTime;
 
   /**
    * Represents the status of the sub-operation.
@@ -1479,7 +1479,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedDateTime: utcDateTime;
+  lastDeployedOn: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
@@ -2026,12 +2026,12 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  lastExportedModelDateTime: utcDateTime;
+  lastExportedModelOn: utcDateTime;
 
   /**
    * The model expiration date.
