@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -19,7 +20,7 @@ namespace KeyVault;
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
-op getCertificates is Azure.Core.Foundations.Operation<
+op getCertificates is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -35,9 +36,7 @@ op getCertificates is Azure.Core.Foundations.Operation<
     @query("includePending")
     includePending?: boolean;
   },
-  CertificateListResult,
-  {},
-  KeyVaultError
+  CertificateListResult
 >;
 
 /**
@@ -47,7 +46,7 @@ op getCertificates is Azure.Core.Foundations.Operation<
 @summary("Deletes a certificate from a specified key vault.")
 @route("/certificates/{certificate-name}")
 @delete
-op deleteCertificate is Azure.Core.Foundations.Operation<
+op deleteCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -56,9 +55,7 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  DeletedCertificateBundle,
-  {},
-  KeyVaultError
+  DeletedCertificateBundle
 >;
 
 /**
@@ -69,16 +66,14 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
 @summary("Sets the certificate contacts for the specified key vault.")
 @route("/certificates/contacts")
 @put
-op setCertificateContacts is Azure.Core.Foundations.Operation<
+op setCertificateContacts is KeyVaultOperation<
   {
     /**
      * The contacts for the key vault certificate.
      */
     @body contacts: Contacts;
   },
-  Contacts,
-  {},
-  KeyVaultError
+  Contacts
 >;
 
 /**
@@ -88,12 +83,7 @@ op setCertificateContacts is Azure.Core.Foundations.Operation<
 @summary("Lists the certificate contacts for a specified key vault.")
 @route("/certificates/contacts")
 @get
-op getCertificateContacts is Azure.Core.Foundations.Operation<
-  {},
-  Contacts,
-  {},
-  KeyVaultError
->;
+op getCertificateContacts is KeyVaultOperation<{}, Contacts>;
 
 /**
  * Deletes the certificate contacts for a specified key vault certificate. This operation requires the certificates/managecontacts permission.
@@ -102,12 +92,7 @@ op getCertificateContacts is Azure.Core.Foundations.Operation<
 @summary("Deletes the certificate contacts for a specified key vault.")
 @route("/certificates/contacts")
 @delete
-op deleteCertificateContacts is Azure.Core.Foundations.Operation<
-  {},
-  Contacts,
-  {},
-  KeyVaultError
->;
+op deleteCertificateContacts is KeyVaultOperation<{}, Contacts>;
 
 /**
  * The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
@@ -117,7 +102,7 @@ op deleteCertificateContacts is Azure.Core.Foundations.Operation<
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
-op getCertificateIssuers is Azure.Core.Foundations.Operation<
+op getCertificateIssuers is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -127,9 +112,7 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  CertificateIssuerListResult,
-  {},
-  KeyVaultError
+  CertificateIssuerListResult
 >;
 
 /**
@@ -140,7 +123,7 @@ op getCertificateIssuers is Azure.Core.Foundations.Operation<
 @summary("Sets the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
 @put
-op setCertificateIssuer is Azure.Core.Foundations.Operation<
+op setCertificateIssuer is KeyVaultOperation<
   {
     /**
      * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -156,9 +139,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameter: CertificateIssuerSetParameters;
   },
-  IssuerBundle,
-  {},
-  KeyVaultError
+  IssuerBundle
 >;
 
 /**
@@ -168,7 +149,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
 @summary("Updates the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
 @patch
-op updateCertificateIssuer is Azure.Core.Foundations.Operation<
+op updateCertificateIssuer is KeyVaultOperation<
   {
     /**
      * The name of the issuer.
@@ -184,9 +165,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameter: CertificateIssuerUpdateParameters;
   },
-  IssuerBundle,
-  {},
-  KeyVaultError
+  IssuerBundle
 >;
 
 /**
@@ -196,7 +175,7 @@ op updateCertificateIssuer is Azure.Core.Foundations.Operation<
 @summary("Lists the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
 @get
-op getCertificateIssuer is Azure.Core.Foundations.Operation<
+op getCertificateIssuer is KeyVaultOperation<
   {
     /**
      * The name of the issuer.
@@ -204,9 +183,7 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
     @path("issuer-name")
     issuerName: string;
   },
-  IssuerBundle,
-  {},
-  KeyVaultError
+  IssuerBundle
 >;
 
 /**
@@ -216,7 +193,7 @@ op getCertificateIssuer is Azure.Core.Foundations.Operation<
 @summary("Deletes the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
 @delete
-op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
+op deleteCertificateIssuer is KeyVaultOperation<
   {
     /**
      * The name of the issuer.
@@ -224,9 +201,7 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
     @path("issuer-name")
     issuerName: string;
   },
-  IssuerBundle,
-  {},
-  KeyVaultError
+  IssuerBundle
 >;
 
 /**
@@ -236,7 +211,7 @@ op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
 @summary("Creates a new certificate.")
 @route("/certificates/{certificate-name}/create")
 @post
-op createCertificate is Azure.Core.Foundations.Operation<
+op createCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -254,9 +229,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateCreateParameters;
   },
-  AcceptedResponse & CertificateOperation,
-  {},
-  KeyVaultError
+  AcceptedResponse & CertificateOperation
 >;
 
 /**
@@ -266,7 +239,7 @@ op createCertificate is Azure.Core.Foundations.Operation<
 @summary("Imports a certificate into a specified key vault.")
 @route("/certificates/{certificate-name}/import")
 @post
-op importCertificate is Azure.Core.Foundations.Operation<
+op importCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -284,9 +257,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateImportParameters;
   },
-  CertificateBundle,
-  {},
-  KeyVaultError
+  CertificateBundle
 >;
 
 /**
@@ -297,7 +268,7 @@ op importCertificate is Azure.Core.Foundations.Operation<
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
-op getCertificateVersions is Azure.Core.Foundations.Operation<
+op getCertificateVersions is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -314,9 +285,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  CertificateListResult,
-  {},
-  KeyVaultError
+  CertificateListResult
 >;
 
 /**
@@ -326,7 +295,7 @@ op getCertificateVersions is Azure.Core.Foundations.Operation<
 @summary("Lists the policy for a certificate.")
 @route("/certificates/{certificate-name}/policy")
 @get
-op getCertificatePolicy is Azure.Core.Foundations.Operation<
+op getCertificatePolicy is KeyVaultOperation<
   {
     /**
      * The name of the certificate in a given key vault.
@@ -335,9 +304,7 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  CertificatePolicy,
-  {},
-  KeyVaultError
+  CertificatePolicy
 >;
 
 /**
@@ -347,7 +314,7 @@ op getCertificatePolicy is Azure.Core.Foundations.Operation<
 @summary("Updates the policy for a certificate.")
 @route("/certificates/{certificate-name}/policy")
 @patch
-op updateCertificatePolicy is Azure.Core.Foundations.Operation<
+op updateCertificatePolicy is KeyVaultOperation<
   {
     /**
      * The name of the certificate in the given vault.
@@ -361,9 +328,7 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
      */
     @body certificatePolicy: CertificatePolicy;
   },
-  CertificatePolicy,
-  {},
-  KeyVaultError
+  CertificatePolicy
 >;
 
 /**
@@ -373,7 +338,7 @@ op updateCertificatePolicy is Azure.Core.Foundations.Operation<
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
 @patch
-op updateCertificate is Azure.Core.Foundations.Operation<
+op updateCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate in the given key vault.
@@ -397,9 +362,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateUpdateParameters;
   },
-  CertificateBundle,
-  {},
-  KeyVaultError
+  CertificateBundle
 >;
 
 /**
@@ -409,7 +372,7 @@ op updateCertificate is Azure.Core.Foundations.Operation<
 @summary("Gets information about a certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
 @get
-op getCertificate is Azure.Core.Foundations.Operation<
+op getCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate in the given vault.
@@ -425,9 +388,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
     @clientName("version", "go")
     certificateVersion: string;
   },
-  CertificateBundle,
-  {},
-  KeyVaultError
+  CertificateBundle
 >;
 
 /**
@@ -438,7 +399,7 @@ op getCertificate is Azure.Core.Foundations.Operation<
 @summary("Updates a certificate operation.")
 @route("/certificates/{certificate-name}/pending")
 @patch
-op updateCertificateOperation is Azure.Core.Foundations.Operation<
+op updateCertificateOperation is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -455,9 +416,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
     @flattenProperty
     certificateOperation: CertificateOperationUpdateParameter;
   },
-  CertificateOperation,
-  {},
-  KeyVaultError
+  CertificateOperation
 >;
 
 /**
@@ -467,7 +426,7 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
 @summary("Gets the creation operation of a certificate.")
 @route("/certificates/{certificate-name}/pending")
 @get
-op getCertificateOperation is Azure.Core.Foundations.Operation<
+op getCertificateOperation is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -476,9 +435,7 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  CertificateOperation,
-  {},
-  KeyVaultError
+  CertificateOperation
 >;
 
 /**
@@ -488,7 +445,7 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
 @summary("Deletes the creation operation for a specific certificate.")
 @route("/certificates/{certificate-name}/pending")
 @delete
-op deleteCertificateOperation is Azure.Core.Foundations.Operation<
+op deleteCertificateOperation is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -497,9 +454,7 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  CertificateOperation,
-  {},
-  KeyVaultError
+  CertificateOperation
 >;
 
 /**
@@ -509,7 +464,7 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
 @summary("Merges a certificate or a certificate chain with a key pair existing on the server.")
 @route("/certificates/{certificate-name}/pending/merge")
 @post
-op mergeCertificate is Azure.Core.Foundations.Operation<
+op mergeCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -526,9 +481,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateMergeParameters;
   },
-  CreatedResponse & CertificateBundle,
-  {},
-  KeyVaultError
+  CreatedResponse & CertificateBundle
 >;
 
 /**
@@ -538,7 +491,7 @@ op mergeCertificate is Azure.Core.Foundations.Operation<
 @summary("Backs up the specified certificate.")
 @route("/certificates/{certificate-name}/backup")
 @post
-op backupCertificate is Azure.Core.Foundations.Operation<
+op backupCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate.
@@ -547,9 +500,7 @@ op backupCertificate is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  BackupCertificateResult,
-  {},
-  KeyVaultError
+  BackupCertificateResult
 >;
 
 /**
@@ -559,7 +510,7 @@ op backupCertificate is Azure.Core.Foundations.Operation<
 @summary("Restores a backed up certificate to a vault.")
 @route("/certificates/restore")
 @post
-op restoreCertificate is Azure.Core.Foundations.Operation<
+op restoreCertificate is KeyVaultOperation<
   {
     /**
      * The parameters to restore the certificate.
@@ -569,9 +520,7 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: CertificateRestoreParameters;
   },
-  CertificateBundle,
-  {},
-  KeyVaultError
+  CertificateBundle
 >;
 
 /**
@@ -582,7 +531,7 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
-op getDeletedCertificates is Azure.Core.Foundations.Operation<
+op getDeletedCertificates is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -598,9 +547,7 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
     @query("includePending")
     includePending?: boolean;
   },
-  DeletedCertificateListResult,
-  {},
-  KeyVaultError
+  DeletedCertificateListResult
 >;
 
 /**
@@ -610,7 +557,7 @@ op getDeletedCertificates is Azure.Core.Foundations.Operation<
 @summary("Retrieves information about the specified deleted certificate.")
 @route("/deletedcertificates/{certificate-name}")
 @get
-op getDeletedCertificate is Azure.Core.Foundations.Operation<
+op getDeletedCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate
@@ -619,9 +566,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  DeletedCertificateBundle,
-  {},
-  KeyVaultError
+  DeletedCertificateBundle
 >;
 
 /**
@@ -632,7 +577,7 @@ op getDeletedCertificate is Azure.Core.Foundations.Operation<
 @summary("Permanently deletes the specified deleted certificate.")
 @route("/deletedcertificates/{certificate-name}")
 @delete
-op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
+op purgeDeletedCertificate is KeyVaultOperation<
   {
     /**
      * The name of the certificate
@@ -641,9 +586,7 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  void,
-  {},
-  KeyVaultError
+  void
 >;
 
 /**
@@ -653,7 +596,7 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
 @summary("Recovers the deleted certificate back to its current version under /certificates.")
 @route("/deletedcertificates/{certificate-name}/recover")
 @post
-op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
+op recoverDeletedCertificate is KeyVaultOperation<
   {
     /**
      * The name of the deleted certificate
@@ -662,7 +605,5 @@ op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     certificateName: string;
   },
-  CertificateBundle,
-  {},
-  KeyVaultError
+  CertificateBundle
 >;
