@@ -47,14 +47,8 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "java");
 
-@@clientName(ServiceConfigurationResource,
-  "HybridConnectivityServiceConfiguration",
-  "csharp"
-);
-@@clientName(ServiceConfigurationResource,
-  "HybridConnectivityServiceConfiguration",
-  "java"
-);
+@@clientName(ServiceConfigurationResource, "HybridConnectivityServiceConfiguration", "csharp");
+@@clientName(ServiceConfigurationResource, "HybridConnectivityServiceConfiguration", "java");
 
 @@clientName(IngressGatewayResource, "IngressGatewayAsset", "csharp");
 @@clientName(IngressGatewayResource, "IngressGatewayAsset", "java");
@@ -93,11 +87,9 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources, "Endpoints", "python");
 @@clientName(EndpointResources, "Endpoints", "java");
 
-@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityManagementAPI", "java");
-
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityManagementAPI", "javascript");
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "javascript");
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
-@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityManagement", "java");
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "java");
