@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "words": [
         "authnotrequired",
@@ -13,6 +13,7 @@
         "subchannel",
         "umls"
     ],
+    "allowCompoundWords": true,
     "dictionaryDefinitions": [
         {
             "name": "custom-words",
@@ -24,9 +25,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
-        "**/package-lock.json"
+        "**/package-lock.json",
+        "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -48,6 +52,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting"
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -60,12 +71,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -408,6 +413,12 @@
             "filename": "**/specification/keyvault/data-plane/Microsoft.KeyVault/**/keyvault.json",
             "words": [
                 "Regenerte"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/resource-manager/readme.go.md",
+            "words": [
+                "modelerfour"
             ]
         },
         {
@@ -998,6 +1009,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1053,7 +1070,9 @@
         {
             "filename": "**/specification/confluent/resource-manager/Microsoft.Confluent/**/confluent.json",
             "words": [
-                "orgvalidate"
+                "orgvalidate",
+                "AZUREBLOBSOURCE",
+                "AZUREBLOBSINK"
             ]
         },
         {
@@ -1324,6 +1343,13 @@
         },
         {
             "filename": "**/specification/batch/data-plane/Microsoft.Batch/**/*.json",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
             "words": [
                 "upgradingos",
                 "TVMs"
@@ -1613,6 +1639,12 @@
             ]
         },
         {
+            "filename": "**/specification/liftrpinecone/**/*.json",
+            "words": [
+                "organizationname"
+            ]
+        },
+        {
             "filename": "**/specification/developerhub/resource-manager/Microsoft.DevHub/**/*.json",
             "words": [
                 "iacProfiles",
@@ -1712,6 +1744,13 @@
             ]
         },
         {
+            "filename": "**/specification/terraform/Microsoft.AzureTerraform.Management/**/*.tsp",
+            "words": [
+                "azurerm",
+                "azapi"
+            ]
+        },
+        {
             "filename": "**/specification/deviceregistry/resource-manager/Microsoft.DeviceRegistry/**/*.json",
             "words": [
                 "billables"
@@ -1759,6 +1798,25 @@
             "words": [
                 "webapi",
                 "genevametrics"
+            ]
+        },
+        {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/**/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
             ]
         }
     ],
