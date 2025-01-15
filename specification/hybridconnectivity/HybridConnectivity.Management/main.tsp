@@ -12,7 +12,9 @@ import "./models.tsp";
 import "./EndpointResource.tsp";
 import "./ServiceConfigurationResource.tsp";
 import "./PublicCloud.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
@@ -40,3 +42,22 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@clientName(EndpointResources.createOrUpdate::parameters.resource,
+  "EndpointResource"
+);
+@@clientName(EndpointResources.listCredentials::parameters.body,
+  "ListCredentialsRequest"
+);
+@@clientName(EndpointResources.listManagedProxyDetails::parameters.body,
+  "ManagedProxyRequest"
+);
+@@clientName(ServiceConfigurationResources.update::parameters.properties,
+  "ServiceConfigurationResource"
+);
+@@clientName(EndpointResources.update::parameters.properties,
+  "EndpointResource"
+);
+@@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
+  "ServiceConfigurationResource"
+);
