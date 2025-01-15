@@ -52,3 +52,5 @@ suppressions:
   - code: SchemaTypeAndFormat
   - code: PathParameterSchema
 ```
+
+deviceregistry should be a spelling error when there's a space.
