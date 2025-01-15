@@ -70,16 +70,16 @@
         }
       }
     },
-    "/providers/Microsoft.Search/resourceAvailabilities": {
+    "/providers/Microsoft.Search/featureAvailabilities": {
       "get": {
         "tags": [
-          "ResourceAvailabilities"
+          "FeatureAvailabilities"
         ],
-        "description": "Lists all of the available resources such as features and SKUs of the Azure AI Search service by region.",
-        "operationId": "ResourceAvailabilities_List",
+        "description": "Lists all of the available features and SKUs of the Azure AI Search service by region.",
+        "operationId": "FeatureAvailabilities_List",
         "x-ms-examples": {
-          "SearchListResourceAvailabilities": {
-            "$ref": "./examples/SearchListResourceAvailabilities.json"
+          "SearchListFeaturevailabilities": {
+            "$ref": "./examples/SearchListFeatureAvailabilities.json"
           }
         },
         "parameters": [
@@ -89,13 +89,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of available resources such as features and SKUs.",
+            "description": "Success. The response describes the list of available features and SKUs.",
             "schema": {
-              "$ref": "#/definitions/ResourceAvailabilityListResult"
+              "$ref": "#/definitions/FeatureAvailabilitiesListResult"
             }
           },
           "default": {
-            "description": "Availabilities API failed.",
+            "description": "Feature Availabilities API failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1565,7 +1565,7 @@
             "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
           }
         },
-        "description": "Upgrades service to latest version available",
+        "description": "Upgrades the Azure AI Search service to the latest version available.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1593,7 +1593,8 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -3338,25 +3339,25 @@
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     },
-    "ResourceAvailabilityListResult": {
+    "FeatureAvailabilitiesListResult": {
       "type": "object",
-      "description": "The response containing a list of available resources such as features and SKUs in various regions.",
+      "description": "The response containing a list of available features and SKUs in various regions.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceAvailability"
+            "$ref": "#/definitions/FeatureAvailabilities"
           },
-          "description": "The list of regions with their respective resource availability such as features and SKUs."
+          "description": "The list of regions with their respective feature availabilities such as features and SKUs."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of resource availabilities, if any."
+          "description": "The URL to get the next set of feature availabilities, if any."
         }
       }
     },
-    "ResourceAvailability": {
+    "FeatureAvailabilities": {
       "type": "object",
       "properties": {
         "regionName": {
