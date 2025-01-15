@@ -984,12 +984,12 @@ model AnalyzeConversationAuthoringEvaluationSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrix", "csharp")
+@clientName("AnalyzeConversationConfusionMatrix", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrix
   is Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrixRow", "csharp")
+@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
@@ -1042,7 +1042,7 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("ConfusionMatrixCell", "csharp")
+@clientName("AnalyzeConversationConfusionMatrixCell", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
