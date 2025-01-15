@@ -10,13 +10,3 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
-
-### Tag: package-preview-2024-11-01 and go
-
-These settings apply only when `--tag=package-preview-2024-11-01 --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-preview-2024-11-01' && $(go)
-namespace: kubernetesconfigurationextensiontypes
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-11-01-preview/$(namespace)
-```
