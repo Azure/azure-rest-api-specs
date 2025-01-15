@@ -22,6 +22,6 @@ input-file:
   - preview/2024-05-01-preview/openapi.json
 suppressions:
   - code: IntegerTypeMustHaveFormat
-    from: swagger-document
+    from: openapi.json
     reason: OpenAI compatible API, which uses unixTimeStamp
 ```
