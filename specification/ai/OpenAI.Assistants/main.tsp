@@ -36,7 +36,7 @@ namespace Azure.AI.OpenAI {
   ]>
 )
 @service({
-  title: "Azure OpenAI",
+  title: "Azure OpenAI test",
 })
 @server(
   "{endpoint}",
