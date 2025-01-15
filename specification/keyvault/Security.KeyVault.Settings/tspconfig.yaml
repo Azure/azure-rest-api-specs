@@ -27,9 +27,10 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate TypeSpec code
   # "@azure-tools/typespec-ts": true
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azadmin"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     module-version: "0.0.1"
-    package-dir: "settings"
+    service-dir: "sdk/security/keyvault"
+    package-dir: "azadmin/settings"
     api-version: "7.5"
     inject-spans: true
     single-client: true
