@@ -1016,7 +1016,7 @@ model CloudErrorProperties {
 /**
  * List of App Attach Package definitions.
  */
-model AppAttachPackageList is Azure.Core.Page<AppAttachPackage>;
+model AppAttachPackageList is Azure.Core.Page<AppAttachPackageModel>;
 
 /**
  * Schema for App Attach Package properties.
@@ -1047,7 +1047,7 @@ model AppAttachPackageProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailure;
+  failHealthCheckOnStagingFailureEnum?: FailHealthCheckOnStagingFailure;
 }
 
 /**
@@ -1113,7 +1113,6 @@ model AppAttachPackageInfoProperties {
   /**
    * Date Package was last updated, found in the appxmanifest.xml.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 
   /**
