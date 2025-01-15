@@ -660,12 +660,12 @@ union ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@doc("A structured chat content item containing an audio reference.")
+@doc("A structured chat content item containing an audio content.")
 model ChatMessageAudioContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'input_audio' for this type.")
   type: "input_audio";
 
-  @doc("An internet location, which must be accessible to the model, from which the image may be retrieved.")
+  @doc("The details of the input audio.")
   @encodedName("application/json", "input_audio")
   inputAudio: ChatMessageInputAudio;
 }
