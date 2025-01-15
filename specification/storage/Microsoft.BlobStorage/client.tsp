@@ -7,6 +7,16 @@ using Storage.Blob;
 
 namespace Customizations;
 
+/** Parameters to be added in client constructors */
+model BlobServiceClientParameters {
+  ...ContainerNamePathParameter;
+  ...BlobPathParameter;
+}
+
+@@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
+@@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
+@@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
+
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
 );
