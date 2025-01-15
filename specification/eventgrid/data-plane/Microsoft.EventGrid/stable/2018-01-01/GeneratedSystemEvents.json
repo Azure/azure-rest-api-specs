@@ -2861,7 +2861,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationKeyValueModifiedEventData": {
       "type": "object",
@@ -2873,7 +2879,8 @@
         },
         "label": {
           "type": "string",
-          "description": "The label, if any, used to identify the key-value that was modified."
+          "description": "The label, if any, used to identify the key-value that was modified.",
+          "x-nullable": true
         },
         "etag": {
           "type": "string",
@@ -2883,7 +2890,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
@@ -2910,7 +2923,12 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
