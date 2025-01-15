@@ -6,7 +6,13 @@
     "api-version": "2025-01-13"
   },
   "responses": {
-    "200": {},
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    },    
     "204": {}
   }
 }
