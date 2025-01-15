@@ -292,17 +292,6 @@ model AnalyzeConversationAuthoringProjectSettings {
 }
 
 /**
- * Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * The error object.
-   */
-  error: Error;
-}
-
-/**
  * The error object.
  */
 @clientName("AuthoringConversationsError", "csharp")

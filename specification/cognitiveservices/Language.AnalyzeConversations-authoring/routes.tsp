@@ -18,7 +18,7 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
+alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
   /**
    * Lists the existing projects.
@@ -52,7 +52,7 @@ op  createProject is Foundations.ResourceOperation<
     },
     Foundations.ResourceCreatedOrOkResponse<AnalyzeConversationAuthoringProjectMetadata>,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -73,7 +73,7 @@ op  deleteProject is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -115,7 +115,7 @@ op  copyProject is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -161,7 +161,7 @@ op  export is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -195,7 +195,7 @@ op  `import` is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -222,7 +222,7 @@ op  train is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -263,7 +263,7 @@ op  swapDeployments is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -302,7 +302,7 @@ op  deployProject is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -329,7 +329,7 @@ op  deleteDeployment is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -365,7 +365,7 @@ op  deleteDeployment is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -443,7 +443,7 @@ op  evaluateModel is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -470,7 +470,7 @@ op  loadSnapshot is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -512,7 +512,7 @@ op  getModelEvaluationSummary is Foundations.Operation<
     },
     AnalyzeConversationAuthoringEvaluationSummary,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -556,7 +556,7 @@ op  assignDeploymentResources is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -586,7 +586,7 @@ op  unassignDeploymentResources is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -619,7 +619,7 @@ op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringDeploymentResourcesJobState,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -659,7 +659,7 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -678,7 +678,7 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringProjectDeletionJobState,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -711,7 +711,7 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -749,7 +749,7 @@ op  getSupportedLanguages is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringSupportedLanguages,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -792,7 +792,7 @@ op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringPrebuiltEntities,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -831,7 +831,7 @@ op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
     },
     AnalyzeConversationAuthoringTrainingConfigVersions,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
 
   /**
@@ -871,7 +871,7 @@ op  deleteExportedModel is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
   /**
    * Creates a new exported model or replaces an existing one.
@@ -903,7 +903,7 @@ op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    Foundations.ErrorResponse
   >;
   /**
    * Gets the status for an existing job to create or update an exported model.
