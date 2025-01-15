@@ -13,10 +13,10 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for App Attach Package properties.
  */
-model AppAttachPackageModel
+model AppAttachPackage
   is Azure.ResourceManager.TrackedResource<AppAttachPackageProperties, false> {
   ...ResourceNameParameter<
-    Resource = AppAttachPackageModel,
+    Resource = AppAttachPackage,
     KeyName = "appAttachPackageName",
     SegmentName = "appAttachPackages",
     NamePattern = "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$"
@@ -24,33 +24,33 @@ model AppAttachPackageModel
 }
 
 @armResourceOperations
-interface AppAttachPackage {
+interface AppAttachPackages {
   /**
    * Get an app attach package.
    */
-  get is ArmResourceRead<AppAttachPackageModel>;
+  get is ArmResourceRead<AppAttachPackage>;
 
   /**
    * Create or update an App Attach package.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AppAttachPackageModel>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<AppAttachPackage>;
 
   /**
    * Update an App Attach Package
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<AppAttachPackageModel, AppAttachPackagePatch>;
+  update is ArmCustomPatchSync<AppAttachPackage, AppAttachPackagePatch>;
 
   /**
    * Remove an App Attach Package.
    */
-  delete is ArmResourceDeleteSync<AppAttachPackageModel>;
+  delete is ArmResourceDeleteSync<AppAttachPackage>;
 
   /**
    * List App Attach packages in resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
-    AppAttachPackageModel,
+    AppAttachPackage,
     Parameters = {
       /**
        * OData filter expression. Valid properties for filtering are package name and host pool.
@@ -65,7 +65,7 @@ interface AppAttachPackage {
    * List App Attach packages in subscription.
    */
   listBySubscription is ArmListBySubscription<
-    AppAttachPackageModel,
+    AppAttachPackage,
     Parameters = {
       /**
        * OData filter expression. Valid properties for filtering are package name, host pool, and resource group.
@@ -77,15 +77,15 @@ interface AppAttachPackage {
   >;
 }
 
-@@maxLength(AppAttachPackageModel.name, 100);
-@@minLength(AppAttachPackageModel.name, 3);
-@@doc(AppAttachPackageModel.name, "The name of the App Attach package");
-@@doc(AppAttachPackageModel.properties,
+@@maxLength(AppAttachPackage.name, 100);
+@@minLength(AppAttachPackage.name, 3);
+@@doc(AppAttachPackage.name, "The name of the App Attach package");
+@@doc(AppAttachPackage.properties,
   "Detailed properties for App Attach Package"
 );
-@@doc(AppAttachPackage.createOrUpdate::parameters.resource,
+@@doc(AppAttachPackages.createOrUpdate::parameters.resource,
   "Object containing App Attach Package definitions."
 );
-@@doc(AppAttachPackage.update::parameters.properties,
+@@doc(AppAttachPackages.update::parameters.properties,
   "Object containing App Attach Package definition."
 );

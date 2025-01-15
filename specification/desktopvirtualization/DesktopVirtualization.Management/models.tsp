@@ -1016,7 +1016,7 @@ model CloudErrorProperties {
 /**
  * List of App Attach Package definitions.
  */
-model AppAttachPackageList is Azure.Core.Page<AppAttachPackageModel>;
+model AppAttachPackageList is Azure.Core.Page<AppAttachPackage>;
 
 /**
  * Schema for App Attach Package properties.

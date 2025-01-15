@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "AppAttachPackage"
+      "name": "AppAttachPackages"
     },
     {
       "name": "ApplicationGroups"
@@ -122,9 +122,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
-        "operationId": "AppAttachPackage_ListBySubscription",
+        "operationId": "AppAttachPackages_ListBySubscription",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "List App Attach packages in subscription.",
         "parameters": [
@@ -154,11 +154,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AppAttachPackage_ListBySubscription": {
-            "$ref": "./examples/AppAttachPackage_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -666,9 +661,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages": {
       "get": {
-        "operationId": "AppAttachPackage_ListByResourceGroup",
+        "operationId": "AppAttachPackages_ListByResourceGroup",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "List App Attach packages in resource group.",
         "parameters": [
@@ -703,11 +698,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AppAttachPackage_ListByResourceGroup": {
-            "$ref": "./examples/AppAttachPackage_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -715,9 +705,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/appAttachPackages/{appAttachPackageName}": {
       "get": {
-        "operationId": "AppAttachPackage_Get",
+        "operationId": "AppAttachPackages_Get",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "Get an app attach package.",
         "parameters": [
@@ -745,7 +735,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppAttachPackageModel"
+              "$ref": "#/definitions/AppAttachPackage"
             }
           },
           "default": {
@@ -754,17 +744,12 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "AppAttachPackage_Get": {
-            "$ref": "./examples/AppAttachPackage_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "AppAttachPackage_CreateOrUpdate",
+        "operationId": "AppAttachPackages_CreateOrUpdate",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "Create or update an App Attach package.",
         "parameters": [
@@ -793,21 +778,21 @@
             "description": "Object containing App Attach Package definitions.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AppAttachPackageModel"
+              "$ref": "#/definitions/AppAttachPackage"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AppAttachPackageModel' update operation succeeded",
+            "description": "Resource 'AppAttachPackage' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AppAttachPackageModel"
+              "$ref": "#/definitions/AppAttachPackage"
             }
           },
           "201": {
-            "description": "Resource 'AppAttachPackageModel' create operation succeeded",
+            "description": "Resource 'AppAttachPackage' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/AppAttachPackageModel"
+              "$ref": "#/definitions/AppAttachPackage"
             }
           },
           "default": {
@@ -816,17 +801,12 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "AppAttachPackage_Create": {
-            "$ref": "./examples/AppAttachPackage_CreateOrUpdate.json"
-          }
         }
       },
       "patch": {
-        "operationId": "AppAttachPackage_Update",
+        "operationId": "AppAttachPackages_Update",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "Update an App Attach Package",
         "parameters": [
@@ -863,7 +843,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AppAttachPackageModel"
+              "$ref": "#/definitions/AppAttachPackage"
             }
           },
           "default": {
@@ -872,17 +852,12 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "AppAttachPackage_Update": {
-            "$ref": "./examples/AppAttachPackage_Update.json"
-          }
         }
       },
       "delete": {
-        "operationId": "AppAttachPackage_Delete",
+        "operationId": "AppAttachPackages_Delete",
         "tags": [
-          "AppAttachPackage"
+          "AppAttachPackages"
         ],
         "description": "Remove an App Attach Package.",
         "parameters": [
@@ -918,11 +893,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AppAttachPackage_Delete": {
-            "$ref": "./examples/AppAttachPackage_Delete.json"
           }
         }
       }
@@ -2590,6 +2560,83 @@
           "HostPools_ListRegistrationToken_Post": {
             "$ref": "./examples/HostPools_ListRegistrationTokens.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
+      "get": {
+        "operationId": "HostPools_MsixPackages",
+        "tags": [
+          "HostPools"
+        ],
+        "description": "List userSessions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MsixPackageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5004,6 +5051,25 @@
         }
       }
     },
+    "AppAttachPackage": {
+      "type": "object",
+      "description": "Schema for App Attach Package properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppAttachPackageProperties",
+          "description": "Detailed properties for App Attach Package",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "AppAttachPackageArchitectures": {
       "type": "string",
       "description": "Possible device architectures that an app attach package can be configured for",
@@ -5144,9 +5210,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AppAttachPackageModel items on this page",
+          "description": "The AppAttachPackage items on this page",
           "items": {
-            "$ref": "#/definitions/AppAttachPackageModel"
+            "$ref": "#/definitions/AppAttachPackage"
           }
         },
         "nextLink": {
@@ -5157,25 +5223,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "AppAttachPackageModel": {
-      "type": "object",
-      "description": "Schema for App Attach Package properties.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AppAttachPackageProperties",
-          "description": "Detailed properties for App Attach Package",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
       ]
     },
     "AppAttachPackagePatch": {
