@@ -422,7 +422,7 @@ These settings apply only when `--tag=package-2024-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-07-01-only'
 input-file:
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRP.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
 ```
 
 ### Tag: package-2024-03-02
