@@ -1266,7 +1266,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    */
   @key
   @visibility("read")
-  azureResourceId: string;
+  resourceId: string;
 
   /**
    * The resource region.
