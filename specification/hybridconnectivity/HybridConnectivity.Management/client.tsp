@@ -4,6 +4,11 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 namespace Microsoft.HybridConnectivity;
 
+@@clientNamespace(Microsoft.HybridConnectivity,
+  "com.azure.resourcemanager.hybridconnectivity"",
+  "java"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ServiceConfigurationResourcePatch.properties);
 
@@ -40,24 +45,52 @@ namespace Microsoft.HybridConnectivity;
 @@flattenProperty(ServiceConfigurationResource.properties);
 
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
+@@clientName(EndpointResource, "HybridConnectivityEndpoint", "java");
+
 @@clientName(ServiceConfigurationResource,
   "HybridConnectivityServiceConfiguration",
   "csharp"
 );
+@@clientName(ServiceConfigurationResource,
+  "HybridConnectivityServiceConfiguration",
+  "java"
+);
+
 @@clientName(IngressGatewayResource, "IngressGatewayAsset", "csharp");
+@@clientName(IngressGatewayResource, "IngressGatewayAsset", "java");
+
 @@clientName(EndpointAccessResource, "TargetResourceEndpointAccess", "csharp");
+@@clientName(EndpointAccessResource, "TargetResourceEndpointAccess", "java");
+
 @@clientName(EndpointProperties,
   "HybridConnectivityEndpointProperties",
   "csharp"
 );
+@@clientName(EndpointProperties,
+  "HybridConnectivityEndpointProperties",
+  "java"
+);
+
 @@clientName(ManagedProxyResource, "ManagedProxyAsset", "csharp");
+@@clientName(ManagedProxyResource, "ManagedProxyAsset", "java");
+
 @@clientName(ProvisioningState,
   "HybridConnectivityProvisioningState",
   "csharp"
 );
+@@clientName(ProvisioningState,
+  "HybridConnectivityProvisioningState",
+  "java"
+);
+
 @@clientName(ServiceName, "HybridConnectivityServiceName", "csharp");
+@@clientName(ServiceName, "HybridConnectivityServiceName", "java");
+
 @@clientName(Type, "HybridConnectivityEndpointType", "csharp");
+@@clientName(Type, "HybridConnectivityEndpointType", "java");
+
 @@clientName(EndpointProperties.type, "endpointType", "csharp");
+@@clientName(EndpointProperties.type, "endpointType", "java");
 
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "go");
 @@clientName(EndpointResources, "Endpoints", "go");
@@ -66,8 +99,22 @@ namespace Microsoft.HybridConnectivity;
   "HybridConnectivityMgmtClient",
   "python"
 );
+
+@@clientName(Microsoft.HybridConnectivity,
+  "HybridConnectivityMgmtClient",
+  "java"
+);
+
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "python");
+@@clientName(ServiceConfigurationResources, "ServiceConfigurations", "java");
+
 @@clientName(EndpointResources, "Endpoints", "python");
+@@clientName(EndpointResources, "Endpoints", "java");
+
+@@clientName(Microsoft.HybridConnectivity,
+  "HybridConnectivityManagementAPI",
+  "java"
+);
 
 @@clientName(Microsoft.HybridConnectivity,
   "HybridConnectivityManagementAPI",
@@ -80,3 +127,4 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityManagement", "java");
