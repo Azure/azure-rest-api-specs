@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-11-04
+tag: package-2024-07-01-only
 
 directive:
   - where:
@@ -422,21 +422,7 @@ These settings apply only when `--tag=package-2024-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-07-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRP.json
 ```
 
 ### Tag: package-2024-03-02
