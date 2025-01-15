@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.HybridConnectivity;
 
 @@clientNamespace(Microsoft.HybridConnectivity,
-  "com.azure.resourcemanager.hybridconnectivity"",
+  "com.azure.resourcemanager.hybridconnectivity",
   "java"
 );
 
