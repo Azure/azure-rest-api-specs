@@ -461,34 +461,12 @@
         }
       }
     },
-    "BaseDataTransferProperties": {
-      "type": "object",
-      "description": "The properties of a DataTransfer Job",
-      "properties": {
-        "dataTransferType": {
-          "type": "string",
-          "enum": [
-            "CosmosDBCassandraToCosmosDBCassandra",
-            "CosmosDBCassandraToAzureBlobStorage",
-            "AzureBlobStorageToCosmosDBCassandra",
-            "CosmosDBMongoToCosmosDBMongo",
-            "CosmosDBMongoToCosmosDBMongoVCore",
-            "CosmosDBNoSqlToCosmosDBNoSql"
-          ],
-          "description": "Date Transfer Type"
-        }
-      },
-      "required": [
-        "dataTransferType"
-      ],
-      "discriminator": "dataTransferType"
-    },
     "SourceBlobDestinationCassandraDataTransferProperties": {
       "description": "The properties of DataTransfer Job with Azure Blob Storage as source and CosmosDB Cassandra as destination",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -537,7 +515,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -585,7 +563,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -634,7 +612,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -682,7 +660,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -731,7 +709,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseDataTransferProperties"
+          "$ref": "#/definitions/DataTransferJobProperties"
         }
       ],
       "properties": {
@@ -777,12 +755,19 @@
     "DataTransferJobProperties": {
       "description": "The properties of a DataTransfer Job",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseDataTransferProperties"
-        }
-      ],
       "properties": {
+        "dataTransferType": {
+          "type": "string",
+          "enum": [
+            "CosmosDBCassandraToCosmosDBCassandra",
+            "CosmosDBCassandraToAzureBlobStorage",
+            "AzureBlobStorageToCosmosDBCassandra",
+            "CosmosDBMongoToCosmosDBMongo",
+            "CosmosDBMongoToCosmosDBMongoVCore",
+            "CosmosDBNoSqlToCosmosDBNoSql"
+          ],
+          "description": "Date Transfer Type"
+        },
         "jobName": {
           "readOnly": true,
           "type": "string",
@@ -840,7 +825,11 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "dataTransferType"
+      ],
+      "discriminator": "dataTransferType"
     },
     "CreateJobRequest": {
       "description": "Parameters to create Data Transfer Job",
