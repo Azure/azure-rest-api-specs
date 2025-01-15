@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "./models/common.tsp";
 import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
+import "./models/image_embeddings.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,6 +40,20 @@ op getChatCompletions is Azure.Core.RpcOperation<
 op getEmbeddings is Azure.Core.RpcOperation<
   {
     ...EmbeddingsOptions;
+    ...AdditionalRequestHeaders;
+  },
+  EmbeddingsResult
+>;
+
+@doc("""
+  Return the embedding vectors for given images.
+  The method makes a REST API call to the `/images/embeddings` route on the given endpoint.
+  """)
+@actionSeparator("/")
+@route("images/embeddings")
+op getImageEmbeddings is Azure.Core.RpcOperation<
+  {
+    ...ImageEmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult

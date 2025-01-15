@@ -90,6 +90,48 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EmbeddingsOptions'
+  /images/embeddings:
+    post:
+      operationId: getImageEmbeddings
+      description: |-
+        Return the embedding vectors for given images.
+        The method makes a REST API call to the `/images/embeddings` route on the given endpoint.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: extra-parameters
+          in: header
+          required: false
+          description: |-
+            Controls what happens if extra parameters, undefined by the REST API,
+            are passed in the JSON request payload.
+            This sets the HTTP request header `extra-parameters`.
+          schema:
+            $ref: '#/components/schemas/ExtraParameters'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingsResult'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageEmbeddingsOptions'
   /info:
     get:
       operationId: getModelInfo
@@ -1067,6 +1109,57 @@ components:
           additionalProperties: {}
           description: The parameters the function accepts, described as a JSON Schema object.
       description: The definition of a caller-specified function that chat completions may invoke in response to matching user input.
+    ImageEmbeddingInput:
+      type: object
+      required:
+        - image
+      properties:
+        image:
+          type: string
+          description: 'The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`.'
+        text:
+          type: string
+          description: |-
+            Optional. The text input to feed into the model (like DINO, CLIP).
+            Returns a 422 error if the model doesn't support the value or parameter.
+      description: Represents an image with optional text.
+    ImageEmbeddingsOptions:
+      type: object
+      required:
+        - input
+      properties:
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageEmbeddingInput'
+          description: |-
+            Input image to embed. To embed multiple inputs in a single request, pass an array.
+            The input must not exceed the max input tokens for the model.
+        dimensions:
+          type: integer
+          format: int32
+          description: |-
+            Optional. The number of dimensions the resulting output embeddings should have.
+            Passing null causes the model to use its default value.
+            Returns a 422 error if the model doesn't support the value or parameter.
+        encoding_format:
+          allOf:
+            - $ref: '#/components/schemas/EmbeddingEncodingFormat'
+          description: |-
+            Optional. The number of dimensions the resulting output embeddings should have.
+            Passing null causes the model to use its default value.
+            Returns a 422 error if the model doesn't support the value or parameter.
+        input_type:
+          allOf:
+            - $ref: '#/components/schemas/EmbeddingInputType'
+          description: |-
+            Optional. The type of the input.
+            Returns a 422 error if the model doesn't support the value or parameter.
+        model:
+          type: string
+          description: ID of the specific AI model to use, if more than one model is available on the endpoint.
+      additionalProperties: {}
+      description: The configuration information for an image embeddings request.
     ModelInfo:
       type: object
       required:

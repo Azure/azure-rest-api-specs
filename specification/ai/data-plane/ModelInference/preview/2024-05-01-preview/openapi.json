@@ -207,6 +207,87 @@
         }
       }
     },
+    "/images/embeddings": {
+      "post": {
+        "operationId": "GetImageEmbeddings",
+        "description": "Return the embedding vectors for given images.\nThe method makes a REST API call to the `/images/embeddings` route on the given endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "drop",
+              "pass-through"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service will error if it detected extra parameters in the request payload. This is the service default."
+                },
+                {
+                  "name": "drop",
+                  "value": "drop",
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                },
+                {
+                  "name": "pass_through",
+                  "value": "pass-through",
+                  "description": "The service will pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_params"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageEmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
+          },
+          "minimum set image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
@@ -1454,6 +1535,58 @@
       "required": [
         "name"
       ]
+    },
+    "ImageEmbeddingInput": {
+      "type": "object",
+      "description": "Represents an image with optional text.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`."
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
+        }
+      },
+      "required": [
+        "image"
+      ]
+    },
+    "ImageEmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an image embeddings request.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
+          "items": {
+            "$ref": "#/definitions/ImageEmbeddingInput"
+          },
+          "x-ms-identifiers": []
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "input_type": {
+          "$ref": "#/definitions/EmbeddingInputType",
+          "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": {}
     },
     "ModelInfo": {
       "type": "object",
