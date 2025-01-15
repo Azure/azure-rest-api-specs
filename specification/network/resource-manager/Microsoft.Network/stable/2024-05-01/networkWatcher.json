@@ -2774,6 +2774,10 @@
           "$ref": "#/definitions/PacketCaptureStorageLocation",
           "description": "The storage location for a packet capture session."
         },
+        "storageSettings": {
+          "$ref": "#/definitions/PacketCaptureStorageSettings",
+          "description": "The storage setting for a packet capture session."
+        },
         "filters": {
           "type": "array",
           "items": {
@@ -2837,6 +2841,15 @@
         }
       },
       "description": "The storage location for a packet capture session."
+    },
+    "PacketCaptureStorageSettings": {
+      "properties": {
+        "storageAuthentication": {
+          "$ref": "#/definitions/StorageAuthentication",
+          "description": "The storage authetication for a packet capture session."
+        }
+      },
+      "description": "The storage setting for a packet capture session."
     },
     "PacketCaptureSettings": {
       "properties": {
@@ -3008,6 +3021,24 @@
         }
       },
       "description": "Status of packet capture session."
+    },
+    "StorageAuthentication": {
+      "properties": {
+        "storageAuthentication": {
+          "$ref": "#/definitions/ManagedIdentityInfo",
+          "description": "The managed identity information for a packet capture session."
+        }
+      },
+      "description": "The storage authentication for a packet capture session."
+    },
+    "ManagedIdentityInfo": {
+      "properties": {
+        "managedIndentityResourceId ": {
+          "type": "string",
+          "description": "The managed identity resource id information for a packet capture session."
+        }
+      },
+      "description": "The managed identity information for a packet capture session."
     },
     "TroubleshootingParameters": {
       "description": "Parameters that define the resource to troubleshoot.",
