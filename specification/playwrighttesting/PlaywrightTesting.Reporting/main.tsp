@@ -266,7 +266,7 @@ model CloudRunSummary {
   @doc("Number of browser sessions used in the test run.")
   numBrowserSessions: int32;
 
-  @doc("Flag indicating if a test-run was throttled because reuqested browser Quota exceeded")
+  @doc("Flag indicating if a test-run was throttled because requested browser Quota exceeded")
   browserQuotaExceeded: boolean;
 }
 
