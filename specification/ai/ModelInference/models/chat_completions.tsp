@@ -234,9 +234,6 @@ model CompletionsUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
   audio_tokens: int32;
 
-  @doc("The number of reasoning tokens.")
-  reasoning_tokens: int32;
-
   @doc("The total number of tokens processed for the completions request and response.")
   total_tokens: int32;
 }
