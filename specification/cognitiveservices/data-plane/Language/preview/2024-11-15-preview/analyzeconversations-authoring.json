@@ -2963,7 +2963,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3126,7 +3126,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3178,7 +3178,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3248,7 +3248,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3435,7 +3435,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -3534,7 +3534,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -3748,7 +3748,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -3966,7 +3966,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -4125,7 +4125,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -4292,7 +4292,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -4637,7 +4637,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
@@ -4809,7 +4809,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -5041,142 +5041,6 @@
         ]
       }
     },
-    "Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "ProjectNotFound",
-        "OperationNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchIndexNotFound",
-        "TooManyRequests",
-        "AzureCognitiveSearchThrottling",
-        "AzureCognitiveSearchIndexLimitReached",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidArgument",
-            "value": "InvalidArgument"
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized"
-          },
-          {
-            "name": "Forbidden",
-            "value": "Forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "NotFound"
-          },
-          {
-            "name": "ProjectNotFound",
-            "value": "ProjectNotFound"
-          },
-          {
-            "name": "OperationNotFound",
-            "value": "OperationNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexNotFound",
-            "value": "AzureCognitiveSearchIndexNotFound"
-          },
-          {
-            "name": "TooManyRequests",
-            "value": "TooManyRequests"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexLimitReached",
-            "value": "AzureCognitiveSearchIndexLimitReached"
-          },
-          {
-            "name": "InternalServerError",
-            "value": "InternalServerError"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
-          },
-          {
-            "name": "Timeout",
-            "value": "Timeout"
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "QuotaExceeded"
-          },
-          {
-            "name": "Conflict",
-            "value": "Conflict"
-          },
-          {
-            "name": "Warning",
-            "value": "Warning"
-          }
-        ]
-      }
-    },
     "EvaluationKind": {
       "type": "string",
       "enum": [
@@ -5211,121 +5075,6 @@
       },
       "required": [
         "trainedModelLabel"
-      ]
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidParameterValue",
-            "value": "InvalidParameterValue"
-          },
-          {
-            "name": "KnowledgeBaseNotFound",
-            "value": "KnowledgeBaseNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "ExtractionFailure",
-            "value": "ExtractionFailure"
-          },
-          {
-            "name": "InvalidRequestBodyFormat",
-            "value": "InvalidRequestBodyFormat"
-          },
-          {
-            "name": "EmptyRequest",
-            "value": "EmptyRequest"
-          },
-          {
-            "name": "MissingInputDocuments",
-            "value": "MissingInputDocuments"
-          },
-          {
-            "name": "InvalidDocument",
-            "value": "InvalidDocument"
-          },
-          {
-            "name": "ModelVersionIncorrect",
-            "value": "ModelVersionIncorrect"
-          },
-          {
-            "name": "InvalidDocumentBatch",
-            "value": "InvalidDocumentBatch"
-          },
-          {
-            "name": "UnsupportedLanguageCode",
-            "value": "UnsupportedLanguageCode"
-          },
-          {
-            "name": "InvalidCountryHint",
-            "value": "InvalidCountryHint"
-          }
-        ]
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
       ]
     },
     "JobStatus": {
