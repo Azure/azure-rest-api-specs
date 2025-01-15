@@ -70,6 +70,17 @@ directive:
       - $.definitions.AccountKeys.properties.secondaryKey
     reason: Secrets are OK to return in a POST response.
 ```
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+modelerfour:
+  lenient-model-deduplication: true
+```
 
 ### Tag: package-2021-03-01-preview
 
@@ -78,7 +89,9 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
   - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
   - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -90,6 +103,7 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 ```yaml $(tag) == 'package-2021-01'
 input-file:
   - Microsoft.MixedReality/stable/2021-01-01/proxy.json
+  - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
   - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
 ```
 
@@ -100,6 +114,7 @@ These settings apply only when `--tag=package-2020-05` is specified on the comma
 ``` yaml $(tag) == 'package-2020-05'
 input-file:
 - Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
 - Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
 modelerfour:
   lenient-model-deduplication: true
@@ -113,6 +128,7 @@ These settings apply only when `--tag=package-2020-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2020-05-01'
 input-file:
 - Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
 ```
 
 ### Tag: package-2020-04-06-preview
@@ -133,6 +149,16 @@ These settings apply only when `--tag=package-2019-12-02-preview` is specified o
 input-file:
 - Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
 - Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
+```
+
+### Tag: package-2019-02-preview
+
+These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-preview'
+input-file:
+- Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
 ```
 
 ---
@@ -166,5 +192,4 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
 
