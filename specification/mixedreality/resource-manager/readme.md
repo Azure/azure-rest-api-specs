@@ -135,15 +135,6 @@ input-file:
 - Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
 ```
 
-### Tag: package-2019-02-preview
-
-These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-02-preview'
-input-file:
-- Microsoft.MixedReality/preview/2019-02-28-preview/mixedreality.json
-```
-
 ---
 
 # Code Generation
