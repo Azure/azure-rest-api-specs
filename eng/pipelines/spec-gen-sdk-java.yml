@@ -1,7 +1,4 @@
 parameters:
-  - name: SpecRepoUrl
-    type: string
-    default: 'https://github.com/Azure/azure-rest-api-specs'
   - name: SpecRepoBranch
     type: string
     default: 'main'
@@ -15,7 +12,7 @@ parameters:
     type: string
     values:
       - 'TypeSpec'
-      - 'AutoRest'
+      - 'OpenAPI'
     default: 'TypeSpec'
     displayName: 'Configuration Type'
   - name: TspConfigPath
@@ -25,34 +22,30 @@ parameters:
   - name: ReadmePath
     type: string
     default: 'specification/contosowidgetmanager/data-plane/readme.md'
-    displayName: 'Path to AutoRest Configuration file (for OpenAPI)'
+    displayName: 'Path to OpenAPI Configuration'
   - name: ApiVersion
     type: string
     default: 'not-specified'
     displayName: 'API Version of Spec to be used for SDK Generation'
-  - name: CodePushRequired
+  - name: SkipPullRequestCreation
     type: boolean
     default: false
-    displayName: 'Push Changes to SDK Repo'
-  - name: SdkPrRequired
-    type: boolean
-    default: false
-    displayName: 'Create Pull Request for SDK Changes'
 
 trigger: none
 pr: none
 
+variables:
+  SdkRepoUrl: 'https://github.com/Azure/azure-sdk-for-java'
+
 extends:
   template: /eng/common/pipelines/templates/jobs/sdk-generation.yml
   parameters:
-    SpecRepoUrl: ${{ parameters.SpecRepoUrl }}
+    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
     SpecRepoBranch: ${{ parameters.SpecRepoBranch }}
     SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
-    SdkRepoUrl: 'https://github.com/Azure/azure-sdk-for-java'
     SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     TspConfigPath: ${{ parameters.TspConfigPath }}
     ReadmePath: ${{ parameters.ReadmePath }}
     ApiVersion: ${{ parameters.ApiVersion }}
-    CodePushRequired: ${{ parameters.CodePushRequired }}
-    SdkPrRequired: ${{ parameters.SdkPrRequired }}
+    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
