@@ -145,16 +145,16 @@ union RunnerType {
   @doc("NUNIT")
   "NUNIT",
 
-  @doc("PLAYRIGHT")
-  "PLAYRIGHT",
+  @doc("PLAYWRIGHT")
+  "PLAYWRIGHT",
 }
 
 @doc("Supported Framework")
 union TestFrameworkName {
   string,
 
-  @doc("PLAYRIGHT")
-  "PLAYRIGHT",
+  @doc("PLAYWRIGHT")
+  "PLAYWRIGHT",
 }
 
 @doc("Model representing a test framework.")
