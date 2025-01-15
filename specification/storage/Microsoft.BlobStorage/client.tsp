@@ -7,13 +7,6 @@ using Storage.Blob;
 
 namespace Customizations;
 
-/** client init */
-model BlobStorageClientOptions {
-  ...ContainerNamePathParameter;
-}
-
-@@clientInitialization(Storage.Blob, BlobStorageClientOptions);
-
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
 );
