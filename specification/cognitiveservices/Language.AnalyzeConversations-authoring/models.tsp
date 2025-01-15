@@ -159,7 +159,7 @@ union JobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-union CompositionSetting {
+union CompositionMode {
   string,
 
   /**
@@ -1557,7 +1557,7 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: CompositionSetting;
+  compositionSetting?: CompositionMode;
 
   /**
    * The list component of the entity.
