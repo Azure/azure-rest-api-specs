@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-namespace Azure.Speech.SpeechToText;
+namespace SpeechToText;
 
 @doc("Transcription")
 model Transcription {

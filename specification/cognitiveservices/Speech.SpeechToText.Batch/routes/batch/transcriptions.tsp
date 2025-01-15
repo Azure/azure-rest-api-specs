@@ -13,7 +13,7 @@ using OpenAPI;
 
 using Azure.Core;
 
-namespace Azure.Speech.SpeechToText.Batch;
+namespace SpeechToText.BatchTranscription;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"

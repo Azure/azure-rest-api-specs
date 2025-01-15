@@ -28,8 +28,9 @@ using OpenAPI;
   }
 )
 @versioned(ServiceApiVersions)
-namespace Azure.Speech.SpeechToText;
+namespace SpeechToText;
 
+@doc("Service API versions.")
 enum ServiceApiVersions {
   V20240515PRE: "2024-05-15-preview",
   V20241115: "2024-11-15",
