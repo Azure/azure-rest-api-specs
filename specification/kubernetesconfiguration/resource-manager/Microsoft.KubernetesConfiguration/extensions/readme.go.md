@@ -10,13 +10,3 @@ module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 ```
-
-### Tag: package-2024-11 and go
-
-These settings apply only when `--tag=package-2024-11 --go` is specified on the command line.
-Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2024-11' && $(go)
-namespace: kubernetesconfigurationextensions
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2024-11-01/$(namespace)
-```
