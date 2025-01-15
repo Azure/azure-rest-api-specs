@@ -85,7 +85,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTestResult"
+              "$ref": "#/definitions/PagedDetailedTestResult"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -929,6 +929,129 @@
         ]
       }
     },
+    "CloudReportingSummary": {
+      "type": "object",
+      "description": "Model representing summary of test run results.",
+      "properties": {
+        "numTotalTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tests executed."
+        },
+        "numPassedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that passed."
+        },
+        "numFailedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that failed."
+        },
+        "numSkippedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were skipped."
+        },
+        "numFlakyTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were flaky."
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "numTotalTests",
+        "numPassedTests",
+        "numFailedTests",
+        "numSkippedTests",
+        "numFlakyTests",
+        "status",
+        "jobs",
+        "projects",
+        "tags"
+      ]
+    },
+    "CloudReportingSummaryCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing summary of test run results.",
+      "properties": {
+        "numTotalTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tests executed."
+        },
+        "numPassedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that passed."
+        },
+        "numFailedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that failed."
+        },
+        "numSkippedTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were skipped."
+        },
+        "numFlakyTests": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were flaky."
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of projects associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "CloudRunSummary": {
       "type": "object",
       "description": "Model representing summary information about a test run.",
@@ -961,6 +1084,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of browser sessions used in the test run."
+        },
+        "browserQuotaExceeded": {
+          "type": "boolean",
+          "description": "Flag indicated if a test-run was throttled because reuqested browser Quota exceeded"
         }
       },
       "required": [
@@ -969,7 +1096,8 @@
         "endTime",
         "billableTime",
         "totalTime",
-        "numBrowserSessions"
+        "numBrowserSessions",
+        "browserQuotaExceeded"
       ]
     },
     "CloudRunSummaryCreateOrUpdate": {
@@ -1004,8 +1132,215 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of browser sessions used in the test run."
+        },
+        "browserQuotaExceeded": {
+          "type": "boolean",
+          "description": "Flag indicated if a test-run was throttled because reuqested browser Quota exceeded"
         }
       }
+    },
+    "DetailedTestResult": {
+      "type": "object",
+      "description": "Details of a single test result.",
+      "properties": {
+        "testExecutionId": {
+          "type": "string",
+          "description": "Identifier of the test execution.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testId": {
+          "type": "string",
+          "description": "Identifier of the test.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testCombinationId": {
+          "type": "string",
+          "description": "Identifier of the test combination.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runId": {
+          "type": "string",
+          "description": "Identifier of the test run.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "shardId": {
+          "type": "string",
+          "description": "Identifier of the shard.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "suiteId": {
+          "type": "string",
+          "description": "Identifier of the suite.",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testTitle": {
+          "type": "string",
+          "description": "Title of the test.",
+          "maxLength": 500,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "suiteTitle": {
+          "type": "string",
+          "description": "Title of the suite.",
+          "maxLength": 500,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the file.",
+          "maxLength": 300,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "uint32",
+          "description": "Line number.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "retry": {
+          "type": "integer",
+          "format": "uint32",
+          "description": "Number of retry attempts. max retry is 20. After which testresults metadata will not be stored",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "webTestConfig": {
+          "$ref": "#/definitions/WebTestConfig",
+          "description": "Configuration for the web test.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "Continuous integration configuration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resultsSummary": {
+          "$ref": "#/definitions/TestResult",
+          "description": "Summary of test results.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "previousRetries": {
+          "type": "array",
+          "description": "Previous retry summaries.",
+          "items": {
+            "$ref": "#/definitions/PreviousRetrySummary"
+          },
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test result.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of annotations.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "artifactsPath": {
+          "type": "string",
+          "description": "Relative path in Storage for all the artifacts of this test",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "testExecutionId",
+        "testId",
+        "testCombinationId",
+        "runId",
+        "shardId",
+        "accountId",
+        "suiteId",
+        "testTitle",
+        "suiteTitle",
+        "fileName",
+        "lineNumber",
+        "retry",
+        "status",
+        "resultsSummary",
+        "artifactsPath"
+      ]
     },
     "OsType": {
       "type": "string",
@@ -1037,15 +1372,15 @@
         ]
       }
     },
-    "PagedTestResult": {
+    "PagedDetailedTestResult": {
       "type": "object",
-      "description": "Paged collection of TestResult items",
+      "description": "Paged collection of DetailedTestResult items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The TestResult items on this page",
+          "description": "The DetailedTestResult items on this page",
           "items": {
-            "$ref": "#/definitions/TestResult"
+            "$ref": "#/definitions/DetailedTestResult"
           },
           "x-ms-identifiers": []
         },
@@ -1128,129 +1463,6 @@
         "startTime",
         "attachmentsMetadata"
       ]
-    },
-    "ReportingSummary": {
-      "type": "object",
-      "description": "Model representing summary of test run results.",
-      "properties": {
-        "numTotalTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of tests executed."
-        },
-        "numPassedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that passed."
-        },
-        "numFailedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that failed."
-        },
-        "numSkippedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were skipped."
-        },
-        "numFlakyTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were flaky."
-        },
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "numTotalTests",
-        "numPassedTests",
-        "numFailedTests",
-        "numSkippedTests",
-        "numFlakyTests",
-        "status",
-        "jobs",
-        "projects",
-        "tags"
-      ]
-    },
-    "ReportingSummaryCreateOrUpdate": {
-      "type": "object",
-      "description": "Model representing summary of test run results.",
-      "properties": {
-        "numTotalTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of tests executed."
-        },
-        "numPassedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that passed."
-        },
-        "numFailedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that failed."
-        },
-        "numSkippedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were skipped."
-        },
-        "numFlakyTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were flaky."
-        },
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ResultsStats": {
       "type": "object",
@@ -1408,209 +1620,6 @@
     },
     "TestResult": {
       "type": "object",
-      "description": "Details of a single test result.",
-      "properties": {
-        "testExecutionId": {
-          "type": "string",
-          "description": "Identifier of the test execution.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "testId": {
-          "type": "string",
-          "description": "Identifier of the test.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "testCombinationId": {
-          "type": "string",
-          "description": "Identifier of the test combination.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "runId": {
-          "type": "string",
-          "description": "Identifier of the test run.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "shardId": {
-          "type": "string",
-          "description": "Identifier of the shard.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "accountId": {
-          "type": "string",
-          "description": "Identifier of the account.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "suiteId": {
-          "type": "string",
-          "description": "Identifier of the suite.",
-          "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "testTitle": {
-          "type": "string",
-          "description": "Title of the test.",
-          "maxLength": 500,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "suiteTitle": {
-          "type": "string",
-          "description": "Title of the suite.",
-          "maxLength": 500,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Name of the file.",
-          "maxLength": 300,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "lineNumber": {
-          "type": "integer",
-          "format": "uint32",
-          "description": "Line number.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "retry": {
-          "type": "integer",
-          "format": "uint32",
-          "description": "Number of retry attempts. max retry is 20. After which testresults metadata will not be stored",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "webTestConfig": {
-          "$ref": "#/definitions/WebTestConfig",
-          "description": "Configuration for the web test.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "ciConfig": {
-          "$ref": "#/definitions/CiConfig",
-          "description": "Continuous integration configuration.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resultsSummary": {
-          "$ref": "#/definitions/TestResultSummary",
-          "description": "Summary of test results.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "previousRetries": {
-          "type": "array",
-          "description": "Previous retry summaries.",
-          "items": {
-            "$ref": "#/definitions/PreviousRetrySummary"
-          },
-          "x-ms-identifiers": []
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test result.",
-          "maxItems": 100,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "annotations": {
-          "type": "array",
-          "description": "List of annotations.",
-          "maxItems": 100,
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "artifactsPath": {
-          "type": "string",
-          "description": "Relative path in Storage for all the artifacts of this test",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "testExecutionId",
-        "testId",
-        "testCombinationId",
-        "runId",
-        "shardId",
-        "accountId",
-        "suiteId",
-        "testTitle",
-        "suiteTitle",
-        "fileName",
-        "lineNumber",
-        "retry",
-        "status",
-        "resultsSummary",
-        "artifactsPath"
-      ]
-    },
-    "TestResultSummary": {
-      "type": "object",
       "description": "Summary of test results.",
       "properties": {
         "status": {
@@ -1722,12 +1731,12 @@
           "type": "string",
           "description": "Creator's name."
         },
-        "summary": {
+        "cloudRunSummary": {
           "$ref": "#/definitions/CloudRunSummary",
           "description": "Summary of the test run."
         },
-        "reportSummary": {
-          "$ref": "#/definitions/ReportingSummary",
+        "cloudReportSummary": {
+          "$ref": "#/definitions/CloudReportingSummary",
           "description": "Summary of test run results."
         },
         "ciConfig": {
@@ -1750,11 +1759,11 @@
           "$ref": "#/definitions/TestResultsUri",
           "description": "URI for accessing test results."
         },
-        "isCloudRunEnabled": {
+        "cloudRunEnabled": {
           "type": "boolean",
           "description": "Flag indicating if cloud run is enabled."
         },
-        "isCloudReportingEnabled": {
+        "cloudReportingEnabled": {
           "type": "boolean",
           "description": "Must be set to true when Customers want to use Reporting Feature ",
           "x-ms-mutability": [
@@ -1768,12 +1777,12 @@
         "startTime",
         "creatorId",
         "creatorName",
-        "summary",
-        "reportSummary",
+        "cloudRunSummary",
+        "cloudReportSummary",
         "testRunConfig",
         "testResultsUri",
-        "isCloudRunEnabled",
-        "isCloudReportingEnabled"
+        "cloudRunEnabled",
+        "cloudReportingEnabled"
       ]
     },
     "TestRunConfig": {
@@ -1982,12 +1991,12 @@
           "type": "string",
           "description": "Creator's name."
         },
-        "summary": {
+        "cloudRunSummary": {
           "$ref": "#/definitions/CloudRunSummaryCreateOrUpdate",
           "description": "Summary of the test run."
         },
-        "reportSummary": {
-          "$ref": "#/definitions/ReportingSummaryCreateOrUpdate",
+        "cloudReportSummary": {
+          "$ref": "#/definitions/CloudReportingSummaryCreateOrUpdate",
           "description": "Summary of test run results."
         },
         "ciConfig": {
@@ -2010,11 +2019,11 @@
           "$ref": "#/definitions/TestResultsUriCreateOrUpdate",
           "description": "URI for accessing test results."
         },
-        "isCloudRunEnabled": {
+        "cloudRunEnabled": {
           "type": "boolean",
           "description": "Flag indicating if cloud run is enabled."
         },
-        "isCloudReportingEnabled": {
+        "cloudReportingEnabled": {
           "type": "boolean",
           "description": "Must be set to true when Customers want to use Reporting Feature ",
           "x-ms-mutability": [
@@ -2247,7 +2256,7 @@
           "description": "List of test results.",
           "maxItems": 100,
           "items": {
-            "$ref": "#/definitions/TestResult"
+            "$ref": "#/definitions/DetailedTestResult"
           },
           "x-ms-identifiers": []
         }

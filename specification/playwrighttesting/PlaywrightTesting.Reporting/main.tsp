@@ -217,7 +217,7 @@ model CiConfig {
 }
 
 @doc("Model representing summary of test run results.")
-model ReportingSummary {
+model CloudReportingSummary {
   @doc("Total number of tests executed.")
   numTotalTests: int32;
 
@@ -265,6 +265,9 @@ model CloudRunSummary {
 
   @doc("Number of browser sessions used in the test run.")
   numBrowserSessions: int32;
+
+  @doc("Flag indicating if a test-run was throttled because reuqested browser Quota exceeded")
+  browserQuotaExceeded: boolean;
 }
 
 @doc("Model to update shard result.")
@@ -330,10 +333,10 @@ model TestRun {
   creatorName: string;
 
   @doc("Summary of the test run.")
-  summary: CloudRunSummary;
+  cloudRunSummary: CloudRunSummary;
 
   @doc("Summary of test run results.")
-  reportSummary: ReportingSummary;
+  cloudReportSummary: CloudReportingSummary;
 
   @doc("Continuous integration configuration.")
   @visibility("read", "create")
@@ -347,11 +350,11 @@ model TestRun {
   testResultsUri: TestResultsUri;
 
   @doc("Flag indicating if cloud run is enabled.")
-  isCloudRunEnabled: boolean;
+  cloudRunEnabled: boolean;
 
   @doc("Must be set to true when Customers want to use Reporting Feature ")
   @visibility("read", "create")
-  isCloudReportingEnabled: boolean;
+  cloudReportingEnabled: boolean;
 }
 
 @doc("DTO representing a Test Run Shard.")
@@ -400,18 +403,18 @@ union TestStatus {
 
 // Model representing UploadTestResultsRequest
 @doc("Request object for uploading test results.")
-@parentResource(TestResult)
+@parentResource(DetailedTestResult)
 model UploadTestResultsRequest {
   @doc("List of test results.")
   @maxItems(100)
-  value: TestResult[];
+  value: DetailedTestResult[];
 }
 
 // Model representing details of a single test result
 @doc("Details of a single test result.")
 @resource("test-results")
 @parentResource(Account)
-model TestResult {
+model DetailedTestResult {
   @doc("Identifier of the test execution.")
   @key
   @visibility("read", "create")
@@ -485,7 +488,7 @@ model TestResult {
 
   @doc("Summary of test results.")
   @visibility("read", "create")
-  resultsSummary: TestResultSummary;
+  resultsSummary: TestResult;
 
   @doc("Previous retry summaries.")
   previousRetries?: PreviousRetrySummary[];
@@ -553,7 +556,7 @@ model WebTestConfig {
 
 // Model representing test results summary
 @doc("Summary of test results.")
-model TestResultSummary {
+model TestResult {
   @doc("Status of the test results.")
   status: TestStatus;
 
@@ -715,14 +718,14 @@ interface TestResults {
   //   "TestResults_Create"
   // )
   uploadBatch is Operations.ResourceCollectionAction<
-    TestResult,
+    DetailedTestResult,
     UploadTestResultsRequest,
     {}
   >;
 
   @doc("List Testresults.")
   listTestResults is Operations.ResourceList<
-    TestResult,
+    DetailedTestResult,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
@@ -730,7 +733,7 @@ interface TestResults {
   @action("summary")
   @actionSeparator("/")
   getTestResultsSummary is Operations.ResourceCollectionAction<
-    TestResult,
+    DetailedTestResult,
     {},
     ResultsStats,
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
