@@ -92,7 +92,7 @@ input-file:
   - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
 
-### Supressions
+### Suppressions
 
 ``` yaml
 directive:
