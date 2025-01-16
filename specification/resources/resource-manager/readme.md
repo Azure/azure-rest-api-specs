@@ -26,95 +26,99 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-03-01
+tag: package-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
-tag: package-2025-03-01
+tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
-tag: package-2025-03-01
+tag: package-features-2021-07
 ```
 
 ``` yaml $(package-locks)
-tag: package-2025-03-01
+tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-2025-03-01
+tag: package-policy-2025-03-stable
 ```
 
 ``` yaml $(package-databoundaries)
-tag: package-2025-03-01
+tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-2025-03-01
+tag: package-resources-2024-03
 ```
 
 ``` yaml $(package-resources)
-tag: package-2025-03-01
+tag: package-resources-2024-07
 ```
 
 ``` yaml $(package-resources)
-tag: package-2025-03-01
+tag: package-resources-2024-11
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-2025-03-01
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-links)
-tag: package-2025-03-01
+tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-2025-03-01
+tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-2025-03-01
+tag: package-deploymentscripts-2023-08
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-2025-03-01
+tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-2025-03-01
+tag: package-deploymentstacks-2024-03
 ```
 
 ``` yaml $(package-changes)
-tag: package-2025-03-01
+tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-2025-03-01
+tag: package-snapshots-2022-11
 ```
 
 ``` yaml $(package-bicep)
-tag: package-2025-03-01
+tag: package-bicep-2023-11
 ```
 
-### Tag: package-2025-03-01
+### Tag: package-policy-2025-03-stable
 
 These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-01'
+```yaml $(tag) == 'package-policy-2025-03-stable'
 input-file:
   - Microsoft.Authorization/stable/2025-03-01/policyAssignments.json
   - Microsoft.Authorization/stable/2025-03-01/policyDefinitions.json
   - Microsoft.Authorization/stable/2025-03-01/policyDefinitionVersions.json
   - Microsoft.Authorization/stable/2025-03-01/policySetDefinitions.json
   - Microsoft.Authorization/stable/2025-03-01/policySetDefinitionVersions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
-### Tag: package-policy-2025-01-stable
+### Tag: package-policy-2025-01
 
-These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
+These settings apply only when `--tag=package-policy-2025-01` is specified on the command line.
 
-```yaml $(tag) == 'package-policy-2025-01-stable'
+```yaml $(tag) == 'package-policy-2025-01'
 input-file:
 - Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
