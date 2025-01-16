@@ -1582,9 +1582,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "description": "Search service has been upgraded to the latest version.",
             "schema": {
               "$ref": "#/definitions/SearchService"
+            }
+          },
+          "202": {
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1594,7 +1602,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
@@ -2694,6 +2705,12 @@
           "readOnly": true,
           "type": "boolean",
           "description": "Indicates whether or not the search service has an upgrade available."
+        },
+        "serviceUpgradeDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time."
         }
       },
       "description": "Properties of the search service."
