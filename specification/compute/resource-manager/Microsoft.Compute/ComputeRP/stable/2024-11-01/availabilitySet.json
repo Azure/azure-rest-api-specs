@@ -625,7 +625,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "AvailabilitySet_ConvertToVirtualMachineScaleSet_Gen": {
-            "$ref": "./examples/virtualMachineScaleSetExamples/AvailabilitySet_ConvertToVirtualMachineScaleSet.json"
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_ConvertToVirtualMachineScaleSet.json"
           }
         }
       }
@@ -744,6 +744,7 @@
       "description": "The List Availability Set operation response."
     },
     "MigrateToVirtualMachineScaleSetInput": {
+      "type": "object",
       "properties": {
         "virtualMachineScaleSetFlexible": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
@@ -756,6 +757,7 @@
       "description": "Describes the Virtual Machine Scale Set to migrate from Availability Set."
     },
     "VirtualMachineScaleSetMigrationInfo": {
+      "type": "object",
       "properties": {
         "defaultVirtualMachineScaleSetInfo": {
           "$ref": "#/definitions/DefaultVirtualMachineScaleSetInfo",
@@ -771,6 +773,7 @@
       "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
     },
     "DefaultVirtualMachineScaleSetInfo": {
+      "type": "object",
       "properties": {
         "constrainedMaximumCapacity": {
           "readOnly": true,
@@ -786,6 +789,7 @@
       "description": "Indicates the target Virtual Machine ScaleSet properties upon triggering a seamless migration without downtime of the VMs via the ConvertToVirtualMachineScaleSet API."
     },
     "ConvertToVirtualMachineScaleSetInput": {
+      "type": "object",
       "properties": {
         "virtualMachineScaleSetName": {
           "type": "string",
