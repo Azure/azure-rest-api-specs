@@ -155,7 +155,7 @@ model CertificateListResult {
   /**
    * The URL to get the next set of certificates.
    */
-  @nextLink
+  @TypeSpec.nextLink
   @visibility("read")
   nextLink?: string;
 }
@@ -603,7 +603,7 @@ model CertificateIssuerListResult {
   /**
    * The URL to get the next set of certificate issuers.
    */
-  @nextLink
+  @TypeSpec.nextLink
   @visibility("read")
   nextLink?: string;
 }
@@ -1000,7 +1000,7 @@ model DeletedCertificateListResult {
   /**
    * The URL to get the next set of deleted certificates.
    */
-  @nextLink
+  @TypeSpec.nextLink
   @visibility("read")
   nextLink?: string;
 }
