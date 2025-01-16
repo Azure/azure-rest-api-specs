@@ -312,7 +312,6 @@ model ConfigurationChecksTemplateProperties {
    * The interval at which the checks are executed. Supports from 1 hour to 24 hours.
    */
   @doc("The interval at which the checks are executed.")
-  @pattern("^(0[1-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$|^(24:00:00)$")
   executionInterval: string;
 
   /**
