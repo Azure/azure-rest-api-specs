@@ -284,7 +284,7 @@ union KeyEncryptionAlgorithm {
 /**
  * The type of the action. The value should be compared case-insensitively.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; orignially modelAsString=false"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; originally modelAsString=false"
 enum KeyRotationPolicyAction {
   /**
    * Rotate the key based on the key policy.
