@@ -24,7 +24,7 @@ model UserSession
     NamePattern = ""
   >;
   ...ManagedServiceIdentityProperty;
-  ...EntityTagProperty;
+  ...etagProperty;
   ...ResourceKindProperty;
   ...ManagedByProperty;
   ...ResourcePlanProperty;

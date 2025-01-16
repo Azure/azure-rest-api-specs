@@ -20,7 +20,7 @@ model CustomPrivateEndpointConnection
   is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<Resource = CustomPrivateEndpointConnection>;
   ...ManagedServiceIdentityProperty;
-  ...EntityTagProperty;
+  ...etagProperty;
   ...ResourceKindProperty;
   ...ManagedByProperty;
   ...ResourcePlanProperty;

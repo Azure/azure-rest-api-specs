@@ -23,7 +23,7 @@ model ApplicationGroup
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
   ...ManagedServiceIdentityProperty;
-  ...EntityTagProperty;
+  ...etagProperty;
   ...ResourceKindProperty;
   ...ManagedByProperty;
   ...ResourcePlanProperty;

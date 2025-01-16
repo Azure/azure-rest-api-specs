@@ -3421,3 +3421,23 @@ model MSIXPackagePatchProperties {
    */
   displayName?: string;
 }
+
+/**
+ * Model used only to spread in the standard `eTag` envelope property for a resource
+ *
+ * @example
+ *
+ * ```typespec
+ * model Foo is TrackedResource<FooProperties> {
+ *   // Only have standard Succeeded, Failed, Cancelled states
+ *   ...EntityTagProperty;
+ * }
+ * ```
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "common types use etag instead of eTag"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
+model etagProperty {
+  @doc("If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")
+  @visibility("read")
+  etag?: string;
+}

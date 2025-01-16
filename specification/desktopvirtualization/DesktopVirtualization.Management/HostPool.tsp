@@ -72,6 +72,7 @@ interface AppAttachPackageInfo {
   /**
    * Gets information from a package given the path to the package.
    */
+  @action("importAppAttachPackageInfo")
   `import` is ArmResourceActionSync<
     HostPool,
     ImportPackageInfoRequest,
