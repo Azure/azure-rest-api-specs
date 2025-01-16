@@ -149,7 +149,6 @@ model CertificateListResult {
    * A response message containing a list of certificates in the key vault along with a link to the next page of certificates.
    */
   @items
-  @visibility("read")
   value?: CertificateItem[];
 
   /**
