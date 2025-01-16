@@ -34,8 +34,8 @@ using Microsoft.PlaywrightTesting.Shared;
 @service({
   title: "Microsoft Playwright Service Reporting Data Plane API",
 })
-@versioned(Microsoft.PlaywrightTesting.DataPlane.Versions)
-namespace Microsoft.PlaywrightTesting.DataPlane;
+@versioned(Microsoft.PlaywrightTesting.Reporting.Versions)
+namespace Microsoft.PlaywrightTesting.Reporting;
 
 @doc("The PlaywrightTesting Data Plane service version.")
 enum Versions {
@@ -468,11 +468,11 @@ model DetailedTestResult {
 
   @doc("Line number.")
   @visibility("read", "create")
-  lineNumber: uint32;
+  lineNumber: int32;
 
   @doc("Number of retry attempts. max retry is 20. After which testresults metadata will not be stored")
   @visibility("read", "create")
-  retry: uint32;
+  retry: int32;
 
   @doc("Status of the test.")
   @visibility("read", "create")
@@ -577,7 +577,7 @@ model PreviousRetrySummary {
   testExecutionId: string;
 
   @doc("Number of retry attempts.")
-  retry: uint32;
+  retry: int32;
 
   @doc("Status of the test execution.")
   status: string;

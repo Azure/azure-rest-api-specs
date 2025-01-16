@@ -108,6 +108,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "TestResults_ListTestResults": {
+            "$ref": "./examples/TestResults_ListTestResults.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -175,6 +180,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TestResults_GetTestResultsSummary": {
+            "$ref": "./examples/TestResults_GetTestResultsSummary.json"
+          }
         }
       }
     },
@@ -232,6 +242,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestResults_UploadBatch": {
+            "$ref": "./examples/TestResults_UploadBatch.json"
           }
         }
       }
@@ -297,6 +312,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_ListTestRuns": {
+            "$ref": "./examples/TestRuns_ListTestRuns.json"
           }
         },
         "x-ms-pageable": {
@@ -444,6 +464,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateOrUpdateTestRun": {
+            "$ref": "./examples/TestRuns_CreateOrUpdateTestRun.json"
+          }
         }
       }
     },
@@ -503,6 +528,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateArtifactsUploadBaseUri": {
+            "$ref": "./examples/TestRuns_  CreateArtifactsUploadBaseUri.json"
           }
         }
       }
@@ -569,6 +599,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TestRuns_UpdateShardExecutionStatus": {
+            "$ref": "./examples/TestRuns_UpdateShardExecutionStatus.json"
+          }
         }
       }
     },
@@ -634,6 +669,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TestRuns_GetTestRunMetadata": {
+            "$ref": "./examples/TestRuns_GetTestRunMetadata.json"
+          }
         }
       }
     },
@@ -698,6 +738,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_GetTestRunSummary": {
+            "$ref": "./examples/TestRuns_GetTestRunSummary.json"
           }
         }
       }
@@ -1235,7 +1280,7 @@
         },
         "lineNumber": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "description": "Line number.",
           "x-ms-mutability": [
             "read",
@@ -1244,7 +1289,7 @@
         },
         "retry": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "description": "Number of retry attempts. max retry is 20. After which testresults metadata will not be stored",
           "x-ms-mutability": [
             "read",
@@ -1426,7 +1471,7 @@
         },
         "retry": {
           "type": "integer",
-          "format": "uint32",
+          "format": "int32",
           "description": "Number of retry attempts."
         },
         "status": {
