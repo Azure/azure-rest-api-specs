@@ -1,5 +1,3 @@
-// test
- 
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
