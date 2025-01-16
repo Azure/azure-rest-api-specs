@@ -59,7 +59,7 @@ async function convert(expect: ExpectStatic, readme: string) {
   }
 
   // Ensure outputFolder is deleted
-  expect(() => access(outputFolder)).rejects.toThrowError();
+  await expect(() => access(outputFolder)).rejects.toThrowError();
 }
 
 test.concurrent("Usage", async ({ expect }) => {
@@ -69,10 +69,10 @@ test.concurrent("Usage", async ({ expect }) => {
   expect(exitCode).not.toBe(0);
 });
 
-test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
-  await convert(expect, "specification/keyvault/data-plane/readme.md");
+test.concurrent("Convert contosowidgetmanager/data-plane", async ({ expect }) => {
+  await convert(expect, "specification/contosowidgetmanager/data-plane/readme.md");
 });
 
-test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
-  await convert(expect, "specification/sphere/resource-manager/readme.md");
+test.concurrent("Convert contosowidgetmanager/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/contosowidgetmanager/resource-manager/readme.md");
 });
