@@ -18155,6 +18155,10 @@
             "read"
           ]
         },
+        "imageDetails": {
+          "description": "Environment image details",
+          "$ref": "#/definitions/ImageDetails"
+        },
         "inferenceConfig": {
           "description": "Defines configuration specific to inference.",
           "$ref": "#/definitions/InferenceContainerProperties",
@@ -19726,6 +19730,52 @@
         }
       },
       "x-ms-discriminator-value": "ImageClassificationMultilabel",
+      "additionalProperties": false
+    },
+    "ImageDetails": {
+      "type": "object",
+      "properties": {
+        "exists": {
+          "description": "Indicates if image exists",
+          "type": "boolean"
+        },
+        "image": {
+          "description": "Container image details",
+          "$ref": "#/definitions/ImageInfo",
+          "x-nullable": true
+        },
+        "vulnerabilityFindings": {
+          "description": "Vulnerability findings details",
+          "$ref": "#/definitions/VulnerabilityFindings",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageInfo": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "description": "Image digest",
+          "type": "string",
+          "x-nullable": true
+        },
+        "hostname": {
+          "description": "Container registry host name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "repository": {
+          "description": "Repository name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "tag": {
+          "description": "Image tag",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "ImageInstanceSegmentation": {
@@ -23720,6 +23770,32 @@
       },
       "additionalProperties": false
     },
+    "PackageDetails": {
+      "type": "object",
+      "properties": {
+        "installPath": {
+          "description": "Install path.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "installedVersion": {
+          "description": "Installed version.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Package or dependency name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "patchedVersion": {
+          "description": "Patched version.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "PartialBatchDeployment": {
       "description": "Mutable batch inference settings per deployment.",
       "type": "object",
@@ -27182,6 +27258,171 @@
           {
             "value": "CocoVoc",
             "description": "CocoVoc metric."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityDetails": {
+      "type": "object",
+      "properties": {
+        "cve": {
+          "description": "CVE id.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "cveUrl": {
+          "description": "CVE url.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dueDate": {
+          "format": "date-time",
+          "description": "DueDate for vulnerability. Provider data or PublishDate + 30 days.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "description": "Vulnerability ID.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "packageDetails": {
+          "description": "Dependency details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackageDetails"
+          },
+          "x-nullable": true
+        },
+        "patchable": {
+          "description": "Indicates if there is a known patch for vulnerability.",
+          "type": "boolean"
+        },
+        "providerId": {
+          "description": "Vulnerability ID from provider.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "publishDate": {
+          "format": "date-time",
+          "description": "Vulnerability publish date.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "risk": {
+          "description": "Vulnerability Risk value.",
+          "$ref": "#/definitions/VulnerabilityRisk"
+        },
+        "solution": {
+          "description": "Vulnerability description.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "title": {
+          "description": "Vulnerability name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "vendorId": {
+          "description": "Vendor vulnerability ID (USN, GH Advisory, etc).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "verdorUrl": {
+          "description": "Vendor vulnerability url.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityFindings": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "description": "AssetId (Image digest).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "criticalFindingsCount": {
+          "format": "int32",
+          "description": "Number of critical findings.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "data": {
+          "description": "List of vulnerability findings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VulnerabilityDetails"
+          },
+          "x-nullable": true
+        },
+        "generatedTime": {
+          "format": "date-time",
+          "description": "Time the report was generated.",
+          "type": "string"
+        },
+        "highFindingsCount": {
+          "format": "int32",
+          "description": "Number of high findings.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lastScanDate": {
+          "format": "date-time",
+          "description": "Scan result date.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "scanner": {
+          "description": "Vulnerability scanner name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "source": {
+          "description": "Data source (internal).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "totalFindingsCount": {
+          "format": "int32",
+          "description": "Total findings count.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VulnerabilityRisk": {
+      "enum": [
+        "UNKNOWN",
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "VulnerabilityRisk",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UNKNOWN"
+          },
+          {
+            "value": "CRITICAL"
+          },
+          {
+            "value": "HIGH"
+          },
+          {
+            "value": "MEDIUM"
+          },
+          {
+            "value": "LOW"
           }
         ]
       },
