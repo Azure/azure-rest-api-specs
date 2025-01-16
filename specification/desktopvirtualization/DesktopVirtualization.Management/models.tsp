@@ -511,7 +511,7 @@ union RemoteApplicationType {
   /**
    * Imported MSIX application packages
    */
-  MsixApplication: "MsixApplication",
+  MSIXApplication: "MSIXApplication",
 }
 
 /**
@@ -1102,7 +1102,7 @@ model AppAttachPackageInfoProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  packageDependencies?: MsixPackageDependencies[];
+  packageDependencies?: MSIXPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -1118,7 +1118,7 @@ model AppAttachPackageInfoProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  packageApplications?: MsixPackageApplications[];
+  packageApplications?: MSIXPackageApplications[];
 
   /**
    * Certificate name found in the appxmanifest.xml.
@@ -1140,7 +1140,8 @@ model AppAttachPackageInfoProperties {
 /**
  * Schema for MSIX Package Dependencies properties.
  */
-model MsixPackageDependencies {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackageDependencies {
   /**
    * Name of package dependency.
    */
@@ -1160,7 +1161,8 @@ model MsixPackageDependencies {
 /**
  * Schema for MSIX Package Application properties.
  */
-model MsixPackageApplications {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackageApplications {
   /**
    * Package Application Id, found in appxmanifest.xml.
    */
@@ -2502,7 +2504,7 @@ model MaintenanceWindowPatchProperties {
  * Represents URI referring to MSIX Image
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is a valid acronym"
-model MsixImageURI {
+model MSIXImageURI {
   /**
    * URI to Image
    */
@@ -2512,23 +2514,27 @@ model MsixImageURI {
 /**
  * List of MSIX package properties retrieved from MSIX Image expansion.
  */
-model ExpandMsixImageList is Azure.Core.Page<ExpandMsixImage>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model ExpandMSIXImageList is Azure.Core.Page<ExpandMSIXImage>;
 
 /**
  * Represents the definition of contents retrieved after expanding the MSIX Image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ExpandMsixImage extends Resource {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model ExpandMSIXImage extends Resource {
   /**
-   * Detailed properties for ExpandMsixImage
+   * Detailed properties for ExpandMSIXImage
    */
-  properties?: ExpandMsixImageProperties;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+  properties?: ExpandMSIXImageProperties;
 }
 
 /**
  * Schema for Expand MSIX Image properties.
  */
-model ExpandMsixImageProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model ExpandMSIXImageProperties {
   /**
    * Alias of MSIX Package.
    */
@@ -2578,7 +2584,7 @@ model ExpandMsixImageProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
-  packageDependencies?: MsixPackageDependencies[];
+  packageDependencies?: MSIXPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -2594,7 +2600,7 @@ model ExpandMsixImageProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", ["appId"])
-  packageApplications?: MsixPackageApplications[];
+  packageApplications?: MSIXPackageApplications[];
 
   /**
    * Certificate name found in the appxmanifest.xml.
@@ -3314,13 +3320,15 @@ model WorkspacePatchProperties {
 /**
  * List of MSIX Package definitions.
  */
-model MsixPackageList is Azure.Core.Page<MsixPackage>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackageList is Azure.Core.Page<MSIXPackage>;
 
 /**
  * Schema for MSIX Package properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model MsixPackageProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackageProperties {
   /**
    * VHD/CIM image path on Network Share.
    */
@@ -3360,7 +3368,7 @@ model MsixPackageProperties {
    * List of package dependencies.
    */
   @OpenAPI.extension("x-ms-identifiers", ["dependencyName"])
-  packageDependencies?: MsixPackageDependencies[];
+  packageDependencies?: MSIXPackageDependencies[];
 
   /**
    * Package version found in the appxmanifest.xml.
@@ -3377,7 +3385,7 @@ model MsixPackageProperties {
    * List of package applications.
    */
   @OpenAPI.extension("x-ms-identifiers", ["appId"])
-  packageApplications?: MsixPackageApplications[];
+  packageApplications?: MSIXPackageApplications[];
 }
 
 /**
@@ -3385,17 +3393,19 @@ model MsixPackageProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model MsixPackagePatch extends Resource {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackagePatch extends Resource {
   /**
    * Detailed properties for MSIX Package
    */
-  properties?: MsixPackagePatchProperties;
+  properties?: MSIXPackagePatchProperties;
 }
 
 /**
  * MSIX Package properties that can be patched.
  */
-model MsixPackagePatchProperties {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+model MSIXPackagePatchProperties {
   /**
    * Set a version of the package to be active across hostpool.
    */

@@ -15,11 +15,12 @@ namespace Microsoft.DesktopVirtualization;
  * Schema for MSIX Package properties.
  */
 // Manually switched@subscriptionResource
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @parentResource(HostPool)
-model MsixPackage
-  is Azure.ResourceManager.ProxyResource<MsixPackageProperties, false> {
+model MSIXPackage
+  is Azure.ResourceManager.ProxyResource<MSIXPackageProperties, false> {
   ...ResourceNameParameter<
-    Resource = MsixPackage,
+    Resource = MSIXPackage,
     KeyName = "msixPackageFullName",
     SegmentName = "msixPackages",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
@@ -32,13 +33,14 @@ model MsixPackage
   ...ResourceSkuProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @armResourceOperations
-interface MsixPackages {
+interface MSIXPackages {
   /**
    * Get a msixpackage.
    */
   get is ArmResourceRead<
-    MsixPackage,
+    MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -46,7 +48,7 @@ interface MsixPackages {
    * Create or update a MSIX package.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    MsixPackage,
+    MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -55,8 +57,8 @@ interface MsixPackages {
    */
   @parameterVisibility
   update is ArmCustomPatchSync<
-    MsixPackage,
-    MsixPackagePatch,
+    MSIXPackage,
+    MSIXPackagePatch,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -64,7 +66,7 @@ interface MsixPackages {
    * Remove an MSIX Package.
    */
   delete is ArmResourceDeleteSync<
-    MsixPackage,
+    MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -72,7 +74,7 @@ interface MsixPackages {
    * List MSIX packages in hostpool.
    */
   list is ArmResourceListByParent<
-    MsixPackage,
+    MSIXPackage,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Parameters = {
       /**
@@ -93,19 +95,19 @@ interface MsixPackages {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = MsixPackageList
+    Response = MSIXPackageList
   >;
 }
 
-@@maxLength(MsixPackage.name, 100);
-@@minLength(MsixPackage.name, 3);
-@@doc(MsixPackage.name,
+@@maxLength(MSIXPackage.name, 100);
+@@minLength(MSIXPackage.name, 3);
+@@doc(MSIXPackage.name,
   "The version specific package full name of the MSIX package within specified hostpool"
 );
-@@doc(MsixPackage.properties, "Detailed properties for MSIX Package");
-@@doc(MsixPackages.createOrUpdate::parameters.resource,
+@@doc(MSIXPackage.properties, "Detailed properties for MSIX Package");
+@@doc(MSIXPackages.createOrUpdate::parameters.resource,
   "Object containing  MSIX Package definitions."
 );
-@@doc(MsixPackages.update::parameters.properties,
+@@doc(MSIXPackages.update::parameters.properties,
   "Object containing MSIX Package definitions."
 );

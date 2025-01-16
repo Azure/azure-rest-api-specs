@@ -29,13 +29,14 @@ model HostPool
   ...ResourceSkuProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @armResourceOperations
-interface MsixImages {
+interface MSIXImages {
   /**
    * Expands and Lists MSIX packages in an Image, given the Image Path.
    */
-  @action("expandMsixImage")
-  expand is ArmResourceActionSync<HostPool, MsixImageURI, ExpandMsixImageList>;
+  @action("expandMSIXImage")
+  expand is ArmResourceActionSync<HostPool, MSIXImageURI, ExpandMSIXImageList>;
 }
 
 @armResourceOperations
@@ -232,7 +233,7 @@ interface HostPools {
 @@doc(HostPools.update::parameters.properties,
   "Object containing HostPool definitions."
 );
-@@doc(MsixImages.expand::parameters.body,
+@@doc(MSIXImages.expand::parameters.body,
   "Object containing URI to MSIX Image"
 );
 @@doc(HostPools.importAppAttachPackageInfo::parameters.body,

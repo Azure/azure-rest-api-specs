@@ -49,7 +49,7 @@
       "name": "ApplicationGroups"
     },
     {
-      "name": "MsixImages"
+      "name": "MSIXImages"
     },
     {
       "name": "PrivateLinkResources"
@@ -85,7 +85,7 @@
       "name": "ScalingPlanPooledSchedules"
     },
     {
-      "name": "MsixPackages"
+      "name": "MSIXPackages"
     }
   ],
   "paths": {
@@ -2063,11 +2063,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMsixImage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMSIXImage": {
       "post": {
         "operationId": "MsixImages_Expand",
         "tags": [
-          "MsixImages"
+          "MSIXImages"
         ],
         "description": "Expands and Lists MSIX packages in an Image, given the Image Path.",
         "parameters": [
@@ -2096,7 +2096,7 @@
             "description": "Object containing URI to MSIX Image",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MsixImageURI"
+              "$ref": "#/definitions/MSIXImageURI"
             }
           }
         ],
@@ -2104,7 +2104,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpandMsixImageList"
+              "$ref": "#/definitions/ExpandMSIXImageList"
             }
           },
           "default": {
@@ -2308,7 +2308,7 @@
       "get": {
         "operationId": "MsixPackages_List",
         "tags": [
-          "MsixPackages"
+          "MSIXPackages"
         ],
         "description": "List MSIX packages in hostpool.",
         "parameters": [
@@ -2359,7 +2359,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MsixPackageList"
+              "$ref": "#/definitions/MSIXPackageList"
             }
           },
           "default": {
@@ -2378,7 +2378,7 @@
       "get": {
         "operationId": "MsixPackages_Get",
         "tags": [
-          "MsixPackages"
+          "MSIXPackages"
         ],
         "description": "Get a msixpackage.",
         "parameters": [
@@ -2416,7 +2416,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MsixPackage"
+              "$ref": "#/definitions/MSIXPackage"
             }
           },
           "default": {
@@ -2430,7 +2430,7 @@
       "put": {
         "operationId": "MsixPackages_CreateOrUpdate",
         "tags": [
-          "MsixPackages"
+          "MSIXPackages"
         ],
         "description": "Create or update a MSIX package.",
         "parameters": [
@@ -2469,21 +2469,21 @@
             "description": "Object containing  MSIX Package definitions.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MsixPackage"
+              "$ref": "#/definitions/MSIXPackage"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'MsixPackage' update operation succeeded",
+            "description": "Resource 'MSIXPackage' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/MsixPackage"
+              "$ref": "#/definitions/MSIXPackage"
             }
           },
           "201": {
-            "description": "Resource 'MsixPackage' create operation succeeded",
+            "description": "Resource 'MSIXPackage' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/MsixPackage"
+              "$ref": "#/definitions/MSIXPackage"
             }
           },
           "default": {
@@ -2497,7 +2497,7 @@
       "patch": {
         "operationId": "MsixPackages_Update",
         "tags": [
-          "MsixPackages"
+          "MSIXPackages"
         ],
         "description": "Update an  MSIX Package.",
         "parameters": [
@@ -2536,7 +2536,7 @@
             "description": "Object containing MSIX Package definitions.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MsixPackagePatch"
+              "$ref": "#/definitions/MSIXPackagePatch"
             }
           }
         ],
@@ -2544,7 +2544,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MsixPackage"
+              "$ref": "#/definitions/MSIXPackage"
             }
           },
           "default": {
@@ -2558,7 +2558,7 @@
       "delete": {
         "operationId": "MsixPackages_Delete",
         "tags": [
-          "MsixPackages"
+          "MSIXPackages"
         ],
         "description": "Remove an MSIX Package.",
         "parameters": [
@@ -5136,7 +5136,7 @@
           "type": "array",
           "description": "List of package dependencies.",
           "items": {
-            "$ref": "#/definitions/MsixPackageDependencies"
+            "$ref": "#/definitions/MSIXPackageDependencies"
           },
           "x-ms-identifiers": []
         },
@@ -5153,7 +5153,7 @@
           "type": "array",
           "description": "List of package applications.",
           "items": {
-            "$ref": "#/definitions/MsixPackageApplications"
+            "$ref": "#/definitions/MSIXPackageApplications"
           },
           "x-ms-identifiers": []
         },
@@ -5923,13 +5923,13 @@
         ]
       }
     },
-    "ExpandMsixImage": {
+    "ExpandMSIXImage": {
       "type": "object",
       "description": "Represents the definition of contents retrieved after expanding the MSIX Image.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ExpandMsixImageProperties",
-          "description": "Detailed properties for ExpandMsixImage"
+          "$ref": "#/definitions/ExpandMSIXImageProperties",
+          "description": "Detailed properties for ExpandMSIXImage"
         }
       },
       "allOf": [
@@ -5938,15 +5938,15 @@
         }
       ]
     },
-    "ExpandMsixImageList": {
+    "ExpandMSIXImageList": {
       "type": "object",
       "description": "List of MSIX package properties retrieved from MSIX Image expansion.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ExpandMsixImage items on this page",
+          "description": "The ExpandMSIXImage items on this page",
           "items": {
-            "$ref": "#/definitions/ExpandMsixImage"
+            "$ref": "#/definitions/ExpandMSIXImage"
           }
         },
         "nextLink": {
@@ -5959,7 +5959,7 @@
         "value"
       ]
     },
-    "ExpandMsixImageProperties": {
+    "ExpandMSIXImageProperties": {
       "type": "object",
       "description": "Schema for Expand MSIX Image properties.",
       "properties": {
@@ -6003,7 +6003,7 @@
           "type": "array",
           "description": "List of package dependencies.",
           "items": {
-            "$ref": "#/definitions/MsixPackageDependencies"
+            "$ref": "#/definitions/MSIXPackageDependencies"
           },
           "x-ms-identifiers": [
             "dependencyName"
@@ -6022,7 +6022,7 @@
           "type": "array",
           "description": "List of package applications.",
           "items": {
-            "$ref": "#/definitions/MsixPackageApplications"
+            "$ref": "#/definitions/MSIXPackageApplications"
           },
           "x-ms-identifiers": [
             "appId"
@@ -6620,6 +6620,236 @@
         ]
       }
     },
+    "MSIXImageURI": {
+      "type": "object",
+      "description": "Represents URI referring to MSIX Image",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI to Image"
+        }
+      }
+    },
+    "MSIXPackage": {
+      "type": "object",
+      "description": "Schema for MSIX Package properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSIXPackageProperties",
+          "description": "Detailed properties for MSIX Package",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MSIXPackageApplications": {
+      "type": "object",
+      "description": "Schema for MSIX Package Application properties.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Package Application Id, found in appxmanifest.xml."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Package Application."
+        },
+        "appUserModelID": {
+          "type": "string",
+          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name."
+        },
+        "iconImageName": {
+          "type": "string",
+          "description": "User friendly name."
+        },
+        "rawIcon": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        },
+        "rawPng": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        }
+      }
+    },
+    "MSIXPackageDependencies": {
+      "type": "object",
+      "description": "Schema for MSIX Package Dependencies properties.",
+      "properties": {
+        "dependencyName": {
+          "type": "string",
+          "description": "Name of package dependency."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Name of dependency publisher."
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Dependency version required."
+        }
+      }
+    },
+    "MSIXPackageList": {
+      "type": "object",
+      "description": "List of MSIX Package definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MSIXPackage items on this page",
+          "items": {
+            "$ref": "#/definitions/MSIXPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MSIXPackagePatch": {
+      "type": "object",
+      "description": "MSIX Package properties that can be patched.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSIXPackagePatchProperties",
+          "description": "Detailed properties for MSIX Package"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "MSIXPackagePatchProperties": {
+      "type": "object",
+      "description": "MSIX Package properties that can be patched.",
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "description": "Set a version of the package to be active across hostpool."
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Set Registration mode. Regular or Delayed."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for MSIX Package."
+        }
+      }
+    },
+    "MSIXPackageProperties": {
+      "type": "object",
+      "description": "Schema for MSIX Package properties.",
+      "properties": {
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml."
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal."
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image."
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed."
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool."
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies.",
+          "items": {
+            "$ref": "#/definitions/MSIXPackageDependencies"
+          },
+          "x-ms-identifiers": [
+            "dependencyName"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Package version found in the appxmanifest.xml."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date Package was last updated, found in the appxmanifest.xml."
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications.",
+          "items": {
+            "$ref": "#/definitions/MSIXPackageApplications"
+          },
+          "x-ms-identifiers": [
+            "appId"
+          ]
+        }
+      }
+    },
     "MaintenanceWindowPatchProperties": {
       "type": "object",
       "description": "Maintenance window starting hour and day of week.",
@@ -6678,236 +6908,6 @@
             "description": "UDP will not attempt this connection type when making connections"
           }
         ]
-      }
-    },
-    "MsixImageURI": {
-      "type": "object",
-      "description": "Represents URI referring to MSIX Image",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "URI to Image"
-        }
-      }
-    },
-    "MsixPackage": {
-      "type": "object",
-      "description": "Schema for MSIX Package properties.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MsixPackageProperties",
-          "description": "Detailed properties for MSIX Package",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MsixPackageApplications": {
-      "type": "object",
-      "description": "Schema for MSIX Package Application properties.",
-      "properties": {
-        "appId": {
-          "type": "string",
-          "description": "Package Application Id, found in appxmanifest.xml."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of Package Application."
-        },
-        "appUserModelID": {
-          "type": "string",
-          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml."
-        },
-        "friendlyName": {
-          "type": "string",
-          "description": "User friendly name."
-        },
-        "iconImageName": {
-          "type": "string",
-          "description": "User friendly name."
-        },
-        "rawIcon": {
-          "type": "string",
-          "format": "byte",
-          "description": "the icon a 64 bit string as a byte array."
-        },
-        "rawPng": {
-          "type": "string",
-          "format": "byte",
-          "description": "the icon a 64 bit string as a byte array."
-        }
-      }
-    },
-    "MsixPackageDependencies": {
-      "type": "object",
-      "description": "Schema for MSIX Package Dependencies properties.",
-      "properties": {
-        "dependencyName": {
-          "type": "string",
-          "description": "Name of package dependency."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "Name of dependency publisher."
-        },
-        "minVersion": {
-          "type": "string",
-          "description": "Dependency version required."
-        }
-      }
-    },
-    "MsixPackageList": {
-      "type": "object",
-      "description": "List of MSIX Package definitions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MsixPackage items on this page",
-          "items": {
-            "$ref": "#/definitions/MsixPackage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "MsixPackagePatch": {
-      "type": "object",
-      "description": "MSIX Package properties that can be patched.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MsixPackagePatchProperties",
-          "description": "Detailed properties for MSIX Package"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "MsixPackagePatchProperties": {
-      "type": "object",
-      "description": "MSIX Package properties that can be patched.",
-      "properties": {
-        "isActive": {
-          "type": "boolean",
-          "description": "Set a version of the package to be active across hostpool."
-        },
-        "isRegularRegistration": {
-          "type": "boolean",
-          "description": "Set Registration mode. Regular or Delayed."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name for MSIX Package."
-        }
-      }
-    },
-    "MsixPackageProperties": {
-      "type": "object",
-      "description": "Schema for MSIX Package properties.",
-      "properties": {
-        "imagePath": {
-          "type": "string",
-          "description": "VHD/CIM image path on Network Share."
-        },
-        "packageName": {
-          "type": "string",
-          "description": "Package Name from appxmanifest.xml."
-        },
-        "packageFamilyName": {
-          "type": "string",
-          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "User friendly Name to be displayed in the portal."
-        },
-        "packageRelativePath": {
-          "type": "string",
-          "description": "Relative Path to the package inside the image."
-        },
-        "isRegularRegistration": {
-          "type": "boolean",
-          "description": "Specifies how to register Package in feed."
-        },
-        "isActive": {
-          "type": "boolean",
-          "description": "Make this version of the package the active one across the hostpool."
-        },
-        "packageDependencies": {
-          "type": "array",
-          "description": "List of package dependencies.",
-          "items": {
-            "$ref": "#/definitions/MsixPackageDependencies"
-          },
-          "x-ms-identifiers": [
-            "dependencyName"
-          ]
-        },
-        "version": {
-          "type": "string",
-          "description": "Package version found in the appxmanifest.xml."
-        },
-        "lastUpdated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date Package was last updated, found in the appxmanifest.xml."
-        },
-        "packageApplications": {
-          "type": "array",
-          "description": "List of package applications.",
-          "items": {
-            "$ref": "#/definitions/MsixPackageApplications"
-          },
-          "x-ms-identifiers": [
-            "appId"
-          ]
-        }
       }
     },
     "PackageTimestamped": {
@@ -7415,7 +7415,7 @@
       "description": "Resource Type of Application.",
       "enum": [
         "InBuilt",
-        "MsixApplication"
+        "MSIXApplication"
       ],
       "x-ms-enum": {
         "name": "RemoteApplicationType",
@@ -7427,8 +7427,8 @@
             "description": "Built-in applications"
           },
           {
-            "name": "MsixApplication",
-            "value": "MsixApplication",
+            "name": "MSIXApplication",
+            "value": "MSIXApplication",
             "description": "Imported MSIX application packages"
           }
         ]
