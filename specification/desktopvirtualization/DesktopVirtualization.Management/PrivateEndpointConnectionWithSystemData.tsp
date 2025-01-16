@@ -16,9 +16,9 @@ namespace Microsoft.DesktopVirtualization;
 /**
  * The Private Endpoint Connection resource.
  */
-model CustomPrivateEndpointConnection
+model PrivateEndpointConnections
   is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<Resource = CustomPrivateEndpointConnection>;
+  ...ResourceNameParameter<Resource = PrivateEndpointConnections>;
   ...ManagedServiceIdentityProperty;
   ...etagProperty;
   ...ResourceKindProperty;
@@ -70,19 +70,19 @@ interface WorkspaceOps
     > {}
 
 @armResourceOperations
-interface PrivateEndpointConnections {
-  getByHostPool is HostPoolOps.Read<CustomPrivateEndpointConnection>;
-  updateByHostPool is HostPoolOps.CreateOrUpdateSync<CustomPrivateEndpointConnection>;
-  deleteByHostPool is HostPoolOps.DeleteSync<CustomPrivateEndpointConnection>;
+interface CustomPrivateEndpointConnection {
+  getByHostPool is HostPoolOps.Read<PrivateEndpointConnections>;
+  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnections>;
+  deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnections>;
   listByHostPool is HostPoolOps.List<
-    CustomPrivateEndpointConnection,
+    PrivateEndpointConnections,
     Parameters = PrivateEndpointListParameter
   >;
-  getByWorkspace is WorkspaceOps.Read<CustomPrivateEndpointConnection>;
-  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<CustomPrivateEndpointConnection>;
-  deleteByWorkspace is WorkspaceOps.DeleteSync<CustomPrivateEndpointConnection>;
+  getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnections>;
+  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnections>;
+  deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnections>;
   listByWorkspace is WorkspaceOps.List<
-    CustomPrivateEndpointConnection,
+    PrivateEndpointConnections,
     Parameters = PrivateEndpointListParameter
   >;
 }

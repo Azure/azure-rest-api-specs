@@ -79,7 +79,7 @@
       "name": "Desktops"
     },
     {
-      "name": "PrivateEndpointConnections"
+      "name": "CustomPrivateEndpointConnection"
     },
     {
       "name": "SessionHosts"
@@ -1827,9 +1827,9 @@
       "get": {
         "operationId": "PrivateEndpointConnections_GetByHostPool",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Get a CustomPrivateEndpointConnection",
+        "description": "Get a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1862,7 +1862,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "default": {
@@ -1881,9 +1881,9 @@
       "put": {
         "operationId": "PrivateEndpointConnections_UpdateByHostPool",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Create a CustomPrivateEndpointConnection",
+        "description": "Create a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1917,21 +1917,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CustomPrivateEndpointConnection' update operation succeeded",
+            "description": "Resource 'PrivateEndpointConnections' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "201": {
-            "description": "Resource 'CustomPrivateEndpointConnection' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnections' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "default": {
@@ -1950,9 +1950,9 @@
       "delete": {
         "operationId": "PrivateEndpointConnections_DeleteByHostPool",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Delete a CustomPrivateEndpointConnection",
+        "description": "Delete a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1999,81 +1999,6 @@
           "PrivateEndpointConnection_DeleteByHostPool": {
             "$ref": "./examples/PrivateEndpointConnections_DeleteByHostPool.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/customPrivateEndpointConnections": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_ListByHostPool",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Get a CustomPrivateEndpointConnection",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The number of items to return per page",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "The number of items to skip before starting to return items.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnection_ListByHostPool": {
-            "$ref": "./examples/PrivateEndpointConnections_ListByHostPool.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2624,6 +2549,81 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByHostPool",
+        "tags": [
+          "CustomPrivateEndpointConnection"
+        ],
+        "description": "Get a PrivateEndpointConnections",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of items to return per page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "The number of items to skip before starting to return items.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_ListByHostPool": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByHostPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4684,9 +4684,9 @@
       "get": {
         "operationId": "PrivateEndpointConnections_GetByWorkspace",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Get a CustomPrivateEndpointConnection",
+        "description": "Get a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4719,7 +4719,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "default": {
@@ -4733,9 +4733,9 @@
       "put": {
         "operationId": "PrivateEndpointConnections_UpdateByWorkspace",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Create a CustomPrivateEndpointConnection",
+        "description": "Create a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4769,21 +4769,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'CustomPrivateEndpointConnection' update operation succeeded",
+            "description": "Resource 'PrivateEndpointConnections' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "201": {
-            "description": "Resource 'CustomPrivateEndpointConnection' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnections' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnections"
             }
           },
           "default": {
@@ -4797,9 +4797,9 @@
       "delete": {
         "operationId": "PrivateEndpointConnections_DeleteByWorkspace",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Delete a CustomPrivateEndpointConnection",
+        "description": "Delete a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4844,13 +4844,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/customPrivateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByWorkspace",
         "tags": [
-          "PrivateEndpointConnections"
+          "CustomPrivateEndpointConnection"
         ],
-        "description": "Get a CustomPrivateEndpointConnection",
+        "description": "Get a PrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4899,77 +4899,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CustomPrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/listByWorkspace": {
-      "get": {
-        "operationId": "Workspaces_ListByWorkspace",
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "List the private link resources available for this workspace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Number of items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionsListResult"
             }
           },
           "default": {
@@ -5706,73 +5636,6 @@
           }
         ]
       }
-    },
-    "CustomPrivateEndpointConnection": {
-      "type": "object",
-      "description": "The Private Endpoint Connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
-        },
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
-          "description": "Details of the resource plan."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "CustomPrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "The response of a CustomPrivateEndpointConnection list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CustomPrivateEndpointConnection items on this page",
-          "items": {
-            "$ref": "#/definitions/CustomPrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "DayOfWeek": {
       "type": "string",
@@ -7099,6 +6962,73 @@
         ]
       },
       "readOnly": true
+    },
+    "PrivateEndpointConnections": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionsListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnections list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnections items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnections"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",

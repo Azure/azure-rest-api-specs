@@ -85,35 +85,6 @@ interface Workspaces {
     Workspace,
     Response = WorkspaceList
   >;
-
-  /**
-   * List the private link resources available for this workspace.
-   */
-  @get
-  listByWorkspace is ArmResourceActionSync<
-    Workspace,
-    void,
-    PrivateLinkResourceListResult,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
-  >;
 }
 
 @@maxLength(Workspace.name, 64);
