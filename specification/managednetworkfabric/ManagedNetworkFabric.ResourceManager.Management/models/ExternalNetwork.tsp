@@ -66,6 +66,11 @@ model ExternalNetworkProperties {
   @doc("Static Route Configuration.")
   staticRouteConfiguration?: ExternalNetworkStaticRouteConfiguration;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
@@ -173,6 +178,22 @@ model ExternalNetworkPropertiesOptionAProperties {
       type: "Microsoft.ManagedNetworkFabric/accessControlLists";
     }
   ]>;
+
+  @doc("V4OverV6 BGP Session state")
+  @added(Versions.v2024_06_15_preview)
+  v4OverV6BgpSession?: V4OverV6BgpSessionState = V4OverV6BgpSessionState.Disabled;
+
+  @doc("V6OverV4 BGP Session state")
+  @added(Versions.v2024_06_15_preview)
+  v6OverV4BgpSession?: V6OverV4BgpSessionState = V6OverV4BgpSessionState.Disabled;
+
+  @doc("Native IPv4 prefix limits configuration")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv4PrefixLimit?: NativeIpv4PrefixLimitProperties;
+
+  @doc("Native IPv6 prefix limits configuration")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitProperties;
 }
 
 @doc("The ExternalNetwork patch resource definition.")
@@ -310,6 +331,22 @@ model ExternalNetworkPatchPropertiesOptionAProperties {
   @doc("BMP Monitor Configuration.")
   @added(Versions.v2024_06_15_preview)
   bmpConfiguration?: ExternalNetworkBmpPatchProperties;
+
+  @doc("V4OverV6 BGP Session state")
+  @added(Versions.v2024_06_15_preview)
+  v4OverV6BgpSession?: V4OverV6BgpSessionState;
+
+  @doc("V6OverV4 BGP Session state")
+  @added(Versions.v2024_06_15_preview)
+  v6OverV4BgpSession?: V6OverV4BgpSessionState;
+
+  @doc("Native IPv4 prefix limit configuration")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv4PrefixLimit?: NativeIpv4PrefixLimitPatchProperties;
+
+  @doc("Native IPv6 prefix limit configuration")
+  @added(Versions.v2024_06_15_preview)
+  nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitPatchProperties;
 }
 
 @doc("External Network Administrative State request")

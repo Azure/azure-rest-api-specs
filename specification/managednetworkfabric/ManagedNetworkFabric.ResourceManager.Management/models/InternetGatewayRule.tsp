@@ -10,6 +10,11 @@ model InternetGatewayRuleProperties {
   @doc("Rules for the InternetGateways")
   ruleProperties: RuleProperties;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;

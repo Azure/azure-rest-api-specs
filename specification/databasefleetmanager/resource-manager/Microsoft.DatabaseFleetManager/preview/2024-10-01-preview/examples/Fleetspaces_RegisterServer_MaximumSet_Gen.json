@@ -12,10 +12,13 @@
       "sourceSubscriptionId": "c76e2b32-46c7-4325-8f4f-476828a5b207",
       "sourceResourceGroupName": "rg-source-database",
       "sourceServerName": "source-db-server-prod",
-      "destinationTierOverrides": {
-        "pool1": "gold",
-        "pool2": "bronze"
-      }
+      "destinationTierOverrides": [
+        {
+          "resourceType": "Database",
+          "destinationTier": "bronze",
+          "resourceName": "source-db-prod"
+        }
+      ]
     }
   },
   "responses": {
