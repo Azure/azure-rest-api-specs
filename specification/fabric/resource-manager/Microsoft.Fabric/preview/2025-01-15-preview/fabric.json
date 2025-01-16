@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Fabric management service",
-    "version": "2023-11-01",
+    "version": "2025-01-15-preview",
     "description": "Microsoft.Fabric Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -170,6 +170,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/locations/{location}/usages": {
+      "get": {
+        "operationId": "FabricCapacities_ListUsages",
+        "tags": [
+          "FabricCapacities"
+        ],
+        "description": "List the current consumption and limit in this location for the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota usages for a subscription": {
+            "$ref": "./examples/FabricCapacities_ListUsagesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/skus": {
       "get": {
         "operationId": "FabricCapacities_ListSkus",
@@ -203,9 +245,6 @@
           "List eligible SKUs for a new capacity": {
             "$ref": "./examples/FabricCapacities_ListSkus.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -616,9 +655,6 @@
           "List eligible SKUs for an existing capacity": {
             "$ref": "./examples/FabricCapacities_ListSkusForCapacity.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
