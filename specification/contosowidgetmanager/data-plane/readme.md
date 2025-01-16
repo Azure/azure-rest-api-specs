@@ -1,6 +1,6 @@
 # Contoso.WidgetManager
 
-> see https://aka.ms/autorest
+> see https://docs.microsoft.com/autorest
 
 This is the AutoRest configuration file for Contoso.WidgetManager.
 
