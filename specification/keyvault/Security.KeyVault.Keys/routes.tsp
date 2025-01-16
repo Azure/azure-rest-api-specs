@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -20,7 +21,7 @@ namespace KeyVault;
 @summary("Creates a new key, stores it, then returns key parameters and attributes to the client.")
 @route("/keys/{key-name}/create")
 @post
-op createKey is Azure.Core.Foundations.Operation<
+op createKey is KeyVaultOperation<
   {
     /**
      * The name for the new key. The system will generate the version name for the new key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -38,9 +39,7 @@ op createKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyCreateParameters;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -50,7 +49,7 @@ op createKey is Azure.Core.Foundations.Operation<
 @summary("Creates a new key version, stores it, then returns key parameters, attributes and policy to the client.")
 @route("/keys/{key-name}/rotate")
 @post
-op rotateKey is Azure.Core.Foundations.Operation<
+op rotateKey is KeyVaultOperation<
   {
     /**
      * The name of key to be rotated. The system will generate a new version in the specified key.
@@ -60,9 +59,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -73,7 +70,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
 @summary("Imports an externally created key, stores it, and returns key parameters and attributes to the client.")
 @route("/keys/{key-name}")
 @put
-op importKey is Azure.Core.Foundations.Operation<
+op importKey is KeyVaultOperation<
   {
     /**
      * Name for the imported key. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -91,9 +88,7 @@ op importKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyImportParameters;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -103,7 +98,7 @@ op importKey is Azure.Core.Foundations.Operation<
 @summary("Deletes a key of any type from storage in Azure Key Vault.")
 @route("/keys/{key-name}")
 @delete
-op deleteKey is Azure.Core.Foundations.Operation<
+op deleteKey is KeyVaultOperation<
   {
     /**
      * The name of the key to delete.
@@ -112,9 +107,7 @@ op deleteKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  DeletedKeyBundle,
-  {},
-  KeyVaultError
+  DeletedKeyBundle
 >;
 
 /**
@@ -124,7 +117,7 @@ op deleteKey is Azure.Core.Foundations.Operation<
 @summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
 @route("/keys/{key-name}/{key-version}")
 @patch
-op updateKey is Azure.Core.Foundations.Operation<
+op updateKey is KeyVaultOperation<
   {
     /**
      * The name of key to update.
@@ -148,9 +141,7 @@ op updateKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyUpdateParameters;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -160,7 +151,7 @@ op updateKey is Azure.Core.Foundations.Operation<
 @summary("Gets the public part of a stored key.")
 @route("/keys/{key-name}/{key-version}")
 @get
-op getKey is Azure.Core.Foundations.Operation<
+op getKey is KeyVaultOperation<
   {
     /**
      * The name of the key to get.
@@ -176,9 +167,7 @@ op getKey is Azure.Core.Foundations.Operation<
     @clientName("version", "go")
     keyVersion: string;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -189,7 +178,7 @@ op getKey is Azure.Core.Foundations.Operation<
 @summary("Retrieves a list of individual key versions with the same key name.")
 @route("/keys/{key-name}/versions")
 @get
-op getKeyVersions is Azure.Core.Foundations.Operation<
+op getKeyVersions is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -206,9 +195,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  KeyListResult,
-  {},
-  KeyVaultError
+  KeyListResult
 >;
 
 /**
@@ -219,7 +206,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
 @summary("List keys in the specified vault.")
 @route("/keys")
 @get
-op getKeys is Azure.Core.Foundations.Operation<
+op getKeys is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -229,9 +216,7 @@ op getKeys is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  KeyListResult,
-  {},
-  KeyVaultError
+  KeyListResult
 >;
 
 /**
@@ -241,7 +226,7 @@ op getKeys is Azure.Core.Foundations.Operation<
 @summary("Requests that a backup of the specified key be downloaded to the client.")
 @route("/keys/{key-name}/backup")
 @post
-op backupKey is Azure.Core.Foundations.Operation<
+op backupKey is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -250,9 +235,7 @@ op backupKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  BackupKeyResult,
-  {},
-  KeyVaultError
+  BackupKeyResult
 >;
 
 /**
@@ -262,7 +245,7 @@ op backupKey is Azure.Core.Foundations.Operation<
 @summary("Restores a backed up key to a vault.")
 @route("/keys/restore")
 @post
-op restoreKey is Azure.Core.Foundations.Operation<
+op restoreKey is KeyVaultOperation<
   {
     /** The parameters to restore the key. */
     #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
@@ -270,9 +253,7 @@ op restoreKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyRestoreParameters;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -284,7 +265,7 @@ op restoreKey is Azure.Core.Foundations.Operation<
 @summary("Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.")
 @route("/keys/{key-name}/{key-version}/encrypt")
 @post
-op encrypt is Azure.Core.Foundations.Operation<
+op encrypt is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -308,9 +289,7 @@ op encrypt is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult,
-  {},
-  KeyVaultError
+  KeyOperationResult
 >;
 
 /**
@@ -322,7 +301,7 @@ op encrypt is Azure.Core.Foundations.Operation<
 @summary("Decrypts a single block of encrypted data.")
 @route("/keys/{key-name}/{key-version}/decrypt")
 @post
-op decrypt is Azure.Core.Foundations.Operation<
+op decrypt is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -346,9 +325,7 @@ op decrypt is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult,
-  {},
-  KeyVaultError
+  KeyOperationResult
 >;
 
 /**
@@ -360,7 +337,7 @@ op decrypt is Azure.Core.Foundations.Operation<
 @summary("Creates a signature from a digest using the specified key.")
 @route("/keys/{key-name}/{key-version}/sign")
 @post
-op sign is Azure.Core.Foundations.Operation<
+op sign is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -384,9 +361,7 @@ op sign is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeySignParameters;
   },
-  KeyOperationResult,
-  {},
-  KeyVaultError
+  KeyOperationResult
 >;
 
 /**
@@ -398,7 +373,7 @@ op sign is Azure.Core.Foundations.Operation<
 @summary("Verifies a signature using a specified key.")
 @route("/keys/{key-name}/{key-version}/verify")
 @post
-op verify is Azure.Core.Foundations.Operation<
+op verify is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -422,9 +397,7 @@ op verify is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyVerifyParameters;
   },
-  KeyVerifyResult,
-  {},
-  KeyVaultError
+  KeyVerifyResult
 >;
 
 /**
@@ -436,7 +409,7 @@ op verify is Azure.Core.Foundations.Operation<
 @summary("Wraps a symmetric key using a specified key.")
 @route("/keys/{key-name}/{key-version}/wrapkey")
 @post
-op wrapKey is Azure.Core.Foundations.Operation<
+op wrapKey is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -460,9 +433,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult,
-  {},
-  KeyVaultError
+  KeyOperationResult
 >;
 
 /**
@@ -474,7 +445,7 @@ op wrapKey is Azure.Core.Foundations.Operation<
 @summary("Unwraps a symmetric key using the specified key that was initially used for wrapping that key.")
 @route("/keys/{key-name}/{key-version}/unwrapkey")
 @post
-op unwrapKey is Azure.Core.Foundations.Operation<
+op unwrapKey is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -498,9 +469,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyOperationsParameters;
   },
-  KeyOperationResult,
-  {},
-  KeyVaultError
+  KeyOperationResult
 >;
 
 /**
@@ -512,7 +481,7 @@ op unwrapKey is Azure.Core.Foundations.Operation<
 @summary("Releases a key.")
 @route("/keys/{key-name}/{key-version}/release")
 @post
-op release is Azure.Core.Foundations.Operation<
+op release is KeyVaultOperation<
   {
     /**
      * The name of the key to get.
@@ -536,9 +505,7 @@ op release is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: KeyReleaseParameters;
   },
-  KeyReleaseResult,
-  {},
-  KeyVaultError
+  KeyReleaseResult
 >;
 
 /**
@@ -549,7 +516,7 @@ op release is Azure.Core.Foundations.Operation<
 @summary("Lists the deleted keys in the specified vault.")
 @route("/deletedkeys")
 @get
-op getDeletedKeys is Azure.Core.Foundations.Operation<
+op getDeletedKeys is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -559,9 +526,7 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  DeletedKeyListResult,
-  {},
-  KeyVaultError
+  DeletedKeyListResult
 >;
 
 /**
@@ -571,7 +536,7 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
 @summary("Gets the public part of a deleted key.")
 @route("/deletedkeys/{key-name}")
 @get
-op getDeletedKey is Azure.Core.Foundations.Operation<
+op getDeletedKey is KeyVaultOperation<
   {
     /**
      * The name of the key.
@@ -580,9 +545,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  DeletedKeyBundle,
-  {},
-  KeyVaultError
+  DeletedKeyBundle
 >;
 
 /**
@@ -593,7 +556,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
 @summary("Permanently deletes the specified key.")
 @route("/deletedkeys/{key-name}")
 @delete
-op purgeDeletedKey is Azure.Core.Foundations.Operation<
+op purgeDeletedKey is KeyVaultOperation<
   {
     /**
      * The name of the key
@@ -602,9 +565,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  void,
-  {},
-  KeyVaultError
+  void
 >;
 
 /**
@@ -614,7 +575,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
 @summary("Recovers the deleted key to its latest version.")
 @route("/deletedkeys/{key-name}/recover")
 @post
-op recoverDeletedKey is Azure.Core.Foundations.Operation<
+op recoverDeletedKey is KeyVaultOperation<
   {
     /**
      * The name of the deleted key.
@@ -623,9 +584,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  KeyBundle,
-  {},
-  KeyVaultError
+  KeyBundle
 >;
 
 /**
@@ -635,7 +594,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
 @summary("Lists the policy for a key.")
 @route("/keys/{key-name}/rotationpolicy")
 @get
-op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
+op getKeyRotationPolicy is KeyVaultOperation<
   {
     /**
      * The name of the key in a given key vault.
@@ -644,9 +603,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     keyName: string;
   },
-  KeyRotationPolicy,
-  {},
-  KeyVaultError
+  KeyRotationPolicy
 >;
 
 /**
@@ -657,7 +614,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
 @summary("Updates the rotation policy for a key.")
 @route("/keys/{key-name}/rotationpolicy")
 @put
-op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
+op updateKeyRotationPolicy is KeyVaultOperation<
   {
     /**
      * The name of the key in the given vault.
@@ -672,9 +629,7 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
     @body
     keyRotationPolicy: KeyRotationPolicy;
   },
-  KeyRotationPolicy,
-  {},
-  KeyVaultError
+  KeyRotationPolicy
 >;
 
 /**
@@ -684,7 +639,7 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
 @summary("Get the requested number of bytes containing random values.")
 @route("/rng")
 @post
-op getRandomBytes is Azure.Core.Foundations.Operation<
+op getRandomBytes is KeyVaultOperation<
   {
     /** The request object to get random bytes. */
     #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
@@ -692,7 +647,5 @@ op getRandomBytes is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: GetRandomBytesRequest;
   },
-  RandomBytes,
-  {},
-  KeyVaultError
+  RandomBytes
 >;
