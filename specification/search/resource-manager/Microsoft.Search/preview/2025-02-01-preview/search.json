@@ -70,16 +70,16 @@
         }
       }
     },
-    "/providers/Microsoft.Search/featureAvailabilities": {
+    "/providers/Microsoft.Search/offerings": {
       "get": {
         "tags": [
-          "FeatureAvailabilities"
+          "Offerings"
         ],
-        "description": "Lists all of the available features and SKUs of the Azure AI Search service by region.",
-        "operationId": "FeatureAvailabilities_List",
+        "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region.",
+        "operationId": "Offerings_List",
         "x-ms-examples": {
-          "SearchListFeaturevailabilities": {
-            "$ref": "./examples/SearchListFeatureAvailabilities.json"
+          "SearchListOfferings": {
+            "$ref": "./examples/SearchListOfferings.json"
           }
         },
         "parameters": [
@@ -89,13 +89,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of available features and SKUs.",
+            "description": "Success. The response describes the list of features and SKUs offered in each region.",
             "schema": {
-              "$ref": "#/definitions/FeatureAvailabilitiesListResult"
+              "$ref": "#/definitions/OfferingsListResult"
             }
           },
           "default": {
-            "description": "Feature Availabilities API failed.",
+            "description": "Offerings API failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3339,25 +3339,25 @@
       },
       "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     },
-    "FeatureAvailabilitiesListResult": {
+    "OfferingsListResult": {
       "type": "object",
-      "description": "The response containing a list of available features and SKUs in various regions.",
+      "description": "The response containing a list of features and SKUs offered in various regions.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FeatureAvailabilities"
+            "$ref": "#/definitions/OfferingsByRegion"
           },
-          "description": "The list of regions with their respective feature availabilities such as features and SKUs."
+          "description": "The list of regions with their respective features and SKUs offered."
         },
         "nextLink": {
           "type": "string",
           "readOnly": true,
-          "description": "The URL to get the next set of feature availabilities, if any."
+          "description": "The URL to get the next set of offerings, if any."
         }
       }
     },
-    "FeatureAvailabilities": {
+    "OfferingsByRegion": {
       "type": "object",
       "properties": {
         "regionName": {
@@ -3367,26 +3367,26 @@
         "features": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FeatureAvailability"
+            "$ref": "#/definitions/FeatureOffering"
           },
-          "description": "The list of features available in this region.",
+          "description": "The list of features offered in this region.",
           "x-ms-identifiers": []
         },
         "skus": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SkuAvailability"
+            "$ref": "#/definitions/SkuOffering"
           },
-          "description": "The list of SKUs available in this region."
+          "description": "The list of SKUs offered in this region."
         }
       }
     },
-    "FeatureAvailability": {
+    "FeatureOffering": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the feature available in this region.",
+          "description": "The name of the feature offered in this region.",
           "enum": [
             "Grok",
             "ImageVectorization",
@@ -3452,7 +3452,7 @@
         }
       }
     },
-    "SkuAvailability": {
+    "SkuOffering": {
       "type": "object",
       "properties": {
         "sku": {
@@ -3497,7 +3497,7 @@
               "description": "The maximum number of partitions available for this SKU."
             }
           },
-          "description": "The limits associated with this SKU in this region."
+          "description": "The limits associated with this SKU offered in this region."
         }
       }
     }
