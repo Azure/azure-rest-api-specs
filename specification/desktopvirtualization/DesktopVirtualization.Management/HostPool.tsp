@@ -218,41 +218,6 @@ interface HostPools {
       initialSkip?: int32;
     }
   >;
-
-  /**
-   * List MSIX Packages.
-   */
-  @get
-  msixPackages is ArmResourceActionSync<
-    HostPool,
-    void,
-    MsixPackageList,
-    Parameters = {
-      /**
-       * OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
-  >;
 }
 
 @@maxLength(HostPool.name, 64);
