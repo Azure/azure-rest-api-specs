@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "ConfigurationChecksTemplateOperations"
+      "name": "ConfigurationChecksTemplatesOperations"
     }
   ],
   "paths": {
     "/{resourceUri}/providers/Microsoft.Workloads/configurationCheckTemplates": {
       "get": {
-        "operationId": "ConfigurationChecksTemplateOperations_ListByResourceGroup",
+        "operationId": "ConfigurationChecksTemplatesOperations_ListByResourceGroup",
         "tags": [
-          "ConfigurationChecksTemplateOperations"
+          "ConfigurationChecksTemplatesOperations"
         ],
-        "description": "List ConfigurationChecksTemplate resources by parent",
+        "description": "List ConfigurationChecksTemplates resources by parent",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationChecksTemplateListResult"
+              "$ref": "#/definitions/ConfigurationChecksTemplatesListResult"
             }
           },
           "default": {
@@ -74,7 +74,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationChecksTemplate_ListByResourceGroup": {
+          "ConfigurationChecksTemplates_ListByResourceGroup": {
             "$ref": "./examples/ConfigurationChecksTemplate_ListByResourceGroup.json"
           }
         },
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Workloads/configurationCheckTemplates/{configurationCheckTemplate}": {
+    "/{resourceUri}/providers/Microsoft.Workloads/configurationCheckTemplates/{configurationCheckTemplates}": {
       "get": {
-        "operationId": "ConfigurationChecksTemplateOperations_Get",
+        "operationId": "ConfigurationChecksTemplatesOperations_Get",
         "tags": [
-          "ConfigurationChecksTemplateOperations"
+          "ConfigurationChecksTemplatesOperations"
         ],
-        "description": "Get a ConfigurationChecksTemplate",
+        "description": "Get a ConfigurationChecksTemplates",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -98,7 +98,7 @@
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
-            "name": "configurationCheckTemplate",
+            "name": "configurationCheckTemplates",
             "in": "path",
             "description": "The name of the configuration check template.",
             "required": true,
@@ -110,7 +110,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationChecksTemplate"
+              "$ref": "#/definitions/ConfigurationChecksTemplates"
             }
           },
           "default": {
@@ -121,7 +121,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationChecksTemplate_Get": {
+          "ConfigurationChecksTemplates_Get": {
             "$ref": "./examples/ConfigurationChecksTemplate_Get.json"
           }
         }
@@ -314,42 +314,6 @@
         "commonChecks"
       ]
     },
-    "ConfigurationChecksTemplate": {
-      "type": "object",
-      "description": "Configuration checks template resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConfigurationChecksTemplateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ConfigurationChecksTemplateListResult": {
-      "type": "object",
-      "description": "The response of a ConfigurationChecksTemplate list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConfigurationChecksTemplate items on this page",
-          "items": {
-            "$ref": "#/definitions/ConfigurationChecksTemplate"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ConfigurationChecksTemplateProperties": {
       "type": "object",
       "description": "Defines the properties of the configuration checks template.",
@@ -416,6 +380,42 @@
         ]
       },
       "readOnly": true
+    },
+    "ConfigurationChecksTemplates": {
+      "type": "object",
+      "description": "Configuration checks template resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationChecksTemplateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigurationChecksTemplatesListResult": {
+      "type": "object",
+      "description": "The response of a ConfigurationChecksTemplates list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigurationChecksTemplates items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigurationChecksTemplates"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "DataType": {
       "type": "string",

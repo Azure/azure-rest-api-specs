@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-preview-2025-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-01'
 input-file:
-  - preview/2025-01-01-preview/ConfigurationChecksTemplate.json
+  - preview/2025-01-01-preview/ConfigurationChecksTemplates.json
   - ../operations/preview/2025-01-01-preview/operations.json
 ```
 
