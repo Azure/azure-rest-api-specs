@@ -178,42 +178,6 @@ model SecretBundle {
 }
 
 /**
- * The key vault error exception.
- */
-@error
-model KeyVaultError {
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  error?: Error;
-}
-
-/**
- * The key vault server error.
- */
-model Error {
-  /**
-   * The error code.
-   */
-  @visibility("read")
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility("read")
-  message?: string;
-
-  /**
-   * The key vault server error.
-   */
-  @visibility("read")
-  @encodedName("application/json", "innererror")
-  innerError?: Error;
-}
-
-/**
  * A Deleted Secret consisting of its previous id, attributes and its tags, as well as information on when it will be purged.
  */
 model DeletedSecretBundle {

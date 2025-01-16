@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -18,7 +19,7 @@ namespace KeyVault;
 @summary("Sets a secret in a specified key vault.")
 @route("/secrets/{secret-name}")
 @put
-op setSecret is Azure.Core.Foundations.Operation<
+op setSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
@@ -36,9 +37,7 @@ op setSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretSetParameters;
   },
-  SecretBundle,
-  {},
-  KeyVaultError
+  SecretBundle
 >;
 
 /**
@@ -48,7 +47,7 @@ op setSecret is Azure.Core.Foundations.Operation<
 @summary("Deletes a secret from a specified key vault.")
 @route("/secrets/{secret-name}")
 @delete
-op deleteSecret is Azure.Core.Foundations.Operation<
+op deleteSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -57,9 +56,7 @@ op deleteSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  DeletedSecretBundle,
-  {},
-  KeyVaultError
+  DeletedSecretBundle
 >;
 
 /**
@@ -69,7 +66,7 @@ op deleteSecret is Azure.Core.Foundations.Operation<
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
 @patch
-op updateSecret is Azure.Core.Foundations.Operation<
+op updateSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -93,9 +90,7 @@ op updateSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretUpdateParameters;
   },
-  SecretBundle,
-  {},
-  KeyVaultError
+  SecretBundle
 >;
 
 /**
@@ -105,7 +100,7 @@ op updateSecret is Azure.Core.Foundations.Operation<
 @summary("Get a specified secret from a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
 @get
-op getSecret is Azure.Core.Foundations.Operation<
+op getSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -121,9 +116,7 @@ op getSecret is Azure.Core.Foundations.Operation<
     @clientName("version", "go")
     secretVersion: string;
   },
-  SecretBundle,
-  {},
-  KeyVaultError
+  SecretBundle
 >;
 
 /**
@@ -134,7 +127,7 @@ op getSecret is Azure.Core.Foundations.Operation<
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
-op getSecrets is Azure.Core.Foundations.Operation<
+op getSecrets is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -144,9 +137,7 @@ op getSecrets is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  SecretListResult,
-  {},
-  KeyVaultError
+  SecretListResult
 >;
 
 /**
@@ -157,7 +148,7 @@ op getSecrets is Azure.Core.Foundations.Operation<
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
-op getSecretVersions is Azure.Core.Foundations.Operation<
+op getSecretVersions is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -174,9 +165,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  SecretListResult,
-  {},
-  KeyVaultError
+  SecretListResult
 >;
 
 /**
@@ -187,7 +176,7 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
-op getDeletedSecrets is Azure.Core.Foundations.Operation<
+op getDeletedSecrets is KeyVaultOperation<
   {
     /**
      * Maximum number of results to return in a page. If not specified the service will return up to 25 results.
@@ -197,9 +186,7 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
     @query("maxresults")
     maxresults?: int32;
   },
-  DeletedSecretListResult,
-  {},
-  KeyVaultError
+  DeletedSecretListResult
 >;
 
 /**
@@ -209,7 +196,7 @@ op getDeletedSecrets is Azure.Core.Foundations.Operation<
 @summary("Gets the specified deleted secret.")
 @route("/deletedsecrets/{secret-name}")
 @get
-op getDeletedSecret is Azure.Core.Foundations.Operation<
+op getDeletedSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -218,9 +205,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  DeletedSecretBundle,
-  {},
-  KeyVaultError
+  DeletedSecretBundle
 >;
 
 /**
@@ -231,7 +216,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
 @summary("Permanently deletes the specified secret.")
 @route("/deletedsecrets/{secret-name}")
 @delete
-op purgeDeletedSecret is Azure.Core.Foundations.Operation<
+op purgeDeletedSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -240,9 +225,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  void,
-  {},
-  KeyVaultError
+  void
 >;
 
 /**
@@ -252,7 +235,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
 @summary("Recovers the deleted secret to the latest version.")
 @route("/deletedsecrets/{secret-name}/recover")
 @post
-op recoverDeletedSecret is Azure.Core.Foundations.Operation<
+op recoverDeletedSecret is KeyVaultOperation<
   {
     /**
      * The name of the deleted secret.
@@ -261,9 +244,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  SecretBundle,
-  {},
-  KeyVaultError
+  SecretBundle
 >;
 
 /**
@@ -273,7 +254,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
 @summary("Backs up the specified secret.")
 @route("/secrets/{secret-name}/backup")
 @post
-op backupSecret is Azure.Core.Foundations.Operation<
+op backupSecret is KeyVaultOperation<
   {
     /**
      * The name of the secret.
@@ -282,9 +263,7 @@ op backupSecret is Azure.Core.Foundations.Operation<
     @clientName("name", "go")
     secretName: string;
   },
-  BackupSecretResult,
-  {},
-  KeyVaultError
+  BackupSecretResult
 >;
 
 /**
@@ -294,7 +273,7 @@ op backupSecret is Azure.Core.Foundations.Operation<
 @summary("Restores a backed up secret to a vault.")
 @route("/secrets/restore")
 @post
-op restoreSecret is Azure.Core.Foundations.Operation<
+op restoreSecret is KeyVaultOperation<
   {
     /**
      * The parameters to restore the secret.
@@ -304,7 +283,5 @@ op restoreSecret is Azure.Core.Foundations.Operation<
     @flattenProperty
     parameters: SecretRestoreParameters;
   },
-  SecretBundle,
-  {},
-  KeyVaultError
+  SecretBundle
 >;
