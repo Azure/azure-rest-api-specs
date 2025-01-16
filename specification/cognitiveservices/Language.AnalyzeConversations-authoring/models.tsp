@@ -845,7 +845,7 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
+  evaluationDetails: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
    * Represents trained model label.
