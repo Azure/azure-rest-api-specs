@@ -2207,7 +2207,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkInterfacesUpdateRequest"
+              "$ref": "#/definitions/NetworkInterfaceTagsUpdate"
             }
           }
         ],
@@ -4889,20 +4889,6 @@
         }
       }
     },
-    "LogicalNetworkUpdateProperties": {
-      "type": "object",
-      "description": "Properties under the logical network resource",
-      "properties": {
-        "subnets": {
-          "type": "array",
-          "description": "Subnet - list of subnets under the logical network",
-          "items": {
-            "$ref": "#/definitions/SubnetUpdate"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "LogicalNetworksUpdateRequest": {
       "type": "object",
       "description": "The logical network resource patch definition.",
@@ -4913,10 +4899,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/LogicalNetworkUpdateProperties",
-          "description": "Defines the resource properties for the update."
         }
       }
     },
@@ -5219,13 +5201,16 @@
         }
       }
     },
-    "NetworkInterfacesUpdateProperties": {
+    "NetworkInterfaceTagsUpdate": {
       "type": "object",
-      "description": "Defines the resource properties for the update.",
+      "description": "The type used for updating tags in NetworkInterface resources.",
       "properties": {
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5239,10 +5224,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/NetworkInterfacesUpdateProperties",
-          "description": "Defines the resource properties for the update."
         }
       }
     },
@@ -5349,43 +5330,6 @@
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/NetworkSecurityGroupStatus",
-          "description": "The observed state of Network Security Group",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityGroupStatus": {
-      "type": "object",
-      "description": "The observed state of network security group",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "NetworkSecurityGroup provisioning error code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Descriptive error message"
-        },
-        "provisioningStatus": {
-          "$ref": "#/definitions/NetworkSecurityGroupStatusProvisioningStatus",
-          "description": "network security group provisioning status"
-        }
-      }
-    },
-    "NetworkSecurityGroupStatusProvisioningStatus": {
-      "type": "object",
-      "description": "network security group provisioning status",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "The ID of the operation performed on the network security group"
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
-          "description": "The status of the operation performed on the network security group [Succeeded, Failed, InProgress]"
         }
       }
     },
@@ -6290,32 +6234,6 @@
         }
       }
     },
-    "SubnetUpdate": {
-      "type": "object",
-      "description": "Subnet resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SubnetUpdateProperties",
-          "description": "Properties of the subnet.",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$"
-        }
-      }
-    },
-    "SubnetUpdateProperties": {
-      "type": "object",
-      "description": "Properties of the subnet.",
-      "properties": {
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        }
-      }
-    },
     "TagsObject": {
       "type": "object",
       "description": "Tags object for patch operations.",
@@ -6394,7 +6312,9 @@
         "progressPercentage": {
           "type": "integer",
           "format": "int64",
-          "description": "The progress of the operation in percentage"
+          "description": "The progress of the operation in percentage",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     },
@@ -6591,7 +6511,9 @@
         "progressPercentage": {
           "type": "integer",
           "format": "int64",
-          "description": "The progress of the operation in percentage"
+          "description": "The progress of the operation in percentage",
+          "minimum": 0,
+          "maximum": 100
         },
         "errorCode": {
           "type": "string",
