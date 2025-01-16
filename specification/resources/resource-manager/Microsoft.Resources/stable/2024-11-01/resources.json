@@ -5606,7 +5606,7 @@
         },
         "managedBy": {
           "type": "string",
-          "description": "ID of the resource that manages this resource."
+          "description": "ID of the resource that manages this resource. This field is immutable once set."
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -5819,7 +5819,10 @@
         },
         "managedBy": {
           "type": "string",
-          "description": "The ID of the resource that manages this resource group."
+          "description": "The ID of the resource that manages this resource group. This field is immutable once set.",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -5845,10 +5848,6 @@
         "properties": {
           "$ref": "#/definitions/ResourceGroupProperties",
           "description": "The resource group properties."
-        },
-        "managedBy": {
-          "type": "string",
-          "description": "The ID of the resource that manages this resource group."
         },
         "tags": {
           "type": "object",

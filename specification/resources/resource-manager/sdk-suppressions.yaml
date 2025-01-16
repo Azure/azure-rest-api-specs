@@ -13,6 +13,7 @@ suppressions:
         - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateAtTenantScopeResponse` has been removed
         - Field `DeploymentValidateResult` of struct `DeploymentsClientValidateResponse` has been removed
         - Struct `DeploymentValidateResult` has been removed
+        - Field `ManagedBy` of struct `ResourceGroupPatchable` has been removed
     - package: sdk/resourcemanager/resources/armdeploymentstacks
       breaking-changes:
         - Struct `DeploymentStackPropertiesActionOnUnmanage` has been removed
@@ -106,3 +107,8 @@ suppressions:
         - Removed Enum KnownExemptionCategory
         - Removed operation group DataPolicyManifests
         - Removed operation group PolicyExemptions
+  azure-sdk-for-python:
+    - package: azure-mgmt-resource
+      breaking-changes:
+        - Model ResourceGroupPatchable no longer has parameter managed_by
+    
