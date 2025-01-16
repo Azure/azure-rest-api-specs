@@ -258,12 +258,15 @@ model AcsRecordingFileStatusUpdatedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
-  sender?: string;
+  sender: string;
 
   /** The recipient Email Address */
-  recipient?: string;
+  recipient: string;
 
-  /** The Id of the email been sent */
+  /** The Internet Message Id of the email that has been sent */
+  internetMessageId: string;
+
+  /** The Id of the email that has been sent */
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
@@ -899,6 +902,9 @@ union AcsEmailDeliveryReportStatus {
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
   statusMessage?: string;
+
+  /** Recipient mail server host name */
+  recipientMailServerHostName?: string;
 }
 
 /** Schema of common properties of all chat thread events */

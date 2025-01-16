@@ -706,9 +706,13 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
+        "internetMessageId": {
+          "type": "string",
+          "description": "The Internet Message Id of the email that has been sent"
+        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -725,6 +729,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
         "status",
         "deliveryStatusDetails",
         "deliveryAttemptTimestamp"
@@ -785,6 +792,10 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
+        },
+        "recipientMailServerHostName": {
+          "type": "string",
+          "description": "Recipient mail server host name"
         }
       }
     },
