@@ -415,7 +415,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_StartMigrationToVirtualMachineScaleSet",
-        "description": "Start a Migration from an existing availability set to Virtual Machine Scale Set.",
+        "description": "Start migration operation on an Availability Set to move its Virtual Machines to a Virtual Machine Scale Set. This should be followed by a migrate operation on each Virtual Machine that triggers a downtime on the Virtual Machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -472,7 +472,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_CancelMigrationToVirtualMachineScaleSet",
-        "description": "Cancel the migration for provided Availability Set and bring Availability Set.",
+        "description": "Cancel the migration operation on an Availability Set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -520,7 +520,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_ValidateMigrationToVirtualMachineScaleSet",
-        "description": "Validate an existing Availability Set migration to Virtual Machine Scale Set.",
+        "description": "Validates that the Virtual Machines in the Availability Set can be migrated to the provided Virtual Machine Scale Set.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -577,7 +577,7 @@
           "AvailabilitySets"
         ],
         "operationId": "AvailabilitySets_convertToVirtualMachineScaleSet",
-        "description": "Convert Availability Set to Flexible Virtual Machine Scale Set.",
+        "description": "Create a new Flexible Virtual Machine Scale Set and migrate all the Virtual Machines in the Availability Set. This does not trigger a downtime on the Virtual Machines.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -596,7 +596,6 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/ConvertToVirtualMachineScaleSetInput"
             },
@@ -672,7 +671,7 @@
         "virtualMachineScaleSetMigrationInfo": {
           "$ref": "#/definitions/VirtualMachineScaleSetMigrationInfo",
           "readOnly": true,
-          "description": "Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set."
+          "description": "Describes the migration properties on the Availability Set."
         }
       },
       "description": "The instance view of a resource."
@@ -793,9 +792,6 @@
           "description": "Specifies information about the Virtual Machine Scale Set that the Availability Set should be converted to."
         }
       },
-      "required": [
-        "virtualMachineScaleSetName"
-      ],
       "description": "Describes the Virtual Machine Scale Set to convert from Availability Set."
     }
   }
