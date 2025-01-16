@@ -654,6 +654,10 @@
         "version": {
           "type": "string",
           "description": "The policy definition version in #.#.# format."
+        },
+        "externalEvaluationEnforcementSettings": {
+          "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation.",
+          "$ref": "#/definitions/ExternalEvaluationEnforcementSettings"
         }
       },
       "description": "The policy definition properties."
@@ -777,6 +781,49 @@
         }
       },
       "description": "List of policy definition versions."
+    },
+    "ExternalEvaluationEnforcementSettings": {
+      "type": "object",
+      "properties": {
+        "missingTokenAction": {
+          "type": "string",
+          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny."
+        },
+        "requireChangeReference": {
+          "type": ["boolean", "string"],
+          "description": "Whether the external evaluation requires a valid change reference to be provided when acquiring a token."
+        },
+        "resultLifespan": {
+          "type": "string",
+          "description": "The lifespan of the endpoint invocation result after which it's no longer valid."
+        },
+        "endpointSettings": {
+          "description": "The settings of an external endpoint providing evaluation results.",
+          "$ref": "#/definitions/ExternalEvaluationEndpointSettings"
+        },
+        "roleDefinitionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of the role definition Ids the assignment's MSI will need in order to invoke the endpoint."
+        }
+      },
+      "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
+    },
+    "ExternalEvaluationEndpointSettings": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the endpoint."
+        },
+        "details": {
+          "type": "object",
+          "description": "The details of the endpoint."
+        }
+      },
+      "description": "The settings of an external endpoint providing evaluation results."
     }
   },
   "parameters": {
