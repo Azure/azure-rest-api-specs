@@ -59,7 +59,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,7 +98,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,9 +131,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful request when deleting a Azure Monitor PrivateLinkScope."
-          },
           "204": {
             "description": "The specified PrivateLinkScope does not exist."
           },
@@ -148,7 +145,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -186,7 +183,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -238,7 +235,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -287,7 +284,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -312,6 +309,12 @@
         "description": "Get the status of an azure asynchronous operation associated with a private link scope operation.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "name": "asyncOperationId",
             "in": "path",
             "required": true,
@@ -319,13 +322,7 @@
             "description": "The operation Id."
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -338,7 +335,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -375,7 +372,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -420,7 +417,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -469,7 +466,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -532,7 +529,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -588,7 +585,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -631,7 +628,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -680,7 +677,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -694,7 +691,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Approve or reject a private endpoint connection with a given name.",
+        "description": "Add an Azure monitor scoped resource in the private link scope.",
         "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
         "parameters": [
           {
@@ -749,7 +746,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -764,7 +761,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Deletes a private endpoint connection with a given name.",
+        "description": "Deletes an Azure monitor scoped resource with a given name.",
         "operationId": "PrivateLinkScopedResources_Delete",
         "parameters": [
           {
@@ -805,7 +802,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -822,7 +819,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Gets all private endpoint connections on a private link scope.",
+        "description": "Gets all scoped resources on a private link scope.",
         "operationId": "PrivateLinkScopedResources_ListByPrivateLinkScope",
         "parameters": [
           {
@@ -848,7 +845,7 @@
           "default": {
             "description": "An error occurred.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -906,10 +903,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "Resource tags",
+          "type": "object"
         }
       },
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance.",
+      "type": "object"
     },
     "AzureMonitorPrivateLinkScope": {
       "properties": {
@@ -932,10 +931,12 @@
       "required": [
         "properties"
       ],
-      "description": "An Azure Monitor PrivateLinkScope definition."
+      "description": "An Azure Monitor PrivateLinkScope definition.",
+      "type": "object"
     },
     "AzureMonitorPrivateLinkScopeProperties": {
       "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -977,7 +978,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessModeSettingsExclusion"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1017,6 +1019,7 @@
     },
     "AzureMonitorPrivateLinkScopeListResult": {
       "description": "Describes the list of Azure Monitor PrivateLinkScope resources.",
+      "type": "object",
       "required": [
         "value"
       ],
@@ -1083,20 +1086,19 @@
           "type": "string"
         },
         "provisioningState": {
-          "description": "State of the private endpoint connection.",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DefaultErrorResponse": {
-      "title": "Default error response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+          "description": "State of the Azure monitor resource.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Provisioning",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ScopedResourceProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     }
