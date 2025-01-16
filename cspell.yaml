@@ -2,10 +2,49 @@ version: '0.2'
 language: en
 flagWords:
   - teh
-ignorePaths:
+ignorePaths:  
   - '**/examples/**'
+  - '**/package-lock.json'
+  - cspell.json
   - cspell.yaml
-  - '!specification/**'
+  - node_modules/**
+
+  # Exclude all files in the repo which aren't in specification/. cspell does 
+  # not support "!specification/**" syntax in ignorePaths.
+  - .azure-pipelines/**
+  - .devcontainer/**
+  - .github/**
+  - .vscode/**
+  - arm-compute/**
+  - dev/**
+  - documentation/**
+  - eng/**
+  - node_modules/**
+  - profile/**
+  - profiles/**
+  - scripts/**
+  - azure-pipelines.yml
+  - baseline.js
+  - baseline.ps1
+  - check-spelling-parallel.js
+  - clean.ps1
+  - CONTRIBUTING.md
+  - cspell.json
+  - cspell.yaml
+  - custom-words.txt
+  - dedup.js
+  - go.ps1
+  - LICENSE
+  - output.txt
+  - package-lock.json
+  - package.json
+  - README.md
+  - SECURITY.md
+  - set-common-words.js
+  - set-cspell-configs.js
+  - set-cspell-overrides.js
+  - specificationRepositoryConfiguration.json
+  - tsconfig.json
 ignoreRegExpList:
   - Base64
   - email
