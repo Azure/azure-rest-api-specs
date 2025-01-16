@@ -123,6 +123,14 @@ interface NetworkFabrics {
     CommitBatchStatusResponse
   >;
 
+  @doc("Post action: Discards a Batch operation in progress.")
+  @added(Versions.v2024_06_15_preview)
+  discardCommitBatch is ArmResourceActionAsync<
+    NetworkFabric,
+    DiscardCommitBatchRequest,
+    DiscardCommitBatchResponse
+  >;
+
   @doc("Post action: Triggers network fabric lock operation.")
   @added(Versions.v2024_06_15_preview)
   lockFabric is ArmResourceActionAsync<
@@ -166,3 +174,4 @@ interface NetworkFabrics {
 );
 @@doc(NetworkFabrics.commitBatchStatus::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.lockFabric::parameters.body, "Request payload.");
+@@doc(NetworkFabrics.discardCommitBatch::parameters.body, "Request payload.");

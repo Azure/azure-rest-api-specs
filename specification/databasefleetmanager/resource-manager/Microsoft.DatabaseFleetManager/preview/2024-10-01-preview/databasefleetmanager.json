@@ -2603,6 +2603,41 @@
         }
       }
     },
+    "DestinationTierOverride": {
+      "type": "object",
+      "description": "A destination tier override.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "Resource type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "destinationTier": {
+          "type": "string",
+          "description": "Destination tier.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Resource name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "resourceType",
+        "destinationTier",
+        "resourceName"
+      ]
+    },
     "FirewallRule": {
       "type": "object",
       "description": "A firewall rule.",
@@ -2964,10 +2999,18 @@
             "create"
           ]
         },
-        "numOfEmptyPreprovisionedDatabases": {
+        "highAvailabilityReplicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of empty preprovisioned databases for fast database provisioning.",
+          "description": "Number of high availability replicas for databases in this tier.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ZoneRedundancy",
+          "description": "Enable zone redundancy for all databases in this tier.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3236,16 +3279,41 @@
           ]
         },
         "destinationTierOverrides": {
-          "type": "object",
+          "type": "array",
           "description": "Destination tier overrides.",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/DestinationTierOverride"
           },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
           ]
         }
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "Resource type of the destination tier override.",
+      "enum": [
+        "Database",
+        "ElasticPool"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Database",
+            "value": "Database",
+            "description": "Database resource type."
+          },
+          {
+            "name": "ElasticPool",
+            "value": "ElasticPool",
+            "description": "Elastic pool resource type."
+          }
+        ]
       }
     },
     "SQLUserType": {
@@ -3310,6 +3378,30 @@
             "create"
           ]
         }
+      }
+    },
+    "ZoneRedundancy": {
+      "type": "string",
+      "description": "Status of zone redundancy in a tier.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneRedundancy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Zone redundancy enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Zone redundancy disabled."
+          }
+        ]
       }
     }
   },
