@@ -452,7 +452,7 @@ model AnalyzeConversationAuthoringExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ExportedProjectAssets", "csharp")
+@clientName("ExportedProjectAsset", "csharp")
 model AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The type of project containing the assets.
@@ -1757,8 +1757,8 @@ model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationSummarizationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAssets {
+@clientName("ConversationSummarizationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset {
   /**
    * Represents the conversations of the project.
    */
@@ -1916,8 +1916,8 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
 /**
  * Represents the assets of an orchestration project.
  */
-@clientName("OrchestrationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringOrchestrationExportedProjectAssets
+@clientName("OrchestrationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
   extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * Represents the intents of the project.
