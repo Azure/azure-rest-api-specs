@@ -2482,10 +2482,16 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
+        },
+        "segmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments in the message"
         }
       },
       "required": [
-        "receivedTimestamp"
+        "receivedTimestamp",
+        "segmentCount"
       ],
       "allOf": [
         {
