@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-- /preview/2023-06-01-preview/privateLinkScopes_API.json
+- preview\2023-06-01-preview\privateLinkScopes_API.json
 ```
 
 ### Tag: package-2021-09-01
@@ -50,25 +50,7 @@ These settings apply only when `--tag=package-2021-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-09-01'
 input-file:
-- /stable/2021-09-01/privateLinkScopes_API.json
-```
-
-### Tag: package-2021-07-01-preview
-
-These settings apply only when `--tag=package-2021-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-07-01-preview'
-input-file:
-  - /preview/2021-07-01-preview/privateLinkScopes_API.json
-```
-
-### Tag: package-2019-10-17-preview
-
-These settings apply only when `--tag=package-2019-10-17-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-10-17-preview'
-input-file:
-  - /preview/2019-10-17-preview/privateLinkScopes_API.json
+- stable\2021-09-01\privateLinkScopes_API.json
 ```
 
 ## Python
