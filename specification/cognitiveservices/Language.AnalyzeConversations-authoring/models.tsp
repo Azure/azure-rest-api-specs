@@ -445,7 +445,7 @@ model AnalyzeConversationAuthoringExportedProject {
   /**
    * Represents the project assets.
    */
-  assets?: AnalyzeConversationAuthoringExportedProjectAssets;
+  assets?: AnalyzeConversationAuthoringExportedProjectAsset;
 }
 
 /**
@@ -453,7 +453,7 @@ model AnalyzeConversationAuthoringExportedProject {
  */
 @discriminator("projectKind")
 @clientName("ExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringExportedProjectAssets {
+model AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The type of project containing the assets.
    */
@@ -1680,9 +1680,9 @@ model AnalyzeConversationAuthoringConversationExportedIntent {
 /**
  * Represents the exported assets of a conversational project.
  */
-@clientName("ConversationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("ConversationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationExportedProjectAsset
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The intents defined in the project.
    */
@@ -1918,7 +1918,7 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
  */
 @clientName("OrchestrationExportedProjectAssets", "csharp")
 model AnalyzeConversationAuthoringOrchestrationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * Represents the intents of the project.
    */
