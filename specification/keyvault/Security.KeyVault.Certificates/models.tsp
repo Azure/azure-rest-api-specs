@@ -131,7 +131,7 @@ union KeyUsageType {
 /**
  * The type of the action.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; orignially modelAsString=false"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Intentional enum; originally modelAsString=false"
 enum CertificatePolicyAction {
   /** A certificate policy that will email certificate contacts. */
   EmailContacts: "EmailContacts",
