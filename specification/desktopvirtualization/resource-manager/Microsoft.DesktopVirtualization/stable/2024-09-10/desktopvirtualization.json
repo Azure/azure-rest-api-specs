@@ -49,6 +49,9 @@
       "name": "ApplicationGroups"
     },
     {
+      "name": "AppAttachPackageInfo"
+    },
+    {
       "name": "MSIXImages"
     },
     {
@@ -2063,13 +2066,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMSIXImage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMsixImage": {
       "post": {
         "operationId": "MsixImages_Expand",
         "tags": [
           "MSIXImages"
         ],
-        "description": "Expands and Lists MSIX packages in an Image, given the Image Path.",
+        "description": "Expands and Lists MSIX packages in an Image, given the Image Path.\nThis action uses incorrect Msix casing intentionally to match the previous APIs.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2124,11 +2127,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/importAppAttachPackageInfo": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/imports": {
       "post": {
-        "operationId": "HostPools_ImportAppAttachPackageInfo",
+        "operationId": "AppAttachPackageInfo_Imports",
         "tags": [
-          "HostPools"
+          "AppAttachPackageInfo"
         ],
         "description": "Gets information from a package given the path to the package.",
         "parameters": [
@@ -5237,7 +5240,7 @@
           "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailure": {
-          "$ref": "#/definitions/FailHealthCheckOnStagingFailure",
+          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         }
       }
@@ -5267,7 +5270,7 @@
           "description": "URL path to certificate name located in keyVault"
         },
         "failHealthCheckOnStagingFailureEnum": {
-          "$ref": "#/definitions/FailHealthCheckOnStagingFailure",
+          "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         }
       }
@@ -6039,7 +6042,7 @@
         }
       }
     },
-    "FailHealthCheckOnStagingFailure": {
+    "FailHealthCheckOnStagingFailureEnum": {
       "type": "string",
       "description": "Parameter indicating how the health check should behave if this package fails staging",
       "enum": [
@@ -6048,7 +6051,7 @@
         "DoNotFail"
       ],
       "x-ms-enum": {
-        "name": "FailHealthCheckOnStagingFailure",
+        "name": "FailHealthCheckOnStagingFailureEnum",
         "modelAsString": true,
         "values": [
           {

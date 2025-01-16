@@ -29,13 +29,26 @@ model HostPool
   ...ResourceSkuProperty;
 }
 
+@armResourceOperations
+interface AppAttachPackageInfo {
+  /**
+   * Gets information from a package given the path to the package.
+   */
+  imports is ArmResourceActionSync<
+    HostPool,
+    ImportPackageInfoRequest,
+    AppAttachPackageList
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @armResourceOperations
 interface MSIXImages {
   /**
    * Expands and Lists MSIX packages in an Image, given the Image Path.
+   * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
-  @action("expandMSIXImage")
+  @action("expandMsixImage")
   expand is ArmResourceActionSync<HostPool, MSIXImageURI, ExpandMSIXImageList>;
 }
 
@@ -176,15 +189,6 @@ interface HostPools {
   >;
 
   /**
-   * Gets information from a package given the path to the package.
-   */
-  importAppAttachPackageInfo is ArmResourceActionSync<
-    HostPool,
-    ImportPackageInfoRequest,
-    AppAttachPackageList
-  >;
-
-  /**
    * List userSessions.
    */
   @get
@@ -236,6 +240,6 @@ interface HostPools {
 @@doc(MSIXImages.expand::parameters.body,
   "Object containing URI to MSIX Image"
 );
-@@doc(HostPools.importAppAttachPackageInfo::parameters.body,
+@@doc(AppAttachPackageInfo.imports::parameters.body,
   "Object containing URI to package image and other optional properties"
 );

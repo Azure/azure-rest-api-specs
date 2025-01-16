@@ -57,7 +57,7 @@ union PackageTimestamped {
 /**
  * Parameter indicating how the health check should behave if this package fails staging
  */
-union FailHealthCheckOnStagingFailure {
+union FailHealthCheckOnStagingFailureEnum {
   string,
 
   /**
@@ -1046,7 +1046,7 @@ model AppAttachPackageProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailureEnum?: FailHealthCheckOnStagingFailure;
+  failHealthCheckOnStagingFailureEnum?: FailHealthCheckOnStagingFailureEnum;
 }
 
 /**
@@ -1997,7 +1997,7 @@ model AppAttachPackagePatchProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailure;
+  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
 }
 
 /**
