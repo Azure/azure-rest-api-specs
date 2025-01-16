@@ -1053,6 +1053,10 @@
         "confidentialVmProperties": {
           "description": "Confidential VM Properties of the cluster",
           "$ref": "#/definitions/ConfidentialVmProperties"
+        },
+        "confidentialGpuProperties": {
+          "description": "Confidential GPU Properties of the cluster",
+          "$ref": "#/definitions/ConfidentialGpuProperties"
         }
       }
     },
@@ -1576,6 +1580,22 @@
           },
           "readOnly": true
         },
+        "nodeState": {
+          "description": "State of the cluster node.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NodeUp",
+            "NodeDown",
+            "NodePaused",
+            "NodeJoining"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "ehcResourceId": {
           "description": "Edge Hardware Center Resource Id",
           "type": "string",
@@ -1858,11 +1878,21 @@
             "modelAsString": true
           },
           "readOnly": true
+        }
+      }
+    },
+    "ConfidentialGpuProperties": {
+      "type": "object",
+      "description": "Confidential GPU Properties of the cluster",
+      "properties": {
+        "confidentialGpuIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialGpuIntent"
         },
         "confidentialGpuStatus": {
           "type": "string",
           "enum": [
             "Enabled",
+            "PartiallyEnabled",
             "Disabled"
           ],
           "default": "Disabled",

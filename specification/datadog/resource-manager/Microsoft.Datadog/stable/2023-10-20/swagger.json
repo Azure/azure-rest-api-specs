@@ -142,7 +142,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
+              "$ref": "#/definitions/CreateResourceSupportedResponseList"
             }
           },
           "default": {
@@ -152,9 +152,12 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "CreationSupported_Get": {
-            "$ref": "./examples/CreationSupported_Get.json"
+          "CreationSupported_List": {
+            "$ref": "./examples/CreationSupported_List.json"
           }
         }
       }
@@ -495,7 +498,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2021-03-01 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2023-10-20 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1279,7 +1282,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionProperties"
+              "$ref": "#/definitions/MonitoredSubscriptionPropertiesList"
             }
           },
           "default": {
@@ -1288,6 +1291,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1646,6 +1652,22 @@
         }
       }
     },
+    "CreateResourceSupportedResponseList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateResourceSupportedResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "DatadogApiKey": {
       "required": [
         "key"
@@ -1993,6 +2015,21 @@
         }
       }
     },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "OperationDisplay": {
       "description": "The object that represents the operation.",
       "type": "object",
@@ -2056,7 +2093,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the SKU.",
+          "description": "Name of the SKU in {PlanId} format. For Terraform, the only allowed value is 'Linked'.",
           "type": "string"
         }
       }
@@ -2077,7 +2114,8 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProvisioningState"
-      }
+      },
+      "readOnly": true
     },
     "MonitoringStatus": {
       "description": "Flag specifying if the resource monitoring is enabled or disabled.",
@@ -2108,7 +2146,7 @@
       "readOnly": true
     },
     "DatadogOrganizationProperties": {
-      "description": "Datadog organization properties",
+      "description": "Specify the Datadog organization name. In the case of linking to existing organizations, Id, ApiKey, and Applicationkey is required as well.",
       "type": "object",
       "properties": {
         "name": {
@@ -2174,13 +2212,13 @@
           ]
         },
         "cspm": {
-          "description": "The configuration which describes the state of cloud security posture management",
+          "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
           "type": "boolean"
         }
       }
     },
     "UserInfo": {
-      "description": "User info",
+      "description": "Includes name, email and optionally, phone number. User Information can't be null.",
       "type": "object",
       "properties": {
         "name": {
@@ -2249,7 +2287,7 @@
         "UserAssigned"
       ],
       "type": "string",
-      "description": "Identity type",
+      "description": "Specifies the identity type of the Datadog Monitor. At this time the only allowed value is 'SystemAssigned'.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ManagedIdentityTypes"
@@ -2344,7 +2382,7 @@
           "$ref": "#/definitions/MonitoringStatus"
         },
         "cspm": {
-          "description": "The new cspm value of the monitor resource.",
+          "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
           "type": "boolean"
         }
       }
