@@ -1061,17 +1061,17 @@ model AnalyzeConversationAuthoringConfusionMatrixCell {
 @clientName("EntityEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringEntityEvaluationSummary {
   /**
-   * Represents the model precision
+   * Represents the model F1 score
    */
   f1: float64;
 
   /**
-   * Represents the model recall
+   * Represents the model precision
    */
   precision: float64;
 
   /**
-   * Represents the model F1 score
+   * Represents the model precision
    */
   recall: float64;
 
