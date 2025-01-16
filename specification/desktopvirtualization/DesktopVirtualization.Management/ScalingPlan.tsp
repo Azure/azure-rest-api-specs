@@ -111,6 +111,7 @@ interface ScalingPlans {
    * List scaling plan associated with hostpool.
    */
   @get
+  @action("scalingPlans")
   listByHostPool is ArmResourceActionSync<
     HostPool,
     void,

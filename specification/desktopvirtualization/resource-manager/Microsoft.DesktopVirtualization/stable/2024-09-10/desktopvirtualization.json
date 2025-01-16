@@ -70,6 +70,9 @@
       "name": "ScalingPlans"
     },
     {
+      "name": "PrivateLinkResourcesWs"
+    },
+    {
       "name": "Workspaces"
     },
     {
@@ -2124,81 +2127,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/listByHostPool": {
-      "get": {
-        "operationId": "ScalingPlans_ListByHostPool",
-        "tags": [
-          "ScalingPlans"
-        ],
-        "description": "List scaling plan associated with hostpool.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Number of items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ScalingPlanList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScalingPlan_ListByHostPool": {
-            "$ref": "./examples/ScalingPlans_ListByHostPool.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/listRegistrationTokens": {
       "post": {
         "operationId": "HostPools_ListRegistrationTokens",
@@ -2748,6 +2676,81 @@
           "HostPools_RetrieveRegistrationToken_Post": {
             "$ref": "./examples/HostPools_RetrieveRegistrationToken.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/scalingPlans": {
+      "get": {
+        "operationId": "ScalingPlans_ListByHostPool",
+        "tags": [
+          "ScalingPlans"
+        ],
+        "description": "List scaling plan associated with hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScalingPlan_ListByHostPool": {
+            "$ref": "./examples/ScalingPlans_ListByHostPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4900,6 +4903,76 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResourcesWs_ListByWorkspace",
+        "tags": [
+          "PrivateLinkResourcesWs"
+        ],
+        "description": "List the private link resources available for this hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -7364,7 +7437,7 @@
       "description": "Resource Type of Application.",
       "enum": [
         "InBuilt",
-        "MSIXApplication"
+        "MsixApplication"
       ],
       "x-ms-enum": {
         "name": "RemoteApplicationType",
@@ -7376,8 +7449,8 @@
             "description": "Built-in applications"
           },
           {
-            "name": "MSIXApplication",
-            "value": "MSIXApplication",
+            "name": "MsixApplication",
+            "value": "MsixApplication",
             "description": "Imported MSIX application packages"
           }
         ]
@@ -7689,8 +7762,29 @@
           "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
         },
         "rampUpStartVMOnConnect": {
-          "$ref": "#/definitions/SetStartVMOnConnect",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually."
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
+          "default": "Enable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Start VM on Connect is enabled"
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
+              }
+            ]
+          }
         },
         "rampUpActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -7762,8 +7856,29 @@
           "description": "Starting time for ramp down period."
         },
         "rampDownStartVMOnConnect": {
-          "$ref": "#/definitions/SetStartVMOnConnect",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase."
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.",
+          "default": "Enable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Start VM on Connect is enabled"
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
+              }
+            ]
+          }
         },
         "rampDownActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",

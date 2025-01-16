@@ -511,7 +511,7 @@ union RemoteApplicationType {
   /**
    * Imported MSIX application packages
    */
-  MSIXApplication: "MSIXApplication",
+  MsixApplication: "MsixApplication",
 }
 
 /**
@@ -3032,7 +3032,7 @@ model ScalingPlanPersonalScheduleProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect;
+  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the ramp up period.
@@ -3094,7 +3094,7 @@ model ScalingPlanPersonalScheduleProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect;
+  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the ramp down period.
