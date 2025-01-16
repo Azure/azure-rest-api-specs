@@ -9,8 +9,4 @@ using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
-@@clientName(CustomPrivateEndpointConnection,
-  "CustomPrivateEndpointConnection"
-);
-
 @@clientName(AppAttachPackages, "AppAttachPackage");

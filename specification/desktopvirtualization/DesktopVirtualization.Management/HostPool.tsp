@@ -30,11 +30,49 @@ model HostPool
 }
 
 @armResourceOperations
+interface UserSessionsHp {
+  /**
+   * List userSessions.
+   */
+  @get
+  @action("userSessions")
+  listByHostPool is ArmResourceActionSync<
+    HostPool,
+    void,
+    UserSessionList,
+    Parameters = {
+      /**
+       * OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
+}
+@armResourceOperations
 interface AppAttachPackageInfo {
   /**
    * Gets information from a package given the path to the package.
    */
-  imports is ArmResourceActionSync<
+  `import` is ArmResourceActionSync<
     HostPool,
     ImportPackageInfoRequest,
     AppAttachPackageList
@@ -187,42 +225,6 @@ interface HostPools {
     void,
     RegistrationInfo
   >;
-
-  /**
-   * List userSessions.
-   */
-  @get
-  @action("userSessions")
-  userSessionsListByHostPool is ArmResourceActionSync<
-    HostPool,
-    void,
-    UserSessionList,
-    Parameters = {
-      /**
-       * OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
-  >;
 }
 
 @@maxLength(HostPool.name, 64);
@@ -240,6 +242,6 @@ interface HostPools {
 @@doc(MSIXImages.expand::parameters.body,
   "Object containing URI to MSIX Image"
 );
-@@doc(AppAttachPackageInfo.imports::parameters.body,
+@@doc(AppAttachPackageInfo.`import`::parameters.body,
   "Object containing URI to package image and other optional properties"
 );

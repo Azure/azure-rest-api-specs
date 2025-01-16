@@ -31,6 +31,38 @@ model ApplicationGroup
 }
 
 @armResourceOperations
+interface StartMenuItems {
+  /**
+   * List start menu items in the given application group.
+   */
+  @get
+  @action("startMenuItems")
+  list is ArmResourceActionSync<
+    ApplicationGroup,
+    void,
+    StartMenuItemList,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
+}
+@armResourceOperations
 interface ApplicationGroups {
   /**
    * Get an application group.
@@ -99,36 +131,6 @@ interface ApplicationGroups {
       $filter?: string;
     },
     Response = ApplicationGroupList
-  >;
-
-  /**
-   * List start menu items in the given application group.
-   */
-  @get
-  @action("startMenuItems")
-  list is ArmResourceActionSync<
-    ApplicationGroup,
-    void,
-    StartMenuItemList,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
   >;
 }
 

@@ -46,7 +46,13 @@
       "name": "AppAttachPackages"
     },
     {
+      "name": "StartMenuItems"
+    },
+    {
       "name": "ApplicationGroups"
+    },
+    {
+      "name": "UserSessionsHp"
     },
     {
       "name": "AppAttachPackageInfo"
@@ -1458,9 +1464,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/startMenuItems": {
       "get": {
-        "operationId": "ApplicationGroups_List",
+        "operationId": "StartMenuItems_List",
         "tags": [
-          "ApplicationGroups"
+          "StartMenuItems"
         ],
         "description": "List start menu items in the given application group.",
         "parameters": [
@@ -1519,6 +1525,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StartMenuItem_List": {
+            "$ref": "./examples/StartMenuItems_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2127,9 +2138,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/imports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/import": {
       "post": {
-        "operationId": "AppAttachPackageInfo_Imports",
+        "operationId": "AppAttachPackageInfo_Import",
         "tags": [
           "AppAttachPackageInfo"
         ],
@@ -2176,6 +2187,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppAttachPackageInfo_Import": {
+            "$ref": "./examples/AppAttachPackageInfo_Import.json"
           }
         },
         "x-ms-pageable": {
@@ -3373,9 +3389,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
       "get": {
-        "operationId": "HostPools_UserSessionsListByHostPool",
+        "operationId": "UserSessionsHp_ListByHostPool",
         "tags": [
-          "HostPools"
+          "UserSessionsHp"
         ],
         "description": "List userSessions.",
         "parameters": [
