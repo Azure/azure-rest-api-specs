@@ -39,7 +39,7 @@ interface MsixPackages {
    */
   get is ArmResourceRead<
     MsixPackage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -47,7 +47,7 @@ interface MsixPackages {
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MsixPackage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -57,7 +57,7 @@ interface MsixPackages {
   update is ArmCustomPatchSync<
     MsixPackage,
     MsixPackagePatch,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -65,7 +65,7 @@ interface MsixPackages {
    */
   delete is ArmResourceDeleteSync<
     MsixPackage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -73,7 +73,7 @@ interface MsixPackages {
    */
   list is ArmResourceListByParent<
     MsixPackage,
-    Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Parameters = {
       /**
        * Number of items per page.

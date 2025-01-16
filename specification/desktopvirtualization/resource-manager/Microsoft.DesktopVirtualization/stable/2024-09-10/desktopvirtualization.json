@@ -274,295 +274,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
-      "get": {
-        "operationId": "MsixPackages_List",
-        "tags": [
-          "MsixPackages"
-        ],
-        "description": "List MSIX packages in hostpool.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "Number of items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "isDescending",
-            "in": "query",
-            "description": "Indicates whether the collection is descending.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "initialSkip",
-            "in": "query",
-            "description": "Initial number of items to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/MsixPackageList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
-      "get": {
-        "operationId": "MsixPackages_Get",
-        "tags": [
-          "MsixPackages"
-        ],
-        "description": "Get a msixpackage.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "msixPackageFullName",
-            "in": "path",
-            "description": "The version specific package full name of the MSIX package within specified hostpool",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MsixPackage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "MsixPackages_CreateOrUpdate",
-        "tags": [
-          "MsixPackages"
-        ],
-        "description": "Create or update a MSIX package.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "msixPackageFullName",
-            "in": "path",
-            "description": "The version specific package full name of the MSIX package within specified hostpool",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Object containing  MSIX Package definitions.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MsixPackage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'MsixPackage' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MsixPackage"
-            }
-          },
-          "201": {
-            "description": "Resource 'MsixPackage' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MsixPackage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "MsixPackages_Update",
-        "tags": [
-          "MsixPackages"
-        ],
-        "description": "Update an  MSIX Package.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "msixPackageFullName",
-            "in": "path",
-            "description": "The version specific package full name of the MSIX package within specified hostpool",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "Object containing MSIX Package definitions.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MsixPackagePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MsixPackage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "MsixPackages_Delete",
-        "tags": [
-          "MsixPackages"
-        ],
-        "description": "Remove an MSIX Package.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "hostPoolName",
-            "in": "path",
-            "description": "The name of the host pool within the specified resource group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "msixPackageFullName",
-            "in": "path",
-            "description": "The version specific package full name of the MSIX package within specified hostpool",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
       "get": {
         "operationId": "ScalingPlans_ListBySubscription",
@@ -2589,6 +2300,310 @@
         "x-ms-examples": {
           "HostPools_ListRegistrationToken_Post": {
             "$ref": "./examples/HostPools_ListRegistrationTokens.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
+      "get": {
+        "operationId": "MsixPackages_List",
+        "tags": [
+          "MsixPackages"
+        ],
+        "description": "List MSIX packages in hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MsixPackageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
+      "get": {
+        "operationId": "MsixPackages_Get",
+        "tags": [
+          "MsixPackages"
+        ],
+        "description": "Get a msixpackage.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "msixPackageFullName",
+            "in": "path",
+            "description": "The version specific package full name of the MSIX package within specified hostpool",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MsixPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "MsixPackages_CreateOrUpdate",
+        "tags": [
+          "MsixPackages"
+        ],
+        "description": "Create or update a MSIX package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "msixPackageFullName",
+            "in": "path",
+            "description": "The version specific package full name of the MSIX package within specified hostpool",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Object containing  MSIX Package definitions.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MsixPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MsixPackage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MsixPackage"
+            }
+          },
+          "201": {
+            "description": "Resource 'MsixPackage' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MsixPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "MsixPackages_Update",
+        "tags": [
+          "MsixPackages"
+        ],
+        "description": "Update an  MSIX Package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "msixPackageFullName",
+            "in": "path",
+            "description": "The version specific package full name of the MSIX package within specified hostpool",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Object containing MSIX Package definitions.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MsixPackagePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MsixPackage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MsixPackages_Delete",
+        "tags": [
+          "MsixPackages"
+        ],
+        "description": "Remove an MSIX Package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "msixPackageFullName",
+            "in": "path",
+            "description": "The version specific package full name of the MSIX package within specified hostpool",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
