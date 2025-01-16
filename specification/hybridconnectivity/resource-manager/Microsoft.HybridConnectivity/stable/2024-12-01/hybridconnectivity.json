@@ -394,6 +394,15 @@
             "default": 10800,
             "minimum": 600,
             "maximum": 10800
+          },
+          {
+            "name": "ListIngressGatewayCredentialsRequest",
+            "in": "body",
+            "description": "Object of type ListIngressGatewayCredentialsRequest",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ListIngressGatewayCredentialsRequest"
+            }
           }
         ],
         "responses": {
@@ -2076,6 +2085,16 @@
         "serviceName": {
           "$ref": "#/definitions/ServiceName",
           "description": "The name of the service. If not provided, the request will by pass the generation of service configuration token"
+        }
+      }
+    },
+    "ListIngressGatewayCredentialsRequest": {
+      "type": "object",
+      "description": "Represent ListIngressGatewayCredentials Request object.",
+      "properties": {
+        "serviceName": {
+          "$ref": "#/definitions/ServiceName",
+          "description": "The name of the service. If not provided, the request will by pass the generation of service configuration token."
         }
       }
     },
