@@ -16960,6 +16960,60 @@
       "x-ms-discriminator-value": "DataDrift",
       "additionalProperties": false
     },
+    "DataGenerationTaskType": {
+      "description": "Enum to determine the type of Data Generation Task.",
+      "enum": [
+        "Conversation",
+        "Math",
+        "Nli",
+        "NluQa",
+        "Summarization"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataGenerationTaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Conversation"
+          },
+          {
+            "value": "Math"
+          },
+          {
+            "value": "Nli"
+          },
+          {
+            "value": "NluQa"
+          },
+          {
+            "value": "Summarization"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "DataGenerationType": {
+      "description": "Enum to determine the type of Data Generation.",
+      "enum": [
+        "LabelGeneration",
+        "DataGeneration"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataGenerationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LabelGeneration"
+          },
+          {
+            "value": "DataGeneration"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "DataPathAssetReference": {
       "description": "Reference to an asset via its path in a datastore.",
       "type": "object",
@@ -24330,6 +24384,22 @@
       },
       "additionalProperties": false
     },
+    "PromptSettings": {
+      "type": "object",
+      "properties": {
+        "enableChainOfDensity": {
+          "type": "boolean"
+        },
+        "enableChainOfThought": {
+          "type": "boolean"
+        },
+        "maxLenSummary": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
     "PropertiesBase": {
       "description": "Base definition for pool resources.",
       "type": "object",
@@ -26813,6 +26883,30 @@
             "description": "Text Named Entity Recognition a.k.a. TextNER.\nNamed Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "TeacherModelEndpoint": {
+      "type": "object",
+      "properties": {
+        "endpointName": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "TeacherModelEndpointRequestSettings": {
+      "type": "object",
+      "properties": {
+        "minEndpointSuccessRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "requestBatchSize": {
+          "format": "int32",
+          "type": "integer"
+        }
       },
       "additionalProperties": false
     },
