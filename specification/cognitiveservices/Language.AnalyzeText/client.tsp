@@ -899,8 +899,12 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
 
-@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+@@clientName(EntitiesDocumentResultWithMetadataDetectedLanguage,
   "EntityActionResult",
+  "csharp"
+);
+@@clientName(EntitiesDocumentResultWithMetadata,
+  "EntityActionResultWithMetadata",
   "csharp"
 );
 @@clientName(ClassificationDocumentResultWithDetectedLanguage,
@@ -932,3 +936,8 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HealthcareActionResult",
   "csharp"
 );
+@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+  "CustomEntityActionResult",
+  "csharp"
+);
+@@clientName(PiiEntityWithTags, "PiiEntity", "csharp");
