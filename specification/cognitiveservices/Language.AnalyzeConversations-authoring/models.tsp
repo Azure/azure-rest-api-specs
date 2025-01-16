@@ -14,6 +14,7 @@ using Azure.Core.Traits;
 namespace Language.Conversations.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationProjectKind", "csharp")
 union ProjectKind {
   string,
 
@@ -38,6 +39,7 @@ union ProjectKind {
  * Human-readable error code.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationErrorCode", "csharp")
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -64,6 +66,7 @@ union ErrorCode {
  * Human-readable error code.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationInnerErrorCode", "csharp")
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -83,6 +86,7 @@ union InnerErrorCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationExportedProjectFormat", "csharp")
 union ExportedProjectFormat {
   string,
 
@@ -109,6 +113,7 @@ union StringIndexType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationTrainingMode", "csharp")
 union TrainingMode {
   string,
 
@@ -124,6 +129,7 @@ union TrainingMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationEvaluationKind", "csharp")
 union EvaluationKind {
   string,
 
@@ -140,6 +146,7 @@ union EvaluationKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
+@clientName("AnalyzeConversationJobStatus", "csharp")
 union JobStatus {
   string,
   notStarted: "notStarted",
@@ -159,6 +166,7 @@ union JobStatus {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("AnalyzeConversationCompositionMode", "csharp")
 union CompositionMode {
   string,
 
@@ -294,6 +302,7 @@ model AnalyzeConversationAuthoringProjectSettings {
 /**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
+@clientName("AnalyzeConversationInnerErrorModel", "csharp")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
