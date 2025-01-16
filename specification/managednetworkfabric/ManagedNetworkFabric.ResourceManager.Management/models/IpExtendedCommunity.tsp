@@ -21,6 +21,11 @@ model IpExtendedCommunityProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   ipExtendedCommunityRules: IpExtendedCommunityRule[];
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
@@ -51,9 +56,6 @@ model IpExtendedCommunityRule {
 
 @doc("The IP Extended Communities patch resource definition.")
 model IpExtendedCommunityPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("IP Extended Community patchable properties.")
