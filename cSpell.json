@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "words": [
         "authnotrequired",
@@ -13,6 +13,7 @@
         "subchannel",
         "umls"
     ],
+    "allowCompoundWords": true,
     "dictionaryDefinitions": [
         {
             "name": "custom-words",
@@ -24,9 +25,12 @@
         "teh"
     ],
     "ignorePaths": [
-        "node_modules/**",
         "**/examples/**",
-        "**/package-lock.json"
+        "**/package-lock.json",
+        "cSpell.json",
+        "eng/**",
+        "node_modules/**",
+        "custom-words.txt"
     ],
     "ignoreRegExpList": [
         "v\\d",
@@ -48,6 +52,13 @@
     ],
     "overrides": [
         {
+            "filename": "**/specification/playwrighttesting/**/*",
+            "words": [
+                "microsoftplaywrighttesting",
+                "playwrighttesting"
+            ]
+        },
+        {
             "filename": "**/specification/azurearcdata/resource-manager/Microsoft.AzureArcData/**/*.json",
             "words": [
                 "azurearcdata"
@@ -60,12 +71,6 @@
                 "SSAS",
                 "SSIS",
                 "PBIRS"
-            ]
-        },
-        {
-            "filename": "**/specification/batch/**/*.json",
-            "words": [
-                "TVMs"
             ]
         },
         {
@@ -330,38 +335,38 @@
             ]
         },
         {
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/DistributedAvailabilityGroups.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/DistributedAvailabilityGroups.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstances.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ManagedInstances.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ServerTrustCertificates.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ServerTrustCertificates.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ManagedInstanceDtcs.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ManagedInstanceDtcs.json",
             "words": [
                 "msdtcdns",
                 "msdtc's"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/TimeZones.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/TimeZones.json",
             "words": [
                 "freemium"
             ]
         },
 		{
-            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/preview/**/ElasticPools.json",
+            "filename": "**/specification/sql/resource-manager/Microsoft.Sql/**/ElasticPools.json",
             "words": [
                 "PRMS"
             ]
@@ -408,6 +413,34 @@
             "filename": "**/specification/keyvault/data-plane/Microsoft.KeyVault/**/keyvault.json",
             "words": [
                 "Regenerte"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/resource-manager/readme.go.md",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.Administration/README.md",
+            "words": [
+                "subservices",
+                "subservice",
+                "renamings",
+                "tspconfig",
+                "backuprestore"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.Administration/tspconfig.yaml",
+            "words": [
+                "subpackage"
+            ]
+        },
+        {
+            "filename": "**/specification/keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml",
+            "words": [
+                "backuprestore"
             ]
         },
         {
@@ -998,6 +1031,12 @@
             ]
         },
         {
+            "filename": "**/specification/maps/data-plane/Route/**",
+            "words": [
+                "modelerfour"
+            ]
+        },
+        {
             "filename": "**/specification/communication/data-plane/Chat/**/communicationserviceschat.json",
             "words": [
                 "readreceipts",
@@ -1053,7 +1092,9 @@
         {
             "filename": "**/specification/confluent/resource-manager/Microsoft.Confluent/**/confluent.json",
             "words": [
-                "orgvalidate"
+                "orgvalidate",
+                "AZUREBLOBSOURCE",
+                "AZUREBLOBSINK"
             ]
         },
         {
@@ -1324,6 +1365,13 @@
         },
         {
             "filename": "**/specification/batch/data-plane/Microsoft.Batch/**/*.json",
+            "words": [
+                "upgradingos",
+                "TVMs"
+            ]
+        },
+        {
+            "filename": "**/specification/batch/Azure.Batch/**/*.tsp",
             "words": [
                 "upgradingos",
                 "TVMs"
@@ -1718,6 +1766,13 @@
             ]
         },
         {
+            "filename": "**/specification/terraform/Microsoft.AzureTerraform.Management/**/*.tsp",
+            "words": [
+                "azurerm",
+                "azapi"
+            ]
+        },
+        {
             "filename": "**/specification/deviceregistry/resource-manager/Microsoft.DeviceRegistry/**/*.json",
             "words": [
                 "billables"
@@ -1768,12 +1823,35 @@
             ]
         },
         {
+            "filename": "**/specification/compute/resource-manager/readme.md",
+            "words": [
+                "Cloudservice"
+            ]
+        },
+        {
+            "filename": "**/specification/**/readme.python.md",
+            "words": [
+                "multiapiscript",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/quota/resource-manager/readme.md",
+            "words": [
+                "groupquota",
+                "modelerfour"
+            ]
+        },
+        {
+            "filename": "**/specification/standbypool/StandbyPool.Management/sdk-suppressions.yaml",
+            "words": [
+                "standbypool"
+            ]
+        },
             "filename": "**/specification/liftrpinecone/Pinecone.VectorDb.Management/tspconfig.yaml",
             "words": [
                 "liftrpinecone",
                 "pineconevectordb"
-            ]
-        }
     ],
     "enableFiletypes": [
         "cadl"
