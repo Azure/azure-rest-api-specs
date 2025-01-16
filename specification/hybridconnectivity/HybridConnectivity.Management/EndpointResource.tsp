@@ -116,7 +116,13 @@ interface EndpointResources {
   @operationId("Endpoints_ListIngressGatewayCredentials")
   listIngressGatewayCredentials is ArmResourceActionSync<
     EndpointResource,
-    void,
+    {
+      /**
+       * Object of type ListIngressGatewayCredentialsRequest
+       */
+      @bodyRoot
+      ListIngressGatewayCredentialsRequest?: ListIngressGatewayCredentialsRequest;
+    },
     IngressGatewayResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Parameters = {
