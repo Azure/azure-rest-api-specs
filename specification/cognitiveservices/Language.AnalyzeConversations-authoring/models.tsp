@@ -750,7 +750,7 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
-  resultUrl?: string;
+  resultUri?: string;
 }
 
 /**
