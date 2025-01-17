@@ -10,13 +10,13 @@ Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your se
 
 ### Versioning
 
-When an event or a new property is added to the typespec it requires a release version. This is the first day of the month, of the current year, that you want your event to be released in. 
+When an event or a new property is added to the typespec it requires a release version. This is the first day of the coming month, of the current year, that you want your event to be released in. 
 
-For example, `v2025-02-01`, February 1st 2025 is targeting a release in February. 
+For example, `v2025-02-01`, February 1st 2025 is targeting a release in February that will contain all work and PRs reviewed in January. 
 
 To add this release version:
 - In the `main.tsp` in the `enum ServiceApiVersions` place your intended release version. For example, `v2025_02_01: "2025-02-01"`.
-- When adding new properties or events to the TypeSpec, use the [versioning](https://github.com/microsoft/typespec/blob/main/packages/versioning/README.md) decorators. The most significant one is `@added(YOUR_RELEASE_VERSION)` for models or properties that are new.
+- When adding new properties or events to the TypeSpec, use the [@added](https://github.com/microsoft/typespec/blob/main/packages/versioning/README.md) decorator, i.e. `@added(YOUR_RELEASE_VERSION)`.
 
 #### Example Event
 
