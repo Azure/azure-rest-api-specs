@@ -281,3 +281,4 @@ using Microsoft.Compute;
   "runCommand"
 );
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
+@@clientName(CachingTypes, "Caching");

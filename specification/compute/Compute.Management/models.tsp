@@ -2410,6 +2410,7 @@ model VirtualMachineScaleSetManagedDiskParameters {
  * Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. **Note:** The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model DiskEncryptionSetParameters extends SubResource {}
 
 /**
@@ -2920,12 +2921,14 @@ model VirtualMachineScaleSetExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  protectedSettings?: unknown;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -5443,12 +5446,14 @@ model VirtualMachineExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  protectedSettings?: unknown;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -5612,12 +5617,14 @@ model VirtualMachineExtensionUpdateProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  settings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  protectedSettings?: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  protectedSettings?: unknown;
 
   /**
    * Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.
@@ -6114,6 +6121,7 @@ model LastPatchInstallationSummary {
  * Describes a Virtual Machine Update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 model VirtualMachineUpdate extends UpdateResource {
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
@@ -6298,8 +6306,9 @@ model VirtualMachineCaptureResult extends SubResource {
   /**
    * parameters of the captured virtual machine
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
   @visibility("read")
-  parameters?: {};
+  parameters?: unknown;
 
   /**
    * a list of resource items of the captured virtual machine
@@ -6919,6 +6928,7 @@ model ProximityPlacementGroupPropertiesIntent {
  * Specifies information about the proximity placement group.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model ProximityPlacementGroupUpdate extends UpdateResource {}
 
 /**
@@ -8050,6 +8060,7 @@ model LogAnalyticsOutput {
  * Api request input for LogAnalytics getThrottledRequests Api.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
 model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 
 /**
