@@ -19,6 +19,7 @@ jobs:
               -CSpellConfigPath 'cspell.json' `
               -SourceCommittish HEAD `
               -TargetCommittish HEAD^ `
+              -SpellCheckRoot (Resolve-Path specification) `
               -ExitWithError
           if ($LASTEXITCODE) {
             Write-Host "Spelling errors found in changed files. See https://aka.ms/ci-fix#spell-check"
