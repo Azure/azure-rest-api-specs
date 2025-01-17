@@ -1046,7 +1046,7 @@ model AppAttachPackageProperties {
   /**
    * Parameter indicating how the health check should behave if this package fails staging
    */
-  failHealthCheckOnStagingFailureEnum?: FailHealthCheckOnStagingFailureEnum;
+  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
 }
 
 /**
@@ -3125,7 +3125,7 @@ model ScalingPlanPersonalScheduleProperties {
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect;
+  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
 
   /**
    * Action to be taken after a user disconnect during the off-peak period.

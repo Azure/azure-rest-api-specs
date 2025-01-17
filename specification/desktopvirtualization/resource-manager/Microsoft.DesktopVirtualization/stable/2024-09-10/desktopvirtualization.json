@@ -5288,7 +5288,7 @@
           "type": "string",
           "description": "URL path to certificate name located in keyVault"
         },
-        "failHealthCheckOnStagingFailureEnum": {
+        "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
         }
@@ -7903,8 +7903,29 @@
           "description": "Starting time for off-peak period."
         },
         "offPeakStartVMOnConnect": {
-          "$ref": "#/definitions/SetStartVMOnConnect",
-          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.",
+          "default": "Enable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Start VM on Connect is enabled"
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
+              }
+            ]
+          }
         },
         "offPeakActionOnDisconnect": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -8684,30 +8705,6 @@
             "name": "UserProfileDiskMounted",
             "value": "UserProfileDiskMounted",
             "description": "Session has mounted user profile disk"
-          }
-        ]
-      }
-    },
-    "SetStartVMOnConnect": {
-      "type": "string",
-      "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.",
-      "enum": [
-        "Enable",
-        "Disable"
-      ],
-      "x-ms-enum": {
-        "name": "SetStartVMOnConnect",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enable",
-            "value": "Enable",
-            "description": "Start VM on Connect is enabled"
-          },
-          {
-            "name": "Disable",
-            "value": "Disable",
-            "description": "Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually"
           }
         ]
       }
