@@ -79,6 +79,39 @@ interface UserSessions {
     Response = UserSessionList
   >;
 
+  @get
+  @action("userSessions")
+  listByHostPool is ArmResourceActionSync<
+    HostPool,
+    void,
+    UserSessionList,
+    Parameters = {
+      /**
+       * OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
+
   /**
    * Disconnect a userSession.
    */

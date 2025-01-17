@@ -52,9 +52,6 @@
       "name": "ApplicationGroups"
     },
     {
-      "name": "UserSessionsHp"
-    },
-    {
       "name": "AppAttachPackageInfo"
     },
     {
@@ -3392,11 +3389,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
       "get": {
-        "operationId": "UserSessionsHp_ListByHostPool",
+        "operationId": "UserSessions_ListByHostPool",
         "tags": [
-          "UserSessionsHp"
+          "UserSessions"
         ],
-        "description": "List userSessions.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3460,6 +3457,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "UserSession_ListByHostPool": {
+            "$ref": "./examples/UserSessions_ListByHostPool.json"
           }
         },
         "x-ms-pageable": {
