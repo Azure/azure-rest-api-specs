@@ -25709,7 +25709,7 @@
           "type": "string"
         },
         "value": {
-          "description": "Environment variable value",
+          "description": "AppSetting name whose value will be used as the value of this environment variable. If the reffered AppSetting is not present, the value will be empty string in container at runtime.",
           "type": "string"
         }
       }
@@ -28857,6 +28857,10 @@
               "items": {
                 "$ref": "#/definitions/VolumeMount"
               }
+            },
+            "inheritAppSettingsAndConnectionStrings": {
+              "description": "<code>true</code> if all AppSettings and ConnectionStrings have to be passed to the container as environment variables; <code>false</code> otherwise.",
+              "type": "boolean"
             },
             "environmentVariables": {
               "description": "List of environment variables",
