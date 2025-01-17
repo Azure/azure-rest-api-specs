@@ -7793,7 +7793,8 @@
         "rampUpMinutesToWaitOnDisconnect": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.",
+          "minimum": 0
         },
         "rampUpActionOnLogoff": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -7802,7 +7803,8 @@
         "rampUpMinutesToWaitOnLogoff": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.",
+          "minimum": 0
         },
         "peakStartTime": {
           "$ref": "#/definitions/Time",
@@ -7840,7 +7842,8 @@
         "peakMinutesToWaitOnDisconnect": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.",
+          "minimum": 0
         },
         "peakActionOnLogoff": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -7849,7 +7852,8 @@
         "peakMinutesToWaitOnLogoff": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.",
+          "minimum": 0
         },
         "rampDownStartTime": {
           "$ref": "#/definitions/Time",
@@ -7887,7 +7891,8 @@
         "rampDownMinutesToWaitOnDisconnect": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.",
+          "minimum": 0
         },
         "rampDownActionOnLogoff": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -7896,7 +7901,8 @@
         "rampDownMinutesToWaitOnLogoff": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.",
+          "minimum": 0
         },
         "offPeakStartTime": {
           "$ref": "#/definitions/Time",
@@ -7934,7 +7940,8 @@
         "offPeakMinutesToWaitOnDisconnect": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.",
+          "minimum": 0
         },
         "offPeakActionOnLogoff": {
           "$ref": "#/definitions/SessionHandlingOperation",
@@ -7943,7 +7950,8 @@
         "offPeakMinutesToWaitOnLogoff": {
           "type": "integer",
           "format": "int32",
-          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.",
+          "minimum": 0
         }
       }
     },
@@ -8084,6 +8092,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Minimum host percentage for ramp down period.",
+          "minimum": 1,
           "maximum": 100
         },
         "rampDownCapacityThresholdPct": {

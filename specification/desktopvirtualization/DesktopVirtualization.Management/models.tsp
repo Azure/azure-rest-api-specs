@@ -3042,6 +3042,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
    */
+  @minValue(0)
   rampUpMinutesToWaitOnDisconnect?: int32;
 
   /**
@@ -3052,6 +3053,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
    */
+  @minValue(0)
   rampUpMinutesToWaitOnLogoff?: int32;
 
   /**
@@ -3073,6 +3075,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
    */
+  @minValue(0)
   peakMinutesToWaitOnDisconnect?: int32;
 
   /**
@@ -3083,6 +3086,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
    */
+  @minValue(0)
   peakMinutesToWaitOnLogoff?: int32;
 
   /**
@@ -3104,6 +3108,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
    */
+  @minValue(0)
   rampDownMinutesToWaitOnDisconnect?: int32;
 
   /**
@@ -3114,6 +3119,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
    */
+  @minValue(0)
   rampDownMinutesToWaitOnLogoff?: int32;
 
   /**
@@ -3135,6 +3141,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
    */
+  @minValue(0)
   offPeakMinutesToWaitOnDisconnect?: int32;
 
   /**
@@ -3145,6 +3152,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
    */
+  @minValue(0)
   offPeakMinutesToWaitOnLogoff?: int32;
 }
 
@@ -3222,6 +3230,7 @@ model ScalingPlanPooledScheduleProperties {
    * Minimum host percentage for ramp down period.
    */
   @maxValue(100)
+  @minValue(1)
   rampDownMinimumHostsPct?: int32;
 
   /**
