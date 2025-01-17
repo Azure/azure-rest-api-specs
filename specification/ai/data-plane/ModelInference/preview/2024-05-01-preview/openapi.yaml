@@ -178,14 +178,14 @@ components:
         minLength: 1
       explode: false
   schemas:
-    AudioMimeType:
+    AudioContentFormat:
       anyOf:
         - type: string
         - type: string
           enum:
             - wav
             - mp3
-      description: A representation of the possible audio MIME types for audio.
+      description: A representation of the possible audio formats for audio.
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -306,7 +306,6 @@ components:
         - id
         - expires_at
         - data
-        - mime_type
         - transcript
       properties:
         id:
@@ -323,10 +322,12 @@ components:
         data:
           type: string
           description: Base64 encoded audio data
-        mime_type:
+        format:
           allOf:
-            - $ref: '#/components/schemas/AudioMimeType'
-          description: The MIME type of the audio file.
+            - $ref: '#/components/schemas/AudioContentFormat'
+          description: |-
+            The format of the audio content. If format is not provided, it will match the format used in the
+            input audio request.
         transcript:
           type: string
           description: The transcript of the audio file.
@@ -704,15 +705,15 @@ components:
       type: object
       required:
         - data
-        - mime_type
+        - format
       properties:
         data:
           type: string
           description: Base64 encoded audio data
-        mime_type:
+        format:
           allOf:
-            - $ref: '#/components/schemas/AudioMimeType'
-          description: The MIME type of the audio file.
+            - $ref: '#/components/schemas/AudioContentFormat'
+          description: The audio format of the audio content.
       description: The details of an audio chat message content part.
     ChatMessageTextContentItem:
       type: object

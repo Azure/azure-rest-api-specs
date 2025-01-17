@@ -680,13 +680,12 @@ model ChatMessageInputAudio {
   @doc("Base64 encoded audio data")
   data: string;
 
-  @doc("The MIME type of the audio file.")
-  @encodedName("application/json", "mime_type")
-  mimeType: AudioMimeType;
+  @doc("The audio format of the audio content.")
+  format: AudioContentFormat;
 }
 
-@doc("A representation of the possible audio MIME types for audio.")
-union AudioMimeType {
+@doc("A representation of the possible audio formats for audio.")
+union AudioContentFormat {
   string,
 
   @doc("Specifies audio in WAV format.")
@@ -715,9 +714,11 @@ model ChatCompletionsAudio {
   @doc("Base64 encoded audio data")
   data: string;
 
-  @doc("The MIME type of the audio file.")
-  @encodedName("application/json", "mime_type")
-  mimeType: AudioMimeType;
+  @doc("""
+    The format of the audio content. If format is not provided, it will match the format used in the
+    input audio request.
+    """)
+  format?: AudioContentFormat;
 
   @doc("The transcript of the audio file.")
   transcript: string;

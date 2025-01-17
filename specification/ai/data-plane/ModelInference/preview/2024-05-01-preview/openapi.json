@@ -332,15 +332,15 @@
     }
   },
   "definitions": {
-    "AudioMimeType": {
+    "AudioContentFormat": {
       "type": "string",
-      "description": "A representation of the possible audio MIME types for audio.",
+      "description": "A representation of the possible audio formats for audio.",
       "enum": [
         "wav",
         "mp3"
       ],
       "x-ms-enum": {
-        "name": "AudioMimeType",
+        "name": "AudioContentFormat",
         "modelAsString": true,
         "values": [
           {
@@ -510,10 +510,9 @@
           "type": "string",
           "description": "Base64 encoded audio data"
         },
-        "mime_type": {
-          "$ref": "#/definitions/AudioMimeType",
-          "description": "The MIME type of the audio file.",
-          "x-ms-client-name": "mimeType"
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The format of the audio content. If format is not provided, it will match the format used in the\ninput audio request."
         },
         "transcript": {
           "type": "string",
@@ -524,7 +523,6 @@
         "id",
         "expires_at",
         "data",
-        "mime_type",
         "transcript"
       ]
     },
@@ -964,15 +962,14 @@
           "type": "string",
           "description": "Base64 encoded audio data"
         },
-        "mime_type": {
-          "$ref": "#/definitions/AudioMimeType",
-          "description": "The MIME type of the audio file.",
-          "x-ms-client-name": "mimeType"
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio content."
         }
       },
       "required": [
         "data",
-        "mime_type"
+        "format"
       ]
     },
     "ChatMessageTextContentItem": {
