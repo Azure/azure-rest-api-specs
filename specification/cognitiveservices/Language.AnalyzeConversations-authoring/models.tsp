@@ -999,12 +999,12 @@ model AnalyzeConversationAuthoringEvaluationSummary {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationConfusionMatrix", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrix
-  is Record<Record<AnalyzeConversationAuthoringConfusionMatrixRow>>;
+  is Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
-  is Record<Record<AnalyzeConversationAuthoringConfusionMatrixCell>>;
+  is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
 /**
  * Represents the evaluation result summary for the project's entities.
