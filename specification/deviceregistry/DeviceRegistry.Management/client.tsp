@@ -19,9 +19,10 @@ using Microsoft.DeviceRegistry;
 @@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
 
 // CSharp Client configuration
-@@access(OperationStatus.get, Access.internal, "csharp");
+@@scope(OperationStatus.get, "!csharp");
 
 @@clientName(Asset, "DeviceRegistryAsset", "csharp");
+@@clientName(AssetProperties.enabled, "IsEnabled", "csharp");
 @@clientName(AssetStatus, "DeviceRegistryAssetStatus", "csharp");
 @@clientName(AssetStatusDataset, "DeviceRegistryAssetStatusDataset", "csharp");
 @@clientName(AssetStatusError, "DeviceRegistryAssetStatusError", "csharp");
@@ -75,6 +76,20 @@ using Microsoft.DeviceRegistry;
   "csharp"
 );
 @@clientName(X509Credentials, "DeviceRegistryX509Credentials", "csharp");
+
+@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
+  url,
+  "csharp"
+);
+@@alternateType(AssetProperties.manufacturerUri, url, "csharp");
+@@alternateType(AssetProperties.documentationUri, url, "csharp");
+@@alternateType(BillingContainer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(DiscoveredAssetProperties.manufacturerUri, url, "csharp");
+@@alternateType(DiscoveredAssetProperties.documentationUri, url, "csharp");
+@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
+  url,
+  "csharp"
+);
 
 // JavaScript Client configuration
 @@clientName(Microsoft.DeviceRegistry,
