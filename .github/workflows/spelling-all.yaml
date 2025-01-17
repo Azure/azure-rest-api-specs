@@ -26,5 +26,6 @@ jobs:
         run: |
           ./eng/common/spelling/Invoke-Cspell.ps1 `
             -ScanGlobs '**' `
-            -CSpellConfigPath './cspell.json'
+            -CSpellConfigPath './cspell.json' `
+            -SpellCheckRoot (Resolve-Path $PSScriptRoot/../../../specification)
         shell: pwsh
