@@ -15485,7 +15485,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "[Required] Use 'Key' for key based authentication and 'AMLToken' for Azure Machine Learning token-based authentication. 'Key' doesn't expire but 'AMLToken' does.",
+          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication. Use 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
@@ -20388,7 +20388,8 @@
           "$ref": "#/definitions/EndpointComputeType"
         },
         "instanceType": {
-          "description": "Compute instance type.",
+          "description": "Compute instance type. Default: Standard_F4s_v2.",
+          "default": "Standard_F4s_v2",
           "type": "string",
           "x-ms-mutability": [
             "create",

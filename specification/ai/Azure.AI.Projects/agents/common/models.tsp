@@ -111,6 +111,9 @@ union AgentsApiResponseFormatOption {
 
   /** Sets the format of the output of the model when a ToolCall is returned. */
   AgentsApiResponseFormat,
+
+  /** Using `json_schema` format will provide a description of what the response format is for. */
+  ResponseFormatJsonSchemaType,
 }
 
 /** Represents the mode in which the model will handle the return format of a tool call. */
@@ -130,11 +133,12 @@ union AgentsApiResponseFormatMode {
  */
 model AgentsApiResponseFormat {
   /** Must be one of `text` or `json_object`. */
-  type?: ApiResponseFormat = ApiResponseFormat.text;
+  type?: ResponseFormat = ResponseFormat.text;
 }
 
 /** Possible API response formats. */
-union ApiResponseFormat {
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+union ResponseFormat {
   string,
 
   /** `text` format should be used for requests involving any sort of ToolCall. */
@@ -142,4 +146,31 @@ union ApiResponseFormat {
 
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
+}
+
+/**
+ * The type of response format being defined: `json_schema`
+ */
+model ResponseFormatJsonSchemaType {
+  /** Type */
+  type: "json_schema";
+
+  /** The JSON schema, describing response format. */
+  @encodedName("application/json", "json_schema")
+  jsonSchema: ResponseFormatJsonSchema;
+}
+
+/**
+ * A description of what the response format is for, used by the model to determine how to respond in the format.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
+model ResponseFormatJsonSchema {
+  /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+  description?: string;
+
+  /** The name of a schema. */
+  name: string;
+
+  /** The JSON schema object, describing the response format. */
+  schema: unknown;
 }

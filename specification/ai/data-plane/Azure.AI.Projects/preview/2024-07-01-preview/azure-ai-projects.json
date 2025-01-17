@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "The Azure AI Studio project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
+        "description": "The Azure AI Foundry project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
         "required": true,
         "type": "string"
       },
@@ -40,7 +40,7 @@
       {
         "name": "projectName",
         "in": "path",
-        "description": "The Azure AI Studio project name.",
+        "description": "The Azure AI Foundry project name.",
         "required": true,
         "type": "string"
       }
@@ -1895,6 +1895,32 @@
             "type": "string"
           },
           {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -2099,6 +2125,32 @@
             "type": "string"
           },
           {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
@@ -2242,6 +2294,32 @@
             "description": "Identifier of the run step.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.\nCurrently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunAdditionalFieldList",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "FileSearchContents",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "File search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
           }
         ],
         "responses": {
@@ -2688,15 +2766,23 @@
                   },
                   "x-ms-client-name": "fileIds"
                 },
+                "data_sources": {
+                  "type": "array",
+                  "description": "List of Azure assets.",
+                  "minItems": 1,
+                  "maxItems": 500,
+                  "items": {
+                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
+                  },
+                  "x-ms-client-name": "dataSources",
+                  "x-ms-identifiers": []
+                },
                 "chunking_strategy": {
                   "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
-              },
-              "required": [
-                "file_ids"
-              ]
+              }
             }
           }
         ],
@@ -3184,15 +3270,21 @@
                   "description": "Identifier of the file.",
                   "x-ms-client-name": "fileId"
                 },
+                "data_sources": {
+                  "type": "array",
+                  "description": "Azure asset ID.",
+                  "items": {
+                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
+                  },
+                  "x-ms-client-name": "dataSources",
+                  "x-ms-identifiers": []
+                },
                 "chunking_strategy": {
                   "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
-              },
-              "required": [
-                "file_id"
-              ]
+              }
             }
           }
         ],
@@ -3455,6 +3547,7 @@
         "thread.run.in_progress",
         "thread.run.requires_action",
         "thread.run.completed",
+        "thread.run.incomplete",
         "thread.run.failed",
         "thread.run.cancelling",
         "thread.run.cancelled",
@@ -3507,6 +3600,11 @@
             "name": "ThreadRunCompleted",
             "value": "thread.run.completed",
             "description": "Event sent when a run is completed. The data of this event is of type ThreadRun"
+          },
+          {
+            "name": "ThreadRunIncomplete",
+            "value": "thread.run.incomplete",
+            "description": "Event sent when a run ends incomplete. The data of this event is of type ThreadRun"
           },
           {
             "name": "ThreadRunFailed",
@@ -3699,7 +3797,7 @@
             "json_object"
           ],
           "x-ms-enum": {
-            "name": "ApiResponseFormat",
+            "name": "ResponseFormat",
             "modelAsString": true,
             "values": [
               {
@@ -3792,7 +3890,7 @@
         "code_interpreter",
         "file_search",
         "bing_grounding",
-        "microsoft_fabric",
+        "fabric_aiskill",
         "sharepoint_grounding",
         "azure_ai_search"
       ],
@@ -3822,8 +3920,8 @@
           },
           {
             "name": "microsoftFabric",
-            "value": "microsoft_fabric",
-            "description": "Tool type `microsoft_fabric`"
+            "value": "fabric_aiskill",
+            "description": "Tool type `fabric_aiskill`"
           },
           {
             "name": "sharepoint",
@@ -3834,30 +3932,6 @@
             "name": "azureAISearch",
             "value": "azure_ai_search",
             "description": "Tool type `azure_ai_search`"
-          }
-        ]
-      }
-    },
-    "Agents.ApiResponseFormat": {
-      "type": "string",
-      "description": "Possible API response formats.",
-      "enum": [
-        "text",
-        "json_object"
-      ],
-      "x-ms-enum": {
-        "name": "ApiResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "`text` format should be used for requests involving any sort of ToolCall."
-          },
-          {
-            "name": "jsonObject",
-            "value": "json_object",
-            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
           }
         ]
       }
@@ -3887,6 +3961,96 @@
         }
       ],
       "x-ms-discriminator-value": "azure_ai_search"
+    },
+    "Agents.AzureFunctionBinding": {
+      "type": "object",
+      "description": "The structure for keeping storage queue name and URI.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of binding, which is always 'storage_queue'.",
+          "enum": [
+            "storage_queue"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "storage_queue": {
+          "$ref": "#/definitions/Agents.AzureFunctionStorageQueue",
+          "description": "Storage queue.",
+          "x-ms-client-name": "storageQueue"
+        }
+      },
+      "required": [
+        "type",
+        "storage_queue"
+      ]
+    },
+    "Agents.AzureFunctionDefinition": {
+      "type": "object",
+      "description": "The definition of Azure function.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/Agents.FunctionDefinition",
+          "description": "The definition of azure function and its parameters."
+        },
+        "input_binding": {
+          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it.",
+          "x-ms-client-name": "inputBinding"
+        },
+        "output_binding": {
+          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "description": "Output storage queue. The function writes output to this queue when the input items are processed.",
+          "x-ms-client-name": "outputBinding"
+        }
+      },
+      "required": [
+        "function",
+        "input_binding",
+        "output_binding"
+      ]
+    },
+    "Agents.AzureFunctionStorageQueue": {
+      "type": "object",
+      "description": "The structure for keeping storage queue name and URI.",
+      "properties": {
+        "queue_service_endpoint": {
+          "type": "string",
+          "description": "URI to the Azure Storage Queue service allowing you to manipulate a queue.",
+          "x-ms-client-name": "storageServiceEndpoint"
+        },
+        "queue_name": {
+          "type": "string",
+          "description": "The name of an Azure function storage queue.",
+          "x-ms-client-name": "queueName"
+        }
+      },
+      "required": [
+        "queue_service_endpoint",
+        "queue_name"
+      ]
+    },
+    "Agents.AzureFunctionToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a azure function tool as used to configure an agent.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/Agents.AzureFunctionDefinition",
+          "description": "The definition of the concrete function that the function tool should call.",
+          "x-ms-client-name": "azureFunction"
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
     },
     "Agents.BingGroundingToolDefinition": {
       "type": "object",
@@ -3930,6 +4094,16 @@
             "type": "string"
           },
           "x-ms-client-name": "fileIds"
+        },
+        "data_sources": {
+          "type": "array",
+          "description": "The data sources to be used. This option is mutually exclusive with the `fileIds` property.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4109,6 +4283,11 @@
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -4201,9 +4380,10 @@
           "description": "Adds additional messages to the thread before creating the run.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.ThreadMessage"
+            "$ref": "#/definitions/Agents.ThreadMessageOptions"
           },
-          "x-ms-client-name": "additionalMessages"
+          "x-ms-client-name": "additionalMessages",
+          "x-ms-identifiers": []
         },
         "tools": {
           "type": "array",
@@ -4269,6 +4449,11 @@
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "If `true` functions will run in parallel during tool use.",
+          "x-ms-client-name": "parallelToolCalls"
         },
         "metadata": {
           "type": "object",
@@ -4450,6 +4635,50 @@
         ]
       }
     },
+    "Agents.FileSearchRankingOptions": {
+      "type": "object",
+      "description": "Ranking options for file search.",
+      "properties": {
+        "ranker": {
+          "type": "string",
+          "description": "File search ranker."
+        },
+        "score_threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Ranker search threshold.",
+          "x-ms-client-name": "scoreThreshold"
+        }
+      },
+      "required": [
+        "ranker",
+        "score_threshold"
+      ]
+    },
+    "Agents.FileSearchToolCallContent": {
+      "type": "object",
+      "description": "The file search result content object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the content.",
+          "enum": [
+            "text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the file."
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ]
+    },
     "Agents.FileSearchToolDefinition": {
       "type": "object",
       "description": "The input definition information for a file search tool as used to configure an agent.",
@@ -4478,6 +4707,11 @@
           "minimum": 1,
           "maximum": 50,
           "x-ms-client-name": "maxNumResults"
+        },
+        "ranking_options": {
+          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "description": "Ranking options for file search.",
+          "x-ms-client-name": "rankingOptions"
         }
       }
     },
@@ -4493,6 +4727,16 @@
             "type": "string"
           },
           "x-ms-client-name": "vectorStoreIds"
+        },
+        "vector_stores": {
+          "type": "array",
+          "description": "The list of vector store configuration objects from Azure.\nThis list is limited to one element.\nThe only element of this list contains the list of azure asset IDs used by the search tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreConfigurations"
+          },
+          "x-ms-client-name": "vectorStores",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4603,7 +4847,7 @@
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.IncompleteRunDetails": {
+    "Agents.IncompleteDetailsReason": {
       "type": "string",
       "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
       "enum": [
@@ -4611,7 +4855,7 @@
         "max_prompt_tokens"
       ],
       "x-ms-enum": {
-        "name": "IncompleteRunDetails",
+        "name": "IncompleteDetailsReason",
         "modelAsString": true,
         "values": [
           {
@@ -4626,6 +4870,19 @@
           }
         ]
       }
+    },
+    "Agents.IncompleteRunDetails": {
+      "type": "object",
+      "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/Agents.IncompleteDetailsReason",
+          "description": "The reason why the run is incomplete. This indicates which specific token limit was reached during the run."
+        }
+      },
+      "required": [
+        "reason"
+      ]
     },
     "Agents.IndexResource": {
       "type": "object",
@@ -4680,6 +4937,11 @@
           "description": "The ID of the file to attach to the message.",
           "x-ms-client-name": "fileId"
         },
+        "data_source": {
+          "$ref": "#/definitions/Agents.VectorStoreDataSource",
+          "description": "Azure asset ID.",
+          "x-ms-client-name": "dataSource"
+        },
         "tools": {
           "type": "array",
           "description": "The tools to add to this file.",
@@ -4689,7 +4951,6 @@
         }
       },
       "required": [
-        "file_id",
         "tools"
       ]
     },
@@ -5315,20 +5576,20 @@
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
-        "microsoft_fabric": {
+        "fabric_aiskill": {
           "$ref": "#/definitions/Agents.ToolConnectionList",
           "description": "The list of connections used by the Microsoft Fabric tool."
         }
       },
       "required": [
-        "microsoft_fabric"
+        "fabric_aiskill"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
         }
       ],
-      "x-ms-discriminator-value": "microsoft_fabric"
+      "x-ms-discriminator-value": "fabric_aiskill"
     },
     "Agents.OpenAIFile": {
       "type": "object",
@@ -5386,6 +5647,166 @@
         "purpose"
       ]
     },
+    "Agents.OpenApiAnonymousAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi anonymous authentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "anonymous"
+    },
+    "Agents.OpenApiAuthDetails": {
+      "type": "object",
+      "description": "authentication details for OpenApiFunctionDefinition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Agents.OpenApiAuthType",
+          "description": "The type of authentication, must be anonymous/connection/managed_identity"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "Agents.OpenApiAuthType": {
+      "type": "string",
+      "description": "  Authentication type for OpenApi endpoint. Allowed types are:\n  - Anonymous (no authentication required)\n  - Connection (requires connection_id to endpoint, as setup in AI Foundry)\n  - Managed_Identity (requires audience for identity based auth)",
+      "enum": [
+        "anonymous",
+        "connection",
+        "managed_identity"
+      ],
+      "x-ms-enum": {
+        "name": "OpenApiAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "connection",
+            "value": "connection"
+          },
+          {
+            "name": "managedIdentity",
+            "value": "managed_identity"
+          }
+        ]
+      }
+    },
+    "Agents.OpenApiConnectionAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi connection authentication",
+      "properties": {
+        "security_scheme": {
+          "$ref": "#/definitions/Agents.OpenApiConnectionSecurityScheme",
+          "description": "Connection auth security details"
+        }
+      },
+      "required": [
+        "security_scheme"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
+    "Agents.OpenApiConnectionSecurityScheme": {
+      "type": "object",
+      "description": "Security scheme for OpenApi managed_identity authentication",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "Connection id for Connection auth type"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "Agents.OpenApiFunctionDefinition": {
+      "type": "object",
+      "description": "The input definition information for an openapi function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does, used by the model to choose when and how to call the function."
+        },
+        "spec": {
+          "description": "The openapi function shape, described as a JSON Schema object."
+        },
+        "auth": {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails",
+          "description": "Open API authentication details"
+        }
+      },
+      "required": [
+        "name",
+        "spec",
+        "auth"
+      ]
+    },
+    "Agents.OpenApiManagedAuthDetails": {
+      "type": "object",
+      "description": "Security details for OpenApi managed_identity authentication",
+      "properties": {
+        "security_scheme": {
+          "$ref": "#/definitions/Agents.OpenApiManagedSecurityScheme",
+          "description": "Connection auth security details"
+        }
+      },
+      "required": [
+        "security_scheme"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "managed_identity"
+    },
+    "Agents.OpenApiManagedSecurityScheme": {
+      "type": "object",
+      "description": "Security scheme for OpenApi managed_identity authentication",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Authentication scope for managed_identity auth type"
+        }
+      },
+      "required": [
+        "audience"
+      ]
+    },
+    "Agents.OpenApiToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
+      "properties": {
+        "openapi": {
+          "$ref": "#/definitions/Agents.OpenApiFunctionDefinition",
+          "description": "The openapi function definition."
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
+    },
     "Agents.RequiredAction": {
       "type": "object",
       "description": "An abstract representation of a required action for an agent thread run to continue.",
@@ -5439,7 +5860,7 @@
     },
     "Agents.RequiredToolCall": {
       "type": "object",
-      "description": "An abstract representation a a tool invocation needed by the model to continue a run.",
+      "description": "An abstract representation of a tool invocation needed by the model to continue a run.",
       "properties": {
         "type": {
           "type": "string",
@@ -5455,6 +5876,94 @@
         "type",
         "id"
       ]
+    },
+    "Agents.ResponseFormat": {
+      "type": "string",
+      "description": "Possible API response formats.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "`text` format should be used for requests involving any sort of ToolCall."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+          }
+        ]
+      }
+    },
+    "Agents.ResponseFormatJsonSchema": {
+      "type": "object",
+      "description": "A description of what the response format is for, used by the model to determine how to respond in the format.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of what the response format is for, used by the model to determine how to respond in the format."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of a schema."
+        },
+        "schema": {
+          "description": "The JSON schema object, describing the response format."
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
+    },
+    "Agents.ResponseFormatJsonSchemaType": {
+      "type": "object",
+      "description": "The type of response format being defined: `json_schema`",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type",
+          "enum": [
+            "json_schema"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "json_schema": {
+          "$ref": "#/definitions/Agents.ResponseFormatJsonSchema",
+          "description": "The JSON schema, describing response format.",
+          "x-ms-client-name": "jsonSchema"
+        }
+      },
+      "required": [
+        "type",
+        "json_schema"
+      ]
+    },
+    "Agents.RunAdditionalFieldList": {
+      "type": "string",
+      "description": "A list of additional fields to include in the response.",
+      "enum": [
+        "step_details.tool_calls[*].file_search.results[*].content"
+      ],
+      "x-ms-enum": {
+        "name": "RunAdditionalFieldList",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FileSearchContents",
+            "value": "step_details.tool_calls[*].file_search.results[*].content",
+            "description": "File search result content."
+          }
+        ]
+      }
     },
     "Agents.RunCompletionUsage": {
       "type": "object",
@@ -6214,16 +6723,18 @@
       "type": "object",
       "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
+        },
         "file_search": {
-          "type": "object",
-          "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults",
+          "description": "For now, this is always going to be an empty object.",
           "x-ms-client-name": "fileSearch"
         }
       },
       "required": [
+        "id",
         "file_search"
       ],
       "allOf": [
@@ -6232,6 +6743,64 @@
         }
       ],
       "x-ms-discriminator-value": "file_search"
+    },
+    "Agents.RunStepFileSearchToolCallResult": {
+      "type": "object",
+      "description": "  File search tool call result.",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "The ID of the file that result was found in.",
+          "x-ms-client-name": "fileId"
+        },
+        "file_name": {
+          "type": "string",
+          "description": "The name of the file that result was found in.",
+          "x-ms-client-name": "fileName"
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The score of the result. All values must be a floating point number between 0 and 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "content": {
+          "type": "array",
+          "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
+          "items": {
+            "$ref": "#/definitions/Agents.FileSearchToolCallContent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "file_id",
+        "file_name",
+        "score"
+      ]
+    },
+    "Agents.RunStepFileSearchToolCallResults": {
+      "type": "object",
+      "description": "The results of the file search.",
+      "properties": {
+        "ranking_options": {
+          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "description": "Ranking options for file search.",
+          "x-ms-client-name": "rankingOptions"
+        },
+        "results": {
+          "type": "array",
+          "description": "The array of a file search results",
+          "items": {
+            "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "results"
+      ]
     },
     "Agents.RunStepFunctionToolCall": {
       "type": "object",
@@ -6314,7 +6883,7 @@
       "type": "object",
       "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
       "properties": {
-        "microsoft_fabric": {
+        "fabric_aiskill": {
           "type": "object",
           "description": "Reserved for future use.",
           "additionalProperties": {
@@ -6324,14 +6893,14 @@
         }
       },
       "required": [
-        "microsoft_fabric"
+        "fabric_aiskill"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.RunStepToolCall"
         }
       ],
-      "x-ms-discriminator-value": "microsoft_fabric"
+      "x-ms-discriminator-value": "fabric_aiskill"
     },
     "Agents.RunStepSharepointToolCall": {
       "type": "object",
@@ -6527,6 +7096,7 @@
         "thread.run.in_progress",
         "thread.run.requires_action",
         "thread.run.completed",
+        "thread.run.incomplete",
         "thread.run.failed",
         "thread.run.cancelling",
         "thread.run.cancelled",
@@ -6560,6 +7130,11 @@
             "name": "ThreadRunCompleted",
             "value": "thread.run.completed",
             "description": "Event sent when a run is completed. The data of this event is of type ThreadRun"
+          },
+          {
+            "name": "ThreadRunIncomplete",
+            "value": "thread.run.incomplete",
+            "description": "Event sent when a run ends incomplete. The data of this event is of type ThreadRun"
           },
           {
             "name": "ThreadRunFailed",
@@ -6934,9 +7509,14 @@
           "x-ms-client-name": "failedAt"
         },
         "incomplete_details": {
-          "$ref": "#/definitions/Agents.IncompleteRunDetails",
+          "type": "object",
           "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Agents.IncompleteRunDetails"
+            }
+          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
@@ -7018,9 +7598,10 @@
           ],
           "x-ms-client-name": "toolResources"
         },
-        "parallelToolCalls": {
+        "parallel_tool_calls": {
           "type": "boolean",
-          "description": "Determines if tools can be executed in parallel within the run."
+          "description": "Determines if tools can be executed in parallel within the run.",
+          "x-ms-client-name": "parallelToolCalls"
         }
       },
       "required": [
@@ -7046,7 +7627,8 @@
         "truncation_strategy",
         "tool_choice",
         "response_format",
-        "metadata"
+        "metadata",
+        "parallel_tool_calls"
       ]
     },
     "Agents.ThreadStreamEvent": {
@@ -7083,7 +7665,7 @@
     },
     "Agents.ToolConnectionList": {
       "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.",
       "properties": {
         "connections": {
           "type": "array",
@@ -7132,7 +7714,7 @@
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/Agents.CodeInterpreterToolResource",
-          "description": "Resources to be used by the `code_interpreter tool` consisting of file IDs.",
+          "description": "Resources to be used by the `code_interpreter` tool consisting of file IDs.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
@@ -7531,6 +8113,88 @@
         ]
       }
     },
+    "Agents.VectorStoreConfiguration": {
+      "type": "object",
+      "description": "Vector storage configuration is the list of data sources, used when multiple\nfiles can be used for the enterprise file search.",
+      "properties": {
+        "data_sources": {
+          "type": "array",
+          "description": "Data sources",
+          "items": {
+            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+          },
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "data_sources"
+      ]
+    },
+    "Agents.VectorStoreConfigurations": {
+      "type": "object",
+      "description": "The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name",
+          "x-ms-client-name": "storeName"
+        },
+        "configuration": {
+          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "description": "Configurations",
+          "x-ms-client-name": "storeConfiguration"
+        }
+      },
+      "required": [
+        "name",
+        "configuration"
+      ]
+    },
+    "Agents.VectorStoreDataSource": {
+      "type": "object",
+      "description": "The structure, containing Azure asset URI path and the asset type of the file used as a data source\nfor the enterprise file search.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Asset URI.",
+          "x-ms-client-name": "assetIdentifier"
+        },
+        "type": {
+          "$ref": "#/definitions/Agents.VectorStoreDataSourceAssetType",
+          "description": "The asset type",
+          "x-ms-client-name": "assetType"
+        }
+      },
+      "required": [
+        "uri",
+        "type"
+      ]
+    },
+    "Agents.VectorStoreDataSourceAssetType": {
+      "type": "string",
+      "description": "Type of vector storage asset. Asset type may be a uri_asset, in this case it should contain asset URI ID,\nin the case of id_asset it should contain the data ID.",
+      "enum": [
+        "uri_asset",
+        "id_asset"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreDataSourceAssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "uri_asset",
+            "value": "uri_asset",
+            "description": "Azure URI"
+          },
+          {
+            "name": "id_asset",
+            "value": "id_asset",
+            "description": "The data ID"
+          }
+        ]
+      }
+    },
     "Agents.VectorStoreDeletionStatus": {
       "type": "object",
       "description": "Response object for deleting a vector store.",
@@ -7820,7 +8484,7 @@
     },
     "Agents.VectorStoreFileError": {
       "type": "object",
-      "description": "Details on the error that may have ocurred while processing a file for this vector store",
+      "description": "Details on the error that may have occurred while processing a file for this vector store",
       "properties": {
         "code": {
           "$ref": "#/definitions/Agents.VectorStoreFileErrorCode",
@@ -7840,34 +8504,28 @@
       "type": "string",
       "description": "Error code variants for vector store file processing",
       "enum": [
-        "internal_error",
-        "file_not_found",
-        "parsing_error",
-        "unhandled_mime_type"
+        "server_error",
+        "invalid_file",
+        "unsupported_file"
       ],
       "x-ms-enum": {
         "name": "VectorStoreFileErrorCode",
         "modelAsString": true,
         "values": [
           {
-            "name": "internalError",
-            "value": "internal_error",
-            "description": "An internal error occurred."
+            "name": "serverError",
+            "value": "server_error",
+            "description": "An server error occurred."
           },
           {
-            "name": "fileNotFound",
-            "value": "file_not_found",
-            "description": "The file was not found."
+            "name": "invalidFile",
+            "value": "invalid_file",
+            "description": "The file is not valid."
           },
           {
-            "name": "parsingError",
-            "value": "parsing_error",
-            "description": "The file could not be parsed."
-          },
-          {
-            "name": "unhandledMimeType",
-            "value": "unhandled_mime_type",
-            "description": "The file has an unhandled mime type."
+            "name": "unsupportedFile",
+            "value": "unsupported_file",
+            "description": "The file is of unsupported type."
           }
         ]
       }
@@ -7960,6 +8618,11 @@
         "name": {
           "type": "string",
           "description": "The name of the vector store."
+        },
+        "configuration": {
+          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "description": "The vector store configuration, used when vector store is created from Azure asset URIs.",
+          "x-ms-client-name": "storeConfiguration"
         },
         "expires_after": {
           "$ref": "#/definitions/Agents.VectorStoreExpirationPolicy",
@@ -8379,7 +9042,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -8516,7 +9179,7 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique."
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
         },
         "description": {
           "type": "string",

@@ -129,7 +129,7 @@ model Evaluation {
   @visibility("read", "create")
   data: InputData;
 
-  @doc("Display Name for evaluation. It helps to find evaluation easily in AI Studio. It does not need to be unique.")
+  @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
 
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")

@@ -58,11 +58,11 @@ model BingGroundingToolDefinition extends ToolDefinition {
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
 model MicrosoftFabricToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'microsoft_fabric'.")
-  type: "microsoft_fabric";
+  @doc("The object type, which is always 'fabric_aiskill'.")
+  type: "fabric_aiskill";
 
   @doc("The list of connections used by the Microsoft Fabric tool.")
-  microsoft_fabric: ToolConnectionList;
+  fabric_aiskill: ToolConnectionList;
 }
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
@@ -78,6 +78,15 @@ model SharepointToolDefinition extends ToolDefinition {
 model AzureAISearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'azure_ai_search'.")
   type: "azure_ai_search";
+}
+
+@doc("The input definition information for an OpenAPI tool as used to configure an agent.")
+model OpenApiToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'openapi'.")
+  type: "openapi";
+
+  @doc("The openapi function definition.")
+  openapi: OpenApiFunctionDefinition;
 }
 
 // Definition details: File Search
@@ -96,21 +105,33 @@ model FileSearchToolDefinitionDetails {
   @maxValue(50)
   maxNumResults?: int32;
 
+  /**
+   * Ranking options for file search.
+   */
   @encodedName("application/json", "ranking_options")
-  rankingOptions?: FileSearchRankingOptions
+  rankingOptions?: FileSearchRankingOptions;
+}
+
+@doc("The input definition information for a azure function tool as used to configure an agent.")
+model AzureFunctionToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("The definition of the concrete function that the function tool should call.")
+  @encodedName("application/json", "azure_function")
+  azureFunction: AzureFunctionDefinition;
 }
 
 /**
  * Ranking options for file search.
  */
 model FileSearchRankingOptions {
-
   @doc("File search ranker.")
   ranker: string;
 
   @doc("Ranker search threshold.")
   @encodedName("application/json", "score_threshold")
-  scoreThreshold: float32
+  scoreThreshold: float32;
 }
 
 // Definition details: Functions
@@ -128,13 +149,101 @@ model FunctionDefinition {
   parameters: unknown;
 }
 
+@doc("The definition of Azure function.")
+model AzureFunctionDefinition {
+  @doc("The definition of azure function and its parameters.")
+  function: FunctionDefinition;
+
+  @doc("Input storage queue. The queue storage trigger runs a function as messages are added to it.")
+  @encodedName("application/json", "input_binding")
+  inputBinding: AzureFunctionBinding;
+
+  @doc("Output storage queue. The function writes output to this queue when the input items are processed.")
+  @encodedName("application/json", "output_binding")
+  outputBinding: AzureFunctionBinding;
+}
+
+// Definition details: OpenAPI
+
+@doc("The input definition information for an openapi function.")
+model OpenApiFunctionDefinition {
+  @doc("The name of the function to be called.")
+  name: string;
+
+  @doc("A description of what the function does, used by the model to choose when and how to call the function.")
+  description?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  @doc("The openapi function shape, described as a JSON Schema object.")
+  spec: unknown;
+
+  @doc("Open API authentication details")
+  auth: OpenApiAuthDetails;
+}
+
+@doc("""
+    Authentication type for OpenApi endpoint. Allowed types are:
+    - Anonymous (no authentication required)
+    - Connection (requires connection_id to endpoint, as setup in AI Foundry)
+    - Managed_Identity (requires audience for identity based auth)
+  """)
+union OpenApiAuthType {
+  anonymous: "anonymous",
+  connection: "connection",
+  managedIdentity: "managed_identity",
+  string,
+}
+
+@doc("authentication details for OpenApiFunctionDefinition")
+@discriminator("type")
+model OpenApiAuthDetails {
+  @doc("The type of authentication, must be anonymous/connection/managed_identity")
+  type: OpenApiAuthType;
+}
+
+@doc("Security details for OpenApi anonymous authentication")
+model OpenApiAnonymousAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'anonymous'.")
+  type: OpenApiAuthType.anonymous;
+}
+
+@doc("Security details for OpenApi connection authentication")
+model OpenApiConnectionAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'connection'.")
+  type: OpenApiAuthType.connection;
+
+  @doc("Connection auth security details")
+  security_scheme: OpenApiConnectionSecurityScheme;
+}
+
+@doc("Security details for OpenApi managed_identity authentication")
+model OpenApiManagedAuthDetails extends OpenApiAuthDetails {
+  @doc("The object type, which is always 'managed_identity'.")
+  type: OpenApiAuthType.managedIdentity;
+
+  @doc("Connection auth security details")
+  security_scheme: OpenApiManagedSecurityScheme;
+}
+
+@doc("Security scheme for OpenApi managed_identity authentication")
+model OpenApiManagedSecurityScheme {
+  @doc("Authentication scope for managed_identity auth type")
+  audience: string;
+}
+
+@doc("Security scheme for OpenApi managed_identity authentication")
+model OpenApiConnectionSecurityScheme {
+  @doc("Connection id for Connection auth type")
+  connection_id: string;
+}
+
 //
 // Required tool calls -- provided on a run and represent tools that need outputs submitted for the run to continue
 //
 
 @discriminator("type")
 @doc("""
-  An abstract representation a a tool invocation needed by the model to continue a run.
+  An abstract representation of a tool invocation needed by the model to continue a run.
   """)
 model RequiredToolCall {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -199,9 +308,52 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
 
-  @doc("Reserved for future use.")
+  @doc("The ID of the tool call. This ID must be referenced when you submit tool outputs.")
+  id: string;
+
+  @doc("For now, this is always going to be an empty object.")
   @encodedName("application/json", "file_search")
-  fileSearch: Record<string>;
+  fileSearch: RunStepFileSearchToolCallResults;
+}
+
+@doc("The results of the file search.")
+model RunStepFileSearchToolCallResults {
+  @doc("Ranking options for file search.")
+  @encodedName("application/json", "ranking_options")
+  rankingOptions?: FileSearchRankingOptions;
+
+  @doc("The array of a file search results")
+  results: RunStepFileSearchToolCallResult[];
+}
+
+@doc("""
+    File search tool call result.
+  """)
+model RunStepFileSearchToolCallResult {
+  @doc("The ID of the file that result was found in.")
+  @encodedName("application/json", "file_id")
+  fileId: string;
+
+  @doc("The name of the file that result was found in.")
+  @encodedName("application/json", "file_name")
+  fileName: string;
+
+  @doc("The score of the result. All values must be a floating point number between 0 and 1.")
+  @minValue(0)
+  @maxValue(1)
+  score: float32;
+
+  @doc("The content of the result that was found. The content is only included if requested via the include query parameter.")
+  content?: FileSearchToolCallContent[];
+}
+
+@doc("The file search result content object.")
+model FileSearchToolCallContent {
+  @doc("The type of the content.")
+  type: "text";
+
+  @doc("The text content of the file.")
+  text: string;
 }
 
 @doc("""
@@ -248,11 +400,11 @@ model RunStepSharepointToolCall extends RunStepToolCall {
   executed Microsoft Fabric operations.
   """)
 model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'microsoft_fabric'.")
-  type: "microsoft_fabric";
+  @doc("The object type, which is always 'fabric_aiskill'.")
+  type: "fabric_aiskill";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "microsoft_fabric")
+  @encodedName("application/json", "fabric_aiskill")
   microsoftFabric: Record<string>;
 }
 
@@ -396,8 +548,8 @@ union AgentsNamedToolChoiceType {
   /** Tool type `bing_grounding` */
   bingGrounding: "bing_grounding",
 
-  /** Tool type `microsoft_fabric` */
-  microsoftFabric: "microsoft_fabric",
+  /** Tool type `fabric_aiskill` */
+  microsoftFabric: "fabric_aiskill",
 
   /** Tool type `sharepoint_grounding` */
   sharepoint: "sharepoint_grounding",
@@ -413,7 +565,7 @@ model FunctionName {
 }
 
 /**
- * A set of connection resources currently used by either the `bing_grounding`, `microsoft_fabric`, or `sharepoint_grounding` tools.
+ * A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.
  */
 model ToolConnectionList {
   /**
@@ -434,4 +586,25 @@ model ToolConnection {
    */
   @encodedName("application/json", "connection_id")
   connectionId: string;
+}
+
+@doc("The structure for keeping storage queue name and URI.")
+model AzureFunctionBinding {
+  @doc("The type of binding, which is always 'storage_queue'.")
+  type: "storage_queue";
+
+  @doc("Storage queue.")
+  @encodedName("application/json", "storage_queue")
+  storageQueue: AzureFunctionStorageQueue;
+}
+
+@doc("The structure for keeping storage queue name and URI.")
+model AzureFunctionStorageQueue {
+  @doc("URI to the Azure Storage Queue service allowing you to manipulate a queue.")
+  @encodedName("application/json", "queue_service_endpoint")
+  storageServiceEndpoint: string;
+
+  @doc("The name of an Azure function storage queue.")
+  @encodedName("application/json", "queue_name")
+  queueName: string;
 }

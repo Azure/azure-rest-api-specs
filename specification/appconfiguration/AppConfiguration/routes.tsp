@@ -22,7 +22,7 @@ alias appConfigOperation<
 >;
 
 alias standardOps = ResourceOperations<
-  SupportsClientRequestId & NoRepeatableRequests & NoConditionalRequests,
+  NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
 
@@ -48,6 +48,7 @@ alias AppConfigResponseHeaders = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of keys.")
 @doc("Gets a list of keys.")
 op getKeys is Foundations.ResourceList<
@@ -114,6 +115,7 @@ op checkKeys is appConfigOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of key-values.")
 @doc("Gets a list of key-values.")
 op getKeyValues is Foundations.ResourceList<
@@ -300,7 +302,7 @@ op getKeyValue is Foundations.ResourceOperation<
     ...ClientRequestIdHeader;
   },
   Response = Body<KeyValue> & {
-    ...ClientRequestIdHeader;
+    ...RequestIdResponseHeader;
     ...AppConfigResponseHeaders;
     ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
@@ -309,6 +311,7 @@ op getKeyValue is Foundations.ResourceOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Creates a key-value.")
 @doc("Creates a key-value.")
 @route("/kv/{key}")
@@ -438,6 +441,7 @@ op checkKeyValue is appConfigOperation<
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value snapshots.")
 @doc("Gets a list of key-value snapshots.")
@@ -519,6 +523,8 @@ op getSnapshot is standardOps.ResourceRead<
         """)
       @header("If-None-Match")
       ifNoneMatch?: string;
+
+      ...ClientRequestIdHeader;
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
@@ -526,7 +532,7 @@ op getSnapshot is standardOps.ResourceRead<
       link?: string;
 
       ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }>
+    } & RequestIdResponseHeader>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -651,6 +657,7 @@ op checkSnapshot is appConfigOperation<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
@@ -723,6 +730,7 @@ op checkLabels is appConfigOperation<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Locks a key-value.")
 @doc("Locks a key-value.")
@@ -795,6 +803,7 @@ op deleteLock is appConfigOperation<
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value revisions.")
 @doc("Gets a list of key-value revisions.")
