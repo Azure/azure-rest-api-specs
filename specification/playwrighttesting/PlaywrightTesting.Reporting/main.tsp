@@ -666,7 +666,7 @@ interface TestRuns {
   createOrUpdateTestRun is Operations.ResourceCreateOrUpdate<TestRun>;
 
   @doc("Gets a testrun.")
-  getTestRuns is Operations.ResourceRead<TestRun>;
+  getTestRun is Operations.ResourceRead<TestRun>;
 
   @doc("List testruns.")
   listTestRuns is Operations.ResourceList<
@@ -713,10 +713,6 @@ interface TestResults {
   // TestResults Operations
 
   @doc("Upload Test Results.")
-  //@example(
-  //   "./TestResults_Create.json",
-  //   "TestResults_Create"
-  // )
   uploadBatch is Operations.ResourceCollectionAction<
     DetailedTestResult,
     UploadTestResultsRequest,
