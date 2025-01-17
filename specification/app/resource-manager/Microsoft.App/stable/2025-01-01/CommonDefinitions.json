@@ -318,6 +318,10 @@
             "read"
           ]
         },
+        "certificateKeyVaultProperties": {
+          "description": "Certificate stored in Azure Key Vault.",
+          "$ref": "#/definitions/CertificateKeyVaultProperties"
+        },
         "certificateValue": {
           "format": "byte",
           "description": "PFX or PEM blob",
@@ -759,7 +763,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -956,12 +960,27 @@
         }
       }
     },
+    "CertificateKeyVaultProperties": {
+      "description": "Properties for a certificate stored in a Key Vault.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "URL pointing to the Azure Key Vault secret that holds the certificate.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
     "Certificate": {
       "description": "Certificate used for Custom Domain bindings of Container Apps in a Managed Environment",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -984,6 +1003,10 @@
                 "name": "CertificateProvisioningState",
                 "modelAsString": true
               }
+            },
+            "certificateKeyVaultProperties": {
+              "description": "Properties for a certificate stored in a Key Vault.",
+              "$ref": "#/definitions/CertificateKeyVaultProperties"
             },
             "password": {
               "description": "Certificate password.",
@@ -1091,7 +1114,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
