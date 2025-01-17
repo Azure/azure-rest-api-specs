@@ -241,7 +241,22 @@
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "202": {
-            "description": "The request was successful; the operation will complete asynchronously."
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for the operation result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Indicates how long the client should wait before polling the URL in the Location or Azure-AsyncOperation header."
+              }
+            }
           },
           "204": {
             "description": "No Content - the specified resource was not found."
@@ -1606,6 +1621,11 @@
           "default": 7,
           "description": "The amount of time in days that the configuration store will be retained when it is soft deleted."
         },
+        "revisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of time in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores."
+        },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": false,
@@ -1789,6 +1809,11 @@
         "dataPlaneProxy": {
           "$ref": "#/definitions/DataPlaneProxyProperties",
           "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
+        "revisionRetentionPeriodInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of time in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores."
         }
       }
     },
