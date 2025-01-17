@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.Conversations.Authoring;
+namespace Language.Conversations.Authoring.Common;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationProjectKind", "csharp")
