@@ -25,6 +25,7 @@ jobs:
       - name: Run spelling check
         run: |
           ./eng/common/spelling/Invoke-Cspell.ps1 `
-            -ScanGlobs 'specification/**' `
-            -CSpellConfigPath './cspell.json'
+            -ScanGlobs '**' `
+            -CSpellConfigPath './cspell.json' `
+            -SpellCheckRoot (Resolve-Path specification)
         shell: pwsh
