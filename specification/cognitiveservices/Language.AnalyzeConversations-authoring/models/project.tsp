@@ -11,7 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Language.Conversations.Authoring.Common;
 
 namespace Language.Conversations.Authoring;
 

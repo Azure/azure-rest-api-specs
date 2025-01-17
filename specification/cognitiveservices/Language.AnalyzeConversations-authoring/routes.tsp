@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models/models.tsp";
+import "./models/project.tsp";
 import "./models/common.tsp";
 import "@typespec/http";
 import "@typespec/versioning";
@@ -12,7 +12,6 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
-using Language.Conversations.Authoring.Common;
 
 namespace Language.Conversations.Authoring;
 
