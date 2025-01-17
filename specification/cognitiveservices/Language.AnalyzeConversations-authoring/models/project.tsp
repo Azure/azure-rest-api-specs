@@ -11,9 +11,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Language.Conversations.Authoring.Common;
+using Language.Conversations.Authoring;
 
-namespace Language.Conversations.Authoring.Project;
+namespace Language.Conversations.Authoring;
 
 /**
  * Represents a list of retrieved projects' metadata.

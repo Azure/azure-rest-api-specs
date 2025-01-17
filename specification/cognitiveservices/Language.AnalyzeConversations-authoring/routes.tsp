@@ -12,8 +12,6 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
-using Language.Conversations.Authoring.Common;
-using Language.Conversations.Authoring.Project;
 
 namespace Language.Conversations.Authoring;
 

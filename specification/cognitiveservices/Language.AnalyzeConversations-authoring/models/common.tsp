@@ -11,10 +11,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.Conversations.Authoring.Common;
+namespace Language.Conversations.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationProjectKind", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union ProjectKind {
   string,
 
@@ -40,6 +41,7 @@ union ProjectKind {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationErrorCode", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -67,6 +69,7 @@ union ErrorCode {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationInnerErrorCode", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union InnerErrorCode {
   string,
   InvalidRequest: "InvalidRequest",
@@ -87,6 +90,7 @@ union InnerErrorCode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("StringIndexType", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union StringIndexType {
   string,
 
@@ -102,6 +106,7 @@ union StringIndexType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationExportedProjectFormat", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union ExportedProjectFormat {
   string,
 
@@ -119,6 +124,7 @@ union ExportedProjectFormat {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationTrainingMode", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union TrainingMode {
   string,
 
@@ -135,6 +141,7 @@ union TrainingMode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationEvaluationKind", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union EvaluationKind {
   string,
 
@@ -152,6 +159,7 @@ union EvaluationKind {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
 @clientName("AnalyzeConversationJobStatus", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union JobStatus {
   string,
   notStarted: "notStarted",
@@ -172,6 +180,7 @@ union JobStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationCompositionMode", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union CompositionMode {
   string,
 
@@ -198,6 +207,7 @@ union CompositionMode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("OrchestrationTargetProjectKind", "csharp")
+@clientNamespace("Language.Conversations.Authoring.Common")
 union OrchestrationTargetProjectKind {
   string,
   Luis: "Luis",
