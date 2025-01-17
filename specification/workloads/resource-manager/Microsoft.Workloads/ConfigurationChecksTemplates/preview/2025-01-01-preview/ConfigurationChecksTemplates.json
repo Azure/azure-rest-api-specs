@@ -143,7 +143,7 @@
           "readOnly": true
         },
         "enabled": {
-          "type": "boolean",
+          "$ref": "#/definitions/ExecutionEnabledStatus",
           "description": "The flag to enable (or) disable the check execution."
         },
         "inputParameters": {
@@ -484,6 +484,30 @@
             "name": "NonProduction",
             "value": "Non-Production",
             "description": "Environment is non production."
+          }
+        ]
+      }
+    },
+    "ExecutionEnabledStatus": {
+      "type": "string",
+      "description": "Represents whether the check is enabled.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionEnabledStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "The execution of the check is enabled."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "The execution of the check is disabled."
           }
         ]
       }

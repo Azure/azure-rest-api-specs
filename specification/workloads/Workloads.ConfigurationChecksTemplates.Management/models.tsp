@@ -157,6 +157,23 @@ union ConfigurationChecksTemplateProvisioningState {
   string,
 }
 
+@doc("Represents whether the check is enabled.")
+union ExecutionEnabledStatus {
+  /**
+   * The execution of the check is enabled.
+   */
+  @doc("The execution of the check is enabled.")
+  True: "true",
+
+  /**
+   * The execution of the check is disabled.
+   */
+  @doc("The execution of the check is disabled.")
+  False: "false",
+
+  string,
+}
+
 @doc("Schema for shared parameters to use in 1P resources checks configuration.")
 model SharedParameters {
   /**
@@ -227,7 +244,7 @@ model CheckConfiguration {
    * The flag to enable (or) disable the check execution.
    */
   @doc("The flag to enable (or) disable the check execution.")
-  enabled: boolean;
+  enabled: ExecutionEnabledStatus;
 
   /**
    * List of input parameters to be used in the check.
