@@ -815,44 +815,6 @@
       }
     },
     "/app/userDefinedFunctions": {
-      "put": {
-        "operationId": "CreateUserDefinedFunction",
-        "x-ms-examples": {
-          "CreateUserDefinedFunction": {
-            "$ref": "./examples/ledger/CreateUserDefinedFunction.json"
-          }
-        },
-        "summary": "Creates a user defined function.",
-        "description": "Creates the user defined function in the Confidential Ledger",
-        "parameters": [
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/UserDefinedFunctionParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The user defined function is created.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "The transaction id at which this write will become durable."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/UserDefinedFunction"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/ConfidentialLedgerError"
-            }
-          }
-        }
-      },
       "get": {
         "operationId": "ListUserDefinedFunctions",
         "x-ms-examples": {
@@ -936,6 +898,47 @@
         "responses": {
           "200": {
             "description": "Gets the user defined function.",
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/ConfidentialLedgerError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateUserDefinedFunction",
+        "x-ms-examples": {
+          "CreateUserDefinedFunction": {
+            "$ref": "./examples/ledger/CreateOrUpdateUserDefinedFunction.json"
+          }
+        },
+        "summary": "Creates a user defined function.",
+        "description": "Creates the user defined function in the Confidential Ledger",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinedFunctionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The user defined function is created.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/UserDefinedFunction"
             }
@@ -1332,13 +1335,13 @@
           "$ref": "#/definitions/TransactionId",
           "readOnly": true
         },
-        "preTriggers": {
-          "description": "List of user defined function triggers to be executed before the ledger entry is written.",
-          "$ref": "#/definitions/UserDefinedFunctionTriggers"
+        "preOperationHooks": {
+          "description": "List of user defined function hooks to be executed before the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionHooks"
         },
-        "postTriggers": {
-          "description": "List of user defined function triggers to be executed after the ledger entry is written.",
-          "$ref": "#/definitions/UserDefinedFunctionTriggers"
+        "postOperationHooks": {
+          "description": "List of user defined function hooks to be executed after the ledger entry is written.",
+          "$ref": "#/definitions/UserDefinedFunctionHooks"
         }
       },
       "type": "object"
@@ -1949,7 +1952,7 @@
     "UserDefinedFunction": {
       "description": "A user defined function in the ledger.",
       "required": [
-        "id"
+        "code"
       ],
       "properties": {
         "code": {
@@ -1958,7 +1961,8 @@
         },
         "id": {
           "type": "string",
-          "description": "ID of the user defined function."
+          "description": "ID of the user defined function.",
+          "readOnly": true
         }
       },
       "type": "object"
@@ -2018,13 +2022,13 @@
       },
       "type": "object"
     },
-    "UserDefinedFunctionTrigger": {
-      "description": "Trigger for a user defined function execution.",
+    "UserDefinedFunctionHook": {
+      "description": "Hook for a user defined function execution.",
       "required": [
-        "id"
+        "functionId"
       ],
       "properties": {
-        "id": {
+        "functionId": {
           "type": "string",
           "description": "ID of the user defined function to execute."
         },
@@ -2034,11 +2038,11 @@
       },
       "type": "object"
     },
-    "UserDefinedFunctionTriggers": {
-      "description": "List of user defined function triggers.",
+    "UserDefinedFunctionHooks": {
+      "description": "List of user defined function hooks.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/UserDefinedFunctionTrigger"
+        "$ref": "#/definitions/UserDefinedFunctionHook"
       }
     }
   },
