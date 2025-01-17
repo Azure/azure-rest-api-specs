@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Discovery Service",
-    "version": "2024-05-01-preview",
+    "version": "2024-12-01-preview",
     "description": "Azure OffAzure Resource Provider management API."
   },
   "schemes": [
@@ -144,6 +144,9 @@
     },
     {
       "name": "SqlSitesController"
+    },
+    {
+      "name": "SqlImportJobsController"
     },
     {
       "name": "WebAppSitesController"
@@ -5134,6 +5137,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportImportedSqlInventoryAsync": {
+      "post": {
+        "operationId": "SqlSitesController_ExportImportedSqlInventoryAsync",
+        "tags": [
+          "SqlSitesController"
+        ],
+        "description": "Method to generate export/read SAS uri for import.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "description": "SQL site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServerErrors": {
       "post": {
         "operationId": "SqlSitesController_ExportSqlServerErrors",
@@ -5294,6 +5354,112 @@
         "x-ms-examples": {
           "SqlSitesController_ExportSqlServers_MaximumSet_Gen": {
             "$ref": "./examples/SqlSitesController_ExportSqlServers_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs": {
+      "get": {
+        "operationId": "SqlImportJobsController_ListImportjobs",
+        "tags": [
+          "SqlImportJobsController"
+        ],
+        "description": "Method to get all import SQL inventory job for the given site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "description": "SQL site name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedImportSqlInventoryJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importJobs/{jobName}": {
+      "get": {
+        "operationId": "SqlImportJobsController_GetImportjob",
+        "tags": [
+          "SqlImportJobsController"
+        ],
+        "description": "Gets the SQL inventory import job with the given job name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "description": "SQL site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job Arm Name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportSqlInventoryJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -6258,6 +6424,120 @@
         "x-ms-examples": {
           "SqlSitesController_Summary_MaximumSet_Gen": {
             "$ref": "./examples/SqlSitesController_Summary_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/triggerImportInventory": {
+      "post": {
+        "operationId": "SqlSitesController_TriggerImportInventory",
+        "tags": [
+          "SqlSitesController"
+        ],
+        "description": "Method to Triggers the import SQL inventory.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "description": "SQL site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/validateAndImportInventory": {
+      "post": {
+        "operationId": "SqlSitesController_ValidateAndImportInventory",
+        "tags": [
+          "SqlSitesController"
+        ],
+        "description": "Method to validate the SQL inventory for import.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlSiteName",
+            "in": "path",
+            "description": "SQL site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SQLInventoryImportBody"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -12929,6 +13209,75 @@
         "machineResourceId"
       ]
     },
+    "ArcScopeProperties": {
+      "type": "object",
+      "description": "Properties for defining Arc scope.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations to discover Arc resources from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ArcScopeType",
+          "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
+        },
+        "subscriptionOrResourceGroupIds": {
+          "type": "array",
+          "description": "List of subscription or resource group ARM IDs. Allowed only if scopeType is SubscriptionOrResourceGroupIds.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "scopeType"
+      ]
+    },
+    "ArcScopePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties for defining Arc scope.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Locations to discover Arc resources from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ArcScopeType",
+          "description": "The type of scope, currently supporting SubscriptionOrResourceGroupIds only."
+        },
+        "subscriptionOrResourceGroupIds": {
+          "type": "array",
+          "description": "List of subscription or resource group ARM IDs. Allowed only if scopeType is SubscriptionOrResourceGroupIds.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ArcScopeType": {
+      "type": "string",
+      "description": "Arc scope type.",
+      "enum": [
+        "SubscriptionOrResourceGroupIds"
+      ],
+      "x-ms-enum": {
+        "name": "ArcScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SubscriptionOrResourceGroupIds",
+            "value": "SubscriptionOrResourceGroupIds",
+            "description": "Scope is based on Subscription or Resource Group IDs."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.Object": {
       "type": "object",
       "description": "object model"
@@ -16093,6 +16442,117 @@
         }
       }
     },
+    "ImportSqlInventoryJob": {
+      "type": "object",
+      "description": "Import SQL inventory job REST Resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Handled by resource provider.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportSqlInventoryJobProperties",
+          "description": "Gets or sets the import job properties."
+        }
+      }
+    },
+    "ImportSqlInventoryJobProperties": {
+      "type": "object",
+      "description": "Import SQL inventory job properties web model",
+      "properties": {
+        "blobName": {
+          "type": "string",
+          "description": "Gets or sets the Blob name for the blob to fetch Import file from."
+        },
+        "blobSasUri": {
+          "type": "string",
+          "description": "Gets or sets the blob SAS Uri of the input import file."
+        },
+        "jobResult": {
+          "$ref": "#/definitions/ImportSqlInventoryJobResult",
+          "description": "Gets or sets the Job Result status."
+        },
+        "numberOfServersImported": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of servers imported."
+        },
+        "numberOfDatabasesImported": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of databases imported."
+        },
+        "numberOfAvailabilityGroupsImported": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of availability groups imported."
+        },
+        "blobCreationTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the Blob creation time stamp."
+        },
+        "errorSummary": {
+          "$ref": "#/definitions/SqlImportJobErrorSummary",
+          "description": "Gets or sets the Job Error Summary."
+        }
+      }
+    },
+    "ImportSqlInventoryJobResult": {
+      "type": "string",
+      "description": "Import SQL inventory job result.",
+      "enum": [
+        "Unknown",
+        "Completed",
+        "CompletedWithWarnings",
+        "CompletedWithErrors",
+        "Failed",
+        "WaitingForBlobUpload",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ImportSqlInventoryJobResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed value."
+          },
+          {
+            "name": "CompletedWithWarnings",
+            "value": "CompletedWithWarnings",
+            "description": "CompletedWithWarnings value."
+          },
+          {
+            "name": "CompletedWithErrors",
+            "value": "CompletedWithErrors",
+            "description": "CompletedWithErrors value."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed value."
+          },
+          {
+            "name": "WaitingForBlobUpload",
+            "value": "WaitingForBlobUpload",
+            "description": "WaitingForBlobUpload value."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress value."
+          }
+        ]
+      }
+    },
     "ImportTypeValues": {
       "type": "string",
       "description": "ImportTypeValues enum.",
@@ -16497,6 +16957,12 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "provisioning state enum",
           "readOnly": true
+        },
+        "lastRefreshArcStatusTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last refresh time of arc status in UTC.",
+          "readOnly": true
         }
       }
     },
@@ -16789,6 +17255,26 @@
           "description": "The ImportMachinesJob items on this page",
           "items": {
             "$ref": "#/definitions/ImportMachinesJob"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      }
+    },
+    "PagedImportSqlInventoryJob": {
+      "type": "object",
+      "description": "Paged collection of ImportSqlInventoryJob items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImportSqlInventoryJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ImportSqlInventoryJob"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -17235,6 +17721,24 @@
         ]
       }
     },
+    "SQLInventoryImportBody": {
+      "type": "object",
+      "description": "SQL Inventory Import URI response object model.",
+      "properties": {
+        "jobArmId": {
+          "type": "string",
+          "description": "Gets or sets the job ARM ID."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the SAS URI."
+        },
+        "importType": {
+          "$ref": "#/definitions/SqlImportType",
+          "description": "Gets or sets the import type."
+        }
+      }
+    },
     "SasUriResponse": {
       "type": "object",
       "description": "Import URI response class.",
@@ -17611,6 +18115,22 @@
           "$ref": "#/definitions/ArcDiscovery",
           "description": "Gets the data related to Azure arc discovery.",
           "readOnly": true
+        },
+        "discoverySource": {
+          "type": "string",
+          "description": "Gets or sets the discovery source of the server.",
+          "enum": [
+            "Arc"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "hypervisor": {
+          "type": "string",
+          "description": "Gets or sets the hypervisor type of the server.",
+          "readOnly": true
         }
       }
     },
@@ -17660,7 +18180,7 @@
       "description": "A ServerSiteResource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SitesProperties",
+          "$ref": "#/definitions/ServerSitesProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -17732,6 +18252,10 @@
         "discoverySolutionId": {
           "type": "string",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopePropertiesUpdate",
+          "description": "Gets or sets the Arc scope properties for the server site."
         }
       }
     },
@@ -18281,6 +18805,47 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        }
+      }
+    },
+    "ServerSitesProperties": {
+      "type": "object",
+      "description": "The properties of ServerSiteResource.",
+      "properties": {
+        "masterSiteId": {
+          "type": "string",
+          "description": "Gets the Master Site this site is linked to.",
+          "readOnly": true
+        },
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopeProperties",
+          "description": "Gets or sets the Arc scope properties for the server site."
         }
       }
     },
@@ -18982,6 +19547,53 @@
           "format": "int32",
           "description": "Gets or sets the count of Shared Disks for SQL FCI."
         }
+      }
+    },
+    "SqlImportJobErrorSummary": {
+      "type": "object",
+      "description": "Job Error Summary",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Gets or sets the Job level errors.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of errors while trying to import SQL Inventory from CSV."
+        },
+        "warningCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the Number of warnings while trying to import SQL Inventory from CSV."
+        }
+      }
+    },
+    "SqlImportType": {
+      "type": "string",
+      "description": "Import types enum supported for Sql Inventory using import.",
+      "enum": [
+        "Unknown",
+        "AzureMigrateCsv"
+      ],
+      "x-ms-enum": {
+        "name": "SqlImportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "AzureMigrateCsv",
+            "value": "AzureMigrateCsv",
+            "description": "AzureMigrateCsv value."
+          }
+        ]
       }
     },
     "SqlJob": {
@@ -19715,6 +20327,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "provisioning state enum",
           "readOnly": true
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopeProperties",
+          "description": "Gets or sets the Arc scope properties for the sql site."
         }
       }
     },
@@ -19777,6 +20393,10 @@
         "discoveryScenario": {
           "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
+        },
+        "arcScope": {
+          "$ref": "#/definitions/ArcScopePropertiesUpdate",
+          "description": "Gets or sets the Arc scope properties for the sql site."
         }
       }
     },
@@ -20630,7 +21250,8 @@
         "2022-10-27",
         "2023-06-06",
         "2023-10-01-preview",
-        "2024-05-01-preview"
+        "2024-05-01-preview",
+        "2024-12-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -20700,6 +21321,11 @@
             "name": "v2024_05_01_preview",
             "value": "2024-05-01-preview",
             "description": "Api version 2024-05-01-preview."
+          },
+          {
+            "name": "v2024_12_01_preview",
+            "value": "2024-12-01-preview",
+            "description": "Api version 2024-12-01-preview."
           }
         ]
       }
