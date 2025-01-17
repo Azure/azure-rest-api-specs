@@ -1357,8 +1357,16 @@
           "description": "The time at which the SMS was received",
           "format": "date-time",
           "type": "string"
+        },
+        "segmentCount": {
+          "description": "Number of segments in the message",
+          "format": "int32",
+          "type": "integer"
         }
-      }
+      },
+      "required": [
+        "segmentCount"
+      ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
@@ -1432,6 +1440,10 @@
         },
         "recipient": {
           "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The Internet Message Id of the email been sent",
           "type": "string"
         },
         "messageId": {
@@ -2015,6 +2027,10 @@
       "description": "Detailed information about the status if any",
       "type": "object",
       "properties": {
+        "recipientMailServerHostName": {
+          "description": "Recipient Mail Server Host Name",
+          "type": "string"
+        },
         "statusMessage": {
           "description": "Detailed status message",
           "type": "string"
