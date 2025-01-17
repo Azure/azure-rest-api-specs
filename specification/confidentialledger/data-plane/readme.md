@@ -7,16 +7,20 @@ Confidential Ledger provides SDKs for the following languages:
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
 - [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
 
-Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-preview/confidentialledger.json` and `Microsoft.ConfidentialLedger/preview/2023-01-18-preview/identityservice.json` for the most up-to-date API changes.
+Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json` and `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json` for the most up-to-date API changes.
 
 > see https://aka.ms/autorest
+
+## Configuration
+
+### Basic Information
+
+These are the global settings for Confidential Ledger.
 
 ``` yaml
 tag: package-preview-2024-12-09
 openapi-type: data-plane
 ```
-
-## Configuration
 
 ### Tag: package-0.1-preview-ledger
 
