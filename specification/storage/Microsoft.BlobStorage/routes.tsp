@@ -411,7 +411,7 @@ interface Container {
     DateResponseHeader & FilterBlobSegment
   >;
 
-  /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
+  /** The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -435,7 +435,7 @@ interface Container {
     }
   >;
 
-  /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
+  /** The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -456,7 +456,7 @@ interface Container {
     }
   >;
 
-  /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
+  /** The Renew Lease operation renews an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -478,7 +478,7 @@ interface Container {
     }
   >;
 
-  /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
+  /** The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -501,7 +501,7 @@ interface Container {
     }
   >;
 
-  /** [Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite */
+  /** The Change Lease operation is used to change the ID of an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -524,7 +524,7 @@ interface Container {
     }
   >;
 
-  /** [Update] The List Blobs operation returns a list of the blobs under the specified container */
+  /** The List Blobs operation returns a list of the blobs under the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -541,7 +541,7 @@ interface Container {
     ListBlobsFlatSegmentResponse & DateResponseHeader
   >;
 
-  /** [Update] The List Blobs operation returns a list of the blobs under the specified container */
+  /** The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -996,7 +996,7 @@ interface Blob {
     }
   >;
 
-  /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
+  /** The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1021,7 +1021,7 @@ interface Blob {
     }
   >;
 
-  /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
+  /** The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1043,7 +1043,7 @@ interface Blob {
     }
   >;
 
-  /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
+  /** The Renew Lease operation renews an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1066,7 +1066,7 @@ interface Blob {
     }
   >;
 
-  /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
+  /** The Change Lease operation is used to change the ID of an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1090,7 +1090,7 @@ interface Blob {
     }
   >;
 
-  /** [Update] The Lease Blob operation establishes and manages a lock on a blob for write and delete operations. */
+  /** The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
