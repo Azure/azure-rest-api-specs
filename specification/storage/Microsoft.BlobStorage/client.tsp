@@ -14,6 +14,8 @@ model BlobServiceClientParameters {
 }
 
 @@clientInitialization(Storage.Blob.Blob, BlobServiceClientParameters);
+@@clientInitialization(Storage.Blob.AppendBlob, BlobServiceClientParameters);
+@@clientInitialization(Storage.Blob.BlockBlob, BlobServiceClientParameters);
 @@clientInitialization(Storage.Blob.PageBlob, BlobServiceClientParameters);
 @@clientInitialization(Storage.Blob.Container, ContainerNamePathParameter);
 
