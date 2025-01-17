@@ -168,3 +168,31 @@ model CapacityNameParameter {
   @path
   capacityName: string;
 }
+
+@doc("Describes Resource Quota")
+model Quota {
+  @doc("The name of the quota.")
+  @visibility("read")
+  name?: QuotaName;
+
+  @doc("Fully qualified ARM resource id")
+  id: armResourceIdentifier;
+
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
+}
+
+@doc("The Quota Names")
+model QuotaName {
+  @doc("The name of the resource.")
+  value?: string;
+
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
+}

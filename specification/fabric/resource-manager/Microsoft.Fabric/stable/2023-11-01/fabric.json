@@ -170,6 +170,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/locations/{location}/usages": {
+      "get": {
+        "operationId": "FabricCapacities_ListUsages",
+        "tags": [
+          "FabricCapacities"
+        ],
+        "description": "List the current consumption and limit in this location for the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota usages for a subscription": {
+            "$ref": "./examples/FabricCapacities_ListUsagesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/skus": {
       "get": {
         "operationId": "FabricCapacities_ListSkus",
@@ -808,6 +850,27 @@
         }
       }
     },
+    "PagedQuota": {
+      "type": "object",
+      "description": "Paged collection of Quota items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the Fabric capacity resource.",
@@ -856,6 +919,56 @@
         ]
       },
       "readOnly": true
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Describes Resource Quota",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/QuotaName",
+          "description": "The name of the quota.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource id"
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of usage measurement."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        }
+      },
+      "required": [
+        "id",
+        "unit",
+        "currentValue",
+        "limit"
+      ]
+    },
+    "QuotaName": {
+      "type": "object",
+      "description": "The Quota Names",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      }
     },
     "ResourceState": {
       "type": "string",
