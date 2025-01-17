@@ -67,9 +67,6 @@
       "name": "ScalingPlans"
     },
     {
-      "name": "PrivateLinkResourcesWs"
-    },
-    {
       "name": "Workspaces"
     },
     {
@@ -4921,11 +4918,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateLinkResources": {
       "get": {
-        "operationId": "PrivateLinkResourcesWs_ListByWorkspace",
+        "operationId": "PrivateLinkResources_ListByWorkspace",
         "tags": [
-          "PrivateLinkResourcesWs"
+          "PrivateLinkResources"
         ],
-        "description": "List the private link resources available for this hostpool.",
+        "description": "List the private link resources available for this workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4982,6 +4979,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByWorkspace": {
+            "$ref": "./examples/PrivateLinkResources_ListByWorkspace.json"
           }
         },
         "x-ms-pageable": {

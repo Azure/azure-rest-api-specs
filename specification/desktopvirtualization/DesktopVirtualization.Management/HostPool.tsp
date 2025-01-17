@@ -84,6 +84,36 @@ interface PrivateLinkResources {
       initialSkip?: int32;
     }
   >;
+
+  /**
+   * List the private link resources available for this workspace.
+   */
+  @action("privateLinkResources")
+  @get
+  listByWorkspace is ArmResourceActionSync<
+    Workspace,
+    void,
+    PrivateLinkResourceListResult,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
+  >;
 }
 @armResourceOperations
 interface HostPools {

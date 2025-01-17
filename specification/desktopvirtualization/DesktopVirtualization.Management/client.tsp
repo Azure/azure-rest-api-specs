@@ -11,8 +11,6 @@ using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
-@@clientName(PrivateLinkResourcesWs, "PrivateLinkResourcesWs");
-
 @@clientName(CustomPrivateEndpointConnection, "PrivateEndpointConnections");
 
 @@clientName(AppAttachPackages, "AppAttachPackage");
