@@ -246,6 +246,8 @@ model CheckConfiguration {
   @doc("The flag to enable (or) disable the check execution.")
   enabled: ExecutionEnabledStatus;
 
+  enabled: ExecutionEnabledStatus;
+
   /**
    * List of input parameters to be used in the check.
    */
