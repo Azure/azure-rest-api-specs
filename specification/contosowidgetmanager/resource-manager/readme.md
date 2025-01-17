@@ -36,5 +36,3 @@ input-file:
 ```
 
 ---
-
-seplng errrror
