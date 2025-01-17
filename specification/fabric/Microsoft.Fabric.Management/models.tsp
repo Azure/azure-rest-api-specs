@@ -175,9 +175,6 @@ model Quota {
   @visibility("read")
   name?: QuotaName;
 
-  @doc("Fully qualified ARM resource id")
-  id: armResourceIdentifier;
-
   @doc("The unit of usage measurement.")
   unit: string;
 
