@@ -27,9 +27,18 @@ These are the global settings for the azuredatatransfer.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-09
+tag: package-2024-09-27
 ```
 
+
+### Tag: package-2024-09-27
+
+These settings apply only when `--tag=package-2024-09-27` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-27'
+input-file:
+  - Microsoft.AzureDataTransfer/stable/2024-09-27/azuredatatransfer.json
+```
 
 ### Tag: package-2024-09
 
