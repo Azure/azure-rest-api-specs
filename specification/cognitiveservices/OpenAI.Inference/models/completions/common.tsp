@@ -91,4 +91,8 @@ union ChatRole {
   @doc("The role that represents extension tool activity within a chat completions operation.")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   tool: "tool",
+
+  /** The role that provides instructions that the model should follow */
+  @added(ServiceApiVersions.v2024_12_01_Preview)
+  developer: "developer",
 }
