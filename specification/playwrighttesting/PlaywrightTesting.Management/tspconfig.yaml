@@ -32,6 +32,7 @@ options:
     hierarchyClient: false
     experimentalExtensibleEnums: true
     enableOperationGroup: true
+    generateSample: true
     package-dir: "arm-playwrighttesting"
     flavor: "azure"
     packageDetails:
@@ -42,3 +43,13 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.PlaywrightTesting"
+    flavor: azure
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-playwrighttesting"
+    flavor: azure
+    service-name: Playwright Testing

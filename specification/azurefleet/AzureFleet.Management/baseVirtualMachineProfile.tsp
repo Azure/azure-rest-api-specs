@@ -53,9 +53,9 @@ model BaseVirtualMachineProfile {
    * Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS
    * (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for
    * Windows
-   * Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing)
+   * Server](https://learn.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing)
    * <br><br> [Azure Hybrid Use Benefit for Linux
-   * Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux)
+   * Server](https://learn.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux)
    * <br><br> Minimum api-version: 2015-06-15
    */
   licenseType?: string;
@@ -146,10 +146,10 @@ model VirtualMachineScaleSetOSProfile {
     \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\",
     \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to
     reset the Remote Desktop service or its login password in a Windows
-    VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp)
+    VM](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp)
     <br><br> For resetting root password, see [Manage users, SSH, and check or
     repair disks on Azure Linux VMs using the VMAccess
-    Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)
+    Extension](https://learn.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)
     """)
   @visibility("create", "update")
   @secret
@@ -160,7 +160,7 @@ model VirtualMachineScaleSetOSProfile {
    * is decoded to a binary array that is saved as a file on the Virtual Machine.
    * The maximum length of the binary array is 65535 bytes. For using cloud-init for
    * your VM, see [Using cloud-init to customize a Linux VM during
-   * creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)
+   * creation](https://learn.microsoft.com/azure/virtual-machines/linux/using-cloud-init)
    */
   @visibility("create", "update")
   @secret
@@ -174,7 +174,7 @@ model VirtualMachineScaleSetOSProfile {
   /**
    * Specifies the Linux operating system settings on the virtual machine. For a
    * list of supported Linux distributions, see [Linux on Azure-Endorsed
-   * Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
+   * Distributions](https://learn.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
    */
   linuxConfiguration?: LinuxConfiguration;
 
@@ -182,9 +182,9 @@ model VirtualMachineScaleSetOSProfile {
    * Specifies set of certificates that should be installed onto the virtual
    * machines in the scale set. To install certificates on a virtual machine it is
    * recommended to use the [Azure Key Vault virtual machine extension for
-   * Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
+   * Linux](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
    * or the [Azure Key Vault virtual machine extension for
-   * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
+   * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "id exists inside sourceVault"
   @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
@@ -226,9 +226,9 @@ model WindowsConfiguration {
   /**
    * Specifies the time zone of the virtual machine. e.g. "Pacific Standard Time".
    * Possible values can be
-   * [TimeZoneInfo.Id](https://docs.microsoft.com/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id)
+   * [TimeZoneInfo.Id](https://learn.microsoft.com/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id)
    * value from time zones returned by
-   * [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/dotnet/api/system.timezoneinfo.getsystemtimezones).
+   * [TimeZoneInfo.GetSystemTimeZones](https://learn.microsoft.com/dotnet/api/system.timezoneinfo.getsystemtimezones).
    */
   timeZone?: string;
 
@@ -379,16 +379,16 @@ model WinRMListener {
    * This is the URL of a certificate that has been uploaded to Key Vault as a
    * secret. For adding a secret to the Key Vault, see [Add a key or secret to the
    * key
-   * vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
+   * vault](https://learn.microsoft.com/azure/key-vault/key-vault-get-started/#add).
    * In this case, your certificate needs to be the Base64 encoding of the following
    * JSON Object which is encoded in UTF-8: <br><br> {<br>
    * "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>
    * "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual
    * machine it is recommended to use the [Azure Key Vault virtual machine extension
    * for
-   * Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
+   * Linux](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
    * or the [Azure Key Vault virtual machine extension for
-   * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
+   * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
   certificateUrl?: url;
 }
@@ -396,7 +396,7 @@ model WinRMListener {
 /**
  * Specifies the Linux operating system settings on the virtual machine. For a
  * list of supported Linux distributions, see [Linux on Azure-Endorsed
- * Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
+ * Distributions](https://learn.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
  */
 model LinuxConfiguration {
   /**
@@ -458,7 +458,7 @@ model SshPublicKey {
    * SSH public key certificate used to authenticate with the VM through ssh. The
    * key needs to be at least 2048-bit and in ssh-rsa format. For creating ssh keys,
    * see [Create SSH keys on Linux and Mac for Linux VMs in
-   * Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
+   * Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).
    */
   keyData?: string;
 }
@@ -547,16 +547,16 @@ model VaultCertificate {
    * This is the URL of a certificate that has been uploaded to Key Vault as a
    * secret. For adding a secret to the Key Vault, see [Add a key or secret to the
    * key
-   * vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add).
+   * vault](https://learn.microsoft.com/azure/key-vault/key-vault-get-started/#add).
    * In this case, your certificate needs to be It is the Base64 encoding of the
    * following JSON Object which is encoded in UTF-8: <br><br> {<br>
    * "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>
    * "password":"<pfx-file-password>"<br>} <br> To install certificates on a virtual
    * machine it is recommended to use the [Azure Key Vault virtual machine extension
    * for
-   * Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
+   * Linux](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-linux)
    * or the [Azure Key Vault virtual machine extension for
-   * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
+   * Windows](https://learn.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
   certificateUrl?: url;
 
@@ -588,7 +588,7 @@ model VirtualMachineScaleSetStorageProfile {
    * Specifies information about the operating system disk used by the virtual
    * machines in the scale set. For more information about disks, see [About disks
    * and VHDs for Azure virtual
-   * machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
+   * machines](https://learn.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
   osDisk?: VirtualMachineScaleSetOSDisk;
 
@@ -596,7 +596,7 @@ model VirtualMachineScaleSetStorageProfile {
    * Specifies the parameters that are used to add data disks to the virtual
    * machines in the scale set. For more information about disks, see [About disks
    * and VHDs for Azure virtual
-   * machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
+   * machines](https://learn.microsoft.com/azure/virtual-machines/managed-disks-overview).
    */
   @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
@@ -763,8 +763,8 @@ model DiffDiskSettings {
    * values are: **CacheDisk,** **ResourceDisk.** The defaulting behavior is:
    * **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk**
    * is used. Refer to the VM size documentation for Windows VM at
-   * https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at
-   * https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM
+   * https://learn.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at
+   * https://learn.microsoft.com/azure/virtual-machines/linux/sizes to check which VM
    * sizes exposes a cache disk.
    */
   placement?: DiffDiskPlacement;
@@ -1639,7 +1639,7 @@ model VMSizeProperties {
    * specified in the request body the default behavior is to set it to the value of
    * vCPUs available for that VM size exposed in api response of [List all available
    * virtual machine sizes in a
-   * region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list).
+   * region](https://learn.microsoft.com/en-us/rest/api/compute/resource-skus/list).
    */
   vCPUsAvailable?: int32;
 
@@ -1648,7 +1648,7 @@ model VMSizeProperties {
    * in the request body the default behavior is set to the value of vCPUsPerCore
    * for the VM Size exposed in api response of [List all available virtual machine
    * sizes in a
-   * region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list).
+   * region](https://learn.microsoft.com/en-us/rest/api/compute/resource-skus/list).
    * **Setting this property to 1 also means that hyper-threading is disabled.**
    */
   vCPUsPerCore?: int32;
@@ -1982,9 +1982,9 @@ union DiffDiskOptions {
  * resource disk space for Ephemeral OS disk provisioning. For more information on
  * Ephemeral OS disk size requirements, please refer Ephemeral OS disk size
  * requirements for Windows VM at
- * https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements
+ * https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements
  * and Linux VM at
- * https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements
+ * https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements
  * Minimum api-version for NvmeDisk: 2024-03-01.
  */
 union DiffDiskPlacement {
@@ -2015,9 +2015,9 @@ union DiffDiskPlacement {
  * zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant
  * storage. For more information regarding disks supported for Windows Virtual
  * Machines, refer to
- * https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for
+ * https://learn.microsoft.com/azure/virtual-machines/windows/disks-types and, for
  * Linux Virtual Machines, refer to
- * https://docs.microsoft.com/azure/virtual-machines/linux/disks-types
+ * https://learn.microsoft.com/azure/virtual-machines/linux/disks-types
  */
 union StorageAccountTypes {
   string,
@@ -2319,10 +2319,10 @@ union StatusLevelTypes {
  * Specifies the disk controller type configured for the VM and
  * VirtualMachineScaleSet. This property is only supported for virtual machines
  * whose operating system disk and VM sku supports Generation 2
- * (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please
+ * (https://learn.microsoft.com/en-us/azure/virtual-machines/generation-2), please
  * check the HyperVGenerations capability returned as part of VM sku capabilities
  * in the response of Microsoft.Compute SKUs api for the region contains V2
- * (https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more
+ * (https://learn.microsoft.com/rest/api/compute/resourceskus/list). For more
  * information about Disk Controller Types supported please refer to
  * https://aka.ms/azure-diskcontrollertypes.
  */

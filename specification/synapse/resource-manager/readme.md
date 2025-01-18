@@ -370,22 +370,6 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Synapse
-  output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
-  clear-output-folder: true
-batch:
- - tag: $(tag)
- - tag: package-sqlGen3-2020-04-01-preview
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)

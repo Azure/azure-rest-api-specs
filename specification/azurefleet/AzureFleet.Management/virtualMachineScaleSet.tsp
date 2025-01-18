@@ -57,6 +57,6 @@ model VirtualMachineScaleSetListResult {
   value: Array<VirtualMachineScaleSet>;
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: url;
 }

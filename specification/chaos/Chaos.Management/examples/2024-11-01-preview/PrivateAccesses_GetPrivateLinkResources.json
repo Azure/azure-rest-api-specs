@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "privateAccessName": "myPrivateAccess",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "agents",
+            "type": "Microsoft.Chaos/privateAccesses/privateLinkResources",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/myResourceGroup/providers/Microsoft.Chaos/privateAccesses/myPrivateAccess/privateLinkResources/agents",
+            "location": "centraluseuap",
+            "properties": {
+              "groupId": "agents",
+              "requiredMembers": [
+                "privateAccess_1"
+              ],
+              "requiredZoneNames": [
+                "privatelink.agents.core.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateAccesses_GetPrivateLinkResources",
+  "title": "List all possible private link resources under private access resource."
+}
