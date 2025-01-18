@@ -28,10 +28,21 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2024-04
+tag: package-2024-09
 ```
 
 ---
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2024-09-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2024-09-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2024-09-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2024-09-01/operations.json
+```
 
 ### Tag: package-preview-2024-04
 
