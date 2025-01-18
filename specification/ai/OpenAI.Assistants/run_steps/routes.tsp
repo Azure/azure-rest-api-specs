@@ -28,6 +28,9 @@ op getRunStep(
   @path threadId: string,
   @path runId: string,
   @path stepId: string,
+  /** A list of additional fields to include in the response. */
+  @added(ServiceApiVersions.v2024_12_01_preview)
+  @query("include[]") include: RunIncludes[],
 ): RunStep;
 
 /**
@@ -47,5 +50,8 @@ op getRunStep(
 op listRunSteps(
   @path threadId: string,
   @path runId: string,
+  /** A list of additional fields to include in the response. */
+  @added(ServiceApiVersions.v2024_12_01_preview)
+  @query("include[]") include: RunIncludes[],
   ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<RunStep>;

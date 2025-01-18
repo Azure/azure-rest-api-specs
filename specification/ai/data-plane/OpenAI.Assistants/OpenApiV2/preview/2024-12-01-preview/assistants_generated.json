@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure OpenAI",
-    "version": "2024-09-01-preview",
+    "version": "2024-12-01-preview",
     "description": "Azure OpenAI APIs for Assistants.",
     "x-typespec-generated": [
       {
@@ -165,11 +165,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of assistants.": {
-            "$ref": "./examples/list_assistants.json"
-          }
         }
       },
       "post": {
@@ -193,11 +188,6 @@
               "$ref": "#/definitions/Assistant"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create an assistant with a model and instructions.": {
-            "$ref": "./examples/create_assistant.json"
-          }
         }
       }
     },
@@ -220,11 +210,6 @@
             "schema": {
               "$ref": "#/definitions/Assistant"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves an assistant.": {
-            "$ref": "./examples/get_assistant.json"
           }
         }
       },
@@ -256,11 +241,6 @@
               "$ref": "#/definitions/Assistant"
             }
           }
-        },
-        "x-ms-examples": {
-          "Modifies an assistant.": {
-            "$ref": "./examples/update_assistant.json"
-          }
         }
       },
       "delete": {
@@ -281,11 +261,6 @@
             "schema": {
               "$ref": "#/definitions/AssistantDeletionStatus"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes an assistant.": {
-            "$ref": "./examples/delete_assistant.json"
           }
         }
       }
@@ -359,11 +334,6 @@
             "schema": {
               "$ref": "#/definitions/FileListResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Returns a list of files filtered by purpose": {
-            "$ref": "./examples/list_file.json"
           }
         }
       },
@@ -453,11 +423,6 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
-        },
-        "x-ms-examples": {
-          "Uploads a file": {
-            "$ref": "./examples/upload_file.json"
-          }
         }
       }
     },
@@ -481,11 +446,6 @@
               "$ref": "#/definitions/OpenAIFile"
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a file": {
-            "$ref": "./examples/get_file.json"
-          }
         }
       },
       "delete": {
@@ -506,11 +466,6 @@
             "schema": {
               "$ref": "#/definitions/FileDeletionStatus"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a previously uploaded file.": {
-            "$ref": "./examples/delete_file.json"
           }
         }
       }
@@ -535,11 +490,6 @@
               "type": "string",
               "format": "byte"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Returns the content of a file": {
-            "$ref": "./examples/get_file_content.json"
           }
         }
       }
@@ -566,11 +516,6 @@
               "$ref": "#/definitions/AssistantThread"
             }
           }
-        },
-        "x-ms-examples": {
-          "Creates a thread.": {
-            "$ref": "./examples/create_thread.json"
-          }
         }
       }
     },
@@ -593,11 +538,6 @@
             "schema": {
               "$ref": "#/definitions/AssistantThread"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves a thread.": {
-            "$ref": "./examples/get_thread.json"
           }
         }
       },
@@ -629,11 +569,6 @@
               "$ref": "#/definitions/AssistantThread"
             }
           }
-        },
-        "x-ms-examples": {
-          "Modifies a thread.": {
-            "$ref": "./examples/update_thread.json"
-          }
         }
       },
       "delete": {
@@ -654,11 +589,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadDeletionStatus"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a thread.": {
-            "$ref": "./examples/delete_thread.json"
           }
         }
       }
@@ -783,11 +713,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "List Messages": {
-            "$ref": "./examples/list_messages.json"
-          }
         }
       },
       "post": {
@@ -818,11 +743,6 @@
               "$ref": "#/definitions/ThreadMessage"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create a message.": {
-            "$ref": "./examples/create_message.json"
-          }
         }
       }
     },
@@ -852,11 +772,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a message.": {
-            "$ref": "./examples/get_message.json"
           }
         }
       },
@@ -903,11 +818,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Modify a message.": {
-            "$ref": "./examples/update_message.json"
           }
         }
       }
@@ -1025,11 +935,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of runs belonging to a thread.": {
-            "$ref": "./examples/list_runs.json"
-          }
         }
       },
       "post": {
@@ -1042,6 +947,32 @@
             "description": "The ID of the thread to run.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunIncludes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "fileSearchContent",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "Fetch the file search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
           },
           {
             "name": "body",
@@ -1059,11 +990,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create a run.": {
-            "$ref": "./examples/create_run.json"
           }
         }
       }
@@ -1094,11 +1020,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a run.": {
-            "$ref": "./examples/get_run.json"
           }
         }
       },
@@ -1146,11 +1067,6 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
-        },
-        "x-ms-examples": {
-          "Modifies a run.": {
-            "$ref": "./examples/update_run.json"
-          }
         }
       }
     },
@@ -1181,11 +1097,6 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
-        },
-        "x-ms-examples": {
-          "Cancels a run that is `in_progress`.\n": {
-            "$ref": "./examples/cancel_run.json"
-          }
         }
       }
     },
@@ -1207,6 +1118,32 @@
             "description": "The ID of the run to list steps from.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunIncludes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "fileSearchContent",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "Fetch the file search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
           },
           {
             "name": "limit",
@@ -1309,11 +1246,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of run steps belonging to a run.": {
-            "$ref": "./examples/list_run_steps.json"
-          }
         }
       }
     },
@@ -1342,6 +1274,32 @@
             "description": "The ID of the step to retrieve information about.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "include[]",
+            "in": "query",
+            "description": "A list of additional fields to include in the response.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "step_details.tool_calls[*].file_search.results[*].content"
+              ],
+              "x-ms-enum": {
+                "name": "RunIncludes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "fileSearchContent",
+                    "value": "step_details.tool_calls[*].file_search.results[*].content",
+                    "description": "Fetch the file search result content."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "include"
           }
         ],
         "responses": {
@@ -1350,11 +1308,6 @@
             "schema": {
               "$ref": "#/definitions/RunStep"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves a run step.": {
-            "$ref": "./examples/get_run_step.json"
           }
         }
       }
@@ -1413,11 +1366,6 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
-        },
-        "x-ms-examples": {
-          "When a run has the `status: \"requires_action\"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.\n": {
-            "$ref": "./examples/submit_tool_outputs_to_run.json"
-          }
         }
       }
     },
@@ -1442,11 +1390,6 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create a thread and run it in one request.": {
-            "$ref": "./examples/create_thread_and_run.json"
           }
         }
       }
@@ -1557,11 +1500,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of vector stores.": {
-            "$ref": "./examples/list_vector_stores.json"
-          }
         }
       },
       "post": {
@@ -1585,11 +1523,6 @@
               "$ref": "#/definitions/VectorStore"
             }
           }
-        },
-        "x-ms-examples": {
-          "Creates a vector store.": {
-            "$ref": "./examples/create_vector_store.json"
-          }
         }
       }
     },
@@ -1612,11 +1545,6 @@
             "schema": {
               "$ref": "#/definitions/VectorStore"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieves a vector store.": {
-            "$ref": "./examples/get_vector_store.json"
           }
         }
       },
@@ -1648,11 +1576,6 @@
               "$ref": "#/definitions/VectorStore"
             }
           }
-        },
-        "x-ms-examples": {
-          "Modifies a vector store.": {
-            "$ref": "./examples/modify_vector_store.json"
-          }
         }
       },
       "delete": {
@@ -1673,11 +1596,6 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreDeletionStatus"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a vector store.": {
-            "$ref": "./examples/delete_vector_store.json"
           }
         }
       }
@@ -1730,11 +1648,6 @@
               "$ref": "#/definitions/VectorStoreFileBatch"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create a vector store file batch.": {
-            "$ref": "./examples/create_vector_store_file_batch.json"
-          }
         }
       }
     },
@@ -1765,11 +1678,6 @@
               "$ref": "#/definitions/VectorStoreFileBatch"
             }
           }
-        },
-        "x-ms-examples": {
-          "Retrieves a vector store file batch.": {
-            "$ref": "./examples/get_vector_store_file_batch.json"
-          }
         }
       }
     },
@@ -1799,11 +1707,6 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFileBatch"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.": {
-            "$ref": "./examples/cancel_vector_store_file_batch.json"
           }
         }
       }
@@ -1967,11 +1870,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of vector store files of a given batch.": {
-            "$ref": "./examples/list_vector_store_file_batch_files.json"
-          }
         }
       }
     },
@@ -2127,11 +2025,6 @@
               ]
             }
           }
-        },
-        "x-ms-examples": {
-          "Returns a list of vector store files.": {
-            "$ref": "./examples/list_vector_store_files.json"
-          }
         }
       },
       "post": {
@@ -2176,11 +2069,6 @@
               "$ref": "#/definitions/VectorStoreFile"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create a vector store file by attaching a File to a vector store.": {
-            "$ref": "./examples/create_vector_store_file.json"
-          }
         }
       }
     },
@@ -2211,11 +2099,6 @@
               "$ref": "#/definitions/VectorStoreFile"
             }
           }
-        },
-        "x-ms-examples": {
-          "Retrieves a vector store file.": {
-            "$ref": "./examples/get_vector_store_file.json"
-          }
         }
       },
       "delete": {
@@ -2243,11 +2126,6 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFileDeletionStatus"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the delete file endpoint.": {
-            "$ref": "./examples/delete_vector_store_file.json"
           }
         }
       }
@@ -2961,6 +2839,62 @@
             "description": "Indicates a file is used as input to a vision operation."
           }
         ]
+      }
+    },
+    "FileSearchToolCallResult": {
+      "type": "object",
+      "description": "File search tool call result",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "The ID of the file that result was found in.",
+          "x-ms-client-name": "fileId"
+        },
+        "file_name": {
+          "type": "string",
+          "description": "The name of the file that result was found in.",
+          "x-ms-client-name": "fileName"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The score of the result. All values must be a floating point number between 0 and 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "content": {
+          "type": "array",
+          "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
+          "items": {
+            "$ref": "#/definitions/FileSearchToolCallResultContentItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "file_id",
+        "file_name",
+        "score"
+      ]
+    },
+    "FileSearchToolCallResultContentItem": {
+      "type": "object",
+      "description": "Content item in a file search result",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the content.",
+          "enum": [
+            "text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the file."
+        }
       }
     },
     "FileSearchToolDefinition": {
@@ -4023,6 +3957,20 @@
     "RunStepFileSearchToolCall": {
       "type": "object",
       "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
+      "properties": {
+        "file_search": {
+          "type": "array",
+          "description": "The results of the file search.",
+          "items": {
+            "$ref": "#/definitions/FileSearchToolCallResult"
+          },
+          "x-ms-client-name": "fileSearch",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "file_search"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/RunStepToolCall"
@@ -5361,34 +5309,28 @@
       "type": "string",
       "description": "Error code variants for vector store file processing",
       "enum": [
-        "internal_error",
-        "file_not_found",
-        "parsing_error",
-        "unhandled_mime_type"
+        "server_error",
+        "unsupported_file",
+        "invalid_file"
       ],
       "x-ms-enum": {
         "name": "VectorStoreFileErrorCode",
         "modelAsString": true,
         "values": [
           {
-            "name": "internalError",
-            "value": "internal_error",
-            "description": "An internal error occurred."
+            "name": "serverError",
+            "value": "server_error",
+            "description": "The server encountered an error."
           },
           {
-            "name": "fileNotFound",
-            "value": "file_not_found",
-            "description": "The file was not found."
+            "name": "unsupportedFile",
+            "value": "unsupported_file",
+            "description": "The file format is not supported."
           },
           {
-            "name": "parsingError",
-            "value": "parsing_error",
-            "description": "The file could not be parsed."
-          },
-          {
-            "name": "unhandledMimeType",
-            "value": "unhandled_mime_type",
-            "description": "The file has an unhandled mime type."
+            "name": "invalidFile",
+            "value": "invalid_file",
+            "description": "The file is invalid."
           }
         ]
       }

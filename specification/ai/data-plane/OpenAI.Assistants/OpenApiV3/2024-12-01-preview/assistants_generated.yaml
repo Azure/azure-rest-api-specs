@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Azure OpenAI
   description: Azure OpenAI APIs for Assistants.
-  version: 2024-07-01-preview
+  version: 2024-12-01-preview
 tags: []
 paths:
   /assistants:
@@ -531,6 +531,15 @@ paths:
           description: The ID of the thread to run.
           schema:
             type: string
+        - name: include[]
+          in: query
+          required: true
+          description: A list of additional fields to include in the response.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RunIncludes'
+          explode: false
       responses:
         '200':
           description: Information about the new thread run.
@@ -721,6 +730,15 @@ paths:
           description: The ID of the run to list steps from.
           schema:
             type: string
+        - name: include[]
+          in: query
+          required: true
+          description: A list of additional fields to include in the response.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RunIncludes'
+          explode: false
         - name: limit
           in: query
           required: false
@@ -809,6 +827,15 @@ paths:
           description: The ID of the step to retrieve information about.
           schema:
             type: string
+        - name: include[]
+          in: query
+          required: true
+          description: A list of additional fields to include in the response.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RunIncludes'
+          explode: false
       responses:
         '200':
           description: Information about the requested run step.
@@ -1641,6 +1668,7 @@ components:
         mapping:
           text: '#/components/schemas/AssistantsApiResponseFormatText'
           json_object: '#/components/schemas/AssistantsApiResponseFormatJsonObject'
+          json_schema: '#/components/schemas/AssistantsApiResponseFormatJsonSchema'
       description: |-
         An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
         If `text` the model can return text or any value needed.
@@ -1657,13 +1685,44 @@ components:
       allOf:
         - $ref: '#/components/schemas/AssistantsApiResponseFormat'
       description: An object describing expected output of the model as a JSON object.
+    AssistantsApiResponseFormatJsonSchema:
+      type: object
+      required:
+        - type
+        - json_schema
+      properties:
+        type:
+          type: string
+          enum:
+            - json_schema
+          description: 'The type of response format being defined: `json_schema`'
+        json_schema:
+          type: object
+          properties:
+            description:
+              type: string
+              description: A description of what the response format is for, used by the model to determine how to respond in the format.
+            name:
+              type: string
+              description: The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+            schema:
+              description: The schema for the response format, described as a JSON Schema object.
+            strict:
+              type: boolean
+              description: Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
+          required:
+            - name
+            - schema
+          description: The JSON schema that the model must output.
+      allOf:
+        - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: An object describing expected output of the model to match a JSON schema.
     AssistantsApiResponseFormatMode:
       anyOf:
         - type: string
         - type: string
           enum:
             - auto
-            - none
       description: Represents the mode in which the model will handle the return format of a tool call.
     AssistantsApiResponseFormatOption:
       anyOf:
@@ -1791,6 +1850,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         tool_resources:
           type: object
           allOf:
@@ -1946,6 +2009,10 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
           description: The overridden list of enabled tools that the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         stream:
           type: boolean
           description: |-
@@ -2095,6 +2162,43 @@ components:
             - batch_output
             - vision
       description: The possible values denoting the intended usage of a file.
+    FileSearchToolCallResult:
+      type: object
+      required:
+        - file_id
+        - file_name
+        - score
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file that result was found in.
+        file_name:
+          type: string
+          description: The name of the file that result was found in.
+        score:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: The score of the result. All values must be a floating point number between 0 and 1.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSearchToolCallResultContentItem'
+          description: The content of the result that was found. The content is only included if requested via the include query parameter.
+      description: File search tool call result
+    FileSearchToolCallResultContentItem:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The type of the content.
+        text:
+          type: string
+          description: The text content of the file.
+      description: Content item in a file search result
     FileSearchToolDefinition:
       type: object
       required:
@@ -2790,6 +2894,13 @@ components:
           type: string
           description: The human-readable text associated with the error.
       description: The details of an error as encountered by an assistant thread run.
+    RunIncludes:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - step_details.tool_calls[*].file_search.results[*].content
+      description: Values to for the includes parameter in the create run operation.
     RunStatus:
       anyOf:
         - type: string
@@ -3297,12 +3408,18 @@ components:
       type: object
       required:
         - type
+        - file_search
       properties:
         type:
           type: string
           enum:
             - file_search
           description: The object type, which is always 'file_search'.
+        file_search:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSearchToolCallResult'
+          description: The results of the file search.
       allOf:
         - $ref: '#/components/schemas/RunStepToolCall'
       description: |-
@@ -3655,6 +3772,7 @@ components:
         - max_completion_tokens
         - truncation_strategy
         - tool_choice
+        - parallel_tool_calls
         - response_format
         - metadata
       properties:
@@ -3773,6 +3891,9 @@ components:
             - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
           nullable: true
           description: Controls whether or not and which tool is called by the model.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
         response_format:
           allOf:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
@@ -4318,10 +4439,9 @@ components:
         - type: string
         - type: string
           enum:
-            - internal_error
-            - file_not_found
-            - parsing_error
-            - unhandled_mime_type
+            - server_error
+            - unsupported_file
+            - invalid_file
       description: Error code variants for vector store file processing
     VectorStoreFileStatus:
       anyOf:
