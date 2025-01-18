@@ -247,6 +247,14 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}"]'
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+  - suppress: MISSING_RESOURCE_ID
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'This api has existed since 2015, it will break existing customers if we add new property to payload'
+  - suppress: ArmResourcePropertiesBag
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
 ### Tag: package-2024-08-01-only
@@ -819,21 +827,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApplicationInsights
-  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.Management.ApplicationInsights/src/Generated
-  clear-output-folder: true
-```
 
 ## Java
 
