@@ -1164,14 +1164,22 @@
       "type": "object",
       "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
       "properties": {
-        "digest": {
+        "memberId": {
+          "$ref": "#/definitions/memberId",
+          "description": "Identifier for member this stateDigest applies to.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "stateDigest": {
           "type": "string",
           "description": "Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.",
           "pattern": "^[a-f0-9]{64}$"
         }
       },
       "required": [
-        "digest"
+        "memberId",
+        "stateDigest"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1534,6 +1542,19 @@
         "constitution"
       ]
     },
+    "ServiceState.FeedInfo": {
+      "type": "object",
+      "description": "Collection of claims regarding a specific feed.",
+      "properties": {
+        "svn": {
+          "type": "string",
+          "description": "Security version number claimed by this endorser."
+        }
+      },
+      "required": [
+        "svn"
+      ]
+    },
     "ServiceState.ForwardingRequired": {
       "type": "string",
       "description": "Describes the forwarding behavior of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.",
@@ -1694,6 +1715,23 @@
         "$ref": "#/definitions/ServiceState.JsEndpointInfo"
       }
     },
+    "ServiceState.Jwk": {
+      "type": "object",
+      "description": "Describes a single JWK.",
+      "properties": {
+        "certificate": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "x509 cert used to validate claims made by this key."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Issuer ID of entity who issued this key."
+        }
+      },
+      "required": [
+        "certificate"
+      ]
+    },
     "ServiceState.JwkInfo": {
       "type": "object",
       "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
@@ -1711,11 +1749,19 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.caCertBundle"
           }
+        },
+        "keys": {
+          "type": "object",
+          "description": "Collection of retrieved JWKs. Keyed by kid.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceState.Jwk"
+          }
         }
       },
       "required": [
         "issuers",
-        "caCertBundles"
+        "caCertBundles",
+        "keys"
       ]
     },
     "ServiceState.JwtIssuer": {
@@ -1789,6 +1835,10 @@
         "certificate": {
           "$ref": "#/definitions/ServiceState.pem",
           "description": "x509 certificate used as this member's identity."
+        },
+        "publicEncryptionKey": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "x509 key used to encrypt this member's key shares, if they are a recovery member."
         }
       },
       "required": [
@@ -1948,7 +1998,7 @@
           "description": "Transaction ID at which this service was first created. If this is a recovery of a previous service, this will indicate when the current service was recovered."
         },
         "previousServiceCreationTransactionId": {
-          "$ref": "#/definitions/ServiceState.pem",
+          "$ref": "#/definitions/transactionId",
           "description": "Transaction ID at which the predecessor service was created, if this service is a recovery. If this is an original service rather than a recovery, this will be omitted."
         },
         "serviceData": {
@@ -2063,10 +2113,9 @@
         },
         "uvmEndorsements": {
           "type": "object",
-          "description": "Collection of acceptable UVM endorsements.",
+          "description": "Collection of acceptable UVM endorsements. Keyed by endorser's did.",
           "additionalProperties": {
-            "format": "byte",
-            "type": "string"
+            "$ref": "#/definitions/ServiceState.UvmEndorsementFeeds"
           }
         }
       },
@@ -2101,6 +2150,13 @@
         }
       ],
       "x-ms-discriminator-value": "AMD_SEV_SNP_v1"
+    },
+    "ServiceState.UvmEndorsementFeeds": {
+      "type": "object",
+      "description": "Collection of endorsement feeds, keyed by feed name.",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceState.FeedInfo"
+      }
     },
     "ServiceState.caCertBundle": {
       "type": "string",
