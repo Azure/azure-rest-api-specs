@@ -33,6 +33,34 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "[category](#category)",
+            "in": "path",
+            "description": "Category if name of metadata entity is 'recommendationtype'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "[control](#control)",
+            "in": "path",
+            "description": "Sub-category if name of metadata entity is 'recommendationtype'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "retirementsFrom",
+            "in": "path",
+            "description": "Date from which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "retirementsTill",
+            "in": "path",
+            "description": "Date upto which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -73,6 +101,34 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "[category](#category)",
+            "in": "path",
+            "description": "Category if name of metadata entity is 'recommendationtype'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "[control](#control)",
+            "in": "path",
+            "description": "Sub-category if name of metadata entity is 'recommendationtype'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "retirementsFrom",
+            "in": "path",
+            "description": "Date from which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "retirementsTill",
+            "in": "path",
+            "description": "Date upto which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -421,7 +477,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost', ResourceGroup eq 'MyResourceGroup', Control eq 'ServiceUpgradeAndRetirement' and RetirementDate ge 2024-01-01T00:00:00Z",
             "required": false,
             "type": "string"
           },
@@ -1215,6 +1271,25 @@
           "type": "string",
           "x-ms-enum": {
             "name": "category",
+            "modelAsString": true
+          }
+        },
+        "control": {
+          "description": "The sub-category of the recommendation.",
+          "enum": [
+            "HighAvailability",
+            "BusinessContinuity",
+            "DisasterRecovery",
+            "Scalability",
+            "MonitoringAndAlerting",
+            "ServiceUpgradeAndRetirement",
+            "Other",
+            "PrioritizedRecommendations",
+            "Personalized"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "control",
             "modelAsString": true
           }
         },
