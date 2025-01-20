@@ -291,6 +291,47 @@ model ChatCompletionsOptions {
   @added(ServiceApiVersions.v2024_09_01_Preview)
   @encodedName("application/json", "parallel_tool_calls")
   parallelToolCalls?: boolean = true;
+
+  /** Whether or not to store the output of this chat completion request for use in our model distillation or evaluation products. */
+  @added(ServiceApiVersions.v2024_12_01_Preview)
+  store?: boolean;
+
+  /** Developer-defined tags and values used for filtering completions in the stored completions dashboard. */
+  @added(ServiceApiVersions.v2024_12_01_Preview)
+  metadata?: Record<string>;
+
+  /**
+   * This option is only valid for o1 models,
+   *
+   * Constrains effort on reasoning for reasoning models (see https://platform.openai.com/docs/guides/reasoning).
+   *
+   * Currently supported values are `low`, `medium`, and `high`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  @added(ServiceApiVersions.v2024_12_01_Preview)
+  @encodedName("application/json", "reasoning_effort")
+  reasoningEffort?: ReasoningEfforValue;
+
+  /**
+   * The security context identifies and authenticates users and applications in your multi-tenant AI system, helping security teams investigate and mitigate incidents.
+   */
+  @added(ServiceApiVersions.v2024_12_01_Preview)
+  @encodedName("application/json", "user_security_context")
+  userSecurityContext?: UserSecurityContext;
+}
+
+/** Values for the reasoning */
+@added(ServiceApiVersions.v2024_12_01_Preview)
+union ReasoningEfforValue {
+  string,
+
+  /** The reasoning effort is low. */
+  "low";
+
+  /** The reasoning effort is medium. */
+  "medium";
+
+  /** The reasoning effort is high. */
+  "high";
 }
 
 @doc("""

@@ -123,6 +123,23 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
   name?: string;
 }
 
+/**
+ * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
+ * With o1 models and newer, `developer` messages replace the previous `system` messages."
+ */
+@added(ServiceApiVersions.v2024_12_01_Preview)
+model ChatRequestDeveloperMessage extends ChatRequestMessage {
+  /** The role of the messages author, in this case `developer`. */
+  role: ChatRole.developer;
+
+  /** An array of content parts with a defined type. For developer messages, only type `text` is supported. */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  content: string | ChatMessageTextContentItem[];
+
+  /** An optional name for the participant. Provides the model information to differentiate between participants of the same role. */
+  name?: string;
+}
+
 @added(ServiceApiVersions.v2023_05_15)
 @doc("A request chat message representing user input to the assistant.")
 model ChatRequestUserMessage extends ChatRequestMessage {
