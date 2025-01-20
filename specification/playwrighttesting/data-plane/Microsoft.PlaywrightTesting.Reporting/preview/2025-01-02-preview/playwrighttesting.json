@@ -1276,7 +1276,10 @@
         "artifactsPath": {
           "type": "string",
           "description": "Relative path in Storage for all the artifacts of this test",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1293,8 +1296,7 @@
         "lineNumber",
         "retry",
         "status",
-        "result",
-        "artifactsPath"
+        "result"
       ]
     },
     "OsType": {
@@ -1403,11 +1405,9 @@
           "description": "Metadata related to attachments."
         },
         "artifactsPath": {
-          "type": "array",
+          "type": "string",
           "description": "List of artifacts paths.",
-          "items": {
-            "type": "string"
-          }
+          "readOnly": true
         }
       },
       "required": [

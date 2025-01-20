@@ -519,8 +519,8 @@ model DetailedTestResult {
   annotations?: string[];
 
   @doc("Relative path in Storage for all the artifacts of this test")
-  @visibility("read")
-  artifactsPath: string;
+  @visibility("read", "create")
+  artifactsPath?: string;
 }
 
 @doc("Supported browser Types for tests")
@@ -607,7 +607,8 @@ model PreviousRetrySummary {
   attachmentsMetadata: string;
 
   @doc("List of artifacts paths.")
-  artifactsPath?: string[];
+  @visibility("read")
+  artifactsPath?: string;
 }
 
 @doc("Count of a specific status such as PASSED for a run ")
