@@ -258,6 +258,27 @@ function Add-GitHubIssueComment {
           -MaximumRetryCount 3
 }
 
+function Get-GitHubIssueComments {
+  param (
+    [Parameter(Mandatory = $true)]
+    $RepoOwner,
+    [Parameter(Mandatory = $true)]
+    $RepoName,
+    [Parameter(Mandatory = $true)]
+    $IssueNumber,
+    [Parameter(Mandatory = $true)]
+    $AuthToken
+  )
+
+  $uri = "$GithubAPIBaseURI/$RepoOwner/$RepoName/issues/$IssueNumber/comments"
+
+  return Invoke-RestMethod `
+    -Method GET `
+    -Uri $uri `
+    -Headers (Get-GitHubApiHeaders -token $AuthToken) `
+    -MaximumRetryCount 3
+}
+
 # Will add labels to existing labels on the issue
 function Add-GitHubIssueLabels {
   param (
