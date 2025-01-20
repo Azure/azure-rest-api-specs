@@ -25,6 +25,16 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-pineconevectordb"
     flavor: "azure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/pineconevectordb"
+    package-dir: "armpineconevectordb"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
