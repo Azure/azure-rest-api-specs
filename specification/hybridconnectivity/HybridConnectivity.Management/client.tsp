@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -80,3 +81,5 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+@@alternateType(AADProfileProperties.serverId, uuid, "csharp");
+@@alternateType(AADProfileProperties.tenantId, uuid, "csharp");

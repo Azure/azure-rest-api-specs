@@ -266,12 +266,12 @@ model AADProfileProperties {
   /**
    * The arc ingress gateway server app id.
    */
-  serverId: uuid;
+  serverId: string;
 
   /**
    * The target resource home tenant id.
    */
-  tenantId: uuid;
+  tenantId: string;
 }
 
 /**
