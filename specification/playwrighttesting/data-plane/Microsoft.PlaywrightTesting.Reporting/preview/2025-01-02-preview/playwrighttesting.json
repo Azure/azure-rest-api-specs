@@ -1046,62 +1046,6 @@
         "tags"
       ]
     },
-    "CloudReportingSummaryCreateOrUpdate": {
-      "type": "object",
-      "description": "Model representing summary of test run results.",
-      "properties": {
-        "numTotalTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of tests executed."
-        },
-        "numPassedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that passed."
-        },
-        "numFailedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that failed."
-        },
-        "numSkippedTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were skipped."
-        },
-        "numFlakyTests": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tests that were flaky."
-        },
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
-        },
-        "jobs": {
-          "type": "array",
-          "description": "List of jobs associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "projects": {
-          "type": "array",
-          "description": "List of projects associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags associated with the test run.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "CloudRunSummary": {
       "type": "object",
       "description": "Model representing summary information about a test run.",
@@ -1149,45 +1093,6 @@
         "numBrowserSessions",
         "browserQuotaExceeded"
       ]
-    },
-    "CloudRunSummaryCreateOrUpdate": {
-      "type": "object",
-      "description": "Model representing summary information about a test run.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/TestRunStatus",
-          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the test run."
-        },
-        "billableTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Billable time for the test run. Available after testRun Ends"
-        },
-        "totalTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total time taken for the test run."
-        },
-        "numBrowserSessions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of browser sessions used in the test run."
-        },
-        "browserQuotaExceeded": {
-          "type": "boolean",
-          "description": "Flag indicating if a test-run was throttled because requested browser Quota exceeded"
-        }
-      }
     },
     "DetailedTestResult": {
       "type": "object",
@@ -1367,11 +1272,7 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "Relative path in Storage for all the artifacts of this test",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Relative path in Storage for all the artifacts of this test"
         }
       },
       "required": [
@@ -1754,10 +1655,7 @@
         "testRunId": {
           "type": "string",
           "description": "Identifier of the test run.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -1775,19 +1673,23 @@
         },
         "creatorId": {
           "type": "string",
-          "description": "Creator's identifier."
+          "description": "Creator's identifier.",
+          "readOnly": true
         },
         "creatorName": {
           "type": "string",
-          "description": "Creator's name."
+          "description": "Creator's name.",
+          "readOnly": true
         },
         "cloudRunSummary": {
           "$ref": "#/definitions/CloudRunSummary",
-          "description": "Summary of the test run."
+          "description": "Summary of the Cloud executed run. Only available if cloud run is enabled ",
+          "readOnly": true
         },
         "cloudReportSummary": {
           "$ref": "#/definitions/CloudReportingSummary",
-          "description": "Summary of test run results."
+          "description": "Summary of reports uploaded on cloud.Only available if cloud reporting is enabled",
+          "readOnly": true
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
@@ -1811,7 +1713,8 @@
         },
         "cloudRunEnabled": {
           "type": "boolean",
-          "description": "Flag indicating if cloud run is enabled."
+          "description": "Flag indicating if cloud run is enabled.",
+          "readOnly": true
         },
         "cloudReportingEnabled": {
           "type": "boolean",
@@ -1827,9 +1730,6 @@
         "startTime",
         "creatorId",
         "creatorName",
-        "cloudRunSummary",
-        "cloudReportSummary",
-        "testRunConfig",
         "testResultsUri",
         "cloudRunEnabled",
         "cloudReportingEnabled"
@@ -2011,14 +1911,6 @@
       "type": "object",
       "description": "Model representing detailed information about a test run.",
       "properties": {
-        "testRunId": {
-          "type": "string",
-          "description": "Identifier of the test run.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "displayName": {
           "type": "string",
           "description": "Display name of the test run, unicode characters allowed.",
@@ -2032,22 +1924,6 @@
             "read",
             "create"
           ]
-        },
-        "creatorId": {
-          "type": "string",
-          "description": "Creator's identifier."
-        },
-        "creatorName": {
-          "type": "string",
-          "description": "Creator's name."
-        },
-        "cloudRunSummary": {
-          "$ref": "#/definitions/CloudRunSummaryCreateOrUpdate",
-          "description": "Summary of the test run."
-        },
-        "cloudReportSummary": {
-          "$ref": "#/definitions/CloudReportingSummaryCreateOrUpdate",
-          "description": "Summary of test run results."
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
@@ -2068,10 +1944,6 @@
         "testResultsUri": {
           "$ref": "#/definitions/TestResultsUriCreateOrUpdate",
           "description": "URI for accessing test results."
-        },
-        "cloudRunEnabled": {
-          "type": "boolean",
-          "description": "Flag indicating if cloud run is enabled."
         },
         "cloudReportingEnabled": {
           "type": "boolean",

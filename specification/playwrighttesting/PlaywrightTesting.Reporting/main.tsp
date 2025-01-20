@@ -315,7 +315,7 @@ model TestResultsUri {
 model TestRun {
   @doc("Identifier of the test run.")
   @key
-  @visibility("read", "create")
+  @visibility("read")
   testRunId: string;
 
   @doc("Display name of the test run, unicode characters allowed.")
@@ -327,16 +327,20 @@ model TestRun {
   startTime: utcDateTime;
 
   @doc("Creator's identifier.")
+  @visibility("read")
   creatorId: string;
 
   @doc("Creator's name.")
+  @visibility("read")
   creatorName: string;
 
-  @doc("Summary of the test run.")
-  cloudRunSummary: CloudRunSummary;
+  @doc("Summary of the Cloud executed run. Only available if cloud run is enabled ")
+  @visibility("read")
+  cloudRunSummary?: CloudRunSummary;
 
-  @doc("Summary of test run results.")
-  cloudReportSummary: CloudReportingSummary;
+  @doc("Summary of reports uploaded on cloud.Only available if cloud reporting is enabled")
+  @visibility("read")
+  cloudReportSummary?: CloudReportingSummary;
 
   @doc("Continuous integration configuration.")
   @visibility("read", "create")
@@ -344,12 +348,13 @@ model TestRun {
 
   @doc("Client configuration for the test run.")
   @visibility("read", "create")
-  testRunConfig: TestRunConfig;
+  testRunConfig?: TestRunConfig;
 
   @doc("URI for accessing test results.")
   testResultsUri: TestResultsUri;
 
   @doc("Flag indicating if cloud run is enabled.")
+  @visibility("read")
   cloudRunEnabled: boolean;
 
   @doc("Must be set to true when Customers want to use Reporting Feature ")
@@ -504,7 +509,6 @@ model DetailedTestResult {
   annotations?: string[];
 
   @doc("Relative path in Storage for all the artifacts of this test")
-  @visibility("read", "create")
   artifactsPath: string;
 }
 
