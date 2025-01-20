@@ -679,13 +679,13 @@ interface TestRuns {
   // TestRuns Operations
 
   @doc("Creates or updates a testrun.")
-  createOrUpdateTestRun is Operations.ResourceCreateOrUpdate<TestRun>;
+  createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
   @doc("Gets a testrun.")
-  getTestRun is Operations.ResourceRead<TestRun>;
+  get is Operations.ResourceRead<TestRun>;
 
   @doc("List testruns.")
-  listTestRuns is Operations.ResourceList<
+  list is Operations.ResourceList<
     TestRun,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
@@ -706,7 +706,7 @@ interface TestRuns {
   @doc("Get TestRun summary for an Odata filter.")
   @action("summary")
   @actionSeparator("/")
-  getTestRunSummary is Operations.ResourceCollectionAction<
+  getSummary is Operations.ResourceCollectionAction<
     TestRun,
     {},
     AccountTestRunStats,
@@ -716,7 +716,7 @@ interface TestRuns {
   @doc("Get TestRun metadata for an Odata filter.")
   @action("metadata")
   @actionSeparator("/")
-  getTestRunMetadata is Operations.ResourceCollectionAction<
+  getMetadata is Operations.ResourceCollectionAction<
     TestRun,
     {},
     TestRunsMetadata,
@@ -736,7 +736,7 @@ interface TestResults {
   >;
 
   @doc("List Testresults.")
-  listTestResults is Operations.ResourceList<
+  list is Operations.ResourceList<
     DetailedTestResult,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
@@ -744,7 +744,7 @@ interface TestResults {
   @doc("Get Testresults summary.")
   @action("summary")
   @actionSeparator("/")
-  getTestResultsSummary is Operations.ResourceCollectionAction<
+  getSummary is Operations.ResourceCollectionAction<
     DetailedTestResult,
     {},
     ResultsStats,

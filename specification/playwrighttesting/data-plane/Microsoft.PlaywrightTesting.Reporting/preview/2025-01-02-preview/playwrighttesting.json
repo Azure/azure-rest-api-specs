@@ -47,7 +47,7 @@
   "paths": {
     "/accounts/{accountId}/test-results": {
       "get": {
-        "operationId": "TestResults_ListTestResults",
+        "operationId": "TestResults_List",
         "tags": [
           "test-result"
         ],
@@ -108,11 +108,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "TestResults_ListTestResults": {
-            "$ref": "./examples/TestResults_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -120,7 +115,7 @@
     },
     "/accounts/{accountId}/test-results/summary": {
       "post": {
-        "operationId": "TestResults_GetTestResultsSummary",
+        "operationId": "TestResults_GetSummary",
         "tags": [
           "test-result"
         ],
@@ -179,11 +174,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "TestResults_GetTestResultsSummary": {
-            "$ref": "./examples/TestResults_GetSummary.json"
           }
         }
       }
@@ -253,7 +243,7 @@
     },
     "/accounts/{accountId}/test-runs": {
       "get": {
-        "operationId": "TestRuns_ListTestRuns",
+        "operationId": "TestRuns_List",
         "tags": [
           "test-run"
         ],
@@ -314,11 +304,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "TestRuns_ListTestRuns": {
-            "$ref": "./examples/TestRuns_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -326,7 +311,7 @@
     },
     "/accounts/{accountId}/test-runs/{testRunId}": {
       "get": {
-        "operationId": "TestRuns_GetTestRun",
+        "operationId": "TestRuns_Get",
         "tags": [
           "test-run"
         ],
@@ -381,15 +366,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "TestRuns_GetTestRun": {
-            "$ref": "./examples/TestRuns_Get.json"
-          }
         }
       },
       "patch": {
-        "operationId": "TestRuns_CreateOrUpdateTestRun",
+        "operationId": "TestRuns_CreateOrUpdate",
         "tags": [
           "test-run"
         ],
@@ -468,11 +448,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "TestRuns_CreateOrUpdateTestRun": {
-            "$ref": "./examples/TestRuns_CreateOrUpdate.json"
           }
         }
       }
@@ -614,7 +589,7 @@
     },
     "/accounts/{accountId}/test-runs/metadata": {
       "post": {
-        "operationId": "TestRuns_GetTestRunMetadata",
+        "operationId": "TestRuns_GetMetadata",
         "tags": [
           "test-run"
         ],
@@ -674,17 +649,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "TestRuns_GetTestRunMetadata": {
-            "$ref": "./examples/TestRuns_GetMetadata.json"
-          }
         }
       }
     },
     "/accounts/{accountId}/test-runs/summary": {
       "post": {
-        "operationId": "TestRuns_GetTestRunSummary",
+        "operationId": "TestRuns_GetSummary",
         "tags": [
           "test-run"
         ],
@@ -743,11 +713,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "TestRuns_GetTestRunSummary": {
-            "$ref": "./examples/TestRuns_GetSummary.json"
           }
         }
       }
