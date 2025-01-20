@@ -1,0 +1,93 @@
+{
+  "operationId": "AnalyzeText",
+  "title": "SuccessfulLanguageDetectionRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2024-11-01",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "LanguageDetection",
+      "parameters": {
+        "modelVersion": "latest"
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "text": "Hello world"
+          },
+          {
+            "id": "2",
+            "text": "Bonjour tout le monde"
+          },
+          {
+            "id": "3",
+            "text": "Hola mundo"
+          },
+          {
+            "id": "4",
+            "text": "Tumhara naam kya hai?"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "LanguageDetectionResults",
+        "results": {
+          "documents": [
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "en",
+                "name": "English",
+                "scriptName": "Latin",
+                "scriptIso15924Code": "Latn"
+              },
+              "id": "1",
+              "warnings": []
+            },
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "fr",
+                "name": "French",
+                "scriptName": "Latin",
+                "scriptIso15924Code": "Latn"
+              },
+              "id": "2",
+              "warnings": []
+            },
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "es",
+                "name": "Spanish",
+                "scriptName": "Latin",
+                "scriptIso15924Code": "Latn"
+              },
+              "id": "3",
+              "warnings": []
+            },
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "hi",
+                "name": "Hindi",
+                "scriptName": "Latin",
+                "scriptIso15924Code": "Latn"
+              },
+              "id": "4",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2023-12-01"
+        }
+      }
+    }
+  }
+}

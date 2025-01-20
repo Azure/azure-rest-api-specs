@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./alertRuleResources.tsp";
+import "./healthValidation.tsp";
 import "./sqlDbDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
@@ -37,6 +38,18 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_19_preview: "2024-07-19-preview",
+
+  @doc("The 2024-10-01-preview version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_10_01_preview: "2024-10-01-preview",
+
+  @doc("The 2025-01-02 version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_01_02: "2025-01-02",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
 model Watcher is TrackedResource<WatcherProperties> {
@@ -74,7 +87,7 @@ model WatcherProperties {
 
 @doc("The properties of a data store.")
 model Datastore {
-  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
+  @doc("The Azure resource ID of an Azure Data Explorer cluster.")
   adxClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
