@@ -247,6 +247,14 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}"]'
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+  - suppress: MISSING_RESOURCE_ID
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'This api has existed since 2015, it will break existing customers if we add new property to payload'
+  - suppress: ArmResourcePropertiesBag
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
 ### Tag: package-2024-08-01-only
