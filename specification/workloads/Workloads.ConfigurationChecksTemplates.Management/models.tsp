@@ -241,6 +241,12 @@ model CheckConfiguration {
   originType?: CheckOriginType;
 
   /**
+   * The specific gallery location.
+   */
+  @doc("The specific gallery location.")
+  selectedGalleryName?: string;
+
+  /**
    * The flag to enable (or) disable the check execution.
    */
   @doc("The flag to enable (or) disable the check execution.")
