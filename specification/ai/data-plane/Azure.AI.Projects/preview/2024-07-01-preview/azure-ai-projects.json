@@ -3270,14 +3270,10 @@
                   "description": "Identifier of the file.",
                   "x-ms-client-name": "fileId"
                 },
-                "data_sources": {
-                  "type": "array",
+                "data_source": {
+                  "$ref": "#/definitions/Agents.VectorStoreDataSource",
                   "description": "Azure asset ID.",
-                  "items": {
-                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
-                  },
-                  "x-ms-client-name": "dataSources",
-                  "x-ms-identifiers": []
+                  "x-ms-client-name": "dataSource"
                 },
                 "chunking_strategy": {
                   "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
