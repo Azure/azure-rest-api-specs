@@ -219,31 +219,40 @@ model CiConfig {
 @doc("Model representing summary of test run results.")
 model CloudReportingSummary {
   @doc("Total number of tests executed.")
+  @visibility("read")
   numTotalTests: int32;
 
   @doc("Number of tests that passed.")
+  @visibility("read")
   numPassedTests: int32;
 
   @doc("Number of tests that failed.")
+  @visibility("read")
   numFailedTests: int32;
 
   @doc("Number of tests that were skipped.")
+  @visibility("read")
   numSkippedTests: int32;
 
   @doc("Number of tests that were flaky.")
+  @visibility("read")
   numFlakyTests: int32;
 
   @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
+  @visibility("read")
   status: TestStatus;
 
   @doc("List of jobs associated with the test run.")
-  jobs: string[];
+  @visibility("read")
+  jobs?: string[];
 
   @doc("List of projects associated with the test run.")
-  projects: string[];
+  @visibility("read")
+  projects?: string[];
 
   @doc("List of tags associated with the test run.")
-  tags: string[];
+  @visibility("read")
+  tags?: string[];
 }
 
 @doc("Model representing summary information about a test run.")
@@ -351,7 +360,8 @@ model TestRun {
   testRunConfig?: TestRunConfig;
 
   @doc("URI for accessing test results.")
-  testResultsUri: TestResultsUri;
+  @visibility("read")
+  testResultsUri?: TestResultsUri;
 
   @doc("Flag indicating if cloud run is enabled.")
   @visibility("read")
@@ -381,7 +391,7 @@ model TestRunShardDto {
 
   @doc("Flag indicating if upload is completed for the shard.")
   @visibility("create", "read", "update")
-  isUploadCompleted?: boolean;
+  uploadCompleted?: boolean;
 }
 
 // Import necessary libraries and define namespaces as per your typespec file.
@@ -492,8 +502,8 @@ model DetailedTestResult {
   ciConfig?: CiConfig;
 
   @doc("Summary of test results.")
-  @visibility("read", "create")
-  resultsSummary: TestResult;
+  @visibility("read")
+  result: TestResult;
 
   @doc("Previous retry summaries.")
   previousRetries?: PreviousRetrySummary[];
@@ -509,6 +519,7 @@ model DetailedTestResult {
   annotations?: string[];
 
   @doc("Relative path in Storage for all the artifacts of this test")
+  @visibility("read")
   artifactsPath: string;
 }
 

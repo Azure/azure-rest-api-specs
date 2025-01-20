@@ -986,52 +986,61 @@
         "numTotalTests": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of tests executed."
+          "description": "Total number of tests executed.",
+          "readOnly": true
         },
         "numPassedTests": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that passed."
+          "description": "Number of tests that passed.",
+          "readOnly": true
         },
         "numFailedTests": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that failed."
+          "description": "Number of tests that failed.",
+          "readOnly": true
         },
         "numSkippedTests": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that were skipped."
+          "description": "Number of tests that were skipped.",
+          "readOnly": true
         },
         "numFlakyTests": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that were flaky."
+          "description": "Number of tests that were flaky.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT"
+          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT",
+          "readOnly": true
         },
         "jobs": {
           "type": "array",
           "description": "List of jobs associated with the test run.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "projects": {
           "type": "array",
           "description": "List of projects associated with the test run.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "tags": {
           "type": "array",
           "description": "List of tags associated with the test run.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -1040,10 +1049,7 @@
         "numFailedTests",
         "numSkippedTests",
         "numFlakyTests",
-        "status",
-        "jobs",
-        "projects",
-        "tags"
+        "status"
       ]
     },
     "CloudRunSummary": {
@@ -1230,13 +1236,10 @@
             "create"
           ]
         },
-        "resultsSummary": {
+        "result": {
           "$ref": "#/definitions/TestResult",
           "description": "Summary of test results.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "previousRetries": {
           "type": "array",
@@ -1272,7 +1275,8 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "Relative path in Storage for all the artifacts of this test"
+          "description": "Relative path in Storage for all the artifacts of this test",
+          "readOnly": true
         }
       },
       "required": [
@@ -1289,7 +1293,7 @@
         "lineNumber",
         "retry",
         "status",
-        "resultsSummary",
+        "result",
         "artifactsPath"
       ]
     },
@@ -1626,28 +1630,6 @@
         "accessLevel"
       ]
     },
-    "TestResultsUriCreateOrUpdate": {
-      "type": "object",
-      "description": "Model representing a test results URI.",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "URI for accessing test results."
-        },
-        "createdAt": {
-          "type": "string",
-          "description": "Creation timestamp of the test results URI- RFC 3339 literal format"
-        },
-        "expiresAt": {
-          "type": "string",
-          "description": "Expiration timestamp of the test results URI- RFC 3339 literal format"
-        },
-        "accessLevel": {
-          "$ref": "#/definitions/AccessLevel",
-          "description": "Access level for the test results URI."
-        }
-      }
-    },
     "TestRun": {
       "type": "object",
       "description": "Model representing detailed information about a test run.",
@@ -1709,7 +1691,8 @@
         },
         "testResultsUri": {
           "$ref": "#/definitions/TestResultsUri",
-          "description": "URI for accessing test results."
+          "description": "URI for accessing test results.",
+          "readOnly": true
         },
         "cloudRunEnabled": {
           "type": "boolean",
@@ -1730,7 +1713,6 @@
         "startTime",
         "creatorId",
         "creatorName",
-        "testResultsUri",
         "cloudRunEnabled",
         "cloudReportingEnabled"
       ]
@@ -1941,10 +1923,6 @@
             "create"
           ]
         },
-        "testResultsUri": {
-          "$ref": "#/definitions/TestResultsUriCreateOrUpdate",
-          "description": "URI for accessing test results."
-        },
         "cloudReportingEnabled": {
           "type": "boolean",
           "description": "Must be set to true when Customers want to use Reporting Feature ",
@@ -1985,7 +1963,7 @@
             "create"
           ]
         },
-        "isUploadCompleted": {
+        "uploadCompleted": {
           "type": "boolean",
           "description": "Flag indicating if upload is completed for the shard.",
           "x-ms-mutability": [

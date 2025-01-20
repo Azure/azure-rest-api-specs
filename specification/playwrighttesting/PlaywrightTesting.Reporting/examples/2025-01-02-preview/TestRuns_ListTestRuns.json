@@ -3,7 +3,7 @@
   "operationId": "TestRuns_ListTestRuns",
   "parameters": {
     "api-version": "2025-01-02-preview",
-    "accountId": "sampleAccountId",
+    "accountId": "4c57e3a2-8a9c-4659-91f3-30ff4115f187",
     "testRunId": "123e4567-e89b-12d3-a456-426614174000",
     "top": 10,
     "skip": 0,
@@ -27,7 +27,7 @@
               "startTime": "2025-01-09T12:20:28Z",
               "endTime": "2025-01-09T12:20:38Z",
               "totalTime" : 10000,
-              "browserQuotaExceeded" : "false"
+              "browserQuotaExceeded" : false
 
             },
             "cloudReportSummary": {
@@ -36,7 +36,10 @@
               "numFailedTests": 0,
               "numSkippedTests": 0,
               "numFlakyTests": 0,
-              "status": "PASSED"
+              "status": "PASSED",
+              "tags": [],
+              "jobs":[],
+              "projects" : []
             },
             "ciConfig": {
               "ciProviderName": "DEFAULT",
@@ -62,7 +65,14 @@
               "testSdkLanguage": "CSHARP",
               "reporterPackageVersion": "1.0.0-beta.4"
             },
-            "testResultsUri": "https://blob.storage.com/abc",
+            "testResultsUri":
+            {
+             "uri": "https://blob.storage.com/abc",
+             "createdAt": "2025-01-09T10:34:37Z",
+             "expiresAt": "2025-01-09T10:34:37Z",
+             "accessLevel": "read"
+
+            },
             "cloudRunEnabled": true,
             "cloudReportingEnabled": true
           },
@@ -79,7 +89,7 @@
               "startTime": "2025-01-09T10:34:37Z",
               "endTime": "2025-01-09T10:34:46Z",
               "totalTime": 29373,
-              "browserQuotaExceeded" : "false"
+              "browserQuotaExceeded" : false
             },
             "cloudReportSummary": {
               "numTotalTests": 2,
@@ -87,7 +97,10 @@
               "numFailedTests": 0,
               "numSkippedTests": 0,
               "numFlakyTests": 0,
-              "status": "PASSED"
+              "status": "PASSED",
+              "tags": [],
+              "jobs":[],
+              "projects" : []
             },
             "ciConfig": {
               "ciProviderName": "DEFAULT",
@@ -113,7 +126,14 @@
               "testSdkLanguage": "CSHARP",
               "reporterPackageVersion": "1.0.0-beta.4"
             },
-            "testResultsUri": "https://blob.storage.com/def",
+            "testResultsUri":
+             {
+              "uri": "https://blob.storage.com/abc",
+              "createdAt": "2025-01-09T10:34:37Z",
+              "expiresAt": "2025-01-09T10:34:37Z",
+              "accessLevel": "read"
+
+             },
             "cloudRunEnabled": true,
             "cloudReportingEnabled": true
           }

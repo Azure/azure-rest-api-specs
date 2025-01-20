@@ -32,6 +32,15 @@ security: AADToken
 #security-scopes: [[SecurityScopes]]
 ```
 
+### Tag: package-2025-01-02-preview
+
+These settings apply only when `--tag=package-2025-01-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-02-preview'
+input-file:
+  - Microsoft.PlaywrightTesting.Reporting\preview\2025-01-02-preview\playwrighttesting.json
+```
+
 ### Tag: package-2024-12-01
 
 These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
@@ -67,7 +76,6 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
   - Microsoft.PlaywrightTesting.AuthManager\preview\2023-10-01-preview\playwrighttesting.json
-  - Microsoft.PlaywrightTesting.Reporting\preview\2023-10-01-preview\playwrighttesting.json
 ```
 
 # Code Generation
