@@ -66,7 +66,7 @@ model ApplicationInsightsConfiguration extends InputData {
   query: string;
 
   @doc("Service name.")
-  serviceName: string;
+  serviceName?: string;
 
   @doc("Connection String to connect to ApplicationInsights.")
   connectionString?: string;
