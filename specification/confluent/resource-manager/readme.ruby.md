@@ -2,7 +2,7 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-``` yaml
+```yaml
 package-name: azure_mgmt_confluent
 package-version: "0.16.0"
 azure-arm: true
@@ -10,7 +10,7 @@ azure-arm: true
 
 ### Ruby multi-api
 
-``` yaml $(ruby) && $(multiapi)
+```yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2020-03-01
   - tag: package-2020-03-01-preview
