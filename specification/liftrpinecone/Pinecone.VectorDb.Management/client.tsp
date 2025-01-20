@@ -10,3 +10,7 @@ using Azure.ClientGenerator.Core;
   "com.azure.resourcemanager.pineconevectordb",
   "java"
 );
+@@clientNamespace(LiftrBase,
+  "com.azure.resourcemanager.pineconevectordb",
+  "java"
+);
