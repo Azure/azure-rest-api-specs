@@ -31,14 +31,14 @@ openapi-type: arm
 tag: package-2024-05
 ```
 
-### Tag: package-2024-11-preview
+### Tag: package-2024-07-preview
 
-These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-11-preview'
+``` yaml $(tag) == 'package-2024-07-preview'
 input-file:
-  - Microsoft.Network/preview/2024-11-01-preview/network.json
-  - Microsoft.Network/preview/2024-11-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-07-01-preview/network.json
+  - Microsoft.Network/preview/2024-07-01-preview/networkSecurityPerimeter.json
 ```
 
 ### Tag: package-2024-05
