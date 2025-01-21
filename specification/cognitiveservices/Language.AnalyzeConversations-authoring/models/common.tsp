@@ -15,7 +15,6 @@ namespace Language.Conversations.Authoring;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationProjectKind", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union ProjectKind {
   string,
 
@@ -41,7 +40,6 @@ union ProjectKind {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationErrorCode", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
 union ErrorCode {
   string,
   InvalidRequest: "InvalidRequest",

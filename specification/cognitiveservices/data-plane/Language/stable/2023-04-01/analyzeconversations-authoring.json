@@ -1712,9 +1712,17 @@
   "definitions": {
     "AnalyzeConversationAuthoringConfusionMatrix": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixRow"
-      }
+      "properties": {
+        "rows": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixRow"
+          }
+        }
+      },
+      "required": [
+        "rows"
+      ]
     },
     "AnalyzeConversationAuthoringConfusionMatrixCell": {
       "type": "object",
@@ -1738,9 +1746,17 @@
     },
     "AnalyzeConversationAuthoringConfusionMatrixRow": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
-      }
+      "properties": {
+        "cells": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
+          }
+        }
+      },
+      "required": [
+        "cells"
+      ]
     },
     "AnalyzeConversationAuthoringConversationExportedEntity": {
       "type": "object",
