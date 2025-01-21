@@ -989,6 +989,36 @@
         ]
       }
     },
+    "EphemeralType": {
+      "type": "string",
+      "description": "The type of Ephemeral option the pool will use on underlying VMs when loading this image.",
+      "enum": [
+        "Automatic",
+        "CacheDisk",
+        "ResourceDisk"
+      ],
+      "x-ms-enum": {
+        "name": "EphemeralType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Ephemeral is handled by Managed DevOps Pools service."
+          },
+          {
+            "name": "CacheDisk",
+            "value": "CacheDisk",
+            "description": "CacheDisk ephemeral only, requires that the SKU has a cache that is large enough for the image."
+          },
+          {
+            "name": "ResourceDisk",
+            "value": "ResourceDisk",
+            "description": "ResourceDisk ephemeral only, requires only that the SKU supports it."
+          }
+        ]
+      }
+    },
     "FabricProfile": {
       "type": "object",
       "description": "Defines the type of fabric the agent will run on.",
@@ -1296,6 +1326,10 @@
           "type": "string",
           "description": "The percentage of the buffer to be allocated to this image.",
           "default": "*"
+        },
+        "ephemeralType": {
+          "$ref": "#/definitions/EphemeralType",
+          "description": "The ephemeral type of the image."
         }
       }
     },

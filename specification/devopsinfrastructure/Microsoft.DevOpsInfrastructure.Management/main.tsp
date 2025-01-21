@@ -244,6 +244,20 @@ union OsDiskStorageAccountType {
   StandardSSD: "StandardSSD",
 }
 
+@doc("The type of Ephemeral option the pool will use on underlying VMs when loading this image.")
+union EphemeralType {
+  string,
+
+  @doc("Ephemeral is handled by Managed DevOps Pools service.")
+  Automatic: "Automatic",
+
+  @doc("CacheDisk ephemeral only, requires that the SKU has a cache that is large enough for the image.")
+  CacheDisk: "CacheDisk",
+
+  @doc("ResourceDisk ephemeral only, requires only that the SKU supports it.")
+  ResourceDisk: "ResourceDisk",
+}
+
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")
@@ -257,6 +271,9 @@ model PoolImage {
 
   @doc("The percentage of the buffer to be allocated to this image.")
   buffer?: string = "*";
+
+  @doc("The ephemeral type of the image.")
+  ephemeralType?: EphemeralType;
 }
 
 @doc("The OS profile of the machines in the pool.")
