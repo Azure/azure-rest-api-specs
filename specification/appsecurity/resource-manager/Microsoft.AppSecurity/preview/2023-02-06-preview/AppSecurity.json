@@ -564,6 +564,93 @@
     }
   },
   "definitions": {
+    "AnomalyScoringActionType": {
+      "type": "string",
+      "description": "Defines the set of supported actions that can be triggered when anomaly scoring exceeds the threshold.",
+      "enum": [
+        "Allow",
+        "Block",
+        "Log"
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyScoringActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the request"
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "Block the request"
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Log the request and allow it"
+          }
+        ]
+      }
+    },
+    "AnomalyScoringDefaultConfiguration": {
+      "type": "object",
+      "description": "Defines default configuration for anomaly scoring mode.",
+      "properties": {
+        "defaultThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default threshold for anomaly scoring. If anomaly scoring is enabled, this value determines the threshold score. When the calculated score exceeds this value, the specified anomaly scoring action will be applied.",
+          "readOnly": true
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/AnomalyScoringActionType",
+          "description": "The default action to be triggered when the anomaly scoring threshold is exceeded. This action defines how the system responds to detected anomalies.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "defaultThreshold",
+        "defaultAction"
+      ]
+    },
+    "AnomalyScoringSeverity": {
+      "type": "number",
+      "description": "The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match. Each level corresponds to a default anomaly score added when a rule matches.",
+      "enum": [
+        5,
+        4,
+        3,
+        2
+      ],
+      "x-ms-enum": {
+        "name": "AnomalyScoringSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CRITICAL",
+            "value": 5,
+            "description": "Represents a critical severity level. Indicates severe anomalies that require immediate attention and contribute significantly to the anomaly score."
+          },
+          {
+            "name": "ERROR",
+            "value": 4,
+            "description": "Represents an error severity level. Indicates significant issues that need prompt resolution and contribute notably to the anomaly score."
+          },
+          {
+            "name": "WARNING",
+            "value": 3,
+            "description": "Represents a warning severity level. Indicates potential issues that should be monitored and contribute moderately to the anomaly score."
+          },
+          {
+            "name": "NOTICE",
+            "value": 2,
+            "description": "Represents a notice severity level. Indicates minor issues or informational messages that contribute minimally to the anomaly score."
+          }
+        ]
+      }
+    },
     "AppProtectAssociation": {
       "type": "object",
       "description": "AppProtect association definition",
@@ -1411,6 +1498,11 @@
           "$ref": "#/definitions/ManagedRuleActionType",
           "description": "Describes the default action to be applied when the managed rule matches.",
           "readOnly": true
+        },
+        "defaultAnomalyScoringSeverity": {
+          "$ref": "#/definitions/AnomalyScoringSeverity",
+          "description": "The default severity level assigned to a rule in anomaly scoring mode. Required for managed rules that support the anomaly scoring action type. When a rule matches, this severity value is added to the total anomaly score.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1540,6 +1632,11 @@
         "defaultAction": {
           "$ref": "#/definitions/ManagedRuleActionType",
           "description": "Define the default action for the rule set."
+        },
+        "anomalyScoring": {
+          "$ref": "#/definitions/AnomalyScoringDefaultConfiguration",
+          "description": "Describes the anomaly scoring default configuration, where it is a supported action.",
+          "readOnly": true
         }
       },
       "required": [

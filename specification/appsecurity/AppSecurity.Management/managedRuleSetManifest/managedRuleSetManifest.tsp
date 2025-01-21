@@ -59,6 +59,10 @@ model ManagedRuleSetDefinition {
 
   @doc("Define the default action for the rule set.")
   defaultAction: ManagedRuleActionType;
+
+  @doc("Describes the anomaly scoring default configuration, where it is a supported action.")
+  @visibility("read")
+  anomalyScoring?: AnomalyScoringDefaultConfiguration;
 }
 
 @doc("Defines a managed rule set pillar type")
@@ -111,6 +115,52 @@ model ManagedRuleDefinition {
   @doc("Describes the default action to be applied when the managed rule matches.")
   @visibility("read")
   defaultAction: ManagedRuleActionType;
+
+  @doc("The default severity level assigned to a rule in anomaly scoring mode. Required for managed rules that support the anomaly scoring action type. When a rule matches, this severity value is added to the total anomaly score.")
+  @visibility("read")
+  defaultAnomalyScoringSeverity?: AnomalyScoringSeverity;
+}
+
+@doc("The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match. Each level corresponds to a default anomaly score added when a rule matches.")
+union AnomalyScoringSeverity {
+  int32,
+
+  @doc("Represents a critical severity level. Indicates severe anomalies that require immediate attention and contribute significantly to the anomaly score.")
+  CRITICAL: 5,
+
+  @doc("Represents an error severity level. Indicates significant issues that need prompt resolution and contribute notably to the anomaly score.")
+  ERROR: 4,
+
+  @doc("Represents a warning severity level. Indicates potential issues that should be monitored and contribute moderately to the anomaly score.")
+  WARNING: 3,
+
+  @doc("Represents a notice severity level. Indicates minor issues or informational messages that contribute minimally to the anomaly score.")
+  NOTICE: 2,
+}
+
+@doc("Defines default configuration for anomaly scoring mode.")
+model AnomalyScoringDefaultConfiguration {
+  @doc("The default threshold for anomaly scoring. If anomaly scoring is enabled, this value determines the threshold score. When the calculated score exceeds this value, the specified anomaly scoring action will be applied.")
+  @visibility("read")
+  defaultThreshold: int32;
+
+  @doc("The default action to be triggered when the anomaly scoring threshold is exceeded. This action defines how the system responds to detected anomalies.")
+  @visibility("read")
+  defaultAction: AnomalyScoringActionType;
+}
+
+@doc("Defines the set of supported actions that can be triggered when anomaly scoring exceeds the threshold.")
+union AnomalyScoringActionType {
+  string,
+
+  @doc("Allow the request")
+  Allow: "Allow",
+
+  @doc("Block the request")
+  Block: "Block",
+
+  @doc("Log the request and allow it")
+  Log: "Log",
 }
 
 // See example of a similar resource (singleton and subscription-level resource) in:
