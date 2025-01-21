@@ -162,7 +162,7 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   type: "file_search";
 
   /** The results of the file search. */
-  @added(ServiceApiVersions.v2024_12_01_preview)
+  @typeChangedFrom(ServiceApiVersions.v2024_12_01_preview, Record<string>)
   @encodedName("application/json", "file_search")
   fileSearch: FileSearchToolCallResult[];
 }

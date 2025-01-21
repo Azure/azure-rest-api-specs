@@ -3305,12 +3305,18 @@ components:
       type: object
       required:
         - type
+        - file_search
       properties:
         type:
           type: string
           enum:
             - file_search
           description: The object type, which is always 'file_search'.
+        file_search:
+          type: object
+          additionalProperties:
+            type: string
+          description: The results of the file search.
       allOf:
         - $ref: '#/components/schemas/RunStepToolCall'
       description: |-
