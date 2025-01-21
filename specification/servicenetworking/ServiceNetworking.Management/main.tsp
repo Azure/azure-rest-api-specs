@@ -75,7 +75,7 @@ model AssociationUpdate {
   tags?: TrackedResource.tags;
 
   /** The resource-specific properties for this resource. */
-  @OpenAPI.extension("x-ms-client-flatten", true)
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationUpdateProperties;
 }
 
