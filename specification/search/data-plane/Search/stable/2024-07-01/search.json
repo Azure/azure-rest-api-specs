@@ -9090,9 +9090,15 @@
           "x-ms-client-name": "answers",
           "x-ms-identifiers": []
         },
+        "@search.nextPageParameters": {
+          "$ref": "#/definitions/SearchRequest",
+          "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with",
+          "readOnly": true,
+          "x-ms-client-name": "nextPageParameters"
+        },
         "value": {
           "type": "array",
-          "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with",
+          "description": "The sequence of results returned by the query.",
           "items": {
             "$ref": "#/definitions/SearchResult"
           },
