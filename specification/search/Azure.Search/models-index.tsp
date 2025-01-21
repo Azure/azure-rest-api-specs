@@ -394,8 +394,7 @@ model FacetResult {
  * results. Answer candidates are scored and the top answers are selected.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-model QueryAnswerResult {
-  ...Record<unknown>;
+model QueryAnswerResult extends Record<unknown> {
 
   /**
    * The score value represents how relevant the answer is to the query relative to
