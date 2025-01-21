@@ -1495,8 +1495,39 @@
         "instruction": {
           "$ref": "#/definitions/Instruction"
         },
+        "address": {
+          "description": "The address of the result. `Note`: Only supported for truck travelMode.",
+          "type": "object",
+          "properties": {
+            "countryRegion": {
+              "type": "object",
+              "properties": {
+                "ISO": {
+                  "description": "ISO of country/region represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+                  "type": "string"
+                }
+              }
+            },
+            "adminDistricts": {
+              "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "shortName": {
+                    "type": "string",
+                    "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA. This is only available for the US, Canada, and Mexico."
+                  }
+                }
+              }
+            }
+          }
+        },
         "sideOfStreet": {
           "$ref": "#/definitions/SideOfStreetEnum"
+        },
+        "drivingSide": {
+          "$ref": "#/definitions/DrivingSideEnum"
         },
         "signs": {
           "description": "Signage text for the route. There may be more than one sign value.",
@@ -2454,6 +2485,31 @@
         ]
       }
     },
+    "DrivingSideEnum": {
+      "description": "Indicates left-hand vs. right-hand side driving at the point of the maneuver. `Note`: Only supported for truck travelMode.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Left",
+        "Right"
+      ],
+      "x-ms-enum": {
+        "name": "DrivingSideEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Left",
+            "name": "Left",
+            "description": "Left."
+          },
+          {
+            "value": "Right",
+            "name": "Right",
+            "description": "Right."
+          }
+        ]
+      }
+    },
     "TrafficDataUsedEnum": {
       "description": "The type of real-time traffic data used to generate the route.",
       "type": "string",
@@ -2581,7 +2637,7 @@
     },
     "RouteDirectionVehicleSpec": {
       "type": "object",
-      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
+      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\nIS`Note`: Only supported for truck travelMode.",
       "allOf": [
         {
           "$ref": "#/definitions/VehicleSpec"
