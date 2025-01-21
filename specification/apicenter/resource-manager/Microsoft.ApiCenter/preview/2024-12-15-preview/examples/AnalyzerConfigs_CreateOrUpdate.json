@@ -28,7 +28,30 @@
         },
         "properties": {
           "analyzerType": "spectral",
-          "state": "inactive"
+          "state": "inactive",
+          "filter": {
+            "apis": [
+              {
+                "property": "kind",
+                "operator": "equals",
+                "value": "rest"
+              }
+            ],
+            "apiVersions": [
+              {
+                "property": "lifecycleStage",
+                "operator": "equals",
+                "value": "design"
+              }
+            ],
+            "apiDefinitions": [
+              {
+                "property": "specification/name",
+                "operator": "equals",
+                "value": "asyncapi"
+              }
+            ]
+          }
         }
       }
     },
@@ -45,7 +68,30 @@
           "title": "Spectral (OpenAPI)",
           "description": "Spectral analyzer configuration for OpenAPI specifications.",
           "analyzerType": "spectral",
-          "state": "inactive"
+          "state": "inactive",
+          "filter": {
+            "apis": [
+              {
+                "property": "kind",
+                "operator": "equals",
+                "value": "rest"
+              }
+            ],
+            "apiVersions": [
+              {
+                "property": "lifecycleStage",
+                "operator": "equals",
+                "value": "design"
+              }
+            ],
+            "apiDefinitions": [
+              {
+                "property": "specification/name",
+                "operator": "equals",
+                "value": "asyncapi"
+              }
+            ]
+          }
         }
       }
     }

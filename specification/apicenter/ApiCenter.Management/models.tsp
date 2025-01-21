@@ -734,6 +734,8 @@ model AnalyzerConfigProperties {
    */
   @visibility("read")
   state?: AnalyzerRulesetState;
+
+  // filter?:
 }
 
 /**
@@ -818,4 +820,71 @@ model RulesetExportResult {
    * The result of the export operation.
    */
   value?: string;
+}
+
+
+/**
+ * Analyzer filter value. The value type of which depends on selected filter property.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing service"
+@added(Versions.v2024_12_15_preview)
+model AnalyzerFilterValue {}
+
+@added(Versions.v2024_12_15_preview)
+/**
+ * Allowed analyzer filter operator values.
+ */
+union AnalyzerFilterOperator {
+  string,
+
+  @doc("In operator.")
+  Equals: "equals",
+
+  @doc("Contains operator.")
+  Contains: "contains",
+}
+
+/**
+ * Analyzer filter condition.
+ */
+@added(Versions.v2024_12_15_preview)
+model AnalyzerFilterCondition {
+  /**
+   * The property to filter on, e.g. "lifecycleStage".
+   */
+  property: string;
+
+  /**
+   * The operator to use for the filter, e.g. "equals".
+   */
+  operator: AnalyzerFilterOperator;
+
+  /**
+   * The value to filter on, e.g. "production".
+   */
+  value: AnalyzerFilterValue;
+}
+
+/**
+ * The API analyzer filter, used to select API definitions for static analysis. All the conditions get applied with the logical AND operator.
+ */
+@added(Versions.v2024_12_15_preview)
+model AnalyzerFilter {
+  /**
+   * API filter conditions.
+   */
+  @extension("x-ms-identifiers", [])
+  apis: AnalyzerFilterCondition[];
+
+  /**
+   * APi version filter conditions.
+   */
+  @extension("x-ms-identifiers", [])
+  apiVersions: AnalyzerFilterCondition[];
+
+  /**
+   * Api definition filter conditions.
+   */
+  @extension("x-ms-identifiers", [])
+  apiDefinitions: AnalyzerFilterCondition[];
 }
