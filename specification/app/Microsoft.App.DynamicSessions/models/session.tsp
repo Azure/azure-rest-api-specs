@@ -7,6 +7,9 @@ namespace Microsoft.App.DynamicSessions;
 
 @doc("The session resource.")
 model Session {
+  @doc("The identifier of the session.")
+  identifier: string;
+
   @doc("The date and time when the session was created.")
   createdAt: utcDateTime;
 
@@ -23,14 +26,5 @@ model Session {
 @doc("The sessions list response.")
 model SessionsListResponse {
   @doc("The list of sessions.")
-  sessions: SessionsListResponseEntry[];
-}
-
-@doc("The sessions list response entry.")
-model SessionsListResponseEntry {
-  @doc("The identifier of the session.")
-  identifier: string;
-
-  @doc("The date and time when the session will expire.")
-  expireAt: utcDateTime;
+  sessions: Session[];
 }
