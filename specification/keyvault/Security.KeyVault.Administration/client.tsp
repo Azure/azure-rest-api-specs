@@ -38,7 +38,7 @@ namespace ClientCustomizations;
   "csharp"
 );
 @@clientName(KeyVault.Permission, "KeyVaultPermission", "csharp");
-@@clientName(Error, "KeyVaultServiceError", "csharp");
+//@@clientName(Error, "KeyVaultServiceError", "csharp");
 @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "csharp");
 @@clientName(KeyVault.RestoreOperation, "RestoreDetailsInternal", "csharp");
 
