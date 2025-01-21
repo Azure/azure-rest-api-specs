@@ -1,4 +1,5 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -23,6 +24,11 @@ model NetworkRackProperties {
       type: "Microsoft.ManagedNetworkFabric/networkDevices";
     }
   ]>[];
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")

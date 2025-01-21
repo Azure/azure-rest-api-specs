@@ -34,8 +34,6 @@
         "ingressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
         "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
         "isMonitoringEnabled": "True",
-        "v4overV6BgpSessionState": "Enabled",
-        "v6overV4BgpSessionState": "Enabled",
         "bgpConfiguration": {
           "annotation": "annotation",
           "bfdConfiguration": {
@@ -71,7 +69,9 @@
               "10.0.0.10"
             ],
             "bmpConfigurationState": "Enabled"
-          }
+          },
+          "v4OverV6BgpSession": "Enabled",
+          "v6OverV4BgpSession": "Enabled"
         },
         "staticRouteConfiguration": {
           "bfdConfiguration": {
@@ -96,28 +96,22 @@
           ]
         },
         "nativeIpv4PrefixLimit": {
-          "ipv4AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1576341239
-          },
-          "ipv6AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1576341239
-          }
+          "prefixLimits": [
+            {
+              "maximumRoutes": 24,
+              "softLimit": 6,
+              "idleTimeExpiry": 20
+            }
+          ]
         },
         "nativeIpv6PrefixLimit": {
-          "ipv4AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1576341239
-          },
-          "ipv6AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1576341239
-          }
+          "prefixLimits": [
+            {
+              "maximumRoutes": 24,
+              "softLimit": 6,
+              "idleTimeExpiry": 20
+            }
+          ]
         }
       }
     }
@@ -153,8 +147,6 @@
           "isMonitoringEnabled": "True",
           "extension": "NoExtension",
           "vlanId": 755,
-          "v4overV6BgpSessionState": "Enabled",
-          "v6overV4BgpSessionState": "Enabled",
           "bgpConfiguration": {
             "annotation": "annotation",
             "bfdConfiguration": {
@@ -194,7 +186,9 @@
                 "10.0.0.1"
               ],
               "bmpConfigurationState": "Enabled"
-            }
+            },
+            "v4OverV6BgpSession": "Enabled",
+            "v6OverV4BgpSession": "Enabled"
           },
           "staticRouteConfiguration": {
             "bfdConfiguration": {
@@ -221,28 +215,22 @@
             "extension": "NoExtension"
           },
           "nativeIpv4PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 24,
+                "threshold": 7,
+                "idleTimeExpiry": 20
+              }
+            ]
           },
           "nativeIpv6PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 24,
+                "threshold": 7,
+                "idleTimeExpiry": 20
+              }
+            ]
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",

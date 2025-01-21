@@ -36,8 +36,6 @@
         "isMonitoringEnabled": "True",
         "extension": "NoExtension",
         "vlanId": 755,
-        "v4overV6BgpSessionState": "Enabled",
-        "v6overV4BgpSessionState": "Enabled",
         "bgpConfiguration": {
           "annotation": "annotation",
           "bfdConfiguration": {
@@ -73,7 +71,9 @@
               "10.0.0.1"
             ],
             "bmpConfigurationState": "Enabled"
-          }
+          },
+          "v4OverV6BgpSession": "Enabled",
+          "v6OverV4BgpSession": "Enabled"
         },
         "staticRouteConfiguration": {
           "bfdConfiguration": {
@@ -99,28 +99,22 @@
           "extension": "NoExtension"
         },
         "nativeIpv4PrefixLimit": {
-          "ipv4AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1711
-          },
-          "ipv6AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1711
-          }
+          "prefixLimits": [
+            {
+              "maximumRoutes": 23,
+              "threshold": 7,
+              "idleTimeExpiry": 28
+            }
+          ]
         },
         "nativeIpv6PrefixLimit": {
-          "ipv4AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1711
-          },
-          "ipv6AddrPrefixLimit": {
-            "hardLimit": 10,
-            "softLimit": 20,
-            "idleTimeExpiry": 1711
-          }
+          "prefixLimits": [
+            {
+              "maximumRoutes": 23,
+              "threshold": 7,
+              "idleTimeExpiry": 28
+            }
+          ]
         }
       }
     }
@@ -195,7 +189,9 @@
                 "10.0.0.1"
               ],
               "bmpConfigurationState": "Enabled"
-            }
+            },
+            "v4OverV6BgpSession": "Enabled",
+            "v6OverV4BgpSession": "Enabled"
           },
           "staticRouteConfiguration": {
             "bfdConfiguration": {
@@ -222,28 +218,25 @@
             "extension": "NoExtension"
           },
           "nativeIpv4PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 23,
+                "threshold": 7,
+                "idleTimeExpiry": 28
+              }
+            ]
           },
           "nativeIpv6PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 23,
+                "threshold": 7,
+                "idleTimeExpiry": 28
+              }
+            ]
+          },
+          "lastOperation": {
+            "details": "Succeeded"
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
@@ -295,8 +288,6 @@
           "isMonitoringEnabled": "True",
           "extension": "NoExtension",
           "vlanId": 755,
-          "v4overV6BgpSessionState": "Enabled",
-          "v6overV4BgpSessionState": "Enabled",
           "bgpConfiguration": {
             "annotation": "annotation",
             "bfdConfiguration": {
@@ -336,7 +327,9 @@
                 "10.0.0.1"
               ],
               "bmpConfigurationState": "Enabled"
-            }
+            },
+            "v4OverV6BgpSession": "Enabled",
+            "v6OverV4BgpSession": "Enabled"
           },
           "staticRouteConfiguration": {
             "bfdConfiguration": {
@@ -363,28 +356,25 @@
             "extension": "NoExtension"
           },
           "nativeIpv4PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 23,
+                "threshold": 7,
+                "idleTimeExpiry": 28
+              }
+            ]
           },
           "nativeIpv6PrefixLimit": {
-            "ipv4AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            },
-            "ipv6AddrPrefixLimit": {
-              "hardLimit": 10,
-              "softLimit": 20,
-              "idleTimeExpiry": 1711
-            }
+            "prefixLimits": [
+              {
+                "maximumRoutes": 23,
+                "threshold": 7,
+                "idleTimeExpiry": 28
+              }
+            ]
+          },
+          "lastOperation": {
+            "details": "Succeeded"
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",

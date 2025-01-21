@@ -16,9 +16,6 @@ model HanaDatabaseSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of HanaDatabaseSourceConnector")
   connectorType: ConnectorType.HanaDatabaseSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("Url of HANA database.")
   connectionUrl: string;
 

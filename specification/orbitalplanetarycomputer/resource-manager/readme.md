@@ -28,6 +28,12 @@ These are the global settings for the AOPC.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2024-01-31-preview
+suppressions:
+    - code: AvoidAnonymousTypes
+      where: 
+        - $.definitions["ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
+      reason: 
+        Issue with common-types
 ```
 
 ### Tag: package-2024-01-31-preview
