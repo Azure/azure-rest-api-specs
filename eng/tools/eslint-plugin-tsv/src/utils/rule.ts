@@ -4,22 +4,20 @@ import { RuleDocument, RuleInfo } from "../interfaces/rule-interfaces.js";
 import { defaultMessageId, defaultRuleType, emitters } from "./constants.js";
 import { NamedRule } from "../interfaces/named-eslint.js";
 import { AST, getStaticYAMLValue } from "yaml-eslint-parser";
+import { stringify } from "yaml";
 
 function createManagementRuleDocument(
   emitterName: string,
   optionName: string,
-  expectedOptionValue: string | boolean,
+  expectedOptionValue: string | boolean | RegExp,
+  exampleValue: string | boolean,
 ): RuleDocument {
   const document: RuleDocument = {
-    description: `Validate whether '${optionName}' is set to true in tspconfig.yaml when generating modular clients`,
-    error: `'${optionName}' is NOT set to true in tspconfig.yaml when generating modular clients`,
-    action: `Set 'options.${emitters.ts}.${optionName}' to true in tspconfig.yaml when generating modular clients`,
-    example: `...
-        options:
-        "${emitterName}":
-            ${optionName}: ${expectedOptionValue} # <--- SET HERE
-            ...
-        `,
+    // TODO: improve description with natual language
+    description: `Validate whether 'options.${emitters.ts}.${optionName}' is set to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
+    error: `'options.${emitters.ts}.${optionName}' is NOT set to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
+    action: `Set 'options.${emitters.ts}.${optionName}' to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
+    example: createEmitterOptions(emitterName, { key: optionName, value: exampleValue }),
   };
   return document;
 }
@@ -65,16 +63,26 @@ export function isManagementForTsEmitter(tspconfig: TypeSpecConfig, context: Rul
   return flavor === "azure" && filename.includes(".Management") && isModularLibrary == undefined;
 }
 
-export function generateEmitterOptions(
+export function createEmitterOptions(
   emitter: string,
   ...pairs: { key: string; value: string | boolean | {} }[]
 ) {
-  let content = `options:
-    "${emitter}":`;
+  const obj = { options: { [emitter]: {} } };
   for (const pair of pairs) {
-    content += `
-      ${pair.key}: ${pair.value}`;
+    const segments = pair.key.split(".");
+    let cur: { [id: string]: any } = obj.options[emitter];
+    for (const [i, segment] of segments.entries()) {
+      if (i === segments.length - 1) {
+        cur[segment] = pair.value;
+        break;
+      }
+      if (!(segment in cur)) {
+        cur[segment] = {};
+      }
+      cur = cur[segment];
+    }
   }
+  const content = stringify(obj);
   return content;
 }
 
@@ -82,9 +90,15 @@ export function createManagementClientRule(
   ruleName: string,
   emitterName: string,
   optionName: string,
-  expectedOptionValue: string | boolean,
+  expectedOptionValue: string | boolean | RegExp,
+  exampleValue: string | boolean,
 ): NamedRule.RuleModule {
-  const documentation = createManagementRuleDocument(emitterName, optionName, expectedOptionValue);
+  const documentation = createManagementRuleDocument(
+    emitterName,
+    optionName,
+    expectedOptionValue,
+    exampleValue,
+  );
 
   const ruleInfo: RuleInfo = {
     name: ruleName,
@@ -93,8 +107,21 @@ export function createManagementClientRule(
       messages: () => createRuleMessages(defaultMessageId, documentation),
       condition: (tspconfig, context) => isManagementForTsEmitter(tspconfig, context),
       validation: (tspconfig, context, node) => {
-        const option = tspconfig.options?.[emitters.ts][optionName];
-        if (option !== expectedOptionValue) context.report({ node, messageId: defaultMessageId });
+        let option: any = tspconfig.options?.[emitters.ts];
+        for (const segment of optionName.split(".")) {
+          if (segment in option) option = option[segment];
+        }
+        switch (typeof expectedOptionValue) {
+          case "boolean":
+          case "string":
+            if (option !== expectedOptionValue)
+              context.report({ node, messageId: defaultMessageId });
+            break;
+          case "object":
+            if (typeof option !== "string" || !expectedOptionValue.test(option))
+              context.report({ node, messageId: defaultMessageId });
+            break;
+        }
       },
     },
   };

@@ -2,7 +2,7 @@ import { Rule, RuleTester } from "eslint";
 import { describe, it } from "vitest";
 import parser from "yaml-eslint-parser";
 import { defaultMessageId, emitters } from "../../src/utils/constants.js";
-import { generateEmitterOptions } from "../../src/utils/rule.js";
+import { createEmitterOptions } from "../../src/utils/rule.js";
 import { NamedRule } from "../../src/interfaces/named-eslint.js";
 
 interface Case {
@@ -17,71 +17,96 @@ interface Case {
 const managementTspconfigPath = "contosowidgetmanager/Contoso.Management/tspconfig.yaml";
 const rulePath = "../../src/rules/tspconfig-validation-rules.js";
 
-const managementGenerateMetadataTestCases = generateManagementClientBooleanTestCases(
+const managementGenerateMetadataTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-generate-metadata-true",
   managementTspconfigPath,
   "generateMetadata",
   true,
+  false,
 );
 
-const managementHierarchyClientTestCases = generateManagementClientBooleanTestCases(
+const managementHierarchyClientTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-hierarchy-client-false",
   managementTspconfigPath,
   "hierarchyClient",
   false,
+  true,
 );
 
-const managementExperimentalExtensibleEnumsTestCases = generateManagementClientBooleanTestCases(
+const managementExperimentalExtensibleEnumsTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-experimental-extensible-enums-true",
   managementTspconfigPath,
   "experimentalExtensibleEnums",
   true,
+  false,
 );
 
-const managementEnableOperationGroupTestCases = generateManagementClientBooleanTestCases(
+const managementEnableOperationGroupTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-enable-operation-group-true",
   managementTspconfigPath,
   "enableOperationGroup",
   true,
+  false,
 );
 
-function generateManagementClientBooleanTestCases(
+const managementPackageDirTestCases = generateManagementClientTestCases(
+  emitters.ts,
+  rulePath,
+  "tspconfig-ts-mgmt-modular-package-dir-match-pattern",
+  managementTspconfigPath,
+  "package-dir",
+  "arm-aaa-bbb",
+  "aaa-bbb",
+);
+
+const managementPackageNameTestCases = generateManagementClientTestCases(
+  emitters.ts,
+  rulePath,
+  "tspconfig-ts-mgmt-modular-package-name-match-pattern",
+  managementTspconfigPath,
+  "packageDetails.name",
+  "@azure/arm-aaa-bbb",
+  "@azure/aaa-bbb",
+);
+
+function generateManagementClientTestCases(
   emitterName: string,
   rulePath: string,
   ruleName: string,
   fileName: string,
   optionName: string,
-  expectedOptionValue: boolean,
+  validOptionValue: boolean | string,
+  invalidOptionValue: boolean | string,
 ): Case[] {
   const managementGenerateMetadataTestCases: Case[] = [
     {
-      description: `valid: ${optionName} is ${expectedOptionValue}`,
+      description: `valid: ${optionName} is ${validOptionValue}`,
       rulePath,
       ruleName,
       fileName,
-      yamlContent: generateEmitterOptions(
+      yamlContent: createEmitterOptions(
         emitterName,
-        { key: optionName, value: expectedOptionValue },
+        { key: optionName, value: validOptionValue },
         { key: "flavor", value: "azure" },
       ),
       shouldReportError: false,
     },
     {
-      description: `invalid: ${optionName} is ${!expectedOptionValue}`,
+      description: `invalid: ${optionName} is ${invalidOptionValue}`,
       rulePath,
       ruleName,
       fileName,
-      yamlContent: generateEmitterOptions(
+      yamlContent: createEmitterOptions(
         emitterName,
-        { key: optionName, value: !expectedOptionValue },
+        { key: optionName, value: invalidOptionValue },
         { key: "flavor", value: "azure" },
       ),
       shouldReportError: true,
@@ -91,7 +116,7 @@ function generateManagementClientBooleanTestCases(
       rulePath,
       ruleName,
       fileName,
-      yamlContent: generateEmitterOptions(emitterName, { key: "flavor", value: "azure" }),
+      yamlContent: createEmitterOptions(emitterName, { key: "flavor", value: "azure" }),
       shouldReportError: true,
     },
   ];
@@ -104,6 +129,8 @@ describe("Tspconfig emitter options validation", () => {
     ...managementHierarchyClientTestCases,
     ...managementExperimentalExtensibleEnumsTestCases,
     ...managementEnableOperationGroupTestCases,
+    ...managementPackageDirTestCases,
+    ...managementPackageNameTestCases,
   ])("$ruleName - $description", async (c: Case) => {
     const ruleTester = new RuleTester({
       languageOptions: {
