@@ -5,6 +5,11 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
+@@clientNamespace(Microsoft.HybridConnectivity,
+  "com.azure.resourcemanager.hybridconnectivity",
+  "java"
+);
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ServiceConfigurationResourcePatch.properties);
 
@@ -81,5 +86,7 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmtClient", "java");
+
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
