@@ -1,0 +1,70 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - actuals
+  - chttp
+  - datasetid
+  - dwgconversion
+  - dwgzippackage
+  - einsteinweg
+  - epsg
+  - fcontoso
+  - fpushpins
+  - haag
+  - hecto
+  - kmph
+  - maputnik
+  - minkowski
+  - neighbourhood
+  - openlr
+  - rstrnt
+  - scame
+  - tepco's
+  - tpeg
+  - udid
+  - udids
+  - unregistering
+  - uturn
+  - viewp
+  - xstr
+  - yazaki
+overrides:
+  - filename: '**/specification/maps/data-plane/Weather/stable/1.1/weather.json'
+    words:
+      - locationally
+      - unittype
+  - filename: >-
+      **/specification/maps/data-plane/Microsoft.Maps/Render/preview/1.0/render.json
+    words:
+      - chttp
+      - fcontoso
+      - fpushpins
+  - filename: '**/specification/maps/data-plane/Render/preview/1.0/render.json'
+    words:
+      - chttp
+      - fcontoso
+      - fpushpins
+  - filename: '**/specification/maps/data-plane/Render/stable/2022-08-01/render.json'
+    words:
+      - maptileset
+  - filename: '**/specification/maps/data-plane/Spatial/stable/2022-08-01/spatial.json'
+    words:
+      - getbuffer
+      - getclosestpoint
+      - postbuffer
+      - postclosestpoint
+  - filename: '**/specification/maps/data-plane/Search/**'
+    words:
+      - geocodingresponse
+      - searchaddressresult
+      - searchaddressreverseresponse
+  - filename: '**/specification/maps/data-plane/**'
+    words:
+      - modelerfour
+

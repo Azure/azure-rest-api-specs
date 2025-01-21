@@ -323,6 +323,16 @@ input-file:
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
+### Tag: package-2024-11-04-only
+
+These settings apply only when `--tag=package-2024-11-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-04-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.

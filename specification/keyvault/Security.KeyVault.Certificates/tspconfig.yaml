@@ -1,0 +1,63 @@
+parameters:
+  "service-dir":
+    default: "sdk/keyvault"
+  "dependencies":
+    "additionalDirectories":
+      - "specification/keyvault/Security.KeyVault.Common/"
+    default: ""
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/certificates.json"
+  # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
+  "@azure-tools/typespec-python":
+    flavor: azure
+    "basic-setup-py": true
+    "package-version": "4.9.0b1"
+    "package-dir": "azure-keyvault-certificates"
+    "package-name": "azure-keyvault-certificates"
+    "output-path": "."
+  "@azure-tools/typespec-java":
+    flavor: azure
+    "package-dir": "azure-security-keyvault-certificates"
+    "namespace": "com.azure.security.keyvault.certificates"
+    "models-subpackage": "implementation.models"
+    "custom-types": "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,CertificateOperationError,SubjectAlternativeNames"
+    "custom-types-subpackage": "models"
+    "customization-class": "swagger/src/main/java/CertificatesCustomizations.java"
+    "partial-update": true
+    "generate-tests": false
+    "generate-samples": false
+    "include-api-view-properties": false
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # "@azure-tools/typespec-csharp": true
+  "@azure-tools/typespec-ts":
+    package-dir: "keyvault-certificates"
+    generateMetadata: true
+    generateTest: false
+    src-folder: "src/generated"
+    experimentalExtensibleEnums: true
+    isModularLibrary: true
+    packageDetails:
+      name: "@azure/keyvault-certificates"
+      description: "Azure Key Vault Certificates"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/security/keyvault"
+    package-dir: "azcertificates"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    override-client-name: "Client"
+    single-client: true
+    api-version: "7.5"
+    inject-spans: true
