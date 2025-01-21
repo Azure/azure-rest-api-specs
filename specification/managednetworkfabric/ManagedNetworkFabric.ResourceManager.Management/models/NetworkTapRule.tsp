@@ -39,6 +39,11 @@ model NetworkTapRuleProperties {
   @added(Versions.v2024_06_15_preview)
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionProperties;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
@@ -100,9 +105,6 @@ model NetworkTapRuleMatchConfigurationPatch {
 
 @doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchCondition {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...CommonMatchConditions;
 
   @doc("Encapsulation Type that needs to be matched.")
@@ -114,9 +116,6 @@ model NetworkTapRuleMatchCondition {
 
 @doc("Defines the match condition that is supported to filter the traffic.")
 model NetworkTapRuleMatchConditionPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...CommonMatchConditionsPatch;
 
   @doc("Encapsulation Type that needs to be matched.")
@@ -167,9 +166,6 @@ model NetworkTapRuleActionPatch is NetworkTapRuleAction;
 
 @doc("The NetworkTapRule resource definition.")
 model NetworkTapRulePatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("Network Tap Rule Patch properties.")

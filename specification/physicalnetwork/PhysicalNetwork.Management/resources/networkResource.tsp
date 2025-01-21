@@ -26,6 +26,18 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
+
+  /** 2024-09-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_09_01_preview: "2024-09-01-preview",
+
+  /** 2025-01-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$";
@@ -73,12 +85,11 @@ model LocationCollectionParameters<T extends Azure.ResourceManager.Foundations.R
 @get
 @listsResource(TResource)
 @segmentOf(TResource)
-@armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
 @armResourceList(TResource)
 op ArmLocResourceListByParent<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
-  TParentName extends valueof string = "",
+  TParentName extends valueof string = "ResourceGroup",
   TParentFriendlyName extends valueof string = ""
 >(
   ...LocationCollectionParameters<TResource>,
