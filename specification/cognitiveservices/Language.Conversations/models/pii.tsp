@@ -184,8 +184,8 @@ union ConversationPiiCategories {
   /** Address category */
   Address: "Address",
 
-  /** Credit card number category */
-  CreditCardNumber: "CreditCardNumber",
+  /** Credit card category */
+  CreditCard: "CreditCard",
 
   /** Email category */
   Email: "Email",
@@ -196,14 +196,11 @@ union ConversationPiiCategories {
   /** Numeric identifier category */
   NumericIdentifier: "NumericIdentifier",
 
-  /** Phone number category */
-  PhoneNumber: "PhoneNumber",
+  /** Phone category */
+  Phone: "Phone",
 
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
-
-  /** Miscellaneous category */
-  Miscellaneous: "Miscellaneous",
 
   /** All categories */
   All: "All",
@@ -220,8 +217,8 @@ union ConversationPiiCategoriesExclude {
   /** Address category */
   Address: "Address",
 
-  /** Credit card number category */
-  CreditCardNumber: "CreditCardNumber",
+  /** Credit card category */
+  CreditCard: "CreditCard",
 
   /** Email category */
   Email: "Email",
@@ -232,8 +229,8 @@ union ConversationPiiCategoriesExclude {
   /** Numeric identifier category */
   NumericIdentifier: "NumericIdentifier",
 
-  /** Phone number category */
-  PhoneNumber: "PhoneNumber",
+  /** Phone category */
+  Phone: "Phone",
 
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
