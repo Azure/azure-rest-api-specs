@@ -45,6 +45,12 @@ namespace KeyVault;
  */
 enum Versions {
   /**
+   * The 7.4 API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `v7.4`: "7.4",
+
+  /**
    * The 7.5 API version.
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
