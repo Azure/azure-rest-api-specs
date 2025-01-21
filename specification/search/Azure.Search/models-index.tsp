@@ -369,7 +369,6 @@ model SearchDocumentsResult {
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model FacetResult is Record<unknown> {
-
   /**
    * The approximate count of documents falling within the bucket described by this
    * facet.
@@ -384,7 +383,6 @@ model FacetResult is Record<unknown> {
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model QueryAnswerResult is Record<unknown> {
-
   /**
    * The score value represents how relevant the answer is to the query relative to
    * other answers returned for the query.
