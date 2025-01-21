@@ -93,10 +93,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
 
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
