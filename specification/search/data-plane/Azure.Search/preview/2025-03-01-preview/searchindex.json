@@ -1363,6 +1363,12 @@
           "readOnly": true,
           "x-ms-client-name": "SemanticQueryRewritesResultType",
           "description": "Type of query rewrite that was used to retrieve documents."
+        },
+        "@search.metrics": {
+          "$ref": "#/definitions/SearchMetricListResult",
+          "readOnly": true,
+          "x-ms-client-name": "Metrics",
+          "description": "The list of aggregated values from the provided documents."
         }
       },
       "required": [
@@ -2628,6 +2634,10 @@
         "hybridSearch": {
           "$ref": "#/definitions/HybridSearch",
           "description": "The query parameters to configure hybrid search behaviors."
+        },
+        "metrics": {
+          "$ref": "#/definitions/SearchMetricList",
+          "description": "A value that specifies how many aggregations and types of aggregations to execute on the documents."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
@@ -3253,6 +3263,67 @@
       },
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
+    },
+    "SearchMetricListResult": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/SearchMetricResult"
+        }
+      },
+      "readOnly": true
+    },
+    "SearchMetricResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The aggregated value from the 'targetField' of all documents."
+        }
+      },
+      "description": "A single aggregation value of a metric query result. Reports the aggregated value from the 'targetField' of all documents."
+    },
+    "SearchMetricList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "#/definitions/SearchMetric"
+      }
+    },
+    "SearchMetric": {
+      "type": "object",
+      "properties": {
+        "targetField": {
+          "type": "string",
+          "description": "The field that will be aggregated across documents."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "sum"
+          ],
+          "x-ms-enum": {
+            "name": "MetricType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "sum",
+                "name": "Sum",
+                "description": "Aggregates the 'targetField' value across documents using summation."
+              }
+            ]
+          }
+        },
+        "missing": {
+          "type":"number",
+          "format": "double",
+          "description": "When this value is specified, documents without a 'targetField' value will use this numeric value as its filler value."
+        }
+      },
+      "description": "Determines how to aggregate values from the 'targetField' of all documents."
     }
   },
   "parameters": {
