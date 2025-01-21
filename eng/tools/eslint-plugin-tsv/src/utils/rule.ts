@@ -5,16 +5,28 @@ import { defaultMessageId, defaultRuleType, emitters } from "./constants.js";
 import { NamedRule } from "../interfaces/named-eslint.js";
 import { AST, getStaticYAMLValue } from "yaml-eslint-parser";
 import { stringify } from "yaml";
+import { resolveValues } from "./config-interpolation.js";
 
 function createManagementRuleDocument(
   emitterName: string,
   optionName: string,
   expectedOptionValue: string | boolean | RegExp,
   exampleValue: string | boolean,
+  extraExplanation: string,
 ): RuleDocument {
+  let description: string = "";
+  switch (typeof expectedOptionValue) {
+    case "string":
+    case "boolean":
+      `Validate whether 'options.${emitters.ts}.${optionName}' is set to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`;
+      break;
+    case "object":
+      `Validate whether 'options.${emitters.ts}.${optionName}' matches regex pattern '${expectedOptionValue}' in tspconfig.yaml when generating modular clients. ${extraExplanation}`;
+      break;
+  }
+
   const document: RuleDocument = {
-    // TODO: improve description with natual language
-    description: `Validate whether 'options.${emitters.ts}.${optionName}' is set to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
+    description,
     error: `'options.${emitters.ts}.${optionName}' is NOT set to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
     action: `Set 'options.${emitters.ts}.${optionName}' to '${expectedOptionValue}' in tspconfig.yaml when generating modular clients`,
     example: createEmitterOptions(emitterName, { key: optionName, value: exampleValue }),
@@ -37,10 +49,11 @@ export function createRule(ruleContext: RuleInfo): NamedRule.RuleModule {
       return {
         YAMLDocument(node: Rule.Node) {
           const yamlDocument = node as unknown as AST.YAMLDocument;
-          const config = getStaticYAMLValue(yamlDocument) || {};
-          const typedConfig = config as unknown as TypeSpecConfig;
-          if (!ruleContext.functions.condition(typedConfig, context)) return;
-          ruleContext.functions.validation(typedConfig, context, node);
+          const rawConfig = getStaticYAMLValue(yamlDocument) || {};
+          const config = rawConfig as unknown as TypeSpecConfig;
+
+          if (!ruleContext.functions.condition(config, context)) return;
+          ruleContext.functions.validation(config, context, node);
         },
       };
     },
@@ -54,13 +67,14 @@ export function createRuleMessages(messageId: string, docs: RuleDocument) {
   };
 }
 
-export function isManagementForTsEmitter(tspconfig: TypeSpecConfig, context: Rule.RuleContext) {
-  const flavor = tspconfig.options?.[emitters.ts]?.flavor as string;
-  const isModularLibrary = tspconfig.options?.[emitters.ts]?.isModularLibrary as
-    | boolean
-    | undefined;
+export function isManagementSDK(
+  tspconfig: TypeSpecConfig,
+  context: Rule.RuleContext,
+  emitterName: string,
+) {
+  const flavor = tspconfig.options?.[emitterName]?.flavor as string;
   const filename = context.filename;
-  return flavor === "azure" && filename.includes(".Management") && isModularLibrary == undefined;
+  return flavor === "azure" && filename.includes(".Management");
 }
 
 export function createEmitterOptions(
@@ -88,16 +102,19 @@ export function createEmitterOptions(
 
 export function createManagementClientRule(
   ruleName: string,
-  emitterName: string,
   optionName: string,
   expectedOptionValue: string | boolean | RegExp,
   exampleValue: string | boolean,
+  extraExplanation: string = "",
 ): NamedRule.RuleModule {
+  const language = ruleName.split("-")[1]! as keyof typeof emitters;
+  const emitterName = emitters[language];
   const documentation = createManagementRuleDocument(
     emitterName,
     optionName,
     expectedOptionValue,
     exampleValue,
+    extraExplanation,
   );
 
   const ruleInfo: RuleInfo = {
@@ -105,9 +122,20 @@ export function createManagementClientRule(
     documentation,
     functions: {
       messages: () => createRuleMessages(defaultMessageId, documentation),
-      condition: (tspconfig, context) => isManagementForTsEmitter(tspconfig, context),
+      condition: (tspconfig, context) => {
+        const isManagement = isManagementSDK(tspconfig, context, emitterName);
+        if (!isManagement) return false;
+
+        if (emitterName === emitters.ts) {
+          const isModularLibrary = tspconfig.options?.[emitters.ts]?.isModularLibrary as
+            | boolean
+            | undefined;
+          return isModularLibrary === undefined || isModularLibrary === true;
+        }
+        return true;
+      },
       validation: (tspconfig, context, node) => {
-        let option: any = tspconfig.options?.[emitters.ts];
+        let option: any = tspconfig.options?.[emitterName];
         for (const segment of optionName.split(".")) {
           if (segment in option) option = option[segment];
         }

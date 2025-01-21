@@ -17,7 +17,7 @@ interface Case {
 const managementTspconfigPath = "contosowidgetmanager/Contoso.Management/tspconfig.yaml";
 const rulePath = "../../src/rules/tspconfig-validation-rules.js";
 
-const managementGenerateMetadataTestCases = generateManagementClientTestCases(
+const tsManagementGenerateMetadataTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-generate-metadata-true",
@@ -27,7 +27,7 @@ const managementGenerateMetadataTestCases = generateManagementClientTestCases(
   false,
 );
 
-const managementHierarchyClientTestCases = generateManagementClientTestCases(
+const tsManagementHierarchyClientTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-hierarchy-client-false",
@@ -37,7 +37,7 @@ const managementHierarchyClientTestCases = generateManagementClientTestCases(
   true,
 );
 
-const managementExperimentalExtensibleEnumsTestCases = generateManagementClientTestCases(
+const tsManagementExperimentalExtensibleEnumsTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-experimental-extensible-enums-true",
@@ -47,7 +47,7 @@ const managementExperimentalExtensibleEnumsTestCases = generateManagementClientT
   false,
 );
 
-const managementEnableOperationGroupTestCases = generateManagementClientTestCases(
+const tsManagementEnableOperationGroupTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-enable-operation-group-true",
@@ -57,7 +57,7 @@ const managementEnableOperationGroupTestCases = generateManagementClientTestCase
   false,
 );
 
-const managementPackageDirTestCases = generateManagementClientTestCases(
+const tsManagementPackageDirTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-package-dir-match-pattern",
@@ -67,7 +67,7 @@ const managementPackageDirTestCases = generateManagementClientTestCases(
   "aaa-bbb",
 );
 
-const managementPackageNameTestCases = generateManagementClientTestCases(
+const tsManagementPackageNameTestCases = generateManagementClientTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-package-name-match-pattern",
@@ -75,6 +75,86 @@ const managementPackageNameTestCases = generateManagementClientTestCases(
   "packageDetails.name",
   "@azure/arm-aaa-bbb",
   "@azure/aaa-bbb",
+);
+
+const goManagementServiceDirTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-service-dir-match-pattern",
+  managementTspconfigPath,
+  "service-dir",
+  "sdk/resourcemanager/aaa",
+  "sdk/manager/aaa",
+);
+
+const goManagementPackageDirTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-package-dir-match-pattern",
+  managementTspconfigPath,
+  "package-dir",
+  "armaaa",
+  "aaa",
+);
+
+const goManagementModuleTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-module-equal-string",
+  managementTspconfigPath,
+  "module",
+  "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}",
+  "github.com/Azure/azure-sdk-for-java/{service-dir}/{package-dir}",
+);
+
+const goManagementFixConstStutteringTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-fix-const-stuttering-true",
+  managementTspconfigPath,
+  "fix-const-stuttering",
+  true,
+  false,
+);
+
+const goManagementGenerateExamplesTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-generate-examples-true",
+  managementTspconfigPath,
+  "generate-examples",
+  true,
+  false,
+);
+
+const goManagementGenerateFakesTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-generate-fakes-true",
+  managementTspconfigPath,
+  "generate-fakes",
+  true,
+  false,
+);
+
+const goManagementHeadAsBooleanTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-head-as-boolean-true",
+  managementTspconfigPath,
+  "head-as-boolean",
+  true,
+  false,
+);
+
+const goManagementInjectSpansTestCases = generateManagementClientTestCases(
+  emitters.go,
+  rulePath,
+  "tspconfig-go-mgmt-inject-spans-true",
+  managementTspconfigPath,
+  "inject-spans",
+  true,
+  false,
 );
 
 function generateManagementClientTestCases(
@@ -125,12 +205,22 @@ function generateManagementClientTestCases(
 
 describe("Tspconfig emitter options validation", () => {
   it.each([
-    ...managementGenerateMetadataTestCases,
-    ...managementHierarchyClientTestCases,
-    ...managementExperimentalExtensibleEnumsTestCases,
-    ...managementEnableOperationGroupTestCases,
-    ...managementPackageDirTestCases,
-    ...managementPackageNameTestCases,
+    // ts
+    ...tsManagementGenerateMetadataTestCases,
+    ...tsManagementHierarchyClientTestCases,
+    ...tsManagementExperimentalExtensibleEnumsTestCases,
+    ...tsManagementEnableOperationGroupTestCases,
+    ...tsManagementPackageDirTestCases,
+    ...tsManagementPackageNameTestCases,
+    // go
+    ...goManagementServiceDirTestCases,
+    ...goManagementPackageDirTestCases,
+    ...goManagementModuleTestCases,
+    ...goManagementFixConstStutteringTestCases,
+    ...goManagementGenerateExamplesTestCases,
+    ...goManagementGenerateFakesTestCases,
+    ...goManagementHeadAsBooleanTestCases,
+    ...goManagementInjectSpansTestCases,
   ])("$ruleName - $description", async (c: Case) => {
     const ruleTester = new RuleTester({
       languageOptions: {
