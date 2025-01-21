@@ -24,12 +24,12 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-2022]
         node-version: [18, 22]
         exclude:
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             node-version: 22
-          - os: windows-latest
+          - os: windows-2022
             node-version: 18
 
     runs-on: ${{ matrix.os }}
@@ -63,7 +63,7 @@ jobs:
       - run: npm run prettier
         if: inputs.prettier == true
         shell: pwsh
-        working-directory: ./eng/tools/${{ inputs.package }}        
+        working-directory: ./eng/tools/${{ inputs.package }}
 
       - run: npm run test:ci
         shell: pwsh
