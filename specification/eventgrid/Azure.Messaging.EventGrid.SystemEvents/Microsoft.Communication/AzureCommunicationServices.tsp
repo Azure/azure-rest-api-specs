@@ -1197,6 +1197,9 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** The message content */
   content?: string;
 
+  /** CPM Internal Message ID Format will Guid as string.  */
+  messageId?: string;
+
   /** The message channel type */
   channelType: AcsMessageChannelKind;
 
@@ -1210,10 +1213,10 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   reaction?: AcsMessageReactionContent;
 
   /** The received message context */
-  context: AcsMessageContext;
+  context?: AcsMessageContext;
 
   /** The received message button content */
-  button: AcsMessageButtonContent;
+  button?: AcsMessageButtonContent;
 
   /** The received message interactive content */
   interactive?: AcsMessageInteractiveContent;
@@ -1222,10 +1225,10 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 /** Message Media Content */
 model AcsMessageMediaContent {
   /** The MIME type of the file this media represents */
-  mimeType?: string;
+  mimeType: string;
 
   /** The media identifier */
-  id?: string;
+  id: string;
 
   /** The filename of the underlying media file as specified when uploaded */
   fileName?: string;
@@ -1243,7 +1246,7 @@ model AcsMessageReactionContent {
   messageId: string;
 
   /** Unicode escape sequence of the emoji. */
-  emoji: string;
+  emoji?: string;
 }
 
 /** Message Context */
@@ -1271,10 +1274,10 @@ model AcsMessageInteractiveContent {
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */
-  buttonReply: AcsMessageInteractiveButtonReplyContent;
+  buttonReply?: AcsMessageInteractiveButtonReplyContent;
 
   /** The Message Sent when a customer selects an item from a list */
-  listReply: AcsMessageInteractiveListReplyContent;
+  listReply?: AcsMessageInteractiveListReplyContent;
 }
 
 /** Message Interactive button reply content for a user to business message */
@@ -1301,17 +1304,17 @@ model AcsMessageInteractiveListReplyContent {
 /** Schema of common properties of all chat thread events */
 model AcsMessageEventData {
   /** The message sender */
-  from?: string;
+  from: string;
 
   /** The message recipient */
-  to?: string;
+  to: string;
 
   /** The time message was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   receivedTimeStamp: utcDateTime;
 
   /** The channel event error */
-  error: AcsMessageChannelEventError;
+  error?: AcsMessageChannelEventError;
 }
 
 /** Message Channel Event Error */
