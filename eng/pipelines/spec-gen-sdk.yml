@@ -19,17 +19,144 @@ parameters:
   - name: SkipPullRequestCreation
     type: boolean
     default: false
-    
-trigger: none
-pr: none
 
-extends:
-  template: /eng/common/pipelines/templates/jobs/archetype-spec-gen-sdk.yml
-  parameters:
-    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
-    SdkRepoUrl: $(SdkRepoUrl)
-    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
-    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
-    ConfigType: ${{ parameters.ConfigType }}
-    ConfigPath: ${{ parameters.ConfigPath }}
-    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
+trigger:
+  branches:
+    include:
+      - user/raych1/support-spec-pr
+pr:
+  branches:
+    include:
+      - user/raych1/support-spec-pr
+
+jobs:
+- job:
+  displayName: 'SDK Generation'
+
+  variables:
+    - template: /eng/pipelines/templates/variables/image.yml
+    - name: NodeVersion
+      value: '22.13.x'
+    - name: PythonVersion
+      value: '3.13'
+    - name: SpecGenSdkVersion
+      value: 'latest'
+    - name: SdkArtifactName
+      value: SDK_Artifact
+    - name: IntegrationSdkRepoOwner
+      value: ''
+    - name: IntegrationSdkRepoName
+      value: ''
+
+  pool:
+    name: $(LINUXPOOL)
+    vmImage: $(LINUXVMIMAGE)
+
+  steps:
+    - powershell: |
+        $repoParts = "$(Build.Repository.Name)" -split '/'
+        $specRepoOwner = $repoParts[0]
+        $specRepoName = $repoParts[1]
+        Write-Host "##vso[task.setvariable variable=SpecRepoOwner]$specRepoOwner"
+        Write-Host "##vso[task.setvariable variable=SpecRepoName]$specRepoName"
+        Write-Host "SpecRepoOwner variable set to: $specRepoOwner"
+        Write-Host "SpecRepoName variable set to: $specRepoName"
+        Write-Host "SdkRepoOwner from pipeline UI: $(SdkRepoOwner)"
+      displayName: "Extract repository info"
+
+    - checkout: self
+      path: '$(SpecRepoName)'
+
+    - pwsh: |
+        # Define the path to the JSON file
+        $configPath = "$(Build.SourcesDirectory)/specificationRepositoryConfiguration.json"
+        $jsonContent = Get-Content -Raw -Path $configPath
+        $configJson = $jsonContent | ConvertFrom-Json
+
+        # Get the 'sdkRepository' settings for the specified SDK repository
+        if ('$(SpecRepoName)' -eq 'azure-rest-api-specs-pr') {
+          $sdkRepositoryMappings = $configJson.'overrides'.'Azure/azure-rest-api-specs-pr'.sdkRepositoryMappings
+        }
+        else {
+          $sdkRepositoryMappings = $configJson.sdkRepositoryMappings
+        }
+        if (-not $sdkRepositoryMappings) {
+          Write-Host "##vso[task.logissue type=error]No sdkRepositoryMappings found in the specificationRepositoryConfiguration.json.`
+            Request help in API Spec Review Teams Channel at `
+            https://aka.ms/azsdk/support/specreview-channel"
+          exit 1
+        }
+        Write-Host "SdkRepoName from pipeline UI: $(SdkRepoName)"
+        $mainRepository = $sdkRepositoryMappings.'$(SdkRepoName)'.mainRepository
+        if (-not [string]::IsNullOrEmpty($mainRepository)) {
+          # Split the value into repo owner and repo name
+          $repoInfo = $mainRepository -split '/'
+          $sdkRepoOwner = $repoInfo[0]
+          $sdkRepoName = $repoInfo[1]
+          Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
+          Write-Host "##vso[task.setvariable variable=SdkRepoName]$sdkRepoName"
+          Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
+          Write-Host "SdkRepoName variable set to: $sdkRepoName"
+        } else {
+          Write-Host "##vso[task.logissue type=error]mainRepository isn't set for '$(SdkRepoName)' in the specificationRepositoryConfiguration.json.`
+            Request help in API Spec Review Teams Channel at `
+            https://aka.ms/azsdk/support/specreview-channel"
+          exit 1
+        }
+
+        $integrationRepository = $sdkRepositoryMappings.'$(SdkRepoName)'.integrationRepository
+        if (-not [string]::IsNullOrEmpty($integrationRepository)) {
+          $repoInfo = $integrationRepository -split '/'
+          $integrationSdkRepoOwner = $repoInfo[0]
+          $integrationSdkRepoName = $repoInfo[1]
+          Write-Host "##vso[task.setvariable variable=IntegrationSdkRepoOwner]$integrationSdkRepoOwner"
+          Write-Host "IntegrationSdkRepoOwner variable set to: $integrationSdkRepoOwner"
+          Write-Host "##vso[task.setvariable variable=IntegrationSdkRepoName]$integrationSdkRepoName"
+          Write-Host "IntegrationSdkRepoName variable set to: $integrationSdkRepoName"
+        } else {
+          Write-Host "Integration repository is null or empty."
+        }
+      condition: eq(variables['Build.Reason'], 'PullRequest')
+      displayName: 'Load configuration for spec-gen-sdk'
+
+    - template: /eng/common/pipelines/templates/steps/generate-sdk.yml
+      parameters:
+        SpecRepoOwner: $(SpecRepoOwner)
+        SpecRepoName: $(SpecRepoName)
+        SdkRepoOwner: $(SdkRepoOwner)
+        SdkRepoName: $(SdkRepoName)
+        IntegrationSdkRepoOwner: $(IntegrationSdkRepoOwner)
+        IntegrationSdkRepoName: $(IntegrationSdkRepoName)
+        SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
+        SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+        ConfigType: ${{ parameters.ConfigType }}
+        ConfigPath: ${{ parameters.ConfigPath }}
+        SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
+
+    - task: PowerShell@2
+      displayName: Add label to the spec PR
+      condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
+      inputs:
+        pwsh: true
+        workingDirectory: $(Build.SourcesDirectory)
+        filePath: $(Build.SourcesDirectory)/eng/common/scripts/Add-IssueLabels.ps1
+        arguments: >
+          -RepoOwner $(SpecRepoOwner)
+          -RepoName $(SpecRepoName)
+          -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+          -Labels $(BreakingChangeLabel)
+          -AuthToken "$(azuresdk-github-pat)"
+
+    - task: PowerShell@2
+      displayName: Remove label from the spec PR
+      condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
+      inputs:
+        pwsh: true
+        workingDirectory: $(Build.SourcesDirectory)
+        filePath: $(Build.SourcesDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
+        arguments: >
+          -RepoOwner $(SpecRepoOwner)
+          -RepoName $(SpecRepoName)
+          -IssueNumber "$(System.PullRequest.PullRequestNumber)"
+          -LabelName $(BreakingChangeLabel)
+          -AuthToken "$(azuresdk-github-pat)"
