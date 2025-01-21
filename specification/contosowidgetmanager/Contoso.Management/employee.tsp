@@ -17,7 +17,7 @@ model Employee is TrackedResource<EmployeeProperties> {
 
 /** Employee properties */
 model EmployeeProperties {
-  /** Age of employee */
+  /** Age of employee along with test that should show up in documentation. */
   age?: int32;
 
   /** City of employee */
