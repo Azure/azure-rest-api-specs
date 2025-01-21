@@ -31,6 +31,17 @@ batch:
   - tag: package-2024-04-01-preview
   - tag: package-2024-08-01-preview
   - tag: package-2024-10-01-preview
+  - tag: package-2025-01-01-preview
+```
+
+### Tag: package-2025-01-01-preview and ruby
+
+These settings apply only when `--tag=package-2025-01-01-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2025-01-01-preview' && $(ruby)
+namespace: "Azure::Signalr::Mgmt::V2025_01_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_signalr/lib
 ```
 
 ### Tag: package-2024-10-01-preview and ruby
@@ -40,7 +51,8 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2024-10-01-preview' && $(ruby)
 namespace: "Azure::Signalr::Mgmt::V2024_10_01_preview"
-output-f
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_signalr/lib
+```
 
 ### Tag: package-2024-08-01-preview and ruby
 
