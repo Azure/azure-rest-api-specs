@@ -325,13 +325,13 @@ union ReasoningEffortValue {
   string,
 
   /** The reasoning effort is low. */
-  "low";
+  "low",
 
   /** The reasoning effort is medium. */
-  "medium";
+  "medium",
 
   /** The reasoning effort is high. */
-  "high";
+  "high",
 }
 
 @doc("""
