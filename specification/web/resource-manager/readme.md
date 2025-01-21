@@ -106,8 +106,6 @@ input-file:
   - Microsoft.Web/stable/2024-04-01/AppServicePlans.json
   - Microsoft.Web/stable/2024-04-01/Certificates.json
   - Microsoft.Web/stable/2024-04-01/CommonDefinitions.json
-  - Microsoft.Web/stable/2024-04-01/ContainerApps.json
-  - Microsoft.Web/stable/2024-04-01/ContainerAppsRevisions.json
   - Microsoft.Web/stable/2024-04-01/DeletedWebApps.json
   - Microsoft.Web/stable/2024-04-01/Diagnostics.json
   - Microsoft.Web/stable/2024-04-01/Global.json
