@@ -424,6 +424,42 @@
         }
       }
     },
+    "/listSessions": {
+      "get": {
+        "operationId": "ListSessions_Get",
+        "description": "List the sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSessions_Get": {
+            "$ref": "./examples/ListSessions_Get.json"
+          }
+        }
+      }
+    },
     "/metadata": {
       "get": {
         "operationId": "SessionPoolMetadata_Get",
@@ -529,42 +565,6 @@
         "x-ms-examples": {
           "SessionManagement_Delete": {
             "$ref": "./examples/SessionManagement_Delete.json"
-          }
-        }
-      }
-    },
-    "/sessions": {
-      "get": {
-        "operationId": "ListSessions_Get",
-        "description": "List the sessions.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SessionsListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListSessions_Get": {
-            "$ref": "./examples/ListSessions_Get.json"
           }
         }
       }
@@ -831,6 +831,10 @@
       "type": "object",
       "description": "The session resource.",
       "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the session."
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -852,6 +856,7 @@
         }
       },
       "required": [
+        "identifier",
         "createdAt",
         "lastAccessedAt",
         "expireAt",
@@ -1065,32 +1070,13 @@
           "type": "array",
           "description": "The list of sessions.",
           "items": {
-            "$ref": "#/definitions/SessionsListResponseEntry"
+            "$ref": "#/definitions/Session"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "sessions"
-      ]
-    },
-    "SessionsListResponseEntry": {
-      "type": "object",
-      "description": "The sessions list response entry.",
-      "properties": {
-        "identifier": {
-          "type": "string",
-          "description": "The identifier of the session."
-        },
-        "expireAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the session will expire."
-        }
-      },
-      "required": [
-        "identifier",
-        "expireAt"
       ]
     }
   },

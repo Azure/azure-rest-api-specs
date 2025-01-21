@@ -114,7 +114,7 @@ interface SessionManagement {
   >;
 }
 
-@route("/sessions")
+@route("/listSessions")
 interface ListSessions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("List the sessions.")
