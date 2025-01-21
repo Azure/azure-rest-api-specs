@@ -206,7 +206,6 @@ model ChaosTargetFilter {
 /**
  * Model that represents the Customer Managed Storage for an Experiment.
  */
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model CustomerDataStorageProperties {
   /**
    * ARM Resource ID of the Storage account to use for Customer Data storage.

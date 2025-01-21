@@ -88,16 +88,16 @@ model CapabilityTypeProperties {
   azureRbacDataActions?: string[];
 
   /**
-   * Data plane actions necessary to execute capability type.
+   * Required Azure Role Definition Ids to execute capability type.
    */
   @visibility("read")
+  @added(Microsoft.Chaos.Versions.v2025_01_01)
   requiredAzureRoleDefinitionIds?: string[];
 
   /**
    * Runtime properties of this Capability Type.
    */
   @visibility("read")
-  @added(Microsoft.Chaos.Versions.v2025_01_01)
   runtimeProperties?: CapabilityTypePropertiesRuntimeProperties;
 }
 

@@ -2487,12 +2487,20 @@
           },
           "readOnly": true
         },
-        "requiredAzureRoleDefinitionIds": {
-          "type": "array",
-          "description": "Data plane actions necessary to execute capability type.",
-          "items": {
-            "type": "string"
-          },
+        "runtimeProperties": {
+          "$ref": "#/definitions/CapabilityTypePropertiesRuntimeProperties",
+          "description": "Runtime properties of this Capability Type.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapabilityTypePropertiesRuntimeProperties": {
+      "type": "object",
+      "description": "Runtime properties of this Capability Type.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "String of the kind of the resource's action type (continuous or discrete).",
           "readOnly": true
         }
       }
