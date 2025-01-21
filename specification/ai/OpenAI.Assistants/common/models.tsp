@@ -126,8 +126,8 @@ union AssistantsApiResponseFormatMode {
   /** Default value. Let the model handle the return format. */
   "auto",
 
-  @removed(ServiceApiVersions.v2024_12_01_preview)
   /** Setting the value to `none`, will result in a 400 Bad request. */
+  @removed(ServiceApiVersions.v2024_12_01_preview)
   "none",
 }
 
@@ -155,7 +155,8 @@ model AssistantsApiResponseFormatText extends AssistantsApiResponseFormat {
  * An object describing expected output of the model as a JSON object.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
-model AssistantsApiResponseFormatJsonObject extends AssistantsApiResponseFormat {
+model AssistantsApiResponseFormatJsonObject
+  extends AssistantsApiResponseFormat {
   /** The type of response format being defined: `json_object` */
   type: ApiResponseFormat.jsonObject;
 }
@@ -164,7 +165,8 @@ model AssistantsApiResponseFormatJsonObject extends AssistantsApiResponseFormat 
  * An object describing expected output of the model to match a JSON schema.
  */
 @added(ServiceApiVersions.v2024_12_01_preview)
-model AssistantsApiResponseFormatJsonSchema extends AssistantsApiResponseFormat {
+model AssistantsApiResponseFormatJsonSchema
+  extends AssistantsApiResponseFormat {
   /** The type of response format being defined: `json_schema` */
   type: ApiResponseFormat.jsonSchema;
 
@@ -185,9 +187,8 @@ model AssistantsApiResponseFormatJsonSchema extends AssistantsApiResponseFormat 
      * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
      */
     strict?: boolean;
-  }
+  };
 }
-
 
 /** Possible API response formats. */
 @added(ServiceApiVersions.v2024_05_01_preview)
