@@ -2029,6 +2029,7 @@
   },
   "definitions": {
     "AnalyzeRequest": {
+      "type": "object",
       "properties": {
         "text": {
           "type": "string",
@@ -2069,6 +2070,7 @@
       "description": "Specifies some text and analysis components used to break that text into tokens."
     },
     "AnalyzeResult": {
+      "type": "object",
       "properties": {
         "tokens": {
           "type": "array",
@@ -2084,6 +2086,7 @@
       "description": "The result of testing an analyzer on text."
     },
     "AnalyzedTokenInfo": {
+      "type": "object",
       "properties": {
         "token": {
           "type": "string",
@@ -2851,7 +2854,7 @@
           {
             "value": "cjk_width",
             "name": "CjkWidth",
-            "description": "Normalizes CJK width differences. Folds full-width ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
           },
           {
             "value": "classic",
@@ -3243,6 +3246,7 @@
       "description": "Defines the data type of a field in a search index."
     },
     "LexicalAnalyzer": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -3264,6 +3268,7 @@
       "description": "Base type for analyzers."
     },
     "CustomAnalyzer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomAnalyzer",
       "allOf": [
         {
@@ -3298,6 +3303,7 @@
       "description": "Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer."
     },
     "PatternAnalyzer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternAnalyzer",
       "allOf": [
         {
@@ -3334,6 +3340,7 @@
       }
     },
     "LuceneStandardAnalyzer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAnalyzer",
       "allOf": [
         {
@@ -3362,6 +3369,7 @@
       }
     },
     "StopAnalyzer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StopAnalyzer",
       "allOf": [
         {
@@ -3436,6 +3444,7 @@
       }
     },
     "LexicalTokenizer": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -3460,6 +3469,7 @@
       }
     },
     "ClassicTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ClassicTokenizer",
       "allOf": [
         {
@@ -3523,6 +3533,7 @@
       "description": "Represents classes of characters on which a token filter can operate."
     },
     "EdgeNGramTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenizer",
       "allOf": [
         {
@@ -3559,6 +3570,7 @@
       }
     },
     "KeywordTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizer",
       "allOf": [
         {
@@ -3580,6 +3592,7 @@
       "x-az-search-deprecated": true
     },
     "KeywordTokenizerV2": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2",
       "allOf": [
         {
@@ -3865,6 +3878,7 @@
       "description": "Lists the languages supported by the Microsoft language tokenizer."
     },
     "MicrosoftLanguageTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer",
       "allOf": [
         {
@@ -4174,6 +4188,7 @@
       "description": "Lists the languages supported by the Microsoft language stemming tokenizer."
     },
     "MicrosoftLanguageStemmingTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer",
       "allOf": [
         {
@@ -4201,6 +4216,7 @@
       "description": "Divides text using language-specific rules and reduces words to their base forms."
     },
     "NGramTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenizer",
       "allOf": [
         {
@@ -4237,6 +4253,7 @@
       }
     },
     "PathHierarchyTokenizerV2": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizerV2",
       "allOf": [
         {
@@ -4283,6 +4300,7 @@
       }
     },
     "PatternTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternTokenizer",
       "allOf": [
         {
@@ -4312,6 +4330,7 @@
       }
     },
     "LuceneStandardTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizer",
       "allOf": [
         {
@@ -4333,6 +4352,7 @@
       "x-az-search-deprecated": true
     },
     "LuceneStandardTokenizerV2": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizerV2",
       "allOf": [
         {
@@ -4354,6 +4374,7 @@
       }
     },
     "UaxUrlEmailTokenizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.UaxUrlEmailTokenizer",
       "allOf": [
         {
@@ -4375,6 +4396,7 @@
       }
     },
     "TokenFilter": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -4399,6 +4421,7 @@
       }
     },
     "AsciiFoldingTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
       "allOf": [
         {
@@ -4454,6 +4477,7 @@
       "description": "Scripts that can be ignored by CjkBigramTokenFilter."
     },
     "CjkBigramTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CjkBigramTokenFilter",
       "allOf": [
         {
@@ -4481,6 +4505,7 @@
       }
     },
     "CommonGramTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter",
       "allOf": [
         {
@@ -4516,6 +4541,7 @@
       }
     },
     "DictionaryDecompounderTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter",
       "allOf": [
         {
@@ -4590,6 +4616,7 @@
       "description": "Specifies which side of the input an n-gram should be generated from."
     },
     "EdgeNGramTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilter",
       "allOf": [
         {
@@ -4622,6 +4649,7 @@
       "x-az-search-deprecated": true
     },
     "EdgeNGramTokenFilterV2": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2",
       "allOf": [
         {
@@ -4655,6 +4683,7 @@
       }
     },
     "ElisionTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ElisionTokenFilter",
       "allOf": [
         {
@@ -4676,6 +4705,7 @@
       }
     },
     "KeepTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeepTokenFilter",
       "allOf": [
         {
@@ -4706,6 +4736,7 @@
       }
     },
     "KeywordMarkerTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordMarkerTokenFilter",
       "allOf": [
         {
@@ -4735,6 +4766,7 @@
       }
     },
     "LengthTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.LengthTokenFilter",
       "allOf": [
         {
@@ -4765,6 +4797,7 @@
       }
     },
     "LimitTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.LimitTokenFilter",
       "allOf": [
         {
@@ -4790,6 +4823,7 @@
       }
     },
     "NGramTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilter",
       "allOf": [
         {
@@ -4817,6 +4851,7 @@
       "x-az-search-deprecated": true
     },
     "NGramTokenFilterV2": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilterV2",
       "allOf": [
         {
@@ -4845,6 +4880,7 @@
       }
     },
     "PatternCaptureTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternCaptureTokenFilter",
       "allOf": [
         {
@@ -4874,6 +4910,7 @@
       }
     },
     "PatternReplaceTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternReplaceTokenFilter",
       "allOf": [
         {
@@ -4978,6 +5015,7 @@
       "description": "Identifies the type of phonetic encoder to use with a PhoneticTokenFilter."
     },
     "PhoneticTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PhoneticTokenFilter",
       "allOf": [
         {
@@ -5003,6 +5041,7 @@
       }
     },
     "ShingleTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ShingleTokenFilter",
       "allOf": [
         {
@@ -5195,6 +5234,7 @@
       "description": "The language to use for a Snowball token filter."
     },
     "SnowballTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SnowballTokenFilter",
       "allOf": [
         {
@@ -5552,6 +5592,7 @@
       "description": "The language to use for a stemmer token filter."
     },
     "StemmerTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StemmerTokenFilter",
       "allOf": [
         {
@@ -5573,6 +5614,7 @@
       }
     },
     "StemmerOverrideTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StemmerOverrideTokenFilter",
       "allOf": [
         {
@@ -5795,6 +5837,7 @@
       "description": "Identifies a predefined list of language-specific stopwords."
     },
     "StopwordsTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StopwordsTokenFilter",
       "allOf": [
         {
@@ -5832,6 +5875,7 @@
       }
     },
     "SynonymTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SynonymTokenFilter",
       "allOf": [
         {
@@ -5866,6 +5910,7 @@
       }
     },
     "TruncateTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.TruncateTokenFilter",
       "allOf": [
         {
@@ -5887,6 +5932,7 @@
       }
     },
     "UniqueTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.UniqueTokenFilter",
       "allOf": [
         {
@@ -5906,6 +5952,7 @@
       }
     },
     "WordDelimiterTokenFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.WordDelimiterTokenFilter",
       "allOf": [
         {
@@ -5972,6 +6019,7 @@
       }
     },
     "CharFilter": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -5996,6 +6044,7 @@
       }
     },
     "MappingCharFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MappingCharFilter",
       "allOf": [
         {
@@ -6020,6 +6069,7 @@
       }
     },
     "PatternReplaceCharFilter": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternReplaceCharFilter",
       "allOf": [
         {
@@ -6046,6 +6096,7 @@
       }
     },
     "Similarity": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -6061,6 +6112,7 @@
       }
     },
     "ClassicSimilarity": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ClassicSimilarity",
       "allOf": [
         {
@@ -6070,6 +6122,7 @@
       "description": "Legacy similarity algorithm which uses the Lucene TFIDFSimilarity implementation of TF-IDF. This variation of TF-IDF introduces static document length normalization as well as coordinating factors that penalize documents that only partially match the searched queries."
     },
     "BM25Similarity": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.BM25Similarity",
       "allOf": [
         {
@@ -6187,8 +6240,8 @@
       "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
-      "x-ms-client-name": "HnswAlgorithmConfiguration",
       "type": "object",
+      "x-ms-client-name": "HnswAlgorithmConfiguration",
       "x-ms-discriminator-value": "hnsw",
       "allOf": [
         {
@@ -6379,8 +6432,8 @@
       "description": "Contains configuration options specific to the compression method used during indexing or querying."
     },
     "RescoringOptions": {
-      "x-ms-client-name": "RescoringOptions",
       "type": "object",
+      "x-ms-client-name": "RescoringOptions",
       "properties": {
         "enableRescoring": {
           "type": "boolean",
@@ -6718,7 +6771,7 @@
           "description": "Specifies the properties of the AML vectorizer."
         }
       },
-      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string."
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog for generating the vector embedding of a query string."
     },
     "AMLParameters": {
       "type": "object",
@@ -6754,7 +6807,7 @@
         },
         "modelName": {
           "$ref": "#/definitions/AIStudioModelCatalogName",
-          "description": "The name of the embedding model from the Azure AI Foundry Catalog that is deployed at the provided endpoint."
+          "description": "The name of the embedding model from the Azure AI Studio Catalog that is deployed at the provided endpoint."
         }
       },
       "required": [
@@ -6802,7 +6855,7 @@
           }
         ]
       },
-      "description": "The name of the embedding model from the Azure AI Foundry Catalog that will be called."
+      "description": "The name of the embedding model from the Azure AI Studio Catalog that will be called."
     },
     "VectorSearchVectorizerKind": {
       "type": "string",
@@ -6834,13 +6887,14 @@
           {
             "value": "aml",
             "name": "AML",
-            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog at query time."
+            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog at query time."
           }
         ]
       },
       "description": "The vectorization method to be used during query time."
     },
     "DataSourceCredentials": {
+      "type": "object",
       "properties": {
         "connectionString": {
           "externalDocs": {
@@ -6853,6 +6907,7 @@
       "description": "Represents credentials that can be used to connect to a datasource."
     },
     "SearchIndexerDataContainer": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -6869,6 +6924,7 @@
       "description": "Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed."
     },
     "SearchIndexerDataIdentity": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -6882,6 +6938,7 @@
       "description": "Abstract base type for data identities."
     },
     "SearchIndexerDataNoneIdentity": {
+      "type": "object",
       "description": "Clears the identity property of a datasource.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataNoneIdentity",
       "allOf": [
@@ -6891,6 +6948,7 @@
       ]
     },
     "SearchIndexerDataUserAssignedIdentity": {
+      "type": "object",
       "description": "Specifies the identity for a datasource to use.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
       "allOf": [
@@ -6909,6 +6967,7 @@
       ]
     },
     "DataChangeDetectionPolicy": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -6922,6 +6981,7 @@
       "description": "Base type for data change detection policies."
     },
     "HighWaterMarkChangeDetectionPolicy": {
+      "type": "object",
       "description": "Defines a data change detection policy that captures changes based on the value of a high water mark column.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
       "allOf": [
@@ -6940,6 +7000,7 @@
       ]
     },
     "SqlIntegratedChangeTrackingPolicy": {
+      "type": "object",
       "description": "Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy",
       "allOf": [
@@ -6949,6 +7010,7 @@
       ]
     },
     "DataDeletionDetectionPolicy": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -6962,6 +7024,7 @@
       "description": "Base type for data deletion detection policies."
     },
     "SoftDeleteColumnDeletionDetectionPolicy": {
+      "type": "object",
       "description": "Defines a data deletion detection policy that implements a soft-deletion strategy. It determines whether an item should be deleted based on the value of a designated 'soft delete' column.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
       "allOf": [
@@ -6981,6 +7044,7 @@
       }
     },
     "NativeBlobSoftDeleteDeletionDetectionPolicy": {
+      "type": "object",
       "description": "Defines a data deletion detection policy utilizing Azure Blob Storage's native soft delete feature for deletion detection.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy",
       "allOf": [
@@ -7044,6 +7108,7 @@
       "description": "Defines the type of a datasource."
     },
     "SearchIndexerDataSource": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -7106,6 +7171,7 @@
       "description": "Represents a datasource definition, which can be used to configure an indexer."
     },
     "ListDataSourcesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "DataSources",
@@ -7123,6 +7189,7 @@
       "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources."
     },
     "IndexingSchedule": {
+      "type": "object",
       "properties": {
         "interval": {
           "type": "string",
@@ -7141,6 +7208,7 @@
       "description": "Represents a schedule for indexer execution."
     },
     "IndexingParameters": {
+      "type": "object",
       "properties": {
         "batchSize": {
           "type": "integer",
@@ -7498,6 +7566,7 @@
       "description": "Specifies the environment in which the indexer should execute."
     },
     "FieldMappingFunction": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -7519,6 +7588,7 @@
       }
     },
     "FieldMapping": {
+      "type": "object",
       "properties": {
         "sourceFieldName": {
           "type": "string",
@@ -7543,6 +7613,7 @@
       }
     },
     "SearchIndexer": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -7637,6 +7708,7 @@
       "description": "Represents an indexer."
     },
     "ListIndexersResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "Indexers",
@@ -7654,6 +7726,7 @@
       "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers."
     },
     "SearchIndexerError": {
+      "type": "object",
       "properties": {
         "key": {
           "type": "string",
@@ -7695,6 +7768,7 @@
       "description": "Represents an item- or document-level indexing error."
     },
     "SearchIndexerWarning": {
+      "type": "object",
       "properties": {
         "key": {
           "type": "string",
@@ -7728,6 +7802,7 @@
       "description": "Represents an item-level warning."
     },
     "IndexerExecutionResult": {
+      "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
@@ -7852,6 +7927,7 @@
       "description": "Represents the status of an individual indexer execution."
     },
     "SearchIndexerStatus": {
+      "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerStatus",
@@ -8006,6 +8082,7 @@
       "description": "Represents the mode the indexer is executing in."
     },
     "SearchIndexerLimits": {
+      "type": "object",
       "properties": {
         "maxRunTime": {
           "type": "string",
@@ -8028,6 +8105,7 @@
       }
     },
     "SearchField": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -8152,6 +8230,7 @@
       "description": "Represents a field in an index definition, which describes the name, data type, and search behavior of a field."
     },
     "TextWeights": {
+      "type": "object",
       "properties": {
         "weights": {
           "type": "object",
@@ -8169,6 +8248,7 @@
       "description": "Defines weights on index fields for which matches should boost scoring in search queries."
     },
     "ScoringFunction": {
+      "type": "object",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -8200,6 +8280,7 @@
       "description": "Base type for functions that can modify document scores during ranking."
     },
     "DistanceScoringFunction": {
+      "type": "object",
       "x-ms-discriminator-value": "distance",
       "allOf": [
         {
@@ -8222,6 +8303,7 @@
       "description": "Defines a function that boosts scores based on distance from a geographic location."
     },
     "DistanceScoringParameters": {
+      "type": "object",
       "properties": {
         "referencePointParameter": {
           "type": "string",
@@ -8240,6 +8322,7 @@
       "description": "Provides parameter values to a distance scoring function."
     },
     "FreshnessScoringFunction": {
+      "type": "object",
       "x-ms-discriminator-value": "freshness",
       "allOf": [
         {
@@ -8262,6 +8345,7 @@
       "description": "Defines a function that boosts scores based on the value of a date-time field."
     },
     "FreshnessScoringParameters": {
+      "type": "object",
       "properties": {
         "boostingDuration": {
           "type": "string",
@@ -8275,6 +8359,7 @@
       "description": "Provides parameter values to a freshness scoring function."
     },
     "MagnitudeScoringFunction": {
+      "type": "object",
       "x-ms-discriminator-value": "magnitude",
       "allOf": [
         {
@@ -8297,6 +8382,7 @@
       "description": "Defines a function that boosts scores based on the magnitude of a numeric field."
     },
     "MagnitudeScoringParameters": {
+      "type": "object",
       "properties": {
         "boostingRangeStart": {
           "type": "number",
@@ -8321,6 +8407,7 @@
       "description": "Provides parameter values to a magnitude scoring function."
     },
     "TagScoringFunction": {
+      "type": "object",
       "x-ms-discriminator-value": "tag",
       "allOf": [
         {
@@ -8343,6 +8430,7 @@
       "description": "Defines a function that boosts scores of documents with string values matching a given list of tags."
     },
     "TagScoringParameters": {
+      "type": "object",
       "properties": {
         "tagsParameter": {
           "type": "string",
@@ -8391,6 +8479,7 @@
       "description": "Defines the function used to interpolate score boosting across a range of documents."
     },
     "ScoringProfile": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -8468,6 +8557,7 @@
       "description": "Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile."
     },
     "CorsOptions": {
+      "type": "object",
       "properties": {
         "allowedOrigins": {
           "type": "array",
@@ -8492,6 +8582,7 @@
       "description": "Defines options to control Cross-Origin Resource Sharing (CORS) for an index."
     },
     "Suggester": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -8531,6 +8622,7 @@
       "description": "Defines how the Suggest API should apply to a group of fields in the index."
     },
     "SearchIndex": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -8691,6 +8783,7 @@
       "description": "Represents an index alias, which describes a mapping from the alias name to an index. The alias name can be used in place of the index name for supported operations."
     },
     "GetIndexStatisticsResult": {
+      "type": "object",
       "properties": {
         "documentCount": {
           "type": "integer",
@@ -8721,6 +8814,7 @@
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
     "ListIndexesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "Indexes",
@@ -8756,6 +8850,7 @@
       "description": "Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases."
     },
     "SearchIndexerSkillset": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -8809,6 +8904,7 @@
       "description": "A list of skills."
     },
     "CognitiveServicesAccount": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -8826,6 +8922,7 @@
       "description": "Base type for describing any Azure AI service resource attached to a skillset."
     },
     "SearchIndexerKnowledgeStore": {
+      "type": "object",
       "properties": {
         "storageConnectionString": {
           "type": "string",
@@ -8858,6 +8955,7 @@
       "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
     },
     "SearchIndexerKnowledgeStoreProjection": {
+      "type": "object",
       "properties": {
         "tables": {
           "type": "array",
@@ -8887,6 +8985,7 @@
       "description": "Container object for various projection selectors."
     },
     "SearchIndexerKnowledgeStoreProjectionSelector": {
+      "type": "object",
       "properties": {
         "referenceKeyName": {
           "type": "string",
@@ -8915,6 +9014,7 @@
       "description": "Abstract class to share properties between concrete selectors."
     },
     "SearchIndexerKnowledgeStoreBlobProjectionSelector": {
+      "type": "object",
       "properties": {
         "storageContainer": {
           "type": "string",
@@ -8932,6 +9032,7 @@
       "description": "Abstract class to share properties between concrete selectors."
     },
     "SearchIndexerKnowledgeStoreTableProjectionSelector": {
+      "type": "object",
       "properties": {
         "tableName": {
           "type": "string",
@@ -8950,6 +9051,7 @@
       "description": "Description for what data to store in Azure Tables."
     },
     "SearchIndexerKnowledgeStoreObjectProjectionSelector": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
@@ -8958,6 +9060,7 @@
       "description": "Projection definition for what data to store in Azure Blob."
     },
     "SearchIndexerKnowledgeStoreFileProjectionSelector": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerKnowledgeStoreBlobProjectionSelector"
@@ -9063,6 +9166,7 @@
       "description": "Defines behavior of the index projections in relation to the rest of the indexer."
     },
     "DefaultCognitiveServicesAccount": {
+      "type": "object",
       "description": "An empty object that represents the default Azure AI service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
@@ -9072,6 +9176,7 @@
       ]
     },
     "CognitiveServicesAccountKey": {
+      "type": "object",
       "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
@@ -9139,6 +9244,7 @@
       ]
     },
     "SearchIndexerSkill": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -9183,6 +9289,7 @@
       "description": "Base type for skills."
     },
     "CustomEntity": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -9255,6 +9362,7 @@
       "description": "An object that contains information about the matches that were found, and related metadata."
     },
     "CustomEntityAlias": {
+      "type": "object",
       "properties": {
         "text": {
           "type": "string",
@@ -9283,6 +9391,7 @@
       "description": "A complex object that can be used to specify alternative spellings or synonyms to the root entity name."
     },
     "InputFieldMappingEntry": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -9310,6 +9419,7 @@
       "description": "Input field mapping for a skill."
     },
     "OutputFieldMappingEntry": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -9329,6 +9439,7 @@
       "description": "Output field mapping for a skill."
     },
     "ConditionalSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill",
       "allOf": [
         {
@@ -9341,6 +9452,7 @@
       "description": "A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output."
     },
     "KeyPhraseExtractionSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
       "allOf": [
         {
@@ -9370,6 +9482,7 @@
       "description": "A skill that uses text analytics for key phrase extraction."
     },
     "OcrSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Vision.OcrSkill",
       "allOf": [
         {
@@ -9398,6 +9511,7 @@
       "description": "A skill that extracts text from image files."
     },
     "ImageAnalysisSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
       "allOf": [
         {
@@ -9432,6 +9546,7 @@
       "description": "A skill that analyzes image files. It extracts a rich set of visual features based on the image content."
     },
     "LanguageDetectionSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.LanguageDetectionSkill",
       "allOf": [
         {
@@ -9456,6 +9571,7 @@
       "description": "A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis."
     },
     "ShaperSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill",
       "allOf": [
         {
@@ -9468,6 +9584,7 @@
       "description": "A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields)."
     },
     "MergeSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.MergeSkill",
       "allOf": [
         {
@@ -9492,6 +9609,7 @@
       "description": "A skill for merging two or more strings into a single unified string, with an optional user-defined delimiter separating each component part."
     },
     "EntityRecognitionSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill",
       "allOf": [
         {
@@ -9530,6 +9648,7 @@
       "x-az-search-deprecated": true
     },
     "SentimentSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
       "allOf": [
         {
@@ -9549,6 +9668,7 @@
       "x-az-search-deprecated": true
     },
     "SentimentSkillV3": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill",
       "allOf": [
         {
@@ -9578,6 +9698,7 @@
       "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level."
     },
     "EntityLinkingSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityLinkingSkill",
       "allOf": [
         {
@@ -9610,6 +9731,7 @@
       "description": "Using the Text Analytics API, extracts linked entities from text."
     },
     "EntityRecognitionSkillV3": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill",
       "allOf": [
         {
@@ -9650,6 +9772,7 @@
       "description": "Using the Text Analytics API, extracts entities of different types from text."
     },
     "PIIDetectionSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.PIIDetectionSkill",
       "allOf": [
         {
@@ -9706,6 +9829,7 @@
       "description": "Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it."
     },
     "SplitSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
       "allOf": [
         {
@@ -9757,6 +9881,7 @@
       "description": "A skill to split a string into chunks of text."
     },
     "CustomEntityLookupSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
       "allOf": [
         {
@@ -9805,6 +9930,7 @@
       "description": "A skill looks for text from a custom, user-defined list of words and phrases."
     },
     "TextTranslationSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.TranslationSkill",
       "allOf": [
         {
@@ -9835,6 +9961,7 @@
       "description": "A skill to translate text from one language to another."
     },
     "DocumentExtractionSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
       "allOf": [
         {
@@ -9958,6 +10085,7 @@
       "description": "The depth of headers in the markdown output. Default is h6."
     },
     "WebApiSkill": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
       "allOf": [
         {
@@ -10073,6 +10201,7 @@
       "description": "The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment."
     },
     "AzureOpenAIEmbeddingSkill": {
+      "type": "object",
       "x-ms-client-name": "AzureOpenAIEmbeddingSkill",
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
       "allOf": [
@@ -10091,10 +10220,10 @@
           "description": "The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models."
         }
       },
-      "type": "object",
       "description": "Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource."
     },
     "VisionVectorizeSkill": {
+      "type": "object",
       "x-ms-client-name": "VisionVectorizeSkill",
       "x-ms-discriminator-value": "#Microsoft.Skills.Vision.VectorizeSkill",
       "allOf": [
@@ -10102,7 +10231,6 @@
           "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
-      "type": "object",
       "properties": {
         "modelVersion": {
           "type": "string",
@@ -10116,6 +10244,7 @@
       "description": "Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API."
     },
     "ListSkillsetsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "Skillsets",
@@ -12474,6 +12603,7 @@
       "description": "The language codes supported for input by ImageAnalysisSkill."
     },
     "SynonymMap": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -12529,6 +12659,7 @@
       "description": "Represents a synonym map definition."
     },
     "ListSynonymMapsResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "SynonymMaps",
@@ -12546,6 +12677,7 @@
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
     },
     "SearchResourceEncryptionKey": {
+      "type": "object",
       "properties": {
         "keyVaultKeyName": {
           "x-ms-client-name": "keyName",
@@ -12602,6 +12734,7 @@
       }
     },
     "AzureActiveDirectoryApplicationCredentials": {
+      "type": "object",
       "properties": {
         "applicationId": {
           "type": "string",
@@ -12618,6 +12751,7 @@
       "description": "Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "ServiceStatistics": {
+      "type": "object",
       "properties": {
         "counters": {
           "$ref": "#/definitions/ServiceCounters",
@@ -12635,6 +12769,7 @@
       "description": "Response from a get service statistics request. If successful, it includes service level counters and limits."
     },
     "ServiceCounters": {
+      "type": "object",
       "properties": {
         "aliasesCount": {
           "x-ms-client-name": "aliasCounter",
@@ -12696,6 +12831,7 @@
       "description": "Represents service-level resource counters and quotas."
     },
     "ServiceLimits": {
+      "type": "object",
       "properties": {
         "maxFieldsPerIndex": {
           "type": "integer",
@@ -12732,6 +12868,7 @@
       "description": "Represents various service level limits."
     },
     "ResourceCounter": {
+      "type": "object",
       "properties": {
         "usage": {
           "type": "integer",
@@ -12752,6 +12889,7 @@
       "description": "Represents a resource's usage and quota."
     },
     "SemanticSettings": {
+      "type": "object",
       "x-ms-client-name": "SemanticSearch",
       "properties": {
         "defaultConfiguration": {
@@ -12773,6 +12911,7 @@
       "description": "Defines parameters for a search index that influence semantic capabilities."
     },
     "SemanticConfiguration": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -12798,6 +12937,7 @@
       "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
+      "type": "object",
       "x-ms-client-name": "SemanticPrioritizedFields",
       "properties": {
         "titleField": {
@@ -12827,6 +12967,7 @@
       "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
     },
     "SemanticField": {
+      "type": "object",
       "properties": {
         "fieldName": {
           "type": "string",
