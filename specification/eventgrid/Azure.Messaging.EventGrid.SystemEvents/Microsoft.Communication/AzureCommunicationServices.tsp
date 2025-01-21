@@ -1197,7 +1197,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** The message content */
   content?: string;
 
-  /** CPM Internal Message ID Format will Guid as string.  */
+  /** Message ID. Format is Guid as string.  */
   messageId?: string;
 
   /** The message channel type */
