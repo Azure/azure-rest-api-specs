@@ -17032,7 +17032,11 @@
         },
         "dataGenerationType": {
           "description": "[Required] Enum to determine the type of Data Generation.",
-          "$ref": "#/definitions/DataGenerationType"
+          "$ref": "#/definitions/DataGenerationType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "promptSettings": {
           "description": "Prompt Settings.",
@@ -17052,7 +17056,7 @@
           "x-nullable": true
         }
       },
-      "additionalProperties": false
+      "discriminator": "dataGenerationType"
     },
     "DataPathAssetReference": {
       "description": "Reference to an asset via its path in a datastore.",
@@ -17713,7 +17717,7 @@
       "properties": {
         "dataGenerationDetails": {
           "description": "[Required] ",
-          "$ref": "#/definitions/LabelGeneration"
+          "$ref": "#/definitions/DataGenerationVertical"
         },
         "finetuningDetails": {
           "description": "[Required] ",
@@ -19282,16 +19286,6 @@
         "studentModel": {
           "description": "[Required] Student model for fine tuning.",
           "$ref": "#/definitions/JobInput"
-        },
-        "trainingData": {
-          "description": "Training data for fine tuning.",
-          "$ref": "#/definitions/JobInput",
-          "x-nullable": true
-        },
-        "validationData": {
-          "description": "Validation data for fine tuning.",
-          "$ref": "#/definitions/JobInput",
-          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -21758,6 +21752,19 @@
           "$ref": "#/definitions/DataGenerationVertical"
         }
       ],
+      "properties": {
+        "trainingData": {
+          "description": "Training data for fine tuning.",
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
+        },
+        "validationData": {
+          "description": "Validation data for fine tuning.",
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "LabelGeneration",
       "additionalProperties": false
     },
     "LakeHouseArtifact": {
