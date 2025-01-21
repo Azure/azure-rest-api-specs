@@ -807,17 +807,17 @@ model AnalyzeConversationAuthoringEvaluationSummary {
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
 }
 
+alias ConfusionMatrixRow = Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
+
+alias ConfusionMatrix = Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationConfusionMatrix", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrix {
-  rows: Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
-}
+model AnalyzeConversationAuthoringConfusionMatrix is ConfusionMatrix;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrixRow {
-  cells: Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
-}
+model AnalyzeConversationAuthoringConfusionMatrixRow is ConfusionMatrixRow;
 
 /**
  * Represents the evaluation result summary for the project's entities.
