@@ -242,14 +242,14 @@ model EvaluationResults {
   actualStateOnResource: string;
 
   /**
-   * Describes any deviatiobns between the recommended/customized state and the actual state.
+   * Describes any deviations between the recommended/customized state and the actual state.
    */
   @doc("Describes the deviation from the recommended state.")
   configurationDeviation: ConfigurationCheckConfigurationDeviation;
 
   /**
    * Provides actions or steps recommended to bring the resource into compliance with the
-   * recommended state/customised state.
+   * recommended state/customized state.
    */
   @doc("The mitigation steps to follow best practices.")
   @removed(Versions.v2024_11_01_preview)
@@ -264,14 +264,14 @@ model EvaluationResults {
 
   /**
    * Provides actions or steps recommended to bring the resource into compliance with the
-   * recommended state/customised state.
+   * recommended state/customized state.
    */
   @doc("The mitigation steps to follow best practices.")
   @added(Versions.v2024_11_01_preview)
   recommendation: ConfigurationCheckRecommendation;
 
   /**
-   * Specifies the type of configuration check performed, such as default or customised.
+   * Specifies the type of configuration check performed, such as default or customized.
    * This helps categorize the check for better tracking and reporting.
    */
   @doc("The type of configuration check.")
