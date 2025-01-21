@@ -3288,6 +3288,37 @@
         }
       }
     },
+    "TeradataSink": {
+      "description": "A copy activity Teradata sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "importSettings": {
+          "$ref": "#/definitions/TeradataImportCommand",
+          "description": "Teradata import settings."
+        }
+      }
+    },
+    "TeradataImportCommand": {
+      "description": "Teradata import command settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImportSettings"
+        }
+      ],
+      "properties": {
+        "additionalFormatOptions": {
+          "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
+          "description": "Additional format options for Teradata Copy Command. The format options only applies to direct copy from CSV source. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"timeFormat\": \"HHhMImSSs\" }"
+        }
+      }
+    },
     "TeradataPartitionSettings": {
       "description": "The settings that will be leveraged for teradata source partitioning.",
       "type": "object",

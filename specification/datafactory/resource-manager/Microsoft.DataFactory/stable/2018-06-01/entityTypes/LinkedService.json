@@ -2231,7 +2231,7 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Only applied for version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
@@ -2260,6 +2260,36 @@
         "password": {
           "description": "Password for authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "sslMode": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SSL mode for connection. Valid values including: “Disable”, “Allow”, “Prefer”, “Require”, “Verify-CA”, “Verify-Full”. Default value is “Verify-Full”. Type: string (or Expression with resultType string). Only applied for version 2.0."
+        },
+        "portNumber": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port numbers when connecting to server through non HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only used for V2. Only applied for version 2.0."
+        },
+        "httpsPortNumber": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port numbers when connecting to server through HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only applied for version 2.0."
+        },
+        "useDataEncryption": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "Specifies whether to encrypt all communication with the Teradata database. Allowed values are 0 or 1. This setting will be ignored for HTTPS/TLS connections. Type: integer (or Expression with resultType integer). Only applied for version 2.0."
+        },
+        "characterSet": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The character set to use for the connection. Type: string (or Expression with resultType string). Only applied for version 2.0."
+        },
+        "maxRespSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The maximum size of the response buffer for SQL requests, in bytes. Type: integer. Only applied for version 2.0."
         },
         "encryptedCredential": {
           "type": "string",
