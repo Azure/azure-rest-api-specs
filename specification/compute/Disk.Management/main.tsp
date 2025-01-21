@@ -17,7 +17,6 @@ import "./PrivateEndpointConnection.tsp";
 import "./DiskEncryptionSet.tsp";
 import "./DiskRestorePoint.tsp";
 import "./Snapshot.tsp";
-import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

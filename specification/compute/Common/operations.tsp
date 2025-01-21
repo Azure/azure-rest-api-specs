@@ -63,7 +63,6 @@ op ComputeProviderActionAsync<
   Error
 >;
 
-
 /** Custom ArmProviderActionSync operation template with CloudError as Error */
 op ComputeProviderActionSync<
   Request extends {} | void = void,
@@ -71,13 +70,7 @@ op ComputeProviderActionSync<
   Scope extends {} = TenantActionScope,
   Parameters extends {} = {},
   Error extends {} = CloudError
-> is ArmProviderActionSync<
-  Request,
-  Response,
-  Scope,
-  Parameters,
-  Error
->;
+> is ArmProviderActionSync<Request, Response, Scope, Parameters, Error>;
 
 /** Custom ArmResourceCreateOrReplaceSync operation template with CloudError as Error */
 op ComputeResourceCreateOrReplaceSync<
@@ -241,7 +234,28 @@ op ComputeResourceActionAsync<
   Parameters,
   Error
 >;
-
+/** Custom ArmResourceActionAsync operation template with CloudError as Error */
+op ComputeResourceActionAsyncBase<
+  Resource extends Foundations.Resource,
+  Request extends TypeSpec.Reflection.Model | void,
+  Response extends TypeSpec.Reflection.Model | void,
+  BaseParameters extends TypeSpec.Reflection.Model = Foundations.DefaultBaseParameters<Resource>,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader,
+  Parameters extends {} = {},
+  Error extends {} = CloudError
+> is ArmResourceActionAsyncBase<
+  Resource,
+  Request,
+  Response,
+  BaseParameters,
+  Parameters,
+  Error
+>;
 /** Custom ArmResourceActionNoResponseContentAsync operation template with CloudError as Error */
 op ComputeResourceActionNoResponseContentAsync<
   Resource extends Foundations.Resource,

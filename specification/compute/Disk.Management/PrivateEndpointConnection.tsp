@@ -31,13 +31,6 @@ model PrivateEndpointConnection
   @visibility("read")
   //FIXME: Review string vs Azure.Core.armResourceIdentifier in V3 reference
   id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * private endpoint connection type
-   */
-  #suppress "azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility("read")
-  type?: string;
 }
 
 @armResourceOperations
@@ -60,7 +53,7 @@ interface PrivateEndpointConnections {
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
       @bodyRoot _: PrivateEndpointConnection;
     })
   >;

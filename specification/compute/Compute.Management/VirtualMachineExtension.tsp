@@ -44,7 +44,10 @@ interface VirtualMachineExtensions {
   /**
    * The operation to create or update the extension.
    */
-  createOrUpdate is ComputeResourceCreateOrReplaceAsync<VirtualMachineExtension>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<
+    VirtualMachineExtension,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update the extension.

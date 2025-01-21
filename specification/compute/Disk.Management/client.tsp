@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
@@ -57,3 +58,22 @@ using Microsoft.Compute;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Snapshot.properties);
+
+@@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
+@@clientName(DiskAccesses.update::parameters.properties, "diskAccess");
+@@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+  "privateEndpointConnection"
+);
+@@clientName(DiskEncryptionSets.createOrUpdate::parameters.resource,
+  "diskEncryptionSet"
+);
+@@clientName(DiskEncryptionSets.update::parameters.properties,
+  "diskEncryptionSet"
+);
+@@clientName(Disks.createOrUpdate::parameters.resource, "disk");
+@@clientName(Disks.update::parameters.properties, "disk");
+@@clientName(Disks.grantAccess::parameters.body, "grantAccessData");
+@@clientName(DiskRestorePoints.grantAccess::parameters.body, "grantAccessData");
+@@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
+@@clientName(Snapshots.update::parameters.properties, "snapshot");
+@@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");

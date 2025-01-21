@@ -232,3 +232,53 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.body,
   "runCommand"
 );
+@@clientName(AvailabilitySets.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(CapacityReservationGroups.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(CapacityReservations.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(DedicatedHostGroups.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(DedicatedHosts.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Images.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(RestorePointCollections.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(RestorePoints.create::parameters.resource, "parameters");
+@@clientName(SshPublicKeyResources.create::parameters.resource, "parameters");
+@@clientName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+  "extensionParameters"
+);
+@@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
+  "parameters"
+);
+@@clientName(AvailabilitySetSkuTypes, "AvailabilitySetSkuType", "java");
+@@clientName(RestorePointSourceVmosDisk,
+  "RestorePointSourceVMOSDisk",
+  "python"
+);
+@@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
+  "extensionParameters"
+);
+@@clientName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+  "extensionParameters"
+);
+@@clientName(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.body,
+  "runCommand"
+);
+@@clientName(VirtualMachineRunCommands.createOrUpdate::parameters.body,
+  "runCommand"
+);
+@@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
+@@clientName(CachingTypes, "Caching");

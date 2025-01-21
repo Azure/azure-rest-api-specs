@@ -85,13 +85,13 @@ interface VirtualMachineScaleSets {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     },
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -108,13 +108,13 @@ interface VirtualMachineScaleSets {
       /**
        * The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
-      @header
+      @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will result in error from server as they are not supported.
        */
-      @header
+      @header("If-None-Match")
       IfNoneMatch?: string;
     },
     Response = ArmResponse<VirtualMachineScaleSet> &
@@ -188,7 +188,7 @@ interface VirtualMachineScaleSets {
        */
       @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
     },
-    void,
+    Response = OkResponse,
     Parameters = {
       /**
        * Optional parameter to hibernate a virtual machine from the VM scale set. (This feature is available for VMSS with Flexible OrchestrationMode only)
@@ -288,7 +288,7 @@ interface VirtualMachineScaleSets {
        */
       @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
     },
-    void
+    Response = OkResponse
   >;
 
   /**
@@ -423,7 +423,7 @@ interface VirtualMachineScaleSets {
   startExtensionUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    void
+    Response = OkResponse
   >;
 
   /**
@@ -435,7 +435,7 @@ interface VirtualMachineScaleSets {
   startOSUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    void
+    Response = OkResponse
   >;
 
   /**
@@ -444,7 +444,11 @@ interface VirtualMachineScaleSets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("rollingUpgrades/cancel")
   @operationId("VirtualMachineScaleSetRollingUpgrades_Cancel")
-  cancel is ComputeResourceActionAsync<VirtualMachineScaleSet, void, void>;
+  cancel is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    void,
+    Response = OkResponse
+  >;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
