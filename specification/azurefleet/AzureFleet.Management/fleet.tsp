@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -414,7 +415,10 @@ model VMAttributes {
   @doc("The range of memory in GiB per vCPU specified from min to max. Optional parameter. Either Min or Max is required if specified.")
   memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
 
-  @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
+  @doc("""
+    Specifies whether the VMSize supporting local storage should be used to build Fleet or not.
+    Included - Default if not specified as most Azure VMs support local storage.
+    """)
   localStorageSupport?: VMAttributeSupport;
 
   @doc("""
@@ -504,7 +508,7 @@ model LocationProfile {
   @doc("""
     The ARM location name of the additional region. If LocationProfile is specified, then location is required.
     """)
-  location: string;
+  location: azureLocation;
 
   @doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 

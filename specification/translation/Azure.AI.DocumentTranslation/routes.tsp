@@ -52,6 +52,7 @@ interface DocumentTranslationOperations {
     destination, it will be overwritten. The targetUrl for each target language
     must be unique.
     """)
+  @finalOperation(DocumentTranslationOperations.getTranslationStatus)
   @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
@@ -70,6 +71,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
     Returns a list of batch requests submitted and the status for each
@@ -128,79 +130,7 @@ interface DocumentTranslationOperations {
   @route("/document/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-        top indicates the total number of records the user wants to be returned across
-        all pages.
-                    
-        Clients MAY use top and skip query parameters to
-        specify a number of results to return and an offset into the collection.
-        When
-        both top and skip are given by a client, the server SHOULD first apply skip
-        and then top on the collection.
-                    
-        Note: If the server can't honor
-        top and/or skip, the server MUST return an error to the client informing
-        about it instead of just ignoring the query options.
-        """)
-      @maxValue(2147483647)
-      @query("top")
-      top?: int32;
-
-      @doc("""
-        skip indicates the number of records to skip from the list of records held by
-        the server based on the sorting method specified.  By default, we sort by
-        descending start time.
-                    
-        Clients MAY use top and skip query
-        parameters to specify a number of results to return and an offset into the
-        collection.
-        When both top and skip are given by a client, the server SHOULD
-        first apply skip and then top on the collection.
-                    
-        Note: If the
-        server can't honor top and/or skip, the server MUST return an error to the
-        client informing about it instead of just ignoring the query options.
-        """)
-      @maxValue(2147483647)
-      @query("skip")
-      skip?: int32;
-
-      @doc("""
-        maxpagesize is the maximum items returned in a page.  If more items are
-        requested via top (or top is not specified and there are more items to be
-        returned), @nextLink will contain the link to the next page.
-                   
-        
-        Clients MAY request server-driven paging with a specific page size by
-        specifying a maxpagesize preference. The server SHOULD honor this preference
-        if the specified page size is smaller than the server's default page size.
-        """)
-      @maxValue(100)
-      @minValue(1)
-      @query("maxpagesize")
-      maxpagesize?: int32 = 50;
-
-      @doc("Ids to use in filtering")
-      @query("ids")
-      ids?: uuid[];
-
-      @doc("Statuses to use in filtering")
-      @query("statuses")
-      statuses?: string[];
-
-      @doc("the start datetime to get items after")
-      @query("createdDateTimeUtcStart")
-      createdDateTimeUtcStart?: utcDateTime;
-
-      @doc("the end datetime to get items before")
-      @query("createdDateTimeUtcEnd")
-      createdDateTimeUtcEnd?: utcDateTime;
-
-      @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query("orderby")
-      orderby?: string[];
-    },
+    GetTranslationsStatusOptions,
     TranslationsStatus
   >;
 
@@ -215,7 +145,7 @@ interface DocumentTranslationOperations {
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The batch id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
 
@@ -239,7 +169,7 @@ interface DocumentTranslationOperations {
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -247,6 +177,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Cancel a currently processing or queued translation")
   @doc("""
     Cancel a currently processing or queued translation.
@@ -263,7 +194,7 @@ interface DocumentTranslationOperations {
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
       @doc("Format - uuid.  The operation-id")
-      @clientName("translation_id", "python")
+      @clientName("translationId")
       @path
       id: uuid;
     },
@@ -271,6 +202,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
     Returns the status for all documents in a batch document translation request.
@@ -323,84 +255,7 @@ interface DocumentTranslationOperations {
   @route("/document/batches/{id}/documents")
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
-    {
-      @doc("Format - uuid.  The operation id")
-      @clientName("translation_id", "python")
-      @path
-      id: uuid;
-
-      @doc("""
-        top indicates the total number of records the user wants to be returned across
-        all pages.
-                    
-        Clients MAY use top and skip query parameters to
-        specify a number of results to return and an offset into the collection.
-        When
-        both top and skip are given by a client, the server SHOULD first apply skip
-        and then top on the collection.
-                    
-        Note: If the server can't honor
-        top and/or skip, the server MUST return an error to the client informing
-        about it instead of just ignoring the query options.
-        """)
-      @maxValue(2147483647)
-      @query("top")
-      top?: int32;
-
-      @doc("""
-        skip indicates the number of records to skip from the list of records held by
-        the server based on the sorting method specified.  By default, we sort by
-        descending start time.
-                    
-        Clients MAY use top and skip query
-        parameters to specify a number of results to return and an offset into the
-        collection.
-        When both top and skip are given by a client, the server SHOULD
-        first apply skip and then top on the collection.
-                    
-        Note: If the
-        server can't honor top and/or skip, the server MUST return an error to the
-        client informing about it instead of just ignoring the query options.
-        """)
-      @maxValue(2147483647)
-      @query("skip")
-      skip?: int32;
-
-      @doc("""
-        maxpagesize is the maximum items returned in a page.  If more items are
-        requested via top (or top is not specified and there are more items to be
-        returned), @nextLink will contain the link to the next page.
-                   
-        
-        Clients MAY request server-driven paging with a specific page size by
-        specifying a maxpagesize preference. The server SHOULD honor this preference
-        if the specified page size is smaller than the server's default page size.
-        """)
-      @maxValue(100)
-      @minValue(1)
-      @query("maxpagesize")
-      maxpagesize?: int32 = 50;
-
-      @doc("Ids to use in filtering")
-      @query("ids")
-      ids?: uuid[];
-
-      @doc("Statuses to use in filtering")
-      @query("statuses")
-      statuses?: string[];
-
-      @doc("the start datetime to get items after")
-      @query("createdDateTimeUtcStart")
-      createdDateTimeUtcStart?: utcDateTime;
-
-      @doc("the end datetime to get items before")
-      @query("createdDateTimeUtcEnd")
-      createdDateTimeUtcEnd?: utcDateTime;
-
-      @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
-      @query("orderby")
-      orderby?: string[];
-    },
+    GetDocumentsStatusOptions,
     DocumentsStatus
   >;
 
