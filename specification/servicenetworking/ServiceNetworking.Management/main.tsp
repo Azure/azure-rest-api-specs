@@ -69,6 +69,30 @@ model Association is TrackedResource<AssociationProperties> {
   name: string;
 }
 
+/** The type used for update operations of the Association. */
+model AssociationUpdate {
+  /** Resource tags. */
+  tags?: Record<string>;
+
+  /** The resource-specific properties for this resource. */
+  properties?: AssociationUpdateProperties;
+}
+
+/** The type used for update operations of the Association. */
+model AssociationUpdateProperties {
+  /** Association Type */
+  associationType?: AssociationType;
+
+  /** Association Subnet */
+  subnet?: AssociationSubnetUpdate;
+}
+
+/** Association Subnet. */
+model AssociationSubnetUpdate {
+  /** Association ID. */
+  id: string;
+}
+
 /** Association Properties. */
 model AssociationProperties {
   /** Association Type */
@@ -234,10 +258,7 @@ interface AssociationsInterface {
   >;
   update is ArmCustomPatchSync<
     Association,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Association,
-      AssociationProperties
-    >
+    AssociationUpdate
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
