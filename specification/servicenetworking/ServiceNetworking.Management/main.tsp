@@ -80,7 +80,7 @@ model AssociationUpdate {
   properties?: AssociationUpdateProperties;
 }
 
-/** The type used for update operations of the Association. */
+/** The updatable properties of the Association. */
 model AssociationUpdateProperties {
   /** Association Type */
   associationType?: AssociationType;
