@@ -481,7 +481,7 @@ model SearchRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  orderby?: string;
+  $orderby?: string;
 
   /**
    * A value that specifies the syntax of the search query. The default is 'simple'.
