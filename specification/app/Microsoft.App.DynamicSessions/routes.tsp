@@ -119,7 +119,18 @@ interface ListSessions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("List the sessions.")
   @get
-  get is Foundations.Operation<{}, SessionsListResponse>;
+  get is Foundations.Operation<
+    {
+      @doc("The offset for pagination purpose.")
+      @query
+      offset?: int32;
+
+      @doc("The page size - by default there is no paging.")
+      @query
+      limit?: int32;
+    },
+    SessionsListResponse
+  >;
 }
 
 interface SessionPoolMetadata {
