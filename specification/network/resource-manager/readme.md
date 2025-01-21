@@ -39,6 +39,11 @@ These settings apply only when `--tag=package-2024-07-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2024-07-01-preview/network.json
   - Microsoft.Network/preview/2024-07-01-preview/networkSecurityPerimeter.json
+suppressions:
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
 ```
 
 ### Tag: package-2024-05
