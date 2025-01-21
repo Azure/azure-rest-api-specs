@@ -301,7 +301,6 @@ model SearchDocumentsResult {
    * parameters, or if the query can't return all the requested documents in a
    * single response.
    */
-  @visibility("read")
   @encodedName("application/json", "@odata.count")
   count?: int64;
 
@@ -309,7 +308,6 @@ model SearchDocumentsResult {
    * A value indicating the percentage of the index that was included in the query,
    * or null if minimumCoverage was not specified in the request.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.coverage")
   coverage?: float64;
 
@@ -318,7 +316,6 @@ model SearchDocumentsResult {
    * buckets for each faceted field; null if the query did not include any facet
    * expressions.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
 
@@ -326,24 +323,21 @@ model SearchDocumentsResult {
    * The answers query results for the search operation; null if the answers query
    * parameter was not specified or set to 'none'.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.answers")
   answers?: QueryAnswerResult[];
 
-  @doc("""
-    Continuation JSON payload returned when the query can't return all the
-    requested results in a single response. You can use this JSON along with
-    @odata.nextLink to formulate another POST Search request to get the next part
-    of the search response.
-    """)
-  @visibility("read")
+  /**
+   * Continuation JSON payload returned when the query can't return all the
+   * requested results in a single response. You can use this JSON along with
+   * @odata.nextLink to formulate another POST Search request to get the next part
+   * of the search response.
+   * /
   @encodedName("application/json", "@search.nextPageParameters")
   nextPageParameters?: SearchRequest;
 
   /**
    * The sequence of results returned by the query.
    */
-  @visibility("read")
   value: SearchResult[];
 
   /**
@@ -352,21 +346,18 @@ model SearchDocumentsResult {
    * Search request to get the next part of the search response. Make sure to use
    * the same verb (GET or POST) as the request that produced this response.
    */
-  @visibility("read")
   @encodedName("application/json", "@odata.nextLink")
   nextLink?: string;
 
   /**
    * Reason that a partial response was returned for a semantic ranking request.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.semanticPartialResponseReason")
   semanticPartialResponseReason?: SemanticErrorReason;
 
   /**
    * Type of partial response that was returned for a semantic ranking request.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.semanticPartialResponseType")
   semanticPartialResponseType?: SemanticSearchResultsType;
 }
@@ -377,13 +368,12 @@ model SearchDocumentsResult {
  * interval.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-model FacetResult extends Record<unknown> {
+model FacetResult is Record<unknown> {
 
   /**
    * The approximate count of documents falling within the bucket described by this
    * facet.
    */
-  @visibility("read")
   count?: int64;
 }
 
@@ -393,32 +383,28 @@ model FacetResult extends Record<unknown> {
  * results. Answer candidates are scored and the top answers are selected.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-model QueryAnswerResult extends Record<unknown> {
+model QueryAnswerResult is Record<unknown> {
 
   /**
    * The score value represents how relevant the answer is to the query relative to
    * other answers returned for the query.
    */
-  @visibility("read")
   score?: float64;
 
   /**
    * The key of the document the answer was extracted from.
    */
-  @visibility("read")
   key?: string;
 
   /**
    * The text passage extracted from the document contents as the answer.
    */
-  @visibility("read")
   text?: string;
 
   /**
    * Same text passage as in the Text property with highlighted text phrases most
    * relevant to the query.
    */
-  @visibility("read")
   highlights?: string;
 }
 
@@ -658,7 +644,9 @@ model VectorQuery {
    */
   weight?: float32;
 
-  @doc("Type of query.")
+  /**
+   * Type of query.
+   */
   kind: VectorQueryKind;
 }
 
@@ -673,7 +661,6 @@ model SearchResult {
    * The relevance score of the document compared to other documents returned by the
    * query.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.score")
   score: float64;
 
@@ -682,7 +669,6 @@ model SearchResult {
    * Search results are sorted by the RerankerScore first and then by the Score.
    * RerankerScore is only returned for queries of type 'semantic'.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.rerankerScore")
   rerankerScore?: float64;
 
@@ -691,7 +677,6 @@ model SearchResult {
    * organized by each applicable field; null if hit highlighting was not enabled
    * for the query.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.highlights")
   highlights?: Record<string[]>;
 
@@ -700,7 +685,6 @@ model SearchResult {
    * the search query. They are often used as document summary. Captions are only
    * returned for queries of type 'semantic'.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.captions")
   captions?: QueryCaptionResult[];
 }
@@ -718,14 +702,12 @@ model QueryCaptionResult {
    * A representative text passage extracted from the document most relevant to the
    * search query.
    */
-  @visibility("read")
   text?: string;
 
   /**
    * Same text passage as in the Text property with highlighted phrases most
    * relevant to the query.
    */
-  @visibility("read")
   highlights?: string;
 }
 
@@ -736,14 +718,12 @@ model SuggestDocumentsResult {
   /**
    * The sequence of results returned by the query.
    */
-  @visibility("read")
   value: SuggestResult[];
 
   /**
    * A value indicating the percentage of the index that was included in the query,
    * or null if minimumCoverage was not set in the request.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.coverage")
   coverage?: float64;
 }
@@ -759,7 +739,6 @@ model SuggestResult {
   /**
    * The text of the suggestion result.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.text")
   text: string;
 }
@@ -882,15 +861,16 @@ model LookupDocument {
  * request.
  */
 model IndexDocumentsResult {
+  /**
+   * Response containing the status of operations for all actions in the batch.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-  @doc("Response containing the status of operations for all actions in the batch.")
   @statusCode
   _: 200 | 207;
 
   /**
    * The list of status information for each document in the indexing request.
    */
-  @visibility("read")
   value: IndexingResult[];
 }
 
@@ -901,21 +881,18 @@ model IndexingResult {
   /**
    * The key of a document that was in the indexing request.
    */
-  @visibility("read")
   key: string;
 
   /**
    * The error message explaining why the indexing operation failed for the document
    * identified by the key; null if indexing succeeded.
    */
-  @visibility("read")
   errorMessage?: string;
 
   /**
    * A value indicating whether the indexing operation succeeded for the document
    * identified by the key.
    */
-  @visibility("read")
   status: boolean;
 
   /**
@@ -925,7 +902,6 @@ model IndexingResult {
    * conflict, 422 when the index is temporarily unavailable, or 503 for when the
    * service is too busy.
    */
-  @visibility("read")
   statusCode: int32;
 }
 
@@ -938,14 +914,12 @@ model AutocompleteResult {
    * autocomplete request, or null if minimumCoverage was not specified in the
    * request.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.coverage")
   coverage?: float64;
 
   /**
    * The list of returned Autocompleted items.
    */
-  @visibility("read")
   value: AutocompleteItem[];
 }
 
@@ -956,13 +930,11 @@ model AutocompleteItem {
   /**
    * The completed term.
    */
-  @visibility("read")
   text: string;
 
   /**
    * The query along with the completed term.
    */
-  @visibility("read")
   queryPlusText: string;
 }
 

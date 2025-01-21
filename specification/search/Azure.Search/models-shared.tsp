@@ -9,57 +9,73 @@ using Azure.Core;
 namespace Search;
 
 alias matchingHeader = {
-  @doc("Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.")
+  /**
+   * Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.
+   */
   @header("If-Match")
   ifMatch?: string;
 
-  @doc("Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.")
+  /**
+   * Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value.
+   */
   @header("If-None-Match")
   ifNoneMatch?: string;
 };
 
 alias preferHeader = {
-  @doc("For HTTP PUT requests, instructs the service to return the created/updated resource on success.")
+  /**
+   * For HTTP PUT requests, instructs the service to return the created/updated resource on success.
+   */
   @header("Prefer")
   prefer: "return=representation";
 };
 
 alias selectQuery = {
-  @doc("""
-    Selects which top-level properties to retrieve.
-    Specified as a comma-separated list of JSON property names,
-    or '*' for all properties. The default is all properties.
-    """)
+  /**
+   * Selects which top-level properties to retrieve.
+   * Specified as a comma-separated list of JSON property names,
+   * or '*' for all properties. The default is all properties.
+   */
   @query
   $select?: string;
 };
 
 alias indexNamePath = {
-  @doc("The name of the index.")
+  /**
+   * The name of the index.
+   */
   @path
   indexName: string;
 };
 
 alias indexerNamePath = {
-  @doc("The name of the indexer.")
+  /**
+   * The name of the indexer.
+   */
   @path
   indexerName: string;
 };
 
 alias dataSourceNamePath = {
-  @doc("The name of the datasource.")
+  /**
+   * The name of the datasource.
+   */
   @path
   dataSourceName: string;
 };
 
 alias skillsetNamePath = {
-  @doc("The name of the skillset.")
+  /**
+   * The name of the skillset.
+   */
   @path
   skillsetName: string;
 };
 
 alias synonymMapNamePath = {
-  @doc("The name of the synonym map.")
+  /**
+   * The name of the synonym map.
+   */
   @path
   synonymMapName: string;
 };
@@ -156,31 +172,26 @@ model ErrorDetail {
   /**
    * The error code.
    */
-  @visibility("read")
   code?: string;
 
   /**
    * The error message.
    */
-  @visibility("read")
   message?: string;
 
   /**
    * The error target.
    */
-  @visibility("read")
   target?: string;
 
   /**
    * The error details.
    */
-  @visibility("read")
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
-  @visibility("read")
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -191,12 +202,10 @@ model ErrorAdditionalInfo {
   /**
    * The additional info type.
    */
-  @visibility("read")
   type?: string;
 
   /**
    * The additional info.
    */
-  @visibility("read")
   info?: Record<string>;
 }

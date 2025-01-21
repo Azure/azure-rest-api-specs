@@ -2596,26 +2596,22 @@
       "properties": {
         "token": {
           "type": "string",
-          "description": "The token returned by the analyzer.",
-          "readOnly": true
+          "description": "The token returned by the analyzer."
         },
         "startOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the first character of the token in the input text.",
-          "readOnly": true
+          "description": "The index of the first character of the token in the input text."
         },
         "endOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "The index of the last character of the token in the input text.",
-          "readOnly": true
+          "description": "The index of the last character of the token in the input text."
         },
         "position": {
           "type": "integer",
           "format": "int32",
-          "description": "The position of the token in the input text relative to other tokens. The first\ntoken in the input text has position 0, the next has position 1, and so on.\nDepending on the analyzer used, some tokens might have the same position, for\nexample if they are synonyms of each other.",
-          "readOnly": true
+          "description": "The position of the token in the input text relative to other tokens. The first\ntoken in the input text has position 0, the next has position 1, and so on.\nDepending on the analyzer used, some tokens might have the same position, for\nexample if they are synonyms of each other."
         }
       },
       "required": [
@@ -2647,13 +2643,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The completed term.",
-          "readOnly": true
+          "description": "The completed term."
         },
         "queryPlusText": {
           "type": "string",
-          "description": "The query along with the completed term.",
-          "readOnly": true
+          "description": "The query along with the completed term."
         }
       },
       "required": [
@@ -2751,7 +2745,6 @@
           "type": "number",
           "format": "double",
           "description": "A value indicating the percentage of the index that was considered by the\nautocomplete request, or null if minimumCoverage was not specified in the\nrequest.",
-          "readOnly": true,
           "x-ms-client-name": "coverage"
         },
         "value": {
@@ -2760,7 +2753,6 @@
           "items": {
             "$ref": "#/definitions/AutocompleteItem"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -4104,16 +4096,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
+          "description": "The additional info type."
         },
         "info": {
           "type": "object",
           "description": "The additional info.",
           "additionalProperties": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -4123,18 +4113,15 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code.",
-          "readOnly": true
+          "description": "The error code."
         },
         "message": {
           "type": "string",
-          "description": "The error message.",
-          "readOnly": true
+          "description": "The error message."
         },
         "target": {
           "type": "string",
-          "description": "The error target.",
-          "readOnly": true
+          "description": "The error target."
         },
         "details": {
           "type": "array",
@@ -4142,7 +4129,6 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "additionalInfo": {
@@ -4151,7 +4137,6 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
@@ -4199,8 +4184,7 @@
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The approximate count of documents falling within the bucket described by this\nfacet.",
-          "readOnly": true
+          "description": "The approximate count of documents falling within the bucket described by this\nfacet."
         }
       },
       "additionalProperties": {}
@@ -4284,20 +4268,17 @@
         "documentCount": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of documents in the index.",
-          "readOnly": true
+          "description": "The number of documents in the index."
         },
         "storageSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The amount of storage in bytes consumed by the index.",
-          "readOnly": true
+          "description": "The amount of storage in bytes consumed by the index."
         },
         "vectorIndexSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The amount of memory in bytes consumed by vectors in the index.",
-          "readOnly": true
+          "description": "The amount of memory in bytes consumed by vectors in the index."
         }
       },
       "required": [
@@ -4828,7 +4809,6 @@
           "items": {
             "$ref": "#/definitions/IndexingResult"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -4890,25 +4870,21 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerExecutionStatus",
-          "description": "The outcome of this indexer execution.",
-          "readOnly": true
+          "description": "The outcome of this indexer execution."
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message indicating the top-level error, if any.",
-          "readOnly": true
+          "description": "The error message indicating the top-level error, if any."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of this indexer execution.",
-          "readOnly": true
+          "description": "The start time of this indexer execution."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of this indexer execution, if the execution has already completed.",
-          "readOnly": true
+          "description": "The end time of this indexer execution, if the execution has already completed."
         },
         "errors": {
           "type": "array",
@@ -4916,7 +4892,6 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerError"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "warnings": {
@@ -4925,30 +4900,25 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerWarning"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "itemsProcessed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that were processed during this indexer execution. This\nincludes both successfully processed items and items where indexing was\nattempted but failed.",
-          "readOnly": true
+          "description": "The number of items that were processed during this indexer execution. This\nincludes both successfully processed items and items where indexing was\nattempted but failed."
         },
         "itemsFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of items that failed to be indexed during this indexer execution.",
-          "readOnly": true
+          "description": "The number of items that failed to be indexed during this indexer execution."
         },
         "initialTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution started.",
-          "readOnly": true
+          "description": "Change tracking state with which an indexer execution started."
         },
         "finalTrackingState": {
           "type": "string",
-          "description": "Change tracking state with which an indexer execution finished.",
-          "readOnly": true
+          "description": "Change tracking state with which an indexer execution finished."
         }
       },
       "required": [
@@ -5270,24 +5240,20 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of a document that was in the indexing request.",
-          "readOnly": true
+          "description": "The key of a document that was in the indexing request."
         },
         "errorMessage": {
           "type": "string",
-          "description": "The error message explaining why the indexing operation failed for the document\nidentified by the key; null if indexing succeeded.",
-          "readOnly": true
+          "description": "The error message explaining why the indexing operation failed for the document\nidentified by the key; null if indexing succeeded."
         },
         "status": {
           "type": "boolean",
-          "description": "A value indicating whether the indexing operation succeeded for the document\nidentified by the key.",
-          "readOnly": true
+          "description": "A value indicating whether the indexing operation succeeded for the document\nidentified by the key."
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "The status code of the indexing operation. Possible values include: 200 for a\nsuccessful update or delete, 201 for successful document creation, 400 for a\nmalformed input document, 404 for document not found, 409 for a version\nconflict, 422 when the index is temporarily unavailable, or 503 for when the\nservice is too busy.",
-          "readOnly": true
+          "description": "The status code of the indexing operation. Possible values include: 200 for a\nsuccessful update or delete, 201 for successful document creation, 400 for a\nmalformed input document, 404 for document not found, 409 for a version\nconflict, 422 when the index is temporarily unavailable, or 503 for when the\nservice is too busy."
         }
       },
       "required": [
@@ -6341,7 +6307,6 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerDataSource"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -6359,7 +6324,6 @@
           "items": {
             "$ref": "#/definitions/SearchIndexer"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -6377,7 +6341,6 @@
           "items": {
             "$ref": "#/definitions/SearchIndex"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -6395,7 +6358,6 @@
           "items": {
             "$ref": "#/definitions/SearchIndexerSkillset"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -6413,7 +6375,6 @@
           "items": {
             "$ref": "#/definitions/SynonymMap"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -8717,23 +8678,19 @@
         "score": {
           "type": "number",
           "format": "double",
-          "description": "The score value represents how relevant the answer is to the query relative to\nother answers returned for the query.",
-          "readOnly": true
+          "description": "The score value represents how relevant the answer is to the query relative to\nother answers returned for the query."
         },
         "key": {
           "type": "string",
-          "description": "The key of the document the answer was extracted from.",
-          "readOnly": true
+          "description": "The key of the document the answer was extracted from."
         },
         "text": {
           "type": "string",
-          "description": "The text passage extracted from the document contents as the answer.",
-          "readOnly": true
+          "description": "The text passage extracted from the document contents as the answer."
         },
         "highlights": {
           "type": "string",
-          "description": "Same text passage as in the Text property with highlighted text phrases most\nrelevant to the query.",
-          "readOnly": true
+          "description": "Same text passage as in the Text property with highlighted text phrases most\nrelevant to the query."
         }
       },
       "additionalProperties": {}
@@ -8768,13 +8725,11 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "A representative text passage extracted from the document most relevant to the\nsearch query.",
-          "readOnly": true
+          "description": "A representative text passage extracted from the document most relevant to the\nsearch query."
         },
         "highlights": {
           "type": "string",
-          "description": "Same text passage as in the Text property with highlighted phrases most\nrelevant to the query.",
-          "readOnly": true
+          "description": "Same text passage as in the Text property with highlighted phrases most\nrelevant to the query."
         }
       },
       "additionalProperties": {}
@@ -9106,14 +9061,12 @@
           "type": "integer",
           "format": "int64",
           "description": "The total count of results found by the search operation, or null if the count\nwas not requested. If present, the count may be greater than the number of\nresults in this response. This can happen if you use the $top or $skip\nparameters, or if the query can't return all the requested documents in a\nsingle response.",
-          "readOnly": true,
           "x-ms-client-name": "count"
         },
         "@search.coverage": {
           "type": "number",
           "format": "double",
           "description": "A value indicating the percentage of the index that was included in the query,\nor null if minimumCoverage was not specified in the request.",
-          "readOnly": true,
           "x-ms-client-name": "coverage"
         },
         "@search.facets": {
@@ -9126,7 +9079,6 @@
             "type": "array",
             "x-ms-identifiers": []
           },
-          "readOnly": true,
           "x-ms-client-name": "facets"
         },
         "@search.answers": {
@@ -9135,41 +9087,30 @@
           "items": {
             "$ref": "#/definitions/QueryAnswerResult"
           },
-          "readOnly": true,
           "x-ms-client-name": "answers",
           "x-ms-identifiers": []
         },
-        "@search.nextPageParameters": {
-          "$ref": "#/definitions/SearchRequest",
-          "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with\n@odata.nextLink to formulate another POST Search request to get the next part\nof the search response.",
-          "readOnly": true,
-          "x-ms-client-name": "nextPageParameters"
-        },
         "value": {
           "type": "array",
-          "description": "The sequence of results returned by the query.",
+          "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with",
           "items": {
             "$ref": "#/definitions/SearchResult"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "@odata.nextLink": {
           "type": "string",
           "description": "Continuation URL returned when the query can't return all the requested results\nin a single response. You can use this URL to formulate another GET or POST\nSearch request to get the next part of the search response. Make sure to use\nthe same verb (GET or POST) as the request that produced this response.",
-          "readOnly": true,
           "x-ms-client-name": "nextLink"
         },
         "@search.semanticPartialResponseReason": {
           "$ref": "#/definitions/SemanticErrorReason",
           "description": "Reason that a partial response was returned for a semantic ranking request.",
-          "readOnly": true,
           "x-ms-client-name": "semanticPartialResponseReason"
         },
         "@search.semanticPartialResponseType": {
           "$ref": "#/definitions/SemanticSearchResultsType",
           "description": "Type of partial response that was returned for a semantic ranking request.",
-          "readOnly": true,
           "x-ms-client-name": "semanticPartialResponseType"
         }
       },
@@ -9685,34 +9626,28 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the item for which indexing failed.",
-          "readOnly": true
+          "description": "The key of the item for which indexing failed."
         },
         "errorMessage": {
           "type": "string",
-          "description": "The message describing the error that occurred while processing the item.",
-          "readOnly": true
+          "description": "The message describing the error that occurred while processing the item."
         },
         "statusCode": {
           "type": "integer",
           "format": "int32",
-          "description": "The status code indicating why the indexing operation failed. Possible values\ninclude: 400 for a malformed input document, 404 for document not found, 409\nfor a version conflict, 422 when the index is temporarily unavailable, or 503\nfor when the service is too busy.",
-          "readOnly": true
+          "description": "The status code indicating why the indexing operation failed. Possible values\ninclude: 400 for a malformed input document, 404 for document not found, 409\nfor a version conflict, 422 when the index is temporarily unavailable, or 503\nfor when the service is too busy."
         },
         "name": {
           "type": "string",
-          "description": "The name of the source at which the error originated. For example, this could\nrefer to a particular skill in the attached skillset. This may not be always\navailable.",
-          "readOnly": true
+          "description": "The name of the source at which the error originated. For example, this could\nrefer to a particular skill in the attached skillset. This may not be always\navailable."
         },
         "details": {
           "type": "string",
-          "description": "Additional, verbose details about the error to assist in debugging the indexer.\nThis may not be always available.",
-          "readOnly": true
+          "description": "Additional, verbose details about the error to assist in debugging the indexer.\nThis may not be always available."
         },
         "documentationLink": {
           "type": "string",
-          "description": "A link to a troubleshooting guide for these classes of errors. This may not be\nalways available.",
-          "readOnly": true
+          "description": "A link to a troubleshooting guide for these classes of errors. This may not be\nalways available."
         }
       },
       "required": [
@@ -9938,20 +9873,17 @@
         "maxRunTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum duration that the indexer is permitted to run for one execution.",
-          "readOnly": true
+          "description": "The maximum duration that the indexer is permitted to run for one execution."
         },
         "maxDocumentExtractionSize": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum size of a document, in bytes, which will be considered valid for\nindexing.",
-          "readOnly": true
+          "description": "The maximum size of a document, in bytes, which will be considered valid for\nindexing."
         },
         "maxDocumentContentCharactersToExtract": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of characters that will be extracted from a document picked\nup for indexing.",
-          "readOnly": true
+          "description": "The maximum number of characters that will be extracted from a document picked\nup for indexing."
         }
       }
     },
@@ -10052,13 +9984,11 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerStatus",
-          "description": "Overall indexer status.",
-          "readOnly": true
+          "description": "Overall indexer status."
         },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
-          "description": "The result of the most recent or an in-progress indexer execution.",
-          "readOnly": true
+          "description": "The result of the most recent or an in-progress indexer execution."
         },
         "executionHistory": {
           "type": "array",
@@ -10066,13 +9996,11 @@
           "items": {
             "$ref": "#/definitions/IndexerExecutionResult"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
-          "description": "The execution limits for the indexer.",
-          "readOnly": true
+          "description": "The execution limits for the indexer."
         }
       },
       "required": [
@@ -10087,28 +10015,23 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the item which generated a warning.",
-          "readOnly": true
+          "description": "The key of the item which generated a warning."
         },
         "message": {
           "type": "string",
-          "description": "The message describing the warning that occurred while processing the item.",
-          "readOnly": true
+          "description": "The message describing the warning that occurred while processing the item."
         },
         "name": {
           "type": "string",
-          "description": "The name of the source at which the warning originated. For example, this could\nrefer to a particular skill in the attached skillset. This may not be always\navailable.",
-          "readOnly": true
+          "description": "The name of the source at which the warning originated. For example, this could\nrefer to a particular skill in the attached skillset. This may not be always\navailable."
         },
         "details": {
           "type": "string",
-          "description": "Additional, verbose details about the warning to assist in debugging the\nindexer. This may not be always available.",
-          "readOnly": true
+          "description": "Additional, verbose details about the warning to assist in debugging the\nindexer. This may not be always available."
         },
         "documentationLink": {
           "type": "string",
-          "description": "A link to a troubleshooting guide for these classes of warnings. This may not\nbe always available.",
-          "readOnly": true
+          "description": "A link to a troubleshooting guide for these classes of warnings. This may not\nbe always available."
         }
       },
       "required": [
@@ -10175,7 +10098,7 @@
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be\ncovered by a search query in order for the query to be reported as a success.\nThis parameter can be useful for ensuring search availability even for services\nwith only one replica. The default is 100."
         },
-        "orderby": {
+        "$orderby": {
           "type": "string",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
@@ -10303,14 +10226,12 @@
           "type": "number",
           "format": "double",
           "description": "The relevance score of the document compared to other documents returned by the\nquery.",
-          "readOnly": true,
           "x-ms-client-name": "score"
         },
         "@search.rerankerScore": {
           "type": "number",
           "format": "double",
           "description": "The relevance score computed by the semantic ranker for the top search results.\nSearch results are sorted by the RerankerScore first and then by the Score.\nRerankerScore is only returned for queries of type 'semantic'.",
-          "readOnly": true,
           "x-ms-client-name": "rerankerScore"
         },
         "@search.highlights": {
@@ -10322,7 +10243,6 @@
             },
             "type": "array"
           },
-          "readOnly": true,
           "x-ms-client-name": "highlights"
         },
         "@search.captions": {
@@ -10331,7 +10251,6 @@
           "items": {
             "$ref": "#/definitions/QueryCaptionResult"
           },
-          "readOnly": true,
           "x-ms-client-name": "captions",
           "x-ms-identifiers": []
         }
@@ -11908,14 +11827,12 @@
           "items": {
             "$ref": "#/definitions/SuggestResult"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "@search.coverage": {
           "type": "number",
           "format": "double",
           "description": "A value indicating the percentage of the index that was included in the query,\nor null if minimumCoverage was not set in the request.",
-          "readOnly": true,
           "x-ms-client-name": "coverage"
         }
       },
@@ -11948,7 +11865,7 @@
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be\ncovered by a suggestion query in order for the query to be reported as a\nsuccess. This parameter can be useful for ensuring search availability even for\nservices with only one replica. The default is 80."
         },
-        "orderby": {
+        "$orderby": {
           "type": "string",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
@@ -11986,7 +11903,6 @@
         "@search.text": {
           "type": "string",
           "description": "The text of the suggestion result.",
-          "readOnly": true,
           "x-ms-client-name": "text"
         }
       },
