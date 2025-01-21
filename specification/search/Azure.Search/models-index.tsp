@@ -377,8 +377,7 @@ model SearchDocumentsResult {
  * interval.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-model FacetResult {
-  ...Record<unknown>;
+model FacetResult extends Record<unknown> {
 
   /**
    * The approximate count of documents falling within the bucket described by this
