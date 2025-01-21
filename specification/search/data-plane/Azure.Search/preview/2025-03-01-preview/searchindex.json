@@ -1273,7 +1273,7 @@
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "The approximate count of documents falling within the bucket described by this facet."
+          "description": "The approximate count of documents falling within the bucket described by this facet; null if metric aggregation is being used. "
         },
         "@search.facets": {
           "$ref": "#/definitions/SearchFacetsResult",
@@ -1363,12 +1363,6 @@
           "readOnly": true,
           "x-ms-client-name": "SemanticQueryRewritesResultType",
           "description": "Type of query rewrite that was used to retrieve documents."
-        },
-        "@search.metrics": {
-          "$ref": "#/definitions/SearchMetricListResult",
-          "readOnly": true,
-          "x-ms-client-name": "Metrics",
-          "description": "The list of aggregated values from the provided documents."
         }
       },
       "required": [
@@ -2635,8 +2629,8 @@
           "$ref": "#/definitions/HybridSearch",
           "description": "The query parameters to configure hybrid search behaviors."
         },
-        "metrics": {
-          "$ref": "#/definitions/SearchMetricList",
+        "extendedFacets": {
+          "$ref": "#/definitions/ExtendedFacets",
           "description": "A value that specifies how many aggregations and types of aggregations to execute on the documents."
         }
       },
@@ -3264,33 +3258,13 @@
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
     },
-    "SearchMetricListResult": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/SearchMetricResult"
-        }
-      },
-      "readOnly": true
-    },
-    "SearchMetricResult": {
+    "ExtendedFacets": {
       "type": "object",
       "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "readOnly": true,
-          "description": "The aggregated value from the 'targetField' of all documents."
+        "metrics": {
+          "$ref": "#/definitions/SearchMetric",
+          "description": "An optional type of facet aggregation that allows a search query to specify an aggregation on a target field on a set filtered documents, or all documents."
         }
-      },
-      "description": "A single aggregation value of a metric query result. Reports the aggregated value from the 'targetField' of all documents."
-    },
-    "SearchMetricList": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "$ref": "#/definitions/SearchMetric"
       }
     },
     "SearchMetric": {
