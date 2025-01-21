@@ -1334,7 +1334,7 @@ model VectorQuery {
 @added(Versions.v2024_11_01_preview)
 @discriminator("kind")
 model VectorThreshold {
-  /** 
+  /**
    * Type of threshold.
    */
   kind: VectorThresholdKind;
