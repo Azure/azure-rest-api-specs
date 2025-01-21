@@ -321,7 +321,7 @@ model ChatCompletionsOptions {
 
 /** Values for the reasoning */
 @added(ServiceApiVersions.v2024_12_01_Preview)
-union ReasoningEfforValue {
+union ReasoningEffortValue {
   string,
 
   /** The reasoning effort is low. */
