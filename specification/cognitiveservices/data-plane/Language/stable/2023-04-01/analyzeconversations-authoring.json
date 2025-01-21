@@ -1710,12 +1710,6 @@
     }
   },
   "definitions": {
-    "AnalyzeConversationAuthoringConfusionMatrix": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixRow"
-      }
-    },
     "AnalyzeConversationAuthoringConfusionMatrixCell": {
       "type": "object",
       "description": "Represents a cell in a confusion matrix.",
@@ -1735,12 +1729,6 @@
         "normalizedValue",
         "rawValue"
       ]
-    },
-    "AnalyzeConversationAuthoringConfusionMatrixRow": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
-      }
     },
     "AnalyzeConversationAuthoringConversationExportedEntity": {
       "type": "object",
@@ -1970,8 +1958,14 @@
       "description": "Represents the evaluation result summary for the project's entities.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted."
+          "type": "object",
+          "description": "Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.",
+          "additionalProperties": {
+            "additionalProperties": {
+              "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
+            },
+            "type": "object"
+          }
         },
         "entities": {
           "type": "object",
@@ -2559,8 +2553,14 @@
       "description": "Represents the evaluation summary for the project's intents.",
       "properties": {
         "confusionMatrix": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrix",
-          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted."
+          "type": "object",
+          "description": "Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.",
+          "additionalProperties": {
+            "additionalProperties": {
+              "$ref": "#/definitions/AnalyzeConversationAuthoringConfusionMatrixCell"
+            },
+            "type": "object"
+          }
         },
         "intents": {
           "type": "object",

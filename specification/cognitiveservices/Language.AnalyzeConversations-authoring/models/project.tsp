@@ -807,18 +807,6 @@ model AnalyzeConversationAuthoringEvaluationSummary {
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
 }
 
-alias ConfusionMatrixRow = Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
-
-alias ConfusionMatrix = Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("AnalyzeConversationConfusionMatrix", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrix is ConfusionMatrix;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
-model AnalyzeConversationAuthoringConfusionMatrixRow is ConfusionMatrixRow;
-
 /**
  * Represents the evaluation result summary for the project's entities.
  */
@@ -827,7 +815,7 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
    */
-  confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
+  confusionMatrix: Record<Record<AnalyzeConversationAuthoringConfusionMatrixCell>>;
 
   /**
    * Represents the entities evaluation summary.
@@ -930,7 +918,7 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
    */
-  confusionMatrix: AnalyzeConversationAuthoringConfusionMatrix;
+  confusionMatrix: Record<Record<AnalyzeConversationAuthoringConfusionMatrixCell>>;
 
   /**
    * Represents the intents evaluation summary.
