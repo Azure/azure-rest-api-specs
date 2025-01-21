@@ -4,7 +4,7 @@
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "$select": null,
-    "api-version": "2024-11-01-preview",
+    "api-version": "2025-03-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
@@ -14,6 +14,7 @@
           {
             "@odata.etag": "0x1234568AE7E58A1",
             "name": "preview-test",
+            "defaultScoringProfile": "stringFieldBoost",
             "fields": [
               {
                 "name": "id",
@@ -175,6 +176,12 @@
                 ]
               }
             ],
+            "corsOptions": {
+              "allowedOrigins": [
+                "https://www.example.com/foo"
+              ],
+              "maxAgeInSeconds": 10
+            },
             "suggesters": [
               {
                 "name": "sg",
@@ -198,15 +205,69 @@
                 ]
               }
             ],
-            "normalizers": [],
-            "tokenizers": [],
-            "tokenFilters": [],
-            "charFilters": [],
+            "normalizers": [
+              {
+                "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+                "name": "my_normalizer",
+                "tokenFilters": [
+                  "my_tokenFilter"
+                ],
+                "charFilters": [
+                  "my_mapping"
+                ]
+              }
+            ],
+            "tokenizers": [
+              {
+                "@odata.type": "#Microsoft.Azure.Search.StandardTokenizerV2",
+                "name": "my_tokenizer",
+                "maxTokenLength": 100
+              }
+            ],
+            "tokenFilters": [
+              {
+                "@odata.type": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
+                "name": "my_tokenFilter",
+                "preserveOriginal": false
+              }
+            ],
+            "charFilters": [
+              {
+                "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
+                "name": "my_mapping",
+                "mappings": [
+                  ".=>,",
+                  "_=>-"
+                ]
+              }
+            ],
             "similarity": {
-              "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+              "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+              "k1": 10.0,
+              "b": 0.1
             },
             "semantic": {
-              "configurations": []
+              "defaultConfiguration": "testconfig",
+              "configurations": [
+                {
+                  "name": "testconfig",
+                  "prioritizedFields": {
+                    "titleField": {
+                      "fieldName": "category"
+                    },
+                    "prioritizedContentFields": [
+                      {
+                        "fieldName": "description"
+                      }
+                    ],
+                    "prioritizedKeywordsFields": [
+                      {
+                        "fieldName": "ownerId"
+                      }
+                    ]
+                  }
+                }
+              ]
             },
             "vectorSearch": {
               "algorithms": [

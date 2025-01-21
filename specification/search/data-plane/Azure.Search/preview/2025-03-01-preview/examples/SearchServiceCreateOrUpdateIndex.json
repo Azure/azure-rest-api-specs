@@ -5,7 +5,7 @@
     "endpoint": "https://previewexampleservice.search.windows.net",
     "indexName": "temp-preview-test",
     "allowIndexDowntime": null,
-    "api-version": "2024-11-01-preview",
+    "api-version": "2025-03-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "If-Match": null,
     "If-None-Match": null,
@@ -123,6 +123,13 @@
           ]
         }
       ],
+      "defaultScoringProfile": "stringFieldBoost",
+      "corsOptions": {
+        "allowedOrigins": [
+          "https://www.example.com/foo"
+        ],
+        "maxAgeInSeconds": 10
+      },
       "suggesters": [
         {
           "name": "sg",
@@ -146,11 +153,70 @@
           "name": "tagsAnalyzer"
         }
       ],
-      "tokenizers": [],
-      "tokenFilters": [],
-      "charFilters": [],
-      "normalizers": [],
-      "semantic": {},
+      "tokenizers": [
+        {
+          "maxTokenLength": 100,
+          "@odata.type": "#Microsoft.Azure.Search.StandardTokenizerV2",
+          "name": "my_tokenizer"
+        }
+      ],
+      "tokenFilters": [
+        {
+          "preserveOriginal": false,
+          "@odata.type": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
+          "name": "my_tokenFilter"
+        }
+      ],
+      "charFilters": [
+        {
+          "mappings": [
+            ".=>,",
+            "_=>-"
+          ],
+          "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
+          "name": "my_mapping"
+        }
+      ],
+      "normalizers": [
+        {
+          "tokenFilters": [
+            "my_tokenFilter"
+          ],
+          "charFilters": [
+            "my_mapping"
+          ],
+          "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+          "name": "my_normalizer"
+        }
+      ],
+      "similarity": {
+        "k1": 10,
+        "b": 0.1,
+        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+      },
+      "semantic": {
+        "defaultConfiguration": "testconfig",
+        "configurations": [
+          {
+            "name": "testconfig",
+            "prioritizedFields": {
+              "titleField": {
+                "fieldName": "category"
+              },
+              "prioritizedContentFields": [
+                {
+                  "fieldName": "description"
+                }
+              ],
+              "prioritizedKeywordsFields": [
+                {
+                  "fieldName": "ownerId"
+                }
+              ]
+            }
+          }
+        ]
+      },
       "vectorSearch": {
         "profiles": [
           {
@@ -260,13 +326,15 @@
             "truncationDimension": 2
           }
         ]
-      }
+      },
+      "@odata.etag": "0x1234568AE7E58A1"
     }
   },
   "responses": {
     "200": {
       "body": {
         "name": "temp-preview-test",
+        "defaultScoringProfile": "stringFieldBoost",
         "fields": [
           {
             "name": "id",
@@ -428,6 +496,12 @@
             ]
           }
         ],
+        "corsOptions": {
+          "allowedOrigins": [
+            "https://www.example.com/foo"
+          ],
+          "maxAgeInSeconds": 10
+        },
         "suggesters": [
           {
             "name": "sg",
@@ -451,15 +525,69 @@
             ]
           }
         ],
-        "normalizers": [],
-        "tokenizers": [],
-        "tokenFilters": [],
-        "charFilters": [],
+        "normalizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+            "name": "my_normalizer",
+            "tokenFilters": [
+              "my_tokenFilter"
+            ],
+            "charFilters": [
+              "my_mapping"
+            ]
+          }
+        ],
+        "tokenizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.StandardTokenizerV2",
+            "name": "my_tokenizer",
+            "maxTokenLength": 100
+          }
+        ],
+        "tokenFilters": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
+            "name": "my_tokenFilter",
+            "preserveOriginal": false
+          }
+        ],
+        "charFilters": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
+            "name": "my_mapping",
+            "mappings": [
+              ".=>,",
+              "_=>-"
+            ]
+          }
+        ],
         "similarity": {
-          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+          "k1": 10.0,
+          "b": 0.1
         },
         "semantic": {
-          "configurations": []
+          "defaultConfiguration": "testconfig",
+          "configurations": [
+            {
+              "name": "testconfig",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "category"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "ownerId"
+                  }
+                ]
+              }
+            }
+          ]
         },
         "vectorSearch": {
           "algorithms": [
@@ -558,6 +686,8 @@
             {
               "name": "mySQ8",
               "kind": "scalarQuantization",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
@@ -571,6 +701,8 @@
             {
               "name": "myBQC",
               "kind": "binaryQuantization",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "rescoringOptions": {
                 "enableRescoring": true,
@@ -585,6 +717,7 @@
     "201": {
       "body": {
         "name": "temp-preview-test",
+        "defaultScoringProfile": "stringFieldBoost",
         "fields": [
           {
             "name": "id",
@@ -746,6 +879,12 @@
             ]
           }
         ],
+        "corsOptions": {
+          "allowedOrigins": [
+            "https://www.example.com/foo"
+          ],
+          "maxAgeInSeconds": 10
+        },
         "suggesters": [
           {
             "name": "sg",
@@ -769,15 +908,69 @@
             ]
           }
         ],
-        "normalizers": [],
-        "tokenizers": [],
-        "tokenFilters": [],
-        "charFilters": [],
+        "normalizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.CustomNormalizer",
+            "name": "my_normalizer",
+            "tokenFilters": [
+              "my_tokenFilter"
+            ],
+            "charFilters": [
+              "my_mapping"
+            ]
+          }
+        ],
+        "tokenizers": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.StandardTokenizerV2",
+            "name": "my_tokenizer",
+            "maxTokenLength": 100
+          }
+        ],
+        "tokenFilters": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter",
+            "name": "my_tokenFilter",
+            "preserveOriginal": false
+          }
+        ],
+        "charFilters": [
+          {
+            "@odata.type": "#Microsoft.Azure.Search.MappingCharFilter",
+            "name": "my_mapping",
+            "mappings": [
+              ".=>,",
+              "_=>-"
+            ]
+          }
+        ],
         "similarity": {
-          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+          "k1": 10.0,
+          "b": 0.1
         },
         "semantic": {
-          "configurations": []
+          "defaultConfiguration": "testconfig",
+          "configurations": [
+            {
+              "name": "testconfig",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "category"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "ownerId"
+                  }
+                ]
+              }
+            }
+          ]
         },
         "vectorSearch": {
           "algorithms": [
@@ -876,6 +1069,8 @@
             {
               "name": "mySQ8",
               "kind": "scalarQuantization",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
@@ -889,6 +1084,8 @@
             {
               "name": "myBQC",
               "kind": "binaryQuantization",
+              "rerankWithOriginalVectors": true,
+              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "rescoringOptions": {
                 "enableRescoring": true,
