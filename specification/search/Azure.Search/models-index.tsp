@@ -574,11 +574,11 @@ union VectorThresholdKind {
    */
   VectorSimilarity: "vectorSimilarity",
 
-  @doc("""
-    The results of the vector query will filter based on the '@search.score' value.
-    Note this is the @search.score returned as part of the search response. The
-    threshold direction will be chosen for higher @search.score.
-    """)
+  /**
+   * The results of the vector query will filter based on the '\@search.score' value.
+   * Note this is the \@search.score returned as part of the search response. The
+   * threshold direction will be chosen for higher \@search.score.
+   */
   SearchScore: "searchScore",
 }
 
@@ -1334,7 +1334,9 @@ model VectorQuery {
 @added(Versions.v2024_11_01_preview)
 @discriminator("kind")
 model VectorThreshold {
-  @doc("Type of threshold.")
+  /** 
+   * Type of threshold.
+   */
   kind: VectorThresholdKind;
 }
 
@@ -1450,7 +1452,9 @@ model DocumentDebugInfo {
   vectors?: VectorsDebugInfo;
 }
 
-@doc("Contains debugging information specific to semantic ranking requests.")
+/**
+ * Contains debugging information specific to semantic ranking requests.
+ */
 @added(Versions.v2024_11_01_preview)
 model SemanticDebugInfo {
   /**
@@ -1527,7 +1531,9 @@ model QueryResultDocumentRerankerInput {
   keywords?: string;
 }
 
-@doc("Contains debugging information specific to vector and hybrid search.")
+/**
+ * "Contains debugging information specific to vector and hybrid search.")
+ */
 @added(Versions.v2024_11_01_preview)
 model VectorsDebugInfo {
   /**
@@ -1551,7 +1557,9 @@ model QueryResultDocumentSubscores {
   @visibility("read")
   text?: TextResult;
 
-  @doc("The vector similarity and @search.score values for each vector query.")
+  /**
+   * The vector similarity and \@search.score values for each vector query.
+   */
   @visibility("read")
   vectors?: Record<SingleVectorFieldResult>[];
 
@@ -1574,16 +1582,16 @@ model TextResult {
   searchScore?: float64;
 }
 
-@doc("""
-  A single vector field result. Both @search.score and vector similarity values
-  are returned. Vector similarity is related to @search.score by an equation.
-  """)
+/**
+ * A single vector field result. Both \@search.score and vector similarity values
+ * are returned. Vector similarity is related to \@search.score by an equation.
+ */
 @added(Versions.v2024_11_01_preview)
 model SingleVectorFieldResult {
-  @doc("""
-    The @search.score value that is calculated from the vector similarity score.
-    This is the score that's visible in a pure single-field single-vector query.
-    """)
+  /**
+   * The \@search.score value that is calculated from the vector similarity score.
+   * This is the score that's visible in a pure single-field single-vector query.
+   */
   @visibility("read")
   searchScore?: float64;
 
@@ -1990,18 +1998,18 @@ model VectorSimilarityThreshold extends VectorThreshold {
   kind: "vectorSimilarity";
 }
 
-@doc("""
-  The results of the vector query will filter based on the '@search.score' value.
-  Note this is the @search.score returned as part of the search response. The
-  threshold direction will be chosen for higher @search.score.
-  """)
+/**
+ * The results of the vector query will filter based on the '\@search.score' value.
+ * Note this is the \@search.score returned as part of the search response. The
+ * threshold direction will be chosen for higher \@search.score.
+ */
 @added(Versions.v2024_11_01_preview)
 model SearchScoreThreshold extends VectorThreshold {
-  @doc("""
-    The threshold will filter based on the '@search.score' value. Note this is the
-    @search.score returned as part of the search response. The threshold direction
-    will be chosen for higher @search.score.
-    """)
+  /**
+   * The threshold will filter based on the '\@search.score' value. Note this is the
+   * \@search.score returned as part of the search response. The threshold direction
+   * will be chosen for higher \@search.score.
+   */
   value: float64;
 
   /**

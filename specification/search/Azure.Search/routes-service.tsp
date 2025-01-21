@@ -149,7 +149,9 @@ interface IndexersOperations {
       keysOrIds?: DocumentKeysOrIds;
     },
     {
-      @doc("A process exit code.")
+      /**
+       * A process exit code.
+       */
       @statusCode
       code: "204";
     }
@@ -649,7 +651,9 @@ interface AliasesOperations {
       `alias`: SearchAlias;
     },
     SearchAlias & {
-      @doc("A process exit code.")
+      /**
+       * A process exit code.
+       */
       @statusCode
       code: "201";
     }
@@ -681,8 +685,10 @@ interface AliasesOperations {
       `alias`: SearchAlias;
     },
     SearchAlias & {
+      /**
+       * A process exit code.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-      @doc("A process exit code.")
       @statusCode
       code: "200" | "201";
     }
@@ -701,8 +707,10 @@ interface AliasesOperations {
       ...matchingHeader;
     },
     {
+      /**
+       * A process exit code.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
-      @doc("A process exit code.")
       @statusCode
       code: "204" | "404";
     }

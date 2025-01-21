@@ -81,7 +81,9 @@ alias synonymMapNamePath = {
 };
 
 alias aliasNamePath = {
-  @doc("The name of the alias.")
+  /**
+   * The name of the alias.
+   */
   @path
   aliasName: string;
 };

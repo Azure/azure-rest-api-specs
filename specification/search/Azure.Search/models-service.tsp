@@ -1474,22 +1474,34 @@ union AzureOpenAIModelName {
 union AIStudioModelCatalogName {
   string,
 
-  @doc("OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32")
+  /**
+   * OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32
+   */
   OpenAICLIPImageTextEmbeddingsVitBasePatch32: "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
 
-  @doc("OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336")
+  /**
+   * OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336
+   */
   OpenAICLIPImageTextEmbeddingsViTLargePatch14336: "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
 
-  @doc("Facebook-DinoV2-Image-Embeddings-ViT-Base")
+  /**
+   * Facebook-DinoV2-Image-Embeddings-ViT-Base
+   */
   FacebookDinoV2ImageEmbeddingsViTBase: "Facebook-DinoV2-Image-Embeddings-ViT-Base",
 
-  @doc("Facebook-DinoV2-Image-Embeddings-ViT-Giant")
+  /**
+   * Facebook-DinoV2-Image-Embeddings-ViT-Giant
+   */
   FacebookDinoV2ImageEmbeddingsViTGiant: "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
 
-  @doc("Cohere-embed-v3-english")
+  /**
+   * Cohere-embed-v3-english
+   */
   CohereEmbedV3English: "Cohere-embed-v3-english",
 
-  @doc("Cohere-embed-v3-multilingual")
+  /**
+   * Cohere-embed-v3-multilingual
+   */
   CohereEmbedV3Multilingual: "Cohere-embed-v3-multilingual",
 }
 
@@ -5231,7 +5243,9 @@ model ListDataSourcesResult {
   value: SearchIndexerDataSource[];
 }
 
-@doc("The type of the keysOrIds.")
+/**
+ * The type of the keysOrIds.
+ */
 @added(Versions.v2024_11_01_preview)
 model DocumentKeysOrIds {
   /**
@@ -5543,7 +5557,9 @@ model FieldMappingFunction {
   parameters?: Record<unknown>;
 }
 
-@doc("The type of the cache.")
+/**
+ * The type of the cache.
+ */
 @added(Versions.v2024_11_01_preview)
 model SearchIndexerCache {
   /**
@@ -6179,8 +6195,10 @@ model ListSkillsetsResult {
   value: SearchIndexerSkillset[];
 }
 
+/**
+ * The type of the skill names.
+ */
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@doc("The type of the skill names.")
 @added(Versions.v2024_11_01_preview)
 model SkillNames {
   /**
@@ -9681,8 +9699,10 @@ model SplitSkill extends SearchIndexerSkill {
   `@odata.type`: "#Microsoft.Skills.Text.SplitSkill";
 }
 
+/**
+ * Azure OpenAI Tokenizer parameters.
+ */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@doc("Azure OpenAI Tokenizer parameters.")
 @added(Versions.v2024_11_01_preview)
 model AzureOpenAITokenizerParameters {
   /**
