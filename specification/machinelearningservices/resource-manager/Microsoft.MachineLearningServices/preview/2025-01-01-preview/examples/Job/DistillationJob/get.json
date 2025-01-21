@@ -34,6 +34,12 @@
             "dataGenerationTaskType": "Conversation",
             "teacherModelEndpoint": {
               "endpointName": "newfinetuneinttesting-jbuob"
+            },
+            "trainingData": {
+              "description": null,
+              "jobInputType": "uri_file",
+              "mode": "ReadOnlyMount",
+              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
           "finetuningDetails": {
@@ -42,12 +48,6 @@
               "jobInputType": "mlflow_model",
               "mode": "ReadOnlyMount",
               "uri": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/1"
-            },
-            "trainingData": {
-              "description": null,
-              "jobInputType": "uri_file",
-              "mode": "ReadOnlyMount",
-              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
           "resources": {

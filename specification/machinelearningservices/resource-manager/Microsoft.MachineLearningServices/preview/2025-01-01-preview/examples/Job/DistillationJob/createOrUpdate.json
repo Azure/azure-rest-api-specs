@@ -10,6 +10,12 @@
           "dataGenerationTaskType": "Conversation",
           "teacherModelEndpoint": {
             "endpointName": "newfinetuneinttesting-jbuob"
+          },
+          "trainingData": {
+            "description": null,
+            "jobInputType": "uri_file",
+            "mode": "ReadOnlyMount",
+            "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
           }
         },
         "finetuningDetails": {
@@ -18,12 +24,6 @@
             "jobInputType": "mlflow_model",
             "mode": "ReadOnlyMount",
             "uri": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/1"
-          },
-          "trainingData": {
-            "description": null,
-            "jobInputType": "uri_file",
-            "mode": "ReadOnlyMount",
-            "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
           }
         },
         "jobType": "Distillation",
@@ -62,26 +62,26 @@
           "displayName": "string",
           "experimentName": "string",
           "dataGenerationDetails": {
-            "dataGenerationType": "LabelGeneration",
-            "dataGenerationTaskType": "Conversation",
-            "teacherModelEndpoint": {
-              "endpointName": "newfinetuneinttesting-jbuob"
-            }
+          "dataGenerationType": "LabelGeneration",
+          "dataGenerationTaskType": "Conversation",
+          "teacherModelEndpoint": {
+            "endpointName": "newfinetuneinttesting-jbuob"
           },
-          "finetuningDetails": {
-            "studentModel": {
-              "description": null,
-              "jobInputType": "mlflow_model",
-              "mode": "ReadOnlyMount",
-              "uri": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/1"
-            },
-            "trainingData": {
-              "description": null,
-              "jobInputType": "uri_file",
-              "mode": "ReadOnlyMount",
-              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
-            }
-          },
+          "trainingData": {
+            "description": null,
+            "jobInputType": "uri_file",
+            "mode": "ReadOnlyMount",
+            "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
+          }
+        },
+        "finetuningDetails": {
+          "studentModel": {
+            "description": null,
+            "jobInputType": "mlflow_model",
+            "mode": "ReadOnlyMount",
+            "uri": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/1"
+          }
+        },
           "identity": {
             "identityType": "AMLToken"
           },
@@ -146,6 +146,12 @@
             "dataGenerationTaskType": "Conversation",
             "teacherModelEndpoint": {
               "endpointName": "newfinetuneinttesting-jbuob"
+            },
+            "trainingData": {
+              "description": null,
+              "jobInputType": "uri_file",
+              "mode": "ReadOnlyMount",
+              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
           "finetuningDetails": {
@@ -154,12 +160,6 @@
               "jobInputType": "mlflow_model",
               "mode": "ReadOnlyMount",
               "uri": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/1"
-            },
-            "trainingData": {
-              "description": null,
-              "jobInputType": "uri_file",
-              "mode": "ReadOnlyMount",
-              "uri": "azureml://registries/azureml-meta/models/Llama-2-7b/versions/11"
             }
           },
           "identity": {
