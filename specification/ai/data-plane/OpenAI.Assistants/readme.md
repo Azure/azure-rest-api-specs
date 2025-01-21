@@ -64,3 +64,12 @@ These settings apply only when `--tag=release_2024_12_01_preview_autogen` is spe
 ``` yaml $(tag) == 'release_2024_12_01_preview_autogen'
 input-file: OpenApiV2/preview/2024-12-01-preview/assistants_generated.json
 ```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: assistants_generated.json
+    reason: No existing examples.
+```
