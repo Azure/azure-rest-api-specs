@@ -5,12 +5,8 @@ on: pull_request
 jobs:
   TypeSpec-Requirement:
     name: TypeSpec Requirement
-    strategy:
-      fail-fast: false
-      matrix:
-        spec-type: [data-plane, resource-manager]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -25,5 +21,12 @@ jobs:
           eng/scripts/TypeSpec-Requirement.ps1 `
             -BaseCommitish HEAD^ `
             -TargetCommitish HEAD `
-            -SpecType ${{ matrix.spec-type }}
+        id: tsr-ps1
         shell: pwsh
+
+      # Always add label artifact, even if "brownfield=false", to ensure label is removed when necessary
+      - uses: ./.github/actions/add-label-artifact
+        name: Upload artifact with results
+        with:
+          name: "brownfield"
+          value: "${{ steps.tsr-ps1.outputs.brownfield == 'true' }}"
