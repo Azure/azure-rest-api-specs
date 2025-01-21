@@ -16,7 +16,8 @@
           "kind": "AzureDevOps",
           "organizations": [
             {
-              "url": "https://mseng.visualstudio.com"
+              "url": "https://mseng.visualstudio.com",
+              "openAccess": true
             }
           ]
         },
@@ -32,7 +33,15 @@
             {
               "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
             }
-          ]
+          ],
+          "osProfile": {
+            "secretsManagementSettings": {
+              "certificateStoreName": "Root",
+              "observedCertificates": [
+                "https://abc.vault.azure.net/secrets/one"
+              ]
+            }
+          }
         }
       }
     }
@@ -67,7 +76,15 @@
               {
                 "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
               }
-            ]
+            ],
+            "osProfile": {
+              "secretsManagementSettings": {
+                "certificateStoreName": "Root",
+                "observedCertificates": [
+                  "https://abc.vault.azure.net/secrets/one"
+                ]
+              }
+            }
           }
         },
         "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
@@ -100,7 +117,15 @@
               {
                 "resourceId": "/MicrosoftWindowsServer/WindowsServer/2019-Datacenter/latest"
               }
-            ]
+            ],
+            "osProfile": {
+              "secretsManagementSettings": {
+                "certificateStoreName": "Root",
+                "observedCertificates": [
+                  "https://abc.vault.azure.net/secrets/one"
+                ]
+              }
+            }
           }
         },
         "id": "/subscriptions/a2e95d27-c161-4b61-bda4-11512c14c2c2/resourceGroups/rg/providers/Microsoft.DevOpsInfrastructure/Pools/pool",
