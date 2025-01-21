@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "./common.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -10,187 +11,9 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Language.Conversations.Authoring;
 
 namespace Language.Conversations.Authoring;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ProjectKind {
-  string,
-
-  /**
-   * A project to build natural language into apps, bots, and IoT devices.
-   */
-  Conversation: "Conversation",
-
-  /**
-   * A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project.
-   */
-  Orchestration: "Orchestration",
-
-  /**
-   * A project to build conversation summarization models which are able to summarize long conversations.
-   */
-  @added(Versions.v2023_04_15_preview)
-  CustomConversationSummarization: "CustomConversationSummarization",
-}
-
-/**
- * Human-readable error code.
- */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ErrorCode {
-  string,
-  InvalidRequest: "InvalidRequest",
-  InvalidArgument: "InvalidArgument",
-  Unauthorized: "Unauthorized",
-  Forbidden: "Forbidden",
-  NotFound: "NotFound",
-  ProjectNotFound: "ProjectNotFound",
-  OperationNotFound: "OperationNotFound",
-  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
-  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
-  TooManyRequests: "TooManyRequests",
-  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
-  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
-  InternalServerError: "InternalServerError",
-  ServiceUnavailable: "ServiceUnavailable",
-  Timeout: "Timeout",
-  QuotaExceeded: "QuotaExceeded",
-  Conflict: "Conflict",
-  Warning: "Warning",
-}
-
-/**
- * Human-readable error code.
- */
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union InnerErrorCode {
-  string,
-  InvalidRequest: "InvalidRequest",
-  InvalidParameterValue: "InvalidParameterValue",
-  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
-  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
-  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
-  ExtractionFailure: "ExtractionFailure",
-  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
-  EmptyRequest: "EmptyRequest",
-  MissingInputDocuments: "MissingInputDocuments",
-  InvalidDocument: "InvalidDocument",
-  ModelVersionIncorrect: "ModelVersionIncorrect",
-  InvalidDocumentBatch: "InvalidDocumentBatch",
-  UnsupportedLanguageCode: "UnsupportedLanguageCode",
-  InvalidCountryHint: "InvalidCountryHint",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union ExportedProjectFormat {
-  string,
-
-  /**
-   * Specifies the format for a conversational project.
-   */
-  Conversation: "Conversation",
-
-  /**
-   * Specifies the format for an application that was exported from LUIS.
-   */
-  Luis: "Luis",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("StringIndexType", "csharp")
-union StringIndexType {
-  string,
-
-  /**
-   * The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript.
-   */
-  Utf16CodeUnit: "Utf16CodeUnit",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union TrainingMode {
-  string,
-
-  /**
-   * Trains using fine-tuned neural network transformer models. Can train multilingual projects.
-   */
-  advanced: "advanced",
-
-  /**
-   * Faster training times for quicker iterations.
-   */
-  standard: "standard",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union EvaluationKind {
-  string,
-
-  /**
-   * Split the data into training and test sets according to user-defined percentages.
-   */
-  percentage: "percentage",
-
-  /**
-   * Split the data according to the chosen dataset for every example in the data.
-   */
-  manual: "manual",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@lroStatus
-union JobStatus {
-  string,
-  notStarted: "notStarted",
-  running: "running",
-
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  @lroFailed
-  failed: "failed",
-
-  @lroCanceled
-  cancelled: "cancelled",
-
-  cancelling: "cancelling",
-  partiallyCompleted: "partiallyCompleted",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-union CompositionSetting {
-  string,
-
-  /**
-   * When two or more components are found in the text and overlap, the component with the longest set of characters is returned.
-   */
-  returnLongestOverlap: "returnLongestOverlap",
-
-  /**
-   * All components must overlap at the exact same characters in the text for the entity to return. If one of the defined components is not matched or predicted, the entity will not return.
-   */
-  requireExactOverlap: "requireExactOverlap",
-
-  /**
-   * Every component's match or prediction is returned as a separate instance of the entity.
-   */
-  separateComponents: "separateComponents",
-
-  /**
-   * When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them.
-   */
-  combineComponents: "combineComponents",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("OrchestrationTargetProjectKind", "csharp")
-union OrchestrationTargetProjectKind {
-  string,
-  Luis: "Luis",
-  Conversation: "Conversation",
-  QuestionAnswering: "QuestionAnswering",
-}
 
 /**
  * Represents a list of retrieved projects' metadata.
@@ -217,22 +40,22 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  createdDateTime: utcDateTime;
+  createdOn: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  lastModifiedDateTime: utcDateTime;
+  lastModifiedOn: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  lastTrainedDateTime?: utcDateTime;
+  lastTrainedOn?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  lastDeployedDateTime?: utcDateTime;
+  lastDeployedOn?: utcDateTime;
 
   /**
    * Represents the project kind.
@@ -292,51 +115,9 @@ model AnalyzeConversationAuthoringProjectSettings {
 }
 
 /**
- * Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * The error object.
-   */
-  error: Error;
-}
-
-/**
- * The error object.
- */
-@clientName("AuthoringConversationsError", "csharp")
-model Error {
-  /**
-   * One of a server-defined set of error codes.
-   */
-  code: ErrorCode;
-
-  /**
-   * A human-readable representation of the error.
-   */
-  message: string;
-
-  /**
-   * The target of the error.
-   */
-  target?: string;
-
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
-  details?: Error[];
-
-  /**
-   * An object containing more specific information than the current object about
-   * the error.
-   */
-  innererror?: InnerErrorModel;
-}
-
-/**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
+@clientName("AnalyzeConversationInnerErrorModel", "csharp")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
@@ -488,15 +269,15 @@ model AnalyzeConversationAuthoringExportedProject {
   /**
    * Represents the project assets.
    */
-  assets?: AnalyzeConversationAuthoringExportedProjectAssets;
+  assets?: AnalyzeConversationAuthoringExportedProjectAsset;
 }
 
 /**
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("ExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The type of project containing the assets.
    */
@@ -576,17 +357,17 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  createdDateTime: utcDateTime;
+  createdOn: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  lastUpdatedDateTime: utcDateTime;
+  lastUpdatedOn: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  expirationDateTime?: utcDateTime;
+  expiresOn?: utcDateTime;
 
   /**
    * The job status.
@@ -601,7 +382,7 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The errors encountered while executing the job.
    */
-  errors?: Error[];
+  errors?: Foundations.Error[];
 }
 
 /**
@@ -658,12 +439,12 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedDateTime: utcDateTime;
+  lastDeployedOn: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
@@ -784,7 +565,7 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
-  resultUrl?: string;
+  resultUri?: string;
 }
 
 /**
@@ -835,7 +616,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * The duration of the model's last training request in seconds.
@@ -879,7 +660,7 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
+  evaluationDetails: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
    * Represents trained model label.
@@ -1027,12 +808,12 @@ model AnalyzeConversationAuthoringEvaluationSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrix", "csharp")
+@clientName("AnalyzeConversationConfusionMatrix", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrix
   is Record<AnalyzeConversationAuthoringConfusionMatrixRow>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConfusionMatrixRow", "csharp")
+@clientName("AnalyzeConversationConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
@@ -1085,7 +866,7 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("ConfusionMatrixCell", "csharp")
+@clientName("AnalyzeConversationConfusionMatrixCell", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
@@ -1104,17 +885,17 @@ model AnalyzeConversationAuthoringConfusionMatrixCell {
 @clientName("EntityEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringEntityEvaluationSummary {
   /**
-   * Represents the model precision
+   * Represents the model F1 score
    */
   f1: float64;
 
   /**
-   * Represents the model recall
+   * Represents the model precision
    */
   precision: float64;
 
   /**
-   * Represents the model F1 score
+   * Represents the model precision
    */
   recall: float64;
 
@@ -1266,7 +1047,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
    */
   @key
   @visibility("read")
-  azureResourceId: string;
+  resourceId: string;
 
   /**
    * The resource region.
@@ -1394,7 +1175,7 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  estimatedEndDateTime?: utcDateTime;
+  estimatedEndOn?: utcDateTime;
 }
 
 /**
@@ -1410,12 +1191,12 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  startDateTime?: utcDateTime;
+  startedOn?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  endDateTime?: utcDateTime;
+  endedOn?: utcDateTime;
 
   /**
    * Represents the status of the sub-operation.
@@ -1479,7 +1260,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  lastDeployedDateTime: utcDateTime;
+  lastDeployedOn: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
@@ -1600,12 +1381,12 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  compositionSetting?: CompositionSetting;
+  compositionMode?: CompositionMode;
 
   /**
    * The list component of the entity.
    */
-  list?: AnalyzeConversationAuthoringExportedEntityList;
+  entities?: AnalyzeConversationAuthoringExportedEntityList;
 
   /**
    * The prebuilt entities components.
@@ -1723,9 +1504,9 @@ model AnalyzeConversationAuthoringConversationExportedIntent {
 /**
  * Represents the exported assets of a conversational project.
  */
-@clientName("ConversationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("ConversationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationExportedProjectAsset
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * The intents defined in the project.
    */
@@ -1800,8 +1581,8 @@ model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationSummarizationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAssets {
+@clientName("ConversationSummarizationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset {
   /**
    * Represents the conversations of the project.
    */
@@ -1959,9 +1740,9 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
 /**
  * Represents the assets of an orchestration project.
  */
-@clientName("OrchestrationExportedProjectAssets", "csharp")
-model AnalyzeConversationAuthoringOrchestrationExportedProjectAssets
-  extends AnalyzeConversationAuthoringExportedProjectAssets {
+@clientName("OrchestrationExportedProjectAsset", "csharp")
+model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
+  extends AnalyzeConversationAuthoringExportedProjectAsset {
   /**
    * Represents the intents of the project.
    */
@@ -2026,12 +1807,12 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  lastTrainedDateTime: utcDateTime;
+  lastTrainedOn: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  lastExportedModelDateTime: utcDateTime;
+  lastExportedModelOn: utcDateTime;
 
   /**
    * The model expiration date.

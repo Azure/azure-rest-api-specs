@@ -62,7 +62,7 @@
   "paths": {
     "/authoring/analyze-conversations/projects": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListProjects",
+        "operationId": "ProjectsConversationAuthoringAnalysis_ListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -88,13 +88,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Projects": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListProjects.json"
           }
         },
         "x-ms-pageable": {
@@ -104,7 +105,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetProject",
+        "operationId": "ProjectsConversationAuthoringAnalysis_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -129,18 +130,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProject.json"
           }
         }
       },
       "patch": {
-        "operationId": "AnalyzeConversationAuthoring_CreateProject",
+        "operationId": "ProjectsConversationAuthoringAnalysis_CreateProject",
         "description": "Creates a new project or updates an existing one.",
         "consumes": [
           "application/merge-patch+json"
@@ -183,18 +185,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Create Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateProject.json"
           }
         }
       },
       "delete": {
-        "operationId": "AnalyzeConversationAuthoring_DeleteProject",
+        "operationId": "ProjectsConversationAuthoringAnalysis_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -223,13 +226,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Delete Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -237,7 +241,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_CopyProjectAuthorization",
+        "operationId": "CopyProjectConversationAuthoringAnalysis_CopyProjectAuthorization",
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "parameters": [
           {
@@ -270,20 +274,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Copy Project Authorization": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProjectAuthorization.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_CopyProject",
+        "operationId": "CopyProjectConversationAuthoringAnalysis_CopyProject",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
           {
@@ -321,13 +326,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Copy Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCopyProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -335,7 +341,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_Export",
+        "operationId": "ProjectFilesConversationAuthoringAnalysis_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -384,7 +390,9 @@
             "required": true,
             "type": "string",
             "enum": [
-              "Utf16CodeUnit"
+              "Utf16CodeUnit",
+              "Utf8CodeUnit",
+              "Utf32CodeUnit"
             ],
             "x-ms-enum": {
               "name": "StringIndexType",
@@ -394,6 +402,14 @@
                   "name": "Utf16CodeUnit",
                   "value": "Utf16CodeUnit",
                   "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+                },
+                {
+                  "name": "Utf8CodeUnit",
+                  "value": "Utf8CodeUnit"
+                },
+                {
+                  "name": "Utf32CodeUnit",
+                  "value": "Utf32CodeUnit"
                 }
               ]
             }
@@ -427,13 +443,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Export Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulExportProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -441,7 +458,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_Import",
+        "operationId": "ProjectFilesConversationAuthoringAnalysis_Import",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
@@ -507,13 +524,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Import Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulImportProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -521,7 +539,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_Train",
+        "operationId": "TrainingConversationAuthoringAnalysis_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -559,13 +577,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Train Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulTrainProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -573,7 +592,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetCopyProjectStatus",
+        "operationId": "CopyProjectConversationAuthoringAnalysis_GetCopyProjectStatus",
         "description": "Gets the status of an existing copy project job.",
         "parameters": [
           {
@@ -605,20 +624,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Copy Project Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetCopyProjectStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListDeployments",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_ListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -652,13 +672,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -668,7 +689,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetDeployment",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -700,18 +721,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeployment.json"
           }
         }
       },
       "put": {
-        "operationId": "AnalyzeConversationAuthoring_DeployProject",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -756,19 +778,20 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeployProject.json"
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "AnalyzeConversationAuthoring_DeleteDeployment",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -804,13 +827,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Delete Deployment": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeployment.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -818,7 +842,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_DeleteDeploymentFromResources",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_DeleteDeploymentFromResources",
         "description": "Deletes a project deployment from the specified assigned resources.",
         "parameters": [
           {
@@ -863,13 +887,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Delete Deployment From Resources": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteDeploymentFromResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -877,7 +902,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetDeploymentDeleteFromResourcesStatus",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeploymentDeleteFromResourcesStatus",
         "description": "Gets the status of an existing delete deployment from specific resources job.",
         "parameters": [
           {
@@ -916,20 +941,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentDeleteFromResourcesStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetDeploymentStatus",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -968,20 +994,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Deployment Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetDeploymentStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_SwapDeployments",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -1019,13 +1046,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Swap Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulSwapDeployments.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1033,7 +1061,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetSwapDeploymentsStatus",
+        "operationId": "DeploymentsConversationAuthoringAnalysis_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -1065,20 +1093,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Swap Deployments Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSwapDeploymentsStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetExportStatus",
+        "operationId": "ProjectFilesConversationAuthoringAnalysis_GetExportStatus",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
@@ -1110,20 +1139,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Export Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetImportStatus",
+        "operationId": "ProjectFilesConversationAuthoringAnalysis_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -1155,20 +1185,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Import Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetImportStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListTrainedModels",
+        "operationId": "ModelsConversationAuthoringAnalysis_ListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -1202,13 +1233,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Models": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListModels.json"
           }
         },
         "x-ms-pageable": {
@@ -1218,7 +1250,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetTrainedModel",
+        "operationId": "ModelsConversationAuthoringAnalysis_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -1250,18 +1282,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModel.json"
           }
         }
       },
       "delete": {
-        "operationId": "AnalyzeConversationAuthoring_DeleteTrainedModel",
+        "operationId": "ModelsConversationAuthoringAnalysis_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -1290,20 +1323,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Delete Model": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteModel.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_EvaluateModel",
+        "operationId": "ModelsConversationAuthoringAnalysis_EvaluateModel",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
           {
@@ -1348,13 +1382,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Evaluation Project": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulEvaluationProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1362,7 +1397,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_LoadSnapshot",
+        "operationId": "ModelsConversationAuthoringAnalysis_LoadSnapshot",
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
         "parameters": [
           {
@@ -1398,13 +1433,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Load Snapshot": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulLoadSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1412,7 +1448,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetEvaluationStatus",
+        "operationId": "ModelsConversationAuthoringAnalysis_GetEvaluationStatus",
         "description": "Gets the status for an evaluation job.",
         "parameters": [
           {
@@ -1451,20 +1487,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Evaluation Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetEvaluationStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetModelEvaluationResults",
+        "operationId": "ModelsConversationAuthoringAnalysis_GetModelEvaluationResults",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
@@ -1508,13 +1545,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Model Evaluation": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluation.json"
           }
         },
         "x-ms-pageable": {
@@ -1524,7 +1562,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetModelEvaluationSummary",
+        "operationId": "ModelsConversationAuthoringAnalysis_GetModelEvaluationSummary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
@@ -1556,20 +1594,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Model Evaluation Summary": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetModelEvaluationSummary.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetLoadSnapshotStatus",
+        "operationId": "ModelsConversationAuthoringAnalysis_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -1608,20 +1647,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Load Snapshot Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetLoadSnapshotStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListDeploymentResources",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_ListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -1655,13 +1695,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Deployment Resources": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeploymentResources.json"
           }
         },
         "x-ms-pageable": {
@@ -1671,7 +1712,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_AssignDeploymentResources",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_AssignDeploymentResources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
@@ -1709,13 +1750,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Assign Deployment Resources": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulAssignDeploymentResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1723,7 +1765,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_UnassignDeploymentResources",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_UnassignDeploymentResources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
@@ -1761,13 +1803,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Unassign Deployment Resources": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulUnassignDeploymentResources.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1775,7 +1818,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetAssignDeploymentResourcesStatus",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_GetAssignDeploymentResourcesStatus",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
           {
@@ -1807,20 +1850,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Assign Deployment Resources Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetAssignDeploymentResourcesStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetUnassignDeploymentResourcesStatus",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_GetUnassignDeploymentResourcesStatus",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
           {
@@ -1852,20 +1896,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Unassign Deployment Resources Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetUnassignDeploymentResourcesStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListTrainingJobs",
+        "operationId": "TrainingConversationAuthoringAnalysis_ListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -1899,13 +1944,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Training Jobs": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListTrainingJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -1915,7 +1961,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetTrainingStatus",
+        "operationId": "TrainingConversationAuthoringAnalysis_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -1947,20 +1993,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Train Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetTrainStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "AnalyzeConversationAuthoring_CancelTrainingJob",
+        "operationId": "TrainingConversationAuthoringAnalysis_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -1996,13 +2043,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Cancel Training Job": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCancelTrainingJob.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2010,7 +2058,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetProjectDeletionStatus",
+        "operationId": "ProjectsConversationAuthoringAnalysis_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {
@@ -2034,20 +2082,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Project Deletion Status": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetProjectDeletionStatus.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListAssignedResourceDeployments",
+        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_ListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2088,20 +2137,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Assigned Resource Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListAssignedResourceDeployments.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetSupportedLanguages",
+        "operationId": "ProjectsConversationAuthoringAnalysis_GetSupportedLanguages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
           {
@@ -2176,20 +2226,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Supported Languages": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedLanguages.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_GetSupportedPrebuiltEntities",
+        "operationId": "PrebuiltsConversationAuthoringAnalysis_GetSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2244,20 +2295,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Supported Prebuilt Entities": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedPrebuiltEntities.json"
           }
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "AnalyzeConversationAuthoring_ListTrainingConfigVersions",
+        "operationId": "TrainingConversationAuthoringAnalysis_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -2332,13 +2384,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Supported Training Config Versions": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         }
       }
@@ -2366,7 +2419,7 @@
       "type": "object",
       "description": "Represents the assigned deployment resource.",
       "properties": {
-        "azureResourceId": {
+        "resourceId": {
           "type": "string",
           "description": "The resource ID.",
           "readOnly": true
@@ -2377,7 +2430,7 @@
         }
       },
       "required": [
-        "azureResourceId",
+        "resourceId",
         "region"
       ]
     },
@@ -2389,7 +2442,7 @@
           "type": "string",
           "description": "Represents the deployment name."
         },
-        "lastDeployedDateTime": {
+        "lastDeployedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last deployed time."
@@ -2402,7 +2455,7 @@
       },
       "required": [
         "deploymentName",
-        "lastDeployedDateTime",
+        "lastDeployedOn",
         "deploymentExpirationDate"
       ]
     },
@@ -2489,11 +2542,11 @@
           "type": "string",
           "description": "The category of the entity."
         },
-        "compositionSetting": {
-          "$ref": "#/definitions/CompositionSetting",
+        "compositionMode": {
+          "$ref": "#/definitions/CompositionMode",
           "description": "The behavior to follow when the entity's components overlap with each other."
         },
-        "list": {
+        "entities": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringExportedEntityList",
           "description": "The list component of the entity."
         },
@@ -2534,7 +2587,7 @@
         "category"
       ]
     },
-    "AnalyzeConversationAuthoringConversationExportedProjectAssets": {
+    "AnalyzeConversationAuthoringConversationExportedProjectAsset": {
       "type": "object",
       "description": "Represents the exported assets of a conversational project.",
       "properties": {
@@ -2565,7 +2618,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAssets"
+          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAsset"
         }
       ],
       "x-ms-discriminator-value": "Conversation"
@@ -2634,17 +2687,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -2665,15 +2718,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -2797,17 +2850,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -2828,15 +2881,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -2849,17 +2902,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -2880,15 +2933,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -2919,17 +2972,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -2950,15 +3003,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -3026,17 +3079,17 @@
         "f1": {
           "type": "number",
           "format": "double",
-          "description": "Represents the model precision"
+          "description": "Represents the model F1 score"
         },
         "precision": {
           "type": "number",
           "format": "double",
-          "description": "Represents the model recall"
+          "description": "Represents the model precision"
         },
         "recall": {
           "type": "number",
           "format": "double",
-          "description": "Represents the model F1 score"
+          "description": "Represents the model precision"
         },
         "truePositiveCount": {
           "type": "integer",
@@ -3072,7 +3125,7 @@
     "AnalyzeConversationAuthoringEvaluationJobResult": {
       "type": "object",
       "properties": {
-        "evaluationOptions": {
+        "evaluationDetails": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
           "description": "Represents the options used running the evaluation."
         },
@@ -3091,7 +3144,7 @@
         }
       },
       "required": [
-        "evaluationOptions",
+        "evaluationDetails",
         "modelLabel",
         "trainingConfigVersion",
         "percentComplete"
@@ -3106,17 +3159,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -3137,7 +3190,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -3148,8 +3201,8 @@
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status",
         "result"
       ]
@@ -3205,17 +3258,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -3236,19 +3289,19 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
-        "resultUrl": {
+        "resultUri": {
           "type": "string",
           "description": "The URL to use in order to download the exported project."
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -3453,7 +3506,7 @@
           "description": "Represents the project metadata."
         },
         "assets": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAssets",
+          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAsset",
           "description": "Represents the project assets."
         }
       },
@@ -3463,7 +3516,7 @@
         "metadata"
       ]
     },
-    "AnalyzeConversationAuthoringExportedProjectAssets": {
+    "AnalyzeConversationAuthoringExportedProjectAsset": {
       "type": "object",
       "description": "Represents the assets of an exported project.",
       "properties": {
@@ -3543,17 +3596,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -3574,15 +3627,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -3702,17 +3755,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -3733,15 +3786,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -3762,7 +3815,7 @@
         "category"
       ]
     },
-    "AnalyzeConversationAuthoringOrchestrationExportedProjectAssets": {
+    "AnalyzeConversationAuthoringOrchestrationExportedProjectAsset": {
       "type": "object",
       "description": "Represents the assets of an orchestration project.",
       "properties": {
@@ -3785,7 +3838,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAssets"
+          "$ref": "#/definitions/AnalyzeConversationAuthoringExportedProjectAsset"
         }
       ],
       "x-ms-discriminator-value": "Orchestration"
@@ -3869,17 +3922,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -3900,15 +3953,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -3925,12 +3978,12 @@
           "type": "string",
           "description": "Represents deployment modelId."
         },
-        "lastTrainedDateTime": {
+        "lastTrainedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last trained time."
         },
-        "lastDeployedDateTime": {
+        "lastDeployedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents deployment last deployed time."
@@ -3956,8 +4009,8 @@
       "required": [
         "deploymentName",
         "modelId",
-        "lastTrainedDateTime",
-        "lastDeployedDateTime",
+        "lastTrainedOn",
+        "lastDeployedOn",
         "deploymentExpirationDate",
         "modelTrainingConfigVersion",
         "assignedResources"
@@ -3967,22 +4020,22 @@
       "type": "object",
       "description": "Represents the metadata of a project.",
       "properties": {
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the project creation datetime."
         },
-        "lastModifiedDateTime": {
+        "lastModifiedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the project creation datetime."
         },
-        "lastTrainedDateTime": {
+        "lastTrainedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the project last trained datetime."
         },
-        "lastDeployedDateTime": {
+        "lastDeployedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the project last deployed datetime."
@@ -4046,8 +4099,8 @@
         }
       },
       "required": [
-        "createdDateTime",
-        "lastModifiedDateTime",
+        "createdOn",
+        "lastModifiedOn",
         "projectKind",
         "projectName",
         "language"
@@ -4080,7 +4133,7 @@
           "type": "string",
           "description": "The model ID."
         },
-        "lastTrainedDateTime": {
+        "lastTrainedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last trained date time of the model."
@@ -4107,7 +4160,7 @@
       "required": [
         "label",
         "modelId",
-        "lastTrainedDateTime",
+        "lastTrainedOn",
         "lastTrainingDurationInSeconds",
         "modelExpirationDate",
         "modelTrainingConfigVersion",
@@ -4146,12 +4199,12 @@
           "format": "int32",
           "description": "Represents progress percentage."
         },
-        "startDateTime": {
+        "startedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the start date time."
         },
-        "endDateTime": {
+        "endedOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the end date time."
@@ -4214,17 +4267,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -4245,15 +4298,15 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         }
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status"
       ]
     },
@@ -4365,7 +4418,7 @@
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents model evaluation status."
         },
-        "estimatedEndDateTime": {
+        "estimatedEndOn": {
           "type": "string",
           "format": "date-time",
           "description": "Represents the estimated end date time for training and evaluation."
@@ -4386,17 +4439,17 @@
           "description": "The job ID.",
           "readOnly": true
         },
-        "createdDateTime": {
+        "createdOn": {
           "type": "string",
           "format": "date-time",
           "description": "The creation date time of the job."
         },
-        "lastUpdatedDateTime": {
+        "lastUpdatedOn": {
           "type": "string",
           "format": "date-time",
           "description": "The last date time the job was updated."
         },
-        "expirationDateTime": {
+        "expiresOn": {
           "type": "string",
           "format": "date-time",
           "description": "The expiration date time of the job."
@@ -4417,7 +4470,7 @@
           "type": "array",
           "description": "The errors encountered while executing the job.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": []
         },
@@ -4428,8 +4481,8 @@
       },
       "required": [
         "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
+        "createdOn",
+        "lastUpdatedOn",
         "status",
         "result"
       ]
@@ -4548,12 +4601,73 @@
         "predictedIntent"
       ]
     },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "CompositionSetting": {
+    "CompositionMode": {
       "type": "string",
       "enum": [
         "returnLongestOverlap",
@@ -4562,7 +4676,7 @@
         "combineComponents"
       ],
       "x-ms-enum": {
-        "name": "CompositionSetting",
+        "name": "CompositionMode",
         "modelAsString": true,
         "values": [
           {
@@ -4588,155 +4702,6 @@
         ]
       }
     },
-    "Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "Unauthorized",
-        "Forbidden",
-        "NotFound",
-        "ProjectNotFound",
-        "OperationNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchIndexNotFound",
-        "TooManyRequests",
-        "AzureCognitiveSearchThrottling",
-        "AzureCognitiveSearchIndexLimitReached",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "Timeout",
-        "QuotaExceeded",
-        "Conflict",
-        "Warning"
-      ],
-      "x-ms-enum": {
-        "name": "ErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidArgument",
-            "value": "InvalidArgument"
-          },
-          {
-            "name": "Unauthorized",
-            "value": "Unauthorized"
-          },
-          {
-            "name": "Forbidden",
-            "value": "Forbidden"
-          },
-          {
-            "name": "NotFound",
-            "value": "NotFound"
-          },
-          {
-            "name": "ProjectNotFound",
-            "value": "ProjectNotFound"
-          },
-          {
-            "name": "OperationNotFound",
-            "value": "OperationNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexNotFound",
-            "value": "AzureCognitiveSearchIndexNotFound"
-          },
-          {
-            "name": "TooManyRequests",
-            "value": "TooManyRequests"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "AzureCognitiveSearchIndexLimitReached",
-            "value": "AzureCognitiveSearchIndexLimitReached"
-          },
-          {
-            "name": "InternalServerError",
-            "value": "InternalServerError"
-          },
-          {
-            "name": "ServiceUnavailable",
-            "value": "ServiceUnavailable"
-          },
-          {
-            "name": "Timeout",
-            "value": "Timeout"
-          },
-          {
-            "name": "QuotaExceeded",
-            "value": "QuotaExceeded"
-          },
-          {
-            "name": "Conflict",
-            "value": "Conflict"
-          },
-          {
-            "name": "Warning",
-            "value": "Warning"
-          }
-        ]
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "EvaluationKind": {
       "type": "string",
       "enum": [
@@ -4759,121 +4724,6 @@
           }
         ]
       }
-    },
-    "InnerErrorCode": {
-      "type": "string",
-      "description": "Human-readable error code.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidParameterValue",
-        "KnowledgeBaseNotFound",
-        "AzureCognitiveSearchNotFound",
-        "AzureCognitiveSearchThrottling",
-        "ExtractionFailure",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputDocuments",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode",
-        "InvalidCountryHint"
-      ],
-      "x-ms-enum": {
-        "name": "InnerErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InvalidRequest",
-            "value": "InvalidRequest"
-          },
-          {
-            "name": "InvalidParameterValue",
-            "value": "InvalidParameterValue"
-          },
-          {
-            "name": "KnowledgeBaseNotFound",
-            "value": "KnowledgeBaseNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchNotFound",
-            "value": "AzureCognitiveSearchNotFound"
-          },
-          {
-            "name": "AzureCognitiveSearchThrottling",
-            "value": "AzureCognitiveSearchThrottling"
-          },
-          {
-            "name": "ExtractionFailure",
-            "value": "ExtractionFailure"
-          },
-          {
-            "name": "InvalidRequestBodyFormat",
-            "value": "InvalidRequestBodyFormat"
-          },
-          {
-            "name": "EmptyRequest",
-            "value": "EmptyRequest"
-          },
-          {
-            "name": "MissingInputDocuments",
-            "value": "MissingInputDocuments"
-          },
-          {
-            "name": "InvalidDocument",
-            "value": "InvalidDocument"
-          },
-          {
-            "name": "ModelVersionIncorrect",
-            "value": "ModelVersionIncorrect"
-          },
-          {
-            "name": "InvalidDocumentBatch",
-            "value": "InvalidDocumentBatch"
-          },
-          {
-            "name": "UnsupportedLanguageCode",
-            "value": "UnsupportedLanguageCode"
-          },
-          {
-            "name": "InvalidCountryHint",
-            "value": "InvalidCountryHint"
-          }
-        ]
-      }
-    },
-    "InnerErrorModel": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InnerErrorCode",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "object",
-          "description": "Error details.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerErrorModel",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "JobStatus": {
       "type": "string",
@@ -5111,7 +4961,9 @@
     "StringIndexType": {
       "type": "string",
       "enum": [
-        "Utf16CodeUnit"
+        "Utf16CodeUnit",
+        "Utf8CodeUnit",
+        "Utf32CodeUnit"
       ],
       "x-ms-enum": {
         "name": "StringIndexType",
@@ -5121,6 +4973,14 @@
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
             "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          },
+          {
+            "name": "Utf8CodeUnit",
+            "value": "Utf8CodeUnit"
+          },
+          {
+            "name": "Utf32CodeUnit",
+            "value": "Utf32CodeUnit"
           }
         ]
       }
@@ -5213,7 +5073,9 @@
       "required": true,
       "type": "string",
       "enum": [
-        "Utf16CodeUnit"
+        "Utf16CodeUnit",
+        "Utf8CodeUnit",
+        "Utf32CodeUnit"
       ],
       "x-ms-enum": {
         "name": "StringIndexType",
@@ -5223,6 +5085,14 @@
             "name": "Utf16CodeUnit",
             "value": "Utf16CodeUnit",
             "description": "The offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+          },
+          {
+            "name": "Utf8CodeUnit",
+            "value": "Utf8CodeUnit"
+          },
+          {
+            "name": "Utf32CodeUnit",
+            "value": "Utf32CodeUnit"
           }
         ]
       },
