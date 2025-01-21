@@ -28,7 +28,7 @@ on:
 
   schedule:
     # Run 4x/day
-    - cron: '0 0,6,12,18 * * *'
+    - cron: "0 0,6,12,18 * * *"
 
   workflow_dispatch:
 
@@ -53,7 +53,7 @@ jobs:
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - name: Enable git long paths
@@ -67,7 +67,7 @@ jobs:
 
       - name: Setup Node and run `npm ci`
         uses: ./.github/actions/setup-node-npm-ci
-        
+
       - name: Validate All Specs
         run: |
           # Keep processing when errors are written. Nonzero exit will mark the 
