@@ -75,6 +75,7 @@ model AssociationUpdate {
   tags?: TrackedResource.tags;
 
   /** The resource-specific properties for this resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationUpdateProperties;
 }
