@@ -72,7 +72,7 @@ model Association is TrackedResource<AssociationProperties> {
 /** The type used for update operations of the Association. */
 model AssociationUpdate {
   /** Resource tags. */
-  tags?: Record<string>;
+  tags?: TrackedResource.tags;
 
   /** The resource-specific properties for this resource. */
   properties?: AssociationUpdateProperties;
