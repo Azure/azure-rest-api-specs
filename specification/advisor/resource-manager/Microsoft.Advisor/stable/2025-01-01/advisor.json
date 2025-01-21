@@ -37,28 +37,28 @@
           {
             "name": "[category](#category)",
             "in": "path",
-            "description": "Category if name of metadata entity is 'recommendationtype'.",
+            "description": "Category of recommendation (applicable only when name is 'recommendationtype').",
             "required": false,
             "type": "string"
           },
           {
             "name": "[control](#control)",
             "in": "path",
-            "description": "Sub-category if name of metadata entity is 'recommendationtype'.",
+            "description": "Sub-category of recommendation (application only when name is 'recommendationtype').",
             "required": false,
             "type": "string"
           },
           {
             "name": "retirementsFrom",
             "in": "path",
-            "description": "Date from which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "description": "Date from which retirements need to be displayed (applicable only when control is 'ServiceUpgradeAndRetirement').",
             "required": false,
             "type": "string"
           },
           {
             "name": "retirementsTill",
             "in": "path",
-            "description": "Date upto which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "description": "Date upto which retirements need to be displayed (applicable only when control is 'ServiceUpgradeAndRetirement').",
             "required": false,
             "type": "string"
           }
@@ -105,28 +105,28 @@
           {
             "name": "[category](#category)",
             "in": "path",
-            "description": "Category if name of metadata entity is 'recommendationtype'.",
+            "description": "Category of recommendation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "[control](#control)",
             "in": "path",
-            "description": "Sub-category if name of metadata entity is 'recommendationtype'.",
+            "description": "Sub-category of recommendation.",
             "required": false,
             "type": "string"
           },
           {
             "name": "retirementsFrom",
             "in": "path",
-            "description": "Date from which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "description": "Date from which retirements need to be displayed (applicable only when control is 'ServiceUpgradeAndRetirement').",
             "required": false,
             "type": "string"
           },
           {
             "name": "retirementsTill",
             "in": "path",
-            "description": "Date upto which retirements need to be displayed if control of metadata entity is 'ServiceUpgradeAndRetirement'.",
+            "description": "Date upto which retirements need to be displayed (applicable only when control is 'ServiceUpgradeAndRetirement').",
             "required": false,
             "type": "string"
           }
@@ -477,7 +477,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost', ResourceGroup eq 'MyResourceGroup', Control eq 'ServiceUpgradeAndRetirement' and RetirementDate ge 2024-01-01T00:00:00Z",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=Control eq 'ServiceUpgradeAndRetirement' and RetirementDate ge 2024-01-01T00:00:00Z",
             "required": false,
             "type": "string"
           },
