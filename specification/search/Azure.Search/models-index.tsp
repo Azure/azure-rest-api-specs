@@ -814,7 +814,7 @@ model SuggestRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  orderby?: string;
+  $orderby?: string;
 
   /**
    * The search text to use to suggest documents. Must be at least 1 character, and
