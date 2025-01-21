@@ -33,19 +33,64 @@ model ValidatorVersion is ProxyResource<ValidatorVersionProperties> {
   name: string;
 }
 
+@doc("Azure resource Id of a Validator.")
+scalar ValidatorResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/validators",
+    }
+  ]>;
+
+@doc("Azure resource Id of a Validator.")
+scalar ValidatorVersionResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/validators/versions",
+    }
+  ]>;
+
 @armResourceOperations
 interface Validators {
   @doc("Get the validator.")
   get is ArmResourceRead<Validator>;
+  getAtSubscriptionLevel is ArmResourceRead<
+    Validator,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Create the validator.")
-  create is ArmResourceCreateOrReplaceAsync<Validator>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Validator>;
+  createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
+    Validator,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Update the validator.")
   update is ArmResourcePatchSync<Validator, ValidatorProperties>;
+  updateAtSubscriptionLevel is ArmResourcePatchSync<
+    Validator,
+    ValidatorProperties,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Deletes the validator.")
-  delete is ArmResourceDeleteSync<Validator>;
+  delete is ArmResourceDeleteWithoutOkAsync<Validator>;
+  deleteAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
+    Validator,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("List the validators.")
   listByResourceGroup is ArmResourceListByParent<Validator>;
@@ -55,18 +100,47 @@ interface Validators {
 
   @doc("Get the validator version.")
   getVersion is ArmResourceRead<ValidatorVersion>;
+  getVersionAtSubscriptionLevel is ArmResourceRead<
+    ValidatorVersion,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Create the validator version.")
-  createVersion is ArmResourceCreateOrReplaceAsync<ValidatorVersion>;
+  createOrUpdateVersion is ArmResourceCreateOrReplaceAsync<ValidatorVersion>;
+  createOrUpdateVersionAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
+    ValidatorVersion,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Update the validator version.")
   updateVersion is ArmResourcePatchSync<
     ValidatorVersion,
     ValidatorVersionProperties
   >;
+  updateVersionAtSubscriptionLevel is ArmResourcePatchSync<
+    ValidatorVersion,
+    ValidatorVersionProperties,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("Deletes the validator version.")
   deleteVersion is ArmResourceDeleteSync<ValidatorVersion>;
+  deleteVersionAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
+    ValidatorVersion,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 
   @doc("List the validator versions.")
   listVersionByResourceGroup is ArmResourceListByParent<ValidatorVersion>;
