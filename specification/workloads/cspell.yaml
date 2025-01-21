@@ -1,0 +1,42 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - acss
+  - ascs
+  - customised
+  - deviatiobns
+  - emfi
+  - giga
+  - hdbuserstore
+  - iaasvm
+  - ibmaix
+  - iloveyou
+  - informix
+  - issqlcompression
+  - kuiper
+  - mpsql
+  - sapase
+  - sapdb
+  - sapsrv
+  - sdaf
+  - sqldb
+  - vmname
+  - webdisp
+overrides:
+  - filename: >-
+      **/specification/workloads/resource-manager/Microsoft.Workloads/EpicVirtualInstance/**/*.json
+    words:
+      - emfi
+      - kuiper
+      - mpsql
+  - filename: >-
+      **/specification/workloads/resource-manager/Microsoft.Workloads/SAPVirtualInstance/**/*.json
+    words:
+      - sdaf
+
