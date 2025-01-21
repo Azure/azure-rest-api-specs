@@ -1,0 +1,26 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+  output-folder-base:
+    default: "data-plane/ModelInference/"
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Disabled since JSON payload in REST API does not conform to Azure guidelines with regards to casing"
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
+    "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{output-folder-base}/preview/{version}/openapi.yaml"
