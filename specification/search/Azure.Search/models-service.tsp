@@ -5228,7 +5228,6 @@ model ListDataSourcesResult {
   /**
    * The datasources in the Search service.
    */
-  @visibility("read")
   value: SearchIndexerDataSource[];
 }
 
@@ -5576,7 +5575,6 @@ model ListIndexersResult {
   /**
    * The indexers in the Search service.
    */
-  @visibility("read")
   value: SearchIndexer[];
 }
 
@@ -5587,25 +5585,21 @@ model SearchIndexerStatus {
   /**
    * Overall indexer status.
    */
-  @visibility("read")
   status: IndexerStatus;
 
   /**
    * The result of the most recent or an in-progress indexer execution.
    */
-  @visibility("read")
   lastResult?: IndexerExecutionResult;
 
   /**
    * History of the recent indexer executions, sorted in reverse chronological order.
    */
-  @visibility("read")
   executionHistory: IndexerExecutionResult[];
 
   /**
    * The execution limits for the indexer.
    */
-  @visibility("read")
   limits: SearchIndexerLimits;
 }
 
@@ -5616,7 +5610,6 @@ model IndexerExecutionResult {
   /**
    * The outcome of this indexer execution.
    */
-  @visibility("read")
   status: IndexerExecutionStatus;
 
   /**
@@ -5636,31 +5629,26 @@ model IndexerExecutionResult {
   /**
    * The error message indicating the top-level error, if any.
    */
-  @visibility("read")
   errorMessage?: string;
 
   /**
    * The start time of this indexer execution.
    */
-  @visibility("read")
   startTime?: utcDateTime;
 
   /**
    * The end time of this indexer execution, if the execution has already completed.
    */
-  @visibility("read")
   endTime?: utcDateTime;
 
   /**
    * The item-level indexing errors.
    */
-  @visibility("read")
   errors: SearchIndexerError[];
 
   /**
    * The item-level indexing warnings.
    */
-  @visibility("read")
   warnings: SearchIndexerWarning[];
 
   /**
@@ -5668,25 +5656,21 @@ model IndexerExecutionResult {
    * includes both successfully processed items and items where indexing was
    * attempted but failed.
    */
-  @visibility("read")
   itemsProcessed: int32;
 
   /**
    * The number of items that failed to be indexed during this indexer execution.
    */
-  @visibility("read")
   itemsFailed: int32;
 
   /**
    * Change tracking state with which an indexer execution started.
    */
-  @visibility("read")
   initialTrackingState?: string;
 
   /**
    * Change tracking state with which an indexer execution finished.
    */
-  @visibility("read")
   finalTrackingState?: string;
 }
 
@@ -5755,13 +5739,11 @@ model SearchIndexerError {
   /**
    * The key of the item for which indexing failed.
    */
-  @visibility("read")
   key?: string;
 
   /**
    * The message describing the error that occurred while processing the item.
    */
-  @visibility("read")
   errorMessage: string;
 
   /**
@@ -5770,7 +5752,6 @@ model SearchIndexerError {
    * for a version conflict, 422 when the index is temporarily unavailable, or 503
    * for when the service is too busy.
    */
-  @visibility("read")
   statusCode: int32;
 
   /**
@@ -5778,21 +5759,18 @@ model SearchIndexerError {
    * refer to a particular skill in the attached skillset. This may not be always
    * available.
    */
-  @visibility("read")
   name?: string;
 
   /**
    * Additional, verbose details about the error to assist in debugging the indexer.
    * This may not be always available.
    */
-  @visibility("read")
   details?: string;
 
   /**
    * A link to a troubleshooting guide for these classes of errors. This may not be
    * always available.
    */
-  @visibility("read")
   documentationLink?: string;
 }
 
@@ -5803,13 +5781,11 @@ model SearchIndexerWarning {
   /**
    * The key of the item which generated a warning.
    */
-  @visibility("read")
   key?: string;
 
   /**
    * The message describing the warning that occurred while processing the item.
    */
-  @visibility("read")
   message: string;
 
   /**
@@ -5817,21 +5793,18 @@ model SearchIndexerWarning {
    * refer to a particular skill in the attached skillset. This may not be always
    * available.
    */
-  @visibility("read")
   name?: string;
 
   /**
    * Additional, verbose details about the warning to assist in debugging the
    * indexer. This may not be always available.
    */
-  @visibility("read")
   details?: string;
 
   /**
    * A link to a troubleshooting guide for these classes of warnings. This may not
    * be always available.
    */
-  @visibility("read")
   documentationLink?: string;
 }
 
@@ -5842,21 +5815,18 @@ model SearchIndexerLimits {
   /**
    * The maximum duration that the indexer is permitted to run for one execution.
    */
-  @visibility("read")
   maxRunTime?: duration;
 
   /**
    * The maximum size of a document, in bytes, which will be considered valid for
    * indexing.
    */
-  @visibility("read")
   maxDocumentExtractionSize?: int64;
 
   /**
    * The maximum number of characters that will be extracted from a document picked
    * up for indexing.
    */
-  @visibility("read")
   maxDocumentContentCharactersToExtract?: int64;
 }
 
@@ -6206,7 +6176,6 @@ model ListSkillsetsResult {
   /**
    * The skillsets defined in the Search service.
    */
-  @visibility("read")
   value: SearchIndexerSkillset[];
 }
 
@@ -6268,7 +6237,6 @@ model ListSynonymMapsResult {
   /**
    * The synonym maps in the Search service.
    */
-  @visibility("read")
   value: SynonymMap[];
 }
 
@@ -6608,7 +6576,9 @@ model ScoringFunction {
    */
   interpolation?: ScoringFunctionInterpolation;
 
-  @doc("Type of ScoringFunction.")
+  /**
+   * Type of ScoringFunction.
+   */
   type: string;
 }
 
@@ -6897,7 +6867,9 @@ model VectorSearchAlgorithmConfiguration {
    */
   name: string;
 
-  @doc("Type of VectorSearchAlgorithmConfiguration.")
+  /**
+   * Type of VectorSearchAlgorithmConfiguration.
+   */
   kind: VectorSearchAlgorithmKind;
 }
 
@@ -6911,7 +6883,9 @@ model VectorSearchVectorizer {
    */
   name: string;
 
-  @doc("Type of VectorSearchVectorizer.")
+  /**
+   * Type of VectorSearchVectorizer.
+   */
   kind: VectorSearchVectorizerKind;
 }
 
@@ -6962,7 +6936,9 @@ model VectorSearchCompression {
   @added(Versions.v2024_11_01_preview)
   truncationDimension?: int32;
 
-  @doc("Type of VectorSearchCompression.")
+  /**
+   * Type of VectorSearchCompression.
+   */
   kind: VectorSearchCompressionKind;
 }
 
@@ -7002,7 +6978,6 @@ model ListIndexesResult {
   /**
    * The indexes in the Search service.
    */
-  @visibility("read")
   @items
   value: SearchIndex[];
 }
@@ -7015,19 +6990,16 @@ model GetIndexStatisticsResult {
   /**
    * The number of documents in the index.
    */
-  @visibility("read")
   documentCount: int64;
 
   /**
    * The amount of storage in bytes consumed by the index.
    */
-  @visibility("read")
   storageSize: int64;
 
   /**
    * The amount of memory in bytes consumed by vectors in the index.
    */
-  @visibility("read")
   vectorIndexSize: int64;
 }
 
@@ -7090,19 +7062,16 @@ model AnalyzedTokenInfo {
   /**
    * The token returned by the analyzer.
    */
-  @visibility("read")
   token: string;
 
   /**
    * The index of the first character of the token in the input text.
    */
-  @visibility("read")
   startOffset: int32;
 
   /**
    * The index of the last character of the token in the input text.
    */
-  @visibility("read")
   endOffset: int32;
 
   /**
@@ -7111,7 +7080,6 @@ model AnalyzedTokenInfo {
    * Depending on the analyzer used, some tokens might have the same position, for
    * example if they are synonyms of each other.
    */
-  @visibility("read")
   position: int32;
 }
 
