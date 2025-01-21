@@ -1,7 +1,7 @@
 import { Rule } from "eslint";
 import { TypeSpecConfig } from "../config/types.js";
 
-export interface RuleDocuments {
+export interface RuleDocument {
   description: string;
   error: string;
   action: string;
@@ -10,7 +10,7 @@ export interface RuleDocuments {
 
 export interface RuleInfo {
   name: string;
-  docs: RuleDocuments;
+  documentation: RuleDocument;
   functions: {
     messages: () => { [messageId: string]: string } | undefined;
     condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) => boolean;
