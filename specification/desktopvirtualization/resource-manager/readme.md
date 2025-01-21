@@ -49,10 +49,10 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: desktopvirtualization.json
-    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
+    reason: False positive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
   - code: XmsPageableForListCalls
     from: desktopvirtualization.json
-    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default'].*
@@ -60,7 +60,7 @@ suppressions:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default'].*
   - code: EvenSegmentedPathForPutOperation
     from: desktopvirtualization.json
-    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default']
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default']
@@ -132,22 +132,6 @@ These settings apply only when `--tag=package-2023-09` is specified on the comma
 ``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2023-09-05/desktopvirtualization.json
-```
-
-### Tag: package-preview-2023-07
-
-These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-07'
-input-file:
-  - Microsoft.DesktopVirtualization/preview/2023-07-07-preview/desktopvirtualization.json
-
-suppressions:
-  - code: ResourceNameRestriction
-    reason: ScalingPlan was already implemented in previous versions of the API and
-      we cannot change naming pattern now.
-  - code: PatchIdentityProperty
-    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
 ```
 
 ### Tag: package-preview-2022-10
