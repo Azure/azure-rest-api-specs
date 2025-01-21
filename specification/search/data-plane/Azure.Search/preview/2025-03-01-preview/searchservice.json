@@ -2025,6 +2025,45 @@
           }
         }
       }
+    },
+    "/indexesstats": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "GetIndexStatisticsSummaries",
+        "x-ms-examples": {
+          "SearchServiceIndexesStatsSummary": {
+            "$ref": "./examples/SearchServiceIndexStatisticsSummaries.json"
+          }
+        },
+        "description": "Retrieves a summary of statistics for all indexes in the search service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statistics summary for all indexes.",
+            "schema": {
+              "$ref": "#/definitions/ListIndexStatisticsSummaries"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -8807,6 +8846,58 @@
         }
       },
       "required": [
+        "documentCount",
+        "storageSize",
+        "vectorIndexSize"
+      ],
+      "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
+    },
+    "ListIndexStatisticsSummaries": {
+      "properties": {
+        "value": {
+          "x-ms-client-name": "IndexesStatistics",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/IndexStatisticsSummary"
+          },
+          "description": "The Statistics summary of all indexes in the Search service."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service."
+    },
+    "IndexStatisticsSummary": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the index."
+        },
+        "documentCount": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The number of documents in the index."
+        },
+        "storageSize": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The amount of storage in bytes consumed by the index."
+        },
+        "vectorIndexSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The amount of memory in bytes consumed by vectors in the index."
+        }
+      },
+      "required": [
+        "name",
         "documentCount",
         "storageSize",
         "vectorIndexSize"
