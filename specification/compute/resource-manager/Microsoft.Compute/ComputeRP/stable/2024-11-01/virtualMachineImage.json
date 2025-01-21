@@ -830,7 +830,11 @@
             "description": "The expand expression to apply on the operation. ",
             "enum": [
               "Properties"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "expand",
+              "modelAsString": true
+            }
           },
           {
             "name": "$top",
@@ -868,6 +872,9 @@
               "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
