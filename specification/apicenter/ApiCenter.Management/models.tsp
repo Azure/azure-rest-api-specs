@@ -735,7 +735,10 @@ model AnalyzerConfigProperties {
   @visibility("read")
   state?: AnalyzerRulesetState;
 
-  // filter?:
+  /**
+   * The API analyzer filter.
+   */
+  filter?: AnalyzerFilter;
 }
 
 /**
@@ -822,7 +825,6 @@ model RulesetExportResult {
   value?: string;
 }
 
-
 /**
  * Analyzer filter value. The value type of which depends on selected filter property.
  */
@@ -830,10 +832,10 @@ model RulesetExportResult {
 @added(Versions.v2024_12_15_preview)
 model AnalyzerFilterValue {}
 
-@added(Versions.v2024_12_15_preview)
 /**
  * Allowed analyzer filter operator values.
  */
+@added(Versions.v2024_12_15_preview)
 union AnalyzerFilterOperator {
   string,
 
