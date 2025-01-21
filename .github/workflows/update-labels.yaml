@@ -37,18 +37,18 @@ jobs:
       contents: read
       pull-requests: write
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        sparse-checkout: |
-          .github
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
 
-    - name: Update Labels
-      uses: ./.github/actions/update-labels
-      with:
-        owner: ${{ inputs.owner }}
-        repo: ${{ inputs.repo }}
-        issue_number: ${{ inputs.issue_number }}
-        run_id: ${{ inputs.run_id }}
+      - name: Update Labels
+        uses: ./.github/actions/update-labels
+        with:
+          owner: ${{ inputs.owner }}
+          repo: ${{ inputs.repo }}
+          issue_number: ${{ inputs.issue_number }}
+          run_id: ${{ inputs.run_id }}
