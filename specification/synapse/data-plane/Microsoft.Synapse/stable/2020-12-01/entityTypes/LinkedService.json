@@ -4501,6 +4501,38 @@
         "encryptedCredential": {
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The ID of the service principal used to authenticate against Azure Database for PostgreSQL Flexible server. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The key of the service principal used to authenticate against Azure Database for PostgreSQL Flexible server.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalEmbeddedCert": {
+          "description": "Specify the base64 encoded certificate of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "servicePrincipalEmbeddedCertPassword": {
+          "description": "Specify the password of your certificate if your certificate has a password and you are using AadServicePrincipal authentication. Type: string (or Expression with resultType string).",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "azureCloudType": {
+          "type": "object",
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
