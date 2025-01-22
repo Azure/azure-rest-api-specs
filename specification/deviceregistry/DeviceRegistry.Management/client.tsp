@@ -68,9 +68,8 @@ using Microsoft.DeviceRegistry;
 @@clientName(ExtendedLocation.type, "ExtendedLocationType", "csharp");
 @@clientName(TopicRetainType, "DeviceRegistryTopicRetainType", "csharp");
 @@clientName(ProvisioningState, "DeviceRegistryProvisioningState", "csharp");
-@@clientName(Authentication, "DeviceRegistryUserAuthentication", "csharp");
-@@clientName(Authentication, "DeviceRegistryUserAuthentication", "csharp");
-@@clientName(Topic, "DeviceRegistryMqttTopic", "csharp");
+@@clientName(Authentication, "DeviceRegistryAuthentication", "csharp");
+@@clientName(Topic, "DeviceRegistryTopic", "csharp");
 @@clientName(UsernamePasswordCredentials,
   "DeviceRegistryUsernamePasswordCredentials",
   "csharp"
