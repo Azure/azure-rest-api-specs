@@ -41,6 +41,85 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceRP.json
+suppressions:
+  - code: DeleteResponseCodes
+    reason: Existing API behavior in 2024-10-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].delete
+  - code: PatchIdentityProperty
+    reason: Existing API behavior in 2024-10-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].patch.parameters[6]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].patch.parameters[6]
+  - code: PathForResourceAction
+    reason: Existing API behavior in 2024-10-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify"]
+  - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
+  - code: AvoidAdditionalProperties
+    reason: Existing API behavior in 2024-10-01-preview.
+    where:
+      - $.definitions.CustomModelFineTuning.properties.hyperParameters
+      - $.definitions.DeltaModelStatusResponse.properties.deltaModels
+      - $.definitions.FineTuningJob.properties.outputs
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+  - code: PatchBodyParametersSchema
+    reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    reason: Existing API behavior, the whole property is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    reason: The required part is within a property, the whole property itself is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: LroLocationHeader
+    reason: Existing API behavior
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].delete.responses.202
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: This should be exist in 2024-10-01-preview and got suppressed already, not sure why it got triggered.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
+  - code: GuidUsage
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: AvoidAdditionalProperties
+    reason: Existing API behavior in 2024-10-01-preview.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.EndpointModelProperties.properties.capabilities
+      - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
+      - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
 ```
 
 ### Tag: package-2024-10
