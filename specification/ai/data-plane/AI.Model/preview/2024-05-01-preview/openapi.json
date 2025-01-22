@@ -147,7 +147,7 @@
                 },
                 "response_format": {
                   "$ref": "#/definitions/ChatCompletionsResponseFormat",
-                  "description": "The format that the model must output. Use this to enable JSON mode instead of the default text mode.\nNote that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON\nvia a system or user message."
+                  "description": "An object specifying the format that the model must output.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length."
                 },
                 "stop": {
                   "type": "array",
@@ -381,7 +381,7 @@
                   "type": "array",
                   "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
                   "items": {
-                    "$ref": "#/definitions/EmbeddingInput"
+                    "$ref": "#/definitions/ImageEmbeddingInput"
                   },
                   "x-ms-identifiers": []
                 },
@@ -443,7 +443,7 @@
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.",
+        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for GitHub Models endpoint or Azure OpenAI endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -606,20 +606,7 @@
         "choices"
       ]
     },
-    "ChatCompletionsFunctionToolSelection": {
-      "type": "object",
-      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the function that should be called."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "ChatCompletionsNamedToolSelection": {
+    "ChatCompletionsNamedToolChoice": {
       "type": "object",
       "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
       "properties": {
@@ -634,13 +621,26 @@
           }
         },
         "function": {
-          "$ref": "#/definitions/ChatCompletionsFunctionToolSelection",
+          "$ref": "#/definitions/ChatCompletionsNamedToolChoiceFunction",
           "description": "The function that should be called."
         }
       },
       "required": [
         "type",
         "function"
+      ]
+    },
+    "ChatCompletionsNamedToolChoiceFunction": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that should be called."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "ChatCompletionsResponseFormat": {
@@ -657,7 +657,7 @@
         "type"
       ]
     },
-    "ChatCompletionsResponseFormatJSON": {
+    "ChatCompletionsResponseFormatJsonObject": {
       "type": "object",
       "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.\nNote that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON\nvia a system or user message.",
       "allOf": [
@@ -666,6 +666,53 @@
         }
       ],
       "x-ms-discriminator-value": "json_object"
+    },
+    "ChatCompletionsResponseFormatJsonSchema": {
+      "type": "object",
+      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a\nJSON schema specified by the caller.",
+      "properties": {
+        "json_schema": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormatJsonSchemaDefinition",
+          "description": "The definition of the required JSON schema in the response, and associated metadata."
+        }
+      },
+      "required": [
+        "json_schema"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "json_schema"
+    },
+    "ChatCompletionsResponseFormatJsonSchemaDefinition": {
+      "type": "object",
+      "description": "Defines the response format for chat completions as JSON with a given schema. The AI model\nwill need to adhere to this schema when generating completions.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A name that labels this JSON schema. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.\nNote that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation\nto determine what is supported.",
+          "additionalProperties": {}
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the response format, used by the AI model to determine how to generate responses in this format."
+        },
+        "strict": {
+          "type": "boolean",
+          "description": "If set to true, the service will error out if the provided JSON schema contains keywords\nnot supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.\nIf false, and the provided JSON schema contains keywords not supported\nby the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.",
+          "default": false
+        }
+      },
+      "required": [
+        "name",
+        "schema"
+      ]
     },
     "ChatCompletionsResponseFormatText": {
       "type": "object",
@@ -706,6 +753,36 @@
         "function"
       ]
     },
+    "ChatCompletionsToolChoicePreset": {
+      "type": "string",
+      "description": "Represents a generic policy for how a chat completions tool may be selected.",
+      "enum": [
+        "auto",
+        "none",
+        "required"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsToolChoicePreset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
+          },
+          {
+            "name": "required",
+            "value": "required",
+            "description": "Specifies that the model should respond with a call to one or more tools."
+          }
+        ]
+      }
+    },
     "ChatCompletionsToolDefinition": {
       "type": "object",
       "description": "The definition of a chat completions tool that can call a function.",
@@ -729,36 +806,6 @@
         "type",
         "function"
       ]
-    },
-    "ChatCompletionsToolSelectionPreset": {
-      "type": "string",
-      "description": "Represents a generic policy for how a chat completions tool may be selected.",
-      "enum": [
-        "auto",
-        "none",
-        "required"
-      ],
-      "x-ms-enum": {
-        "name": "ChatCompletionsToolSelectionPreset",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "auto",
-            "value": "auto",
-            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
-          },
-          {
-            "name": "required",
-            "value": "required",
-            "description": "Specifies that the model should respond with a call to one or more tools."
-          }
-        ]
-      }
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -866,8 +913,7 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "tool_calls": {
           "type": "array",
@@ -924,8 +970,7 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "The content of the message."
         },
         "tool_call_id": {
           "type": "string",
@@ -934,7 +979,6 @@
         }
       },
       "required": [
-        "content",
         "tool_call_id"
       ],
       "allOf": [
@@ -1135,23 +1179,6 @@
         ]
       }
     },
-    "EmbeddingInput": {
-      "type": "object",
-      "description": "Represents an image with optional text.",
-      "properties": {
-        "image": {
-          "type": "string",
-          "description": "The input image, in PNG format."
-        },
-        "text": {
-          "type": "string",
-          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
-        }
-      },
-      "required": [
-        "image"
-      ]
-    },
     "EmbeddingInputType": {
       "type": "string",
       "description": "Represents the input types used for embedding search.",
@@ -1167,17 +1194,17 @@
           {
             "name": "text",
             "value": "text",
-            "description": "to do"
+            "description": "Indicates the input is a general text input."
           },
           {
             "name": "query",
             "value": "query",
-            "description": "to do"
+            "description": "Indicates the input represents a search query to find the most relevant documents in your vector database."
           },
           {
             "name": "document",
             "value": "document",
-            "description": "to do"
+            "description": "Indicates the input represents a document that is stored in a vector database."
           }
         ]
       }
@@ -1204,6 +1231,10 @@
       "type": "object",
       "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the embeddings result."
+        },
         "data": {
           "type": "array",
           "description": "Embedding values for the prompts submitted in the request.",
@@ -1222,6 +1253,7 @@
         }
       },
       "required": [
+        "id",
         "data",
         "usage",
         "model"
@@ -1308,13 +1340,28 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "type": "object",
-          "description": "The parameters the function accepts, described as a JSON Schema object.",
-          "additionalProperties": {}
+          "description": "The parameters the function accepts, described as a JSON Schema object."
         }
       },
       "required": [
         "name"
+      ]
+    },
+    "ImageEmbeddingInput": {
+      "type": "object",
+      "description": "Represents an image with optional text.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`."
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional. The text input to feed into the model (like DINO, CLIP).\nReturns a 422 error if the model doesn't support the value or parameter."
+        }
+      },
+      "required": [
+        "image"
       ]
     },
     "ModelInfo": {
@@ -1349,7 +1396,7 @@
         "text_generation",
         "image_embeddings",
         "audio_generation",
-        "chat"
+        "chat_completion"
       ],
       "x-ms-enum": {
         "name": "ModelType",
@@ -1358,32 +1405,32 @@
           {
             "name": "embeddings",
             "value": "embeddings",
-            "description": "Embeddings."
+            "description": "A model capable of generating embeddings from a text"
           },
           {
             "name": "image_generation",
             "value": "image_generation",
-            "description": "Image generation"
+            "description": "A model capable of generating images from an image and text description"
           },
           {
             "name": "text_generation",
             "value": "text_generation",
-            "description": "Text generation"
+            "description": "A text generation model"
           },
           {
             "name": "image_embeddings",
             "value": "image_embeddings",
-            "description": "Image embeddings"
+            "description": "A model capable of generating embeddings from an image"
           },
           {
             "name": "audio_generation",
             "value": "audio_generation",
-            "description": "Audio generation"
+            "description": "A text-to-audio generative model"
           },
           {
-            "name": "chat",
-            "value": "chat",
-            "description": "Chat completions"
+            "name": "chat_completion",
+            "value": "chat_completion",
+            "description": "A model capable of taking chat-formatted messages and generate responses"
           }
         ]
       }

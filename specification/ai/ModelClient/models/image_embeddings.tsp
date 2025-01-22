@@ -11,7 +11,7 @@ alias ImageEmbeddingsOptions = {
     Input image to embed. To embed multiple inputs in a single request, pass an array.
     The input must not exceed the max input tokens for the model.
     """)
-  input: EmbeddingInput[];
+  input: ImageEmbeddingInput[];
 
   @doc("""
     Optional. The number of dimensions the resulting output embeddings should have.
@@ -42,9 +42,9 @@ alias ImageEmbeddingsOptions = {
 };
 
 @doc("Represents an image with optional text.")
-model EmbeddingInput {
+model ImageEmbeddingInput {
   @doc("""
-    The input image, in PNG format.
+    The input image encoded in base64 string as a data URL. Example: `data:image/{format};base64,{data}`.
     """)
   image: string;
 
