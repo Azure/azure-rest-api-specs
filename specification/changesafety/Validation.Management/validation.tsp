@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -25,6 +26,8 @@ model Validation is ProxyResource<ValidationPropertiesExtended> {
 interface Validations {
   @doc("Get the validation.")
   get is ArmResourceRead<Validation>;
+
+  @added(Versions.v2025_01_15_preview)
   getAtSubscriptionLevel is ArmResourceRead<
     Validation,
     {
@@ -35,6 +38,8 @@ interface Validations {
 
   @doc("Creates a validation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Validation>;
+
+  @added(Versions.v2025_01_15_preview)
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     Validation,
     {
@@ -45,6 +50,8 @@ interface Validations {
 
   @doc("Validation can be re-run by doing a PUT operation with the same parameters. The output of the validation will be updated based on the new validation run.")
   update is ArmResourcePatchSync<Validation, ValidationProperties>;
+
+  @added(Versions.v2025_01_15_preview)
   updateAtSubscriptionLevel is ArmResourcePatchSync<
     Validation,
     ValidationPropertiesExtended,
@@ -56,6 +63,8 @@ interface Validations {
 
   @doc("Deletes the validation.")
   delete is ArmResourceDeleteWithoutOkAsync<Validation>;
+
+  @added(Versions.v2025_01_15_preview)
   deleteAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
     Validation,
     {

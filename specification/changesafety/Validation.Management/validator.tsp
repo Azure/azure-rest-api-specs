@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -53,6 +54,8 @@ scalar ValidatorVersionResourceId
 interface Validators {
   @doc("Get the validator.")
   get is ArmResourceRead<Validator>;
+
+  @added(Versions.v2025_01_15_preview)
   getAtSubscriptionLevel is ArmResourceRead<
     Validator,
     {
@@ -63,6 +66,8 @@ interface Validators {
 
   @doc("Create the validator.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Validator>;
+
+  @added(Versions.v2025_01_15_preview)
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     Validator,
     {
@@ -73,6 +78,8 @@ interface Validators {
 
   @doc("Update the validator.")
   update is ArmResourcePatchSync<Validator, ValidatorProperties>;
+
+  @added(Versions.v2025_01_15_preview)
   updateAtSubscriptionLevel is ArmResourcePatchSync<
     Validator,
     ValidatorProperties,
@@ -84,6 +91,8 @@ interface Validators {
 
   @doc("Deletes the validator.")
   delete is ArmResourceDeleteWithoutOkAsync<Validator>;
+
+  @added(Versions.v2025_01_15_preview)
   deleteAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
     Validator,
     {
@@ -100,6 +109,8 @@ interface Validators {
 
   @doc("Get the validator version.")
   getVersion is ArmResourceRead<ValidatorVersion>;
+
+  @added(Versions.v2025_01_15_preview)
   getVersionAtSubscriptionLevel is ArmResourceRead<
     ValidatorVersion,
     {
@@ -110,6 +121,8 @@ interface Validators {
 
   @doc("Create the validator version.")
   createOrUpdateVersion is ArmResourceCreateOrReplaceAsync<ValidatorVersion>;
+
+  @added(Versions.v2025_01_15_preview)
   createOrUpdateVersionAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     ValidatorVersion,
     {
@@ -123,6 +136,8 @@ interface Validators {
     ValidatorVersion,
     ValidatorVersionProperties
   >;
+
+  @added(Versions.v2025_01_15_preview)
   updateVersionAtSubscriptionLevel is ArmResourcePatchSync<
     ValidatorVersion,
     ValidatorVersionProperties,
@@ -134,6 +149,8 @@ interface Validators {
 
   @doc("Deletes the validator version.")
   deleteVersion is ArmResourceDeleteWithoutOkAsync<ValidatorVersion>;
+
+  @added(Versions.v2025_01_15_preview)
   deleteVersionAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
     ValidatorVersion,
     {
