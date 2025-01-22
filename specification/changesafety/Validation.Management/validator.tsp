@@ -133,7 +133,7 @@ interface Validators {
   >;
 
   @doc("Deletes the validator version.")
-  deleteVersion is ArmResourceDeleteSync<ValidatorVersion>;
+  deleteVersion is ArmResourceDeleteWithoutOkAsync<ValidatorVersion>;
   deleteVersionAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
     ValidatorVersion,
     {
