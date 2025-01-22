@@ -914,6 +914,9 @@
         "x-ms-examples": {
           "ScalingPlanPooledSchedules_Create": {
             "$ref": "./examples/ScalingPlanPooledSchedule_Create.json"
+          },
+          "ScalingPlanPooledSchedule_CreateUsingCreateDelete": {
+            "$ref": "./examples/ScalingPlanPooledSchedule_CreateUsingCreateDelete.json"
           }
         },
         "parameters": [
@@ -8437,6 +8440,21 @@
       "description": "Schema for SessionHost properties.",
       "type": "object",
       "properties": {
+        "activeSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of active sessions on SessionHost."
+        },
+        "disconnectedSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of disconnected sessions on SessionHost."
+        },
+        "pendingSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pending sessions on SessionHost."
+        },
         "objectId": {
           "type": "string",
           "description": "ObjectId of SessionHost. (internal use)",
@@ -8989,6 +9007,14 @@
             "$ref": "#/definitions/DaysOfWeek"
           }
         },
+        "scalingMethod": {
+          "$ref": "#/definitions/ScalingMethodProperties",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool."
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -9188,6 +9214,14 @@
             "$ref": "#/definitions/DaysOfWeek"
           }
         },
+        "scalingMethod": {
+          "$ref": "#/definitions/ScalingMethodProperties",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool."
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -9323,6 +9357,14 @@
             "$ref": "#/definitions/DaysOfWeek"
           }
         },
+        "scalingMethod": {
+          "$ref": "#/definitions/ScalingMethodProperties",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool."
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -9439,6 +9481,66 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "ScalingMethodProperties": {
+      "enum": [
+        "PowerManage",
+        "CreateDeletePowerManage"
+      ],
+      "x-ms-enum": {
+        "name": "ScalingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PowerManage",
+            "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+          },
+          {
+            "value": "CreateDeletePowerManage",
+            "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+          }
+        ]
+      },
+      "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+      "type": "string",
+      "default": "PowerManage"
+    },
+    "CreateDeleteProperties": {
+      "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "rampUpMaximumHostPoolSize": {
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampUpMinimumHostPoolSize": {
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampDownMaximumHostPoolSize": {
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampDownMinimumHostPoolSize": {
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
