@@ -2,8 +2,8 @@ import { Rule, RuleTester } from "eslint";
 import { describe, it } from "vitest";
 import parser from "yaml-eslint-parser";
 import { defaultMessageId, emitters } from "../../src/utils/constants.js";
-import { createEmitterOptions } from "../../src/utils/rule.js";
 import { NamedRule } from "../../src/interfaces/named-eslint.js";
+import { createEmitterOptionExample, createParameterExample } from "../../src/utils/rule-doc.js";
 
 interface Case {
   description: string;
@@ -17,7 +17,16 @@ interface Case {
 const managementTspconfigPath = "contosowidgetmanager/Contoso.Management/tspconfig.yaml";
 const rulePath = "../../src/rules/tspconfig-validation-rules.js";
 
-const tsManagementGenerateMetadataTestCases = generateManagementClientTestCases(
+const commonAzureServiceDirTestCases = createParameterTestCases(
+  rulePath,
+  "tspconfig-common-az-service-dir-match-pattern",
+  "",
+  "service-dir",
+  "sdk/aaa",
+  "sdka/aaa",
+);
+
+const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-generate-metadata-true",
@@ -27,7 +36,7 @@ const tsManagementGenerateMetadataTestCases = generateManagementClientTestCases(
   false,
 );
 
-const tsManagementHierarchyClientTestCases = generateManagementClientTestCases(
+const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-hierarchy-client-false",
@@ -37,7 +46,7 @@ const tsManagementHierarchyClientTestCases = generateManagementClientTestCases(
   true,
 );
 
-const tsManagementExperimentalExtensibleEnumsTestCases = generateManagementClientTestCases(
+const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-experimental-extensible-enums-true",
@@ -47,7 +56,7 @@ const tsManagementExperimentalExtensibleEnumsTestCases = generateManagementClien
   false,
 );
 
-const tsManagementEnableOperationGroupTestCases = generateManagementClientTestCases(
+const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-enable-operation-group-true",
@@ -57,7 +66,7 @@ const tsManagementEnableOperationGroupTestCases = generateManagementClientTestCa
   false,
 );
 
-const tsManagementPackageDirTestCases = generateManagementClientTestCases(
+const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-package-dir-match-pattern",
@@ -67,7 +76,7 @@ const tsManagementPackageDirTestCases = generateManagementClientTestCases(
   "aaa-bbb",
 );
 
-const tsManagementPackageNameTestCases = generateManagementClientTestCases(
+const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   emitters.ts,
   rulePath,
   "tspconfig-ts-mgmt-modular-package-name-match-pattern",
@@ -77,7 +86,7 @@ const tsManagementPackageNameTestCases = generateManagementClientTestCases(
   "@azure/aaa-bbb",
 );
 
-const goManagementServiceDirTestCases = generateManagementClientTestCases(
+const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-service-dir-match-pattern",
@@ -87,7 +96,7 @@ const goManagementServiceDirTestCases = generateManagementClientTestCases(
   "sdk/manager/aaa",
 );
 
-const goManagementPackageDirTestCases = generateManagementClientTestCases(
+const goManagementPackageDirTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-package-dir-match-pattern",
@@ -97,7 +106,7 @@ const goManagementPackageDirTestCases = generateManagementClientTestCases(
   "aaa",
 );
 
-const goManagementModuleTestCases = generateManagementClientTestCases(
+const goManagementModuleTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-module-equal-string",
@@ -107,7 +116,7 @@ const goManagementModuleTestCases = generateManagementClientTestCases(
   "github.com/Azure/azure-sdk-for-java/{service-dir}/{package-dir}",
 );
 
-const goManagementFixConstStutteringTestCases = generateManagementClientTestCases(
+const goManagementFixConstStutteringTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-fix-const-stuttering-true",
@@ -117,7 +126,7 @@ const goManagementFixConstStutteringTestCases = generateManagementClientTestCase
   false,
 );
 
-const goManagementGenerateExamplesTestCases = generateManagementClientTestCases(
+const goManagementGenerateExamplesTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-generate-examples-true",
@@ -127,7 +136,7 @@ const goManagementGenerateExamplesTestCases = generateManagementClientTestCases(
   false,
 );
 
-const goManagementGenerateFakesTestCases = generateManagementClientTestCases(
+const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-generate-fakes-true",
@@ -137,7 +146,7 @@ const goManagementGenerateFakesTestCases = generateManagementClientTestCases(
   false,
 );
 
-const goManagementHeadAsBooleanTestCases = generateManagementClientTestCases(
+const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-head-as-boolean-true",
@@ -147,7 +156,7 @@ const goManagementHeadAsBooleanTestCases = generateManagementClientTestCases(
   false,
 );
 
-const goManagementInjectSpansTestCases = generateManagementClientTestCases(
+const goManagementInjectSpansTestCases = createEmitterOptionTestCases(
   emitters.go,
   rulePath,
   "tspconfig-go-mgmt-inject-spans-true",
@@ -157,54 +166,100 @@ const goManagementInjectSpansTestCases = generateManagementClientTestCases(
   false,
 );
 
-function generateManagementClientTestCases(
-  emitterName: string,
-  rulePath: string,
-  ruleName: string,
-  fileName: string,
-  optionName: string,
-  validOptionValue: boolean | string,
-  invalidOptionValue: boolean | string,
-): Case[] {
-  const managementGenerateMetadataTestCases: Case[] = [
-    {
-      description: `valid: ${optionName} is ${validOptionValue}`,
-      rulePath,
-      ruleName,
-      fileName,
-      yamlContent: createEmitterOptions(
-        emitterName,
-        { key: optionName, value: validOptionValue },
-        { key: "flavor", value: "azure" },
-      ),
-      shouldReportError: false,
-    },
-    {
-      description: `invalid: ${optionName} is ${invalidOptionValue}`,
-      rulePath,
-      ruleName,
-      fileName,
-      yamlContent: createEmitterOptions(
-        emitterName,
-        { key: optionName, value: invalidOptionValue },
-        { key: "flavor", value: "azure" },
-      ),
-      shouldReportError: true,
-    },
-    {
-      description: `invalid: ${optionName} is undefined`,
-      rulePath,
-      ruleName,
-      fileName,
-      yamlContent: createEmitterOptions(emitterName, { key: "flavor", value: "azure" }),
-      shouldReportError: true,
-    },
-  ];
-  return managementGenerateMetadataTestCases;
-}
+const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
+  emitters.java,
+  rulePath,
+  "tspconfig-java-mgmt-package-dir-match-pattern",
+  managementTspconfigPath,
+  "package-dir",
+  "azure-aaa",
+  "aaa",
+);
+
+const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
+  emitters.python,
+  rulePath,
+  "tspconfig-python-mgmt-package-dir-match-pattern",
+  managementTspconfigPath,
+  "package-dir",
+  "azure-mgmt-aaa",
+  "azure-aaa",
+);
+
+const pythonManagementPackageNameTestCases = createEmitterOptionTestCases(
+  emitters.python,
+  rulePath,
+  "tspconfig-python-mgmt-package-name-equal-string",
+  managementTspconfigPath,
+  "package-name",
+  "{package-dir}",
+  "aaa",
+);
+
+const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
+  emitters.python,
+  rulePath,
+  "tspconfig-python-mgmt-generate-test-true",
+  managementTspconfigPath,
+  "generate-test",
+  true,
+  false,
+);
+
+const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
+  emitters.python,
+  rulePath,
+  "tspconfig-python-mgmt-generate-sample-true",
+  managementTspconfigPath,
+  "generate-sample",
+  true,
+  false,
+);
+
+const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
+  emitters.csharp,
+  rulePath,
+  "tspconfig-csharp-az-package-dir-match-pattern",
+  "",
+  "package-dir",
+  "Azure.AAA",
+  "AAA",
+);
+
+const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
+  emitters.csharp,
+  rulePath,
+  "tspconfig-csharp-az-namespace-equal-string",
+  "",
+  "namespace",
+  "{package-dir}",
+  "AAA",
+);
+
+const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
+  emitters.csharp,
+  rulePath,
+  "tspconfig-csharp-az-clear-output-folder-true",
+  "",
+  "clear-output-folder",
+  true,
+  false,
+);
+
+const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
+  emitters.csharp,
+  rulePath,
+  "tspconfig-csharp-mgmt-package-dir-match-pattern",
+  managementTspconfigPath,
+  "package-dir",
+  "Azure.ResourceManager.AAA",
+  "Azure.Management.AAA",
+);
 
 describe("Tspconfig emitter options validation", () => {
   it.each([
+    // common
+    ...commonAzureServiceDirTestCases,
     // ts
     ...tsManagementGenerateMetadataTestCases,
     ...tsManagementHierarchyClientTestCases,
@@ -221,6 +276,18 @@ describe("Tspconfig emitter options validation", () => {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
+    // java
+    ...javaManagementPackageDirTestCases,
+    // python
+    ...pythonManagementPackageDirTestCases,
+    ...pythonManagementPackageNameTestCases,
+    ...pythonManagementGenerateTestTestCases,
+    ...pythonManagementGenerateSampleTestCases,
+    // csharp
+    ...csharpAzPackageDirTestCases,
+    ...csharpAzNamespaceTestCases,
+    ...csharpAzClearOutputFolderTestCases,
+    ...csharpMgmtPackageDirTestCases,
   ])("$ruleName - $description", async (c: Case) => {
     const ruleTester = new RuleTester({
       languageOptions: {
@@ -253,3 +320,86 @@ describe("Tspconfig emitter options validation", () => {
     ruleTester.run(rule.name, rule as Rule.RuleModule, tests);
   });
 });
+
+function createEmitterOptionTestCases(
+  emitterName: string,
+  rulePath: string,
+  ruleName: string,
+  fileName: string,
+  key: string,
+  validValue: boolean | string,
+  invalidValue: boolean | string,
+): Case[] {
+  const managementGenerateMetadataTestCases: Case[] = [
+    {
+      description: `valid: ${key} is ${validValue}`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: createEmitterOptionExample(
+        emitterName,
+        { key: key, value: validValue },
+        { key: "flavor", value: "azure" },
+      ),
+      shouldReportError: false,
+    },
+    {
+      description: `invalid: ${key} is ${invalidValue}`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: createEmitterOptionExample(
+        emitterName,
+        { key: key, value: invalidValue },
+        { key: "flavor", value: "azure" },
+      ),
+      shouldReportError: true,
+    },
+    {
+      description: `invalid: ${key} is undefined`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: createEmitterOptionExample(emitterName, { key: "flavor", value: "azure" }),
+      shouldReportError: true,
+    },
+  ];
+  return managementGenerateMetadataTestCases;
+}
+
+function createParameterTestCases(
+  rulePath: string,
+  ruleName: string,
+  fileName: string,
+  key: string,
+  validValue: boolean | string,
+  invalidValue: boolean | string,
+): Case[] {
+  const managementGenerateMetadataTestCases: Case[] = [
+    {
+      description: `valid: ${key} is ${validValue}`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: createParameterExample({ key: key, value: validValue }),
+      shouldReportError: false,
+    },
+    {
+      description: `invalid: ${key} is ${invalidValue}`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: createParameterExample({ key: key, value: invalidValue }),
+      shouldReportError: true,
+    },
+    {
+      description: `invalid: ${key} is undefined`,
+      rulePath,
+      ruleName,
+      fileName,
+      yamlContent: "",
+      shouldReportError: true,
+    },
+  ];
+  return managementGenerateMetadataTestCases;
+}
