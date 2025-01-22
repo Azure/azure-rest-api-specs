@@ -31,13 +31,14 @@ openapi-type: arm
 tag: package-2024-05
 ```
 
-### Tag: package-2024-07-preview
-These settings apply only when `--tag=package-2024-07-preview` is specified on the command line.
+### Tag: package-2024-07-01
 
-``` yaml $(tag) == 'package-2024-07-preview'
+These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-07-01'
 input-file:
-  - Microsoft.Network/preview/2024-07-01-preview/network.json
-  - Microsoft.Network/preview/2024-07-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-07-01/network.json
+  - Microsoft.Network/preview/2024-07-01/networkSecurityPerimeter.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
@@ -45,13 +46,14 @@ suppressions:
     reason: Required for multiple response codes. Reviewed by ARM team.
 ```
 
-### Tag: package-2024-07
-These settings apply only when `--tag=package-2024-07` is specified on the command line.
+### Tag: package-2024-02-preview
 
-``` yaml $(tag) == 'package-2024-07'
+These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-preview'
 input-file:
-  - Microsoft.Network/preview/2024-07-01/network.json
-  - Microsoft.Network/preview/2024-07-01/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-02-01-preview/network.json
+  - Microsoft.Network/preview/2024-02-01-preview/networkSecurityPerimeter.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
