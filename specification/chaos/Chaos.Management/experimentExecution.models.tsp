@@ -111,7 +111,7 @@ model ExperimentExecutionDetailsProperties {
   stoppedAt?: utcDateTime;
 
   /**
-   * Resource provisioning state. Resource provisioning state. Not currently in use for executions.
+   * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
