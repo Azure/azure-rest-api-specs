@@ -62,7 +62,7 @@
   "paths": {
     "/authoring/analyze-conversations/projects": {
       "get": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_ListProjects",
+        "operationId": "ProjectsAuthoringConversationAnalysis_ListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -105,7 +105,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}": {
       "get": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_GetProject",
+        "operationId": "ProjectsAuthoringConversationAnalysis_GetProject",
         "description": "Gets the details of a project.",
         "parameters": [
           {
@@ -142,7 +142,7 @@
         }
       },
       "patch": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_CreateProject",
+        "operationId": "ProjectsAuthoringConversationAnalysis_CreateProject",
         "description": "Creates a new project or updates an existing one.",
         "consumes": [
           "application/merge-patch+json"
@@ -197,7 +197,7 @@
         }
       },
       "delete": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_DeleteProject",
+        "operationId": "ProjectsAuthoringConversationAnalysis_DeleteProject",
         "description": "Deletes a project.",
         "parameters": [
           {
@@ -241,7 +241,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
-        "operationId": "CopyProjectConversationAuthoringAnalysis_CopyProjectAuthorization",
+        "operationId": "CopyProjectAuthoringConversationAnalysis_CopyProjectAuthorization",
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "parameters": [
           {
@@ -288,7 +288,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "CopyProjectConversationAuthoringAnalysis_CopyProject",
+        "operationId": "CopyProjectAuthoringConversationAnalysis_CopyProject",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
           {
@@ -341,7 +341,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
-        "operationId": "ProjectFilesConversationAuthoringAnalysis_Export",
+        "operationId": "ProjectFilesAuthoringConversationAnalysis_Export",
         "description": "Triggers a job to export a project's data.",
         "parameters": [
           {
@@ -458,7 +458,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:import": {
       "post": {
-        "operationId": "ProjectFilesConversationAuthoringAnalysis_Import",
+        "operationId": "ProjectFilesAuthoringConversationAnalysis_Import",
         "description": "Triggers a job to import a project. If a project with the same name already exists, the data of that project is replaced.",
         "parameters": [
           {
@@ -539,7 +539,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
-        "operationId": "TrainingConversationAuthoringAnalysis_Train",
+        "operationId": "TrainingAuthoringConversationAnalysis_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -592,7 +592,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
       "get": {
-        "operationId": "CopyProjectConversationAuthoringAnalysis_GetCopyProjectStatus",
+        "operationId": "CopyProjectAuthoringConversationAnalysis_GetCopyProjectStatus",
         "description": "Gets the status of an existing copy project job.",
         "parameters": [
           {
@@ -638,7 +638,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_ListDeployments",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_ListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -689,7 +689,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}": {
       "get": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeployment",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_GetDeployment",
         "description": "Gets the details of a deployment.",
         "parameters": [
           {
@@ -733,7 +733,7 @@
         }
       },
       "put": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_DeployProject",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_DeployProject",
         "description": "Creates a new deployment or replaces an existing one.",
         "parameters": [
           {
@@ -791,7 +791,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_DeleteDeployment",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_DeleteDeployment",
         "description": "Deletes a project deployment.",
         "parameters": [
           {
@@ -842,7 +842,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources": {
       "post": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_DeleteDeploymentFromResources",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_DeleteDeploymentFromResources",
         "description": "Deletes a project deployment from the specified assigned resources.",
         "parameters": [
           {
@@ -902,7 +902,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/delete-from-resources/jobs/{jobId}": {
       "get": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeploymentDeleteFromResourcesStatus",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_GetDeploymentDeleteFromResourcesStatus",
         "description": "Gets the status of an existing delete deployment from specific resources job.",
         "parameters": [
           {
@@ -955,7 +955,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_GetDeploymentStatus",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_GetDeploymentStatus",
         "description": "Gets the status of an existing deployment job.",
         "parameters": [
           {
@@ -1008,7 +1008,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/:swap": {
       "post": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_SwapDeployments",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_SwapDeployments",
         "description": "Swaps two existing deployments with each other.",
         "parameters": [
           {
@@ -1061,7 +1061,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments/swap/jobs/{jobId}": {
       "get": {
-        "operationId": "DeploymentsConversationAuthoringAnalysis_GetSwapDeploymentsStatus",
+        "operationId": "DeploymentsAuthoringConversationAnalysis_GetSwapDeploymentsStatus",
         "description": "Gets the status of an existing swap deployment job.",
         "parameters": [
           {
@@ -1107,7 +1107,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
-        "operationId": "ProjectFilesConversationAuthoringAnalysis_GetExportStatus",
+        "operationId": "ProjectFilesAuthoringConversationAnalysis_GetExportStatus",
         "description": "Gets the status of an export job. Once job completes, returns the project metadata, and assets.",
         "parameters": [
           {
@@ -1153,7 +1153,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/exported-models": {
       "get": {
-        "operationId": "ExportedModelsConversationAuthoringAnalysis_ListExportedModels",
+        "operationId": "ExportedModelsAuthoringConversationAnalysis_ListExportedModels",
         "description": "Lists the exported models belonging to a project.",
         "parameters": [
           {
@@ -1204,7 +1204,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}": {
       "get": {
-        "operationId": "ExportedModelsConversationAuthoringAnalysis_GetExportedModel",
+        "operationId": "ExportedModelsAuthoringConversationAnalysis_GetExportedModel",
         "description": "Gets the details of an exported model.",
         "parameters": [
           {
@@ -1248,7 +1248,7 @@
         }
       },
       "put": {
-        "operationId": "ExportedModelsConversationAuthoringAnalysis_CreateOrUpdateExportedModel",
+        "operationId": "ExportedModelsAuthoringConversationAnalysis_CreateOrUpdateExportedModel",
         "description": "Creates a new exported model or replaces an existing one.",
         "parameters": [
           {
@@ -1305,7 +1305,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ExportedModelsConversationAuthoringAnalysis_DeleteExportedModel",
+        "operationId": "ExportedModelsAuthoringConversationAnalysis_DeleteExportedModel",
         "description": "Deletes an existing exported model.",
         "parameters": [
           {
@@ -1355,7 +1355,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
       "get": {
-        "operationId": "ExportedModelsConversationAuthoringAnalysis_GetExportedModelJobStatus",
+        "operationId": "ExportedModelsAuthoringConversationAnalysis_GetExportedModelJobStatus",
         "description": "Gets the status for an existing job to create or update an exported model.",
         "parameters": [
           {
@@ -1408,7 +1408,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
-        "operationId": "ProjectFilesConversationAuthoringAnalysis_GetImportStatus",
+        "operationId": "ProjectFilesAuthoringConversationAnalysis_GetImportStatus",
         "description": "Gets the status for an import.",
         "parameters": [
           {
@@ -1454,7 +1454,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_ListTrainedModels",
+        "operationId": "ModelsAuthoringConversationAnalysis_ListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -1505,7 +1505,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_GetTrainedModel",
+        "operationId": "ModelsAuthoringConversationAnalysis_GetTrainedModel",
         "description": "Gets the details of a trained model.",
         "parameters": [
           {
@@ -1549,7 +1549,7 @@
         }
       },
       "delete": {
-        "operationId": "ModelsConversationAuthoringAnalysis_DeleteTrainedModel",
+        "operationId": "ModelsAuthoringConversationAnalysis_DeleteTrainedModel",
         "description": "Deletes an existing trained model.",
         "parameters": [
           {
@@ -1592,7 +1592,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
       "post": {
-        "operationId": "ModelsConversationAuthoringAnalysis_EvaluateModel",
+        "operationId": "ModelsAuthoringConversationAnalysis_EvaluateModel",
         "description": "Triggers evaluation operation on a trained model.",
         "parameters": [
           {
@@ -1652,7 +1652,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
-        "operationId": "ModelsConversationAuthoringAnalysis_LoadSnapshot",
+        "operationId": "ModelsAuthoringConversationAnalysis_LoadSnapshot",
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
         "parameters": [
           {
@@ -1703,7 +1703,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_GetEvaluationStatus",
+        "operationId": "ModelsAuthoringConversationAnalysis_GetEvaluationStatus",
         "description": "Gets the status for an evaluation job.",
         "parameters": [
           {
@@ -1756,7 +1756,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_GetModelEvaluationResults",
+        "operationId": "ModelsAuthoringConversationAnalysis_GetModelEvaluationResults",
         "description": "Gets the detailed results of the evaluation for a trained model. This includes the raw inference results for the data included in the evaluation process.",
         "parameters": [
           {
@@ -1817,7 +1817,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_GetModelEvaluationSummary",
+        "operationId": "ModelsAuthoringConversationAnalysis_GetModelEvaluationSummary",
         "description": "Gets the evaluation summary of a trained model. The summary includes high level performance measurements of the model e.g., F1, Precision, Recall, etc.",
         "parameters": [
           {
@@ -1863,7 +1863,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/load-snapshot/jobs/{jobId}": {
       "get": {
-        "operationId": "ModelsConversationAuthoringAnalysis_GetLoadSnapshotStatus",
+        "operationId": "ModelsAuthoringConversationAnalysis_GetLoadSnapshotStatus",
         "description": "Gets the status for loading a snapshot.",
         "parameters": [
           {
@@ -1916,7 +1916,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_ListDeploymentResources",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_ListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -1967,7 +1967,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_AssignDeploymentResources",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_AssignDeploymentResources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
@@ -2020,7 +2020,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_UnassignDeploymentResources",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_UnassignDeploymentResources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
@@ -2073,7 +2073,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_GetAssignDeploymentResourcesStatus",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_GetAssignDeploymentResourcesStatus",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
           {
@@ -2119,7 +2119,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_GetUnassignDeploymentResourcesStatus",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_GetUnassignDeploymentResourcesStatus",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
           {
@@ -2165,7 +2165,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "TrainingConversationAuthoringAnalysis_ListTrainingJobs",
+        "operationId": "TrainingAuthoringConversationAnalysis_ListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -2216,7 +2216,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "TrainingConversationAuthoringAnalysis_GetTrainingStatus",
+        "operationId": "TrainingAuthoringConversationAnalysis_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -2262,7 +2262,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "TrainingConversationAuthoringAnalysis_CancelTrainingJob",
+        "operationId": "TrainingAuthoringConversationAnalysis_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -2313,7 +2313,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deletion-jobs/{jobId}": {
       "get": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_GetProjectDeletionStatus",
+        "operationId": "ProjectsAuthoringConversationAnalysis_GetProjectDeletionStatus",
         "description": "Gets the status for a project deletion job.",
         "parameters": [
           {
@@ -2351,7 +2351,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "DeploymentResourcesConversationAuthoringAnalysis_ListAssignedResourceDeployments",
+        "operationId": "DeploymentResourcesAuthoringConversationAnalysis_ListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2406,7 +2406,7 @@
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "ProjectsConversationAuthoringAnalysis_GetSupportedLanguages",
+        "operationId": "ProjectsAuthoringConversationAnalysis_GetSupportedLanguages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
           {
@@ -2495,7 +2495,7 @@
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "PrebuiltsConversationAuthoringAnalysis_GetSupportedPrebuiltEntities",
+        "operationId": "PrebuiltsAuthoringConversationAnalysis_GetSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2564,7 +2564,7 @@
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "TrainingConversationAuthoringAnalysis_ListTrainingConfigVersions",
+        "operationId": "TrainingAuthoringConversationAnalysis_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
