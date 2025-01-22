@@ -34,18 +34,18 @@ enum Versions {
   v5_preview: "2024-11-01-preview",
 }
 
-@doc("Marketplace subscription status of a resource.")
+@doc("Marketplace subscription status")
 union MarketplaceSubscriptionStatus {
-  /** Purchased but not yet activated */
+  /** Marketplace subscription purchased but not yet activated */
   PendingFulfillmentStart: "PendingFulfillmentStart",
 
-  /** Marketplace subscription is activated */
+  /** Marketplace subscription activated */
   Subscribed: "Subscribed",
 
-  /** This state indicates that a customer's payment for the Marketplace service was not received */
+  /** Marketplace subscription suspended due to missing customer payment */
   Suspended: "Suspended",
 
-  /** Customer has cancelled the subscription */
+  /** Marketplace subscription cancelled */
   Unsubscribed: "Unsubscribed",
 
   string,
@@ -54,16 +54,16 @@ union MarketplaceSubscriptionStatus {
 @doc("A string that represents a URI.")
 scalar Uri extends string;
 
-@doc("Marketplace details of a resource.")
+@doc("Marketplace details")
 model MarketplaceDetails {
-  @doc("Marketplace Subscription Id.")
+  @doc("Marketplace subscription ID")
   @visibility("read")
   subscriptionId?: string;
 
   @doc("Marketplace subscription status")
   subscriptionStatus?: MarketplaceSubscriptionStatus;
 
-  @doc("Offer details for the marketplace that is selected by the user")
+  @doc("Offer details of the marketplace subscription")
   offerDetails: OfferDetails;
 }
 
@@ -77,13 +77,13 @@ model MarketplacePlanUpdate {
 
 @doc("Offer details for the marketplace that is selected by the user")
 model OfferDetails {
-  @doc("Publisher Id for the marketplace offer")
+  @doc("Publisher ID for the marketplace offer")
   publisherId: string;
 
-  @doc("Offer Id for the marketplace offer")
+  @doc("Offer ID for the marketplace offer")
   offerId: string;
 
-  @doc("Plan Id for the marketplace offer")
+  @doc("Plan ID for the marketplace offer")
   planId: string;
 
   @doc("Plan Name for the marketplace offer")
@@ -100,16 +100,16 @@ model OfferDetails {
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
 scalar email extends string;
 
-@doc("Company details.")
+@doc("Company details")
 model CompanyDetails {
-  @doc("Company name.")
+  @doc("Company name")
   companyName: string;
 
-  @doc("Company address.")
+  @doc("Company address")
   address?: Address;
 }
 
-@doc("Address details.")
+@doc("Address details")
 model Address {
   @doc("Address line 1")
   addressLine1: string;
@@ -117,44 +117,44 @@ model Address {
   @doc("Address line 2")
   addressLine2?: string;
 
-  @doc("Name of the city")
+  @doc("City")
   city: string;
 
-  @doc("Name of the state")
+  @doc("State (if any")
   state: string;
 
-  @doc("Name of the country")
+  @doc("Country")
   country: string;
 
   @doc("Postal code")
   postalCode: string;
 }
 
-@doc("User company details.")
+@doc("User company details")
 model UserCompanyDetails {
-  @doc("Company details of the user.")
+  @doc("Company details")
   companyDetails?: CompanyDetails;
 }
 
 alias UserDetailsDefaultExtraProperties = UserCompanyDetails;
 
 #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
-@doc("Details of the User.")
+@doc("User details")
 @friendlyName("UserDetails")
 model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
-  @doc("First name of the user")
+  @doc("First name")
   firstName: string;
 
-  @doc("Last name of the user")
+  @doc("Last name")
   lastName: string;
 
-  @doc("Email address of the user")
+  @doc("Email address")
   emailAddress: email;
 
-  @doc("User's principal name")
+  @doc("Principal name")
   upn?: string;
 
-  @doc("User's phone number")
+  @doc("Phone number")
   phoneNumber?: string;
 
   ...TExtraProperties;
@@ -162,14 +162,14 @@ model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProper
 
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
-  @doc("Marketplace details of the resource.")
+  @doc("Marketplace details")
   @visibility("create", "read")
   marketplace: MarketplaceDetails;
 
-  @doc("Details of the user.")
+  @doc("User details")
   user: UserDetails<TUserDetailsExtraProperties>;
 
-  @doc("Provisioning state of the resource.")
+  @doc("Provisioning state of the resource")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }

@@ -26,11 +26,11 @@ enum Versions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
-@doc("Reservation resource type.")
+@doc("Pure Storage cloud service resource type, also called reservation")
 @friendlyName("Reservation")
 model Reservation<TProperties extends Model = ReservationProperties>
   is Azure.ResourceManager.TrackedResource<TProperties> {
-  @doc("The name of the reservation.")
+  @doc("Name of the reservation.")
   @segment("reservations")
   @key("reservationName")
   @visibility("read")
@@ -46,8 +46,11 @@ interface Reservations<
   TReservation extends Foundations.Resource = Reservation,
   TReservationProperties extends Model = ReservationProperties
 > {
+  @doc("Get a reservation")
   get is ArmResourceRead<TReservation>;
+  @doc("Create a reservation")
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
+  @doc("Update a reservation")
   update is ArmCustomPatchAsync<
     TReservation,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -55,14 +58,17 @@ interface Reservations<
       TReservationProperties
     >
   >;
+  @doc("Delete a reservation")
   delete is ArmResourceDeleteWithoutOkAsync<TReservation>;
+  @doc("List reservations by resource group")
   listByResourceGroup is ArmResourceListByParent<TReservation>;
+  @doc("List reservations by Azure subscription ID")
   listBySubscription is ArmListBySubscription<TReservation>;
 }
 
 @doc("Properties of a Reservation resource.")
 model ReservationProperties<TProperties extends Model = BaseResourceProperties> {
-  @doc("Internal ID of Reservation.")
+  @doc("Pure Storage's internal ID for the reservation")
   @visibility("read")
   reservationInternalId?: string;
 
