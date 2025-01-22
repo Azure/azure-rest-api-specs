@@ -5,6 +5,11 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ComputeSchedule;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmt", "python");
+@@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
+@@clientNamespace(Microsoft.ComputeSchedule,
+  "com.azure.resourcemanager.computeschedule",
+  "java"
+);
 
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
@@ -91,3 +96,10 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(CancelOperationsRequest.correlationid, "correlationId", "csharp");
+@@clientName(Schedule.deadLine, "userRequestDeadline", "csharp");
+@@clientName(Schedule.timeZone, "userRequestTimezone", "csharp");
+@@clientName(ResourceOperationDetails.timeZone, "operationTimezone", "csharp");
+@@clientName(OperationErrorDetails.timeStamp,
+  "errorDetailsTimestamp",
+  "csharp"
+);
