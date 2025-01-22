@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -64,6 +65,13 @@ model CapabilityProperties {
   @visibility("read")
   @maxLength(2048)
   urn?: string;
+
+  /**
+   * Resource provisioning state. Not currently in use because resource is created synchronously.
+   */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /**
