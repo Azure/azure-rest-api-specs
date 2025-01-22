@@ -424,9 +424,6 @@ union ResourceType {
   @doc("Value when customer wants to provide custom naming convention for Bastion NSG.")
   networkSecurityGroups: "networkSecurityGroups",
 
-  @doc("Value when customer wants to provide custom naming convention for ExpressRoute.")
-  expressRouteCircuits: "expressRouteCircuits",
-
   @doc("Value when customer wants to provide custom naming convention for virtual network.")
   virtualNetworks: "virtualNetworks",
 
