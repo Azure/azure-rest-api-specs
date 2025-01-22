@@ -1109,9 +1109,11 @@ model DimensionValueList {
   name?: string;
 
   @doc("The dimension value")
+  @pageItems
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable.")
+  @nextLink
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 
