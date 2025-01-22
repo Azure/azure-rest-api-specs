@@ -20,6 +20,7 @@ namespace Microsoft.KubernetesRuntime;
 @doc("Versions of KubernetesRuntime service")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("2023-10-01-preview")
   v2023_10_01_preview: "2023-10-01-preview",
 
@@ -31,18 +32,19 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Initial provisioning in progress")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Update in progress")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deletion in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing")
-  Accepted,
+  Accepted: "Accepted",
 }

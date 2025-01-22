@@ -24,8 +24,8 @@ interface DevCenterClientOperations {
   getPool is DevCenterService.DevBoxes.getPool;
   listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
   getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
-  listAllDevBoxes is DevCenterService.DevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevCenter.listAllDevBoxesByUser;
+  listAllDevBoxes is DevCenterService.DevBoxes.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
   getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
   createDevBox is DevCenterService.DevBoxes.createDevBox;
@@ -71,7 +71,7 @@ interface DevCenterClientOperations {
 @@clientName(DevCenterService.OsDisk, "OSDisk", "python");
 @@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "python");
 @@clientName(DevCenterService.OperationStatus, "OperationDetails", "python");
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(Azure.Core.Foundations.OperationState,
   "OperationStatus",
   "python"
 );

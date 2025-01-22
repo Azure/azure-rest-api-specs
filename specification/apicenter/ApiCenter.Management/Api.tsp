@@ -6,7 +6,6 @@ import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
@@ -30,7 +29,7 @@ interface Apis {
   @doc("Checks if specified API exists.")
   @head
   head(
-    ...ResourceInstanceParameters<Api, BaseParameters<Api>>,
+    ...ResourceInstanceParameters<Api, Foundations.BaseParameters<Api>>,
   ): OkResponse | ErrorResponse;
   @doc("Creates new or updates existing API.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Api>;

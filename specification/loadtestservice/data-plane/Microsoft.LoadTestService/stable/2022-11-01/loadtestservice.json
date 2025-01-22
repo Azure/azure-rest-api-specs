@@ -1656,7 +1656,7 @@
     },
     "AppComponent": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1698,7 +1698,7 @@
     },
     "AppComponentUpdate": {
       "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
+      "description": "An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
       "properties": {
         "resourceName": {
           "type": "string",
@@ -2184,8 +2184,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2414,8 +2413,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2437,8 +2435,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2460,8 +2457,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2491,7 +2487,7 @@
         },
         "aggregate": {
           "$ref": "#/definitions/PFAgFunc",
-          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
+          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
           "type": "string",
@@ -2546,7 +2542,7 @@
     },
     "ResourceMetric": {
       "type": "object",
-      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
+      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "properties": {
         "id": {
           "type": "string",
@@ -2592,7 +2588,7 @@
     },
     "ResourceMetricUpdate": {
       "type": "object",
-      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
+      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -3090,7 +3086,7 @@
         },
         "testRunStatistics": {
           "type": "object",
-          "description": "Test run statistics.",
+          "description": "Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.\nThe sampler name is the same as the name mentioned in the test script.\nSampler name \"Total\" represents the aggregated statistics of all the samplers.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },
@@ -3415,7 +3411,7 @@
         },
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetric"
           }
@@ -3544,7 +3540,7 @@
         },
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetric"
           }
@@ -3582,7 +3578,7 @@
       "properties": {
         "metrics": {
           "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
+          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceMetricUpdate"
           }

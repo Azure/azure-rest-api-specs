@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "providerInstanceName": "myProviderInstance",
+    "resource": {
+      "properties": {
+        "providerSettings": {
+          "dbName": "db",
+          "dbPassword": "****",
+          "dbPasswordUri": "",
+          "dbUsername": "user",
+          "hostname": "name",
+          "instanceNumber": "00",
+          "providerType": "SapHana",
+          "sapSid": "SID",
+          "sqlPort": "0000",
+          "sslHostNameInCertificate": "xyz.domain.com",
+          "sslPreference": "RootCertificate"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "dbName": "db",
+            "dbPasswordUri": "",
+            "dbUsername": "user",
+            "hostname": "name",
+            "instanceNumber": "00",
+            "providerType": "SapHana",
+            "sapSid": "SID",
+            "sqlPort": "0000",
+            "sslHostNameInCertificate": "xyz.domain.com",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "dbName": "db",
+            "dbPasswordUri": "",
+            "dbUsername": "user",
+            "hostname": "name",
+            "instanceNumber": "00",
+            "providerType": "SapHana",
+            "sapSid": "SID",
+            "sqlPort": "0000",
+            "sslHostNameInCertificate": "xyz.domain.com",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "ProviderInstances_Create",
+  "title": "Create a SAP monitor Hana provider with Root Certificate"
+}

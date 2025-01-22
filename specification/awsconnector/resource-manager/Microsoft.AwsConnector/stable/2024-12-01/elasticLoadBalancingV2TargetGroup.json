@@ -1,0 +1,716 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticLoadBalancingV2TargetGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetGroups": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_ListBySubscription",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "List ElasticLoadBalancingV2TargetGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_ListBySubscription": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetGroups": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_ListByResourceGroup",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "List ElasticLoadBalancingV2TargetGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_ListByResourceGroup": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticLoadBalancingV2TargetGroups/{name}": {
+      "get": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_Get",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "Get a ElasticLoadBalancingV2TargetGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2TargetGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_Get": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_CreateOrReplace",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "Create a ElasticLoadBalancingV2TargetGroup. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2TargetGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticLoadBalancingV2TargetGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticLoadBalancingV2TargetGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_CreateOrReplace": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_Update",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "Update a ElasticLoadBalancingV2TargetGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2TargetGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_Update": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticLoadBalancingV2TargetGroups_Delete",
+        "tags": [
+          "ElasticLoadBalancingV2TargetGroups"
+        ],
+        "description": "Delete a ElasticLoadBalancingV2TargetGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticLoadBalancingV2TargetGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticLoadBalancingV2TargetGroups_Delete": {
+            "$ref": "./examples/ElasticLoadBalancingV2TargetGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsElasticLoadBalancingV2TargetGroupProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticLoadBalancingV2TargetGroup",
+      "properties": {
+        "healthCheckEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled."
+        },
+        "healthCheckIntervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The approximate amount of time, in seconds, between health checks of an individual target."
+        },
+        "healthCheckPath": {
+          "type": "string",
+          "description": "[HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck."
+        },
+        "healthCheckPort": {
+          "type": "string",
+          "description": "The port the load balancer uses when performing health checks on targets."
+        },
+        "healthCheckProtocol": {
+          "type": "string",
+          "description": "The protocol the load balancer uses when performing health checks on targets."
+        },
+        "healthCheckTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time, in seconds, during which no response from a target means a failed health check."
+        },
+        "healthyThresholdCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive health checks successes required before considering an unhealthy target healthy."
+        },
+        "ipAddressType": {
+          "type": "string",
+          "description": "The type of IP address used for this target group. The possible values are ipv4 and ipv6."
+        },
+        "loadBalancerArns": {
+          "type": "array",
+          "description": "The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "matcher": {
+          "$ref": "#/definitions/Matcher",
+          "description": "[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the target group."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol to use for routing traffic to the targets."
+        },
+        "protocolVersion": {
+          "type": "string",
+          "description": "[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2."
+        },
+        "tags": {
+          "type": "array",
+          "description": "The tags.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "targetGroupArn": {
+          "type": "string",
+          "description": "The ARN of the Target Group"
+        },
+        "targetGroupAttributes": {
+          "type": "array",
+          "description": "The attributes.",
+          "items": {
+            "$ref": "#/definitions/TargetGroupAttribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "targetGroupFullName": {
+          "type": "string",
+          "description": "The full name of the target group."
+        },
+        "targetGroupName": {
+          "type": "string",
+          "description": "The name of the target group."
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type."
+        },
+        "targets": {
+          "type": "array",
+          "description": "The targets.",
+          "items": {
+            "$ref": "#/definitions/TargetDescription"
+          },
+          "x-ms-identifiers": []
+        },
+        "unhealthyThresholdCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive health check failures required before considering a target unhealthy."
+        },
+        "vpcId": {
+          "type": "string",
+          "description": "The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply."
+        }
+      }
+    },
+    "ElasticLoadBalancingV2TargetGroup": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticLoadBalancingV2TargetGroupListResult": {
+      "type": "object",
+      "description": "The response of a ElasticLoadBalancingV2TargetGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticLoadBalancingV2TargetGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticLoadBalancingV2TargetGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticLoadBalancingV2TargetGroupProperties": {
+      "type": "object",
+      "description": "Definition of ElasticLoadBalancingV2TargetGroup",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticLoadBalancingV2TargetGroupProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticLoadBalancingV2TargetGroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticLoadBalancingV2TargetGroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Matcher": {
+      "type": "object",
+      "description": "Definition of Matcher",
+      "properties": {
+        "grpcCode": {
+          "type": "string",
+          "description": "You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12."
+        },
+        "httpCode": {
+          "type": "string",
+          "description": "For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values or a range of values."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The value for the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The key name of the tag."
+        }
+      }
+    },
+    "TargetDescription": {
+      "type": "object",
+      "description": "Definition of TargetDescription",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function."
+        }
+      }
+    },
+    "TargetGroupAttribute": {
+      "type": "object",
+      "description": "Definition of TargetGroupAttribute",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The value of the attribute."
+        },
+        "value": {
+          "type": "string",
+          "description": "The name of the attribute."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

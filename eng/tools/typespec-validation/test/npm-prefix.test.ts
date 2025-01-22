@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { NpmPrefixRule } from "../src/rules/npm-prefix.js";
 import { IGitOperation, TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";

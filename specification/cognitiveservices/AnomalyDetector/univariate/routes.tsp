@@ -20,16 +20,16 @@ op UnivariateServiceAction<TParams, TResponse>(
 @route("timeseries/entire/detect")
 @summary("Detect anomalies for the entire series in batch.")
 @doc("""
-This operation generates a model with an entire series. Each point is detected
-with the same model. With this method, points before and after a certain point
-are used to determine whether it's an anomaly. The entire detection can give the
-user an overall status of the time series.
-""")
+  This operation generates a model with an entire series. Each point is detected
+  with the same model. With this method, points before and after a certain point
+  are used to determine whether it's an anomaly. The entire detection can give the
+  user an overall status of the time series.
+  """)
 op detectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateDetectionOptions;
   },
   // TResponse
@@ -41,14 +41,14 @@ op detectUnivariateEntireSeries is UnivariateServiceAction<
 @route("timeseries/last/detect")
 @summary("Detect anomaly status of the latest point in time series.")
 @doc("""
-This operation generates a model by using the points that you sent in to the API
-and based on all data to determine whether the last point is anomalous.
-""")
+  This operation generates a model by using the points that you sent in to the API
+  and based on all data to determine whether the last point is anomalous.
+  """)
 op detectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateDetectionOptions;
   },
   // TResponse
@@ -64,7 +64,7 @@ op detectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateChangePointDetectionOptions;
   },
   // TResponse

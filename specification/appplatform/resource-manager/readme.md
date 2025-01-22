@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-01
+tag: package-preview-2024-05
 ```
 
 ### Suppression
@@ -59,11 +59,20 @@ suppressions:
     reason: start,stop,flushDNSsetting api do not have return body in async operation
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.AppPlatform/preview/2024-05-01-preview/appplatform.json
+```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.AppPlatform/preview/2024-01-01-preview/appplatform.json
 ```
@@ -265,18 +274,3 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "sdk" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.0.17.3
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.AppPlatform
-  output-folder: $(csharp-sdks-folder)/appplatform/Microsoft.Azure.Management.AppPlatform/src/Generated
-  clear-output-folder: true
-```

@@ -12,27 +12,25 @@
   "responses": {
     "200": {
       "body": {
-        "status": "Succeeded",
-        "properties": {
-          "output": {
-            "value": [
-              {
-                "prefix": "192.168.50.0/24",
-                "asPath": "65520-65520",
-                "bgpCommunities": "4293853166,12076,51004"
-              },
-              {
-                "prefix": "10.200.0.0/16",
-                "asPath": "65520-65520-12076-12076",
-                "bgpCommunities": "4293787629,12076,51027,4293734188"
-              }
-            ]
+        "value": [
+          {
+            "prefix": "192.168.50.0/24",
+            "asPath": "65520-65520",
+            "bgpCommunities": "4293853166,12076,51004"
+          },
+          {
+            "prefix": "10.200.0.0/16",
+            "asPath": "65520-65520-12076-12076",
+            "bgpCommunities": "4293787629,12076,51027,4293734188"
           }
-        }
+        ]
       }
     },
     "202": {
-      "description": "Accepted and the operation will complete asynchronously."
+      "description": "Accepted and the operation will complete asynchronously.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Network/locations/region/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-09-01"
+      }
     }
   }
 }

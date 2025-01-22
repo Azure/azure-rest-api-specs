@@ -4,40 +4,12 @@ These settings apply only when `--az` is specified on the command line.
 
 ``` yaml $(az)
 az:
-    extensions: codesigning
-    namespace: azure.mgmt.codesigning
-    package-name: azure-mgmt-codesigning
+    extensions: trustedsigning
+    namespace: azure.mgmt.trustedsigning
+    package-name: azure-mgmt-trustedsigning
     randomize-names: true
-az-output-folder: $(azure-cli-extension-folder)/src/codesigning
-python-sdk-output-folder: "$(az-output-folder)/azext_codesigning/vendored_sdks/codesigning"
+az-output-folder: $(azure-cli-extension-folder)/src/trustedsigning
+python-sdk-output-folder: "$(az-output-folder)/azext_trustedsigning/vendored_sdks/trustedsigning"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 
-directive:
-  - where:
-     group: codesigning code-signing-account
-    set:
-     group: codesigning
-
-cli:
-  cli-directive:
-    - where:
-        group: Operations
-      hidden: true
-    - where:
-        group: CodeSigningAccount
-        param: accountName
-      name: name
-      alias:
-        - name
-        - n
-    - where:
-        group: CertificateProfile
-        param: profileName
-      name: name
-      alias:
-        - name
-        - n
-      
-
-```

@@ -1,15 +1,8 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./deviceGroup.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -38,13 +31,24 @@ interface Devices {
   /**
    * Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Device>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Device,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
-  @parameterVisibility("read")
-  update is ArmCustomPatchAsync<Device, DeviceUpdate, LroHeaders = {}>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @parameterVisibility
+  update is ArmCustomPatchAsync<
+    Device,
+    DeviceUpdate,
+    LroHeaders = ArmLroLocationHeader<FinalResult = Device> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete a Device
@@ -71,11 +75,6 @@ interface Devices {
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "application/json",
-  "generateDeviceCapabilityRequest"
-);
-@@extension(Devices.generateCapabilityImage::parameters.body,
-  "x-ms-client-name",
+@@clientName(Devices.generateCapabilityImage::parameters.body,
   "generateDeviceCapabilityRequest"
 );

@@ -1,9 +1,5 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -16,266 +12,282 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Provisioning state of resource.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /**
    * Resource has been created.
    */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /**
    * Resource creation failed.
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * Resource creation was canceled.
    */
-  Canceled,
+  Canceled: "Canceled",
 
   /**
    * The resource is being provisioned
    */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /**
    * The resource is being updated
    */
-  Updating,
+  Updating: "Updating",
 
   /**
    * The resource is being deleted
    */
-  Deleting,
+  Deleting: "Deleting",
 
   /**
    * The resource create request has been accepted
    */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 /**
  * Certificate status values.
  */
-enum CertificateStatus {
+union CertificateStatus {
+  string,
+
   /**
    * Certificate is active
    */
-  Active,
+  Active: "Active",
 
   /**
    * Certificate is inactive
    */
-  Inactive,
+  Inactive: "Inactive",
 
   /**
    * Certificate has expired
    */
-  Expired,
+  Expired: "Expired",
 
   /**
    * Certificate has been revoked
    */
-  Revoked,
+  Revoked: "Revoked",
 }
 
 /**
  * Regional data boundary values.
  */
-enum RegionalDataBoundary {
+union RegionalDataBoundary {
+  string,
+
   /**
    * No data boundary
    */
-  None,
+  None: "None",
 
   /**
    * EU data boundary
    */
-  EU,
+  EU: "EU",
 }
 
 /**
  * Image type values.
  */
-enum ImageType {
+union ImageType {
+  string,
+
   /**
    * Invalid image.
    */
-  InvalidImageType,
+  InvalidImageType: "InvalidImageType",
 
   /**
    * One Bl image type
    */
-  OneBl,
+  OneBl: "OneBl",
 
   /**
    * Pluton image type
    */
-  PlutonRuntime,
+  PlutonRuntime: "PlutonRuntime",
 
   /**
    * Wifi firmware image type
    */
-  WifiFirmware,
+  WifiFirmware: "WifiFirmware",
 
   /**
    * Security monitor image type
    */
-  SecurityMonitor,
+  SecurityMonitor: "SecurityMonitor",
 
   /**
    * Normal world loader image type
    */
-  NormalWorldLoader,
+  NormalWorldLoader: "NormalWorldLoader",
 
   /**
    * Normal world dtb image type
    */
-  NormalWorldDtb,
+  NormalWorldDtb: "NormalWorldDtb",
 
   /**
    * Normal world kernel image type
    */
-  NormalWorldKernel,
+  NormalWorldKernel: "NormalWorldKernel",
 
   /**
    * Root FS image type
    */
-  RootFs,
+  RootFs: "RootFs",
 
   /**
    * Services image type
    */
-  Services,
+  Services: "Services",
 
   /**
    * Applications image type
    */
-  Applications,
+  Applications: "Applications",
 
   /**
    * FW config image type
    */
-  FwConfig,
+  FwConfig: "FwConfig",
 
   /**
    * Boot manifest image type
    */
-  BootManifest,
+  BootManifest: "BootManifest",
 
   /**
    * Nwfs image type
    */
-  Nwfs,
+  Nwfs: "Nwfs",
 
   /**
    * Trusted key store image type
    */
-  TrustedKeystore,
+  TrustedKeystore: "TrustedKeystore",
 
   /**
    * Policy image type
    */
-  Policy,
+  Policy: "Policy",
 
   /**
    * Customer board config image type
    */
-  CustomerBoardConfig,
+  CustomerBoardConfig: "CustomerBoardConfig",
 
   /**
    * Update certificate store image type
    */
-  UpdateCertStore,
+  UpdateCertStore: "UpdateCertStore",
 
   /**
    * Base system update manifest image type
    */
-  BaseSystemUpdateManifest,
+  BaseSystemUpdateManifest: "BaseSystemUpdateManifest",
 
   /**
    * Firmware update manifest image type
    */
-  FirmwareUpdateManifest,
+  FirmwareUpdateManifest: "FirmwareUpdateManifest",
 
   /**
    * Customer update manifest image type
    */
-  CustomerUpdateManifest,
+  CustomerUpdateManifest: "CustomerUpdateManifest",
 
   /**
    * Recovery manifest image type
    */
-  RecoveryManifest,
+  RecoveryManifest: "RecoveryManifest",
 
   /**
    * manifest set image type
    */
-  ManifestSet,
+  ManifestSet: "ManifestSet",
 
   /**
    * Other image type
    */
-  Other,
+  Other: "Other",
 }
 
 /**
  * OS feed type values.
  */
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /**
    * Retail OS feed type.
    */
-  Retail,
+  Retail: "Retail",
 
   /**
    * Retail evaluation OS feed type.
    */
-  RetailEval,
+  RetailEval: "RetailEval",
 }
 
 /**
  * Update policy values.
  */
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /**
    * Update all policy.
    */
-  UpdateAll,
+  UpdateAll: "UpdateAll",
 
   /**
    * No update for 3rd party app policy.
    */
-  No3rdPartyAppUpdates,
+  No3rdPartyAppUpdates: "No3rdPartyAppUpdates",
 }
 
 /**
  * Allow crash dumps values.
  */
-enum AllowCrashDumpCollection {
+union AllowCrashDumpCollection {
+  string,
+
   /**
    * Crash dump collection enabled
    */
-  Enabled,
+  Enabled: "Enabled",
 
   /**
    * Crash dump collection disabled
    */
-  Disabled,
+  Disabled: "Disabled",
 }
 
 /**
  * Capability image type
  */
-enum CapabilityType {
+union CapabilityType {
+  string,
+
   /**
    * Application development capability
    */
-  ApplicationDevelopment,
+  ApplicationDevelopment: "ApplicationDevelopment",
 
   /**
    * Field servicing capability
    */
-  FieldServicing,
+  FieldServicing: "FieldServicing",
 }
 
 /**
@@ -331,6 +343,7 @@ model CatalogUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 }
 
@@ -408,12 +421,14 @@ model ProofOfPossessionNonceRequest {
  * Result of the action to generate a proof of possession nonce
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
 /**
  * Response to the action call for count devices in a catalog.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model CountDevicesResponse extends CountElementsResponse {}
 
 /**
@@ -691,7 +706,8 @@ model ProductUpdate {
   /**
    * The updatable properties of the Product.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ProductUpdateProperties;
 }
 
@@ -712,7 +728,8 @@ model DeviceGroupUpdate {
   /**
    * The updatable properties of the DeviceGroup.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -763,7 +780,8 @@ model DeviceUpdate {
   /**
    * The updatable properties of the Device.
    */
-  @extension("x-ms-client-flatten", true)
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceUpdateProperties;
 }
 
@@ -802,6 +820,7 @@ model SignedCapabilityImageResponse {
  * Response to the action call for count devices in a catalog (preview API).
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
 model CountDeviceResponse extends CountElementsResponse {}
 
 /**

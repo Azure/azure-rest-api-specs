@@ -6,6 +6,8 @@ import "./model.radiologyinsights.valuesets.tsp";
 
 using TypeSpec.Rest;
 
+using TypeSpec.Versioning;
+
 namespace AzureHealthInsights;
 
 @doc("Contains the list of patients, and configuration data.")
@@ -21,6 +23,7 @@ model RadiologyInsightsModelConfiguration {
   ...ModelConfiguration;
 
   @doc("This is a list of inference types to be inferred for the current request. It could be used if only part of the Radiology Insights inferences are required. If this list is omitted or empty, the model will return all the inference types.")
+  @minItems(1)
   inferenceTypes?: RadiologyInsightsInferenceType[];
 
   @doc("Options regarding follow up recommendation inferences and finding inferences.")
@@ -37,6 +40,14 @@ model RadiologyInsightsInferenceOptions {
 
   @doc("Finding options.")
   findingOptions?: FindingOptions;
+
+  @added(ApiVersion.v2024_10_01)
+  @doc("Guidance options.")
+  guidanceOptions?: GuidanceOptions;
+
+  @added(ApiVersion.v2024_10_01)
+  @doc("QualityMeasureOptions.")
+  qualityMeasureOptions?: QualityMeasureOptions;
 }
 
 @doc("Follow-up recommendation options.")
@@ -57,17 +68,43 @@ model FindingOptions {
   provideFocusedSentenceEvidence?: boolean;
 }
 
-@resource("radiology-insights/jobs")
+@added(ApiVersion.v2024_10_01)
+@doc("Guidance options.")
+model GuidanceOptions {
+  @doc("If this is true, also show guidances from a clinical history section i.e. if the first token of the associated finding's clinical indicator is in this section. Default is false.")
+  showGuidanceInHistory: boolean;
+}
+
+@added(ApiVersion.v2024_10_01)
+@doc("Quality Measure Options.")
+model QualityMeasureOptions {
+  @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
+  @minItems(1)
+  measureTypes: Array<QualityMeasureType>;
+}
+
 @doc("Response for the Radiology Insights request.")
-model RadiologyInsightsResult
-  is HealthInsightsOperationStatus<RadiologyInsightsInferenceResult>;
+@resource("radiology-insights/jobs")
+model RadiologyInsightsJob {
+  @doc("The request data for the operation.")
+  @visibility("read", "create")
+  jobData?: RadiologyInsightsData;
+
+  @doc("The result of the operation.")
+  @visibility("read")
+  result?: RadiologyInsightsInferenceResult;
+
+  ...HealthInsightsJobBase;
+}
 
 @doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
 model RadiologyInsightsInferenceResult {
   @doc("Results for the patients given in the request.")
+  @minItems(1)
   patientResults: RadiologyInsightsPatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
+  @pattern("^(?:[2][0-9]{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])(?:-preview)?)$")
   modelVersion: ModelVersion;
 }
 
@@ -77,22 +114,24 @@ model RadiologyInsightsPatientResult {
   patientId: string;
 
   @doc("The model's inferences for the given patient.")
+  @minItems(1)
   inferences: RadiologyInsightsInference[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("""
-An inference made by the Radiology Insights model regarding a patient.
-  - AgeMismatch
-  - SexMismatch
-  - LateralityDiscrepancy
-  - CompleteOrderDiscrepancy
-  - LimitedOrderDiscrepancy
-  - Finding
-  - CriticalResult
-  - FollowupRecommendation
-  - RadiologyProcedure
-  - FollowupCommunication
-""")
+  An inference made by the Radiology Insights model regarding a patient.
+    - AgeMismatch
+    - SexMismatch
+    - LateralityDiscrepancy
+    - CompleteOrderDiscrepancy
+    - LimitedOrderDiscrepancy
+    - Finding
+    - CriticalResult
+    - FollowupRecommendation
+    - RadiologyProcedure
+    - FollowupCommunication
+  """)
 @discriminator("kind")
 model RadiologyInsightsInference {
   ...Fhir.R4.Extendible;
@@ -134,9 +173,11 @@ model CompleteOrderDiscrepancyInference extends RadiologyInsightsInference {
   orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of missing body parts required by a complete order : SNOMED CT codes.")
+  @minItems(1)
   missingBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of missing body parts that require measurement by a complete order : SNOMED CT codes.")
+  @minItems(1)
   missingBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
@@ -149,9 +190,11 @@ model LimitedOrderDiscrepancyInference extends RadiologyInsightsInference {
   orderType: Fhir.R4.CodeableConcept;
 
   @doc("List of body parts found in the document : SNOMED CT codes.")
+  @minItems(1)
   presentBodyParts?: Array<Fhir.R4.CodeableConcept>;
 
   @doc("List of body parts that are measured according to the document : SNOMED CT codes.")
+  @minItems(1)
   presentBodyPartMeasurements?: Array<Fhir.R4.CodeableConcept>;
 }
 
@@ -204,7 +247,7 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupRecommendation;
 
   @doc("Date and time are displayed when the procedure is recommended to be done at a specific point in time.")
-  effectiveDateTime?: Fhir.R4.fhirDateTime;
+  effectiveAt?: Fhir.R4.fhirDateTime;
 
   @doc("The period is shown if a specific period is mentioned, with a start and end date-time.")
   effectivePeriod?: Fhir.R4.Period;
@@ -229,9 +272,12 @@ model FollowupRecommendationInference extends RadiologyInsightsInference {
   recommendedProcedure: ProcedureRecommendation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The procedure recommendation can be a generic procedure or an imaging procedure.")
 @discriminator("kind")
-model ProcedureRecommendation {}
+model ProcedureRecommendation {
+  ...Fhir.R4.Extendible;
+}
 
 @doc("Generic procedure information.")
 model GenericProcedureRecommendation extends ProcedureRecommendation {
@@ -286,7 +332,7 @@ model RadiologyCodeWithTypes {
 }
 
 @doc("Finding reference for recommendation.")
-model RecommendationFinding is Fhir.R4.Extendible {
+model RecommendationFinding {
   @doc("Finding linked to a recommendation.")
   finding?: Fhir.R4.Observation;
 
@@ -295,6 +341,8 @@ model RecommendationFinding is Fhir.R4.Extendible {
 
   @doc("Recommendation finding status.")
   recommendationFindingStatus: RecommendationFindingStatusType;
+
+  ...Fhir.R4.Extendible;
 }
 
 @doc("Follow-up communication involves the exchange of important information, recommendations, or updates between radiologists and other healthcare professionals involved in a patient's care.")
@@ -303,11 +351,111 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.FollowupCommunication;
 
   @doc("Communication date and time.")
-  dateTime?: Array<utcDateTime>;
+  @minItems(1)
+  communicatedAt?: Array<utcDateTime>;
 
   @doc("Recipient of the communication.")
+  @minItems(1)
   recipient?: Array<MedicalProfessionalType>;
 
   @doc("Communication was acknowledged.")
   wasAcknowledged: boolean;
+}
+
+// For scoring and assessment:
+@doc("Identifies and highlights Risk, Scoring, Assessment and Classifications and correspondent values dictated in a report, e.g. 'BIRADS 5'")
+@added(ApiVersion.v2024_10_01)
+model ScoringAndAssessmentInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.ScoringAndAssessment;
+
+  @doc("Category, e.g. BIRADS")
+  category: ScoringAndAssessmentCategoryType;
+
+  @doc("The expansion of the category (which is an abbreviation.)")
+  categoryDescription: string;
+
+  @doc("The value. If the value is a range, use field valueRange.")
+  singleValue?: string;
+
+  @doc("The range.")
+  rangeValue?: AssessmentValueRange;
+}
+
+@added(ApiVersion.v2024_10_01)
+@doc("A range of values.")
+model AssessmentValueRange {
+  @doc("The minimum value.")
+  minimum: string;
+
+  @doc("The maximum value.")
+  maximum: string;
+}
+
+// For guidance: Clinical Guidance or (Guided) Follow-up Finding
+
+@added(ApiVersion.v2024_10_01)
+@doc("A guidance inference collects structured information about a specific finding in the report and can possibly propose appropriate follow-up recommendations, based upon established, evidence-based best practices i.e. ACR guidelines.")
+model GuidanceInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.Guidance;
+
+  @doc("The finding associated with the guidance.")
+  finding: FindingInference;
+
+  @doc("The guidance identifier, as a concept")
+  identifier: Fhir.R4.CodeableConcept;
+
+  @doc("presentGuidanceInformation lists each item of the structured information (e.g. laterality) and corresponding details (left, right, bilateral) that is present in the document.")
+  @minItems(1)
+  presentGuidanceInformation?: Array<PresentGuidanceInformation>;
+
+  @doc("See doc of GuidanceRankingType.")
+  ranking: GuidanceRankingType;
+
+  @doc("The proposed follow-up recommendations, if any. If this is filled, missingGuidanceInformation cannot be filled (and vice versa).")
+  @minItems(1)
+  recommendationProposals?: Array<FollowupRecommendationInference>;
+
+  @doc("Contains all missing items that are needed to determine follow-up.")
+  @minItems(1)
+  missingGuidanceInformation?: Array<string>;
+}
+
+@added(ApiVersion.v2024_10_01)
+@doc("An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)")
+model PresentGuidanceInformation {
+  @doc("The item of the structured information ")
+  presentGuidanceItem: string;
+
+  @doc("A list of size values, if the item is about size.")
+  @minItems(1)
+  sizes?: Array<Fhir.R4.Observation>;
+
+  @doc("The maximum diameter value, if the item is about the maximum diameter.")
+  maximumDiameterAsInText?: Fhir.R4.Quantity;
+
+  @doc("The list of item values that are mentioned in the report.")
+  @minItems(1)
+  presentGuidanceValues?: Array<string>;
+
+  ...Fhir.R4.Extendible;
+}
+
+// For quality measure:
+@added(ApiVersion.v2024_10_01)
+@doc("A QualityMeasure inference captures the  MIPS ('measure based incentive payment system') quality measure criteria in the document that are used to measure the data completeness.")
+model QualityMeasureInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.QualityMeasure;
+
+  @doc("The denominator, which identifies the QualityMeasure kind.")
+  qualityMeasureDenominator: string;
+
+  @doc("The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply.")
+  complianceType: QualityMeasureComplianceType;
+
+  @doc("List of quality criteria identified in the document, if any. ")
+  @minItems(1)
+  qualityCriteria?: Array<string>;
 }

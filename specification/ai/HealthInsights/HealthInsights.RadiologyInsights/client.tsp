@@ -7,9 +7,7 @@ import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(
-  AzureHealthInsights.ApiVersion.v2023_09_01_Preview
-)
+@TypeSpec.Versioning.useDependency(AzureHealthInsights.ApiVersion.v2024_04_01)
 namespace ClientForAzureHealthInsights;
 
 @client({
@@ -19,6 +17,7 @@ namespace ClientForAzureHealthInsights;
 interface RadiologyInsightsClient {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
 }
 
@@ -84,5 +83,21 @@ interface RadiologyInsightsClient {
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
-@@clientName(AzureHealthInsights.PatientInfoSex, "PatientSex");
-@@clientName(AzureHealthInsights.PatientInfo, "PatientDetails");
+
+@@clientName(AzureHealthInsights.FollowupCommunicationInference.wasAcknowledged,
+  "acknowledged",
+  "java"
+);
+
+@@clientName(AzureHealthInsights.DocumentAuthor,
+  "ClinicalDocumentAuthor",
+  "csharp, java"
+);
+@@clientName(AzureHealthInsights.DocumentType,
+  "ClinicalDocumentContentType",
+  "csharp, java"
+);
+@@clientName(AzureHealthInsights.DocumentContent,
+  "ClinicalDocumentContent",
+  "csharp, java"
+);

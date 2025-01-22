@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mySapMonitor1",
+            "type": "Microsoft.Workloads/monitors",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Workloads/monitors/mySapMonitor1",
+            "location": "westus",
+            "properties": {
+              "appLocation": "eastus",
+              "appServicePlanConfiguration": {
+                "capacity": 1,
+                "tier": "ElasticPremium"
+              },
+              "errors": {
+                "code": "0000",
+                "message": "Error message",
+                "target": "Error target",
+                "details": []
+              },
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/example-rg/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "managedResourceGroupConfiguration": {
+                "name": "myManagedRg1"
+              },
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+              "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
+              "provisioningState": "Succeeded",
+              "routingPreference": "RouteAll",
+              "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount",
+              "zoneRedundancyPreference": "ZoneRedundantApp"
+            },
+            "tags": {
+              "key": "value"
+            }
+          },
+          {
+            "name": "mySapMonitor2",
+            "type": "Microsoft.Workloads/monitors",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Workloads/monitors/mySapMonitor2",
+            "location": "westus",
+            "properties": {
+              "appLocation": "westus",
+              "appServicePlanConfiguration": {
+                "capacity": 1,
+                "tier": "ElasticPremium"
+              },
+              "errors": {
+                "code": "0000",
+                "message": "Error message",
+                "target": "Error target",
+                "details": []
+              },
+              "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/example-rg/providers/microsoft.operationalinsights/workspaces/myWorkspace",
+              "managedResourceGroupConfiguration": {
+                "name": "myManagedRg2"
+              },
+              "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+              "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
+              "provisioningState": "Succeeded",
+              "routingPreference": "Default",
+              "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+            },
+            "tags": {
+              "key": "value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Monitors_ListByResourceGroup",
+  "title": "List all SAP monitors in a resource group"
+}

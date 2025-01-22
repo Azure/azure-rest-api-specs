@@ -25,11 +25,30 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
+
 ``` yaml
 openapi-type: arm
-tag: package-2024-02-preview
+tag: package-2024-05-preview
 ```
 
+
+### Tag: package-2024-05-preview
+
+These settings apply only when `--tag=package-2024-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05-preview'
+input-file:
+  - preview/2024-05-02-preview/fleets.json
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04'
+input-file:
+  - stable/2024-04-01/fleets.json
+```
 
 ### Tag: package-2024-02-preview
 

@@ -12,15 +12,15 @@ using Azure.ClientGenerator.Core;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat
-extension.
-""")
+  A specific representation of configurable options for Azure Cosmos DB when using it as an Azure OpenAI chat
+  extension.
+  """)
 model AzureCosmosDBChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Azure Cosmos DB.
-  """)
+    The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+    default value for Azure Cosmos DB.
+    """)
   type: AzureChatExtensionType.azureCosmosDB;
 
   @doc("The parameters to use when configuring Azure OpenAI CosmosDB chat extensions.")
@@ -30,11 +30,21 @@ model AzureCosmosDBChatExtensionConfiguration
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
-MongoDB vCore. The supported authentication type is ConnectionString.
-""")
+  Parameters to use when configuring Azure OpenAI On Your Data chat extensions when using Azure Cosmos DB for
+  MongoDB vCore. The supported authentication type is ConnectionString.
+  """)
 model AzureCosmosDBChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
+
+  @doc("""
+    The authentication method to use when accessing the defined data source.
+    Each data source type supports a specific set of available authentication methods; please see the documentation of
+    the data source for supported mechanisms.
+    If not otherwise provided, On Your Data will attempt to use System Managed Identity (default credential)
+    authentication.
+    """)
+  @clientName("Authentication", "csharp")
+  authentication?: OnYourDataAuthenticationOptions;
 
   @doc("The MongoDB vCore database name to use with Azure Cosmos DB.")
   @clientName("DatabaseName", "csharp")

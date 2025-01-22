@@ -1,0 +1,1282 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EmrClusters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/emrClusters": {
+      "get": {
+        "operationId": "EmrClusters_ListBySubscription",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "List EmrCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_ListBySubscription": {
+            "$ref": "./examples/EmrClusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusters": {
+      "get": {
+        "operationId": "EmrClusters_ListByResourceGroup",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "List EmrCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_ListByResourceGroup": {
+            "$ref": "./examples/EmrClusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/emrClusters/{name}": {
+      "get": {
+        "operationId": "EmrClusters_Get",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "Get a EmrCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_Get": {
+            "$ref": "./examples/EmrClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EmrClusters_CreateOrReplace",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "Create a EmrCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmrCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EmrCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EmrCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'EmrCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EmrCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_CreateOrReplace": {
+            "$ref": "./examples/EmrClusters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EmrClusters_Update",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "Update a EmrCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmrClusterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EmrCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_Update": {
+            "$ref": "./examples/EmrClusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EmrClusters_Delete",
+        "tags": [
+          "EmrClusters"
+        ],
+        "description": "Delete a EmrCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of EmrCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EmrClusters_Delete": {
+            "$ref": "./examples/EmrClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "description": "Definition of Application",
+      "properties": {
+        "additionalInfo": {
+          "type": "object",
+          "description": "<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "type": "array",
+          "description": "<p>Arguments for Amazon EMR to pass to the application.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the application.</p>"
+        },
+        "version": {
+          "type": "string",
+          "description": "<p>The version of the application.</p>"
+        }
+      }
+    },
+    "AwsEmrClusterProperties": {
+      "type": "object",
+      "description": "Definition of awsEmrCluster",
+      "properties": {
+        "applications": {
+          "type": "array",
+          "description": "<p>The applications installed on this cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "x-ms-identifiers": []
+        },
+        "autoScalingRole": {
+          "type": "string",
+          "description": "<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>"
+        },
+        "autoTerminate": {
+          "type": "boolean",
+          "description": "<p>Specifies whether the cluster should terminate after completing all steps.</p>"
+        },
+        "clusterArn": {
+          "type": "string",
+          "description": "<p>The Amazon Resource Name of the cluster.</p>"
+        },
+        "configurations": {
+          "type": "array",
+          "description": "<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "x-ms-identifiers": []
+        },
+        "customAmiId": {
+          "type": "string",
+          "description": "<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
+        },
+        "ebsRootVolumeIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The IOPS, of the Amazon EBS root device volume of the Linux AMI that is used for each Amazon EC2 instance. Available in Amazon EMR releases 6.15.0 and later.</p>"
+        },
+        "ebsRootVolumeSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and later.</p>"
+        },
+        "ebsRootVolumeThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The throughput, in MiB/s, of the Amazon EBS root device volume of the Linux AMI that is used for each Amazon EC2 instance. Available in Amazon EMR releases 6.15.0 and later.</p>"
+        },
+        "ec2InstanceAttributes": {
+          "$ref": "#/definitions/Ec2InstanceAttributes",
+          "description": "<p>Provides information about the Amazon EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.</p>"
+        },
+        "id": {
+          "type": "string",
+          "description": "<p>The unique identifier for the cluster.</p>"
+        },
+        "instanceCollectionType": {
+          "$ref": "#/definitions/InstanceCollectionTypeEnumValue",
+          "description": "<note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note> <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code> indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code> indicates an instance fleets configuration.</p>"
+        },
+        "kerberosAttributes": {
+          "$ref": "#/definitions/KerberosAttributes",
+          "description": "<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href='https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html'>Use Kerberos Authentication</a> in the <i>Amazon EMR Management Guide</i>.</p>"
+        },
+        "logEncryptionKmsKeyId": {
+          "type": "string",
+          "description": "<p> The KMS key used for encrypting log files. This attribute is only available with Amazon EMR 5.30.0 and later, excluding Amazon EMR 6.0.0. </p>"
+        },
+        "logUri": {
+          "type": "string",
+          "description": "<p>The path to the Amazon S3 location where logs for this cluster are stored.</p>"
+        },
+        "masterPublicDnsName": {
+          "type": "string",
+          "description": "<p>The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.</p>"
+        },
+        "name": {
+          "type": "string",
+          "description": "<p>The name of the cluster. This parameter can't contain the characters &lt;, &gt;, $, |, or ` (backtick).</p>"
+        },
+        "normalizedInstanceHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.</p>"
+        },
+        "osReleaseLabel": {
+          "type": "string",
+          "description": "<p>The Amazon Linux release specified in a cluster launch RunJobFlow request. If no Amazon Linux release was specified, the default Amazon Linux release is shown in the response.</p>"
+        },
+        "outpostArn": {
+          "type": "string",
+          "description": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
+        },
+        "placementGroups": {
+          "type": "array",
+          "description": "<p>Placement group configured for an Amazon EMR cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/PlacementGroupConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "releaseLabel": {
+          "type": "string",
+          "description": "<p>The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href='https://docs.aws.amazon.com/emr/latest/ReleaseGuide/'>https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.</p>"
+        },
+        "repoUpgradeOnBoot": {
+          "$ref": "#/definitions/RepoUpgradeOnBootEnumValue",
+          "description": "<p>Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that the Amazon Linux AMI package repositories apply when an instance boots using the AMI.</p>"
+        },
+        "requestedAmiVersion": {
+          "type": "string",
+          "description": "<p>The AMI version requested for this cluster.</p>"
+        },
+        "runningAmiVersion": {
+          "type": "string",
+          "description": "<p>The AMI version running on this cluster.</p>"
+        },
+        "scaleDownBehavior": {
+          "$ref": "#/definitions/ScaleDownBehaviorEnumValue",
+          "description": "<p>The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR releases 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+        },
+        "securityConfiguration": {
+          "type": "string",
+          "description": "<p>The name of the security configuration applied to the cluster.</p>"
+        },
+        "serviceRole": {
+          "type": "string",
+          "description": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.</p>"
+        },
+        "status": {
+          "$ref": "#/definitions/ClusterStatus",
+          "description": "<p>The current status details about the cluster.</p>"
+        },
+        "stepConcurrencyLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>Specifies the number of steps that can be executed concurrently.</p>"
+        },
+        "tags": {
+          "type": "array",
+          "description": "<p>A list of tags associated with a cluster.</p>",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "terminationProtected": {
+          "type": "boolean",
+          "description": "<p>Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.</p>"
+        },
+        "unhealthyNodeReplacement": {
+          "type": "boolean",
+          "description": "<p>Indicates whether Amazon EMR should gracefully replace Amazon EC2 core instances that have degraded within the cluster.</p>"
+        },
+        "visibleToAllUsers": {
+          "type": "boolean",
+          "description": "<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI <a href='https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html'>create-cluster</a> command, or the Amazon Web Services Management Console.</p>"
+        }
+      }
+    },
+    "ClusterState": {
+      "type": "string",
+      "description": "ClusterState enum",
+      "enum": [
+        "BOOTSTRAPPING",
+        "RUNNING",
+        "STARTING",
+        "TERMINATED",
+        "TERMINATED_WITH_ERRORS",
+        "TERMINATING",
+        "WAITING"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BOOTSTRAPPING",
+            "value": "BOOTSTRAPPING",
+            "description": "ClusterState enum BOOTSTRAPPING"
+          },
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "ClusterState enum RUNNING"
+          },
+          {
+            "name": "STARTING",
+            "value": "STARTING",
+            "description": "ClusterState enum STARTING"
+          },
+          {
+            "name": "TERMINATED",
+            "value": "TERMINATED",
+            "description": "ClusterState enum TERMINATED"
+          },
+          {
+            "name": "TERMINATED_WITH_ERRORS",
+            "value": "TERMINATED_WITH_ERRORS",
+            "description": "ClusterState enum TERMINATED_WITH_ERRORS"
+          },
+          {
+            "name": "TERMINATING",
+            "value": "TERMINATING",
+            "description": "ClusterState enum TERMINATING"
+          },
+          {
+            "name": "WAITING",
+            "value": "WAITING",
+            "description": "ClusterState enum WAITING"
+          }
+        ]
+      }
+    },
+    "ClusterStateChangeReason": {
+      "type": "object",
+      "description": "Definition of ClusterStateChangeReason",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ClusterStateChangeReasonCodeEnumValue",
+          "description": "<p>The programmatic code for the state change reason.</p>"
+        },
+        "message": {
+          "type": "string",
+          "description": "<p>The descriptive message for the state change reason.</p>"
+        }
+      }
+    },
+    "ClusterStateChangeReasonCode": {
+      "type": "string",
+      "description": "ClusterStateChangeReasonCode enum",
+      "enum": [
+        "ALL_STEPS_COMPLETED",
+        "BOOTSTRAP_FAILURE",
+        "INSTANCE_FAILURE",
+        "INSTANCE_FLEET_TIMEOUT",
+        "INTERNAL_ERROR",
+        "STEP_FAILURE",
+        "USER_REQUEST",
+        "VALIDATION_ERROR"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterStateChangeReasonCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALL_STEPS_COMPLETED",
+            "value": "ALL_STEPS_COMPLETED",
+            "description": "ClusterStateChangeReasonCode enum ALL_STEPS_COMPLETED"
+          },
+          {
+            "name": "BOOTSTRAP_FAILURE",
+            "value": "BOOTSTRAP_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum BOOTSTRAP_FAILURE"
+          },
+          {
+            "name": "INSTANCE_FAILURE",
+            "value": "INSTANCE_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum INSTANCE_FAILURE"
+          },
+          {
+            "name": "INSTANCE_FLEET_TIMEOUT",
+            "value": "INSTANCE_FLEET_TIMEOUT",
+            "description": "ClusterStateChangeReasonCode enum INSTANCE_FLEET_TIMEOUT"
+          },
+          {
+            "name": "INTERNAL_ERROR",
+            "value": "INTERNAL_ERROR",
+            "description": "ClusterStateChangeReasonCode enum INTERNAL_ERROR"
+          },
+          {
+            "name": "STEP_FAILURE",
+            "value": "STEP_FAILURE",
+            "description": "ClusterStateChangeReasonCode enum STEP_FAILURE"
+          },
+          {
+            "name": "USER_REQUEST",
+            "value": "USER_REQUEST",
+            "description": "ClusterStateChangeReasonCode enum USER_REQUEST"
+          },
+          {
+            "name": "VALIDATION_ERROR",
+            "value": "VALIDATION_ERROR",
+            "description": "ClusterStateChangeReasonCode enum VALIDATION_ERROR"
+          }
+        ]
+      }
+    },
+    "ClusterStateChangeReasonCodeEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterStateChangeReasonCodeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterStateChangeReasonCode",
+          "description": "Property value"
+        }
+      }
+    },
+    "ClusterStateEnumValue": {
+      "type": "object",
+      "description": "Definition of ClusterStateEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ClusterState",
+          "description": "Property value"
+        }
+      }
+    },
+    "ClusterStatus": {
+      "type": "object",
+      "description": "Definition of ClusterStatus",
+      "properties": {
+        "errorDetails": {
+          "type": "array",
+          "description": "<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "state": {
+          "$ref": "#/definitions/ClusterStateEnumValue",
+          "description": "<p>The current state of the cluster.</p>"
+        },
+        "stateChangeReason": {
+          "$ref": "#/definitions/ClusterStateChangeReason",
+          "description": "<p>The reason for the cluster status change.</p>"
+        },
+        "timeline": {
+          "$ref": "#/definitions/ClusterTimeline",
+          "description": "<p>A timeline that represents the status of a cluster over the lifetime of the cluster.</p>"
+        }
+      }
+    },
+    "ClusterTimeline": {
+      "type": "object",
+      "description": "Definition of ClusterTimeline",
+      "properties": {
+        "creationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The creation date and time of the cluster.</p>"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time when the cluster was terminated.</p>"
+        },
+        "readyDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The date and time when the cluster was ready to run steps.</p>"
+        }
+      }
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Definition of Configuration",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "<p>The classification within a configuration.</p>"
+        },
+        "configurations": {
+          "type": "array",
+          "description": "<p>A list of additional configurations to apply within a configuration object.</p>",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          },
+          "x-ms-identifiers": []
+        },
+        "properties": {
+          "type": "object",
+          "description": "<p>A set of properties specified within a configuration classification.</p>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Ec2InstanceAttributes": {
+      "type": "object",
+      "description": "Definition of Ec2InstanceAttributes",
+      "properties": {
+        "additionalMasterSecurityGroups": {
+          "type": "array",
+          "description": "<p>A list of additional Amazon EC2 security group IDs for the master node.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "additionalSlaveSecurityGroups": {
+          "type": "array",
+          "description": "<p>A list of additional Amazon EC2 security group IDs for the core and task nodes.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "ec2AvailabilityZone": {
+          "type": "string",
+          "description": "<p>The Availability Zone in which the cluster will run. </p>"
+        },
+        "ec2KeyName": {
+          "type": "string",
+          "description": "<p>The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as a user named 'hadoop'.</p>"
+        },
+        "ec2SubnetId": {
+          "type": "string",
+          "description": "<p>Set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, and your account supports EC2-Classic, the cluster launches in EC2-Classic.</p>"
+        },
+        "emrManagedMasterSecurityGroup": {
+          "type": "string",
+          "description": "<p>The identifier of the Amazon EC2 security group for the master node.</p>"
+        },
+        "emrManagedSlaveSecurityGroup": {
+          "type": "string",
+          "description": "<p>The identifier of the Amazon EC2 security group for the core and task nodes.</p>"
+        },
+        "iamInstanceProfile": {
+          "type": "string",
+          "description": "<p>The IAM role that was specified when the cluster was launched. The Amazon EC2 instances of the cluster assume this role.</p>"
+        },
+        "requestedEc2AvailabilityZones": {
+          "type": "array",
+          "description": "<p>Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch Amazon EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "requestedEc2SubnetIds": {
+          "type": "array",
+          "description": "<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the Amazon EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceAccessSecurityGroup": {
+          "type": "string",
+          "description": "<p>The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.</p>"
+        }
+      }
+    },
+    "EmrCluster": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EmrClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EmrClusterListResult": {
+      "type": "object",
+      "description": "The response of a EmrCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EmrCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/EmrCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EmrClusterProperties": {
+      "type": "object",
+      "description": "Definition of EmrCluster",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsEmrClusterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "EmrClusterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EmrCluster resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "Definition of ErrorDetail",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "<p>The name or code associated with the error.</p>"
+        },
+        "errorData": {
+          "type": "array",
+          "description": "<p>A list of key value pairs that provides contextual information about why an error occured.</p>",
+          "items": {
+            "$ref": "#/definitions/StringMap"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "<p>A message that describes the error.</p>"
+        }
+      }
+    },
+    "InstanceCollectionType": {
+      "type": "string",
+      "description": "InstanceCollectionType enum",
+      "enum": [
+        "INSTANCE_FLEET",
+        "INSTANCE_GROUP"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceCollectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "INSTANCE_FLEET",
+            "value": "INSTANCE_FLEET",
+            "description": "InstanceCollectionType enum INSTANCE_FLEET"
+          },
+          {
+            "name": "INSTANCE_GROUP",
+            "value": "INSTANCE_GROUP",
+            "description": "InstanceCollectionType enum INSTANCE_GROUP"
+          }
+        ]
+      }
+    },
+    "InstanceCollectionTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of InstanceCollectionTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InstanceCollectionType",
+          "description": "Property value"
+        }
+      }
+    },
+    "InstanceRoleType": {
+      "type": "string",
+      "description": "InstanceRoleType enum",
+      "enum": [
+        "CORE",
+        "MASTER",
+        "TASK"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceRoleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CORE",
+            "value": "CORE",
+            "description": "InstanceRoleType enum CORE"
+          },
+          {
+            "name": "MASTER",
+            "value": "MASTER",
+            "description": "InstanceRoleType enum MASTER"
+          },
+          {
+            "name": "TASK",
+            "value": "TASK",
+            "description": "InstanceRoleType enum TASK"
+          }
+        ]
+      }
+    },
+    "InstanceRoleTypeEnumValue": {
+      "type": "object",
+      "description": "Definition of InstanceRoleTypeEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/InstanceRoleType",
+          "description": "Property value"
+        }
+      }
+    },
+    "KerberosAttributes": {
+      "type": "object",
+      "description": "Definition of KerberosAttributes",
+      "properties": {
+        "adDomainJoinPassword": {
+          "type": "string",
+          "description": "<p>The Active Directory password for <code>ADDomainJoinUser</code>.</p>"
+        },
+        "adDomainJoinUser": {
+          "type": "string",
+          "description": "<p>Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.</p>"
+        },
+        "crossRealmTrustPrincipalPassword": {
+          "type": "string",
+          "description": "<p>Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.</p>"
+        },
+        "kdcAdminPassword": {
+          "type": "string",
+          "description": "<p>The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.</p>"
+        },
+        "realm": {
+          "type": "string",
+          "description": "<p>The name of the Kerberos realm to which all nodes in a cluster belong. For example, <code>EC2.INTERNAL</code>. </p>"
+        }
+      }
+    },
+    "PlacementGroupConfig": {
+      "type": "object",
+      "description": "Definition of PlacementGroupConfig",
+      "properties": {
+        "instanceRole": {
+          "$ref": "#/definitions/InstanceRoleTypeEnumValue",
+          "description": "<p>Role of the instance in the cluster.</p> <p>Starting with Amazon EMR release 5.23.0, the only supported instance role is <code>MASTER</code>.</p>"
+        },
+        "placementStrategy": {
+          "$ref": "#/definitions/PlacementGroupStrategyEnumValue",
+          "description": "<p>Amazon EC2 Placement Group strategy associated with instance role.</p> <p>Starting with Amazon EMR release 5.23.0, the only supported placement strategy is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>"
+        }
+      }
+    },
+    "PlacementGroupStrategy": {
+      "type": "string",
+      "description": "PlacementGroupStrategy enum",
+      "enum": [
+        "CLUSTER",
+        "NONE",
+        "PARTITION",
+        "SPREAD"
+      ],
+      "x-ms-enum": {
+        "name": "PlacementGroupStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CLUSTER",
+            "value": "CLUSTER",
+            "description": "PlacementGroupStrategy enum CLUSTER"
+          },
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "PlacementGroupStrategy enum NONE"
+          },
+          {
+            "name": "PARTITION",
+            "value": "PARTITION",
+            "description": "PlacementGroupStrategy enum PARTITION"
+          },
+          {
+            "name": "SPREAD",
+            "value": "SPREAD",
+            "description": "PlacementGroupStrategy enum SPREAD"
+          }
+        ]
+      }
+    },
+    "PlacementGroupStrategyEnumValue": {
+      "type": "object",
+      "description": "Definition of PlacementGroupStrategyEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PlacementGroupStrategy",
+          "description": "Property value"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RepoUpgradeOnBoot": {
+      "type": "string",
+      "description": "RepoUpgradeOnBoot enum",
+      "enum": [
+        "NONE",
+        "SECURITY"
+      ],
+      "x-ms-enum": {
+        "name": "RepoUpgradeOnBoot",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "RepoUpgradeOnBoot enum NONE"
+          },
+          {
+            "name": "SECURITY",
+            "value": "SECURITY",
+            "description": "RepoUpgradeOnBoot enum SECURITY"
+          }
+        ]
+      }
+    },
+    "RepoUpgradeOnBootEnumValue": {
+      "type": "object",
+      "description": "Definition of RepoUpgradeOnBootEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/RepoUpgradeOnBoot",
+          "description": "Property value"
+        }
+      }
+    },
+    "ScaleDownBehavior": {
+      "type": "string",
+      "description": "ScaleDownBehavior enum",
+      "enum": [
+        "TERMINATE_AT_INSTANCE_HOUR",
+        "TERMINATE_AT_TASK_COMPLETION"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleDownBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TERMINATE_AT_INSTANCE_HOUR",
+            "value": "TERMINATE_AT_INSTANCE_HOUR",
+            "description": "ScaleDownBehavior enum TERMINATE_AT_INSTANCE_HOUR"
+          },
+          {
+            "name": "TERMINATE_AT_TASK_COMPLETION",
+            "value": "TERMINATE_AT_TASK_COMPLETION",
+            "description": "ScaleDownBehavior enum TERMINATE_AT_TASK_COMPLETION"
+          }
+        ]
+      }
+    },
+    "ScaleDownBehaviorEnumValue": {
+      "type": "object",
+      "description": "Definition of ScaleDownBehaviorEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ScaleDownBehavior",
+          "description": "Property value"
+        }
+      }
+    },
+    "StringMap": {
+      "type": "object",
+      "description": "Definition of StringMap"
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "<p>A user-defined key, which is the minimum required information for a valid tag. For more information, see <a href='https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html'>Tag</a>. </p>"
+        },
+        "value": {
+          "type": "string",
+          "description": "<p>A user-defined value, which is optional in a tag. For more information, see <a href='https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html'>Tag Clusters</a>. </p>"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

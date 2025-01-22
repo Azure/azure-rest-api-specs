@@ -5,6 +5,7 @@ import "../shared/models.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace DevCenterService;
 
@@ -15,22 +16,17 @@ interface DevCenter {
   @doc("Gets a project.")
   getProject is StandardResourceOperations.ResourceRead<Project>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
-  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
-  @route("/devboxes")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "no @key for ProjectAbility model"
+  //There is no @key for ProjectAbility model
+  @doc("Gets the signed-in user's permitted abilities in a project.")
   @get
-  listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
-  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
-  @route("/users/{userId}/devboxes")
-  @get
-  listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
+  @route("/projects/{projectName}/users/{userId}/abilities")
+  @added(APIVersions.v2024_05_01_preview)
+  getProjectAbilities is Azure.Core.Foundations.Operation<
     {
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
+      ...ProjectNameParameter;
+      ...UserIdParameter;
     },
-    DevBoxListResult
+    ProjectAbilities
   >;
 }

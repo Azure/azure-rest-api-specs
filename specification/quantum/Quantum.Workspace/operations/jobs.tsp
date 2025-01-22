@@ -12,33 +12,37 @@ using TypeSpec.Http;
 using OpenAPI;
 
 /** The type of the job. */
-enum JobType {
+union JobType {
+  string,
+
   /** Unknown job type. */
-  Unknown,
+  Unknown: "Unknown",
 
   /** Quantum Computing job type. */
-  QuantumComputing,
+  QuantumComputing: "QuantumComputing",
 
   /** Optimization job type. */
-  Optimization,
+  Optimization: "Optimization",
 }
 
 /** The status of the job. */
-enum JobStatus {
+union JobStatus {
+  string,
+
   /** The job is waiting in the queue to be executed. */
-  Waiting,
+  Waiting: "Waiting",
 
   /** The job is being executed. */
-  Executing,
+  Executing: "Executing",
 
   /** The job completed with success. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** The job completed with failure. */
-  Failed,
+  Failed: "Failed",
 
   /** The job was cancelled. */
-  Cancelled,
+  Cancelled: "Cancelled",
 }
 
 /** Quantum computing data. */
@@ -123,17 +127,19 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
     /** Create a new job. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-    There is no support for JsonPatch in Azure.Core.
-    The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-    See https://github.com/Azure/typespec-azure/issues/475
-    """
+      There is no support for JsonPatch in Azure.Core.
+      The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+      See https://github.com/Azure/typespec-azure/issues/475
+      """
     update is PatchOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     cancel is CancelOperation<JobDetails>;
 
     /** Get job by its id. */
@@ -141,9 +147,9 @@ namespace Quantum.Workspace.Operations {
 
     /** List all jobs. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
-    See https://github.com/Azure/typespec-azure/issues/494
-    """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+      See https://github.com/Azure/typespec-azure/issues/494
+      """
     list is CustomListOperation<
       Resource = JobDetails,
       Response = PagedJobDetails

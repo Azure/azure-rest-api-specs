@@ -14,10 +14,10 @@ using Azure.ClientGenerator.Core;
 namespace Azure.OpenAI;
 
 @doc("""
-The configuration information for a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  The configuration information for a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model CompletionsOptions {
   @doc("The prompts to generate completions from.")
   @clientName("Prompts", "csharp")
@@ -132,6 +132,14 @@ model CompletionsOptions {
   @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
+  /**
+   * Options for streaming response. Only set this when you set `stream: true`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @encodedName("application/json", "stream_options")
+  @added(ServiceApiVersions.v2024_09_01_Preview)
+  streamOptions?: ChatCompletionStreamOptions | null;
+
   @doc("""
     The model name to provide as part of this completions request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
@@ -139,13 +147,21 @@ model CompletionsOptions {
     """)
   @clientName("DeploymentName", "csharp")
   `model`?: string;
+
+  /**
+   * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
+   *
+   * Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
+   */
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  seed?: int32;
 }
 
 @doc("""
-Representation of the response data from a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Representation of the response data from a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model Completions {
   @doc("A unique identifier associated with this completions response.")
   id: string;
@@ -159,9 +175,9 @@ model Completions {
   created: utcDateTime;
 
   @doc("""
-  Content filtering results for zero or more prompts in the request. In a streaming request,
-  results for different prompts may arrive at different times or in different orders.
-  """)
+    Content filtering results for zero or more prompts in the request. In a streaming request,
+    results for different prompts may arrive at different times or in different orders.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
@@ -177,13 +193,22 @@ model Completions {
     Usage information for tokens processed and generated as part of this completions operation.
     """)
   usage: CompletionsUsage;
+
+  /**
+   * This fingerprint represents the backend configuration that the model runs with.
+   *
+   * Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.
+   */
+  @encodedName("application/json", "system_fingerprint")
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  systemFingerprint?: string;
 }
 
 @doc("""
-The representation of a single prompt completion as part of an overall completions request.
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
+  The representation of a single prompt completion as part of an overall completions request.
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
 model Choice {
   @doc("The generated text for a given completions prompt.")
   text: string;
@@ -192,10 +217,10 @@ model Choice {
   index: int32;
 
   @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if it
-  has been detected, as well as the severity level (very_low, low, medium, high-scale that
-  determines the intensity and risk level of harmful content) and if it has been filtered or not.
-  """)
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
@@ -215,8 +240,8 @@ model Choice {
 alias NullableFloat = float32 | null;
 
 @doc("""
-Representation of a log probabilities model for a completions generation.
-""")
+  Representation of a log probabilities model for a completions generation.
+  """)
 model CompletionsLogProbabilityModel {
   @doc("The textual forms of tokens evaluated in this probability model.")
   tokens: string[];
@@ -238,4 +263,17 @@ model CompletionsLogProbabilityModel {
   @clientName("TextOffsets", "csharp")
   @clientName("textOffsets", "java")
   textOffset: int32[];
+}
+
+/**
+ * Get completions request body.
+ */
+model GetCompletionsBody {
+  /**
+   * The configuration information for a completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: CompletionsOptions;
 }

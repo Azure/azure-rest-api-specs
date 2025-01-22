@@ -1,3 +1,6 @@
+| Short Link: | [aka.ms/azsdk/sdk-suppression](https://aka.ms/azsdk/sdk-suppression) |
+|--|--|
+
 # SDK Breaking Change Review Workflow
 
 When a specification pull request has breaking change for a specific SDK language, such as `Go`, the pull request will be labelled with "BreakingChange-Go-Sdk". According to [the design principles of Azure SDK](https://azure.github.io/azure-sdk/general_introduction.html#dependable), breaking changes are more harmful to a user’s experience than most new features and improvements are beneficial. Therefore, the pull request author will be strongly encouraged to update the API specification to remove the breaking changes for the SDK. If the breaking change cannot be mitigated by a specification change, the author will need to suppress the breaking changes and have the suppression reviewed. See the following section for details on how to suppress breaking changes.
@@ -17,6 +20,8 @@ Absent SDK breaking changes suppressions
 ### Next Steps
 
 1. The pull request authors create a file called `sdk-suppressions.yaml` if it doesn't already exist in your service folder in the `azure-rest-api-specs` repository. 
+    - For TypeSpec scenarios, `sdk-suppressions.yaml` should be placed in the root folder of the TypeSpec project, which also contains the `tspconfig.yaml` file. For example, refers to the location for [Contoso.Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/contosowidgetmanager/Contoso.Management).
+    - For OpenAPI scenarios, `sdk-suppressions.yaml` should be placed in the `{service}\resource-manager` folder. For example, see the location for the [contosowidgetmanager resource provider](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/contosowidgetmanager/resource-manager).
 2. The pull request authors copy every line under the `Absent SDK breaking changes suppressions` section to the suppression file in the following format:
 ```
 suppressions:

@@ -68,6 +68,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DeviceLocationVerificationContent"
@@ -130,6 +131,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkIdentifier"
@@ -192,6 +194,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NumberVerificationWithoutCodeContent"
@@ -203,17 +206,19 @@
             "description": "Redirection",
             "headers": {
               "location": {
-                "type": "string"
-              },
-              "x-ms-request-id": {
                 "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+                "format": "uri",
+                "description": "The URI of the network's authorization endpoint, which should be followed by the front-end application."
               },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -254,6 +259,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SimSwapRetrievalContent"
@@ -316,6 +322,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SimSwapVerificationContent"
@@ -380,6 +387,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NumberVerificationWithCodeContent"
@@ -427,24 +435,6 @@
     }
   },
   "definitions": {
-    "APCVersions": {
-      "type": "string",
-      "description": "APC Versions",
-      "enum": [
-        "2024-02-09-preview"
-      ],
-      "x-ms-enum": {
-        "name": "APCVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_09_preview",
-            "value": "2024-02-09-preview",
-            "description": "Version 2024-02-09-preview"
-          }
-        ]
-      }
-    },
     "ApcError": {
       "type": "object",
       "description": "A custom error for APC.",
@@ -828,26 +818,12 @@
       "type": "object",
       "description": "Request to verify number of device - second call",
       "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
-          "pattern": "^\\+?[0-9]{5,15}$"
-        },
-        "hashedPhoneNumber": {
-          "type": "string",
-          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
-        },
         "apcCode": {
           "type": "string",
           "description": "The code provided by APC in exchange for the operator code."
         }
       },
       "required": [
-        "networkIdentifier",
         "apcCode"
       ]
     },
@@ -867,10 +843,16 @@
         "hashedPhoneNumber": {
           "type": "string",
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Redirect URI to backend application."
         }
       },
       "required": [
-        "networkIdentifier"
+        "networkIdentifier",
+        "redirectUri"
       ]
     },
     "PhoneNumberModel": {

@@ -12,33 +12,37 @@ using TypeSpec.Versioning;
 using OpenAPI;
 
 /** Policy controlling the behavior of the Session when a job in the session fails. */
-enum SessionJobFailurePolicy {
+union SessionJobFailurePolicy {
+  string,
+
   /** New jobs submitted after a job fails will be rejected. */
-  Abort,
+  Abort: "Abort",
 
   /** New jobs submitted after a job fails will be accepted. */
-  Continue,
+  Continue: "Continue",
 }
 
 /** The status of the session. */
-enum SessionStatus {
+union SessionStatus {
+  string,
+
   /** The session is waiting in the queue to be executed. */
-  Waiting,
+  Waiting: "Waiting",
 
   /** The session is being executed. */
-  Executing,
+  Executing: "Executing",
 
   /** The session completed with success. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** The session completed with failure. */
-  Failed,
+  Failed: "Failed",
 
   /** The session completed with some failures. */
-  `Failure(s)`,
+  `Failure(s)`: "Failure(s)",
 
   /** The session timed out. */
-  TimedOut,
+  TimedOut: "TimedOut",
 }
 
 /** Session, a logical grouping of jobs. */
@@ -68,6 +72,7 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     open is CreateOperation<SessionDetails>;
 
     /** Close an existing session. */
@@ -80,11 +85,13 @@ namespace Quantum.Workspace.Operations {
     list is ListOperation<SessionDetails>;
 
     /** List jobs in a session. */
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
-    See https://github.com/Azure/typespec-azure/issues/494
-    """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+      See https://github.com/Azure/typespec-azure/issues/494
+      """
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,

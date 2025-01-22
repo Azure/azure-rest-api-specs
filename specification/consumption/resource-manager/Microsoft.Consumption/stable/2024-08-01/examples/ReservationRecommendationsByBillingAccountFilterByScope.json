@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "$filter": "properties/scope eq 'Single'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "legacy",
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/71fd91a7-13b9-4ade-bb11-85cfd6422d9d",
+            "name": "71fd91a7-13b9-4ade-bb11-85cfd6422d9d",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "location": "westus3",
+            "sku": "Standard_B4ms",
+            "properties": {
+              "meterId": "9a3781ce-d0dc-5f76-99d7-29eb5aec447f",
+              "term": "P1Y",
+              "costWithNoReservedInstances": 0.332,
+              "recommendedQuantity": 1,
+              "totalCostWithReservedInstances": 0.19474885844748857,
+              "netSavings": 0.13725114155251145,
+              "firstUsageDate": "2024-04-30T07:00:00Z",
+              "scope": "Single",
+              "lookBackPeriod": "Last7Days",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "resourceType": "virtualmachines",
+              "instanceFlexibilityRatio": 8,
+              "instanceFlexibilityGroup": "BS Series High Memory",
+              "normalizedSize": "Standard_B1ms",
+              "recommendedQuantityNormalized": 8,
+              "skuProperties": []
+            }
+          },
+          {
+            "kind": "legacy",
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/904b99c2-baf3-4bff-98ff-a96238ccbc96",
+            "name": "904b99c2-baf3-4bff-98ff-a96238ccbc96",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "location": "westus3",
+            "sku": "Standard_B4ms",
+            "properties": {
+              "meterId": "9a3781ce-d0dc-5f76-99d7-29eb5aec447f",
+              "term": "P3Y",
+              "costWithNoReservedInstances": 0.332,
+              "recommendedQuantity": 1,
+              "totalCostWithReservedInstances": 0.12511415525114156,
+              "netSavings": 0.20688584474885846,
+              "firstUsageDate": "2024-04-30T07:00:00Z",
+              "scope": "Single",
+              "lookBackPeriod": "Last7Days",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "resourceType": "virtualmachines",
+              "instanceFlexibilityRatio": 8,
+              "instanceFlexibilityGroup": "BS Series High Memory",
+              "normalizedSize": "Standard_B1ms",
+              "recommendedQuantityNormalized": 8,
+              "skuProperties": []
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  }
+}

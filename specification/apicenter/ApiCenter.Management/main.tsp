@@ -12,13 +12,13 @@ import "./Workspace.tsp";
 import "./Api.tsp";
 import "./ApiVersion.tsp";
 import "./ApiDefinition.tsp";
+import "./ApiSource.tsp";
 import "./Deployment.tsp";
 import "./Environment.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
@@ -42,62 +42,74 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
+
+  @doc("Azure API Center 2024-06-01-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_06_01_preview: "2024-06-01-preview",
 }
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Apis.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiVersions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Deployments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Environments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Environments.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Services.update::parameters.properties,
   "application/json",
   "payload"
 );
 @@clientName(Services.update::parameters.properties, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(ApiDefinitions.importSpecification::parameters.body,
   "application/json",
   "payload"
 );
-
-@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
 
 @@encodedName(ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
@@ -106,6 +118,7 @@ enum Versions {
 
 @@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
 
+#suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(Services.exportMetadataSchema::parameters.body,
   "application/json",
   "payload"
@@ -130,7 +143,7 @@ enum Versions {
 @segmentOf(TResource)
 @armResourceList(TResource)
 op ArmResourceListByParent<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
   TParentName extends valueof string = "",
   TParentFriendlyName extends valueof string = ""
@@ -151,7 +164,7 @@ op ArmResourceListByParent<
 @get
 @armResourceRead(TResource)
 op ArmResourceRead<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
@@ -169,25 +182,25 @@ op ArmResourceRead<
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrReplaceSync<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
 
 @doc("Resource '{name}' create operation succeeded", TResource)
-model ArmResourceCreatedSyncResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmResourceCreatedSyncResponseWithEtag<TResource extends Foundations.Resource>
   is Body<TResource> {
   ...CreatedResponse;
   ...Azure.Core.EtagResponseEnvelope;
 }
 
 @doc("Resource '{name}' update operation succeeded", TResource)
-model ArmResourceUpdatedResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmResourceUpdatedResponseWithEtag<TResource extends Foundations.Resource>
   is ArmResponseWithEtag<TResource>;
 
 @doc("Azure operation completed successfully.")
@@ -195,4 +208,18 @@ model ArmResponseWithEtag<T> {
   ...OkResponse;
   ...Azure.Core.EtagResponseEnvelope;
   ...Body<T>;
+}
+
+model IfMatchParameters<T> {
+  @added(Versions.v2024_06_01_preview)
+  @doc("The request should only proceed if an entity matches this string.")
+  @header("If-Match")
+  ifMatch?: string;
+}
+
+model IfNoneMatchParameters<T> {
+  @added(Versions.v2024_06_01_preview)
+  @header("If-None-Match")
+  @doc("The request should only proceed if no entity matches this string.")
+  ifNoneMatch?: string;
 }
