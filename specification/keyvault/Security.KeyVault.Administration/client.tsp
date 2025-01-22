@@ -42,14 +42,17 @@ namespace ClientCustomizations;
 // @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "csharp");
 // @@clientName(KeyVault.RestoreOperation, "RestoreDetailsInternal", "csharp");
 
-@@access(KeyVault.RoleAssignmentCreateParameters, Access.internal, "csharp");
-@@access(KeyVault.RoleDefinitionCreateParameters, Access.internal, "csharp");
-@@access(KeyVault.SASTokenParameter, Access.internal, "csharp");
-@@access(KeyVault.SelectiveKeyRestoreOperationParameters,
-  Access.internal,
-  "csharp"
-);
-@@access(KeyVault.RoleDefinitionProperties, Access.internal, "csharp");
+// @@access(KeyVault.RoleAssignmentCreateParameters, Access.internal, "csharp");
+// @@access(KeyVault.RoleDefinitionCreateParameters, Access.internal, "csharp");
+// @@access(KeyVault.SASTokenParameter, Access.internal, "csharp");
+// @@access(KeyVault.SelectiveKeyRestoreOperationParameters,
+//   Access.internal,
+//   "csharp"
+// );
+// @@access(KeyVault.RoleDefinitionProperties, Access.internal, "csharp");
+
+
+@@access(KeyVault, Access.internal, "csharp");
 
 // @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
 //   "folderUri",
