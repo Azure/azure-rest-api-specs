@@ -1266,6 +1266,117 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations/{loggingConfigurationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/LoggingConfigurationNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_Get",
+        "description": "Gets the NSP logging configuration.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationGet": {
+            "$ref": "./examples/NspLoggingConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_CreateOrUpdate",
+        "description": "Creates or updates NSP logging configuration.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            },
+            "description": "Parameters that hold the NspLoggingConfiguration to be created/updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Existing NspLoggingConfiguration is updated. Returns the logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationPut": {
+            "$ref": "./examples/NspLoggingConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfiguration_Delete",
+        "description": "Deletes an NSP Logging configuration.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "204": {
+            "description": "Request successful. The logging configuration does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationDelete": {
+            "$ref": "./examples/NspLoggingConfigurationDelete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}": {
       "parameters": [
         {
@@ -2034,6 +2145,39 @@
       },
       "description": "Properties of NSP LinkReference resource."
     },
+    "NspLoggingConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/NspLoggingConfigurationProperties",
+          "description": "Properties of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration",
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NspLoggingConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The log categories to enable in the NSP logging configuration."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the NSP logging configuration."
+        }
+      },
+      "description": "The NSP logging configuration properties."
+    },
     "NspOperationStatus": {
       "type": "object",
       "properties": {
@@ -2122,7 +2266,8 @@
       "type": "string",
       "description": "The name of the network security perimeter.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "ProfileNameParameter": {
       "name": "profileName",
@@ -2131,8 +2276,8 @@
       "type": "string",
       "description": "The name of the NSP profile.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
-
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "AccessRuleNameParameter": {
       "name": "accessRuleName",
@@ -2141,7 +2286,8 @@
       "type": "string",
       "description": "The name of the NSP access rule.",
       "x-ms-parameter-location": "method",
-      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.~-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "AssociationNameParameter": {
       "name": "associationName",
@@ -2150,7 +2296,8 @@
       "type": "string",
       "description": "The name of the NSP association.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "LinkNameParameter": {
       "name": "linkName",
@@ -2159,7 +2306,8 @@
       "type": "string",
       "description": "The name of the NSP link.",
       "x-ms-parameter-location": "method",
-      "pattern":"^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "LinkReferenceNameParameter": {
       "name": "linkReferenceName",
@@ -2168,7 +2316,8 @@
       "type": "string",
       "description": "The name of the NSP linkReference.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "ListTopParameter": {
       "name": "$top",
@@ -2196,7 +2345,8 @@
       "type": "string",
       "description": "The name of the network security perimeter profile.",
       "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$"
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "LocationParameter": {
       "name": "location",
@@ -2205,6 +2355,16 @@
       "type": "string",
       "description": "The location of network security perimeter.",
       "x-ms-parameter-location": "method"
+    },
+    "LoggingConfigurationNameParameter": {
+      "name": "loggingConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the NSP logging configuration. Accepts 'instance' as name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)",
+      "maxLength": 80
     },
     "OperationIdParameter": {
       "name": "operationId",
