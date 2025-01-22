@@ -51,9 +51,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 enum Versions {
   /**
-   * The 2024-09-10 API version.
+   * The 2024-09-10-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_09_10: "2024-09-10",
+  v2024_09_10_preview: "2024-09-10-preview",
 }
