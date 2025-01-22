@@ -610,3 +610,33 @@ union ChatMessageImageDetailLevel {
     """)
   high: "high",
 }
+
+@doc("A structured chat content item containing an audio content.")
+model ChatMessageAudioContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'input_audio' for this type.")
+  type: "input_audio";
+
+  @doc("The details of the input audio.")
+  @encodedName("application/json", "input_audio")
+  inputAudio: ChatMessageInputAudio;
+}
+
+@doc("The details of an audio chat message content part.")
+model ChatMessageInputAudio {
+  @doc("Base64 encoded audio data")
+  data: string;
+
+  @doc("The audio format of the audio content.")
+  format: AudioContentFormat;
+}
+
+@doc("A representation of the possible audio formats for audio.")
+union AudioContentFormat {
+  string,
+
+  @doc("Specifies audio in WAV format.")
+  wav: "wav",
+
+  @doc("Specifies audio in MP3 format.")
+  mp3: "mp3",
+}
