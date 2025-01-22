@@ -481,6 +481,30 @@
     }
   },
   "definitions": {
+    "AudioContentFormat": {
+      "type": "string",
+      "description": "A representation of the possible audio formats for audio.",
+      "enum": [
+        "wav",
+        "mp3"
+      ],
+      "x-ms-enum": {
+        "name": "AudioContentFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "wav",
+            "value": "wav",
+            "description": "Specifies audio in WAV format."
+          },
+          {
+            "name": "mp3",
+            "value": "mp3",
+            "description": "Specifies audio in MP3 format."
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -807,6 +831,26 @@
         "function"
       ]
     },
+    "ChatMessageAudioContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio content.",
+      "properties": {
+        "input_audio": {
+          "$ref": "#/definitions/ChatMessageInputAudio",
+          "description": "The details of the input audio.",
+          "x-ms-client-name": "inputAudio"
+        }
+      },
+      "required": [
+        "input_audio"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "input_audio"
+    },
     "ChatMessageContentItem": {
       "type": "object",
       "description": "An abstract representation of a structured content item within a chat message.",
@@ -886,6 +930,24 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "ChatMessageInputAudio": {
+      "type": "object",
+      "description": "The details of an audio chat message content part.",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base64 encoded audio data"
+        },
+        "format": {
+          "$ref": "#/definitions/AudioContentFormat",
+          "description": "The audio format of the audio content."
+        }
+      },
+      "required": [
+        "data",
+        "format"
       ]
     },
     "ChatMessageTextContentItem": {
