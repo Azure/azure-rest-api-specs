@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2024-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-09'
 input-file:
-  - Microsoft.DesktopVirtualization/stable/2024-09-10-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2024-09-10-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-preview-2024-08
