@@ -51,7 +51,7 @@ model ExperimentExecutionProperties {
   stoppedAt?: utcDateTime;
 
   /**
-   * Resource provisioning state. Not currently in use because resource is created synchronously.
+   * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
@@ -111,7 +111,7 @@ model ExperimentExecutionDetailsProperties {
   stoppedAt?: utcDateTime;
 
   /**
-   * Resource provisioning state. Not currently in use because resource is created synchronously.
+   * Resource provisioning state. Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
