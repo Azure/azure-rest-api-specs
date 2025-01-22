@@ -38,6 +38,10 @@ model StandbyContainerGroupPoolResourceProperties {
   @doc("Specifies elasticity profile of standby container group pools.")
   elasticityProfile: StandbyContainerGroupPoolElasticityProfile;
 
+  @doc("Specifies the elasticity profile of the standby container group pools.")
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  degradedPolicy?: StandbyContainerGroupPoolDegradedPolicy;
+
   @doc("Specifies container group properties of standby container group pools.")
   containerGroupProperties: ContainerGroupProperties;
 
@@ -56,6 +60,25 @@ model StandbyContainerGroupPoolElasticityProfile {
 
   @doc("Specifies refill policy of the pool.")
   refillPolicy?: RefillPolicy;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Details of the degraded policy.")
+model StandbyContainerGroupPoolDegradedPolicy {
+  @doc("Specifies the failure percentage threshold to move Standby Pool into degraded state.")
+  @maxValue(100)
+  @minValue(0)
+  failurePercentageToEnterDegraded: int64;
+
+  @doc("Specifies StandbyPool retry percentage in degraded state.")
+  @maxValue(100)
+  @minValue(0)
+  retryPercentage: int64;
+
+  @doc("Specifies StandbyPool waiting time between two retries in degraded state.")
+  @maxValue(2000)
+  @minValue(0)
+  retryWaitingTimeByMinutes: int64;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)

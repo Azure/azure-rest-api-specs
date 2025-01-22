@@ -37,6 +37,10 @@ model StandbyVirtualMachinePoolResourceProperties {
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
+  @doc("Specifies the elasticity profile of the standby virtual machine pools.")
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  degradedPolicy?: StandbyVirtualMachinePoolDegradedPolicy;
+
   @doc("Specifies the desired state of virtual machines in the pool.")
   @extension("x-ms-identifiers", ["vmState"])
   virtualMachineState: VirtualMachineState;
@@ -78,6 +82,25 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @maxValue(2000)
   @minValue(0)
   minReadyCapacity?: int64;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Details of the degraded policy.")
+model StandbyVirtualMachinePoolDegradedPolicy {
+  @doc("Specifies the failure percentage threshold to move Standby Pool into degraded state.")
+  @maxValue(100)
+  @minValue(0)
+  failurePercentageToEnterDegraded: int64;
+
+  @doc("Specifies StandbyPool retry percentage in degraded state.")
+  @maxValue(100)
+  @minValue(0)
+  retryPercentage: int64;
+
+  @doc("Specifies StandbyPool waiting time between two retries in degraded state.")
+  @maxValue(2000)
+  @minValue(0)
+  retryWaitingTimeByMinutes: int64;
 }
 
 @armResourceOperations
