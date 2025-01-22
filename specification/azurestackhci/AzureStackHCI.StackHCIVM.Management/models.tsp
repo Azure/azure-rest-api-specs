@@ -1267,21 +1267,6 @@ model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
-
-  @added(Versions.v2025_02_01_preview)
-  @doc("Defines the resource properties for the update.")
-  properties?: VirtualHardDisksUpdateProperties;
-}
-
-@added(Versions.v2025_02_01_preview)
-@doc("Defines the resource properties for the update.")
-model VirtualHardDisksUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
-  @doc("Size of the disk in GB")
-  diskSizeGB?: int64;
-
-  @doc("Boolean for enabling dynamic sizing on the virtual hard disk")
-  dynamic?: boolean;
 }
 
 @added(Versions.v2024_05_01_preview)

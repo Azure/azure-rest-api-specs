@@ -43,16 +43,7 @@ interface VirtualHardDisks {
   >;
 
   @doc("The operation to update a virtual hard disk.")
-  @removed(Versions.v2025_02_01_preview)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_02_01_preview, "update")
-  updateOld is ArmTagsPatchAsync<VirtualHardDisk>;
-
-  @doc("The operation to update a virtual hard disk.")
-  @parameterVisibility
-  @added(Versions.v2025_02_01_preview)
-  @sharedRoute
-  update is ArmCustomPatchAsync<VirtualHardDisk, VirtualHardDisksUpdateRequest>;
+  update is ArmTagsPatchAsync<VirtualHardDisk>;
 
   @doc("The operation to delete a virtual hard disk.")
   delete is ArmResourceDeleteWithoutOkAsync<VirtualHardDisk>;
