@@ -69,6 +69,32 @@ model Association is TrackedResource<AssociationProperties> {
   name: string;
 }
 
+/** The type used for update operations of the Association. */
+model AssociationUpdate {
+  /** Resource tags. */
+  tags?: TrackedResource.tags;
+
+  /** The resource-specific properties for this resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: AssociationUpdateProperties;
+}
+
+/** The updatable properties of the Association. */
+model AssociationUpdateProperties {
+  /** Association Type */
+  associationType?: AssociationType;
+
+  /** Association Subnet */
+  subnet?: AssociationSubnetUpdate;
+}
+
+/** Association Subnet. */
+model AssociationSubnetUpdate {
+  /** Association ID. */
+  id: string;
+}
+
 /** Association Properties. */
 model AssociationProperties {
   /** Association Type */
@@ -232,13 +258,7 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmCustomPatchSync<
-    Association,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Association,
-      AssociationProperties
-    >
-  >;
+  update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
 }
