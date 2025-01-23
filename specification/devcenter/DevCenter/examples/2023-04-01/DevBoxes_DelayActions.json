@@ -1,0 +1,43 @@
+{
+  "title": "Delays all actions.",
+  "operationId": "DevBoxes_DelayActions",
+  "parameters": {
+    "api-version": "2023-04-01",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "myDevBox",
+    "until": "2022-09-30T17:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "schedule-default",
+            "result": "Succeeded",
+            "action": {
+              "name": "schedule-default",
+              "actionType": "Stop",
+              "sourceId": "/projects/myProject/pools/myPool/schedules/default",
+              "suspendedUntil": "2022-09-30T17:00:00Z",
+              "next": {
+                "scheduledTime": "2022-09-30T17:00:00Z"
+              }
+            }
+          },
+          {
+            "name": "idle-hibernateondisconnect",
+            "result": "Succeeded",
+            "action": {
+              "name": "idle-hibernateondisconnect",
+              "actionType": "Stop",
+              "sourceId": "/projects/myProject/pools/myPool",
+              "suspendedUntil": "2022-09-30T17:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

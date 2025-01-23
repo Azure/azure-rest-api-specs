@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "api-version": "2023-06-28-preview",
+    "subscriptionId": "0000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "DummyResourceGroupName",
+    "appName": "DummyMccfAppName",
+    "ManagedCCF": {
+      "restoreRegion": "EastUS",
+      "uri": "DummySASUri"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Backup Created for ManagedCCF App : DummyMccfAppName."
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  }
+}

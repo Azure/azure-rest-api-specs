@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "managementGroupId": "myMg"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+            "type": "Microsoft.Resources/deploymentStacks",
+            "name": "simpleDeploymentStack",
+            "location": "eastus",
+            "tags": {
+              "tagkey": "tagVal"
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+            },
+            "properties": {
+              "actionOnUnmanage": {
+                "resources": "delete",
+                "resourceGroups": "delete",
+                "managementGroups": "detach"
+              },
+              "denySettings": {
+                "mode": "denyDelete",
+                "excludedPrincipals": [
+                  "principal"
+                ],
+                "excludedActions": [
+                  "action"
+                ],
+                "applyToChildScopes": false
+              },
+              "parameters": {
+                "parameter1": {
+                  "value": "a string"
+                }
+              },
+              "outputs": {
+                "myOut": "myVal"
+              },
+              "duration": "PT1D12H"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack2",
+            "type": "Microsoft.Resources/deploymentStacks",
+            "name": "simpleDeploymentStack2",
+            "location": "eastus",
+            "tags": {
+              "tagkey": "tagVal"
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+            },
+            "properties": {
+              "deploymentId": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deployments/simpleDeploymentStack2-20210301-3f41c",
+              "provisioningState": "succeededWithFailures",
+              "resources": [
+                {
+                  "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/templateSpecs/templateSpec/versions/1.0",
+                  "status": "managed",
+                  "denyStatus": "denyDelete"
+                },
+                {
+                  "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
+                  "status": "managed",
+                  "denyStatus": "denyDelete"
+                }
+              ],
+              "actionOnUnmanage": {
+                "resources": "delete",
+                "resourceGroups": "delete",
+                "managementGroups": "detach"
+              },
+              "denySettings": {
+                "mode": "denyDelete",
+                "excludedPrincipals": [
+                  "principal"
+                ],
+                "excludedActions": [
+                  "action"
+                ],
+                "applyToChildScopes": false
+              },
+              "parameters": {
+                "parameter1": {
+                  "value": "a string"
+                }
+              },
+              "outputs": {
+                "myOut": "myVal"
+              },
+              "duration": "PT1D12H"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1110,47 +1110,6 @@
     }
   },
   "definitions": {
-    "AdultMatch": {
-      "description": "An object describing adult content match.",
-      "required": [
-        "confidence",
-        "isMatch"
-      ],
-      "type": "object",
-      "properties": {
-        "isMatch": {
-          "description": "A value indicating if the image is matched adult content.",
-          "type": "boolean"
-        },
-        "confidence": {
-          "format": "double",
-          "description": "A value indicating the confidence level of matched adult content.",
-          "maximum": 1,
-          "minimum": 0,
-          "type": "number"
-        }
-      }
-    },
-    "AdultResult": {
-      "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
-      "required": [
-        "adult",
-        "gore",
-        "racy"
-      ],
-      "type": "object",
-      "properties": {
-        "adult": {
-          "$ref": "#/definitions/AdultMatch"
-        },
-        "racy": {
-          "$ref": "#/definitions/AdultMatch"
-        },
-        "gore": {
-          "$ref": "#/definitions/AdultMatch"
-        }
-      }
-    },
     "BoundingBox": {
       "description": "A bounding box for an area inside an image.",
       "required": [
@@ -1645,9 +1604,6 @@
         },
         "tagsResult": {
           "$ref": "#/definitions/TagsResult"
-        },
-        "adultResult": {
-          "$ref": "#/definitions/AdultResult"
         },
         "smartCropsResult": {
           "$ref": "#/definitions/SmartCropsResult"

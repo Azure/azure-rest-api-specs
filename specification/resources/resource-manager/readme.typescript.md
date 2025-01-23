@@ -18,12 +18,29 @@ batch:
   - package-templatespecs: true
   - package-subscriptions: true
   - package-changes: true
+  - package-deploymentstacks: true
+  - package-databoundaries: true
+```
+
+```yaml $(typescript) && $(package-databoundaries) && !$(profile-content)
+title: DataboundariesManegementClient
+typescript:
+  package-name: "@azure/arm-databoundaries"
+  output-folder: "$(typescript-sdks-folder)/sdk/databoundaries/arm-databoundaries"
 ```
 
 ```yaml $(typescript) && $(package-features) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-features"
   output-folder: "$(typescript-sdks-folder)/sdk/features/arm-features"
+```
+
+```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
+modelerfour:
+  flatten-models: false
+typescript:
+  package-name: "@azure/arm-resourcesdeploymentstacks"
+  output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
 ```
 
 ```yaml $(typescript) && $(package-locks) && !$(profile-content)

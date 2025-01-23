@@ -13,4 +13,8 @@ directive:
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created."
         }
+  - from: gallery.json
+    where: $.definitions.GalleryTargetExtendedLocation.properties.storageAccountType
+    transform: > 
+      $['x-ms-enum'].name = "StorageAccountType"
 ```

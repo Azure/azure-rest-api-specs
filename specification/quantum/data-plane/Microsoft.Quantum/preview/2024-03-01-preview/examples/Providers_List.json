@@ -1,0 +1,49 @@
+{
+  "operationId": "Providers_List",
+  "title": "Get provider and target statuses.",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "microsoft-qc",
+            "currentAvailability": "Available",
+            "targets": [
+              {
+                "id": "microsoft.estimator",
+                "currentAvailability": "Available",
+                "averageQueueTime": 0,
+                "statusPage": null
+              }
+            ]
+          },
+          {
+            "id": "ionq",
+            "currentAvailability": "Available",
+            "targets": [
+              {
+                "id": "ionq.qpu",
+                "currentAvailability": "Available",
+                "averageQueueTime": 1679,
+                "statusPage": "https://status.ionq.co"
+              },
+              {
+                "id": "ionq.simulator",
+                "currentAvailability": "Available",
+                "averageQueueTime": 0,
+                "statusPage": "https://status.ionq.co"
+              }
+            ]
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

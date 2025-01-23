@@ -24,13 +24,74 @@ To see additional help and options, run:
 
 These are the global settings for the Cdn API.
 
+
 ``` yaml
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2023-05
+tag: package-2024-09
 ```
 
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09'
+input-file:
+  - Microsoft.Cdn/stable/2024-09-01/afdx.json
+  - Microsoft.Cdn/stable/2024-09-01/cdn.json
+  - Microsoft.Cdn/stable/2024-09-01/cdnwebapplicationfirewall.json
+suppressions:
+  - code: MISSING_RESOURCE_ID
+    reason: Keeping it for legacy tooling
+```
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - Microsoft.Cdn/preview/2024-06-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2024-06-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2024-06-01-preview/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.Cdn/preview/2024-05-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2024-05-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2024-05-01-preview/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Cdn/stable/2024-02-01/afdx.json
+  - Microsoft.Cdn/stable/2024-02-01/cdn.json
+  - Microsoft.Cdn/stable/2024-02-01/cdnwebapplicationfirewall.json
+```
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Cdn/preview/2023-07-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2023-07-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2023-07-01-preview/cdnwebapplicationfirewall.json
+
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    reason: False alarm. PUT request body is not superset of GET response body. We also do not support PATCH on keyGroups resource by design.  
+```
 
 ### Tag: package-2023-05
 
@@ -195,7 +256,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net-track2

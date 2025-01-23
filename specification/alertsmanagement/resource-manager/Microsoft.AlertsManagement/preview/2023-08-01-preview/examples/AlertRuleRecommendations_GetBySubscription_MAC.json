@@ -1,0 +1,286 @@
+{
+  "parameters": {
+    "subscriptionId": "2f00cc51-6809-498f-9ffc-48c42aff570d",
+    "targetType": "microsoft.monitor/accounts",
+    "api-version": "2023-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/providers/Microsoft.AlertsManagement/alertRuleRecommendations/NodeRecordingRulesRuleGroup",
+            "name": "NodeRecordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "properties": {
+              "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+              "category": "MyCategory1",
+              "displayInformation": {
+                "ruleInfo": "Rule Information for first recording rule."
+              },
+              "ruleArmTemplate": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "targetResourceId": {
+                    "type": "string"
+                  },
+                  "targetResourceName": {
+                    "type": "string"
+                  },
+                  "actionGroupIds": {
+                    "type": "array",
+                    "defaultValue": [],
+                    "metadata": {
+                      "description": "Insert Action groups ids to attach them to the below alert rules."
+                    }
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "clusterNameForPrometheus": {
+                    "type": "string"
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "NodeRecordingRulesRuleGroup",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    }
+                  },
+                  "alertName": {
+                    "type": "string",
+                    "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "Name of the alert rule"
+                    }
+                  }
+                },
+                "variables": {
+                  "scopes": "[array(parameters('targetResourceId'))]",
+                  "copy": [
+                    {
+                      "name": "actionsForPrometheusRuleGroups",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                      }
+                    }
+                  ]
+                },
+                "resources": [
+                  {
+                    "name": "[parameters('alertName')]",
+                    "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                    "apiVersion": "2021-07-22-preview",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "description": "Node Recording Rules RuleGroup",
+                      "scopes": "[variables('scopes')]",
+                      "clusterName": "[parameters('clusterNameForPrometheus')]",
+                      "interval": "PT1M",
+                      "rules": [
+                        {
+                          "record": "instance:node_num_cpu:sum",
+                          "expression": "count without (cpu, mode) (  node_cpu_seconds_total{job=\"node\",mode=\"idle\"})"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/providers/Microsoft.AlertsManagement/alertRuleRecommendations/KubernetesReccordingRulesRuleGroup",
+            "name": "KubernetesReccordingRulesRuleGroup",
+            "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "properties": {
+              "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+              "category": "MyCategory1",
+              "displayInformation": {
+                "ruleInfo": "Rule Information for second recording rule."
+              },
+              "ruleArmTemplate": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "targetResourceId": {
+                    "type": "string"
+                  },
+                  "targetResourceName": {
+                    "type": "string"
+                  },
+                  "actionGroupIds": {
+                    "type": "array",
+                    "defaultValue": [],
+                    "metadata": {
+                      "description": "Insert Action groups ids to attach them to the below alert rules."
+                    }
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "clusterNameForPrometheus": {
+                    "type": "string"
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "KubernetesReccordingRulesRuleGroup",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    }
+                  },
+                  "alertName": {
+                    "type": "string",
+                    "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "Name of the alert rule"
+                    }
+                  }
+                },
+                "variables": {
+                  "scopes": "[array(parameters('targetResourceId'))]",
+                  "copy": [
+                    {
+                      "name": "actionsForPrometheusRuleGroups",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                      }
+                    }
+                  ]
+                },
+                "resources": [
+                  {
+                    "name": "[parameters('alertName')]",
+                    "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                    "apiVersion": "2021-07-22-preview",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "description": "Kubernetes Recording Rules RuleGroup",
+                      "scopes": "[variables('scopes')]",
+                      "clusterName": "[parameters('clusterNameForPrometheus')]",
+                      "interval": "PT1M",
+                      "rules": [
+                        {
+                          "record": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate",
+                          "expression": "sum by (cluster, namespace, pod, container) (  irate(container_cpu_usage_seconds_total{job=\"cadvisor\", image!=\"\"}[5m])) * on (cluster, namespace, pod) group_left(node) topk by (cluster, namespace, pod) (  1, max by(cluster, namespace, pod, node) (kube_pod_info{node!=\"\"}))"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/providers/Microsoft.AlertsManagement/alertRuleRecommendations/KubernetesAlert-DefaultAlerts",
+            "name": "KubernetesAlert-DefaultAlerts",
+            "type": "Microsoft.AlertsManagement/alertRuleRecommendations",
+            "properties": {
+              "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+              "category": "MyCategory2",
+              "displayInformation": {
+                "ruleInfo": "Rule Information for alerting rule."
+              },
+              "ruleArmTemplate": {
+                "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "targetResourceId": {
+                    "type": "string"
+                  },
+                  "targetResourceName": {
+                    "type": "string"
+                  },
+                  "actionGroupIds": {
+                    "type": "array",
+                    "defaultValue": [],
+                    "metadata": {
+                      "description": "Insert Action groups ids to attach them to the below alert rules."
+                    }
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "clusterNameForPrometheus": {
+                    "type": "string"
+                  },
+                  "alertNamePrefix": {
+                    "type": "string",
+                    "defaultValue": "KubernetesAlert-DefaultAlerts",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "prefix of the alert rule name"
+                    }
+                  },
+                  "alertName": {
+                    "type": "string",
+                    "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                    "minLength": 1,
+                    "metadata": {
+                      "description": "Name of the alert rule"
+                    }
+                  }
+                },
+                "variables": {
+                  "scopes": "[array(parameters('targetResourceId'))]",
+                  "copy": [
+                    {
+                      "name": "actionsForPrometheusRuleGroups",
+                      "count": "[length(parameters('actionGroupIds'))]",
+                      "input": {
+                        "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                      }
+                    }
+                  ]
+                },
+                "resources": [
+                  {
+                    "name": "[parameters('alertName')]",
+                    "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                    "apiVersion": "2021-07-22-preview",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "description": "Kubernetes Alert RuleGroup-DefaultAlerts",
+                      "scopes": "[variables('scopes')]",
+                      "clusterName": "[parameters('clusterNameForPrometheus')]",
+                      "interval": "PT1M",
+                      "rules": [
+                        {
+                          "alert": "KubePodCrashLooping",
+                          "expression": "max_over_time(kube_pod_container_status_waiting_reason{reason=\"CrashLoopBackOff\", job=\"kube-state-metrics\"}[5m]) >= 1",
+                          "for": "PT15M",
+                          "labels": {
+                            "severity": "warning"
+                          },
+                          "Severity": 3,
+                          "actions": "[variables('actionsForPrometheusRuleGroups')]"
+                        },
+                        {
+                          "alert": "KubePodNotReady",
+                          "expression": "sum by (namespace, pod, cluster) (  max by(namespace, pod, cluster) (    kube_pod_status_phase{job=\"kube-state-metrics\", phase=~\"Pending|Unknown\"}  ) * on(namespace, pod, cluster) group_left(owner_kind) topk by(namespace, pod, cluster) (    1, max by(namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!=\"Job\"})  )) > 0",
+                          "for": "PT15M",
+                          "labels": {
+                            "severity": "warning"
+                          },
+                          "Severity": 3,
+                          "actions": "[variables('actionsForPrometheusRuleGroups')]"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

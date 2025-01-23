@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "baseUrl": "https://westus2.metrics.monitor.azure.com",
+    "subscriptionId": "12345678-abcd-1234-abcd-123456789abc",
+    "starttime": "2023-11-07T14:00:00.000Z",
+    "endtime": "2023-11-07T18:00:00.000Z",
+    "interval": "FULL",
+    "metricnamespace": "Microsoft.Cache/Redis",
+    "metricnames": "cacheWrite",
+    "aggregation": "average",
+    "top": 10,
+    "orderby": "average desc",
+    "filter": "ShardId eq '0'",
+    "rollupby": "ShardId",
+    "api-version": "2024-02-01",
+    "batchRequest": {
+      "resourceids": [
+        "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis5",
+        "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis3",
+        "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "values": [
+          {
+            "starttime": "2023-11-07T14:00:00Z",
+            "endtime": "2023-11-07T18:00:00Z",
+            "interval": "PT4H",
+            "value": [
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis5/providers/Microsoft.Insights/metrics/cacheWrite",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "cacheWrite",
+                  "localizedValue": "Cache Write"
+                },
+                "displayDescription": "The amount of data written to the cache in bytes per second. For more details, see https://aka.ms/redis/metrics.",
+                "unit": "BytesPerSecond",
+                "timeseries": [
+                  {
+                    "metadatavalues": [],
+                    "data": [
+                      {
+                        "timeStamp": "2023-11-07T14:00:00Z",
+                        "average": 35513.760416666664
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              }
+            ],
+            "namespace": "microsoft.cache/redis",
+            "resourceregion": "westus2",
+            "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis5"
+          },
+          {
+            "starttime": "2023-11-07T14:00:00Z",
+            "endtime": "2023-11-07T18:00:00Z",
+            "interval": "PT4H",
+            "value": [
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis3/providers/Microsoft.Insights/metrics/cacheWrite",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "cacheWrite",
+                  "localizedValue": "Cache Write"
+                },
+                "displayDescription": "The amount of data written to the cache in bytes per second. For more details, see https://aka.ms/redis/metrics.",
+                "unit": "BytesPerSecond",
+                "timeseries": [
+                  {
+                    "metadatavalues": [],
+                    "data": [
+                      {
+                        "timeStamp": "2023-11-07T14:00:00Z",
+                        "average": 7135.0625
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              }
+            ],
+            "namespace": "microsoft.cache/redis",
+            "resourceregion": "westus2",
+            "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis3"
+          },
+          {
+            "starttime": "2023-11-07T14:00:00Z",
+            "endtime": "2023-11-07T18:00:00Z",
+            "interval": "PT4H",
+            "value": [
+              {
+                "id": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis2/providers/Microsoft.Insights/metrics/cacheWrite",
+                "type": "Microsoft.Insights/metrics",
+                "name": {
+                  "value": "cacheWrite",
+                  "localizedValue": "Cache Write"
+                },
+                "displayDescription": "The amount of data written to the cache in bytes per second. For more details, see https://aka.ms/redis/metrics.",
+                "unit": "BytesPerSecond",
+                "timeseries": [
+                  {
+                    "metadatavalues": [],
+                    "data": [
+                      {
+                        "timeStamp": "2023-11-07T14:00:00Z",
+                        "average": 6723.489583333333
+                      }
+                    ]
+                  }
+                ],
+                "errorCode": "Success"
+              }
+            ],
+            "namespace": "microsoft.cache/redis",
+            "resourceregion": "westus2",
+            "resourceid": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/test_redis/providers/Microsoft.Cache/Redis/redis2"
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "x-ms-error-code": "BadRequest"
+      },
+      "body": {
+        "error": {
+          "additionalInfo": [
+            {
+              "type": "string",
+              "info": "TraceId=dd033ebf1e260d815f4bccad149bbc15"
+            },
+            {
+              "type": "string",
+              "info": "ExceptionType=Microsoft.Online.Metrics.MetricsMP.Utilities.RPRequestFormatException"
+            }
+          ],
+          "code": "BadRequest",
+          "message": "Detected invalid time range parameters for API version 2024-02-01. Please use only starttime and endtime to specify a time range."
+        }
+      }
+    }
+  }
+}

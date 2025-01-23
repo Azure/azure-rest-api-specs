@@ -12,6 +12,17 @@ python:
   clear-output-folder: true
 ```
 
+### Tag: package-2023-10-31
+These settings apply only when `--tag=package-2023-10-31` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-31' && $(python)
+python:
+  namespace: Azure.DigitalTwins.Core
+  package-name: digitaltwins
+  package-version: 2023-10-31
+  output-folder: $(python-sdks-folder)/digitaltwins/2023-10-31
+```
+
 ### Tag: package-2023-06-30
 These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
 

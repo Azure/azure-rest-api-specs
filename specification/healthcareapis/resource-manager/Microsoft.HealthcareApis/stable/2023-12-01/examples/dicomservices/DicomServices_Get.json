@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "dicomServiceName": "blue",
+    "api-version": "2023-12-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blue",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/dicomservices/blue",
+        "type": "Microsoft.HealthcareApis/workspaces/dicomservices",
+        "properties": {
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audiences": [
+              "https://azurehealthcareapis.com/",
+              "https://azurehealthcareapis.com"
+            ]
+          },
+          "corsConfiguration": {
+            "origins": [
+              "*"
+            ],
+            "headers": [
+              "*"
+            ],
+            "methods": [
+              "DELETE",
+              "GET",
+              "OPTIONS",
+              "PATCH",
+              "POST",
+              "PUT"
+            ],
+            "maxAge": 1440,
+            "allowCredentials": false
+          },
+          "provisioningState": "Succeeded",
+          "serviceUrl": "https://workspace1-blue.dicom.azurehealthcareapis.com",
+          "eventState": "Disabled",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "2f1f372f-edcf-43f5-aedb-173da3cc5c1e",
+          "tenantId": "abfde7b2-df0f-47e6-aabf-2462b07508dc",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}

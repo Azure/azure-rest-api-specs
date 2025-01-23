@@ -10,4 +10,18 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/paloaltonetworksngfw/arm-paloaltonetworksngfw"
   payload-flattening-threshold: 1
   generate-metadata: true
+
+directive:
+  - from: PaloAltoNetworks.Cloudngfw.json
+    where: $.paths
+    transform: >
+      for (const pathKey in $) {
+        const path = $[pathKey];
+        for (const methodKey in path) {
+          const method = path[methodKey];
+          if (method['x-ms-pageable'] && (method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listAppIds' || method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listCountries' || method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listPredefinedUrlCategories')) {
+            delete method['x-ms-pageable'];
+          }
+        }
+      }
 ```

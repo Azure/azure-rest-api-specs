@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "endpoint": "https://{exampleAppConfigurationName}.azconfig.io",
+    "api-version": "2023-10-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/vnd.microsoft.appconfig.snapshotset+json"
+      },
+      "body": {
+        "items": [
+          {
+            "etag": "4f6dd610dd5e4deebc7fbaef685fb903",
+            "name": "Prod-2022-08-01",
+            "status": "ready",
+            "filters": [
+              {
+                "key": "app1/*",
+                "label": "Production"
+              }
+            ],
+            "composition_type": "all",
+            "created": "2022-08-01T22:19:40+00:00",
+            "size": 100000,
+            "items_count": 71,
+            "retention_period": 2592000,
+            "tags": {
+              "release": "{link/id}"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

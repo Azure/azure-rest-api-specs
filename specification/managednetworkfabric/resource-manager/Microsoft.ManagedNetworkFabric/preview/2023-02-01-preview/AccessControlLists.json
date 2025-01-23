@@ -361,61 +361,7 @@
           "items": {
             "description": "Access Control List condition model.",
             "type": "object",
-            "allOf": [
-              {
-                "$ref": "./common.json#/definitions/AnnotationResource",
-                "description": "Common properties for annotated type."
-              }
-            ],
-            "properties": {
-              "sequenceNumber": {
-                "type": "integer",
-                "format": "int32",
-                "description": "sequenceNumber of the Access Control List."
-              },
-              "action": {
-                "type": "string",
-                "description": "action. Example: allow | deny.",
-                "enum": [
-                  "allow",
-                  "deny"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true,
-                  "name": "conditionActionType"
-                }
-              },
-              "destinationAddress": {
-                "type": "string",
-                "description": "destinationAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
-              },
-              "destinationPort": {
-                "type": "string",
-                "description": "destinationPort. Example: any | 1253"
-              },
-              "sourceAddress": {
-                "type": "string",
-                "description": "sourceAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
-              },
-              "sourcePort": {
-                "type": "string",
-                "description": "sourcePort. Example: any | 1253"
-              },
-              "protocol": {
-                "type": "integer",
-                "format": "int32",
-                "description": "TCP/IP protocol as defined in the list of IP protocol numbers. Example: 255 (any) | 0 | 1."
-              }
-            },
-            "required": [
-              "sequenceNumber",
-              "action",
-              "destinationAddress",
-              "destinationPort",
-              "sourceAddress",
-              "sourcePort",
-              "protocol"
-            ]
+            "$ref": "#/definitions/AccessControlListConditionProperties"
           }
         },
         "provisioningState": {
@@ -498,61 +444,7 @@
           "items": {
             "description": "Access Control List condition model.",
             "type": "object",
-            "allOf": [
-              {
-                "$ref": "./common.json#/definitions/AnnotationResource",
-                "description": "Common properties for annotated type."
-              }
-            ],
-            "properties": {
-              "sequenceNumber": {
-                "type": "integer",
-                "format": "int32",
-                "description": "sequenceNumber of the Access Control List."
-              },
-              "action": {
-                "type": "string",
-                "description": "action. Example: allow | deny.",
-                "enum": [
-                  "allow",
-                  "deny"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": true,
-                  "name": "conditionActionType"
-                }
-              },
-              "destinationAddress": {
-                "type": "string",
-                "description": "destinationAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
-              },
-              "destinationPort": {
-                "type": "string",
-                "description": "destinationPort. Example: any | 1253"
-              },
-              "sourceAddress": {
-                "type": "string",
-                "description": "sourceAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
-              },
-              "sourcePort": {
-                "type": "string",
-                "description": "sourcePort. Example: any | 1253"
-              },
-              "protocol": {
-                "type": "integer",
-                "format": "int32",
-                "description": "TCP/IP protocol as defined in the list of IP protocol numbers. Example: 255 (any) | 0 | 1."
-              }
-            },
-            "required": [
-              "sequenceNumber",
-              "action",
-              "destinationAddress",
-              "destinationPort",
-              "sourceAddress",
-              "sourcePort",
-              "protocol"
-            ]
+            "$ref": "#/definitions/AccessControlListConditionProperties"
           }
         }
       },
@@ -576,6 +468,65 @@
         }
       },
       "description": "The AccessControlList patch resource definition."
+    },
+    "AccessControlListConditionProperties": {
+      "description": "Access Control List condition model.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "sequenceNumber of the Access Control List."
+        },
+        "action": {
+          "type": "string",
+          "description": "action. Example: allow | deny.",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "conditionActionType"
+          }
+        },
+        "destinationAddress": {
+          "type": "string",
+          "description": "destinationAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+        },
+        "destinationPort": {
+          "type": "string",
+          "description": "destinationPort. Example: any | 1253"
+        },
+        "sourceAddress": {
+          "type": "string",
+          "description": "sourceAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+        },
+        "sourcePort": {
+          "type": "string",
+          "description": "sourcePort. Example: any | 1253"
+        },
+        "protocol": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TCP/IP protocol as defined in the list of IP protocol numbers. Example: 255 (any) | 0 | 1."
+        }
+      },
+      "required": [
+        "sequenceNumber",
+        "action",
+        "destinationAddress",
+        "destinationPort",
+        "sourceAddress",
+        "sourcePort",
+        "protocol"
+      ]
     }
   },
   "parameters": {}

@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "originGroupName": "origingroup1",
+    "originGroup": {
+      "properties": {
+        "healthProbeSettings": {
+          "probePath": "/health.aspx",
+          "probeRequestType": "GET",
+          "probeProtocol": "Http",
+          "probeIntervalInSeconds": 120
+        },
+        "origins": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+          }
+        ],
+        "responseBasedOriginErrorDetectionSettings": {
+          "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+          "responseBasedFailoverThresholdPercentage": 10
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "origingroup1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1",
+        "type": "Microsoft.Cdn/profiles/endpoints/origingroups",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "healthProbeSettings": {
+            "probePath": "/health.aspx",
+            "probeRequestType": "GET",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 120
+          },
+          "origins": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+            }
+          ],
+          "responseBasedOriginErrorDetectionSettings": {
+            "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+            "responseBasedFailoverThresholdPercentage": 10
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "origingroup1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1",
+        "type": "Microsoft.Cdn/profiles/endpoints/origingroups",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "healthProbeSettings": {
+            "probePath": "/health.aspx",
+            "probeRequestType": "GET",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 120
+          },
+          "origins": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+            }
+          ],
+          "responseBasedOriginErrorDetectionSettings": {
+            "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+            "responseBasedFailoverThresholdPercentage": 10
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-07-01-preview"
+      },
+      "body": {
+        "name": "originGroup1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1",
+        "type": "Microsoft.Cdn/profiles/endpoints/origingroups",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "healthProbeSettings": {
+            "probePath": "/health.aspx",
+            "probeRequestType": "GET",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 120
+          },
+          "origins": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+            }
+          ],
+          "responseBasedOriginErrorDetectionSettings": {
+            "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+            "responseBasedFailoverThresholdPercentage": 10
+          }
+        }
+      }
+    }
+  }
+}

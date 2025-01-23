@@ -1,0 +1,54 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: 2024-08-01-preview
+  fine-tuning-job-id: ftjob-72a2792ef7d24ba7b82c7fe4a37e379f
+responses:
+  200:
+    headers: {}
+    body:
+      has_more: false
+      data:
+        - id: ftckpt_qtZ5Gyk4BLq1SfLFWp3RtO3P
+          created_at: 1646126127
+          fineTunedModelCheckpoint: gpt-35-turbo-0613.ft-72a2792ef7d24ba7b82c7fe4a37e379f:ckpt-step-10
+          stepNumber: 10
+          metrics:
+            step: 10
+            train_loss: 0.478
+            train_mean_token_accuracy: 0.924
+            valid_loss: 10.112
+            valid_mean_token_accuracy: 0.145
+            full_valid_loss: 0.567
+            full_valid_mean_token_accuracy: 0.944
+          fineTuningJobId: ftjob-72a2792ef7d24ba7b82c7fe4a37e379f
+          object: fine_tuning.job.checkpoint
+        - id: ftckpt_frtXDR2453C4FG67t03MLPs5
+          created_at: 1646126137
+          fineTunedModelCheckpoint: gpt-35-turbo-0613.ft-72a2792ef7d24ba7b82c7fe4a37e379f:ckpt-step-20
+          stepNumber: 20
+          metrics:
+            step: 20
+            train_loss: 0.355
+            train_mean_token_accuracy: 0.947
+            valid_loss: 11.32
+            valid_mean_token_accuracy: 0.122
+            full_valid_loss: 0.317
+            full_valid_mean_token_accuracy: 0.955
+          fineTuningJobId: ftjob-72a2792ef7d24ba7b82c7fe4a37e379f
+          object: fine_tuning.job.checkpoint
+        - id: ftckpt_agLk6Gio560ORp14gl123fgd
+          created_at: 1646126147
+          fineTunedModelCheckpoint: gpt-35-turbo-0613.ft-72a2792ef7d24ba7b82c7fe4a37e379f:ckpt-step-30
+          stepNumber: 30
+          metrics:
+            step: 30
+            train_loss: 0.155
+            train_mean_token_accuracy: 0.975
+            valid_loss: 9.31
+            valid_mean_token_accuracy: 0.092
+            full_valid_loss: 0.114
+            full_valid_mean_token_accuracy: 0.963
+          fineTuningJobId: ftjob-72a2792ef7d24ba7b82c7fe4a37e379f
+          object: fine_tuning.job.checkpoint
+      object: list

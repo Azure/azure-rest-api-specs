@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "customLocationResourceUri": "subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+    "api-version": "2024-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation/providers/Microsoft.HybridContainerService/kubernetesVersions/default",
+        "name": "default",
+        "type": "microsoft.hybridcontainerservice/kubernetesVersions",
+        "extendedLocation": {
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "values": [
+            {
+              "version": "1.23",
+              "isPreview": false,
+              "patchVersions": {
+                "1.23.12": {
+                  "readiness": [
+                    {
+                      "osType": "Linux",
+                      "osSku": "CBLMariner",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows2022",
+                      "ready": false,
+                      "errorMessage": "Not Ready. Reasons: Failed to find proudct stream windoes2022 in release aks-hybrid-catalog-stable-int"
+                    }
+                  ],
+                  "upgrades": [
+                    "1.23.13"
+                  ]
+                },
+                "1.23.13": {
+                  "readiness": [
+                    {
+                      "osType": "Linux",
+                      "osSku": "CBLMariner",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows2019",
+                      "ready": true
+                    },
+                    {
+                      "osType": "Windows",
+                      "osSku": "Windows2022",
+                      "ready": true
+                    }
+                  ],
+                  "upgrades": []
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

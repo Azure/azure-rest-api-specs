@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "api-version": "2023-06-15",
+    "networkDeviceName": "example-device",
+    "networkInterfaceName": "example-interface",
+    "body": {
+      "properties": {
+        "annotation": "annotation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "physicalIdentifier": "Id",
+          "connectedTo": "external-interface",
+          "interfaceType": "Management",
+          "ipv4Address": "10.2.2.8",
+          "ipv6Address": "10:2:0:0::",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled",
+          "annotation": "annotation"
+        },
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device/networkInterfaces/example-interface",
+        "name": "example-interface",
+        "type": "microsoft.managednetworkfabric/networkdevices/networkinterfaces",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-11T16:02:19.538Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-11T16:02:19.538Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "physicalIdentifier": "Id",
+          "connectedTo": "external-interface",
+          "interfaceType": "Management",
+          "ipv4Address": "10.2.2.8",
+          "ipv6Address": "10:2:0:0::",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled",
+          "annotation": "annotation"
+        },
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device/networkInterfaces/example-interface",
+        "name": "example-interface",
+        "type": "microsoft.managednetworkfabric/networkdevices/networkinterfaces",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-11T16:02:19.538Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-11T16:02:19.538Z"
+        }
+      }
+    }
+  }
+}

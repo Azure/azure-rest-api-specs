@@ -27,18 +27,63 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2023-05.17.0
+tag: package-2024-07
 ```
 
+### Tag: package-2024-07.20.0
+
+These settings apply only when `--tag=package-2024-07.20.0` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07.20.0-preview'
+input-file:
+  - Azure.Batch/preview/2024-07-01.20.0/BatchService.json
+```
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.Batch/stable/2024-07-01.20.0/BatchService.json
+```
+
+### Tag: package-2024-02.19.0-preview
+
+These settings apply only when `--tag=package-2024-02.19.0-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02.19.0-preview'
+input-file:
+  - Azure.Batch/preview/2024-02-01.19.0/BatchService.json
+```
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Batch/stable/2024-02-01.19.0/BatchService.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Batch/stable/2023-11-01.18.0/BatchService.json
+```
 
 ### Tag: package-2023-05.17.0
 
 These settings apply only when `--tag=package-2023-05.17.0` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05.17.0'
+``` yaml $(tag) == 'package-2023-05.17.0'
 input-file:
   - Microsoft.Batch/stable/2023-05-01.17.0/BatchService.json
 ```
+
 ### Tag: package-2022-10.16.0
 
 These settings apply only when `--tag=package-2022-10.16.0` is specified on the command line.
@@ -205,6 +250,8 @@ directive:
       - $.paths["/pools/{poolId}/removenodes"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reboot"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reimage"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
     reason: Service does not return 200, nor supply location header.
 
   - suppress: R2017
@@ -214,6 +261,11 @@ directive:
       - $.paths["/jobs/{jobId}/tasks/{taskId}"].put
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].put
     reason: Matching service response.
+
+  - suppress: R2018 # XmsEnumValidation
+    where:
+      - $.definitions.AADToken.properties.type
+    reason: Single-value enums are expressed to force the values to be used for de/serialization but should not be exposed or settable by the a client.
 
   - suppress: R2029
     where:
@@ -284,6 +336,18 @@ directive:
       - $.paths["/jobs/{jobId}/tasks/{taskId}"].delete.responses
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].delete.responses
     reason: These delete operations have the required responses. Looks like a bug with the validator.
+
+suppressions:
+ - code: OperationIdNounVerb
+   from: BatchService.json
+   reason: This rule is an ARM specific API validation rule and does not apply to data plane API validation.
+ - code: LroExtension
+   from: BatchService.json
+   where: 
+     - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
+     - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
+   reason: Service does not return 200, nor supply location header.
+
 ```
 
 ### Tag: package-2017-05.5.0

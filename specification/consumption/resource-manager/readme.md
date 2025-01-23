@@ -26,19 +26,48 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-03
+tag: package-2024-08
 ```
 
+### Tag: package-2024-08
+
+These settings apply only when `--tag=package-2024-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08'
+input-file:
+  - Microsoft.Consumption/stable/2024-08-01/consumption_pricesheet.json
+  - Microsoft.Consumption/stable/2024-08-01/consumption.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Consumption/stable/2023-11-01/consumption.json
+  - Microsoft.Consumption/stable/2023-11-01/consumption_pricesheet.json
+```
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Consumption/stable/2023-05-01/consumption.json
+  - Microsoft.Consumption/stable/2023-05-01/consumption_pricesheet.json
+```
 
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.Consumption/stable/2023-03-01/consumption.json
   - Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
 ```
+
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
@@ -264,7 +293,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -273,20 +302,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Consumption
-  output-folder: $(csharp-sdks-folder)/consumption/Microsoft.Azure.Management.Consumption/src/Generated
-  clear-output-folder: true
 ```
 
 ## Java

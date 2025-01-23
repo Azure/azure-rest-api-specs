@@ -729,13 +729,8 @@
       "type": "object",
       "properties": {
         "terminalServerConfiguration": {
-          "type": "object",
           "description": "Network and credentials configuration already applied to terminal server.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/TerminalServerPatchableProperties"
-            }
-          ]
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
         }
       }
     },
@@ -871,97 +866,12 @@
           ]
         },
         "terminalServerConfiguration": {
-          "type": "object",
           "description": "Network and credentials configuration currently applied to terminal server.",
-          "required": [
-            "username",
-            "password",
-            "primaryIpv4Prefix",
-            "secondaryIpv4Prefix"
-          ],
-          "properties": {
-            "networkDeviceId": {
-              "type": "string",
-              "description": "ARM Resource ID used for the NetworkDevice.",
-              "readOnly": true
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "#/definitions/Layer3IpPrefixProperties"
-            },
-            {
-              "$ref": "#/definitions/TerminalServerPatchableProperties"
-            }
-          ]
+          "$ref": "#/definitions/TerminalServerConfiguration"
         },
         "managementNetworkConfiguration": {
-          "type": "object",
           "description": "Configuration to be used to setup the management network.",
-          "required": [
-            "infrastructureVpnConfiguration",
-            "workloadVpnConfiguration"
-          ],
-          "properties": {
-            "infrastructureVpnConfiguration": {
-              "type": "object",
-              "description": "Configuration for infrastructure vpn.",
-              "properties": {
-                "administrativeState": {
-                  "description": "Indicates configuration state. Example: Enabled | Disabled.",
-                  "$ref": "./common.json#/definitions/EnabledDisabledState"
-                },
-                "networkToNetworkInterconnectId": {
-                  "type": "string",
-                  "description": "Gets the networkToNetworkInterconnectId of the resource.",
-                  "readOnly": true
-                },
-                "peeringOption": {
-                  "$ref": "./common.json#/definitions/PeeringOption"
-                },
-                "optionBProperties": {
-                  "description": "option B properties",
-                  "$ref": "#/definitions/OptionBProperties"
-                },
-                "optionAProperties": {
-                  "description": "option A properties",
-                  "$ref": "#/definitions/OptionAProperties"
-                }
-              },
-              "required": [
-                "peeringOption"
-              ]
-            },
-            "workloadVpnConfiguration": {
-              "type": "object",
-              "description": "Configuration for workload vpn.",
-              "properties": {
-                "administrativeState": {
-                  "description": "Indicates configuration state. Example: enabled | disabled.",
-                  "$ref": "./common.json#/definitions/EnabledDisabledState"
-                },
-                "peeringOption": {
-                  "$ref": "./common.json#/definitions/PeeringOption"
-                },
-                "networkToNetworkInterconnectId": {
-                  "type": "string",
-                  "description": "Gets the networkToNetworkInterconnectId of the resource.",
-                  "readOnly": true
-                },
-                "optionAProperties": {
-                  "description": "option A properties object",
-                  "$ref": "#/definitions/OptionAProperties"
-                },
-                "optionBProperties": {
-                  "description": "option B properties object",
-                  "$ref": "#/definitions/OptionBProperties"
-                }
-              },
-              "required": [
-                "peeringOption"
-              ]
-            }
-          }
+          "$ref": "#/definitions/ManagementNetworkConfiguration"
         },
         "operationalState": {
           "description": "Gets the operational state of the resource.",
@@ -1122,17 +1032,10 @@
           "$ref": "./common.json#/definitions/BooleanEnumProperty"
         },
         "layer2Configuration": {
-          "type": "object",
           "description": "Common properties for Layer2Configuration.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Layer2Configuration",
-              "description": "Common properties for Layer2Configuration."
-            }
-          ]
+          "$ref": "#/definitions/Layer2Configuration"
         },
         "layer3Configuration": {
-          "type": "object",
           "description": "Common properties for Layer3Configuration.",
           "$ref": "#/definitions/Layer3Configuration"
         },
@@ -1190,22 +1093,8 @@
           "description": "Peer ASN number.Example : 28"
         },
         "bfdConfiguration": {
-          "type": "object",
           "description": "BFD Configuration properties.",
-          "properties": {
-            "interval": {
-              "type": "integer",
-              "format": "int32",
-              "description": "interval in seconds. Example: 300.",
-              "readOnly": true
-            },
-            "multiplier": {
-              "type": "integer",
-              "format": "int32",
-              "description": "multiplier. Example: 3.",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/FabricBfdConfiguration"
         }
       },
       "allOf": [
@@ -1333,6 +1222,96 @@
           "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         }
       }
+    },
+    "ManagementNetworkConfiguration": {
+      "type": "object",
+      "description": "Configuration to be used to setup the management network.",
+      "required": [
+        "infrastructureVpnConfiguration",
+        "workloadVpnConfiguration"
+      ],
+      "properties": {
+        "infrastructureVpnConfiguration": {
+          "description": "Configuration for infrastructure vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        },
+        "workloadVpnConfiguration": {
+          "description": "Configuration for workload vpn.",
+          "$ref": "#/definitions/VpnConfigurationProperties"
+        }
+      }
+    },
+    "VpnConfigurationProperties": {
+      "type": "object",
+      "description": "Configuration for infrastructure vpn.",
+      "properties": {
+        "administrativeState": {
+          "description": "Indicates configuration state. Example: Enabled | Disabled.",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "networkToNetworkInterconnectId": {
+          "type": "string",
+          "description": "Gets the networkToNetworkInterconnectId of the resource.",
+          "readOnly": true
+        },
+        "peeringOption": {
+          "$ref": "./common.json#/definitions/PeeringOption"
+        },
+        "optionBProperties": {
+          "description": "option B properties",
+          "$ref": "#/definitions/OptionBProperties"
+        },
+        "optionAProperties": {
+          "description": "option A properties",
+          "$ref": "#/definitions/OptionAProperties"
+        }
+      },
+      "required": [
+        "peeringOption"
+      ]
+    },
+    "FabricBfdConfiguration": {
+      "type": "object",
+      "description": "BFD Configuration properties.",
+      "properties": {
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "interval in seconds. Example: 300.",
+          "readOnly": true
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "description": "multiplier. Example: 3.",
+          "readOnly": true
+        }
+      }
+    },
+    "TerminalServerConfiguration": {
+      "type": "object",
+      "description": "Network and credentials configuration currently applied to terminal server.",
+      "required": [
+        "username",
+        "password",
+        "primaryIpv4Prefix",
+        "secondaryIpv4Prefix"
+      ],
+      "properties": {
+        "networkDeviceId": {
+          "type": "string",
+          "description": "ARM Resource ID used for the NetworkDevice.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        },
+        {
+          "$ref": "#/definitions/TerminalServerPatchableProperties"
+        }
+      ]
     }
   },
   "parameters": {}

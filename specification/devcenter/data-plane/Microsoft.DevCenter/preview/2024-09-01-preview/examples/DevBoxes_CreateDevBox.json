@@ -1,0 +1,74 @@
+{
+  "title": "Creates or replaces a Dev Box.",
+  "operationId": "DevBoxes_CreateDevBox",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "MyDevBox",
+    "body": {
+      "poolName": "LargeDevWorkStationPool"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox",
+        "name": "MyDevBox",
+        "provisioningState": "Succeeded",
+        "projectName": "ContosoProject",
+        "poolName": "LargeDevWorkStationPool",
+        "location": "centralus",
+        "osType": "Windows",
+        "user": "b08e39b4-2ac6-4465-a35e-48322efb0f98",
+        "hardwareProfile": {
+          "vCPUs": 8,
+          "memoryGB": 32
+        },
+        "storageProfile": {
+          "osDisk": {
+            "diskSizeGB": 1024
+          }
+        },
+        "hibernateSupport": "Enabled",
+        "imageReference": {
+          "name": "DevImage",
+          "version": "1.0.0",
+          "publishedDate": "2022-03-01T00:13:23.323Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0",
+        "Operation-Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0"
+      },
+      "body": {
+        "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/users/b08e39b4-2ac6-4465-a35e-48322efb0f98/devboxes/MyDevBox",
+        "name": "MyDevBox",
+        "provisioningState": "Creating",
+        "projectName": "ContosoProject",
+        "poolName": "LargeDevWorkStationPool",
+        "location": "centralus",
+        "osType": "Windows",
+        "user": "b08e39b4-2ac6-4465-a35e-48322efb0f98",
+        "hardwareProfile": {
+          "vCPUs": 8,
+          "memoryGB": 32
+        },
+        "storageProfile": {
+          "osDisk": {
+            "diskSizeGB": 1024
+          }
+        },
+        "hibernateSupport": "Enabled",
+        "imageReference": {
+          "name": "DevImage",
+          "version": "1.0.0",
+          "publishedDate": "2022-03-01T00:13:23.323Z"
+        }
+      }
+    }
+  }
+}

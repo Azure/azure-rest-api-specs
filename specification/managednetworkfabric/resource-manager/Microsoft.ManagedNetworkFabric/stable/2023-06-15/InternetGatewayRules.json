@@ -1,0 +1,482 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/{internetGatewayRuleName}": {
+      "put": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Create",
+        "summary": "Creates an Internet Gateway rule.",
+        "description": "Creates an Internet Gateway rule resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Get",
+        "summary": "Gets an Internet Gateway Rule.",
+        "description": "Gets an Internet Gateway Rule resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Update",
+        "summary": "Updates an Internet Gateway Rule.",
+        "description": "API to update certain properties of the Internet Gateway Rule resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Internet Gateway Rule properties to update.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRule"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InternetGatewayRules"
+        ],
+        "operationId": "InternetGatewayRules_Delete",
+        "summary": "Deletes an Internet Gateway Rule.",
+        "description": "Implements Internet Gateway Rules DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InternetGatewayRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules": {
+      "get": {
+        "operationId": "InternetGatewayRules_ListByResourceGroup",
+        "summary": "List Internet Gateway Rules by resource group.",
+        "description": "Implements Internet Gateway Rules list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Internet Gateway Rules under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules": {
+      "get": {
+        "operationId": "InternetGatewayRules_ListBySubscription",
+        "summary": "List Internet Gateway Rules by subscription.",
+        "description": "List all Internet Gateway rules in the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all Internet Gateway Rules under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/InternetGatewayRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternetGatewayRules_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/InternetGatewayRules_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InternetGatewayRuleProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "required": [
+        "ruleProperties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "ruleProperties": {
+          "description": "Rules for the InternetGateways",
+          "$ref": "#/definitions/RuleProperties"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "internetGatewayIds": {
+          "type": "array",
+          "description": "List of Internet Gateway resource Id.",
+          "items": {
+            "description": "ARM Resource ID of the Internet Gateway.",
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Internet Gateway Rule Properties defines the resource properties."
+    },
+    "InternetGatewayRule": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InternetGatewayRuleProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The Internet Gateway Rule resource definition."
+    },
+    "InternetGatewayRulePatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "description": "Resource tags",
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The Internet Gateway Rules patch resource definition."
+    },
+    "InternetGatewayRulesListResult": {
+      "type": "object",
+      "description": "List of Internet Gateway Rules.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Internet Gateway Rule resources.",
+          "items": {
+            "$ref": "#/definitions/InternetGatewayRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "RuleProperties": {
+      "type": "object",
+      "description": "Rules for the InternetGateways",
+      "required": [
+        "action",
+        "addressList"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Specify action.",
+          "minLength": 1,
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "action"
+          },
+          "example": "Deny"
+        },
+        "addressList": {
+          "type": "array",
+          "description": "List of Addresses to be allowed or denied.",
+          "minItems": 1,
+          "items": {
+            "description": "Addresses to be allowed or denied.",
+            "type": "string",
+            "minLength": 1,
+            "example": "10.10.10.10:22 | www.foo.com"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "InternetGatewayRuleNameParameter": {
+      "type": "string",
+      "description": "Name of the Internet Gateway rule.",
+      "in": "path",
+      "name": "internetGatewayRuleName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

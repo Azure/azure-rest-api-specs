@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all installed templates.": {
+            "$ref": "./examples/contentTemplates/GetProductTemplates.json"
+          }
+        },
+        "tags": [
+          "ContentProductTemplates"
+        ],
+        "description": "Gets all templates in the catalog.",
+        "operationId": "ProductTemplates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/productTemplateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates/{templateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a template.": {
+            "$ref": "./examples/contentTemplates/GetProductTemplateById.json"
+          }
+        },
+        "tags": [
+          "ContentProductTemplates"
+        ],
+        "description": "Gets a template by its identifier.",
+        "operationId": "ProductTemplate_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/templateIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/productTemplateModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "productTemplateList": {
+      "description": "List of all the template.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of templates.",
+          "items": {
+            "$ref": "#/definitions/productTemplateModel"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to fetch the next page of template.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "productTemplateModel": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Template resource definition.",
+      "properties": {
+        "properties": {
+          "description": "template properties",
+          "$ref": "#/definitions/productTemplateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "productTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/templateBaseProperties"
+        },
+        {
+          "$ref": "#/definitions/productTemplateAdditionalProperties"
+        }
+      ],
+      "description": "Template property bag.",
+      "required": [
+        "contentId",
+        "version",
+        "displayName",
+        "contentKind",
+        "source"
+      ]
+    },
+    "productTemplateAdditionalProperties": {
+      "description": "additional properties of product template.",
+      "type": "object",
+      "properties": {
+        "packagedContent": {
+          "type": "object",
+          "description": "the json to deploy"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "templateIdParameter": {
+      "description": "template Id",
+      "in": "path",
+      "name": "templateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

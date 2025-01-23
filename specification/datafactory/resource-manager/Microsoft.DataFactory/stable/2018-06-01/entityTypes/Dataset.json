@@ -290,6 +290,15 @@
         }
       ]
     },
+    "LakeHouseLocation": {
+      "description": "The location of Microsoft Fabric LakeHouse Files dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
@@ -773,6 +782,7 @@
         },
         "compressionLevel": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The data compression method used for DelimitedText."
         },
         "quoteChar": {
@@ -982,6 +992,36 @@
         "location"
       ]
     },
+    "IcebergDataset": {
+      "x-ms-discriminator-value": "Iceberg",
+      "description": "Iceberg dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Iceberg dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IcebergDatasetTypeProperties"
+        }
+      }
+    },
+    "IcebergDatasetTypeProperties": {
+      "description": "Iceberg dataset properties.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the iceberg storage. Setting a file name is not allowed for iceberg format."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
       "description": "The Azure Blob storage.",
@@ -1092,6 +1132,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1128,6 +1169,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1164,6 +1206,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1727,6 +1770,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -1863,6 +1907,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
@@ -1899,6 +1944,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "schema": {
@@ -2043,8 +2089,41 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlV2TableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlV2Table",
+      "description": "The PostgreSQLV2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQLV2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlV2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlV2TableDatasetTypeProperties": {
+      "description": "PostgreSQLV2 table dataset properties.",
+      "properties": {
         "table": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -2828,6 +2907,38 @@
         }
       }
     },
+    "GoogleBigQueryV2ObjectDataset": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2Object",
+      "description": "Google BigQuery service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2DatasetTypeProperties"
+        }
+      }
+    },
+    "GoogleBigQueryV2DatasetTypeProperties": {
+      "description": "Google BigQuery Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        },
+        "dataset": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumTableDataset": {
       "x-ms-discriminator-value": "GreenplumTable",
       "description": "Greenplum Database dataset.",
@@ -3304,6 +3415,7 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
@@ -3505,6 +3617,26 @@
         "typeProperties"
       ]
     },
+    "SnowflakeV2Dataset": {
+      "x-ms-discriminator-value": "SnowflakeV2Table",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
       "properties": {
@@ -3576,6 +3708,155 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The database name of delta table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "LakeHouseTableDataset": {
+      "x-ms-discriminator-value": "LakeHouseTable",
+      "description": "Microsoft Fabric LakeHouse Table.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LakeHouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "LakeHouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric LakeHouse Table dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceV2Object",
+      "description": "The Salesforce V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce V2 report Id. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudV2Object",
+      "description": "The Salesforce Service Cloud V2 object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud V2 object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudV2ObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceServiceCloudV2ObjectDatasetTypeProperties": {
+      "description": "Salesforce Service Cloud V2 object dataset properties.",
+      "type": "object",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 object API name. Type: string (or Expression with resultType string)."
+        },
+        "reportId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Salesforce Service Cloud V2 reportId. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseTableDataset": {
+      "x-ms-discriminator-value": "WarehouseTable",
+      "description": "Microsoft Fabric Warehouse dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Fabric Warehouse dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarehouseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "WarehouseTableDatasetTypeProperties": {
+      "description": "Microsoft Fabric Warehouse dataset properties.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The schema name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ServiceNowV2ObjectDataset": {
+      "x-ms-discriminator-value": "ServiceNowV2Object",
+      "description": "ServiceNowV2 server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
     }

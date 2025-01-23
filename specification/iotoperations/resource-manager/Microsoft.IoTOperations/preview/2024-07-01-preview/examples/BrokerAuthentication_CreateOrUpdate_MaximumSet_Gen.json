@@ -1,0 +1,99 @@
+{
+  "title": "BrokerAuthentication_CreateOrUpdate",
+  "operationId": "BrokerAuthentication_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "brokerName": "aio-broker",
+    "authenticationName": "resource-name123",
+    "resource": {
+      "properties": {
+        "authenticationMethods": [
+          {
+            "method": "ServiceAccountToken",
+            "serviceAccountToken": {
+              "audiences": [
+                "aio-mq"
+              ]
+            }
+          }
+        ]
+      },
+      "extendedLocation": {
+        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "authenticationMethods": [
+            {
+              "method": "ServiceAccountToken",
+              "serviceAccountToken": {
+                "audiences": [
+                  "aio-mq"
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/authentications/resource-name123",
+        "name": "gjfyvwhgwouiqfxml",
+        "type": "iebmxuxbwumiobejywgyh",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "authenticationMethods": [
+            {
+              "method": "ServiceAccountToken",
+              "serviceAccountToken": {
+                "audiences": [
+                  "aio-mq"
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/authentications/resource-name123",
+        "name": "gjfyvwhgwouiqfxml",
+        "type": "iebmxuxbwumiobejywgyh",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    }
+  }
+}

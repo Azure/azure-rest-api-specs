@@ -55,10 +55,10 @@
   "paths": {
     "/providers/Microsoft.ServiceNetworking/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -79,22 +79,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Operations List": {
             "$ref": "./examples/OperationsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceNetworking/trafficControllers": {
       "get": {
+        "operationId": "TrafficControllerInterface_ListBySubscription",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_ListBySubscription",
         "description": "List TrafficController resources by subscription ID",
         "parameters": [
           {
@@ -118,22 +118,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Traffic Controllers List": {
             "$ref": "./examples/TrafficControllersGetList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers": {
       "get": {
+        "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "description": "List TrafficController resources by resource group",
         "parameters": [
           {
@@ -160,22 +160,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Traffic Controllers": {
             "$ref": "./examples/TrafficControllersGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}": {
       "get": {
+        "operationId": "TrafficControllerInterface_Get",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_Get",
         "description": "Get a TrafficController",
         "parameters": [
           {
@@ -190,8 +190,8 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -217,10 +217,10 @@
         }
       },
       "put": {
+        "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "description": "Create a TrafficController",
         "parameters": [
           {
@@ -235,16 +235,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -252,22 +252,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'TrafficController' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'TrafficController' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/TrafficController"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -288,10 +288,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "TrafficControllerInterface_Update",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_Update",
         "description": "Update a TrafficController",
         "parameters": [
           {
@@ -306,16 +306,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TrafficControllerUpdate"
             }
@@ -342,10 +342,10 @@
         }
       },
       "delete": {
+        "operationId": "TrafficControllerInterface_Delete",
         "tags": [
           "TrafficControllerInterface"
         ],
-        "operationId": "TrafficControllerInterface_Delete",
         "description": "Delete a TrafficController",
         "parameters": [
           {
@@ -360,8 +360,8 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -374,13 +374,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -407,10 +407,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations": {
       "get": {
+        "operationId": "AssociationsInterface_ListByTrafficController",
         "tags": [
           "AssociationsInterface"
         ],
-        "operationId": "AssociationsInterface_ListByTrafficController",
         "description": "List Association resources by TrafficController",
         "parameters": [
           {
@@ -425,8 +425,8 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -445,22 +445,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Associations": {
             "$ref": "./examples/AssociationsGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations/{associationName}": {
       "get": {
+        "operationId": "AssociationsInterface_Get",
         "tags": [
           "AssociationsInterface"
         ],
-        "operationId": "AssociationsInterface_Get",
         "description": "Get a Association",
         "parameters": [
           {
@@ -475,16 +475,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
             "in": "path",
-            "required": true,
             "description": "Name of Association",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -510,10 +510,10 @@
         }
       },
       "put": {
+        "operationId": "AssociationsInterface_CreateOrUpdate",
         "tags": [
           "AssociationsInterface"
         ],
-        "operationId": "AssociationsInterface_CreateOrUpdate",
         "description": "Create a Association",
         "parameters": [
           {
@@ -528,24 +528,24 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
             "in": "path",
-            "required": true,
             "description": "Name of Association",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -553,22 +553,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Association' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Association"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Association' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Association"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -589,10 +589,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "AssociationsInterface_Update",
         "tags": [
           "AssociationsInterface"
         ],
-        "operationId": "AssociationsInterface_Update",
         "description": "Update a Association",
         "parameters": [
           {
@@ -607,24 +607,24 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
             "in": "path",
-            "required": true,
             "description": "Name of Association",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AssociationUpdate"
             }
@@ -651,10 +651,10 @@
         }
       },
       "delete": {
+        "operationId": "AssociationsInterface_Delete",
         "tags": [
           "AssociationsInterface"
         ],
-        "operationId": "AssociationsInterface_Delete",
         "description": "Delete a Association",
         "parameters": [
           {
@@ -669,16 +669,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "associationName",
             "in": "path",
-            "required": true,
             "description": "Name of Association",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -691,13 +691,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -724,10 +724,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends": {
       "get": {
+        "operationId": "FrontendsInterface_ListByTrafficController",
         "tags": [
           "FrontendsInterface"
         ],
-        "operationId": "FrontendsInterface_ListByTrafficController",
         "description": "List Frontend resources by TrafficController",
         "parameters": [
           {
@@ -742,8 +742,8 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -762,22 +762,22 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get Frontends": {
             "$ref": "./examples/FrontendsGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends/{frontendName}": {
       "get": {
+        "operationId": "FrontendsInterface_Get",
         "tags": [
           "FrontendsInterface"
         ],
-        "operationId": "FrontendsInterface_Get",
         "description": "Get a Frontend",
         "parameters": [
           {
@@ -792,16 +792,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
             "in": "path",
-            "required": true,
             "description": "Frontends",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -827,10 +827,10 @@
         }
       },
       "put": {
+        "operationId": "FrontendsInterface_CreateOrUpdate",
         "tags": [
           "FrontendsInterface"
         ],
-        "operationId": "FrontendsInterface_CreateOrUpdate",
         "description": "Create a Frontend",
         "parameters": [
           {
@@ -845,24 +845,24 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
             "in": "path",
-            "required": true,
             "description": "Frontends",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "resource",
             "in": "body",
-            "required": true,
             "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -870,22 +870,22 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Resource 'Frontend' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
+            "description": "Resource 'Frontend' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Frontend"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -906,10 +906,10 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
+        "operationId": "FrontendsInterface_Update",
         "tags": [
           "FrontendsInterface"
         ],
-        "operationId": "FrontendsInterface_Update",
         "description": "Update a Frontend",
         "parameters": [
           {
@@ -924,24 +924,24 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
             "in": "path",
-            "required": true,
             "description": "Frontends",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "properties",
             "in": "body",
-            "required": true,
             "description": "The resource properties to be updated.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/FrontendUpdate"
             }
@@ -968,10 +968,10 @@
         }
       },
       "delete": {
+        "operationId": "FrontendsInterface_Delete",
         "tags": [
           "FrontendsInterface"
         ],
-        "operationId": "FrontendsInterface_Delete",
         "description": "Delete a Frontend",
         "parameters": [
           {
@@ -986,16 +986,16 @@
           {
             "name": "trafficControllerName",
             "in": "path",
-            "required": true,
             "description": "traffic controller name for path",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           },
           {
             "name": "frontendName",
             "in": "path",
-            "required": true,
             "description": "Frontends",
+            "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
           }
@@ -1008,13 +1008,13 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1043,6 +1043,7 @@
   "definitions": {
     "Association": {
       "type": "object",
+      "description": "Association Subresource of Traffic Controller",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssociationProperties",
@@ -1054,7 +1055,6 @@
           ]
         }
       },
-      "description": "Association Subresource of Traffic Controller",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1063,29 +1063,28 @@
     },
     "AssociationListResult": {
       "type": "object",
+      "description": "The response of a Association list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Association items on this page",
           "items": {
             "$ref": "#/definitions/Association"
-          },
-          "description": "The Association items on this page",
-          "x-typespec-name": "Association[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Association list operation.",
       "required": [
         "value"
       ]
     },
     "AssociationProperties": {
       "type": "object",
+      "description": "Association Properties.",
       "properties": {
         "associationType": {
           "$ref": "#/definitions/AssociationType",
@@ -1101,33 +1100,32 @@
           "readOnly": true
         }
       },
-      "description": "Association Properties.",
       "required": [
         "associationType"
       ]
     },
     "AssociationSubnet": {
       "type": "object",
+      "description": "Association Subnet.",
       "properties": {
         "id": {
           "type": "string",
           "description": "Association ID."
         }
       },
-      "description": "Association Subnet.",
       "required": [
         "id"
       ]
     },
     "AssociationSubnetUpdate": {
       "type": "object",
+      "description": "Association Subnet.",
       "properties": {
         "id": {
           "type": "string",
           "description": "Association ID."
         }
-      },
-      "description": "Association Subnet."
+      }
     },
     "AssociationType": {
       "type": "string",
@@ -1141,24 +1139,24 @@
     },
     "AssociationUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Association.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          }
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
           "x-ms-client-flatten": true
         }
-      },
-      "description": "The type used for update operations of the Association."
+      }
     },
     "AssociationUpdateProperties": {
       "type": "object",
+      "description": "The updatable properties of the Association.",
       "properties": {
         "associationType": {
           "$ref": "#/definitions/AssociationType",
@@ -1168,11 +1166,11 @@
           "$ref": "#/definitions/AssociationSubnetUpdate",
           "description": "Association Subnet"
         }
-      },
-      "description": "The updatable properties of the Association."
+      }
     },
     "Frontend": {
       "type": "object",
+      "description": "Frontend Subresource of Traffic Controller.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
@@ -1184,7 +1182,6 @@
           ]
         }
       },
-      "description": "Frontend Subresource of Traffic Controller.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1193,29 +1190,28 @@
     },
     "FrontendListResult": {
       "type": "object",
+      "description": "The response of a Frontend list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The Frontend items on this page",
           "items": {
             "$ref": "#/definitions/Frontend"
-          },
-          "description": "The Frontend items on this page",
-          "x-typespec-name": "Frontend[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a Frontend list operation.",
       "required": [
         "value"
       ]
     },
     "FrontendProperties": {
       "type": "object",
+      "description": "Frontend Properties.",
       "properties": {
         "fqdn": {
           "type": "string",
@@ -1227,22 +1223,20 @@
           "description": "Provisioning State of Traffic Controller Frontend Resource",
           "readOnly": true
         }
-      },
-      "description": "Frontend Properties."
+      }
     },
     "FrontendUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the Frontend.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "The type used for update operations of the Frontend."
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -1262,19 +1256,20 @@
     },
     "ResourceId": {
       "type": "object",
+      "description": "Resource ID definition used by parent to reference child resources.",
       "properties": {
         "id": {
           "type": "string",
           "description": "Resource ID of child resource."
         }
       },
-      "description": "Resource ID definition used by parent to reference child resources.",
       "required": [
         "id"
       ]
     },
     "TrafficController": {
       "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TrafficControllerProperties",
@@ -1286,7 +1281,6 @@
           ]
         }
       },
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1295,55 +1289,51 @@
     },
     "TrafficControllerListResult": {
       "type": "object",
+      "description": "The response of a TrafficController list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The TrafficController items on this page",
           "items": {
             "$ref": "#/definitions/TrafficController"
-          },
-          "description": "The TrafficController items on this page",
-          "x-typespec-name": "TrafficController[]"
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TrafficController list operation.",
       "required": [
         "value"
       ]
     },
     "TrafficControllerProperties": {
       "type": "object",
+      "description": "Traffic Controller Properties.",
       "properties": {
         "configurationEndpoints": {
           "type": "array",
+          "description": "Configuration Endpoints.",
           "items": {
             "type": "string"
           },
-          "description": "Configuration Endpoints.",
-          "x-typespec-name": "string[]",
           "readOnly": true
         },
         "frontends": {
           "type": "array",
+          "description": "Frontends References List",
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Frontends References List",
-          "x-typespec-name": "ResourceId[]",
           "readOnly": true
         },
         "associations": {
           "type": "array",
+          "description": "Associations References List",
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Associations References List",
-          "x-typespec-name": "ResourceId[]",
           "readOnly": true
         },
         "provisioningState": {
@@ -1351,22 +1341,20 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      },
-      "description": "Traffic Controller Properties."
+      }
     },
     "TrafficControllerUpdate": {
       "type": "object",
+      "description": "The type used for update operations of the TrafficController.",
       "properties": {
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          }
         }
-      },
-      "description": "The type used for update operations of the TrafficController."
+      }
     }
   },
   "parameters": {}

@@ -8728,7 +8728,7 @@
           "readOnly": true
         },
         "serviceId": {
-          "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
+          "description": "ServiceInstanceEntity Id which uniquely identifies a created resource",
           "type": "string",
           "readOnly": true
         },
@@ -10004,17 +10004,15 @@
             "modelAsString": true
           }
         },
-        "resourceRequests": {
-          "$ref": "#/definitions/DevToolPortalResourceRequests",
-          "description": "The requested resource quantity for required CPU and Memory."
-        },
-        "instances": {
-          "description": "Collection of instances belong to Dev Tool Portal.",
+        "components": {
+          "description": "Collection of components belong to Dev Tool Portal.",
           "uniqueItems": false,
           "type": "array",
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "items": {
-            "$ref": "#/definitions/DevToolPortalInstance"
+            "$ref": "#/definitions/DevToolPortalComponent"
           },
           "readOnly": true
         },
@@ -10035,6 +10033,29 @@
         "features": {
           "$ref": "#/definitions/DevToolPortalFeatureSettings",
           "description": "Settings for Dev Tool Portal"
+        }
+      }
+    },
+    "DevToolPortalComponent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/DevToolPortalResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        },
+        "instances": {
+          "description": "Collection of instances belong to Dev Tool Portal.",
+          "uniqueItems": false,
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/DevToolPortalInstance"
+          },
+          "readOnly": true
         }
       }
     },

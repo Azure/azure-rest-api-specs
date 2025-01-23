@@ -1,0 +1,1157 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Live Metrics REST APIs for client SDKs.",
+    "version": "2024-04-01-preview",
+    "description": "Live Metrics REST APIs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint of the Live Metrics service.",
+        "required": true,
+        "type": "string",
+        "default": "https://global.livediagnostics.monitor.azure.com"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://monitor.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://monitor.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/QuickPulseService.svc/ping": {
+      "post": {
+        "operationId": "IsSubscribed",
+        "description": "Determine whether there is any subscription to the metrics and documents.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.ikey"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.transmissionTime"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.machineName"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.instanceName"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.streamId"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.roleName"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.invariantVersion"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.configurationEtag"
+          },
+          {
+            "$ref": "#/parameters/IsSubscribedOperationRequestParameters.monitoringDataPoint"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollectionConfigurationInfo"
+            },
+            "headers": {
+              "x-ms-qps-configuration-etag": {
+                "type": "string",
+                "description": "An encoded string that indicates whether the collection configuration is changed."
+              },
+              "x-ms-qps-service-endpoint-redirect-v2": {
+                "type": "string",
+                "description": "Contains a URI of the service endpoint that the client must permanently use for the particular resource. This header exists only when the client is talking to Live Metrics global endpoint."
+              },
+              "x-ms-qps-service-polling-interval-hint": {
+                "type": "string",
+                "description": "Recommended time (in milliseconds) before the client should ping the service again. This header exists only when the instrumentation key is not subscribed to."
+              },
+              "x-ms-qps-subscribed": {
+                "type": "string",
+                "description": "A boolean flag indicating whether there are active user sessions 'watching' the instrumentation key. If true, the client must start collecting data and posting it to Live Metrics. Otherwise, the client must keep pinging."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Live Metrics client checks if its data is subscribed to.": {
+            "$ref": "./examples/LiveMetrics_IsSubscribed.json"
+          }
+        }
+      }
+    },
+    "/QuickPulseService.svc/post": {
+      "post": {
+        "operationId": "Publish",
+        "description": "Publish live metrics to the Live Metrics service when there is an active subscription to the metrics.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublishOperationRequestParameters.ikey"
+          },
+          {
+            "$ref": "#/parameters/PublishOperationRequestParameters.configurationEtag"
+          },
+          {
+            "$ref": "#/parameters/PublishOperationRequestParameters.transmissionTime"
+          },
+          {
+            "$ref": "#/parameters/PublishOperationRequestParameters.monitoringDataPoints"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollectionConfigurationInfo"
+            },
+            "headers": {
+              "x-ms-qps-configuration-etag": {
+                "type": "string",
+                "description": "An encoded string that indicates whether the collection configuration is changed."
+              },
+              "x-ms-qps-subscribed": {
+                "type": "string",
+                "description": "Tells the client whether the input instrumentation key is subscribed to."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Live Metrics client publishes live metrics": {
+            "$ref": "./examples/LiveMetrics_Publish.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregationType": {
+      "type": "string",
+      "description": "Aggregation type.",
+      "enum": [
+        "Avg",
+        "Sum",
+        "Min",
+        "Max"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Avg",
+            "value": "Avg",
+            "description": "Average"
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Sum"
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum"
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum"
+          }
+        ]
+      }
+    },
+    "CollectionConfigurationError": {
+      "type": "object",
+      "description": "Represents an error while SDK parses and applies an instance of CollectionConfigurationInfo.",
+      "properties": {
+        "CollectionConfigurationErrorType": {
+          "$ref": "#/definitions/CollectionConfigurationErrorType",
+          "description": "Error type."
+        },
+        "Message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "FullException": {
+          "type": "string",
+          "description": "Exception that led to the creation of the configuration error."
+        },
+        "Data": {
+          "type": "array",
+          "description": "Custom properties to add more information to the error.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringString"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "CollectionConfigurationErrorType",
+        "Message",
+        "FullException",
+        "Data"
+      ]
+    },
+    "CollectionConfigurationErrorType": {
+      "type": "string",
+      "description": "Collection configuration error type reported by the client SDK.",
+      "enum": [
+        "Unknown",
+        "PerformanceCounterParsing",
+        "PerformanceCounterUnexpected",
+        "PerformanceCounterDuplicateIds",
+        "DocumentStreamDuplicateIds",
+        "DocumentStreamFailureToCreate",
+        "DocumentStreamFailureToCreateFilterUnexpected",
+        "MetricDuplicateIds",
+        "MetricTelemetryTypeUnsupported",
+        "MetricFailureToCreate",
+        "MetricFailureToCreateFilterUnexpected",
+        "FilterFailureToCreateUnexpected",
+        "CollectionConfigurationFailureToCreateUnexpected"
+      ],
+      "x-ms-enum": {
+        "name": "CollectionConfigurationErrorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown error type."
+          },
+          {
+            "name": "PerformanceCounterParsing",
+            "value": "PerformanceCounterParsing",
+            "description": "Performance counter parsing error."
+          },
+          {
+            "name": "PerformanceCounterUnexpected",
+            "value": "PerformanceCounterUnexpected",
+            "description": "Performance counter unexpected error."
+          },
+          {
+            "name": "PerformanceCounterDuplicateIds",
+            "value": "PerformanceCounterDuplicateIds",
+            "description": "Performance counter duplicate ids."
+          },
+          {
+            "name": "DocumentStreamDuplicateIds",
+            "value": "DocumentStreamDuplicateIds",
+            "description": "Document stream duplication ids."
+          },
+          {
+            "name": "DocumentStreamFailureToCreate",
+            "value": "DocumentStreamFailureToCreate",
+            "description": "Document stream failed to create."
+          },
+          {
+            "name": "DocumentStreamFailureToCreateFilterUnexpected",
+            "value": "DocumentStreamFailureToCreateFilterUnexpected",
+            "description": "Document stream failed to create filter unexpectedly."
+          },
+          {
+            "name": "MetricDuplicateIds",
+            "value": "MetricDuplicateIds",
+            "description": "Metric duplicate ids."
+          },
+          {
+            "name": "MetricTelemetryTypeUnsupported",
+            "value": "MetricTelemetryTypeUnsupported",
+            "description": "Metric telemetry type unsupported."
+          },
+          {
+            "name": "MetricFailureToCreate",
+            "value": "MetricFailureToCreate",
+            "description": "Metric failed to create."
+          },
+          {
+            "name": "MetricFailureToCreateFilterUnexpected",
+            "value": "MetricFailureToCreateFilterUnexpected",
+            "description": "Metric failed to create filter unexpectedly."
+          },
+          {
+            "name": "FilterFailureToCreateUnexpected",
+            "value": "FilterFailureToCreateUnexpected",
+            "description": "Filter failed to create unexpectedly."
+          },
+          {
+            "name": "CollectionConfigurationFailureToCreateUnexpected",
+            "value": "CollectionConfigurationFailureToCreateUnexpected",
+            "description": "Collection configuration failed to create unexpectedly."
+          }
+        ]
+      }
+    },
+    "CollectionConfigurationInfo": {
+      "type": "object",
+      "description": "Represents the collection configuration - a customizable description of performance counters, metrics, and full telemetry documents to be collected by the client SDK.",
+      "properties": {
+        "ETag": {
+          "type": "string",
+          "description": "An encoded string that indicates whether the collection configuration is changed."
+        },
+        "Metrics": {
+          "type": "array",
+          "description": "An array of metric configuration info.",
+          "items": {
+            "$ref": "#/definitions/DerivedMetricInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "DocumentStreams": {
+          "type": "array",
+          "description": "An array of document stream configuration info.",
+          "items": {
+            "$ref": "#/definitions/DocumentStreamInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "QuotaInfo": {
+          "$ref": "#/definitions/QuotaConfigurationInfo",
+          "description": "Controls document quotas to be sent to Live Metrics."
+        }
+      },
+      "required": [
+        "ETag",
+        "Metrics",
+        "DocumentStreams"
+      ]
+    },
+    "DerivedMetricInfo": {
+      "type": "object",
+      "description": "A metric configuration set by UX to scope the metrics it's interested in.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "metric configuration identifier."
+        },
+        "TelemetryType": {
+          "type": "string",
+          "description": "Telemetry type."
+        },
+        "FilterGroups": {
+          "type": "array",
+          "description": "A collection of filters to scope metrics that UX needs.",
+          "items": {
+            "$ref": "#/definitions/FilterConjunctionGroupInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "Projection": {
+          "type": "string",
+          "description": "Telemetry's metric dimension whose value is to be aggregated. Example values: Duration, Count(),..."
+        },
+        "Aggregation": {
+          "$ref": "#/definitions/AggregationType",
+          "description": "Aggregation type. This is the aggregation done from everything within a single server."
+        },
+        "BackEndAggregation": {
+          "$ref": "#/definitions/AggregationType",
+          "description": "Aggregation type. This Aggregation is done across the values for all the servers taken together."
+        }
+      },
+      "required": [
+        "Id",
+        "TelemetryType",
+        "FilterGroups",
+        "Projection",
+        "Aggregation",
+        "BackEndAggregation"
+      ]
+    },
+    "DocumentFilterConjunctionGroupInfo": {
+      "type": "object",
+      "description": "A collection of filters for a specific telemetry type.",
+      "properties": {
+        "TelemetryType": {
+          "$ref": "#/definitions/TelemetryType",
+          "description": "Telemetry type."
+        },
+        "Filters": {
+          "$ref": "#/definitions/FilterConjunctionGroupInfo",
+          "description": "An array of filter groups."
+        }
+      },
+      "required": [
+        "TelemetryType",
+        "Filters"
+      ]
+    },
+    "DocumentIngress": {
+      "type": "object",
+      "description": "Base class of the specific document types.",
+      "properties": {
+        "DocumentType": {
+          "$ref": "#/definitions/DocumentType",
+          "description": "Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type."
+        },
+        "DocumentStreamIds": {
+          "type": "array",
+          "description": "An array of document streaming ids. Each id identifies a flow of documents customized by UX customers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Properties": {
+          "type": "array",
+          "description": "Collection of custom properties.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringString"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "discriminator": "DocumentType",
+      "required": [
+        "DocumentType"
+      ]
+    },
+    "DocumentStreamInfo": {
+      "type": "object",
+      "description": "Configurations/filters set by UX to scope the document/telemetry it's interested in.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Identifier of the document stream initiated by a UX."
+        },
+        "DocumentFilterGroups": {
+          "type": "array",
+          "description": "Gets or sets an OR-connected collection of filter groups.",
+          "items": {
+            "$ref": "#/definitions/DocumentFilterConjunctionGroupInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Id",
+        "DocumentFilterGroups"
+      ]
+    },
+    "DocumentType": {
+      "type": "string",
+      "description": "Document type",
+      "enum": [
+        "Request",
+        "RemoteDependency",
+        "Exception",
+        "Event",
+        "Trace",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Represents a request telemetry type."
+          },
+          {
+            "name": "RemoteDependency",
+            "value": "RemoteDependency",
+            "description": "Represents a remote dependency telemetry type."
+          },
+          {
+            "name": "Exception",
+            "value": "Exception",
+            "description": "Represents an exception telemetry type."
+          },
+          {
+            "name": "Event",
+            "value": "Event",
+            "description": "Represents an event telemetry type."
+          },
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "Represents a trace telemetry type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Represents an unknown telemetry type."
+          }
+        ]
+      }
+    },
+    "Event": {
+      "type": "object",
+      "description": "Event document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Event name.",
+          "maxLength": 512
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Event"
+    },
+    "Exception": {
+      "type": "object",
+      "description": "Exception document type.",
+      "properties": {
+        "ExceptionType": {
+          "type": "string",
+          "description": "Exception type name.",
+          "maxLength": 1024
+        },
+        "ExceptionMessage": {
+          "type": "string",
+          "description": "Exception message.",
+          "maxLength": 32768
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Exception"
+    },
+    "FilterConjunctionGroupInfo": {
+      "type": "object",
+      "description": "An AND-connected group of FilterInfo objects.",
+      "properties": {
+        "Filters": {
+          "type": "array",
+          "description": "An array of filters.",
+          "items": {
+            "$ref": "#/definitions/FilterInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Filters"
+      ]
+    },
+    "FilterInfo": {
+      "type": "object",
+      "description": "A filter set on UX",
+      "properties": {
+        "FieldName": {
+          "type": "string",
+          "description": "dimension name of the filter"
+        },
+        "Predicate": {
+          "$ref": "#/definitions/PredicateType",
+          "description": "Operator of the filter"
+        },
+        "Comparand": {
+          "type": "string",
+          "description": "Comparand of the filter"
+        }
+      },
+      "required": [
+        "FieldName",
+        "Predicate",
+        "Comparand"
+      ]
+    },
+    "KeyValuePairStringString": {
+      "type": "object",
+      "description": "Key-value pair of string and string.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the key-value pair."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the key-value pair."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "MetricPoint": {
+      "type": "object",
+      "description": "Metric data point.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Metric name."
+        },
+        "Value": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value."
+        },
+        "Weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Metric weight."
+        }
+      },
+      "required": [
+        "Name",
+        "Value",
+        "Weight"
+      ]
+    },
+    "MonitoringDataPoint": {
+      "type": "object",
+      "description": "Monitoring data point coming from the client, which includes metrics, documents and other metadata info.",
+      "properties": {
+        "Version": {
+          "type": "string",
+          "description": "Application Insights SDK version."
+        },
+        "InvariantVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Version/generation of the data contract (MonitoringDataPoint) between SDK and Live Metrics."
+        },
+        "Instance": {
+          "type": "string",
+          "description": "Service instance name where Application Insights SDK lives."
+        },
+        "RoleName": {
+          "type": "string",
+          "description": "Service role name."
+        },
+        "MachineName": {
+          "type": "string",
+          "description": "Computer name where Application Insights SDK lives."
+        },
+        "StreamId": {
+          "type": "string",
+          "description": "Identifies an Application Insights SDK as a trusted agent to report metrics and documents."
+        },
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data point generation timestamp."
+        },
+        "TransmissionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the client transmits the metrics and documents to Live Metrics."
+        },
+        "IsWebApp": {
+          "type": "boolean",
+          "description": "True if the current application is an Azure Web App."
+        },
+        "PerformanceCollectionSupported": {
+          "type": "boolean",
+          "description": "True if performance counters collection is supported."
+        },
+        "Metrics": {
+          "type": "array",
+          "description": "An array of metric data points.",
+          "items": {
+            "$ref": "#/definitions/MetricPoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "Documents": {
+          "type": "array",
+          "description": "An array of documents of a specific type {Request}, {RemoteDependency}, {Exception}, {Event}, or {Trace}",
+          "items": {
+            "$ref": "#/definitions/DocumentIngress"
+          },
+          "x-ms-identifiers": []
+        },
+        "TopCpuProcesses": {
+          "type": "array",
+          "description": "An array of top cpu consumption data point.",
+          "items": {
+            "$ref": "#/definitions/ProcessCpuData"
+          },
+          "x-ms-identifiers": []
+        },
+        "CollectionConfigurationErrors": {
+          "type": "array",
+          "description": "An array of error while SDK parses and applies the {CollectionConfigurationInfo} provided by Live Metrics.",
+          "items": {
+            "$ref": "#/definitions/CollectionConfigurationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Version",
+        "InvariantVersion",
+        "Instance",
+        "RoleName",
+        "MachineName",
+        "StreamId",
+        "IsWebApp",
+        "PerformanceCollectionSupported"
+      ]
+    },
+    "PredicateType": {
+      "type": "string",
+      "description": "Enum representing the different types of predicates.",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "LessThan",
+        "GreaterThan",
+        "LessThanOrEqual",
+        "GreaterThanOrEqual",
+        "Contains",
+        "DoesNotContain"
+      ],
+      "x-ms-enum": {
+        "name": "PredicateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Represents an equality predicate."
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual",
+            "description": "Represents a not-equal predicate."
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan",
+            "description": "Represents a less-than predicate."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "Represents a greater-than predicate."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual",
+            "description": "Represents a less-than-or-equal predicate."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual",
+            "description": "Represents a greater-than-or-equal predicate."
+          },
+          {
+            "name": "Contains",
+            "value": "Contains",
+            "description": "Represents a contains predicate."
+          },
+          {
+            "name": "DoesNotContain",
+            "value": "DoesNotContain",
+            "description": "Represents a does-not-contain predicate."
+          }
+        ]
+      }
+    },
+    "ProcessCpuData": {
+      "type": "object",
+      "description": "CPU consumption datapoint.",
+      "properties": {
+        "ProcessName": {
+          "type": "string",
+          "description": "Process name."
+        },
+        "CpuPercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CPU consumption percentage."
+        }
+      },
+      "required": [
+        "ProcessName",
+        "CpuPercentage"
+      ]
+    },
+    "QuotaConfigurationInfo": {
+      "type": "object",
+      "description": "Controls document quotas to be sent to Live Metrics.",
+      "properties": {
+        "InitialQuota": {
+          "type": "number",
+          "format": "float",
+          "description": "Initial quota"
+        },
+        "MaxQuota": {
+          "type": "number",
+          "format": "float",
+          "description": "Max quota"
+        },
+        "QuotaAccrualRatePerSec": {
+          "type": "number",
+          "format": "float",
+          "description": "Quota accrual rate per second"
+        }
+      },
+      "required": [
+        "MaxQuota",
+        "QuotaAccrualRatePerSec"
+      ]
+    },
+    "RemoteDependency": {
+      "type": "object",
+      "description": "RemoteDependency document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the command initiated with this dependency call, e.g., GET /username.",
+          "maxLength": 1024
+        },
+        "CommandName": {
+          "type": "string",
+          "description": "URL of the dependency call to the target, with all query string parameters.",
+          "maxLength": 2048
+        },
+        "ResultCode": {
+          "type": "string",
+          "description": "Result code of a dependency call. Examples are SQL error code and HTTP status code.",
+          "maxLength": 1024
+        },
+        "Duration": {
+          "type": "string",
+          "description": "Request duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "RemoteDependency"
+    },
+    "Request": {
+      "type": "object",
+      "description": "Request document type.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the request, e.g., 'GET /values/{id}'.",
+          "maxLength": 1024
+        },
+        "Url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Request URL with all query string parameters.",
+          "maxLength": 2048
+        },
+        "ResponseCode": {
+          "type": "string",
+          "description": "Result of a request execution. For http requests, it could be some HTTP status code.",
+          "maxLength": 1024
+        },
+        "Duration": {
+          "type": "string",
+          "description": "Request duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Request"
+    },
+    "ServiceError": {
+      "type": "object",
+      "description": "Optional http response body, whose existence carries additional error descriptions.",
+      "properties": {
+        "RequestId": {
+          "type": "string",
+          "description": "A globally unique identifier to identify the diagnostic context. It defaults to the empty GUID.",
+          "default": "00000000-0000-0000-0000-000000000000"
+        },
+        "ResponseDateTime": {
+          "type": "string",
+          "description": "Service error response date time."
+        },
+        "Code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "Message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "Exception": {
+          "type": "string",
+          "description": "Message of the exception that triggers the error response."
+        }
+      },
+      "required": [
+        "RequestId",
+        "ResponseDateTime",
+        "Code",
+        "Message",
+        "Exception"
+      ]
+    },
+    "TelemetryType": {
+      "type": "string",
+      "description": "Telemetry type.",
+      "enum": [
+        "Request",
+        "Dependency",
+        "Exception",
+        "Event",
+        "Metric",
+        "PerformanceCounter",
+        "Trace"
+      ],
+      "x-ms-enum": {
+        "name": "TelemetryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Represents a request telemetry type."
+          },
+          {
+            "name": "Dependency",
+            "value": "Dependency",
+            "description": "Represents a dependency telemetry type."
+          },
+          {
+            "name": "Exception",
+            "value": "Exception",
+            "description": "Represents an exception telemetry type."
+          },
+          {
+            "name": "Event",
+            "value": "Event",
+            "description": "Represents an event telemetry type."
+          },
+          {
+            "name": "Metric",
+            "value": "Metric",
+            "description": "Represents a metric telemetry type."
+          },
+          {
+            "name": "PerformanceCounter",
+            "value": "PerformanceCounter",
+            "description": "Represents a performance counter telemetry type."
+          },
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "Represents a trace telemetry type."
+          }
+        ]
+      }
+    },
+    "Trace": {
+      "type": "object",
+      "description": "Trace document type.",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "description": "Trace message.",
+          "maxLength": 32768
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentIngress"
+        }
+      ],
+      "x-ms-discriminator-value": "Trace"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "IsSubscribedOperationRequestParameters.configurationEtag": {
+      "name": "x-ms-qps-configuration-etag",
+      "in": "header",
+      "description": "An encoded string that indicates whether the collection configuration is changed.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "configurationEtag"
+    },
+    "IsSubscribedOperationRequestParameters.ikey": {
+      "name": "ikey",
+      "in": "query",
+      "description": "The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IsSubscribedOperationRequestParameters.instanceName": {
+      "name": "x-ms-qps-instance-name",
+      "in": "header",
+      "description": "Service instance name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "instanceName"
+    },
+    "IsSubscribedOperationRequestParameters.invariantVersion": {
+      "name": "x-ms-qps-invariant-version",
+      "in": "header",
+      "description": "Version/generation of the data contract (MonitoringDataPoint) between the client and Live Metrics.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "invariantVersion"
+    },
+    "IsSubscribedOperationRequestParameters.machineName": {
+      "name": "x-ms-qps-machine-name",
+      "in": "header",
+      "description": "Computer name where Application Insights SDK lives. Live Metrics uses machine name with instance name as a backup.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "machineName"
+    },
+    "IsSubscribedOperationRequestParameters.monitoringDataPoint": {
+      "name": "monitoringDataPoint",
+      "in": "body",
+      "description": "Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/MonitoringDataPoint"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IsSubscribedOperationRequestParameters.roleName": {
+      "name": "x-ms-qps-role-name",
+      "in": "header",
+      "description": "Cloud role name of the service.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "roleName"
+    },
+    "IsSubscribedOperationRequestParameters.streamId": {
+      "name": "x-ms-qps-stream-id",
+      "in": "header",
+      "description": "Identifies an Application Insights SDK as trusted agent to report metrics and documents.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "streamId"
+    },
+    "IsSubscribedOperationRequestParameters.transmissionTime": {
+      "name": "x-ms-qps-transmission-time",
+      "in": "header",
+      "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "transmissionTime"
+    },
+    "PublishOperationRequestParameters.configurationEtag": {
+      "name": "x-ms-qps-configuration-etag",
+      "in": "header",
+      "description": "An encoded string that indicates whether the collection configuration is changed.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "configurationEtag"
+    },
+    "PublishOperationRequestParameters.ikey": {
+      "name": "ikey",
+      "in": "query",
+      "description": "The instrumentation key of the target Application Insights component for which the client checks whether there's any subscription to it.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublishOperationRequestParameters.monitoringDataPoints": {
+      "name": "monitoringDataPoints",
+      "in": "body",
+      "description": "Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.",
+      "required": false,
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/MonitoringDataPoint"
+        },
+        "x-ms-identifiers": []
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "PublishOperationRequestParameters.transmissionTime": {
+      "name": "x-ms-qps-transmission-time",
+      "in": "header",
+      "description": "Timestamp when the client transmits the metrics and documents to Live Metrics. A 8-byte long type of ticks.",
+      "required": false,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "transmissionTime"
+    }
+  }
+}

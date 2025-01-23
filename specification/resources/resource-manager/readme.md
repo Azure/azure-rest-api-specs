@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-subscriptions-2022-12
+tag: package-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
@@ -42,11 +42,23 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2022-06
+tag: package-policy-2025-01-stable
+```
+
+``` yaml $(package-databoundaries)
+tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2022-09
+tag: package-resources-2024-03
+```
+
+``` yaml $(package-resources)
+tag: package-resources-2024-07
+```
+
+``` yaml $(package-resources)
+tag: package-resources-2024-11
 ```
 
 ``` yaml $(package-subscriptions)
@@ -62,7 +74,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2020-10
+tag: package-deploymentscripts-2023-08
 ```
 
 ``` yaml $(package-templatespecs)
@@ -70,7 +82,7 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2022-08-preview
+tag: package-deploymentstacks-2024-03
 ```
 
 ``` yaml $(package-changes)
@@ -81,12 +93,154 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+``` yaml $(package-bicep)
+tag: package-bicep-2023-11
+```
+
+### Tag: package-policy-2025-01-stable
+
+These settings apply only when `--tag=package-policy-2025-01-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2025-01-stable'
+input-file:
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2025-01-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2025-01-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-05
+
+These settings apply only when `--tag=package-policy-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-05'
+input-file:
+- Microsoft.Authorization/stable/2024-05-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2024-05-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2024-05-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2024-05-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2024-05-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2024-04
+
+These settings apply only when `--tag=package-policy-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2024-04'
+input-file:
+  - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
+```
+
+### Tag: package-bicep-2023-11
+
+These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-bicep-2023-11'
+input-file:
+  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
+```
+
+### Tag: package-policy-2023-04
+
+These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2023-04-only
+
+These settings apply only when `--tag=package-policy-2023-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04-only'
+input-file:
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-deploymentscripts-2023-08
+
+These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentscripts-2023-08'
+input-file:
+  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: OperationsAPI will come from Resources
+```
+
+### Tag: package-resources-2023-07
+
+These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2023-07'
+input-file:
+  - Microsoft.Resources/stable/2023-07-01/resources.json
+```
+
+### Tag: package-resources-2024-03
+
+These settings apply only when `--tag=package-resources-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-03'
+input-file:
+  - Microsoft.Resources/stable/2024-03-01/resources.json
+```
+
+### Tag: package-resources-2024-07
+
+These settings apply only when `--tag=package-resources-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-07'
+input-file:
+  - Microsoft.Resources/stable/2024-07-01/resources.json
+```
+
+### Tag: package-resources-2024-11
+
+These settings apply only when `--tag=package-resources-2024-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-11'
+input-file:
+  - Microsoft.Resources/stable/2024-11-01/resources.json
+```
 
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
@@ -168,6 +322,15 @@ input-file:
 - Microsoft.Resources/preview/2023-07-01-preview/changes.json
 ```
 
+### Tag: package-changes-2024-06-01-preview
+
+These settings apply only when `--tag=package-changes-2024-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2024-06-01-preview'
+input-file:
+- Microsoft.Resources/preview/2024-06-01-preview/changes.json
+```
+
 ### Tag: package-snapshots-2022-11
 
 These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
@@ -175,6 +338,15 @@ These settings apply only when `--tag=package-snapshots-2022-11` is specified on
 ``` yaml $(tag) == 'package-snapshots-2022-11'
 input-file:
 - Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
+```
+
+### Tag: package-databoundaries-2024-08
+
+These settings apply only when `--tag=package-databoundaries-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-databoundaries-2024-08'
+input-file:
+  - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
 ```
 
 ### Tag: package-changes-2022-05
@@ -315,7 +487,6 @@ These settings apply only when `--tag=package-subscriptions-2022-12` is specifie
 input-file:
 - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
-
 
 ### Tag: package-subscriptions-2021-01
 
@@ -575,6 +746,15 @@ These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` 
 ``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
 input-file:
 - Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
+```
+
+### Tag: package-deploymentstacks-2024-03
+
+These settings apply only when `--tag=package-deploymentstacks-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentstacks-2024-03'
+input-file:
+- Microsoft.Resources/stable/2024-03-01/deploymentStacks.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -870,13 +1050,29 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+- Microsoft.Resources/stable/2018-05-01/resources.json
+
+override-info:
+  title: PolicyClient
+```
+
 ## Suppression
 
 ``` yaml
 directive:
   - suppress: UniqueResourcePaths
     from: policySetDefinitions.json
-    where: $.paths
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: resources.json
@@ -884,11 +1080,9 @@ directive:
     reason: route definitions under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: policyDefinitions.json
-    where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: policyAssignments.json
-    where: $.paths
     reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: policyExemptions.json
@@ -896,7 +1090,6 @@ directive:
     reason: policy exemption under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
-    where: $.paths
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: privateLinks.json
@@ -904,11 +1097,15 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyDefinitions.json
-    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policySetDefinitions.json
-    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policySetDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyExemptions.json
@@ -924,8 +1121,19 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
-    where: $.definitions.PolicyAssignment.properties
-    reason: Currently systemData is not allowed
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policyDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policyDefinitionVersions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policySetDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policySetDefinitionVersions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
@@ -994,10 +1202,37 @@ directive:
     suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: OperationsAPIImplementation
+  - suppress: OperationsAPIImplementation
+    from: deploymentScripts.json
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - suppress: IntegerTypeMustHaveFormat
+    from: deploymentScripts.json
+    reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
+  - suppress: ResourceNameRestriction
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PropertiesTypeObjectNoDefinition
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersInPointGet
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PatchIdentityProperty
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: deploymentScripts.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
   - from: deploymentScripts.json
     suppress: R3006
     where:
@@ -1053,10 +1288,6 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
-  - suppress: XmsExamplesRequired
-    where: $.paths
-    from: resources.json
-    reason: Pre-existing lint error. Not related to this version release.
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
@@ -1111,6 +1342,279 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LRO_RESPONSE_HEADER
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiResponseSchema
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationsApiSchemaUsesCommonTypes
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroLocationHeader
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroErrorContent
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: NoErrorCodeResponses
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutRequestResponseSchemeArm
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PutResponseSchemaDescription
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PostOperationAsyncResponseValidation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingXmsErrorResponse
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForPutOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathResourceProviderMatchNamespace
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ParametersOrder
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SyncPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathContainsResourceType
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: OperationIdNounVerb
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForResourceAction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: UnSupportedPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: LroPostReturn
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ProvisioningStateSpecifiedForLROPatch
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: SubscriptionsAndResourceGroupCasing
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ResourceNameRestriction
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: ConsistentPatchProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: MissingTypeObject
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TrackedResourcePatchOperation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: IntegerTypeMustHaveFormat
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: BodyTopLevelProperties
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: TopLevelResourcesListBySubscription
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: XmsParameterLocation
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForTrackedResourceTypes
+    from: resources.json
+    reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
+  - suppress: PathForTrackedResourceTypes
+    from: policyAssignments.json
+    reason: Not a tracked resource type. The API has never been changed since inception. Would be a breaking change.
+  - suppress: PostResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: resources.json
+    reason: Tenant level API's are allowed as an exception in ARM repo. It is a breaking change to modify it.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyDefinitionVersions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policySetDefinitionVersions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: XmsPageableForListCalls
+    from: resources.json
+    reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: resources.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: DeleteResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: PutResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: PutResponseCodes
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: PutResponseCodes
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: PutResponseCodes
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: resources.json
+    reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: AvoidAdditionalProperties
+    from: changes.json
+    reason: "Change properties including the dictionary of individual property changes are dynamic types. where clause is not working on all parent fields using this property bag, hence we're suppressing the entire file for now."
+  - suppress: AvoidAdditionalProperties
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policyDefinitionVersions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policySetDefinitionVersions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: XmsExamplesRequired
+    from: resources.json
+    reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: RequiredReadOnlySystemData
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future
+  - suppress: PathForTrackedResourceTypes
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: TenantLevelAPIsNotAllowed
+    from: deploymentStacks.json
+    reason: "Working with deployment stacks at the management group scope is supported."
+  - suppress: TrackedResourcePatchOperation
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: AvoidAdditionalProperties
+    from: deploymentStacks.json
+    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
+  - suppress: PostResponseCodes
+    from: deploymentStacks.json
+    reason: "Validate endpoints have 200, 202, 400, and default responses. The 400 response inherits the error response."
+  - suppress: LroErrorContent
+    from: deploymentStacks.json
+    reason: Error response is inherited via allOf on flagged response.
+  - suppress: NoErrorCodeResponses
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: MissingXmsErrorResponse
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: DeleteResponseCodes
+    from: deploymentStacks.json
+    reason: Deployment stacks supports synchronous delete with 200 response.
+  - suppress: OperationsAPIImplementation
+    from: deploymentStacks.json
+    reason: This comes from resources.json
+  - suppress: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
+  - suppress: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - suppress: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - suppress: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policyDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policySetDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - suppress: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
+  - suppress: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
+  - suppress: TenantLevelAPIsNotAllowed
+    from: dataBoundaries.json
+    reason: "Have approval from the PAS team."
+  - suppress: GetCollectionResponseSchema
+    from: dataBoundaries.json
+    reason: "Do not have any list calls."
+  - suppress: ParametersInPointGet
+    from: policyAssignments.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: ParametersInPointGet
+    from: policySetDefinitions.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: ParametersInPointGet
+    from: policySetDefinitionVersions.json
+    reason: "This is for specific properties that require extra processing to produce so only want to return on demand."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: policyAssignments.json
+    reason: "Policy assignments can have a manged identity associated with them. This requires a location."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: resources.json
+    reason: "The deployments resource type is ProxyOnly."
 ```
 
 ---
@@ -1125,7 +1629,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -1164,21 +1668,5 @@ batch:
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2016-09-01/locks.json
-- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
-- Microsoft.Resources/stable/2016-06-01/subscriptions.json
-- Microsoft.Resources/stable/2018-05-01/resources.json
-
-override-info:
-  title: PolicyClient
+  - package-bicep: true
 ```

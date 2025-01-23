@@ -1,0 +1,165 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "resourceGroupName": "YourResourceGroupName",
+    "jobName": "TestJobName1",
+    "api-version": "2024-02-01-preview",
+    "$expand": "details",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "allDevicesLost": false,
+          "transferType": "ImportToAzure",
+          "isCancellable": true,
+          "isDeletable": false,
+          "isShippingAddressEditable": true,
+          "isPrepareToShipEnabled": true,
+          "status": "DeviceOrdered",
+          "startTime": "2020-08-07T10:50:36.3341513+05:30",
+          "details": {
+            "copyProgress": [],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:50:40.1872217+05:30"
+              },
+              {
+                "stageName": "DevicePrepared",
+                "displayName": "Processed",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T12:50:40.1872217+05:30"
+              },
+              {
+                "stageName": "Dispatched",
+                "displayName": "Dispatched",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-08T10:50:40.1872217+05:30"
+              },
+              {
+                "stageName": "Delivered",
+                "displayName": "Delivered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-09T10:50:40.1872217+05:30"
+              },
+              {
+                "stageName": "PickedUp",
+                "displayName": "Picked up",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "AtAzureDC",
+                "displayName": "Received",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Completed",
+                "displayName": "Completed",
+                "stageStatus": "None"
+              }
+            ],
+            "contactDetails": {
+              "contactName": "XXXX XXXX",
+              "phone": "0000000000",
+              "phoneExtension": "",
+              "emailList": [
+                "xxxx@xxxx.xxx"
+              ],
+              "notificationPreference": [
+                {
+                  "stageName": "DevicePrepared",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Dispatched",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Delivered",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "PickedUp",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "AtAzureDC",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                }
+              ]
+            },
+            "shippingAddress": {
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "companyName": "XXXX XXXX",
+              "addressType": "Commercial"
+            },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": [],
+            "reverseShipmentLabelSasKey": "https://xxx.xxx.xx",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            }
+          },
+          "cancellationReason": "Issue reported by you. All device/s lost.",
+          "deliveryType": "NonScheduled",
+          "deliveryInfo": {
+            "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+          },
+          "isCancellableWithoutFee": true
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "TestJobName1",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

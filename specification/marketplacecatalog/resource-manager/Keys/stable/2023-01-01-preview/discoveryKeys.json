@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Discovery API Keys Management",
+    "description": "This API is designed to streamline the process of generating designated keys for accessing all Marketplace Catalog APIs. By utilizing a simple POST operation, users can effortlessly generate a unique API key, granting  access to Marketplace Catalog APIs from version 2023-01-01 and beyond.",
+    "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{apiKeyAlias}/create": {
+      "post": {
+        "tags": [
+          "CreateApiKey"
+        ],
+        "summary": "Generates an API key, granting access to the full range of Marketplace Catalog APIs. Please note that this API is currently in a preview state and requires sign-up to the 'Discovery Api Key Early Access' preview feature using a valid Azure subscription. For more information on this process please see the documentation for Marketplace Catalog APIs [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/dataplane/products/get?view=rest-marketplacecatalog-dataplane-2023-05-01-preview&tabs=HTTP)",
+        "operationId": "CreateApiKey_Post",
+        "x-ms-examples": {
+          "Create_Key": {
+            "$ref": "./examples/CreateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "apiKeyAlias",
+            "in": "path",
+            "required": true,
+            "description": "Alias for new API Key. This alias must be unique and contain only alphanumeric characters separated by dashes."
+          },
+          {
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "tenantId",
+            "description": "The tenant associated with the subscription.",
+            "in": "header",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "Returns the newly created API key.",
+            "schema": {
+              "$ref": "#/definitions/ApiKey"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys/{apiKeyAlias}/revoke": {
+      "post": {
+        "tags": [
+          "RevokeApiKey"
+        ],
+        "summary": "Revokes an active API key. Please note that this API is currently in a preview state and requires sign-up to the 'Discovery Api Key Early Access' preview feature using a valid Azure subscription. For more information on this process please see the documentation for Marketplace Catalog APIs [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/dataplane/products/get?view=rest-marketplacecatalog-dataplane-2023-05-01-preview&tabs=HTTP)",
+        "operationId": "RevokeApiKey_Post",
+        "x-ms-examples": {
+          "Revoke_Key": {
+            "$ref": "./examples/RevokeKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "apiKeyAlias",
+            "description": "The alias of your API key.",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "tenantId",
+            "description": "The tenant associated with the subscription.",
+            "in": "header",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicates that the API key was successfully revoked."
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/keys": {
+      "get": {
+        "tags": [
+          "GetApiKeys"
+        ],
+        "summary": "Retrieves a list of API keys associated with a selected subscription. Please note that this API is currently in a preview state and requires sign-up to the 'Discovery Api Key Early Access' preview feature using a valid Azure subscription. For more information on this process please see the documentation for Marketplace Catalog APIs [here](https://learn.microsoft.com/en-us/rest/api/marketplacecatalog/dataplane/products/get?view=rest-marketplacecatalog-dataplane-2023-05-01-preview&tabs=HTTP)",
+        "operationId": "GetApiKeys_List",
+        "x-ms-examples": {
+          "Get_Key": {
+            "$ref": "./examples/GetKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "x-ms-client-tenant-id",
+            "x-originalName": "tenantId",
+            "description": "The tenant associated with the subscription.",
+            "in": "header",
+            "required": true,
+            "x-nullable": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "List of active keys that belong to the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ApiKeys"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiKeys": {
+      "type": "object",
+      "description": "List of ApiKey objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiKey"
+          }
+        },
+        "nextLink": {
+          "description": "Next page of results.",
+          "type": "string"
+        }
+      }
+    },
+    "ApiKey": {
+      "type": "object",
+      "description": "ApiKey object containing both the key and its alias.",
+      "properties": {
+        "keyAlias": {
+          "description": "The API key alias.",
+          "type": "string"
+        },
+        "key": {
+          "description": "The API key to be used when calling relevant Discovery endpoints.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

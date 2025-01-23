@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "apiKeyId": "apiKeyId-123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "apiKeyId-123",
+        "kind": "ApiKey",
+        "properties": {
+          "metadata": {
+            "createdTimestamp": "2023-11-15T16:15:44.489498Z",
+            "resourceName": "crn://api.stag.cpdev.cloud/organization=37d1220b-93a6-43e3-a114-dd8a20a94a31/service-account=sa-wwn7mm/api-key=apiKeyId-123",
+            "self": "https://api.stag.cpdev.cloud/iam/v2/api-keys/apiKeyId-123",
+            "updatedTimestamp": "2023-11-15T16:15:44.489498Z"
+          },
+          "spec": {
+            "description": "This API key provides kafka access to cluster x",
+            "name": "CI kafka access key",
+            "owner": {
+              "id": "sa-wwn7mm",
+              "kind": "ServiceAccount",
+              "related": "https://api.stag.cpdev.cloud/iam/v2/service-accounts/sa-wwn7mm",
+              "resourceName": "crn://api.stag.cpdev.cloud/organization=37d1220b-93a6-43e3-a114-dd8a20a94a31/service-account=sa-wwn7mm"
+            },
+            "resource": {
+              "id": "lsrc-stgc1yrzz3",
+              "kind": "SchemaRegistry",
+              "related": "https://api.stag.cpdev.cloud/srcm/v2/schema-registries/lsrc-stgc1yrzz3",
+              "resourceName": "crn://api.stag.cpdev.cloud/organization=37d1220b-93a6-43e3-a114-dd8a20a94a31/schema-registry=lsrc-stgc1yrzz3",
+              "environment": "env-0000"
+            }
+          }
+        }
+      }
+    }
+  }
+}

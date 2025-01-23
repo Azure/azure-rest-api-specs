@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
+    "ueId": "84449105622"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/ues/84449105622/extendedInformation/default",
+        "name": "default",
+        "type": "Microsoft.MobileNetwork/packetCoreControlPlanes/ues/extendedInformation",
+        "properties": {
+          "lastReadAt": "2020-01-01T17:18:19.1234567Z",
+          "ratType": "4G",
+          "info": {
+            "imsi": "84449105622",
+            "imei": "123456789012345",
+            "imeisv": "2993972087439794",
+            "guti": {
+              "plmn": {
+                "mcc": "001",
+                "mnc": "01"
+              },
+              "mmeId": {
+                "groupId": 1,
+                "code": 1
+              },
+              "mTmsi": 907
+            },
+            "connectionInfo": {
+              "locationInfo": {
+                "locationType": "EUTRA",
+                "tac": "000001",
+                "plmn": {
+                  "mcc": "001",
+                  "mnc": "01"
+                }
+              },
+              "globalRanNodeId": {
+                "plmnId": {
+                  "mcc": "001",
+                  "mnc": "01"
+                },
+                "eNbId": "MacroeNB-ABCDE"
+              },
+              "perUeTnla": "00101.0.macroEnbId-10.232.228.84:36412",
+              "mmeS1apId": 12345678,
+              "enbS1apId": 12345678,
+              "lastVisitedTai": "00101 000001",
+              "ueState": "Connected",
+              "rrcEstablishmentCause": "Emergency",
+              "ueUsageSetting": "DataCentric",
+              "lastActivityTime": "2020-01-01T17:18:19.1234567Z"
+            },
+            "sessionInfo": [
+              {
+                "ebi": 15,
+                "apn": "internet",
+                "ueIpAddress": {
+                  "ipV4Addr": "10.10.0.1"
+                },
+                "pdnType": "IPV4"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -28,15 +28,33 @@ These are the global settings for the Virtual Machine Image Builder API.
 title: ImageBuilderClient
 description: Azure Virtual Machine Image Builder Client
 openapi-type: arm
-tag: package-2022-07
+tag: package-2024-02
 azure-arm: true
 ```
 
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.VirtualMachineImages/stable/2024-02-01/imagebuilder.json
+```
+
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.VirtualMachineImages/stable/2023-07-01/imagebuilder.json
+```
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.VirtualMachineImages/stable/2022-07-01/imagebuilder.json
 ```
@@ -45,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.VirtualMachineImages/stable/2022-02-14/imagebuilder.json
 ```
@@ -104,7 +122,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -124,3 +142,12 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: imagebuilder.json
+    reason: Needed value. Exception provided in API Design review meeting. Note - suppressing entire file due to bug with where field. Suppression targets are as follows, $.definitions.ImageTemplateDistributor.properties.artifactTags, $.definitions.ImageTemplateProperties.properties.managedResourceTags, $.definitions.UserAssignedIdentities, $.definitions.ImageTemplateUpdateParameters.properties.tags
+```

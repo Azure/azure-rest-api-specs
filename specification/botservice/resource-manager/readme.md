@@ -26,9 +26,31 @@ These are the global settings for the BotService API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-09
+tag: package-preview-2023-09
 ```
 
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.BotService/preview/2023-09-15-preview/botservice.json
+directive:
+  - suppress: R4009
+    from: botservice.json
+    reason: We don not yet support systemdata
+  - suppress: R4018
+    from: botservice.json
+    reason: We don not yet support systemdata
+  - suppress: R3016
+    from: botservice.json
+    reason: app settings keys are case sensitive
+  - suppress: R3018
+    from: botservice.json
+    reason: app settings for ValidateAuthority needs to be boolean
+```
 
 ### Tag: package-2022-09
 
@@ -181,7 +203,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-js
