@@ -134,7 +134,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the delete operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
     @autoRoute
     @doc("Delete a {name}", Resource)
     @delete
@@ -158,7 +157,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the delete operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
     @autoRoute
     @doc("Delete a {name}", Resource)
     @delete
@@ -285,7 +283,6 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "ARM"
     #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
     @autoRoute
     @armResourceAction(Resource)
