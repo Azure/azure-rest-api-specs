@@ -2,6 +2,7 @@ import parser from "yaml-eslint-parser";
 import { NamedESLint } from "./interfaces/named-eslint.js";
 import emitAutorest from "./rules/emit-autorest.js";
 import kebabCaseOrg from "./rules/kebab-case-org.js";
+import tspconfigValidationRules from "./rules/tspconfig-validation-rules.js";
 
 const plugin: NamedESLint.Plugin = {
   configs: { recommended: {} },
@@ -25,5 +26,10 @@ plugin.configs.recommended = {
     parser: parser,
   },
 };
+
+tspconfigValidationRules.forEach((rule) => {
+  plugin.rules![rule.name] = rule;
+  plugin.configs.recommended.rules![`${plugin.name}/${rule.name}`] = "error";
+});
 
 export default plugin;

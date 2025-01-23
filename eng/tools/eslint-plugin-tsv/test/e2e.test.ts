@@ -5,7 +5,7 @@ import eslintPluginTsv from "../src/eslint-plugin-tsv.js";
 
 function createESLint() {
   return new ESLint({
-    cwd: "/",
+    cwd: join(__dirname, "../../../../"),
     overrideConfig: eslintPluginTsv.configs.recommended,
     overrideConfigFile: true,
   });
