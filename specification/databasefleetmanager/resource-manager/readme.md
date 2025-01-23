@@ -1,8 +1,10 @@
-# databasefleetmanager
+# DatabaseFleetManager
 
 > see https://aka.ms/autorest
 
-## This is the AutoRest configuration file for Database Fleet Manager.
+This is the AutoRest configuration file for DatabaseFleetManager.
+
+## Overview
 
 The service is hosted under the Microsoft.DatabaseFleetManager resource provider but exposes a separate set of
 resources, apis, and SDKs.
@@ -66,8 +68,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
 
 ## C#
 
