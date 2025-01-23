@@ -26,7 +26,8 @@ These are the global settings for the billingbenefits.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2024-11-01
+openapi-subtype: providerHub
+tag: package-preview-2024-11-01-preview
 ```
 
 ### Suppression
