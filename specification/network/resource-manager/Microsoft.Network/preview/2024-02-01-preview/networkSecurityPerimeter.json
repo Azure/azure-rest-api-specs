@@ -1402,7 +1402,7 @@
           "200": {
             "description": "OK - Returns information about the Nsp operation.",
             "schema": {
-              "$ref": "#/definitions/NspOperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -2177,77 +2177,6 @@
         }
       },
       "description": "The NSP logging configuration properties."
-    },
-    "NspOperationStatus": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The operation ARM id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation GUID."
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/NspOperationStatusProperties"
-        },
-        "error": {
-          "$ref": "#/definitions/OperationError"
-        }
-      },
-      "description": "Operation status of the async operation"
-    },
-    "NspOperationStatusProperties": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "OperationError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "OperationStatus": {
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Updating",
-        "Creating",
-        "Deleting",
-        "Accepted"
-      ],
-      "description": "Enum representing the status of an operation.",
-      "x-ms-enum": {
-        "name": "Operation status",
-        "modelAsString": true
-      }
     }
   },
   "parameters": {
