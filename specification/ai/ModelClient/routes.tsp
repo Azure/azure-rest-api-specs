@@ -25,7 +25,7 @@ namespace AI.Model;
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    ...ChatCompletionsOptions;
+    @body body: ChatCompletionsOptions;
     ...AdditionalRequestHeaders;
   },
   ChatCompletions
@@ -39,7 +39,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
-    ...EmbeddingsOptions;
+    @body body: EmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
@@ -53,7 +53,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
-    ...ImageEmbeddingsOptions;
+    @body body: ImageEmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
@@ -62,6 +62,8 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
 @doc("""
   Returns information about the AI model.
   The method makes a REST API call to the `/info` route on the given endpoint.
+  This method will only work when using Serverless API or Managed Compute endpoint.
+  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
   """)
 @actionSeparator("/")
 @route("info")

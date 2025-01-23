@@ -78,9 +78,13 @@ model ChatCompletionsOptions {
   max_tokens?: int32;
 
   @doc("""
-    The format that the model must output. Use this to enable JSON mode instead of the default text mode.
-    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
-    via a system or user message.
+    An object specifying the format that the model must output.
+    
+    Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.
+    
+    Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+    
+    **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
     """)
   response_format?: ChatCompletionsResponseFormat;
 
@@ -102,7 +106,7 @@ model ChatCompletionsOptions {
   @doc("""
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
-  toolChoice?: ChatCompletionsToolSelection;
+  toolChoice?: ChatCompletionsToolChoice;
 
   @doc("""
     If specified, the system will make a best effort to sample deterministically such that repeated requests with the
@@ -255,9 +259,56 @@ model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
   Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
   via a system or user message.
   """)
-model ChatCompletionsResponseFormatJSON extends ChatCompletionsResponseFormat {
+model ChatCompletionsResponseFormatJsonObject
+  extends ChatCompletionsResponseFormat {
   @doc("Response format type: always 'json_object' for this object.")
   type: "json_object";
+}
+
+@doc("""
+  Defines the response format for chat completions as JSON with a given schema. The AI model
+  will need to adhere to this schema when generating completions.
+  """)
+model ChatCompletionsResponseFormatJsonSchemaDefinition {
+  @doc("""
+    A name that labels this JSON schema. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+    """)
+  name: string;
+
+  @doc("""
+    The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.
+    Note that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation
+    to determine what is supported.
+    """)
+  schema: Record<unknown>;
+
+  @doc("""
+    A description of the response format, used by the AI model to determine how to generate responses in this format.
+    """)
+  description?: string;
+
+  @doc("""
+    If set to true, the service will error out if the provided JSON schema contains keywords
+    not supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.
+    If false, and the provided JSON schema contains keywords not supported
+    by the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.
+    """)
+  strict?: boolean = false;
+}
+
+@doc("""
+  A response format for Chat Completions that restricts responses to emitting valid JSON objects, with a
+  JSON schema specified by the caller.
+  """)
+model ChatCompletionsResponseFormatJsonSchema
+  extends ChatCompletionsResponseFormat {
+  @doc("""
+    The type of response format being defined: `json_schema`
+    """)
+  type: "json_schema";
+
+  /** The definition of the required JSON schema in the response, and associated metadata. */
+  json_schema: ChatCompletionsResponseFormatJsonSchemaDefinition;
 }
 
 alias ChatChoiceCommon = {
@@ -331,7 +382,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content?: string | null;
+  content?: string;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
@@ -348,7 +399,7 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content: string | null;
+  content?: string;
 
   @encodedName("application/json", "tool_call_id")
   @doc("The ID of the tool call resolved by the provided content.")
@@ -389,13 +440,11 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | "required" | {"type": "function", "function": {"name": string}}
-
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
-alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
+alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
-union ChatCompletionsToolSelectionPreset {
+union ChatCompletionsToolChoicePreset {
   string,
 
   @doc("""
@@ -417,16 +466,16 @@ union ChatCompletionsToolSelectionPreset {
 }
 
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsNamedToolSelection {
+model ChatCompletionsNamedToolChoice {
   @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function that should be called.")
-  function: ChatCompletionsFunctionToolSelection;
+  function: ChatCompletionsNamedToolChoiceFunction;
 }
 
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsFunctionToolSelection {
+model ChatCompletionsNamedToolChoiceFunction {
   @doc("The name of the function that should be called.")
   name: string;
 }
@@ -455,7 +504,7 @@ model FunctionDefinition {
     """)
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
   parameters?: unknown;
 }
