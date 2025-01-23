@@ -5159,14 +5159,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "sqlSiteName",
             "in": "path",
             "description": "SQL site name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -5190,6 +5192,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ExportImportedSqlInventoryAsync": {
+            "$ref": "./examples/SqlSitesController_ExportImportedSqlInventoryAsync_Example.json"
           }
         }
       }
@@ -5380,14 +5387,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "sqlSiteName",
             "in": "path",
             "description": "SQL site name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -5406,6 +5415,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListImportJobsExample": {
+            "$ref": "./examples/SqlImportJobsController_ListImportjobs_Example.json"
+          }
         }
       }
     },
@@ -5431,21 +5445,24 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "sqlSiteName",
             "in": "path",
             "description": "SQL site name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "jobName",
             "in": "path",
             "description": "Job Arm Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -5460,6 +5477,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetImportJobExample": {
+            "$ref": "./examples/SqlImportJobsController_GetImportjob_Example.json"
           }
         }
       }
@@ -6450,14 +6472,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "sqlSiteName",
             "in": "path",
             "description": "SQL site name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -6481,6 +6505,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TriggerImportInventoryExample": {
+            "$ref": "./examples/SqlSitesController_TriggerImportInventory_Example.json"
           }
         }
       }
@@ -6507,14 +6536,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "sqlSiteName",
             "in": "path",
             "description": "SQL site name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -6538,6 +6569,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateAndImportInventoryExample": {
+            "$ref": "./examples/SqlSitesController_ValidateAndImportInventory_Example.json"
           }
         }
       }
