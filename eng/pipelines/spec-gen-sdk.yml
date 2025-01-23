@@ -1,10 +1,10 @@
 parameters:
   - name: SpecRepoCommit
     type: string
-    default: 'HEAD'
+    default: '$(Build.SourceBranch)'
   - name: SdkRepoCommit
     type: string
-    default: 'HEAD'
+    default: 'main'
   - name: ConfigType
     type: string
     values:
@@ -19,9 +19,15 @@ parameters:
   - name: SkipPullRequestCreation
     type: boolean
     default: false
-    
-trigger: none
-pr: none
+
+trigger:
+  branches:
+    include:
+      - user/raych1/pipeline-sdk-auto
+pr:
+  branches:
+    include:
+      - user/raych1/pipeline-sdk-auto
 
 extends:
   template: /eng/common/pipelines/templates/jobs/archetype-spec-gen-sdk.yml
