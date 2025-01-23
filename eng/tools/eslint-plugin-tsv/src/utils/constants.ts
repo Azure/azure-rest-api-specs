@@ -5,6 +5,7 @@ export const emitters = {
   python: "@azure-tools/typespec-python",
   go: "@azure-tools/typespec-go",
   autorest: "@azure-tools/typespec-autorest",
+  common: "",
 };
 
 export const defaultMessageId = "problem";
