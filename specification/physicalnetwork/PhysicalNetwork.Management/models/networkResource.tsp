@@ -4,6 +4,8 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
+
 namespace Microsoft.PhysicalNetwork;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -29,28 +31,34 @@ model NetworkDeviceProperties {
   preferredIp: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The datacenter short code's ARM Id string")
-  dcCodeArmId: string;
+  dcCodeArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The device's IPv4 address's ARM Id string")
-  loopbackIpV4ArmId: string;
+  loopbackIpV4ArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The device's IPv6 address's ARM Id string")
-  loopbackIpV6ArmId: string;
+  loopbackIpV6ArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The management console's IPv4 address's ARM Id string")
-  managementIpV4ArmId: string;
+  managementIpV4ArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The management console's IPv6 address's ARM Id string")
-  managementIpV6ArmId: string;
+  managementIpV6ArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The device's preferred IP address's ARM Id string")
-  preferredIpArmId: string;
+  preferredIpArmId: armResourceIdentifier;
 
   @doc("The device's hardware SKU")
   hardwareSku: string;
@@ -62,8 +70,9 @@ model NetworkDeviceProperties {
   cluster: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The cluster's ARM Id string")
-  clusterArmId: string;
+  clusterArmId: armResourceIdentifier;
 
   @doc("The cloud the device is in")
   cloudType: string;
@@ -75,20 +84,35 @@ model NetworkDeviceProperties {
   dcRackLocation: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, string)
   @doc("The device's rack location's ARM Id string")
-  dcRackLocationArmId: string;
+  dcRackLocationArmId: armResourceIdentifier;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.removed(Versions.v2025_01_01_preview)
   @doc("The device owner's Service Tree Id")
   serviceTreeId: string;
+
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's platform Service Tree Id")
+  platformServiceTreeId: string;
+
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's platform Service Tree Id")
+  infraServiceTreeId: string;
+
+  @Versioning.added(Versions.v2025_01_01_preview)
+  @doc("The device owner's IcM Queue")
+  icmQueue: string;
 
   @Versioning.added(Versions.v2024_09_01_preview)
   @doc("Additional Device Interface IP addresses")
   additionalIps: Array<string>;
 
   @Versioning.added(Versions.v2024_09_01_preview)
+  @Versioning.typeChangedFrom(Versions.v2025_01_01_preview, Array<string>)
   @doc("Additional Device Interface IP address ARM Ids")
-  additionalIpsArmId: Array<string>;
+  additionalIpsArmId: Array<armResourceIdentifier>;
 
   @doc("Provisioning state")
   @visibility("read")

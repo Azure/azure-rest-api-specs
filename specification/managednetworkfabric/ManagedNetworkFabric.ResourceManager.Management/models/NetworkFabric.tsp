@@ -25,10 +25,12 @@ model NetworkFabricProperties {
   @added(Versions.v2024_06_15_preview)
   storageAccountConfiguration?: StorageAccountConfiguration;
 
-  @doc("Network Fabric Lock Configuration. Default: Disabled")
+  @doc("Network Fabric Lock details")
+  @OpenAPI.extension("x-ms-identifiers", [])
   @added(Versions.v2024_06_15_preview)
   @visibility("read")
-  nfLockConfiguration?: LockConfigurationState = LockConfigurationState.Disabled;
+  @minItems(1)
+  fabricLocks?: FabricLockProperties[];
 
   @doc("Azure resource ID for the NetworkFabricController the NetworkFabric belongs.")
   @visibility("read", "create")
@@ -95,9 +97,11 @@ model NetworkFabricProperties {
   ]>[];
 
   @doc("Feature flag status information")
+  @OpenAPI.extension("x-ms-identifiers", [])
   @added(Versions.v2024_06_15_preview)
   @visibility("read")
-  featureFlags?: FeatureFlagProperties;
+  @minItems(1)
+  featureFlags?: FeatureFlagProperties[];
 
   @doc("Trusted IP Prefixes ARM resource IDs.")
   @added(Versions.v2024_06_15_preview)
@@ -111,10 +115,21 @@ model NetworkFabricProperties {
   @added(Versions.v2024_06_15_preview)
   uniqueRdConfiguration?: UniqueRouteDistinguisherProperties;
 
+  @doc("Number of Storage arrays associated with the Network Fabric.")
+  @added(Versions.v2024_06_15_preview)
+  @minValue(1)
+  @maxValue(2)
+  storageArrayCount?: int32;
+
   @doc("Active commit batch identifiers")
   @added(Versions.v2024_06_15_preview)
   @visibility("read")
   activeCommitBatches?: string[];
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
   @visibility("read")
@@ -489,6 +504,16 @@ model StorageAccountPatchConfiguration {
   storageAccountIdentity?: IdentitySelectorPatch;
 }
 
+@doc("Network Fabric Lock Configuration.")
+@added(Versions.v2024_06_15_preview)
+model FabricLockProperties {
+  @doc("NetworkFabric Lock State.")
+  lockState?: LockConfigurationState;
+
+  @doc("NetworkFabric Lock Type.")
+  lockType?: NetworkFabricLockType;
+}
+
 @doc("Lock Configuration State.")
 @added(Versions.v2024_06_15_preview)
 union LockConfigurationState {
@@ -528,8 +553,11 @@ union NetworkFabricLockType {
 @doc("Feature flag properties.")
 @added(Versions.v2024_06_15_preview)
 model FeatureFlagProperties {
-  @doc("Unique route distinguisher feature status.")
-  uniqueRdConfigurationState?: UniqueRouteDistinguisherConfigurationState;
+  @doc("Feature flag name.")
+  featureFlagName?: string;
+
+  @doc("Feature flag value.")
+  featureFlagValue?: string;
 }
 
 @doc("Arm Configuration Diff Response.")
@@ -597,6 +625,22 @@ model CommitBatchStatusResponse {
 
   @doc("Commit Batch Details.")
   commitBatchDetails?: CommitBatchDetails;
+
+  ...ErrorResponse;
+}
+
+@doc("Discard Commit Batch Request.")
+@added(Versions.v2024_06_15_preview)
+model DiscardCommitBatchRequest {
+  @doc("Commit Batch Identifier. If not provided, the latest commit batch status will be returned.")
+  commitBatchId?: string;
+}
+
+@doc("Discard Commit Batch Response.")
+@added(Versions.v2024_06_15_preview)
+model DiscardCommitBatchResponse {
+  @doc("Commit Batch Identifier.")
+  commitBatchId?: string;
 
   ...ErrorResponse;
 }

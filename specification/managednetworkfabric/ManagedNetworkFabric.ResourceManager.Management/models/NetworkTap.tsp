@@ -1,12 +1,10 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
 @doc("Network Tap Properties defines the properties of the resource.")
 model NetworkTapProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("ARM resource ID of the Network Packet Broker.")
@@ -31,6 +29,11 @@ model NetworkTapProperties {
 
   @doc("Polling type.")
   pollingType?: PollingType = PollingType.Pull;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
 
   @doc("Gets the configurations state of the resource.")
   @visibility("read")
@@ -123,9 +126,6 @@ model IsolationDomainPatchProperties is IsolationDomainProperties;
 
 @doc("The NetworkFabric resource definition.")
 model NetworkTapPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("Resource properties.")
@@ -134,9 +134,6 @@ model NetworkTapPatch {
 
 @doc("The Network Tap resource patch definition.")
 model NetworkTapPatchProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("Polling type.")
