@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "291F8922-D548-4CAF-9C43-C65300D5AFD4",
+    "resourceGroupName": "exampleResourceGroup",
+    "siteName": "55--o3Q",
+    "sqlSiteName": "SQL-Server01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/291F8922-D548-4CAF-9C43-C65300D5AFD4/resourceGroups/exampleResourceGroup/providers/Microsoft.OffAzure/masterSites/exampleSite/sqlSites/exampleSqlSite/importJobs/job1",
+            "name": "job1",
+            "type": "Microsoft.OffAzure/masterSites/sqlSites/importJobs",
+            "properties": {
+              "status": "Completed",
+              "startTime": "2025-01-22T07:00:00Z",
+              "endTime": "2025-01-22T07:10:00Z",
+              "importedDatabases": ["exampleDatabase1", "exampleDatabase2"],
+              "errorDetails": null
+            }
+          },
+          {
+            "id": "/subscriptions/291F8922-D548-4CAF-9C43-C65300D5AFD4/resourceGroups/exampleResourceGroup/providers/Microsoft.OffAzure/masterSites/exampleSite/sqlSites/exampleSqlSite/importJobs/job2",
+            "name": "job2",
+            "type": "Microsoft.OffAzure/masterSites/sqlSites/importJobs",
+            "properties": {
+              "status": "Failed",
+              "startTime": "2025-01-22T07:15:00Z",
+              "endTime": "2025-01-22T07:20:00Z",
+              "importedDatabases": ["exampleDatabase3"],
+              "errorDetails": {
+                "code": "DatabaseNotFound",
+                "message": "The database 'exampleDatabase3' was not found."
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
