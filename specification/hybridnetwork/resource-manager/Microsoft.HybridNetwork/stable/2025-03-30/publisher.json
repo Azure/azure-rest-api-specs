@@ -1,0 +1,1714 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used by publishers to on-board offerings and manage network functions.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/publishers": {
+      "get": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_ListBySubscription",
+        "description": "Lists all the publishers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of publisher resources.",
+            "schema": {
+              "$ref": "#/definitions/PublisherListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all publisher resources in a subscription": {
+            "$ref": "./examples/PublisherListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers": {
+      "get": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_ListByResourceGroup",
+        "description": "Lists all the publishers in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of publisher resources.",
+            "schema": {
+              "$ref": "#/definitions/PublisherListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all publisher resources in a resource group": {
+            "$ref": "./examples/PublisherListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}": {
+      "delete": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_Delete",
+        "description": "Deletes the specified publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a publisher resource": {
+            "$ref": "./examples/PublisherDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_Get",
+        "description": "Gets information about the specified publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting publisher resource.",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a publisher resource": {
+            "$ref": "./examples/PublisherGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_CreateOrUpdate",
+        "description": "Creates or updates a publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            },
+            "description": "Parameters supplied to the create publisher operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting publisher resource.",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a publisher resource": {
+            "$ref": "./examples/PublisherCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Publishers"
+        ],
+        "operationId": "Publishers_Update",
+        "description": "Update a publisher resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create publisher operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Request is successful.",
+            "schema": {
+              "$ref": "#/definitions/Publisher"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a publisher tags": {
+            "$ref": "./examples/PublisherUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores": {
+      "get": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_ListByPublisher",
+        "description": "Gets information of the ArtifactStores under publisher.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting ArtifactStoreVersion resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get application groups under a publisher resource": {
+            "$ref": "./examples/ArtifactStoresListByPublisherName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}": {
+      "delete": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_Delete",
+        "description": "Deletes the specified artifact store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a artifact store of publisher resource": {
+            "$ref": "./examples/ArtifactStoreDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_CreateOrUpdate",
+        "description": "Creates or updates a artifact store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStore"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting ArtifactStore sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStore"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting ArtifactStore sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an artifact store of publisher resource": {
+            "$ref": "./examples/ArtifactStoreCreate.json"
+          },
+          "Create or update an artifact store of publisher resource with container registry": {
+            "$ref": "./examples/ArtifactStoreCreateContainer.json"
+          },
+          "Create or update an artifact store of publisher resource with storage": {
+            "$ref": "./examples/ArtifactStoreCreateStorage.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_Get",
+        "description": "Gets information about the specified artifact store.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting ArtifactStore resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a artifact store resource": {
+            "$ref": "./examples/ArtifactStoreGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_Update",
+        "description": "Update artifact store resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting ArtifactStore sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update artifact store resource tags": {
+            "$ref": "./examples/ArtifactStoreUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/addNetworkFabricControllerEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_AddNetworkFabricControllerEndPoints",
+        "description": "Add network fabric controllers to artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Network Fabric Endpoint": {
+            "$ref": "./examples/ArtifactStoreAddNFCEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/deleteNetworkFabricControllerEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_DeleteNetworkFabricControllerEndPoints",
+        "description": "Delete network fabric controllers on artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Fabric Endpoints": {
+            "$ref": "./examples/ArtifactStoreDeleteNFCEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listNetworkFabricControllerPrivateEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_ListNetworkFabricControllerPrivateEndPoints",
+        "description": "List network fabric controllers to artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the list of network fabric controllers attached to artifact store.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPointsList"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Fabric Endpoints": {
+            "$ref": "./examples/ArtifactStoreListNFCEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/approvePrivateEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_ApprovePrivateEndPoints",
+        "description": "Approve manual private endpoints on artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+            },
+            "description": "Parameters supplied to approve private endpoints."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve manual private endpoints": {
+            "$ref": "./examples/ArtifactStoreApprovePrivateEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/removePrivateEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_RemovePrivateEndPoints",
+        "description": "Remove manual private endpoints on artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+            },
+            "description": "Parameters supplied to the create or update application group operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove Manual Endpoint": {
+            "$ref": "./examples/ArtifactStoreRemovePrivateEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/listPrivateEndPoints": {
+      "post": {
+        "tags": [
+          "ArtifactStores"
+        ],
+        "operationId": "ArtifactStores_ListPrivateEndPoints",
+        "description": "List manual private endpoints on artifact stores",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactStorePrivateEndPointsListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Manual Private Endpoints": {
+            "$ref": "./examples/ArtifactStoreListPrivateEndPoints.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactManifests": {
+      "get": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_ListByArtifactStore",
+        "description": "Gets information about the artifact manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting ArtifactManifest resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifestListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get artifact manifest list resource": {
+            "$ref": "./examples/ArtifactManifestListByArtifactStore.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactManifests/{artifactManifestName}": {
+      "delete": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_Delete",
+        "description": "Deletes the specified artifact manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets provisioningState to 'Deleting' until the operation is completed. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a artifact manifest resource": {
+            "$ref": "./examples/ArtifactManifestDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "put": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_CreateOrUpdate",
+        "description": "Creates or updates a artifact manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifest"
+            },
+            "description": "Parameters supplied to the create or update artifact manifest operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting ArtifactManifest sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifest"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The operation returns the resulting ArtifactManifest sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update the artifact manifest resource": {
+            "$ref": "./examples/ArtifactManifestCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_Get",
+        "description": "Gets information about a artifact manifest resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting ArtifactManifest resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a artifact manifest resource": {
+            "$ref": "./examples/ArtifactManifestGet.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_Update",
+        "description": "Updates a artifact manifest resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the create or update artifact manifest operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Creation or update is successful. The operation returns the resulting ArtifactManifest sub resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifest"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a artifact manifest resource tags": {
+            "$ref": "./examples/ArtifactManifestUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactManifests/{artifactManifestName}/listCredential": {
+      "post": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_ListCredential",
+        "description": "List credential for publishing artifacts defined in artifact manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the credential for publishing artifacts.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ArtifactAccessCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List a credential for artifact manifest": {
+            "$ref": "./examples/ArtifactManifestListCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactManifests/{artifactManifestName}/updateState": {
+      "post": {
+        "tags": [
+          "ArtifactManifests"
+        ],
+        "operationId": "ArtifactManifests_UpdateState",
+        "description": "Update state for artifact manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactStoreParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ArtifactManifestParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifestUpdateState"
+            },
+            "description": "Parameters supplied to update the state of artifact manifest."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operations returns the credential for publishing artifacts.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactManifestUpdateState"
+            }
+          },
+          "202": {
+            "description": "Request of updating artifact manifest state is accepted.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update artifact manifest state": {
+            "$ref": "./examples/ArtifactManifestUpdateState.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Publisher": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/PublisherPropertiesFormat",
+          "description": "Publisher properties."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity of the publisher, if configured."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "publisher resource."
+    },
+    "PublisherPropertiesFormat": {
+      "description": "publisher properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the publisher resource."
+        },
+        "scope": {
+          "description": "The publisher scope.",
+          "$ref": "./common.json#/definitions/PublisherScope",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "PublisherListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Publisher"
+          },
+          "description": "A list of publishers."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of publishers."
+    },
+    "ArtifactStore": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ArtifactStorePropertiesFormat",
+          "description": "ArtifactStores properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Artifact store properties."
+    },
+    "ArtifactStorePropertiesFormat": {
+      "description": "Artifact store properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the application groups resource."
+        },
+        "storeType": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The artifact store type.",
+          "enum": [
+            "Unknown",
+            "AzureContainerRegistry",
+            "AzureStorageAccount"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactStoreType",
+            "modelAsString": true
+          }
+        },
+        "backingResourcePublicNetworkAccess": {
+          "$ref": "./common.json#/definitions/backingResourcePublicNetworkAccess",
+          "description": "The artifact store backing resource network access type"
+        },
+        "replicationStrategy": {
+          "type": "string",
+          "description": "The replication strategy.",
+          "enum": [
+            "Unknown",
+            "SingleReplication"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactReplicationStrategy",
+            "modelAsString": true
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "description": "The managed resource group name."
+            },
+            "location": {
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ],
+              "description": "The managed resource group location."
+            }
+          }
+        },
+        "storageResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The created storage resource id"
+        }
+      }
+    },
+    "ArtifactStoreListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStore"
+          },
+          "description": "A list of artifact stores."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "A list of artifact stores."
+    },
+    "ArtifactStoreNetworkFabricControllerEndPoints": {
+      "type": "object",
+      "properties": {
+        "networkFabricControllerIds": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "description": "list of network fabric controllers.",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "description": "List of network fabric controller ids."
+    },
+    "ArtifactStoreNetworkFabricControllerEndPointsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStoreNetworkFabricControllerEndPoints"
+          },
+          "description": "A list of network fabric controllers."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results.",
+          "format": "uri"
+        }
+      },
+      "description": "List of manual private endpoints."
+    },
+    "ArtifactStorePrivateEndPointsFormat": {
+      "type": "object",
+      "properties": {
+        "manualPrivateEndPointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/ReferencedResource"
+          },
+          "description": "list of private endpoints.",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "description": "List of manual private endpoints."
+    },
+    "ArtifactStorePrivateEndPointsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactStorePrivateEndPointsFormat"
+          },
+          "description": "A list of private endpoints."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "List of manual private endpoints."
+    },
+    "ArtifactManifestListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactManifest"
+          },
+          "description": "A list of artifact manifests."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to get the next set of results."
+        }
+      },
+      "description": "A list of artifact manifests."
+    },
+    "ArtifactManifest": {
+      "description": "Artifact manifest properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ArtifactManifestPropertiesFormat",
+          "description": "Artifact manifest properties."
+        }
+      }
+    },
+    "ArtifactManifestPropertiesFormat": {
+      "description": "Artifact manifest properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the ArtifactManifest resource."
+        },
+        "artifactManifestState": {
+          "readOnly": true,
+          "description": "The artifact manifest state.",
+          "$ref": "#/definitions/ArtifactManifestState"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManifestArtifactFormat"
+          },
+          "x-ms-identifiers": [
+            "artifactName",
+            "artifactType",
+            "artifactVersion"
+          ],
+          "description": "The artifacts list."
+        }
+      }
+    },
+    "ManifestArtifactFormat": {
+      "description": "Manifest artifact properties.",
+      "type": "object",
+      "properties": {
+        "artifactName": {
+          "type": "string",
+          "description": "The artifact name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "artifactType": {
+          "$ref": "#/definitions/ArtifactType",
+          "description": "The artifact type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "artifactVersion": {
+          "type": "string",
+          "description": "The artifact version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ArtifactManifestUpdateState": {
+      "description": "The artifact manifest updating request payload. Only the 'Uploaded' state is allowed for updates. Other states are used for internal state transitioning.",
+      "type": "object",
+      "properties": {
+        "artifactManifestState": {
+          "description": "The artifact manifest state.",
+          "$ref": "#/definitions/ArtifactManifestState",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ArtifactManifestState": {
+      "type": "string",
+      "description": "The artifact manifest state.",
+      "enum": [
+        "Unknown",
+        "Uploading",
+        "Uploaded",
+        "Validating",
+        "ValidationFailed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactManifestState",
+        "modelAsString": true
+      }
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "The artifact type.",
+      "enum": [
+        "Unknown",
+        "OCIArtifact",
+        "VhdImageFile",
+        "ArmTemplate",
+        "ImageFile"
+      ],
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
+      }
+    }
+  }
+}

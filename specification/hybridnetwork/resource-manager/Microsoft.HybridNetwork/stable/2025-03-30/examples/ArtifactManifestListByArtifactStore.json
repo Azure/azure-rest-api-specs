@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "artifactStoreName": "TestArtifactStore"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactManifests/TestManifest",
+            "name": "TestManifest",
+            "type": "microsoft.hybridnetwork/publishers/artifactStores/artifactManifests",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "artifactManifestState": "Uploaded",
+              "artifacts": [
+                {
+                  "artifactName": "fed-rbac",
+                  "artifactType": "OCIArtifact",
+                  "artifactVersion": "1.0.0"
+                },
+                {
+                  "artifactName": "nginx",
+                  "artifactType": "OCIArtifact",
+                  "artifactVersion": "v1"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
