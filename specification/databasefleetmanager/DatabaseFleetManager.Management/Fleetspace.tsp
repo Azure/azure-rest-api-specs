@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DatabaseFleetManager;
 /**
@@ -35,6 +36,13 @@ interface Fleetspaces {
    * Creates or updates a fleetspace resource.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Fleetspace>;
+
+  /**
+   * Modifies a fleetspace resource.
+   */
+  @parameterVisibility
+  @added(Versions.v2025_02_01_preview)
+  update is ArmCustomPatchAsync<Fleetspace, Fleetspace>;
 
   /**
    * Deletes a fleetspace.

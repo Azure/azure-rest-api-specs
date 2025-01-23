@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DatabaseFleetManager;
 /**
@@ -32,13 +33,34 @@ interface Fleets {
   /**
    * Creates or updates a fleet resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Fleet>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
+  createOrUpdateOld is ArmResourceCreateOrReplaceSync<Fleet>;
+
+  /**
+   * Creates or updates a fleet resource.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Fleet>;
 
   /**
    * Modifies a fleet resource.
    */
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
   @parameterVisibility
-  update is ArmCustomPatchSync<Fleet, Fleet>;
+  updateOld is ArmCustomPatchSync<Fleet, Fleet>;
+
+  /**
+   * Modifies a fleet resource.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @parameterVisibility
+  update is ArmCustomPatchAsync<Fleet, Fleet>;
 
   /**
    * Deletes a fleet.
