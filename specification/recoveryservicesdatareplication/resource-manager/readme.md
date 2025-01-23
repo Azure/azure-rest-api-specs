@@ -38,6 +38,46 @@ input-file:
   - Microsoft.DataReplication/preview/2021-02-16-preview/recoveryservicesdatareplication.json
 ```
 
+### Tag: package-2024-09-01
+
+These settings apply only when `--tag=package-2024-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-01'
+input-file:
+  - Microsoft.DataReplication/stable/2024-09-01/recoveryservicesdatareplication.json
+
+suppressions:
+  - code: GuidUsage
+    reason: These parameters have already shipped as type GUID in the previous API version.  
+    where:
+      - $.definitions.HyperVToAzStackHCIDiskInput.properties.diskIdentifier.format
+  - code: GuidUsage
+    reason: These parameters have already shipped as type GUID in the previous API version.  
+    where:
+      - $.definitions.VMwareToAzStackHCIDiskInput.properties.diskIdentifier.format
+  - code: AllTrackedResourcesMustHaveDelete
+    reason: PrivateEndpointConnectionProxy has a delete operation defined.
+    where:
+      - $.definitions.PrivateEndpointConnectionProxy
+  - code: TrackedResourcePatchOperation
+    reason: PrivateEndpointConnectionProxy does not support an update operation.
+    where:
+      - $.definitions.PrivateEndpointConnectionProxy
+  - code: PatchBodyParametersSchema
+    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}"].patch.parameters[4].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}"].patch.parameters[4].schema.properties.identity
+  - code: PatchBodyParametersSchema
+    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}"].patch.parameters[5].schema.properties.properties
+
+```
+
 ---
 
 # Code Generation
