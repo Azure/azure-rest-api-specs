@@ -29,7 +29,7 @@ These are the global settings for the DatabaseFleetManager API.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2025-02-01
+tag: package-2025-02-01-preview
 ```
 
 ### Tag: package-2025-02-01-preview

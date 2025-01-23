@@ -12,8 +12,4 @@ csharp:
   client-side-validation: false
   namespace: Microsoft.DatabaseFleetManager
   output-folder: $(csharp-sdks-folder)/db/management/Microsoft.DatabaseFleetManager/GeneratedProtocol
-  directive:
-    - rename-model:
-      from: 'Identity'
-      to: 'DatabaseIdentity'
 ```
