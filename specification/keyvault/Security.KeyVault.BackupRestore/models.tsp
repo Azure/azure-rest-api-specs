@@ -26,11 +26,13 @@ model SASTokenParameter {
   /**
    * The SAS token pointing to an Azure Blob storage container
    */
+  @madeOptional(KeyVault.Versions.`v7.5`)
   token?: string;
 
   /**
    * Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.
    */
+  @added(KeyVault.Versions.`v7.5`)
   useManagedIdentity?: boolean = false;
 }
 
