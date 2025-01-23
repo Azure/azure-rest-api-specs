@@ -25,7 +25,7 @@ namespace AI.Model;
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    @body body: ...ChatCompletionsOptions;
+    @body body: ChatCompletionsOptions;
     ...AdditionalRequestHeaders;
   },
   ChatCompletions
@@ -39,7 +39,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
-    @body body: ...EmbeddingsOptions;
+    @body body: EmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
@@ -53,7 +53,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
-    @body body: ...ImageEmbeddingsOptions;
+    @body body: ImageEmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
