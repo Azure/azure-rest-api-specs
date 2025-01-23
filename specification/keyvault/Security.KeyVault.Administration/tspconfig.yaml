@@ -21,6 +21,7 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.KeyVault/{version-status}/{version}/administration.json"
+    omit-unreachable-types: true
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   "@azure-tools/typespec-python":
     flavor: azure
@@ -47,7 +48,6 @@ options:
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"
     flavor: azure
-    omit-unreachable-types: true
   "@azure-tools/typespec-ts":
     package-dir: "keyvault-admin"
     generateMetadata: true
