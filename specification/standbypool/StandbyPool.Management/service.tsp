@@ -71,3 +71,27 @@ model PoolResourceStateCount {
   @doc("The count of pooled resources in the given state.")
   count: int64;
 }
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Displays StandbyPool status.")
+model PoolStatus {
+  @doc("Displays the healthy state of the StandbyPool.")
+  @visibility("read")
+  code: HealthStateCode;
+
+  @doc("Displays the StandbyPool health state details.")
+  @visibility("read")
+  message?: string;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("StandbyPool health state.")
+union HealthStateCode {
+  string,
+
+  @doc("StandbyPool is in healthy state.")
+  healthy: "HealthState/healthy",
+
+  @doc("StandbyPool is in degraded state.")
+  degraded: "HealthState/degraded",
+}
