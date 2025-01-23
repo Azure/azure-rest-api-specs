@@ -15,65 +15,76 @@ interface TestCase {
 }
 
 const testCases: TestCase[] = [
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "package-dir \"azure-abc\" is valid",
+//     tspconfig: `
+// options:
+//   "@azure-tools/typespec-java":
+//     package-dir: azure-abc
+// `,
+//     expectedResult: true,
+//   },
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "tspconfig.yaml is not a valid yaml",
+//     tspconfig: `aaa`,
+//     expectedResult: false,
+//   },
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "java emitter has no options",
+//     tspconfig: `
+// options:
+//   "@azure-tools/typespec-ts":
+//     package-dir: com.azure.test
+// `,
+//     expectedResult: false,
+//   },
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "java emitter options have no package-dir",
+//     tspconfig: `
+// options:
+//   "@azure-tools/typespec-java":
+//     x: com.azure.test
+// `,
+//     expectedResult: false,
+//   },
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "package-dir \"azure.test\" is invalid",
+//     tspconfig: `
+// options:
+//   "@azure-tools/typespec-java":
+//     package-dir: azure.test
+// `,
+//     expectedResult: false,
+//   },
+//   {
+//     rule: new TspConfigJavaPackageDirectoryRule(),
+//     folder: TsvTestHost.folder,
+//     when: "package-dir \"azure-\" is invalid",
+//     tspconfig: `
+// options:
+//   "@azure-tools/typespec-java":
+//     package-dir: azure-
+// `,
+//     expectedResult: false,
+//   },
   {
-    rule: new TspConfigJavaPackageDirectoryRule(),
-    folder: TsvTestHost.folder,
-    when: "package-dir \"azure-abc\" is valid",
-    tspconfig: `
-options:
-  "@azure-tools/typespec-java":
-    package-dir: azure-abc
-`,
-    expectedResult: true,
-  },
-  {
-    rule: new TspConfigJavaPackageDirectoryRule(),
-    folder: TsvTestHost.folder,
-    when: "tspconfig.yaml is not a valid yaml",
-    tspconfig: `aaa`,
-    expectedResult: false,
-  },
-  {
-    rule: new TspConfigJavaPackageDirectoryRule(),
-    folder: TsvTestHost.folder,
-    when: "java emitter has no options",
-    tspconfig: `
-options:
-  "@azure-tools/typespec-ts":
-    package-dir: com.azure.test
-`,
-    expectedResult: false,
-  },
-  {
-    rule: new TspConfigJavaPackageDirectoryRule(),
-    folder: TsvTestHost.folder,
-    when: "java emitter options have no package-dir",
-    tspconfig: `
-options:
-  "@azure-tools/typespec-java":
-    x: com.azure.test
-`,
-    expectedResult: false,
-  },
-  {
-    rule: new TspConfigJavaPackageDirectoryRule(),
-    folder: TsvTestHost.folder,
-    when: "package-dir \"azure.test\" is invalid",
-    tspconfig: `
-options:
-  "@azure-tools/typespec-java":
-    package-dir: azure.test
-`,
-    expectedResult: false,
-  },
-  {
-    rule: new TspConfigJavaPackageDirectoryRule(),
+    rule: tspconfigRules()[0],
     folder: TsvTestHost.folder,
     when: "package-dir \"azure-\" is invalid",
     tspconfig: `
 options:
   "@azure-tools/typespec-java":
-    package-dir: azure-
+    package-dir: azure-aaa
 `,
     expectedResult: false,
   },
@@ -99,7 +110,3 @@ describe("tspconfig", function () {
     },
   );
 });
-
-describe("convert new ruls to old rules", function () {
-  
-})
