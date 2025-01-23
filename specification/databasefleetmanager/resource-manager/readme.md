@@ -4,7 +4,8 @@
 
 ## This is the AutoRest configuration file for Database Fleet Manager.
 
-The service is hosted under the Microsoft.DatabaseFleetManager resource provider but exposes a separate set of resources, apis, and SDKs.
+The service is hosted under the Microsoft.DatabaseFleetManager resource provider but exposes a separate set of
+resources, apis, and SDKs.
 
 ## Getting Started
 
@@ -28,7 +29,16 @@ These are the global settings for the DatabaseFleetManager API.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2024-10-01
+tag: package-preview-2025-02-01
+```
+
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - Microsoft.DatabaseFleetManager/preview/2025-02-01-preview/databasefleetmanager.json
 ```
 
 ### Tag: package-2024-10-01-preview
