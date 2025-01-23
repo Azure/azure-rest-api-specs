@@ -317,15 +317,6 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
-  @removed(Versions.v4_preview)
-  @doc("Lists AVS properties for specific Storage Pool.")
-  @armResourceAction(StoragePool)
-  @action("getAvsParameters")
-  @post
-  getAvsParameters(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<AvsDetails> | ErrorResponse;
-
   @added(Versions.v3_preview)
   @doc("Returns current information about an on-going connection to an AVS instance")
   @armResourceAction(StoragePool)
@@ -618,86 +609,6 @@ model RangeLimits {
 
   @doc("Maximum value of the property")
   max: int64;
-}
-
-@removed(Versions.v4_preview)
-@doc("AVS (Azure VMware Solution) related properties.")
-model AvsDetails {
-  @doc("Flag which tells if the AVS support is enabled.")
-  avsEnabled: boolean;
-
-  @doc("AVS configuration properties")
-  avs?: Avs;
-
-  @doc("vSphere configuration properties")
-  vSphere?: Vsphere;
-
-  @doc("tells if the plugin has been enabled or not")
-  vSpherePluginEnabled: boolean;
-
-  @doc("vSpherePluginKey associated with the plugin")
-  vSpherePluginKey?: string;
-
-  @doc("vSphere plugin configuration properties")
-  vSpherePlugin?: VspherePlugin;
-}
-
-@doc("vSphere plugin configuration properties")
-model VspherePlugin {
-  @doc("URL for registration of vSphere plugin")
-  registrationUrl: string;
-
-  @doc("Company name for vSphere plugin")
-  companyName: string;
-
-  @doc("Description of vSphere plugin")
-  description: string;
-
-  @doc("Protocol used by vSphere plugin")
-  protocol: string;
-
-  @doc("Admin email for vSphere plugin")
-  adminEmail: string;
-
-  @doc("Version of vSphere plugin")
-  version: string;
-
-  @doc("Certificate for vSphere plugin")
-  certificate: string;
-}
-
-@doc("vSphere configuration properties")
-model Vsphere {
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
-  sddcResourceId: string;
-
-  @doc("IP address of the vSphere software installed in the SDDC")
-  vSphereIp: string;
-}
-
-@doc("AVS (Azure VMware Solution) related properties.")
-model Avs {
-  @doc("Username for VMware VASA service login.")
-  vasaProviderUsername: string;
-
-  @doc("URLs to use for VMware VASA.")
-  vasaProviderUrls: string[];
-
-  @doc("Array of iSCSI endpoint and IQN.")
-  @extension("x-ms-identifiers", [])
-  vasaIscsiEndpoints: VasaIscsiEndpoints[];
-}
-
-@doc("iSCSI endpoint and IQN.")
-model VasaIscsiEndpoints {
-  @doc("IP address of the iSCSI endpoint.")
-  address: string;
-
-  @doc("Port of the iSCSI endpoint.")
-  port: int32;
-
-  @doc("IQN the Volume Group is available under.")
-  iqn: string;
 }
 
 @doc("Health information for a storage pool")
@@ -1054,7 +965,7 @@ union VolumeType {
   @removed(Versions.v4_preview)
   Azure: "azure",
 
-  /** AVS Volume Type */
+  /** AVS/VMware */
   AVS: "avs",
 
   string,
