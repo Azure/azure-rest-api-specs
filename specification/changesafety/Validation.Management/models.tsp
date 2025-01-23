@@ -135,7 +135,6 @@ model ValidationPropertiesExtended {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
   @doc("The output of the validation. This property will match the output schema in the validator version resource.")
-  @madeOptional(Versions.v2025_01_15_preview)
   validationOutput?: {};
 
   @doc("The outcome of the validation.")
