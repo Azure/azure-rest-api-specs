@@ -102,7 +102,7 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-05-01/webapplicationfirewall.json
-  - Microsoft.Network/preview/2024-06-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-02-01-preview/networkSecurityPerimeter.json
 suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: networkVerifier.json
