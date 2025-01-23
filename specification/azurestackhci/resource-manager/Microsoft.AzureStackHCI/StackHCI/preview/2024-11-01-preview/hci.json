@@ -1259,6 +1259,80 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/validate": {
+      "post": {
+        "operationId": "EdgeMachines_Validate",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineValidateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachines_Validate_MaximumSet": {
+            "$ref": "./examples/EdgeMachines_Validate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1663,6 +1737,36 @@
         }
       ]
     },
+    "EdgeMachineConnectivityStatus": {
+      "type": "string",
+      "description": "Overall connectivity status for the machine resource.",
+      "enum": [
+        "NotSpecified",
+        "Disconnected",
+        "Connected"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeMachineConnectivityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The connectivity status of the machine resource is not specified."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The machine resource is disconnected."
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The machine resource is connected."
+          }
+        ]
+      }
+    },
     "EdgeMachineJob": {
       "type": "object",
       "description": "Cluster Jobs resource",
@@ -1923,6 +2027,11 @@
           "description": "OS configuration status details ",
           "readOnly": true
         },
+        "connectivityStatus": {
+          "$ref": "#/definitions/EdgeMachineConnectivityStatus",
+          "description": "machine connectivity status",
+          "readOnly": true
+        },
         "labels": {
           "type": "array",
           "description": "selection labels that can be used by CMP to decide which all machines can be part of this device pool",
@@ -2004,6 +2113,37 @@
             "description": "EdgeMachine failed state and only option to recover is to re-provisioning machine"
           }
         ]
+      }
+    },
+    "EdgeMachineValidateRequest": {
+      "type": "object",
+      "description": "The validate request for Edge Machine.",
+      "properties": {
+        "edgeMachineIds": {
+          "type": "array",
+          "description": "Machine Ids against which, current machine has to be validated.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "Additional info required for validation."
+        }
+      },
+      "required": [
+        "edgeMachineIds"
+      ]
+    },
+    "EdgeMachineValidateResponse": {
+      "type": "object",
+      "description": "An Accepted response with an Operation-Location header.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "edge device validation status",
+          "readOnly": true
+        }
       }
     },
     "ErrorDetailModel": {
