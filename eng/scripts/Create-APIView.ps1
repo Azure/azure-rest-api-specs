@@ -91,22 +91,23 @@ function Get-ImpactedTypespecProjects {
         [Parameter(Mandatory = $true)]
         [string]$TypeSpecFile
     )
-    $filePathParts = $TypeSpecFile.split([IO.Path]::DirectorySeparatorChar)
-    while ($filePathParts.Length -and !$configFilesInTypeSpecProjects) {
-      $filePathParts = $filePathParts | Select-Object -SkipLast 1
-      $typeSpecProjectBaseDirectory = $filePathParts -join [IO.Path]::DirectorySeparatorChar
-      $configFilesInTypeSpecProjects = Get-ChildItem -Path $typeSpecProjectBaseDirectory -File "tspconfig.yaml"
+    $it = $TypeSpecFile
+    while ($it -and !$configFilesInTypeSpecProjects) {
+      $it = Split-Path -Parent $it
+      $configFilesInTypeSpecProjects = Get-ChildItem -Path $it -File "tspconfig.yaml"
     }
     
     if ($configFilesInTypeSpecProjects) {
       foreach($configFilesInTypeSpecProject in $configFilesInTypeSpecProjects) {
-        $entryPointFile = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp" 
+        $maintsp = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "main.tsp"
+        $clienttsp = Get-ChildItem -Path $($configFilesInTypeSpecProject.Directory.FullName) -File "client.tsp"
+        $entryPointFile = $maintsp ? $maintsp : $clienttsp
         if ($entryPointFile) {
           Write-Host "Found $($configFilesInTypeSpecProject.Name) and $($entryPointFile.Name) in directory $($configFilesInTypeSpecProject.Directory.FullName)"
           return $configFilesInTypeSpecProject.Directory.FullName
         }
         else {
-          Write-Host "Did not find main.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
+          Write-Host "Did not find main.tsp nor client.tsp in directory $($configFilesInTypeSpecProject.Directory.FullName)"
         }
       }
     }
