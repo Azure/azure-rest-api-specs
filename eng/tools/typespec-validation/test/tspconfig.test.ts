@@ -1,6 +1,7 @@
 import { describe, it } from "vitest";
 import { join } from "path";
 import { TspConfigJavaPackageDirectoryRule } from "../src/rules/tspconfig-java-package-dir.js";
+import tspconfigRules from "../src/rules/tspconfig-validation-rules.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert, strictEqual } from "node:assert";
 import { Rule } from "../src/rule.js";
@@ -98,3 +99,7 @@ describe("tspconfig", function () {
     },
   );
 });
+
+describe("convert new ruls to old rules", function () {
+  
+})
