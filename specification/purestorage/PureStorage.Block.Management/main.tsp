@@ -113,55 +113,55 @@ interface Reservations
 }
 
 @added(Versions.v5_preview)
-@doc("Represents a billing usage report, including overall status and detailed properties.")
+@doc("Represents a billing usage report, including overall status and detailed properties")
 model ReservationBillingUsageReport {
-  @doc("A list of detailed billing usage properties.")
+  @doc("A list of detailed billing usage properties")
   @extension("x-ms-identifiers", [])
   billingUsageProperties: BillingUsageProperty[];
 
-  @doc("Overall status message of the billing usage report.")
+  @doc("Overall status message of the billing usage report")
   overallStatusMessage: string;
 }
 
 @added(Versions.v5_preview)
-@doc("Represents an individual billing usage property.")
+@doc("Represents an individual billing usage property")
 model BillingUsageProperty {
-  @doc("Unique identifier for the billing usage property.")
+  @doc("Unique identifier for the billing usage property")
   propertyId: string;
 
-  @doc("Name of the billing usage property.")
+  @doc("Name of the billing usage property")
   propertyName: string;
 
-  @doc("Current value of the billing usage property.")
+  @doc("Current value of the billing usage property")
   currentValue: string;
 
-  @doc("Previous value of the billing usage property.")
+  @doc("Previous value of the billing usage property")
   previousValue?: string;
 
-  @doc("Severity level of the usage.")
+  @doc("Severity level of the usage")
   severity: UsageSeverity;
 
-  @doc("Status message for the billing usage against a property.")
+  @doc("Status message for the billing usage against a property")
   statusMessage?: string;
 
-  @doc("Optional list of sub-properties providing additional details.")
+  @doc("Optional list of sub-properties providing additional details")
   @extension("x-ms-identifiers", [])
   subProperties?: BillingUsageProperty[];
 }
 
 @added(Versions.v5_preview)
-@doc("Severity levels for billing usage properties.")
+@doc("Severity levels for billing usage properties")
 union UsageSeverity {
-  @doc("Indicates an alert condition.")
+  @doc("Indicates an alert condition")
   ALERT: "alert",
 
-  @doc("Provides informational details.")
+  @doc("Provides informational details")
   INFORMATION: "information",
 
-  @doc("Indicates a warning condition.")
+  @doc("Indicates a warning condition")
   WARNING: "warning",
 
-  @doc("Indicates no severity.")
+  @doc("Indicates no severity")
   NONE: "none",
 
   string,
@@ -170,46 +170,46 @@ union UsageSeverity {
 @added(Versions.v5_preview)
 @doc("Various recent statistics for resources billed via a given reservation")
 model ReservationBillingStatus {
-  @doc("The time this usage was updated, in RFC 3339 format.")
+  @doc("The time this usage was updated, in RFC 3339 format")
   timestamp: string;
 
-  @doc("Total used capacity as reported by associated storage pools. In bytes.")
+  @doc("Total used capacity as reported by associated storage pools. In bytes")
   totalUsedCapacityReported: int64;
 
-  @doc("How many associated storage pools have low DRR and thus cost more.")
+  @doc("How many associated storage pools have low DRR and thus cost more")
   lowDrrPoolCount: int32;
 
-  @doc("Average DRR for all pools.")
+  @doc("Average DRR for all pools")
   drrWeightedAverage: float64;
 
-  @doc("The sum of total used capacity for all pools with low DRR, if the DRR penalty applies. In bytes.")
+  @doc("The sum of total used capacity for all pools with low DRR, if the DRR penalty applies. In bytes")
   totalNonReducibleReported: int64;
 
-  @doc("The extra base capacity accounted for low DRR storage pools; the total non-reducible, transformed into additional base bytes for billing. In bytes.")
+  @doc("The extra base capacity accounted for low DRR storage pools; the total non-reducible, transformed into additional base bytes for billing. In bytes")
   extraUsedCapacityNonReducible: int64;
 
-  @doc("Extra base capacity accounted for rounding up low-usage pools to 30TiB. In bytes.")
+  @doc("Extra base capacity accounted for rounding up low-usage pools to 30TiB. In bytes")
   extraUsedCapacityLowUsageRounding: int64;
 
-  @doc("Extra base capacity discounted due to plan forgiving some low-DRR usage. In bytes.")
+  @doc("Extra base capacity discounted due to plan forgiving some low-DRR usage. In bytes")
   extraUsedCapacityNonReduciblePlanDiscount: int64;
 
-  @doc("Total used capacity actually billed. In bytes.")
+  @doc("Total used capacity actually billed. In bytes")
   totalUsedCapacityBilled: int64;
 
-  @doc("Total used capacity included in plan. In bytes.")
+  @doc("Total used capacity included in plan. In bytes")
   totalUsedCapacityIncludedPlan: int64;
 
-  @doc("Total used capacity reported as overage. In bytes.")
+  @doc("Total used capacity reported as overage. In bytes")
   totalUsedCapacityOverage: int64;
 
-  @doc("The sum of all performance settings across the pools under this reservation. In bytes per second.")
+  @doc("The sum of all performance settings across the pools under this reservation. In bytes per second")
   totalPerformanceReported: int64;
 
-  @doc("Total performance amount included in plan. In bytes per second.")
+  @doc("Total performance amount included in plan. In bytes per second")
   totalPerformanceIncludedPlan: int64;
 
-  @doc("Total performance amount reported as overage. In bytes per second.")
+  @doc("Total performance amount reported as overage. In bytes per second")
   totalPerformanceOverage: int64;
 }
 
@@ -802,7 +802,7 @@ model AvsStorageContainerProperties {
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
-  @madeOptional(Versions.v3_preview)
+  @removed(Versions.v5_preview)
   storageName?: string;
 
   @added(Versions.v3_preview)
