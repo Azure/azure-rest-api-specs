@@ -90,7 +90,7 @@ options:
   },
 ];
 
-describe("tspconfig", function () {
+describe("tspconfig-xxx", function () {
   it.each(testCases)(
     `should be $expectedResult for rule $rule.name when $when`,
     async (c: TestCase) => {
