@@ -210,6 +210,7 @@ These settings apply only when `--tag=package-2024-02-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2024-02-01-preview/network.json
   - Microsoft.Network/preview/2024-02-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/stable/2024-01-01/operation.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
