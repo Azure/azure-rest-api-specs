@@ -1102,6 +1102,30 @@
         "containerGroupProfile"
       ]
     },
+    "HealthStateCode": {
+      "type": "string",
+      "description": "StandbyPool health state.",
+      "enum": [
+        "HealthState/healthy",
+        "HealthState/degraded"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStateCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "healthy",
+            "value": "HealthState/healthy",
+            "description": "StandbyPool is in healthy state."
+          },
+          {
+            "name": "degraded",
+            "value": "HealthState/degraded",
+            "description": "StandbyPool is in degraded state."
+          }
+        ]
+      }
+    },
     "PoolResourceStateCount": {
       "type": "object",
       "description": "Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.",
@@ -1119,6 +1143,25 @@
       "required": [
         "state",
         "count"
+      ]
+    },
+    "PoolStatus": {
+      "type": "object",
+      "description": "Displays StandbyPool status.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/HealthStateCode",
+          "description": "Displays the healthy state of the StandbyPool.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Displays the StandbyPool health state details.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code"
       ]
     },
     "ProvisioningState": {
@@ -1378,6 +1421,11 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "status": {
+          "$ref": "#/definitions/PoolStatus",
+          "description": "Display status of the standby pool",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Displays the provisioning state of the standby pool",
@@ -1621,6 +1669,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/PoolStatus",
+          "description": "Display status of the standby pool",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
