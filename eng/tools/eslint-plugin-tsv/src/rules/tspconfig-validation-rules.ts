@@ -1,10 +1,6 @@
 import { Rule } from "eslint";
 import { TypeSpecConfig } from "../config/types.js";
-import {
-  createCodeGenSDKRule,
-  isAzureSDK,
-  isManagementSDK,
-} from "../utils/rule-creator.js";
+import { createCodeGenSDKRule, isAzureSDK, isManagementSDK } from "../utils/rule-creator.js";
 import { emitters } from "../utils/constants.js";
 import { CreateCodeGenSDKRuleArgs, KeyType } from "../interfaces/rule-interfaces.js";
 
@@ -90,7 +86,8 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "sdk/resourcemanager/aaa",
     extraExplanation:
       "The 'service-dir' should be a string that starts with 'sdk/resourcemanager/', followed by zero or more characters that are not a '/', and ends there",
-    condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
+    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
+      isManagementSDK(tspconfig, context, emitters.go),
   },
   {
     rule: "tspconfig-go-mgmt-package-dir-match-pattern",
