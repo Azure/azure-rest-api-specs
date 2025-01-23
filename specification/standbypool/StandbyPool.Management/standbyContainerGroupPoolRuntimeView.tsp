@@ -42,7 +42,7 @@ model StandbyContainerGroupPoolRuntimeViewResourceProperties {
   @extension("x-ms-identifiers", [])
   instanceCountSummary: ContainerGroupInstanceCountSummary[];
 
-  @added(Microsoft.StandbyPool.Versions.`2024-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
   @doc("Display status of the standby pool")
   @visibility("read")
   status?: PoolStatus;
