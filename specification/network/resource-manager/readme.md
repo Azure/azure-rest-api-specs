@@ -28,13 +28,14 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2024-06-preview
+tag: 2024-06-01-preview
 ```
-### Tag: package-2024-06-preview
 
-These settings apply only when `--tag=package-2024-06-preview` is specified on the command line.
+### Tag: 2024-06-01-preview
 
-```yaml $(tag) == 'package-2024-06-preview'
+These settings apply only when `--tag=2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-06-01-preview'
 input-file:
   - Microsoft.Network/stable/2024-05-01/applicationGateway.json
   - Microsoft.Network/stable/2024-05-01/applicationGatewayWafDynamicManifests.json
@@ -101,7 +102,7 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-05-01/webapplicationfirewall.json
-  - Microsoft.Network/preview/2024-06-02-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-06-01-preview/networkSecurityPerimeter.json
 suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: networkVerifier.json
@@ -212,13 +213,8 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
-``` yaml
-title: NetworkManagementClient
-description: Network Client
-openapi-type: arm
-tag: package-2024-05
-```
 
+```
 
 ### Tag: package-2024-03
 
@@ -297,21 +293,6 @@ suppressions:
   - code: PatchIdentityProperty
     from: virtualNetworkGateway.json
     reason: False alarm.
-```
-
-### Tag: package-2024-02-preview
-
-These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-02-preview'
-input-file:
-  - Microsoft.Network/preview/2024-02-01-preview/network.json
-  - Microsoft.Network/preview/2024-02-01-preview/networkSecurityPerimeter.json
-suppressions:
-  - code: PutResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
-  - code: DeleteResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
 ```
 
 ### Tag: package-2024-01-preview
