@@ -1176,6 +1176,38 @@
         ]
       }
     },
+    "StandbyContainerGroupPoolDegradedPolicy": {
+      "type": "object",
+      "description": "Details of the degraded policy.",
+      "properties": {
+        "failurePercentageToEnterDegraded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the failure percentage threshold to move Standby Pool into degraded state.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "retryPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies StandbyPool retry percentage in degraded state.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "retryWaitingTimeByMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies StandbyPool waiting time between two retries in degraded state.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "failurePercentageToEnterDegraded",
+        "retryPercentage",
+        "retryWaitingTimeByMinutes"
+      ]
+    },
     "StandbyContainerGroupPoolElasticityProfile": {
       "type": "object",
       "description": "Specifies the elasticity profile of the standby container group pools.",
@@ -1241,6 +1273,10 @@
           "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
           "description": "Specifies elasticity profile of standby container group pools."
         },
+        "degradedPolicy": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolDegradedPolicy",
+          "description": "Specifies the elasticity profile of the standby container group pools."
+        },
         "containerGroupProperties": {
           "$ref": "#/definitions/ContainerGroupProperties",
           "description": "Specifies container group properties of standby container group pools."
@@ -1281,6 +1317,10 @@
         "elasticityProfile": {
           "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
           "description": "Specifies elasticity profile of standby container group pools."
+        },
+        "degradedPolicy": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolDegradedPolicy",
+          "description": "Specifies the elasticity profile of the standby container group pools."
         },
         "containerGroupProperties": {
           "$ref": "#/definitions/ContainerGroupProperties",
@@ -1346,6 +1386,38 @@
       },
       "required": [
         "instanceCountSummary"
+      ]
+    },
+    "StandbyVirtualMachinePoolDegradedPolicy": {
+      "type": "object",
+      "description": "Details of the degraded policy.",
+      "properties": {
+        "failurePercentageToEnterDegraded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the failure percentage threshold to move Standby Pool into degraded state.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "retryPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies StandbyPool retry percentage in degraded state.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "retryWaitingTimeByMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies StandbyPool waiting time between two retries in degraded state.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "failurePercentageToEnterDegraded",
+        "retryPercentage",
+        "retryWaitingTimeByMinutes"
       ]
     },
     "StandbyVirtualMachinePoolElasticityProfile": {
@@ -1416,6 +1488,10 @@
           "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
+        "degradedPolicy": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolDegradedPolicy",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
+        },
         "virtualMachineState": {
           "$ref": "#/definitions/VirtualMachineState",
           "description": "Specifies the desired state of virtual machines in the pool.",
@@ -1469,6 +1545,10 @@
       "properties": {
         "elasticityProfile": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
+        },
+        "degradedPolicy": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolDegradedPolicy",
           "description": "Specifies the elasticity profile of the standby virtual machine pools."
         },
         "virtualMachineState": {
