@@ -1447,20 +1447,7 @@
           "200": {
             "description": "OK - Returns information about the Nsp operation.",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "resourceId": {
-                      "type": "string",
-                      "description": "The resource ID."
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/definitions/NspOperationStatus"
             }
           },
           "default": {
@@ -2252,6 +2239,22 @@
         }
       },
       "description": "Result of the request to list NSP logging configuration. Contains a list of NSP logging configurations and a URL link to get the next set of results."
+    },
+    "NspOperationStatus": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "resourceId": {
+              "type": "string",
+              "description": "The resource ID."
+            }
+          }
+        }
+      ]
     }
   },
   "parameters": {
