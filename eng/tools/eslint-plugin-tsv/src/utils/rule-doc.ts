@@ -57,7 +57,7 @@ export function createRuleDocument(
   let example = "";
   switch (keyType) {
     case KeyType.EmitterOption:
-      displayName = `options.${emitters.ts}.${key}`;
+      displayName = `options.${emitterName}.${key}`;
       example = createEmitterOptionExample(emitterName, { key: key, value: exampleValue });
       break;
     case KeyType.Parameter:
