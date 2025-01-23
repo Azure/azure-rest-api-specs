@@ -25,7 +25,10 @@ namespace ModelInference;
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    ...ChatCompletionsOptions;
+    @doc("The parameters of the chat completions request.")
+    @body
+    body: ChatCompletionsOptions;
+
     ...AdditionalRequestHeaders;
   },
   ChatCompletions
@@ -39,7 +42,10 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
-    ...EmbeddingsOptions;
+    @doc("The parameters of the embeddings request.")
+    @body
+    body: EmbeddingsOptions;
+
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
@@ -53,7 +59,10 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
-    ...ImageEmbeddingsOptions;
+    @doc("The parameters of the image embeddings request.")
+    @body
+    body: ImageEmbeddingsOptions;
+
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
