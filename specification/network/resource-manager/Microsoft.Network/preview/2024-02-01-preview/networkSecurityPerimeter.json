@@ -1377,6 +1377,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfigurations_List",
+        "description": "Lists the NSP logging configuration.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationList": {
+            "$ref": "./examples/NspLoggingConfigurationList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationStatuses/{operationId}": {
       "parameters": [
         {
@@ -2177,6 +2222,23 @@
         }
       },
       "description": "The NSP logging configuration properties."
+    },
+    "NspLoggingConfigurationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLoggingConfiguration"
+          },
+          "description": "Gets a page of NSP logging configuration"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP logging configuration. Contains a list of NSP logging configurations and a URL link to get the next set of results."
     }
   },
   "parameters": {
