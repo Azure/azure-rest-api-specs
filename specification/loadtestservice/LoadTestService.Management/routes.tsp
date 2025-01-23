@@ -131,3 +131,18 @@ interface LoadTestProfileMappings {
   @added(APIVersions.v2023_12_01_preview)
   list is ArmResourceListByParent<LoadTestProfileMappingResource>;
 }
+
+@armResourceOperations
+interface LoadTestsMaxMonthlyVirtualUserHoursLimitsResource {
+  @added(APIVersions.v2024_12_01_preview)
+  @doc("Get the limit of max monthly virtual user hours for the load testing resource.")
+  get is ArmResourceRead<MaxMonthlyVirtualUserHoursResource>;
+
+  @added(APIVersions.v2024_12_01_preview)
+  @doc("Set the limit of max monthly virtual user hours for the load testing resource.")
+  set is ArmResourceActionSync<
+    MaxMonthlyVirtualUserHoursResource,
+    MaxMonthlyVirtualUserHoursLimitRequest,
+    MaxMonthlyVirtualUserHoursResource
+  >;
+}
