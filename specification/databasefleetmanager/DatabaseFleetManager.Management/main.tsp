@@ -59,4 +59,4 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @@clientName(DatabaseChangeTierDefinition, "DatabaseChangeTierProperties");
 @@clientName(DatabaseRenameDefinition, "DatabaseRenameProperties");
 @@clientName(RegisterServerDefinition, "RegisterServerProperties");
-@@clientName(Identity, "DatabaseIdentity", "csharp");
+@@clientName(Identity, "IdentityProperties", "csharp");
