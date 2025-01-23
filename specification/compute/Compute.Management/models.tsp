@@ -5645,12 +5645,14 @@ model AttachDetachDataDisksRequest {
    * The list of managed data disks to be attached.
    */
   @OpenAPI.extension("x-ms-identifiers", ["diskId"])
+  @minItems(1)
   dataDisksToAttach?: DataDisksToAttach[];
 
   /**
    * The list of managed data disks to be detached.
    */
   @OpenAPI.extension("x-ms-identifiers", ["diskId"])
+  @minItems(1)
   dataDisksToDetach?: DataDisksToDetach[];
 }
 
