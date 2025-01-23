@@ -13,6 +13,11 @@
           "maxReadyCapacity": 304,
           "minReadyCapacity": 300
         },
+        "degradedPolicy": {
+          "failurePercentageToEnterDegraded": 30,
+          "retryPercentage": 15,
+          "retryWaitingTimeByMinutes": 30
+        },
         "virtualMachineState": "Running",
         "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss"
       }
@@ -25,6 +30,11 @@
           "elasticityProfile": {
             "maxReadyCapacity": 304,
             "minReadyCapacity": 300
+          },
+          "degradedPolicy": {
+            "failurePercentageToEnterDegraded": 30,
+            "retryPercentage": 15,
+            "retryWaitingTimeByMinutes": 30
           },
           "virtualMachineState": "Running",
           "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
