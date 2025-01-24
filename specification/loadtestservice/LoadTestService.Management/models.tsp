@@ -207,7 +207,6 @@ model MaxMonthlyVirtualUserHoursResourceProperties {
   provisioningState?: ResourceState;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
 @parentResource(LoadTestResource)
 @doc("Max monthly virtual usage hours resource.")
 @added(APIVersions.v2024_12_01_preview)
