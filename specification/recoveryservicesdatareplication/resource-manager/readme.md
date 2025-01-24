@@ -26,7 +26,7 @@ These are the global settings for the recoveryservicesdatareplication.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-02-16-preview
+tag: package-2024-09-01
 ```
 
 ### Tag: package-2021-02-16-preview
@@ -45,6 +45,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
   - Microsoft.DataReplication/stable/2024-09-01/recoveryservicesdatareplication.json
+```
 
 suppressions:
   - code: GuidUsage
