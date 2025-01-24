@@ -73,6 +73,7 @@ using Microsoft.IoTOperations;
 @@clientName(OperationType, "DataflowOperationType", "csharp");
 @@clientName(OperatorValues, "BrokerOperatorValues", "csharp");
 @@clientName(PrincipalDefinition, "PrincipalConfig", "csharp");
+@@clientName(ProfileDiagnostics, "DataflowProfileDiagnostics", "csharp");
 @@clientName(ProvisioningState, "IotOperationsProvisioningState", "csharp");
 @@clientName(SelfCheck, "BrokerDiagnosticSelfCheck", "csharp");
 @@clientName(SelfTracing, "DiagnosticSelfTracing", "csharp");
@@ -81,5 +82,6 @@ using Microsoft.IoTOperations;
   "DataflowSourceSerializationFormat",
   "csharp"
 );
+@@clientName(TlsCertMethod, "ListenerPortTlsCertMethod", "csharp");
 @@clientName(TlsProperties, "IotOperationsTlsProperties", "csharp");
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
