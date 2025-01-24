@@ -121,11 +121,16 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
   - code: PutResponseCodes
-    from: networkSecurityPerimeter.json
     reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"]
   - code: DeleteResponseCodes
-    from: networkSecurityPerimeter.json
     reason: Required for multiple response codes. Reviewed by ARM team.
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"]
+  - code: TrackedResourcePatchOperation
+    from: networkSecurityPerimeter.json
+    reason: False alarm.
 ```
 
 ### Tag: package-2024-05
