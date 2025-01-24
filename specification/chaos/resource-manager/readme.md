@@ -28,7 +28,40 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-preview-2024-11
+tag: package-2025-01
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Chaos/stable/2025-01-01/openapi.json
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change
 ```
 
 ### Tag: package-preview-2024-11

@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -48,6 +49,13 @@ model ExperimentExecutionProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
+
+  /**
+   * Resource provisioning state. Not currently in use for executions.
+   */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -101,6 +109,13 @@ model ExperimentExecutionDetailsProperties {
    */
   @visibility("read")
   stoppedAt?: utcDateTime;
+
+  /**
+   * Resource provisioning state. Not currently in use for executions.
+   */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 
   /**
    * The reason why the execution failed.
