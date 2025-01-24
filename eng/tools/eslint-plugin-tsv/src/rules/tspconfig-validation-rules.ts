@@ -156,7 +156,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
   },
   // java
   {
-    rule: "tspconfig-java-mgmt-package-dir-match-pattern",
+    rule: "tspconfig-java-az-package-dir-match-pattern",
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^azure(-\w+)+$/,
@@ -164,7 +164,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure', followed by one or more '-<word>' segments. Each segment can contains letters, digits, or underscores",
     condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.java),
+      isAzureSDK(tspconfig, emitters.java),
   },
   // python
   {
