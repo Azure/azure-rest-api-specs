@@ -296,22 +296,6 @@ suppressions:
     reason: False alarm.
 ```
 
-### Tag: package-2024-02-preview
-
-These settings apply only when `--tag=package-2024-02-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2024-02-preview'
-input-file:
-  - Microsoft.Network/preview/2024-02-01-preview/network.json
-  - Microsoft.Network/preview/2024-02-01-preview/networkSecurityPerimeter.json
-  - Microsoft.Network/stable/2024-01-01/operation.json
-suppressions:
-  - code: PutResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
-  - code: DeleteResponseCodes
-    reason: Required for multiple response codes. Reviewed by ARM team.
-```
-
 ### Tag: package-2024-01-preview
 
 These settings apply only when `--tag=package-2024-01-preview` is specified on the command line.
