@@ -98,23 +98,19 @@ interface Client1 {
   getModelInfo is AI.Model.getModelInfo;
 }
 
-@client(
-  {
-    name: "EmbeddingsClient",
-    service: AI.Model,
-  }
-)
+@client({
+  name: "EmbeddingsClient",
+  service: AI.Model,
+})
 interface Client2 {
   embed is AI.Model.getEmbeddings;
   getModelInfo is AI.Model.getModelInfo;
 }
 
-@client(
-  {
-    name: "ImageEmbeddingsClient",
-    service: AI.Model,
-  }
-)
+@client({
+  name: "ImageEmbeddingsClient",
+  service: AI.Model,
+})
 interface Client3 {
   embed is AI.Model.getImageEmbeddings;
   getModelInfo is AI.Model.getModelInfo;

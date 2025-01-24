@@ -9,8 +9,8 @@ using Azure.ClientGenerator.Core;
 
 namespace AI.Model;
 
-@doc("The ChatCompletionsOptions model")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@doc("The ChatCompletionsOptions model")
 model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
@@ -119,7 +119,7 @@ model ChatCompletionsOptions {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   ...Record<unknown>;
-};
+}
 
 alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
