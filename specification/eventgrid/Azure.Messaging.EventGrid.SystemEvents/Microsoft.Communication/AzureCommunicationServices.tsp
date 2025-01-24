@@ -1194,58 +1194,64 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageReceivedEventData extends AcsMessageEventData {
-  /** The message content */
+  /** Optional. The message content */
   content?: string;
 
-  /** Message ID. Format is Guid as string.  */
+  @added(ServiceApiVersions.v2025_02_01)
+  /** Optional. Message ID. Format is Guid as string.  */
   messageId?: string;
 
-  /** The message channel type */
+  /** Required. The message channel type */
   channelType: AcsMessageChannelKind;
 
-  /** Whatsapp message type */
+  /** Required. Whatsapp message type */
   messageType: string;
 
-  /** The received message media content */
+  /** Optional. The received message media content */
   media?: AcsMessageMediaContent;
 
-  /** The received message reaction content */
+  @added(ServiceApiVersions.v2025_02_01)
+  /** Optional. The received message reaction content */
   reaction?: AcsMessageReactionContent;
 
-  /** The received message context */
+  /** Optional. The received message context */
   context?: AcsMessageContext;
 
-  /** The received message button content */
+  /** Optional. The received message button content */
   button?: AcsMessageButtonContent;
 
-  /** The received message interactive content */
+  /** Optional. The received message interactive content */
   interactive?: AcsMessageInteractiveContent;
 }
 
 /** Message Media Content */
 model AcsMessageMediaContent {
-  /** The MIME type of the file this media represents */
+  /** Required. The MIME type of the file this media represents */
   mimeType: string;
 
-  /** The media identifier */
+  /** Required. The media identifier */
   id: string;
 
-  /** The filename of the underlying media file as specified when uploaded */
+  /** Optional. The filename of the underlying media file as specified when uploaded */
   fileName?: string;
 
-  /** The caption for the media object, if supported and provided */
+  /** Optional. The caption for the media object, if supported and provided */
   caption?: string;
 
-  /** Set to  true  if the sticker is animated; false otherwise. */
+  @added(ServiceApiVersions.v2025_02_01)
+  /** Optional. Set to  true  if the sticker is animated; false otherwise. */
   animated?: boolean;
 }
 
+@added(ServiceApiVersions.v2025_02_01)
 /** Message Reaction Content */
 model AcsMessageReactionContent {
-  /** WhatsApp message ID of message you want to apply the emoji to. */
+  @added(ServiceApiVersions.v2025_02_01)
+  /** Required. WhatsApp message ID of message you want to apply the emoji to. */
   messageId: string;
 
-  /** Unicode escape sequence of the emoji. */
+  @added(ServiceApiVersions.v2025_02_01)
+  /** Optional. Unicode escape sequence of the emoji. */
   emoji?: string;
 }
 
