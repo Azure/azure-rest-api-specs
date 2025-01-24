@@ -1,6 +1,11 @@
 import { Rule } from "eslint";
 import { TypeSpecConfig } from "../config/types.js";
-import { CreateCodeGenSDKRuleArgs, KeyType, RuleDocument, RuleInfo } from "../interfaces/rule-interfaces.js";
+import {
+  CreateCodeGenSDKRuleArgs,
+  KeyType,
+  RuleDocument,
+  RuleInfo,
+} from "../interfaces/rule-interfaces.js";
 import { defaultMessageId, defaultRuleType, emitters } from "./constants.js";
 import { NamedRule } from "../interfaces/named-eslint.js";
 import { AST, getStaticYAMLValue } from "yaml-eslint-parser";
@@ -39,18 +44,9 @@ export function createRuleMessages(messageId: string, docs: RuleDocument) {
   };
 }
 
-export function isAzureSDK(tspconfig: TypeSpecConfig, emitterName: string) {
-  const flavor = tspconfig.options?.[emitterName]?.flavor as string;
-  return flavor === "azure";
-}
-
-export function isManagementSDK(
-  tspconfig: TypeSpecConfig,
-  context: Rule.RuleContext,
-  emitterName: string,
-) {
+export function isManagementSDK(context: Rule.RuleContext) {
   const filename = context.filename;
-  return isAzureSDK(tspconfig, emitterName) && filename.includes(".Management");
+  return filename.includes(".Management");
 }
 
 function validateValue(
@@ -62,8 +58,7 @@ function validateValue(
   switch (typeof expected) {
     case "boolean":
     case "string":
-      if (actual !== expected)
-        context.report({ node, messageId: defaultMessageId });
+      if (actual !== expected) context.report({ node, messageId: defaultMessageId });
       break;
     case "object":
       if (typeof actual !== "string" || !expected.test(actual))
@@ -107,7 +102,12 @@ export function createCodeGenSDKRule(args: CreateCodeGenSDKRuleArgs): NamedRule.
             for (const segment of args.key.split(".")) {
               if (option && segment in option) option = option![segment];
             }
-            validateValue(context, node, option as undefined | string | boolean, args.expectedValue);
+            validateValue(
+              context,
+              node,
+              option as undefined | string | boolean,
+              args.expectedValue,
+            );
             break;
           }
           case KeyType.Parameter: {
@@ -119,7 +119,6 @@ export function createCodeGenSDKRule(args: CreateCodeGenSDKRuleArgs): NamedRule.
             // TODO: log not supported
             break;
         }
-        
       },
     },
   };

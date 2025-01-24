@@ -336,11 +336,7 @@ function createEmitterOptionTestCases(
       rulePath,
       ruleName,
       fileName,
-      yamlContent: createEmitterOptionExample(
-        emitterName,
-        { key: key, value: validValue },
-        { key: "flavor", value: "azure" },
-      ),
+      yamlContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
       shouldReportError: false,
     },
     {
@@ -348,11 +344,7 @@ function createEmitterOptionTestCases(
       rulePath,
       ruleName,
       fileName,
-      yamlContent: createEmitterOptionExample(
-        emitterName,
-        { key: key, value: invalidValue },
-        { key: "flavor", value: "azure" },
-      ),
+      yamlContent: createEmitterOptionExample(emitterName, { key: key, value: invalidValue }),
       shouldReportError: true,
     },
     {
@@ -360,7 +352,7 @@ function createEmitterOptionTestCases(
       rulePath,
       ruleName,
       fileName,
-      yamlContent: createEmitterOptionExample(emitterName, { key: "flavor", value: "azure" }),
+      yamlContent: createEmitterOptionExample(emitterName),
       shouldReportError: true,
     },
   ];
