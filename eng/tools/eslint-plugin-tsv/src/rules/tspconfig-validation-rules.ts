@@ -19,7 +19,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "service-dir",
     type: KeyType.Parameter,
     expectedValue: /^sdk\/[^\/]*$/,
-    exampleValue: "sdk/aaa",
+    exampleValue: "sdk/placeholder",
     extraExplanation:
       "The 'service-dir' should be a string that starts with 'sdk/', followed by zero or more characters that are not a '/', and ends there",
     condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
@@ -62,7 +62,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^arm(?:-[a-z]+)+$/,
-    exampleValue: "arm-aaa-bbb",
+    exampleValue: "arm-placeholder-placeholder",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'arm' and is followed by one or more groups of a hyphen (-) and lowercase letters",
     condition: tsIsManagementCondition,
@@ -72,7 +72,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "packageDetails.name",
     type: KeyType.EmitterOption,
     expectedValue: /^\@azure\/arm(?:-[a-z]+)+$/,
-    exampleValue: "@azure/arm-aaa-bbb",
+    exampleValue: "@azure/arm-placeholder-placeholder",
     extraExplanation:
       "The package name should be a string that starts with '@azure/arm' and is followed by one or more groups of a hyphen (-) and lowercase letters",
     condition: tsIsManagementCondition,
@@ -83,7 +83,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "service-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^sdk\/resourcemanager\/[^\/]*$/,
-    exampleValue: "sdk/resourcemanager/aaa",
+    exampleValue: "sdk/resourcemanager/placeholder",
     extraExplanation:
       "The 'service-dir' should be a string that starts with 'sdk/resourcemanager/', followed by zero or more characters that are not a '/', and ends there",
     condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
@@ -93,7 +93,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^arm[^\/]*$/,
-    exampleValue: "armaaa",
+    exampleValue: "armplaceholder",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'arm' and do not contain a forward slash (/) after it",
     condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
@@ -152,7 +152,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^azure(-\w+)+$/,
-    exampleValue: "azure-aaa",
+    exampleValue: "azure-placeholder",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure', followed by one or more '-<word>' segments. Each segment can contains letters, digits, or underscores",
     condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
@@ -163,7 +163,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^azure-mgmt(-[a-z]+){1,2}$/,
-    exampleValue: "azure-mgmt-aaa",
+    exampleValue: "azure-mgmt-placeholder",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure-mgmt', followed by 1 or 2 hyphen-separated lowercase alphabetic segments",
     condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
@@ -198,7 +198,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^Azure\./,
-    exampleValue: "Azure.aaa",
+    exampleValue: "Azure.placeholder",
     extraExplanation: "The 'package-dir' should be a string that starts with 'Azure.'",
     condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
   },
@@ -223,7 +223,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     key: "package-dir",
     type: KeyType.EmitterOption,
     expectedValue: /^Azure\.ResourceManager\./,
-    exampleValue: "Azure.ResourceManager.aaa",
+    exampleValue: "Azure.ResourceManager.Placeholder",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'Azure.ResourceManager.'",
     condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
