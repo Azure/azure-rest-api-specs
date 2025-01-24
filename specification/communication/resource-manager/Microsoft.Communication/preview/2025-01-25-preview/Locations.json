@@ -75,22 +75,6 @@
     }
   },
   "definitions": {
-    "Quota": {
-      "description": "Quota limit on the subscription",
-      "type": "object",
-      "properties": {
-        "limit": {
-          "description": "Current quota limit per hour allowed on the subscription",
-          "type": "integer",
-          "format": "int32"
-        },
-        "currentValue": {
-          "description": "Current usage on the subscription",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "QuotaName": {
       "description": "The name of the resource",
       "type": "object",
@@ -109,14 +93,43 @@
       "description": "Quota on the assigned to the subscription",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The arm resource id",
+          "type": "string"
+        },
         "name": {
           "$ref": "#/definitions/QuotaName"
         },
-        "quotaPerHour": {
-          "$ref": "#/definitions/Quota"
+        "quotaPeriod": {
+          "description": "The period of the quota",
+          "type": "string"
         },
-        "quotaPerMinute": {
-          "$ref": "#/definitions/Quota"
+        "unit": {
+          "description": "The unit of the quota",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "unit",
+            "modelAsString": true
+          }
+        },
+        "limit": {
+          "description": "Current quota limit per hour allowed on the subscription",
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentValue": {
+          "description": "Current usage on the subscription",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
