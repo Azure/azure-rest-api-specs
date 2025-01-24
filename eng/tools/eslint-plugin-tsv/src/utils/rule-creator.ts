@@ -40,7 +40,7 @@ export function createRule(ruleContext: RuleInfo): NamedRule.RuleModule {
 
 export function createRuleMessages(messageId: string, docs: RuleDocument) {
   return {
-    [messageId]: `${docs.error}.\n${docs.action}.\n${docs.example}`,
+    [messageId]: `Error: ${docs.error}.\nAction: ${docs.action}.\nExample: ${docs.example}`,
   };
 }
 
