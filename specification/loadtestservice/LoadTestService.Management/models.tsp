@@ -207,6 +207,7 @@ model MaxMonthlyVirtualUserHoursResourceProperties {
   provisioningState?: ResourceState;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
 @parentResource(LoadTestResource)
 @doc("Max monthly virtual usage hours resource.")
 @added(APIVersions.v2024_12_01_preview)
@@ -224,6 +225,7 @@ model MaxMonthlyVirtualUserHoursResource
 @doc("Max monthly virtual usage hours limit request payload.")
 @added(APIVersions.v2024_12_01_preview)
 model MaxMonthlyVirtualUserHoursLimitRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("The new maxMonthlyVirtualUserHours limit, with -1 indicating that there is no limit.")
   @minValue(-1)
   limit?: int32;
