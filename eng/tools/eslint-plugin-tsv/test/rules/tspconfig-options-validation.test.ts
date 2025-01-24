@@ -169,8 +169,8 @@ const goManagementInjectSpansTestCases = createEmitterOptionTestCases(
 const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
   emitters.java,
   rulePath,
-  "tspconfig-java-mgmt-package-dir-match-pattern",
-  managementTspconfigPath,
+  "tspconfig-java-az-package-dir-match-pattern",
+  "",
   "package-dir",
   "azure-aaa",
   "aaa",
