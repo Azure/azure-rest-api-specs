@@ -4457,6 +4457,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceTags"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -6260,6 +6263,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceTags"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -6906,6 +6912,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -7738,6 +7747,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -8745,6 +8757,9 @@
           },
           {
             "$ref": "#/parameters/CopySourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
           }
         ],
         "responses": {
@@ -11805,6 +11820,22 @@
         "name": "container-cpk-scope-info"
       },
       "description": "Optional.  Version 2019-07-07 and newer.  If true, prevents any request from specifying a different encryption scope than the scope set on the container."
+    },
+    "FileRequestIntent": {
+      "name": "x-ms-file-request-intent",
+      "x-ms-client-name": "fileRequestIntent",
+      "in": "header",
+      "description": "Valid value is backup",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "backup"
+      ],
+      "x-ms-enum": {
+        "name": "FileShareTokenIntent",
+        "modelAsString": true
+      }
     },
     "FilterBlobsInclude": {
       "name": "include",
