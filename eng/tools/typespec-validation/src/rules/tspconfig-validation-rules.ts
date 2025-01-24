@@ -8,13 +8,15 @@ import { TsvHost } from "../tsv-host.js";
 import tsvPlugin, { ESLint } from "eslint-plugin-tsv";
 
 async function runESLint(content: string, folder: string, ruleName: string) {
-  const config = tsvPlugin.configs.recommended;
-  for (const key in config.rules) {
-    if (key !== "tsv/" + ruleName) delete config.rules[key];
-  }
+  const cwd = process.cwd();
   const eslint = new ESLint({
-    cwd: join(__dirname, "../../../../"),
-    overrideConfig: tsvPlugin.configs.recommended,
+    cwd,
+    overrideConfig: {
+      ...tsvPlugin.configs.recommended,
+      rules: {
+          [`${tsvPlugin.name}/${ruleName}`]: "error",
+        }
+    },
     overrideConfigFile: true,
   });
   const results = await eslint.lintText(content, { filePath: join(folder, "tspconfig.yaml") });
@@ -35,7 +37,7 @@ function convertToOldRules() {
         const results = await runESLint(configText, folder, rule.name);
         if (results.length > 0 && results[0].messages.length > 0) {
           return {
-            errorOutput: results[0].messages[0].message,
+            stdOutput: 'Validation failed. ' + results[0].messages[0].message,
             // Only used to provide suggestion to correct tspconfig
             success: true,
           };
