@@ -29,6 +29,16 @@ options:
     namespace: "com.azure.resourcemanager.impactreporting"
     service-name: "Impact Reporting"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/impactreporting"
+    package-dir: "armimpactreporting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
