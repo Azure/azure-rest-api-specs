@@ -377,28 +377,12 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The warnings that were encountered while executing the job.
    */
-  warnings?: Warning[];
+  warnings?: Foundations.Error[];
 
   /**
    * The errors encountered while executing the job.
    */
   errors?: Foundations.Error[];
-}
-
-/**
- * Represents a warning that was encountered while executing the request.
- */
-@clientName("AuthoringConversationsWarning", "csharp")
-model Warning {
-  /**
-   * The warning code.
-   */
-  code: string;
-
-  /**
-   * The warning message.
-   */
-  message: string;
 }
 
 /**
