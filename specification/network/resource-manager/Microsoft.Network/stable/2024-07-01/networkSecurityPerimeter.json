@@ -1377,6 +1377,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/loggingConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NspLoggingConfiguration"
+        ],
+        "operationId": "NspLoggingConfigurations_List",
+        "description": "Lists the NSP logging configuration.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of NSP logging configuration.",
+            "schema": {
+              "$ref": "#/definitions/NspLoggingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspLoggingConfigurationList": {
+            "$ref": "./examples/NspLoggingConfigurationList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}": {
       "parameters": [
         {
@@ -1402,7 +1447,7 @@
           "200": {
             "description": "OK - Returns information about the Nsp operation.",
             "schema": {
-              "$ref": "#/definitions/NspOperationStatus"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -2178,76 +2223,22 @@
       },
       "description": "The NSP logging configuration properties."
     },
-    "NspOperationStatus": {
+    "NspLoggingConfigurationListResult": {
       "type": "object",
       "properties": {
-        "id": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspLoggingConfiguration"
+          },
+          "description": "Gets a page of NSP logging configuration"
+        },
+        "nextLink": {
           "type": "string",
-          "description": "The operation ARM id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation GUID."
-        },
-        "status": {
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/NspOperationStatusProperties"
-        },
-        "error": {
-          "$ref": "#/definitions/OperationError"
+          "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "Operation status of the async operation"
-    },
-    "NspOperationStatusProperties": {
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The resource ID."
-        }
-      }
-    },
-    "OperationError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "OperationStatus": {
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Updating",
-        "Creating",
-        "Deleting",
-        "Accepted"
-      ],
-      "description": "Enum representing the status of an operation.",
-      "x-ms-enum": {
-        "name": "Operation status",
-        "modelAsString": true
-      }
+      "description": "Result of the request to list NSP logging configuration. Contains a list of NSP logging configurations and a URL link to get the next set of results."
     }
   },
   "parameters": {
