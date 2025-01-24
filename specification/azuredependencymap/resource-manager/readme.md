@@ -26,17 +26,38 @@ These are the global settings for the Dependency Map RP.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+openapi-subtype: rpaas
 tag: package-2025-01-31-preview
 ```
 
 ### Tag: package-2024-06-01-preview
 
-These settings apply only when `--tag=package-2025-01-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
+  - Microsoft.DependencyMap/preview/2024-06-01-preview/dependencyMap.json
+```
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2024-06-01-preview
+```
+
+### Tag: package-2025-01-31-preview
+
+These settings apply only when `--tag=package-2025-01-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-31-preview'
+input-file:
   - Microsoft.DependencyMap/preview/2025-01-31-preview/dependencyMap.json
+```
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2025-01-31-preview
 ```
 
 ---

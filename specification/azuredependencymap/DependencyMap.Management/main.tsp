@@ -17,7 +17,7 @@ using Azure.Core;
 })
 @doc("Microsoft.DependencyMap management service")
 @versioned(Microsoft.DependencyMap.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion("v3")
 namespace Microsoft.DependencyMap;
 
 /** The available API versions. */
@@ -25,7 +25,7 @@ enum Versions {
   /** 2025-01-31-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_06_01_preview: "2025-01-31-preview",
+  v2025_01_31_preview: "2025-01-31-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -80,7 +80,7 @@ interface Maps {
   get is ArmResourceRead<MapsResource>;
   //create is ArmResourceCreateOrUpdateAsync<MapsResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MapsResource>;
-  update is ArmResourcePatchAsync<MapsResource, MapsResourceProperties>;
+  update is ArmTagsPatchAsync<MapsResource>;
   //update is ArmTagsPatchSync<MapsResource>;
   delete is ArmResourceDeleteWithoutOkAsync<MapsResource>;
   listByResourceGroup is ArmResourceListByParent<MapsResource>;
@@ -240,12 +240,8 @@ interface DiscoverySources {
   get is ArmResourceRead<DiscoverySourceResource>;
   //create is ArmResourceCreateOrUpdateAsync<DiscoverySourceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DiscoverySourceResource>;
-  update is ArmResourcePatchAsync<
-    DiscoverySourceResource,
-    DiscoverySourceResourceProperties
-  >;
+  update is ArmTagsPatchAsync<DiscoverySourceResource>;
   //update is ArmTagsPatchSync<DiscoverySourceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoverySourceResource>;
-  listByResourceGroup is ArmResourceListByParent<DiscoverySourceResource>;
-  listBySubscription is ArmListBySubscription<DiscoverySourceResource>;
+  listByMapsResource is ArmResourceListByParent<DiscoverySourceResource>;
 }
