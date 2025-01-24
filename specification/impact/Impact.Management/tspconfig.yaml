@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "sdk/impact"
+    default: "sdk/impactreporting"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -18,6 +18,12 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-impactreporting"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
   "@azure-tools/typespec-java":
     flavor: azure
     namespace: "com.azure.resourcemanager.impactreporting"
