@@ -47,15 +47,10 @@ describe("tspconfig rules", () => {
     host.readTspConfig = async (_folder: string) => c.tspconfig;
     const result = await c.rule.execute(host, c.folder);
     strictEqual(result.success, true);
+    assert(result.stdOutput && result.stdOutput.length > 0 && result.errorOutput === undefined);
     assert(
-      (c.expectedResult &&
-        result.stdOutput &&
-        result.stdOutput.length > 0 &&
-        result.errorOutput === undefined) ||
-        (!c.expectedResult &&
-          result.stdOutput === undefined &&
-          result.errorOutput &&
-          result.errorOutput.length > 0),
+      (c.expectedResult && result.stdOutput.includes("validation passed")) ||
+        (!c.expectedResult && result.stdOutput.includes("Validation failed. ")),
     );
   });
 });
