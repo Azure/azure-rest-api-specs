@@ -1255,6 +1255,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment expiration date in the runtime.
    */
+  @clientName("DeploymentExpiresOn", "csharp")
   deploymentExpirationDate: plainDate;
 }
 
