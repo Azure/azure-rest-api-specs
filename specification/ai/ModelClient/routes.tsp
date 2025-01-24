@@ -25,6 +25,8 @@ namespace AI.Model;
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
+    @doc("request options to pass to the endpoint using complete path")
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
     @body body: ChatCompletionsOptions;
     ...AdditionalRequestHeaders;
   },
@@ -39,6 +41,8 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
+    @doc("request options to pass to the endpoint using embeddings path")
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
     @body body: EmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },
@@ -53,6 +57,8 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
+    @doc("request options to pass to the endpoint using images embeddings path")
+    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
     @body body: ImageEmbeddingsOptions;
     ...AdditionalRequestHeaders;
   },

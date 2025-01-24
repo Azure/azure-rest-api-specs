@@ -9,6 +9,8 @@ using Azure.ClientGenerator.Core;
 
 namespace AI.Model;
 
+@doc("The ChatCompletionsOptions model")
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
@@ -115,6 +117,7 @@ model ChatCompletionsOptions {
     """)
   `model`?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   ...Record<unknown>;
 };
 
@@ -455,7 +458,7 @@ model FunctionDefinition {
     """)
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
   parameters?: unknown;
 }

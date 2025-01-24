@@ -6,6 +6,7 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 alias EmbeddingsOptions = {
   @doc("""
     Input text to embed, encoded as a string or array of tokens.
@@ -37,5 +38,6 @@ alias EmbeddingsOptions = {
     """)
   `model`?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   ...Record<unknown>;
 };

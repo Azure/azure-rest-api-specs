@@ -6,6 +6,7 @@ using TypeSpec.Http;
 
 namespace AI.Model;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 alias ImageEmbeddingsOptions = {
   @doc("""
     Input image to embed. To embed multiple inputs in a single request, pass an array.
@@ -38,6 +39,7 @@ alias ImageEmbeddingsOptions = {
     """)
   `model`?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   ...Record<unknown>;
 };
 
