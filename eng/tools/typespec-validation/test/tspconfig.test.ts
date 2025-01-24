@@ -90,7 +90,7 @@ describe("tspconfig", function () {
 
   it.each([
     {
-      rule: tspconfigRules.find((r) => r.name === "tspconfig-java-mgmt-package-dir-match-pattern")!,
+      rule: tspconfigRules.find((r) => r.name === "tspconfig-java-az-package-dir-match-pattern")!,
       folder: "aaa/aaa.Management/",
       when: 'package-dir "azure-" is invalid',
       tspconfig: `
@@ -102,7 +102,7 @@ describe("tspconfig", function () {
       expectedResult: false,
     },
     {
-      rule: tspconfigRules.find((r) => r.name === "tspconfig-java-mgmt-package-dir-match-pattern")!,
+      rule: tspconfigRules.find((r) => r.name === "tspconfig-java-az-package-dir-match-pattern")!,
       folder: "aaa/aaa.Management/",
       when: 'package-dir "azure-" is invalid',
       tspconfig: `
