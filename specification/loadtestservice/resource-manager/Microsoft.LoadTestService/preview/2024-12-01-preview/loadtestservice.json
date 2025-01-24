@@ -1605,8 +1605,8 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "The new maxMonthlyVirtualUserHours limit.",
-          "minimum": 0
+          "description": "The new maxMonthlyVirtualUserHours limit, with -1 indicating that there is no limit.",
+          "minimum": -1
         }
       }
     },
@@ -1633,7 +1633,8 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "Current limit value."
+          "description": "Current limit value, with -1 indicating that there is no limit.",
+          "minimum": -1
         },
         "usage": {
           "type": "integer",

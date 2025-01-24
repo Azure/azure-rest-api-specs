@@ -194,7 +194,8 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
 @doc("Max monthly virtual usage hours resource limit properties.")
 @added(APIVersions.v2024_12_01_preview)
 model MaxMonthlyVirtualUserHoursResourceProperties {
-  @doc("Current limit value.")
+  @doc("Current limit value, with -1 indicating that there is no limit.")
+  @minValue(-1)
   limit?: int32;
 
   @doc("Current usage value.")
@@ -223,8 +224,8 @@ model MaxMonthlyVirtualUserHoursResource
 @doc("Max monthly virtual usage hours limit request payload.")
 @added(APIVersions.v2024_12_01_preview)
 model MaxMonthlyVirtualUserHoursLimitRequest {
-  @minValue(0)
-  @doc("The new maxMonthlyVirtualUserHours limit.")
+  @doc("The new maxMonthlyVirtualUserHours limit, with -1 indicating that there is no limit.")
+  @minValue(-1)
   limit?: int32;
 }
 
