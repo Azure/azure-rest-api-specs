@@ -1115,7 +1115,7 @@ model DimensionValueList {
   value?: string[];
 
   @doc("Link for the next set of values in case of paginated results, if applicable.")
-  @nextLink
+  @TypeSpec.nextLink
   nextLink?: ResourceLocation<DimensionValueList>;
 }
 
