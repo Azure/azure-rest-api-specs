@@ -335,7 +335,7 @@ model AnalyzeConversationAuthoringEvaluationOptions {
  * Represents the state of a copy job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("CopyProjectJobState", "csharp")
+@clientName("CopyProjectOperationState", "csharp")
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringCopyProjectJobState {
@@ -345,7 +345,7 @@ model AnalyzeConversationAuthoringCopyProjectJobState {
 /**
  * Represents a job's state.
  */
-@clientName("JobState", "csharp")
+@clientName("ConversationAuthoringOperationState", "csharp")
 model AnalyzeConversationAuthoringJobState {
   /**
    * The job ID.
@@ -510,7 +510,7 @@ model AnalyzeConversationAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("DeploymentJobState", "csharp")
+@clientName("DeploymentOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("jobs")
 model AnalyzeConversationAuthoringDeploymentJobState {
@@ -520,7 +520,7 @@ model AnalyzeConversationAuthoringDeploymentJobState {
 /**
  * Represents the state of an existing delete deployment from specific resources job.
  */
-@clientName("DeploymentDeleteFromResourcesJobState", "csharp")
+@clientName("DeploymentDeleteFromResourcesOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("delete-from-resources/jobs")
 model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
@@ -530,7 +530,7 @@ model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("SwapDeploymentsJobState", "csharp")
+@clientName("SwapDeploymentsOperationState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @resource("deployments/swap/jobs")
 model AnalyzeConversationAuthoringSwapDeploymentsJobState {
@@ -556,7 +556,7 @@ model AnalyzeConversationAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-@clientName("ExportProjectJobState", "csharp")
+@clientName("ExportProjectOperationState", "csharp")
 @resource("export/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportProjectJobState {
@@ -571,7 +571,7 @@ model AnalyzeConversationAuthoringExportProjectJobState {
 /**
  * Represents the state of an import job.
  */
-@clientName("ImportProjectJobState", "csharp")
+@clientName("ImportProjectOperationState", "csharp")
 @resource("import/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringImportProjectJobState {
@@ -642,7 +642,7 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-@clientName("EvaluationJobState", "csharp")
+@clientName("EvaluationOperationState", "csharp")
 @resource("evaluate/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringEvaluationJobState {
@@ -1000,7 +1000,7 @@ model AnalyzeConversationAuthoringIntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-@clientName("LoadSnapshotJobState", "csharp")
+@clientName("LoadSnapshotOperationState", "csharp")
 @resource("load-snapshot/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringLoadSnapshotJobState {
@@ -1094,7 +1094,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
  * Represents the state of a deployment resources job.
  */
 @added(Versions.v2023_04_15_preview)
-@clientName("DeploymentResourcesJobState", "csharp")
+@clientName("DeploymentResourcesOperationState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringDeploymentResourcesJobState {
@@ -1120,7 +1120,7 @@ model AnalyzeConversationAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-@clientName("TrainingJobState", "csharp")
+@clientName("TrainingOperationState", "csharp")
 @resource("train/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringTrainingJobState {
@@ -1171,7 +1171,7 @@ model AnalyzeConversationAuthoringTrainingJobResult {
 /**
  * Represents the detailed state of a training sub-operation.
  */
-@clientName("SubTrainingJobState", "csharp")
+@clientName("SubTrainingOperationState", "csharp")
 model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
@@ -1197,7 +1197,7 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-@clientName("ProjectDeletionJobState", "csharp")
+@clientName("ProjectDeletionOperationState", "csharp")
 model AnalyzeConversationAuthoringProjectDeletionJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
@@ -1819,7 +1819,7 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
  * Represents the state of a job to create or updated an exported model.
  */
 @added(Versions.v2024_11_15_preview)
-@clientName("ExportedModelJobState", "csharp")
+@clientName("ExportedModelOperationState", "csharp")
 @resource("jobs")
 @parentResource(AnalyzeConversationAuthoringExportedTrainedModel)
 model AnalyzeConversationAuthoringExportedModelJobState {

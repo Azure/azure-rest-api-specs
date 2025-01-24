@@ -156,8 +156,7 @@ union EvaluationKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
-@clientName("AnalyzeConversationAuthoringJobStatus", "csharp")
-@clientNamespace("Language.Conversations.Authoring.Common")
+@clientName("ConversationAuthoringOperationStatus", "csharp")
 union JobStatus {
   string,
   notStarted: "notStarted",
