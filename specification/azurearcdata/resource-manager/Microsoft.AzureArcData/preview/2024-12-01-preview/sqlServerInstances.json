@@ -279,6 +279,12 @@
           "description": "Indicates if the resource represents a SQL Server engine or a SQL Server component service installed on the host.",
           "$ref": "#/definitions/ServiceType"
         },
+        "maxServerMemoryInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "max server memory (MB) value configured for this instance.",
+          "readOnly": true
+        },
         "isMicrosoftPkiCertTrustConfigured": {
           "type": "boolean",
           "description": "Indicates whether Microsoft PKI root-authority certificate (trusted by Azure) exists in SQL Server and trusted for Azure database.windows.net domains.",
