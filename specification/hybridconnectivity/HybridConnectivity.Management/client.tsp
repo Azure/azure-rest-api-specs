@@ -71,6 +71,13 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(EndpointResources, "Endpoints", "python");
 
 @@clientName(Microsoft.HybridConnectivity,
+  "HybridConnectivityMgmtClient",
+  "java"
+);
+@@clientName(ServiceConfigurationResources, "ServiceConfigurations", "java");
+@@clientName(EndpointResources, "Endpoints", "java");
+
+@@clientName(Microsoft.HybridConnectivity,
   "HybridConnectivityManagementAPI",
   "javascript"
 );
