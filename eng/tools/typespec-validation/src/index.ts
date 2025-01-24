@@ -8,6 +8,8 @@ import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
 import { getSuppressions, Suppression } from "suppressions";
+import tspconfigRules from "./rules/tspconfig-validation-rules.js";
+import { Rule } from "./rule.js";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -39,7 +41,7 @@ export async function main() {
     return;
   }
 
-  const rules = [
+  let rules: Rule[] = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
@@ -48,6 +50,8 @@ export async function main() {
     new CompileRule(),
     new FormatRule(),
   ];
+  rules.push(...tspconfigRules);
+
   let success = true;
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
