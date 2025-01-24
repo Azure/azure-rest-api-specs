@@ -37,7 +37,7 @@ function convertToOldRules() {
         const results = await runESLint(configText, folder, rule.name);
         if (results.length > 0 && results[0].messages.length > 0) {
           return {
-            stdOutput: 'Validation failed. ' + results[0].messages[0].message,
+            stdOutput: 'Validation failed.\n' + results[0].messages[0].message,
             // Only used to provide suggestion to correct tspconfig
             success: true,
           };
