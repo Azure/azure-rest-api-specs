@@ -1,5 +1,4 @@
 import { KeyType, RuleDocument } from "../interfaces/rule-interfaces.js";
-import { emitters } from "./constants.js";
 import { stringify } from "yaml";
 
 function createDescriptionDocumentBlock(
