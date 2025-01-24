@@ -1,6 +1,6 @@
 import { Rule } from "eslint";
 import { TypeSpecConfig } from "../config/types.js";
-import { createCodeGenSDKRule, isAzureSDK, isManagementSDK } from "../utils/rule-creator.js";
+import { createCodeGenSDKRule, isManagementSDK } from "../utils/rule-creator.js";
 import { emitters } from "../utils/constants.js";
 import { CreateCodeGenSDKRuleArgs, KeyType } from "../interfaces/rule-interfaces.js";
 
@@ -9,7 +9,7 @@ const tsIsManagementCondition = (tspconfig: TypeSpecConfig, context: Rule.RuleCo
   const isModularLibrary = tspconfig.options?.[emitterName]?.isModularLibrary as
     | boolean
     | undefined;
-  return isManagementSDK(tspconfig, context, emitterName) && isModularLibrary !== false;
+  return isManagementSDK(context) && isModularLibrary !== false;
 };
 
 const args: CreateCodeGenSDKRuleArgs[] = [
@@ -86,8 +86,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "sdk/resourcemanager/aaa",
     extraExplanation:
       "The 'service-dir' should be a string that starts with 'sdk/resourcemanager/', followed by zero or more characters that are not a '/', and ends there",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-package-dir-match-pattern",
@@ -97,8 +96,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "armaaa",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'arm' and do not contain a forward slash (/) after it",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-module-equal-string",
@@ -106,8 +104,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}",
     exampleValue: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-fix-const-stuttering-true",
@@ -115,8 +112,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-generate-examples-true",
@@ -124,8 +120,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-generate-fakes-true",
@@ -133,8 +128,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-head-as-boolean-true",
@@ -142,8 +136,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-go-mgmt-inject-spans-true",
@@ -151,8 +144,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.go),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   // java
   {
@@ -163,8 +155,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "azure-aaa",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure', followed by one or more '-<word>' segments. Each segment can contains letters, digits, or underscores",
-    condition: (tspconfig: TypeSpecConfig, _: Rule.RuleContext) =>
-      isAzureSDK(tspconfig, emitters.java),
+    condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
   },
   // python
   {
@@ -175,8 +166,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "azure-mgmt-aaa",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure-mgmt', followed by 1 or 2 hyphen-separated lowercase alphabetic segments",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.python),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-python-mgmt-package-name-equal-string",
@@ -184,8 +174,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: "{package-dir}",
     exampleValue: "{package-dir}",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.python),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-python-mgmt-generate-test-true",
@@ -193,8 +182,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.python),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   {
     rule: "tspconfig-python-mgmt-generate-sample-true",
@@ -202,8 +190,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.python),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
   // csharp
   {
@@ -213,8 +200,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     expectedValue: /^Azure\./,
     exampleValue: "Azure.aaa",
     extraExplanation: "The 'package-dir' should be a string that starts with 'Azure.'",
-    condition: (tspconfig: TypeSpecConfig, _: Rule.RuleContext) =>
-      isAzureSDK(tspconfig, emitters.csharp),
+    condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
   },
   {
     rule: "tspconfig-csharp-az-namespace-equal-string",
@@ -222,8 +208,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: "{package-dir}",
     exampleValue: "{package-dir}",
-    condition: (tspconfig: TypeSpecConfig, _: Rule.RuleContext) =>
-      isAzureSDK(tspconfig, emitters.csharp),
+    condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
   },
   {
     rule: "tspconfig-csharp-az-clear-output-folder-true",
@@ -231,8 +216,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     type: KeyType.EmitterOption,
     expectedValue: true,
     exampleValue: true,
-    condition: (tspconfig: TypeSpecConfig, _: Rule.RuleContext) =>
-      isAzureSDK(tspconfig, emitters.csharp),
+    condition: (_: TypeSpecConfig, _1: Rule.RuleContext) => true,
   },
   {
     rule: "tspconfig-csharp-mgmt-package-dir-match-pattern",
@@ -242,8 +226,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "Azure.ResourceManager.aaa",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'Azure.ResourceManager.'",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
-      isManagementSDK(tspconfig, context, emitters.csharp),
+    condition: (_: TypeSpecConfig, context: Rule.RuleContext) => isManagementSDK(context),
   },
 ];
 
