@@ -163,7 +163,7 @@ const args: CreateCodeGenSDKRuleArgs[] = [
     exampleValue: "azure-aaa",
     extraExplanation:
       "The 'package-dir' should be a string that starts with 'azure', followed by one or more '-<word>' segments. Each segment can contains letters, digits, or underscores",
-    condition: (tspconfig: TypeSpecConfig, context: Rule.RuleContext) =>
+    condition: (tspconfig: TypeSpecConfig, _: Rule.RuleContext) =>
       isAzureSDK(tspconfig, emitters.java),
   },
   // python
