@@ -26,6 +26,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
 
   ...EntityTagProperty;
 
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 scalar ClusterResourceId
@@ -56,7 +57,6 @@ model FleetMemberProperties {
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
 
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @lroStatus
