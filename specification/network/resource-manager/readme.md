@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2024-06-preview` is specified on t
 ```yaml $(tag) == 'package-2024-06-preview'
 input-file:
   - Microsoft.Network/preview/2024-06-01-preview/networkSecurityPerimeter.json
+  - Microsoft.Network/preview/2024-06-01-preview/network.json
   - Microsoft.Network/stable/2024-05-01/applicationGateway.json
   - Microsoft.Network/stable/2024-05-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2024-05-01/applicationSecurityGroup.json
@@ -67,7 +68,6 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/loadBalancer.json
   - Microsoft.Network/stable/2024-05-01/natGateway.json
   - Microsoft.Network/stable/2024-05-01/networkInterface.json
-  - Microsoft.Network/stable/2024-05-01/network.json
   - Microsoft.Network/stable/2024-05-01/networkManager.json
   - Microsoft.Network/stable/2024-05-01/networkManagerActiveConfiguration.json
   - Microsoft.Network/stable/2024-05-01/networkManagerConnection.json
