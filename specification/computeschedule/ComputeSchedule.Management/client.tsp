@@ -96,9 +96,9 @@ using Microsoft.ComputeSchedule;
   "csharp"
 );
 @@clientName(CancelOperationsRequest.correlationid, "correlationId", "csharp");
-@@clientName(Schedule.deadLine, "userRequestDeadline", "csharp");
-@@clientName(Schedule.timeZone, "userRequestTimezone", "csharp");
-@@clientName(ResourceOperationDetails.timeZone, "operationTimezone", "csharp");
+@@clientName(Schedule.deadLine, "userRequestDeadline", "csharp,javascript");
+@@clientName(Schedule.timeZone, "userRequestTimezone", "csharp,javascript");
+@@clientName(ResourceOperationDetails.timeZone, "operationTimezone", "csharp,javascript");
 @@clientName(OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp"
