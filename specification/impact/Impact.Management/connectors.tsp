@@ -23,7 +23,6 @@ model Connector is ProxyResource<ConnectorProperties> {
 }
 
 @doc("A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.")
-@subscriptionResource
 model ConnectorUpdate is ProxyResource<ConnectorPropertiesUpdate> {
   @doc("The name of the connector")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
@@ -33,6 +32,7 @@ model ConnectorUpdate is ProxyResource<ConnectorPropertiesUpdate> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("Details of the Connector.")
 model ConnectorPropertiesUpdate {
   @doc("connector type")
