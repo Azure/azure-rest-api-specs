@@ -910,6 +910,17 @@
         }
       }
     },
+    "HciHardwareProfile": {
+      "type": "object",
+      "description": "Hardware configurations for HCI device.",
+      "properties": {
+        "processorType": {
+          "type": "string",
+          "description": "Process type of the device",
+          "readOnly": true
+        }
+      }
+    },
     "HciReportedProperties": {
       "type": "object",
       "description": "The device Configuration for HCI device.",
@@ -932,6 +943,11 @@
         "storageProfile": {
           "$ref": "#/definitions/HciStorageProfile",
           "description": "Hci device storage specific information.",
+          "readOnly": true
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HciHardwareProfile",
+          "description": "Hci device hardware specific information.",
           "readOnly": true
         }
       },
