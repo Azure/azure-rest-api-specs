@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultClient",
-    "version": "7.5",
+    "version": "7.6-preview.2",
     "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
     "x-typespec-generated": [
       {
@@ -435,6 +435,53 @@
         "x-ms-examples": {
           "Update key": {
             "$ref": "./examples/UpdateKey-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}/{key-version}/attestation": {
+      "get": {
+        "operationId": "GetKeyAttestation",
+        "summary": "Gets the public part of a stored key along with its attestation blob.",
+        "description": "The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key-name",
+            "in": "path",
+            "description": "The name of the key to retrieve attestation for.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyName"
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "description": "Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "keyVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get key attestation": {
+            "$ref": "./examples/GetKeyAttestation-example.json"
           }
         }
       }
@@ -1566,7 +1613,9 @@
         "A256CBC",
         "A128CBCPAD",
         "A192CBCPAD",
-        "A256CBCPAD"
+        "A256CBCPAD",
+        "CKM_AES_KEY_WRAP",
+        "CKM_AES_KEY_WRAP_PAD"
       ],
       "x-ms-enum": {
         "name": "JsonWebKeyEncryptionAlgorithm",
@@ -1646,6 +1695,16 @@
             "name": "A256_CBCPAD",
             "value": "A256CBCPAD",
             "description": "256-bit AES-CBC with PKCS padding."
+          },
+          {
+            "name": "CKM_AES_KEY_WRAP",
+            "value": "CKM_AES_KEY_WRAP",
+            "description": "CKM AES key wrap."
+          },
+          {
+            "name": "CKM_AES_KEY_WRAP_PAD",
+            "value": "CKM_AES_KEY_WRAP_PAD",
+            "description": "CKM AES key wrap with padding."
           }
         ]
       }

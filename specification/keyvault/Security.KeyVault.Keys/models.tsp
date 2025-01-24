@@ -376,6 +376,39 @@ model KeyAttributes {
    */
   @visibility("read")
   hsmPlatform?: string;
+
+  /**
+   * The key or key version attestation information.
+   */
+  attestation?: KeyAttestation;
+}
+
+/**
+ * The key attestation information.
+ */
+model KeyAttestation {
+  /**
+   * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
+   */
+  @encode("base64url")
+  certificatePemFile?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a private key.
+   */
+  @encode("base64url")
+  privateKeyAttestation?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a public key in case of asymmetric key.
+   */
+  @encode("base64url")
+  publicKeyAttestation?: bytes;
+
+  /**
+   * The version of the attestation.
+   */
+  version?: string;
 }
 
 /**
