@@ -8,4 +8,5 @@ import "./resources/subscriptionInternalProperties.tsp";
 import "./resources/azurehosts.tsp";
 import "./resources/datacenters.tsp";
 import "./resources/clusters.tsp";
+import "./resources/service.tsp";
 import "./resources/operations.tsp";
