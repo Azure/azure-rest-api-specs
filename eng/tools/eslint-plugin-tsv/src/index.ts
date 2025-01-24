@@ -1,6 +1,5 @@
-import { Rule, ESLint, Linter } from "eslint";
+import { ESLint } from "eslint";
 import tsvPlugin from "./eslint-plugin-tsv.js";
-import { parseForESLint, parseYAML } from "yaml-eslint-parser";
 
-export { parseForESLint, parseYAML, Rule as ESRule, ESLint, Linter };
+export { ESLint };
 export default tsvPlugin;
