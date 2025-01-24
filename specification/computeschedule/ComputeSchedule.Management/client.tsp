@@ -85,20 +85,44 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
 
-@@clientName(SubmitDeallocateRequest.correlationid, "correlationId", "csharp,javascript");
-@@clientName(SubmitStartRequest.correlationid, "correlationId", "csharp,javascript");
-@@clientName(SubmitHibernateRequest.correlationid, "correlationId", "csharp,javascript");
-@@clientName(ExecuteDeallocateRequest.correlationid, "correlationId", "csharp,javascript");
-@@clientName(ExecuteHibernateRequest.correlationid, "correlationId", "csharp,javascript");
-@@clientName(ExecuteStartRequest.correlationid, "correlationId", "csharp,javascript");
+@@clientName(SubmitDeallocateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(SubmitStartRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(SubmitHibernateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteDeallocateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteHibernateRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
+@@clientName(ExecuteStartRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(GetOperationStatusRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(CancelOperationsRequest.correlationid, "correlationId", "csharp,javascript");
+@@clientName(CancelOperationsRequest.correlationid,
+  "correlationId",
+  "csharp,javascript"
+);
 @@clientName(Schedule.deadLine, "userRequestDeadline", "csharp,javascript");
 @@clientName(Schedule.timeZone, "userRequestTimezone", "csharp,javascript");
-@@clientName(ResourceOperationDetails.timeZone, "operationTimezone", "csharp,javascript");
+@@clientName(ResourceOperationDetails.timeZone,
+  "operationTimezone",
+  "csharp,javascript"
+);
 @@clientName(OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript"
