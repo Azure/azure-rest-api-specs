@@ -3,5 +3,5 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Impact, "ImpactReportingManagementClient", "java");
+@@clientName(Microsoft.Impact, "ImpactReportingMgmtClient", "java");
 @@clientName(Microsoft.Impact, "ImpactReportingMgmtClient", "python");
