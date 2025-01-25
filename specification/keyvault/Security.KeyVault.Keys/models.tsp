@@ -387,6 +387,7 @@ model KeyAttributes {
 /**
  * The key attestation information.
  */
+@added(KeyVault.Versions.`v7.6_preview.2`)
 model KeyAttestation {
   /**
    * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
