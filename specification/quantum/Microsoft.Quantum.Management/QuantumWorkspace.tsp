@@ -27,6 +27,11 @@ model QuantumWorkspace
 @armResourceOperations
 interface QuantumWorkspaces {
   /**
+   * Check the availability of the resource name for the given location.
+   */
+  checkLocalNameAvailability is checkLocalNameAvailability;
+
+  /**
    * Returns the Workspace resource associated with the given name.
    */
   get is ArmResourceRead<QuantumWorkspace>;

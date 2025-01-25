@@ -15,15 +15,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Quantum;
 
 @armResourceOperations
-interface WorkspaceOperations {
-  /**
-   * Check the availability of the resource name.
-   */
-  checkNameAvailability is checkLocalNameAvailability
-}
-
-@armResourceOperations
-interface OfferingsOperations {
+interface Offerings {
   /**
    * Returns the list of all provider offerings available for the given location.
    */
