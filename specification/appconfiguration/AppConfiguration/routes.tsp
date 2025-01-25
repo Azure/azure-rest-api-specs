@@ -10,7 +10,7 @@ using Azure.Core.Traits;
 namespace AzureAppConfiguration;
 
 alias AppConfigOperation<
-  TParams extends Reflection.Model,
+  TParams,
   TResponse,
   Traits extends Reflection.Model = {},
   TError = Error
@@ -26,22 +26,21 @@ alias StandardOps = ResourceOperations<
   Error
 >;
 
+alias KeysRequestParams = {
+  ...NameQueryParam<"A filter for the name of the returned keys.">;
+  ...AfterHeader;
+  ...SyncTokenHeader;
+  ...AcceptDatetimeHeader;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of keys.")
 @doc("Gets a list of keys.")
 op getKeys is Foundations.ResourceList<
   Key,
-  {
-    ...NameQueryParam<"A filter for the name of the returned keys.">;
-    ...AfterHeader;
-    ...SyncTokenHeader;
-    ...AcceptDatetimeHeader;
-  },
-  KeyListResult & {
-    ...SyncTokenHeader;
-    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
-  },
+  KeysRequestParams,
+  KeyListResult & SyncTokenHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">,
   {},
   Error
 >;
@@ -52,25 +51,12 @@ op getKeys is Foundations.ResourceList<
 @route("/keys")
 @head
 op checkKeys is AppConfigOperation<
-  {
-    ...NameQueryParam<"A filter for the name of the returned keys.">;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-  },
-  OkResponse & {
-    ...SyncTokenHeader;
-  }
+  KeysRequestParams,
+  OkResponse & SyncTokenHeader
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
-@summary("Gets a list of key-values.")
-@doc("Gets a list of key-values.")
-op getKeyValues is Foundations.ResourceList<
-  KeyValue,
-  {
-    ...KeyQueryParam<"""
+alias KeyValuesRequestParams = {
+  ...KeyQueryParam<"""
       A filter used to match keys. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """>;
@@ -96,7 +82,15 @@ op getKeyValues is Foundations.ResourceList<
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """>;
-  },
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
+@summary("Gets a list of key-values.")
+@doc("Gets a list of key-values.")
+op getKeyValues is Foundations.ResourceList<
+  KeyValue,
+  KeyValuesRequestParams,
   KeyValueListResult &
     AppConfigResponseHeaders &
     ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
@@ -110,31 +104,7 @@ op getKeyValues is Foundations.ResourceList<
 @route("/kv")
 @head
 op checkKeyValues is AppConfigOperation<
-  {
-    ...KeyQueryParam<"""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """>;
-    ...LabelQueryParam<"""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """>;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      KeyValueFields
-    >;
-    ...SnapshotOptionalQueryParam<"A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.">;
-    ...IfMatchHeader;
-    ...IfNoneMatchHeader;
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    ...TagsQueryParam<"""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/keyvaluefiltering
-      """>;
-  },
+  KeyValuesRequestParams,
   OkResponse & AppConfigResponseHeaders
 >;
 
