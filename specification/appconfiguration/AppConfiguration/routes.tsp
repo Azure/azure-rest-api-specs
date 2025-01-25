@@ -9,7 +9,7 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-alias appConfigOperation<
+alias AppConfigOperation<
   TParams extends Reflection.Model,
   TResponse,
   Traits extends Reflection.Model = {},
@@ -21,7 +21,7 @@ alias appConfigOperation<
   TError
 >;
 
-alias standardOps = ResourceOperations<
+alias StandardOps = ResourceOperations<
   NoClientRequestId & NoRepeatableRequests & NoConditionalRequests,
   Error
 >;
@@ -75,7 +75,7 @@ op getKeys is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/keys")
 @head
-op checkKeys is appConfigOperation<
+op checkKeys is AppConfigOperation<
   {
     ...NameQuery;
 
@@ -160,7 +160,7 @@ op getKeyValues is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/kv")
 @head
-op checkKeyValues is appConfigOperation<
+op checkKeyValues is AppConfigOperation<
   {
     @doc("""
       A filter used to match keys. Syntax reference:
@@ -261,7 +261,7 @@ op getKeyValue is Foundations.ResourceOperation<
 @doc("Creates a key-value.")
 @route("/kv/{key}")
 @put
-op putKeyValue is appConfigOperation<
+op putKeyValue is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
@@ -312,7 +312,7 @@ op putKeyValue is appConfigOperation<
 @doc("Deletes a key-value.")
 @route("/kv/{key}")
 @delete
-op deleteKeyValue is appConfigOperation<
+op deleteKeyValue is AppConfigOperation<
   {
     @doc("The key of the key-value to delete.")
     @path
@@ -346,7 +346,7 @@ op deleteKeyValue is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/kv/{key}")
 @head
-op checkKeyValue is appConfigOperation<
+op checkKeyValue is AppConfigOperation<
   {
     @doc("The key of the key-value to retrieve.")
     @path
@@ -415,7 +415,7 @@ op getSnapshots is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots")
 @head
-op checkSnapshots is appConfigOperation<
+op checkSnapshots is AppConfigOperation<
   {
     ...SyncTokenHeader;
 
@@ -428,7 +428,7 @@ op checkSnapshots is appConfigOperation<
 
 @summary("Gets a single key-value snapshot.")
 @doc("Gets a single key-value snapshot.")
-op getSnapshot is standardOps.ResourceRead<
+op getSnapshot is StandardOps.ResourceRead<
   Snapshot,
   QueryParametersTrait<{
     @doc("Used to select what fields are present in the returned resource(s).")
@@ -507,7 +507,7 @@ op createSnapshot is Foundations.LongRunningOperation<
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
 @patch
-op updateSnapshot is appConfigOperation<
+op updateSnapshot is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
@@ -554,7 +554,7 @@ op updateSnapshot is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/snapshots/{name}")
 @head
-op checkSnapshot is appConfigOperation<
+op checkSnapshot is AppConfigOperation<
   {
     @doc("The name of the key-value snapshot to check.")
     @path
@@ -590,7 +590,7 @@ op checkSnapshot is appConfigOperation<
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
-op getLabels is appConfigOperation<
+op getLabels is AppConfigOperation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
@@ -617,7 +617,7 @@ op getLabels is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
 @head
-op checkLabels is appConfigOperation<
+op checkLabels is AppConfigOperation<
   {
     @doc("A filter for the name of the returned labels.")
     @query("name")
@@ -644,7 +644,7 @@ op checkLabels is appConfigOperation<
 @doc("Locks a key-value.")
 @route("/locks/{key}")
 @put
-op putLock is appConfigOperation<
+op putLock is AppConfigOperation<
   {
     @doc("The key of the key-value to lock.")
     @path
@@ -680,7 +680,7 @@ op putLock is appConfigOperation<
 @doc("Unlocks a key-value.")
 @route("/locks/{key}")
 @delete
-op deleteLock is appConfigOperation<
+op deleteLock is AppConfigOperation<
   {
     @doc("The key of the key-value to unlock.")
     @path
@@ -717,7 +717,7 @@ op deleteLock is appConfigOperation<
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
-op getRevisions is appConfigOperation<
+op getRevisions is AppConfigOperation<
   {
     @doc("""
       A filter used to match keys. Syntax reference:
@@ -759,7 +759,7 @@ op getRevisions is appConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/revisions")
 @head
-op checkRevisions is appConfigOperation<
+op checkRevisions is AppConfigOperation<
   {
     @doc("""
       A filter used to match keys. Syntax reference:
@@ -799,7 +799,7 @@ op checkRevisions is appConfigOperation<
 @doc("Gets the state of a long running operation.")
 @route("/operations")
 @get
-op getOperationDetails is appConfigOperation<
+op getOperationDetails is AppConfigOperation<
   {
     @doc("Snapshot identifier for the long running operation.")
     @query("snapshot")
