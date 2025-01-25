@@ -329,6 +329,27 @@ model OperationDetails {
   error?: Foundations.Error;
 }
 
+alias SyncTokenHeader = {
+  @doc("Used to guarantee real-time consistency between requests.")
+  @header("Sync-Token")
+  syncToken?: string;
+};
+
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+alias ContentTypeHeader<T extends string> = {
+  @doc("Content-Type header")
+  @header("Content-Type")
+  contentType?: T | "application/problem+json";
+};
+
+alias AppConfigResponseHeaders = {
+  ...SyncTokenHeader;
+
+  @doc("A value representing the current state of the resource.")
+  @header("ETag")
+  etagHeader?: string;
+};
+
 alias AfterHeader = {
   @doc("""
     Instructs the server to return elements that appear after the element referred
@@ -336,7 +357,7 @@ alias AfterHeader = {
     """)
   @query("After")
   after?: string;
-}
+};
 
 alias AcceptDatetimeHeader = {
   @doc("""
@@ -345,16 +366,81 @@ alias AcceptDatetimeHeader = {
     """)
   @header("Accept-Datetime")
   acceptDatetime?: string;
-}
+};
 
-alias SelectKeyValueFieldsQuery = {
-  @doc("Used to select what fields are present in the returned resource(s).")
+alias SelectQueryParam<
+  TDoc extends valueof string,
+  Type extends TypeSpec.Reflection.Model | string
+> = {
+  @doc(TDoc)
   @query("$Select")
-  select?: KeyValueFields[];
-}
+  select?: Type[];
+};
 
-alias NameQuery = {
-  @doc("A filter for the name of the returned keys.")
+alias NameQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
   @query("name")
   name?: string;
-}
+};
+
+alias KeyQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("key")
+  key?: string;
+};
+
+alias IfMatchHeader = {
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag matches the
+    value provided.
+    """)
+  @header("If-Match")
+  ifMatch?: string;
+};
+
+alias IfNoneMatchHeader = {
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag does not
+    match the value provided.
+    """)
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+};
+
+alias KeyPathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @path
+  key: string;
+};
+
+alias LabelQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("label")
+  label?: string;
+};
+
+alias SnapshotOptionalQueryParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @query("snapshot")
+  snapshot?: string;
+};
+
+alias TagsQueryParam<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+  @doc(TDoc)
+  @query(#{ name: "tags", explode: true })
+  tags?: string[];
+};
+
+alias LinkHeader = {
+  @doc("Includes links to related resources.")
+  @header("Link")
+  link?: string;
+};
+
+alias NamePathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @maxLength(256)
+  @path
+  name: string;
+};
