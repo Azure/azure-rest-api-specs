@@ -326,22 +326,24 @@ op checkSnapshot is AppConfigOperation<
   OkResponse & AppConfigResponseHeaders & LinkHeader
 >;
 
+alias LabelsRequestParams = {
+  ...NameQueryParam<"A filter for the name of the returned labels.">;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...AcceptDatetimeHeader;
+  ...SelectQueryParam<
+    "Used to select what fields are present in the returned resource(s).",
+    LabelFields
+  >;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
 op getLabels is AppConfigOperation<
-  {
-    ...NameQueryParam<"A filter for the name of the returned labels.">;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      LabelFields
-    >;
-  },
+  LabelsRequestParams,
   LabelListResult & SyncTokenHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">
 >;
 
@@ -351,16 +353,7 @@ op getLabels is AppConfigOperation<
 @route("/labels")
 @head
 op checkLabels is AppConfigOperation<
-  {
-    ...NameQueryParam<"A filter for the name of the returned labels.">;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      LabelFields
-    >;
-  },
+  LabelsRequestParams,
   OkResponse & SyncTokenHeader
 >;
 
@@ -401,6 +394,29 @@ op deleteLock is AppConfigOperation<
     ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
+alias RevisionsRequestParams = {
+  ...KeyQueryParam<"""
+    A filter used to match keys. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+  ...LabelQueryParam<"""
+    A filter used to match labels. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...AcceptDatetimeHeader;
+  ...SelectQueryParam<
+    "Used to select what fields are present in the returned resource(s).",
+    KeyValueFields
+  >;
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
+  ...TagsQueryParam<"""
+    A filter used to query by tags. Syntax reference:
+    https://aka.ms/azconfig/docs/restapirevisions
+    """>;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value revisions.")
@@ -408,28 +424,7 @@ op deleteLock is AppConfigOperation<
 @route("/revisions")
 @get
 op getRevisions is AppConfigOperation<
-  {
-    ...KeyQueryParam<"""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-    ...LabelQueryParam<"""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      KeyValueFields
-    >;
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    ...TagsQueryParam<"""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-  },
+  RevisionsRequestParams,
   KeyValueListResult &
     AppConfigResponseHeaders &
     ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
@@ -441,28 +436,7 @@ op getRevisions is AppConfigOperation<
 @route("/revisions")
 @head
 op checkRevisions is AppConfigOperation<
-  {
-    ...KeyQueryParam<"""
-      A filter used to match keys. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-    ...LabelQueryParam<"""
-      A filter used to match labels. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-    ...SyncTokenHeader;
-    ...AfterHeader;
-    ...AcceptDatetimeHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      KeyValueFields
-    >;
-    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
-    ...TagsQueryParam<"""
-      A filter used to query by tags. Syntax reference:
-      https://aka.ms/azconfig/docs/restapirevisions
-      """>;
-  },
+  RevisionsRequestParams,
   OkResponse & AppConfigResponseHeaders
 >;
 
