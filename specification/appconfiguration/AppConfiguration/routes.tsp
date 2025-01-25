@@ -120,18 +120,13 @@ op getKeyValue is Foundations.ResourceOperation<
       "Used to select what fields are present in the returned resource(s).",
       KeyValueFields
     >;
-  } & {
     ...SyncTokenHeader;
     ...AcceptDatetimeHeader;
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...ClientRequestIdHeader;
   },
-  Body<KeyValue> & {
-    ...RequestIdResponseHeader;
-    ...AppConfigResponseHeaders;
-    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
-  },
+  Body<KeyValue> & RequestIdResponseHeader & AppConfigResponseHeaders & ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">,
   {},
   Error
 >;
@@ -233,10 +228,7 @@ op getSnapshots is Foundations.ResourceList<
 
     ...SyncTokenHeader;
   },
-  SnapshotListResult & {
-    ...SyncTokenHeader;
-    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
-  },
+  SnapshotListResult & SyncTokenHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">,
   {},
   Error
 >;
@@ -247,10 +239,7 @@ op getSnapshots is Foundations.ResourceList<
 @route("/snapshots")
 @head
 op checkSnapshots is AppConfigOperation<
-  {
-    ...SyncTokenHeader;
-    ...AfterHeader;
-  },
+  SyncTokenHeader & AfterHeader,
   OkResponse & SyncTokenHeader
 >;
 
@@ -268,10 +257,7 @@ op getSnapshot is StandardOps.ResourceRead<
       ...IfNoneMatchHeader;
       ...ClientRequestIdHeader;
     }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders & {
-      ...LinkHeader;
-      ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    } & RequestIdResponseHeader>
+    ResponseHeadersTrait<AppConfigResponseHeaders & LinkHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json"> & RequestIdResponseHeader>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -296,11 +282,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     entity: Snapshot;
   },
   CreatedResponse &
-    Snapshot & {
-      ...AppConfigResponseHeaders;
-      ...LinkHeader;
-      ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    },
+    Snapshot & AppConfigResponseHeaders & LinkHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">,
   {},
   Error
 >;
@@ -326,11 +308,7 @@ op updateSnapshot is AppConfigOperation<
     @body
     entity: SnapshotUpdateParameters;
   },
-  Snapshot & {
-    ...AppConfigResponseHeaders;
-    ...LinkHeader;
-    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-  }
+  Snapshot & AppConfigResponseHeaders & LinkHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -345,10 +323,7 @@ op checkSnapshot is AppConfigOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
   },
-  OkResponse & {
-    ...AppConfigResponseHeaders;
-    ...LinkHeader;
-  }
+  OkResponse & AppConfigResponseHeaders & LinkHeader
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
@@ -367,10 +342,7 @@ op getLabels is AppConfigOperation<
       LabelFields
     >;
   },
-  LabelListResult & {
-    ...SyncTokenHeader;
-    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
-  }
+  LabelListResult & SyncTokenHeader & ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -389,9 +361,7 @@ op checkLabels is AppConfigOperation<
       LabelFields
     >;
   },
-  OkResponse & {
-    ...SyncTokenHeader;
-  }
+  OkResponse & SyncTokenHeader
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
