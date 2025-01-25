@@ -56,7 +56,7 @@ union UsableStatus {
  */
 union WorkspaceProvisioningStatus {
   ResourceProvisioningState,
-  
+
   /** The Workspace provisioning is succeeded. */
   Succeeded: "Succeeded",
 
@@ -466,10 +466,10 @@ model Resource {
   systemData?: SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 /**
  * Tags object for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model TagsObject {
   /**
    * Resource tags.
