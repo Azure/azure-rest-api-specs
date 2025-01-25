@@ -26,21 +26,21 @@ alias standardOps = ResourceOperations<
   Error
 >;
 
-alias syncTokenHeader = {
+alias SyncTokenHeader = {
   @doc("Used to guarantee real-time consistency between requests.")
   @header("Sync-Token")
   syncToken?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-alias contentTypeHeader<T extends string> = {
+alias ContentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
   contentType?: T | "application/problem+json";
 };
 
 alias AppConfigResponseHeaders = {
-  ...syncTokenHeader;
+  ...SyncTokenHeader;
 
   @doc("A value representing the current state of the resource.")
   @header("ETag")
@@ -54,29 +54,17 @@ alias AppConfigResponseHeaders = {
 op getKeys is Foundations.ResourceList<
   Key,
   {
-    @doc("A filter for the name of the returned keys.")
-    @query("name")
-    name?: string;
+    ...NameQuery;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
   },
   KeyListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
+    ...SyncTokenHeader;
+    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   },
   {},
   Error
@@ -89,28 +77,16 @@ op getKeys is Foundations.ResourceList<
 @head
 op checkKeys is appConfigOperation<
   {
-    @doc("A filter for the name of the returned keys.")
-    @query("name")
-    name?: string;
+    ...NameQuery;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
   },
   OkResponse & {
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   }
 >;
 
@@ -135,25 +111,13 @@ op getKeyValues is Foundations.ResourceList<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
 
     @doc("""
       A filter used get key-values for a snapshot. The value should be the name of
@@ -186,7 +150,7 @@ op getKeyValues is Foundations.ResourceList<
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">,
   {},
   Error
 >;
@@ -212,25 +176,13 @@ op checkKeyValues is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
 
     @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
     @query("snapshot")
@@ -272,18 +224,11 @@ op getKeyValue is Foundations.ResourceOperation<
     @query("label")
     label?: string;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
   } & {
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -304,7 +249,7 @@ op getKeyValue is Foundations.ResourceOperation<
   Response = Body<KeyValue> & {
     ...RequestIdResponseHeader;
     ...AppConfigResponseHeaders;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
+    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
   Traits = {},
   ErrorResponse = Error
@@ -337,7 +282,7 @@ op putKeyValue is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -359,7 +304,7 @@ op putKeyValue is appConfigOperation<
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -377,7 +322,7 @@ op deleteKeyValue is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -388,11 +333,11 @@ op deleteKeyValue is appConfigOperation<
   },
   (Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
     statusCode: 204;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   }
 >;
 
@@ -411,14 +356,9 @@ op checkKeyValue is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -434,9 +374,7 @@ op checkKeyValue is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
   },
   OkResponse & AppConfigResponseHeaders
 >;
@@ -452,12 +390,7 @@ op getSnapshots is Foundations.ResourceList<
     @query("name")
     name?: string;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
@@ -467,11 +400,11 @@ op getSnapshots is Foundations.ResourceList<
     @query("status")
     status?: SnapshotStatus[];
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   },
   SnapshotListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
+    ...SyncTokenHeader;
+    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   {},
   Error
@@ -484,17 +417,12 @@ op getSnapshots is Foundations.ResourceList<
 @head
 op checkSnapshots is appConfigOperation<
   {
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
   },
   OkResponse & {
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   }
 >;
 
@@ -508,7 +436,7 @@ op getSnapshot is standardOps.ResourceRead<
     select?: SnapshotFields[];
   }> &
     RequestHeadersTrait<{
-      ...syncTokenHeader;
+      ...SyncTokenHeader;
 
       @doc("""
         Used to perform an operation only if the targeted resource's etag matches the
@@ -531,7 +459,7 @@ op getSnapshot is standardOps.ResourceRead<
       @header("Link")
       link?: string;
 
-      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+      ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     } & RequestIdResponseHeader>
 >;
 
@@ -554,7 +482,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     @path
     name: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("The key-value snapshot to create.")
     @body
@@ -568,7 +496,7 @@ op createSnapshot is Foundations.LongRunningOperation<
       @header("Link")
       link?: string;
 
-      ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+      ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     },
   {},
   Error
@@ -590,7 +518,7 @@ op updateSnapshot is appConfigOperation<
     @path
     name: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -617,7 +545,7 @@ op updateSnapshot is appConfigOperation<
     @header("Link")
     link?: string;
 
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
+    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   }
 >;
 
@@ -632,7 +560,7 @@ op checkSnapshot is appConfigOperation<
     @path
     name: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -668,29 +596,19 @@ op getLabels is appConfigOperation<
     @query("name")
     name?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: LabelFields[];
   },
   LabelListResult & {
-    ...syncTokenHeader;
-    ...contentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
+    ...SyncTokenHeader;
+    ...ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   }
 >;
 
@@ -705,28 +623,18 @@ op checkLabels is appConfigOperation<
     @query("name")
     name?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
     @doc("Used to select what fields are present in the returned resource(s).")
     @query("$Select")
     select?: LabelFields[];
   },
   OkResponse & {
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
   }
 >;
 
@@ -746,7 +654,7 @@ op putLock is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -764,7 +672,7 @@ op putLock is appConfigOperation<
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -782,7 +690,7 @@ op deleteLock is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
     @doc("""
       Used to perform an operation only if the targeted resource's etag matches the
@@ -800,7 +708,7 @@ op deleteLock is appConfigOperation<
   },
   Body<KeyValue> &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
@@ -825,25 +733,13 @@ op getRevisions is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
 
     #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
@@ -855,7 +751,7 @@ op getRevisions is appConfigOperation<
   },
   KeyValueListResult &
     AppConfigResponseHeaders &
-    contentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -879,25 +775,13 @@ op checkRevisions is appConfigOperation<
     @query("label")
     label?: string;
 
-    ...syncTokenHeader;
+    ...SyncTokenHeader;
 
-    @doc("""
-      Instructs the server to return elements that appear after the element referred
-      to by the specified token.
-      """)
-    @query("After")
-    after?: string;
+    ...AfterHeader;
 
-    @doc("""
-      Requests the server to respond with the state of the resource at the specified
-      time.
-      """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+    ...AcceptDatetimeHeader;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$Select")
-    select?: KeyValueFields[];
+    ...SelectKeyValueFieldsQuery;
 
     #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""

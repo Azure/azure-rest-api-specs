@@ -328,3 +328,33 @@ model OperationDetails {
     """)
   error?: Foundations.Error;
 }
+
+alias AfterHeader = {
+  @doc("""
+    Instructs the server to return elements that appear after the element referred
+    to by the specified token.
+    """)
+  @query("After")
+  after?: string;
+}
+
+alias AcceptDatetimeHeader = {
+  @doc("""
+    Requests the server to respond with the state of the resource at the specified
+    time.
+    """)
+  @header("Accept-Datetime")
+  acceptDatetime?: string;
+}
+
+alias SelectKeyValueFieldsQuery = {
+  @doc("Used to select what fields are present in the returned resource(s).")
+  @query("$Select")
+  select?: KeyValueFields[];
+}
+
+alias NameQuery = {
+  @doc("A filter for the name of the returned keys.")
+  @query("name")
+  name?: string;
+}
