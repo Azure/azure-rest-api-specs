@@ -6,7 +6,6 @@ import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 import "./Microsoft.KeyVault/KeyVault.tsp";
 
@@ -41,11 +40,6 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRouterWorkerSelector.ttlSeconds,
   "timeToLive",
-  "java"
-);
-
-@@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
-  "channelLatency",
   "java"
 );
 
@@ -108,11 +102,6 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(RedisExportRDBCompletedEventData,
   "RedisExportRdbCompletedEventData",
-  "java"
-);
-
-@@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
-  "channelLatency",
   "java"
 );
 
