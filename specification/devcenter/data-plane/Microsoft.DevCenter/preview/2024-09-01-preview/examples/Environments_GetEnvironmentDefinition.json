@@ -1,0 +1,58 @@
+{
+  "title": "Get an environment definition from a catalog.",
+  "operationId": "Environments_GetEnvironmentDefinition",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "catalogName": "myCatalog",
+    "definitionName": "foo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "uri": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/catalogs/myCatalog/environmentDefinitions/foo",
+        "id": "/projects/myProject/catalogs/myCatalog/environmentDefinitions/foo",
+        "name": "foo",
+        "catalogName": "myCatalog",
+        "description": "This environment definition is just for example purposes.",
+        "parameters": [
+          {
+            "id": "functionAppRuntime",
+            "name": "Function App Runtime",
+            "type": "string",
+            "required": true,
+            "default": "dotnet",
+            "allowed": [
+              "node",
+              "dotnet",
+              "java"
+            ]
+          },
+          {
+            "id": "storageAccountType",
+            "name": "Storage Account Type",
+            "type": "string",
+            "required": true,
+            "default": "Standard_LRS",
+            "allowed": [
+              "Standard_LRS",
+              "Standard_GRS",
+              "Standard_RAGRS"
+            ]
+          },
+          {
+            "id": "httpsOnly",
+            "name": "HTTPS only",
+            "type": "boolean",
+            "default": "true",
+            "readOnly": true,
+            "required": true
+          }
+        ],
+        "parametersSchema": "{\"type\":\"object\",\"properties\":{\"functionAppRuntime\":{\"$id\":\"functionAppRuntime\",\"value\":\"dotnet\",\"displayName\":\"Function App Runtime\",\"type\":\"string\",\"enum\":[\"node\",\"dotnet\",\"java\"]},\"storageAccountType\":{\"$id\":\"storageAccountType\",\"value\":\"Standard_LRS\",\"displayName\":\"Storage Account Type\",\"type\":\"string\",\"enum\":[\"Standard_LRS\",\"Standard_GRS\",\"Standard_RAGRS\"]},\"httpsOnly\":{\"$id\":\"httpsOnly\",\"value\":true,\"displayName\":\"HTTPS only\",\"type\":\"boolean\"}},\"required\":[\"functionAppRuntime\",\"storageAccountType\"]}",
+        "templatePath": "azuredeploy.json"
+      }
+    }
+  }
+}

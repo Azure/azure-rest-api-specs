@@ -1,0 +1,885 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Split.IO Experimentation",
+    "version": "2024-07-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ExperimentationWorkspaces"
+    }
+  ],
+  "paths": {
+    "/providers/SplitIO.Experimentation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/SplitIO.Experimentation/experimentationWorkspaces": {
+      "get": {
+        "operationId": "ExperimentationWorkspaces_ListBySubscription",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "List ExperimentationWorkspace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesListBySubscription": {
+            "$ref": "./examples/ExperimentationWorkspacesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces": {
+      "get": {
+        "operationId": "ExperimentationWorkspaces_ListByResourceGroup",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "List ExperimentationWorkspace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesListByResourceGroup": {
+            "$ref": "./examples/ExperimentationWorkspacesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}": {
+      "get": {
+        "operationId": "ExperimentationWorkspaces_Get",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Get a ExperimentationWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesGet": {
+            "$ref": "./examples/ExperimentationWorkspacesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExperimentationWorkspaces_Create",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Create a ExperimentationWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExperimentationWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExperimentationWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesCreate": {
+            "$ref": "./examples/ExperimentationWorkspacesCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExperimentationWorkspaces_Update",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Update a ExperimentationWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentationWorkspace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesUpdate": {
+            "$ref": "./examples/ExperimentationWorkspacesUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExperimentationWorkspaces_Delete",
+        "tags": [
+          "ExperimentationWorkspaces"
+        ],
+        "description": "Delete a ExperimentationWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExperimentationWorkspacesDelete": {
+            "$ref": "./examples/ExperimentationWorkspacesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/dataPlaneApplications/{applicationId}/exchangeToken": {
+      "post": {
+        "operationId": "DataPlaneApplications_ExchangeToken",
+        "description": "The action to exchange Split.IO data plane authentication token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the ExperimentationWorkspace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "description": "The id of the Split.IO data plane authentication application in Guid format.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exchangeTokenParameters",
+            "in": "body",
+            "description": "The parameter of exchange token action.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExchangeTokenResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataPlaneApplicationsExchangeToken": {
+            "$ref": "./examples/DataPlaneApplicationsExchangeToken.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessPolicy": {
+      "type": "object",
+      "description": "Access policy for an experimentation workspace.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application id used for access to the experimentation workspace."
+        },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "A default role given to a user calling the Split.IO data plane when the user has no assigned role."
+        },
+        "dataPlaneEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint used for access to the experimentation workspace.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "applicationId"
+      ]
+    },
+    "AccessPolicyUpdate": {
+      "type": "object",
+      "description": "Access policy for an experimentation workspace.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application id used for access to the experimentation workspace."
+        },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "A default role given to a user calling the Split.IO data plane when the user has no assigned role."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "DataPlaneRole": {
+      "type": "string",
+      "description": "Role required for data plane access.",
+      "enum": [
+        "None",
+        "ExperimentationDataReader",
+        "ExperimentationDataOwner"
+      ],
+      "x-ms-enum": {
+        "name": "DataPlaneRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None data plane role is assigned to user by default."
+          },
+          {
+            "name": "ExperimentationDataReader",
+            "value": "ExperimentationDataReader",
+            "description": "ExperimentationDataReader data plane role is assigned to user by default."
+          },
+          {
+            "name": "ExperimentationDataOwner",
+            "value": "ExperimentationDataOwner",
+            "description": "ExperimentationDataOwner data plane role is assigned to user by default."
+          }
+        ]
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "description": "Data source that telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalytics",
+          "description": "Log Analytics data source."
+        }
+      }
+    },
+    "DataSourceUpdate": {
+      "type": "object",
+      "description": "Data source that telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "logAnalytics": {
+          "$ref": "#/definitions/LogAnalyticsUpdate",
+          "description": "Log Analytics data source."
+        }
+      }
+    },
+    "ExchangeTokenParameters": {
+      "type": "object",
+      "description": "The exchange token parameters for exchanging Split.IO data plane authentication token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The bearer token that is used for exchanging Split.IO data plane authentication token.",
+          "x-ms-secret": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The application ID URI of Split.IO data plane authentication application."
+        }
+      },
+      "required": [
+        "token",
+        "resource"
+      ]
+    },
+    "ExchangeTokenResult": {
+      "type": "object",
+      "description": "The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The bearer token that is used for Split.IO data plane authentication.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "ExperimentationWorkspace": {
+      "type": "object",
+      "description": "A ExperimentationWorkspace Resource by Split.IO",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExperimentationWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a ExperimentationWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExperimentationWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/ExperimentationWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExperimentationWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties of the experimentation workspace",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicy",
+          "description": "Access policy for an experimentation workspace."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        }
+      },
+      "required": [
+        "accessPolicy"
+      ]
+    },
+    "ExperimentationWorkspacePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of the experimentation workspace",
+      "properties": {
+        "accessPolicy": {
+          "$ref": "#/definitions/AccessPolicyUpdate",
+          "description": "Access policy for an experimentation workspace."
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSourceUpdate",
+          "description": "Data source that telemetry data required for experimentation will be retrieved from."
+        }
+      }
+    },
+    "ExperimentationWorkspaceUpdate": {
+      "type": "object",
+      "description": "A ExperimentationWorkspace Resource by Split.IO",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentationWorkspacePropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "LogAnalytics": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      },
+      "required": [
+        "resourceId",
+        "storageAccountResourceId",
+        "enabled"
+      ]
+    },
+    "LogAnalyticsUpdate": {
+      "type": "object",
+      "description": "The Log Analytics workspace which telemetry data required for experimentation will be retrieved from.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
+          "description": "Resource id of the Log Analytics workspace."
+        },
+        "storageAccountResourceId": {
+          "$ref": "#/definitions/StorageAccountResourceId",
+          "description": "Resource id of the storage account associated with the Log Analytics workspace."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether data flow from the configured Log Analytics workspace into the experimentation workspace is enabled."
+        }
+      }
+    },
+    "LogAnalyticsWorkspaceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.OperationalInsights/workspaces"
+          }
+        ]
+      }
+    },
+    "StorageAccountResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Storage/storageAccounts"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

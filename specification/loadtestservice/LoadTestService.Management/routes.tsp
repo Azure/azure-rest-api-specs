@@ -11,16 +11,18 @@ namespace Microsoft.LoadTestService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(LoadTests.createOrUpdate::parameters.resource,
   "application/json",
   "LoadTestResource"
 );
 
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(LoadTests.update::parameters.properties,
   "application/json",
   "LoadTestResourcePatchRequestBody"
 );
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(Quotas.checkAvailability::parameters.body,
   "application/json",
   "QuotaBucketRequest"
@@ -40,9 +42,12 @@ interface LoadTests {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     LoadTestResource,
-    LoadTestProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestResource,
+      LoadTestProperties
+    >,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
@@ -50,13 +55,14 @@ interface LoadTests {
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationID already published."
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "OperationID already published."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")
   outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
     LoadTestResource,
     void,
-    OutboundEnvironmentEndpointCollection
+    PagedOutboundEnvironmentEndpoint
   >;
 }
 
@@ -89,13 +95,16 @@ interface LoadTestMappings {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   @added(APIVersions.v2023_12_01_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     LoadTestMappingResource,
-    LoadTestMappingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestMappingResource,
+      LoadTestMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestMappingResource>;
+  list is ArmResourceListByParent<LoadTestMappingResource>;
 }
 
 @armResourceOperations
@@ -111,11 +120,14 @@ interface LoadTestProfileMappings {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   @added(APIVersions.v2023_12_01_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     LoadTestProfileMappingResource,
-    LoadTestProfileMappingProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestProfileMappingResource,
+      LoadTestProfileMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestProfileMappingResource>;
+  list is ArmResourceListByParent<LoadTestProfileMappingResource>;
 }

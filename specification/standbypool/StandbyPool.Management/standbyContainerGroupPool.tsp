@@ -113,9 +113,13 @@ interface StandbyContainerGroupPools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
-  update is ArmResourcePatchSync<
+  @parameterVisibility
+  update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
-    StandbyContainerGroupPoolResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyContainerGroupPoolResource,
+      StandbyContainerGroupPoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;

@@ -8,39 +8,60 @@ on:
         description: Name of package under eng/tools
         required: true
         type: string
+      sparse-checkout-paths:
+        description: Paths for sparse checkout
+        type: string
+      lint:
+        description: Run 'npm run lint' if true
+        required: false
+        type: boolean
+      prettier:
+        description: Run 'npm run prettier' if true
+        required: false
+        type: boolean
 
 jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        node-version: [18, 20]
+        os: [ubuntu, windows]
+        node-version: [18, 22]
         exclude:
-          - os: ubuntu-latest
-            node-version: 20
-          - os: windows-latest
+          - os: ubuntu
+            node-version: 22
+          - os: windows
             node-version: 18
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+        shell: pwsh
+
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: eng
+          sparse-checkout: |
+            .github
+            eng
+            ${{ inputs.sparse-checkout-paths }}
 
-      - name: Use Node ${{ matrix.node-version }}.x
-        uses: actions/setup-node@v4
+      - name: Setup Node ${{ matrix.node-version }} and run `npm ci`
+        uses: ./.github/actions/setup-node-npm-ci
         with:
           node-version: ${{ matrix.node-version }}.x
 
-      - run: npm ci
-        shell: pwsh
-
-      - run: npm ls -a
-        shell: pwsh
-        continue-on-error: true
-
       - run: npm run build
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run lint
+        if: inputs.lint == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run prettier
+        if: inputs.prettier == true
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 

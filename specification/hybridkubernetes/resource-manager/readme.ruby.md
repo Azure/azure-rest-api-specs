@@ -20,6 +20,7 @@ batch:
   - tag: package-2022-05-01-preview
   - tag: package-2022-10-01-preview
   - tag: package-2024-07-01-preview
+  - tag: package-2024-07-15-preview
 ```
 
 ### Tag: package-2020-01-01-preview and ruby
@@ -57,6 +58,11 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 These settings apply only when `--tag=package-2024-07-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
+### Tag: package-2024-07-15-preview and ruby
+
+These settings apply only when `--tag=package-2024-07-15-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
 ```yaml $(tag) == 'package-2020-01-01-preview' && $(ruby)
 namespace: "Azure::Kubernetes::Mgmt::V2020_01_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybridkubernetes/lib
@@ -83,5 +89,9 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybridkubernetes/lib
 ```
 ```yaml $(tag) == 'package-2024-07-01-preview' && $(ruby)
 namespace: "Azure::Kubernetes::Mgmt::V2024_07_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybridkubernetes/lib
+```
+```yaml $(tag) == 'package-2024-07-15-preview' && $(ruby)
+namespace: "Azure::Kubernetes::Mgmt::V2024_07_15_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybridkubernetes/lib
 ```

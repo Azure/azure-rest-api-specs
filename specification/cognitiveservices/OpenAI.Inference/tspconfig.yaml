@@ -14,7 +14,6 @@ options:
     output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
-    examples-directory: "{project-root}/examples"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
@@ -25,12 +24,10 @@ options:
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai"
-    namespace: "com.azure.ai.openai"
     partial-update: true
     enable-sync-stack: true
     generate-tests: false
-    custom-types-subpackage: "implementation.models"
-    custom-types: "FunctionCallPreset"
+    generate-samples: false
     customization-class: customization/src/main/java/OpenAICustomizations.java
     flavor: azure
   "@azure-tools/typespec-ts":

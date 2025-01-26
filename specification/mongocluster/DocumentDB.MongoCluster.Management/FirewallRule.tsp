@@ -3,6 +3,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 
 namespace Microsoft.DocumentDB;
+
 /** Represents a mongo cluster firewall rule. */
 @parentResource(MongoCluster)
 model FirewallRule is ProxyResource<FirewallRuleProperties> {
@@ -42,13 +43,14 @@ interface FirewallRules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
-    Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
+    Response = ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
       FirewallRule,
       LroHeaders = {}
-    >
+    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FirewallRule> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
   /** Deletes a mongo cluster firewall rule. */
   delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
   /** List all the firewall rules in a given mongo cluster. */
-  listByParent is ArmResourceListByParent<FirewallRule>;
+  listByMongoCluster is ArmResourceListByParent<FirewallRule>;
 }

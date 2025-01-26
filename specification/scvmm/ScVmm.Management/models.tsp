@@ -1,11 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/versioning";
+import "./main.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ScVmm;
@@ -640,6 +643,38 @@ model OsProfileForVmInstance {
   /** Gets os version. */
   @visibility("read")
   osVersion?: string;
+
+  /** Gets or sets the domain name. */
+  @added(Versions.v2024_06_01)
+  domainName?: string;
+
+  /** Gets or sets the domain username. */
+  @added(Versions.v2024_06_01)
+  domainUsername?: string;
+
+  /** Password of the domain the VM has to join. */
+  @visibility("create", "update")
+  @secret
+  @added(Versions.v2024_06_01)
+  domainPassword?: string;
+
+  /** Gets or sets the workgroup. */
+  @added(Versions.v2024_06_01)
+  workgroup?: string;
+
+  /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
+  @visibility("create")
+  @secret
+  @added(Versions.v2024_06_01)
+  productKey?: string;
+
+  /** Gets or sets the index value of the timezone. */
+  @added(Versions.v2024_06_01)
+  timezone?: int32;
+
+  /** Get or sets the commands to be run once at the time of creation separated by semicolons. */
+  @added(Versions.v2024_06_01)
+  runOnceCommands?: string;
 }
 
 /** Defines the resource properties. */
@@ -849,6 +884,14 @@ model GuestAgentProperties {
   /** Provisioning state of the resource. */
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  /** The resource id of the private link scope this machine is assigned to, if any. */
+  @added(Versions.v2024_06_01)
+  privateLinkScopeResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/privateLinkScopes";
+    }
+  ]>;
 }
 
 /** Username / Password Credentials to connect to guest. */

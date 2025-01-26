@@ -20,7 +20,7 @@ model FabricCapacityProperties {
 
   @doc("The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.")
   @visibility("read")
-  state: ResourceState;
+  state?: ResourceState;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
@@ -111,6 +111,7 @@ union ResourceState {
 model RpSkuEnumerationForNewResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The collection of available SKUs for new resources")
+  @items
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -140,6 +141,7 @@ model RpSkuProperties {
 model RpSkuEnumerationForExistingResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The SKU details")
+  @items
   value: Array<RpSkuDetailsForExistingResource>;
 
   @doc("Url for the next page.  Null if no more pages available")

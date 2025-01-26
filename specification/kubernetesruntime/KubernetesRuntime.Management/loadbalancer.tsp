@@ -69,5 +69,5 @@ interface LoadBalancers {
   @renamedFrom(Versions.v2024_03_01, "delete")
   @removed(Versions.v2024_03_01)
   oldDelete is ArmResourceDeleteWithoutOkAsync<LoadBalancer>;
-  listByParent is ArmResourceListByParent<LoadBalancer>;
+  list is ArmResourceListByParent<LoadBalancer>;
 }

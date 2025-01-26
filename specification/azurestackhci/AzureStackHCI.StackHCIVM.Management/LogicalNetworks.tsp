@@ -12,9 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The logical network resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @doc("Name of the logical network")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -49,7 +49,7 @@ interface LogicalNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
-  list is ArmResourceListByParent<LogicalNetwork>;
+  listByResourceGroup is ArmResourceListByParent<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")
   listAll is ArmListBySubscription<LogicalNetwork>;

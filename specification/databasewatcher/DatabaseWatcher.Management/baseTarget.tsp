@@ -15,7 +15,7 @@ interface Targets {
   get is ArmResourceRead<Target>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Target>;
   delete is ArmResourceDeleteSync<Target>;
-  listByParent is ArmResourceListByParent<Target>;
+  listByWatcher is ArmResourceListByParent<Target>;
 }
 
 @parentResource(Watcher)
@@ -49,7 +49,7 @@ model TargetProperties {
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
+  @doc("The Azure resource ID of the Key Vault instance storing database authentication secrets.")
   akvResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";

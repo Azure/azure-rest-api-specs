@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
     "version": "2023-04-01",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -64,6 +78,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input documents to analyze.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
@@ -315,9 +330,6 @@
           "description": "Parameters for the Abstractive Summarization task."
         }
       },
-      "required": [
-        "parameters"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROTask"

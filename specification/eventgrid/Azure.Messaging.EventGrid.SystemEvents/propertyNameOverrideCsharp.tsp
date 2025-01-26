@@ -2,11 +2,11 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
@@ -23,14 +23,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "csharp"
-);
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "csharp"
-);
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "csharp"
@@ -198,6 +190,48 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
   "recordingChannelKind",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+  "EventGridMqttClientCreatedOrUpdatedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientDeletedEventData,
+  "EventGridMqttClientDeletedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionConnectedEventData,
+  "EventGridMqttClientSessionConnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+  "EventGridMqttClientSessionDisconnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientEventData,
+  "EventGridMqttClientEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "csharp");
+
+@@clientName(EventGridMQTTClientDisconnectionReason,
+  "EventGridMqttClientDisconnectionReason",
+  "csharp"
+);
+
+@@clientName(RedisImportRDBCompletedEventData,
+  "RedisImportRdbCompletedEventData",
+  "csharp"
+);
+
+@@clientName(RedisExportRDBCompletedEventData,
+  "RedisExportRdbCompletedEventData",
   "csharp"
 );
 

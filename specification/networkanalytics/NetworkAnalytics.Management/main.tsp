@@ -543,11 +543,18 @@ interface DataTypes {
   get is ArmResourceRead<DataType>;
 
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
+  update is ArmCustomPatchAsync<
+    DataType,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataType,
+      DataTypeProperties
+    >
+  >;
 
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
@@ -560,7 +567,7 @@ interface DataTypes {
   >;
 
   @doc("List data type by parent resource.")
-  listByParent is ArmResourceListByParent<DataType>;
+  listByDataProduct is ArmResourceListByParent<DataType>;
 }
 
 @doc("Operations on data product resource.")
@@ -579,7 +586,13 @@ interface DataProducts {
   get is ArmResourceRead<DataProduct>;
 
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmCustomPatchAsync<
+    DataProduct,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataProduct,
+      DataProductProperties
+    >
+  >;
 
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;
@@ -607,6 +620,7 @@ interface DataProducts {
     RoleAssignmentDetail
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("List user roles associated with the data product.")
   listRolesAssignments is ArmResourceActionSync<
     DataProduct,

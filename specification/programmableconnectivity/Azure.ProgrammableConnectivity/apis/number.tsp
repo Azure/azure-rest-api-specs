@@ -29,7 +29,7 @@ interface NumberVerification {
   @action("verify")
   verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationWithoutCodeContent,
+    BodyParameter<NumberVerificationWithoutCodeContent>,
     TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
       @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
@@ -43,7 +43,7 @@ interface NumberVerification {
   @action("verify")
   verifyWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationWithCodeContent,
+    BodyParameter<NumberVerificationWithCodeContent>,
     NumberVerificationResult
   >;
 }

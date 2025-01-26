@@ -4,6 +4,7 @@ import "./common.tsp";
 
 namespace Azure.OpenAI;
 
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
@@ -156,4 +157,16 @@ model AudioTranslation {
     A collection of information about the timing, probabilities, and other detail of each processed audio segment.
     """)
   segments?: AudioTranslationSegment[];
+}
+
+/**
+ * Get audio translation body.
+ */
+@added(ServiceApiVersions.v2024_02_15_Preview)
+model GetAudioTranslationBody {
+  /**
+   * The configuration information for an audio translation request.
+   */
+  @body
+  body: AudioTranslationOptions;
 }
