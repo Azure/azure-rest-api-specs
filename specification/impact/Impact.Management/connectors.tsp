@@ -22,23 +22,6 @@ model Connector is ProxyResource<ConnectorProperties> {
   name: string;
 }
 
-@doc("A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.")
-model ConnectorUpdate is ProxyResource<ConnectorPropertiesUpdate> {
-  @doc("The name of the connector")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("connectorName")
-  @segment("connectors")
-  @path
-  name: string;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-@doc("Details of the Connector.")
-model ConnectorPropertiesUpdate {
-  @doc("connector type")
-  connectorType: Platform;
-}
-
 @doc("Details of the Connector.")
 model ConnectorProperties is ResourceProperties {
   @visibility("read")
@@ -69,7 +52,13 @@ union Platform {
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
-  update is ArmCustomPatchSync<Connector, ConnectorUpdate>;
+  update is ArmCustomPatchSync<
+    Connector,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Connector,
+      ConnectorProperties
+    >
+  >;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;
 }
