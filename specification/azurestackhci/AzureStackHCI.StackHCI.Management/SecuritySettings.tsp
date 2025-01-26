@@ -8,175 +8,229 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
-/**
- * Security settings proxy resource
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-@parentResource(Cluster)
-@discriminator("kind")
-model SecuritySetting is Azure.ResourceManager.ProxyResource<{}> {
+
+@doc("Cluster details.")
+model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
   ...ResourceNameParameter<
-    Resource = SecuritySetting,
-    KeyName = "securitySettingsName",
-    SegmentName = "securitySettings",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    Resource = Cluster,
+    KeyName = "clusterName",
+    SegmentName = "clusters",
+    NamePattern = ""
   >;
-
-  /**
-   * Cluster kind to support polymorphic resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @visibility("read", "create")
-  kind: EdgeSolutionType;
 }
 
-@armResourceOperations
-interface SecuritySettings {
-  /**
-   * Get a SecuritySetting
-   */
-  get is ArmResourceRead<SecuritySetting>;
-
-  /**
-   * Create a security setting
-   */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecuritySetting>;
-
-  /**
-   * Delete a SecuritySetting
-   */
-  delete is ArmResourceDeleteWithoutOkAsync<SecuritySetting>;
-
-  /**
-   * List SecuritySetting resources by Clusters
-   */
-  listByClusters is ArmResourceListByParent<SecuritySetting>;
-}
-
-@@doc(SecuritySetting.name, "Name of security setting");
-
-/////////////////////models/////////////////////
-using Azure.ResourceManager.Foundations;
-
-/**
- * Represents the compliance status of a resource.
- */
-union ComplianceStatus {
-  string,
-
-  /**
-   * The resource is compliant
-   */
-  Compliant: "Compliant",
-
-  /**
-   * The resource is non-compliant
-   */
-  NonCompliant: "NonCompliant",
-
-  /**
-   * The resource compliance status is pending
-   */
-  Pending: "Pending",
-}
-
-/**
- * Represents the compliance assignment type of a resource.
- */
-union ComplianceAssignmentType {
-  string,
-
-  /**
-   * Report on the state of the machine, but don't make changes.
-   */
-  Audit: "Audit",
-
-  /**
-   * Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation.
-   */
-  ApplyAndAutoCorrect: "ApplyAndAutoCorrect",
-}
-
-/**
- * Security compliance properties of the resource
- */
-model SecurityComplianceStatus {
-  /**
-   * Indicates whether HCI hosts meets secured-core server requirements.
-   */
-  @visibility("read")
-  securedCoreCompliance?: ComplianceStatus;
-
-  /**
-   * Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.
-   */
-  @visibility("read")
-  wdacCompliance?: ComplianceStatus;
-
-  /**
-   * Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.
-   */
-  @visibility("read")
-  dataAtRestEncrypted?: ComplianceStatus;
-
-  /**
-   * Indicates whether HCI cluster has data in-transit protection.
-   */
-  @visibility("read")
-  dataInTransitProtected?: ComplianceStatus;
-
-  /**
-   * Time in UTC when compliance status was last updated.
-   */
-  @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdated?: utcDateTime;
-}
-
-/**
- * Security properties of the resource
- */
-model WindowsSecuritySettingsProperties {
-  /**
-   * Secured Core Compliance Assignment
-   */
-  securedCoreComplianceAssignment?: ComplianceAssignmentType;
-
-  /**
-   * WDAC Compliance Assignment
-   */
-  wdacComplianceAssignment?: ComplianceAssignmentType;
-
-  /**
-   * SMB encryption for intra-cluster traffic Compliance Assignment
-   */
-  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType;
-
-  /**
-   * Security Compliance Status
-   */
-  @visibility("read")
-  securityComplianceStatus?: SecurityComplianceStatus;
-
-  /**
-   * The status of the last operation.
-   */
+@doc("The provisioning state of a resource.")
+model ClusterProperties {
+  @doc("The status of the last operation.")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Deployment Configuration for Windows-based Cluster deployment.
- */
-model WindowsSecuritySetting extends SecuritySetting {
-  /**
-   * properties for Cluster deployment configuration.
-   */
-  ...WindowsSecuritySettingsProperties;
+@doc("The provisioning state of a resource.")
+union ProvisioningState {
+  string,
 
-  /**
-   * Cluster kind to support polymorphic resource.
-   */
-  kind: "WindowsServer";
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
+
+  @doc("The resource provision state is not specified")
+  NotSpecified: "NotSpecified",
+
+  @doc("The resource is being provisioned")
+  Provisioning: "Provisioning",
+
+  @doc("The resource is updating")
+  Updating: "Updating",
+
+  @doc("The resource is being deleted")
+  Deleting: "Deleting",
+
+  @doc("The resource create request has been accepted")
+  Accepted: "Accepted",
+}
+
+@doc("Security settings proxy resource")
+@parentResource(Cluster)
+model SecuritySetting
+  is Azure.ResourceManager.ProxyResource<SecurityProperties> {
+  ...ResourceNameParameter<
+    Resource = SecuritySetting,
+    NamePattern = "^default$"
+  >;
+  ...EntityTagProperty;
+}
+
+@armResourceOperations
+interface SecuritySettings {
+  @doc("Get a SecuritySetting")
+  get is ArmResourceRead<SecuritySetting>;
+
+  @doc("Create a security setting")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecuritySetting>;
+
+  @doc("Delete a SecuritySetting")
+  delete is ArmResourceDeleteSync<SecuritySetting>;
+
+  @doc("List SecuritySetting resources by Clusters")
+  listByClusters is ArmResourceListByParent<SecuritySetting>;
+
+  @doc("Remediate a group of settings within SecuritySetting")
+  remediate is ArmResourceActionNoResponseContentAsync<
+    SecuritySetting,
+    Recommendation
+  >;
+}
+
+@doc("Security properties of the resource")
+model SecurityProperties {
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+  @doc("Security Compliance Status")
+  @visibility("read")
+  securityComplianceStatus: SecurityComplianceStatus;
+
+  @doc("Desired security settings")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  desiredSettings: Array<DesiredSetting>;
+
+  @doc("Reported compliance states for security settings")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility("read")
+  reportedComplianceStates: Array<ReportedComplianceState>;
+
+  @doc("Secured Core Compliance Assignment")
+  securedCoreComplianceAssignment?: ComplianceAssignmentType;
+
+  @doc("WDAC Compliance Assignment")
+  wdacComplianceAssignment?: ComplianceAssignmentType;
+
+  @doc("SMB encryption for intra-cluster traffic Compliance Assignment")
+  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType;
+}
+
+@doc("Desired security setting")
+model DesiredSetting {
+  @doc("Name of the setting")
+  settingName: string;
+
+  @doc("Value of the setting")
+  value: string;
+}
+
+@doc("Reported compliance state of a security setting")
+model ReportedComplianceState {
+  @doc("Name of the setting")
+  @visibility("read")
+  settingName: string;
+
+  @doc("Aggregated compliance state value of the setting across all nodes of the cluster")
+  @visibility("read")
+  value: ComplianceStatus;
+
+  @doc("Per machine compliance state value and reason for it")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility("read")
+  perMachineStates: Array<MachineComplianceState>;
+}
+
+@doc("Compliance state on single machine")
+model MachineComplianceState {
+  @doc("Name of the machine")
+  @visibility("read")
+  machineName: string;
+
+  @doc("Compliance state value of the setting")
+  @visibility("read")
+  value: ComplianceStatus;
+
+  @doc("Compliance score of the setting")
+  @visibility("read")
+  percentScore?: string;
+
+  @doc("Reason for the compliance state of the machine")
+  @visibility("read")
+  reason: string;
+}
+
+@doc("Name of the recommendation")
+model Recommendation {
+  @doc("Name of the recommendation")
+  recommendationName: string;
+}
+
+@doc("Security compliance properties of the resource")
+model SecurityComplianceStatus {
+  @doc("Indicates whether HCI hosts meets secured-core server requirements.")
+  @visibility("read")
+  securedCoreCompliance: ComplianceStatus;
+
+  @doc("Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.")
+  @visibility("read")
+  wdacCompliance: ComplianceStatus;
+
+  @doc("Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.")
+  @visibility("read")
+  dataAtRestEncrypted: ComplianceStatus;
+
+  @doc("Indicates whether HCI cluster has data in-transit protection.")
+  @visibility("read")
+  dataInTransitProtected: ComplianceStatus;
+
+  @doc("Contains details about HCI cluster's compliance with security baseline.")
+  @visibility("read")
+  securityBaseline: SecurityBaseline;
+
+  @doc("Time in UTC when compliance status was last updated.")
+  @visibility("read")
+  lastUpdated: string;
+}
+
+@doc("Compliance state of security baseline")
+model SecurityBaseline {
+  @doc("Status of compliance")
+  securityBaselineCompliance: ComplianceStatus;
+
+  @doc("Aggregated compliance score across cluster nodes")
+  @visibility("read")
+  percentScore: string;
+
+  @doc("Per machine compliance state value and reason for it")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility("read")
+  perMachineStates: Array<MachineComplianceState>;
+}
+
+@doc("Represents the compliance status of a resource.")
+union ComplianceStatus {
+  string,
+
+  @doc("The resource is compliant")
+  Compliant: "Compliant",
+
+  @doc("The resource is non-compliant")
+  NonCompliant: "NonCompliant",
+
+  @doc("The resource compliance status is pending")
+  Pending: "Pending",
+}
+
+@doc("Represents the compliance assignment type of a resource.")
+union ComplianceAssignmentType {
+  string,
+
+  @doc("Report on the state of the machine, but don't make changes.")
+  Audit: "Audit",
+
+  @doc("Applied to the machine. If it drifts, the local service inside the machine makes a correction at the next evaluation.")
+  ApplyAndAutoCorrect: "ApplyAndAutoCorrect",
 }

@@ -27,9 +27,18 @@ These are the global settings for the vmware.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-12
+tag: package-2025-01-01
 ```
 
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/stable/2025-01-01/connectedvmware.json
+```
 
 ### Tag: package-2023-12
 

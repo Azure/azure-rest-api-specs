@@ -320,11 +320,7 @@
         },
         "clusterPattern": {
           "$ref": "./hciCommon.json#/definitions/ClusterPattern",
-          "description": "Cluster Storage type supported."
-        },
-        "replicationMode": {
-          "$ref": "#/definitions/ReplicationMode",
-          "description": "Replication mode feature configuration for stretch cluster."
+          "description": "Cluster Pattern supported."
         },
         "hardwareClass": {
           "$ref": "#/definitions/HardwareClass",
@@ -845,30 +841,6 @@
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         }
-      }
-    },
-    "ReplicationMode": {
-      "type": "string",
-      "description": "Replication mode feature configuration for stretch cluster.",
-      "enum": [
-        "Sync",
-        "Async"
-      ],
-      "x-ms-enum": {
-        "name": "ReplicationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sync",
-            "value": "Sync",
-            "description": "Sync mode enabled."
-          },
-          {
-            "name": "Async",
-            "value": "Async",
-            "description": "Async mode enabled."
-          }
-        ]
       }
     },
     "SbePartnerInfo": {

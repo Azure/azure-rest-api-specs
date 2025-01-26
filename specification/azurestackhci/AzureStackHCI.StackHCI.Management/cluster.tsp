@@ -876,6 +876,10 @@ model IsolatedVmAttestationConfiguration {
   @doc("Region specific endpoint for Microsoft Azure Attestation service for the cluster")
   @visibility("read")
   attestationServiceEndpoint?: string;
+
+  @doc("Region specific endpoint for AzCS service.")
+  @visibility("read")
+  azureCertificateServiceEndpoint?: url;
 }
 
 @doc("Cluster of nodes installed with Windows-based OS.")
