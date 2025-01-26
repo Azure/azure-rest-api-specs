@@ -154,7 +154,6 @@ input-file:
  - ./Microsoft.Sql/stable/2023-08-01/WorkloadClassifiers.json
  - ./Microsoft.Sql/stable/2023-08-01/WorkloadGroups.json
 ```
-
 ### Tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
@@ -303,7 +302,6 @@ input-file:
   - Microsoft.Sql/preview/2024-05-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2024-05-01-preview/WorkloadGroups.json
 ```
-
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
