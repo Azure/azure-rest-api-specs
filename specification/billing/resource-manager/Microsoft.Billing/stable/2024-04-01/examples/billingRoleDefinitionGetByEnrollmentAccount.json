@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "123456",
+    "enrollmentAccountName": "4568789",
+    "roleDefinitionName": "50000000-aaaa-bbbb-cccc-100000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/123456/enrollmentAccounts/4568789/billingRoleDefinitions/50000000-aaaa-bbbb-cccc-100000000000",
+        "name": "50000000-aaaa-bbbb-cccc-100000000000",
+        "properties": {
+          "permissions": [
+            {
+              "actions": [
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/write",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/action",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/delete",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/read",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/write",
+                "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingSubscriptions/action"
+              ]
+            }
+          ],
+          "roleName": "Account Owner"
+        },
+        "type": "Microsoft.Billing/billingAccounts/enrollmentAccounts/billingRoleDefinitions"
+      }
+    }
+  }
+}

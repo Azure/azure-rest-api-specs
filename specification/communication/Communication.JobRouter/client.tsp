@@ -11,12 +11,14 @@ using TypeSpec.Versioning;
 namespace ClientForAcsJobRouter;
 
 // Your customizations here
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "JobRouterAdministrationClient",
   service: AzureCommunicationRoutingService,
 })
 interface JobRouterAdministrationRestClient {
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertDistributionPolicy;
 
@@ -28,6 +30,7 @@ interface JobRouterAdministrationRestClient {
   deleteDistributionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteDistributionPolicy;
 
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertClassificationPolicy;
 
@@ -39,6 +42,7 @@ interface JobRouterAdministrationRestClient {
   deleteClassificationPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteClassificationPolicy;
 
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
 
@@ -51,6 +55,7 @@ interface JobRouterAdministrationRestClient {
   deleteExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteExceptionPolicy;
 
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertQueue;
 
@@ -62,12 +67,14 @@ interface JobRouterAdministrationRestClient {
   deleteQueue is AzureCommunicationRoutingService.JobRouterAdministrationOperations.deleteQueue;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
   name: "JobRouterClient",
   service: AzureCommunicationRoutingService,
 })
 interface JobRouterRestClient {
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertJob is AzureCommunicationRoutingService.JobRouterOperations.upsertJob;
 
@@ -124,6 +131,7 @@ interface JobRouterRestClient {
   getQueueStatistics is AzureCommunicationRoutingService.JobRouterOperations.getQueueStatistics;
 
   @access(Access.internal, "csharp")
+  @convenientAPI(false, "csharp")
   @access(Access.internal, "java")
   upsertWorker is AzureCommunicationRoutingService.JobRouterOperations.upsertWorker;
 

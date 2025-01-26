@@ -1,0 +1,29 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-batch
+      breaking-changes:
+        - The 'LocationOperations' method 'list_supported_cloud_service_skus' was deleted or renamed in the current version
+        - The 'LocationOperations' method 'list_supported_cloud_service_skus' was deleted or renamed in the current version
+        - The model or publicly exposed class 'CloudServiceConfiguration' was deleted or renamed in the current version
+        - The model or publicly exposed class 'DeploymentConfiguration' had its instance variable 'cloud_service_configuration' deleted or renamed in the current version
+        - The model or publicly exposed class 'ProxyResource' had its instance variable 'etag' deleted or renamed in the current version
+        - The model or publicly exposed class 'Resource' had its instance variable 'location' deleted or renamed in the current version
+        - The model or publicly exposed class 'Resource' had its instance variable 'tags' deleted or renamed in the current version
+  azure-sdk-for-js:
+    - package: '@azure/arm-batch'
+      breaking-changes:
+        - Interface DeploymentConfiguration no longer has parameter cloudServiceConfiguration
+        - Interface ProxyResource no longer has parameter etag
+        - Interface Resource no longer has parameter location
+        - Interface Resource no longer has parameter tags
+        - Removed operation Location_2.listSupportedCloudServiceSkus
+        - Type of parameter securityType of interface SecurityProfile is changed from "trustedLaunch" to SecurityTypes
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/batch/armbatch'
+      breaking-changes:
+        - Field `CloudServiceConfiguration` of struct `DeploymentConfiguration` has been removed
+        - Field `Etag` of struct `ProxyResource` has been removed
+        - Field `Location`, `Tags` of struct `Resource` has been removed
+        - Function `*LocationClient.NewListSupportedCloudServiceSKUsPager` has been removed
+        - Struct `CloudServiceConfiguration` has been removed
+        - Type of `SecurityProfile.SecurityType` has been changed from `*string` to `*SecurityTypes`

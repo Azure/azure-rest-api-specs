@@ -1,0 +1,297 @@
+{
+  "title": "DataFlow_CreateOrUpdate",
+  "operationId": "DataFlow_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance",
+    "dataflowProfileName": "aio-dataflowprofile",
+    "dataflowName": "aio-dataflow",
+    "resource": {
+      "properties": {
+        "profileRef": "juecrpocwpcajelwiwrplvacf",
+        "mode": "Enabled",
+        "operations": [
+          {
+            "operationType": "Source",
+            "name": "hhoeuttlpjucxldumilbdbxsglpfhvamwrasjuroucjzutjamarau",
+            "builtInTransformationSettings": {
+              "serializationFormat": "Delta",
+              "schemaRef": "kszdaahrhhctjvusgakiz",
+              "datasets": [
+                {
+                  "key": "dataset-name-user-provided1",
+                  "description": "a description of this dataset",
+                  "schemaRef": "schemaRef-pointing-to-AIO-schema-registry-instance",
+                  "inputs": [
+                    "machineId",
+                    "$context(dataset-name-user-provided1).machine.details.id"
+                  ],
+                  "expression": "$2 == $1"
+                }
+              ],
+              "filter": [
+                {
+                  "type": "Filter",
+                  "description": "this is a user generated string to provide context",
+                  "expression": "$1 == $3  && $2 > $4",
+                  "inputs": [
+                    "machineId",
+                    "temperature",
+                    "$context(dataset-name-user-provided1).machine.details.id",
+                    "$context(dataset-name-user-provided2).machine.location.temperature"
+                  ]
+                }
+              ],
+              "map": [
+                {
+                  "type": "NewProperties",
+                  "description": "this is a user generated string to provide context for the operation",
+                  "expression": "400",
+                  "inputs": [],
+                  "output": "temperatureLimit"
+                },
+                {
+                  "description": "this is a user generated string to provide context for the operation",
+                  "expression": "$1 * 1000",
+                  "inputs": [
+                    "speed ? $last"
+                  ],
+                  "output": "speedLKV"
+                },
+                {
+                  "type": "Compute",
+                  "description": "this is a user generated string to provide context for the operation",
+                  "expression": "$1 * 9/5 + 32",
+                  "inputs": [
+                    "temperature"
+                  ],
+                  "output": "temperatureF"
+                }
+              ]
+            },
+            "destinationSettings": {
+              "endpointRef": "hvexewvu",
+              "dataDestination": "hxwohipwddccefqrdz"
+            },
+            "sourceSettings": {
+              "endpointRef": "cqsvkqeuyjzci",
+              "assetRef": "eswnjlnapfrdeklaivntm",
+              "serializationFormat": "Json",
+              "schemaRef": "uchmgqpworewvayionuwydneotyo",
+              "dataSources": [
+                "dvncbklqkvjygnjgatioaikaneue"
+              ]
+            }
+          }
+        ]
+      },
+      "extendedLocation": {
+        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "profileRef": "juecrpocwpcajelwiwrplvacf",
+          "mode": "Enabled",
+          "operations": [
+            {
+              "operationType": "Source",
+              "name": "hhoeuttlpjucxldumilbdbxsglpfhvamwrasjuroucjzutjamarau",
+              "builtInTransformationSettings": {
+                "serializationFormat": "Delta",
+                "schemaRef": "kszdaahrhhctjvusgakiz",
+                "datasets": [
+                  {
+                    "key": "dataset-name-user-provided1",
+                    "description": "a description of this dataset",
+                    "schemaRef": "schemaRef-pointing-to-AIO-schema-registry-instance",
+                    "inputs": [
+                      "machineId",
+                      "$context(dataset-name-user-provided1).machine.details.id"
+                    ],
+                    "expression": "$2 == $1"
+                  }
+                ],
+                "filter": [
+                  {
+                    "type": "Filter",
+                    "description": "this is a user generated string to provide context",
+                    "expression": "$1 == $3  && $2 > $4",
+                    "inputs": [
+                      "machineId",
+                      "temperature",
+                      "$context(dataset-name-user-provided1).machine.details.id",
+                      "$context(dataset-name-user-provided2).machine.location.temperature"
+                    ]
+                  }
+                ],
+                "map": [
+                  {
+                    "type": "NewProperties",
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "400",
+                    "inputs": [],
+                    "output": "temperatureLimit"
+                  },
+                  {
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "$1 * 1000",
+                    "inputs": [
+                      "speed ? $last"
+                    ],
+                    "output": "speedLKV"
+                  },
+                  {
+                    "type": "Compute",
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "$1 * 9/5 + 32",
+                    "inputs": [
+                      "temperature"
+                    ],
+                    "output": "temperatureF"
+                  }
+                ]
+              },
+              "destinationSettings": {
+                "endpointRef": "hvexewvu",
+                "dataDestination": "hxwohipwddccefqrdz"
+              },
+              "sourceSettings": {
+                "endpointRef": "cqsvkqeuyjzci",
+                "assetRef": "eswnjlnapfrdeklaivntm",
+                "serializationFormat": "Json",
+                "schemaRef": "uchmgqpworewvayionuwydneotyo",
+                "dataSources": [
+                  "dvncbklqkvjygnjgatioaikaneue"
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123",
+        "name": "gyhhonqupjblolottsc",
+        "type": "xqjpfgdfqgmytza",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "profileRef": "juecrpocwpcajelwiwrplvacf",
+          "mode": "Enabled",
+          "operations": [
+            {
+              "operationType": "Source",
+              "name": "hhoeuttlpjucxldumilbdbxsglpfhvamwrasjuroucjzutjamarau",
+              "builtInTransformationSettings": {
+                "serializationFormat": "Delta",
+                "schemaRef": "kszdaahrhhctjvusgakiz",
+                "datasets": [
+                  {
+                    "key": "dataset-name-user-provided1",
+                    "description": "a description of this dataset",
+                    "schemaRef": "schemaRef-pointing-to-AIO-schema-registry-instance",
+                    "inputs": [
+                      "machineId",
+                      "$context(dataset-name-user-provided1).machine.details.id"
+                    ],
+                    "expression": "$2 == $1"
+                  }
+                ],
+                "filter": [
+                  {
+                    "type": "Filter",
+                    "description": "this is a user generated string to provide context",
+                    "expression": "$1 == $3  && $2 > $4",
+                    "inputs": [
+                      "machineId",
+                      "temperature",
+                      "$context(dataset-name-user-provided1).machine.details.id",
+                      "$context(dataset-name-user-provided2).machine.location.temperature"
+                    ]
+                  }
+                ],
+                "map": [
+                  {
+                    "type": "NewProperties",
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "400",
+                    "inputs": [],
+                    "output": "temperatureLimit"
+                  },
+                  {
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "$1 * 1000",
+                    "inputs": [
+                      "speed ? $last"
+                    ],
+                    "output": "speedLKV"
+                  },
+                  {
+                    "type": "Compute",
+                    "description": "this is a user generated string to provide context for the operation",
+                    "expression": "$1 * 9/5 + 32",
+                    "inputs": [
+                      "temperature"
+                    ],
+                    "output": "temperatureF"
+                  }
+                ]
+              },
+              "destinationSettings": {
+                "endpointRef": "hvexewvu",
+                "dataDestination": "hxwohipwddccefqrdz"
+              },
+              "sourceSettings": {
+                "endpointRef": "cqsvkqeuyjzci",
+                "assetRef": "eswnjlnapfrdeklaivntm",
+                "serializationFormat": "Json",
+                "schemaRef": "uchmgqpworewvayionuwydneotyo",
+                "dataSources": [
+                  "dvncbklqkvjygnjgatioaikaneue"
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123",
+        "name": "gyhhonqupjblolottsc",
+        "type": "xqjpfgdfqgmytza",
+        "systemData": {
+          "createdBy": "ijyjtvjpfwt",
+          "createdByType": "User",
+          "createdAt": "2024-06-26T23:49:23.909Z",
+          "lastModifiedBy": "fkfrkewn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+        }
+      }
+    }
+  }
+}

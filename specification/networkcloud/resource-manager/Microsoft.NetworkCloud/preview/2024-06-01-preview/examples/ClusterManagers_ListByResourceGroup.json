@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusterManagers/clusterManagerName",
+            "name": "clusterManagerName",
+            "systemData": {
+              "createdAt": "2021-01-22T13:27:03.008Z",
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User"
+            },
+            "type": "Microsoft.NetworkCloud/clusterManagers",
+            "location": "location",
+            "tags": {
+              "key1": "myvalue1",
+              "key2": "myvalue2"
+            },
+            "identity": {
+              "principalId": "321e7654-e89b-12d3-a456-426655449999",
+              "tenantId": "199e9999-e89b-12d3-a456-426655441111",
+              "type": "SystemAssigned"
+            },
+            "properties": {
+              "managerExtendedLocation": {
+                "type": "CustomLocation",
+                "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName"
+              },
+              "fabricControllerId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
+              "analyticsWorkspaceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/microsoft.operationalInsights/workspaces/logAnalyticsWorkspaceName",
+              "clusterVersions": [
+                {
+                  "targetClusterVersion": "1.0.0",
+                  "supportExpiryDate": "2023-04-29"
+                },
+                {
+                  "targetClusterVersion": "1.0.2",
+                  "supportExpiryDate": "2025-01-01"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "detailedStatus": "Available",
+              "detailedStatusMessage": "cluster manager is up and running",
+              "managedResourceGroupConfiguration": {
+                "name": "my-managed-rg",
+                "location": "East US"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://fully.qualified.hyperlink"
+      }
+    }
+  }
+}

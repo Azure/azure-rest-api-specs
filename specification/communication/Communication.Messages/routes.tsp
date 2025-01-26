@@ -35,7 +35,7 @@ interface NotificationMessagesOperations {
   @doc("Sends a notification message from Business to User.")
   send is Operations.ResourceCollectionAction<
     Notifications,
-    NotificationContent,
+    NotificationMessagesSendRequestBody,
     AcceptedResponse & SendMessageResult
   >;
 }

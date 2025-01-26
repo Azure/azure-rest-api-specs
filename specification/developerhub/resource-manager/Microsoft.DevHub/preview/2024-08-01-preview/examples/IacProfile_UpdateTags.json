@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "a0a37f63-7183-4e86-9ac7-ce8036a3ed31",
+    "resourceGroupName": "resourceGroup1",
+    "iacProfileName": "iacprofile",
+    "parameters": {
+      "tags": {
+        "resourceEnv": "testing",
+        "promote": "false"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/a0a37f63-7183-4e86-9ac7-ce8036a3ed31/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles/iacprofile",
+        "location": "location1",
+        "name": "iacprofile",
+        "type": "Micfosoft.DevHub/iacProfiles",
+        "tags": {
+          "appname": "testapp",
+          "resourceEnv": "testing",
+          "promote": "false"
+        },
+        "properties": {
+          "githubProfile": {
+            "repositoryName": "localtest",
+            "repositoryMainBranch": "main",
+            "repositoryOwner": "owner",
+            "authStatus": "Authorized",
+            "pullNumber": 8,
+            "prStatus": "submitted",
+            "branchName": "aks-devhub-ybvmw"
+          },
+          "terraformProfile": {
+            "storageAccountSubscription": "subscriptions",
+            "storageAccountResourceGroup": "hybrid-iac",
+            "storageAccountName": "hybridiac",
+            "storageContainerName": "hybridiac"
+          },
+          "stages": [
+            {
+              "stageName": "dev",
+              "dependencies": [],
+              "gitEnvironment": "Terraform"
+            },
+            {
+              "stageName": "qa",
+              "dependencies": [
+                "dev"
+              ],
+              "gitEnvironment": "Terraform"
+            },
+            {
+              "stageName": "prod",
+              "dependencies": [
+                "qa"
+              ],
+              "gitEnvironment": "Terraform"
+            }
+          ],
+          "templates": [
+            {
+              "templateName": "base",
+              "templateDetails": [
+                {
+                  "productName": "HCI",
+                  "count": 1,
+                  "namingConvention": "$sitid-hci"
+                },
+                {
+                  "productName": "AKSarc",
+                  "count": 1,
+                  "namingConvention": "$sitid-aks"
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "",
+          "createdByType": "User",
+          "createdAt": "2024-01-16T09:56:23.933651400Z",
+          "lastModifiedBy": "aks-dev-hub-devhub",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-01-16T14:35:15.206059900Z"
+        }
+      }
+    }
+  }
+}

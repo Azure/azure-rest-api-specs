@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "myDeployment",
+    "certificateName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/NGINX.NGINXPLUS/nginxDeployments/myDeployment/certificates/default",
+        "name": "default",
+        "type": "nginx.nginxplus/nginxdeployments/certificates",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "keyVirtualPath": "/src/cert/somekey.key",
+          "certificateVirtualPath": "/src/cert/somePath.cert",
+          "keyVaultSecretId": "https://someKV.vault.azure.com/someSecretID",
+          "sha1Thumbprint": "1234567890ABCDEF1234567890ABCDEF12345678",
+          "keyVaultSecretVersion": "12345678ef9a12345678ef9a12345678",
+          "keyVaultSecretCreated": "2020-01-01T00:00:00Z",
+          "certificateError": {
+            "code": "CertificateNotYetValid",
+            "message": "The certificate is not yet valid. The certificate is not yet valid. NotBefore: '2020-01-01T00:00:00Z', NotAfter: '2020-01-01T00:00:00Z'"
+          }
+        }
+      }
+    }
+  }
+}

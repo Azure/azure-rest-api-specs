@@ -19,6 +19,9 @@ directive:
 - rename-model:
     from: 'CdnEndpoint'
     to: 'LinkedEndpoint'
+- rename-model:
+    from: 'CertificateSourceParameters'
+    to: 'CertificateSourceParametersBase'
 ```
 
 ### Go multi-api

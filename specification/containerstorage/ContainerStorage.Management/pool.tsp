@@ -13,6 +13,7 @@ namespace Microsoft.ContainerStorage;
 interface Pools {
   get is ArmResourceRead<Pool>;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DOT NOT COPY - migrate to LRO apis"
   @extension(
     "x-ms-long-running-operation-options",
     {
@@ -25,7 +26,10 @@ interface Pools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
-  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  update is ArmCustomPatchAsync<
+    Pool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
+  >;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }

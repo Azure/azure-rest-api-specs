@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure EventHub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -25,8 +27,10 @@ model EventHubCaptureFileCreatedEventData {
   lastSequenceNumber?: int32;
 
   /** The first time from the queue. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   firstEnqueueTime: utcDateTime;
 
   /** The last time from the queue. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   lastEnqueueTime: utcDateTime;
 }

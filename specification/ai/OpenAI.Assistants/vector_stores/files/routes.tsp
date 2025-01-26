@@ -46,6 +46,11 @@ op createVectorStoreFile(
   /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
   @encodedName("application/json", "file_id")
   fileId: string,
+
+  /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
+  @encodedName("application/json", "chunking_strategy")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  chunkingStrategy?: VectorStoreChunkingStrategyRequest,
 ): VectorStoreFile;
 
 /**

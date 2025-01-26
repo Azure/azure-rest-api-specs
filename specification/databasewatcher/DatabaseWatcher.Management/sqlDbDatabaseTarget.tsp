@@ -16,7 +16,7 @@ model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB single database target.")
   targetType: "SqlDb";
 
-  @doc("The Azure ResourceId of an Azure SQL DB single database target.")
+  @doc("The Azure resource ID of an Azure SQL DB single database target.")
   sqlDbResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";

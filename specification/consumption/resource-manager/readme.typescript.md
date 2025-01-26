@@ -9,4 +9,10 @@ typescript:
   package-name: "@azure/arm-consumption"
   output-folder: "$(typescript-sdks-folder)/sdk/consumption/arm-consumption"
   generate-metadata: true
+
+directive:
+  - from: consumption_pricesheet.json
+    where: $.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/download"].post.responses.default.schema
+    transform: >
+      $["$ref"] = "consumption.json#/definitions/ErrorResponse";
 ```

@@ -1,0 +1,46 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - affinitized
+  - dsms
+  - fluentd
+  - inbuild
+  - milli
+  - myapp
+  - reimage
+  - reimages
+  - sfhealthid
+  - sfpkg
+  - unprovision
+  - unprovisioned
+  - unprovisioning
+  - unpublish
+  - unregistering
+  - unregisters
+  - waagent
+overrides:
+  - filename: >-
+      **/specification/servicefabric/data-plane/Microsoft.ServiceFabric/stable/6.2/servicefabric.json
+    words:
+      - fautls
+      - milli
+      - qurum
+  - filename: >-
+      **/specification/servicefabric/data-plane/Microsoft.ServiceFabric/stable/6.3/servicefabric.json
+    words:
+      - fautls
+      - milli
+      - qurum
+  - filename: >-
+      **/specification/servicefabric/data-plane/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
+    words:
+      - fautls
+      - milli
+      - qurum
+

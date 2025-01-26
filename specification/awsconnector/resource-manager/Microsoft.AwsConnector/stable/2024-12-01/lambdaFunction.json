@@ -1,0 +1,1155 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LambdaFunctions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/lambdaFunctions": {
+      "get": {
+        "operationId": "LambdaFunctions_ListBySubscription",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "List LambdaFunction resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_ListBySubscription": {
+            "$ref": "./examples/LambdaFunctions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaFunctions": {
+      "get": {
+        "operationId": "LambdaFunctions_ListByResourceGroup",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "List LambdaFunction resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_ListByResourceGroup": {
+            "$ref": "./examples/LambdaFunctions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/lambdaFunctions/{name}": {
+      "get": {
+        "operationId": "LambdaFunctions_Get",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "Get a LambdaFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_Get": {
+            "$ref": "./examples/LambdaFunctions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LambdaFunctions_CreateOrReplace",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "Create a LambdaFunction. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaFunction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LambdaFunction' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunction"
+            }
+          },
+          "201": {
+            "description": "Resource 'LambdaFunction' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_CreateOrReplace": {
+            "$ref": "./examples/LambdaFunctions_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LambdaFunctions_Update",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "Update a LambdaFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LambdaFunctionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LambdaFunction"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_Update": {
+            "$ref": "./examples/LambdaFunctions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LambdaFunctions_Delete",
+        "tags": [
+          "LambdaFunctions"
+        ],
+        "description": "Delete a LambdaFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of LambdaFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LambdaFunctions_Delete": {
+            "$ref": "./examples/LambdaFunctions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Architectures": {
+      "type": "string",
+      "description": "Architectures enum",
+      "enum": [
+        "arm64",
+        "x86_64"
+      ],
+      "x-ms-enum": {
+        "name": "Architectures",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "arm64",
+            "value": "arm64",
+            "description": "Architectures enum arm64"
+          },
+          {
+            "name": "x86_64",
+            "value": "x86_64",
+            "description": "Architectures enum x86_64"
+          }
+        ]
+      }
+    },
+    "AwsLambdaFunctionProperties": {
+      "type": "object",
+      "description": "Definition of awsLambdaFunction",
+      "properties": {
+        "architectures": {
+          "type": "array",
+          "description": "The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.",
+          "items": {
+            "$ref": "#/definitions/Architectures"
+          },
+          "x-ms-identifiers": []
+        },
+        "arn": {
+          "type": "string",
+          "description": "Property arn"
+        },
+        "code": {
+          "$ref": "#/definitions/Code",
+          "description": "The code for the function. The [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) for a Lambda function. To deploy a function defined as a container image, you specify the location of a container image in the Amazon ECR registry. For a .zip file deployment package, you can specify the location of an object in Amazon S3. For Node.js and Python functions, you can specify the function code inline in the template. Changes to a deployment package in Amazon S3 or a container image in ECR are not detected automatically during stack updates. To update the function code, change the object key or version in the template."
+        },
+        "codeSigningConfigArn": {
+          "type": "string",
+          "description": "To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function."
+        },
+        "deadLetterConfig": {
+          "$ref": "#/definitions/DeadLetterConfig",
+          "description": "A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see [Dead-letter queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq). The [dead-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for failed asynchronous invocations."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the function."
+        },
+        "environment": {
+          "$ref": "#/definitions/Environment",
+          "description": "Environment variables that are accessible from function code during execution. A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration."
+        },
+        "ephemeralStorage": {
+          "$ref": "#/definitions/EphemeralStorage",
+          "description": "The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB. The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB."
+        },
+        "fileSystemConfigs": {
+          "type": "array",
+          "description": "Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function. For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html).",
+          "items": {
+            "$ref": "#/definitions/FileSystemConfig"
+          },
+          "x-ms-identifiers": []
+        },
+        "functionName": {
+          "type": "string",
+          "description": "The name of the Lambda function, up to 64 characters in length. If you don't specify a name, CFN generates one. If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name."
+        },
+        "handler": {
+          "type": "string",
+          "description": "The name of the method within your code that Lambda calls to run your function. Handler is required if the deployment package is a .zip file archive. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see [Lambda programming model](https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html)."
+        },
+        "imageConfig": {
+          "$ref": "#/definitions/ImageConfig",
+          "description": "Configuration values that override the container image Dockerfile settings. For more information, see [Container image settings](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms). Configuration values that override the container image Dockerfile settings. For more information, see [Container image settings](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)."
+        },
+        "kmsKeyArn": {
+          "type": "string",
+          "description": "The ARN of the KMSlong (KMS) customer managed key that's used to encrypt your function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption). When [Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) is activated, Lambda also uses this key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to encrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses a default service key."
+        },
+        "layers": {
+          "type": "array",
+          "description": "A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "loggingConfig": {
+          "$ref": "#/definitions/LoggingConfig",
+          "description": "The function's Amazon CloudWatch Logs configuration settings. The function's Amazon CloudWatch Logs configuration settings."
+        },
+        "memorySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of [memory available to the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console) at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB. Note that new AWS accounts have reduced concurrency and memory quotas. AWS raises these quotas automatically based on your usage. You can also request a quota increase."
+        },
+        "packageType": {
+          "$ref": "#/definitions/PackageType",
+          "description": "The type of deployment package. Set to ``Image`` for container image and set ``Zip`` for .zip file archive."
+        },
+        "reservedConcurrentExecutions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of simultaneous executions to reserve for the function."
+        },
+        "role": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the function's execution role."
+        },
+        "runtime": {
+          "type": "string",
+          "description": "The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)."
+        },
+        "runtimeManagementConfig": {
+          "$ref": "#/definitions/RuntimeManagementConfig",
+          "description": "Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html). Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html)."
+        },
+        "snapStart": {
+          "$ref": "#/definitions/SnapStart",
+          "description": "The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting. The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting."
+        },
+        "snapStartResponse": {
+          "$ref": "#/definitions/SnapStartResponse",
+          "description": "The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html)."
+        },
+        "tracingConfig": {
+          "$ref": "#/definitions/TracingConfig",
+          "description": "Set ``Mode`` to ``Active`` to sample and trace a subset of incoming requests with [X-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html). The function's [](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) tracing configuration. To sample and record incoming requests, set ``Mode`` to ``Active``."
+        },
+        "vpcConfig": {
+          "$ref": "#/definitions/VpcConfig",
+          "description": "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can access resources and the internet only through that VPC. For more information, see [Configuring a Lambda function to access resources in a VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html). The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC. For more information, see [VPC Settings](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).  When you delete a function, CFN monitors the state of its network interfaces and waits for Lambda to delete them before proceeding. If the VPC is defined in the same stack, the network interfaces need to be deleted by Lambda before CFN can delete the VPC's resources. To monitor network interfaces, CFN needs the ``ec2:DescribeNetworkInterfaces`` permission. It obtains this from the user or role that modifies the stack. If you don't provide this permission, CFN does not wait for network interfaces to be deleted."
+        }
+      }
+    },
+    "Code": {
+      "type": "object",
+      "description": "Definition of Code",
+      "properties": {
+        "imageUri": {
+          "type": "string",
+          "description": "URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry."
+        },
+        "s3Bucket": {
+          "type": "string",
+          "description": "An Amazon S3 bucket in the same AWS-Region as your function. The bucket can be in a different AWS-account."
+        },
+        "s3Key": {
+          "type": "string",
+          "description": "The Amazon S3 key of the deployment package."
+        },
+        "s3ObjectVersion": {
+          "type": "string",
+          "description": "For versioned objects, the version of the deployment package object to use."
+        },
+        "zipFile": {
+          "type": "string",
+          "description": "(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.  For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash. If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details."
+        }
+      }
+    },
+    "DeadLetterConfig": {
+      "type": "object",
+      "description": "Definition of DeadLetterConfig",
+      "properties": {
+        "targetArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic."
+        }
+      }
+    },
+    "Environment": {
+      "type": "object",
+      "description": "Definition of Environment",
+      "properties": {
+        "variables": {
+          "type": "object",
+          "description": "Environment variable key-value pairs. For more information, see [Using Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EphemeralStorage": {
+      "type": "object",
+      "description": "Definition of EphemeralStorage",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size of the function's ``/tmp`` directory."
+        }
+      }
+    },
+    "FileSystemConfig": {
+      "type": "object",
+      "description": "Definition of FileSystemConfig",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system."
+        },
+        "localMountPath": {
+          "type": "string",
+          "description": "The path where the function can access the file system, starting with ``/mnt/``."
+        }
+      }
+    },
+    "ImageConfig": {
+      "type": "object",
+      "description": "Definition of ImageConfig",
+      "properties": {
+        "command": {
+          "type": "array",
+          "description": "Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "entryPoint": {
+          "type": "array",
+          "description": "Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "workingDirectory": {
+          "type": "string",
+          "description": "Specifies the working directory. The length of the directory string cannot exceed 1,000 characters."
+        }
+      }
+    },
+    "LambdaFunction": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LambdaFunctionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LambdaFunctionListResult": {
+      "type": "object",
+      "description": "The response of a LambdaFunction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LambdaFunction items on this page",
+          "items": {
+            "$ref": "#/definitions/LambdaFunction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LambdaFunctionProperties": {
+      "type": "object",
+      "description": "Definition of LambdaFunction",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsLambdaFunctionProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LambdaFunctionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in LambdaFunction resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoggingConfig": {
+      "type": "object",
+      "description": "Definition of LoggingConfig",
+      "properties": {
+        "applicationLogLevel": {
+          "$ref": "#/definitions/LoggingConfigApplicationLogLevel",
+          "description": "Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the selected level of detail and lower, where ``TRACE`` is the highest level and ``FATAL`` is the lowest."
+        },
+        "logFormat": {
+          "$ref": "#/definitions/LoggingConfigLogFormat",
+          "description": "The format in which Lambda sends your function's application and system logs to CloudWatch. Select between plain text and structured JSON."
+        },
+        "logGroup": {
+          "type": "string",
+          "description": "The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default log group named ``/aws/lambda/<function name>``. To use a different log group, enter an existing log group or enter a new log group name."
+        },
+        "systemLogLevel": {
+          "$ref": "#/definitions/LoggingConfigSystemLogLevel",
+          "description": "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest."
+        }
+      }
+    },
+    "LoggingConfigApplicationLogLevel": {
+      "type": "string",
+      "description": "LoggingConfigApplicationLogLevel enum",
+      "enum": [
+        "DEBUG",
+        "ERROR",
+        "FATAL",
+        "INFO",
+        "TRACE",
+        "WARN"
+      ],
+      "x-ms-enum": {
+        "name": "LoggingConfigApplicationLogLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEBUG",
+            "value": "DEBUG",
+            "description": "LoggingConfigApplicationLogLevel enum DEBUG"
+          },
+          {
+            "name": "ERROR",
+            "value": "ERROR",
+            "description": "LoggingConfigApplicationLogLevel enum ERROR"
+          },
+          {
+            "name": "FATAL",
+            "value": "FATAL",
+            "description": "LoggingConfigApplicationLogLevel enum FATAL"
+          },
+          {
+            "name": "INFO",
+            "value": "INFO",
+            "description": "LoggingConfigApplicationLogLevel enum INFO"
+          },
+          {
+            "name": "TRACE",
+            "value": "TRACE",
+            "description": "LoggingConfigApplicationLogLevel enum TRACE"
+          },
+          {
+            "name": "WARN",
+            "value": "WARN",
+            "description": "LoggingConfigApplicationLogLevel enum WARN"
+          }
+        ]
+      }
+    },
+    "LoggingConfigLogFormat": {
+      "type": "string",
+      "description": "LoggingConfigLogFormat enum",
+      "enum": [
+        "JSON",
+        "Text"
+      ],
+      "x-ms-enum": {
+        "name": "LoggingConfigLogFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JSON",
+            "value": "JSON",
+            "description": "LoggingConfigLogFormat enum JSON"
+          },
+          {
+            "name": "Text",
+            "value": "Text",
+            "description": "LoggingConfigLogFormat enum Text"
+          }
+        ]
+      }
+    },
+    "LoggingConfigSystemLogLevel": {
+      "type": "string",
+      "description": "LoggingConfigSystemLogLevel enum",
+      "enum": [
+        "DEBUG",
+        "INFO",
+        "WARN"
+      ],
+      "x-ms-enum": {
+        "name": "LoggingConfigSystemLogLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEBUG",
+            "value": "DEBUG",
+            "description": "LoggingConfigSystemLogLevel enum DEBUG"
+          },
+          {
+            "name": "INFO",
+            "value": "INFO",
+            "description": "LoggingConfigSystemLogLevel enum INFO"
+          },
+          {
+            "name": "WARN",
+            "value": "WARN",
+            "description": "LoggingConfigSystemLogLevel enum WARN"
+          }
+        ]
+      }
+    },
+    "PackageType": {
+      "type": "string",
+      "description": "PackageType enum",
+      "enum": [
+        "Image",
+        "Zip"
+      ],
+      "x-ms-enum": {
+        "name": "PackageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Image",
+            "value": "Image",
+            "description": "PackageType enum Image"
+          },
+          {
+            "name": "Zip",
+            "value": "Zip",
+            "description": "PackageType enum Zip"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RuntimeManagementConfig": {
+      "type": "object",
+      "description": "Definition of RuntimeManagementConfig",
+      "properties": {
+        "runtimeVersionArn": {
+          "type": "string",
+          "description": "The ARN of the runtime version you want the function to use.  This is only required if you're using the *Manual* runtime update mode."
+        },
+        "updateRuntimeOn": {
+          "$ref": "#/definitions/RuntimeManagementConfigUpdateRuntimeOn",
+          "description": "Specify the runtime update mode.  +   *Auto (default)* - Automatically update to the most recent and secure runtime version using a [Two-phase runtime version rollout](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase). This is the best choice for most customers to ensure they always benefit from runtime updates.  +   *FunctionUpdate* - LAM updates the runtime of you function to the most recent and secure runtime version when you update your function. This approach synchronizes runtime updates with function deployments, giving you control over when runtime updates are applied and allowing you to detect and mitigate rare runtime update incompatibilities early. When using this setting, you need to regularly update your functions to keep their runtime up-to-date.  +   *Manual* - You specify a runtime version in your function configuration. The function will use this runtime version indefinitely. In the rare case where a new runtime version is incompatible with an existing function, this allows you to roll back your function to an earlier runtime version. For more information, see [Roll back a runtime version](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback).    *Valid Values*: ``Auto`` | ``FunctionUpdate`` | ``Manual``"
+        }
+      }
+    },
+    "RuntimeManagementConfigUpdateRuntimeOn": {
+      "type": "string",
+      "description": "RuntimeManagementConfigUpdateRuntimeOn enum",
+      "enum": [
+        "Auto",
+        "FunctionUpdate",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "RuntimeManagementConfigUpdateRuntimeOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "RuntimeManagementConfigUpdateRuntimeOn enum Auto"
+          },
+          {
+            "name": "FunctionUpdate",
+            "value": "FunctionUpdate",
+            "description": "RuntimeManagementConfigUpdateRuntimeOn enum FunctionUpdate"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "RuntimeManagementConfigUpdateRuntimeOn enum Manual"
+          }
+        ]
+      }
+    },
+    "SnapStart": {
+      "type": "object",
+      "description": "Definition of SnapStart",
+      "properties": {
+        "applyOn": {
+          "$ref": "#/definitions/SnapStartApplyOn",
+          "description": "Set ``ApplyOn`` to ``PublishedVersions`` to create a snapshot of the initialized execution environment when you publish a function version."
+        }
+      }
+    },
+    "SnapStartApplyOn": {
+      "type": "string",
+      "description": "SnapStartApplyOn enum",
+      "enum": [
+        "None",
+        "PublishedVersions"
+      ],
+      "x-ms-enum": {
+        "name": "SnapStartApplyOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "SnapStartApplyOn enum None"
+          },
+          {
+            "name": "PublishedVersions",
+            "value": "PublishedVersions",
+            "description": "SnapStartApplyOn enum PublishedVersions"
+          }
+        ]
+      }
+    },
+    "SnapStartResponse": {
+      "type": "object",
+      "description": "Definition of SnapStartResponse",
+      "properties": {
+        "applyOn": {
+          "$ref": "#/definitions/SnapStartResponseApplyOn",
+          "description": "When set to ``PublishedVersions``, Lambda creates a snapshot of the execution environment when you publish a function version."
+        },
+        "optimizationStatus": {
+          "$ref": "#/definitions/SnapStartResponseOptimizationStatus",
+          "description": "When you provide a [qualified Amazon Resource Name (ARN)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using), this response element indicates whether SnapStart is activated for the specified function version."
+        }
+      }
+    },
+    "SnapStartResponseApplyOn": {
+      "type": "string",
+      "description": "SnapStartResponseApplyOn enum",
+      "enum": [
+        "None",
+        "PublishedVersions"
+      ],
+      "x-ms-enum": {
+        "name": "SnapStartResponseApplyOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "SnapStartResponseApplyOn enum None"
+          },
+          {
+            "name": "PublishedVersions",
+            "value": "PublishedVersions",
+            "description": "SnapStartResponseApplyOn enum PublishedVersions"
+          }
+        ]
+      }
+    },
+    "SnapStartResponseOptimizationStatus": {
+      "type": "string",
+      "description": "SnapStartResponseOptimizationStatus enum",
+      "enum": [
+        "Off",
+        "On"
+      ],
+      "x-ms-enum": {
+        "name": "SnapStartResponseOptimizationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "SnapStartResponseOptimizationStatus enum Off"
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "SnapStartResponseOptimizationStatus enum On"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Property key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Property value"
+        }
+      }
+    },
+    "TracingConfig": {
+      "type": "object",
+      "description": "Definition of TracingConfig",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/TracingConfigMode",
+          "description": "The tracing mode."
+        }
+      }
+    },
+    "TracingConfigMode": {
+      "type": "string",
+      "description": "TracingConfigMode enum",
+      "enum": [
+        "Active",
+        "PassThrough"
+      ],
+      "x-ms-enum": {
+        "name": "TracingConfigMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "TracingConfigMode enum Active"
+          },
+          {
+            "name": "PassThrough",
+            "value": "PassThrough",
+            "description": "TracingConfigMode enum PassThrough"
+          }
+        ]
+      }
+    },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Definition of VpcConfig",
+      "properties": {
+        "ipv6AllowedForDualStack": {
+          "type": "boolean",
+          "description": "Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets."
+        },
+        "securityGroupIds": {
+          "type": "array",
+          "description": "A list of VPC security group IDs.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "A list of VPC subnet IDs.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

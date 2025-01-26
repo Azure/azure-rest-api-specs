@@ -12,9 +12,9 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The marketplace gallery image resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImage
   is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
@@ -50,7 +50,7 @@ interface MarketplaceGalleryImages {
   delete is ArmResourceDeleteWithoutOkAsync<MarketplaceGalleryImage>;
 
   @doc("Lists all of the marketplace gallery images in the specified resource group. Use the nextLink property in the response to get the next page of marketplace gallery images.")
-  list is ArmResourceListByParent<MarketplaceGalleryImage>;
+  listByResourceGroup is ArmResourceListByParent<MarketplaceGalleryImage>;
 
   @doc("Lists all of the marketplace gallery images in the specified subscription. Use the nextLink property in the response to get the next page of marketplace gallery images.")
   listAll is ArmListBySubscription<MarketplaceGalleryImage>;

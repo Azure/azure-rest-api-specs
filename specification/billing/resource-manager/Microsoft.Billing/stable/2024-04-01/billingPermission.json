@@ -1,0 +1,830 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has on a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a billing account.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByBillingAccount": {
+            "$ref": "./examples/billingPermissionsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has on a billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a billing profile.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByBillingProfile": {
+            "$ref": "./examples/billingPermissionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for a billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByBillingProfile",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for a billing profile.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByBillingProfile": {
+            "$ref": "./examples/checkAccessByBillingProfile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for a customer.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a customer.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByCustomer": {
+            "$ref": "./examples/billingPermissionsListByCustomer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for a customer.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for a customer.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByCustomer": {
+            "$ref": "./examples/checkAccessByCustomer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for an invoice section.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByInvoiceSection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on an invoice section.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByInvoiceSection": {
+            "$ref": "./examples/billingPermissionsListByInvoiceSection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for an invoice section.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByInvoiceSection",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for an invoice section.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByInvoiceSection": {
+            "$ref": "./examples/checkAccessByInvoiceSection.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for a billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByBillingAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for a billing account.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByBillingAccount": {
+            "$ref": "./examples/checkAccessByBillingAccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for a customer at billing account level.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByCustomerAtBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a customer.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByCustomerAtBillingAccount": {
+            "$ref": "./examples/billingPermissionsListByCustomerAtBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for a department.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByDepartment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/departmentName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on a department.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByDepartment": {
+            "$ref": "./examples/billingPermissionsListByDepartment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for a department.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByDepartment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/departmentName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for a department.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByDepartment": {
+            "$ref": "./examples/checkAccessByDepartment.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Lists the billing permissions the caller has for an enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_ListByEnrollmentAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billingPermissions a caller has on an enrollment account.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingPermissionsListByEnrollmentAccount": {
+            "$ref": "./examples/billingPermissionsListByEnrollmentAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}/checkAccess": {
+      "post": {
+        "tags": [
+          "BillingPermission"
+        ],
+        "description": "Provides a list of check access response objects for an enrollment account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingPermissions_CheckAccessByEnrollmentAccount",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request object against which access of the caller will be checked.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckAccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of check access response objects for an enrollment account.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CheckAccessResponse"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckAccessByEnrollmentAccount": {
+            "$ref": "./examples/checkAccessByEnrollmentAccount.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BillingPermission": {
+      "description": "The set of allowed action and not allowed actions a caller has on a resource.",
+      "type": "object",
+      "properties": {
+        "actions": {
+          "description": "The set of actions that the caller is allowed to perform.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "notActions": {
+          "description": "The set of actions that the caller is not allowed to perform.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "readOnly": true
+    },
+    "BillingPermissionListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingPermission"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckAccessRequest": {
+      "description": "Request to check access.",
+      "type": "object",
+      "properties": {
+        "actions": {
+          "description": "List of actions passed in the request body against which the permissions will be checked.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CheckAccessResponse": {
+      "description": "The properties of a check access response.",
+      "type": "object",
+      "properties": {
+        "accessDecision": {
+          "description": "Access Decision, specifies access is allowed or not.",
+          "enum": [
+            "Other",
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AccessDecision",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "description": "Gets or sets an action.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

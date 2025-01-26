@@ -2180,6 +2180,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
           "202": {
             "headers": {
               "Location": {
@@ -3038,9 +3044,8 @@
       "type": "object",
       "properties": {
         "openAIResourceId": {
-          "description": "The resource id of Open AI resource",
-          "type": "string",
-          "format": "arm-id"
+          "description": "The resource name of Open AI resource",
+          "type": "string"
         },
         "openAIResourceEndpoint": {
           "description": "The API endpoint for Open AI resource",

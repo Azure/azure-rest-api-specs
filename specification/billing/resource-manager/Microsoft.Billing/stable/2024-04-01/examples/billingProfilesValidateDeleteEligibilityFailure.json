@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "eligibilityStatus": "NotAllowed",
+        "eligibilityDetails": [
+          {
+            "code": "ActiveBillingSubscriptions",
+            "message": "There are active or disabled subscriptions assigned to the invoice section. Either move the subscription to another invoice section or delete the subscriptions and then try deleting the invoice section."
+          },
+          {
+            "code": "LastBillingProfile",
+            "message": "Billing profile cannot be deleted as this is the only billing profile in this billing account."
+          },
+          {
+            "code": "OutstandingCharges",
+            "message": "Billing Profile cannot be deleted as there are outstanding charges on this billing profile."
+          },
+          {
+            "code": "PendingCharges",
+            "message": "Billing Profile cannot be deleted as there are pending charges accumulating on this billing profile."
+          },
+          {
+            "code": "ReservedInstances",
+            "message": "Billing Profile cannot be deleted as there are reserved assets with a billing plan."
+          }
+        ]
+      }
+    }
+  }
+}

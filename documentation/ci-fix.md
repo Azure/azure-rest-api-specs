@@ -41,7 +41,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
-  - [`Swagger SpellCheck`](#swagger-spellcheck)
+  - [`Spell Check`](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
@@ -86,15 +86,13 @@ Please reach out to him with any questions.
 
 If you have an issue or with any of checks listed in the first column of the table below:
 
-| Check name                        | Owner          |
-|-----------------------------------|----------------|
-| `SDK azure-sdk-for-go`            | Ray Chen       |
-| `SDK azure-sdk-for-java`          | Weidong Xu     |
-| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang |
-| `SDK azure-sdk-for-net`           | Wei Hu         |
-| `SDK azure-sdk-for-net-track2`    | Wei Hu         |
-| `SDK azure-sdk-for-python`        | Yuchao Yan     |
-| `SDK azure-sdk-for-python-track2` | Yuchao Yan     |
+| Check name                        | Owner          | GitHub login                                                  |
+|-----------------------------------|----------------| ------------------------------------------------------------- |
+| `SDK azure-sdk-for-go`            | Chenjie Shi    | [tadelesh](https://github.com/tadelesh)                       |
+| `SDK azure-sdk-for-java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
+| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK azure-sdk-for-net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
+| `SDK azure-sdk-for-python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
 
@@ -114,7 +112,7 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 ### If an expected APIView was not generated, follow the step below to troubleshoot.
 
 - On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
-- Investigate the CI job for the languge with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languges are generated in their respective language jobs in the `SDK Automation` stage.
+- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
 - Ensure that all previous checks in the job are green before proceeding.
 
 ### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
@@ -190,70 +188,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-Check `Swagger LintDiff` may fail for the OpenAPI generated from TypeSpec, even if there are no warnings or errors reported from the TypeSpec compiler.  Causes include bugs in the TypeSpec OpenAPI emitter, bugs in LintDiff rules, incompatibilities between TypeSpec and LintDiff, or checks duplicated in TypeSpec and LintDiff.
-
-We are working to address the root causes (where possible).  Until then, we recommend you [suppress](#suppression-process) these LintDiff errors, using a "permanent suppression" with a descriptive "reason", so we can revert your suppression when the root cause is fixed.
-
-### `Record<unknown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`
-
-The use of `Record<unknown>` in TypeSpec is discouraged, and there is a TypeSpec lint rule to enforce this.  If you still need to use `Record<unknown>`, the OpenAPI spec generated will cause many LintDiff errors of types `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`.  You will need to suppress both the TypeSpec violation (in TypeSpec source code) and the LintDiff violations.
-
-### `RequestBodyMustExistForPutPatch`
-
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/641
-
-### `PatchPropertiesCorrespondToPutProperties`
-
-We believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/642
-
-### `@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`
-
-If `EvenSegmentedPathForPutOperation` and/or `XmsPageableForListCalls` are failing for OpenAPI generated from TypeSpec using `@singleton` (OpenAPI path ends with `/default`), we believe this is a false positive: https://github.com/Azure/azure-openapi-validator/issues/646
-
-### `AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`
-
-Data-plane specs can suppress violations of the following rules, since they only exist for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec.  Resource-manager specs should **not** suppress violations of these rules, since resource-manager SDKs are generated from OpenAPI, and rely on these errors being fixed.
-
-- `AvoidAnonymousParameter`
-- `AvoidAnonymousTypes`
-- `IntegerTypeMustHaveFormat`
-
-### `AvoidAnonymousTypes` inside a 202 response
-
-As an exception to the previous note, resource-manager specs **may** be able to suppress `AvoidAnonymousTypes`, but only if the error is inside a 202 response from a long-running operation (LRO).  It is known that SDKs do not need to generate type names for such responses.
-
-### `OAuth2Auth` causes `XmsEnumValidation`
-
-TypeSpec using `OAuth2Auth` may generate the following OpenAPI:
-
-``` yaml
-"type": {
-  "type": "string",
-  "description": "OAuth2 authentication",
-  "enum": [
-    "oauth2"
-  ]
-},
-```
-
-Which causes error `XmsEnumValidation`.  The recommended workaround is to add `omit-unreachable-types: true` to your `tspconfig.yaml`.
-
-### `ProvisioningStateMustBeReadOnly`
-
-The root cause is bugs in `azure-openapi-validator` and `oav`:
-
-https://github.com/Azure/azure-openapi-validator/issues/637
-https://github.com/Azure/oav/issues/848
-
-The recommended workaround is to add `use-read-only-status-schema: true` to your `tspconfig.yaml`.
-
-### `PatchBodyParameterSchema`
-
-The root cause is a bug in typespec-azure:
-
-https://github.com/Azure/typespec-azure/issues/383.
-
-Please see the issue above for the suggested workaround and apply it directly to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
+https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
 
 ## `Swagger ModelValidation`
 
@@ -311,58 +246,41 @@ oav validate-spec <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
-## `Swagger SpellCheck`
+## Spell Check
 
-If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
-add to your existing section or create a new section for your specific spec or service family if the work is more generally used in lots of files under your service.
+If you receive a spelling failure, first try to fix the spelling in source.
 
-``` yaml
- "overrides": [
-    ... example of specific file override
-    {
-        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
-        "words": [
-            "saskey"
-        ]
-    }
-    ... example of specific service family override
-    {
-        "filename": "**/specification/cognitiveservices/**/*.json",
-        "words": [
-            "flac",
-            "mpga"
-        ]
-    }
+If there are new words that need to be supported for your service, add the word to the override list in the `words` list in
+the `specification/<service>/cspell.yaml` file for your service. Specific files can also be overridden using the
+`override` field in your service's `cspell.yaml` file (see example below).
+
+If the `specification/<service>/cspell.yaml` file does not exist, create it using the example below and set the `words`
+and `overrides` fields to the words that need to be suppressed. The `import` field is *required*.
+
+For example (note the words list is sorted alphabetically):
+
+```yaml
+import:
+  - ../../cspell.yaml
+words:
+  - aardvark
+  - zoology
+
+# Optional overrides example for words in a specific file
+overrides: 
+  - filename: '**/specification/contosowidgetmanager/somefile.yaml'
+    words:
+      - aardwolf
+      - zoo
 ```
 
-Words are case-insensitive so use lower case for the word list.
+Spell checking is *case-insensitive* so you only need to add a word once in lower-case. Try to kept the word list sorted for easier discovery.
 
-If you need more information on see [cspell configuration](https://cspell.org/configuration/).
-
-*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
+For more information see [cspell configuration](https://cspell.org/configuration/).
 
 ## `TypeSpec Validation`
 
-This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated OpenAPI spec](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
-
-### Run `tsv` locally
-
-``` powershell
-cd <repo>
-git checkout <your-branch>
-git merge <target-branch>
-npm ci
-npx tsv <path-to-your-spec>
-git commit; git push (if any changes)
-
-# example
-npx tsv specification/contosowidgetmanager/Contoso.WidgetManager
-```
-
-Then check any errors that might be outputted and address any issues as needed. If there are changed files after the runit generally means
-that the generated OpenAPI spec files were not in-sync with the TypeSpec project and you should include those changes in your pull request as well.
-
-If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
+https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
 ## `license/cla`
 

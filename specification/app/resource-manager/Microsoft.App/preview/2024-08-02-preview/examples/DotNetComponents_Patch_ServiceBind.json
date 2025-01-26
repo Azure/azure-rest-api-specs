@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "name": "mydotnetcomponent",
+    "api-version": "2024-08-02-preview",
+    "dotNetComponentEnvelope": {
+      "properties": {
+        "componentType": "AspireDashboard",
+        "configurations": [
+          {
+            "propertyName": "dashboard-theme",
+            "value": "dark"
+          }
+        ],
+        "serviceBinds": [
+          {
+            "name": "yellowcat",
+            "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/mydotnetcomponent",
+        "name": "mydotnetcomponent",
+        "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+        "properties": {
+          "componentType": "AspireDashboard",
+          "provisioningState": "Succeeded",
+          "configurations": [
+            {
+              "propertyName": "dashboard-theme",
+              "value": "dark"
+            }
+          ],
+          "serviceBinds": [
+            {
+              "name": "yellowcat",
+              "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/amF2YUNvbXBvbmVudHM6OWFiZTM5OGUtY2ZjNi00NGZmLThmODQtNjRiOWJhMTUzZWYy?api-version=2024-08-02-preview"
+      }
+    }
+  }
+}

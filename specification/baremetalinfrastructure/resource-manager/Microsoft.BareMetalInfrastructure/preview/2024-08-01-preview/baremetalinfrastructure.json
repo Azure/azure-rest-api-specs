@@ -1,0 +1,1378 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01-preview",
+    "title": "bareMetalInfrastructureClient",
+    "description": "The Bare Metal Infrastructure Management client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Bare Metal Instances",
+      "description": "Handle Operations for Compute Bare Metal Instances."
+    },
+    {
+      "name": "Bare Metal Storage Instances",
+      "description": "Handle Operations for Storage Bare Metal Instances."
+    },
+    {
+      "name": "Common",
+      "description": "Handle Common Operations across Bare Metal Infrastructure (Compute, and Storage)"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/start": {
+      "post": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "summary": "Start a Bare Metal Instance.",
+        "description": "The operation to start an Azure Bare Metal instance",
+        "operationId": "AzureBareMetalInstances_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Start an Azure Bare Metal instance": {
+            "$ref": "./examples/AzureBareMetalInstances_Start.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning on and includes a 'Location' header to query the operation result.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Bare Metal Infrastructure in the specified location."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/restart": {
+      "post": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "summary": "Restart a Bare Metal Instance.",
+        "description": "The operation to restart an Azure Bare Metal Instance",
+        "operationId": "AzureBareMetalInstances_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Restart an Azure Bare Metal Instance": {
+            "$ref": "./examples/AzureBareMetalInstances_Restart.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ForcePowerManagementOperationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now restarting and includes a 'Location' header to query the operation result.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Bare Metal Infrastructure in the specified location."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}/shutdown": {
+      "post": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "summary": "Shutdown a Bare Metal Instance.",
+        "description": "The operation to shutdown an Azure Bare Metal Instance",
+        "operationId": "AzureBareMetalInstances_Shutdown",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Shutdown an Azure Bare Metal Instance": {
+            "$ref": "./examples/AzureBareMetalInstances_Shutdown.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates that the existing Bare Metal Instance is now turning off and includes a 'Location' header to query the operation result.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to track the operation status of the Microsoft Bare Metal Infrastructure in the specified location."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances": {
+      "get": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "operationId": "AzureBareMetalInstances_ListBySubscription",
+        "summary": "Returns a list of Azure Bare Metal Instances in the specified subscription.",
+        "description": "Returns a list of Azure Bare Metal Instances in the specified subscription. The operations returns various properties of each Azure Bare Metal Instance.",
+        "x-ms-examples": {
+          "List all Azure Bare Metal Instances in a subscription": {
+            "$ref": "./examples/AzureBareMetalInstances_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances": {
+      "get": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "operationId": "AzureBareMetalInstances_ListByResourceGroup",
+        "summary": "Gets a list of Azure Bare Metal Instances in the specified subscription and resource group.",
+        "description": "Gets a list of Azure Bare Metal Instances in the specified subscription and resource group. The operations returns various properties of each Azure Bare Metal Instance.",
+        "x-ms-examples": {
+          "List all Azure Bare Metal Instances in a resource group": {
+            "$ref": "./examples/AzureBareMetalInstances_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BareMetalInfrastructure/operations": {
+      "get": {
+        "tags": [
+          "Common"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List all management operations supported by the AzureBareMetal RP": {
+            "$ref": "./examples/AzureBareMetalOperations_List.json"
+          }
+        },
+        "summary": "Lists all of the available consumption REST API operations.",
+        "description": "Gets a list of AzureBareMetal management operations.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/{azureBareMetalInstanceName}": {
+      "get": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "operationId": "AzureBareMetalInstances_Get",
+        "summary": "Gets an Azure Bare Metal Instance.",
+        "description": "Gets an Azure Bare Metal Instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get an Azure Bare Metal Instance": {
+            "$ref": "./examples/AzureBareMetalInstances_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureBareMetalInstances_Create",
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "description": "Creates an Azure Bare Metal Instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            }
+          },
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureBareMetalInstances_Create": {
+            "$ref": "./examples/AzureBareMetalInstances_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "operationId": "AzureBareMetalInstances_Update",
+        "summary": "Patches the Tags field of a Azure Bare Metal Instance.",
+        "description": "Patches the Tags field of a Azure Bare Metal Instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Update Tags field of an Azure Bare Metal Instance": {
+            "$ref": "./examples/AzureBareMetalInstances_PatchTags.json"
+          },
+          "Delete Tags field of an Azure Bare Metal Instance": {
+            "$ref": "./examples/AzureBareMetalInstances_PatchTags_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureBareMetalInstances_Delete",
+        "tags": [
+          "Bare Metal Instances"
+        ],
+        "description": "Deletes an Azure Bare Metal Instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureBareMetalInstances_Delete": {
+            "$ref": "./examples/AzureBareMetalInstances_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetalInfrastructure/bareMetalStorageInstances": {
+      "get": {
+        "tags": [
+          "Bare Metal Storage Instances"
+        ],
+        "operationId": "AzureBareMetalStorageInstances_ListBySubscription",
+        "summary": "Gets a list of Azure Bare Metal Storage instances in the specified subscription.",
+        "description": "Gets a list of AzureBareMetalStorage instances in the specified subscription. The operations returns various properties of each Azure Bare Metal Instance.",
+        "x-ms-examples": {
+          "List all AzureBareMetalStorage instances in a subscription": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalStorageInstances": {
+      "get": {
+        "tags": [
+          "Bare Metal Storage Instances"
+        ],
+        "operationId": "AzureBareMetalStorageInstances_ListByResourceGroup",
+        "summary": "Gets a list of Azure Bare Metal Storage instances in the specified subscription and resource group.",
+        "description": "Gets a list of AzureBareMetalStorage instances in the specified subscription and resource group. The operations returns various properties of each Azure Bare Metal Instance.",
+        "x-ms-examples": {
+          "List all AzureBareMetalStorage instances in a resource group": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BareMetalInfrastructure/bareMetalStorageInstances/{azureBareMetalStorageInstanceName}": {
+      "get": {
+        "tags": [
+          "Bare Metal Storage Instances"
+        ],
+        "operationId": "AzureBareMetalStorageInstances_Get",
+        "summary": "Gets an Azure Bare Metal Storage instance.",
+        "description": "Gets an Azure Bare Metal Storage instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get an AzureBareMetalStorage instance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Bare Metal Storage Instances"
+        ],
+        "summary": "Create an azure bare metal storage resource.",
+        "description": "Creates an Azure Bare Metal Storage Instance for the specified subscription, resource group, and instance name.",
+        "operationId": "AzureBareMetalStorageInstances_Create",
+        "x-ms-examples": {
+          "Put a new AzureBareMetalStorageInstance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBodyParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            },
+            "description": "request body for put call"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
+          },
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BareMetalInfrastructure"
+        ],
+        "operationId": "AzureBareMetalStorageInstances_Update",
+        "summary": "Patches the Tags field of a Azure BareMetalStorage instance.",
+        "description": "Patches the Tags field of a Azure BareMetalStorage instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Update Tags field of an AzureBareMetalStorage instance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_PatchTags.json"
+          },
+          "Delete Tags field of an AzureBareMetalStorage instance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_PatchTags_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Bare Metal Storage Instances"
+        ],
+        "summary": "Delete an AzureBareMetalStorageInstance.",
+        "description": "Deletes an Azure Bare Metal Storage Instance for the specified subscription, resource group, and instance name.",
+        "operationId": "AzureBareMetalStorageInstances_Delete",
+        "x-ms-examples": {
+          "Delete an AzureBareMetalStorageInstance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureBareMetalInstancesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureBareMetalInstance"
+          },
+          "description": "The list of Azure Bare Metal Instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of Azure Bare Metal Instances."
+        }
+      },
+      "description": "The response from the List Azure Bare Metal Instances operation."
+    },
+    "AzureBareMetalInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBareMetalInstanceProperties",
+          "description": "AzureBareMetal instance properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "AzureBareMetal instance info on Azure (ARM properties and AzureBareMetal properties)"
+    },
+    "AzureBareMetalInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the Azure Bare Metal Instance."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the Azure Bare Metal Instance disks."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings for the Azure Bare Metal Instance."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the network settings for the Azure Bare Metal Instance."
+        },
+        "azureBareMetalInstanceId": {
+          "type": "string",
+          "description": "Specifies the Azure Bare Metal Instance unique ID."
+        },
+        "powerState": {
+          "type": "string",
+          "enum": [
+            "starting",
+            "started",
+            "stopping",
+            "stopped",
+            "restarting",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AzureBareMetalInstancePowerStateEnum",
+            "modelAsString": true
+          },
+          "description": "Resource power state"
+        },
+        "proximityPlacementGroup": {
+          "type": "string",
+          "description": "Resource proximity placement group"
+        },
+        "hwRevision": {
+          "type": "string",
+          "description": "Hardware revision of an Azure Bare Metal Instance"
+        },
+        "partnerNodeId": {
+          "type": "string",
+          "description": "ARM ID of another AzureBareMetalInstance that will share a network with this AzureBareMetalInstance"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "AzureBareMetalProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the AzureBareMetalInstance"
+        }
+      },
+      "description": "Describes the properties of an Azure Bare Metal Instance."
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "properties": {
+        "hardwareType": {
+          "type": "string",
+          "enum": [
+            "Cisco_UCS",
+            "HPE",
+            "SDFLEX"
+          ],
+          "x-ms-enum": {
+            "name": "AzureBareMetalHardwareTypeNamesEnum",
+            "modelAsString": true
+          },
+          "description": "Name of the hardware type (vendor and/or their product name)"
+        },
+        "azureBareMetalInstanceSize": {
+          "type": "string",
+          "enum": [
+            "S72m",
+            "S144m",
+            "S72",
+            "S144",
+            "S192",
+            "S192m",
+            "S192xm",
+            "S96",
+            "S112",
+            "S224",
+            "S224m",
+            "S224om",
+            "S224oo",
+            "S224oom",
+            "S224ooo",
+            "S384",
+            "S384m",
+            "S384xm",
+            "S384xxm",
+            "S448",
+            "S448m",
+            "S448om",
+            "S448oo",
+            "S448oom",
+            "S448ooo",
+            "S448se",
+            "S576m",
+            "S576xm",
+            "S672",
+            "S672m",
+            "S672om",
+            "S672oo",
+            "S672oom",
+            "S672ooo",
+            "S768",
+            "S768m",
+            "S768xm",
+            "S896",
+            "S896m",
+            "S896om",
+            "S896oo",
+            "S896oom",
+            "S896ooo",
+            "S960m"
+          ],
+          "x-ms-enum": {
+            "name": "azureBareMetalInstanceSizeNamesEnum",
+            "modelAsString": true
+          },
+          "description": "Specifies the Azure Bare Metal Instance SKU."
+        }
+      },
+      "description": "Specifies the hardware settings for the Azure Bare Metal Instance."
+    },
+    "Disk": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of an empty data disk in gigabytes."
+        },
+        "lun": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+        }
+      },
+      "description": "Specifies the disk information fo the Azure Bare Metal Instance"
+    },
+    "StorageProfile": {
+      "type": "object",
+      "properties": {
+        "nfsIpAddress": {
+          "type": "string",
+          "description": "IP Address to connect to storage."
+        },
+        "osDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies information about the operating system disk used by bare metal instance."
+        }
+      },
+      "description": "Specifies the storage settings for the Azure Bare Metal instance disks."
+    },
+    "OSProfile": {
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "Specifies the host OS name of the Azure Bare Metal instance."
+        },
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specifies version of operating system."
+        },
+        "sshPublicKey": {
+          "type": "string",
+          "description": "Specifies the SSH public key used to access the operating system."
+        }
+      },
+      "description": "Specifies the operating system settings for the Azure Bare Metal instance."
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ],
+          "description": "Specifies the network interfaces for the Azure Bare Metal Instance."
+        },
+        "circuitId": {
+          "type": "string",
+          "description": "Specifies the circuit id for connecting to express route."
+        }
+      },
+      "description": "Specifies the network settings for the Azure Bare Metal Instance disks."
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "Specifies the IP address of the network interface."
+        }
+      },
+      "description": "Specifies the network interfaces of a bare metal resource."
+    },
+    "AzureBareMetalStorageInstancesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureBareMetalStorageInstance"
+          },
+          "description": "The list of AzureBareMetalStorage instances.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of AzureBareMetalStorage instances."
+        }
+      },
+      "description": "The response from the Get AzureBareMetalStorageInstances operation."
+    },
+    "AzureBareMetalStorageInstance": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBareMetalStorageInstanceProperties",
+          "description": "AzureBareMetalStorageInstance properties"
+        },
+        "identity": {
+          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
+          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "AzureBareMetalStorageInstance info on Azure (ARM properties and AzureBareMetalStorage properties)"
+    },
+    "AzureBareMetalStorageInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "azureBareMetalStorageInstanceUniqueIdentifier": {
+          "type": "string",
+          "description": "Specifies the AzureBareMetaStorageInstance unique ID."
+        },
+        "storageProperties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "Specifies the storage properties for the AzureBareMetalStorage instance."
+        }
+      },
+      "description": "Describes the properties of an AzureBareMetalStorageInstance."
+    },
+    "AzureBareMetalStorageInstanceBody": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
+          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags field of the AzureBareMetal/AzureBareMetaStorage instance."
+        }
+      },
+      "description": "properties of body during PUT/PATCH for an AzureBareMetalStorageInstance."
+    },
+    "AzureBareMetalStorageInstanceIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of Azure Bare Metal Storage Instance identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID associated with the Azure Bare Metal Storage Instance. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Azure Bare Metal Storage Instance. The type 'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any identities from the Azure Bare Metal Storage Instance.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Identity for Azure Bare Metal Storage Instance."
+    },
+    "StorageProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the AzureBareMetalStorageInstance"
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "the offering type for which the resource is getting provisioned"
+        },
+        "storageType": {
+          "type": "string",
+          "description": "the storage protocol for which the resource is getting provisioned"
+        },
+        "generation": {
+          "type": "string",
+          "description": "the kind of storage instance"
+        },
+        "hardwareType": {
+          "type": "string",
+          "description": "the hardware type of the storage instance"
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "the workload for which the resource is getting provisioned"
+        },
+        "storageBillingProperties": {
+          "$ref": "#/definitions/StorageBillingProperties",
+          "description": "the billing related information for the resource"
+        }
+      },
+      "description": "described the storage properties of the azure bare metal storage instance"
+    },
+    "StorageBillingProperties": {
+      "type": "object",
+      "properties": {
+        "billingMode": {
+          "type": "string",
+          "description": "the billing mode for the storage instance"
+        },
+        "azureBareMetalStorageInstanceSize": {
+          "type": "string",
+          "description": "the SKU type that is provisioned"
+        }
+      },
+      "description": "Describes the billing related details of the AzureBareMetalStorageInstance."
+    },
+    "Tags": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags field of the AzureBareMetal/AzureBareMetaStorage instance."
+        }
+      },
+      "description": "Tags field of the AzureBareMetal/AzureBareMetalStorage instance."
+    },
+    "ForceState": {
+      "type": "object",
+      "properties": {
+        "forceState": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ],
+          "x-ms-enum": {
+            "name": "AzureBareMetalInstanceForcePowerState",
+            "modelAsString": true
+          },
+          "description": "Whether to force restart by shutting all processes."
+        }
+      },
+      "description": "The active state empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server"
+    },
+    "OperationStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique Operation Status Identifier."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Requesting",
+            "Executing",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "AsyncOperationStatus",
+            "modelAsString": true
+          },
+          "description": "Status of the operation."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start Time when the operation was initially executed."
+        },
+        "error": {
+          "description": "An error from the Azure Bare Metal Infrastructure service.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Server-defined set of error codes.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Human-readable representation of the error.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "The OperationStatus object returns the state of an asynchronous operation."
+    }
+  },
+  "parameters": {
+    "AzureBareMetalInstanceNameParameter": {
+      "name": "azureBareMetalInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+$",
+      "description": "Name of the Azure Bare Metal Instance, also known as the ResourceName.",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureBareMetalStorageInstanceNameParameter": {
+      "name": "azureBareMetalStorageInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": ".*",
+      "description": "Name of the Azure Bare Metal Storage Instance, also known as the ResourceName.",
+      "x-ms-parameter-location": "method"
+    },
+    "ForcePowerManagementOperationParameter": {
+      "name": "forceParameter",
+      "in": "body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ForceState"
+      },
+      "description": "When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing processes that may be running on the server",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsParameter": {
+      "name": "tagsParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Tags"
+      },
+      "description": "Request body that only contains the new Tags field",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureBareMetalStorageInstanceBodyParameter": {
+      "name": "azureBareMetalStorageInstanceBodyParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AzureBareMetalStorageInstanceBody"
+      },
+      "description": "Request body that only contains the Tags and Identity Field",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -20,6 +20,8 @@ Absent SDK breaking changes suppressions
 ### Next Steps
 
 1. The pull request authors create a file called `sdk-suppressions.yaml` if it doesn't already exist in your service folder in the `azure-rest-api-specs` repository. 
+    - For TypeSpec scenarios, `sdk-suppressions.yaml` should be placed in the root folder of the TypeSpec project, which also contains the `tspconfig.yaml` file. For example, refers to the location for [Contoso.Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/contosowidgetmanager/Contoso.Management).
+    - For OpenAPI scenarios, `sdk-suppressions.yaml` should be placed in the `{service}\resource-manager` folder. For example, see the location for the [contosowidgetmanager resource provider](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/contosowidgetmanager/resource-manager).
 2. The pull request authors copy every line under the `Absent SDK breaking changes suppressions` section to the suppression file in the following format:
 ```
 suppressions:

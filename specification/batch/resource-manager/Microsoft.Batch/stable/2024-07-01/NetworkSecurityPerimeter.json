@@ -1,0 +1,197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BatchManagementClient",
+    "description": "The Batch Management Client.",
+    "version": "2024-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth 2.0 auth code flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "operationId": "NetworkSecurityPerimeter_ListConfigurations",
+        "description": "Lists all of the NSP configurations in the specified account.",
+        "x-ms-examples": {
+          "ListNspConfigurations": {
+            "$ref": "./examples/NspConfigurationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./BatchManagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of NSP configurations associated with the account.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./BatchManagement.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "operationId": "NetworkSecurityPerimeter_GetConfiguration",
+        "description": "Gets information about the specified NSP configuration.",
+        "x-ms-examples": {
+          "GetNspConfiguration": {
+            "$ref": "./examples/NspConfigurationGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./BatchManagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the NSP configuration.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./BatchManagement.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeter"
+        ],
+        "operationId": "NetworkSecurityPerimeter_ReconcileConfiguration",
+        "description": "Reconciles the specified NSP configuration.",
+        "x-ms-examples": {
+          "ReconcileNspConfiguration": {
+            "$ref": "./examples/NspConfigurationReconcile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./BatchManagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+          },
+          {
+            "$ref": "./BatchManagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation was accepted and will be performed in the background.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "networkSecurityPerimeterConfigurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

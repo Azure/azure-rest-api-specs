@@ -31,6 +31,5 @@ model SystemVersionsFilter {
 @doc("System Version Resource model")
 model SystemVersionProperties {
   @doc("A valid Oracle System Version")
-  @visibility("read")
   systemVersion: string;
 }

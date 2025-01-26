@@ -86,7 +86,7 @@
         }
       },
       "put": {
-        "description": "Provisions the specified Dedicated capacity based on the configuration specified in the request.",
+        "description": "Provisions the specified dedicated capacity based on the configuration specified in the request. You can’t create a capacity with a name that’s used by another capacity in another tenant in the target location.",
         "x-ms-examples": {
           "Create capacity": {
             "$ref": "./examples/createCapacity.json"
@@ -568,7 +568,7 @@
           "Capacities"
         ],
         "operationId": "Capacities_CheckNameAvailability",
-        "description": "Check the name availability in the target location.",
+        "description": "Check the name availability in the target location. The name isn’t available if it’s used by another capacity in another tenant in the target location.",
         "parameters": [
           {
             "name": "location",

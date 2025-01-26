@@ -104,3 +104,15 @@ model Ipv6Address {
   @doc("User equipment port.")
   port: int32;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};

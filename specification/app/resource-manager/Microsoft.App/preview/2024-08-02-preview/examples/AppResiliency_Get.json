@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "appName": "testcontainerApp0",
+    "name": "resiliency-policy-1",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/resiliencyPolicies/resiliency-policy-1",
+        "name": "resiliency-policy-1",
+        "type": "Microsoft.App/containerApps/resiliencyPolicies",
+        "properties": {
+          "timeoutPolicy": {
+            "responseTimeoutInSeconds": 15,
+            "connectionTimeoutInSeconds": 5
+          },
+          "httpRetryPolicy": {
+            "maxRetries": 5,
+            "retryBackOff": {
+              "initialDelayInMilliseconds": 1000,
+              "maxIntervalInMilliseconds": 10000
+            },
+            "matches": {
+              "headers": [
+                {
+                  "header": "X-Content-Type",
+                  "match": {
+                    "prefixMatch": "GOATS"
+                  }
+                }
+              ],
+              "httpStatusCodes": [
+                502,
+                503
+              ],
+              "errors": [
+                "5xx",
+                "connect-failure",
+                "reset",
+                "retriable-headers",
+                "retriable-status-codes"
+              ]
+            }
+          },
+          "tcpRetryPolicy": {
+            "maxConnectAttempts": 3
+          },
+          "circuitBreakerPolicy": {
+            "consecutiveErrors": 5,
+            "intervalInSeconds": 10,
+            "maxEjectionPercent": 50
+          },
+          "tcpConnectionPool": {
+            "maxConnections": 100
+          },
+          "httpConnectionPool": {
+            "http1MaxPendingRequests": 1024,
+            "http2MaxRequests": 1024
+          }
+        }
+      }
+    }
+  }
+}

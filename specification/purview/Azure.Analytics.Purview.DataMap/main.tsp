@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
   "{endpoint}/datamap/api",
   "Purview Data Map Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
-    endpoint: string,
+    endpoint: url,
   }
 )
 @doc("""

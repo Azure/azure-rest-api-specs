@@ -1,0 +1,158 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01",
+    "title": "ConsumptionManagementClient",
+    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/download": {
+      "post": {
+        "tags": [
+          "PriceSheet"
+        ],
+        "operationId": "PriceSheet_DownloadByBillingAccountPeriod",
+        "description": "Generates the pricesheet for the provided billing period asynchronously based on the enrollment id",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "EAPriceSheetForBillingPeriod": {
+            "$ref": "./examples/EAPriceSheetForBillingPeriod.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingPeriodNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationStatus": {
+      "description": "The status of the long running operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "Running",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/PricesheetDownloadProperties"
+        }
+      }
+    },
+    "PricesheetDownloadProperties": {
+      "description": "The properties of the price sheet download.",
+      "type": "object",
+      "properties": {
+        "downloadUrl": {
+          "description": "The link (url) to download the pricesheet.",
+          "type": "string",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "Download link validity.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingPeriodNameParameter": {
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

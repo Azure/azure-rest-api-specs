@@ -1,0 +1,30 @@
+{
+  "operationId": "DocumentModels_ListModels",
+  "title": "Get Document Models",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "modelId": "prebuilt-layout",
+            "createdDateTime": "2021-07-30T00:00:00Z",
+            "description": "Prebuilt model to extract text, selection marks, tables, and other layout information.",
+            "apiVersion": "2024-07-31-preview"
+          },
+          {
+            "modelId": "myCustomModel",
+            "createdDateTime": "2021-09-24T12:54:35Z",
+            "expirationDateTime": "2023-01-01T00:00:00Z",
+            "description": "Custom model description",
+            "apiVersion": "2024-07-31-preview"
+          }
+        ],
+        "nextLink": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/documentModels?nextLink=nextLinkData"
+      }
+    }
+  }
+}

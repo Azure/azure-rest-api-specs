@@ -2,7 +2,8 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
@@ -45,10 +46,7 @@ using Microsoft.EventGrid.SystemEvents;
   "toCommunicationIdentifier",
   "javascript"
 );
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "javascript"
-);
+
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "javascript"
@@ -65,10 +63,7 @@ using Microsoft.EventGrid.SystemEvents;
   "summaryReportBlobUri",
   "javascript"
 );
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "javascript"
-);
+
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "javascript"

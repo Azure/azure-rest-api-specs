@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "certificateOrderName": "SampleCertificateOrderName",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.CertificateRegistration/certificateOrders/SampleCertificateOrderName",
+        "name": "SampleCertificateOrderName",
+        "type": "Microsoft.CertificateRegistration/certificateOrders",
+        "location": "Global",
+        "properties": {
+          "certificates": {
+            "SampleCertName1": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleSecretName1",
+              "provisioningState": "Succeeded"
+            },
+            "SampleCertName2": {
+              "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/SamplevaultName",
+              "keyVaultSecretName": "SampleSecretName2",
+              "provisioningState": "KeyVaultSecretDoesNotExist"
+            }
+          },
+          "distinguishedName": "CN=SampleCustomDomain.com",
+          "domainVerificationToken": "awe4163Br6d32r",
+          "validityInYears": 2,
+          "keySize": 2048,
+          "productType": "StandardDomainValidatedSsl",
+          "autoRenew": true,
+          "provisioningState": "Succeeded",
+          "status": "Issued",
+          "signedCertificate": {
+            "version": 1232490,
+            "serialNumber": "sds12424k",
+            "thumbprint": "FE703D7411A44163B6D32B3AD9B03E175886EBFE",
+            "subject": "CN=CertSubjectName",
+            "issuer": "CACert",
+            "signatureAlgorithm": "SHA",
+            "notAfter": "2022-11-12T23:40:25+00:00",
+            "notBefore": "2021-11-12T23:40:25+00:00"
+          },
+          "csr": "xdf!x|",
+          "intermediate": {
+            "version": 5589220,
+            "serialNumber": "k45kad0024",
+            "thumbprint": "RF3D7411A44163B6D32B3343559B03E175886EBFE",
+            "subject": "CN=IntermediateCertSubjectName",
+            "issuer": "CACert",
+            "signatureAlgorithm": "SHA",
+            "notAfter": "2023-11-12T23:40:25+00:00",
+            "notBefore": "2021-05-12T23:40:25+00:00"
+          },
+          "root": {
+            "version": 3430921,
+            "serialNumber": "jkskd890ajdd00124",
+            "thumbprint": "ZD3D7411A44163B6D32B3343559B03E175886EBFE",
+            "subject": "CN=RootCertSubjectName",
+            "issuer": "CACert",
+            "signatureAlgorithm": "SHA",
+            "notAfter": "2023-11-12T23:40:25+00:00",
+            "notBefore": "2021-05-12T23:40:25+00:00"
+          },
+          "serialNumber": "12324325325",
+          "lastCertificateIssuanceTime": "2021-11-12T23:40:25+00:00",
+          "expirationTime": "2022-11-12T23:40:25+00:00",
+          "isPrivateKeyExternal": false,
+          "appServiceCertificateNotRenewableReasons": [
+            "ExpirationNotInRenewalTimeRange"
+          ],
+          "nextAutoRenewalTimeStamp": "2022-11-12T23:40:25+00:00",
+          "contact": {
+            "email": "contact@email.com",
+            "nameFirst": "SampleFirstName",
+            "nameLast": "SampleLastName",
+            "phone": "1-224-550-332"
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,6 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Communication.ProgrammableConnectivity"
@@ -23,6 +22,16 @@ options:
     package-mode: "dataplane"
     package-dir: "azure-programmableconnectivity"
     package-name: "{package-dir}"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "programmableconnectivity"
+    packageDetails:
+      name: "@azure/programmableconnectivity"
     flavor: azure
 linter:
   extends:

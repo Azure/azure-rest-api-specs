@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -57,6 +71,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze conversations operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -107,6 +122,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The input for the analyze conversations operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationJobsInput"
@@ -375,7 +391,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPIIResults"
+      "x-ms-discriminator-value": "conversationalPIIResults"
     },
     "AnalyzeConversationJobResult": {
       "type": "object",
@@ -581,8 +597,8 @@
       "type": "string",
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
-        "ConversationalSummarizationResults",
-        "ConversationalPIIResults"
+        "conversationalSummarizationResults",
+        "conversationalPIIResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -590,12 +606,12 @@
         "values": [
           {
             "name": "ConversationalSummarizationResults",
-            "value": "ConversationalSummarizationResults",
+            "value": "conversationalSummarizationResults",
             "description": "Conversational Summarization Results"
           },
           {
             "name": "ConversationalPIIResults",
-            "value": "ConversationalPIIResults",
+            "value": "conversationalPIIResults",
             "description": "Conversational PII Results"
           }
         ]
@@ -618,7 +634,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalSummarizationResults"
+      "x-ms-discriminator-value": "conversationalSummarizationResults"
     },
     "AnalyzeConversationSummarizationTask": {
       "type": "object",
@@ -1195,13 +1211,12 @@
       "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
       "enum": [
         "Address",
-        "CreditCardNumber",
+        "CreditCard",
         "Email",
         "Person",
         "NumericIdentifier",
-        "PhoneNumber",
+        "Phone",
         "USSocialSecurityNumber",
-        "Miscellaneous",
         "All",
         "Default"
       ],
@@ -1215,9 +1230,9 @@
             "description": "Address category"
           },
           {
-            "name": "CreditCardNumber",
-            "value": "CreditCardNumber",
-            "description": "Credit card number category"
+            "name": "CreditCard",
+            "value": "CreditCard",
+            "description": "Credit card category"
           },
           {
             "name": "Email",
@@ -1235,19 +1250,14 @@
             "description": "Numeric identifier category"
           },
           {
-            "name": "PhoneNumber",
-            "value": "PhoneNumber",
-            "description": "Phone number category"
+            "name": "Phone",
+            "value": "Phone",
+            "description": "Phone category"
           },
           {
             "name": "USSocialSecurityNumber",
             "value": "USSocialSecurityNumber",
             "description": "US social security number category"
-          },
-          {
-            "name": "Miscellaneous",
-            "value": "Miscellaneous",
-            "description": "Miscellaneous category"
           },
           {
             "name": "All",
@@ -1267,11 +1277,11 @@
       "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
       "enum": [
         "Address",
-        "CreditCardNumber",
+        "CreditCard",
         "Email",
         "Person",
         "NumericIdentifier",
-        "PhoneNumber",
+        "Phone",
         "USSocialSecurityNumber"
       ],
       "x-ms-enum": {
@@ -1284,9 +1294,9 @@
             "description": "Address category"
           },
           {
-            "name": "CreditCardNumber",
-            "value": "CreditCardNumber",
-            "description": "Credit card number category"
+            "name": "CreditCard",
+            "value": "CreditCard",
+            "description": "Credit card category"
           },
           {
             "name": "Email",
@@ -1304,9 +1314,9 @@
             "description": "Numeric identifier category"
           },
           {
-            "name": "PhoneNumber",
-            "value": "PhoneNumber",
-            "description": "Phone number category"
+            "name": "Phone",
+            "value": "Phone",
+            "description": "Phone category"
           },
           {
             "name": "USSocialSecurityNumber",
@@ -1814,7 +1824,7 @@
     },
     "ConversationalTask": {
       "type": "object",
-      "description": "The input for a custom conversation task.",
+      "description": "The input for a conversation language understanding task.",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/ConversationAnalysisOptions",
@@ -1822,7 +1832,7 @@
         },
         "parameters": {
           "$ref": "#/definitions/ConversationTaskParameters",
-          "description": "Input parameters necessary for a Conversation task."
+          "description": "Input parameters necessary for a Conversation language understanding task."
         }
       },
       "required": [
@@ -3366,7 +3376,7 @@
         },
         "regexPattern": {
           "type": "string",
-          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
         }
       },
       "allOf": [

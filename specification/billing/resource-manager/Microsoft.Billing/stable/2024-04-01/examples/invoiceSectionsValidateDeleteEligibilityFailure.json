@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "xxxx-xxxx-xxx-xxx",
+    "invoiceSectionName": "yyyy-yyyy-yyy-yyy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "eligibilityStatus": "NotAllowed",
+        "eligibilityDetails": [
+          {
+            "code": "ActiveBillingSubscriptions",
+            "message": "There are active or disabled subscriptions assigned to the invoice section. Either move the subscription to another invoice section or delete the subscriptions and then try deleting the invoice section."
+          },
+          {
+            "code": "LastInvoiceSection",
+            "message": "This is the only invoice section in this billing profile so it can’t be deleted."
+          },
+          {
+            "code": "ActiveAzurePlans",
+            "message": "This is the invoice section that was created when its billing profile was created so it can’t be deleted."
+          },
+          {
+            "code": "ReservedInstances",
+            "message": "The invoice section has the RI asset with a billing plan."
+          }
+        ]
+      }
+    }
+  }
+}

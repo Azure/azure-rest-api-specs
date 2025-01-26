@@ -1,0 +1,8 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/computeschedule/armcomputeschedule'
+      breaking-changes:
+        - Field `CrpOperationID`, `TimeStamp` of struct `OperationErrorDetails` has been removed
+        - Field `DeadLine`, `TimeZone` of struct `Schedule` has been removed
+        - Field `TimeZone` of struct `ResourceOperationDetails` has been removed
+        - Type of `OperationErrorDetails.ErrorDetails` has been changed from `*time.Time` to `*string`

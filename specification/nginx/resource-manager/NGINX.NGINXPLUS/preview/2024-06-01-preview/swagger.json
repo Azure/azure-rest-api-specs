@@ -1,0 +1,1768 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Nginx.NginxPlus",
+    "version": "2024-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Get a certificate of given NGINX deployment",
+        "operationId": "Certificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Get": {
+            "$ref": "./examples/Certificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Create or update the NGINX certificates for given NGINX deployment",
+        "operationId": "Certificates_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The certificate",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificate"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Certificates_CreateOrUpdate": {
+            "$ref": "./examples/Certificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "Deletes a certificate from the NGINX deployment",
+        "operationId": "Certificates_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "The name of certificate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Certificates_Delete": {
+            "$ref": "./examples/Certificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates": {
+      "get": {
+        "tags": [
+          "NginxCertificate"
+        ],
+        "summary": "List all certificates of given NGINX deployment",
+        "operationId": "Certificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxCertificateListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Certificates_List": {
+            "$ref": "./examples/Certificates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/configurations": {
+      "get": {
+        "tags": [
+          "NginxConfiguration"
+        ],
+        "summary": "List the NGINX configuration of given NGINX deployment.",
+        "operationId": "Configurations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxConfigurationListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Configurations_List": {
+            "$ref": "./examples/Configurations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/configurations/{configurationName}": {
+      "get": {
+        "tags": [
+          "NginxConfiguration"
+        ],
+        "summary": "Get the NGINX configuration of given NGINX deployment",
+        "operationId": "Configurations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxConfiguration"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Get": {
+            "$ref": "./examples/Configurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NginxConfiguration"
+        ],
+        "summary": "Create or update the NGINX configuration for given NGINX deployment",
+        "operationId": "Configurations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The NGINX configuration",
+            "schema": {
+              "$ref": "#/definitions/NginxConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxConfiguration"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxConfiguration"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Configurations_CreateOrUpdate": {
+            "$ref": "./examples/Configurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxConfiguration"
+        ],
+        "summary": "Reset the NGINX configuration of given NGINX deployment to default",
+        "operationId": "Configurations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "configurationName",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Configurations_Delete": {
+            "$ref": "./examples/Configurations_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/configurations/{configurationName}/analyze": {
+      "post": {
+        "tags": [
+          "NginxConfigurationAnalysis"
+        ],
+        "summary": "Analyze an NGINX configuration without applying it to the NGINXaaS deployment",
+        "operationId": "Configurations_Analysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The NGINX configuration to analyze",
+            "schema": {
+              "$ref": "#/definitions/AnalysisCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis complete",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Default error response",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Analysis": {
+            "$ref": "./examples/Configurations_Analysis.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}": {
+      "get": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "Get the NGINX deployment",
+        "operationId": "Deployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Get": {
+            "$ref": "./examples/Deployments_Get.json"
+          },
+          "Deployments_Get_AutoScale": {
+            "$ref": "./examples/Deployments_Get_AutoScale.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "Create or update the NGINX deployment",
+        "operationId": "Deployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Deployments_Create": {
+            "$ref": "./examples/Deployments_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "Update the NGINX deployment",
+        "operationId": "Deployments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeployment"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deployments_Update": {
+            "$ref": "./examples/Deployments_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "Delete the NGINX deployment resource",
+        "operationId": "Deployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deployments_Delete": {
+            "$ref": "./examples/Deployments_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Nginx.NginxPlus/nginxDeployments": {
+      "get": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "List the NGINX deployments resources",
+        "operationId": "Deployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_List": {
+            "$ref": "./examples/Deployments_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments": {
+      "get": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "List all NGINX deployments under the specified resource group.",
+        "operationId": "Deployments_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Deployments_ListByResourceGroup": {
+            "$ref": "./examples/Deployments_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Nginx.NginxPlus/operations": {
+      "get": {
+        "tags": [
+          "NginxDeployment"
+        ],
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-06-01-preview api version.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScaleProfile": {
+      "type": "object",
+      "description": "The autoscale profile.",
+      "required": [
+        "name",
+        "capacity"
+      ],
+      "x-ms-client-flatten": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "ExampleProfile"
+        },
+        "capacity": {
+          "type": "object",
+          "required": [
+            "min",
+            "max"
+          ],
+          "description": "The capacity parameters of the profile.",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The minimum number of NCUs the deployment can be autoscaled to.",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The maximum number of NCUs the deployment can be autoscaled to.",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "AutoUpgradeProfile": {
+      "type": "object",
+      "description": "Autoupgrade settings of a deployment.",
+      "required": [
+        "upgradeChannel"
+      ],
+      "properties": {
+        "upgradeChannel": {
+          "description": "Channel used for autoupgrade.",
+          "type": "string",
+          "example": "stable"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "NginxCertificateProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "keyVirtualPath": {
+          "type": "string"
+        },
+        "certificateVirtualPath": {
+          "type": "string"
+        },
+        "keyVaultSecretId": {
+          "type": "string"
+        },
+        "sha1Thumbprint": {
+          "type": "string",
+          "example": "1234567890ABCDEF1234567890ABCDEF12345678",
+          "readOnly": true
+        },
+        "keyVaultSecretVersion": {
+          "type": "string",
+          "example": "12345678ef9a12345678ef9a12345678",
+          "readOnly": true
+        },
+        "keyVaultSecretCreated": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2022-01-01T00:00:00.000Z",
+          "readOnly": true
+        },
+        "certificateError": {
+          "$ref": "#/definitions/NginxCertificateErrorResponseBody"
+        }
+      }
+    },
+    "NginxCertificateErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxCertificate": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxCertificateProperties"
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxCertificateListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxCertificate"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxConfigurationFile": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "virtualPath": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxConfigurationPackage": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NginxConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "package": {
+          "$ref": "#/definitions/NginxConfigurationPackage"
+        },
+        "rootFile": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxConfiguration": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxConfigurationProperties"
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxConfigurationListResponse": {
+      "description": "Response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "IdentityType": {
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IdentityType"
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceSku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the SKU.",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IdentityType"
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      }
+    },
+    "NginxPrivateIPAllocationMethod": {
+      "enum": [
+        "Static",
+        "Dynamic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NginxPrivateIPAllocationMethod"
+      }
+    },
+    "NginxPrivateIPAddress": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "#/definitions/NginxPrivateIPAllocationMethod"
+        },
+        "subnetId": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxPublicIPAddress": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxFrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "publicIPAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxPublicIPAddress"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateIPAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxPrivateIPAddress"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NginxNetworkInterfaceConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxNetworkProfile": {
+      "type": "object",
+      "properties": {
+        "frontEndIPConfiguration": {
+          "$ref": "#/definitions/NginxFrontendIPConfiguration"
+        },
+        "networkInterfaceConfiguration": {
+          "$ref": "#/definitions/NginxNetworkInterfaceConfiguration"
+        }
+      }
+    },
+    "NginxStorageAccount": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxLogging": {
+      "type": "object",
+      "properties": {
+        "storageAccount": {
+          "$ref": "#/definitions/NginxStorageAccount"
+        }
+      }
+    },
+    "NginxDeploymentScalingProperties": {
+      "type": "object",
+      "description": "Information on how the deployment will be scaled.",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "type": "integer",
+          "example": 20
+        },
+        "autoScaleSettings": {
+          "type": "object",
+          "required": [
+            "profiles"
+          ],
+          "description": "The settings for enabling automatic scaling of the deployment. If this field is specified, 'scale.capacity' must be empty.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "profiles": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScaleProfile"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        }
+      }
+    },
+    "NginxDeploymentUserProfile": {
+      "type": "object",
+      "properties": {
+        "preferredEmail": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^$|^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "description": "The preferred support contact email address of the user used for sending alerts and notification. Can be an empty string or a valid email address.",
+          "example": [
+            "",
+            "john.doe@example.com",
+            "tom@example.com"
+          ]
+        }
+      }
+    },
+    "NginxDeploymentProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "nginxVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "managedResourceGroup": {
+          "type": "string",
+          "description": "The managed resource group to deploy VNet injection related network resources."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NginxNetworkProfile"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the deployment.",
+          "readOnly": true
+        },
+        "enableDiagnosticsSupport": {
+          "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
+        },
+        "scalingProperties": {
+          "$ref": "#/definitions/NginxDeploymentScalingProperties"
+        },
+        "autoUpgradeProfile": {
+          "$ref": "#/definitions/AutoUpgradeProfile"
+        },
+        "userProfile": {
+          "$ref": "#/definitions/NginxDeploymentUserProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Settings for NGINX App Protect (NAP)",
+          "required": [
+            "webApplicationFirewallSettings"
+          ],
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            },
+            "webApplicationFirewallStatus": {
+              "$ref": "#/definitions/WebApplicationFirewallStatus",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "NginxDeployment": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "location": {
+          "type": "string"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "enableDiagnosticsSupport": {
+          "type": "boolean"
+        },
+        "logging": {
+          "$ref": "#/definitions/NginxLogging"
+        },
+        "scalingProperties": {
+          "$ref": "#/definitions/NginxDeploymentScalingProperties"
+        },
+        "userProfile": {
+          "$ref": "#/definitions/NginxDeploymentUserProfile"
+        },
+        "autoUpgradeProfile": {
+          "$ref": "#/definitions/AutoUpgradeProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Update settings for NGINX App Protect (NAP)",
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            }
+          }
+        }
+      }
+    },
+    "NginxDeploymentUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "location": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentUpdateProperties"
+        }
+      }
+    },
+    "NginxDeploymentListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Nginx.NginxPlus",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Type on which the operation is performed, e.g., 'deployments'.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type, e.g., read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation, e.g., 'Write deployments'.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "A Nginx.NginxPlus REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of GET request to list Nginx.NginxPlus operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Nginx.NginxPlus provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisCreate": {
+      "type": "object",
+      "description": "The request body for creating an analysis for an NGINX configuration.",
+      "properties": {
+        "config": {
+          "type": "object",
+          "properties": {
+            "rootFile": {
+              "type": "string",
+              "description": "The root file of the NGINX config file(s). It must match one of the files' filepath."
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationFile"
+              },
+              "x-ms-identifiers": []
+            },
+            "protectedFiles": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationFile"
+              },
+              "x-ms-identifiers": []
+            },
+            "package": {
+              "$ref": "#/definitions/NginxConfigurationPackage"
+            }
+          }
+        }
+      },
+      "required": [
+        "config"
+      ]
+    },
+    "AnalysisResult": {
+      "type": "object",
+      "description": "The response body for an analysis request. Contains the status of the analysis and any errors.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the analysis."
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalysisDiagnostic"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AnalysisDiagnostic": {
+      "type": "object",
+      "description": "An error object found during the analysis of an NGINX configuration.",
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the error"
+        },
+        "directive": {
+          "type": "string",
+          "example": "worker_processes"
+        },
+        "description": {
+          "type": "string",
+          "example": "Directives outside the http context are not allowed"
+        },
+        "file": {
+          "type": "string",
+          "description": "the filepath of the most relevant config file",
+          "example": "nginx.conf"
+        },
+        "line": {
+          "type": "number",
+          "example": 2
+        },
+        "message": {
+          "type": "string",
+          "example": "You are not allowed to set the worker_processes directive"
+        },
+        "rule": {
+          "type": "string",
+          "example": "nginx-azure-load-balancer-allowed-directives"
+        }
+      }
+    },
+    "WebApplicationFirewallSettings": {
+      "type": "object",
+      "description": "Settings for the NGINX App Protect Web Application Firewall (WAF)",
+      "properties": {
+        "activationState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "The activation state of the WAF. Use 'Enabled' to enable the WAF and 'Disabled' to disable it.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "activationState"
+          }
+        }
+      }
+    },
+    "WebApplicationFirewallStatus": {
+      "type": "object",
+      "description": "The status of the NGINX App Protect Web Application Firewall",
+      "properties": {
+        "attackSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing attack signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "botSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing bot signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "threatCampaignsPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing threat campaigns for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "componentVersions": {
+          "$ref": "#/definitions/WebApplicationFirewallComponentVersions",
+          "readOnly": true,
+          "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components."
+        }
+      }
+    },
+    "WebApplicationFirewallPackage": {
+      "type": "object",
+      "description": "NGINX App Protect Web Application Firewall (WAF) Package. Contains the version and revision date of the package.",
+      "required": [
+        "version",
+        "revisionDatetime"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "2.02",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) package."
+        },
+        "revisionDatetime": {
+          "type": "string",
+          "example": "2024-02-21T15:50:53Z",
+          "format": "date-time",
+          "description": "The date and time of the package revision."
+        }
+      }
+    },
+    "WebApplicationFirewallComponentVersions": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "wafEngineVersion",
+        "wafNginxVersion"
+      ],
+      "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components.",
+      "properties": {
+        "wafEngineVersion": {
+          "type": "string",
+          "example": "10.624.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) engine."
+        },
+        "wafNginxVersion": {
+          "type": "string",
+          "example": "4.815.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) module for NGINX."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DeploymentNameParameter": {
+      "in": "path",
+      "name": "deploymentName",
+      "description": "The name of targeted NGINX deployment",
+      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

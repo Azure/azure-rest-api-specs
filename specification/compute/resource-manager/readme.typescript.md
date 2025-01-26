@@ -28,6 +28,12 @@ directive:
     transform: >-
       return $.
         replace(/[,|*] 'DummyOrchestrationServiceName'/g,'');
+
+  # we do not need to hack to add a dummy enum entry in track 2, because track 2 generator will generate the enum type even if it only has on entry 
+  - from: diskRPCommon.json
+    where: "$.definitions.PurchasePlan"
+    transform: >
+      $["x-ms-client-name"] = "DiskPurchasePlan";
 ```
 
 ``` yaml $(typescript) && !$(profile-content)

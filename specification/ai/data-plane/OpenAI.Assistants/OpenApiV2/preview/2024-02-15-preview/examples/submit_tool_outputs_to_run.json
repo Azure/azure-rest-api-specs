@@ -1,0 +1,69 @@
+{
+  "title": "When a run has the `status: \"requires_action\"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.\n",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-02-15-preview",
+    "threadId": "thread_eRNwflE3ncDYak1np6MdMHJh",
+    "runId": "run_HsO8tYM4K5AAMAHgK0J3om8Q",
+    "body": {
+      "tool_outputs": [
+        {
+          "tool_call_id": "call_abc123",
+          "output": "28C"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "run_HsO8tYM4K5AAMAHgK0J3om8Q",
+        "object": "thread.run",
+        "created_at": 1699075592,
+        "assistant_id": "asst_abc123",
+        "thread_id": "thread_eRNwflE3ncDYak1np6MdMHJh",
+        "status": "queued",
+        "started_at": 1699075592,
+        "expires_at": 1699076192,
+        "cancelled_at": null,
+        "failed_at": null,
+        "completed_at": null,
+        "last_error": null,
+        "model": "gpt-4",
+        "instructions": "You tell the weather.",
+        "incomplete_details": null,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "description": "Determine weather in my location",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string",
+                    "description": "The city and state e.g. San Francisco, CA"
+                  },
+                  "unit": {
+                    "type": "string",
+                    "enum": [
+                      "c",
+                      "f"
+                    ]
+                  }
+                },
+                "required": [
+                  "location"
+                ]
+              }
+            }
+          }
+        ],
+        "metadata": {},
+        "usage": null
+      }
+    }
+  },
+  "operationId": "SubmitToolOutputsToRun"
+}

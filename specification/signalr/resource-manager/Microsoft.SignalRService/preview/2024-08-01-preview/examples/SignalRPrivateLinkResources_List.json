@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "groupId": "signalr",
+              "requiredMembers": [
+                "signalr"
+              ],
+              "requiredZoneNames": [
+                "privatelink.service.signalr.net"
+              ],
+              "shareablePrivateLinkResourceTypes": [
+                {
+                  "name": "site",
+                  "properties": {
+                    "description": "Azure App Service can be used as an upstream",
+                    "groupId": "sites",
+                    "type": "Microsoft.Web/sites"
+                  }
+                },
+                {
+                  "name": "vault",
+                  "properties": {
+                    "description": "Azure Key Vault can be used as credentials store",
+                    "groupId": "vault",
+                    "type": "Microsoft.KeyVault/vaults"
+                  }
+                },
+                {
+                  "name": "table",
+                  "properties": {
+                    "description": "Azure Storage Table can be used as message store",
+                    "groupId": "table",
+                    "type": "Microsoft.Storage/storageAccounts"
+                  }
+                }
+              ]
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateLinkResources/myPrivateLink",
+            "name": "myPrivateLink",
+            "type": "privateLinkResources"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults..."
+      }
+    }
+  }
+}

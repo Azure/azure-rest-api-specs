@@ -34,7 +34,6 @@ union AzureOpenAIOperationState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure OpenAI .")
 @removed(ServiceApiVersions.v2024_02_15_Preview)

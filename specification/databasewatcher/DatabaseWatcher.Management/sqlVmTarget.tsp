@@ -7,15 +7,17 @@ namespace Microsoft.DatabaseWatcher;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
 @doc("The properties specific to Azure SQL VM targets.")
+@removed(Versions.v2025_01_02)
 model SqlVmTargetProperties extends TargetProperties {
   @doc("The Azure SQL VM target.")
   targetType: "SqlVm";
 
-  @doc("The Azure ResourceId of an Azure SQL VM target.")
+  @doc("The Azure resource ID of an Azure SQL VM target.")
   sqlVmResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SqlVirtualMachine/sqlVirtualMachines";

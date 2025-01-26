@@ -1,0 +1,925 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RdsDBClusters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/rdsDBClusters": {
+      "get": {
+        "operationId": "RdsDbClusters_ListBySubscription",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "List RdsDBCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_ListBySubscription": {
+            "$ref": "./examples/RdsDbClusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/rdsDBClusters": {
+      "get": {
+        "operationId": "RdsDbClusters_ListByResourceGroup",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "List RdsDBCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_ListByResourceGroup": {
+            "$ref": "./examples/RdsDbClusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/rdsDBClusters/{name}": {
+      "get": {
+        "operationId": "RdsDbClusters_Get",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "Get a RdsDBCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_Get": {
+            "$ref": "./examples/RdsDbClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RdsDbClusters_CreateOrReplace",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "Create a RdsDBCluster. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RdsDBCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RdsDBCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RdsDBCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'RdsDBCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RdsDBCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_CreateOrReplace": {
+            "$ref": "./examples/RdsDbClusters_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RdsDbClusters_Update",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "Update a RdsDBCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RdsDBClusterTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RdsDBCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_Update": {
+            "$ref": "./examples/RdsDbClusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RdsDbClusters_Delete",
+        "tags": [
+          "RdsDBClusters"
+        ],
+        "description": "Delete a RdsDBCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of RdsDBCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RdsDbClusters_Delete": {
+            "$ref": "./examples/RdsDbClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsRdsDBClusterProperties": {
+      "type": "object",
+      "description": "Definition of awsRdsDBCluster",
+      "properties": {
+        "allocatedStorage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster."
+        },
+        "associatedRoles": {
+          "type": "array",
+          "description": "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
+          "items": {
+            "$ref": "#/definitions/DBClusterRole"
+          },
+          "x-ms-identifiers": []
+        },
+        "autoMinorVersionUpgrade": {
+          "type": "boolean",
+          "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically."
+        },
+        "availabilityZones": {
+          "type": "array",
+          "description": "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "backtrackWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target backtrack window, in seconds. To disable backtracking, set this value to 0."
+        },
+        "backupRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days for which automated backups are retained.",
+          "default": 1
+        },
+        "copyTagsToSnapshot": {
+          "type": "boolean",
+          "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them."
+        },
+        "dbClusterArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) for the DB cluster."
+        },
+        "dbClusterIdentifier": {
+          "type": "string",
+          "description": "The DB cluster identifier. This parameter is stored as a lowercase string."
+        },
+        "dbClusterInstanceClass": {
+          "type": "string",
+          "description": "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge."
+        },
+        "dbClusterParameterGroupName": {
+          "type": "string",
+          "description": "The name of the DB cluster parameter group to associate with this DB cluster.",
+          "default": "default.aurora5.6"
+        },
+        "dbClusterResourceId": {
+          "type": "string",
+          "description": "The AWS Region-unique, immutable identifier for the DB cluster."
+        },
+        "dbInstanceParameterGroupName": {
+          "type": "string",
+          "description": "The name of the DB parameter group to apply to all instances of the DB cluster."
+        },
+        "dbSubnetGroupName": {
+          "type": "string",
+          "description": "A DB subnet group that you want to associate with this DB cluster."
+        },
+        "dbSystemId": {
+          "type": "string",
+          "description": "Reserved for future use."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide."
+        },
+        "deletionProtection": {
+          "type": "boolean",
+          "description": "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The Active Directory directory ID to create the DB cluster in."
+        },
+        "domainIAMRoleName": {
+          "type": "string",
+          "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service."
+        },
+        "enableCloudwatchLogsExports": {
+          "type": "array",
+          "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "enableGlobalWriteForwarding": {
+          "type": "boolean",
+          "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database."
+        },
+        "enableHttpEndpoint": {
+          "type": "boolean",
+          "description": "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled."
+        },
+        "enableIAMDatabaseAuthentication": {
+          "type": "boolean",
+          "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/Endpoint",
+          "description": "Property endpoint"
+        },
+        "engine": {
+          "type": "string",
+          "description": "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql"
+        },
+        "engineMode": {
+          "type": "string",
+          "description": "The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster."
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "The version number of the database engine to use."
+        },
+        "globalClusterIdentifier": {
+          "type": "string",
+          "description": "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the AWS::RDS::GlobalCluster resource.If you aren't configuring a global database cluster, don't specify this property."
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster."
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true."
+        },
+        "manageMasterUserPassword": {
+          "type": "boolean",
+          "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager."
+        },
+        "masterUserPassword": {
+          "type": "string",
+          "description": "The master password for the DB instance."
+        },
+        "masterUserSecret": {
+          "$ref": "#/definitions/MasterUserSecret",
+          "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password."
+        },
+        "masterUsername": {
+          "type": "string",
+          "description": "The name of the master user for the DB cluster. You must specify MasterUsername, unless you specify SnapshotIdentifier. In that case, don't specify MasterUsername."
+        },
+        "monitoringInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0."
+        },
+        "monitoringRoleArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs."
+        },
+        "networkType": {
+          "type": "string",
+          "description": "The network type of the DB cluster."
+        },
+        "performanceInsightsEnabled": {
+          "type": "boolean",
+          "description": "A value that indicates whether to turn on Performance Insights for the DB cluster."
+        },
+        "performanceInsightsKmsKeyId": {
+          "type": "string",
+          "description": "The Amazon Web Services KMS key identifier for encryption of Performance Insights data."
+        },
+        "performanceInsightsRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time, in days, to retain Performance Insights data."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number on which the instances in the DB cluster accept connections. Default: 3306 if engine is set as aurora or 5432 if set to aurora-postgresql."
+        },
+        "preferredBackupWindow": {
+          "type": "string",
+          "description": "The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide."
+        },
+        "preferredMaintenanceWindow": {
+          "type": "string",
+          "description": "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide."
+        },
+        "publiclyAccessible": {
+          "type": "boolean",
+          "description": "A value that indicates whether the DB cluster is publicly accessible."
+        },
+        "readEndpoint": {
+          "$ref": "#/definitions/ReadEndpoint",
+          "description": "Property readEndpoint"
+        },
+        "replicationSourceIdentifier": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica."
+        },
+        "restoreToTime": {
+          "type": "string",
+          "description": "The date and time to restore the DB cluster to. Value must be a time in Universal Coordinated Time (UTC) format. An example: 2015-03-07T23:45:00Z"
+        },
+        "restoreType": {
+          "type": "string",
+          "description": "The type of restore to be performed. You can specify one of the following values:full-copy - The new DB cluster is restored as a full copy of the source DB cluster.copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
+          "default": "full-copy"
+        },
+        "scalingConfiguration": {
+          "$ref": "#/definitions/ScalingConfiguration",
+          "description": "The ScalingConfiguration property type specifies the scaling configuration of an Aurora Serverless DB cluster. The ScalingConfiguration property type specifies the scaling configuration of an Aurora Serverless DB cluster."
+        },
+        "serverlessV2ScalingConfiguration": {
+          "$ref": "#/definitions/ServerlessV2ScalingConfiguration",
+          "description": "Contains the scaling configuration of an Aurora Serverless v2 DB cluster. Contains the scaling configuration of an Aurora Serverless v2 DB cluster."
+        },
+        "snapshotIdentifier": {
+          "type": "string",
+          "description": "The identifier for the DB snapshot or DB cluster snapshot to restore from.You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.After you restore a DB cluster with a SnapshotIdentifier property, you must specify the same SnapshotIdentifier property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the SnapshotIdentifier property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the specified SnapshotIdentifier property, and the original DB cluster is deleted."
+        },
+        "sourceDBClusterIdentifier": {
+          "type": "string",
+          "description": "The identifier of the source DB cluster from which to restore."
+        },
+        "sourceRegion": {
+          "type": "string",
+          "description": "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1."
+        },
+        "storageEncrypted": {
+          "type": "boolean",
+          "description": "Indicates whether the DB instance is encrypted.If you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance."
+        },
+        "storageThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type."
+        },
+        "storageType": {
+          "type": "string",
+          "description": "Specifies the storage type to be associated with the DB cluster."
+        },
+        "tags": {
+          "type": "array",
+          "description": "An array of key-value pairs to apply to this resource.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "useLatestRestorableTime": {
+          "type": "boolean",
+          "description": "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time."
+        },
+        "vpcSecurityGroupIds": {
+          "type": "array",
+          "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DBClusterRole": {
+      "type": "object",
+      "description": "Definition of DBClusterRole",
+      "properties": {
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference."
+        },
+        "roleArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster."
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Definition of Endpoint",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The connection endpoint for the DB cluster."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port number that will accept connections on this DB cluster."
+        }
+      }
+    },
+    "MasterUserSecret": {
+      "type": "object",
+      "description": "Definition of MasterUserSecret",
+      "properties": {
+        "kmsKeyId": {
+          "type": "string",
+          "description": "The AWS KMS key identifier that is used to encrypt the secret."
+        },
+        "secretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the secret."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RdsDBCluster": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RdsDBClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RdsDBClusterListResult": {
+      "type": "object",
+      "description": "The response of a RdsDBCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RdsDBCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/RdsDBCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RdsDBClusterProperties": {
+      "type": "object",
+      "description": "Definition of RdsDBCluster",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsRdsDBClusterProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "RdsDBClusterTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in RdsDBCluster resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReadEndpoint": {
+      "type": "object",
+      "description": "Definition of ReadEndpoint",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The reader endpoint for the DB cluster."
+        }
+      }
+    },
+    "ScalingConfiguration": {
+      "type": "object",
+      "description": "Definition of ScalingConfiguration",
+      "properties": {
+        "autoPause": {
+          "type": "boolean",
+          "description": "A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections)."
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity for an Aurora DB cluster in serverless DB engine mode.For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.The maximum capacity must be greater than or equal to the minimum capacity."
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.For Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.For Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.The minimum capacity must be less than or equal to the maximum capacity."
+        },
+        "secondsBeforeTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.The default is 300."
+        },
+        "secondsUntilAutoPause": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time, in seconds, before an Aurora DB cluster in serverless mode is paused."
+        },
+        "timeoutAction": {
+          "type": "string",
+          "description": "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.ForceApplyCapacityChange sets the capacity to the specified value as soon as possible.RollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.For more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide."
+        }
+      }
+    },
+    "ServerlessV2ScalingConfiguration": {
+      "type": "object",
+      "description": "Definition of ServerlessV2ScalingConfiguration",
+      "properties": {
+        "maxCapacity": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128."
+        },
+        "minCapacity": {
+          "type": "number",
+          "format": "float",
+          "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

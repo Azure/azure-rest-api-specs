@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/events/eventId1",
+            "name": "eventId1",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "lotSource": "ConsumptionCommitment",
+              "lotId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/Microsoft.Consumption/lots/G202001083926600XXXXX",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/X3TD-KVTT-BG7-TGB",
+              "billingProfileDisplayName": "Contoso Operations Billing",
+              "transactionDate": "2019-07-01T00:00:00Z",
+              "description": "New MACC Added",
+              "charges": {
+                "currency": "USD",
+                "value": 500
+              },
+              "newCredit": {
+                "currency": "USD",
+                "value": 500
+              },
+              "invoiceNumber": "3304",
+              "eventType": "NewCredit"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Consumption/events/eventId2",
+            "name": "eventId2",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "lotSource": "AzurePrepayment",
+              "lotId": "/providers/Microsoft.Billing/billingAccounts/1234:5678/Microsoft.Consumption/lots/7004bc39-974d-482e-8e45-caf91dba0870",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/X3TD-KVTT-BG7-TGB",
+              "billingProfileDisplayName": "Contoso Operations Billing",
+              "transactionDate": "2019-07-01T00:00:00Z",
+              "description": "Balance after invoice 3304",
+              "charges": {
+                "currency": "USD",
+                "value": 500
+              },
+              "invoiceNumber": "3304",
+              "eventType": "SettledCharges"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

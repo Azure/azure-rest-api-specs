@@ -1,0 +1,90 @@
+{
+  "operationId": "AutonomousDatabases_Failover",
+  "title": "AutonomousDatabases_Failover",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "autonomousdatabasename": "databasedb1",
+    "body": {
+      "peerDbId": "peerDbId"
+    },
+    "tags": {
+      "tagK1": "tagV1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1",
+        "type": "Oracle.Database/autonomousDatabases",
+        "location": "eastus",
+        "tags": {
+          "tagK1": "tagV1"
+        },
+        "properties": {
+          "autonomousDatabaseId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1",
+          "actualUsedDataStorageSizeInTbs": null,
+          "autonomousMaintenanceScheduleType": "Regular",
+          "characterSet": "AL32UTF8",
+          "ncharacterSet": "AL16UTF16",
+          "computeCount": 2.0,
+          "computeModel": "ECPU",
+          "cpuCoreCount": 1,
+          "customerContacts": null,
+          "dataStorageSizeInGbs": 1024,
+          "dataStorageSizeInTbs": 1,
+          "databaseEdition": "EnterpriseEdition",
+          "dataBaseType": "Regular",
+          "dbVersion": "18.4.0.0",
+          "displayName": "example_autonomous_databasedb1",
+          "isAutoScalingEnabled": false,
+          "isAutoScalingForStorageEnabled": false,
+          "failedDataRecoveryInSeconds": null,
+          "isLocalDataGuardEnabled": true,
+          "timeLocalDataGuardEnabled": "2024-02-28T19:03:43.714Z",
+          "localDisasterRecoveryType": "Adg",
+          "localAdgAutoFailoverMaxDataLossLimit": 300,
+          "role": "Primary",
+          "peerDbIds": null,
+          "localStandbyDb": {
+            "lagTimeInSeconds": null,
+            "lifecycleDetails": null,
+            "lifecycleState": "RoleChangeInProgress",
+            "timeDataGuardRoleChanged": null,
+            "timeDisasterRecoveryRoleChanged": null
+          },
+          "isMtlsConnectionRequired": true,
+          "licenseModel": "BringYourOwnLicense",
+          "lifecycleState": "Updating",
+          "lifecycleDetails": null,
+          "privateEndpointIp": null,
+          "privateEndpointLabel": null,
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "provisioningState": "Provisioning",
+          "ociUrl": "https://fake",
+          "timeCreated": "2024-01-09T20:44:09.466Z",
+          "timeOfLastFailover": null,
+          "timeOfLastSwitchover": null,
+          "timeMaintenanceBegin": null,
+          "timeMaintenanceEnd": null,
+          "usedDataStorageSizeInGbs": null,
+          "usedDataStorageSizeInTbs": null,
+          "ocid": "ocid1..aaaaa",
+          "whitelistedIps": [
+            "1.1.1.1",
+            "1.1.1.0/24",
+            "1.1.2.25"
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
+      }
+    }
+  }
+}

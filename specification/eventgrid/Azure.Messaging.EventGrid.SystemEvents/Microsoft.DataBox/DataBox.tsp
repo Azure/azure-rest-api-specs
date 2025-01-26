@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** EG DataBox Data Model */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event. */
@@ -17,12 +19,14 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias DataBoxBase = {
     /** Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated. */
-    serialNumber?: string;
+    serialNumber: string;
 
     /** Name of the current Stage */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     stageName: DataBoxStageName;
 
     /** The time at which the stage happened. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     stageTime: utcDateTime;
   };
 

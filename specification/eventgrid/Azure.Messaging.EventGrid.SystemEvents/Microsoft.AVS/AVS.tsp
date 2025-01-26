@@ -65,13 +65,13 @@ model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/privateClouds events. */
 model AvsPrivateCloudEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  operationId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/clusters events. */
 model AvsClusterEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
   addedHostNames?: string[];
@@ -86,10 +86,10 @@ model AvsClusterEventData {
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/scriptExecutions events. */
 model AvsScriptExecutionEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  operationId: string;
 
   /** Cmdlet referenced in the execution that caused this event. */
-  cmdletId?: string;
+  cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */
   output?: string[];

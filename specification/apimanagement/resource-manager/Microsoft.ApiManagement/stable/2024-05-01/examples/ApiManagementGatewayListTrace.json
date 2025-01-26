@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "gatewayId": "gw1",
+    "parameters": {
+      "traceId": "CrDvXXXXXXXXXXXXXVU3ZA2-1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "serviceName": "apimService1",
+        "traceId": "1e0447d4-XXXX-XXXX-XXXX-dbdb8098a0d3",
+        "traceEntries": {
+          "inbound": [
+            {
+              "source": "api-inspector",
+              "timestamp": "2023-05-03T12:03:04.6899436Z",
+              "elapsed": "00:00:00.2983315",
+              "data": {
+                "request": {
+                  "method": "GET",
+                  "url": "https://proxy.msitesting.net/6452XXXXXXXXXXXX9c2facb1/64524dXXXXXXXXXXXX2facb3?subscription-key=117313e70XXXXXXXXXXXX38ba4658ca3",
+                  "headers": [
+                    {
+                      "name": "Host",
+                      "value": "proxy.msitesting.net"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "source": "api-inspector",
+              "timestamp": "2023-05-03T12:03:04.6969650Z",
+              "elapsed": "00:00:00.3046329",
+              "data": {
+                "configuration": {
+                  "api": {
+                    "from": "/6452XXXXXXXXXXXX9c2facb1",
+                    "to": {
+                      "scheme": "http",
+                      "host": "msitesting.net",
+                      "port": 80,
+                      "path": "/",
+                      "queryString": "",
+                      "query": {},
+                      "isDefaultPort": true
+                    },
+                    "version": null,
+                    "revision": "1"
+                  },
+                  "operation": {
+                    "method": "GET",
+                    "uriTemplate": "/64524dXXXXXXXXXXXX2facb3"
+                  },
+                  "user": "-",
+                  "product": "-"
+                }
+              }
+            },
+            {
+              "source": "cors",
+              "timestamp": "2023-05-03T12:03:04.9901631Z",
+              "elapsed": "00:00:00.5972352",
+              "data": "Origin header was missing or empty and the request was classified as not cross-domain. CORS policy was not applied."
+            },
+            {
+              "source": "set-status",
+              "timestamp": "2023-05-03T12:03:05.0031202Z",
+              "elapsed": "00:00:00.6107970",
+              "data": {
+                "message": [
+                  "Response status code was set to 200",
+                  "Response status reason was set to 'OK'"
+                ]
+              }
+            },
+            {
+              "source": "return-response",
+              "timestamp": "2023-05-03T12:03:05.0086543Z",
+              "elapsed": "00:00:00.6164228",
+              "data": {
+                "message": "Return response was applied",
+                "response": {
+                  "status": {
+                    "code": "OK",
+                    "reason": "OK"
+                  },
+                  "headers": []
+                }
+              }
+            }
+          ],
+          "outbound": [
+            {
+              "source": "transfer-response",
+              "timestamp": "2023-05-03T12:03:05.0438287Z",
+              "elapsed": "00:00:00.6510195",
+              "data": {
+                "message": "Response has been sent to the caller in full"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
