@@ -4,8 +4,8 @@ import { join } from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-
-import tsvPlugin, { ESLint } from "eslint-plugin-tsv";
+import { ESLint } from "eslint";
+import tsvPlugin from "../eslint-plugin-tsv/src/eslint-plugin-tsv.js";
 
 async function runESLint(content: string, folder: string, ruleName: string) {
   const cwd = process.cwd();
