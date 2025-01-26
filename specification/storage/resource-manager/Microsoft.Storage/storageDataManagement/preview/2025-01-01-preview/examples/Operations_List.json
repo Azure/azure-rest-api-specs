@@ -1,0 +1,60 @@
+{
+  "operationId": "Operations_List",
+  "title": "ListOperations",
+  "parameters": {
+    "api-version": "2025-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Storage/storageAccounts/connectors/read",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Connector",
+              "operation": "Read Storage Connector",
+              "description": "Reads the properties of a storage connector."
+            }
+          },
+          {
+            "name": "Microsoft.Storage/storageAccounts/connectors/write",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Connector",
+              "operation": "Write Storage Connector",
+              "description": "Creates or updates a storage connector."
+            }
+          },
+          {
+            "name": "Microsoft.Storage/storageAccounts/connectors/delete",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Connector",
+              "operation": "Delete Storage Connector",
+              "description": "Deletes a storage connector."
+            }
+          },
+          {
+            "name": "Microsoft.Storage/storageAccounts/connectors/testExistingConnection/action",
+            "display": {
+              "provider": "Microsoft Storage",
+              "resource": "Storage Connector",
+              "operation": "Test Existing Connection",
+              "description": "Tests connection to an existing storage connector."
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred."
+        }
+      }
+    }
+  }
+}

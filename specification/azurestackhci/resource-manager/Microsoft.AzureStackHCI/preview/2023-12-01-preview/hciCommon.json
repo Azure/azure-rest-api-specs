@@ -218,10 +218,9 @@
     },
     "ClusterPattern": {
       "type": "string",
-      "description": "Supported Storage Type for HCI Cluster",
+      "description": "Supported Storage Pattern for HCI Cluster",
       "enum": [
         "Standard",
-        "Stretch",
         "RackAware"
       ],
       "x-ms-enum": {
@@ -232,11 +231,6 @@
             "name": "Standard",
             "value": "Standard",
             "description": "Standard cluster."
-          },
-          {
-            "name": "Stretch",
-            "value": "Stretch",
-            "description": "Stretch cluster."
           },
           {
             "name": "RackAware",
@@ -254,10 +248,6 @@
           "type": "string",
           "description": "Local Availability Zone name for HCI cluster"
         },
-        "localAvailabilityZoneMode": {
-          "$ref": "#/definitions/LocalAvailabilityZoneMode",
-          "description": "Local Availability Zone Mode for HCI cluster. Can be active or passive."
-        },
         "nodes": {
           "type": "array",
           "description": "Nodes belonging to a particular zone",
@@ -266,30 +256,6 @@
           },
           "x-ms-identifiers": []
         }
-      }
-    },
-    "LocalAvailabilityZoneMode": {
-      "type": "string",
-      "description": "Local Availability Zone Mode for HCI cluster.",
-      "enum": [
-        "Active",
-        "Passive"
-      ],
-      "x-ms-enum": {
-        "name": "LocalAvailabilityZoneMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Local Availability Zone in active mode."
-          },
-          {
-            "name": "Passive",
-            "value": "Passive",
-            "description": "Local Availability Zone in passive mode."
-          }
-        ]
       }
     },
     "EceSecrets": {

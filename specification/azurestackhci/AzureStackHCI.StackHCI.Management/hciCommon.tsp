@@ -358,20 +358,6 @@ union LocalAvailabilityZoneMode {
   Passive: "Passive",
 }
 
-@doc("Supported Storage Type for HCI Cluster")
-union ClusterPattern {
-  string,
-
-  @doc("Standard Cluster.")
-  Standard: "Standard",
-
-  @doc("Stretch Cluster.")
-  Stretch: "Stretch",
-
-  @doc("RackAware Cluster.")
-  RackAware: "RackAware",
-}
-
 @doc("Identity Provider for the cluster")
 union IdentityProvider {
   string,
