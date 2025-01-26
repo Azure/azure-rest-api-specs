@@ -25,12 +25,16 @@ export function createRule(ruleContext: RuleInfo): NamedRule.RuleModule {
     create(context) {
       return {
         YAMLDocument(node: Rule.Node) {
-          const yamlDocument = node as unknown as AST.YAMLDocument;
-          const rawConfig = getStaticYAMLValue(yamlDocument) || {};
-          const config = rawConfig as unknown as TypeSpecConfig;
-
-          if (!ruleContext.functions.condition(config, context)) return;
-          ruleContext.functions.validation(config, context, node);
+          // TODO: remove try-catch block when ESLint based TSV is ready, and have confidence for this 
+          try {
+            const yamlDocument = node as unknown as AST.YAMLDocument;
+            const rawConfig = getStaticYAMLValue(yamlDocument) || {};
+            const config = rawConfig as unknown as TypeSpecConfig;
+            if (!ruleContext.functions.condition(config, context)) return;
+            ruleContext.functions.validation(config, context, node);
+          } catch (error) {
+            console.error(`Failed to validate rule '${ruleContext.name}' due to error: ${error}`);
+          }
         },
       };
     },
@@ -40,7 +44,7 @@ export function createRule(ruleContext: RuleInfo): NamedRule.RuleModule {
 
 export function createRuleMessages(messageId: string, docs: RuleDocument) {
   return {
-    [messageId]: `Error: ${docs.error}.\nAction: ${docs.action}.\nExample: ${docs.example}`,
+    [messageId]: `Error: ${docs.error}.\nAction: ${docs.action}.\nExample:\n\`\`\`\n${docs.example}\n\`\`\``,
   };
 }
 
@@ -68,7 +72,7 @@ function validateValue(
       context.report({ node, messageId: defaultMessageId });
       break;
     default:
-      // TODO: log not supported
+      console.warn("Unsupported expected-value-type for tspconfig.yaml");      
       break;
   }
 }
@@ -116,7 +120,7 @@ export function createCodeGenSDKRule(args: CreateCodeGenSDKRuleArgs): NamedRule.
             break;
           }
           default:
-            // TODO: log not supported
+            console.warn("Unsupported key type in tspconfig.yaml");
             break;
         }
       },

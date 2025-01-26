@@ -4,8 +4,8 @@ import { join } from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-
-import tsvPlugin, { ESLint } from "eslint-plugin-tsv";
+import { ESLint } from "eslint";
+import tsvPlugin from "../eslint-plugin-tsv/src/eslint-plugin-tsv.js";
 
 async function runESLint(content: string, folder: string, ruleName: string) {
   const cwd = process.cwd();
@@ -37,7 +37,7 @@ function convertToOldRules() {
         const results = await runESLint(configText, folder, rule.name);
         if (results.length > 0 && results[0].messages.length > 0) {
           return {
-            stdOutput: 'Validation failed. ' + results[0].messages[0].message,
+            stdOutput: 'Validation failed.\n' + results[0].messages[0].message,
             // Only used to provide suggestion to correct tspconfig
             success: true,
           };

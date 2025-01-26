@@ -50,7 +50,7 @@ describe("tspconfig rules", () => {
     assert(result.stdOutput && result.stdOutput.length > 0 && result.errorOutput === undefined);
     assert(
       (c.expectedResult && result.stdOutput.includes("validation passed")) ||
-        (!c.expectedResult && result.stdOutput.includes("Validation failed. ")),
+        (!c.expectedResult && result.stdOutput.includes("Validation failed."))
     );
   });
 });
