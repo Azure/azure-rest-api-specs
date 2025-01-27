@@ -288,6 +288,15 @@ suppressions:
     reason: Existing issue from last version. 
 ```
 
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2025-02-01-preview/diagnostic.json
+```
+
 ### Tag: package-2024-11-04
 
 These settings apply only when `--tag=package-2024-11-04` is specified on the command line.
