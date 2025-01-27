@@ -17,6 +17,12 @@ model Employee is TrackedResource<EmployeeProperties> {
 
 /** Employee properties */
 model EmployeeProperties {
+  /** Age of employee */
+  age?: int32;
+
+  /** City of employee */
+  city?: string;
+
   /** Profile of employee */
   @encode("base64url")
   profile?: bytes;
