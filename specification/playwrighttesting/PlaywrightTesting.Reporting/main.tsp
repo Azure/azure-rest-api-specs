@@ -551,7 +551,7 @@ union BrowserType {
   string,
 
   @doc("Chromium")
-  "Chomium",
+  "Chromium",
 
   @doc("Webkit")
   "Webkit",
