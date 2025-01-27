@@ -184,7 +184,10 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The contents of the user message, with available input types varying by selected model.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, ChatMessageContent)
-  @typeChangedFrom(ServiceApiVersions.v2025_01_01_Preview, string | ChatMessageTextContentItem[] | ChatMessageImageContentItem[])
+  @typeChangedFrom(
+    ServiceApiVersions.v2025_01_01_Preview,
+    string | ChatMessageTextContentItem[] | ChatMessageImageContentItem[]
+  )
   content: string | (ChatMessageTextContentItem | ChatMessageImageContentItem | ChatMessageAudioContentItem)[];
 
   @doc("An optional name for the participant.")
