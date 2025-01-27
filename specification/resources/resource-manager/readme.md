@@ -50,14 +50,6 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-03
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-07
-```
-
-``` yaml $(package-resources)
 tag: package-resources-2024-11
 ```
 
@@ -1314,7 +1306,7 @@ directive:
     reason: The resource is managed in a management group level (instead of inside a resource group)
   - suppress: TopLevelResourcesListBySubscription
     from: changes.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - from: changes.json
     suppress: OperationsAPIImplementation
     where: $.paths
@@ -1325,7 +1317,7 @@ directive:
     reason: 'Duplicate Operations API causes generation issues'
   - suppress: TopLevelResourcesListBySubscription
     from: snapshots.json
-    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios. 
+    reason: We will be pushing customers to use Azure Resource Graph for those at scale scenarios.
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
