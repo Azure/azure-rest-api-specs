@@ -52,7 +52,7 @@
           "Metrics"
         ],
         "operationId": "MetricsBatch_Batch",
-        "description": "Lists the metric values for multiple resources.",
+        "description": "Lists the metric values for multiple resources. The default rate limit is 3k request/30s/userId though this is subject to change. See the following response headers for current limits: X-Rate-Limit-Limit, X-Rate-Limit-Remaining, X-Rate-Limit-Reset.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -183,7 +183,7 @@
         "type": "string"
       },
       "collectionFormat": "csv",
-      "description": "The names of the metrics (comma separated) to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve. Limit 20 metrics.",
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
