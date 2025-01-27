@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
-// renaming SecretItem to SecretProperties. 
+// renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else
 // to avoid a naming conflict as it's not part of the public surface area
 @@clientName(SecretProperties, "ShouldNotGenerate", "go");
