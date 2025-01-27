@@ -1279,9 +1279,6 @@ model VirtualHardDisksUpdateProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
   @doc("Size of the disk in GB")
   diskSizeGB?: int64;
-
-  @doc("Boolean for enabling dynamic sizing on the virtual hard disk")
-  dynamic?: boolean;
 }
 
 @added(Versions.v2024_05_01_preview)
