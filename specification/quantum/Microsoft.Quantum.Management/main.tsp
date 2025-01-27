@@ -31,7 +31,6 @@ using Azure.ResourceManager.Foundations;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 namespace Microsoft.Quantum;
 
 /**
