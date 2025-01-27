@@ -25,4 +25,4 @@ az:
   package-name: azure-mgmt-databasefleetmanager
 az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/databasefleetmanager
 python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/databasefleetmanager"
-``` 
+```
