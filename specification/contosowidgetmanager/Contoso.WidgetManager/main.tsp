@@ -31,6 +31,9 @@ model WidgetSuite {
   @visibility("read")
   name: string;
 
+  @doc("The ID of the widget's manufacturer.")
+  manufacturerId: string;
+
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
 }
