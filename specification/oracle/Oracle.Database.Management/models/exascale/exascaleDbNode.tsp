@@ -20,7 +20,11 @@ scalar ExascaleDbNodeResourceId
 @doc("The DbNode resource belonging to ExadbVmCluster")
 @parentResource(ExadbVmCluster)
 model ExascaleDbNode is ProxyResource<ExascaleDbNodeProperties> {
-  ...ResourceNameParameter<ExascaleDbNode, SegmentName = "dbNodes">;
+  ...ResourceNameParameter<
+    ExascaleDbNode,
+    SegmentName = "dbNodes",
+    NamePattern = ".*"
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource. No provisioning state provided."
