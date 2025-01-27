@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DatabaseFleetManager;
 /**
@@ -34,13 +35,34 @@ interface FleetTiers {
   /**
    * Creates or updates a tier.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FleetTier>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
+  createOrUpdateOld is ArmResourceCreateOrReplaceSync<FleetTier>;
+
+  /**
+   * Creates or updates a tier.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<FleetTier>;
 
   /**
    * Updates a tier.
    */
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
   @parameterVisibility
-  update is ArmResourcePatchSync<FleetTier, FleetTier>;
+  updateOld is ArmResourcePatchSync<FleetTier, FleetTier>;
+
+  /**
+   * Updates a tier.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @parameterVisibility
+  update is ArmCustomPatchAsync<FleetTier, FleetTier>;
 
   /**
    * Deletes a tier.
