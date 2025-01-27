@@ -237,7 +237,7 @@ model AzureGroundingEnhancementCoordinatePoint {
  * approach to protecting your AI applications. (Learn more at https://aka.ms/TP4AI/Documentation/EndUserContext)
  * about protecting AI applications using Microsoft Defender for Cloud.
  */
-@added(ServiceApiVersions.v2024_02_15_Preview)
+@added(ServiceApiVersions.v2025_01_01_Preview)
 model UserSecurityContext {
   /** The name of the application. Sensitive personal information should not be included in this field. */
   @encodedName("application/json", "application_name")
