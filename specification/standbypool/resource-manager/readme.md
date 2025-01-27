@@ -47,7 +47,7 @@ modelerfour:
 ### Tag: package-2025-03
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-03'
+```yaml $(tag) == 'package-2025-03'
 input-file:
   - Microsoft.StandbyPool/stable/2025-03-01/standbypool.json
 ```
