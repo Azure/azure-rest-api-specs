@@ -86,9 +86,7 @@ interface Workspaces {
 @@doc(QuantumWorkspace.properties,
   "Gets or sets the properties. Define quantum workspace's specific properties."
 );
-@@doc(Workspaces.createOrUpdate::parameters.resource,
-  "Workspace details."
-);
+@@doc(Workspaces.createOrUpdate::parameters.resource, "Workspace details.");
 @@doc(Workspaces.updateTags::parameters.properties,
   "Parameters supplied to update tags."
 );
