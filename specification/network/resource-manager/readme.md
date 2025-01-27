@@ -35,10 +35,10 @@ tag: package-2024-05
 
 These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-07-01'
+``` yaml $(tag) == 'package-2024-07'
 input-file:
-  - Microsoft.Network/preview/2024-07-01/network.json
-  - Microsoft.Network/preview/2024-07-01/networkSecurityPerimeter.json
+  - Microsoft.Network/stable/2024-07-01/network.json
+  - Microsoft.Network/stable/2024-07-01/networkSecurityPerimeter.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
