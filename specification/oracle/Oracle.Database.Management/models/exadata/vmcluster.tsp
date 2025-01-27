@@ -175,6 +175,16 @@ model PortRange {
   max: int32;
 }
 
+@doc("File configuration options")
+@added(Versions.v20241201_preview)
+model FileSystemConfigurationDetails {
+  @doc("Mount path")
+  mountPoint?: string;
+
+  @doc("Size of the VM")
+  fileSystemSizeGb?: int32;
+}
+
 @doc("A rule for allowing inbound (INGRESS) IP packets")
 model NsgCidr {
   @doc("Conceptually, this is the range of IP addresses that a packet coming into the instance can come from.")
@@ -203,6 +213,12 @@ model CloudVmClusterProperties {
   @doc("The data disk group size to be allocated in GBs per VM.")
   @visibility("read", "update")
   storageSizeInGbs?: int32;
+
+  @doc("Array of mount path and size.")
+  @added(Versions.v20241201_preview)
+  @visibility("read", "update")
+  @extension("x-ms-identifiers", [])
+  fileSystemConfigurationDetails?: FileSystemConfigurationDetails[];
 
   @doc("The data disk group size to be allocated in TBs.")
   dataStorageSizeInTbs?: float64;

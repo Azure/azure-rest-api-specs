@@ -1406,12 +1406,15 @@
           "type": "string",
           "description": "Keepalive time, per RFC4271"
         },
-        "communities": {
+        "nodeSelector": {
           "type": "array",
-          "description": "BGP Communities",
+          "description": "A dynamic label mapping to select related nodes to peer with. For instance, if you want to create a BGP peer only for nodes with label \"a=b\", then please specify {\"a\": \"b\"} in the field.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/Label"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1535,6 +1538,24 @@
         ]
       }
     },
+    "Label": {
+      "type": "object",
+      "description": "Kubernetes Label Definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Label name"
+        },
+        "value": {
+          "type": "string",
+          "description": "Label value"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "LoadBalancer": {
       "type": "object",
       "description": "A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1596,6 +1617,13 @@
         "bgpPeers": {
           "type": "array",
           "description": "The list of BGP peers it should advertise to. Null or empty means to advertise to all peers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "communities": {
+          "type": "array",
+          "description": "BGP Communities",
           "items": {
             "type": "string"
           }

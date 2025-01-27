@@ -16,7 +16,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 @doc("Represents a validated solution recipe resource.")
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model ValidatedSolutionRecipe
   is Azure.ResourceManager.ProxyResource<ValidatedSolutionRecipeProperties> {
   ...ResourceNameParameter<
@@ -37,6 +37,12 @@ interface ValidatedSolutionRecipes {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a validated solution recipe resource.")
 model ValidatedSolutionRecipeProperties {
+  @doc("Represents contents of a validated solution recipe.")
+  recipeContent: ValidatedSolutionRecipeContent;
+}
+
+@doc("Represents contents of a validated solution recipe resource.")
+model ValidatedSolutionRecipeContent {
   @doc("Represents information about a validated solution recipe.")
   info: ValidatedSolutionRecipeInfo;
 
@@ -55,9 +61,6 @@ model ValidatedSolutionRecipeInfo {
 
   @doc("Represents the version for which this validated solution recipe is applicable.")
   version: string;
-
-  @doc("Represents the ring for which this validated solution recipe is applicable.")
-  ring: string;
 }
 
 @doc("Represents capabilities available in a validated solution recipe.")

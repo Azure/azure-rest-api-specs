@@ -598,7 +598,31 @@ model NativePerformanceData extends PerformanceData {
 @doc("Import entities Operation Status Result model by extending OperationStatusResult as per SAP Discovery.")
 @added(Versions.v2024_06_01_preview)
 model ImportOperationStatusResult {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  /** Fully qualified ID for the async operation. */
+  id?: string;
+
+  /** Name of the async operation. */
+  name?: string;
+
+  /** Operation status. */
+  status: string;
+
+  /** Percent of the operation that is complete. */
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: float64;
+
+  /** The start time of the operation. */
+  startTime?: utcDateTime;
+
+  /** The end time of the operation. */
+  endTime?: utcDateTime;
+
+  /** The operations list. */
+  operations?: Azure.ResourceManager.Foundations.OperationStatusResult[];
+
+  /** If present, details of the operation error. */
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
   @doc("The resource ID of the SAP Discovery site.")
   resourceId?: Azure.Core.armResourceIdentifier<[

@@ -32,7 +32,7 @@ model WorkloadProperties {
   ...RestartAtProperty;
 
   @visibility("read", "create")
-  @doc("The virtual machine size of the chamber workload. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes).<br/>The available chamber workload VM sizes depend on region.<br/>For a list of available sizes use these APIs: [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).*")
+  @doc("The virtual machine size of the chamber workload. For more information about virtual machine sizes, see [Sizes for virtual machines](https://learn.microsoft.com/azure/virtual-machines/sizes).<br/>The available chamber workload VM sizes depend on region.<br/>For a list of available sizes use these APIs: [List all available virtual machine sizes in a region](https://learn.microsoft.com/rest/api/compute/virtualmachinesizes/list), [List all available virtual machine sizes for resizing](https://learn.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes).*")
   vmSize: string; // TODO: Eventually deprecate. Use top-level sku.
 
   @visibility("read", "create")

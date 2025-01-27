@@ -48,9 +48,35 @@ model PlannedQuotaResourceProperties {
   @doc("Skip unsupported silently")
   skipUnsupportedSilently?: boolean;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: PlannedQuotaProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Fulfilled Plan details after fulfilling the quota of the plan; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  fulfilledPlan?: FulfilledPlan;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
+  @added(Versions.v2024_06_24_preview)
+  @doc("Dictionary of the SKUs with alternative assigned. The key is the original SKU and the value is the alternative; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  alternatives?: {};
+}
+
+@added(Versions.v2024_06_24_preview)
+@doc("Fulfilled Plan details after fulfilling the quota of the plan.")
+model FulfilledPlan {
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
+  @doc("Same as the \"arm\" node in the plan for the corresponding Subscription.")
+  arm?: {};
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Generic object model is used, because the number of nested properties can be different."
+  @doc("Same as the \"rdfe\" node in the plan for the corresponding Subscription.")
+  rdfe?: {};
+
+  @doc("Indicates whether AZ is enabled.")
+  isAzEnabled?: boolean;
 }
 
 @doc("plannedQuota Property Binding")

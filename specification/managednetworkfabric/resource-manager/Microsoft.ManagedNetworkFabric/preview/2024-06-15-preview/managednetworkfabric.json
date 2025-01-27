@@ -7388,6 +7388,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/discardCommitBatch": {
+      "post": {
+        "operationId": "NetworkFabrics_DiscardCommitBatch",
+        "tags": [
+          "NetworkFabrics"
+        ],
+        "description": "Post action: Discards a Batch operation in progress.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFabricName",
+            "in": "path",
+            "description": "Name of the Network Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiscardCommitBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DiscardCommitBatchResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFabrics_DiscardCommitBatch": {
+            "$ref": "./examples/NetworkFabrics_DiscardCommitBatch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkFabrics/{networkFabricName}/getTopology": {
       "post": {
         "operationId": "NetworkFabrics_GetTopology",
@@ -11062,9 +11136,20 @@
             "type": "string"
           }
         },
+        "protocolNeighbors": {
+          "type": "array",
+          "description": "Protocol neighbors that need to be matched.",
+          "items": {
+            "type": "string"
+          }
+        },
         "portCondition": {
           "$ref": "#/definitions/AccessControlListPortCondition",
           "description": "Defines the port condition that needs to be matched."
+        },
+        "icmpConfiguration": {
+          "$ref": "#/definitions/IcmpConfigurationProperties",
+          "description": "Internet Control Message Protocol (ICMP) configuration"
         }
       }
     },
@@ -11139,12 +11224,9 @@
             "type": "string"
           }
         },
-        "icmpTypes": {
-          "type": "array",
-          "description": "Internet Control Management Protocol (ICMP) types that need to be matched.",
-          "items": {
-            "type": "string"
-          }
+        "icmpConfiguration": {
+          "$ref": "#/definitions/IcmpConfigurationPatchProperties",
+          "description": "Internet Control Message Protocol (ICMP) configuration"
         }
       }
     },
@@ -11291,10 +11373,6 @@
         "globalAccessControlListActions": {
           "$ref": "#/definitions/GlobalAccessControlListActionPatchProperties",
           "description": "Global Access Control List (ACL) actions"
-        },
-        "icmpConfiguration": {
-          "$ref": "#/definitions/IcmpConfigurationPatchProperties",
-          "description": "Internet Control Message Protocol (ICMP) configuration"
         },
         "annotation": {
           "type": "string",
@@ -11453,9 +11531,10 @@
           "$ref": "#/definitions/GlobalAccessControlListActionProperties",
           "description": "Global Access Control List (ACL) actions"
         },
-        "icmpConfiguration": {
-          "$ref": "#/definitions/IcmpConfigurationProperties",
-          "description": "Internet Control Message Protocol (ICMP) configuration"
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -12010,6 +12089,56 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/InternalNetworkBmpProperties",
           "description": "InternalNetwork BMP Configuration"
+        },
+        "v4OverV6BgpSession": {
+          "type": "string",
+          "description": "V4 over V6 bgp session.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "V4OverV6BgpSessionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "V4OverV6BgpSessionState-Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "V4OverV6BgpSessionState-Disabled"
+              }
+            ]
+          }
+        },
+        "v6OverV4BgpSession": {
+          "type": "string",
+          "description": "v6 over v4 bgp session.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "V6OverV4BgpSessionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "V6OverV4BgpSessionState-Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "V6OverV4BgpSessionState-Disabled"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -12093,6 +12222,14 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/InternalNetworkBmpPatchProperties",
           "description": "InternalNetwork BMP Configuration"
+        },
+        "v4OverV6BgpSession": {
+          "$ref": "#/definitions/V4OverV6BgpSessionState",
+          "description": "V4 over V6 bgp session."
+        },
+        "v6OverV4BgpSession": {
+          "$ref": "#/definitions/V6OverV4BgpSessionState",
+          "description": "v6 over v4 bgp session."
         }
       }
     },
@@ -13279,6 +13416,30 @@
         }
       }
     },
+    "DiscardCommitBatchRequest": {
+      "type": "object",
+      "description": "Discard Commit Batch Request.",
+      "properties": {
+        "commitBatchId": {
+          "type": "string",
+          "description": "Commit Batch Identifier. If not provided, the latest commit batch status will be returned."
+        }
+      }
+    },
+    "DiscardCommitBatchResponse": {
+      "type": "object",
+      "description": "Discard Commit Batch Response.",
+      "properties": {
+        "commitBatchId": {
+          "type": "string",
+          "description": "Commit Batch Identifier."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
     "EnableDisableState": {
       "type": "string",
       "description": "Administrative state.",
@@ -13777,6 +13938,22 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/ExternalNetworkBmpPatchProperties",
           "description": "BMP Monitor Configuration."
+        },
+        "v4OverV6BgpSession": {
+          "$ref": "#/definitions/V4OverV6BgpSessionState",
+          "description": "V4OverV6 BGP Session state"
+        },
+        "v6OverV4BgpSession": {
+          "$ref": "#/definitions/V6OverV4BgpSessionState",
+          "description": "V6OverV4 BGP Session state"
+        },
+        "nativeIpv4PrefixLimit": {
+          "$ref": "#/definitions/NativeIpv4PrefixLimitPatchProperties",
+          "description": "Native IPv4 prefix limit configuration"
+        },
+        "nativeIpv6PrefixLimit": {
+          "$ref": "#/definitions/NativeIpv6PrefixLimitPatchProperties",
+          "description": "Native IPv6 prefix limit configuration"
         }
       }
     },
@@ -13823,6 +14000,11 @@
         "staticRouteConfiguration": {
           "$ref": "#/definitions/ExternalNetworkStaticRouteConfiguration",
           "description": "Static Route Configuration."
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -13925,6 +14107,64 @@
               }
             ]
           }
+        },
+        "v4OverV6BgpSession": {
+          "type": "string",
+          "description": "V4OverV6 BGP Session state",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "V4OverV6BgpSessionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "V4OverV6BgpSessionState-Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "V4OverV6BgpSessionState-Disabled"
+              }
+            ]
+          }
+        },
+        "v6OverV4BgpSession": {
+          "type": "string",
+          "description": "V6OverV4 BGP Session state",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "V6OverV4BgpSessionState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "V6OverV4BgpSessionState-Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "V6OverV4BgpSessionState-Disabled"
+              }
+            ]
+          }
+        },
+        "nativeIpv4PrefixLimit": {
+          "$ref": "#/definitions/NativeIpv4PrefixLimitProperties",
+          "description": "Native IPv4 prefix limits configuration"
+        },
+        "nativeIpv6PrefixLimit": {
+          "$ref": "#/definitions/NativeIpv6PrefixLimitProperties",
+          "description": "Native IPv6 prefix limits configuration"
         }
       },
       "required": [
@@ -14016,6 +14256,20 @@
         }
       }
     },
+    "FabricLockProperties": {
+      "type": "object",
+      "description": "Network Fabric Lock Configuration.",
+      "properties": {
+        "lockState": {
+          "$ref": "#/definitions/LockConfigurationState",
+          "description": "NetworkFabric Lock State."
+        },
+        "lockType": {
+          "$ref": "#/definitions/NetworkFabricLockType",
+          "description": "NetworkFabric Lock Type."
+        }
+      }
+    },
     "FabricSkuType": {
       "type": "string",
       "description": "Type of Network Fabric SKU.",
@@ -14044,9 +14298,13 @@
       "type": "object",
       "description": "Feature flag properties.",
       "properties": {
-        "uniqueRdConfigurationState": {
-          "$ref": "#/definitions/UniqueRouteDistinguisherConfigurationState",
-          "description": "Unique route distinguisher feature status."
+        "featureFlagName": {
+          "type": "string",
+          "description": "Feature flag name."
+        },
+        "featureFlagValue": {
+          "type": "string",
+          "description": "Feature flag value."
         }
       }
     },
@@ -14215,6 +14473,7 @@
         "icmpTypes": {
           "type": "array",
           "description": "Internet Control Message Protocol (ICMP) types",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
@@ -14228,6 +14487,7 @@
         "icmpTypes": {
           "type": "array",
           "description": "Internet Control Message Protocol (ICMP) types",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
@@ -14653,14 +14913,6 @@
           "$ref": "#/definitions/IsMonitoringEnabled",
           "description": "To check whether monitoring of internal network is enabled or not."
         },
-        "v4overV6BgpSessionState": {
-          "$ref": "#/definitions/V4OverV6BgpSessionState",
-          "description": "V4 over V6 bgp session."
-        },
-        "v6overV4BgpSessionState": {
-          "$ref": "#/definitions/V6OverV4BgpSessionState",
-          "description": "v6 over v4 bgp session."
-        },
         "bgpConfiguration": {
           "$ref": "#/definitions/BgpPatchConfiguration",
           "description": "BGP configuration properties."
@@ -14806,56 +15058,6 @@
           "minimum": 100,
           "maximum": 4094
         },
-        "v4overV6BgpSessionState": {
-          "type": "string",
-          "description": "V4 over V6 bgp session.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "V4OverV6BgpSessionState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "V4OverV6BgpSessionState-Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "V4OverV6BgpSessionState-Disabled"
-              }
-            ]
-          }
-        },
-        "v6overV4BgpSessionState": {
-          "type": "string",
-          "description": "v6 over v4 bgp session.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "V6OverV4BgpSessionState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "V6OverV4BgpSessionState-Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "V6OverV4BgpSessionState-Disabled"
-              }
-            ]
-          }
-        },
         "bgpConfiguration": {
           "$ref": "#/definitions/BgpConfiguration",
           "description": "BGP configuration properties."
@@ -14871,6 +15073,11 @@
         "nativeIpv6PrefixLimit": {
           "$ref": "#/definitions/NativeIpv6PrefixLimitProperties",
           "description": "Native IPv6 Prefix Limit Configuration properties."
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -15041,6 +15248,11 @@
             ]
           }
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource.",
@@ -15114,6 +15326,11 @@
         "ruleProperties": {
           "$ref": "#/definitions/RuleProperties",
           "description": "Rules for the InternetGateways"
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -15244,6 +15461,11 @@
             "$ref": "#/definitions/IpCommunityRule"
           },
           "x-ms-identifiers": []
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -15417,6 +15639,11 @@
             "$ref": "#/definitions/IpExtendedCommunityRule"
           },
           "x-ms-identifiers": []
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -15674,6 +15901,11 @@
             "$ref": "#/definitions/IpPrefixRule"
           },
           "x-ms-identifiers": []
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -15943,6 +16175,23 @@
             ]
           }
         },
+        "networkToNetworkInterconnectId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Resource ID of the networkToNetworkInterconnectId of the L2 ISD resource.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkFabrics/networkToNetworkInterconnects"
+              }
+            ]
+          }
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
@@ -16208,6 +16457,11 @@
           "$ref": "#/definitions/RoutePrefixLimitProperties",
           "description": "VRF Limit configuration."
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
@@ -16286,6 +16540,17 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true
+        }
+      }
+    },
+    "LastOperationProperties": {
+      "type": "object",
+      "description": "Details of the last operations performed on the resource",
+      "properties": {
+        "details": {
+          "type": "string",
+          "description": "Details status of the last operation performed on the resource.",
           "readOnly": true
         }
       }
@@ -16377,6 +16642,30 @@
             "name": "SCTP",
             "value": "SCTP",
             "description": "SCTP(Streaming Control Transmission Protocol) Protocol"
+          }
+        ]
+      }
+    },
+    "LockConfigurationState": {
+      "type": "string",
+      "description": "Lock Configuration State.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "LockConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "LockConfigurationState Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "LockConfigurationState Disabled"
           }
         ]
       }
@@ -16528,57 +16817,61 @@
     },
     "NativeIpv4PrefixLimitPatchProperties": {
       "type": "object",
-      "description": "Native IPv4 Prefix Limit Configuration patch properties",
+      "description": "External Network native IPv4 prefix limits patch properties",
       "properties": {
-        "ipv4AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitPatchProperties",
-          "description": "IPv4 Prefix Limit Configuration properties."
-        },
-        "ipv6AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitPatchProperties",
-          "description": "IPv6 Prefix Limit Configuration properties."
+        "prefixLimits": {
+          "type": "array",
+          "description": "Prefix limits",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PrefixLimitPatchProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "NativeIpv4PrefixLimitProperties": {
       "type": "object",
-      "description": "Native IPv4 Prefix Limit Configuration properties",
+      "description": "External Network native IPv4 prefix limit properties",
       "properties": {
-        "ipv4AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitProperties",
-          "description": "IPv4 Prefix Limit Configuration properties."
-        },
-        "ipv6AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitProperties",
-          "description": "IPv6 Prefix Limit Configuration properties."
+        "prefixLimits": {
+          "type": "array",
+          "description": "Prefix limits",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PrefixLimitProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "NativeIpv6PrefixLimitPatchProperties": {
       "type": "object",
-      "description": "Native IPv6 Prefix Limit Configuration patch properties",
+      "description": "External Network native IPv6 prefix limits patch properties",
       "properties": {
-        "ipv4AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitPatchProperties",
-          "description": "IPv4 Prefix Limit Configuration properties."
-        },
-        "ipv6AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitPatchProperties",
-          "description": "IPv6 Prefix Limit Configuration properties."
+        "prefixLimits": {
+          "type": "array",
+          "description": "Prefix limits",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PrefixLimitPatchProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "NativeIpv6PrefixLimitProperties": {
       "type": "object",
-      "description": "Native IPv6 Prefix Limit Configuration properties",
+      "description": "External Network native IPv6 prefix limit properties",
       "properties": {
-        "ipv4AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitProperties",
-          "description": "IPv4 Prefix Limit Configuration properties."
-        },
-        "ipv6AddrPrefixLimit": {
-          "$ref": "#/definitions/PrefixLimitProperties",
-          "description": "IPv6 Prefix Limit Configuration properties."
+        "prefixLimits": {
+          "type": "array",
+          "description": "Prefix limits",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PrefixLimitProperties"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -16830,6 +17123,11 @@
           },
           "readOnly": true
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
@@ -16970,6 +17268,11 @@
         "rwDeviceConfig": {
           "type": "string",
           "description": "User configured read-write configuration applied on the network devices.",
+          "readOnly": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
           "readOnly": true
         },
         "configurationState": {
@@ -17412,6 +17715,11 @@
             ]
           }
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.",
@@ -17653,31 +17961,15 @@
           "$ref": "#/definitions/StorageAccountConfiguration",
           "description": "Bring your own storage account configurations for Network Fabric."
         },
-        "nfLockConfiguration": {
-          "type": "string",
-          "description": "Network Fabric Lock Configuration. Default: Disabled",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "LockConfigurationState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "LockConfigurationState Enabled"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "LockConfigurationState Disabled"
-              }
-            ]
+        "fabricLocks": {
+          "type": "array",
+          "description": "Network Fabric Lock details",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FabricLockProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "networkFabricControllerId": {
           "type": "string",
@@ -17782,9 +18074,14 @@
           }
         },
         "featureFlags": {
-          "$ref": "#/definitions/FeatureFlagProperties",
+          "type": "array",
           "description": "Feature flag status information",
-          "readOnly": true
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FeatureFlagProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "trustedIpPrefixes": {
           "type": "array",
@@ -17806,12 +18103,24 @@
           "$ref": "#/definitions/UniqueRouteDistinguisherProperties",
           "description": "Unique Route Distinguisher configuration"
         },
+        "storageArrayCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Storage arrays associated with the Network Fabric.",
+          "minimum": 1,
+          "maximum": 2
+        },
         "activeCommitBatches": {
           "type": "array",
           "description": "Active commit batch identifiers",
           "items": {
             "type": "string"
           },
+          "readOnly": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
           "readOnly": true
         },
         "configurationState": {
@@ -18050,6 +18359,11 @@
           "type": "string",
           "description": "Additional description of the interface."
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -18140,6 +18454,11 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/BmpConfigurationProperties",
           "description": "BMP Configurations for the Network Fabric."
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -18298,6 +18617,11 @@
           },
           "readOnly": true
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -18399,6 +18723,11 @@
               ]
             }
           },
+          "readOnly": true
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
           "readOnly": true
         },
         "provisioningState": {
@@ -18588,6 +18917,11 @@
               }
             ]
           }
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -19029,6 +19363,11 @@
           "$ref": "#/definitions/GlobalNetworkTapRuleActionProperties",
           "description": "Global network tap rule actions"
         },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
+        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
@@ -19285,6 +19624,11 @@
         "conditionalDefaultRouteConfiguration": {
           "$ref": "#/definitions/ConditionalDefaultRouteProperties",
           "description": "Conditional Default Route Configuration properties."
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
@@ -19556,6 +19900,15 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/NniBmpProperties",
           "description": "BGP Monitoring Protocol (BMP) Configuration."
+        },
+        "prefixLimits": {
+          "type": "array",
+          "description": "OptionB Layer3 prefix limit configuration.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/OptionBLayer3PrefixLimitProperties"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -19613,6 +19966,37 @@
         "bmpConfiguration": {
           "$ref": "#/definitions/NniBmpPatchProperties",
           "description": "BGP Monitoring Protocol (BMP) Configuration."
+        },
+        "prefixLimits": {
+          "type": "array",
+          "description": "OptionB Layer3 prefix limit configuration.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/OptionBLayer3PrefixLimitPatchProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OptionBLayer3PrefixLimitPatchProperties": {
+      "type": "object",
+      "description": "OptionB Layer3 prefix limit patch properties.",
+      "properties": {
+        "maximumRoutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of routes allowed."
+        }
+      }
+    },
+    "OptionBLayer3PrefixLimitProperties": {
+      "type": "object",
+      "description": "OptionB Layer3 prefix limit properties.",
+      "properties": {
+        "maximumRoutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of routes allowed."
         }
       }
     },
@@ -19805,12 +20189,12 @@
     },
     "PrefixLimitPatchProperties": {
       "type": "object",
-      "description": "Prefix Limit Configuration properties",
+      "description": "Prefix Limit Patch properties.",
       "properties": {
-        "hardLimit": {
+        "maximumRoutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Limit at which route prefixes are deleted and recreated."
+          "description": "Maximum routes allowed."
         },
         "softLimit": {
           "type": "integer",
@@ -19820,22 +20204,20 @@
         "idleTimeExpiry": {
           "type": "integer",
           "format": "int32",
-          "description": "Idle Time Expiry in seconds, default is 60.",
-          "minimum": 60,
-          "maximum": 4294967295
+          "description": "Idle time expiry in seconds."
         }
       }
     },
     "PrefixLimitProperties": {
       "type": "object",
-      "description": "Prefix Limit Configuration properties",
+      "description": "Prefix Limit properties.",
       "properties": {
-        "hardLimit": {
+        "maximumRoutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Limit at which route prefixes are deleted and recreated."
+          "description": "Maximum routes allowed."
         },
-        "softLimit": {
+        "threshold": {
           "type": "integer",
           "format": "int32",
           "description": "Limit at which route prefixes a warning is generate."
@@ -19844,9 +20226,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Idle Time Expiry in seconds, default is 60.",
-          "default": 60,
-          "minimum": 60,
-          "maximum": 4294967295
+          "default": 60
         }
       }
     },
@@ -20224,6 +20604,11 @@
               }
             ]
           }
+        },
+        "lastOperation": {
+          "$ref": "#/definitions/LastOperationProperties",
+          "description": "Details of the last operation performed on the resource",
+          "readOnly": true
         },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",

@@ -47,6 +47,10 @@ model LoadBalancerProperties {
   @added(Microsoft.KubernetesRuntime.Versions.v2024_03_01)
   bgpPeers?: string[];
 
+  @doc("BGP Communities")
+  @added(Versions.v2024_08_01)
+  communities?: string[];
+
   @visibility("read")
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;

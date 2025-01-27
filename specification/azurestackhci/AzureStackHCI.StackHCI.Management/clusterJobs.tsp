@@ -152,7 +152,7 @@ model AddServerJobServerDetails {
   hostIpv4Address: string;
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  arcNodeResourceId?: Azure.Core.armResourceIdentifier;
+  serverResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Properties for adding a server in the cluster.")
@@ -238,7 +238,7 @@ model AddNetworkIntentJobDetails {
   hostNetwork: DeploymentHostNetwork;
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  arcNodeResourceId?: Azure.Core.armResourceIdentifier;
+  serverResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Details of servers to be paused in the cluster")
@@ -247,7 +247,7 @@ model PauseServerJobServerDetails {
   serverName: string;
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  arcNodeResourceId?: Azure.Core.armResourceIdentifier;
+  serverResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Details of servers to be repaired in the cluster")
@@ -256,7 +256,7 @@ model RepairServerJobServerDetails {
   serverName: string;
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  arcNodeResourceId?: Azure.Core.armResourceIdentifier;
+  serverResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Details of servers to be resumes in the cluster")
@@ -265,5 +265,5 @@ model ResumeServerJobServerDetails {
   serverName: string;
 
   @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  arcNodeResourceId?: Azure.Core.armResourceIdentifier;
+  serverResourceId?: Azure.Core.armResourceIdentifier;
 }

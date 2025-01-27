@@ -5494,6 +5494,60 @@
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettings",
           "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfiguration",
+          "description": "Maintenance Mode configuration."
+        }
+      }
+    },
+    "CommunityPropertiesUpdate": {
+      "type": "object",
+      "description": "Community Resource Properties",
+      "properties": {
+        "addressSpace": {
+          "type": "string",
+          "description": "Address Space."
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "Dns Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by communities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "List of services governed by a community.",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          }
+        },
+        "communityRoleAssignments": {
+          "type": "array",
+          "description": "Community role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/ApprovalSettings",
+          "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationUpdate",
+          "description": "Maintenance Mode configuration."
         }
       }
     },
@@ -5555,7 +5609,7 @@
       "description": "Community Model Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunityProperties",
+          "$ref": "#/definitions/CommunityPropertiesUpdate",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         },

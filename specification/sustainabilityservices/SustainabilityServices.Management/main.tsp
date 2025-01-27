@@ -116,6 +116,22 @@ model CalculationResourceProperties {
   @visibility("read")
   @doc("Profile of Azure FrontDoor Resource Created.")
   azureFrontDoorProfile?: AzureFrontDoorProfile;
+
+  @doc("Caching Type.")
+  @visibility("read", "create", "update")
+  cachingType?: string;
+
+  @visibility("read", "create", "update")
+  @doc("Enable Public Access.")
+  enablePublicEndpoint?: boolean;
+
+  @visibility("read")
+  @doc("Managed On Behalf Of Configuration.")
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
+
+  @doc("Deny Assignments exclusion list.")
+  @visibility("read", "update")
+  denyAssignmentExclusions?: DenyAssignmentExclusion[];
 }
 
 @doc("The properties related to Storage Resource")
@@ -160,13 +176,41 @@ model AzureFrontDoorProfile {
   id?: string;
 }
 
+@doc("Configuration of the managed on behalf of resource.")
+model ManagedOnBehalfOfConfiguration {
+  @visibility("read")
+  @doc("Associated MoboBrokerResources.")
+  moboBrokerResources: MoboBrokerResource[];
+}
+
+@doc("MoboBroker resource.")
+model MoboBrokerResource {
+  @doc("Mobo Broker Resource Id")
+  @visibility("read")
+  id: string;
+}
+
+@doc("The properties related to Deny Assignment Exclusions")
+model DenyAssignmentExclusion {
+  @doc("Object Id of Identity")
+  @visibility("read", "update")
+  id: string;
+
+  @doc("Type of Identity")
+  @visibility("read", "update")
+  type: string;
+}
+
 @armResourceOperations(CalculationResource)
 interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     CalculationResource,
-    CalculationResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CalculationResource,
+      CalculationResourceProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<CalculationResource>;
   listByResourceGroup is ArmResourceListByParent<CalculationResource>;

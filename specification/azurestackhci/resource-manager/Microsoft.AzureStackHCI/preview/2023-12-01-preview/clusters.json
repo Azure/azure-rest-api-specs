@@ -1053,6 +1053,10 @@
         "confidentialVmProperties": {
           "description": "Confidential VM Properties of the cluster",
           "$ref": "#/definitions/ConfidentialVmProperties"
+        },
+        "confidentialGpuProperties": {
+          "description": "Confidential GPU Properties of the cluster",
+          "$ref": "#/definitions/ConfidentialGpuProperties"
         }
       }
     },
@@ -1155,6 +1159,19 @@
         "correlationId": {
           "description": "CorrelationId of the log collection",
           "type": "string",
+          "readOnly": true
+        },
+        "logCollectionJobType": {
+          "description": "LogCollection job type",
+          "type": "string",
+          "enum": [
+            "OnDemand",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionJobType",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "endTimeCollected": {
@@ -1382,6 +1399,11 @@
           "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
           "type": "string",
           "readOnly": true
+        },
+        "azureCertificateServiceEndpoint": {
+          "description": "Region specific endpoint for AzCS service for the cluster",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1529,7 +1551,7 @@
           },
           "readOnly": true
         },
-        "customLocationId": {
+        "customLocationResourceId": {
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
@@ -1572,6 +1594,22 @@
           ],
           "x-ms-enum": {
             "name": "ClusterNodeType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "nodeState": {
+          "description": "State of the cluster node.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NodeUp",
+            "NodeDown",
+            "NodePaused",
+            "NodeJoining"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeState",
             "modelAsString": true
           },
           "readOnly": true
@@ -1712,6 +1750,56 @@
       },
       "additionalProperties": false
     },
+    "SecretsLocationDetails": {
+      "type": "object",
+      "description": "Secrets location details",
+      "properties": {
+        "secretsType": {
+          "$ref": "#/definitions/SecretsType",
+          "description": "Type of secrets to store"
+        },
+        "secretsLocation": {
+          "type": "string",
+          "description": "secrets location"
+        }
+      },
+      "required": [
+        "secretsType",
+        "secretsLocation"
+      ]
+    },
+    "SecretsLocationsChangeRequest": {
+      "description": "Update secrets locations change  Request",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "description": "List of secret locations",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SecretsType": {
+      "type": "string",
+      "description": "Type of secrets to store",
+      "enum": [
+        "BackupSecrets"
+      ],
+      "x-ms-enum": {
+        "name": "SecretsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BackupSecrets",
+            "value": "BackupSecrets",
+            "description": "Backup secrets type"
+          }
+        ]
+      }
+    },
     "SoftwareAssuranceChangeRequestProperties": {
       "type": "object",
       "properties": {
@@ -1744,20 +1832,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogCollectionRequestProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "SecretsLocationsChangeRequest": {
-      "description": "Update secrets locations change  Request",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "array",
-          "description": "List of secret locations",
-          "items": {
-            "$ref": "#/definitions/SecretsLocationDetails"
-          }
         }
       },
       "additionalProperties": false
@@ -1802,42 +1876,6 @@
       "additionalProperties": false,
       "readOnly": true
     },
-    "SecretsLocationDetails": {
-      "type": "object",
-      "description": "Secrets location details",
-      "properties": {
-        "secretsType": {
-          "$ref": "#/definitions/SecretsType",
-          "description": "Type of secrets to store"
-        },
-        "secretsLocation": {
-          "type": "string",
-          "description": "secrets location"
-        }
-      },
-      "required": [
-        "secretsType",
-        "secretsLocation"
-      ]
-    },
-    "SecretsType": {
-      "type": "string",
-      "description": "Type of secrets to store",
-      "enum": [
-        "BackupSecrets"
-      ],
-      "x-ms-enum": {
-        "name": "SecretsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BackupSecrets",
-            "value": "BackupSecrets",
-            "description": "Backup secrets type"
-          }
-        ]
-      }
-    },
     "ConfidentialVmProperties": {
       "type": "object",
       "description": "Confidential VM Properties of the cluster",
@@ -1858,11 +1896,21 @@
             "modelAsString": true
           },
           "readOnly": true
+        }
+      }
+    },
+    "ConfidentialGpuProperties": {
+      "type": "object",
+      "description": "Confidential GPU Properties of the cluster",
+      "properties": {
+        "confidentialGpuIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialGpuIntent"
         },
         "confidentialGpuStatus": {
           "type": "string",
           "enum": [
             "Enabled",
+            "PartiallyEnabled",
             "Disabled"
           ],
           "default": "Disabled",

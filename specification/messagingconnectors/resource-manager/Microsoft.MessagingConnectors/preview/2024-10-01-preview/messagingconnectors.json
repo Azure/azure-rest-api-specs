@@ -40,13 +40,13 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "ConnectorOperations"
     },
     {
       "name": "DataPreviewOperations"
-    },
-    {
-      "name": "Operations"
     },
     {
       "name": "SchemaOperations"
@@ -325,6 +325,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           }
         ],
@@ -391,6 +393,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           },
           {
@@ -472,6 +476,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           },
           {
@@ -547,6 +553,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           }
         ],
@@ -615,6 +623,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           },
           {
@@ -689,6 +699,8 @@
             "description": "Name of the Connector resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,64}[a-zA-Z0-9_]"
           },
           {
@@ -942,7 +954,7 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "Endpoint."
+          "description": "Endpoint for catalog."
         }
       },
       "required": [
@@ -2511,7 +2523,7 @@
           {
             "name": "None",
             "value": "None",
-            "description": "None config"
+            "description": "Do not use SourceDataFormat feature."
           },
           {
             "name": "JSON",

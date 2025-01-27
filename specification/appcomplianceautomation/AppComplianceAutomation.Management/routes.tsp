@@ -16,10 +16,7 @@ namespace Microsoft.AppComplianceAutomation;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias PlaceholderResource = {
-  id: string;
-  type: string;
-};
+alias PlaceholderResource = Azure.ResourceManager.CommonTypes.Resource;
 
 alias ArmProviderActionAsync<
   Request extends {} | void,
@@ -85,10 +82,12 @@ interface ProviderActions {
   >;
 }
 
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
   "parameters"
 );
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
 @@encodedName(ArmProviderActionSync::parameters.body,
   "application/json",
   "parameters"
