@@ -89,7 +89,7 @@
           {
             "name": "incidentType",
             "in": "query",
-            "description": "Specifies the type of traffic incident to return. Values are case sensitive. Multiple incident types are allowed. \n\nFor example, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
+            "description": "Specifies the type of traffic incident to return. Multiple incident types are allowed. \n\nFor example, '&incidentType=Accident' or '&incidentType=Accident,Construction'. \n\nWill return all the available incident types if not specified.",
             "required": false,
             "type": "string",
             "enum": [
@@ -305,10 +305,6 @@
           "description": "The date time that the traffic incident will end. The time is specified in the format of RFC3339.",
           "type": "string"
         },
-        "id": {
-          "description": "A unique ID for the incident.",
-          "type": "integer"
-        },
         "lastModified": {
           "description": "The date time the incident information was last updated. The time is specified in the format of RFC3339.",
           "type": "string"
@@ -319,7 +315,8 @@
         },
         "severity": {
           "description": "Specifies the level of importance of incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "incidentType": {
           "$ref": "#/definitions/IncidentTypeEnum"
@@ -353,6 +350,11 @@
           "properties": {
             "type": {
               "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "id": {
+              "description": "A unique ID for the incident.",
+              "type": "integer",
+              "format": "int64"
             },
             "geometry": {
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
