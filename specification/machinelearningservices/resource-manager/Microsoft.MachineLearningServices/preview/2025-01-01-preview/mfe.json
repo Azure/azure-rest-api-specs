@@ -10713,6 +10713,9 @@
           },
           "List FineTuning Job.": {
             "$ref": "./examples/Job/FineTuningJob/list.json"
+          },
+          "List Distillation Job.": {
+            "$ref": "./examples/Job/DistillationJob/list.json"
           }
         },
         "x-ms-pageable": {
@@ -10855,6 +10858,9 @@
           },
           "Get FineTuning Job.": {
             "$ref": "./examples/Job/FineTuningJob/get.json"
+          },
+          "Get Distillation Job.": {
+            "$ref": "./examples/Job/DistillationJob/get.json"
           }
         }
       },
@@ -10936,6 +10942,9 @@
           },
           "CreateOrUpdate FineTuning Job.": {
             "$ref": "./examples/Job/FineTuningJob/createOrUpdate.json"
+          },
+          "CreateOrUpdate Distillation Job.": {
+            "$ref": "./examples/Job/DistillationJob/createOrUpdate.json"
           }
         }
       }
@@ -16951,6 +16960,111 @@
       "x-ms-discriminator-value": "DataDrift",
       "additionalProperties": false
     },
+    "DataGenerationTaskType": {
+      "description": "Enum to determine the type of Data Generation Task.",
+      "enum": [
+        "Conversation",
+        "Math",
+        "Nli",
+        "NluQa",
+        "Summarization"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataGenerationTaskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Conversation",
+            "description": "Generate conversational data (multi/single turn)"
+          },
+          {
+            "value": "Math",
+            "description": "Generate Math data for numerical responses"
+          },
+          {
+            "value": "Nli",
+            "description": "Generate Natural Language Inference data"
+          },
+          {
+            "value": "NluQa",
+            "description": "Generate Natural Language Understanding data for Question Answering data"
+          },
+          {
+            "value": "Summarization",
+            "description": "Generate Key Summary for an Article"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "DataGenerationType": {
+      "description": "Enum to determine the type of Data Generation.",
+      "enum": [
+        "LabelGeneration",
+        "DataGeneration"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataGenerationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LabelGeneration",
+            "description": "Label Generation by Teacher Model Inferencing"
+          },
+          {
+            "value": "DataGeneration",
+            "description": "Synthetic Data Generation"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "DataGenerationVertical": {
+      "required": [
+        "dataGenerationTaskType",
+        "dataGenerationType",
+        "teacherModelEndpoint"
+      ],
+      "type": "object",
+      "properties": {
+        "dataGenerationTaskType": {
+          "description": "[Required] DataGeneration Task type.",
+          "$ref": "#/definitions/DataGenerationTaskType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dataGenerationType": {
+          "description": "[Required] Enum to determine the type of Data Generation.",
+          "$ref": "#/definitions/DataGenerationType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "promptSettings": {
+          "description": "Prompt Settings.",
+          "$ref": "#/definitions/PromptSettings",
+          "x-nullable": true
+        },
+        "teacherModelEndpoint": {
+          "description": "[Required] Teacher Model Endpoint Details.",
+          "$ref": "#/definitions/TeacherModelEndpoint",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "teacherModelSettings": {
+          "$ref": "#/definitions/TeacherModelSettings",
+          "x-nullable": true
+        }
+      },
+      "discriminator": "dataGenerationType"
+    },
     "DataPathAssetReference": {
       "description": "Reference to an asset via its path in a datastore.",
       "type": "object",
@@ -17591,6 +17705,64 @@
           "x-nullable": true
         }
       },
+      "additionalProperties": false
+    },
+    "DistillationJob": {
+      "description": "Distillation Job definition.",
+      "required": [
+        "dataGenerationDetails",
+        "finetuningDetails",
+        "jobType",
+        "outputs"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "dataGenerationDetails": {
+          "description": "[Required] ",
+          "$ref": "#/definitions/DataGenerationVertical"
+        },
+        "finetuningDetails": {
+          "description": "[Required] ",
+          "$ref": "#/definitions/FinetuningDetails"
+        },
+        "outputs": {
+          "description": "[Required] ",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Job output definition container information on where to find job output/logs.",
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "resources": {
+          "description": "Instance types and other resources for the job",
+          "default": "{}",
+          "$ref": "#/definitions/JobResources",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Distillation",
       "additionalProperties": false
     },
     "DistributionConfiguration": {
@@ -19102,6 +19274,28 @@
         }
       },
       "discriminator": "modelProvider"
+    },
+    "FinetuningDetails": {
+      "required": [
+        "studentModel"
+      ],
+      "type": "object",
+      "properties": {
+        "hyperParameters": {
+          "description": "Finetuning Hyperparameters",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "studentModel": {
+          "description": "[Required] Student model for fine tuning.",
+          "$ref": "#/definitions/JobInput"
+        }
+      },
+      "additionalProperties": false
     },
     "FixedInputData": {
       "description": "Fixed input data definition.",
@@ -21484,7 +21678,8 @@
         "Sweep",
         "Pipeline",
         "Spark",
-        "FineTuning"
+        "FineTuning",
+        "Distillation"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -21508,6 +21703,9 @@
           },
           {
             "value": "FineTuning"
+          },
+          {
+            "value": "Distillation"
           }
         ]
       },
@@ -21549,6 +21747,31 @@
         }
       },
       "x-ms-discriminator-value": "Kubernetes",
+      "additionalProperties": false
+    },
+    "LabelGeneration": {
+      "required": [
+        "dataGenerationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataGenerationVertical"
+        }
+      ],
+      "properties": {
+        "trainingData": {
+          "description": "Training data for fine tuning.",
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
+        },
+        "validationData": {
+          "description": "Validation data for fine tuning.",
+          "$ref": "#/definitions/JobInput",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "LabelGeneration",
       "additionalProperties": false
     },
     "LakeHouseArtifact": {
@@ -24267,6 +24490,22 @@
       },
       "additionalProperties": false
     },
+    "PromptSettings": {
+      "type": "object",
+      "properties": {
+        "enableChainOfDensity": {
+          "type": "boolean"
+        },
+        "enableChainOfThought": {
+          "type": "boolean"
+        },
+        "maxLenSummary": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
     "PropertiesBase": {
       "description": "Base definition for pool resources.",
       "type": "object",
@@ -26758,6 +26997,50 @@
             "description": "Text Named Entity Recognition a.k.a. TextNER.\nNamed Entity Recognition (NER) is the ability to take free-form text and identify the occurrences of entities such as people, locations, organizations, and more."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "TeacherModelEndpoint": {
+      "type": "object",
+      "properties": {
+        "endpointName": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "TeacherModelEndpointRequestSettings": {
+      "type": "object",
+      "properties": {
+        "minEndpointSuccessRatio": {
+          "format": "double",
+          "type": "number"
+        },
+        "requestBatchSize": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TeacherModelSettings": {
+      "type": "object",
+      "properties": {
+        "teacherModelEndpointRequestSettings": {
+          "description": "Teacher Model Request Settings.",
+          "$ref": "#/definitions/TeacherModelEndpointRequestSettings",
+          "x-nullable": true
+        },
+        "teacherModelInferenceParameters": {
+          "description": "Teacher Model Inference Settings.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
       },
       "additionalProperties": false
     },

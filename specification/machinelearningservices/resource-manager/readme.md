@@ -42,6 +42,15 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceFeatures.json
   - Microsoft.MachineLearningServices/preview/2025-01-01-preview/workspaceRP.json
 suppressions:
+  - code: AvoidAdditionalProperties
+    reason: This is necessary to allow users to specify custom inference parameters and 
+      fine-tuning hyperparameters for any model. Enforcing typecasting would require modifying 
+      contracts for each new addition by model providers. A similar approach has been previously 
+      permitted for the FinetuningJob.
+    where:
+      - $.definitions.TeacherModelSettings.properties.teacherModelInferenceParameters
+      - $.definitions.FinetuningDetails.properties.hyperParameters
+      - $.definitions.DistillationJob.properties.outputs
   - code: DeleteResponseCodes
     reason: Existing API behavior in 2024-10-01-preview.
     where:
