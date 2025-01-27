@@ -260,9 +260,9 @@ model PeeringSetting is TrackedResource<PeeringSettingProperties> {
  */
 model PeeringSettingProperties {
   /**
-   * Tenant Ids in a source vnet.
+   * Linked Resources in a source vnet.
    */
-  tenantIds: string[];
+  linkedResources: string[];
 
   /**
    * Source vnet ID in the following format: "Source/VNET/ARM/Resource/ID"
@@ -300,7 +300,7 @@ model RemotePeeringLink {
    * The current provisioning state for a peering link.
    */
   @visibility("read")
-  provisioningState?: PeeringLinkProvisioningState;
+  autoSyncProvisioningStatus?: PeeringLinkProvisioningState;
 }
 
 /**
