@@ -25,11 +25,11 @@ model QuantumWorkspace
 }
 
 @armResourceOperations
-interface QuantumWorkspaces {
+interface Workspaces {
   /**
    * Check the availability of the resource name for the given location.
    */
-  checkLocalNameAvailability is checkLocalNameAvailability;
+  checkNameAvailability is checkLocalNameAvailability;
 
   /**
    * Returns the Workspace resource associated with the given name.
@@ -86,12 +86,12 @@ interface QuantumWorkspaces {
 @@doc(QuantumWorkspace.properties,
   "Gets or sets the properties. Define quantum workspace's specific properties."
 );
-@@doc(QuantumWorkspaces.createOrUpdate::parameters.resource,
+@@doc(Workspaces.createOrUpdate::parameters.resource,
   "Workspace details."
 );
-@@doc(QuantumWorkspaces.updateTags::parameters.properties,
+@@doc(Workspaces.updateTags::parameters.properties,
   "Parameters supplied to update tags."
 );
-@@doc(QuantumWorkspaces.regenerateKeys::parameters.body,
+@@doc(Workspaces.regenerateKeys::parameters.body,
   "Which key to regenerate:  primary or secondary."
 );

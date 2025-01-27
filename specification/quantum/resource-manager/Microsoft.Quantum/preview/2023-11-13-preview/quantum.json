@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "QuantumWorkspaces"
+      "name": "Workspaces"
     },
     {
       "name": "Offerings"
@@ -88,9 +88,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/locations/{location}/checkNameAvailability": {
       "post": {
-        "operationId": "QuantumWorkspaces_CheckLocalNameAvailability",
+        "operationId": "Workspaces_CheckNameAvailability",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Check the availability of the resource name for the given location.",
         "parameters": [
@@ -128,7 +128,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_CheckLocalNameAvailability": {
+          "Workspaces_CheckNameAvailability": {
             "$ref": "./examples/quantumWorkspacesCheckNameAvailability.json"
           }
         }
@@ -182,9 +182,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/workspaces": {
       "get": {
-        "operationId": "QuantumWorkspaces_ListBySubscription",
+        "operationId": "Workspaces_ListBySubscription",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Gets the list of Workspaces within a Subscription.",
         "parameters": [
@@ -210,7 +210,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_ListBySubscription": {
+          "Workspaces_ListBySubscription": {
             "$ref": "./examples/quantumWorkspacesListSubscription.json"
           }
         },
@@ -221,9 +221,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces": {
       "get": {
-        "operationId": "QuantumWorkspaces_ListByResourceGroup",
+        "operationId": "Workspaces_ListByResourceGroup",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Gets the list of Workspaces within a resource group.",
         "parameters": [
@@ -252,7 +252,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_ListByResourceGroup": {
+          "Workspaces_ListByResourceGroup": {
             "$ref": "./examples/quantumWorkspacesListResourceGroup.json"
           }
         },
@@ -263,9 +263,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}": {
       "get": {
-        "operationId": "QuantumWorkspaces_Get",
+        "operationId": "Workspaces_Get",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Returns the Workspace resource associated with the given name.",
         "parameters": [
@@ -302,15 +302,15 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_Get": {
+          "Workspaces_Get": {
             "$ref": "./examples/quantumWorkspacesGet.json"
           }
         }
       },
       "put": {
-        "operationId": "QuantumWorkspaces_CreateOrUpdate",
+        "operationId": "Workspaces_CreateOrUpdate",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Creates or updates a Workspace resource.",
         "parameters": [
@@ -373,7 +373,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_CreateOrUpdate": {
+          "Workspaces_CreateOrUpdate": {
             "$ref": "./examples/quantumWorkspacesPut.json"
           }
         },
@@ -383,9 +383,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "QuantumWorkspaces_UpdateTags",
+        "operationId": "Workspaces_UpdateTags",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Updates an existing Workspace's tags.",
         "parameters": [
@@ -431,15 +431,15 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_UpdateTags": {
+          "Workspaces_UpdateTags": {
             "$ref": "./examples/quantumWorkspacesPatch.json"
           }
         }
       },
       "delete": {
-        "operationId": "QuantumWorkspaces_Delete",
+        "operationId": "Workspaces_Delete",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Deletes a Workspace resource.",
         "parameters": [
@@ -487,7 +487,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_Delete": {
+          "Workspaces_Delete": {
             "$ref": "./examples/quantumWorkspacesDelete.json"
           }
         },
@@ -499,9 +499,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/listKeys": {
       "post": {
-        "operationId": "QuantumWorkspaces_ListKeys",
+        "operationId": "Workspaces_ListKeys",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Get the keys to use with the Quantum APIs. A key is used to authenticate and authorize access to the Quantum REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
         "parameters": [
@@ -538,7 +538,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_ListKeys": {
+          "Workspaces_ListKeys": {
             "$ref": "./examples/listKeys.json"
           }
         }
@@ -546,9 +546,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/regenerateKey": {
       "post": {
-        "operationId": "QuantumWorkspaces_RegenerateKeys",
+        "operationId": "Workspaces_RegenerateKeys",
         "tags": [
-          "QuantumWorkspaces"
+          "Workspaces"
         ],
         "description": "Regenerate either the primary or secondary key for use with the Quantum APIs. The old key will stop working immediately.",
         "parameters": [
@@ -591,7 +591,7 @@
           }
         },
         "x-ms-examples": {
-          "QuantumWorkspaces_RegenerateKeys": {
+          "Workspaces_RegenerateKeys": {
             "$ref": "./examples/regenerateKey.json"
           }
         }
