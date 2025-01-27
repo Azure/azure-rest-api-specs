@@ -132,8 +132,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
   - code: TrackedResourcePatchOperation
-    from: networkSecurityPerimeter.json
     reason: False alarm.
+    where:
+      - $.definitions.NspProfile
+      - $.definitions.NspAccessRule
+      - $.definitions.NspAssociation
 ```
 
 ### Tag: package-2024-05
