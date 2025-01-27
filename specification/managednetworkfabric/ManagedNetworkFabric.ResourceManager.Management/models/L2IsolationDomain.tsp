@@ -7,9 +7,6 @@ namespace Microsoft.ManagedNetworkFabric;
 
 @doc("L2Isolation Domain Properties defines the properties of the resource.")
 model L2IsolationDomainProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("ARM Resource ID of the Network Fabric.")
@@ -33,6 +30,19 @@ model L2IsolationDomainProperties {
   @doc("Extended VLAN status, default value is Disabled.")
   extendedVlan?: ExtendedVlan = ExtendedVlan.Disabled;
 
+  @added(Versions.v2024_06_15_preview)
+  @doc("ARM Resource ID of the networkToNetworkInterconnectId of the L2 ISD resource.")
+  networkToNetworkInterconnectId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics/networkToNetworkInterconnects";
+    }
+  ]>;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
@@ -48,9 +58,6 @@ model L2IsolationDomainProperties {
 
 @doc("The L2 Isolation Domain patch resource definition.")
 model L2IsolationDomainPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("Resource properties.")
@@ -60,9 +67,6 @@ model L2IsolationDomainPatch {
 @doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")
 @withoutDefaultValues
 model L2IsolationDomainPatchProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("Maximum transmission unit. Default value is 1500.")

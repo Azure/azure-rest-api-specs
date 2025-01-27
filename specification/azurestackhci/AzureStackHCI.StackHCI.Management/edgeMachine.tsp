@@ -61,6 +61,15 @@ interface EdgeMachines {
   @doc("Update an edgeMachine")
   @parameterVisibility
   update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
+
+  /**
+   * A long-running resource action.
+   */
+  validate is ArmResourceActionAsync<
+    EdgeMachine,
+    EdgeMachineValidateRequest,
+    EdgeMachineValidateResponse
+  >;
 }
 
 @@doc(EdgeMachine.name, "Name of Device");
@@ -104,6 +113,10 @@ model EdgeMachineProperties {
   @visibility("read")
   machineState?: EdgeMachineState;
 
+  @doc("machine connectivity status")
+  @visibility("read")
+  connectivityStatus?: EdgeMachineConnectivityStatus;
+
   @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
   @OpenAPI.extension("x-ms-identifiers", ["labelName"])
   labels?: Labels[];
@@ -115,6 +128,46 @@ model EdgeMachineProperties {
   @doc("Reported properties for edge machine.")
   @visibility("read")
   reportedProperties?: ReportedProperties;
+}
+
+/**
+ * The validate request for Edge Machine.
+ */
+model EdgeMachineValidateRequest {
+  /**
+   * Machine Ids against which, current machine has to be validated.
+   */
+  edgeMachineIds: string[];
+
+  /**
+   * Additional info required for validation.
+   */
+  additionalInfo?: string;
+}
+
+/**
+ * An Accepted response with an Operation-Location header.
+ */
+model EdgeMachineValidateResponse {
+  /**
+   * edge device validation status
+   */
+  @visibility("read")
+  status?: string;
+}
+
+@doc("Overall connectivity status for the machine resource.")
+union EdgeMachineConnectivityStatus {
+  string,
+
+  @doc("The connectivity status of the machine resource is not specified.")
+  NotSpecified: "NotSpecified",
+
+  @doc("The machine resource is disconnected.")
+  Disconnected: "Disconnected",
+
+  @doc("The machine resource is connected.")
+  Connected: "Connected",
 }
 
 @doc("Site Details consists of common configurations.")

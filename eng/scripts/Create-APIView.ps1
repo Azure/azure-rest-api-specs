@@ -363,8 +363,8 @@ function New-TypeSpecAPIViewTokens {
     [string]$APIViewArtifactsDirectoryName
   )
 
-  $SourceCommitId = $(git rev-parse HEAD^)
-  $TargetCommitId = $(git rev-parse HEAD)
+  $SourceCommitId = $(git rev-parse HEAD^2)
+  $TargetCommitId = $(git rev-parse HEAD^1)
 
   $typeSpecProjects, $null = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
     -IgnoreCoreFiles:$true `

@@ -42,6 +42,32 @@ union PrincipalType {
 }
 
 /**
+ * Resource type of the destination tier override.
+ */
+union ResourceType {
+  string,
+
+  /** Database resource type. */
+  Database: "Database",
+
+  /** Elastic pool resource type. */
+  ElasticPool: "ElasticPool",
+}
+
+/**
+ * Status of zone redundancy in a tier.
+ */
+union ZoneRedundancy {
+  string,
+
+  /** Zone redundancy enabled. */
+  Enabled: "Enabled",
+
+  /** Zone redundancy disabled. */
+  Disabled: "Disabled",
+}
+
+/**
  * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
  */
 union SQLUserType {
@@ -366,6 +392,29 @@ model FleetProperties {
 }
 
 /**
+ * A destination tier override.
+ */
+model DestinationTierOverride {
+  /**
+   * Resource type.
+   */
+  @visibility("read", "create")
+  resourceType: ResourceType;
+
+  /**
+   * Destination tier.
+   */
+  @visibility("read", "create")
+  destinationTier: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility("read", "create")
+  resourceName: string;
+}
+
+/**
  * A main principal.
  */
 model MainPrincipal {
@@ -454,9 +503,9 @@ model RegisterServerDefinition {
   /**
    * Destination tier overrides.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   @visibility("read", "create")
-  destinationTierOverrides?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  destinationTierOverrides?: DestinationTierOverride[];
 }
 
 /**
@@ -506,10 +555,16 @@ model FleetTierProperties {
   poolNumOfDatabasesMax?: int32;
 
   /**
-   * Number of empty preprovisioned databases for fast database provisioning.
+   * Number of high availability replicas for databases in this tier.
    */
   @visibility("read", "create")
-  numOfEmptyPreprovisionedDatabases?: int32;
+  highAvailabilityReplicaCount?: int32;
+
+  /**
+   * Enable zone redundancy for all databases in this tier.
+   */
+  @visibility("read", "create")
+  zoneRedundancy?: ZoneRedundancy;
 
   /**
    * Minimum allocated capacity per database, in units matching the specified service tier.

@@ -10,7 +10,7 @@ jobs:
   protected-files:
     name: Protected Files
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       # Since check is required, the job must pass instead of being skipped
@@ -29,9 +29,10 @@ jobs:
         run: |
           . eng/scripts/ChangedFiles-Functions.ps1
 
-          $protectedFiles = @("package.json", "package-lock.json")
+          $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -targetCommitish HEAD -diffFilter "")
-          $matchedFiles = @($protectedFiles | Where-Object { $changedFiles -contains $_})
+
+          $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
