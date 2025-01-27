@@ -8,6 +8,16 @@ options:
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/validation/{version-status}/{version}/validation.json"
     examples-dir: "{project-root}/examples/"
+  "@azure-tools/typespec-go":
+      service-dir: "sdk/resourcemanager/contoso"
+      package-dir: "armcontoso"
+      module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+      fix-const-stuttering: true
+      flavor: "azure"
+      generate-examples: true
+      generate-fakes: true
+      head-as-boolean: true
+      inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
