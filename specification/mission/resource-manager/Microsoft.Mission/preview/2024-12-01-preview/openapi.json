@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Mission",
-    "version": "2024-11-01-preview",
+    "version": "2024-12-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -4925,26 +4925,25 @@
           "type": "array",
           "description": "List of approvers for the approval request",
           "items": {
-            "$ref": "#/definitions/Approvers"
+            "$ref": "#/definitions/Approver"
           },
           "x-ms-identifiers": [
             "approverEntraId"
           ]
         },
-        "mandatoryApprovers": {
-          "type": "array",
-          "description": "List of mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
+        "ticketId": {
+          "type": "string",
+          "description": "Ticket ID for the approval request"
         },
-        "minimumApproversRequired": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for the approval request"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request creation time"
+        },
+        "stateChangedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         }
       },
       "required": [
@@ -4971,26 +4970,25 @@
           "type": "array",
           "description": "List of approvers for the approval request",
           "items": {
-            "$ref": "#/definitions/Approvers"
+            "$ref": "#/definitions/Approver"
           },
           "x-ms-identifiers": [
             "approverEntraId"
           ]
         },
-        "mandatoryApprovers": {
-          "type": "array",
-          "description": "List of mandatory approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approvers"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
+        "ticketId": {
+          "type": "string",
+          "description": "Ticket ID for the approval request"
         },
-        "minimumApproversRequired": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for the approval request"
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request creation time"
+        },
+        "stateChangedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         }
       }
     },
@@ -5101,6 +5099,33 @@
         "serviceCatalogDeployment": {
           "$ref": "#/definitions/ApprovalPolicy",
           "description": "Approval required for deploying service catalog templates (Required or NotRequired)."
+        },
+        "notificationOnApprovalCreation": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on creation of an Approval Request"
+        },
+        "notificationOnApprovalAction": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on any action taken (Approve/Reject) on an Approval Request"
+        },
+        "notificationOnApprovalDeletion": {
+          "$ref": "#/definitions/ApprovalPolicy",
+          "description": "Notification will be sent on deletion of an Approval Request"
+        },
+        "mandatoryApprovers": {
+          "type": "array",
+          "description": "List of mandatory approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/MandatoryApprover"
+          },
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        },
+        "minimumApproversRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of approvers required for the approval request"
         }
       }
     },
@@ -5146,7 +5171,7 @@
         ]
       }
     },
-    "Approvers": {
+    "Approver": {
       "type": "object",
       "description": "Approver Metadata for approvals request.",
       "properties": {
@@ -5298,10 +5323,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
         }
       },
       "required": [
@@ -5326,10 +5347,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },
@@ -5998,10 +6015,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
         }
       },
       "required": [
@@ -6026,10 +6039,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "approvalRequired": {
-          "type": "boolean",
-          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },
@@ -7016,6 +7025,19 @@
           "description": "Managed Resource Group location"
         }
       }
+    },
+    "MandatoryApprover": {
+      "type": "object",
+      "description": "Approver Metadata for approvals request.",
+      "properties": {
+        "approverEntraId": {
+          "type": "string",
+          "description": "EntraId of the approver"
+        }
+      },
+      "required": [
+        "approverEntraId"
+      ]
     },
     "Principal": {
       "type": "object",

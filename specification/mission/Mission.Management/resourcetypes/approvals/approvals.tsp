@@ -57,7 +57,7 @@ model RequestMetadata {
 
   @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("Route name for the approval callback")
-  approvalCallbackRoute: string;
+  approvalCallbackRoute?: string;
 
   @added(Microsoft.Mission.Versions.v2024_11_01_preview)
   @doc("Payload to be sent upon any action on approval request")
