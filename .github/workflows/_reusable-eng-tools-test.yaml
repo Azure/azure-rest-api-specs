@@ -24,15 +24,15 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu, windows]
         node-version: [18, 22]
         exclude:
-          - os: ubuntu-latest
+          - os: ubuntu
             node-version: 22
-          - os: windows-latest
+          - os: windows
             node-version: 18
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - if: runner.os == 'Windows'
@@ -63,7 +63,7 @@ jobs:
       - run: npm run prettier
         if: inputs.prettier == true
         shell: pwsh
-        working-directory: ./eng/tools/${{ inputs.package }}        
+        working-directory: ./eng/tools/${{ inputs.package }}
 
       - run: npm run test:ci
         shell: pwsh
