@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DatabaseFleetManager;
 /**
@@ -35,12 +36,32 @@ interface AuthorizedPrincipals {
   /**
    * Creates or updates an authorized principal.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<AuthorizedPrincipal>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "createOrUpdate")
+  createOrUpdateOld is ArmResourceCreateOrReplaceSync<AuthorizedPrincipal>;
+
+  /**
+   * Creates or updates an authorized principal.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<AuthorizedPrincipal>;
 
   /**
    * Deletes an authorized principal.
    */
-  delete is ArmResourceDeleteSync<AuthorizedPrincipal>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "delete")
+  deleteOld is ArmResourceDeleteSync<AuthorizedPrincipal>;
+
+  /**
+   * Deletes an authorized principal.
+   */
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<AuthorizedPrincipal>;
 
   /**
    * Gets all authorized principals in a fleet.
