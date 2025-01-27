@@ -471,10 +471,11 @@ model Resource {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
 model TagsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Resource tags.
    */
-  tags?: string[];
+  tags?: Record<string>;
 }
 
 /**
