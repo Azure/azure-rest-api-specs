@@ -16,33 +16,52 @@ using Azure.Core.Traits;
 using Autorest;
 using Microsoft.PlaywrightTesting.Shared;
 
+
 @server(
-  "https://eastus.api.playwright.microsoft.com",
-  "Azure Playwright Service API Endpoint"
+  "{endpoint}",
+  "Microsoft Azure Playwright Reporting Service API Endpoint",
+  {
+    @doc("""
+      Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+        https://{region}.reporting.api.playwright.microsoft.com).
+      """)
+    endpoint: string,
+  }
 )
 @useAuth(
   [
     OAuth2Auth<[
       {
         type: OAuth2FlowType.implicit,
+        description: "We can use OAuth2 Implicit flow to get the auth token for calling the APIs.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://preview.playwright-int.io/.default"],
+        scopes: ["https://playwright.microsoft.com/.default"],
+      }
+    ]>,
+    OAuth2Auth<[
+      {
+        type: OAuth2FlowType.authorizationCode,
+        description: "We can use OAuth2 Authorization Code flow to get the auth token for calling the APIs.",
+        authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+        tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
+        scopes: ["https://playwright.microsoft.com/.default"],
       }
     ]>
   ]
 )
+
 @service({
   title: "Microsoft Playwright Service Reporting Data Plane API",
 })
 @versioned(Microsoft.PlaywrightTesting.Reporting.Versions)
 namespace Microsoft.PlaywrightTesting.Reporting;
 
-@doc("The PlaywrightTesting Data Plane service version.")
+@doc("The PlaywrightTesting Reporting service Data Plane version.")
 enum Versions {
-  @doc("Version 2025-01-02-preview")
+  @doc("Version 2025-02-24")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Microsoft.PlaywrightTesting.Shared.Versions.v1_0)
-  `2025-01-02-preview`,
+  `2025-02-24`,
 }
 
 // Models ////////////////////
@@ -52,16 +71,16 @@ union TestRunStatus {
   string,
 
   @doc("The test run is currently running.")
-  "RUNNING",
+  "Running",
 
   @doc("The test run completed on the client side.")
-  "CLIENT_COMPLETE",
+  "ClientComplete",
 
   @doc("The test run completed on the server side.")
-  "SERVER_COMPLETE",
+  "ServerComplete",
 }
 
-@doc("Access levels for test results URI.")
+@doc("Access levels for test results URL.")
 union AccessLevel {
   string,
 
@@ -83,13 +102,13 @@ union TestSdkLanguage {
   string,
 
   @doc("JavaScript.")
-  "JAVASCRIPT",
+  "JavaScript",
 
   @doc("TypeScript")
-  "TYPESCRIPT",
+  "TypeScript",
 
   @doc("Csharp")
-  "CSHARP",
+  "CSharp",
 }
 
 // Models with unions
@@ -97,7 +116,7 @@ union TestSdkLanguage {
 model TestRunConfig {
   @doc("Number of retry attempts.")
   @visibility("read", "create")
-  retries?: int32;
+  retryCount?: int32;
 
   @doc("Interval between repeated test runs.")
   @visibility("read", "create")
@@ -113,11 +132,11 @@ model TestRunConfig {
 
   @doc("Details of the shards used in the test.")
   @visibility("read", "create")
-  shards?: Shard;
+  shardDetails?: ShardDetails;
 
   @doc("Timeout duration for test execution.")
   @visibility("read", "create")
-  timeout: int32;
+  timeoutInMs: duration;
 
   // Added Fields
   @doc("Type of test being executed (default: WebTest).")
@@ -139,22 +158,22 @@ model TestRunConfig {
 union RunnerType {
   string,
 
-  @doc("MSTEST")
-  "MSTEST",
+  @doc("MsTest")
+  "MsTest",
 
-  @doc("NUNIT")
-  "NUNIT",
+  @doc("Nunit")
+  "Nunit",
 
-  @doc("PLAYWRIGHT")
-  "PLAYWRIGHT",
+  @doc("Playwright")
+  "Playwright",
 }
 
 @doc("Supported Framework")
 union TestFrameworkName {
   string,
 
-  @doc("PLAYWRIGHT")
-  "PLAYWRIGHT",
+  @doc("Playwright")
+  "Playwright",
 }
 
 @doc("Model representing a test framework.")
@@ -169,11 +188,11 @@ model TestFramework {
   version: string;
 
   @doc("Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT")
-  runnerName: RunnerType;
+  runnerType: RunnerType;
 }
 
 @doc("Model representing a shard.")
-model Shard {
+model ShardDetails {
   @doc("Total number of shards.")
   @maxValue(1000)
   total: int32;
@@ -184,13 +203,13 @@ union CiProviderName {
   string,
 
   @doc("GitHub")
-  "GITHUB",
+  "GitHub",
 
-  @doc("Ado")
-  "ADO",
+  @doc("Azure Devops")
+  "Ado",
 
   @doc("default")
-  "DEFAULT",
+  "Default",
 }
 
 @doc("Model representing continuous integration (CI) configuration. ")
@@ -211,13 +230,17 @@ model CiConfig {
   @doc("ID of the commit triggering the test run.")
   commitId?: string;
 
-  @maxLength(1000)
+  @maxLength(4096)
   @doc("URL linking to the revision details.")
-  revisionUrl?: string;
+  revisionUrl?: url;
 }
 
 @doc("Model representing summary of test run results.")
 model CloudReportingSummary {
+
+  @doc("Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
+  resultProcessingstatus: TestRunStatus;
+
   @doc("Total number of tests executed.")
   @visibility("read")
   numTotalTests: int32;
@@ -294,27 +317,27 @@ model UpdateShardExecutionSummary {
 @doc("Model representing upload metadata.")
 model UploadMetadata {
   @doc("Total number of test results uploaded.")
-  numTestResults: int32;
+  testResultsCount: int32;
 
   @doc("Total number of attachments uploaded.")
-  numTotalAttachments: int32;
+  totalAttachmentsCount: int32;
 
   @doc("Total size of attachments uploaded in Bytes.")
-  sizeTotalAttachments: int64;
+  totalAttachmentsSize: int64;
 }
 
-@doc("Model representing a test results URI.")
-model TestResultsUri {
-  @doc("URI for accessing test results.")
-  uri: string;
+@doc("Model representing a test results URL.")
+model TestResultsUrl {
+  @doc("URL for accessing test results.")
+  url: url;
 
-  @doc("Creation timestamp of the test results URI- RFC 3339 literal format")
-  createdAt: string;
+  @doc("Creation timestamp of the test results URL- RFC 3339 literal format")
+  createdAt: utcDateTime;
 
-  @doc("Expiration timestamp of the test results URI- RFC 3339 literal format")
-  expiresAt: string;
+  @doc("Expiration timestamp of the test results URL- RFC 3339 literal format")
+  expiresAt: utcDateTime;
 
-  @doc("Access level for the test results URI.")
+  @doc("Access level for the test results URL.")
   accessLevel: AccessLevel;
 }
 
@@ -359,9 +382,9 @@ model TestRun {
   @visibility("read", "create")
   testRunConfig?: TestRunConfig;
 
-  @doc("URI for accessing test results.")
+  @doc("URL for accessing test results.")
   @visibility("read")
-  testResultsUri?: TestResultsUri;
+  testResultsUrl?: TestResultsUrl;
 
   @doc("Flag indicating if cloud run is enabled.")
   @visibility("read")
@@ -372,14 +395,13 @@ model TestRun {
   cloudReportingEnabled: boolean;
 }
 
-@doc("DTO representing a Test Run Shard.")
-@resource("shards")
+@doc("Execution details of a Shard.")
 @parentResource(TestRun)
-model TestRunShardDto {
-  @doc("Shard Id for the shard")
+model ShardExecutionDetails {
+  @doc("Shard Id for the shard- indexed 0,1,2")
   @key
   @visibility("read", "create")
-  shardId: string;
+  shardId: int32;
 
   @doc("Summary of the test run shard.")
   @visibility("read", "create", "update")
@@ -401,35 +423,35 @@ union TestStatus {
   string,
 
   @doc("The test passed successfully.")
-  "PASSED",
+  "Passed",
 
   @doc("The test failed.")
-  "FAILED",
+  "Failed",
 
   @doc("The test was skipped.")
-  "SKIPPED",
+  "Skipped",
 
   @doc("The test was interrupted.")
-  "INTERRUPTED",
+  "Interrupted",
 
   @doc("The test timed out.")
-  "TIMEDOUT",
+  "TimedOut",
 }
 
 // Model representing UploadTestResultsRequest
 @doc("Request object for uploading test results.")
-@parentResource(DetailedTestResult)
+@parentResource(TestResultDetails )
 model UploadTestResultsRequest {
   @doc("List of test results.")
   @maxItems(100)
-  value: DetailedTestResult[];
+  values: TestResultDetails [];
 }
 
 // Model representing details of a single test result
 @doc("Details of a single test result.")
 @resource("test-results")
 @parentResource(Account)
-model DetailedTestResult {
+model TestResultDetails  {
   @doc("Identifier of the test execution.")
   @key
   @visibility("read", "create")
@@ -457,7 +479,7 @@ model DetailedTestResult {
   shardId: string;
 
   @doc("Identifier of the account.")
-  @visibility("read", "create")
+  @visibility("read")
   @maxLength(200)
   accountId: string;
 
@@ -485,9 +507,10 @@ model DetailedTestResult {
   @visibility("read", "create")
   lineNumber: int32;
 
-  @doc("Number of retry attempts. max retry is 20. After which testresults metadata will not be stored")
+  @doc("Number of retryCount attempts. max retryCount is 20. After which testresults metadata will not be stored")
   @visibility("read", "create")
-  retry: int32;
+  @maxValue(20)
+  retryCount: int32;
 
   @doc("Status of the test.")
   @visibility("read", "create")
@@ -505,7 +528,7 @@ model DetailedTestResult {
   @visibility("read")
   result: TestResult;
 
-  @doc("Previous retry summaries.")
+  @doc("Previous retryCount summaries.")
   previousRetries?: PreviousRetrySummary[];
 
   @doc("List of tags associated with the test result.")
@@ -528,13 +551,13 @@ union BrowserType {
   string,
 
   @doc("Chromium")
-  "CHROMIUM",
+  "Chomium",
 
   @doc("Webkit")
-  "WEBKIT",
+  "Webkit",
 
   @doc("Safari")
-  "FIREFOX",
+  "FireFox",
 }
 
 @doc("Supported OS  for tests")
@@ -542,13 +565,27 @@ union OsType {
   string,
 
   @doc("Windows")
-  "WINDOWS",
+  "Windows",
 
   @doc("Linux")
-  "LINUX",
+  "Linux",
 
   @doc("MAC")
-  "MAC",
+  "Mac",
+}
+
+@doc("Attachment kinds uploaded for a test result")
+union AttachmentKind {
+  string,
+
+  @doc("Image")
+  "Image",
+
+  @doc("Video")
+  "Video",
+
+  @doc("Trace")
+  "Trace"
 }
 
 // Model representing web test configuration
@@ -569,6 +606,8 @@ model WebTestConfig {
   os: OsType;
 }
 
+
+
 // Model representing test results summary
 @doc("Summary of test results.")
 model TestResult {
@@ -576,35 +615,35 @@ model TestResult {
   status: TestStatus;
 
   @doc("Duration of the test execution in milliseconds.")
-  duration: int64;
+  durationInMs: int64;
 
   @doc("Start time of the test execution.- (RFC 3339 literal format)")
   startTime: utcDateTime;
 
   @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
-  attachmentsMetadata?: string;
+  attachmentsMetadata?: AttachmentKind[];
 }
 
-// Model representing summary of previous retries
+// Model representing summary of previous retryCount
 @doc("Summary of previous retries.")
 model PreviousRetrySummary {
   @doc("Identifier of the test execution.")
   testExecutionId: string;
 
-  @doc("Number of retry attempts.")
-  retry: int32;
+  @doc("Number of retryCount attempts.")
+  retryCount: int32;
 
   @doc("Status of the test execution.")
-  status: string;
+  status: TestStatus;
 
   @doc("Duration of the test execution.")
-  duration: int64;
+  duration: duration;
 
   @doc("Start time of the test execution- RFC 3339 literal format ")
   startTime: utcDateTime;
 
   @doc("Metadata related to attachments.")
-  attachmentsMetadata: string;
+  attachmentsMetadata: AttachmentKind[];
 
   @doc("List of artifacts paths.")
   @visibility("read")
@@ -690,23 +729,22 @@ interface TestRuns {
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get TestResults Upload Uri.")
-  createArtifactsUploadBaseUri is Operations.ResourceAction<
+  @doc("Get TestResults Upload Url.")
+  createArtifactsUploadBaseUrl is Operations.ResourceAction<
     TestRun,
     {},
-    TestResultsUri
+    TestResultsUrl
   >;
 
   updateShardExecutionStatus is Operations.ResourceAction<
     TestRun,
-    TestRunShardDto,
+    ShardExecutionDetails,
     {}
   >;
 
   @doc("Get TestRun summary for an Odata filter.")
-  @action("summary")
-  @actionSeparator("/")
-  getSummary is Operations.ResourceCollectionAction<
+  @action("accountRunStats")
+  computeAccountRunStats is Operations.ResourceCollectionAction<
     TestRun,
     {},
     AccountTestRunStats,
@@ -715,8 +753,7 @@ interface TestRuns {
 
   @doc("Get TestRun metadata for an Odata filter.")
   @action("metadata")
-  @actionSeparator("/")
-  getMetadata is Operations.ResourceCollectionAction<
+  computeMetadata is Operations.ResourceCollectionAction<
     TestRun,
     {},
     TestRunsMetadata,
@@ -730,22 +767,21 @@ interface TestResults {
 
   @doc("Upload Test Results.")
   uploadBatch is Operations.ResourceCollectionAction<
-    DetailedTestResult,
+    TestResultDetails ,
     UploadTestResultsRequest,
     {}
   >;
 
   @doc("List Testresults.")
   list is Operations.ResourceList<
-    DetailedTestResult,
+    TestResultDetails ,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
   @doc("Get Testresults summary.")
-  @action("summary")
-  @actionSeparator("/")
-  getSummary is Operations.ResourceCollectionAction<
-    DetailedTestResult,
+  @action("resultsStats")
+  computeResultsStats is Operations.ResourceCollectionAction<
+    TestResultDetails ,
     {},
     ResultsStats,
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
