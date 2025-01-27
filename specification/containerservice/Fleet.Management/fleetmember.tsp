@@ -25,7 +25,6 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   name: string;
 
   ...EntityTagProperty;
-
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
@@ -56,7 +55,6 @@ model FleetMemberProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
-
 }
 
 @lroStatus
