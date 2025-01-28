@@ -350,13 +350,13 @@ union ReasoningEffortValue {
   string,
 
   /** The reasoning effort is low. */
-  "low",
+  low: "low",
 
   /** The reasoning effort is medium. */
-  "medium",
+  medium: "medium",
 
   /** The reasoning effort is high. */
-  "high",
+  high: "high",
 }
 
 /** Values to specified the required modality for the model to use. */
@@ -386,7 +386,7 @@ model PredictionContent {
    * The type of the predicted content you want to provide. This type is
    * currently always `content`.
    */
-  type: "content";
+  type: PredictionContentType.content;
 
   /**
    * The content that should be matched when generating a model response.
