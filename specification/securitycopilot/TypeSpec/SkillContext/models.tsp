@@ -246,62 +246,62 @@ namespace SkillContext
 
 	@doc("Represents the execution context for the current session.")
 	model MedeinaExecutionContext {
-	  @doc("The session id.")
-	  SessionId: string;
+		@doc("The session id.")
+		SessionId: string;
 
-	  @doc("The prompt id.")
-	  PromptId: string;
+		@doc("The prompt id.")
+		PromptId: string;
 
-	  @doc("The evaluation id.")
-	  EvaluationId: string;
+		@doc("The evaluation id.")
+		EvaluationId: string;
 
-	  @doc("The tenant id.")
-	  TenantId: string;
+		@doc("The tenant id.")
+		TenantId: string;
 
-	  @doc("The account id.")
-	  AccountId: string;
+		@doc("The account id.")
+		AccountId: string;
 
-	  @doc("The workspace id.")
-	  WorkspaceId: string;
+		@doc("The workspace id.")
+		WorkspaceId: string;
 
-	  @doc("The display name of the user.")
-	  UserName: string;
+		@doc("The display name of the user.")
+		UserName: string;
 
-	  @doc("The Application Id that created the Session.")
-	  ApplicationId?: string;
+		@doc("The Application Id that created the Session.")
+		ApplicationId?: string;
 
-	  @doc("The Source tag i.e. 'immersive'.")
-	  Source: string;
+		@doc("The Source tag i.e. 'immersive'.")
+		Source: string;
 
-	  @doc("The source application ID.")
-	  UnauthenticatedSourceApplicationId: string;
+		@doc("The source application ID.")
+		UnauthenticatedSourceApplicationId: string;
 
-	  @doc("The selected skills.")
-	  SelectedSkills: string;
+		@doc("The selected skills.")
+		SelectedSkills: string;
 
-	  @doc("The skillsets identified for execution during the evaluation process post skill selection.")
-	  SelectedSkillsets: Array<string>;
+		@doc("The skillsets identified for execution during the evaluation process post skill selection.")
+		SelectedSkillsets: Array<string>;
 
-	  @doc("Indicates whether the context is for a user onboarded to Fidelis.")
-	  IsFidelisUser: boolean;
+		@doc("Indicates whether the context is for a user onboarded to Fidelis.")
+		IsFidelisUser: boolean;
 
-	  @doc("Indicates whether the evaluation is manually generated or user driven.")
-	  InvocationType: EvaluationInvocationType;
+		@doc("Indicates whether the evaluation is manually generated or user driven.")
+		InvocationType: EvaluationInvocationType;
 
-	  @doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
-	  InvocationCategory: EvaluationInvocationCategory;
+		@doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
+		InvocationCategory: EvaluationInvocationCategory;
 
-	  @doc("The encrypted token used to authenticate the user.")
-	  EncryptedUserAccessToken: string;
+		@doc("The encrypted token used to authenticate the user.")
+		EncryptedUserAccessToken: string;
 
-	  @doc("Compliance flags for logging.")
-	  ComplianceFlags: ComplianceFlags;
+		@doc("Compliance flags for logging.")
+		ComplianceFlags: ComplianceFlags;
 
-	  @doc("Contains the context for the Azure OpenAI requests such as the deployment id.")
-	  AzureOpenAIExecutionContext: AzureOpenAIExecutionContext;
+		@doc("Contains the context for the Azure OpenAI requests such as the deployment id.")
+		AzureOpenAIExecutionContext: AzureOpenAIExecutionContext;
 
-	  @doc("Preview state of the execution context.")
-	  PreviewState: SkillPreviewState;
+		@doc("Preview state of the execution context.")
+		PreviewState: SkillPreviewState;
 	}
 
 	
@@ -328,9 +328,9 @@ namespace SkillContext
 
 	@doc("Used to configure the preview state of a skill.")
 	enum SkillPreviewState {
-	  GA,
-	  Public,
-	  Private
+		GA,
+		Public,
+		Private
 	}
 
 	@doc("The prompt history of the current session")
@@ -415,6 +415,27 @@ namespace SkillContext
 	model AddSourceRequest {
 		@doc("SkillSource")
 		SkillSource: SkillSource;
+	}
+
+	@doc("AddSuggestedPromptsRequest")
+	model AddSuggestedPromptsRequest {
+		@doc("List of SuggestedPrompt")
+		suggestedPrompts: Array<SuggestedPrompt>;
+	}
+
+	@doc("SetFinalResponseSettingsRequest")
+	model SetFinalResponseSettingsRequest {
+		@doc("FinalResponseBehavior")
+		finalResponseBehavior: string;
+
+		@doc("FinalResponseFormat")
+		finalResponseFormat?: string;
+
+		@doc("FinalResponsePersona")
+		finalResponsePersona?: string;
+
+		@doc("FinalResponseFallback")
+		finalResponseFallback?: string;
 	}
 
 	@doc("Represents a chat completion request.")
