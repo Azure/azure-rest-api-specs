@@ -2,34 +2,35 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
-    "version": "6.0"
+    "version": "v6"
   },
   "paths": {},
   "definitions": {
     "PrivateEndpoint": {
       "type": "object",
-      "description": "The private endpoint resource.",
+      "description": "The Private Endpoint resource.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM identifier for private endpoint.",
+          "format": "arm-id",
+          "description": "The resource identifier for private endpoint",
           "readOnly": true
         }
       }
     },
     "PrivateEndpointConnection": {
       "type": "object",
-      "description": "The private endpoint connection resource.",
+      "description": "The private endpoint connection resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
+          "description": "The private endpoint connection properties",
           "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../v5/types.json#/definitions/Resource"
+          "$ref": "./types.json#/definitions/Resource"
         }
       ]
     },
@@ -42,11 +43,11 @@
           "description": "Array of private endpoint connections.",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "URL to get the next set of operation list results (if there are any).",
           "readOnly": true
         }
@@ -74,7 +75,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource."
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -92,9 +94,30 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      },
-      "readOnly": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Connection has been provisioned"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Connection is being created"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Connection is being deleted"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Connection provisioning has failed"
+          }
+        ]
+      }
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -106,7 +129,24 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Connectionaiting for approval or rejection"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Connection approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Connection Rejected"
+          }
+        ]
       }
     },
     "PrivateLinkResource": {
@@ -121,7 +161,7 @@
       },
       "allOf": [
         {
-          "$ref": "../v5/types.json#/definitions/Resource"
+          "$ref": "./types.json#/definitions/Resource"
         }
       ]
     },
@@ -134,11 +174,11 @@
           "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "URL to get the next set of operation list results (if there are any).",
           "readOnly": true
         }
@@ -190,8 +230,8 @@
     }
   },
   "parameters": {
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
+    "PrivateEndpointConnectionParameter": {
+      "name": "name",
       "in": "path",
       "description": "The name of the private endpoint connection associated with the Azure resource.",
       "required": true,
