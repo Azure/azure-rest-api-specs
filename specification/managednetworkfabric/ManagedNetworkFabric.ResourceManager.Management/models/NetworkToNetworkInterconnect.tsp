@@ -91,6 +91,11 @@ model NetworkToNetworkInterconnectProperties {
   @added(Versions.v2024_06_15_preview)
   conditionalDefaultRouteConfiguration?: ConditionalDefaultRouteProperties;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;
@@ -246,6 +251,13 @@ model OptionBLayer3ConfigurationPatchProperties {
   @doc("BGP Monitoring Protocol (BMP) Configuration.")
   @added(Versions.v2024_06_15_preview)
   bmpConfiguration?: NniBmpPatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("OptionB Layer3 prefix limit configuration.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  prefixLimits?: OptionBLayer3PrefixLimitPatchProperties[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -276,6 +288,13 @@ model OptionBLayer3Configuration {
   @doc("BGP Monitoring Protocol (BMP) Configuration.")
   @added(Versions.v2024_06_15_preview)
   bmpConfiguration?: NniBmpProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+  @doc("OptionB Layer3 prefix limit configuration.")
+  @added(Versions.v2024_06_15_preview)
+  @minItems(1)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  prefixLimits?: OptionBLayer3PrefixLimitProperties[];
 }
 
 @doc("NPB Static Route Configuration properties.")
@@ -433,3 +452,18 @@ model NniBmpPatchProperties {
   @doc("(BGP Monitoring Protocol (BMP) configuration state.")
   configurationState?: BmpConfigurationState;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("OptionB Layer3 prefix limit properties.")
+@added(Versions.v2024_06_15_preview)
+model OptionBLayer3PrefixLimitProperties {
+  @doc("Maximum number of routes allowed.")
+  @added(Versions.v2024_06_15_preview)
+  maximumRoutes?: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+@doc("OptionB Layer3 prefix limit patch properties.")
+@added(Versions.v2024_06_15_preview)
+model OptionBLayer3PrefixLimitPatchProperties
+  is OptionBLayer3PrefixLimitProperties;

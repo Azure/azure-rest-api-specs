@@ -17,9 +17,6 @@ union NetworkPolicy {
   /** Use the calico policy */
   calico: "calico",
 
-  /** Use the cilium policy */
-  cilium: "cilium",
-
   string,
 }
 
@@ -248,45 +245,6 @@ union ProvisioningState {
 }
 
 /**
- * Schema of supported witness types for provisioned cluster with 2 control plane nodes.
- */
-union WitnessType {
-  string,
-
-  /**
-   * Use NFS file share as the witness type.
-   */
-  NFS: "NFS",
-
-  /**
-   * Use SMB file share as the witness type.
-   */
-  SMB: "SMB",
-
-  /**
-   * Use Azure Blob storage as the witness type.
-   */
-  AzureBlob: "AzureBlob",
-}
-
-/**
- * The kubernetes distribution
- */
-union KubernetesDistribution {
-  string,
-
-  /**
-   * K8s kubernetes distribution
-   */
-  K8s: "K8s",
-
-  /**
-   * K3s kubernetes distribution
-   */
-  K3s: "K3s",
-}
-
-/**
  * Properties of the provisioned cluster.
  */
 model ProvisionedClusterProperties {
@@ -304,11 +262,6 @@ model ProvisionedClusterProperties {
    * The version of Kubernetes in use by the provisioned cluster.
    */
   kubernetesVersion?: string;
-
-  /**
-   * The distribution of Kubernetes in use by the provisioned cluster.
-   */
-  kubernetesDistribution?: KubernetesDistribution;
 
   /**
    * The network configuration profile for the provisioned cluster.
@@ -340,10 +293,12 @@ model ProvisionedClusterProperties {
       "minCount",
       "enableAutoScaling",
       "maxPods",
+      "availabilityZones",
       "count",
       "vmSize",
       "kubernetesVersion",
-      "name"
+      "name",
+      "gpuCountPerNode"
     ]
   )
   agentPoolProfiles?: NamedAgentPoolProfile[];
@@ -425,79 +380,6 @@ model ControlPlaneProfile {
    * IP Address of the Kubernetes API server
    */
   controlPlaneEndpoint?: ControlPlaneProfileControlPlaneEndpoint;
-
-  /**
-   * Profile of witness to support 2 control plane nodes for provisioned cluster.
-   */
-  witness?: WitnessProfile;
-}
-
-/**
- * Schema of common witness property to support provisioned cluster with 2 control plane nodes.
- */
-@discriminator("type")
-model WitnessProfile {
-  /**
-   * Specifies the witness type used for provisioned cluster with 2 control plane nodes.
-   */
-  type: WitnessType;
-
-  /**
-   * The endpoint of witness for provisioned cluster with 2 control plane nodes.
-   */
-  endpoint: string;
-}
-
-/**
- * Schema of witness properties to support provisioned cluster with 2 control plane nodes when the witness type is SMB.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SMB should be upper-case"
-model SMBWitnessProfile extends WitnessProfile {
-  /**
-   * Witness type is SMB
-   */
-  type: WitnessType.SMB;
-
-  /**
-   * The username to access the SMB file share as the witness.
-   */
-  userName: string;
-
-  /**
-   * The password to access the SMB file share as the witness.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO: should be using @secret"
-  @OpenAPI.extension("x-ms-secret", true)
-  @visibility("create", "update")
-  password?: string;
-}
-
-/**
- * Schema of witness properties to support provisioned cluster with 2 control plane nodes when the witness type is AzureBlob.
- */
-model AzureBlobWitnessProfile extends WitnessProfile {
-  /**
-   * Witness type is azure blob
-   */
-  type: WitnessType.AzureBlob;
-
-  /**
-   * The SAS token to access the Azure Blob storage as the witness.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO: should be using @secret"
-  @OpenAPI.extension("x-ms-secret", true)
-  @visibility("create", "update")
-  sasToken?: string;
-}
-
-/**
- * Schema of witness properties to support provisioned cluster with 2 control plane nodes when the witness type is NFS.
- */
-model NfsWitnessProfile extends WitnessProfile {
-  /**
-   * Witness type is NFS
-   */
-  type: WitnessType.NFS;
 }
 
 /**
@@ -521,38 +403,14 @@ model NetworkProfile {
   loadBalancerProfile?: NetworkProfileLoadBalancerProfile;
 
   /**
-   * Network policy used for building Kubernetes network. Possible values include: 'calico', 'cilium'.
+   * Network policy used for building Kubernetes network. Possible values include: 'calico'.
    */
-  networkPolicy?: NetworkPolicy;
+  networkPolicy?: NetworkPolicy = NetworkPolicy.calico;
 
   /**
    * A CIDR notation IP Address range from which to assign pod IPs.
    */
   podCidr?: string;
-
-  /**
-   * An ARM ID specifying which network from the global vnetSubnetIds list the default CNI is to be deployed upon. May be left blank if the global vnetSubnetIds list in the cloudProviderProfile.infraNetworkProfile has only one item.
-   */
-  vnetSubnetId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/logicalNetworks";
-    },
-    {
-      type: "Microsoft.HybridContainerService/virtualNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
-    }
-  ]>;
 }
 
 /**
@@ -578,11 +436,6 @@ model StorageProfile {
    * NFS CSI Driver settings for the storage profile.
    */
   nfsCsiDriver?: StorageProfileNfsCSIDriver;
-
-  /**
-   * Local Path Provisioner Driver settings for the storage profile.
-   */
-  localPathProvisionerDriver?: StorageProfileLocalPathDriver;
 }
 
 /**
@@ -591,9 +444,9 @@ model StorageProfile {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
 model StorageProfileSmbCSIDriver {
   /**
-   * Indicates whether to enable SMB CSI Driver. The default value is true for hci, and false for linux baremetal.
+   * Indicates whether to enable SMB CSI Driver. The default value is true.
    */
-  enabled?: boolean;
+  enabled?: boolean = true;
 }
 
 /**
@@ -602,19 +455,9 @@ model StorageProfileSmbCSIDriver {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
 model StorageProfileNfsCSIDriver {
   /**
-   * Indicates whether to enable NFS CSI Driver. The default value is true for hci, and false for linux baremetal.
+   * Indicates whether to enable NFS CSI Driver. The default value is true.
    */
-  enabled?: boolean;
-}
-
-/**
- * Local Path Provisioner Driver settings for the storage profile.
- */
-model StorageProfileLocalPathDriver {
-  /**
-   * Indicates whether to enable Local Path Provisioner Driver. The default value is true for hci, and false for linux baremetal.
-   */
-  enabled?: boolean;
+  enabled?: boolean = true;
 }
 
 /**
@@ -682,6 +525,16 @@ model AgentPoolProfile {
    * The maximum number of pods that can run on a node.
    */
   maxPods?: int32;
+
+  /**
+   * The list of Availability zones to use for nodes.
+   */
+  availabilityZones?: string[];
+
+  /**
+   * The number of gpus attached to a node.
+   */
+  gpuCountPerNode?: int32;
 }
 
 /**
@@ -738,18 +591,6 @@ model CloudProviderProfileInfraNetworkProfile {
     },
     {
       type: "Microsoft.HybridContainerService/virtualNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>[];
 }
@@ -1539,7 +1380,7 @@ model LinuxProfile {
   /**
    * Profile for Linux VMs in the container service cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Inital suppression to prevent breaking change"
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Initial suppression to prevent breaking change"
   linuxProfile?: LinuxProfileProperties;
 }
 

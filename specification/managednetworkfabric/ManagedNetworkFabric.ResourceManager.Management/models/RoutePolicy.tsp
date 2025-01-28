@@ -1,4 +1,5 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -22,6 +23,11 @@ model RoutePolicyProperties {
 
   @doc("AddressFamilyType. This parameter decides whether the given ipv4 or ipv6 route policy.")
   addressFamilyType?: AddressFamilyType = AddressFamilyType.IPv4;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
   @visibility("read")
@@ -49,9 +55,6 @@ model RoutePolicyPatchableProperties {
 
 @doc("Route Policy Statement properties.")
 model RoutePolicyStatementProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("Sequence to insert to/delete from existing route.")
@@ -69,9 +72,6 @@ model RoutePolicyStatementProperties {
 
 @doc("Route Policy Statement properties.")
 model RoutePolicyStatementPatchProperties {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("Sequence to insert to/delete from existing route.")
@@ -196,9 +196,6 @@ model ActionIpExtendedCommunityPatchProperties
 
 @doc("The Route Policy patch resource definition.")
 model RoutePolicyPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("The RoutePolicy patchable properties.")

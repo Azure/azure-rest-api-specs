@@ -63,6 +63,11 @@ model NetworkFabricControllerProperties {
   @doc("Network Fabric Controller SKU.")
   nfcSku?: NfcSku = NfcSku.Standard;
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.")
   @visibility("read")
   provisioningState?: ProvisioningState;
