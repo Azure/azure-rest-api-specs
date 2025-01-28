@@ -320,8 +320,6 @@ union InfrastructureAsCodeOutputOptions {
   @doc("Value when generating landing zone code in Arm.")
   ARM: "ARM",
 
-  // values to be added in the future.
-  //terraform: "Terraform",
   string,
 }
 
