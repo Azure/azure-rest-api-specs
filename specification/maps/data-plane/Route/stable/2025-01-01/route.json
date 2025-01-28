@@ -728,8 +728,7 @@
         "departAt": {
           "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nIf the `departAt` is not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
-          "format": "date-time",
-          "default": "any"
+          "format": "date-time"
         },
         "arriveAt": {
           "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
@@ -1171,6 +1170,7 @@
       "properties": {
         "countryRegion": {
           "type": "object",
+          "description": "Represents a country or region, containing related details.",
           "properties": {
             "name": {
               "description": "name of country/region",
@@ -3183,7 +3183,7 @@
         "isSimplifiedPolygon": {
           "description": "Use this to specify whether simplified polygons are required, reducing the number of vertices while preserving the overall shape. Currently, isSimplifiedPolygon only supports true. High-definition polygons are supported in version 2024-07-01-preview",
           "type": "boolean",
-          "default": "true"
+          "default": true
         },
         "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
@@ -3222,15 +3222,17 @@
         "vehicleSpec": {
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
-        "distanceBudgetInMeters ": {
+        "distanceBudgetInMeters": {
           "description": "The distance budget specifies the maximum range in meters which can be traveled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 500,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
           "type": "number",
+          "format": "float",
           "minimum": 0,
           "maximum": 500000
         },
         "timeBudgetInSec": {
           "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 21,600 seconds.\n\nExample: \"timeBudgetInSec\":3600",
           "type": "number",
+          "format": "float",
           "minimum": 0,
           "maximum": 21600
         },
@@ -3419,17 +3421,20 @@
         },
         "departureTime": {
           "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is `any`, then departureTime is absent.",
+          "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "arrivalTime": {
           "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used. If departAt or arriveAt is any, then departureTime is absent.",
+          "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "distanceInMeters": {
           "description": "Length In Meters property",
           "type": "number",
+          "format": "double",
           "readOnly": true
         },
         "durationInSeconds": {
