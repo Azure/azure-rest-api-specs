@@ -34,7 +34,7 @@ model PagedDataContainer {
   value: DataContainer[];
 
   @doc("The link to the next page of results, if any.")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 
@@ -61,7 +61,7 @@ model PagedDataVersionBase {
   value: DataVersionBase[];
 
   @doc("The link to the next page of results, if any.")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: string;
 }
 

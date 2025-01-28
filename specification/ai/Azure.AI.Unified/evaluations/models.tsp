@@ -119,7 +119,7 @@ model PagedEvaluation {
   value: Evaluation[];
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: ResourceLocation<Evaluation>;
 }
 

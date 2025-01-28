@@ -20,6 +20,8 @@ import "./models/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;

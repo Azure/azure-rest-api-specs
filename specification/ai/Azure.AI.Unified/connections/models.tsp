@@ -46,6 +46,6 @@ model PagedConnection {
   value: Connection[];
 
   @doc("The link to the next page of items")
-  @Azure.Core.nextLink
+  @nextLink
   nextLink?: ResourceLocation<Connection>;
 }
