@@ -10,6 +10,7 @@ namespace Microsoft.Mission;
 
 @doc("Supported API versions for the Microsoft.Mission resource provider.")
 enum Versions {
+
   @doc("The 2024-11-01-preview version.")
   @armCommonTypesVersion("v5")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
