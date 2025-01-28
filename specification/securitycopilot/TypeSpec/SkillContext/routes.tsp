@@ -142,6 +142,21 @@ op addSource(
 @body addSourceRequest  : AddSourceRequest,
 ): NoContentResponse;
 
+@post
+@route("/skillContext/AddSuggestedPrompts")
+@doc(" Adds a list of suggested prompts to the skill context")
+op addSuggestedPrompts(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body addSuggestedPromptsRequest  : AddSuggestedPromptsRequest,
+): NoContentResponse;
+
+@post
+@route("/skillContext/SetFinalResponseSettings")
+@doc("Sets the final response settings")
+op setFinalResponseSettings(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body setFinalResponseSettingsRequest  : SetFinalResponseSettingsRequest,
+): NoContentResponse;
 
 @post
 @route("/medeinaOpenAI/createChatCompletion")
