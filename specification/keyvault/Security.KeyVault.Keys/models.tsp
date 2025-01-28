@@ -195,11 +195,11 @@ union JsonWebKeyEncryptionAlgorithm {
   A256_CBCPAD: "A256CBCPAD",
 
   /** CKM AES key wrap. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
 
   /** CKM AES key wrap with padding. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
