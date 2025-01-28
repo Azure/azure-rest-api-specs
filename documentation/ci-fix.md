@@ -92,7 +92,6 @@ If you have an issue or with any of checks listed in the first column of the tab
 | `SDK azure-sdk-for-java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
 | `SDK azure-sdk-for-js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
 | `SDK azure-sdk-for-net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
-| `SDK azure-sdk-for-net-track2`    | Wei Hu         | [live1206](https://github.com/live1206)                       |
 | `SDK azure-sdk-for-python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
