@@ -14,10 +14,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
-@@clientName(AcsIncomingCallEventData.to,
-  "toCommunicationIdentifier",
-  "java"
-);
+@@clientName(AcsIncomingCallEventData.to, "toCommunicationIdentifier", "java");
 @@clientName(AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
   "java"
@@ -28,20 +25,11 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(AcsMessageMediaContent.id,
-  "mediaId",
-  "java"
-);
+@@clientName(AcsMessageMediaContent.id, "mediaId", "java");
 
-@@clientName(AcsMessageContext.id,
-  "messageId",
-  "java"
-);
+@@clientName(AcsMessageContext.id, "messageId", "java");
 
-@@clientName(AcsRouterWorkerSelector.ttlSeconds,
-  "timeToLive",
-  "java"
-);
+@@clientName(AcsRouterWorkerSelector.ttlSeconds, "timeToLive", "java");
 
 @@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
   "replyKind",
@@ -105,10 +93,7 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(AcsRouterWorkerSelector.value,
-  "labelValue",
-  "java"
-);
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "java");
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "recordingDuration",
@@ -120,121 +105,54 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(KeyVaultAccessPolicyChangedEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultAccessPolicyChangedEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultCertificateExpiredEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultCertificateExpiredEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultCertificateExpiredEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultCertificateExpiredEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF, "Nbf", "java");
 
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultKeyNearExpiryEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultKeyNearExpiryEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultKeyExpiredEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultKeyExpiredEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultKeyExpiredEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultKeyExpiredEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultSecretNearExpiryEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultSecretNearExpiryEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultSecretExpiredEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultSecretExpiredEventData.NBF,
-  "Nbf",
-  "java"
-);
+@@clientName(KeyVaultSecretExpiredEventData.EXP, "Exp", "java");
 
-@@clientName(KeyVaultSecretExpiredEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF, "Nbf", "java");
 
-@@clientName(KeyVaultCertificateNearExpiryEventData.NBF,
-  "Nbf",
-  "java"
-);
-
-@@clientName(KeyVaultCertificateNearExpiryEventData.EXP,
-  "Exp",
-  "java"
-);
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "Exp", "java");
 
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "java"
 );
 
-@@clientName(AcsMessageReceivedEventData.channelType,
-  "channelKind",
-  "java"
-);
+@@clientName(AcsMessageReceivedEventData.channelType, "channelKind", "java");
 
-@@clientName(AcsMessageReceivedEventData.media,
-  "mediaContent",
-  "java"
-);
+@@clientName(AcsMessageReceivedEventData.media, "mediaContent", "java");
 
 @@clientName(AcsMessageReceivedEventData.interactive,
   "interactiveContent",
@@ -261,7 +179,7 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(CommunicationIdentifierModelKind, 
+@@clientName(CommunicationIdentifierModelKind,
   "CommunicationIdentifierKind",
   "java"
 );
