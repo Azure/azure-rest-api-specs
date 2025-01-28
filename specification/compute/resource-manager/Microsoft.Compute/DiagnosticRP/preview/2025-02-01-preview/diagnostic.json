@@ -968,9 +968,19 @@
     "RecommendationProperties": {
       "type": "object",
       "properties": {
-        "quotaAndOfferRestrictionsCheckRequired": {
-          "type": "boolean",
-          "description": "The quota and offer restrictions check required flag."
+        "restrictionsFilter": {
+          "type": "string",
+          "description": "The restrictions filters to apply on VMSize recommendations.",
+          "enum": [
+            "QuotaAndOfferRestrictions",
+            "QuotaRestrictions",
+            "OfferRestrictions",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "RestrictionsFilterType",
+            "modelAsString": false
+          }
         }
       },
       "description": "Recommendations Properties for AttributeBasedVmSizeRecommender."
