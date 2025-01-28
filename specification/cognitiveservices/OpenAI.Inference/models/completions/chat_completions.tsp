@@ -326,7 +326,7 @@ model ChatCompletionsOptions {
    * use: `["text", "audio"]`
    */
   @added(ServiceApiVersions.v2025_01_01_Preview)
-  modalities?: ChatCompletionModality[];
+  modalities?: ChatCompletionModality[] = [ChatCompletionModality.text];
 
   /**
    * Configuration for a Predicted Output, which can greatly improve response times
