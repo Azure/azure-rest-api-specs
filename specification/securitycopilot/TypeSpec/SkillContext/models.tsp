@@ -148,7 +148,7 @@ namespace SkillContext
 	}
 
 	@doc("A collection of skill variables")
-	model SkillVariableCollection extends Dictionary<string, SkillVariable>{
+	model SkillVariableCollection extends Record<SkillVariable>{
 	}
 
 	@doc("An invocation of a skill")
