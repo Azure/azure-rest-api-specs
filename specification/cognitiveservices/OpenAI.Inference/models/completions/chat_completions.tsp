@@ -309,7 +309,7 @@ model ChatCompletionsOptions {
    */
   @added(ServiceApiVersions.v2025_01_01_Preview)
   @encodedName("application/json", "reasoning_effort")
-  reasoningEffort?: ReasoningEffortValue;
+  reasoningEffort?: ReasoningEffortValue = ReasoningEffortValue.medium;
 
   /**
    * The security context identifies and authenticates users and applications in your multi-tenant AI system, helping security teams investigate and mitigate incidents.
