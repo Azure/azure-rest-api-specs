@@ -498,6 +498,9 @@
           },
           "Create or Update Vault performing critical operation With MUA": {
             "$ref": "./examples/PUTVault_ResourceGuardEnabled.json"
+          },
+          "Create or Update Vault with Source scan configuration": {
+            "$ref": "./examples/PUTVault_WithSourceScanConfiguration.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -631,6 +634,9 @@
           },
           "Update Vault With Redundancy Setting": {
             "$ref": "./examples/PATCHVault_WithRedundancySettings.json"
+          },
+          "Update Vault With Source scan configuration": {
+            "$ref": "./examples/PATCHVault_WithSourceScanConfiguration.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1288,6 +1294,41 @@
         }
       }
     },
+    "SourceScanConfiguration": {
+      "description": "Source scan configuration of vault",
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
+        },
+        "sourceScanIdentity": {
+          "$ref": "#/definitions/SourceScanIdentity"
+        }
+      }
+    },
+    "SourceScanIdentity": {
+      "type": "object",
+      "description": "Identity details to be used for source scan operation",
+      "properties": {
+        "useSystemAssignedIdentity": {
+          "type": "boolean",
+          "description": "Indicates whether system assigned identity should be used for source scan operation."
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "User assigned identity to be used for source scan operation."
+        }
+      }
+    },
     "MultiUserAuthorization": {
       "description": "MUA Settings of vault",
       "enum": [
@@ -1357,6 +1398,10 @@
         "multiUserAuthorization": {
           "description": "MUA Settings of a vault",
           "$ref": "#/definitions/MultiUserAuthorization"
+        },
+        "sourceScanConfiguration": {
+          "description": "Source scan configuration of vault",
+          "$ref": "#/definitions/SourceScanConfiguration"
         }
       }
     },
