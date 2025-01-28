@@ -2,18 +2,18 @@
   "operationId": "FleetMembers_Create",
   "title": "Creates a FleetMember resource with a long running operation.",
   "parameters": {
-    "api-version": "2025-01-23-preview",
+    "api-version": "2024-05-02-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
     "fleetName": "fleet1",
     "fleetMemberName": "member-1",
     "resource": {
+      "properties": {
+        "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1"
+      },
       "tags": {
           "tier": "production",
           "archv2": ""
-      },
-      "properties": {
-        "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1"
       }
     }
   },
@@ -66,6 +66,10 @@
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         },
         "eTag": "23ujdflewrj3=",
+        "tags": {
+          "tier": "production",
+          "archv2": ""
+        },
         "properties": {
           "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
           "provisioningState": "Succeeded"
