@@ -276,6 +276,9 @@
           }
         },
         "x-ms-examples": {
+          "Create or update an OnlineExperimentWorkspace with Free sku and customer managed key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_CreateorUpdateWithEncryption.json"
+          },
           "Create or update an OnlineExperimentWorkspace with Free sku.": {
             "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdate.json"
           }
@@ -348,6 +351,9 @@
           }
         },
         "x-ms-examples": {
+          "Update an Online Experiment Workspace with customer managed encryption key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_UpdateWithEncryption.json"
+          },
           "Update an Online Experiment Workspace.": {
             "$ref": "./examples/OnlineExperimentWorkspaces_Update.json"
           }
@@ -616,6 +622,10 @@
               }
             ]
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experiment workspace resource."
         }
       },
       "required": [
@@ -651,6 +661,10 @@
               }
             ]
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfigurationUpdate",
+          "description": "The encryption configuration for the online experiment workspace resource."
         }
       }
     },
@@ -676,6 +690,29 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "ResourceEncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the online experiment workspace resource.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/customerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        }
+      },
+      "required": [
+        "customerManagedKeyEncryption"
+      ]
+    },
+    "ResourceEncryptionConfigurationUpdate": {
+      "type": "object",
+      "description": "The encryption configuration for the online experiment workspace resource.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/customerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        }
+      }
     }
   },
   "parameters": {}

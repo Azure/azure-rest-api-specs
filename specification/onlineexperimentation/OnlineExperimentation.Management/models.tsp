@@ -51,4 +51,17 @@ model OnlineExperimentWorkspaceProperties {
       type: "Microsoft.AppConfiguration/configurationStores";
     }
   ]>;
+
+  /**
+   * The encryption configuration for the online experiment workspace resource.
+   */
+  encryption?: ResourceEncryptionConfiguration;
+}
+
+/**
+ * The encryption configuration for the online experiment workspace resource.
+ */
+model ResourceEncryptionConfiguration {
+  /** All Customer-managed key encryption properties for the resource. */
+  customerManagedKeyEncryption: CustomerManagedKeyEncryption;
 }
