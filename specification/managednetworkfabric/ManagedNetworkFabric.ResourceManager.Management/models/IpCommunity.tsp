@@ -20,6 +20,11 @@ model IpCommunityProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   ipCommunityRules: IpCommunityRule[];
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("Configuration state of the resource.")
   @visibility("read")
   configurationState?: ConfigurationState;

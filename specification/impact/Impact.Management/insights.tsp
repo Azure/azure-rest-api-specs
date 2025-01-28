@@ -61,6 +61,7 @@ model InsightProperties is ResourceProperties {
   @doc("details of of the impact for which insight has been generated.")
   impact: ImpactDetails;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("additional details of the insight.")
   additionalDetails?: {};
 }

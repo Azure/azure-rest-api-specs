@@ -42,9 +42,10 @@ model AccessControlListProperties {
   @added(Versions.v2024_06_15_preview)
   globalAccessControlListActions?: GlobalAccessControlListActionProperties;
 
-  @doc("Internet Control Message Protocol (ICMP) configuration")
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
   @added(Versions.v2024_06_15_preview)
-  icmpConfiguration?: IcmpConfigurationProperties;
+  lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
   @visibility("read")
@@ -133,8 +134,16 @@ model AccessControlListMatchCondition {
   @minItems(1)
   dscpMarkings?: string[];
 
+  @doc("Protocol neighbors that need to be matched.")
+  @added(Versions.v2024_06_15_preview)
+  protocolNeighbors?: string[];
+
   @doc("Defines the port condition that needs to be matched.")
   portCondition?: AccessControlListPortCondition;
+
+  @doc("Internet Control Message Protocol (ICMP) configuration")
+  @added(Versions.v2024_06_15_preview)
+  icmpConfiguration?: IcmpConfigurationProperties;
 }
 
 @doc("Defines the match condition that is supported to filter the traffic.")
@@ -168,9 +177,9 @@ model AccessControlListMatchConditionPatch {
   @added(Versions.v2024_06_15_preview)
   protocolNeighbors?: string[];
 
-  @doc("Internet Control Management Protocol (ICMP) types that need to be matched.")
+  @doc("Internet Control Message Protocol (ICMP) configuration")
   @added(Versions.v2024_06_15_preview)
-  icmpTypes?: string[];
+  icmpConfiguration?: IcmpConfigurationPatchProperties;
 }
 
 @doc("Defines the port condition that needs to be matched.")
@@ -251,10 +260,6 @@ model AccessControlListPatchProperties {
   @added(Versions.v2024_06_15_preview)
   globalAccessControlListActions?: GlobalAccessControlListActionPatchProperties;
 
-  @doc("Internet Control Message Protocol (ICMP) configuration")
-  @added(Versions.v2024_06_15_preview)
-  icmpConfiguration?: IcmpConfigurationPatchProperties;
-
   ...AnnotationResource;
 }
 
@@ -330,6 +335,7 @@ model GlobalAccessControlListActionPatchProperties
 @added(Versions.v2024_06_15_preview)
 model IcmpConfigurationProperties {
   @doc("Internet Control Message Protocol (ICMP) types")
+  @minItems(1)
   icmpTypes?: string[];
 }
 
