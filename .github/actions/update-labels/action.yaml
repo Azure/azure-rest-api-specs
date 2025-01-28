@@ -30,5 +30,5 @@ runs:
       with:
         script: |
           const { default: updateLabels } =
-            await import('${{ github.workspace }}/.github/actions/update-labels/update-labels.js');
+            await import('${{ github.workspace }}/.github/actions/update-labels/src/update-labels.js');
           await updateLabels({ github, context, core });
