@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -780,6 +781,7 @@ model RouterWorker {
 
   @doc("A list of active offers issued to this worker.")
   @visibility("read")
+  @Azure.ResourceManager.identifiers([])
   offers?: RouterJobOffer[];
 
   @doc("A list of assigned jobs attached to this worker.")

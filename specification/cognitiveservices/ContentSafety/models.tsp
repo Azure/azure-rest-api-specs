@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -196,12 +197,14 @@ model TextBlocklistItem {
 @doc("The request to add blocklistItems to a text blocklist.")
 model AddOrUpdateTextBlocklistItemsOptions {
   @doc("Array of blocklistItems to add.")
+  @Azure.ResourceManager.identifiers([])
   blocklistItems: TextBlocklistItem[];
 }
 
 @doc("The response of adding blocklistItems to the text blocklist.")
 model AddOrUpdateTextBlocklistItemsResult {
   @doc("Array of blocklistItems have been added.")
+  @Azure.ResourceManager.identifiers([])
   blocklistItems: TextBlocklistItem[];
 }
 

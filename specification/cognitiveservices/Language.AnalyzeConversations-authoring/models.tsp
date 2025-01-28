@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -200,6 +201,7 @@ model AnalyzeConversationAuthoringProjectsMetadata {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringProjectMetadata[];
 
   /**
@@ -628,6 +630,7 @@ model AnalyzeConversationAuthoringProjectDeployments {
   /**
    * The list of retrieved deployments.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringProjectDeployment[];
 
   /**
@@ -805,6 +808,7 @@ model AnalyzeConversationAuthoringProjectTrainedModels {
   /**
    * The list of trained models.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringProjectTrainedModel[];
 
   /**
@@ -905,6 +909,7 @@ model AnalyzeConversationAuthoringEvaluationResults {
   /**
    * The utterances evaluation results.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringUtteranceEvaluationResult[];
 
   /**
@@ -1245,6 +1250,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringAssignedDeploymentResource[];
 
   /**
@@ -1338,6 +1344,7 @@ model AnalyzeConversationAuthoringTrainingJobs {
   /**
    * The list of jobs.
    */
+  @Azure.ResourceManager.identifiers([])
   value: AnalyzeConversationAuthoringTrainingJobState[];
 
   /**

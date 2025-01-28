@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -178,6 +179,7 @@ model TextAnalysisAuthoringProjectsMetadata {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringProjectMetadata[];
 
   /**
@@ -657,6 +659,7 @@ model TextAnalysisAuthoringProjectDeployments {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringProjectDeployment[];
 
   /**
@@ -825,6 +828,7 @@ model TextAnalysisAuthoringExportedTrainedModels {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringExportedTrainedModel[];
 
   /**
@@ -941,6 +945,7 @@ model TextAnalysisAuthoringProjectTrainedModels {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringProjectTrainedModel[];
 
   /**
@@ -1041,6 +1046,7 @@ model TextAnalysisAuthoringEvaluationResults {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringDocumentEvaluationResult[];
 
   /**
@@ -1152,6 +1158,7 @@ model TextAnalysisAuthoringAssignedDeploymentResources {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringAssignedDeploymentResource[];
 
   /**
@@ -1255,6 +1262,7 @@ model TextAnalysisAuthoringTrainingJobs {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringTrainingJobState[];
 
   /**
@@ -1353,6 +1361,7 @@ model TextAnalysisAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringAssignedProjectDeploymentsMetadata[];
 
   /**
@@ -1410,6 +1419,7 @@ model TextAnalysisAuthoringSupportedLanguages {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringSupportedLanguage[];
 
   /**
@@ -1446,6 +1456,7 @@ model TextAnalysisAuthoringPrebuiltEntities {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringPrebuiltEntity[];
 
   /**
@@ -1487,6 +1498,7 @@ model TextAnalysisAuthoringTrainingConfigVersions {
   /**
    * The list of projects.
    */
+  @Azure.ResourceManager.identifiers([])
   value: TextAnalysisAuthoringTrainingConfigVersion[];
 
   /**

@@ -293,6 +293,7 @@ interface TranslationOperations {
   deleteTranslation is ops.ResourceDelete<Translation>;
 
   @doc("List translation resources.")
+  //this creates one scenario that needs fixing
   listTranslation is ops.ResourceList<
     Translation,
     ListQueryParametersTrait<StandardListQueryParameters>

@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -353,6 +354,7 @@ model AnomalyDetectionModel {
 model ModelList {
   @doc("List of models.")
   @items
+  @Azure.ResourceManager.identifiers([])
   models: AnomalyDetectionModel[];
 
   @doc("Number of trained multivariate models.")
