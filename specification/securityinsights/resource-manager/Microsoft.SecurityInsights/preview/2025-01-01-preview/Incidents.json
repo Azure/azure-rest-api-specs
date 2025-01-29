@@ -215,57 +215,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/createTeam": {
-      "post": {
-        "tags": [
-          "IncidentTeam"
-        ],
-        "description": "Creates a Microsoft team to investigate the incident by sharing information and insights between participants.",
-        "operationId": "Incidents_CreateTeam",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/IncidentId"
-          },
-          {
-            "$ref": "#/parameters/TeamProperties"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TeamInformation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Incidents_CreateTeam": {
-            "$ref": "./examples/incidents/IncidentTeam/Incidents_CreateTeam.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/alerts": {
       "post": {
         "tags": [
@@ -1128,6 +1077,16 @@
         },
         "providerIncidentUrl": {
           "description": "The provider incident url to the incident in Microsoft 365 Defender portal",
+          "type": "string",
+          "readOnly": true
+        },
+        "mergedIncidentNumber": {
+          "description": "The incident number of the incident that the current incident was merged into",
+          "type": "string",
+          "readOnly": true
+        },
+        "mergedIncidentUrl": {
+          "description": "The URL to the incident that the current incident was merged into",
           "type": "string",
           "readOnly": true
         }
