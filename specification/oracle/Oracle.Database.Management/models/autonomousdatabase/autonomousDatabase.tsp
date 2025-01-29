@@ -131,17 +131,6 @@ union DataBaseType {
   string,
 }
 
-@doc("Compute model enum")
-union ComputeModel {
-  @doc("ECPU model type")
-  ECPU: "ECPU",
-
-  @doc("OCPU model type")
-  OCPU: "OCPU",
-
-  string,
-}
-
 @doc("Clone type enum")
 union CloneType {
   @doc("Full clone")

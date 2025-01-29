@@ -1,6 +1,7 @@
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -66,7 +67,7 @@ model ValidatorProperties {
 @doc("The validator version properties.")
 model ValidatorVersionProperties {
   @doc("The ARM resource id of the parent validator resource.")
-  validatorId: Azure.Core.armResourceIdentifier;
+  validatorId: ValidatorResourceId;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
   @doc("The schema of parameters that is used for validation.")
@@ -104,7 +105,7 @@ model ErrorDefinition {
 @doc("The validation properties.")
 model ValidationProperties {
   @doc("The ARM resource Id of the validator version to use for validation.")
-  validatorVersionId: string;
+  validatorVersionId: ValidatorVersionResourceId;
 
   @doc("The changeState is a new resource that encapsulates the change and tracks the change state. The changeStateId is the ARM resource id of the changeState resource. ")
   changeStateId?: string;
@@ -134,11 +135,12 @@ model ValidationPropertiesExtended {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
   @doc("The output of the validation. This property will match the output schema in the validator version resource.")
-  validationOutput: {};
+  validationOutput?: {};
 
   @doc("The outcome of the validation.")
   @visibility("read")
-  outcome: Outcome;
+  @madeOptional(Versions.v2025_01_15_preview)
+  outcome?: Outcome;
 
   @doc("Time duration in ISO8601 format to retry after, when the outcome property is 'Pending'. For all other values, the retryAfter is not present. This is an indication to the client to 'PATCH' validation after the duration.")
   @visibility("read")

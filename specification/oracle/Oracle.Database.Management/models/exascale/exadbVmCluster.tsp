@@ -11,7 +11,7 @@ namespace Oracle.Database;
 @added(Versions.v20241201_preview)
 @doc("ExadbVmCluster resource definition")
 model ExadbVmCluster is TrackedResource<ExadbVmClusterProperties> {
-  ...ResourceNameParameter<ExadbVmCluster>;
+  ...ResourceNameParameter<ExadbVmCluster, NamePattern = ".*">;
   ...AvailabilityZonesProperty;
 }
 
