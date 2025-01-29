@@ -36,7 +36,7 @@ suppressions:
         Issue with common-types
     - code: GuidUsage
       where: 
-        - $.definitions["Azure.Core.uuid"]
+        - $.definitions["Azure.Core.uuid"].format
       reason: 
         federatedClientId and delegatedIdentityClientId are common types and defined as guid.
 ```
