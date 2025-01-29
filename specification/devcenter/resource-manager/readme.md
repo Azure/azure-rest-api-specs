@@ -40,6 +40,10 @@ input-file:
   - Microsoft.DevCenter/stable/2025-02-01/commonDefinitions.json
   - Microsoft.DevCenter/stable/2025-02-01/devcenter.json
   - Microsoft.DevCenter/stable/2025-02-01/vdi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: vdi.json
+    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
 ### Tag: package-preview-2024-10
