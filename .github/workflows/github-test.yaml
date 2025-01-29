@@ -26,11 +26,12 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 20 and run `npm i`
-        uses: ./.github/actions/setup-node-npm-i
+      - name: Setup Node 20 and install deps
+        uses: ./.github/actions/setup-node-install-deps
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
+          install-command: 'npm install'
           working-directory: ./.github
 
       - run: npm run test:ci
