@@ -80,7 +80,6 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/stable/2024-05-01/networkProfile.json
   - Microsoft.Network/stable/2024-05-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2024-05-01/networkSecurityPerimeter.json
   - Microsoft.Network/stable/2024-05-01/networkVerifier.json
   - Microsoft.Network/stable/2024-05-01/networkVirtualAppliance.json
   - Microsoft.Network/stable/2024-05-01/networkWatcher.json
