@@ -765,7 +765,7 @@ model Alert {
   @doc("Severity level")
   level: AlertLevel;
 
-  @doc("Message")
+  @doc("A short description of the alert")
   message: string;
 }
 
