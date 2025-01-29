@@ -1027,35 +1027,35 @@
       "type": "object",
       "description": "Model representing summary of test run results.",
       "properties": {
-        "resultProcessingstatus": {
+        "executionStatus": {
           "$ref": "#/definitions/TestRunStatus",
           "description": "Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
         },
-        "numTotalTests": {
+        "totalTestsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Total number of tests executed.",
           "readOnly": true
         },
-        "numPassedTests": {
+        "passedTestsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of tests that passed.",
           "readOnly": true
         },
-        "numFailedTests": {
+        "failedTestsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of tests that failed.",
           "readOnly": true
         },
-        "numSkippedTests": {
+        "skippedTestsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of tests that were skipped.",
           "readOnly": true
         },
-        "numFlakyTests": {
+        "flakyTestsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of tests that were flaky.",
@@ -1092,12 +1092,12 @@
         }
       },
       "required": [
-        "resultProcessingstatus",
-        "numTotalTests",
-        "numPassedTests",
-        "numFailedTests",
-        "numSkippedTests",
-        "numFlakyTests",
+        "executionStatus",
+        "totalTestsCount",
+        "passedTestsCount",
+        "failedTestsCount",
+        "skippedTestsCount",
+        "flakyTestsCount",
         "status"
       ]
     },
@@ -1481,7 +1481,7 @@
           "$ref": "#/definitions/TestStatus",
           "description": "Status of the test results."
         },
-        "durationInMs": {
+        "durationInMillis": {
           "type": "integer",
           "format": "int64",
           "description": "Duration of the test execution in milliseconds."
@@ -1501,7 +1501,7 @@
       },
       "required": [
         "status",
-        "durationInMs",
+        "durationInMillis",
         "startTime"
       ]
     },
@@ -1867,9 +1867,9 @@
             "create"
           ]
         },
-        "timeoutInMs": {
-          "type": "string",
-          "format": "duration",
+        "timeoutInMillis": {
+          "type": "integer",
+          "format": "int64",
           "description": "Timeout duration for test execution.",
           "x-ms-mutability": [
             "read",
@@ -1904,7 +1904,7 @@
         }
       },
       "required": [
-        "timeoutInMs",
+        "timeoutInMillis",
         "testSdkLanguage"
       ]
     },
@@ -1955,9 +1955,9 @@
             "create"
           ]
         },
-        "timeoutInMs": {
-          "type": "string",
-          "format": "duration",
+        "timeoutInMillis": {
+          "type": "integer",
+          "format": "int64",
           "description": "Timeout duration for test execution.",
           "x-ms-mutability": [
             "read",

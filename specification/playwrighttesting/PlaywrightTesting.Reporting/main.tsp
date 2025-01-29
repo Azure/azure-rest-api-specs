@@ -136,7 +136,7 @@ model TestRunConfig {
 
   @doc("Timeout duration for test execution.")
   @visibility("read", "create")
-  timeoutInMs: duration;
+  timeoutInMillis: int64;
 
   // Added Fields
   @doc("Type of test being executed (default: WebTest).")
@@ -239,27 +239,27 @@ model CiConfig {
 model CloudReportingSummary {
 
   @doc("Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
-  resultProcessingstatus: TestRunStatus;
+  executionStatus: TestRunStatus;
 
   @doc("Total number of tests executed.")
   @visibility("read")
-  numTotalTests: int32;
+  totalTestsCount: int32;
 
   @doc("Number of tests that passed.")
   @visibility("read")
-  numPassedTests: int32;
+  passedTestsCount: int32;
 
   @doc("Number of tests that failed.")
   @visibility("read")
-  numFailedTests: int32;
+  failedTestsCount: int32;
 
   @doc("Number of tests that were skipped.")
   @visibility("read")
-  numSkippedTests: int32;
+  skippedTestsCount: int32;
 
   @doc("Number of tests that were flaky.")
   @visibility("read")
-  numFlakyTests: int32;
+  flakyTestsCount: int32;
 
   @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
   @visibility("read")
@@ -615,7 +615,7 @@ model TestResult {
   status: TestStatus;
 
   @doc("Duration of the test execution in milliseconds.")
-  durationInMs: int64;
+  durationInMillis: int64;
 
   @doc("Start time of the test execution.- (RFC 3339 literal format)")
   startTime: utcDateTime;
