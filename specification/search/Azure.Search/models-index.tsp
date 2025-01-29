@@ -890,7 +890,6 @@ model SearchDocumentsResult {
    * @odata.nextLink to formulate another POST Search request to get the next part
    * of the search response.
    */
-  @visibility("read")
   @encodedName("application/json", "@search.nextPageParameters")
   nextPageParameters?: SearchRequest;
 
@@ -1092,7 +1091,7 @@ model SearchRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  $orderby?: string;
+  orderby?: string;
 
   /**
    * A value that specifies the syntax of the search query. The default is 'simple'.
@@ -1684,7 +1683,7 @@ model SuggestRequest {
    * $orderby is specified, the default sort order is descending by document match
    * score. There can be at most 32 $orderby clauses.
    */
-  $orderby?: string;
+  orderby?: string;
 
   /**
    * The search text to use to suggest documents. Must be at least 1 character, and
