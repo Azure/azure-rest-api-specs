@@ -3,7 +3,7 @@
   "operationId": "StandbyVirtualMachinePools_Get",
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000009",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "rgstandbypool",
     "standbyVirtualMachinePoolName": "pool"
   },
@@ -16,12 +16,12 @@
             "minReadyCapacity": 300
           },
           "virtualMachineState": "Running",
-          "attachedVirtualMachineScaleSetId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
+          "attachedVirtualMachineScaleSetId": "/subscriptions/{subscription-id}/resourceGroups/rgstandbypool/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
           "provisioningState": "Succeeded"
         },
         "tags": {},
         "location": "West US",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgstandbypool/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/pool",
         "name": "pool",
         "type": "Microsoft.StandbyPool/standbyVirtualMachinePools",
         "systemData": {
