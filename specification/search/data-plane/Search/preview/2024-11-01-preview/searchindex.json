@@ -2783,7 +2783,6 @@
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
           "description": "Continuation JSON payload returned when the query can't return all the\nrequested results in a single response. You can use this JSON along with",
-          "readOnly": true,
           "x-ms-client-name": "nextPageParameters"
         },
         "value": {
@@ -2880,7 +2879,7 @@
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be\ncovered by a search query in order for the query to be reported as a success.\nThis parameter can be useful for ensuring search availability even for services\nwith only one replica. The default is 100."
         },
-        "$orderby": {
+        "orderby": {
           "type": "string",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
@@ -3295,7 +3294,7 @@
           "format": "double",
           "description": "A number between 0 and 100 indicating the percentage of the index that must be\ncovered by a suggestion query in order for the query to be reported as a\nsuccess. This parameter can be useful for ensuring search availability even for\nservices with only one replica. The default is 80."
         },
-        "$orderby": {
+        "orderby": {
           "type": "string",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the\nresults. Each expression can be either a field name or a call to either the\ngeo.distance() or the search.score() functions. Each expression can be followed\nby asc to indicate ascending, or desc to indicate descending. The default is\nascending order. Ties will be broken by the match scores of documents. If no\n$orderby is specified, the default sort order is descending by document match\nscore. There can be at most 32 $orderby clauses."
         },
