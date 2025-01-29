@@ -258,12 +258,20 @@ model FleetDatabaseProperties {
   /**
    * Identity property.
    */
+  @visibility("read", "create", "update")
   identity?: Identity;
 
   /**
    * Transparent Data Encryption properties
    */
+  @visibility("read", "create", "update")
   transparentDataEncryption?: TransparentDataEncryption;
+
+  /**
+   * Database collation.
+   */
+  @visibility("read", "create")
+  collation?: string;
 }
 
 /**
@@ -273,20 +281,20 @@ model Identity {
   /**
    * Identity type of the main principal.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   identityType?: IdentityType;
 
   /**
    * User identity ids
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @OpenAPI.extension("x-ms-identifiers", [])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
    * The federated client id for the SQL Database. It is used for cross tenant CMK scenario.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   federatedClientId?: uuid;
 }
 
@@ -297,7 +305,7 @@ model DatabaseIdentity {
   /**
    * Resource Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -307,13 +315,13 @@ model DatabaseIdentity {
   /**
    * Principal Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   principalId?: uuid;
 
   /**
    * Client Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   clientId?: uuid;
 }
 
@@ -324,19 +332,19 @@ model TransparentDataEncryption {
   /**
    * Customer Managed Key (CMK) Uri.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   keyUri?: url;
 
   /**
    * Additional Keys
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   keys?: string[];
 
   /**
    * Enable key auto rotation
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   enableAutoRotation?: boolean;
 }
 
@@ -462,7 +470,7 @@ model FleetspaceProperties {
   /**
    * Maximum number of vCores database fleet manager is allowed to provision in the fleetspace.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   capacityMax?: int32;
 
   /**

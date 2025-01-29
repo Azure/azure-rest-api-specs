@@ -2561,6 +2561,7 @@
           "description": "Resource Id of the database identity.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ],
           "x-ms-arm-id-details": {
@@ -2576,6 +2577,7 @@
           "description": "Principal Id of the database identity.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -2584,6 +2586,7 @@
           "description": "Client Id of the database identity.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -2856,11 +2859,29 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "description": "Identity property."
+          "description": "Identity property.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "transparentDataEncryption": {
           "$ref": "#/definitions/TransparentDataEncryption",
-          "description": "Transparent Data Encryption properties"
+          "description": "Transparent Data Encryption properties",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "collation": {
+          "type": "string",
+          "description": "Database collation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -3101,6 +3122,7 @@
           "description": "Maximum number of vCores database fleet manager is allowed to provision in the fleetspace.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3123,6 +3145,7 @@
           "description": "Identity type of the main principal.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3135,6 +3158,7 @@
           "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3143,6 +3167,7 @@
           "description": "The federated client id for the SQL Database. It is used for cross tenant CMK scenario.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
@@ -3356,6 +3381,7 @@
           "description": "Customer Managed Key (CMK) Uri.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3367,6 +3393,7 @@
           },
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3375,6 +3402,7 @@
           "description": "Enable key auto rotation",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         }
