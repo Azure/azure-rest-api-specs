@@ -1,0 +1,2578 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CommunicationMessagesClient",
+    "version": "2025-03-01-preview",
+    "description": "Azure Communication Messages Service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://communication.azure.com/.default"
+      ]
+    },
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://communication.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Template"
+    },
+    {
+      "name": "Notifications"
+    },
+    {
+      "name": "Stream"
+    },
+    {
+      "name": "ConversationManagement"
+    },
+    {
+      "name": "ConversationMessages"
+    }
+  ],
+  "paths": {
+    "/messages/channels/{channelId}/templates": {
+      "get": {
+        "operationId": "TemplateOperations_ListTemplates",
+        "tags": [
+          "Template"
+        ],
+        "description": "List all templates for given Azure Communication Services channel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "The registration ID of the channel.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMessageTemplateItem"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations": {
+      "get": {
+        "operationId": "ConversationMessagesOperations_ListConversations",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Retrieves list of conversations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}": {
+      "get": {
+        "operationId": "ConversationManagementOperations_GetConversation",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Gets the details of a specific conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConversationManagementOperations_DeleteConversation",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Terminates a specific conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages": {
+      "get": {
+        "operationId": "ConversationMessagesOperations_ListMessages",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Retrieves list of conversation messages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationMessageItem"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages:manage": {
+      "get": {
+        "operationId": "ConversationManagementOperations_GetMessages",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Retrieves list of conversation messages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "initiator",
+            "in": "header",
+            "description": "The Initiator user ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The ID of the conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxPageSize",
+            "in": "query",
+            "description": "The max page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListConversationMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages:sendMessage": {
+      "post": {
+        "operationId": "ConversationMessagesOperations_SendMessage",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Sends a conversation message from Business to User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ConversationMessagesSendRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SendConversationMessageResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages:summarize": {
+      "post": {
+        "operationId": "ConversationMessagesOperations_Summarize",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Get AI Analysis of a conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/RemoveParticipantsRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages:summarizeConversation": {
+      "post": {
+        "operationId": "ConversationManagementOperations_SummarizeConversation",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Get AI Analysis of a conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/RemoveParticipantsRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/participants:addParticipants": {
+      "post": {
+        "operationId": "ConversationManagementOperations_AddParticipants",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Adds participants to a specific conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/AddParticipantsRequestBody"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/participants:removeParticipants": {
+      "post": {
+        "operationId": "ConversationManagementOperations_RemoveParticipants",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "remove a participant from a conversation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/RemoveParticipantsRequestBody"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations/channels/{channelId}:manage": {
+      "get": {
+        "operationId": "ConversationManagementOperations_GetChannelConversations",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Retrieves list of conversations for a channel.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "channelId",
+            "in": "path",
+            "description": "The ID of the channel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations:create": {
+      "post": {
+        "operationId": "ConversationManagementOperations_Create",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Creates a new conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/CreateConversationRequestBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CreateConversationResponse"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/conversations:manage": {
+      "get": {
+        "operationId": "ConversationManagementOperations_GetConversations",
+        "tags": [
+          "ConversationManagement"
+        ],
+        "description": "Retrieves list of conversation for a participant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "initiator",
+            "in": "header",
+            "description": "The Initiator user ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListConversationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/notifications:send": {
+      "post": {
+        "operationId": "NotificationMessagesOperations_Send",
+        "tags": [
+          "Notifications"
+        ],
+        "description": "Sends a notification message from Business to User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/NotificationMessagesSendRequestBody"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SendMessageResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages/streams/{id}": {
+      "get": {
+        "operationId": "StreamOperations_GetMedia",
+        "tags": [
+          "Stream"
+        ],
+        "description": "Download the Media payload from a User to Business message.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The stream ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddParticipantsRequest": {
+      "type": "object",
+      "description": "Request payload for adding participants to a conversation.",
+      "properties": {
+        "participants": {
+          "type": "array",
+          "description": "List of participants to add.",
+          "items": {
+            "$ref": "#/definitions/Participant"
+          }
+        }
+      },
+      "required": [
+        "participants"
+      ]
+    },
+    "AudioNotificationContent": {
+      "type": "object",
+      "description": "A request to send an audio notification.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "BotContact": {
+      "type": "object",
+      "description": "Bot Contact.",
+      "properties": {
+        "botAppId": {
+          "type": "string",
+          "description": "Bot App Id of the Bot Contact."
+        }
+      },
+      "required": [
+        "botAppId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Contact"
+        }
+      ],
+      "x-ms-discriminator-value": "bot"
+    },
+    "CommunicationContact": {
+      "type": "object",
+      "description": "Communication Contact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Contact"
+        }
+      ],
+      "x-ms-discriminator-value": "communication"
+    },
+    "CommunicationMessageKind": {
+      "type": "string",
+      "description": "The type of message.",
+      "enum": [
+        "text",
+        "image",
+        "image_v0",
+        "document",
+        "video",
+        "audio",
+        "template"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationMessageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "Text message type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "Image message type."
+          },
+          {
+            "name": "image_v0",
+            "value": "image_v0",
+            "description": "Image message type. Legacy image type for `MediaNotificationContent` which is being deprecated"
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Document message type."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "Video message type."
+          },
+          {
+            "name": "audio",
+            "value": "audio",
+            "description": "Audio message type."
+          },
+          {
+            "name": "template",
+            "value": "template",
+            "description": "Template message type."
+          }
+        ]
+      }
+    },
+    "CommunicationMessagesChannel": {
+      "type": "string",
+      "description": "The type of the communication messages channel.",
+      "enum": [
+        "whatsApp"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationMessagesChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "The WhatsApp communication messages channel type."
+          }
+        ]
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "description": "Details of an external platform contact.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "External platform identifier."
+        },
+        "kind": {
+          "$ref": "#/definitions/MessagePlatformKind",
+          "description": "Type of message platform (e.g., WhatsApp)."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
+    "Conversation": {
+      "type": "object",
+      "description": "A conversation.",
+      "properties": {
+        "conversationId": {
+          "type": "string",
+          "description": "The conversation ID.",
+          "readOnly": true
+        },
+        "topic": {
+          "type": "string",
+          "description": "The conversation topic."
+        },
+        "deliveryChannelIds": {
+          "type": "array",
+          "description": "List of delivery channel IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outboundDeliveryStrategy": {
+          "$ref": "#/definitions/OutboundDeliveryStrategyKind",
+          "description": "Outbound delivery strategy for the conversation."
+        },
+        "participants": {
+          "type": "array",
+          "description": "List of participants involved in the conversation.",
+          "items": {
+            "$ref": "#/definitions/Participant"
+          }
+        }
+      },
+      "required": [
+        "conversationId"
+      ]
+    },
+    "ConversationMessageItem": {
+      "type": "object",
+      "description": "The conversation message as returned from the service.",
+      "properties": {
+        "sequenceId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Message sequence ID."
+        },
+        "message": {
+          "$ref": "#/definitions/Message",
+          "description": "Payload of a threaded conversation message."
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the message sender."
+        },
+        "senderCommunicationIdentifier": {
+          "type": "string",
+          "description": "The communication identifier of the message sender."
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the message is sent."
+        }
+      },
+      "required": [
+        "message",
+        "senderCommunicationIdentifier",
+        "createdOn"
+      ]
+    },
+    "CreateConversationRequest": {
+      "type": "object",
+      "description": "Request payload for creating a conversation.",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/Conversation",
+          "description": "The conversation details.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "initialMessage": {
+          "$ref": "#/definitions/Message",
+          "description": "An elevated message within the conversation."
+        }
+      },
+      "required": [
+        "conversation"
+      ]
+    },
+    "CreateConversationResponse": {
+      "type": "object",
+      "description": "Response for the create conversation operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Server-generated conversation ID."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "DocumentNotificationContent": {
+      "type": "object",
+      "description": "A request to send a document notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Optional name for the file."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
+    "ExternalParticipant": {
+      "type": "object",
+      "description": "External conversation participant.",
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "description": "List of external platform identifiers for the participant.",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        }
+      },
+      "required": [
+        "contacts"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Participant"
+        }
+      ],
+      "x-ms-discriminator-value": "External"
+    },
+    "GetConversationMessagesAnalysisResult": {
+      "type": "object",
+      "description": "Result of the get conversation messages AI Analysis operation.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "The AI summary of the conversation messages."
+        }
+      },
+      "required": [
+        "summary"
+      ]
+    },
+    "ImageNotificationContent": {
+      "type": "object",
+      "description": "A request to send an image notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "InternalParticipant": {
+      "type": "object",
+      "description": "Internal conversation participant.",
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/Contact",
+          "description": "The internal platform identifiers for the participant."
+        }
+      },
+      "required": [
+        "contact"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Participant"
+        }
+      ],
+      "x-ms-discriminator-value": "internal"
+    },
+    "ListConversationMessageResponse": {
+      "type": "object",
+      "description": "Paged collection of ConversationMessageItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Conversation Message items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationMessageItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListConversationResponse": {
+      "type": "object",
+      "description": "Paged collection of Conversation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Conversation items on this page",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MediaNotificationContent": {
+      "type": "object",
+      "description": "@deprecated A request to send an image notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image_v0"
+    },
+    "Message": {
+      "type": "object",
+      "description": "Details of a message.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of the message."
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "MessagePlatformKind": {
+      "type": "string",
+      "description": "Defines the type of message platform.",
+      "enum": [
+        "communication",
+        "bot",
+        "whatsApp"
+      ],
+      "x-ms-enum": {
+        "name": "MessagePlatformKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "communication",
+            "value": "communication",
+            "description": "Azure Communication platform."
+          },
+          {
+            "name": "bot",
+            "value": "bot",
+            "description": "Bot platform."
+          },
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "WhatsApp platform."
+          }
+        ]
+      }
+    },
+    "MessageReceipt": {
+      "type": "object",
+      "description": "Receipt of the sending one message.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The message id."
+        },
+        "to": {
+          "type": "string",
+          "description": "The native external platform user identifier of the recipient."
+        }
+      },
+      "required": [
+        "messageId",
+        "to"
+      ]
+    },
+    "MessageTemplate": {
+      "type": "object",
+      "description": "The template object used to create templates.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the template."
+        },
+        "language": {
+          "type": "string",
+          "description": "The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'."
+        },
+        "values": {
+          "type": "array",
+          "description": "The template values.",
+          "items": {
+            "$ref": "#/definitions/MessageTemplateValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "bindings": {
+          "$ref": "#/definitions/MessageTemplateBindings",
+          "description": "The binding object to link values to the template specific locations"
+        }
+      },
+      "required": [
+        "name",
+        "language"
+      ]
+    },
+    "MessageTemplateBindings": {
+      "type": "object",
+      "description": "The binding object to link values to the template specific locations",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageTemplateBindingsKind",
+          "description": "The type discriminator describing a template bindings type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "MessageTemplateBindingsKind": {
+      "type": "string",
+      "description": "The type of the message template.",
+      "enum": [
+        "whatsApp"
+      ],
+      "x-ms-enum": {
+        "name": "MessageTemplateBindingsKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsApp",
+            "value": "whatsApp",
+            "description": "The WhatsApp template type."
+          }
+        ]
+      }
+    },
+    "MessageTemplateDocument": {
+      "type": "object",
+      "description": "The message template's document value information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The (public) URL of the media."
+        },
+        "caption": {
+          "type": "string",
+          "description": "The [optional] caption of the media object."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The [optional] filename of the media file."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
+    "MessageTemplateImage": {
+      "type": "object",
+      "description": "The message template's image value information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The (public) URL of the media."
+        },
+        "caption": {
+          "type": "string",
+          "description": "The [optional] caption of the media object."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The [optional] filename of the media file."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
+    "MessageTemplateItem": {
+      "type": "object",
+      "description": "The message template as returned from the service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The template's name.",
+          "readOnly": true
+        },
+        "language": {
+          "type": "string",
+          "description": "The template's language, in the ISO 639 format, consist of a two-letter language code followed by an optional two-letter country code, e.g., 'en' or 'en_US'."
+        },
+        "status": {
+          "$ref": "#/definitions/MessageTemplateStatus",
+          "description": "The aggregated template status."
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationMessagesChannel",
+          "description": "The type discriminator describing a template type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "name",
+        "language",
+        "status",
+        "kind"
+      ]
+    },
+    "MessageTemplateLocation": {
+      "type": "object",
+      "description": "The message template's location value information.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "The [Optional] name of the location."
+        },
+        "address": {
+          "type": "string",
+          "description": "The [Optional] address of the location."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The latitude of the location."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The longitude of the location."
+        }
+      },
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "location"
+    },
+    "MessageTemplateQuickAction": {
+      "type": "object",
+      "description": "The message template's quick action value information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The [Optional] quick action text"
+        },
+        "payload": {
+          "type": "string",
+          "description": "The [Optional] quick action payload"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "quickAction"
+    },
+    "MessageTemplateStatus": {
+      "type": "string",
+      "description": "The aggregated template status.",
+      "enum": [
+        "approved",
+        "rejected",
+        "pending",
+        "paused"
+      ],
+      "x-ms-enum": {
+        "name": "MessageTemplateStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "approved",
+            "value": "approved",
+            "description": "Message template is approved."
+          },
+          {
+            "name": "rejected",
+            "value": "rejected",
+            "description": "Message template is rejected."
+          },
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "Message template is pending."
+          },
+          {
+            "name": "paused",
+            "value": "paused",
+            "description": "Message template is paused."
+          }
+        ]
+      }
+    },
+    "MessageTemplateText": {
+      "type": "object",
+      "description": "The message template's text value information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text value."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "MessageTemplateValue": {
+      "type": "object",
+      "description": "The class describes a parameter of a template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Template binding reference name"
+        },
+        "kind": {
+          "$ref": "#/definitions/MessageTemplateValueKind",
+          "description": "The type discriminator describing a template parameter type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "name",
+        "kind"
+      ]
+    },
+    "MessageTemplateValueKind": {
+      "type": "string",
+      "description": "The type of the template parameter.",
+      "enum": [
+        "text",
+        "image",
+        "document",
+        "video",
+        "location",
+        "quickAction"
+      ],
+      "x-ms-enum": {
+        "name": "MessageTemplateValueKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The text template parameter type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "The image template parameter type."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "The document template parameter type."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "The video template parameter type."
+          },
+          {
+            "name": "location",
+            "value": "location",
+            "description": "The location template parameter type."
+          },
+          {
+            "name": "quickAction",
+            "value": "quickAction",
+            "description": "The quick action template parameter type."
+          }
+        ]
+      }
+    },
+    "MessageTemplateVideo": {
+      "type": "object",
+      "description": "The message template's video value information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The (public) URL of the media."
+        },
+        "caption": {
+          "type": "string",
+          "description": "The [optional] caption of the media object."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The [optional] filename of the media file."
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateValue"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
+    },
+    "NotificationContent": {
+      "type": "object",
+      "description": "Details of the message to send.",
+      "properties": {
+        "channelRegistrationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Channel Registration ID for the Business Identifier."
+        },
+        "to": {
+          "type": "array",
+          "description": "The native external platform user identifiers of the recipient.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationMessageKind",
+          "description": "The type discriminator describing a notification type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "channelRegistrationId",
+        "to",
+        "kind"
+      ]
+    },
+    "OutboundDeliveryStrategyKind": {
+      "type": "string",
+      "description": "The options of the outbound delivery strategy for messages sent by emplyees in a conversation.",
+      "enum": [
+        "internalOnly",
+        "allParticipants"
+      ],
+      "x-ms-enum": {
+        "name": "OutboundDeliveryStrategyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "internalOnly",
+            "value": "internalOnly",
+            "description": "Delivery strategy for internal only."
+          },
+          {
+            "name": "allParticipants",
+            "value": "allParticipants",
+            "description": "Delivery strategy for all participants."
+          }
+        ]
+      }
+    },
+    "PagedConversation": {
+      "type": "object",
+      "description": "Paged collection of Conversation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Conversation items on this page",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedConversationMessageItem": {
+      "type": "object",
+      "description": "Paged collection of ConversationMessageItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConversationMessageItem items on this page",
+          "items": {
+            "$ref": "#/definitions/ConversationMessageItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedMessageTemplateItem": {
+      "type": "object",
+      "description": "Paged collection of MessageTemplateItem items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MessageTemplateItem items on this page",
+          "items": {
+            "$ref": "#/definitions/MessageTemplateItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Participant": {
+      "type": "object",
+      "description": "Advanced Messaging conversation participant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Participant Identifier.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Participant display name."
+        },
+        "kind": {
+          "$ref": "#/definitions/ParticipantKind",
+          "description": "The type discriminator describing a participant type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "id",
+        "kind"
+      ]
+    },
+    "ParticipantKind": {
+      "type": "string",
+      "description": "The type of a participant in a threaded conversation.",
+      "enum": [
+        "internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "ParticipantKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "internal",
+            "value": "internal",
+            "description": "A participant internal to Azure Communication Services."
+          },
+          {
+            "name": "external",
+            "value": "External",
+            "description": "A participant on other platforms"
+          }
+        ]
+      }
+    },
+    "RemoveParticipantsRequest": {
+      "type": "object",
+      "description": "Request payload for removing participants from a conversation.",
+      "properties": {
+        "participantIds": {
+          "type": "array",
+          "description": "The participant IDs to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "participantIds"
+      ]
+    },
+    "SendConversationMessageRequest": {
+      "type": "object",
+      "description": "Request payload for sending a conversation message.",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/NotificationContent",
+          "description": "Details of a send conversation message request."
+        },
+        "outboundDeliveryStrategy": {
+          "$ref": "#/definitions/OutboundDeliveryStrategyKind",
+          "description": "The options of the outbound delivery strategy for messages sent by emplyees in a conversation.\r\nSupports internalOnly, allChannels."
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "SendConversationMessageResult": {
+      "type": "object",
+      "description": "Result of the send conversation message operation.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "A server-generated Advanced Messaging conversation message id."
+        }
+      },
+      "required": [
+        "messageId"
+      ]
+    },
+    "SendMessageResult": {
+      "type": "object",
+      "description": "Result of the send message operation.",
+      "properties": {
+        "receipts": {
+          "type": "array",
+          "description": "Receipts of the send message operation.",
+          "items": {
+            "$ref": "#/definitions/MessageReceipt"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "receipts"
+      ]
+    },
+    "TemplateNotificationContent": {
+      "type": "object",
+      "description": "A request to send a template notification.",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/MessageTemplate",
+          "description": "The template object used to create templates."
+        }
+      },
+      "required": [
+        "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "template"
+    },
+    "TextNotificationContent": {
+      "type": "object",
+      "description": "A request to send a text notification.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Message content."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "VideoNotificationContent": {
+      "type": "object",
+      "description": "A request to send a video notification.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
+    },
+    "WhatsAppContact": {
+      "type": "object",
+      "description": "WhatsApp Contact.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Contact"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsApp"
+    },
+    "WhatsAppMessageButtonSubType": {
+      "type": "string",
+      "description": "The WhatsApp button sub type.",
+      "enum": [
+        "quickReply",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "WhatsAppMessageButtonSubType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "quickReply",
+            "value": "quickReply",
+            "description": "The WhatsApp button sub type is quick reply."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "The WhatsApp button sub type is url."
+          }
+        ]
+      }
+    },
+    "WhatsAppMessageTemplateBindings": {
+      "type": "object",
+      "description": "The template bindings for WhatsApp",
+      "properties": {
+        "header": {
+          "type": "array",
+          "description": "The header template bindings",
+          "items": {
+            "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
+          },
+          "x-ms-identifiers": []
+        },
+        "body": {
+          "type": "array",
+          "description": "The body template bindings",
+          "items": {
+            "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
+          },
+          "x-ms-identifiers": []
+        },
+        "footer": {
+          "type": "array",
+          "description": "The footer template bindings",
+          "items": {
+            "$ref": "#/definitions/WhatsAppMessageTemplateBindingsComponent"
+          },
+          "x-ms-identifiers": []
+        },
+        "buttons": {
+          "type": "array",
+          "description": "The button template bindings",
+          "items": {
+            "$ref": "#/definitions/WhatsAppMessageTemplateBindingsButton"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateBindings"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsApp"
+    },
+    "WhatsAppMessageTemplateBindingsButton": {
+      "type": "object",
+      "description": "The template bindings component button for WhatsApp",
+      "properties": {
+        "subType": {
+          "$ref": "#/definitions/WhatsAppMessageButtonSubType",
+          "description": "The WhatsApp button sub type"
+        },
+        "refValue": {
+          "type": "string",
+          "description": "The name of the referenced item in the template values."
+        }
+      },
+      "required": [
+        "subType",
+        "refValue"
+      ]
+    },
+    "WhatsAppMessageTemplateBindingsComponent": {
+      "type": "object",
+      "description": "The template bindings component for WhatsApp",
+      "properties": {
+        "refValue": {
+          "type": "string",
+          "description": "The name of the referenced item in the template values."
+        }
+      },
+      "required": [
+        "refValue"
+      ]
+    },
+    "WhatsAppMessageTemplateItem": {
+      "type": "object",
+      "description": "The WhatsApp-specific template response contract",
+      "properties": {
+        "content": {
+          "description": "WhatsApp platform's template content. This is the payload returned from WhatsApp API."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTemplateItem"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsApp"
+    }
+  },
+  "parameters": {
+    "AddParticipantsRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the payload for adding participants to a conversation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AddParticipantsRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
+    },
+    "ConversationMessagesSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the conversation message to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SendConversationMessageRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateConversationRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the payload for creating a conversation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateConversationRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "NotificationMessagesSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the message to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/NotificationContent"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RemoveParticipantsRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the request body for removing participants from a conversation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RemoveParticipantsRequest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

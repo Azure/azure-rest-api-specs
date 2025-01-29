@@ -14,7 +14,7 @@ using Azure.Core.Traits;
   AadOauth2Auth<["https://communication.azure.com/.default"]> | ApiKeyAuth<
     ApiKeyLocation.header,
     "Authorization"
-  >
+  > | BearerAuth
 )
 @service({
   title: "CommunicationMessagesClient",

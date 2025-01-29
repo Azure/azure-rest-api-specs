@@ -7,7 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(Azure.Communication.MessagesService.Versions.c2024_02_01)
+@useDependency(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
 namespace ClientForAcsMessages;
 
 @client({
@@ -16,7 +16,6 @@ namespace ClientForAcsMessages;
 })
 interface NotificationMessagesClient
   extends Azure.Communication.MessagesService.NotificationMessagesOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
@@ -28,6 +27,22 @@ interface NotificationMessagesClient
 })
 interface MessageTemplateClient
   extends Azure.Communication.MessagesService.TemplateOperations {}
+
+@added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
+@client({
+  name: "ConversationManagementClient",
+  service: Azure.Communication.MessagesService,
+})
+interface ConversationManagementClient
+  extends Azure.Communication.MessagesService.ConversationManagementOperations {}
+
+@added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
+@client({
+  name: "ConversationMessagesClient",
+  service: Azure.Communication.MessagesService,
+})
+interface ConversationMessagesClient
+  extends Azure.Communication.MessagesService.ConversationMessagesOperations {}
 
 @@access(Azure.Communication.MessagesService.MessageDataStream,
   Access.internal
