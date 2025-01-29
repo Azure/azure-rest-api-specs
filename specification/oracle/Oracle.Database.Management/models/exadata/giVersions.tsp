@@ -38,15 +38,3 @@ model GiVersionFilter {
   @doc("Filters the result for the given Azure Availability Zone")
   zone?: string;
 }
-
-@added(Versions.v20241201_preview)
-@doc("Allowed values for GI Versions Shape filter")
-union SystemShapes {
-  @doc("Exadata X9M shape")
-  ExadataX9M: "Exadata.X9M",
-
-  @doc("Exadata DB on Exascale Infrastructure shape")
-  ExaDbXs: "ExaDbXS",
-
-  string,
-}

@@ -31,6 +31,7 @@ model SchemaProperties {
 @resource("schemas")
 model Schema is TrackedResource<SchemaProperties> {
   ...ResourceNameParameter<Schema>;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -45,7 +46,7 @@ interface Schemas {
   update is ArmResourcePatchSync<Schema, SchemaProperties>;
 
   @doc("Delete a Schema Resource")
-  delete is ArmResourceDeleteSync<Schema>;
+  delete is ArmResourceDeleteWithoutOkAsync<Schema>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Schema>;

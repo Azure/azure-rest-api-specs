@@ -20,7 +20,7 @@ scalar ExascaleDbStorageVaultResourceId
 @doc("ExascaleDbStorageVault resource definition")
 model ExascaleDbStorageVault
   is TrackedResource<ExascaleDbStorageVaultProperties> {
-  ...ResourceNameParameter<ExascaleDbStorageVault>;
+  ...ResourceNameParameter<ExascaleDbStorageVault, NamePattern = ".*">;
   ...AvailabilityZonesProperty;
 }
 
