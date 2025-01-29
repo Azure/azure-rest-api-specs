@@ -3,19 +3,28 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./CapabilityList.tsp";
-import "./DeploymentTarget.tsp";
 import "./DynamicSchema.tsp";
 import "./DynamicSchemaVersion.tsp";
-import "./HierarchyList.tsp";
 import "./Schema.tsp";
 import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";
 import "./Solution.tsp";
-import "./SolutionBinding.tsp";
-import "./SolutionBindingConfiguration.tsp";
-import "./SolutionInstance.tsp";
 import "./SolutionVersion.tsp";
+import "./Target.tsp";
+import "./TargetTemplate.tsp";
+import "./SolutionTemplate.tsp";
+import "./SolutionTemplateVersion.tsp";
+import "./Instance.tsp";
+import "./InstanceHistory.tsp";
+import "./ConfigTemplate.tsp";
+import "./ConfigTemplateVersion.tsp";
+import "./Workflow.tsp";
+import "./WorkflowVersion.tsp";
+import "./WorkflowTemplate.tsp";
+import "./WorkflowTemplateVersion.tsp";
+import "./Execution.tsp";
+import "./Diagnostics.tsp";
+import "./Context.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -38,5 +47,5 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_08_01_preview: "2024-08-01-preview",
+  v2025_01_01_preview: "2025-01-01-preview",
 }
