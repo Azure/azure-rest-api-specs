@@ -505,7 +505,7 @@ model UpdateAccountUpdate is TagUpdate {
    * The type of identity used for the resource.
    */
   @typeChangedFrom(Versions.v2025_04_01_preview, ManagedServiceIdentityUpdate)
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentityType;
 
   /**
    * The geo-location where the resource lives
