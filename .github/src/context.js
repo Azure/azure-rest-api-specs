@@ -10,6 +10,8 @@
  * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }>}
  */
 export async function extractInputs(github, context, core) {
+  core.debug(JSON.stringify(context));
+
   core.info(`extractInputs(${context.eventName}, ${context.payload.action})`);
 
   // Add support for more event types as needed
@@ -23,7 +25,7 @@ export async function extractInputs(github, context, core) {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
       head_sha: payload.pull_request.head.sha,
-      issue_number: payload.number,
+      issue_number: payload.pull_request.number,
       run_id: NaN,
     };
 
