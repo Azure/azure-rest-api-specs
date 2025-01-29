@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-
 import updateLabels from "../src/update-labels.js";
 
 describe("update-labels", () => {
