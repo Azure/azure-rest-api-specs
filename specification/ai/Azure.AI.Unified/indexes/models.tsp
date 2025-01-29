@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Microsoft.MachineLearningServices;
+namespace Azure.AI.Unified;
 
 @doc("AssetVersion Definition")
 model AssetVersion {
