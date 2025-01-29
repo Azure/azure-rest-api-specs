@@ -37,6 +37,7 @@ model DynamicSchemaProperties {
 @parentResource(Schema)
 model DynamicSchema is ProxyResource<DynamicSchemaProperties> {
   ...ResourceNameParameter<DynamicSchema>;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -45,13 +46,13 @@ interface DynamicSchemas {
   get is ArmResourceRead<DynamicSchema>;
 
   @doc("Create or update a DynamicSchema Resource")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DynamicSchema>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicSchema>;
 
   @doc("update a DynamicSchema Resource")
   update is ArmResourcePatchSync<DynamicSchema, DynamicSchemaProperties>;
 
   @doc("Delete a DynamicSchema Resource")
-  delete is ArmResourceDeleteSync<DynamicSchema>;
+  delete is ArmResourceDeleteWithoutOkAsync<DynamicSchema>;
 
   @doc("List by Schema")
   listBySchema is ArmResourceListByParent<DynamicSchema>;
