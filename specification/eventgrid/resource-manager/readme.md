@@ -36,6 +36,21 @@ These settings apply only when `--tag=package-2025-02` is specified on the comma
 ``` yaml $(tag) == 'package-2025-02'
 input-file:
 - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
+
+
+LRO_RESPONSE_HEADER
+suppressions:
+  - code: LRO_RESPONSE_HEADER
+    reason: This is false positive as all the delete operations that were flagged are already part of previous GA version. When trying to add the header, it was flagged as breaking change. 
+    from: EventGrid.json
+
+  - code:  PatchBodyParametersSchema
+    reason: This is false positive as all the flagged operations are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
+
+  - code:  GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous GA version and cannot be changed.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2024-12-preview
