@@ -2,6 +2,9 @@ name: Protected Files
 
 on: pull_request
 
+permissions:
+  contents: read
+
 env:
   # Users allowed to edit protected files without failing check
   user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' }}

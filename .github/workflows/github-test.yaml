@@ -12,8 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: none
-  contents: none
+  contents: read
 
 defaults:
   run:
@@ -23,10 +22,6 @@ defaults:
 jobs:
   test:
     runs-on: ubuntu-24.04
-
-    permissions:
-      actions: none
-      contents: none
 
     steps:
       - name: Checkout
