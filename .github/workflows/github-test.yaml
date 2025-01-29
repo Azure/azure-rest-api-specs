@@ -34,7 +34,8 @@ jobs:
           install-command: 'npm install'
           working-directory: ./.github
 
-      - run: npm run test:ci
+      - name: Run tests
+        run: npm run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
