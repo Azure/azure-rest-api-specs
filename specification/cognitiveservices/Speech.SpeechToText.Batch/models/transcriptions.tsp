@@ -76,6 +76,7 @@ model TranscriptionUpdate {
   customProperties?: Record<string>;
 
   @doc("EntityReference")
+  @removed(ServiceApiVersions.V20241115)
   project?: EntityReference;
 }
 
@@ -96,7 +97,13 @@ model TranscriptionProperties {
 
   @visibility("read")
   @doc("The duration of the transcription. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
+  @removed(ServiceApiVersions.V20241115)
   duration?: string;
+
+  @visibility("read")
+  @doc("The duration in milliseconds of the transcription.\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.")
+  @added(ServiceApiVersions.V20241115)
+  durationMilliseconds?: int32;
 
   @doc("A collection of the requested channel numbers. In the default case, the channels 0 and 1 are considered.")
   channels?: Array<int32>;
@@ -111,7 +118,12 @@ model TranscriptionProperties {
   profanityFilterMode?: ProfanityFilterMode;
 
   @doc("How long the transcription will be kept in the system after it has completed. Once the transcription reaches the time to live after completion (successful or failed) it will be automatically deleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account will also be deleted. Use either destinationContainerUrl to specify a separate container for result files which will not be deleted when the timeToLive expires, or retrieve the result files through the API and store them as needed.\n\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value when data is consumed directly. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
+  @removed(ServiceApiVersions.V20241115)
   timeToLive: string;
+
+  @doc("How long the transcription will be kept in the system after it has completed. Once the transcription reaches the time to live after completion(successful or failed) it will be automatically deleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account will also be deleted.Use either destinationContainerUrl to specify a separate container for result files which will not be deleted when the timeToLive expires, or retrieve the result files through the API and store them as needed.\n\nThe shortest supported duration is 6 hours, the longest supported duration is 31 days. 2 days (48 hours) is the recommended default value when data is consumed directly.")
+  @added(ServiceApiVersions.V20241115)
+  timeToLiveHours: int32;
 
   @doc("EntityError")
   error?: EntityError;
@@ -193,17 +205,17 @@ model EntityError {
 model DiarizationProperties {
   @removed(ServiceApiVersions.V20241115)
   @doc("DiarizationSpeakersProperties")
-  speakers?: DiarizationSpeakersProperties;
+  speakers: DiarizationSpeakersProperties;
 
   @added(ServiceApiVersions.V20241115)
   @doc("A value indicating whether speaker diarization is enabled.")
-  enabled?: boolean;
+  enabled: boolean;
 
   @added(ServiceApiVersions.V20241115)
   @minValue(2)
   @maxValue(35)
   @doc("A hint for the maximum number of speakers for diarization. Must be greater than 1 and less than 36.")
-  maxSpeakers?: int32;
+  maxSpeakers: int32;
 }
 
 @removed(ServiceApiVersions.V20241115)
@@ -211,11 +223,11 @@ model DiarizationProperties {
 model DiarizationSpeakersProperties {
   @minValue(1)
   @doc("A hint for the minimum number of speakers for diarization. Must be smaller than or equal to the maxSpeakers property.")
-  minCount?: int32;
+  minCount: int32;
 
   @minValue(1)
   @doc("The maximum number of speakers for diarization. Must be less than 36 and larger than or equal to the minSpeakers property.")
-  maxCount?: int32;
+  maxCount: int32;
 }
 
 @doc("LanguageIdentificationProperties")
@@ -361,6 +373,80 @@ model TranscribeDiarizationProperties {
   @minValue(2)
   @doc("Gets or sets a hint for the maximum number of speakers for diarization. Must be greater than 1 and less than 36.")
   maxSpeakers?: int32;
+}
+
+@doc("File")
+model File {
+  @doc("The creation time of this file. The time stamp is encoded as ISO 8601 date and time format (see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  createdDateTime: utcDateTime;
+
+  @doc("FileKind")
+  kind: FileKind;
+
+  @doc("FileLinks")
+  links: FileLinks;
+
+  @doc("The name of this file.")
+  name: string;
+
+  @doc("FileProperties")
+  properties: FileProperties;
+
+  @doc("The location of this entity.")
+  self: url;
+}
+
+@doc("FileLinks")
+model FileLinks {
+  @doc("The url to retrieve the content of this file.")
+  contentUrl: url;
+}
+
+@doc("FileProperties")
+model FileProperties {
+  @doc("The total duration in milliseconds of the file in case this file is an audio file.")
+  durationMilliseconds: int32;
+
+  @doc("The size of the data in bytes.")
+  size: int32;
+}
+
+@doc("FileKind")
+union FileKind {
+  @doc("Type of data is acoustic data archive.")
+  AcousticDataArchive: "AcousticDataArchive",
+
+  @doc("Type of data is acoustic data transcription v2.")
+  AcousticDataTranscriptionV2: "AcousticDataTranscriptionV2",
+
+  @doc("Type of data is audio.")
+  Audio: "Audio",
+
+  @doc("Type of data is dataset report.")
+  DatasetReport: "DatasetReport",
+
+  @doc("Type of data is evaluation details.")
+  EvaluationDetails: "EvaluationDetails",
+
+  @doc("Type of data is language data.")
+  LanguageData: "LanguageData",
+
+  @doc("Type of data is model report.")
+  ModelReport: "ModelReport",
+
+  @doc("Type of data is output formatting input file.")
+  OutputFormattingData: "OutputFormattingData",
+
+  @doc("Type of data is pronunciation data.")
+  PronunciationData: "PronunciationData",
+
+  @doc("Type of data is transcription.")
+  Transcription: "Transcription",
+
+  @doc("Type of data is transcription report.")
+  TranscriptionReport: "TranscriptionReport",
+
+  string,
 }
 
 @doc("High level error codes.")

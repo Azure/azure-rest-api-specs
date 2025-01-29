@@ -13,12 +13,7 @@ using OpenAPI;
 @service({
   title: "Azure Speech Services API",
 })
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Authorization"
-  >
-)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/speechtotext",
   "Azure Speech Services APIs for speech-to-text",
@@ -32,6 +27,6 @@ namespace SpeechToText;
 
 @doc("Service API versions.")
 enum ServiceApiVersions {
-  V20240515PRE: "2024-05-15-preview",
+  V20240515PRE: "2024-05-15-preview", // Preview versions are only generated, if the newest version is also a preview version.
   V20241115: "2024-11-15",
 }

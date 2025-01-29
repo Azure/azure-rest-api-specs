@@ -43,11 +43,11 @@ op submitTranscription(
 @doc("Gets a list of transcriptions for the authenticated subscription.")
 op getTranscriptions(
   @query("skip")
-  @doc("Number of datasets that will be skipped.")
+  @doc("Number of transcriptions that will be skipped.")
   skip?: int32,
 
   @query("top")
-  @doc("Number of datasets that will be included after skipping.")
+  @doc("Number of transcriptions that will be included after skipping.")
   top?: int32,
 
   @query("filter")
@@ -63,6 +63,38 @@ op getTranscriptions(
   retryAfter?: int32;
 
   @body transcriptions: Pageable<Transcription>;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is an existing service, the api-version is required to be in the 'api-version' parameter"
+@get
+@route("/transcriptions/{id}/files")
+@doc("Gets the files of the transcription identified by the given ID")
+op getTranscriptionFiles(
+  @path @doc("The identifier of the transcription.") id: string,
+
+  @query("skip")
+  @doc("Number of transcription files that will be skipped.")
+  skip?: int32,
+
+  @query("top")
+  @doc("Number of transcription files that will be included after skipping.")
+  top?: int32,
+
+  @query("sasLifetimeMinutes")
+  @doc("This parameter defines the duration in minutes for which an SAS url should be valid.\r\n            The parameter can only be used for operations on speech resources that don't have BYOS enabled and transcriptions without a destinationContainerUrl. For speech resources\r\n            that don't have BYOS enabled, the default SAS validity duration is 12 hours.\r\n            For speech resources with BYOS and transcriptions with a destinationContainerUrl, returned urls do not contain an SAS token.")
+  @added(ServiceApiVersions.V20241115)
+  sasLifetimeMinutes?: int32,
+
+  @query("api-version")
+  @doc("The identifier of the transcription.")
+  serviceApiVersionsQueryParameter?: ServiceApiVersions,
+): {
+  @header("Retry-After")
+  @doc("The minimum number of seconds to wait for a non terminal operation to complete.")
+  retryAfter?: int32;
+
+  @body files: Pageable<File>;
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."

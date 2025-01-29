@@ -76,6 +76,7 @@ model TranscriptionUpdate {
   customProperties?: Record<string>;
 
   @doc("EntityReference")
+  @removed(ServiceApiVersions.V20241115)
   project?: EntityReference;
 }
 
@@ -96,7 +97,13 @@ model TranscriptionProperties {
 
   @visibility("read")
   @doc("The duration of the transcription. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
+  @removed(ServiceApiVersions.V20241115)
   duration?: string;
+
+  @visibility("read")
+  @doc("The duration in milliseconds of the transcription.\nDurations larger than 2^53-1 are not supported to ensure compatibility with JavaScript integers.")
+  @added(ServiceApiVersions.V20241115)
+  durationMilliseconds?: int32;
 
   @doc("A collection of the requested channel numbers. In the default case, the channels 0 and 1 are considered.")
   channels?: Array<int32>;
@@ -111,7 +118,12 @@ model TranscriptionProperties {
   profanityFilterMode?: ProfanityFilterMode;
 
   @doc("How long the transcription will be kept in the system after it has completed. Once the transcription reaches the time to live after completion (successful or failed) it will be automatically deleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account will also be deleted. Use either destinationContainerUrl to specify a separate container for result files which will not be deleted when the timeToLive expires, or retrieve the result files through the API and store them as needed.\n\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value when data is consumed directly. The duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).")
+  @removed(ServiceApiVersions.V20241115)
   timeToLive: string;
+
+  @doc("How long the transcription will be kept in the system after it has completed. Once the transcription reaches the time to live after completion(successful or failed) it will be automatically deleted.\n\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account will also be deleted.Use either destinationContainerUrl to specify a separate container for result files which will not be deleted when the timeToLive expires, or retrieve the result files through the API and store them as needed.\n\nThe shortest supported duration is 6 hours, the longest supported duration is 31 days. 2 days (48 hours) is the recommended default value when data is consumed directly.")
+  @added(ServiceApiVersions.V20241115)
+  timeToLiveHours: int32;
 
   @doc("EntityError")
   error?: EntityError;

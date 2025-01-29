@@ -11,3 +11,4 @@ namespace SpeechToText.ClientCustomizations;
 @@clientName(Word, "TimestampedWord", "csharp");
 @@clientName(Transcription, "AsynchronousTranscription", "csharp");
 @@clientName(TranscribeDefinition, "TranscribeMetadata", "csharp");
+@@clientName(File, "TranscriptionFile", "csharp");
