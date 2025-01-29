@@ -895,6 +895,7 @@ model AvsStorageContainerProperties {
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility("read")
+  @madeOptional(Versions.v3_preview)
   @removed(Versions.v5_preview)
   storageName?: string;
 
