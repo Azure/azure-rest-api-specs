@@ -253,6 +253,7 @@ model FleetDatabaseProperties {
    * Additional database properties to be applied as the underlying database resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+  @visibility("read", "create", "update")
   resourceTags?: Record<string>;
 
   /**
