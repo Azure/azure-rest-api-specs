@@ -32,6 +32,7 @@ model FabricModel
   "x-ms-client-name",
   "body"
 );
+
 @armResourceOperations
 interface Fabric {
   /**
