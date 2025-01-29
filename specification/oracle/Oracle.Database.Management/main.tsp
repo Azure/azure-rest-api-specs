@@ -11,6 +11,7 @@ import "./operations/exadata/giMinorVersionOperations.tsp";
 import "./operations/exadata/dbSystemShapeOperations.tsp";
 import "./operations/exadata/dnsPrivateViewsOperations.tsp";
 import "./operations/exadata/dnsPrivateZonesOperations.tsp";
+import "./operations/exadata/flexComponentOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseBackupOperations.tsp";
 import "./operations/autonomousdatabase/autonomousDatabaseCharacterSetOperations.tsp";
