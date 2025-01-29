@@ -28,7 +28,7 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2024-05
+tag: package-2024-07
 ```
 
 ### Tag: package-2024-07
@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-07'
 input-file:
-  - Microsoft.Network/preview/2024-07-01-preview/networkSecurityPerimeter.json
-  - Microsoft.Network/preview/2024-07-01-preview/network.json
+  - Microsoft.Network/stable/2024-07-01/networkSecurityPerimeter.json
+  - Microsoft.Network/stable/2024-07-01/network.json
   - Microsoft.Network/stable/2024-05-01/applicationGateway.json
   - Microsoft.Network/stable/2024-05-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2024-05-01/applicationSecurityGroup.json
