@@ -2,707 +2,434 @@
   "swagger": "2.0",
   "info": {
     "title": "KeyVaultClient",
+    "version": "7.5",
     "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
-    "version": "7.5"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
+  "schemes": [
+    "https"
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{vaultBaseUrl}",
     "useSchemePrefix": false,
-    "positionInOperation": "first",
     "parameters": [
       {
         "name": "vaultBaseUrl",
-        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "in": "path",
         "required": true,
         "type": "string",
-        "in": "path",
+        "format": "uri",
         "x-ms-skip-url-encoding": true
       }
     ]
   },
-  "consumes": [
-    "application/json"
-  ],
   "produces": [
     "application/json"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://vault.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://vault.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}": {
-      "delete": {
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "operationId": "RoleDefinitions_Delete",
-        "description": "Deletes a custom role definition.",
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForScope",
+        "description": "Gets role assignments for a scope.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role assignments.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role definition to delete. Managed HSM only supports '/'.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleDefinitionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name (GUID) of the role definition to delete."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role definition that was deleted.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RoleDefinition"
+              "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "DeleteRoleDefinition": {
-            "$ref": "./examples/DeleteRoleDefinition-example.json"
+          "Get role assignments for a scope": {
+            "$ref": "./examples/ListRoleAssignments-example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
+      "get": {
+        "operationId": "RoleAssignments_Get",
+        "description": "Get the specified role assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role assignment.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified role assignment": {
+            "$ref": "./examples/GetRoleAssignments-example.json"
           }
         }
       },
       "put": {
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "operationId": "RoleDefinitions_CreateOrUpdate",
-        "description": "Creates or updates a custom role definition.",
+        "operationId": "RoleAssignments_Create",
+        "description": "Creates a role assignment.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role assignment to create.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role definition to create or update. Managed HSM only supports '/'.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleDefinitionName",
+            "name": "roleAssignmentName",
             "in": "path",
+            "description": "The name of the role assignment to create. It can be any valid GUID.",
             "required": true,
-            "type": "string",
-            "description": "The name of the role definition to create or update. It can be any valid GUID."
+            "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters for the role assignment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleDefinitionCreateParameters"
-            },
-            "description": "Parameters for the role definition."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns information about the role definition.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RoleDefinition"
+              "$ref": "#/definitions/RoleAssignment"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "PutRoleDefinition": {
-            "$ref": "./examples/PutRoleDefinition-example.json"
+          "Create a role assignment": {
+            "$ref": "./examples/PutRoleAssignments-example.json"
           }
         }
       },
-      "get": {
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "operationId": "RoleDefinitions_Get",
-        "description": "Get the specified role definition.",
+      "delete": {
+        "operationId": "RoleAssignments_Delete",
+        "description": "Deletes a role assignment.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role assignment to delete.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role definition to get. Managed HSM only supports '/'.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleDefinitionName",
+            "name": "roleAssignmentName",
             "in": "path",
+            "description": "The name of the role assignment to delete.",
             "required": true,
-            "type": "string",
-            "description": "The name of the role definition to get."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RoleDefinition"
+              "$ref": "#/definitions/RoleAssignment"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "GetRoleAssignments": {
-            "$ref": "./examples/GetRoleDefinition-example.json"
+          "Delete a role assignment": {
+            "$ref": "./examples/DeleteRoleAssignments-example.json"
           }
         }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleDefinitions": {
       "get": {
-        "tags": [
-          "RoleDefinitions"
-        ],
         "operationId": "RoleDefinitions_List",
         "description": "Get all role definitions that are applicable at scope and above.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role definition.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role definition.",
             "x-ms-skip-url-encoding": true
           },
           {
             "name": "$filter",
             "in": "query",
+            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.",
             "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role definitions.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RoleDefinitionListResult"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get all role definitions that are applicable at scope and above": {
+            "$ref": "./examples/ListRoleDefinitions-example.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListRoleDefinitions": {
-            "$ref": "./examples/ListRoleDefinitions-example.json"
-          }
-        },
-        "x-ms-odata": "#/definitions/RoleDefinitionFilter"
+        }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
-      "delete": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Delete",
-        "description": "Deletes a role assignment.",
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}": {
+      "get": {
+        "operationId": "RoleDefinitions_Get",
+        "description": "Get the specified role definition.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role definition to get. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment to delete.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentName",
+            "name": "roleDefinitionName",
             "in": "path",
+            "description": "The name of the role definition to get.",
             "required": true,
-            "type": "string",
-            "description": "The name of the role assignment to delete."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignment"
+              "$ref": "#/definitions/RoleDefinition"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "DeleteRoleAssignments": {
-            "$ref": "./examples/DeleteRoleAssignments-example.json"
+          "Get the specified role definition": {
+            "$ref": "./examples/GetRoleDefinition-example.json"
           }
         }
       },
       "put": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Create",
-        "description": "Creates a role assignment.",
+        "operationId": "RoleDefinitions_CreateOrUpdate",
+        "description": "Creates or updates a custom role definition.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role definition to create or update. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment to create.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentName",
+            "name": "roleDefinitionName",
             "in": "path",
+            "description": "The name of the role definition to create or update. It can be any valid GUID.",
             "required": true,
-            "type": "string",
-            "description": "The name of the role assignment to create. It can be any valid GUID."
+            "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters for the role definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleAssignmentCreateParameters"
-            },
-            "description": "Parameters for the role assignment."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+              "$ref": "#/definitions/RoleDefinitionCreateParameters"
+            }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns information about the role assignment.",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignment"
+              "$ref": "#/definitions/RoleDefinition"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "PutRoleAssignments": {
-            "$ref": "./examples/PutRoleAssignments-example.json"
+          "Create or update a custom role definition": {
+            "$ref": "./examples/PutRoleDefinition-example.json"
           }
         }
       },
-      "get": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Get",
-        "description": "Get the specified role assignment.",
+      "delete": {
+        "operationId": "RoleDefinitions_Delete",
+        "description": "Deletes a custom role definition.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "scope",
             "in": "path",
+            "description": "The scope of the role definition to delete. Managed HSM only supports '/'.",
             "required": true,
             "type": "string",
-            "description": "The scope of the role assignment.",
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "roleAssignmentName",
+            "name": "roleDefinitionName",
             "in": "path",
+            "description": "The name (GUID) of the role definition to delete.",
             "required": true,
-            "type": "string",
-            "description": "The name of the role assignment to get."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role assignment.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RoleAssignment"
+              "$ref": "#/definitions/RoleDefinition"
             }
           },
           "default": {
-            "description": "Key Vault error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
+              "$ref": "#/definitions/KeyVaultError"
             }
           }
         },
         "x-ms-examples": {
-          "GetRoleAssignments": {
-            "$ref": "./examples/GetRoleAssignments-example.json"
+          "Delete a custom role definition": {
+            "$ref": "./examples/DeleteRoleDefinition-example.json"
           }
         }
-      }
-    },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
-      "get": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_ListForScope",
-        "description": "Gets role assignments for a scope.",
-        "parameters": [
-          {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role assignments.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal."
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of role assignments.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListRoleAssignments": {
-            "$ref": "./examples/ListRoleAssignments-example.json"
-          }
-        },
-        "x-ms-odata": "#/definitions/RoleAssignmentFilter"
       }
     }
   },
   "definitions": {
-    "RoleAssignmentFilter": {
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "Returns role assignment of the specific principal."
-        }
-      },
-      "description": "Role Assignments filter"
-    },
-    "RoleAssignmentPropertiesWithScope": {
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/RoleScope"
-        },
-        "roleDefinitionId": {
-          "type": "string",
-          "description": "The role definition ID."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID."
-        }
-      },
-      "description": "Role assignment properties with scope."
-    },
-    "RoleAssignment": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role assignment ID."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role assignment name."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role assignment type."
-        },
-        "properties": {
-          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
-          "description": "Role assignment properties."
-        }
-      },
-      "description": "Role Assignments"
-    },
-    "RoleAssignmentListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignment"
-          },
-          "description": "Role assignment list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Role assignment list operation result."
-    },
-    "RoleAssignmentProperties": {
-      "properties": {
-        "roleDefinitionId": {
-          "type": "string",
-          "description": "The role definition ID used in the role assignment."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
-        }
-      },
-      "required": [
-        "roleDefinitionId",
-        "principalId"
-      ],
-      "description": "Role assignment properties."
-    },
-    "RoleDefinitionCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoleDefinitionProperties",
-          "description": "Role definition properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Role definition create parameters."
-    },
-    "RoleAssignmentCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoleAssignmentProperties",
-          "description": "Role assignment properties."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Role assignment create parameters."
-    },
-    "RoleDefinitionFilter": {
-      "properties": {
-        "roleName": {
-          "type": "string",
-          "description": "Returns role definition with the specific name."
-        }
-      },
-      "description": "Role Definitions filter"
-    },
-    "Permission": {
-      "properties": {
-        "actions": {
-          "type": "array",
-          "description": "Action permissions that are granted.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "notActions": {
-          "type": "array",
-          "description": "Action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
-          "items": {
-            "type": "string",
-            "description": "Not actions."
-          }
-        },
-        "dataActions": {
-          "type": "array",
-          "description": "Data action permissions that are granted.",
-          "items": {
-            "$ref": "#/definitions/DataAction"
-          }
-        },
-        "notDataActions": {
-          "type": "array",
-          "description": "Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
-          "items": {
-            "$ref": "#/definitions/DataAction"
-          }
-        }
-      },
-      "description": "Role definition permissions."
-    },
-    "RoleDefinitionProperties": {
-      "properties": {
-        "roleName": {
-          "type": "string",
-          "description": "The role name."
-        },
-        "description": {
-          "type": "string",
-          "description": "The role definition description."
-        },
-        "type": {
-          "type": "string",
-          "description": "The role type.",
-          "enum": [
-            "AKVBuiltInRole",
-            "CustomRole"
-          ],
-          "x-ms-enum": {
-            "name": "RoleType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "BuiltInRole",
-                "value": "AKVBuiltInRole",
-                "description": "Built in role."
-              },
-              {
-                "value": "CustomRole",
-                "description": "Custom role."
-              }
-            ]
-          },
-          "x-ms-client-name": "roleType"
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Permission"
-          },
-          "description": "Role definition permissions."
-        },
-        "assignableScopes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleScope"
-          },
-          "description": "Role definition assignable scopes."
-        }
-      },
-      "description": "Role definition properties."
-    },
-    "RoleDefinition": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role definition ID."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The role definition name."
-        },
-        "type": {
-          "type": "string",
-          "description": "The role definition type.",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.Authorization/roleDefinitions"
-          ],
-          "x-ms-enum": {
-            "name": "RoleDefinitionType",
-            "modelAsString": true
-          }
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RoleDefinitionProperties",
-          "description": "Role definition properties."
-        }
-      },
-      "description": "Role definition."
-    },
-    "RoleDefinitionListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleDefinition"
-          },
-          "description": "Role definition list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Role definition list operation result."
-    },
-    "RoleScope": {
-      "type": "string",
-      "description": "The role scope.",
-      "enum": [
-        "/",
-        "/keys"
-      ],
-      "x-ms-enum": {
-        "name": "RoleScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Global",
-            "value": "/",
-            "description": "Global scope"
-          },
-          {
-            "name": "Keys",
-            "value": "/keys",
-            "description": "Keys scope"
-          }
-        ]
-      }
-    },
     "DataAction": {
       "type": "string",
       "description": "Supported permissions for data actions.",
@@ -918,6 +645,352 @@
           }
         ]
       }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
+      },
+      "x-nullable": true
+    },
+    "KeyVaultError": {
+      "type": "object",
+      "description": "The key vault error exception.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "description": "Role definition permissions.",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Action permissions that are granted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Data action permissions that are granted.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        }
+      }
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "description": "Role Assignments",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role assignment ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The role assignment name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The role assignment type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+          "description": "Role assignment properties."
+        }
+      }
+    },
+    "RoleAssignmentCreateParameters": {
+      "type": "object",
+      "description": "Role assignment create parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "Role assignment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleAssignmentFilter": {
+      "type": "object",
+      "description": "Role Assignments filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment of the specific principal."
+        }
+      }
+    },
+    "RoleAssignmentListResult": {
+      "type": "object",
+      "description": "Role assignment list operation result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Role assignment list.",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "RoleAssignmentProperties": {
+      "type": "object",
+      "description": "Role assignment properties.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID used in the role assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ]
+    },
+    "RoleAssignmentPropertiesWithScope": {
+      "type": "object",
+      "description": "Role assignment properties with scope.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/RoleScope",
+          "description": "The role scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        }
+      }
+    },
+    "RoleDefinition": {
+      "type": "object",
+      "description": "Role definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role definition ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The role definition name.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "The role definition type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RoleDefinitionCreateParameters": {
+      "type": "object",
+      "description": "Role definition create parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleDefinitionFilter": {
+      "type": "object",
+      "description": "Role Definitions filter",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        }
+      }
+    },
+    "RoleDefinitionListResult": {
+      "type": "object",
+      "description": "Role definition list operation result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Role definition list.",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "RoleDefinitionProperties": {
+      "type": "object",
+      "description": "Role definition properties.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The role definition description."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleType",
+          "description": "The role type.",
+          "x-ms-client-name": "roleType"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Role definition permissions.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "x-ms-identifiers": []
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "Role definition assignable scopes.",
+          "items": {
+            "$ref": "#/definitions/RoleScope"
+          }
+        }
+      }
+    },
+    "RoleDefinitionType": {
+      "type": "string",
+      "description": "The role definition type.",
+      "enum": [
+        "Microsoft.Authorization/roleDefinitions"
+      ],
+      "x-ms-enum": {
+        "name": "RoleDefinitionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.Authorization/roleDefinitions",
+            "value": "Microsoft.Authorization/roleDefinitions",
+            "description": "Microsoft-defined role definitions."
+          }
+        ]
+      }
+    },
+    "RoleScope": {
+      "type": "string",
+      "description": "The role scope.",
+      "enum": [
+        "/",
+        "/keys"
+      ],
+      "x-ms-enum": {
+        "name": "RoleScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Global",
+            "value": "/",
+            "description": "Global scope"
+          },
+          {
+            "name": "Keys",
+            "value": "/keys",
+            "description": "Keys scope"
+          }
+        ]
+      }
+    },
+    "RoleType": {
+      "type": "string",
+      "description": "The role type.",
+      "enum": [
+        "AKVBuiltInRole",
+        "CustomRole"
+      ],
+      "x-ms-enum": {
+        "name": "RoleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BuiltInRole",
+            "value": "AKVBuiltInRole",
+            "description": "Built in role."
+          },
+          {
+            "name": "CustomRole",
+            "value": "CustomRole",
+            "description": "Custom role."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
