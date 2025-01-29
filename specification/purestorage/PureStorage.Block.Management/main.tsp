@@ -774,10 +774,10 @@ union AlertLevel {
   /** Information */
   Info: "info",
 
-  /** Warning */
+  /** Warning level */
   Warning: "warning",
 
-  /** Error */
+  /** Error level */
   Error: "error",
 
   string,

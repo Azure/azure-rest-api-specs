@@ -117,13 +117,13 @@ model Address {
   @doc("Address line 2")
   addressLine2?: string;
 
-  @doc("City")
+  @doc("Name of the city")
   city: string;
 
-  @doc("State (if any")
+  @doc("State (if any)")
   state: string;
 
-  @doc("Country")
+  @doc("Name of the country")
   country: string;
 
   @doc("Postal code")
