@@ -20,8 +20,8 @@ jobs:
           # Required since "HEAD^" is passed to Get-ChangedFiles
           fetch-depth: 2
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Get GitHub PullRequest Changed Files
         shell: pwsh
