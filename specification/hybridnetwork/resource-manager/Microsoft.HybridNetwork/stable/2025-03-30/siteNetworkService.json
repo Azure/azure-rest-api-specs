@@ -352,16 +352,10 @@
         "202": {
           "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
           "headers": {
-            "Azure-AsyncOperation": {
-              "description": "The Azure-AsyncOperation header contains the URL where the status of the long-running operation can be checked.",
+            "Location": {
+              "description": "The Location header contains the URL where the status of the long-running operation can be checked.",
               "type": "string"
             }
-          }
-        },
-        "409": {
-          "description": "Conflict. The request cannot be processed because there is no ongoing PUT operation to cancel. This typically occurs if the operation has already completed or was never initiated. Ensure a PUT operation is in progress before sending a cancel request. Retry later if necessary.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           }
         },
         "default": {
@@ -373,12 +367,12 @@
       },
       "x-ms-examples": {
         "Cancel an in progress SNS PUT ": {
-          "$ref": "./examples/SiteNetworkServiceCancelOngoingPutOperation.json"
+          "$ref": "./examples/SiteNetworkServicesCancelOngoingPUTOperation.json"
         }
       },
       "x-ms-long-running-operation": true,
       "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
+        "final-state-via": "location"
       }
       }
     }
