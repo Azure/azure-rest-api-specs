@@ -162,6 +162,21 @@
             "format": "int32"
           },
           {
+            "name": "initiator",
+            "in": "query",
+            "description": "The Initiator user ID, needs to be present when authenticating with Bearer token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "channelId",
+            "in": "query",
+            "description": "The id of channel",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -351,6 +366,13 @@
             "format": "int32"
           },
           {
+            "name": "initiator",
+            "in": "query",
+            "description": "The Initiator user ID, needs to be present when authenticating with Bearer token.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -386,68 +408,9 @@
         }
       }
     },
-    "/messages/conversations/{conversationId}/messages:manage": {
-      "get": {
-        "operationId": "ConversationManagementOperations_GetMessages",
-        "tags": [
-          "ConversationManagement"
-        ],
-        "description": "Retrieves list of conversation messages.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "initiator",
-            "in": "header",
-            "description": "The Initiator user ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The ID of the conversation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "The max page size.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListConversationMessageResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/messages/conversations/{conversationId}/messages:sendMessage": {
+    "/messages/conversations/{conversationId}/messages:send": {
       "post": {
-        "operationId": "ConversationMessagesOperations_SendMessage",
+        "operationId": "ConversationMessagesOperations_Send",
         "tags": [
           "ConversationMessages"
         ],
@@ -555,9 +518,6 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/RemoveParticipantsRequestBody"
           }
         ],
         "responses": {
@@ -613,93 +573,9 @@
         }
       }
     },
-    "/messages/conversations/{conversationId}/messages:summarizeConversation": {
+    "/messages/conversations/{conversationId}/participants:add": {
       "post": {
-        "operationId": "ConversationManagementOperations_SummarizeConversation",
-        "tags": [
-          "ConversationManagement"
-        ],
-        "description": "Get AI Analysis of a conversation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The conversation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/RemoveParticipantsRequestBody"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
-            },
-            "headers": {
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/messages/conversations/{conversationId}/participants:addParticipants": {
-      "post": {
-        "operationId": "ConversationManagementOperations_AddParticipants",
+        "operationId": "ConversationManagementOperations_Add",
         "tags": [
           "ConversationManagement"
         ],
@@ -729,8 +605,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "207": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/AddParticipantsResult"
+            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -778,9 +657,9 @@
         }
       }
     },
-    "/messages/conversations/{conversationId}/participants:removeParticipants": {
+    "/messages/conversations/{conversationId}/participants:remove": {
       "post": {
-        "operationId": "ConversationManagementOperations_RemoveParticipants",
+        "operationId": "ConversationManagementOperations_Remove",
         "tags": [
           "ConversationManagement"
         ],
@@ -810,8 +689,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "207": {
+            "description": "Successful",
+            "schema": {
+              "$ref": "#/definitions/RemoveParticipantsResult"
+            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -856,50 +738,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "/messages/conversations/channels/{channelId}:manage": {
-      "get": {
-        "operationId": "ConversationManagementOperations_GetChannelConversations",
-        "tags": [
-          "ConversationManagement"
-        ],
-        "description": "Retrieves list of conversations for a channel.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "channelId",
-            "in": "path",
-            "description": "The ID of the channel.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListConversationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -931,7 +769,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CreateConversationResponse"
+              "$ref": "#/definitions/CreateConversationResult"
             },
             "headers": {
               "Repeatability-Result": {
@@ -977,50 +815,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "/messages/conversations:manage": {
-      "get": {
-        "operationId": "ConversationManagementOperations_GetConversations",
-        "tags": [
-          "ConversationManagement"
-        ],
-        "description": "Retrieves list of conversation for a participant.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "initiator",
-            "in": "header",
-            "description": "The Initiator user ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListConversationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1172,6 +966,22 @@
       },
       "required": [
         "participants"
+      ]
+    },
+    "AddParticipantsResult": {
+      "type": "object",
+      "description": "Response for the add participants operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Ids with Errors if failed to be added",
+          "items": {
+            "$ref": "#/definitions/ParticipantsResult"
+          }
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "AudioNotificationContent": {
@@ -1469,7 +1279,7 @@
         "conversation"
       ]
     },
-    "CreateConversationResponse": {
+    "CreateConversationResult": {
       "type": "object",
       "description": "Response for the create conversation operation.",
       "properties": {
@@ -1587,48 +1397,6 @@
         }
       ],
       "x-ms-discriminator-value": "internal"
-    },
-    "ListConversationMessageResponse": {
-      "type": "object",
-      "description": "Paged collection of ConversationMessageItem items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Conversation Message items on this page",
-          "items": {
-            "$ref": "#/definitions/ConversationMessageItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ListConversationResponse": {
-      "type": "object",
-      "description": "Paged collection of Conversation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Conversation items on this page",
-          "items": {
-            "$ref": "#/definitions/Conversation"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "MediaNotificationContent": {
       "type": "object",
@@ -2234,6 +2002,23 @@
         ]
       }
     },
+    "ParticipantsResult": {
+      "type": "object",
+      "description": "Response for the remove participants operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Participant User Id."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error of the participant operation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "RemoveParticipantsRequest": {
       "type": "object",
       "description": "Request payload for removing participants from a conversation.",
@@ -2243,11 +2028,28 @@
           "description": "The participant IDs to remove.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
         "participantIds"
+      ]
+    },
+    "RemoveParticipantsResult": {
+      "type": "object",
+      "description": "Response for the remove participants operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Ids with Errors if failed to be added",
+          "items": {
+            "$ref": "#/definitions/ParticipantsResult"
+          }
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "SendConversationMessageRequest": {

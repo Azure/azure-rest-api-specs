@@ -54,7 +54,7 @@ interface ConversationManagementOperations {
   create is Operations.ResourceCollectionAction<
     Conversation,
     CreateConversationRequestBody,
-    CreatedResponse & CreateConversationResponseBody
+    CreatedResponse & CreateConversationResult
   >;
 
   @tag("ConversationManagement")
@@ -70,77 +70,19 @@ interface ConversationManagementOperations {
   @tag("ConversationManagement")
   @doc("Adds participants to a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
-  addParticipants is Operations.ResourceCollectionAction<
+  add is Operations.ResourceCollectionAction<
     Participant,
     AddParticipantsRequestBody,
-    NoContentResponse
+    Response<207> & AddParticipantsResult
   >;
 
   @tag("ConversationManagement")
   @doc("remove a participant from a conversation")
   @added(Versions.c2025_03_01_Preview)
-  removeParticipants is Operations.ResourceCollectionAction<
+  remove is Operations.ResourceCollectionAction<
     Participant,
     RemoveParticipantsRequestBody,
-    NoContentResponse
-  >;
-
-  @tag("ConversationManagement")
-  @doc("Retrieves list of conversation for a participant.")
-  @added(Versions.c2025_03_01_Preview)
-  @route("/messages/conversations:manage")
-  @get
-  getConversations is Azure.Core.Foundations.Operation<
-    {
-      @header
-      @doc("The Initiator user ID")
-      initiator: string;
-    },
-    ListConversationResponse
-  >;
-
-  @tag("ConversationManagement")
-  @doc("Retrieves list of conversations for a channel.")
-  @added(Versions.c2025_03_01_Preview)
-  @route("/messages/conversations/channels/{channelId}:manage")
-  getChannelConversations is Azure.Core.Foundations.Operation<
-  {
-    @doc("The ID of the channel.")
-    @path
-    channelId: string;
-  },
-  ListConversationResponse
->;
-
-  @tag("ConversationManagement")
-  @doc("Retrieves list of conversation messages.")
-  @added(Versions.c2025_03_01_Preview)
-  @route("/messages/conversations/{conversationId}/messages:manage")
-  @get
-  getMessages is Azure.Core.Foundations.Operation<
-    {
-      @header
-      @doc("The Initiator user ID")
-      initiator: string;
-
-      @doc("The ID of the conversation.")
-      @path
-      conversationId: string;
-
-      @doc("The max page size.")
-      @query
-      maxPageSize?: int32;
-    },
-    ListConversationMessageResponse
-  >;
-
-  @tag("ConversationManagement")
-  @doc("Get AI Analysis of a conversation.")
-  @added(Versions.c2025_03_01_Preview)
-  summarizeConversation is Operations.ResourceCollectionAction<
-    ConversationMessageItem,
-    RemoveParticipantsRequestBody,
-    OkResponse & GetConversationMessagesAnalysisResult
+    Response<207> & RemoveParticipantsResult
   >;
 }
 
@@ -166,7 +108,7 @@ interface ConversationMessagesOperations {
   @tag("ConversationMessages")
   @doc("Sends a conversation message from Business to User.")
   @added(Versions.c2025_03_01_Preview)
-  sendMessage is Operations.ResourceCollectionAction<
+  send is Operations.ResourceCollectionAction<
     ConversationMessageItem,
     ConversationMessagesSendRequestBody,
     OkResponse & SendConversationMessageResult
@@ -177,7 +119,7 @@ interface ConversationMessagesOperations {
   @added(Versions.c2025_03_01_Preview)
   summarize is Operations.ResourceCollectionAction<
     ConversationMessageItem,
-    RemoveParticipantsRequestBody,
+    {},
     OkResponse & GetConversationMessagesAnalysisResult
   >;
 }

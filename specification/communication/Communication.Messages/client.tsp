@@ -34,7 +34,11 @@ interface MessageTemplateClient
   service: Azure.Communication.MessagesService,
 })
 interface ConversationManagementClient
-  extends Azure.Communication.MessagesService.ConversationManagementOperations {}
+  extends Azure.Communication.MessagesService.ConversationManagementOperations {
+    listConversations is Azure.Communication.MessagesService.ConversationMessagesOperations.listConversations;
+    listMessages is Azure.Communication.MessagesService.ConversationMessagesOperations.listMessages;
+    summarize is Azure.Communication.MessagesService.ConversationMessagesOperations.summarize;
+  }
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
 @client({

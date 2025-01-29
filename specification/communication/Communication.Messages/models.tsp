@@ -447,12 +447,26 @@ alias ListTemplatesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
 }>;
 
-alias ListConversationsQueryParams = ListQueryParametersTrait<{
+alias ListConversationsQueryParams = 
+ListQueryParametersTrait<{
   ...CommonListParams;
+  
+  @query 
+  @doc("The Initiator user ID, needs to be present when authenticating with Bearer token.")
+  initiator?: string;
+  
+  @query 
+  @doc("The id of channel")
+  channelId?: uuid;
 }>;
 
-alias ListConversationMessagesQueryParams = ListQueryParametersTrait<{
+alias ListConversationMessagesQueryParams = 
+ListQueryParametersTrait<{
   ...CommonListParams;
+  
+  @query 
+  @doc("The Initiator user ID, needs to be present when authenticating with Bearer token.")
+  initiator?: string;
 }>;
 
 @doc("Notification messages send request body.")
@@ -550,28 +564,6 @@ model SendConversationMessageResult {
   messageId: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
-@doc("Details of a list item in a conversation's messages.")
-model ListMessageItem {
-  @doc("ID of the message.")
-  messageId: string;
-
-  @doc("Sequence ID of the message.")
-  sequenceId?: int64;
-
-  @doc("Message details.")
-  message: Message;
-
-  @doc("Display name of the sender.")
-  senderDisplayName?: string;
-
-  @doc("Communication identifier of the sender.")
-  senderCommunicationIdentifier: string;
-
-  @doc("Timestamp of when the message was created.")
-  createdOn: utcDateTime;
-}
-
 @clientName("CreateConversationRequestPayload", "csharp")
 @added(Versions.c2025_03_01_Preview)
 @resource("messages/conversations")
@@ -610,16 +602,8 @@ model Conversation {
 }
 
 @added(Versions.c2025_03_01_Preview)
-@doc("Create Convresation respond body.")
-model CreateConversationResponseBody {
-  @doc("Details of the message to send.")
-  @bodyRoot
-  body: CreateConversationResponse;
-}
-
-@added(Versions.c2025_03_01_Preview)
 @doc("Response for the create conversation operation.")
-model CreateConversationResponse {
+model CreateConversationResult {
   @doc("Server-generated conversation ID.")
   id: string;
 }
@@ -654,6 +638,30 @@ model RemoveParticipantsRequestBody {
   @doc("Details of the request body for removing participants from a conversation.")
   @bodyRoot
   body: RemoveParticipantsRequest;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the add participants operation.")
+model AddParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  value: ParticipantsResult[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the remove participants operation.")
+model RemoveParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  value: ParticipantsResult[];
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("Response for the remove participants operation.")
+model ParticipantsResult {
+  @doc("Participant User Id.")
+  id: string;
+
+  @doc("Error of the participant operation.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 @added(Versions.c2025_03_01_Preview)
@@ -773,6 +781,7 @@ model AddParticipantsRequest {
 @doc("Request payload for removing participants from a conversation.")
 model RemoveParticipantsRequest {
   @key
+  @visibility("read")
   @doc("The participant IDs to remove.")
   participantIds: string[];
 }
