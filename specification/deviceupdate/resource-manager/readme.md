@@ -56,7 +56,11 @@ suppressions:
       - $.definitions.UpdateProperties.properties.compatibility.items   
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
-    reason: False positive. Provisioning state is read-only. This has already been approved for previous API version     
+    reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
+  - code: PatchBodyParametersSchema
+    from: deviceupdate.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched. Bug https://msazure.visualstudio.com/One/_workitems/edit/30069110
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[4].schema.properties.identity     
 ```
 
 ### Tag: package-2024-10-01-preview
