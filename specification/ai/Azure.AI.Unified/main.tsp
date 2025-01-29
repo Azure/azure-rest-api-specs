@@ -17,6 +17,7 @@ import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./dataset/routes.tsp";
 import "./models/routes.tsp";
+import "./indexes/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
