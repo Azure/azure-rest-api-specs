@@ -21,7 +21,7 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - run: |
-        eval echo "::group::$INSTALL_COMMAND"
+        echo "::group::$INSTALL_COMMAND"
         $INSTALL_COMMAND
         echo "::endgroup::"
       shell: bash
