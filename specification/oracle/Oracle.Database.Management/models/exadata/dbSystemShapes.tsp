@@ -86,6 +86,20 @@ model DbSystemShapeProperties {
 
   @doc("The maximum number of CPU cores per database node that can be enabled for this shape. Only applicable to the flex Exadata shape and ExaCC Elastic shapes.")
   availableCoreCountPerNode?: int32;
+
+  @added(Versions.v20250101_preview)
+  @doc("The compute model of the Exadata Infrastructure")
+  computeModel?: ComputeModel;
+
+  @added(Versions.v20250101_preview)
+  @doc("Indicates if the shape supports database and storage server types")
+  areServerTypesSupported?: boolean;
+
+  @added(Versions.v20250101_preview)
+  @doc("The display name of the shape used for the DB system")
+  @minLength(1)
+  @maxLength(255)
+  displayName?: string;
 }
 
 @added(Versions.v20241201_preview)
