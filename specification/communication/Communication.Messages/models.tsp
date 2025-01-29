@@ -546,7 +546,6 @@ union ParticipantKind {
   external: "External",
 }
 
-@clientName("SendConversationMessageRequestPayload", "csharp")
 @added(Versions.c2025_03_01_Preview)
 @doc("Request payload for sending a conversation message.")
 model SendConversationMessageRequest {
