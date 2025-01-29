@@ -688,7 +688,8 @@
         },
         "resultLifespan": {
           "type": "string",
-          "description": "The lifespan of the endpoint invocation result after which it's no longer valid."
+          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format.",
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$"
         },
         "endpointSettings": {
           "description": "The settings of an external endpoint providing evaluation results.",
