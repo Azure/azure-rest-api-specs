@@ -1,10 +1,13 @@
-# databasefleetmanager
+# DatabaseFleetManager
 
 > see https://aka.ms/autorest
 
-## This is the AutoRest configuration file for Database Fleet Manager.
+This is the AutoRest configuration file for DatabaseFleetManager.
 
-The service is hosted under the Microsoft.DatabaseFleetManager resource provider but exposes a separate set of resources, apis, and SDKs.
+## Overview
+
+The service is hosted under the Microsoft.DatabaseFleetManager resource provider but exposes a separate set of
+resources, apis, and SDKs.
 
 ## Getting Started
 
@@ -28,7 +31,16 @@ These are the global settings for the DatabaseFleetManager API.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2024-10-01
+tag: package-2025-02-01-preview
+```
+
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - Microsoft.DatabaseFleetManager/preview/2025-02-01-preview/databasefleetmanager.json
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -51,8 +63,18 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-java
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
+  - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
+  - repo: azure-powershell
 ```
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
 
 ## C#
 
