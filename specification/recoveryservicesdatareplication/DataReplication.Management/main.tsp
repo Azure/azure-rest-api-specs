@@ -38,7 +38,7 @@ using TypeSpec.Versioning;
   title: "Azure Site Recovery Management Service API",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DataReplication;
 
 /**

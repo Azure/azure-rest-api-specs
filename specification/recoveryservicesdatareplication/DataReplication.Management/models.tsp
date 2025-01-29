@@ -1022,7 +1022,7 @@ model FabricModelProperties {
 model FabricModelCustomProperties {}
 
 /**
- * Fabric model for update.
+ * Fabric model update.
  */
 model FabricModelUpdate {
   /**
@@ -1034,7 +1034,7 @@ model FabricModelUpdate {
   /**
    * Fabric model properties.
    */
-  properties?: FabricModelProperties;
+  properties?: FabricModelPropertiesUpdate;
 
   /**
    * Gets or sets the Id of the resource.
@@ -1060,6 +1060,24 @@ model FabricModelUpdate {
   @visibility("read")
   systemData?: SystemData;
 }
+
+/**
+ * Fabric model properties update.
+ */
+model FabricModelPropertiesUpdate {
+  /**
+   * Fabric model custom properties update.
+   */
+  customProperties?: FabricModelCustomPropertiesUpdate;
+}
+
+/**
+ * Fabric model custom properties update.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+@discriminator("instanceType")
+model FabricModelCustomPropertiesUpdate {}
 
 /**
  * Fabric agent model properties.
@@ -1921,7 +1939,7 @@ model ProtectedItemJobProperties {
 model ProtectedItemModelCustomProperties {}
 
 /**
- * Protected item model for update.
+ * Protected item model update.
  */
 model ProtectedItemModelUpdate {
   /**
@@ -1955,11 +1973,11 @@ model ProtectedItemModelUpdate {
 }
 
 /**
- * Protected item model properties.
+ * Protected item model properties update.
  */
 model ProtectedItemModelPropertiesUpdate {
   /**
-   * Protected item model custom properties.
+   * Protected item model custom properties update.
    */
   customProperties?: ProtectedItemModelCustomPropertiesUpdate;
 }
@@ -2212,7 +2230,7 @@ model VaultIdentityModel {
 }
 
 /**
- * Vault model for update.
+ * Vault model update.
  */
 model VaultModelUpdate {
   /**
@@ -2227,7 +2245,7 @@ model VaultModelUpdate {
   properties?: VaultModelProperties;
 
   /**
-   * Vault model.
+   * Vault identity.
    */
   identity?: VaultIdentityModel;
 

@@ -47,35 +47,34 @@ input-file:
   - Microsoft.DataReplication/stable/2024-09-01/recoveryservicesdatareplication.json
 ```
 
+---
+
+## Suppression
+
+``` yaml
 suppressions:
   - code: GuidUsage
     reason: These parameters have already shipped as type GUID in the previous API version.  
     where:
       - $.definitions.HyperVToAzStackHCIDiskInput.properties.diskIdentifier.format
-  - code: GuidUsage
-    reason: These parameters have already shipped as type GUID in the previous API version.  
-    where:
       - $.definitions.VMwareToAzStackHCIDiskInput.properties.diskIdentifier.format
+  
   - code: AllTrackedResourcesMustHaveDelete
     reason: PrivateEndpointConnectionProxy has a delete operation defined.
     where:
       - $.definitions.PrivateEndpointConnectionProxy
+
   - code: TrackedResourcePatchOperation
     reason: PrivateEndpointConnectionProxy does not support an update operation.
     where:
       - $.definitions.PrivateEndpointConnectionProxy
+
   - code: PatchBodyParametersSchema
-    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
+    reason: False positive since these properties are either discriminator or identity that are required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}"].patch.parameters[4].schema.properties.properties
-  - code: PatchBodyParametersSchema
-    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}"].patch.parameters[4].schema.properties.identity
-  - code: PatchBodyParametersSchema
-    reason: This has been approved in the previous API version and since this property is the discriminator it is required.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}"].patch.parameters[4].schema.properties.properties.properties.customProperties.properties.instanceType
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}"].patch.parameters[4].schema.properties.identity.properties.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}"].patch.parameters[5].schema.properties.properties.properties.customProperties.properties.instanceType
 
 ```
 
