@@ -47,27 +47,16 @@ suppressions:
       - $.definitions.UpdateFileBase.properties.hashes
   - code: AvoidAdditionalProperties
     from: deviceupdate.json
-    reason: Optional file properties (not consumed by service but pass-through to device).
+    reason: Pass-through properties (not consumed by service but pass-through to device).
     where:
       - $.definitions.UpdateFile.properties.properties
       - $.definitions.AgentInfo.properties.compatibilityProperties
       - $.definitions.DeviceClassInfo.properties.compatibilityProperties
       - $.definitions.UpdateFileBase.properties.properties
-      - $.definitions.UpdateProperties.properties.compatibility.items
+      - $.definitions.UpdateProperties.properties.compatibility.items   
   - code: ProvisioningStateMustBeReadOnly
     from: deviceupdate.json
-    reason: False positive. Provisioning state is read-only. This has already been approved for previous API version 
-  - code: UnsupportedPatchProperties
-    from: deviceupdate.json
-    reason: Location property can't be removed as it will be a breaking change.Property exists in GA version 
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/updateAccounts/{updateAccountName}].patch.parameters[4]                
-  - code: AvoidAnonymousTypes
-    from: deviceupdate.json
-    reason: Type will not be shared
-    where: 
-      - $.definitions.ManagedServiceIdentityUpdate.properties.userAssignedIdentities.additionalProperties
-      
+    reason: False positive. Provisioning state is read-only. This has already been approved for previous API version     
 ```
 
 ### Tag: package-2024-10-01-preview

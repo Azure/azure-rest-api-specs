@@ -3276,6 +3276,24 @@
         "url"
       ]
     },
+    "HashAlgorithm": {
+      "type": "string",
+      "description": "Step type.",
+      "enum": [
+        "Sha256"
+      ],
+      "x-ms-enum": {
+        "name": "HashAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sha256",
+            "value": "Sha256",
+            "description": "sha256 hash"
+          }
+        ]
+      }
+    },
     "ImportManifestMetadata": {
       "type": "object",
       "description": "Metadata describing the import manifest, a document which describes the files and other metadata about an update version.",
@@ -3293,7 +3311,7 @@
           "type": "object",
           "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/HashAlgorithm"
           }
         }
       },
@@ -3435,29 +3453,6 @@
                 "description": "Failover Location"
               }
             ]
-          }
-        }
-      }
-    },
-    "ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The template for adding optional properties.",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            ],
-            "type": "object",
-            "x-nullable": true
           }
         }
       }
@@ -3829,12 +3824,8 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
         }
       }
     },
@@ -3887,7 +3878,7 @@
           "type": "object",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/HashAlgorithm"
           }
         },
         "mimeType": {
@@ -3949,7 +3940,7 @@
           "type": "object",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/HashAlgorithm"
           }
         },
         "mimeType": {

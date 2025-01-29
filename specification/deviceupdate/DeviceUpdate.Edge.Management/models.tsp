@@ -302,6 +302,19 @@ union StepType {
 }
 
 /**
+ * Step type.
+ */
+@added(Versions.v2025_04_01_preview)
+union HashAlgorithm {
+  string,
+
+  /**
+   * sha256 hash
+   */
+  Sha256: "Sha256",
+}
+
+/**
  * Device Update update account properties.
  */
 model UpdateAccountProperties {
@@ -480,8 +493,10 @@ model Resource {
   systemData?: SystemData;
 }
 
+@removed(Versions.v2025_04_01_preview)
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
 /**
  * Request payload used to update an existing Update Account.
  */
@@ -489,11 +504,13 @@ model UpdateAccountUpdate is TagUpdate {
   /**
    * The type of identity used for the resource.
    */
-  identity?: ManagedServiceIdentityUpdate;
+  @typeChangedFrom(Versions.v2025_04_01_preview, ManagedServiceIdentityUpdate)
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   /**
    * The geo-location where the resource lives
    */
+  @removed(Versions.v2025_04_01_preview)
   location?: string;
 }
 
@@ -1118,7 +1135,8 @@ model ImportManifestMetadata {
    * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  hashes: Record<string>;
+  @typeChangedFrom(Versions.v2025_04_01_preview, Record<string>)
+  hashes: Record<HashAlgorithm>;
 }
 
 /**
@@ -1312,7 +1330,8 @@ model UpdateFileBase {
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  hashes: Record<string>;
+  @typeChangedFrom(Versions.v2025_04_01_preview, Record<string>)
+  hashes: Record<HashAlgorithm>;
 
   /**
    * File MIME type.
