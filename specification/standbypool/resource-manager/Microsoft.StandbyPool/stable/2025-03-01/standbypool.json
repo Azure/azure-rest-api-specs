@@ -448,7 +448,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}/runtimeViews": {
       "get": {
-        "operationId": "StandbyContainerGroupPoolRuntimeViews_ListByStandbyContainerGroupPoolResource",
+        "operationId": "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool",
         "tags": [
           "StandbyContainerGroupPoolRuntimeViews"
         ],
@@ -484,6 +484,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool": {
+            "$ref": "./examples/StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool.json"
           }
         },
         "x-ms-pageable": {
@@ -822,7 +827,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/runtimeViews": {
       "get": {
-        "operationId": "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyVirtualMachinePoolResource",
+        "operationId": "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool",
         "tags": [
           "StandbyVirtualMachinePoolRuntimeViews"
         ],
@@ -858,6 +863,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool": {
+            "$ref": "./examples/StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool.json"
           }
         },
         "x-ms-pageable": {
@@ -1031,16 +1041,11 @@
       "type": "object",
       "description": "Displays the counts of container groups in each state, as known by the StandbyPool resource provider.",
       "properties": {
-        "zone": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The zone that the provided counts are in. It will not have a value if zones are not enabled."
-        },
         "instanceCountsByState": {
           "type": "array",
-          "description": "The count of pooled container groups in each state for the given zone.",
+          "description": "The count of pooled resources in each state.",
           "items": {
-            "$ref": "#/definitions/PoolContainerGroupStateCount"
+            "$ref": "#/definitions/PoolResourceStateCount"
           },
           "x-ms-identifiers": [
             "state"
@@ -1121,48 +1126,18 @@
         ]
       }
     },
-    "PoolContainerGroupState": {
-      "type": "string",
-      "description": "The state of the pooled container groups.",
-      "enum": [
-        "Running",
-        "Creating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "PoolContainerGroupState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The container group is up and running."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The container group is creating."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The container group is deleting."
-          }
-        ]
-      }
-    },
-    "PoolContainerGroupStateCount": {
+    "PoolResourceStateCount": {
       "type": "object",
-      "description": "Displays the counts of pooled container groups in each state, as known by the StandbyPool resource provider.",
+      "description": "Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/PoolContainerGroupState",
-          "description": "The state that the pooled container groups count is for."
+          "type": "string",
+          "description": "The state that the pooled resources count is for."
         },
         "count": {
           "type": "integer",
           "format": "int64",
-          "description": "The count of pooled container groups in the given state."
+          "description": "The count of pooled resources in the given state."
         }
       },
       "required": [
@@ -1187,85 +1162,6 @@
       },
       "required": [
         "code"
-      ]
-    },
-    "PoolVirtualMachineState": {
-      "type": "string",
-      "description": "The state of the pooled virtual machines.",
-      "enum": [
-        "Running",
-        "Creating",
-        "Starting",
-        "Deleting",
-        "Deallocated",
-        "Deallocating",
-        "Hibernated",
-        "Hibernating"
-      ],
-      "x-ms-enum": {
-        "name": "PoolVirtualMachineState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The virtual machine is up and running."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The virtual machine is creating."
-          },
-          {
-            "name": "Starting",
-            "value": "Starting",
-            "description": "The virtual machine is starting."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The virtual machine is deleting."
-          },
-          {
-            "name": "Deallocated",
-            "value": "Deallocated",
-            "description": "The virtual machine has released the lease on the underlying hardware and is powered off."
-          },
-          {
-            "name": "Deallocating",
-            "value": "Deallocating",
-            "description": "The virtual machine is releasing the lease on the underlying hardware and is powered off."
-          },
-          {
-            "name": "Hibernated",
-            "value": "Hibernated",
-            "description": "The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk. When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
-          },
-          {
-            "name": "Hibernating",
-            "value": "Hibernating",
-            "description": "The virtual machine is hibernating."
-          }
-        ]
-      }
-    },
-    "PoolVirtualMachineStateCount": {
-      "type": "object",
-      "description": "Displays the counts of pooled virtual machines in each state, as known by the StandbyPool resource provider.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/PoolVirtualMachineState",
-          "description": "The state that the pooled virtual machines count is for."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of pooled virtual machines in the given state."
-        }
-      },
-      "required": [
-        "state",
-        "count"
       ]
     },
     "ProvisioningState": {
@@ -1349,7 +1245,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolResourceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1391,13 +1288,6 @@
           "$ref": "#/definitions/ContainerGroupProperties",
           "description": "Specifies container group properties of standby container group pools."
         },
-        "zones": {
-          "type": "array",
-          "description": "Specifies zones of standby container group pools.",
-          "items": {
-            "type": "string"
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -1422,7 +1312,8 @@
         },
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1437,13 +1328,6 @@
         "containerGroupProperties": {
           "$ref": "#/definitions/ContainerGroupProperties",
           "description": "Specifies container group properties of standby container group pools."
-        },
-        "zones": {
-          "type": "array",
-          "description": "Specifies zones of standby container group pools.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1453,7 +1337,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResourceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1540,7 +1425,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolResourceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1620,7 +1506,8 @@
         },
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1659,7 +1546,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResourceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1695,7 +1583,7 @@
       "properties": {
         "instanceCountSummary": {
           "type": "array",
-          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry without zone values.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider. If zones are not enabled on the attached VMSS, the list will contain a single entry without zone values. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
           "items": {
             "$ref": "#/definitions/VirtualMachineInstanceCountSummary"
           },
@@ -1723,7 +1611,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachineResourceProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1759,7 +1648,11 @@
       "properties": {
         "virtualMachineResourceId": {
           "type": "string",
-          "description": "Resource id of the virtual machine."
+          "format": "arm-id",
+          "description": "Resource id of the virtual machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1794,18 +1687,18 @@
     },
     "VirtualMachineInstanceCountSummary": {
       "type": "object",
-      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider. Note: any resources in the Running state may still be installing extensions / not fully provisioned.",
       "properties": {
         "zone": {
           "type": "integer",
           "format": "int64",
-          "description": "The zone that the provided counts are in. It will not have a value if zones are not enabled on the attached VMSS."
+          "description": "The zone that the provided counts are in. This is null if zones are not enabled on the attached VMSS."
         },
         "instanceCountsByState": {
           "type": "array",
-          "description": "The count of pooled virtual machines in each state for the given zone.",
+          "description": "The count of pooled resources in each state for the given zone.",
           "items": {
-            "$ref": "#/definitions/PoolVirtualMachineStateCount"
+            "$ref": "#/definitions/PoolResourceStateCount"
           },
           "x-ms-identifiers": [
             "state"
@@ -1821,8 +1714,7 @@
       "description": "State of standby virtual machines",
       "enum": [
         "Running",
-        "Deallocated",
-        "Hibernated"
+        "Deallocated"
       ],
       "x-ms-enum": {
         "name": "VirtualMachineState",
@@ -1837,11 +1729,6 @@
             "name": "Deallocated",
             "value": "Deallocated",
             "description": "The virtual machine has released the lease on the underlying hardware and is powered off."
-          },
-          {
-            "name": "Hibernated",
-            "value": "Hibernated",
-            "description": "The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
           }
         ]
       }
