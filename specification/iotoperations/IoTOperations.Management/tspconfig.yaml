@@ -9,6 +9,14 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/iotoperations.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.IotOperations"
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"
+    # Disable generate samples until CodGen fix collection initialization issue https://github.com/Azure/azure-sdk-for-net/issues/47929
+    generate-sample-project: false
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-iotoperations"
     package-name: "{package-dir}"
@@ -27,6 +35,7 @@ options:
     hierarchyClient: false
     experimentalExtensibleEnums: true
     enableOperationGroup: true
+    generateSample: true
     package-dir: "arm-iotoperations"
     flavor: "azure"
     packageDetails:
@@ -41,7 +50,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
