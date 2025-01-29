@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-searchindex-2024-11-01-preview` is
 
 ``` yaml $(tag) == 'package-searchindex-2024-11-01-preview'
 input-file:
-- stable/2024-11-01-preview/searchindex.json
+- preview/2024-11-01-preview/searchindex.json
 suppressions:
   - code: LroExtension 
     from: searchindex.json
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-searchservice-2024-11-01-preview` 
 
 ``` yaml $(tag) == 'package-searchservice-2024-11-01-preview'
 input-file:
-- stable/2024-11-01-preview/searchservice.json
+- preview/2024-11-01-preview/searchservice.json
 suppressions:
   - code: LroExtension 
     from: searchservice.json
