@@ -40,13 +40,6 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: deviceupdate.json
-    reason: Hash algorithm to hashed value map. Service validates the algorithms.Already approved in previous API version
-    where:
-      - $.definitions.UpdateFile.properties.hashes
-      - $.definitions.ImportManifestMetadata.properties.hashes
-      - $.definitions.UpdateFileBase.properties.hashes
-  - code: AvoidAdditionalProperties
-    from: deviceupdate.json
     reason: Pass-through properties (not consumed by service but pass-through to device).
     where:
       - $.definitions.UpdateFile.properties.properties
