@@ -55,6 +55,32 @@ suppressions:
     reason: Legacy swagger file
 ```
 
+### Tag: package-searchindex-2024-11-01-preview
+
+These settings apply only when `--tag=package-searchindex-2024-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-searchindex-2024-11-01-preview'
+input-file:
+- stable/2024-11-01-preview/searchindex.json
+suppressions:
+  - code: LroExtension 
+    from: searchindex.json
+    reason: Legacy swagger file
+```
+
+### Tag: package-searchservice-2024-11-01-preview
+
+These settings apply only when `--tag=package-searchservice-2024-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-searchservice-2024-11-01-preview'
+input-file:
+- stable/2024-11-01-preview/searchservice.json
+suppressions:
+  - code: LroExtension 
+    from: searchservice.json
+    reason: Legacy swagger file
+```
+
 ### Tag: package-searchindex-2024-07-01
 
 These settings apply only when `--tag=package-searchindex-2024-07-01` is specified on the command line.
