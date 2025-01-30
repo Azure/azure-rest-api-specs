@@ -257,7 +257,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it.each([404, 500, 501])(
-    "handles errors removing label (%s)",
+    "handles error removing label (%s)",
     async (status) => {
       const github = createMockGithub();
       github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
