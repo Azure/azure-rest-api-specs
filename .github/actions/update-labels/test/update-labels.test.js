@@ -60,16 +60,6 @@ describe("updateLabels", () => {
     expect(github.rest.issues.addLabels).toBeCalledTimes(0);
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
-
-  //     process.env.ISSUE_NUMBER = "123";
-  //     // Listing all artifacts by issue_number is not yet implemented
-  //     await expect(
-  //       updateLabels({
-  //         github: github,
-  //         context: null,
-  //         core: createMockCore(),
-  //       }),
-  //     ).rejects.toThrow();
 });
 
 describe("updateLabelsImpl", () => {
