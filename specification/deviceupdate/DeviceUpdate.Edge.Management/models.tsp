@@ -314,7 +314,7 @@ union HashAlgorithm {
 }
 
 /**
- * Hash type
+ * Hash value
  */
 model HashValue {
   /**
