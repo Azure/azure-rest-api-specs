@@ -42,12 +42,6 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         workflow_run: {
-          head_repository: {
-            name: "TestRepoName",
-            owner: {
-              login: "TestRepoOwnerLogin",
-            },
-          },
           head_sha: "abc123",
           id: 456,
           repository: {
