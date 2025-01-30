@@ -1,10 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { extractInputs } from "../src/context.js";
+import { createMockCore } from "./mocks.js";
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
-    const core = createMockCore();
-
     const context = {
       eventName: "unsupported_event",
       payload: {
@@ -12,12 +11,12 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, core)).rejects.toThrow();
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).rejects.toThrow();
   });
 
   it("pull_request", async () => {
-    const core = createMockCore();
-
     const context = {
       eventName: "pull_request",
       payload: {
@@ -36,7 +35,9 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, core)).resolves.toEqual({
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -46,8 +47,6 @@ describe("extractInputs", () => {
   });
 
   it("workflow_run (same repo)", async () => {
-    const core = createMockCore();
-
     const context = {
       eventName: "workflow_run",
       payload: {
@@ -66,7 +65,9 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, core)).resolves.toEqual({
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -78,8 +79,6 @@ describe("extractInputs", () => {
   it.each([0, 1, 2])(
     "workflow_run (fork repo, %s PRs)",
     async (numPullRequests) => {
-      const core = createMockCore();
-
       const context = {
         eventName: "workflow_run",
         payload: {
@@ -117,7 +116,7 @@ describe("extractInputs", () => {
         },
       };
 
-      const inputsPromise = extractInputs(github, context, core);
+      const inputsPromise = extractInputs(github, context, createMockCore());
       if (numPullRequests === 1) {
         await expect(inputsPromise).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
@@ -140,10 +139,3 @@ describe("extractInputs", () => {
     },
   );
 });
-
-function createMockCore() {
-  return {
-    debug: vi.fn(console.debug),
-    info: vi.fn(console.log),
-  };
-}
