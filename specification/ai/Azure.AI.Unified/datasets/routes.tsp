@@ -28,7 +28,7 @@ interface Datasets {
     @doc("View type for including/excluding (for example) archived entities.")
     @query("listViewType")
     listViewType?: ListViewType,
-  ): PagedDataContainer;
+  ): PagedDatasetContainer;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -76,7 +76,7 @@ interface Datasets {
     @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.")
     @query("listViewType")
     listViewType?: ListViewType,
-  ): PagedDataVersionBase;
+  ): PagedDatasetVersion;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -108,7 +108,7 @@ interface Datasets {
     @doc("Version identifier.")
     @path
     version: string,
-  ): DataVersionBase;
+  ): DatasetVersion;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -127,6 +127,6 @@ interface Datasets {
 
     @doc("Version entity to create or update.")
     @body
-    body: DataVersionBase,
-  ): DataVersionBase;
+    body: DatasetVersion,
+  ): DatasetVersion;
 }

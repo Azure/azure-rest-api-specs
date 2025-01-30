@@ -49,7 +49,7 @@ model DatasetVersion extends AssetBase {
   datasetUri: string;
 
   @doc("Data type")
-  datasetType: DataType;
+  datasetType: DatasetType;
 }
 
 @doc("PagedDataVersionBase Definition")
@@ -69,12 +69,12 @@ model PagedDatasetVersion {
 @doc("UriFileDatasetVersion Definition")
 model UriFileDataserVersion extends DatasetVersion {
   @doc("[Required] Specifies the type of data.")
-  dataType: DatasetType.uri_file;
+  datasetType: DatasetType.uri_file;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("UriFolderDatasetVersion Definition")
 model UriFolderDatasetVersion extends DatasetVersion {
   @doc("[Required] Specifies the type of data.")
-  dataType: DatasetType.uri_folder;
+  datasetType: DatasetType.uri_folder;
 }
