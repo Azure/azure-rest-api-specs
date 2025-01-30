@@ -17,9 +17,11 @@ on:
       - eng/tools/tsconfig.json
       - eng/tools/tsp-client-tests/**
       - specification/common-types
-      - specification/keyvault
-      - specification/sphere
+      - specification/contosowidgetmanager
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   tsp-client:
@@ -28,5 +30,4 @@ jobs:
       package: tsp-client-tests
       sparse-checkout-paths: |
         specification/common-types
-        specification/keyvault
-        specification/sphere
+        specification/contosowidgetmanager

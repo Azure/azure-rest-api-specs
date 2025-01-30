@@ -682,9 +682,13 @@
           "type": "string",
           "description": "The recipient Email Address"
         },
+        "internetMessageId": {
+          "type": "string",
+          "description": "The Internet Message Id of the email that has been sent"
+        },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "status": {
           "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
@@ -701,6 +705,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
         "deliveryStatusDetails"
       ]
     },
@@ -759,6 +766,10 @@
         "statusMessage": {
           "type": "string",
           "description": "Detailed status message"
+        },
+        "recipientMailServerHostName": {
+          "type": "string",
+          "description": "Recipient mail server host name"
         }
       }
     },
@@ -2429,8 +2440,16 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the SMS was received"
+        },
+        "segmentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments in the message"
         }
       },
+      "required": [
+        "segmentCount"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -6146,7 +6165,9 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6189,7 +6210,11 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "geometryId"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
