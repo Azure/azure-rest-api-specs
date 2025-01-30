@@ -183,8 +183,8 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
-        issue_number: 456,
-        run_id: 123,
+        issue_number: 123,
+        run_id: 456,
         github: github,
         core: createMockCore(),
       }),
@@ -193,31 +193,103 @@ describe("updateLabelsImpl", () => {
     expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
       owner: "owner",
       repo: "repo",
-      run_id: 123,
+      run_id: 456,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "owner",
       repo: "repo",
-      issue_number: 456,
+      issue_number: 123,
       labels: ["foo", "bar"],
     });
-
     expect(github.rest.issues.removeLabel).toBeCalledTimes(2);
-
     expect(github.rest.issues.removeLabel).nthCalledWith(1, {
       owner: "owner",
       repo: "repo",
-      issue_number: 456,
+      issue_number: 123,
       name: "baz",
     });
-
     expect(github.rest.issues.removeLabel).nthCalledWith(2, {
       owner: "owner",
       repo: "repo",
-      issue_number: 456,
+      issue_number: 123,
       name: "qux",
     });
   });
+
+  it("throws for invalid label value", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "label-foo=true" },
+          { name: "label-bar=false" },
+          { name: "label-baz=invalid" },
+        ],
+      },
+    });
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow();
+
+    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
+      owner: "owner",
+      repo: "repo",
+      run_id: 456,
+    });
+
+    // Ensure no labels are added or removed if any are invalid
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
+  it.each([404, 500, 501])(
+    "handles errors removing label (%s)",
+    async (status) => {
+      const github = createMockGithub();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [{ name: "label-foo=false" }],
+        },
+      });
+      github.rest.issues.removeLabel.mockRejectedValue({ status: status });
+
+      const updateLabelsImplPromise = updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      });
+
+      if (status == 404) {
+        await expect(updateLabelsImplPromise).resolves.toBeUndefined();
+      } else {
+        await expect(updateLabelsImplPromise).rejects.toThrow();
+      }
+
+      expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
+        owner: "owner",
+        repo: "repo",
+        run_id: 456,
+      });
+      expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+      expect(github.rest.issues.removeLabel).toBeCalledWith({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        name: "foo",
+      });
+    },
+  );
 });
 
 function createMockGithub() {
