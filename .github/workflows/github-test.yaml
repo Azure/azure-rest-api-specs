@@ -1,0 +1,48 @@
+name: GitHub Actions - Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/**
+  pull_request:
+    paths:
+      - .github/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./.github
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+
+      - name: Setup Node 20 and install deps
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          # actions/github-script@v7 uses Node 20
+          node-version: 20.x
+          working-directory: ./.github
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: ./.github/coverage
+          if-no-files-found: ignore
