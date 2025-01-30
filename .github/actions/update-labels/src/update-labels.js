@@ -19,6 +19,26 @@ export default async function updateLabels({ github, context, core }) {
     run_id = run_id || inputs.run_id;
   }
 
+  await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
+}
+
+/**
+ * @param {Object} params
+ * @param {string} params.owner
+ * @param {string} params.repo
+ * @param {number} params.issue_number
+ * @param {number} params.run_id
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {typeof import("@actions/core")} params.core
+ */
+export async function updateLabelsImpl({
+  owner,
+  repo,
+  issue_number,
+  run_id,
+  github,
+  core,
+}) {
   /** @type {string[]} */
   let artifactNames = [];
 
