@@ -302,16 +302,18 @@ union StepType {
 }
 
 /**
- * Step type.
+ * Hash type
  */
-@added(Versions.v2025_04_01_preview)
-union HashAlgorithm {
-  string,
+model HashType {
+  /**
+   * Hash algorithm
+   */
+  algorithm: string;
 
   /**
-   * sha256 hash
+   * Hash value
    */
-  Sha256: "Sha256",
+  hashValue: string;
 }
 
 /**
@@ -1135,8 +1137,17 @@ model ImportManifestMetadata {
    * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  @typeChangedFrom(Versions.v2025_04_01_preview, Record<string>)
-  hashes: Record<HashAlgorithm>;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "hashes")
+  hashesOld: Record<string>;
+
+  /**
+   * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  hashes: HashType[];
 }
 
 /**
@@ -1330,8 +1341,17 @@ model UpdateFileBase {
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
-  @typeChangedFrom(Versions.v2025_04_01_preview, Record<string>)
-  hashes: Record<HashAlgorithm>;
+  @removed(Versions.v2025_04_01_preview)
+  @renamedFrom(Versions.v2025_04_01_preview, "hashes")
+  hashesOld: Record<string>;
+
+  /**
+   * Mapping of hashing algorithm to base64 encoded hash values.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
+  @added(Versions.v2025_04_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", [])
+  hashes: HashType[];
 
   /**
    * File MIME type.

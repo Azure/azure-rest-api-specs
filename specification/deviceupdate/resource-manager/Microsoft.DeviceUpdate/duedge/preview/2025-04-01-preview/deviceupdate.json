@@ -3276,23 +3276,23 @@
         "url"
       ]
     },
-    "HashAlgorithm": {
-      "type": "string",
-      "description": "Step type.",
-      "enum": [
-        "Sha256"
-      ],
-      "x-ms-enum": {
-        "name": "HashAlgorithm",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sha256",
-            "value": "Sha256",
-            "description": "sha256 hash"
-          }
-        ]
-      }
+    "HashType": {
+      "type": "object",
+      "description": "Hash type",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Hash algorithm"
+        },
+        "hashValue": {
+          "type": "string",
+          "description": "Hash value"
+        }
+      },
+      "required": [
+        "algorithm",
+        "hashValue"
+      ]
     },
     "ImportManifestMetadata": {
       "type": "object",
@@ -3308,11 +3308,12 @@
           "description": "File size in number of bytes."
         },
         "hashes": {
-          "type": "object",
+          "type": "array",
           "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.",
-          "additionalProperties": {
-            "$ref": "#/definitions/HashAlgorithm"
-          }
+          "items": {
+            "$ref": "#/definitions/HashType"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3875,11 +3876,12 @@
           "description": "File size in number of bytes."
         },
         "hashes": {
-          "type": "object",
+          "type": "array",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
-          "additionalProperties": {
-            "$ref": "#/definitions/HashAlgorithm"
-          }
+          "items": {
+            "$ref": "#/definitions/HashType"
+          },
+          "x-ms-identifiers": []
         },
         "mimeType": {
           "type": "string",
@@ -3937,11 +3939,12 @@
           "description": "File size in number of bytes."
         },
         "hashes": {
-          "type": "object",
+          "type": "array",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
-          "additionalProperties": {
-            "$ref": "#/definitions/HashAlgorithm"
-          }
+          "items": {
+            "$ref": "#/definitions/HashType"
+          },
+          "x-ms-identifiers": []
         },
         "mimeType": {
           "type": "string",
