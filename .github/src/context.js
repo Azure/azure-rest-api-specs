@@ -53,7 +53,6 @@ export async function extractInputs(github, context, core) {
       // Owner and repo for the PR head (at least one should differ from target for fork PRs)
       const head_owner = payload.workflow_run.head_repository.owner.login;
       const head_repo = payload.workflow_run.head_repository.name;
-
       const head_sha = payload.workflow_run.head_sha;
 
       core.info(
