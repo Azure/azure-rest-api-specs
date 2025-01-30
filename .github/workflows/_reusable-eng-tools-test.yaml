@@ -20,6 +20,9 @@ on:
         required: false
         type: boolean
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
@@ -46,8 +49,8 @@ jobs:
             eng
             ${{ inputs.sparse-checkout-paths }}
 
-      - name: Setup Node ${{ matrix.node-version }} and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node ${{ matrix.node-version }} and install deps
+        uses: ./.github/actions/setup-node-install-deps
         with:
           node-version: ${{ matrix.node-version }}.x
 
