@@ -45,7 +45,7 @@ describe("updateLabels", () => {
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 
-  it("loads inputs from context (workflow_run:completed)", async () => {
+  it("loads inputs from context", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
@@ -93,7 +93,7 @@ describe("updateLabels", () => {
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 
-  it("loads inputs from env and context (workflow_dispatch)", async () => {
+  it("loads inputs from env and context", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
@@ -102,20 +102,26 @@ describe("updateLabels", () => {
     });
 
     const context = {
-      eventName: "workflow_dispatch",
+      eventName: "workflow_run",
       payload: {
-        repository: {
-          name: "TestRepoName",
-          owner: {
-            login: "TestRepoOwnerLogin",
+        action: "completed",
+        workflow_run: {
+          head_sha: "abc123",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
           },
+          pull_requests: [{ number: 123 }],
         },
       },
     };
 
     try {
-      process.env.ISSUE_NUMBER = "123";
-      process.env.RUN_ID = "456";
+      process.env.OWNER = "TestRepoOwnerLoginEnv";
+      process.env.REPO = "TestRepoNameEnv";
 
       await expect(
         updateLabels({
@@ -125,18 +131,18 @@ describe("updateLabels", () => {
         }),
       ).resolves.toBeUndefined();
     } finally {
-      delete process.env.ISSUE_NUMBER;
-      delete process.env.RUN_ID;
+      delete process.env.OWNER;
+      delete process.env.REPO;
     }
 
     expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
-      owner: "TestRepoOwnerLogin",
-      repo: "TestRepoName",
+      owner: "TestRepoOwnerLoginEnv",
+      repo: "TestRepoNameEnv",
       run_id: 456,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
-      owner: "TestRepoOwnerLogin",
-      repo: "TestRepoName",
+      owner: "TestRepoOwnerLoginEnv",
+      repo: "TestRepoNameEnv",
       issue_number: 123,
       labels: ["foo"],
     });
