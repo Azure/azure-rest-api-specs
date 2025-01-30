@@ -3,7 +3,7 @@
   "info": {
     "title": "ConnectivityConfiguration",
     "description": "The Microsoft Azure Virtual Network Manager Connectivity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2024-05-01"
+    "version": "2024-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -276,67 +276,80 @@
           },
           "description": "Connectivity topology type."
         },
-        "hubs": {
-          "type": "array",
-          "x-ms-identifiers": [
-            "resourceId"
-          ],
-          "items": {
-            "$ref": "#/definitions/Hub"
-          },
-          "description": "List of hubItems"
-        },
-        "isGlobal": {
+        "allowAddressOverlap": {
           "type": "string",
           "enum": [
             "False",
             "True"
           ],
           "x-ms-enum": {
-            "name": "IsGlobal",
+            "name": "AllowAddressOverlap",
             "modelAsString": true
           },
-          "description": "Flag if global mesh is supported."
+          "description": "Flag if allow address overlap.",
+          "default": "True"
         },
-        "appliesToGroups": {
-          "type": "array",
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ],
-          "items": {
-            "$ref": "#/definitions/connectivityGroupItem"
+          "hubs": {
+            "type": "array",
+            "x-ms-identifiers": [
+              "resourceId"
+            ],
+            "items": {
+              "$ref": "#/definitions/Hub"
+            },
+            "description": "List of hubItems"
           },
-          "description": "Groups for configuration"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the connectivity configuration resource."
-        },
-        "deleteExistingPeering": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "DeleteExistingPeering",
-            "modelAsString": true
+          "isGlobal": {
+            "type": "string",
+            "enum": [
+              "False",
+              "True"
+            ],
+            "x-ms-enum": {
+              "name": "IsGlobal",
+              "modelAsString": true
+            },
+            "description": "Flag if global mesh is supported."
           },
-          "description": "Flag if need to remove current existing peerings."
+          "appliesToGroups": {
+            "type": "array",
+            "x-ms-identifiers": [
+              "networkGroupId"
+            ],
+            "items": {
+              "$ref": "#/definitions/connectivityGroupItem"
+            },
+            "description": "Groups for configuration"
+          },
+          "provisioningState": {
+            "readOnly": true,
+            "$ref": "./network.json#/definitions/ProvisioningState",
+            "description": "The provisioning state of the connectivity configuration resource."
+          },
+          "deleteExistingPeering": {
+            "type": "string",
+            "enum": [
+              "False",
+              "True"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteExistingPeering",
+              "modelAsString": true
+            },
+            "description": "Flag if need to remove current existing peerings."
+          },
+          "resourceGuid": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Unique identifier for this resource."
+          }
         },
-        "resourceGuid": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Unique identifier for this resource."
-        }
+        "required": [
+          "connectivityTopology",
+          "appliesToGroups"
+        ],
+        "description": "Properties of network manager connectivity configuration"
       },
-      "required": [
-        "connectivityTopology",
-        "appliesToGroups"
-      ],
-      "description": "Properties of network manager connectivity configuration"
-    },
     "Hub": {
       "type": "object",
       "properties": {
