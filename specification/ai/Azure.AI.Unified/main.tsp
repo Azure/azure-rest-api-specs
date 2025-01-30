@@ -15,7 +15,7 @@ import "./agents/vector_stores/files/routes.tsp";
 import "./agents/vector_stores/file_batches/routes.tsp";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
-import "./dataset/routes.tsp";
+import "./datasets/routes.tsp";
 import "./models/routes.tsp";
 import "./indexes/routes.tsp";
 
