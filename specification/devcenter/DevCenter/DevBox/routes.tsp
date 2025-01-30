@@ -452,4 +452,108 @@ interface DevBoxes {
     {},
     OperationStatus
   >;
+
+  @doc("Creates an action to schedule the deletion of a Dev Box")
+  @added(APIVersions.v2025_03_01_preview)
+  @action("scheduledDelete")
+  scheduledDeleteAction is StandardResourceOperations.ResourceAction<
+    DevBox,
+    {
+      ...DeleteAtQueryParameter;
+    },
+    DevBoxAction
+  >;
+
+  @doc("Lists addons for this Dev Box.")
+  @added(APIVersions.v2025_03_01_preview)
+  listDevBoxAddons is StandardResourceOperations.ResourceList<DevBoxAddOn>;
+
+  @doc("Gets a Dev Box addon by Dev Box addon id.")
+  @added(APIVersions.v2025_03_01_preview)
+  getDevBoxAddons is StandardResourceOperations.ResourceRead<DevBoxAddOn>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Creates a Dev Box addon.")
+  @finalOperation(DevBoxes.getDevBoxAddons)
+  @pollingOperation(OperationStatuses.get)
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}")
+  @put
+  createDevBoxAddOn is Azure.Core.Foundations.Operation<
+    {
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
+      ...DevBoxAddOnNameParameter;
+
+      @doc("Represents the body request of a Dev Box addon creation.")
+      @bodyRoot
+      body: DevBoxAddOn;
+    },
+    DevBoxAddOn | {
+      @statusCode statusCode: 201;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @added(APIVersions.v2025_03_01_preview)
+      @bodyRoot
+      body?: DevBoxAddOn;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Deletes a Dev Box addon.")
+  @pollingOperation(OperationStatuses.get)
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}")
+  @delete
+  deleteDevBoxAddOn is Azure.Core.Foundations.Operation<
+    {
+      ...ProjectNameParameter;
+      ...UserIdParameter;
+      ...DevBoxNameParameter;
+      ...DevBoxAddOnNameParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @bodyRoot body: OperationStatus;
+    } | {
+      @statusCode statusCode: 204;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Enable a Dev Box addon.")
+  @pollingOperation(OperationStatuses.get)
+  @action("enable")
+  enableDevBoxAddOn is DevCenterOps.LongRunningResourceAction<
+    DevBoxAddOn,
+    {},
+    OperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Disable a Dev Box addon.")
+  @pollingOperation(OperationStatuses.get)
+  @action("disable")
+  disableDevBoxAddOn is DevCenterOps.LongRunningResourceAction<
+    DevBoxAddOn,
+    {},
+    OperationStatus
+  >;
 }
