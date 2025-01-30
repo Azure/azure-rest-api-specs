@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-09-preview'
 input-file:
-  - Microsoft.Network/stable/2024-09-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2024-09-01-preview/networkManagerConnectivityConfiguration.json
   - Microsoft.Network/stable/2024-05-01/applicationGateway.json
   - Microsoft.Network/stable/2024-05-01/applicationGatewayWafDynamicManifests.json
   - Microsoft.Network/stable/2024-05-01/applicationSecurityGroup.json
