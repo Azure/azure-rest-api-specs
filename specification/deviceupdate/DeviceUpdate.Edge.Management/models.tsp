@@ -301,6 +301,9 @@ union StepType {
   Reference: "reference",
 }
 
+/**
+ * Hash algorithm
+ */
 union HashAlgorithm {
   string,
 
@@ -309,10 +312,11 @@ union HashAlgorithm {
    */
   sha256: "sha256",
 }
+
 /**
  * Hash type
  */
-model HashType {
+model HashValue {
   /**
    * Hash algorithm
    */
@@ -321,7 +325,7 @@ model HashType {
   /**
    * Hash value
    */
-  hashValue: string;
+  value: string;
 }
 
 /**
@@ -1142,7 +1146,7 @@ model ImportManifestMetadata {
   sizeInBytes: int64;
 
   /**
-   * An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
+   * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @removed(Versions.v2025_04_01_preview)
@@ -1152,10 +1156,9 @@ model ImportManifestMetadata {
   /**
    * An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  hashes: HashType[];
+  hashes: HashValue[];
 }
 
 /**
@@ -1356,10 +1359,9 @@ model UpdateFileBase {
   /**
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  hashes: HashType[];
+  hashes: HashValue[];
 
   /**
    * File MIME type.

@@ -3276,22 +3276,40 @@
         "url"
       ]
     },
-    "HashType": {
+    "HashAlgorithm": {
+      "type": "string",
+      "description": "Hash algorithm",
+      "enum": [
+        "sha256"
+      ],
+      "x-ms-enum": {
+        "name": "HashAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sha256",
+            "value": "sha256",
+            "description": "Hash algorithm type"
+          }
+        ]
+      }
+    },
+    "HashValue": {
       "type": "object",
       "description": "Hash type",
       "properties": {
         "algorithm": {
-          "type": "string",
+          "$ref": "#/definitions/HashAlgorithm",
           "description": "Hash algorithm"
         },
-        "hashValue": {
+        "value": {
           "type": "string",
           "description": "Hash value"
         }
       },
       "required": [
         "algorithm",
-        "hashValue"
+        "value"
       ]
     },
     "ImportManifestMetadata": {
@@ -3309,9 +3327,9 @@
         },
         "hashes": {
           "type": "array",
-          "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.",
+          "description": "An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.",
           "items": {
-            "$ref": "#/definitions/HashType"
+            "$ref": "#/definitions/HashValue"
           },
           "x-ms-identifiers": []
         }
@@ -3879,7 +3897,7 @@
           "type": "array",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
           "items": {
-            "$ref": "#/definitions/HashType"
+            "$ref": "#/definitions/HashValue"
           },
           "x-ms-identifiers": []
         },
@@ -3942,7 +3960,7 @@
           "type": "array",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
           "items": {
-            "$ref": "#/definitions/HashType"
+            "$ref": "#/definitions/HashValue"
           },
           "x-ms-identifiers": []
         },
