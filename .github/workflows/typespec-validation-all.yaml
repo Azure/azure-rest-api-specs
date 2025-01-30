@@ -32,6 +32,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   typespec-validation-all:
     # Use short name to maximize space for parameters in UI
@@ -65,8 +68,8 @@ jobs:
           # Convert placeholder string 'default' to '', which tells the action to checkout the default ref.
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate All Specs
         run: |
