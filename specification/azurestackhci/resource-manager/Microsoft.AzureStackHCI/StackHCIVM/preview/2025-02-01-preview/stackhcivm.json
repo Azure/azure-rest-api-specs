@@ -2213,7 +2213,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkInterfaceTagsUpdate"
+              "$ref": "#/definitions/NetworkInterfacesUpdateRequest"
             }
           }
         ],
@@ -5215,16 +5215,17 @@
         }
       }
     },
-    "NetworkInterfaceTagsUpdate": {
+    "NetworkInterfacesUpdateProperties": {
       "type": "object",
-      "description": "The type used for updating tags in NetworkInterface resources.",
+      "description": "Defines the resource properties for the update.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupArmReference",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/InterfaceDNSSettings",
+          "description": "DNS Settings for the interface"
         }
       }
     },
@@ -5238,6 +5239,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfacesUpdateProperties",
+          "description": "Defines the resource properties for the update."
         }
       }
     },
@@ -5344,6 +5349,43 @@
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/NetworkSecurityGroupStatus",
+          "description": "The observed state of Network Security Group",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityGroupStatus": {
+      "type": "object",
+      "description": "The observed state of network security group",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "NetworkSecurityGroup provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/NetworkSecurityGroupStatusProvisioningStatus",
+          "description": "network security group provisioning status"
+        }
+      }
+    },
+    "NetworkSecurityGroupStatusProvisioningStatus": {
+      "type": "object",
+      "description": "network security group provisioning status",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the network security group"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the network security group [Succeeded, Failed, InProgress]"
         }
       }
     },
