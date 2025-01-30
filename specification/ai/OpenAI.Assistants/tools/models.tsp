@@ -162,13 +162,13 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
   type: "file_search";
 
   /** The results of the file search. */
-  @typeChangedFrom(ServiceApiVersions.v2024_12_01_preview, Record<string>)
+  @typeChangedFrom(ServiceApiVersions.v2025_01_01_preview, Record<string>)
   @encodedName("application/json", "file_search")
   fileSearch: FileSearchToolCallResult[];
 }
 
 /** File search tool call result */
-@added(ServiceApiVersions.v2024_12_01_preview)
+@added(ServiceApiVersions.v2025_01_01_preview)
 model FileSearchToolCallResult {
   /** The ID of the file that result was found in. */
   @encodedName("application/json", "file_id")
@@ -188,7 +188,7 @@ model FileSearchToolCallResult {
 }
 
 /** Content item in a file search result */
-@added(ServiceApiVersions.v2024_12_01_preview)
+@added(ServiceApiVersions.v2025_01_01_preview)
 model FileSearchToolCallResultContentItem {
   /** The type of the content. */
   type?: "text";

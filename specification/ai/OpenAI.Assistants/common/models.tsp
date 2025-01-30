@@ -127,7 +127,7 @@ union AssistantsApiResponseFormatMode {
   "auto",
 
   /** Setting the value to `none`, will result in a 400 Bad request. */
-  @removed(ServiceApiVersions.v2024_12_01_preview)
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   "none",
 }
 
@@ -164,7 +164,7 @@ model AssistantsApiResponseFormatJsonObject
 /**
  * An object describing expected output of the model to match a JSON schema.
  */
-@added(ServiceApiVersions.v2024_12_01_preview)
+@added(ServiceApiVersions.v2025_01_01_preview)
 model AssistantsApiResponseFormatJsonSchema
   extends AssistantsApiResponseFormat {
   /** The type of response format being defined: `json_schema` */

@@ -30,7 +30,7 @@ op getRunStep(
   @path stepId: string,
 
   /** A list of additional fields to include in the response. */
-  @added(ServiceApiVersions.v2024_12_01_preview)
+  @added(ServiceApiVersions.v2025_01_01_preview)
   @query("include[]")
   runInclude: RunIncludes[],
 ): RunStep;
@@ -54,7 +54,7 @@ op listRunSteps(
   @path runId: string,
 
   /** A list of additional fields to include in the response. */
-  @added(ServiceApiVersions.v2024_12_01_preview)
+  @added(ServiceApiVersions.v2025_01_01_preview)
   @query("include[]")
   runInclude: RunIncludes[],
 

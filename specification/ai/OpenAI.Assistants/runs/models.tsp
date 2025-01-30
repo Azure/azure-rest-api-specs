@@ -187,7 +187,7 @@ model RunCompletionUsage {
 /**
  * Values to for the includes parameter in the create run operation.
  */
-@added(ServiceApiVersions.v2024_12_01_preview)
+@added(ServiceApiVersions.v2025_01_01_preview)
 union RunIncludes {
   string,
 
