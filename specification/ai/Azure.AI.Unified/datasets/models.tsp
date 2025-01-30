@@ -18,11 +18,8 @@ namespace Azure.AI.Unified;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DataContainer Definition")
-@discriminator("dataType")
 model DatasetContainer extends AssetContainer {
-  @doc("[Required] Specifies the type of data")
-  @visibility("read", "create")
-  datasetType: DatasetType;
+
 }
 
 @doc("PagedDataContainer Definition")
