@@ -240,6 +240,24 @@ union JsonWebKeySignatureAlgorithm {
   RS512: "RS512",
 
   /**
+   * HMAC using SHA-256, as described in  https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS256: "HS256",
+
+  /**
+   * HMAC using SHA-384, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS384: "HS384",
+
+  /**
+   * HMAC using SHA-512, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS512: "HS512",
+
+  /**
    * Reserved
    */
   RSNULL: "RSNULL",
