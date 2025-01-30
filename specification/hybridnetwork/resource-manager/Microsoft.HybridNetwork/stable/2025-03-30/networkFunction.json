@@ -510,57 +510,57 @@
         "tags": [
           "NetworkFunction"
         ],
-      "operationId": "NetworkFunctions_CancelOperation",
-      "description": "Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
-        },
-        {
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "./common.json#/definitions/CancelOperationType"
+        "operationId": "NetworkFunctions_CancelOperation",
+        "description": "Cancels an ongoing long-running PUT operation for the specified Site Network Service resource. Other operations are not supported for cancellation at this time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
-          "description": "Details of the operation to cancel. Includes information about the ongoing operation type."
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
-          "headers": {
-            "Location": {
-              "description": "The Location header contains the URL where the status of the long-running operation can be checked.",
-              "type": "string"
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/NetworkFunctionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/CancelOperationType"
+            },
+            "description": "Details of the operation to cancel. Includes information about the ongoing operation type."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long-running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+        "x-ms-examples": {
+          "Cancel an in progress NF PUT": {
+            "$ref": "./examples/NetworkFunctionCancelOngoingPutOperation.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
-      },
-      "x-ms-examples": {
-        "Cancel an in progress NF PUT": {
-          "$ref": "./examples/NetworkFunctionCancelOngoingPutOperation.json"
-        }
-      },
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
-      }
       }
     }
   },
