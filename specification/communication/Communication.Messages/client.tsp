@@ -37,7 +37,9 @@ interface ConversationManagementClient
   extends Azure.Communication.MessagesService.ConversationManagementOperations {
     listConversations is Azure.Communication.MessagesService.ConversationMessagesOperations.listConversations;
     listMessages is Azure.Communication.MessagesService.ConversationMessagesOperations.listMessages;
-    summarize is Azure.Communication.MessagesService.ConversationMessagesOperations.summarize;
+    addParticipant is Azure.Communication.MessagesService.ConversationMessagesOperations.addParticipant;
+    removeParticipant is Azure.Communication.MessagesService.ConversationMessagesOperations.removeParticipant;
+    analyze is Azure.Communication.MessagesService.ConversationMessagesOperations.analyze;
   }
 
 @added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)

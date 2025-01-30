@@ -66,28 +66,30 @@ interface ConversationManagementOperations {
   @doc("Terminates a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   deleteConversation is Operations.ResourceDelete<Conversation>;
+}
 
-  @tag("ConversationManagement")
+@added(Versions.c2025_03_01_Preview)
+interface ConversationMessagesOperations {
+  @tag("ConversationMessages")
   @doc("Adds participants to a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
-  add is Operations.ResourceCollectionAction<
+  @action("add")
+  addParticipant is Operations.ResourceCollectionAction<
     Participant,
     AddParticipantsRequestBody,
     Response<207> & AddParticipantsResult
   >;
 
-  @tag("ConversationManagement")
+  @tag("ConversationMessages")
   @doc("remove a participant from a conversation")
   @added(Versions.c2025_03_01_Preview)
-  remove is Operations.ResourceCollectionAction<
+  @action("remove")
+  removeParticipant is Operations.ResourceCollectionAction<
     Participant,
     RemoveParticipantsRequestBody,
     Response<207> & RemoveParticipantsResult
   >;
-}
 
-@added(Versions.c2025_03_01_Preview)
-interface ConversationMessagesOperations {
   @tag("ConversationMessages")
   @doc("Retrieves list of conversations.")
   @added(Versions.c2025_03_01_Preview)
@@ -116,7 +118,8 @@ interface ConversationMessagesOperations {
   @tag("ConversationMessages")
   @doc("Get AI Analysis of a conversation.")
   @added(Versions.c2025_03_01_Preview)
-  summarize is Operations.ResourceCollectionAction<
+  @action("analyze")
+  analyze is Operations.ResourceCollectionAction<
     ConversationMessageItem,
     {},
     OkResponse & GetConversationMessagesAnalysisResult

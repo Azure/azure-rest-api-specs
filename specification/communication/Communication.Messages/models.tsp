@@ -172,7 +172,7 @@ model ImageNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a document notification.")
 model DocumentNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is document.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
@@ -187,7 +187,7 @@ model DocumentNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a video notification.")
 model VideoNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is video.")
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
@@ -503,9 +503,9 @@ model Message {
 @doc("Advanced Messaging conversation participant.")
 model Participant {
   @key
-  @visibility("create")
+  @visibility("read")
   @doc("Participant Identifier.")
-  id: string;
+  id: string; // 8:acs:xxx
 
   @doc("Participant display name.")
   displayName?: string;
@@ -563,7 +563,6 @@ model SendConversationMessageResult {
   messageId: string;
 }
 
-@clientName("CreateConversationRequestPayload", "csharp")
 @added(Versions.c2025_03_01_Preview)
 @resource("messages/conversations")
 @doc("Request payload for creating a conversation.")
@@ -573,7 +572,7 @@ model CreateConversationRequest {
   @doc("The conversation details.")
   conversation: Conversation;
 
-  @doc("An elevated message within the conversation.")
+  @doc("An intial message within the conversation.")
   initialMessage?: Message;
 }
 
@@ -583,7 +582,7 @@ model CreateConversationRequest {
 @doc("A conversation.")
 model Conversation {
   @key
-  @visibility("read") // this model is only used as a xparameter
+  @visibility("read") // this model is only used as a parameter
   @doc("The conversation ID.")
   conversationId: string;
 
@@ -643,14 +642,14 @@ model RemoveParticipantsRequestBody {
 @doc("Response for the add participants operation.")
 model AddParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
-  value: ParticipantsResult[];
+  invalidParticipants: ParticipantsResult[];
 }
 
 @added(Versions.c2025_03_01_Preview)
 @doc("Response for the remove participants operation.")
 model RemoveParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
-  value: ParticipantsResult[];
+  invalidParticipants: ParticipantsResult[];
 }
 
 @added(Versions.c2025_03_01_Preview)

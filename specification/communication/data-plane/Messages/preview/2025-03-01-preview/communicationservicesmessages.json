@@ -164,7 +164,7 @@
           {
             "name": "initiator",
             "in": "query",
-            "description": "The Initiator user ID, needs to be present when authenticating with Bearer token.",
+            "description": "The Initiator user ID",
             "required": false,
             "type": "string"
           },
@@ -368,7 +368,7 @@
           {
             "name": "initiator",
             "in": "query",
-            "description": "The Initiator user ID, needs to be present when authenticating with Bearer token.",
+            "description": "The Initiator user ID",
             "required": false,
             "type": "string"
           },
@@ -405,6 +405,87 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages:analyze": {
+      "post": {
+        "operationId": "ConversationMessagesOperations_Analyze",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Get AI Analysis of a conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
+            },
+            "headers": {
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
         }
       }
     },
@@ -492,92 +573,11 @@
         }
       }
     },
-    "/messages/conversations/{conversationId}/messages:summarize": {
-      "post": {
-        "operationId": "ConversationMessagesOperations_Summarize",
-        "tags": [
-          "ConversationMessages"
-        ],
-        "description": "Get AI Analysis of a conversation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The conversation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/GetConversationMessagesAnalysisResult"
-            },
-            "headers": {
-              "Repeatability-Result": {
-                "type": "string",
-                "description": "Indicates whether the repeatable request was accepted or rejected.",
-                "enum": [
-                  "accepted",
-                  "rejected"
-                ],
-                "x-ms-enum": {
-                  "name": "RepeatabilityResult",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "accepted",
-                      "value": "accepted",
-                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-                    },
-                    {
-                      "name": "rejected",
-                      "value": "rejected",
-                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-                    }
-                  ]
-                }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/messages/conversations/{conversationId}/participants:add": {
       "post": {
-        "operationId": "ConversationManagementOperations_Add",
+        "operationId": "ConversationMessagesOperations_AddParticipant",
         "tags": [
-          "ConversationManagement"
+          "ConversationMessages"
         ],
         "description": "Adds participants to a specific conversation.",
         "parameters": [
@@ -659,9 +659,9 @@
     },
     "/messages/conversations/{conversationId}/participants:remove": {
       "post": {
-        "operationId": "ConversationManagementOperations_Remove",
+        "operationId": "ConversationMessagesOperations_RemoveParticipant",
         "tags": [
-          "ConversationManagement"
+          "ConversationMessages"
         ],
         "description": "remove a participant from a conversation",
         "parameters": [
@@ -972,7 +972,7 @@
       "type": "object",
       "description": "Response for the add participants operation.",
       "properties": {
-        "value": {
+        "invalidParticipants": {
           "type": "array",
           "description": "List of Ids with Errors if failed to be added",
           "items": {
@@ -981,7 +981,7 @@
         }
       },
       "required": [
-        "value"
+        "invalidParticipants"
       ]
     },
     "AudioNotificationContent": {
@@ -1272,7 +1272,7 @@
         },
         "initialMessage": {
           "$ref": "#/definitions/Message",
-          "description": "An elevated message within the conversation."
+          "description": "An intial message within the conversation."
         }
       },
       "required": [
@@ -1959,9 +1959,7 @@
         "id": {
           "type": "string",
           "description": "Participant Identifier.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -2040,7 +2038,7 @@
       "type": "object",
       "description": "Response for the remove participants operation.",
       "properties": {
-        "value": {
+        "invalidParticipants": {
           "type": "array",
           "description": "List of Ids with Errors if failed to be added",
           "items": {
@@ -2049,7 +2047,7 @@
         }
       },
       "required": [
-        "value"
+        "invalidParticipants"
       ]
     },
     "SendConversationMessageRequest": {
