@@ -80,17 +80,17 @@
       },
       "description": "Common error representation."
     },
-    "CloudError": {
+    "CloudException": {
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/CloudExceptionBody",
           "description": "Cloud error body."
         }
       },
       "description": "An error response from the service."
     },
-    "CloudErrorBody": {
+    "CloudExceptionBody": {
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -108,7 +108,7 @@
         "details": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/CloudExceptionBody"
           },
           "description": "A list of additional details about the error."
         }
