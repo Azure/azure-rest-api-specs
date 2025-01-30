@@ -301,7 +301,7 @@ union StepType {
   Reference: "reference",
 }
 
-union HashAlgorithmType {
+union HashAlgorithm {
   string,
 
   /**
@@ -316,7 +316,7 @@ model HashType {
   /**
    * Hash algorithm
    */
-  algorithm: HashAlgorithmType;
+  algorithm: HashAlgorithm;
 
   /**
    * Hash value
@@ -1155,7 +1155,6 @@ model ImportManifestMetadata {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
-  @minLength(1)
   hashes: HashType[];
 }
 
