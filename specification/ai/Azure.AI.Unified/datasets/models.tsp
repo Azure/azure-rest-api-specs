@@ -67,7 +67,7 @@ model PagedDatasetVersion {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("UriFileDatasetVersion Definition")
-model UriFileDataserVersion extends DatasetVersion {
+model UriFileDatasetVersion extends DatasetVersion {
   @doc("[Required] Specifies the type of data.")
   datasetType: DatasetType.uri_file;
 }
