@@ -12,6 +12,9 @@
 export async function extractInputs(github, context, core) {
   core.info(`extractInputs(${context.eventName}, ${context.payload.action})`);
 
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }} */
+  let inputs;
+
   // Add support for more event types as needed
   if (context.eventName === "pull_request") {
     const payload =
@@ -19,17 +22,26 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
-    const inputs = {
+    inputs = {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
       head_sha: payload.pull_request.head.sha,
       issue_number: payload.pull_request.number,
       run_id: NaN,
     };
+  } else if (context.eventName === "workflow_dispatch") {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
+        context.payload
+      );
 
-    core.info(`inputs: ${JSON.stringify(inputs)}`);
-
-    return inputs;
+    inputs = {
+      owner: payload.repository.owner.login,
+      repo: payload.repository.name,
+      head_sha: "",
+      issue_number: NaN,
+      run_id: NaN,
+    };
   } else if (
     context.eventName === "workflow_run" &&
     context.payload.action === "completed"
@@ -74,20 +86,19 @@ export async function extractInputs(github, context, core) {
       }
     }
 
-    const inputs = {
+    inputs = {
       owner: payload.workflow_run.repository.owner.login,
       repo: payload.workflow_run.repository.name,
       head_sha: payload.workflow_run.head_sha,
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
     };
-
-    core.info(`inputs: ${JSON.stringify(inputs)}`);
-
-    return inputs;
   } else {
     throw new Error(
       `Context '${context.eventName}:${context.payload.action}' is not yet supported.`,
     );
   }
+
+  core.info(`inputs: ${JSON.stringify(inputs)}`);
+  return inputs;
 }

@@ -46,6 +46,30 @@ describe("extractInputs", () => {
     });
   });
 
+  it("workflow_dispatch", async () => {
+    const context = {
+      eventName: "workflow_dispatch",
+      payload: {
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+      },
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "",
+      issue_number: NaN,
+      run_id: NaN,
+    });
+  });
+
   it("workflow_run (same repo)", async () => {
     const context = {
       eventName: "workflow_run",
