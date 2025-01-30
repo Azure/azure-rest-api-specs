@@ -16,7 +16,6 @@ using Azure.Core.Traits;
 using Autorest;
 using Microsoft.PlaywrightTesting.Shared;
 
-
 @server(
   "{endpoint}",
   "Microsoft Azure Playwright Reporting Service API Endpoint",
@@ -49,7 +48,6 @@ using Microsoft.PlaywrightTesting.Shared;
     ]>
   ]
 )
-
 @service({
   title: "Microsoft Playwright Service Reporting Data Plane API",
 })
@@ -237,7 +235,6 @@ model CiConfig {
 
 @doc("Model representing summary of test run results.")
 model CloudReportingSummary {
-
   @doc("Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
   executionStatus: TestRunStatus;
 
@@ -440,18 +437,18 @@ union TestStatus {
 
 // Model representing UploadTestResultsRequest
 @doc("Request object for uploading test results.")
-@parentResource(TestResultDetails )
+@parentResource(TestResultDetails)
 model UploadTestResultsRequest {
   @doc("List of test results.")
   @maxItems(100)
-  values: TestResultDetails [];
+  values: TestResultDetails[];
 }
 
 // Model representing details of a single test result
 @doc("Details of a single test result.")
 @resource("test-results")
 @parentResource(Account)
-model TestResultDetails  {
+model TestResultDetails {
   @doc("Identifier of the test execution.")
   @key
   @visibility("read", "create")
@@ -585,7 +582,7 @@ union AttachmentKind {
   "Video",
 
   @doc("Trace")
-  "Trace"
+  "Trace",
 }
 
 // Model representing web test configuration
@@ -605,8 +602,6 @@ model WebTestConfig {
   @doc("Operating system details.")
   os: OsType;
 }
-
-
 
 // Model representing test results summary
 @doc("Summary of test results.")
@@ -767,21 +762,21 @@ interface TestResults {
 
   @doc("Upload Test Results.")
   uploadBatch is Operations.ResourceCollectionAction<
-    TestResultDetails ,
+    TestResultDetails,
     UploadTestResultsRequest,
     {}
   >;
 
   @doc("List Testresults.")
   list is Operations.ResourceList<
-    TestResultDetails ,
+    TestResultDetails,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
   @doc("Get Testresults summary.")
   @action("resultsStats")
   computeResultsStats is Operations.ResourceCollectionAction<
-    TestResultDetails ,
+    TestResultDetails,
     {},
     ResultsStats,
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
