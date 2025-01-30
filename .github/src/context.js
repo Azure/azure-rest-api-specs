@@ -69,7 +69,7 @@ export async function extractInputs(github, context, core) {
         issue_number = pullRequests[0].number;
       } else {
         throw new Error(
-          `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual '${pullRequests.length}'.`,
+          `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
         );
       }
     }
@@ -87,7 +87,7 @@ export async function extractInputs(github, context, core) {
     return inputs;
   } else {
     throw new Error(
-      `Invalid context: '${context.eventName}:${context.payload.action}'.  Expected 'workflow_run:completed'.`,
+      `Context '${context.eventName}:${context.payload.action}' is not yet supported.`,
     );
   }
 }
