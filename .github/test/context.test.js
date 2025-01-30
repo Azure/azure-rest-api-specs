@@ -70,7 +70,7 @@ describe("extractInputs", () => {
     });
   });
 
-  it("workflow_run (same repo)", async () => {
+  it("workflow_run:completed (same repo)", async () => {
     const context = {
       eventName: "workflow_run",
       payload: {
@@ -101,7 +101,7 @@ describe("extractInputs", () => {
   });
 
   it.each([0, 1, 2])(
-    "workflow_run (fork repo, %s PRs)",
+    "workflow_run:completed (fork repo, %s PRs)",
     async (numPullRequests) => {
       const context = {
         eventName: "workflow_run",
