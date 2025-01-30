@@ -1034,7 +1034,7 @@ model FabricModelUpdate {
   /**
    * Fabric model properties.
    */
-  properties?: FabricModelPropertiesUpdate;
+  properties?: FabricModelProperties;
 
   /**
    * Gets or sets the Id of the resource.
@@ -1060,24 +1060,6 @@ model FabricModelUpdate {
   @visibility("read")
   systemData?: SystemData;
 }
-
-/**
- * Fabric model properties update.
- */
-model FabricModelPropertiesUpdate {
-  /**
-   * Fabric model custom properties update.
-   */
-  customProperties?: FabricModelCustomPropertiesUpdate;
-}
-
-/**
- * Fabric model custom properties update.
- */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
-@discriminator("instanceType")
-model FabricModelCustomPropertiesUpdate {}
 
 /**
  * Fabric agent model properties.

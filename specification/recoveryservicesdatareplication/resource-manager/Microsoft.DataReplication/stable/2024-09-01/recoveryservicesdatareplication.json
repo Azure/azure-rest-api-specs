@@ -3954,20 +3954,6 @@
         "instanceType"
       ]
     },
-    "FabricModelCustomPropertiesUpdate": {
-      "type": "object",
-      "description": "Fabric model custom properties update.",
-      "properties": {
-        "instanceType": {
-          "type": "string",
-          "description": "Discriminator property for FabricModelCustomPropertiesUpdate."
-        }
-      },
-      "discriminator": "instanceType",
-      "required": [
-        "instanceType"
-      ]
-    },
     "FabricModelListResult": {
       "type": "object",
       "description": "The response of a FabricModel list operation.",
@@ -4031,16 +4017,6 @@
         "customProperties"
       ]
     },
-    "FabricModelPropertiesUpdate": {
-      "type": "object",
-      "description": "Fabric model properties update.",
-      "properties": {
-        "customProperties": {
-          "$ref": "#/definitions/FabricModelCustomPropertiesUpdate",
-          "description": "Fabric model custom properties update."
-        }
-      }
-    },
     "FabricModelUpdate": {
       "type": "object",
       "description": "Fabric model update.",
@@ -4053,7 +4029,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/FabricModelPropertiesUpdate",
+          "$ref": "#/definitions/FabricModelProperties",
           "description": "Fabric model properties."
         },
         "id": {

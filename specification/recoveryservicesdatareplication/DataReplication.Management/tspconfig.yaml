@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/recoveryservicesdatareplication"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -14,6 +17,27 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-recoveryservicesdatareplication"
+    package-name: "{package-dir}"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/recoveryservicesdatareplication"
+    package-dir: "armrecoveryservicesdatareplication"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-recoveryservicesdatareplication"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
+    service-name: "Recovery Services Data Replication"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
