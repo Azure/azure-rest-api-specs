@@ -14,13 +14,13 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Unified;
 
-interface Data {
+interface Datasets {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List data containers.")
-  @route("/data")
+  @doc("List datasets in a project.")
+  @route("/datasets")
   @get
-  list(
+  listDatasets(
     @doc("Continuation token for pagination.")
     @query("$skip")
     $skip?: string,
@@ -33,7 +33,7 @@ interface Data {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Delete container.")
-  @route("/data/{name}")
+  @route("/datasets/{name}")
   @delete
   delete(
     @doc("Name of Azure Machine Learning workspace.")
@@ -48,38 +48,10 @@ interface Data {
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get container.")
-  @route("/data/{name}")
-  @get
-  get(
-    @doc("Container name.")
-    @path
-    name: string,
-  ): DataContainer;
-
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create or update container.")
-  @route("/data/{name}")
-  @put
-  createOrUpdate(
-    @doc("Container name.")
-    @path
-    name: string,
-
-    @doc("Container entity to create or update.")
-    @body
-    body: DataContainer,
-  ): DataContainer;
-}
-
-interface DataVersionsBase {
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List data versions in the data container")
   @route("/data/{name}/versions")
   @get
-  list(
+  listDatasetVersions(
     @doc("Container name.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
     @path
@@ -111,7 +83,7 @@ interface DataVersionsBase {
   @doc("Delete version.")
   @route("/data/{name}/versions/{version}")
   @delete
-  delete(
+  deleteVersion(
     @doc("Container name.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
     @path
@@ -124,10 +96,10 @@ interface DataVersionsBase {
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get version.")
-  @route("/data/{name}/versions/{version}")
+  @doc("Get dataset version.")
+  @route("/datasets/{name}/versions/{version}")
   @get
-  get(
+  getVersion(
     @doc("Container name.")
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
     @path
@@ -141,7 +113,7 @@ interface DataVersionsBase {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update version.")
-  @route("/data/{name}/versions/{version}")
+  @route("/datasets/{name}/versions/{version}")
   @put
   createOrUpdate(
     @doc("Container name.")
@@ -157,23 +129,4 @@ interface DataVersionsBase {
     @body
     body: DataVersionBase,
   ): DataVersionBase;
-
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Publish version asset into registry.")
-  @route("/data/{name}/versions/{version}/publish")
-  @post
-  publish(
-    @doc("Container name.")
-    @path
-    name: string,
-
-    @doc("Version identifier.")
-    @path
-    version: string,
-
-    @doc("Destination registry info")
-    @body
-    body: DestinationAsset,
-  ): void;
 }

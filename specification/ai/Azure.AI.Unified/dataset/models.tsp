@@ -19,19 +19,19 @@ namespace Azure.AI.Unified;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DataContainer Definition")
 @discriminator("dataType")
-model DataContainer extends AssetContainer {
+model DatasetContainer extends AssetContainer {
   @doc("[Required] Specifies the type of data")
   @visibility("read", "create")
-  dataType: DataType;
+  datasetType: DatasetType;
 }
 
 @doc("PagedDataContainer Definition")
 @pagedResult
-model PagedDataContainer {
-  @doc("The list of DataContainers.")
+model PagedDatasetContainer {
+  @doc("The list of DatasetContainers.")
   @extension("x-ms-identifiers", [])
   @items
-  value: DataContainer[];
+  value: DatasetContainer[];
 
   @doc("The link to the next page of results, if any.")
   @nextLink
@@ -39,26 +39,26 @@ model PagedDataContainer {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("DataVersionBase Definition")
-@discriminator("dataType")
-model DataVersionBase extends AssetBase {
+@doc("DatasetVersion Definition")
+@discriminator("datasetType")
+model DatasetVersion extends AssetBase {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility("read", "create")
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
-  dataUri: string;
+  datasetUri: string;
 
   @doc("Data type")
-  dataType: DataType;
+  datasetType: DataType;
 }
 
 @doc("PagedDataVersionBase Definition")
 @pagedResult
-model PagedDataVersionBase {
-  @doc("The list of DataVersions.")
+model PagedDatasetVersion {
+  @doc("The list of DatasetVersions.")
   @extension("x-ms-identifiers", [])
   @items
-  value: DataVersionBase[];
+  value: DatasetVersion[];
 
   @doc("The link to the next page of results, if any.")
   @nextLink
@@ -66,15 +66,15 @@ model PagedDataVersionBase {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("UriFileDataVersion Definition")
-model UriFileDataVersion extends DataVersionBase {
+@doc("UriFileDatasetVersion Definition")
+model UriFileDataserVersion extends DatasetVersion {
   @doc("[Required] Specifies the type of data.")
-  dataType: DataType.uri_file;
+  dataType: DatasetType.uri_file;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@doc("UriFolderDataVersion Definition")
-model UriFolderDataVersion extends DataVersionBase {
+@doc("UriFolderDatasetVersion Definition")
+model UriFolderDatasetVersion extends DatasetVersion {
   @doc("[Required] Specifies the type of data.")
-  dataType: DataType.uri_folder;
+  dataType: DatasetType.uri_folder;
 }

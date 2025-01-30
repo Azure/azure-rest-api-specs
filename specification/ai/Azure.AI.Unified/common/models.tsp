@@ -420,7 +420,7 @@ model AssetBase extends ResourceBase {
 }
 
 @doc("Enum to determine the type of data.")
-union DataType {
+union DatasetType {
   string,
 
   @doc("URI file.")
@@ -448,6 +448,14 @@ model AssetContainer extends ResourceBase {
 
 @doc("ResourceBase definition")
 model ResourceBase {
+  @doc("A unique identifier for the asset")
+  @visibility("read")
+  id?: string;
+
+  @doc("The name of the resource")
+  @visibility("read")
+  name?: string;
+
   @doc("The asset description text.")
   description?: string;
 

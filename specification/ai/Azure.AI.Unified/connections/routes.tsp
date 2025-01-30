@@ -30,8 +30,8 @@ interface Connections {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a connection with credentials by name.")
-  @route("/connections/{name}/listsecrets")
+  @doc("Get credentials for a connection by name.")
+  @route("/connections/{name}/listSecrets")
   @post
   post is Azure.Core.Foundations.Operation<
     {
@@ -49,17 +49,6 @@ interface Connections {
   @route("/connections")
   @get
   list is Azure.Core.Foundations.Operation<
-    {
-      ...StandardListQueryParameters;
-    },
-    PagedConnection
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List all connections with credentials in the project.")
-  @route("/connections/withsecrets")
-  @post
-  listWithCredentials is Azure.Core.Foundations.Operation<
     {
       ...StandardListQueryParameters;
     },
