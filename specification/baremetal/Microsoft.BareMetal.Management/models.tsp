@@ -10,6 +10,23 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.BareMetal;
 
 /**
+ * Placement of the SDN Appliance
+ */
+union SdnAppliancePlacement {
+  string,
+
+  /**
+   * T1 device
+   */
+  T1: "T1",
+
+  /**
+   * T2 device
+   */
+  T2: "T2",
+}
+
+/**
  * The current provisioning state.
  */
 union ProvisioningState {
@@ -163,6 +180,81 @@ model BareMetalConnectionUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Type exists as previously approved by ARM"
   @visibility("read", "create", "update")
   tags?: Record<string>;
+}
+
+/**
+ * Custom Page for Clusters
+ */
+model ClusterPage<T extends {}> {
+  /**
+   * Items on this page
+   */
+  @Azure.Core.items
+  @OpenAPI.extension("x-ms-identifiers", [])
+  clusters: T[];
+}
+
+/**
+ * List of cluster properties
+ */
+model ClusterList is ClusterPage<ClusterProperties>;
+
+/**
+ * Cluster object representation
+ */
+model ClusterProperties {
+  /**
+   * Name of the cluster
+   */
+  clusterName: string;
+
+  /**
+   * Number of Virtual Routing and Forwarding currently on the cluster
+   */
+  @visibility("read")
+  vrfCount?: int32;
+
+  /**
+   * Max number of Virtual Routing and Forwarding for the cluster
+   */
+  @visibility("read")
+  vrfLimit?: int32;
+
+  /**
+   * Number of routes currently on the cluster
+   */
+  @visibility("read")
+  routeCount?: int32;
+
+  /**
+   * Max number of routes for the cluster
+   */
+  @visibility("read")
+  routeLimit?: int32;
+
+  /**
+   * Potential number of routes for the cluster
+   */
+  @visibility("read")
+  allocatedRoutes?: int32;
+
+  /**
+   * Alias of the T2 device
+   */
+  @visibility("read")
+  tier2Alias?: string;
+
+  /**
+   * Placement of the SDN Appliance
+   */
+  @visibility("read")
+  sdnAppliancePlacement?: SdnAppliancePlacement;
+
+  /**
+   * True if Rotterdam, else False
+   */
+  @visibility("read")
+  sdnApplianceEnabled?: boolean;
 }
 
 /**
