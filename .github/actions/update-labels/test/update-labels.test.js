@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { createMockCore } from "../../../test/mocks.js";
-import updateLabels from "../src/update-labels.js";
+import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 
-describe("update-labels", () => {
-  it("loads inputs from env (run_id)", async () => {
+describe("updateLabels", () => {
+  it("loads inputs from env", async () => {
     try {
       process.env.OWNER = "TestRepoOwnerLoginEnv";
       process.env.REPO = "TestRepoNameEnv";
@@ -28,30 +28,67 @@ describe("update-labels", () => {
     }
   });
 
-  it("loads inputs from env (issue_number)", async () => {
-    try {
-      process.env.OWNER = "TestRepoOwnerLoginEnv";
-      process.env.REPO = "TestRepoNameEnv";
-      process.env.ISSUE_NUMBER = "123";
+  it("loads inputs from context (workflow_run:completed)", async () => {
+    const github = createMockGithub();
 
-      const github = createMockGithub();
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          head_sha: "abc123",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [{ number: 123 }],
+        },
+      },
+    };
 
-      // Listing all artifacts by issue_number is not yet implemented
-      await expect(
-        updateLabels({
-          github: github,
-          context: null,
-          core: createMockCore(),
-        }),
-      ).rejects.toThrow();
+    await expect(
+      updateLabels({
+        github: github,
+        context: context,
+        core: createMockCore(),
+      }),
+    ).resolves.toBeUndefined();
 
-      expect(github.rest.issues.addLabels).toBeCalledTimes(0);
-      expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
-    } finally {
-      delete process.env.OWNER;
-      delete process.env.REPO;
-      delete process.env.ISSUE_NUMBER;
-    }
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
+  //     process.env.ISSUE_NUMBER = "123";
+  //     // Listing all artifacts by issue_number is not yet implemented
+  //     await expect(
+  //       updateLabels({
+  //         github: github,
+  //         context: null,
+  //         core: createMockCore(),
+  //       }),
+  //     ).rejects.toThrow();
+});
+
+describe("updateLabelsImpl", () => {
+  it("throws if no run_id", async () => {
+    const github = createMockGithub();
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        run_id: NaN,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow();
+
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
   });
 });
 
