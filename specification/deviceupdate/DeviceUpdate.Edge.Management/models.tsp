@@ -1154,7 +1154,7 @@ model ImportManifestMetadata {
   hashesOld: Record<string>;
 
   /**
-   * An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
+   * An array containing the hash(es) of the file. At least one item is required containing SHA256 hash algorithm and the value being the hash of the file calculated using that algorithm.
    */
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
