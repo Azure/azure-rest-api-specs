@@ -550,7 +550,7 @@ union ParticipantKind {
 @doc("Request payload for sending a conversation message.")
 model SendConversationMessageRequest {
   @doc("Details of a send conversation message request.")
-  request: NotificationContent;
+  request: ConversationMessageContent;
 
   @doc("The options of the outbound delivery strategy for messages sent by emplyees in a conversation.\r\nSupports internalOnly, allChannels.")
   outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
@@ -688,32 +688,6 @@ model ConversationMessageItem {
   createdOn: utcDateTime;
 }
 
-@added(Versions.c2025_03_01_Preview)
-@pagedResult
-@doc("Paged collection of ConversationMessageItem items")
-model ListConversationMessageResponse {
-  @doc("The Conversation Message items on this page")
-  @items
-  value: ConversationMessageItem[];
-
-  @doc("The link to the next page of items")
-  @Azure.Core.nextLink
-  nextLink?: string;
-}
-
-@added(Versions.c2025_03_01_Preview)
-@pagedResult
-@doc("Paged collection of Conversation items")
-model ListConversationResponse {
-  @doc("The Conversation items on this page")
-  @items
-  value: Conversation[];
-
-  @doc("The link to the next page of items")
-  @Azure.Core.nextLink
-  nextLink?: string;
-}
-
 @clientName("ConversationContact", "csharp")
 @discriminator("kind")
 @added(Versions.c2025_03_01_Preview)
@@ -788,6 +762,93 @@ model RemoveParticipantsRequest {
 model GetConversationMessagesAnalysisResult {
   @doc("The AI summary of the conversation messages.")
   summary: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@discriminator("kind")
+@doc("Details of the conversation message content.")
+model ConversationMessageContent {
+  @doc("The native external platform user identifiers of the recipient.")
+  to: string[];
+
+  @doc("The type discriminator describing a conversation message type.")
+  kind: CommunicationMessageKind;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send a text conversation message.")
+model TextConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is text.")
+  kind: CommunicationMessageKind.text;
+
+  @doc("Message content.")
+  content: string;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send a media conversation message. Could be an image, document or video.")
+model MediaConversationMessageContentBase {
+  @clientName("mediaUrl", "java")
+  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
+  mediaUri: url;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send an image conversation message.")
+model ImageConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is image.")
+  kind: CommunicationMessageKind.image;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaConversationMessageContentBase;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send a document conversation message.")
+model DocumentConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is document.")
+  kind: CommunicationMessageKind.document;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  @doc("Optional name for the file.")
+  fileName?: string;
+
+  ...MediaConversationMessageContentBase;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send a video conversation message.")
+model VideoConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is video.")
+  kind: CommunicationMessageKind.video;
+
+  @doc("Optional text content.")
+  caption?: string;
+
+  ...MediaConversationMessageContentBase;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send an audio conversation message.")
+model AudioConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is audio.")
+  kind: CommunicationMessageKind.audio;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2025_03_01_Preview)
+@doc("A request to send a template conversation message.")
+model TemplateConversationMessageContent extends ConversationMessageContent {
+  @doc("Message content type is template.")
+  kind: CommunicationMessageKind.template;
+
+  @doc("The template object used to create templates.")
+  template: MessageTemplate;
 }
 
 @doc("Azure Communication Messages Versions")

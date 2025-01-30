@@ -984,6 +984,26 @@
         "invalidParticipants"
       ]
     },
+    "AudioConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send an audio conversation message.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
     "AudioNotificationContent": {
       "type": "object",
       "description": "A request to send an audio notification.",
@@ -1226,6 +1246,28 @@
         "conversationId"
       ]
     },
+    "ConversationMessageContent": {
+      "type": "object",
+      "description": "Details of the conversation message content.",
+      "properties": {
+        "to": {
+          "type": "array",
+          "description": "The native external platform user identifiers of the recipient.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationMessageKind",
+          "description": "The type discriminator describing a conversation message type."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "to",
+        "kind"
+      ]
+    },
     "ConversationMessageItem": {
       "type": "object",
       "description": "The conversation message as returned from the service.",
@@ -1292,6 +1334,34 @@
         "id"
       ]
     },
+    "DocumentConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send a document conversation message.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Optional name for the file."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
     "DocumentNotificationContent": {
       "type": "object",
       "description": "A request to send a document notification.",
@@ -1354,6 +1424,30 @@
       "required": [
         "summary"
       ]
+    },
+    "ImageConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send an image conversation message.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
     },
     "ImageNotificationContent": {
       "type": "object",
@@ -2055,7 +2149,7 @@
       "description": "Request payload for sending a conversation message.",
       "properties": {
         "request": {
-          "$ref": "#/definitions/NotificationContent",
+          "$ref": "#/definitions/ConversationMessageContent",
           "description": "Details of a send conversation message request."
         },
         "outboundDeliveryStrategy": {
@@ -2097,6 +2191,25 @@
         "receipts"
       ]
     },
+    "TemplateConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send a template conversation message.",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/MessageTemplate",
+          "description": "The template object used to create templates."
+        }
+      },
+      "required": [
+        "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "template"
+    },
     "TemplateNotificationContent": {
       "type": "object",
       "description": "A request to send a template notification.",
@@ -2116,6 +2229,25 @@
       ],
       "x-ms-discriminator-value": "template"
     },
+    "TextConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send a text conversation message.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Message content."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
     "TextNotificationContent": {
       "type": "object",
       "description": "A request to send a text notification.",
@@ -2134,6 +2266,30 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "VideoConversationMessageContent": {
+      "type": "object",
+      "description": "A request to send a video conversation message.",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Optional text content."
+        },
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
     },
     "VideoNotificationContent": {
       "type": "object",
