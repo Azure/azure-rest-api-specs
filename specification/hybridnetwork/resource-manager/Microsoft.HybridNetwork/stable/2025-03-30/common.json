@@ -425,13 +425,24 @@
         "modelAsString": true
       }
     },
+    "operation": {
+      "type": "string",
+      "description": "The type of long running operation. Only PUT is supported as of now.",
+      "enum": [
+        "PUT"
+      ],
+      "x-ms-enum": {
+        "name": "operation",
+        "modelAsString": true
+      }
+    },
     "CancelOperationType": {
       "type": "object",
       "description": "Cancels an ongoing long-running operation, only PUT is supported now",
       "properties": {
         "operation": {
           "description": "The type of operation, example PUT",
-          "$ref": "./common.json#/parameters/operation"
+          "$ref": "#/definitions/operation"
         }
       }
     }
@@ -616,17 +627,6 @@
       "maxLength": 64,
       "description": "The name of the component.",
       "x-ms-parameter-location": "method"
-    },
-    "operation": {
-      "type": "string",
-      "description": "The type of long running operation. Only PUT is supported as of now.",
-      "enum": [
-        "PUT"
-      ],
-      "x-ms-enum": {
-        "name": "operation",
-        "modelAsString": true
-      }
     }
   }
 }
