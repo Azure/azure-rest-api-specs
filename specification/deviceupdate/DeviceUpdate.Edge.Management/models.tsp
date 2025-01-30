@@ -1158,6 +1158,7 @@ model ImportManifestMetadata {
    */
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
   hashes: HashValue[];
 }
 
@@ -1361,6 +1362,7 @@ model UpdateFileBase {
    */
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
   hashes: HashValue[];
 
   /**
