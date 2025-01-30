@@ -1,11 +1,71 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { createMockCore } from "../../../test/mocks.js";
 import updateLabels from "../src/update-labels.js";
 
 describe("update-labels", () => {
-  // TODO: Replace with better tests
-  it("throws if inputs null", async () => {
-    await expect(
-      updateLabels({ github: null, context: null, core: null }),
-    ).rejects.toThrow();
+  it("loads inputs from env (run_id)", async () => {
+    try {
+      process.env.OWNER = "TestRepoOwnerLoginEnv";
+      process.env.REPO = "TestRepoNameEnv";
+      process.env.RUN_ID = "123";
+
+      const github = createMockGithub();
+
+      await expect(
+        updateLabels({
+          github: github,
+          context: null,
+          core: createMockCore(),
+        }),
+      ).resolves.toBeUndefined();
+
+      expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+      expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+    } finally {
+      delete process.env.OWNER;
+      delete process.env.REPO;
+      delete process.env.RUN_ID;
+    }
+  });
+
+  it("loads inputs from env (issue_number)", async () => {
+    try {
+      process.env.OWNER = "TestRepoOwnerLoginEnv";
+      process.env.REPO = "TestRepoNameEnv";
+      process.env.ISSUE_NUMBER = "123";
+
+      const github = createMockGithub();
+
+      await expect(
+        updateLabels({
+          github: github,
+          context: null,
+          core: createMockCore(),
+        }),
+      ).rejects.toThrow();
+
+      expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+      expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+    } finally {
+      delete process.env.OWNER;
+      delete process.env.REPO;
+      delete process.env.ISSUE_NUMBER;
+    }
   });
 });
+
+function createMockGithub() {
+  return {
+    rest: {
+      actions: {
+        listWorkflowRunArtifacts: vi
+          .fn()
+          .mockResolvedValue({ data: { artifacts: [] } }),
+      },
+      issues: {
+        addLabels: vi.fn(),
+        removeLabel: vi.fn(),
+      },
+    },
+  };
+}
