@@ -5,7 +5,7 @@ import { extractInputs } from "../../../src/context.js";
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-export default async function updateLabels({ github, context, core }) {
+export default async function updatedLabels({ github, context, core }) {
   let owner = process.env.OWNER;
   let repo = process.env.REPO;
   let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
@@ -19,6 +19,26 @@ export default async function updateLabels({ github, context, core }) {
     run_id = run_id || inputs.run_id;
   }
 
+  await updateLabelsImpl({ owner, repo, issue_number, run_id, github, core });
+}
+
+/**
+ * @param {Object} params
+ * @param {string} params.owner
+ * @param {string} params.repo
+ * @param {number} params.issue_number
+ * @param {number} params.run_id
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {typeof import("@actions/core")} params.core
+ */
+export async function updateLabelsImpl({
+  owner,
+  repo,
+  issue_number,
+  run_id,
+  github,
+  core,
+}) {
   /** @type {string[]} */
   let artifactNames = [];
 
