@@ -34,7 +34,7 @@ op createRun(
   /** A list of additional fields to include in the response. */
   @added(ServiceApiVersions.v2025_01_01_preview)
   @query("include[]")
-  runInclude: RunIncludes[],
+  runInclude?: RunIncludes[],
 
   /**
    * The details used when creating a new run of an assistant thread.
