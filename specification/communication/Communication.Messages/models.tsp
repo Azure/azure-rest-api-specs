@@ -452,7 +452,7 @@ ListQueryParametersTrait<{
   ...CommonListParams;
   
   @query 
-  @doc("The Initiator user ID, needs to be present when authenticating with Bearer token.")
+  @doc("The Initiator user ID")
   initiator?: string;
   
   @query 
@@ -465,7 +465,7 @@ ListQueryParametersTrait<{
   ...CommonListParams;
   
   @query 
-  @doc("The Initiator user ID, needs to be present when authenticating with Bearer token.")
+  @doc("The Initiator user ID")
   initiator?: string;
 }>;
 

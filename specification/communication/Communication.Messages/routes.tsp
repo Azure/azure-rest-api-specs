@@ -86,7 +86,6 @@ interface ConversationManagementOperations {
   >;
 }
 
-@useAuth(BearerAuth)
 @added(Versions.c2025_03_01_Preview)
 interface ConversationMessagesOperations {
   @tag("ConversationMessages")
