@@ -11,7 +11,7 @@ export default async function updateLabels({ github, context, core }) {
   let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
   let run_id = parseInt(process.env.RUN_ID || "");
 
-  if (!owner || !repo || !(issue_number && run_id)) {
+  if (!owner || !repo || !(issue_number || run_id)) {
     let inputs = await extractInputs(github, context, core);
     owner = owner || inputs.owner;
     repo = repo || inputs.repo;
