@@ -121,6 +121,7 @@ model CommunityEndpointProperties {
   provisioningState?: ProvisioningState;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
 }
