@@ -36,6 +36,7 @@ describe("update-labels", () => {
 
       const github = createMockGithub();
 
+      // Listing all artifacts by issue_number is not yet implemented
       await expect(
         updateLabels({
           github: github,
