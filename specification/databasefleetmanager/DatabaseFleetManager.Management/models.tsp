@@ -475,7 +475,7 @@ model FleetspaceProperties {
   capacityMax?: int32;
 
   /**
-   * Main AAD principal that has admin access to all databases in the fleetspace.
+   * Main Microsoft Entra ID principal that has admin access to all databases in the fleetspace.
    */
   @visibility("read", "create")
   mainPrincipal?: MainPrincipal;
@@ -540,7 +540,7 @@ model FleetTierProperties {
   pooled?: boolean;
 
   /**
-   * Service tier of provisioned resources, for example GeneralPurpose.
+   * Service tier of provisioned resources. Supported values: GeneralPurpose, Hyperscale.
    */
   @visibility("read", "create")
   serviceTier?: string;
