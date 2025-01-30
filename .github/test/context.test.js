@@ -70,6 +70,19 @@ describe("extractInputs", () => {
     });
   });
 
+  it("workflow_run:unsupported_action", async () => {
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "unsupported_action",
+      },
+    };
+
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).rejects.toThrow();
+  });
+
   it("workflow_run:completed (same repo)", async () => {
     const context = {
       eventName: "workflow_run",
