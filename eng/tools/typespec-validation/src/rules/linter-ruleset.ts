@@ -1,7 +1,7 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 // Maps deprecated rulesets to the replacement rulesets
@@ -27,9 +27,9 @@ export class LinterRulesetRule implements Rule {
     const configText = await host.readTspConfig(folder);
     const config = yamlParse(configText);
 
-    const rpFolder =
-      config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
-    stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
+    // const rpFolder =
+    //   config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
+    // stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
     const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
     const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
@@ -46,9 +46,9 @@ export class LinterRulesetRule implements Rule {
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
     let requiredRuleset = "";
-    if (rpFolder?.trim()?.endsWith("resource-manager")) {
+    if (folder?.trim()?.includes("resource-manager")) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
-    } else if (rpFolder?.trim()?.endsWith("data-plane")) {
+    } else if (folder?.trim()?.includes("data-plane")) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
