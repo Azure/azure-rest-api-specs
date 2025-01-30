@@ -424,6 +424,16 @@
         "name": "idType",
         "modelAsString": true
       }
+    },
+    "CancelOperationType": {
+      "type": "object",
+      "description": "Cancels an ongoing long-running operation, only PUT is supported now",
+      "properties": {
+        "operation": {
+          "description": "The type of operation, example PUT",
+          "$ref": "./common.json#/parameters/operation"
+        }
+      }
     }
   },
   "parameters": {
@@ -616,16 +626,6 @@
       "x-ms-enum": {
         "name": "operation",
         "modelAsString": true
-      }
-    },
-    "CancelOperationType": {
-      "type": "object",
-      "description": "Cancels an ongoing long-running operation, only PUT is supported now",
-      "properties": {
-        "operation": {
-          "description": "The type of operation, example PUT",
-          "$ref": "./common.json#/parameters/operation"
-        }
       }
     }
   }
