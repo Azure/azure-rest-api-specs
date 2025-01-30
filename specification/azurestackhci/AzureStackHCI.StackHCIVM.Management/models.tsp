@@ -859,8 +859,10 @@ model NetworkSecurityGroupProperties {
 model NetworkSecurityGroupStatus {
   @doc("NetworkSecurityGroup provisioning error code")
   errorCode?: string;
+
   @doc("Descriptive error message")
   errorMessage?: string;
+
   @doc("network security group provisioning status")
   provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
 }
@@ -870,6 +872,7 @@ model NetworkSecurityGroupStatus {
 model NetworkSecurityGroupStatusProvisioningStatus {
   @doc("The ID of the operation performed on the network security group")
   operationId?: string;
+
   @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
   status?: Status;
 }
@@ -1117,6 +1120,7 @@ model NetworkInterfacesUpdateRequest {
 model NetworkInterfacesUpdateProperties {
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 }
