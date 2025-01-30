@@ -301,6 +301,14 @@ union StepType {
   Reference: "reference",
 }
 
+union HashAlgorithmType {
+  string,
+
+  /**
+   * Hash algorithm type
+   */
+  sha256: "sha256",
+}
 /**
  * Hash type
  */
@@ -308,7 +316,7 @@ model HashType {
   /**
    * Hash algorithm
    */
-  algorithm: string;
+  algorithm: HashAlgorithmType;
 
   /**
    * Hash value
@@ -1134,7 +1142,7 @@ model ImportManifestMetadata {
   sizeInBytes: int64;
 
   /**
-   * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
+   * An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @removed(Versions.v2025_04_01_preview)
@@ -1142,11 +1150,12 @@ model ImportManifestMetadata {
   hashesOld: Record<string>;
 
   /**
-   * A JSON object containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
+   * An array containing the hash(es) of the file. At least SHA256 hash is required. This object can be thought of as a set of key-value pairs where the key is the hash algorithm, and the value is the hash of the file calculated using that algorithm.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @added(Versions.v2025_04_01_preview)
   @OpenAPI.extension("x-ms-identifiers", [])
+  @minLength(1)
   hashes: HashType[];
 }
 
