@@ -36,7 +36,7 @@ interface CheckNameAvailability {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Cannot use @armResourceOperations decorator here, the auto-generated routes do not match feature requirements"
 interface DeploymentPreflight {
   /**
-   * Performs resource deployment validation.
+   * Performs resource deployment preflight validation.
    */
   @summary("Performs resource deployment validation.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/deployments/{deploymentId}/preflight")
@@ -74,12 +74,6 @@ interface OperationResults {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
-
-    /**
-     * The ID of an ongoing async operation.
-     */
-    @minLength(1)
-    @path
-    operationId: string,
+    ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationStatus> | ErrorResponse;
 }

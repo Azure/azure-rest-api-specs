@@ -198,7 +198,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists the fabrics.": {
+          "Lists the fabrics by subscription.": {
             "$ref": "./examples/Fabric_ListBySubscription.json"
           }
         },
@@ -237,7 +237,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists the vaults.": {
+          "Lists the vaults by subscription.": {
             "$ref": "./examples/Vault_ListBySubscription.json"
           }
         },
@@ -250,7 +250,7 @@
       "post": {
         "operationId": "DeploymentPreflight_Post",
         "summary": "Performs resource deployment validation.",
-        "description": "Performs resource deployment validation.",
+        "description": "Performs resource deployment preflight validation.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -318,12 +318,7 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of an ongoing async operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
