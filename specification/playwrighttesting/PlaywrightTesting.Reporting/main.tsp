@@ -114,15 +114,18 @@ union TestSdkLanguage {
 model TestRunConfig {
   @doc("Number of retry attempts.")
   @visibility("read", "create")
+  @maxValue(100)
   retryCount?: int32;
 
   @doc("Interval between repeated test runs.")
   @visibility("read", "create")
+  @maxValue(10000)
   repeatEach?: int32;
 
   @doc("Number of worker instances.")
   @visibility("read", "create")
-  workers?: int32;
+  @maxValue(1000)
+  workersCount?: int32;
 
   @doc("Details of the test framework used.")
   @visibility("read", "create")
@@ -134,7 +137,7 @@ model TestRunConfig {
 
   @doc("Timeout duration for test execution.")
   @visibility("read", "create")
-  timeoutInMillis: int64;
+  timeoutInMs: int64;
 
   // Added Fields
   @doc("Type of test being executed (default: WebTest).")
@@ -178,7 +181,6 @@ union TestFrameworkName {
 model TestFramework {
   //TODO- validate values of framework
   @doc("Name of the test framework. Supported Frameworks are Playwright")
-  @maxLength(200)
   name: TestFrameworkName;
 
   @doc("Version of the test framework.")
@@ -213,7 +215,6 @@ union CiProviderName {
 @doc("Model representing continuous integration (CI) configuration. ")
 model CiConfig {
   @doc("Name of the CI provider.  GitHub | ADO")
-  @maxLength(200)
   ciProviderName?: CiProviderName;
 
   @maxLength(500)
@@ -235,30 +236,37 @@ model CiConfig {
 
 @doc("Model representing summary of test run results.")
 model CloudReportingSummary {
-  @doc("Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
-  executionStatus: TestRunStatus;
 
-  @doc("Total number of tests executed.")
+  @doc("Start time of the test run in datetime(RFC 3339 literal format).")
+  startTime: utcDateTime;
+
+  @doc("End time of the test run.")
+  endTime: utcDateTime;
+
+  @doc("Processing Status of the testresults.")
+  serverStatus: TestRunStatus;
+
+  @doc("Total number of tests executed")
   @visibility("read")
-  totalTestsCount: int32;
+  totalTestsCount?: int32;
 
   @doc("Number of tests that passed.")
   @visibility("read")
-  passedTestsCount: int32;
+  passedTestsCount?: int32;
 
   @doc("Number of tests that failed.")
   @visibility("read")
-  failedTestsCount: int32;
+  failedTestsCount?: int32;
 
   @doc("Number of tests that were skipped.")
   @visibility("read")
-  skippedTestsCount: int32;
+  skippedTestsCount?: int32;
 
   @doc("Number of tests that were flaky.")
   @visibility("read")
-  flakyTestsCount: int32;
+  flakyTestsCount?: int32; 
 
-  @doc("Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT")
+  @doc("Status of the test run")
   @visibility("read")
   status: TestStatus;
 
@@ -278,25 +286,19 @@ model CloudReportingSummary {
 @doc("Model representing summary information about a test run.")
 model CloudRunSummary {
   @doc("Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
-  status: TestRunStatus;
-
-  @doc("Start time of the test run in datetime(RFC 3339 literal format).")
-  startTime: utcDateTime;
-
-  @doc("End time of the test run.")
-  endTime: utcDateTime;
+  serverStatus: TestRunStatus;
 
   @doc("Billable time for the test run. Available after testRun Ends")
-  billableTime: int32;
+  billableTimeInMs?: int32;
 
   @doc("Total time taken for the test run.")
-  totalTime: int32;
+  totalTimeInMs?: int32;
 
   @doc("Number of browser sessions used in the test run.")
-  numBrowserSessions: int32;
+  numBrowserSessions?: int32;
 
   @doc("Flag indicating if a test-run was throttled because requested browser Quota exceeded")
-  browserQuotaExceeded: boolean;
+  browserQuotaExceeded?: boolean;
 }
 
 @doc("Model to update shard result.")
@@ -345,17 +347,20 @@ model TestRun {
   @doc("Identifier of the test run.")
   @key
   @visibility("read")
+  @maxLength(200)
   testRunId: string;
 
   @doc("Display name of the test run, unicode characters allowed.")
   @maxLength(200)
-  displayName?: string;
+  @minLength(3)
+  @visibility("read","create")
+  displayName: string;
 
-  @doc("Start time of the test run -RFC 3339 literal format")
+  @doc("Creation time of the test run -RFC 3339 literal format")
   @visibility("read", "create")
-  startTime: utcDateTime;
+  creationTime: utcDateTime;
 
-  @doc("Creator's identifier.")
+  @doc("Creator's identifier. It's the Id referred in the access/Entra token")
   @visibility("read")
   creatorId: string;
 
@@ -406,7 +411,7 @@ model ShardExecutionDetails {
 
   @doc("number of workers used by playwright client.")
   @visibility("read", "create")
-  workers: int32;
+  workersCount: int32;
 
   @doc("Flag indicating if upload is completed for the shard.")
   @visibility("create", "read", "update")
@@ -427,6 +432,9 @@ union TestStatus {
 
   @doc("The test was skipped.")
   "Skipped",
+
+  @doc("The test was flaky.")
+  "flaky",
 
   @doc("The test was interrupted.")
   "Interrupted",
