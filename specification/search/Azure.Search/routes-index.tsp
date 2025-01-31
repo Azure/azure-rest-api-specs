@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Search;
 
 @route("/indexes('{indexName}')")
-interface DocumentsOperations {
+interface Documents {
   /**
    * Queries the number of documents in the index.
    */
