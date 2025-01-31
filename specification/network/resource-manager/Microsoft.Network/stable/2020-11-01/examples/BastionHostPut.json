@@ -3,7 +3,10 @@
     "api-version": "2020-11-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "bastionHostName": "bastionhosttenant'",
+    "bastionHostName": "bastionhosttenant",
+    "sku": {
+      "name": "Standard"
+    },
     "parameters": {
       "properties": {
         "ipConfigurations": [
@@ -25,11 +28,14 @@
   "responses": {
     "200": {
       "body": {
-        "name": "bastionhost'",
+        "name": "bastionhost",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
         "type": "Microsoft.Network/bastionHosts",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "location": "West US",
+        "sku": {
+          "name": "Standard"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
@@ -61,6 +67,9 @@
         "type": "Microsoft.Network/bastionHosts",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "location": "West US",
+        "sku": {
+          "name": "Standard"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
