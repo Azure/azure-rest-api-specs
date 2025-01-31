@@ -8,28 +8,22 @@ using TypeSpec.Versioning;
 @useDependency(AI.Model.Versions.v2024_05_01_Preview)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
-// Are these needed?
-@@usage(AI.Model.ChatCompletions, Usage.output);
-@@usage(AI.Model.ModelInfo, Usage.output);
-@@usage(AI.Model.StreamingChatCompletionsUpdate, Usage.output);
-@@usage(AI.Model.StreamingChatChoiceUpdate, Usage.output);
-@@usage(AI.Model.StreamingChatResponseMessageUpdate, Usage.output);
-@@usage(AI.Model.StreamingChatResponseToolCallUpdate, Usage.output);
-
 // Since we made all operator methods internal, we need to expliclty
 // say we still want the models they use to be public.
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
-@@access(AI.Model.ChatCompletionsNamedToolSelection, Access.public);
-@@access(AI.Model.ChatCompletionsFunctionToolSelection, Access.public);
+@@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
+@@access(AI.Model.ChatCompletionsNamedToolChoiceFunction, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
-@@access(AI.Model.ChatCompletionsResponseFormatJSON, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonObject, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchema, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormatText, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
-@@access(AI.Model.ChatCompletionsToolSelectionPreset, Access.public);
+@@access(AI.Model.ChatCompletionsToolChoicePreset, Access.public);
 @@access(AI.Model.ChatRequestAssistantMessage, Access.public);
 @@access(AI.Model.ChatRequestMessage, Access.public);
 @@access(AI.Model.ChatRequestSystemMessage, Access.public);
@@ -40,12 +34,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.CompletionsFinishReason, Access.public);
 @@access(AI.Model.CompletionsUsage, Access.public);
 @@access(AI.Model.EmbeddingEncodingFormat, Access.public);
-@@access(AI.Model.EmbeddingInput, Access.public);
 @@access(AI.Model.EmbeddingInputType, Access.public);
 @@access(AI.Model.EmbeddingItem, Access.public);
 @@access(AI.Model.EmbeddingsResult, Access.public);
 @@access(AI.Model.EmbeddingsUsage, Access.public);
 @@access(AI.Model.ExtraParameters, Access.public, "java");
+@@access(AI.Model.ImageEmbeddingInput, Access.public);
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
