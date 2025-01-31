@@ -32,7 +32,16 @@
       "required": true,
       "type": "string",
       "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Microsoft.ContainerService",
+        "Microsoft.Kubernetes",
+        "Microsoft.HybridContainerService"
+      ],
+      "x-ms-enum": {
+        "name": "KubernetesClusterResourceProviderName",
+        "modelAsString": true
+      }
     },
     "ClusterResourceNameParameter": {
       "name": "clusterResourceName",
@@ -40,7 +49,16 @@
       "required": true,
       "type": "string",
       "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "connectedClusters",
+        "managedClusters",
+        "provisionedClusters"
+      ],
+      "x-ms-enum": {
+        "name": "KubernetesClusterResourceName",
+        "modelAsString": true
+      }
     },
     "ClusterNameParameter": {
       "name": "clusterName",
