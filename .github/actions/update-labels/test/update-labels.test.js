@@ -65,8 +65,19 @@ describe("updateLabels", () => {
             owner: {
               login: "TestRepoOwnerLogin",
             },
+            url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName",
           },
-          pull_requests: [{ number: 123 }],
+          pull_requests: [
+            {
+              url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName/pulls/123",
+              number: 123,
+              base: {
+                repo: {
+                  url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName",
+                },
+              },
+            },
+          ],
         },
       },
     };
@@ -109,12 +120,23 @@ describe("updateLabels", () => {
           head_sha: "abc123",
           id: 456,
           repository: {
-            name: "TestRepoName",
+            name: "TestRepoNameEnv",
             owner: {
-              login: "TestRepoOwnerLogin",
+              login: "TestRepoOwnerLoginEnv",
             },
+            url: "https://api.github.com/repos/TestRepoOwnerLoginEnv/TestRepoNameEnv",
           },
-          pull_requests: [{ number: 123 }],
+          pull_requests: [
+            {
+              url: "https://api.github.com/repos/TestRepoOwnerLoginEnv/TestRepoNameEnv/pulls/123",
+              number: 123,
+              base: {
+                repo: {
+                  url: "https://api.github.com/repos/TestRepoOwnerLoginEnv/TestRepoNameEnv",
+                },
+              },
+            },
+          ],
         },
       },
     };
