@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Playwright Service Reporting Data Plane API",
+    "title": "Microsoft Playwright Testing Service Reporting Data Plane API",
     "version": "2025-02-24",
     "x-typespec-generated": [
       {
@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.reporting.api.playwright.microsoft.com).",
+        "description": "Supported Azure Playwright Service reporting API Endpoints (protocol and hostname, for example:\n  https://{region}.reporting.api.playwright.microsoft.com).",
         "required": true,
         "type": "string"
       }
@@ -64,7 +64,7 @@
         "tags": [
           "test-result"
         ],
-        "description": "List Test Results.",
+        "description": "List test results.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -137,7 +137,7 @@
         "tags": [
           "test-result"
         ],
-        "description": "Get Test Results summary.",
+        "description": "Get test results summary.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -207,7 +207,7 @@
         "tags": [
           "test-result"
         ],
-        "description": "Upload Test Results.",
+        "description": "Upload test results.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -350,7 +350,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Gets a test run.",
+        "description": "Get a test run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -414,7 +414,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Creates or updates a testrun.",
+        "description": "Create or update a testrun.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -505,7 +505,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Get TestResults Upload Url.",
+        "description": "Get Test results upload url to publish test results.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -642,7 +642,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Get TestRun summary for an Odata filter.",
+        "description": "Get test run summary for an Odata filter.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -712,7 +712,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Get TestRun metadata for an Odata filter.",
+        "description": "Get test run metadata for an Odata filter.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -809,39 +809,39 @@
           {
             "name": "ReadAddCreateWrite",
             "value": "ReadAddCreateWrite",
-            "description": "Read, add, create, and write access."
+            "description": "Read, create, and write access."
           }
         ]
       }
     },
     "AccountTestRunStats": {
       "type": "object",
-      "description": "Summary statistics of Testrun in an account.",
+      "description": "Summary statistics of test run in a workspace.",
       "properties": {
         "passed": {
           "type": "integer",
           "format": "int32",
-          "description": "Passed  runs within an account"
+          "description": "Passed  runs within a workspace"
         },
         "failed": {
           "type": "integer",
           "format": "int32",
-          "description": "Failed  runs within an account"
+          "description": "Failed  runs within a workspace"
         },
         "flaky": {
           "type": "integer",
           "format": "int32",
-          "description": "Flaky  runs within an account"
+          "description": "Flaky  runs within a workspace"
         },
         "all": {
           "type": "integer",
           "format": "int32",
-          "description": "Total  runs within an account"
+          "description": "Total  runs within a workspace"
         },
         "cloudExecutionRuns": {
           "type": "integer",
           "format": "int32",
-          "description": "Cloud Executed runs within an account"
+          "description": "Cloud Executed runs within a workspace"
         }
       },
       "required": [
@@ -854,7 +854,7 @@
     },
     "AttachmentKind": {
       "type": "string",
-      "description": "Attachment kinds uploaded for a test result",
+      "description": "Types of attachments uploaded for a test result",
       "enum": [
         "Image",
         "Video",
@@ -945,7 +945,7 @@
     },
     "BrowserType": {
       "type": "string",
-      "description": "Supported browser Types for tests",
+      "description": "Supported browser types for running tests",
       "enum": [
         "Chromium",
         "Webkit",
@@ -979,7 +979,7 @@
       "properties": {
         "ciProviderName": {
           "$ref": "#/definitions/CiProviderName",
-          "description": "Name of the CI provider.  GitHub | Azure DevOps | Default"
+          "description": "Name of the CI provider."
         },
         "branch": {
           "type": "string",
@@ -988,18 +988,18 @@
         },
         "author": {
           "type": "string",
-          "description": "Author of the commit triggering the test run.",
+          "description": "Author of the last commit.",
           "maxLength": 500
         },
         "commitId": {
           "type": "string",
-          "description": "ID of the commit triggering the test run.",
+          "description": "ID of the last commit.",
           "maxLength": 500
         },
         "revisionUrl": {
           "type": "string",
           "format": "uri",
-          "description": "URL linking to the revision details.",
+          "description": "URL linking to the revision details in source code repository.",
           "maxLength": 4096
         }
       }
@@ -1050,7 +1050,7 @@
         },
         "serverStatus": {
           "$ref": "#/definitions/TestRunStatus",
-          "description": "Processing Status of the testresults on the Server Side."
+          "description": "Run status of the test results on the service."
         },
         "totalTestsCount": {
           "type": "integer",
@@ -1061,25 +1061,25 @@
         "passedTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that passed.",
+          "description": "Number of passed tests in the test run.",
           "readOnly": true
         },
         "failedTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that failed.",
+          "description": "Number of failed tests in the test run.",
           "readOnly": true
         },
         "skippedTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that were skipped.",
+          "description": "Number of skipped tests in the test run.",
           "readOnly": true
         },
         "flakyTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that were flaky (passed on retry).",
+          "description": "Number of flaky tests in the test run (tests that passed on retry).",
           "readOnly": true
         },
         "status": {
@@ -1097,7 +1097,7 @@
         },
         "projects": {
           "type": "array",
-          "description": "List of Playwright projects (https://playwright.dev/docs/test-projects) associated with the test run.",
+          "description": "List of Playwright [projects](https://playwright.dev/docs/test-projects) associated with the test run.",
           "items": {
             "type": "string"
           },
@@ -1105,7 +1105,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "List of tags associated with the test run.",
+          "description": "List of tags associated with tests in the test run.",
           "items": {
             "type": "string"
           },
@@ -1125,12 +1125,12 @@
       "properties": {
         "serverStatus": {
           "$ref": "#/definitions/TestRunStatus",
-          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
+          "description": "Status of the test run."
         },
         "billableTimeInMs": {
           "type": "integer",
           "format": "int32",
-          "description": "Billable time for the test run. Available after testRun Ends"
+          "description": "Billed time for the test run, available once the test run has ended"
         },
         "totalTimeInMs": {
           "type": "integer",
@@ -1154,7 +1154,7 @@
     },
     "OsType": {
       "type": "string",
-      "description": "Supported OS  for tests",
+      "description": "Supported operating systems for tests",
       "enum": [
         "Windows",
         "Linux",
@@ -1237,7 +1237,7 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retryCount attempts.",
+          "description": "Number of retries.",
           "maximum": 100
         },
         "status": {
@@ -1263,7 +1263,7 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "List of artifacts paths.",
+          "description": "Relative path of test artifacts in storage.",
           "readOnly": true
         }
       },
@@ -1278,12 +1278,12 @@
     },
     "ResultsStats": {
       "type": "object",
-      "description": "Summary statistics of testresults in a run.",
+      "description": "Summary statistics of test results in a run.",
       "properties": {
         "passed": {
           "type": "integer",
           "format": "int32",
-          "description": "Passed test-results within a run"
+          "description": "Passed tests within a run"
         },
         "failed": {
           "type": "integer",
@@ -1316,7 +1316,7 @@
     },
     "RunnerType": {
       "type": "string",
-      "description": "Supported Runner Types for tests",
+      "description": "Supported runners for test reporting",
       "enum": [
         "MsTest",
         "Nunit",
@@ -1329,12 +1329,12 @@
           {
             "name": "MsTest",
             "value": "MsTest",
-            "description": "MsTest"
+            "description": "MsTest runner. Learn more [here].(https://learn.microsoft.com/dotnet/core/testing/unit-testing-mstest-runner-intro)"
           },
           {
             "name": "Nunit",
             "value": "Nunit",
-            "description": "Nunit"
+            "description": "Nunit. Learn more [here](https://nunit.org)"
           },
           {
             "name": "Playwright",
@@ -1346,7 +1346,7 @@
     },
     "ShardDetails": {
       "type": "object",
-      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
+      "description": "Model representing a shard. Learn about Playwright sharding [here](https://playwright.dev/docs/test-sharding)",
       "properties": {
         "total": {
           "type": "integer",
@@ -1361,7 +1361,7 @@
     },
     "ShardDetailsCreateOrUpdate": {
       "type": "object",
-      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
+      "description": "Model representing a shard. Learn about Playwright sharding [here](https://playwright.dev/docs/test-sharding)",
       "properties": {
         "total": {
           "type": "integer",
@@ -1373,7 +1373,7 @@
     },
     "ShardExecutionDetails": {
       "type": "object",
-      "description": "Execution details of a Shard.",
+      "description": "Execution details of a Playwright shard within the test run.",
       "properties": {
         "shardId": {
           "type": "integer",
@@ -1395,8 +1395,8 @@
         "workersCount": {
           "type": "integer",
           "format": "int32",
-          "description": "number of workers used by playwright client.",
-          "maximum": 1000,
+          "description": "Number of workers used by playwright client.",
+          "maximum": 10000000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1404,7 +1404,7 @@
         },
         "uploadCompleted": {
           "type": "boolean",
-          "description": "Flag indicating if upload is completed for the shard.",
+          "description": "Flag indicating if upload is complete for the shard.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1423,7 +1423,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/TestFrameworkName",
-          "description": "Name of the test framework. Supported Frameworks are Playwright"
+          "description": "Name of the test framework."
         },
         "version": {
           "type": "string",
@@ -1432,7 +1432,7 @@
         },
         "runnerType": {
           "$ref": "#/definitions/RunnerType",
-          "description": "Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT"
+          "description": "Name of the test runner."
         }
       },
       "required": [
@@ -1447,7 +1447,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/TestFrameworkName",
-          "description": "Name of the test framework. Supported Frameworks are Playwright"
+          "description": "Name of the test framework."
         },
         "version": {
           "type": "string",
@@ -1456,13 +1456,13 @@
         },
         "runnerType": {
           "$ref": "#/definitions/RunnerType",
-          "description": "Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT"
+          "description": "Name of the test runner."
         }
       }
     },
     "TestFrameworkName": {
       "type": "string",
-      "description": "Supported Framework",
+      "description": "Supported test frameworks",
       "enum": [
         "Playwright"
       ],
@@ -1484,7 +1484,7 @@
       "properties": {
         "testExecutionId": {
           "type": "string",
-          "description": "Identifier of the test execution.",
+          "description": "Identifier for the test execution.",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1493,7 +1493,7 @@
         },
         "testId": {
           "type": "string",
-          "description": "Identifier of the test.",
+          "description": "Identifier for the test.",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1502,7 +1502,7 @@
         },
         "testCombinationId": {
           "type": "string",
-          "description": "Identifier of the test combination.",
+          "description": "Identifier for the test combination. A test combination represents a specific test within a project.",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1527,7 +1527,7 @@
         },
         "accountId": {
           "type": "string",
-          "description": "Identifier of the account.",
+          "description": "Identifier of the workspace.",
           "maxLength": 200,
           "readOnly": true
         },
@@ -1551,7 +1551,7 @@
         },
         "suiteTitle": {
           "type": "string",
-          "description": "Title of the suite.",
+          "description": "Title of the test suite.",
           "maxLength": 500,
           "x-ms-mutability": [
             "read",
@@ -1570,7 +1570,7 @@
         "lineNumber": {
           "type": "integer",
           "format": "int32",
-          "description": "Line number.",
+          "description": "Line number for the test in the file.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1579,7 +1579,7 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retryCount attempts. Max retryCount is 100, after which testresults metadata will not be stored",
+          "description": "Number of retries for the test.",
           "maximum": 100,
           "x-ms-mutability": [
             "read",
@@ -1588,7 +1588,7 @@
         },
         "status": {
           "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test result. While uploading results, a single test execution status can't be Flaky",
+          "description": "Status of the individual test execution. The status cannot be 'flaky' for upload",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1604,7 +1604,7 @@
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
-          "description": "Continuous integration configuration.",
+          "description": "Continuous integration (CI) configuration.",
           "readOnly": true
         },
         "durationInMs": {
@@ -1619,14 +1619,14 @@
         },
         "attachmentsMetadata": {
           "type": "array",
-          "description": "Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable",
+          "description": "Metadata related to attachments",
           "items": {
             "$ref": "#/definitions/AttachmentKind"
           }
         },
         "previousRetries": {
           "type": "array",
-          "description": "Previous retry summaries. While uploading results, each retry is uploaded separately.However, all the retries of a test gets grouped on the server side and can be retrieved as a single entity using GET API.",
+          "description": "Previous retry summaries: Retires are uploaded separately but grouped on the service, accessible as a single entity via the GET API.",
           "items": {
             "$ref": "#/definitions/PreviousRetrySummary"
           },
@@ -1647,7 +1647,7 @@
         },
         "annotations": {
           "type": "array",
-          "description": "List of annotations (https://playwright.dev/docs/test-annotations).",
+          "description": "List of annotations (https://playwright.dev/docs/test-annotations) for the test result.",
           "maxItems": 100,
           "items": {
             "type": "string"
@@ -1659,7 +1659,7 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "Relative path in storage for all the artifacts of this test",
+          "description": "Relative path in storage for all the artifacts of the test",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1727,7 +1727,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run (unicode characters allowed).",
+          "description": "Display name of the test run in the portal (unicode characters allowed).",
           "minLength": 3,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -1751,12 +1751,12 @@
         },
         "creatorName": {
           "type": "string",
-          "description": "Creator's name.",
+          "description": "Test run created by.",
           "readOnly": true
         },
         "cloudRunSummary": {
           "$ref": "#/definitions/CloudRunSummary",
-          "description": "Summary of the Cloud executed run. Only available if cloud run is enabled ",
+          "description": "Summary of the cloud-hosted browser run. Only available if cloud run is enabled ",
           "readOnly": true
         },
         "cloudReportSummary": {
@@ -1766,7 +1766,7 @@
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
-          "description": "Continuous integration configuration.",
+          "description": "Continuous integration (CI) configuration.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1774,7 +1774,7 @@
         },
         "testRunConfig": {
           "$ref": "#/definitions/TestRunConfig",
-          "description": "Client configuration for the test run.",
+          "description": "Playwright client configuration for the test run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1787,12 +1787,12 @@
         },
         "cloudRunEnabled": {
           "type": "boolean",
-          "description": "Flag indicating if cloud run is enabled.",
+          "description": "Flag indicating if test run is using cloud-hosted browsers (cloud run).",
           "readOnly": true
         },
         "cloudReportingEnabled": {
           "type": "boolean",
-          "description": "Must be set to true when users want to use Reporting Feature ",
+          "description": "Must be set to true when users want to use reporting feature ",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1816,7 +1816,7 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retry attempts.",
+          "description": "Number of retries.",
           "maximum": 100,
           "x-ms-mutability": [
             "read",
@@ -1826,7 +1826,7 @@
         "repeatEach": {
           "type": "integer",
           "format": "int32",
-          "description": "Interval between repeated test runs.",
+          "description": "The number of times to repeat each test, useful for debugging flaky tests.",
           "maximum": 10000,
           "x-ms-mutability": [
             "read",
@@ -1836,8 +1836,8 @@
         "workersCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of worker instances.",
-          "maximum": 1000,
+          "description": "Number of worker instances (https://playwright.dev/docs/test-parallel#worker-processes).",
+          "maximum": 10000000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1862,7 +1862,7 @@
         "timeoutInMs": {
           "type": "integer",
           "format": "int64",
-          "description": "Timeout duration for test execution.",
+          "description": "Playwright test timeout.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1880,7 +1880,7 @@
         },
         "testSdkLanguage": {
           "$ref": "#/definitions/TestSdkLanguage",
-          "description": "Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'",
+          "description": "Programming language used for the test SDK.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1888,7 +1888,7 @@
         },
         "reporterPackageVersion": {
           "type": "string",
-          "description": "Version of the reporter package.",
+          "description": "Version of the service package.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1907,7 +1907,7 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retry attempts.",
+          "description": "Number of retries.",
           "maximum": 100,
           "x-ms-mutability": [
             "read",
@@ -1917,7 +1917,7 @@
         "repeatEach": {
           "type": "integer",
           "format": "int32",
-          "description": "Interval between repeated test runs.",
+          "description": "The number of times to repeat each test, useful for debugging flaky tests.",
           "maximum": 10000,
           "x-ms-mutability": [
             "read",
@@ -1927,8 +1927,8 @@
         "workersCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of worker instances.",
-          "maximum": 1000,
+          "description": "Number of worker instances (https://playwright.dev/docs/test-parallel#worker-processes).",
+          "maximum": 10000000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1953,7 +1953,7 @@
         "timeoutInMs": {
           "type": "integer",
           "format": "int64",
-          "description": "Timeout duration for test execution.",
+          "description": "Playwright test timeout.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1971,7 +1971,7 @@
         },
         "testSdkLanguage": {
           "$ref": "#/definitions/TestSdkLanguage",
-          "description": "Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'",
+          "description": "Programming language used for the test SDK.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1979,7 +1979,7 @@
         },
         "reporterPackageVersion": {
           "type": "string",
-          "description": "Version of the reporter package.",
+          "description": "Version of the service package.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1993,7 +1993,7 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run (unicode characters allowed).",
+          "description": "Display name of the test run in the portal (unicode characters allowed).",
           "minLength": 3,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -2012,7 +2012,7 @@
         },
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
-          "description": "Continuous integration configuration.",
+          "description": "Continuous integration (CI) configuration.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2020,7 +2020,7 @@
         },
         "testRunConfig": {
           "$ref": "#/definitions/TestRunConfigCreateOrUpdate",
-          "description": "Client configuration for the test run.",
+          "description": "Playwright client configuration for the test run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2028,7 +2028,7 @@
         },
         "cloudReportingEnabled": {
           "type": "boolean",
-          "description": "Must be set to true when users want to use Reporting Feature ",
+          "description": "Must be set to true when users want to use reporting feature ",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2051,7 +2051,7 @@
           {
             "name": "Running",
             "value": "Running",
-            "description": "The test run is currently running."
+            "description": "The test run is currently in progress."
           },
           {
             "name": "ClientComplete",
@@ -2084,7 +2084,7 @@
     },
     "TestSdkLanguage": {
       "type": "string",
-      "description": "Supported Test SDK Language.",
+      "description": "Supported Test SDK Languages.",
       "enum": [
         "JavaScript",
         "TypeScript",
@@ -2145,7 +2145,7 @@
           {
             "name": "Flaky",
             "value": "Flaky",
-            "description": "The test was flaky."
+            "description": "The test was flaky (passed in retry)."
           },
           {
             "name": "Interrupted",
@@ -2191,19 +2191,19 @@
         "testResultsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of test results uploaded."
+          "description": "Total number of test results uploaded in the test run."
         },
         "totalAttachmentsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of attachments uploaded.",
+          "description": "Total number of attachments uploaded in the test run.",
           "maximum": 1000000
         },
         "totalAttachmentsSize": {
           "type": "integer",
           "format": "int64",
-          "description": "Total size of attachments uploaded in Bytes.",
-          "maximum": 1024000000
+          "description": "Total size of attachments uploaded in the test run (bytes).",
+          "maximum": 100000000000
         }
       },
       "required": [
@@ -2241,12 +2241,12 @@
         },
         "projectName": {
           "type": "string",
-          "description": "Name of the Playwright project.",
+          "description": "Name of the Playwright project to which the test is associated.",
           "maxLength": 500
         },
         "browserType": {
           "$ref": "#/definitions/BrowserType",
-          "description": "Name of the browser."
+          "description": "Name of the browser running the test."
         },
         "os": {
           "$ref": "#/definitions/OsType",
