@@ -191,7 +191,7 @@ model TestFramework {
   runnerType: RunnerType;
 }
 
-@doc("Model representing a shard.")
+@doc("Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding")
 model ShardDetails {
   @doc("Total number of shards.")
   @maxValue(1000)
@@ -205,8 +205,8 @@ union CiProviderName {
   @doc("GitHub")
   "GitHub",
 
-  @doc("Azure Devops")
-  "Ado",
+  @doc("Azure DevOps")
+  "Azure DevOps",
 
   @doc("default")
   "Default",
@@ -214,7 +214,8 @@ union CiProviderName {
 
 @doc("Model representing continuous integration (CI) configuration. ")
 model CiConfig {
-  @doc("Name of the CI provider.  GitHub | ADO")
+  @doc("Name of the CI provider.  GitHub | Azure DevOps | Default")
+  @maxLength(200)
   ciProviderName?: CiProviderName;
 
   @maxLength(500)
@@ -262,7 +263,7 @@ model CloudReportingSummary {
   @visibility("read")
   skippedTestsCount?: int32;
 
-  @doc("Number of tests that were flaky.")
+  @doc("Number of tests that were flaky (passed on retry).")
   @visibility("read")
   flakyTestsCount?: int32; 
 
@@ -270,11 +271,11 @@ model CloudReportingSummary {
   @visibility("read")
   status: TestStatus;
 
-  @doc("List of jobs associated with the test run.")
+  @doc("List of CI jobs associated with the test run.")
   @visibility("read")
   jobs?: string[];
 
-  @doc("List of projects associated with the test run.")
+  @doc("List of Playwright projects (https://playwright.dev/docs/test-projects) associated with the test run.")
   @visibility("read")
   projects?: string[];
 
@@ -297,8 +298,8 @@ model CloudRunSummary {
   @doc("Number of browser sessions used in the test run.")
   numBrowserSessions?: int32;
 
-  @doc("Flag indicating if a test-run was throttled because requested browser Quota exceeded")
-  browserQuotaExceeded?: boolean;
+  @doc("Flag indicating whether the test run was throttled due to reaching the maximum allowed parallel browser limit for the workspace.")
+  browserQuotaExceeded: boolean;
 }
 
 @doc("Model to update shard result.")
@@ -350,7 +351,7 @@ model TestRun {
   @maxLength(200)
   testRunId: string;
 
-  @doc("Display name of the test run, unicode characters allowed.")
+  @doc("Display name of the test run (unicode characters allowed).")
   @maxLength(200)
   @minLength(3)
   @visibility("read","create")
@@ -372,7 +373,7 @@ model TestRun {
   @visibility("read")
   cloudRunSummary?: CloudRunSummary;
 
-  @doc("Summary of reports uploaded on cloud.Only available if cloud reporting is enabled")
+  @doc("Summary of reports uploaded on cloud. Only available if cloud reporting is enabled")
   @visibility("read")
   cloudReportSummary?: CloudReportingSummary;
 
@@ -392,7 +393,7 @@ model TestRun {
   @visibility("read")
   cloudRunEnabled: boolean;
 
-  @doc("Must be set to true when Customers want to use Reporting Feature ")
+  @doc("Must be set to true when users want to use Reporting Feature ")
   @visibility("read", "create")
   cloudReportingEnabled: boolean;
 }
@@ -512,7 +513,7 @@ model TestResultDetails {
   @visibility("read", "create")
   lineNumber: int32;
 
-  @doc("Number of retryCount attempts. max retryCount is 20. After which testresults metadata will not be stored")
+  @doc("Number of retryCount attempts. Max retryCount is 20, after which testresults metadata will not be stored")
   @visibility("read", "create")
   @maxValue(20)
   retryCount: int32;
@@ -541,12 +542,12 @@ model TestResultDetails {
   @maxItems(100)
   tags?: string[];
 
-  @doc("List of annotations.")
+  @doc("List of annotations (https://playwright.dev/docs/test-annotations).")
   @visibility("read", "create")
   @maxItems(100)
   annotations?: string[];
 
-  @doc("Relative path in Storage for all the artifacts of this test")
+  @doc("Relative path in storage for all the artifacts of this test")
   @visibility("read", "create")
   artifactsPath?: string;
 }
@@ -561,8 +562,8 @@ union BrowserType {
   @doc("Webkit")
   "Webkit",
 
-  @doc("Safari")
-  "FireFox",
+  @doc("Firefox")
+  "Firefox",
 }
 
 @doc("Supported OS  for tests")
@@ -583,7 +584,7 @@ union OsType {
 union AttachmentKind {
   string,
 
-  @doc("Image")
+  @doc("Screenshot")
   "Image",
 
   @doc("Video")
@@ -596,18 +597,18 @@ union AttachmentKind {
 // Model representing web test configuration
 @doc("Configuration details for the web test.")
 model WebTestConfig {
-  @doc("Name of the job.")
+  @doc("Name of the CI job running the test.")
   @maxLength(500)
   jobName: string;
 
-  @doc("Name of the project.")
+  @doc("Name of the Playwright project.")
   @maxLength(500)
   projectName: string;
 
   @doc("Name of the browser.")
   browserType: BrowserType;
 
-  @doc("Operating system details.")
+  @doc("Operating system where the browser is hosted.")
   os: OsType;
 }
 
@@ -723,10 +724,10 @@ interface TestRuns {
   @doc("Creates or updates a testrun.")
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
-  @doc("Gets a testrun.")
+  @doc("Gets a test run.")
   get is Operations.ResourceRead<TestRun>;
 
-  @doc("List testruns.")
+  @doc("List test runs.")
   list is Operations.ResourceList<
     TestRun,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
@@ -775,13 +776,13 @@ interface TestResults {
     {}
   >;
 
-  @doc("List Testresults.")
+  @doc("List Test Results.")
   list is Operations.ResourceList<
     TestResultDetails,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get Testresults summary.")
+  @doc("Get Test Results summary.")
   @action("resultsStats")
   computeResultsStats is Operations.ResourceCollectionAction<
     TestResultDetails,
