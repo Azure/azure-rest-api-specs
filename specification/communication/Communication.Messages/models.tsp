@@ -120,7 +120,7 @@ model NotificationContent {
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
 
-  @doc("The type discriminator describing a notification type.")
+  @doc("The type discriminator describing a message type.")
   kind: CommunicationMessageKind;
 }
 
@@ -766,89 +766,52 @@ model GetConversationMessagesAnalysisResult {
 
 @added(Versions.c2025_03_01_Preview)
 @discriminator("kind")
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("Details of the conversation message content.")
 model ConversationMessageContent {
-  @doc("The native external platform user identifiers of the recipient.")
-  to: string[];
-
-  @doc("The type discriminator describing a conversation message type.")
-  kind: CommunicationMessageKind;
+  ...NotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a text conversation message.")
 model TextConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is text.")
-  kind: CommunicationMessageKind.text;
-
-  @doc("Message content.")
-  content: string;
+  ...TextNotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
-@doc("A request to send a media conversation message. Could be an image, document or video.")
-model MediaConversationMessageContentBase {
-  @clientName("mediaUrl", "java")
-  @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
-  mediaUri: url;
-}
-
-@added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send an image conversation message.")
 model ImageConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is image.")
-  kind: CommunicationMessageKind.image;
-
-  @doc("Optional text content.")
-  caption?: string;
-
-  ...MediaConversationMessageContentBase;
+  ...ImageNotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a document conversation message.")
 model DocumentConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is document.")
-  kind: CommunicationMessageKind.document;
-
-  @doc("Optional text content.")
-  caption?: string;
-
-  @doc("Optional name for the file.")
-  fileName?: string;
-
-  ...MediaConversationMessageContentBase;
+  ...DocumentNotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a video conversation message.")
 model VideoConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is video.")
-  kind: CommunicationMessageKind.video;
-
-  @doc("Optional text content.")
-  caption?: string;
-
-  ...MediaConversationMessageContentBase;
+  ...VideoNotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send an audio conversation message.")
-model AudioConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is audio.")
-  kind: CommunicationMessageKind.audio;
-
-  ...MediaNotificationContentBase;
+model AudioConversationMessageContent  extends ConversationMessageContent {
+  ...AudioNotificationContent
 }
 
 @added(Versions.c2025_03_01_Preview)
+@withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a template conversation message.")
 model TemplateConversationMessageContent extends ConversationMessageContent {
-  @doc("Message content type is template.")
-  kind: CommunicationMessageKind.template;
-
-  @doc("The template object used to create templates.")
-  template: MessageTemplate;
+  ...TemplateNotificationContent
 }
 
 @doc("Azure Communication Messages Versions")

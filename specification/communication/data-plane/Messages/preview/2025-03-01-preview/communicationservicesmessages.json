@@ -1255,21 +1255,13 @@
       "type": "object",
       "description": "Details of the conversation message content.",
       "properties": {
-        "to": {
-          "type": "array",
-          "description": "The native external platform user identifiers of the recipient.",
-          "items": {
-            "type": "string"
-          }
-        },
         "kind": {
           "$ref": "#/definitions/CommunicationMessageKind",
-          "description": "The type discriminator describing a conversation message type."
+          "description": "The type discriminator describing a message type."
         }
       },
       "discriminator": "kind",
       "required": [
-        "to",
         "kind"
       ]
     },
@@ -1951,7 +1943,7 @@
         },
         "kind": {
           "$ref": "#/definitions/CommunicationMessageKind",
-          "description": "The type discriminator describing a notification type."
+          "description": "The type discriminator describing a message type."
         }
       },
       "discriminator": "kind",
