@@ -676,7 +676,7 @@ model ConversationMessageItem {
   sequenceId?: int64;
 
   @doc("Payload of a threaded conversation message.")
-  message: Message;
+  message: ConversationMessageContent;
 
   @doc("The display name of the message sender.")
   senderDisplayName?: string;

@@ -261,8 +261,10 @@
             }
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/messages/conversations/{conversationId}:terminate": {
+      "post": {
         "operationId": "ConversationManagementOperations_DeleteConversation",
         "tags": [
           "ConversationManagement"
@@ -290,8 +292,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CreateConversationResult"
+            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -1278,7 +1283,7 @@
           "description": "Message sequence ID."
         },
         "message": {
-          "$ref": "#/definitions/Message",
+          "$ref": "#/definitions/ConversationMessageContent",
           "description": "Payload of a threaded conversation message."
         },
         "senderDisplayName": {

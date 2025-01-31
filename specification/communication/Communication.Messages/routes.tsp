@@ -65,7 +65,12 @@ interface ConversationManagementOperations {
   @tag("ConversationManagement")
   @doc("Terminates a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
-  deleteConversation is Operations.ResourceDelete<Conversation>;
+  @action("terminate")
+  deleteConversation is Operations.ResourceAction<
+  Conversation,
+  {},
+  OkResponse & CreateConversationResult
+>;
 }
 
 @added(Versions.c2025_03_01_Preview)
