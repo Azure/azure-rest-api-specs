@@ -196,10 +196,12 @@ model QuotaResource is ProxyResource<QuotaResourceProperties> {
 model MaxMonthlyVirtualUserHoursResourceProperties {
   @doc("Current limit value, with -1 indicating that there is no limit.")
   @minValue(-1)
+  @visibility("read")
   limit?: int32;
 
   @doc("Current usage value.")
   @minValue(0)
+  @visibility("read")
   usage?: int32;
 
   @doc("Resource provisioning state.")
