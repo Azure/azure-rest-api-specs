@@ -438,6 +438,52 @@ namespace SkillContext
 		finalResponseFallback?: string;
 	}
 
+	@doc("PromptBuilder")
+	model PromptBuilder {
+		@doc("SkillName")
+		skillName: string;
+
+		@doc("SkillsetName")
+		skillsetName: string;
+
+		@doc("SkillInputParts")
+		skillInputParts: Record<IPromptPart>;
+
+		@doc("TokenReductionStrategies")
+		tokenReductionStrategies: Array<TokenReductionStrategy>;
+
+		@doc("TokenSafetyMargin")
+		tokenSafetyMargin: int32 = 256;
+
+		@doc("Functions")
+		functions: FunctionList;
+	}
+
+	@doc("TokenReductionStrategy")
+	model TokenReductionStrategy {
+		@doc("TokenTarget")
+		tokenTarget: TokenTarget;
+
+		@doc("Parts")
+		parts: Array<IPromptPart>;
+	}
+
+	@doc("IPromptPart")
+	interface IPromptPart {
+		@doc("Renders the prompt part")
+		render(): string;
+	}
+
+	@doc("TokenTarget")
+	model TokenTarget {
+	}
+
+	@doc("FunctionList")
+	model FunctionList {
+		@doc("Functions")
+		functions: Array<GPTFunction>;
+	}
+
 	@doc("Represents a chat completion request.")
 	model ChatCompletionRequest extends BaseCompletionRequest {
 	  @doc("The messages associated with the request.")
