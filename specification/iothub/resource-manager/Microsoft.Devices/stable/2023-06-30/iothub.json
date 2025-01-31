@@ -3292,20 +3292,7 @@
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
         "source": {
-          "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",
-          "enum": [
-            "Invalid",
-            "DeviceMessages",
-            "TwinChangeEvents",
-            "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents",
-            "DeviceConnectionStateEvents"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingSource",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingSource"
         },
         "condition": {
           "description": "The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",
@@ -3347,7 +3334,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RoutingSource",
+            "name": "FallbackRoutingSource",
             "modelAsString": true
           }
         },
@@ -4093,20 +4080,7 @@
       "type": "object",
       "properties": {
         "routingSource": {
-          "description": "Routing source",
-          "enum": [
-            "Invalid",
-            "DeviceMessages",
-            "TwinChangeEvents",
-            "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents",
-            "DeviceConnectionStateEvents"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingSource",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingSource"
         },
         "message": {
           "description": "Routing message",
@@ -4116,6 +4090,22 @@
           "description": "Routing Twin Reference",
           "$ref": "#/definitions/RoutingTwin"
         }
+      }
+    },
+    "RoutingSource": {
+      "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",
+      "enum": [
+        "Invalid",
+        "DeviceMessages",
+        "TwinChangeEvents",
+        "DeviceLifecycleEvents",
+        "DeviceJobLifecycleEvents",
+        "DeviceConnectionStateEvents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RoutingSource",
+        "modelAsString": true
       }
     },
     "RoutingTwin": {
