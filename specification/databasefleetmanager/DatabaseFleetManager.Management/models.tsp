@@ -560,7 +560,7 @@ model FleetTierProperties {
   /**
    * Maximum number of databases per pool.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   poolNumOfDatabasesMax?: int32;
 
   /**
