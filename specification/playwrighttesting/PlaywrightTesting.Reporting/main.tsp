@@ -184,6 +184,7 @@ model TestFramework {
   name: TestFrameworkName;
 
   @doc("Version of the test framework.")
+  @maxLength(20)
   //TODO add pattern for playwright version
   version: string;
 
@@ -295,7 +296,7 @@ model CloudRunSummary {
   totalTimeInMs?: int32;
 
   @doc("Number of browser sessions used in the test run.")
-  numBrowserSessions?: int32;
+  browserSessionsCount?: int32;
 
   @doc("Flag indicating whether the test run was throttled due to reaching the maximum allowed parallel browser limit for the workspace.")
   browserQuotaExceeded: boolean;
@@ -319,9 +320,11 @@ model UploadMetadata {
   testResultsCount: int32;
 
   @doc("Total number of attachments uploaded.")
+  @maxValue(1000000)
   totalAttachmentsCount: int32;
 
   @doc("Total size of attachments uploaded in Bytes.")
+  @maxValue(1024000000)
   totalAttachmentsSize: int64;
 }
 
@@ -398,23 +401,22 @@ model TestRun {
 }
 
 @doc("Execution details of a Shard.")
-@parentResource(TestRun)
 model ShardExecutionDetails {
-  @doc("Shard Id for the shard- indexed 0,1,2")
-  @key
+  @doc("Shard Id for the shard- indexed 1,2,3 etc.")
   @visibility("read", "create")
   shardId: int32;
 
   @doc("Summary of the test run shard.")
-  @visibility("read", "create", "update")
+  @visibility("read", "create")
   summary: UpdateShardExecutionSummary;
 
   @doc("number of workers used by playwright client.")
   @visibility("read", "create")
+  @maxValue(1000)
   workersCount: int32;
 
   @doc("Flag indicating if upload is completed for the shard.")
-  @visibility("create", "read", "update")
+  @visibility("create", "read")
   uploadCompleted?: boolean;
 }
 
@@ -434,7 +436,7 @@ union TestStatus {
   "Skipped",
 
   @doc("The test was flaky.")
-  "flaky",
+  "Flaky",
 
   @doc("The test was interrupted.")
   "Interrupted",
@@ -480,8 +482,8 @@ model TestResultDetails {
 
   @doc("Identifier of the shard.")
   @visibility("read", "create")
-  @maxLength(200)
-  shardId: string;
+  @maxValue(1000)
+  shardId: int32;
 
   @doc("Identifier of the account.")
   @visibility("read")
@@ -512,12 +514,12 @@ model TestResultDetails {
   @visibility("read", "create")
   lineNumber: int32;
 
-  @doc("Number of retryCount attempts. Max retryCount is 20, after which testresults metadata will not be stored")
+  @doc("Number of retryCount attempts. Max retryCount is 100, after which testresults metadata will not be stored")
   @visibility("read", "create")
-  @maxValue(20)
+  @maxValue(100)
   retryCount: int32;
 
-  @doc("Status of the test.")
+  @doc("Status of the test result. While uploading results, a single test execution status can't be Flaky")
   @visibility("read", "create")
   status: TestStatus;
 
@@ -526,14 +528,20 @@ model TestResultDetails {
   webTestConfig?: WebTestConfig;
 
   @doc("Continuous integration configuration.")
-  @visibility("read", "create")
+  @visibility("read")
   ciConfig?: CiConfig;
 
-  @doc("Summary of test results.")
-  @visibility("read")
-  result: TestResult;
+  @doc("Duration of the test execution in milliseconds.")
+  durationInMs: int64;
 
-  @doc("Previous retryCount summaries.")
+  @doc("Start time of the test execution.- (RFC 3339 literal format)")
+  startTime: utcDateTime;
+
+  @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
+  attachmentsMetadata?: AttachmentKind[];
+
+  @doc("Previous retry summaries. While uploading results, each retry is uploaded separately.However, all the retries of a test gets grouped on the server side and can be retrieved as a single entity using GET API.")
+  @visibility("read")
   previousRetries?: PreviousRetrySummary[];
 
   @doc("List of tags associated with the test result.")
@@ -575,7 +583,7 @@ union OsType {
   @doc("Linux")
   "Linux",
 
-  @doc("MAC")
+  @doc("Macintosh")
   "Mac",
 }
 
@@ -611,22 +619,6 @@ model WebTestConfig {
   os: OsType;
 }
 
-// Model representing test results summary
-@doc("Summary of test results.")
-model TestResult {
-  @doc("Status of the test results.")
-  status: TestStatus;
-
-  @doc("Duration of the test execution in milliseconds.")
-  durationInMillis: int64;
-
-  @doc("Start time of the test execution.- (RFC 3339 literal format)")
-  startTime: utcDateTime;
-
-  @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
-  attachmentsMetadata?: AttachmentKind[];
-}
-
 // Model representing summary of previous retryCount
 @doc("Summary of previous retries.")
 model PreviousRetrySummary {
@@ -634,13 +626,14 @@ model PreviousRetrySummary {
   testExecutionId: string;
 
   @doc("Number of retryCount attempts.")
+  @maxValue(100)
   retryCount: int32;
 
   @doc("Status of the test execution.")
   status: TestStatus;
 
   @doc("Duration of the test execution.")
-  duration: duration;
+  durationInMs: duration;
 
   @doc("Start time of the test execution- RFC 3339 literal format ")
   startTime: utcDateTime;
@@ -651,15 +644,6 @@ model PreviousRetrySummary {
   @doc("List of artifacts paths.")
   @visibility("read")
   artifactsPath?: string;
-}
-
-@doc("Count of a specific status such as PASSED for a run ")
-model StatusSummary {
-  @doc(" Status of a testrun or test ")
-  status: string;
-
-  @doc(" Count  of the specified status")
-  count: int32;
 }
 
 @doc("Summary statistics of Testrun in an account.")

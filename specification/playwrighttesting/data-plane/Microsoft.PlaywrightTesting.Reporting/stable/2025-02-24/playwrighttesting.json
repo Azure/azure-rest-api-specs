@@ -1130,7 +1130,7 @@
           "format": "int32",
           "description": "Total time taken for the test run."
         },
-        "numBrowserSessions": {
+        "browserSessionsCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of browser sessions used in the test run."
@@ -1170,7 +1170,7 @@
           {
             "name": "Mac",
             "value": "Mac",
-            "description": "MAC"
+            "description": "Macintosh"
           }
         ]
       }
@@ -1230,13 +1230,14 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retryCount attempts."
+          "description": "Number of retryCount attempts.",
+          "maximum": 100
         },
         "status": {
           "$ref": "#/definitions/TestStatus",
           "description": "Status of the test execution."
         },
-        "duration": {
+        "durationInMs": {
           "type": "string",
           "format": "duration",
           "description": "Duration of the test execution."
@@ -1263,7 +1264,7 @@
         "testExecutionId",
         "retryCount",
         "status",
-        "duration",
+        "durationInMs",
         "startTime",
         "attachmentsMetadata"
       ]
@@ -1370,7 +1371,7 @@
         "shardId": {
           "type": "integer",
           "format": "int32",
-          "description": "Shard Id for the shard- indexed 0,1,2",
+          "description": "Shard Id for the shard- indexed 1,2,3 etc.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1381,7 +1382,6 @@
           "description": "Summary of the test run shard.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1389,6 +1389,7 @@
           "type": "integer",
           "format": "int32",
           "description": "number of workers used by playwright client.",
+          "maximum": 1000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1399,7 +1400,6 @@
           "description": "Flag indicating if upload is completed for the shard.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -1420,7 +1420,8 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the test framework."
+          "description": "Version of the test framework.",
+          "maxLength": 20
         },
         "runnerType": {
           "$ref": "#/definitions/RunnerType",
@@ -1443,7 +1444,8 @@
         },
         "version": {
           "type": "string",
-          "description": "Version of the test framework."
+          "description": "Version of the test framework.",
+          "maxLength": 20
         },
         "runnerType": {
           "$ref": "#/definitions/RunnerType",
@@ -1468,38 +1470,6 @@
           }
         ]
       }
-    },
-    "TestResult": {
-      "type": "object",
-      "description": "Summary of test results.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test results."
-        },
-        "durationInMillis": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Duration of the test execution in milliseconds."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the test execution.- (RFC 3339 literal format)"
-        },
-        "attachmentsMetadata": {
-          "type": "array",
-          "description": "Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable",
-          "items": {
-            "$ref": "#/definitions/AttachmentKind"
-          }
-        }
-      },
-      "required": [
-        "status",
-        "durationInMillis",
-        "startTime"
-      ]
     },
     "TestResultDetails": {
       "type": "object",
@@ -1542,9 +1512,10 @@
           ]
         },
         "shardId": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Identifier of the shard.",
-          "maxLength": 200,
+          "maximum": 1000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1604,8 +1575,8 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retryCount attempts. Max retryCount is 20, after which testresults metadata will not be stored",
-          "maximum": 20,
+          "description": "Number of retryCount attempts. Max retryCount is 100, after which testresults metadata will not be stored",
+          "maximum": 100,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1613,7 +1584,7 @@
         },
         "status": {
           "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test.",
+          "description": "Status of the test result. While uploading results, a single test execution status can't be Flaky",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1630,22 +1601,32 @@
         "ciConfig": {
           "$ref": "#/definitions/CiConfig",
           "description": "Continuous integration configuration.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "result": {
-          "$ref": "#/definitions/TestResult",
-          "description": "Summary of test results.",
           "readOnly": true
+        },
+        "durationInMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of the test execution in milliseconds."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test execution.- (RFC 3339 literal format)"
+        },
+        "attachmentsMetadata": {
+          "type": "array",
+          "description": "Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable",
+          "items": {
+            "$ref": "#/definitions/AttachmentKind"
+          }
         },
         "previousRetries": {
           "type": "array",
-          "description": "Previous retryCount summaries.",
+          "description": "Previous retry summaries. While uploading results, each retry is uploaded separately.However, all the retries of a test gets grouped on the server side and can be retrieved as a single entity using GET API.",
           "items": {
             "$ref": "#/definitions/PreviousRetrySummary"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "tags": {
@@ -1695,7 +1676,8 @@
         "lineNumber",
         "retryCount",
         "status",
-        "result"
+        "durationInMs",
+        "startTime"
       ]
     },
     "TestResultsUrl": {
@@ -2133,7 +2115,7 @@
         "Passed",
         "Failed",
         "Skipped",
-        "flaky",
+        "Flaky",
         "Interrupted",
         "TimedOut"
       ],
@@ -2157,8 +2139,8 @@
             "description": "The test was skipped."
           },
           {
-            "name": "flaky",
-            "value": "flaky",
+            "name": "Flaky",
+            "value": "Flaky",
             "description": "The test was flaky."
           },
           {
@@ -2210,12 +2192,14 @@
         "totalAttachmentsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of attachments uploaded."
+          "description": "Total number of attachments uploaded.",
+          "maximum": 1000000
         },
         "totalAttachmentsSize": {
           "type": "integer",
           "format": "int64",
-          "description": "Total size of attachments uploaded in Bytes."
+          "description": "Total size of attachments uploaded in Bytes.",
+          "maximum": 1024000000
         }
       },
       "required": [
