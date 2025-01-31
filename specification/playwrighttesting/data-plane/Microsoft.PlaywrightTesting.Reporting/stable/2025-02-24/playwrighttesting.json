@@ -222,6 +222,13 @@
             "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
           },
           {
+            "name": "testRunId",
+            "in": "query",
+            "description": "Mandatory runId for the test results.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1506,10 +1513,7 @@
           "type": "string",
           "description": "Identifier of the test run.",
           "maxLength": 200,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "shardId": {
           "type": "integer",

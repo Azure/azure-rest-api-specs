@@ -476,7 +476,7 @@ model TestResultDetails {
   testCombinationId: string;
 
   @doc("Identifier of the test run.")
-  @visibility("read", "create")
+  @visibility("read")
   @maxLength(200)
   runId: string;
 
@@ -748,6 +748,12 @@ interface TestRuns {
   >;
 }
 
+alias TestRunIdQueryParameter = QueryParametersTrait<{
+  /** Mandatory runId for the test results. */
+  @query
+  testRunId: string;
+}>;
+
 @tag("test-result")
 interface TestResults {
   // TestResults Operations
@@ -756,7 +762,8 @@ interface TestResults {
   uploadBatch is Operations.ResourceCollectionAction<
     TestResultDetails,
     UploadTestResultsRequest,
-    {}
+    {},
+    TestRunIdQueryParameter
   >;
 
   @doc("List Test Results.")
