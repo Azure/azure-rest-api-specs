@@ -62,3 +62,23 @@ union TlsVerification {
 
   string,
 }
+
+@doc("The type of the backing data source.")
+union DataSourceType {
+  @doc("NetApp ONTAP data source type.")
+  NetApp_ONTAP: "NetApp_ONTAP",
+
+  @doc("Azure NetApp Files data source type.")
+  Azure_NetApp_Files: "Azure_NetApp_Files",
+
+  @doc("Dell OneFS data source type.")
+  Dell_OneFS: "Dell_OneFS",
+
+  @doc("AWS S3 data source type.")
+  AWS_S3: "AWS_S3",
+
+  @doc("S3 Compatible data source type.")
+  S3_Compatible: "S3_Compatible",
+
+  string,
+}
