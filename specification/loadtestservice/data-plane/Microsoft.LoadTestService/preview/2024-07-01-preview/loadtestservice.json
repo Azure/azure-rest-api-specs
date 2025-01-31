@@ -6215,7 +6215,11 @@
       "in": "query",
       "description": "Comma separated list IDs of the tests which should be associated with the test profiles to fetch.",
       "required": false,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ListTestProfileQueryParams.testProfileIds": {

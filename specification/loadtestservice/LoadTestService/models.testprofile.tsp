@@ -264,7 +264,7 @@ model ListTestProfileQueryParams {
 
   @doc("Comma separated list IDs of the tests which should be associated with the test profiles to fetch.")
   @query(#{ explode: false })
-  testIds?: string;
+  testIds?: string[];
 }
 
 @doc("Parameters for list test profile run operation")
