@@ -86,7 +86,7 @@ namespace SkillContext
 		@doc("A user of the application")
 		User,
 
-		@doc("The orchestrator (planner)")
+		@doc("The orchestrator or planner")
 		Planner,
 	}
 
