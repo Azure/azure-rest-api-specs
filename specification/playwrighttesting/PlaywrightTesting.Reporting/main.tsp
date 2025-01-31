@@ -169,7 +169,7 @@ union RunnerType {
   "Playwright",
 }
 
-@doc("Supported Framework")
+@doc("Supported test frameworks")
 union TestFrameworkName {
   string,
 
@@ -180,7 +180,7 @@ union TestFrameworkName {
 @doc("Model representing a test framework.")
 model TestFramework {
   //TODO- validate values of framework
-  @doc("Name of the test framework. Supported Frameworks are Playwright")
+  @doc("Name of the test framework.")
   name: TestFrameworkName;
 
   @doc("Version of the test framework.")
@@ -188,11 +188,11 @@ model TestFramework {
   //TODO add pattern for playwright version
   version: string;
 
-  @doc("Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT")
+  @doc("Name of the test runner.")
   runnerType: RunnerType;
 }
 
-@doc("Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding")
+@doc("Model representing a shard. Learn about Playwright sharding [here](https://playwright.dev/docs/test-sharding)")
 model ShardDetails {
   @doc("Total number of shards.")
   @maxValue(1000)
@@ -215,7 +215,7 @@ union CiProviderName {
 
 @doc("Model representing continuous integration (CI) configuration. ")
 model CiConfig {
-  @doc("Name of the CI provider.  GitHub | Azure DevOps | Default")
+  @doc("Name of the CI provider.")
   @maxLength(200)
   ciProviderName?: CiProviderName;
 
@@ -224,15 +224,15 @@ model CiConfig {
   branch?: string;
 
   @maxLength(500)
-  @doc("Author of the commit triggering the test run.")
+  @doc("Author of the last commit.")
   author?: string;
 
   @maxLength(500)
-  @doc("ID of the commit triggering the test run.")
+  @doc("ID of the last commit.")
   commitId?: string;
 
   @maxLength(4096)
-  @doc("URL linking to the revision details.")
+  @doc("URL linking to the revision details in source code repository.")
   revisionUrl?: url;
 }
 
@@ -244,26 +244,26 @@ model CloudReportingSummary {
   @doc("End time of the test run.")
   endTime: utcDateTime;
 
-  @doc("Processing Status of the testresults on the Server Side.")
+  @doc("Run status of the test results on the service.")
   serverStatus: TestRunStatus;
 
   @doc("Total number of tests executed")
   @visibility("read")
   totalTestsCount?: int32;
 
-  @doc("Number of tests that passed.")
+  @doc("Number of passed tests in the test run.")
   @visibility("read")
   passedTestsCount?: int32;
 
-  @doc("Number of tests that failed.")
+  @doc("Number of failed tests in the test run.")
   @visibility("read")
   failedTestsCount?: int32;
 
-  @doc("Number of tests that were skipped.")
+  @doc("Number of skipped tests in the test run.")
   @visibility("read")
   skippedTestsCount?: int32;
 
-  @doc("Number of tests that were flaky (passed on retry).")
+  @doc("Number of flaky tests in the test run (tests that passed on retry).")
   @visibility("read")
   flakyTestsCount?: int32;
 
@@ -275,21 +275,21 @@ model CloudReportingSummary {
   @visibility("read")
   jobs?: string[];
 
-  @doc("List of Playwright projects (https://playwright.dev/docs/test-projects) associated with the test run.")
+  @doc("List of Playwright [projects](https://playwright.dev/docs/test-projects) associated with the test run.")
   @visibility("read")
   projects?: string[];
 
-  @doc("List of tags associated with the test run.")
+  @doc("List of tags associated with tests in the test run.")
   @visibility("read")
   tags?: string[];
 }
 
 @doc("Model representing summary information about a test run.")
 model CloudRunSummary {
-  @doc("Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE")
+  @doc("Status of the test run.")
   serverStatus: TestRunStatus;
 
-  @doc("Billable time for the test run. Available after testRun Ends")
+  @doc("Billed time for the test run, available once the test run has ended")
   billableTimeInMs?: int32;
 
   @doc("Total time taken for the test run.")
@@ -316,15 +316,15 @@ model UpdateShardExecutionSummary {
 
 @doc("Model representing upload metadata.")
 model UploadMetadata {
-  @doc("Total number of test results uploaded.")
+  @doc("Total number of test results uploaded in the test run.")
   testResultsCount: int32;
 
-  @doc("Total number of attachments uploaded.")
+  @doc("Total number of attachments uploaded in the test run.")
   @maxValue(1000000)
   totalAttachmentsCount: int32;
 
-  @doc("Total size of attachments uploaded in Bytes.")
-  @maxValue(1024000000)
+  @doc("Total size of attachments uploaded in the test run (bytes).")
+  @maxValue(100000000000)
   totalAttachmentsSize: int64;
 }
 
@@ -353,7 +353,7 @@ model TestRun {
   @maxLength(200)
   testRunId: string;
 
-  @doc("Display name of the test run (unicode characters allowed).")
+  @doc("Display name of the test run in the portal (unicode characters allowed).")
   @maxLength(200)
   @minLength(3)
   @visibility("read", "create")
@@ -367,11 +367,11 @@ model TestRun {
   @visibility("read")
   creatorId: string;
 
-  @doc("Creator's name.")
+  @doc("Test run created by.")
   @visibility("read")
   creatorName: string;
 
-  @doc("Summary of the Cloud executed run. Only available if cloud run is enabled ")
+  @doc("Summary of the cloud-hosted browser run. Only available if cloud run is enabled ")
   @visibility("read")
   cloudRunSummary?: CloudRunSummary;
 
@@ -379,11 +379,11 @@ model TestRun {
   @visibility("read")
   cloudReportSummary?: CloudReportingSummary;
 
-  @doc("Continuous integration configuration.")
+  @doc("Continuous integration (CI) configuration.")
   @visibility("read", "create")
   ciConfig?: CiConfig;
 
-  @doc("Client configuration for the test run.")
+  @doc("Playwright client configuration for the test run.")
   @visibility("read", "create")
   testRunConfig?: TestRunConfig;
 
@@ -391,16 +391,16 @@ model TestRun {
   @visibility("read")
   testResultsUrl?: TestResultsUrl;
 
-  @doc("Flag indicating if cloud run is enabled.")
+  @doc("Flag indicating if test run is using cloud-hosted browsers (cloud run).")
   @visibility("read")
   cloudRunEnabled: boolean;
 
-  @doc("Must be set to true when users want to use Reporting Feature ")
+  @doc("Must be set to true when users want to use reporting feature ")
   @visibility("read", "create")
   cloudReportingEnabled: boolean;
 }
 
-@doc("Execution details of a Shard.")
+@doc("Execution details of a Playwright shard within the test run.")
 model ShardExecutionDetails {
   @doc("Shard Id for the shard- indexed 1,2,3 etc.")
   @visibility("read", "create")
@@ -410,12 +410,12 @@ model ShardExecutionDetails {
   @visibility("read", "create")
   summary: UpdateShardExecutionSummary;
 
-  @doc("number of workers used by playwright client.")
+  @doc("Number of workers used by playwright client.")
   @visibility("read", "create")
   @maxValue(10000000)
   workersCount: int32;
 
-  @doc("Flag indicating if upload is completed for the shard.")
+  @doc("Flag indicating if upload is complete for the shard.")
   @visibility("create", "read")
   uploadCompleted?: boolean;
 }
@@ -435,7 +435,7 @@ union TestStatus {
   @doc("The test was skipped.")
   "Skipped",
 
-  @doc("The test was flaky.")
+  @doc("The test was flaky (passed in retry).")
   "Flaky",
 
   @doc("The test was interrupted.")
@@ -459,18 +459,18 @@ model UploadTestResultsRequest {
 @resource("test-results")
 @parentResource(Account)
 model TestResultDetails {
-  @doc("Identifier of the test execution.")
+  @doc("Identifier for the test execution.")
   @key
   @visibility("read", "create")
   @maxLength(200)
   testExecutionId: string;
 
-  @doc("Identifier of the test.")
+  @doc("Identifier for the test.")
   @visibility("read", "create")
   @maxLength(200)
   testId: string;
 
-  @doc("Identifier of the test combination.")
+  @doc("Identifier for the test combination. A test combination represents a specific test within a project.")
   @visibility("read", "create")
   @maxLength(200)
   testCombinationId: string;
@@ -485,7 +485,7 @@ model TestResultDetails {
   @maxValue(1000)
   shardId: int32;
 
-  @doc("Identifier of the account.")
+  @doc("Identifier of the workspace.")
   @visibility("read")
   @maxLength(200)
   accountId: string;
@@ -500,7 +500,7 @@ model TestResultDetails {
   @maxLength(500)
   testTitle: string;
 
-  @doc("Title of the suite.")
+  @doc("Title of the test suite.")
   @visibility("read", "create")
   @maxLength(500)
   suiteTitle: string;
@@ -510,16 +510,16 @@ model TestResultDetails {
   @maxLength(300)
   fileName: string;
 
-  @doc("Line number.")
+  @doc("Line number for the test in the file.")
   @visibility("read", "create")
   lineNumber: int32;
 
-  @doc("Number of retryCount attempts. Max retryCount is 100, after which testresults metadata will not be stored")
+  @doc("Number of retries for the test.")
   @visibility("read", "create")
   @maxValue(100)
   retryCount: int32;
 
-  @doc("Status of the test result. While uploading results, a single test execution status can't be Flaky")
+  @doc("Status of the individual test execution. The status cannot be 'flaky' for upload")
   @visibility("read", "create")
   status: TestStatus;
 
@@ -527,7 +527,7 @@ model TestResultDetails {
   @visibility("read", "create")
   webTestConfig?: WebTestConfig;
 
-  @doc("Continuous integration configuration.")
+  @doc("Continuous integration (CI) configuration.")
   @visibility("read")
   ciConfig?: CiConfig;
 
@@ -537,10 +537,10 @@ model TestResultDetails {
   @doc("Start time of the test execution.- (RFC 3339 literal format)")
   startTime: utcDateTime;
 
-  @doc("Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable")
+  @doc("Metadata related to attachments")
   attachmentsMetadata?: AttachmentKind[];
 
-  @doc("Previous retry summaries. While uploading results, each retry is uploaded separately.However, all the retries of a test gets grouped on the server side and can be retrieved as a single entity using GET API.")
+  @doc("Previous retry summaries: Retires are uploaded separately but grouped on the service, accessible as a single entity via the GET API.")
   @visibility("read")
   previousRetries?: PreviousRetrySummary[];
 
@@ -549,17 +549,17 @@ model TestResultDetails {
   @maxItems(100)
   tags?: string[];
 
-  @doc("List of annotations (https://playwright.dev/docs/test-annotations).")
+  @doc("List of annotations (https://playwright.dev/docs/test-annotations) for the test result.")
   @visibility("read", "create")
   @maxItems(100)
   annotations?: string[];
 
-  @doc("Relative path in storage for all the artifacts of this test")
+  @doc("Relative path in storage for all the artifacts of the test")
   @visibility("read", "create")
   artifactsPath?: string;
 }
 
-@doc("Supported browser Types for tests")
+@doc("Supported browser types for running tests")
 union BrowserType {
   string,
 
@@ -573,7 +573,7 @@ union BrowserType {
   "Firefox",
 }
 
-@doc("Supported OS  for tests")
+@doc("Supported operating systems for tests")
 union OsType {
   string,
 
@@ -587,7 +587,7 @@ union OsType {
   "Mac",
 }
 
-@doc("Attachment kinds uploaded for a test result")
+@doc("Types of attachments uploaded for a test result")
 union AttachmentKind {
   string,
 
@@ -608,11 +608,11 @@ model WebTestConfig {
   @maxLength(500)
   jobName: string;
 
-  @doc("Name of the Playwright project.")
+  @doc("Name of the Playwright project to which the test is associated.")
   @maxLength(500)
   projectName: string;
 
-  @doc("Name of the browser.")
+  @doc("Name of the browser running the test.")
   browserType: BrowserType;
 
   @doc("Operating system where the browser is hosted.")
@@ -625,7 +625,7 @@ model PreviousRetrySummary {
   @doc("Identifier of the test execution.")
   testExecutionId: string;
 
-  @doc("Number of retryCount attempts.")
+  @doc("Number of retries.")
   @maxValue(100)
   retryCount: int32;
 
@@ -641,33 +641,33 @@ model PreviousRetrySummary {
   @doc("Metadata related to attachments.")
   attachmentsMetadata: AttachmentKind[];
 
-  @doc("List of artifacts paths.")
+  @doc("Relative path of test artifacts in storage.")
   @visibility("read")
   artifactsPath?: string;
 }
 
-@doc("Summary statistics of Testrun in an account.")
+@doc("Summary statistics of test run in a workspace.")
 model AccountTestRunStats {
-  /** Passed  runs within an account */
+  /** Passed  runs within a workspace */
   passed: int32;
 
-  /** Failed  runs within an account */
+  /** Failed  runs within a workspace */
   failed: int32;
 
-  /** Flaky  runs within an account */
+  /** Flaky  runs within a workspace */
   flaky: int32;
 
-  /** Total  runs within an account */
+  /** Total  runs within a workspace */
   all: int32;
 
-  /** Cloud Executed runs within an account */
+  /** Cloud Executed runs within a workspace */
   cloudExecutionRuns: int32;
 }
 
 // Model representing summary statistics of tests
-@doc("Summary statistics of testresults in a run.")
+@doc("Summary statistics of test results in a run.")
 model ResultsStats {
-  /** Passed test-results within a run */
+  /** Passed tests within a run */
   passed: int32;
 
   /** Failed tests within a run */
@@ -704,10 +704,10 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface TestRuns {
   // TestRuns Operations
 
-  @doc("Creates or updates a testrun.")
+  @doc("Create or update a testrun.")
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
-  @doc("Gets a test run.")
+  @doc("Get a test run.")
   get is Operations.ResourceRead<TestRun>;
 
   @doc("List test runs.")
@@ -716,7 +716,7 @@ interface TestRuns {
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get TestResults Upload Url.")
+  @doc("Get Test results upload url to publish test results.")
   createArtifactsUploadBaseUrl is Operations.ResourceAction<
     TestRun,
     {},
@@ -729,7 +729,7 @@ interface TestRuns {
     {}
   >;
 
-  @doc("Get TestRun summary for an Odata filter.")
+  @doc("Get test run summary for an Odata filter.")
   @action("accountRunStats")
   computeAccountRunStats is Operations.ResourceCollectionAction<
     TestRun,
@@ -738,7 +738,7 @@ interface TestRuns {
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get TestRun metadata for an Odata filter.")
+  @doc("Get test run metadata for an Odata filter.")
   @action("metadata")
   computeMetadata is Operations.ResourceCollectionAction<
     TestRun,
@@ -758,7 +758,7 @@ alias TestRunIdQueryParameter = QueryParametersTrait<{
 interface TestResults {
   // TestResults Operations
 
-  @doc("Upload Test Results.")
+  @doc("Upload test results.")
   uploadBatch is Operations.ResourceCollectionAction<
     TestResultDetails,
     UploadTestResultsRequest,
@@ -766,13 +766,13 @@ interface TestResults {
     TestRunIdQueryParameter
   >;
 
-  @doc("List Test Results.")
+  @doc("List test results.")
   list is Operations.ResourceList<
     TestResultDetails,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get Test Results summary.")
+  @doc("Get test results summary.")
   @action("resultsStats")
   computeResultsStats is Operations.ResourceCollectionAction<
     TestResultDetails,
