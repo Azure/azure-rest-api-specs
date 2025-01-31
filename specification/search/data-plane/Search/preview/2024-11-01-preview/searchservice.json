@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure AI Search",
+    "title": "Search Service Client",
     "version": "2024-11-01-preview",
     "description": "Client that can be used to manage and query indexes and documents, as well as\nmanage other resources, on a search service.",
     "x-typespec-generated": [
@@ -298,7 +298,7 @@
     },
     "/datasources": {
       "get": {
-        "operationId": "DataSourcesOperations_List",
+        "operationId": "DataSources_List",
         "description": "Lists all datasources available for a search service.",
         "parameters": [
           {
@@ -336,7 +336,7 @@
         }
       },
       "post": {
-        "operationId": "DataSourcesOperations_Create",
+        "operationId": "DataSources_Create",
         "description": "Creates a new datasource.",
         "parameters": [
           {
@@ -378,7 +378,7 @@
     },
     "/datasources('{dataSourceName}')": {
       "get": {
-        "operationId": "DataSourcesOperations_Get",
+        "operationId": "DataSources_Get",
         "description": "Retrieves a datasource definition.",
         "parameters": [
           {
@@ -416,7 +416,7 @@
         }
       },
       "put": {
-        "operationId": "DataSourcesOperations_CreateOrUpdate",
+        "operationId": "DataSources_CreateOrUpdate",
         "description": "Creates a new datasource or updates a datasource if it already exists.",
         "parameters": [
           {
@@ -507,7 +507,7 @@
         }
       },
       "delete": {
-        "operationId": "DataSourcesOperations_Delete",
+        "operationId": "DataSources_Delete",
         "description": "Deletes a datasource.",
         "parameters": [
           {
@@ -563,7 +563,7 @@
     },
     "/indexers": {
       "get": {
-        "operationId": "IndexersOperations_List",
+        "operationId": "Indexers_List",
         "description": "Lists all indexers available for a search service.",
         "parameters": [
           {
@@ -601,7 +601,7 @@
         }
       },
       "post": {
-        "operationId": "IndexersOperations_Create",
+        "operationId": "Indexers_Create",
         "description": "Creates a new indexer.",
         "parameters": [
           {
@@ -643,7 +643,7 @@
     },
     "/indexers('{indexerName}')": {
       "get": {
-        "operationId": "IndexersOperations_Get",
+        "operationId": "Indexers_Get",
         "description": "Retrieves an indexer definition.",
         "parameters": [
           {
@@ -681,7 +681,7 @@
         }
       },
       "put": {
-        "operationId": "IndexersOperations_CreateOrUpdate",
+        "operationId": "Indexers_CreateOrUpdate",
         "description": "Creates a new indexer or updates an indexer if it already exists.",
         "parameters": [
           {
@@ -779,7 +779,7 @@
         }
       },
       "delete": {
-        "operationId": "IndexersOperations_Delete",
+        "operationId": "Indexers_Delete",
         "description": "Deletes an indexer.",
         "parameters": [
           {
@@ -835,7 +835,7 @@
     },
     "/indexers('{indexerName}')/search.reset": {
       "post": {
-        "operationId": "IndexersOperations_Reset",
+        "operationId": "Indexers_Reset",
         "description": "Resets the change tracking state associated with an indexer.",
         "parameters": [
           {
@@ -872,7 +872,7 @@
     },
     "/indexers('{indexerName}')/search.resetdocs": {
       "post": {
-        "operationId": "IndexersOperations_ResetDocs",
+        "operationId": "Indexers_ResetDocs",
         "description": "Resets specific documents in the datasource to be selectively re-ingested by\nthe indexer.",
         "parameters": [
           {
@@ -925,7 +925,7 @@
     },
     "/indexers('{indexerName}')/search.run": {
       "post": {
-        "operationId": "IndexersOperations_Run",
+        "operationId": "Indexers_Run",
         "description": "Runs an indexer on-demand.",
         "parameters": [
           {
@@ -962,7 +962,7 @@
     },
     "/indexers('{indexerName}')/search.status": {
       "get": {
-        "operationId": "IndexersOperations_GetStatus",
+        "operationId": "Indexers_GetStatus",
         "description": "Returns the current status and execution history of an indexer.",
         "parameters": [
           {
@@ -1002,7 +1002,7 @@
     },
     "/indexes": {
       "get": {
-        "operationId": "IndexesOperations_List",
+        "operationId": "Indexes_List",
         "description": "Lists all indexes available for a search service.",
         "parameters": [
           {
@@ -1040,7 +1040,7 @@
         }
       },
       "post": {
-        "operationId": "IndexesOperations_Create",
+        "operationId": "Indexes_Create",
         "description": "Creates a new search index.",
         "parameters": [
           {
@@ -1082,7 +1082,7 @@
     },
     "/indexes('{indexName}')": {
       "get": {
-        "operationId": "IndexesOperations_Get",
+        "operationId": "Indexes_Get",
         "description": "Retrieves an index definition.",
         "parameters": [
           {
@@ -1120,7 +1120,7 @@
         }
       },
       "put": {
-        "operationId": "IndexesOperations_CreateOrUpdate",
+        "operationId": "Indexes_CreateOrUpdate",
         "description": "Creates a new search index or updates an index if it already exists.",
         "parameters": [
           {
@@ -1210,7 +1210,7 @@
         }
       },
       "delete": {
-        "operationId": "IndexesOperations_Delete",
+        "operationId": "Indexes_Delete",
         "description": "Deletes a search index and all the documents it contains. This operation is\npermanent, with no recovery option. Make sure you have a master copy of your\nindex definition, data ingestion code, and a backup of the primary data source\nin case you need to re-build the index.",
         "parameters": [
           {
@@ -1266,7 +1266,7 @@
     },
     "/indexes('{indexName}')/search.analyze": {
       "post": {
-        "operationId": "IndexesOperations_Analyze",
+        "operationId": "Indexes_Analyze",
         "description": "Shows how an analyzer breaks text into tokens.",
         "parameters": [
           {
@@ -1315,7 +1315,7 @@
     },
     "/indexes('{indexName}')/search.stats": {
       "get": {
-        "operationId": "IndexesOperations_GetStatistics",
+        "operationId": "Indexes_GetStatistics",
         "description": "Returns statistics for the given index, including a document count and storage\nusage.",
         "parameters": [
           {
@@ -1388,7 +1388,7 @@
     },
     "/skillsets": {
       "get": {
-        "operationId": "SkillsetsOperations_List",
+        "operationId": "Skillsets_List",
         "description": "List all skillsets in a search service.",
         "parameters": [
           {
@@ -1426,7 +1426,7 @@
         }
       },
       "post": {
-        "operationId": "SkillsetsOperations_Create",
+        "operationId": "Skillsets_Create",
         "description": "Creates a new skillset in a search service.",
         "parameters": [
           {
@@ -1468,7 +1468,7 @@
     },
     "/skillsets('{skillsetName}')": {
       "get": {
-        "operationId": "SkillsetsOperations_Get",
+        "operationId": "Skillsets_Get",
         "description": "Retrieves a skillset in a search service.",
         "parameters": [
           {
@@ -1506,7 +1506,7 @@
         }
       },
       "put": {
-        "operationId": "SkillsetsOperations_CreateOrUpdate",
+        "operationId": "Skillsets_CreateOrUpdate",
         "description": "Creates a new skillset in a search service or updates the skillset if it\nalready exists.",
         "parameters": [
           {
@@ -1604,7 +1604,7 @@
         }
       },
       "delete": {
-        "operationId": "SkillsetsOperations_Delete",
+        "operationId": "Skillsets_Delete",
         "description": "Deletes a skillset in a search service.",
         "parameters": [
           {
@@ -1660,7 +1660,7 @@
     },
     "/skillsets('{skillsetName}')/search.resetskills": {
       "post": {
-        "operationId": "SkillsetsOperations_ResetSkills",
+        "operationId": "Skillsets_ResetSkills",
         "description": "Reset an existing skillset in a search service.",
         "parameters": [
           {
@@ -1706,7 +1706,7 @@
     },
     "/synonymmaps": {
       "get": {
-        "operationId": "SynonymMapsOperations_List",
+        "operationId": "SynonymMaps_List",
         "description": "Lists all synonym maps available for a search service.",
         "parameters": [
           {
@@ -1744,7 +1744,7 @@
         }
       },
       "post": {
-        "operationId": "SynonymMapsOperations_Create",
+        "operationId": "SynonymMaps_Create",
         "description": "Creates a new synonym map.",
         "parameters": [
           {
@@ -1786,7 +1786,7 @@
     },
     "/synonymmaps('{synonymMapName}')": {
       "get": {
-        "operationId": "SynonymMapsOperations_Get",
+        "operationId": "SynonymMaps_Get",
         "description": "Retrieves a synonym map definition.",
         "parameters": [
           {
@@ -1824,7 +1824,7 @@
         }
       },
       "put": {
-        "operationId": "SynonymMapsOperations_CreateOrUpdate",
+        "operationId": "SynonymMaps_CreateOrUpdate",
         "description": "Creates a new synonym map or updates a synonym map if it already exists.",
         "parameters": [
           {
@@ -1907,7 +1907,7 @@
         }
       },
       "delete": {
-        "operationId": "SynonymMapsOperations_Delete",
+        "operationId": "SynonymMaps_Delete",
         "description": "Deletes a synonym map.",
         "parameters": [
           {

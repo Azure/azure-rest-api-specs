@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure AI Search",
+    "title": "Search Index Client",
     "version": "2024-11-01-preview",
     "description": "Client that can be used to manage and query indexes and documents, as well as\nmanage other resources, on a search service.",
     "x-typespec-generated": [
@@ -48,7 +48,7 @@
   "paths": {
     "/indexes('{indexName}')/docs": {
       "get": {
-        "operationId": "DocumentsOperations_SearchGet",
+        "operationId": "Documents_SearchGet",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -984,7 +984,7 @@
     },
     "/indexes('{indexName}')/docs/$count": {
       "get": {
-        "operationId": "DocumentsOperations_Count",
+        "operationId": "Documents_Count",
         "description": "Queries the number of documents in the index.",
         "parameters": [
           {
@@ -1025,7 +1025,7 @@
     },
     "/indexes('{indexName}')/docs/search.autocomplete": {
       "get": {
-        "operationId": "DocumentsOperations_AutocompleteGet",
+        "operationId": "Documents_AutocompleteGet",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -1169,7 +1169,7 @@
     },
     "/indexes('{indexName}')/docs/search.index": {
       "post": {
-        "operationId": "DocumentsOperations_Index",
+        "operationId": "Documents_Index",
         "description": "Sends a batch of document write actions to the index.",
         "parameters": [
           {
@@ -1224,7 +1224,7 @@
     },
     "/indexes('{indexName}')/docs/search.post.autocomplete": {
       "post": {
-        "operationId": "DocumentsOperations_AutocompletePost",
+        "operationId": "Documents_AutocompletePost",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -1273,7 +1273,7 @@
     },
     "/indexes('{indexName}')/docs/search.post.search": {
       "post": {
-        "operationId": "DocumentsOperations_SearchPost",
+        "operationId": "Documents_SearchPost",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -1325,7 +1325,7 @@
     },
     "/indexes('{indexName}')/docs/search.post.suggest": {
       "post": {
-        "operationId": "DocumentsOperations_SuggestPost",
+        "operationId": "Documents_SuggestPost",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -1374,7 +1374,7 @@
     },
     "/indexes('{indexName}')/docs/search.suggest": {
       "get": {
-        "operationId": "DocumentsOperations_SuggestGet",
+        "operationId": "Documents_SuggestGet",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -1508,7 +1508,7 @@
     },
     "/indexes('{indexName}')/docs('{key}')": {
       "get": {
-        "operationId": "DocumentsOperations_Get",
+        "operationId": "Documents_Get",
         "description": "Retrieves a document from the index.",
         "parameters": [
           {
@@ -2774,7 +2774,7 @@
           "x-ms-client-name": "answers",
           "x-ms-identifiers": []
         },
-        "@search.debugInfo": {
+        "@search.debug": {
           "$ref": "#/definitions/DebugInfo",
           "description": "Debug information that applies to the search results as a whole.",
           "readOnly": true,

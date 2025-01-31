@@ -881,7 +881,7 @@ model SearchDocumentsResult {
    */
   @added(Versions.v2024_11_01_preview)
   @visibility("read")
-  @encodedName("application/json", "@search.debugInfo")
+  @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo;
 
   /**
