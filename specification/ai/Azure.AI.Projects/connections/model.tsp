@@ -75,6 +75,9 @@ enum AuthenticationType {
 
   @doc("Shared Access Signature (SAS) authentication")
   SAS: "SAS",
+
+  @doc("No authentication")
+  None: "None",
 }
 
 @doc("Connection properties for connections with API key authentication")
@@ -102,6 +105,13 @@ model InternalConnectionPropertiesSASAuth extends InternalConnectionProperties {
 
   @doc("Credentials will only be present for authType=ApiKey")
   credentials: CredentialsSASAuth;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Connection properties for connections with no authentication")
+model InternalConnectionPropertiesNoAuth extends InternalConnectionProperties {
+  @doc("Authentication type of the connection target")
+  authType: AuthenticationType.None;
 }
 
 @doc("The credentials needed for API key authentication")
