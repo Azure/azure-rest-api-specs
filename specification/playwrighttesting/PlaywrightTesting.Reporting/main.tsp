@@ -237,14 +237,13 @@ model CiConfig {
 
 @doc("Model representing summary of test run results.")
 model CloudReportingSummary {
-
   @doc("Start time of the test run in datetime(RFC 3339 literal format).")
   startTime: utcDateTime;
 
   @doc("End time of the test run.")
   endTime: utcDateTime;
 
-  @doc("Processing Status of the testresults.")
+  @doc("Processing Status of the testresults on the Server Side.")
   serverStatus: TestRunStatus;
 
   @doc("Total number of tests executed")
@@ -265,7 +264,7 @@ model CloudReportingSummary {
 
   @doc("Number of tests that were flaky (passed on retry).")
   @visibility("read")
-  flakyTestsCount?: int32; 
+  flakyTestsCount?: int32;
 
   @doc("Status of the test run")
   @visibility("read")
@@ -354,7 +353,7 @@ model TestRun {
   @doc("Display name of the test run (unicode characters allowed).")
   @maxLength(200)
   @minLength(3)
-  @visibility("read","create")
+  @visibility("read", "create")
   displayName: string;
 
   @doc("Creation time of the test run -RFC 3339 literal format")
