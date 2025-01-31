@@ -883,7 +883,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1016,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -940,7 +940,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1016,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$"
           },
           {
             "name": "agent",
@@ -1013,7 +1013,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1016,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$"
           },
           {
             "name": "tagUpdatePayload",
@@ -1080,7 +1080,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1016,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -2862,7 +2862,7 @@
           "description": "The state of the deployment."
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "The error details of the Failed state.  This is not present if the deployment state is not Failed."
         },
         "subgroupStatus": {
@@ -3042,7 +3042,7 @@
           "description": "The state of the subgroup deployment."
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "The error details of the Failed state.  This is not present if the deployment state is not Failed."
         },
         "totalDevices": {

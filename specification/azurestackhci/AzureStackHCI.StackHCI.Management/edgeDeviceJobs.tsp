@@ -78,17 +78,6 @@ union ProvisioningOsType {
   HCI: "HCI",
 }
 
-@doc("Job Type supported by Azure Linux Edge Devices.")
-union AzureLinuxEdgeDeviceJobType {
-  string,
-
-  @doc("Job to collect logs from the device.")
-  CollectLog: "CollectLog",
-
-  @doc("Job to provide remote support to the device.")
-  RemoteSupport: "RemoteSupport",
-}
-
 @doc("Job Type supported by Azure Linux Edge Devices in Restricted operating environment.")
 union AzureLinuxRoeEdgeDeviceJobType {
   string,
@@ -123,15 +112,6 @@ union EdgeDeviceJobType {
 
   @doc("Job to establish a remote connection to the device.")
   RemoteConnect: "RemoteConnect",
-}
-
-@doc("Azure Linux Collect Log Job Properties.")
-model AzureLinuxCollectLogJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  ...CollectLogJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  jobType: AzureLinuxEdgeDeviceJobType.CollectLog;
 }
 
 @doc("Represents the reported properties of a log collection job.")
@@ -192,16 +172,6 @@ union DeviceLogCollectionStatus {
   Canceled: "Canceled",
 }
 
-@doc("Edge device job properties")
-@discriminator("jobType")
-model AzureLinuxEdgeDeviceJobProperties {
-  ...EdgeDeviceJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
-  jobType: AzureLinuxEdgeDeviceJobType;
-}
-
 @doc("Azure linux edge device job properties in restricted operating environment")
 @discriminator("jobType")
 model AzureLinuxRoeEdgeDeviceJobProperties {
@@ -238,15 +208,6 @@ model EdgeDeviceJobProperties {
   status?: JobStatus;
 }
 
-@doc("Edge device job for Azure Linux solution.")
-model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
-  @doc("Edge device job properties")
-  properties: AzureLinuxEdgeDeviceJobProperties;
-
-  @doc("Edge Solution type to support polymorphic resource.")
-  kind: EdgeDeviceKind.AzureLinux;
-}
-
 @doc("Edge device job for Azure Linux restricted operating environment solution.")
 model AzureLinuxRoeEdgeDeviceJob extends EdgeDeviceJob {
   @doc("Edge device job properties for restricted operating environment")
@@ -254,15 +215,6 @@ model AzureLinuxRoeEdgeDeviceJob extends EdgeDeviceJob {
 
   @doc("Edge Solution type to support polymorphic resource.")
   kind: EdgeDeviceKind.AzureLinuxRoe;
-}
-
-@doc("Represents the properties of an Azure Linux Remote Support job.")
-model AzureLinuxRemoteSupportJobProperties
-  extends AzureLinuxEdgeDeviceJobProperties {
-  ...RemoteSupportJobProperties;
-
-  @doc("Job Type to support polymorphic resource.")
-  jobType: AzureLinuxEdgeDeviceJobType.RemoteSupport;
 }
 
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
@@ -387,96 +339,6 @@ model HybridComputeMachineOnboardingConfiguration
 
   @doc("Azure Arc virtual machine ID.")
   arcVirtualMachineId: string;
-}
-
-@doc("Device configuration.")
-model DeviceConfiguration {
-  @doc("Network configuration.")
-  network?: NetworkConfiguration;
-
-  @doc("Hostname of the device.")
-  hostName?: string;
-
-  @doc("Web proxy configuration.")
-  webProxy?: WebProxyConfiguration;
-
-  @doc("Time configuration.")
-  time?: TimeConfiguration;
-}
-
-@doc("Network configuration.")
-model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
-  @doc("List of network adapters.")
-  networkAdapters: NetworkAdapter[];
-}
-
-@doc("Network adapter configuration.")
-model NetworkAdapter {
-  @doc("Type of IP assignment.")
-  ipAssignmentType: IpAssignmentType;
-
-  @doc("IP address.")
-  ipAddress?: string;
-
-  @doc("IP address range.")
-  ipAddressRange?: IpAddressRange;
-
-  @doc("Gateway id.")
-  gateway?: string;
-
-  @doc("Subnet mask.")
-  subnetMask?: string;
-
-  @doc("Array of DNS addresses.")
-  dnsAddressArray?: string[];
-
-  @doc("VLAN ID for the network setup.")
-  vlanId?: string;
-}
-
-@doc("IP assignment types")
-union IpAssignmentType {
-  string,
-
-  @doc("Automatic IP assignment")
-  Automatic: "Automatic",
-
-  @doc("Manual IP assignment")
-  Manual: "Manual",
-}
-
-@doc("IP address range configuration.")
-model IpAddressRange {
-  @doc("Start IP address.")
-  startIp: string;
-
-  @doc("End IP address.")
-  endIp: string;
-}
-
-@doc("Web proxy configuration.")
-model WebProxyConfiguration {
-  @doc("Connection URI of the web proxy.")
-  connectionUri?: string;
-
-  @doc("Port of the web proxy.")
-  port?: string;
-
-  @doc("Bypass list for the web proxy.")
-  bypassList?: string[];
-}
-
-@doc("Time configuration.")
-model TimeConfiguration {
-  @doc("Primary NTP server.")
-  primaryTimeServer?: string;
-
-  @doc("Secondary NTP server.")
-  secondaryTimeServer?: string;
-
-  @doc("Time zone.")
-  timeZone?: string;
 }
 
 @doc("Represents the reported properties of a remote support job.")

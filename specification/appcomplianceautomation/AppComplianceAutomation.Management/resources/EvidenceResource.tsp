@@ -16,10 +16,12 @@ namespace Microsoft.AppComplianceAutomation;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @parentResource(ReportResource)
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
-model EvidenceResource extends ProxyResourceBase {
+model EvidenceResource extends Foundations.ProxyResource {
   /**
    * The evidence name.
    */
@@ -116,6 +118,7 @@ interface EvidenceResources {
 @@doc(EvidenceResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"
 );
+#suppress "deprecated" "Deprecated: Using encodedName for the body property is meaningless."
 @@encodedName(EvidenceResources.download::parameters.body,
   "application/json",
   "parameters"

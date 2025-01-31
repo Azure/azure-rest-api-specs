@@ -8,7 +8,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -29,7 +28,7 @@ interface AcatOperations {
     ErrorResponse extends {}
   >(
     ...HttpParameters,
-    @doc("Resource create parameters.") @body parameters: BodyParameter,
+    @doc("Resource create parameters.") @bodyRoot parameters: BodyParameter,
   ): Response | ErrorResponse;
 
   /**
@@ -41,6 +40,11 @@ interface AcatOperations {
    * @template Response Optional. The success response for the createOrUpdate operation
    * @template Error Optional. The error response, if non-standard.
    */
+  #suppress "deprecated" "legacy"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "legacy"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
   @autoRoute
   @doc("Create a {name}", Resource)
   @extension("x-ms-long-running-operation", true)
@@ -53,13 +57,15 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrUpdateAsync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
       Resource,
-      LroHeaders
+      LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+        ArmAsyncOperationHeader &
+        ArmLroLocationHeader
     >,
     Error extends {} = ErrorResponse
   > is AcatOperations.AcatCreateOperation<
@@ -82,7 +88,7 @@ interface AcatOperations {
    * @template Error Optional. The error response, if non-standard.
    */
   AcatResourceCreateOrReplaceAsync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},
@@ -113,7 +119,7 @@ interface AcatOperations {
   @armResourceCreateOrUpdate(Resource)
   @put
   AcatResourceCreateOrReplaceSync<
-    Resource extends ArmResource,
+    Resource extends Foundations.Resource,
     BaseParameters = DefaultBaseParameters<Resource>,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,

@@ -27,9 +27,17 @@ These are the global settings for the connectedcache
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-05-01-preview
+tag: package-2024-11-30-preview
 ```
 
+### Tag: package-2024-11-30-preview
+
+These settings apply only when `--tag=package-2024-11-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-30-preview'
+input-file:
+  - Microsoft.ConnectedCache/preview/2024-11-30-preview/ConnectedCache.json
+```
 
 ### Tag: package-preview-2023-05-01-preview
 
@@ -77,14 +85,6 @@ input-file:
 ```
 
 ## Suppression
-
-``` yaml
-directive:
-  - suppress: ENUM_CASE_MISMATCH
-    where: $.definitions.Identity.properties.type
-    from: connectedcache.json
-    reason: Managed Identity type can be case in-sensitive
-```
 
 ---
 

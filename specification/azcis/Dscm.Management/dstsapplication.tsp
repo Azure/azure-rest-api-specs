@@ -22,9 +22,19 @@ model DstsApplicationResourceProperties {
   @doc("The application group. Optional.")
   applicationGroup?: ApplicationGroup;
 
-  @doc("Provisioning state")
+  @doc("Provisioning status of the resource.")
   @visibility("read")
   provisioningState?: DscmProvisioningState;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Request ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  requestId?: string;
+
+  @added(Versions.v2024_06_24_preview)
+  @doc("Application Group ID; a part of provisioning ResultData output.")
+  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  applicationGroupId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"

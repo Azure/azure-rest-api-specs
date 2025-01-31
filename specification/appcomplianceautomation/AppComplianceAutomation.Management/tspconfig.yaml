@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/appcomplianceautomation"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,15 +15,23 @@ options:
     package-name: "{package-dir}"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Microsoft.AppComplianceAutomation"
+    package-dir: "Microsoft.ResourceManager.AppComplianceAutomation"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
     flavor: azure
+    examples-directory: "{project-root}/examples"
+    generateSample: true
     package-dir: "arm-appcomplianceautomation"
     packageDetails:
       name: "@azure/arm-appcomplianceautomation"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

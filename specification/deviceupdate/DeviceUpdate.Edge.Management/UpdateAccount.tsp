@@ -122,3 +122,10 @@ interface UpdateAccounts {
   "updateToImport"
 );
 @@clientName(UpdateAccounts.importUpdate::parameters.body, "updateToImport");
+
+/**
+ * .NET SDK does not like the model name ends with Response
+ */
+@@clientName(CommonTypes.CheckNameAvailabilityResponse,
+  "CheckNameAvailabilityResult"
+);

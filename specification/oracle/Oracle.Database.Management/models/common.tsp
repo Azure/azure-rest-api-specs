@@ -47,6 +47,30 @@ union WorkloadType {
   string,
 }
 
+@doc("A rule for allowing inbound (INGRESS) IP packets")
+model NsgCidr {
+  @doc("Conceptually, this is the range of IP addresses that a packet coming into the instance can come from.")
+  @minLength(1)
+  @maxLength(128)
+  source: string;
+
+  @doc("Destination port range to specify particular destination ports for TCP rules.")
+  destinationPortRange?: PortRange;
+}
+
+@doc("Port Range to specify particular destination ports for TCP rules.")
+model PortRange {
+  @doc("The minimum port number, which must not be greater than the maximum port number.")
+  @minValue(1)
+  @maxValue(65535)
+  min: int32;
+
+  @doc("The maximum port number, which must not be less than the minimum port number. To specify a single port number, set both the min and max to the same value.")
+  @minValue(1)
+  @maxValue(65535)
+  max: int32;
+}
+
 @doc("DayOfWeek resource properties")
 model DayOfWeek {
   @doc("Name of the day of the week.")
@@ -69,6 +93,22 @@ union LicenseModel {
   string,
 }
 
+@doc("ExadataIormConfig for cloud vm cluster")
+model ExadataIormConfig {
+  @doc("An array of IORM settings for all the database in the Exadata DB system.")
+  @extension("x-ms-identifiers", [])
+  dbPlans?: DbIormConfig[];
+
+  @doc("Additional information about the current lifecycleState.")
+  lifecycleDetails?: string;
+
+  @doc("The current state of IORM configuration for the Exadata DB system.")
+  lifecycleState?: IormLifecycleState;
+
+  @doc("The current value for the IORM objective. The default is AUTO.")
+  objective?: Objective;
+}
+
 @doc("validation result")
 model ValidationResult {
   @doc("validation status")
@@ -87,6 +127,18 @@ union ValidationStatus {
   Failed: "Failed",
 
   string,
+}
+
+@doc("DataCollectionOptions resource properties")
+model DataCollectionOptions {
+  @doc("Indicates whether diagnostic collection is enabled for the VM cluster/Cloud VM cluster/VMBM DBCS.")
+  isDiagnosticsEventsEnabled?: boolean = false;
+
+  @doc("Indicates whether health monitoring is enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.")
+  isHealthMonitoringEnabled?: boolean = false;
+
+  @doc("Indicates whether incident logs and trace collection are enabled for the VM cluster / Cloud VM cluster / VMBM DBCS.")
+  isIncidentLogsEnabled?: boolean = false;
 }
 
 @doc("validation error")
@@ -201,4 +253,31 @@ model CreateValidationDetails<T extends TypeSpec.Reflection.Model> {
 // only properties are passed for Patch Validation extension
 model PatchValidationDetails<T extends TypeSpec.Reflection.Model> {
   properties: T;
+}
+
+@doc("Compute model enum")
+union ComputeModel {
+  @doc("ECPU model type")
+  ECPU: "ECPU",
+
+  @doc("OCPU model type")
+  OCPU: "OCPU",
+
+  string,
+}
+
+@added(Versions.v20241201_preview)
+@doc("Allowed values for System Shapes")
+union SystemShapes {
+  @doc("Exadata X9M shape")
+  ExadataX9M: "Exadata.X9M",
+
+  @added(Versions.v20250101_preview)
+  @doc("Exadata X11M shape")
+  ExadataX11M: "Exadata.X11M",
+
+  @doc("Exadata DB on Exascale Infrastructure shape")
+  ExaDbXs: "ExaDbXS",
+
+  string,
 }

@@ -510,7 +510,22 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/CertificateProvisioningState",
-          "description": "Provisioning state",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "selfSignedCertificateDsmsName": {
+          "type": "string",
+          "description": "Self-signed Certificate DSMS name; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "chainedCertificateDsmsName": {
+          "type": "string",
+          "description": "Chained Certificate DSMS name; a part of provisioning ResultData output.",
+          "readOnly": true
+        },
+        "edgeSiteChildTrustIsland": {
+          "type": "string",
+          "description": "Automatically injected if the environment is a child trusted island; a part of provisioning ResultData output.",
           "readOnly": true
         }
       },

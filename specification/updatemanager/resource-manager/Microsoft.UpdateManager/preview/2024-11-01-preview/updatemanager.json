@@ -569,7 +569,7 @@
       "type": "object",
       "description": "Update rule set properties.",
       "properties": {
-        "rebootSettings": {
+        "rebootSetting": {
           "$ref": "#/definitions/rebootSettings",
           "description": "reboot settings."
         },
@@ -590,6 +590,31 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
+      },
+      "required": [
+        "rebootSetting"
+      ]
+    },
+    "UpdateRulePropertiesUpdate": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSetting": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
+        }
       }
     },
     "UpdateRuleUpdate": {
@@ -597,7 +622,7 @@
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UpdateRuleProperties",
+          "$ref": "#/definitions/UpdateRulePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
