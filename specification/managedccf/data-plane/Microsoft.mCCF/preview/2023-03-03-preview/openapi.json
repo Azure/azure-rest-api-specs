@@ -1,0 +1,1912 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CCF governance",
+    "version": "2023-02-20",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/gov/ack": {
+      "post": {
+        "operationId": "Ack",
+        "summary": "Provide a member endorsement of a service state digest",
+        "parameters": [
+          {
+            "name": "state_digest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StateDigest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        }
+      }
+    },
+    "/gov/ack/update_state_digest": {
+      "post": {
+        "operationId": "UpdateStateDigest",
+        "summary": "Update and fetch a service state digest, for the purpose of member endorsement",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StateDigest"
+            }
+          }
+        }
+      }
+    },
+    "/gov/commit": {
+      "get": {
+        "operationId": "Commit",
+        "summary": "Current commit level",
+        "description": "Latest transaction ID that has been committed on the service",
+        "parameters": [
+          {
+            "name": "view_history",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "view_history_since",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetCommit"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/constitution": {
+      "get": {
+        "operationId": "GetConstitution",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/cose_history": {
+      "get": {
+        "operationId": "GetCoseHistory",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToBase64"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/cose_recent_proposals": {
+      "get": {
+        "operationId": "GetCoseRecentProposals",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/history": {
+      "get": {
+        "operationId": "GetHistory",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemberIdToSignedReq"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/js_runtime_options": {
+      "get": {
+        "operationId": "GetJsRuntimeOptions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JSRuntimeOptions"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/jwt/issuers": {
+      "get": {
+        "operationId": "GetJwtIssuers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToJwtIssuerMetadata"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/jwt/public_signing_key_issuer": {
+      "get": {
+        "operationId": "GetJwtPublicSigningKeyIssuer",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/jwt/public_signing_keys": {
+      "get": {
+        "operationId": "GetJwtPublicSigningKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToBase64"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/members/acks": {
+      "get": {
+        "operationId": "GetMembersAcks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemberIdToMemberAck"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/members/certs": {
+      "get": {
+        "operationId": "GetMembersCerts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemberIdToPem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/members/encryption_public_keys": {
+      "get": {
+        "operationId": "GetMembersEncryptionPublicKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemberIdToPem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/members/info": {
+      "get": {
+        "operationId": "GetMembersInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemberIdToMemberDetails"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/modules": {
+      "get": {
+        "operationId": "GetModules",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/modules_quickjs_bytecode": {
+      "get": {
+        "operationId": "GetModulesQuickJsBytecode",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToBase64"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/modules_quickjs_version": {
+      "get": {
+        "operationId": "GetModulesQuickJsVersion",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/nodes/code_ids": {
+      "get": {
+        "operationId": "GetNodeCodeIds",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CodeDigestToCodeStatus"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/nodes/endorsed_certificates": {
+      "get": {
+        "operationId": "GetNodesEndorsedCertificates",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NodeIdToPem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/nodes/info": {
+      "get": {
+        "operationId": "GetNodesInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NodeIdToNodeInfo"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/nodes/snp/host_data": {
+      "get": {
+        "operationId": "GetNodeSnpHostData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Sha256DigestToString"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/nodes/snp/measurements": {
+      "get": {
+        "operationId": "GetNodeSnpMeasurements",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CodeDigestToCodeStatus"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/proposals": {
+      "get": {
+        "operationId": "GetProposals",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToBase64"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/proposals_info": {
+      "get": {
+        "operationId": "GetProposalsInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToProposalInfo"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/service/acme_certificates": {
+      "get": {
+        "operationId": "GetServiceAcmeCertificates",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToPem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/service/config": {
+      "get": {
+        "operationId": "GetServiceConfig",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/service/info": {
+      "get": {
+        "operationId": "GetServiceInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ServiceInfo"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/service/previous_service_identity": {
+      "get": {
+        "operationId": "GetServicePreviousServiceIdentity",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/tls/ca_cert_bundles": {
+      "get": {
+        "operationId": "GetTlsCaCertBundles",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/users/certs": {
+      "get": {
+        "operationId": "GetUsersCerts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserIdToPem"
+            }
+          }
+        }
+      }
+    },
+    "/gov/kv/users/info": {
+      "get": {
+        "operationId": "GetUsersInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDetails"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals": {
+      "get": {
+        "operationId": "Proposal_Alaproposals",
+        "summary": "Proposed changes to the service pending resolution",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StringToProposalInfo"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Proposal_ProposalInfo",
+        "summary": "Submit a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfoSummary"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}": {
+      "get": {
+        "operationId": "GetProposalId",
+        "summary": "Information about a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfo"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/actions": {
+      "get": {
+        "operationId": "GetProposalIdActions",
+        "summary": "Actions contained in a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Proposal"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/ballots": {
+      "post": {
+        "operationId": "PostProposalIdBallots",
+        "summary": "Ballots submitted against a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ballot",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Ballot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfoSummary"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/ballots/{member_id}": {
+      "get": {
+        "operationId": "GetMemberIdBallot",
+        "summary": "Ballot for a given member about a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "member_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Ballot"
+            }
+          }
+        }
+      }
+    },
+    "/gov/proposals/{proposal_id}/withdraw": {
+      "post": {
+        "operationId": "PostProposalIdWithdraw",
+        "summary": "Withdraw a proposed change to the service",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProposalInfo"
+            }
+          }
+        }
+      }
+    },
+    "/gov/receipt": {
+      "get": {
+        "operationId": "GetReceipt",
+        "summary": "Receipt for a transaction",
+        "description": "A signed statement from the service over a transaction entry in the ledger",
+        "parameters": [
+          {
+            "name": "transactionID",
+            "in": "query",
+            "required": true,
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Json"
+            }
+          }
+        }
+      }
+    },
+    "/gov/recovery_share": {
+      "get": {
+        "operationId": "Recover_GetRecoveryShare",
+        "summary": "A member's recovery share",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetRecoveryShare"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Recover_PostRecoveryShare",
+        "summary": "Provide a recovery share for the purpose of completing a service recovery",
+        "parameters": [
+          {
+            "name": "recoveryShare",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubmitRecoveryShareIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SubmitRecoveryShareOut"
+            }
+          }
+        }
+      }
+    },
+    "/gov/tx": {
+      "get": {
+        "operationId": "GetTx",
+        "description": "Possible statuses returned are Unknown, Pending, Committed or Invalid.",
+        "parameters": [
+          {
+            "name": "transactionID",
+            "in": "query",
+            "required": true,
+            "pattern": "^[0-9]+\\.[0-9]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetTxStatusOut"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ACME": {
+      "type": "object",
+      "properties": {
+        "caCerts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "challengeType": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "directoryUrl": {
+          "type": "string"
+        },
+        "serviceDNSName": {
+          "type": "string"
+        },
+        "termsOfServiceAgreed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "caCerts",
+        "challengeType",
+        "contact",
+        "directoryUrl",
+        "serviceDNSName",
+        "termsOfServiceAgreed"
+      ]
+    },
+    "ACMEConfigurations": {
+      "type": "object",
+      "properties": {
+        "acme": {
+          "$ref": "#/definitions/ACME"
+        }
+      },
+      "required": [
+        "acme"
+      ]
+    },
+    "Action": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "$ref": "#/definitions/Json"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "args",
+        "name"
+      ]
+    },
+    "ActionArray": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Action[]"
+        }
+      },
+      "required": [
+        "actions"
+      ]
+    },
+    "AppProtocol": {
+      "type": "string",
+      "enum": [
+        "HTTP1",
+        "HTTP2"
+      ],
+      "x-ms-enum": {
+        "name": "AppProtocol",
+        "modelAsString": true
+      }
+    },
+    "Authority": {
+      "type": "string",
+      "enum": [
+        "Node",
+        "Service",
+        "ACME",
+        "Unsecured"
+      ],
+      "x-ms-enum": {
+        "name": "Authority",
+        "modelAsString": true
+      }
+    },
+    "Ballot": {
+      "type": "object",
+      "properties": {
+        "ballot": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ballot"
+      ]
+    },
+    "CodeDetails": {
+      "type": "object",
+      "properties": {
+        "codeDigest": {
+          "type": "string",
+          "format": "hex",
+          "pattern": "^[a-f0-9]+$"
+        },
+        "codeStatus": {
+          "$ref": "#/definitions/CodeStatusValues"
+        }
+      },
+      "required": [
+        "codeDigest",
+        "codeStatus"
+      ]
+    },
+    "CodeDigestToCodeStatus": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CodeDetails"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "CodeDetails[]"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CodeStatusValues": {
+      "type": "string",
+      "enum": [
+        "AllowedToJoin"
+      ],
+      "x-ms-enum": {
+        "name": "CodeStatusValues",
+        "modelAsString": true
+      }
+    },
+    "ConsensusType": {
+      "type": "string",
+      "enum": [
+        "BFT",
+        "CFT"
+      ],
+      "x-ms-enum": {
+        "name": "ConsensusType",
+        "modelAsString": true
+      }
+    },
+    "Endorsement": {
+      "type": "object",
+      "properties": {
+        "acmeConfig": {
+          "type": "string"
+        },
+        "authority": {
+          "$ref": "#/definitions/Authority"
+        }
+      },
+      "required": [
+        "authority"
+      ]
+    },
+    "Failure": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "trace": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "GetCommit": {
+      "type": "object",
+      "properties": {
+        "transactionValue": {
+          "$ref": "#/definitions/Transaction"
+        },
+        "viewHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Transaction[]"
+        }
+      },
+      "required": [
+        "transactionValue",
+        "viewHistory"
+      ]
+    },
+    "GetRecoveryShare": {
+      "type": "object",
+      "properties": {
+        "encryptedShare": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "encryptedShare"
+      ]
+    },
+    "GetTxStatusOut": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/TxStatus"
+        },
+        "transactionID": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "status",
+        "transactionID"
+      ]
+    },
+    "HttpConfiguration": {
+      "type": "object",
+      "properties": {
+        "initialWindowSize": {
+          "type": "string",
+          "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$"
+        },
+        "maxBodySize": {
+          "type": "string",
+          "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$"
+        },
+        "maxConcurrentStreams": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "maximum": 18446744073709552000
+        },
+        "maxFrameSize": {
+          "type": "string",
+          "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$"
+        },
+        "maxHeaderSize": {
+          "type": "string",
+          "pattern": "^[0-9]+(B|KB|MB|GB|TB|PB)?$"
+        },
+        "maxHeadersCount": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "initialWindowSize",
+        "maxBodySize",
+        "maxConcurrentStreams",
+        "maxFrameSize",
+        "maxHeaderSize",
+        "maxHeadersCount"
+      ]
+    },
+    "JSRuntimeOptions": {
+      "type": "object",
+      "properties": {
+        "maxExecutionTimeInMs": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "maxHeapBytes": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "maxStackBytes": {
+          "type": "integer",
+          "format": "uint64"
+        }
+      },
+      "required": [
+        "maxExecutionTimeInMs",
+        "maxHeapBytes",
+        "maxStackBytes"
+      ]
+    },
+    "Json": {},
+    "JwtIssuerKeyFilter": {
+      "type": "string",
+      "enum": [
+        "all",
+        "sgx"
+      ],
+      "x-ms-enum": {
+        "name": "JwtIssuerKeyFilter",
+        "modelAsString": true
+      }
+    },
+    "JwtIssuerKeyPolicy": {
+      "type": "object",
+      "properties": {
+        "sgxClaims": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sgxClaims"
+      ]
+    },
+    "JwtIssuerMetadata": {
+      "type": "object",
+      "properties": {
+        "autoRefresh": {
+          "type": "boolean"
+        },
+        "caCertBundleName": {
+          "type": "string"
+        },
+        "keyFilter": {
+          "$ref": "#/definitions/JwtIssuerKeyFilter"
+        },
+        "keyPolicy": {
+          "$ref": "#/definitions/JwtIssuerKeyPolicy"
+        }
+      },
+      "required": [
+        "keyFilter"
+      ]
+    },
+    "MDType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "SHA1",
+        "SHA256",
+        "SHA384",
+        "SHA512"
+      ],
+      "x-ms-enum": {
+        "name": "MDType",
+        "modelAsString": true
+      }
+    },
+    "MemberAck": {
+      "type": "object",
+      "properties": {
+        "codeSign1Req": {
+          "type": "string",
+          "format": "base64"
+        },
+        "signedReq": {
+          "$ref": "#/definitions/SignedReq"
+        },
+        "stateDigest": {
+          "$ref": "#/definitions/StateDigest"
+        }
+      },
+      "required": [
+        "stateDigest"
+      ]
+    },
+    "MemberDetails": {
+      "type": "object",
+      "properties": {
+        "memberData": {
+          "$ref": "#/definitions/Json"
+        },
+        "memberStatus": {
+          "$ref": "#/definitions/MemberStatus"
+        }
+      },
+      "required": [
+        "memberData",
+        "memberStatus"
+      ]
+    },
+    "MemberIdToBase64": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MemberIdToFailure": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "trace": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "MemberIdToMemberAck": {
+      "type": "object",
+      "properties": {
+        "codeSign1Req": {
+          "type": "string",
+          "format": "base64"
+        },
+        "signedReq": {
+          "$ref": "#/definitions/SignedReq"
+        },
+        "stateDigest": {
+          "$ref": "#/definitions/StateDigest"
+        }
+      },
+      "required": [
+        "stateDigest"
+      ]
+    },
+    "MemberIdToMemberDetails": {
+      "type": "object",
+      "properties": {
+        "memberData": {
+          "$ref": "#/definitions/Json"
+        },
+        "memberStatus": {
+          "$ref": "#/definitions/MemberStatus"
+        }
+      },
+      "required": [
+        "memberData",
+        "memberStatus"
+      ]
+    },
+    "MemberIdToPem": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "$ref": "#/definitions/Pem"
+        }
+      },
+      "required": [
+        "Id"
+      ]
+    },
+    "MemberIdToSignedReq": {
+      "type": "object",
+      "properties": {
+        "keyId": {
+          "type": "string"
+        },
+        "req": {
+          "type": "string",
+          "format": "base64"
+        },
+        "md": {
+          "$ref": "#/definitions/MDType"
+        },
+        "requestBody": {
+          "type": "string",
+          "format": "base64"
+        },
+        "sig": {
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "keyId",
+        "req",
+        "md",
+        "requestBody",
+        "sig"
+      ]
+    },
+    "MemberStatus": {
+      "type": "string",
+      "enum": [
+        "Accepted",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "MemberStatus",
+        "modelAsString": true
+      }
+    },
+    "NodeIdToNodeInfo": {
+      "type": "object",
+      "properties": {
+        "acmeConfig": {
+          "$ref": "#/definitions/ACMEConfigurations"
+        },
+        "cert": {
+          "$ref": "#/definitions/Pem"
+        },
+        "certificateSigningRequest": {
+          "$ref": "#/definitions/Pem"
+        },
+        "codeDigest": {
+          "type": "string"
+        },
+        "encryptionPublicKey": {
+          "$ref": "#/definitions/Pem"
+        },
+        "ledgetSecretSeqno": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "nodeData": {
+          "$ref": "#/definitions/Json"
+        },
+        "nodeToNodeInterface": {
+          "$ref": "#/definitions/NodeToNodeInterface"
+        },
+        "publicKey": {
+          "$ref": "#/definitions/Pem"
+        },
+        "quoteInfo": {
+          "$ref": "#/definitions/QuoteInfo"
+        },
+        "retiredCommitted": {
+          "type": "boolean"
+        },
+        "rpcInterfaces": {
+          "$ref": "#/definitions/RPCInterfaces"
+        },
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
+        }
+      },
+      "required": [
+        "encryptionPublicKey",
+        "nodeToNodeInterface",
+        "quoteInfo",
+        "rpcInterfaces",
+        "status"
+      ]
+    },
+    "NodeIdToPem": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "$ref": "#/definitions/Pem"
+        }
+      },
+      "required": [
+        "Id"
+      ]
+    },
+    "NodeInfo": {
+      "type": "object",
+      "properties": {
+        "acmeConfig": {
+          "$ref": "#/definitions/ACMEConfigurations"
+        },
+        "cert": {
+          "$ref": "#/definitions/Pem"
+        },
+        "certificateSigningRequest": {
+          "$ref": "#/definitions/Pem"
+        },
+        "codeDigest": {
+          "type": "string"
+        },
+        "encryptionPublicKey": {
+          "$ref": "#/definitions/Pem"
+        },
+        "ledgetSecretSeqno": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "nodeData": {
+          "$ref": "#/definitions/Json"
+        },
+        "nodeToNodeInterface": {
+          "$ref": "#/definitions/NodeToNodeInterface"
+        },
+        "publicKey": {
+          "$ref": "#/definitions/Pem"
+        },
+        "quoteInfo": {
+          "$ref": "#/definitions/QuoteInfo"
+        },
+        "retiredCommitted": {
+          "type": "boolean"
+        },
+        "rpcInterfaces": {
+          "$ref": "#/definitions/RPCInterfaces"
+        },
+        "status": {
+          "$ref": "#/definitions/NodeStatus"
+        }
+      },
+      "required": [
+        "encryptionPublicKey",
+        "nodeToNodeInterface",
+        "quoteInfo",
+        "rpcInterfaces",
+        "status"
+      ]
+    },
+    "NodeStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Trusted",
+        "Retired",
+        "Learner",
+        "Retiring"
+      ],
+      "x-ms-enum": {
+        "name": "NodeStatus",
+        "modelAsString": true
+      }
+    },
+    "NodeToNodeInterface": {
+      "type": "object",
+      "properties": {
+        "acceptedEndpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "appProtocol": {
+          "$ref": "#/definitions/AppProtocol"
+        },
+        "bindAddress": {
+          "type": "string"
+        },
+        "endorsement": {
+          "$ref": "#/definitions/Endorsement"
+        },
+        "httpConfig": {
+          "$ref": "#/definitions/HttpConfiguration"
+        },
+        "maxOpenSessionsHard": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "maximum": 18446744073709552000
+        },
+        "maxOpenSessionsSoft": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "maximum": 18446744073709552000
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "publishedAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bindAddress"
+      ]
+    },
+    "Pem": {
+      "type": "object",
+      "properties": {
+        "pemValue": {
+          "type": "string",
+          "format": "pem"
+        }
+      },
+      "required": [
+        "pemValue"
+      ]
+    },
+    "Proposal": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/ActionArray"
+        }
+      },
+      "required": [
+        "actions"
+      ]
+    },
+    "ProposalInfo": {
+      "type": "object",
+      "properties": {
+        "ballots": {
+          "type": "string"
+        },
+        "failure": {
+          "$ref": "#/definitions/Failure"
+        },
+        "finalVotes": {
+          "type": "boolean"
+        },
+        "proposerId": {
+          "type": "string",
+          "format": "hex",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "state": {
+          "$ref": "#/definitions/ProposalState"
+        },
+        "voteFailures": {
+          "$ref": "#/definitions/MemberIdToFailure"
+        }
+      },
+      "required": [
+        "ballots",
+        "proposerId",
+        "state",
+        "voteFailures"
+      ]
+    },
+    "ProposalInfoSummary": {
+      "type": "object",
+      "properties": {
+        "ballotCount": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "failure": {
+          "$ref": "#/definitions/Failure"
+        },
+        "proposalId": {
+          "type": "string"
+        },
+        "proposerId": {
+          "type": "string",
+          "format": "hex",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "state": {
+          "$ref": "#/definitions/ProposalState"
+        },
+        "voteFailures": {
+          "$ref": "#/definitions/MemberIdToFailure"
+        },
+        "votes": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ballotCount",
+        "proposalId",
+        "proposerId",
+        "state"
+      ]
+    },
+    "ProposalState": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Accepted",
+        "Withdrawn",
+        "Rejected",
+        "Failed",
+        "Dropped"
+      ],
+      "x-ms-enum": {
+        "name": "ProposalState",
+        "modelAsString": true
+      }
+    },
+    "QuoteFormat": {
+      "type": "string",
+      "enum": [
+        "OE_SGX_v1",
+        "Insecure_Virtual",
+        "AMD_SEV_SNP_v1"
+      ],
+      "x-ms-enum": {
+        "name": "QuoteFormat",
+        "modelAsString": true
+      }
+    },
+    "QuoteInfo": {
+      "type": "object",
+      "properties": {
+        "endorsements": {
+          "type": "string",
+          "format": "base64"
+        },
+        "format": {
+          "$ref": "#/definitions/QuoteFormat"
+        },
+        "quote": {
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "endorsements",
+        "format",
+        "quote"
+      ]
+    },
+    "RPCInterfaces": {
+      "type": "object",
+      "properties": {
+        "acceptedEndpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "appProtocol": {
+          "$ref": "#/definitions/AppProtocol"
+        },
+        "bindAddress": {
+          "type": "string"
+        },
+        "endorsement": {
+          "$ref": "#/definitions/Endorsement"
+        },
+        "httpConfig": {
+          "$ref": "#/definitions/HttpConfiguration"
+        },
+        "maxOpenSessionsHard": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "maximum": 18446744073709552000
+        },
+        "maxOpenSessionsSoft": {
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0,
+          "maximum": 18446744073709552000
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "publishedAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "bindAddress"
+      ]
+    },
+    "ServiceConfiguration": {
+      "type": "object",
+      "properties": {
+        "consensus": {
+          "$ref": "#/definitions/ConsensusType"
+        },
+        "maxNodeCertValidityDays": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "maxServiceCertValidityDays": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "recentCoseProposalsWindowSize": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "reconfigurationType": {
+          "$ref": "#/definitions/reconfigurationType"
+        },
+        "recoveryThreshold": {
+          "type": "integer",
+          "format": "uint64"
+        }
+      },
+      "required": [
+        "consensus",
+        "recoveryThreshold"
+      ]
+    },
+    "ServiceInfo": {
+      "type": "object",
+      "properties": {
+        "cert": {
+          "$ref": "#/definitions/Pem"
+        },
+        "currentServiceCreateTxId": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "prevServiceIdentityVersion": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "recoveryCount": {
+          "type": "integer",
+          "format": "uint64"
+        },
+        "serviceData": {
+          "$ref": "#/definitions/Json"
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceStatus"
+        }
+      },
+      "required": [
+        "cert",
+        "status"
+      ]
+    },
+    "ServiceStatus": {
+      "type": "string",
+      "enum": [
+        "Opening",
+        "Open",
+        "WaitingForRecoveryShares",
+        "Recovering"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceStatus",
+        "modelAsString": true
+      }
+    },
+    "Sha256DigestToString": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sha256DigestToStringMap"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Sha256DigestToStringMap[]"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Sha256DigestToStringMap": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "format": "hex",
+          "pattern": "^[a-f0-9]{32}$"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "digest",
+        "value"
+      ]
+    },
+    "SignedReq": {
+      "type": "object",
+      "properties": {
+        "keyId": {
+          "type": "string"
+        },
+        "req": {
+          "type": "string",
+          "format": "base64"
+        },
+        "md": {
+          "$ref": "#/definitions/MDType"
+        },
+        "requestBody": {
+          "type": "string",
+          "format": "base64"
+        },
+        "sig": {
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "keyId",
+        "req",
+        "md",
+        "requestBody",
+        "sig"
+      ]
+    },
+    "StateDigest": {
+      "type": "object",
+      "properties": {
+        "state_digest": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "state_digest"
+      ]
+    },
+    "StringToBase64": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StringToJwtIssuerMetadata": {
+      "type": "object",
+      "properties": {
+        "autoRefresh": {
+          "type": "boolean"
+        },
+        "caCertBundleName": {
+          "type": "string"
+        },
+        "keyFilter": {
+          "$ref": "#/definitions/JwtIssuerKeyFilter"
+        },
+        "keyPolicy": {
+          "$ref": "#/definitions/JwtIssuerKeyPolicy"
+        }
+      },
+      "required": [
+        "keyFilter"
+      ]
+    },
+    "StringToPem": {
+      "type": "object",
+      "properties": {
+        "pemValue": {
+          "type": "string",
+          "format": "pem"
+        }
+      },
+      "required": [
+        "pemValue"
+      ]
+    },
+    "StringToProposalInfo": {
+      "type": "object",
+      "properties": {
+        "ballots": {
+          "type": "string"
+        },
+        "failure": {
+          "$ref": "#/definitions/Failure"
+        },
+        "finalVotes": {
+          "type": "boolean"
+        },
+        "proposerId": {
+          "type": "string",
+          "format": "hex",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "state": {
+          "$ref": "#/definitions/ProposalState"
+        },
+        "voteFailures": {
+          "$ref": "#/definitions/MemberIdToFailure"
+        }
+      },
+      "required": [
+        "ballots",
+        "proposerId",
+        "state",
+        "voteFailures"
+      ]
+    },
+    "SubmitRecoveryShareIn": {
+      "type": "object",
+      "properties": {
+        "share": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "share"
+      ]
+    },
+    "SubmitRecoveryShareOut": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "Transaction": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "transactionId"
+      ]
+    },
+    "TxStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Committed",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "TxStatus",
+        "modelAsString": true
+      }
+    },
+    "UserDetails": {
+      "type": "object",
+      "properties": {
+        "userData": {
+          "$ref": "#/definitions/Json"
+        }
+      },
+      "required": [
+        "userData"
+      ]
+    },
+    "UserIdToPem": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "$ref": "#/definitions/Pem"
+        }
+      },
+      "required": [
+        "Id"
+      ]
+    },
+    "reconfigurationType": {
+      "type": "string",
+      "enum": [
+        "OneTransaction",
+        "TwoTransaction"
+      ],
+      "x-ms-enum": {
+        "name": "reconfigurationType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}
