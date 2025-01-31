@@ -74,7 +74,7 @@ interface ConversationMessagesOperations {
   @doc("Adds participants to a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("add")
-  addParticipant is Operations.ResourceCollectionAction<
+  addParticipants is Operations.ResourceCollectionAction<
     Participant,
     AddParticipantsRequestBody,
     Response<207> & AddParticipantsResult
@@ -84,7 +84,7 @@ interface ConversationMessagesOperations {
   @doc("remove a participant from a conversation")
   @added(Versions.c2025_03_01_Preview)
   @action("remove")
-  removeParticipant is Operations.ResourceCollectionAction<
+  removeParticipants is Operations.ResourceCollectionAction<
     Participant,
     RemoveParticipantsRequestBody,
     Response<207> & RemoveParticipantsResult
@@ -119,8 +119,8 @@ interface ConversationMessagesOperations {
   @doc("Get AI Analysis of a conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("analyze")
-  analyze is Operations.ResourceCollectionAction<
-    ConversationMessageItem,
+  analyze is Operations.ResourceAction<
+    Conversation,
     {},
     OkResponse & GetConversationMessagesAnalysisResult
   >;

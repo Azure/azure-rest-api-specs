@@ -162,9 +162,9 @@
             "format": "int32"
           },
           {
-            "name": "initiator",
+            "name": "participant",
             "in": "query",
-            "description": "The Initiator user ID",
+            "description": "The participant user ID",
             "required": false,
             "type": "string"
           },
@@ -339,76 +339,7 @@
         }
       }
     },
-    "/messages/conversations/{conversationId}/messages": {
-      "get": {
-        "operationId": "ConversationMessagesOperations_ListMessages",
-        "tags": [
-          "ConversationMessages"
-        ],
-        "description": "Retrieves list of conversation messages.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The conversation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "Number of objects to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "initiator",
-            "in": "query",
-            "description": "The Initiator user ID",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedConversationMessageItem"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/messages/conversations/{conversationId}/messages:analyze": {
+    "/messages/conversations/{conversationId}:analyze": {
       "post": {
         "operationId": "ConversationMessagesOperations_Analyze",
         "tags": [
@@ -486,6 +417,75 @@
               }
             }
           }
+        }
+      }
+    },
+    "/messages/conversations/{conversationId}/messages": {
+      "get": {
+        "operationId": "ConversationMessagesOperations_ListMessages",
+        "tags": [
+          "ConversationMessages"
+        ],
+        "description": "Retrieves list of conversation messages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The conversation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "Number of objects to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "participant",
+            "in": "query",
+            "description": "The participant user ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConversationMessageItem"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -575,7 +575,7 @@
     },
     "/messages/conversations/{conversationId}/participants:add": {
       "post": {
-        "operationId": "ConversationMessagesOperations_AddParticipant",
+        "operationId": "ConversationMessagesOperations_AddParticipants",
         "tags": [
           "ConversationMessages"
         ],
@@ -659,7 +659,7 @@
     },
     "/messages/conversations/{conversationId}/participants:remove": {
       "post": {
-        "operationId": "ConversationMessagesOperations_RemoveParticipant",
+        "operationId": "ConversationMessagesOperations_RemoveParticipants",
         "tags": [
           "ConversationMessages"
         ],

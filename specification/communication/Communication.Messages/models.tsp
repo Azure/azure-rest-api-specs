@@ -452,8 +452,8 @@ ListQueryParametersTrait<{
   ...CommonListParams;
   
   @query 
-  @doc("The Initiator user ID")
-  initiator?: string;
+  @doc("The participant user ID")
+  participant?: string;
   
   @query 
   @doc("The id of channel")
@@ -465,8 +465,8 @@ ListQueryParametersTrait<{
   ...CommonListParams;
   
   @query 
-  @doc("The Initiator user ID")
-  initiator?: string;
+  @doc("The participant user ID")
+  participant?: string;
 }>;
 
 @doc("Notification messages send request body.")
