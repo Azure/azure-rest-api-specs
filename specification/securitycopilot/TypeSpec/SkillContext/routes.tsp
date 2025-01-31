@@ -23,6 +23,35 @@ op invokeSkill(
 ): OutputSkillVariable;
 
 @get
+@route("/skillContext/skillDescriptor")
+@doc("Get skill descriptor")
+op getSkillDescriptor(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body skillName: string,
+): SkillDescriptor;
+
+@get
+@route("/skillContext/skillDescriptors")
+@doc("Get skill descriptors")
+op getSkillDescriptors(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): SkillDescriptor[];
+
+@get
+@route("/skillContext/skillsetDescriptors")
+@doc("Get skillset descriptors")
+op getSkillsetDescriptors(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): SkillsetDescriptor[];
+
+@get
+@route("/skillContext/executionContext")
+@doc("Get execution context")
+op getExecutionContext(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): MedeinaExecutionContext;
+
+@get
 @route("/skillContext/promptHistory")
 @doc("Get prompt history")
 op getPromptHistory(
@@ -113,6 +142,21 @@ op addSource(
 @body addSourceRequest  : AddSourceRequest,
 ): NoContentResponse;
 
+@post
+@route("/skillContext/AddSuggestedPrompts")
+@doc(" Adds a list of suggested prompts to the skill context")
+op addSuggestedPrompts(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body addSuggestedPromptsRequest  : AddSuggestedPromptsRequest,
+): NoContentResponse;
+
+@post
+@route("/skillContext/SetFinalResponseSettings")
+@doc("Sets the final response settings")
+op setFinalResponseSettings(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body setFinalResponseSettingsRequest  : SetFinalResponseSettingsRequest,
+): NoContentResponse;
 
 @post
 @route("/medeinaOpenAI/createChatCompletion")

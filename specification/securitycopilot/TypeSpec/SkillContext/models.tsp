@@ -81,6 +81,15 @@ namespace SkillContext
 		Promptbooks,
 	}
 
+	@doc("Skill Audience")
+	enum SkillAudience {
+		@doc("A user of the application")
+		User,
+
+		@doc("The orchestrator (planner)")
+		Planner,
+	}
+
 	@doc("ComplianceFlags")
 	model ComplianceFlags {
 		@doc("Whether to record logs in Geneva and Kusto for this user")
@@ -136,6 +145,43 @@ namespace SkillContext
 
 		@doc("Enum indicating the output type of the skill. Supports StructuredOutput and Primitive")
 		outputType: SkillOutputType;
+	}
+
+	@doc("A collection of skill variables")
+	model SkillVariableCollection extends Record<SkillVariable>{
+	}
+
+	@doc("An invocation of a skill")
+	model SkillInvocation {
+		@doc("The name of the skill function")
+		functionName: string;
+
+		@doc("The description of the skill")
+		skillDescription: string;
+
+		@doc("The inputs to the skill")
+		inputs: SkillVariableCollection;
+
+		@doc("If the skill is successful")
+		success: boolean;
+
+		@doc("The output of the skill")
+		output: OutputSkillVariable;
+
+		@doc("If the output is truncated")
+		outputIsTruncated: boolean;
+		
+		@doc("The exception that occurred during the skill invocation")	
+		exception: Exception;
+	}
+
+	@doc("Exception")
+	model Exception {
+		@doc("The exception message")
+		message: string;
+
+		@doc("The inner exception")
+		innerException: Exception;
 	}
 
 	model EvaluationResultOutput {
@@ -198,6 +244,67 @@ namespace SkillContext
 		StructuredComponents,
 	}
 
+	@doc("Represents the execution context for the current session.")
+	model MedeinaExecutionContext {
+		@doc("The session id.")
+		SessionId: string;
+
+		@doc("The prompt id.")
+		PromptId: string;
+
+		@doc("The evaluation id.")
+		EvaluationId: string;
+
+		@doc("The tenant id.")
+		TenantId: string;
+
+		@doc("The account id.")
+		AccountId: string;
+
+		@doc("The workspace id.")
+		WorkspaceId: string;
+
+		@doc("The display name of the user.")
+		UserName: string;
+
+		@doc("The Application Id that created the Session.")
+		ApplicationId?: string;
+
+		@doc("The Source tag i.e. 'immersive'.")
+		Source: string;
+
+		@doc("The source application ID.")
+		UnauthenticatedSourceApplicationId: string;
+
+		@doc("The selected skills.")
+		SelectedSkills: string;
+
+		@doc("The skillsets identified for execution during the evaluation process post skill selection.")
+		SelectedSkillsets: Array<string>;
+
+		@doc("Indicates whether the context is for a user onboarded to Fidelis.")
+		IsFidelisUser: boolean;
+
+		@doc("Indicates whether the evaluation is manually generated or user driven.")
+		InvocationType: EvaluationInvocationType;
+
+		@doc("Indicates whether the evaluation is from a Prompt or a Promptbook")
+		InvocationCategory: EvaluationInvocationCategory;
+
+		@doc("The encrypted token used to authenticate the user.")
+		EncryptedUserAccessToken: string;
+
+		@doc("Compliance flags for logging.")
+		ComplianceFlags: ComplianceFlags;
+
+		@doc("Contains the context for the Azure OpenAI requests such as the deployment id.")
+		AzureOpenAIExecutionContext: AzureOpenAIExecutionContext;
+
+		@doc("Preview state of the execution context.")
+		PreviewState: SkillPreviewState;
+	}
+
+	
 	@doc("Suggested prompts providing assistance to users in understanding what prompts work well with CFS")
 	model SuggestedPrompt {
 		@doc("Prompt text")
@@ -217,6 +324,13 @@ namespace SkillContext
 
 		@doc("Source data serialized as string")
 		sourceSerializedData?: string | null;
+	}
+
+	@doc("Used to configure the preview state of a skill.")
+	enum SkillPreviewState {
+		GA,
+		Public,
+		Private
 	}
 
 	@doc("The prompt history of the current session")
@@ -242,7 +356,7 @@ namespace SkillContext
 		@doc("Log message")
 		message: string;
 	}
-
+	
 	@doc("Auth Details")
 	model AuthDetails {
 		@doc("Auth Location")
@@ -301,6 +415,73 @@ namespace SkillContext
 	model AddSourceRequest {
 		@doc("SkillSource")
 		SkillSource: SkillSource;
+	}
+
+	@doc("AddSuggestedPromptsRequest")
+	model AddSuggestedPromptsRequest {
+		@doc("List of SuggestedPrompt")
+		suggestedPrompts: Array<SuggestedPrompt>;
+	}
+
+	@doc("SetFinalResponseSettingsRequest")
+	model SetFinalResponseSettingsRequest {
+		@doc("FinalResponseBehavior")
+		finalResponseBehavior: string;
+
+		@doc("FinalResponseFormat")
+		finalResponseFormat?: string;
+
+		@doc("FinalResponsePersona")
+		finalResponsePersona?: string;
+
+		@doc("FinalResponseFallback")
+		finalResponseFallback?: string;
+	}
+
+	@doc("PromptBuilder")
+	model PromptBuilder {
+		@doc("SkillName")
+		skillName: string;
+
+		@doc("SkillsetName")
+		skillsetName: string;
+
+		@doc("SkillInputParts")
+		skillInputParts: Record<IPromptPart>;
+
+		@doc("TokenReductionStrategies")
+		tokenReductionStrategies: Array<TokenReductionStrategy>;
+
+		@doc("TokenSafetyMargin")
+		tokenSafetyMargin: int32 = 256;
+
+		@doc("Functions")
+		functions: FunctionList;
+	}
+
+	@doc("TokenReductionStrategy")
+	model TokenReductionStrategy {
+		@doc("TokenTarget")
+		tokenTarget: TokenTarget;
+
+		@doc("Parts")
+		parts: Array<IPromptPart>;
+	}
+
+	@doc("IPromptPart")
+	interface IPromptPart {
+		@doc("Renders the prompt part")
+		render(): string;
+	}
+
+	@doc("TokenTarget")
+	model TokenTarget {
+	}
+
+	@doc("FunctionList")
+	model FunctionList {
+		@doc("Functions")
+		functions: Array<GPTFunction>;
 	}
 
 	@doc("Represents a chat completion request.")
