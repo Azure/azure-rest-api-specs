@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure.Storage.Blob service",
+    "version": "0000-00-00",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The host name of the blob storage account, e.g. accountName.blob.core.windows.net",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://storage.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://storage.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "Versions": {
+      "type": "string",
+      "description": "The Azure.Storage.Blob service versions.",
+      "enum": [
+        "2020-10-02-preview",
+        "2020-12-06-preview",
+        "2021-02-12-preview",
+        "2021-04-10-preview",
+        "2021-08-06-preview",
+        "2021-12-02-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2020-10-02-preview",
+            "value": "2020-10-02-preview",
+            "description": "The 2020-10-02-preview version of the Azure.Storage.Blob service."
+          },
+          {
+            "name": "2020-12-06-preview",
+            "value": "2020-12-06-preview",
+            "description": "The 2020-12-06-preview version of the Azure.Storage.Blob service."
+          },
+          {
+            "name": "2021-02-12-preview",
+            "value": "2021-02-12-preview",
+            "description": "The 2021-02-12-preview version of the Azure.Storage.Blob service."
+          },
+          {
+            "name": "2021-04-10-preview",
+            "value": "2021-04-10-preview",
+            "description": "The 2021-04-10-preview version of the Azure.Storage.Blob service."
+          },
+          {
+            "name": "2021-08-06-preview",
+            "value": "2021-08-06-preview",
+            "description": "The 2021-08-06-preview version of the Azure.Storage.Blob service."
+          },
+          {
+            "name": "2021-12-02-preview",
+            "value": "2021-12-02-preview",
+            "description": "The 2021-12-02-preview version of the Azure.Storage.Blob service."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
