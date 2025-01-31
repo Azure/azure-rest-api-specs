@@ -268,7 +268,7 @@ model EvaluationResults {
    */
   @doc("The mitigation steps to follow best practices.")
   @added(Versions.v2024_11_01_preview)
-  recommendation: ConfigurationCheckRecommendation;
+  recommendation?: ConfigurationCheckRecommendation;
 
   /**
    * Specifies the type of configuration check performed, such as default or customized.
