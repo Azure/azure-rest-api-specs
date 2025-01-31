@@ -7,7 +7,7 @@ using TypeSpec.Http;
 
 namespace Search;
 
-interface DataSourcesOperations {
+interface DataSources {
   /**
    * Creates a new datasource or updates a datasource if it already exists.
    */
@@ -97,7 +97,7 @@ interface DataSourcesOperations {
   >;
 }
 
-interface IndexersOperations {
+interface Indexers {
   /**
    * Resets the change tracking state associated with an indexer.
    */
@@ -231,7 +231,7 @@ interface IndexersOperations {
   getStatus is SearchIndexerOperation<{}, SearchIndexerStatus>;
 }
 
-interface SkillsetsOperations {
+interface Skillsets {
   /**
    * Creates a new skillset in a search service or updates the skillset if it
    * already exists.
@@ -324,7 +324,7 @@ interface SkillsetsOperations {
   >;
 }
 
-interface SynonymMapsOperations {
+interface SynonymMaps {
   /**
    * Creates a new synonym map or updates a synonym map if it already exists.
    */
@@ -415,7 +415,7 @@ interface SynonymMapsOperations {
   >;
 }
 
-interface IndexesOperations {
+interface Indexes {
   /**
    * Creates a new search index.
    */

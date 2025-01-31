@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure AI Search",
+    "title": "Search Index Client",
     "version": "2024-07-01",
     "description": "Client that can be used to manage and query indexes and documents, as well as\nmanage other resources, on a search service.",
     "x-typespec-generated": [
@@ -48,7 +48,7 @@
   "paths": {
     "/indexes('{indexName}')/docs": {
       "get": {
-        "operationId": "DocumentsOperations_SearchGet",
+        "operationId": "Documents_SearchGet",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -414,20 +414,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSearchDocumentsGet": {
-            "$ref": "./examples/SearchIndexSearchDocumentsGet.json"
-          },
-          "SearchIndexSearchDocumentsSemanticGet": {
-            "$ref": "./examples/SearchIndexSearchDocumentsSemanticGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/$count": {
       "get": {
-        "operationId": "DocumentsOperations_Count",
+        "operationId": "Documents_Count",
         "description": "Queries the number of documents in the index.",
         "parameters": [
           {
@@ -458,17 +450,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexCountDocuments": {
-            "$ref": "./examples/SearchIndexCountDocuments.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.autocomplete": {
       "get": {
-        "operationId": "DocumentsOperations_AutocompleteGet",
+        "operationId": "Documents_AutocompleteGet",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -602,17 +589,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsGet": {
-            "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.index": {
       "post": {
-        "operationId": "DocumentsOperations_Index",
+        "operationId": "Documents_Index",
         "description": "Sends a batch of document write actions to the index.",
         "parameters": [
           {
@@ -657,17 +639,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexIndexDocuments": {
-            "$ref": "./examples/SearchIndexIndexDocuments.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.autocomplete": {
       "post": {
-        "operationId": "DocumentsOperations_AutocompletePost",
+        "operationId": "Documents_AutocompletePost",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -706,17 +683,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsPost": {
-            "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.search": {
       "post": {
-        "operationId": "DocumentsOperations_SearchPost",
+        "operationId": "Documents_SearchPost",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -755,20 +727,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSearchDocumentsPost": {
-            "$ref": "./examples/SearchIndexSearchDocumentsPost.json"
-          },
-          "SearchIndexSearchDocumentsSemanticPost": {
-            "$ref": "./examples/SearchIndexSearchDocumentsSemanticPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.suggest": {
       "post": {
-        "operationId": "DocumentsOperations_SuggestPost",
+        "operationId": "Documents_SuggestPost",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -807,17 +771,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSuggestDocumentsPost": {
-            "$ref": "./examples/SearchIndexSuggestDocumentsPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.suggest": {
       "get": {
-        "operationId": "DocumentsOperations_SuggestGet",
+        "operationId": "Documents_SuggestGet",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -941,17 +900,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSuggestDocumentsGet": {
-            "$ref": "./examples/SearchIndexSuggestDocumentsGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs('{key}')": {
       "get": {
-        "operationId": "DocumentsOperations_Get",
+        "operationId": "Documents_Get",
         "description": "Retrieves a document from the index.",
         "parameters": [
           {
@@ -999,11 +953,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SearchIndexGetDocument": {
-            "$ref": "./examples/SearchIndexGetDocument.json"
           }
         }
       }

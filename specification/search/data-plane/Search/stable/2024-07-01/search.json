@@ -48,7 +48,7 @@
   "paths": {
     "/datasources": {
       "get": {
-        "operationId": "DataSourcesOperations_List",
+        "operationId": "DataSources_List",
         "description": "Lists all datasources available for a search service.",
         "parameters": [
           {
@@ -78,15 +78,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListDataSources": {
-            "$ref": "./examples/SearchServiceListDataSources.json"
-          }
         }
       },
       "post": {
-        "operationId": "DataSourcesOperations_Create",
+        "operationId": "DataSources_Create",
         "description": "Creates a new datasource.",
         "parameters": [
           {
@@ -118,17 +113,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateDataSource": {
-            "$ref": "./examples/SearchServiceCreateDataSource.json"
-          }
         }
       }
     },
     "/datasources('{dataSourceName}')": {
       "get": {
-        "operationId": "DataSourcesOperations_Get",
+        "operationId": "DataSources_Get",
         "description": "Retrieves a datasource definition.",
         "parameters": [
           {
@@ -158,15 +148,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetDataSource": {
-            "$ref": "./examples/SearchServiceGetDataSource.json"
-          }
         }
       },
       "put": {
-        "operationId": "DataSourcesOperations_CreateOrUpdate",
+        "operationId": "DataSources_CreateOrUpdate",
         "description": "Creates a new datasource or updates a datasource if it already exists.",
         "parameters": [
           {
@@ -241,15 +226,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateDataSource": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateDataSource.json"
-          }
         }
       },
       "delete": {
-        "operationId": "DataSourcesOperations_Delete",
+        "operationId": "DataSources_Delete",
         "description": "Deletes a datasource.",
         "parameters": [
           {
@@ -295,17 +275,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteDataSource": {
-            "$ref": "./examples/SearchServiceDeleteDataSource.json"
-          }
         }
       }
     },
     "/indexers": {
       "get": {
-        "operationId": "IndexersOperations_List",
+        "operationId": "Indexers_List",
         "description": "Lists all indexers available for a search service.",
         "parameters": [
           {
@@ -335,15 +310,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListIndexers": {
-            "$ref": "./examples/SearchServiceListIndexers.json"
-          }
         }
       },
       "post": {
-        "operationId": "IndexersOperations_Create",
+        "operationId": "Indexers_Create",
         "description": "Creates a new indexer.",
         "parameters": [
           {
@@ -375,17 +345,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateIndexer": {
-            "$ref": "./examples/SearchServiceCreateIndexer.json"
-          }
         }
       }
     },
     "/indexers('{indexerName}')": {
       "get": {
-        "operationId": "IndexersOperations_Get",
+        "operationId": "Indexers_Get",
         "description": "Retrieves an indexer definition.",
         "parameters": [
           {
@@ -415,15 +380,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetIndexer": {
-            "$ref": "./examples/SearchServiceGetIndexer.json"
-          }
         }
       },
       "put": {
-        "operationId": "IndexersOperations_CreateOrUpdate",
+        "operationId": "Indexers_CreateOrUpdate",
         "description": "Creates a new indexer or updates an indexer if it already exists.",
         "parameters": [
           {
@@ -498,15 +458,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateIndexer": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateIndexer.json"
-          }
         }
       },
       "delete": {
-        "operationId": "IndexersOperations_Delete",
+        "operationId": "Indexers_Delete",
         "description": "Deletes an indexer.",
         "parameters": [
           {
@@ -552,17 +507,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteIndexer": {
-            "$ref": "./examples/SearchServiceDeleteIndexer.json"
-          }
         }
       }
     },
     "/indexers('{indexerName}')/search.reset": {
       "post": {
-        "operationId": "IndexersOperations_Reset",
+        "operationId": "Indexers_Reset",
         "description": "Resets the change tracking state associated with an indexer.",
         "parameters": [
           {
@@ -589,17 +539,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceResetIndexer": {
-            "$ref": "./examples/SearchServiceResetIndexer.json"
-          }
         }
       }
     },
     "/indexers('{indexerName}')/search.run": {
       "post": {
-        "operationId": "IndexersOperations_Run",
+        "operationId": "Indexers_Run",
         "description": "Runs an indexer on-demand.",
         "parameters": [
           {
@@ -626,17 +571,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceRunIndexer": {
-            "$ref": "./examples/SearchServiceRunIndexer.json"
-          }
         }
       }
     },
     "/indexers('{indexerName}')/search.status": {
       "get": {
-        "operationId": "IndexersOperations_GetStatus",
+        "operationId": "Indexers_GetStatus",
         "description": "Returns the current status and execution history of an indexer.",
         "parameters": [
           {
@@ -666,17 +606,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetIndexerStatus": {
-            "$ref": "./examples/SearchServiceGetIndexerStatus.json"
-          }
         }
       }
     },
     "/indexes": {
       "get": {
-        "operationId": "IndexesOperations_List",
+        "operationId": "Indexes_List",
         "description": "Lists all indexes available for a search service.",
         "parameters": [
           {
@@ -706,15 +641,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListIndexes": {
-            "$ref": "./examples/SearchServiceListIndexes.json"
-          }
         }
       },
       "post": {
-        "operationId": "IndexesOperations_Create",
+        "operationId": "Indexes_Create",
         "description": "Creates a new search index.",
         "parameters": [
           {
@@ -746,17 +676,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateIndex": {
-            "$ref": "./examples/SearchServiceCreateIndex.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')": {
       "get": {
-        "operationId": "IndexesOperations_Get",
+        "operationId": "Indexes_Get",
         "description": "Retrieves an index definition.",
         "parameters": [
           {
@@ -786,15 +711,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetIndex": {
-            "$ref": "./examples/SearchServiceGetIndex.json"
-          }
         }
       },
       "put": {
-        "operationId": "IndexesOperations_CreateOrUpdate",
+        "operationId": "Indexes_CreateOrUpdate",
         "description": "Creates a new search index or updates an index if it already exists.",
         "parameters": [
           {
@@ -876,15 +796,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateIndex": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateIndex.json"
-          }
         }
       },
       "delete": {
-        "operationId": "IndexesOperations_Delete",
+        "operationId": "Indexes_Delete",
         "description": "Deletes a search index and all the documents it contains. This operation is\npermanent, with no recovery option. Make sure you have a master copy of your\nindex definition, data ingestion code, and a backup of the primary data source\nin case you need to re-build the index.",
         "parameters": [
           {
@@ -930,17 +845,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteIndex": {
-            "$ref": "./examples/SearchServiceDeleteIndex.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs": {
       "get": {
-        "operationId": "DocumentsOperations_SearchGet",
+        "operationId": "Documents_SearchGet",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -1306,20 +1216,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSearchDocumentsGet": {
-            "$ref": "./examples/SearchIndexSearchDocumentsGet.json"
-          },
-          "SearchIndexSearchDocumentsSemanticGet": {
-            "$ref": "./examples/SearchIndexSearchDocumentsSemanticGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/$count": {
       "get": {
-        "operationId": "DocumentsOperations_Count",
+        "operationId": "Documents_Count",
         "description": "Queries the number of documents in the index.",
         "parameters": [
           {
@@ -1350,17 +1252,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexCountDocuments": {
-            "$ref": "./examples/SearchIndexCountDocuments.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.autocomplete": {
       "get": {
-        "operationId": "DocumentsOperations_AutocompleteGet",
+        "operationId": "Documents_AutocompleteGet",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -1494,17 +1391,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsGet": {
-            "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.index": {
       "post": {
-        "operationId": "DocumentsOperations_Index",
+        "operationId": "Documents_Index",
         "description": "Sends a batch of document write actions to the index.",
         "parameters": [
           {
@@ -1549,17 +1441,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexIndexDocuments": {
-            "$ref": "./examples/SearchIndexIndexDocuments.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.autocomplete": {
       "post": {
-        "operationId": "DocumentsOperations_AutocompletePost",
+        "operationId": "Documents_AutocompletePost",
         "description": "Autocompletes incomplete query terms based on input text and matching terms in\nthe index.",
         "parameters": [
           {
@@ -1598,17 +1485,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsPost": {
-            "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.search": {
       "post": {
-        "operationId": "DocumentsOperations_SearchPost",
+        "operationId": "Documents_SearchPost",
         "description": "Searches for documents in the index.",
         "parameters": [
           {
@@ -1647,20 +1529,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSearchDocumentsPost": {
-            "$ref": "./examples/SearchIndexSearchDocumentsPost.json"
-          },
-          "SearchIndexSearchDocumentsSemanticPost": {
-            "$ref": "./examples/SearchIndexSearchDocumentsSemanticPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.post.suggest": {
       "post": {
-        "operationId": "DocumentsOperations_SuggestPost",
+        "operationId": "Documents_SuggestPost",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -1699,17 +1573,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSuggestDocumentsPost": {
-            "$ref": "./examples/SearchIndexSuggestDocumentsPost.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs/search.suggest": {
       "get": {
-        "operationId": "DocumentsOperations_SuggestGet",
+        "operationId": "Documents_SuggestGet",
         "description": "Suggests documents in the index that match the given partial query text.",
         "parameters": [
           {
@@ -1833,17 +1702,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexSuggestDocumentsGet": {
-            "$ref": "./examples/SearchIndexSuggestDocumentsGet.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/docs('{key}')": {
       "get": {
-        "operationId": "DocumentsOperations_Get",
+        "operationId": "Documents_Get",
         "description": "Retrieves a document from the index.",
         "parameters": [
           {
@@ -1892,17 +1756,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchIndexGetDocument": {
-            "$ref": "./examples/SearchIndexGetDocument.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/search.analyze": {
       "post": {
-        "operationId": "IndexesOperations_Analyze",
+        "operationId": "Indexes_Analyze",
         "description": "Shows how an analyzer breaks text into tokens.",
         "parameters": [
           {
@@ -1941,17 +1800,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceIndexAnalyze": {
-            "$ref": "./examples/SearchServiceIndexAnalyze.json"
-          }
         }
       }
     },
     "/indexes('{indexName}')/search.stats": {
       "get": {
-        "operationId": "IndexesOperations_GetStatistics",
+        "operationId": "Indexes_GetStatistics",
         "description": "Returns statistics for the given index, including a document count and storage\nusage.",
         "parameters": [
           {
@@ -1980,11 +1834,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetIndexStatistics": {
-            "$ref": "./examples/SearchServiceGetIndexStatistics.json"
           }
         }
       }
@@ -2024,7 +1873,7 @@
     },
     "/skillsets": {
       "get": {
-        "operationId": "SkillsetsOperations_List",
+        "operationId": "Skillsets_List",
         "description": "List all skillsets in a search service.",
         "parameters": [
           {
@@ -2054,15 +1903,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListSkillsets": {
-            "$ref": "./examples/SearchServiceListSkillsets.json"
-          }
         }
       },
       "post": {
-        "operationId": "SkillsetsOperations_Create",
+        "operationId": "Skillsets_Create",
         "description": "Creates a new skillset in a search service.",
         "parameters": [
           {
@@ -2094,17 +1938,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateSkillset": {
-            "$ref": "./examples/SearchServiceCreateSkillset.json"
-          }
         }
       }
     },
     "/skillsets('{skillsetName}')": {
       "get": {
-        "operationId": "SkillsetsOperations_Get",
+        "operationId": "Skillsets_Get",
         "description": "Retrieves a skillset in a search service.",
         "parameters": [
           {
@@ -2134,15 +1973,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetSkillset": {
-            "$ref": "./examples/SearchServiceGetSkillset.json"
-          }
         }
       },
       "put": {
-        "operationId": "SkillsetsOperations_CreateOrUpdate",
+        "operationId": "Skillsets_CreateOrUpdate",
         "description": "Creates a new skillset in a search service or updates the skillset if it\nalready exists.",
         "parameters": [
           {
@@ -2217,15 +2051,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateSkillset": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateSkillset.json"
-          }
         }
       },
       "delete": {
-        "operationId": "SkillsetsOperations_Delete",
+        "operationId": "Skillsets_Delete",
         "description": "Deletes a skillset in a search service.",
         "parameters": [
           {
@@ -2271,17 +2100,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteSkillset": {
-            "$ref": "./examples/SearchServiceDeleteSkillset.json"
-          }
         }
       }
     },
     "/synonymmaps": {
       "get": {
-        "operationId": "SynonymMapsOperations_List",
+        "operationId": "SynonymMaps_List",
         "description": "Lists all synonym maps available for a search service.",
         "parameters": [
           {
@@ -2311,15 +2135,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceListSynonymMaps": {
-            "$ref": "./examples/SearchServiceListSynonymMaps.json"
-          }
         }
       },
       "post": {
-        "operationId": "SynonymMapsOperations_Create",
+        "operationId": "SynonymMaps_Create",
         "description": "Creates a new synonym map.",
         "parameters": [
           {
@@ -2351,17 +2170,12 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateSynonymMap": {
-            "$ref": "./examples/SearchServiceCreateSynonymMap.json"
-          }
         }
       }
     },
     "/synonymmaps('{synonymMapName}')": {
       "get": {
-        "operationId": "SynonymMapsOperations_Get",
+        "operationId": "SynonymMaps_Get",
         "description": "Retrieves a synonym map definition.",
         "parameters": [
           {
@@ -2391,15 +2205,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceGetSynonymMap": {
-            "$ref": "./examples/SearchServiceGetSynonymMap.json"
-          }
         }
       },
       "put": {
-        "operationId": "SynonymMapsOperations_CreateOrUpdate",
+        "operationId": "SynonymMaps_CreateOrUpdate",
         "description": "Creates a new synonym map or updates a synonym map if it already exists.",
         "parameters": [
           {
@@ -2474,15 +2283,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "SearchServiceCreateOrUpdateSynonymMap": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateSynonymMap.json"
-          }
         }
       },
       "delete": {
-        "operationId": "SynonymMapsOperations_Delete",
+        "operationId": "SynonymMaps_Delete",
         "description": "Deletes a synonym map.",
         "parameters": [
           {
@@ -2527,11 +2331,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SearchServiceDeleteSynonymMap": {
-            "$ref": "./examples/SearchServiceDeleteSynonymMap.json"
           }
         }
       }
