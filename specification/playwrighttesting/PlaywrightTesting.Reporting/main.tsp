@@ -18,10 +18,10 @@ using Microsoft.PlaywrightTesting.Shared;
 
 @server(
   "{endpoint}",
-  "Microsoft Azure Playwright Reporting Service API Endpoint",
+  "Microsoft Azure Playwright reporting service API endpoint",
   {
     @doc("""
-      Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+      Supported Azure Playwright Service reporting API Endpoints (protocol and hostname, for example:
         https://{region}.reporting.api.playwright.microsoft.com).
       """)
     endpoint: string,
@@ -32,7 +32,7 @@ using Microsoft.PlaywrightTesting.Shared;
     OAuth2Auth<[
       {
         type: OAuth2FlowType.implicit,
-        description: "We can use OAuth2 Implicit flow to get the auth token for calling the APIs.",
+        description: "We can use the OAuth2 Implicit flow to get the auth token for authenticating the APIs.",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
         scopes: ["https://playwright.microsoft.com/.default"],
       }
@@ -40,7 +40,7 @@ using Microsoft.PlaywrightTesting.Shared;
     OAuth2Auth<[
       {
         type: OAuth2FlowType.authorizationCode,
-        description: "We can use OAuth2 Authorization Code flow to get the auth token for calling the APIs.",
+        description: "We can use the OAuth2 Authorization Code flow to obtain the authentication token for calling the APIs",
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
         tokenUrl: "https://login.microsoftonline.com/common/v2.0/oauth2/token",
         scopes: ["https://playwright.microsoft.com/.default"],
@@ -49,12 +49,12 @@ using Microsoft.PlaywrightTesting.Shared;
   ]
 )
 @service({
-  title: "Microsoft Playwright Service Reporting Data Plane API",
+  title: "Microsoft Playwright Testing Service Reporting Data Plane API",
 })
 @versioned(Microsoft.PlaywrightTesting.Reporting.Versions)
 namespace Microsoft.PlaywrightTesting.Reporting;
 
-@doc("The PlaywrightTesting Reporting service Data Plane version.")
+@doc("The Playwright Testing Reporting service Data Plane version.")
 enum Versions {
   @doc("Version 2025-02-24")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
@@ -68,7 +68,7 @@ enum Versions {
 union TestRunStatus {
   string,
 
-  @doc("The test run is currently running.")
+  @doc("The test run is currently in progress.")
   "Running",
 
   @doc("The test run completed on the client side.")
@@ -91,11 +91,11 @@ union AccessLevel {
   @doc("Read and write access.")
   "ReadWrite",
 
-  @doc("Read, add, create, and write access.")
+  @doc("Read, create, and write access.")
   "ReadAddCreateWrite",
 }
 
-@doc("Supported Test SDK Language.")
+@doc("Supported Test SDK Languages.")
 union TestSdkLanguage {
   string,
 
@@ -112,7 +112,7 @@ union TestSdkLanguage {
 // Models with unions
 @doc("Model representing client configuration.")
 model TestRunConfig {
-  @doc("Number of retry attempts.")
+  @doc("Number of retries.")
   @visibility("read", "create")
   retryCount?: int32;
 
