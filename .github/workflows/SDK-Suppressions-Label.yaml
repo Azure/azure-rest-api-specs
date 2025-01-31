@@ -7,12 +7,13 @@ on:
       - RPSaaSMaster
       - release*
 
+permissions:
+  contents: read
+
 jobs:
   process-sdk-suppressions-labels:
     name: Sdk Suppressions
     runs-on: ubuntu-24.04
-    permissions:
-      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
