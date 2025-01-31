@@ -64,7 +64,7 @@
         "tags": [
           "test-result"
         ],
-        "description": "List Testresults.",
+        "description": "List Test Results.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -137,7 +137,7 @@
         "tags": [
           "test-result"
         ],
-        "description": "Get Testresults summary.",
+        "description": "Get Test Results summary.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -270,7 +270,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "List testruns.",
+        "description": "List test runs.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -343,7 +343,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Gets a testrun.",
+        "description": "Gets a test run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -362,7 +362,8 @@
             "in": "path",
             "description": "Identifier of the test run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 200
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -428,7 +429,8 @@
             "in": "path",
             "description": "Identifier of the test run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 200
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -515,7 +517,8 @@
             "in": "path",
             "description": "Identifier of the test run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 200
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -580,7 +583,8 @@
             "in": "path",
             "description": "Identifier of the test run.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 200
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -856,7 +860,7 @@
           {
             "name": "Image",
             "value": "Image",
-            "description": "Image"
+            "description": "Screenshot"
           },
           {
             "name": "Video",
@@ -938,7 +942,7 @@
       "enum": [
         "Chromium",
         "Webkit",
-        "FireFox"
+        "Firefox"
       ],
       "x-ms-enum": {
         "name": "BrowserType",
@@ -955,9 +959,9 @@
             "description": "Webkit"
           },
           {
-            "name": "FireFox",
-            "value": "FireFox",
-            "description": "Safari"
+            "name": "Firefox",
+            "value": "Firefox",
+            "description": "Firefox"
           }
         ]
       }
@@ -968,7 +972,7 @@
       "properties": {
         "ciProviderName": {
           "$ref": "#/definitions/CiProviderName",
-          "description": "Name of the CI provider.  GitHub | ADO"
+          "description": "Name of the CI provider.  GitHub | Azure DevOps | Default"
         },
         "branch": {
           "type": "string",
@@ -998,7 +1002,7 @@
       "description": "Supported CI provider for tests",
       "enum": [
         "GitHub",
-        "Ado",
+        "Azure DevOps",
         "Default"
       ],
       "x-ms-enum": {
@@ -1011,9 +1015,9 @@
             "description": "GitHub"
           },
           {
-            "name": "Ado",
-            "value": "Ado",
-            "description": "Azure Devops"
+            "name": "Azure DevOps",
+            "value": "Azure DevOps",
+            "description": "Azure DevOps"
           },
           {
             "name": "Default",
@@ -1027,14 +1031,24 @@
       "type": "object",
       "description": "Model representing summary of test run results.",
       "properties": {
-        "executionStatus": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the test run."
+        },
+        "serverStatus": {
           "$ref": "#/definitions/TestRunStatus",
-          "description": "Processing Status of the the uploaded. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
+          "description": "Processing Status of the testresults."
         },
         "totalTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of tests executed.",
+          "description": "Total number of tests executed",
           "readOnly": true
         },
         "passedTestsCount": {
@@ -1058,17 +1072,17 @@
         "flakyTestsCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tests that were flaky.",
+          "description": "Number of tests that were flaky (passed on retry).",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/TestStatus",
-          "description": "Status of the test run - PASSED | FAILED | INTERRUPTED | TIMEDOUT",
+          "description": "Status of the test run",
           "readOnly": true
         },
         "jobs": {
           "type": "array",
-          "description": "List of jobs associated with the test run.",
+          "description": "List of CI jobs associated with the test run.",
           "items": {
             "type": "string"
           },
@@ -1076,7 +1090,7 @@
         },
         "projects": {
           "type": "array",
-          "description": "List of projects associated with the test run.",
+          "description": "List of Playwright projects (https://playwright.dev/docs/test-projects) associated with the test run.",
           "items": {
             "type": "string"
           },
@@ -1092,12 +1106,9 @@
         }
       },
       "required": [
-        "executionStatus",
-        "totalTestsCount",
-        "passedTestsCount",
-        "failedTestsCount",
-        "skippedTestsCount",
-        "flakyTestsCount",
+        "startTime",
+        "endTime",
+        "serverStatus",
         "status"
       ]
     },
@@ -1105,26 +1116,16 @@
       "type": "object",
       "description": "Model representing summary information about a test run.",
       "properties": {
-        "status": {
+        "serverStatus": {
           "$ref": "#/definitions/TestRunStatus",
           "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
         },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the test run."
-        },
-        "billableTime": {
+        "billableTimeInMs": {
           "type": "integer",
           "format": "int32",
           "description": "Billable time for the test run. Available after testRun Ends"
         },
-        "totalTime": {
+        "totalTimeInMs": {
           "type": "integer",
           "format": "int32",
           "description": "Total time taken for the test run."
@@ -1136,16 +1137,11 @@
         },
         "browserQuotaExceeded": {
           "type": "boolean",
-          "description": "Flag indicating if a test-run was throttled because requested browser Quota exceeded"
+          "description": "Flag indicating whether the test run was throttled due to reaching the maximum allowed parallel browser limit for the workspace."
         }
       },
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "billableTime",
-        "totalTime",
-        "numBrowserSessions",
+        "serverStatus",
         "browserQuotaExceeded"
       ]
     },
@@ -1342,7 +1338,7 @@
     },
     "ShardDetails": {
       "type": "object",
-      "description": "Model representing a shard.",
+      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
       "properties": {
         "total": {
           "type": "integer",
@@ -1357,7 +1353,7 @@
     },
     "ShardDetailsCreateOrUpdate": {
       "type": "object",
-      "description": "Model representing a shard.",
+      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
       "properties": {
         "total": {
           "type": "integer",
@@ -1389,7 +1385,7 @@
             "create"
           ]
         },
-        "workers": {
+        "workersCount": {
           "type": "integer",
           "format": "int32",
           "description": "number of workers used by playwright client.",
@@ -1411,7 +1407,7 @@
       "required": [
         "shardId",
         "summary",
-        "workers"
+        "workersCount"
       ]
     },
     "TestFramework": {
@@ -1608,7 +1604,7 @@
         "retryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of retryCount attempts. max retryCount is 20. After which testresults metadata will not be stored",
+          "description": "Number of retryCount attempts. Max retryCount is 20, after which testresults metadata will not be stored",
           "maximum": 20,
           "x-ms-mutability": [
             "read",
@@ -1666,7 +1662,7 @@
         },
         "annotations": {
           "type": "array",
-          "description": "List of annotations.",
+          "description": "List of annotations (https://playwright.dev/docs/test-annotations).",
           "maxItems": 100,
           "items": {
             "type": "string"
@@ -1678,7 +1674,7 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "Relative path in Storage for all the artifacts of this test",
+          "description": "Relative path in storage for all the artifacts of this test",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1740,17 +1736,23 @@
         "testRunId": {
           "type": "string",
           "description": "Identifier of the test run.",
+          "maxLength": 200,
           "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run, unicode characters allowed.",
-          "maxLength": 200
+          "description": "Display name of the test run (unicode characters allowed).",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
-        "startTime": {
+        "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the test run -RFC 3339 literal format",
+          "description": "Creation time of the test run -RFC 3339 literal format",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1758,7 +1760,7 @@
         },
         "creatorId": {
           "type": "string",
-          "description": "Creator's identifier.",
+          "description": "Creator's identifier. It's the Id referred in the access/Entra token",
           "readOnly": true
         },
         "creatorName": {
@@ -1773,7 +1775,7 @@
         },
         "cloudReportSummary": {
           "$ref": "#/definitions/CloudReportingSummary",
-          "description": "Summary of reports uploaded on cloud.Only available if cloud reporting is enabled",
+          "description": "Summary of reports uploaded on cloud. Only available if cloud reporting is enabled",
           "readOnly": true
         },
         "ciConfig": {
@@ -1804,7 +1806,7 @@
         },
         "cloudReportingEnabled": {
           "type": "boolean",
-          "description": "Must be set to true when Customers want to use Reporting Feature ",
+          "description": "Must be set to true when users want to use Reporting Feature ",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1813,7 +1815,8 @@
       },
       "required": [
         "testRunId",
-        "startTime",
+        "displayName",
+        "creationTime",
         "creatorId",
         "creatorName",
         "cloudRunEnabled",
@@ -1828,6 +1831,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of retry attempts.",
+          "maximum": 100,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1837,15 +1841,17 @@
           "type": "integer",
           "format": "int32",
           "description": "Interval between repeated test runs.",
+          "maximum": 10000,
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "workers": {
+        "workersCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of worker instances.",
+          "maximum": 1000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1867,7 +1873,7 @@
             "create"
           ]
         },
-        "timeoutInMillis": {
+        "timeoutInMs": {
           "type": "integer",
           "format": "int64",
           "description": "Timeout duration for test execution.",
@@ -1904,7 +1910,7 @@
         }
       },
       "required": [
-        "timeoutInMillis",
+        "timeoutInMs",
         "testSdkLanguage"
       ]
     },
@@ -1916,6 +1922,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of retry attempts.",
+          "maximum": 100,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1925,15 +1932,17 @@
           "type": "integer",
           "format": "int32",
           "description": "Interval between repeated test runs.",
+          "maximum": 10000,
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "workers": {
+        "workersCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of worker instances.",
+          "maximum": 1000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1955,7 +1964,7 @@
             "create"
           ]
         },
-        "timeoutInMillis": {
+        "timeoutInMs": {
           "type": "integer",
           "format": "int64",
           "description": "Timeout duration for test execution.",
@@ -1998,13 +2007,18 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run, unicode characters allowed.",
-          "maxLength": 200
+          "description": "Display name of the test run (unicode characters allowed).",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
-        "startTime": {
+        "creationTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time of the test run -RFC 3339 literal format",
+          "description": "Creation time of the test run -RFC 3339 literal format",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2028,7 +2042,7 @@
         },
         "cloudReportingEnabled": {
           "type": "boolean",
-          "description": "Must be set to true when Customers want to use Reporting Feature ",
+          "description": "Must be set to true when users want to use Reporting Feature ",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2119,6 +2133,7 @@
         "Passed",
         "Failed",
         "Skipped",
+        "flaky",
         "Interrupted",
         "TimedOut"
       ],
@@ -2140,6 +2155,11 @@
             "name": "Skipped",
             "value": "Skipped",
             "description": "The test was skipped."
+          },
+          {
+            "name": "flaky",
+            "value": "flaky",
+            "description": "The test was flaky."
           },
           {
             "name": "Interrupted",
@@ -2228,12 +2248,12 @@
       "properties": {
         "jobName": {
           "type": "string",
-          "description": "Name of the job.",
+          "description": "Name of the CI job running the test.",
           "maxLength": 500
         },
         "projectName": {
           "type": "string",
-          "description": "Name of the project.",
+          "description": "Name of the Playwright project.",
           "maxLength": 500
         },
         "browserType": {
@@ -2242,7 +2262,7 @@
         },
         "os": {
           "$ref": "#/definitions/OsType",
-          "description": "Operating system details."
+          "description": "Operating system where the browser is hosted."
         }
       },
       "required": [
