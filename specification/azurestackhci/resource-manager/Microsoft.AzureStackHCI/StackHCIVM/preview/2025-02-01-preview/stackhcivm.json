@@ -3344,7 +3344,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualHardDiskTagsUpdate"
+              "$ref": "#/definitions/VirtualHardDisksUpdateRequest"
             }
           }
         ],
@@ -6506,19 +6506,6 @@
         }
       }
     },
-    "VirtualHardDiskTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in VirtualHardDisk resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "VirtualHardDiskUploadRequest": {
       "type": "object",
       "description": "Request for uploading virtual hard disk.",
@@ -6586,6 +6573,17 @@
         }
       }
     },
+    "VirtualHardDisksUpdateProperties": {
+      "type": "object",
+      "description": "Defines the resource properties for the update.",
+      "properties": {
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the disk in GB"
+        }
+      }
+    },
     "VirtualHardDisksUpdateRequest": {
       "type": "object",
       "description": "The virtual hard disk resource patch definition.",
@@ -6596,6 +6594,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualHardDisksUpdateProperties",
+          "description": "Defines the resource properties for the update."
         }
       }
     },
