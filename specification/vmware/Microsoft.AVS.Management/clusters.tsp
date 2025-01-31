@@ -49,7 +49,7 @@ interface Clusters {
     ...CreatedResponse;
 
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updated cluster.")
