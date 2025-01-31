@@ -82,7 +82,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "ImageDetailLevel",
   "python"
 );
-@@clientName(AI.Model.ChatCompletionsResponseFormatJSON, "ChatCompletionsResponseFormatJson", "java");
 
 @client({
   name: "ChatCompletionsClient",
