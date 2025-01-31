@@ -8,6 +8,7 @@ import "./edgeDeviceMetadata.tsp";
 import "./validatedSolutionRecipes.tsp";
 //import "./cluster.tsp";
 import "./gpus.tsp";
+import "./networkProfile.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

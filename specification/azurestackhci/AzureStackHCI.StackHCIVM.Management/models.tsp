@@ -923,6 +923,10 @@ model NetworkInterfaceProperties {
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is a existing local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the network interface.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -1242,6 +1246,10 @@ model VirtualHardDiskProperties {
   @doc("The format of the actual VHD file [vhd, vhdx]")
   diskFileFormat?: DiskFileFormat;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -1332,6 +1340,21 @@ model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: VirtualHardDisksUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model VirtualHardDisksUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
+  @doc("Size of the disk in GB")
+  diskSizeGB?: int64;
+
+  @doc("Boolean for enabling dynamic sizing on the virtual hard disk")
+  dynamic?: boolean;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1375,6 +1398,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("HTTP Proxy configuration for the VM.")
   httpProxyConfig?: HttpProxyConfiguration;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")

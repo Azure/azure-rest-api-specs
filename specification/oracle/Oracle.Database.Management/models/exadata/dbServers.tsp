@@ -2,6 +2,7 @@ import "../common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Oracle.Database;
@@ -141,6 +142,11 @@ model DbServerProperties {
   @doc("Azure resource provisioning state.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @added(Versions.v20250101_preview)
+  @doc("The compute model of the Exadata Infrastructure")
+  @visibility("read")
+  computeModel?: ComputeModel;
 }
 
 @doc("DbServerProvisioningState enum")

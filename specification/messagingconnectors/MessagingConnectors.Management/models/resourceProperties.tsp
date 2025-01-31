@@ -12,10 +12,14 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Properties of one Azure resource")
-model ResourceProperties {
-  @doc("Properties of one Connector")
-  connectorProperties: ConnectorProperties;
+@doc("Properties of one Azure MessagingConnector resource")
+@discriminator("direction")
+model ConnectorProperties {
+  @doc("Direction of connector")
+  direction: Direction;
+
+  @doc("Max Tasks count of the Connector.")
+  maxTasks: int32;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -40,16 +44,6 @@ union ConnectorProvisioningState {
   Updating: "Updating",
 
   string,
-}
-
-@doc("Basic info for Connector")
-@discriminator("direction")
-model ConnectorProperties {
-  @doc("Direction of connector")
-  direction: Direction;
-
-  @doc("Max Tasks count of the Connector.")
-  maxTasks: int32;
 }
 
 @doc("Base properties for Source Connector")

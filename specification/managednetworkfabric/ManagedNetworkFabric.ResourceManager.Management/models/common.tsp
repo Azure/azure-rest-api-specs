@@ -249,6 +249,14 @@ model AnnotationResource {
   annotation?: string;
 }
 
+@doc("Details of the last operations performed on the resource")
+@added(Versions.v2024_06_15_preview)
+model LastOperationProperties {
+  @doc("Details status of the last operation performed on the resource.")
+  @visibility("read")
+  details?: string;
+}
+
 @doc("Port condition that needs to be matched.")
 model PortCondition {
   @doc("Port type that needs to be matched.")
@@ -917,6 +925,92 @@ union BgpAdministrativeState {
   Enabled: "Enabled",
 
   @doc("BgpAdministrativeState-Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("External Network native IPv4 prefix limit properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv4PrefixLimitProperties {
+  @doc("Prefix limits")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  prefixLimits?: PrefixLimitProperties[];
+}
+
+@doc("External Network native IPv4 prefix limits patch properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv4PrefixLimitPatchProperties {
+  @doc("Prefix limits")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  prefixLimits?: PrefixLimitPatchProperties[];
+}
+
+@doc("External Network native IPv6 prefix limit properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv6PrefixLimitProperties {
+  @doc("Prefix limits")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  prefixLimits?: PrefixLimitProperties[];
+}
+
+@doc("External Network native IPv6 prefix limits patch properties")
+@added(Versions.v2024_06_15_preview)
+model NativeIpv6PrefixLimitPatchProperties {
+  @doc("Prefix limits")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @minItems(1)
+  prefixLimits?: PrefixLimitPatchProperties[];
+}
+
+@doc("Prefix Limit properties.")
+@added(Versions.v2024_06_15_preview)
+model PrefixLimitProperties {
+  @doc("Maximum routes allowed.")
+  maximumRoutes?: int32;
+
+  @doc("Limit at which route prefixes a warning is generate.")
+  threshold?: int32;
+
+  @doc("Idle Time Expiry in seconds, default is 60.")
+  idleTimeExpiry?: int32 = 60;
+}
+
+@doc("Prefix Limit Patch properties.")
+@added(Versions.v2024_06_15_preview)
+model PrefixLimitPatchProperties {
+  @doc("Maximum routes allowed.")
+  maximumRoutes?: int32;
+
+  @doc("Limit at which route prefixes a warning is generate.")
+  softLimit?: int32;
+
+  @doc("Idle time expiry in seconds.")
+  idleTimeExpiry?: int32;
+}
+
+@doc("V4 over V6 BGP session state")
+@added(Versions.v2024_06_15_preview)
+union V4OverV6BgpSessionState {
+  @doc("V4OverV6BgpSessionState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("V4OverV6BgpSessionState-Disabled")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("V6 over V4 BGP session state")
+@added(Versions.v2024_06_15_preview)
+union V6OverV4BgpSessionState {
+  @doc("V6OverV4BgpSessionState-Enabled")
+  Enabled: "Enabled",
+
+  @doc("V6OverV4BgpSessionState-Disabled")
   Disabled: "Disabled",
 
   string,

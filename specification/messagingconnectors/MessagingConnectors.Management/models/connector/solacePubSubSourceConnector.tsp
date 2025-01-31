@@ -16,9 +16,6 @@ model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of SolacePubsubSourceConnector")
   connectorType: ConnectorType.SolacePubsubSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("Solace Pubsub+ connection URI, e.g. tcp://127.0.0.1:55555.")
   connectionUri: url;
 

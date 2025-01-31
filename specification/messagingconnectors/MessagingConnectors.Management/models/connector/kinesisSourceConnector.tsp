@@ -16,9 +16,6 @@ model KinesisSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of KinesisSourceConnector")
   connectorType: ConnectorType.KinesisSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("AccessKeyId for AWS Kinesis Server.")
   awsAccessKeyId: string;
 

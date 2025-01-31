@@ -51,6 +51,10 @@ model PolicyProperties {
 
   @doc("Customization for managed rules (including exclusions and overrides)")
   managedRulesCustomization?: ManagedRulesCustomization;
+
+  @doc("Policy revision. Incremented on each change, starting from 0.")
+  @visibility("read")
+  revision?: int32 = 0;
 }
 
 @doc("Policy resource definition")

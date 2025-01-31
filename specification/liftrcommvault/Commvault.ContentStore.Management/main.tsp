@@ -24,7 +24,7 @@ namespace Commvault.ContentStore;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2024_08_27)
+  @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -55,7 +55,11 @@ interface CloudAccounts {
 }
 
 @doc("Properties specific to Commvault Cloud Account resource")
-model CloudAccountProperties is BaseResourceProperties;
+model CloudAccountProperties is BaseResourceProperties {
+  @doc("SSO URL for the Commvault Cloud Account")
+  @visibility("read")
+  ssoUrl?: string;
+}
 
 @doc("A Commvault Storage Resource")
 @parentResource(CloudAccount)
@@ -360,8 +364,13 @@ model ProtectionGroupProperties {
   @visibility("read")
   protectionStatus: ProtectionStatus; //Check what values can it have
 
-  @doc("Details of the user.")
-  user: UserDetails;
+  @doc("The number of ProtectedItems under the Protection Group")
+  @visibility("read")
+  numberOfProtectedItems: int32;
+
+  @doc("The Commvault Protection Group backup time")
+  @visibility("read")
+  lastBackUpTime: int64;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
@@ -370,11 +379,23 @@ model ProtectionGroupProperties {
 
 @doc("The Protection Status")
 union ProtectionStatus {
-  @doc("The protection group is active")
-  Active: "active",
+  @doc("The protection group status is All")
+  All: "all",
 
-  @doc("The protection group is inactive")
-  Inactive: "inactive",
+  @doc("The protection group status is Protected")
+  Protected: "protected",
+
+  @doc("The protection group status is Not Protected")
+  Not_Protected: "not_protected",
+
+  @doc("The protection group status is Pending")
+  Pending: "pending",
+
+  @doc("The protection group status is backed_up_with_error")
+  Backed_up_with_error: "backed_up_with_error",
+
+  @doc("The protection group status is discovered")
+  Discovered: "discovered",
 
   string,
 }
@@ -445,15 +466,6 @@ union RuleProperty {
   @doc("The status of the rule")
   Status: "status",
 
-  @doc("The power state of the rule")
-  PowerState: "powerState",
-
-  @doc("The virtual machine of the rule")
-  VirtualMachine: "virtualMachine",
-
-  @doc("The virtual machine pattern of the rule")
-  VirtualMachinePattern: "virtualMachinePattern",
-
   string,
 }
 
@@ -514,7 +526,7 @@ interface ProtectionGroups {
 @parentResource(ProtectionGroup)
 model ProtectedItem is ProxyResource<ProtectedItemProperties> {
   @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
-  @doc("The protectedItem name")
+  @doc("The protectedItem Id, name of 2 protected items can be same under a PG if they belong to different resource group or even different data source types VM/DB/AKS, etc; and name is mandatory in Azure Typespec, hence using name parameter for id in Commvault In case of Vm it will be vmGuid")
   @segment("protectedItems")
   @key("protectedItemName")
   @visibility("read")
@@ -525,13 +537,157 @@ model ProtectedItem is ProxyResource<ProtectedItemProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("The properties of Commvault Protected Item")
 model ProtectedItemProperties {
+  @doc("The Name of the commvault protected item")
+  @visibility("read")
+  resourceName: "string";
+
   @doc("The Commvault Protected Item backup time")
   @visibility("read")
-  lastBackUpTime: utcDateTime;
+  lastBackUpTime: int64;
+
+  @doc("The resource group of the protected item")
+  @visibility("read")
+  resourceGroup: string;
+
+  @doc("The location of the protected item")
+  @visibility("read")
+  location: string;
+}
+
+@doc("Types of Restore Supported")
+union RestoreType {
+  @doc("Azure In place Restore")
+  None: "NONE",
+
+  @doc("Azure Out of Place")
+  VirtualMachine: "VIRTUAL_MACHINE",
+
+  @doc("Azure Attach disk restore to existing VM")
+  DiskAttach: "DISK_ATTACH",
+
+  string,
+}
+
+@doc("The properties of VMTag for Restore Request")
+model VmTag {
+  @doc("The name of VM tag.")
+  name: string;
+
+  @doc("The value of VM tag.")
+  value: string;
+}
+
+@doc("The properties of information of a VM")
+model VmInfo {
+  @doc("The GUID of VM to be restored.")
+  @visibility("read", "create")
+  sourceVmGuid: string;
+
+  @doc("The storage account to be used for restore.")
+  @visibility("read", "create")
+  storageAccountId: string;
+
+  @doc("The identifier to check if VM needs to be powered on.")
+  @visibility("read", "create")
+  powerOnVmAfterRestore?: boolean;
+
+  @doc("The name of the VM.")
+  @visibility("read", "create")
+  name?: string;
+
+  @doc("The resource group of the VM.")
+  @visibility("read", "create")
+  resourceGroup?: string;
+
+  @doc("The region of the VM.")
+  @visibility("read", "create")
+  region?: string;
+
+  @doc("The network Id of the VM.")
+  @visibility("read", "create")
+  networkId?: string;
+
+  @doc("The subnet Id of the VM.")
+  @visibility("read", "create")
+  subnetId?: string;
+
+  @doc("The identifier to check if to attach and swap disk of the VM.")
+  @visibility("read", "create")
+  attachAndSwapOsDisk?: boolean;
+
+  @doc("The GUID of target VM used in DISK ATTACH.")
+  @visibility("read", "create")
+  targetVmGuid?: string;
+
+  @doc("The vmTag of the VM.")
+  @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  vmtag?: VmTag[];
+}
+
+@doc("The properties of VmDestinationInfo")
+model VmDestinationInfo {
+  @doc("List of information on VMs")
+  @visibility("read", "create")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  vmInfoList: VmInfo[];
+}
+
+@doc("The properties of RestoreProtectionItemRequest")
+model RestoreProtectionItemRequest {
+  @doc("Check whether inplace or out of place restore.")
+  @visibility("read", "create")
+  inPlaceRestore: boolean;
+
+  @doc("Type of Restore")
+  @visibility("read", "create")
+  restoreType?: RestoreType;
+
+  @doc("The vm destination details of the VM.")
+  @visibility("read", "create")
+  vmDestinationInfo: VmDestinationInfo;
 }
 
 @armResourceOperations
 interface ProtectedItems {
   get is ArmResourceRead<ProtectedItem>;
   listByProtectionGroup is ArmResourceListByParent<ProtectedItem>;
+
+  @doc("Limits used for creation of resources.")
+  @armResourceAction(ProtectedItem)
+  @action("getRestorePoints")
+  @post
+  getRestorePoints(
+    ...ResourceInstanceParameters<ProtectedItem>,
+  ): ArmResponse<RestorePoints> | ErrorResponse;
+
+  @doc("Restore resource for a protected item.")
+  @armResourceAction(ProtectedItem)
+  @action("restore")
+  @post
+  restore(
+    ...ResourceInstanceParameters<ProtectedItem>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: RestoreProtectionItemRequest,
+  ): ArmResponse<RestoreProtectionItemResponse> | ErrorResponse;
+}
+
+@doc("Restore points of a Protected Item")
+model RestorePoints {
+  @doc("The Commvault Protected Item Restore points")
+  @visibility("read")
+  restoreTimes: int64[];
+}
+
+@doc("Restore resource response for a Protected Item")
+model RestoreProtectionItemResponse {
+  @doc("The Commvault response for taskId")
+  @visibility("read")
+  taskId: int32;
+
+  @doc("The jobIds returned from Commvault.")
+  @visibility("read")
+  jobIds: string[];
 }

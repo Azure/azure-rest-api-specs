@@ -58,6 +58,9 @@
                 "dscpMarkings": [
                   "32"
                 ],
+                "protocolNeighbors": [
+                  "example-neighbor"
+                ],
                 "portCondition": {
                   "portType": "SourcePort",
                   "layer4Protocol": "TCP",
@@ -69,6 +72,11 @@
                   ],
                   "flags": [
                     "established"
+                  ]
+                },
+                "icmpConfiguration": {
+                  "icmpTypes": [
+                    "echo"
                   ]
                 }
               }
@@ -125,11 +133,6 @@
         "deviceRole": "CE",
         "globalAccessControlListActions": {
           "enableCount": "True"
-        },
-        "icmpConfiguration": {
-          "icmpTypes": [
-            "echo"
-          ]
         }
       },
       "tags": {
@@ -192,6 +195,9 @@
                   "dscpMarkings": [
                     "32"
                   ],
+                  "protocolNeighbors": [
+                    "example-neighbor"
+                  ],
                   "portCondition": {
                     "portType": "SourcePort",
                     "layer4Protocol": "TCP",
@@ -203,6 +209,11 @@
                     ],
                     "flags": [
                       "established"
+                    ]
+                  },
+                  "icmpConfiguration": {
+                    "icmpTypes": [
+                      "echo"
                     ]
                   }
                 }
@@ -261,10 +272,8 @@
           "globalAccessControlListActions": {
             "enableCount": "True"
           },
-          "icmpConfiguration": {
-            "icmpTypes": [
-              "echo"
-            ]
+          "lastOperation": {
+            "details": "Succeeded"
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
@@ -293,10 +302,6 @@
       },
       "body": {
         "properties": {
-          "lastSyncedTime": "2023-06-17T08:56:23.203Z",
-          "configurationState": "Succeeded",
-          "provisioningState": "Accepted",
-          "administrativeState": "Enabled",
           "annotation": "annotation",
           "configurationType": "File",
           "aclsUrl": "https://ACL-Storage-URL",
@@ -308,34 +313,6 @@
               "ipAddressType": "IPv4",
               "matchConditions": [
                 {
-                  "etherTypes": [
-                    "0x1"
-                  ],
-                  "fragments": [
-                    "0xff00-0xffff"
-                  ],
-                  "ipLengths": [
-                    "4094-9214"
-                  ],
-                  "ttlValues": [
-                    "23"
-                  ],
-                  "dscpMarkings": [
-                    "32"
-                  ],
-                  "portCondition": {
-                    "flags": [
-                      "established"
-                    ],
-                    "portType": "SourcePort",
-                    "layer4Protocol": "TCP",
-                    "ports": [
-                      "1-20"
-                    ],
-                    "portGroupNames": [
-                      "example-portGroup"
-                    ]
-                  },
                   "protocolTypes": [
                     "TCP"
                   ],
@@ -358,6 +335,42 @@
                     ],
                     "ipGroupNames": [
                       "example-ipGroup"
+                    ]
+                  },
+                  "etherTypes": [
+                    "0x1"
+                  ],
+                  "fragments": [
+                    "0xff00-0xffff"
+                  ],
+                  "ipLengths": [
+                    "4094-9214"
+                  ],
+                  "ttlValues": [
+                    "23"
+                  ],
+                  "dscpMarkings": [
+                    "32"
+                  ],
+                  "protocolNeighbors": [
+                    "example-neighbor"
+                  ],
+                  "portCondition": {
+                    "portType": "SourcePort",
+                    "layer4Protocol": "TCP",
+                    "ports": [
+                      "1-20"
+                    ],
+                    "portGroupNames": [
+                      "example-portGroup"
+                    ],
+                    "flags": [
+                      "established"
+                    ]
+                  },
+                  "icmpConfiguration": {
+                    "icmpTypes": [
+                      "echo"
                     ]
                   }
                 }
@@ -410,16 +423,18 @@
               ]
             }
           ],
+          "lastSyncedTime": "2023-06-17T08:56:23.203Z",
           "aclType": "ControlPlaneTrafficPolicy",
           "deviceRole": "CE",
           "globalAccessControlListActions": {
             "enableCount": "True"
           },
-          "icmpConfiguration": {
-            "icmpTypes": [
-              "echo"
-            ]
-          }
+          "lastOperation": {
+            "details": "Succeeded"
+          },
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
         },
         "tags": {
           "keyId": "keyValue"

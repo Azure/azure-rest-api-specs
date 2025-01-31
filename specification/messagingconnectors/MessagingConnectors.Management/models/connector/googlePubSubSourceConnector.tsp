@@ -16,9 +16,6 @@ model GooglePubSubSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of GooglePubSubSourceConnector")
   connectorType: ConnectorType.GooglePubSubSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("Google Cloud project ID where the Pub/Sub instance resides, assigned by GCP.")
   projectId: string;
 

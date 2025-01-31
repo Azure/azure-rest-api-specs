@@ -41,7 +41,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
-  - [`Swagger SpellCheck`](#swagger-spellcheck)
+  - [`Spell Check`](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
@@ -92,7 +92,6 @@ If you have an issue or with any of checks listed in the first column of the tab
 | `SDK azure-sdk-for-java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
 | `SDK azure-sdk-for-js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
 | `SDK azure-sdk-for-net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
-| `SDK azure-sdk-for-net-track2`    | Wei Hu         | [live1206](https://github.com/live1206)                       |
 | `SDK azure-sdk-for-python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
@@ -113,7 +112,7 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 ### If an expected APIView was not generated, follow the step below to troubleshoot.
 
 - On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
-- Investigate the CI job for the languge with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languges are generated in their respective language jobs in the `SDK Automation` stage.
+- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
 - Ensure that all previous checks in the job are green before proceeding.
 
 ### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
@@ -247,35 +246,37 @@ oav validate-spec <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
-## `Swagger SpellCheck`
+## Spell Check
 
-If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
-add to your existing section or create a new section for your specific spec or service family if the work is more generally used in lots of files under your service.
+If you receive a spelling failure, first try to fix the spelling in source.
 
-``` yaml
- "overrides": [
-    ... example of specific file override
-    {
-        "filename": "**/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json",
-        "words": [
-            "saskey"
-        ]
-    }
-    ... example of specific service family override
-    {
-        "filename": "**/specification/cognitiveservices/**/*.json",
-        "words": [
-            "flac",
-            "mpga"
-        ]
-    }
+If there are new words that need to be supported for your service, add the word to the override list in the `words` list in
+the `specification/<service>/cspell.yaml` file for your service. Specific files can also be overridden using the
+`override` field in your service's `cspell.yaml` file (see example below).
+
+If the `specification/<service>/cspell.yaml` file does not exist, create it using the example below and set the `words`
+and `overrides` fields to the words that need to be suppressed. The `import` field is *required*.
+
+For example (note the words list is sorted alphabetically):
+
+```yaml
+import:
+  - ../../cspell.yaml
+words:
+  - aardvark
+  - zoology
+
+# Optional overrides example for words in a specific file
+overrides: 
+  - filename: '**/specification/contosowidgetmanager/somefile.yaml'
+    words:
+      - aardwolf
+      - zoo
 ```
 
-Words are case-insensitive so use lower case for the word list.
+Spell checking is *case-insensitive* so you only need to add a word once in lower-case. Try to kept the word list sorted for easier discovery.
 
-If you need more information on see [cspell configuration](https://cspell.org/configuration/).
-
-*Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
+For more information see [cspell configuration](https://cspell.org/configuration/).
 
 ## `TypeSpec Validation`
 

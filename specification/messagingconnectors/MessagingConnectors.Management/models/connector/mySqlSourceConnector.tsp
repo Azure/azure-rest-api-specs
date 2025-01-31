@@ -16,9 +16,6 @@ model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of MySqlSourceConnector")
   connectorType: ConnectorType.MySqlSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("HostName for MySql.")
   hostName: string;
 

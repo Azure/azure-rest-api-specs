@@ -60,9 +60,29 @@
               "multiplier": 10
             },
             "ingressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
-            "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
             "bmpConfiguration": {
               "configurationState": "Enabled"
+            },
+            "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+            "v4OverV6BgpSession": "Enabled",
+            "v6OverV4BgpSession": "Enabled",
+            "nativeIpv4PrefixLimit": {
+              "prefixLimits": [
+                {
+                  "maximumRoutes": 14,
+                  "threshold": 17,
+                  "idleTimeExpiry": 7
+                }
+              ]
+            },
+            "nativeIpv6PrefixLimit": {
+              "prefixLimits": [
+                {
+                  "maximumRoutes": 14,
+                  "threshold": 17,
+                  "idleTimeExpiry": 7
+                }
+              ]
             }
           },
           "staticRouteConfiguration": {
@@ -87,6 +107,9 @@
                 ]
               }
             ]
+          },
+          "lastOperation": {
+            "details": "Succeeded"
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",

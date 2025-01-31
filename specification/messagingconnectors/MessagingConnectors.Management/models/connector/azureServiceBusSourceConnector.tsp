@@ -16,9 +16,6 @@ model AzureServiceBusSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of AzureServiceBusSource")
   connectorType: ConnectorType.AzureServiceBusSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("Name for topic Or Queue.")
   topicOrQueueName: string;
 

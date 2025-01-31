@@ -1,4 +1,5 @@
 import "./common.tsp";
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -25,6 +26,11 @@ model NeighborGroupProperties {
     }
   ]>[];
 
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
+
   @doc("The provisioning state of the resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -46,9 +52,6 @@ model NeighborGroupDestinationPatch is NeighborGroupDestination;
 
 @doc("The Neighbor Group Patch definition.")
 model NeighborGroupPatch {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...TagsUpdate;
 
   @doc("Neighbor Group Patch properties.")

@@ -19,25 +19,26 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ## Suppression
 
 ### AutoRest v3 Suppressions
+
 ``` yaml
 suppressions:
     
-  - code: PathForPutOperation
-    reason: Design forces us to not have resources under resource group but only have under subscription. proxy resources
+  - code: GuidUsage
+    reason: this is for getting a subscriptionId from customers
     from: impact.json
-    where:
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"]
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"]
-    
-  - code: PutRequestResponseSchemeArm
-    reason: False positive both request and response are same. proxy resources
-    from: impact.json
-    where:
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/workloadImpacts/{workloadImpactName}"].put
-        - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Impact/topologyImpacts/{topologyImpactName}"].put
-  
-```
 
+  - code: AvoidAnonymousTypes
+    reason: this is for associating user assigned managed identity with connectors resource
+    from: impact.json
+
+  - code: EnumInsteadOfBoolean
+    reason: this is the right data type for the given context.
+    from: impact.json
+
+  - code: AvoidAdditionalProperties
+    reason: this is needed as its the extensible property bag for storing custom metadata associated with an impact.
+    from: impact.json
+```
 
 ## Configuration
 
@@ -48,7 +49,17 @@ These are the global settings for the impact.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-01-preview
+tag: package-2025-01-01-preview
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - Microsoft.Impact/preview/2025-01-01-preview/impact.json
+tag: package-2025-01-01-preview
 ```
 
 ### Tag: package-2024-05-01-preview
@@ -117,6 +128,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)

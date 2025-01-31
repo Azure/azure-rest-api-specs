@@ -16,9 +16,6 @@ model ConfluentSourceConnectorProperties extends DataSourceProperties {
   @doc("Type of ConfluentSourceConnector")
   connectorType: ConnectorType.ConfluentSource;
 
-  @doc("Direction of the Source Connector.")
-  connectorDirection?: Direction = Direction.Source;
-
   @doc("bootstrapServers of the Confluent server.")
   bootstrapServers: string;
 
