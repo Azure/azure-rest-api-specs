@@ -117,14 +117,14 @@ model TestRunConfig {
   @maxValue(100)
   retryCount?: int32;
 
-  @doc("Interval between repeated test runs.")
+  @doc("The number of times to repeat each test, useful for debugging flaky tests.")
   @visibility("read", "create")
   @maxValue(10000)
   repeatEach?: int32;
 
-  @doc("Number of worker instances.")
+  @doc("Number of worker instances (https://playwright.dev/docs/test-parallel#worker-processes).")
   @visibility("read", "create")
-  @maxValue(1000)
+  @maxValue(10000000)
   workersCount?: int32;
 
   @doc("Details of the test framework used.")
@@ -135,7 +135,7 @@ model TestRunConfig {
   @visibility("read", "create")
   shardDetails?: ShardDetails;
 
-  @doc("Timeout duration for test execution.")
+  @doc("Playwright test timeout.")
   @visibility("read", "create")
   timeoutInMs: int64;
 
@@ -145,24 +145,24 @@ model TestRunConfig {
   @maxLength(200)
   testType?: string = "WebTest";
 
-  @doc("Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'")
+  @doc("Programming language used for the test SDK.")
   @visibility("read", "create")
   testSdkLanguage: TestSdkLanguage;
 
   //TODO pattern check
-  @doc("Version of the reporter package.")
+  @doc("Version of the service package.")
   @visibility("read", "create")
   reporterPackageVersion?: string;
 }
 
-@doc("Supported Runner Types for tests")
+@doc("Supported runners for test reporting")
 union RunnerType {
   string,
 
-  @doc("MsTest")
+  @doc("MsTest runner. Learn more [here].(https://learn.microsoft.com/dotnet/core/testing/unit-testing-mstest-runner-intro)")
   "MsTest",
 
-  @doc("Nunit")
+  @doc("Nunit. Learn more [here](https://nunit.org)")
   "Nunit",
 
   @doc("Playwright")
@@ -412,7 +412,7 @@ model ShardExecutionDetails {
 
   @doc("number of workers used by playwright client.")
   @visibility("read", "create")
-  @maxValue(1000)
+  @maxValue(10000000)
   workersCount: int32;
 
   @doc("Flag indicating if upload is completed for the shard.")
