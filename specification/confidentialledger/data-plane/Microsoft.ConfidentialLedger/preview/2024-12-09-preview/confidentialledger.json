@@ -931,6 +931,18 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The user defined function is updated.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The transaction id at which this write will become durable."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserDefinedFunction"
+            }
+          },
           "201": {
             "description": "The user defined function is created.",
             "headers": {
