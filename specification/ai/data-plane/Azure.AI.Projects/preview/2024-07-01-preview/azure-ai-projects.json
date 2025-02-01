@@ -8813,7 +8813,8 @@
       "enum": [
         "ApiKey",
         "AAD",
-        "SAS"
+        "SAS",
+        "None"
       ],
       "x-ms-enum": {
         "name": "AuthenticationType",
@@ -8833,6 +8834,11 @@
             "name": "SAS",
             "value": "SAS",
             "description": "Shared Access Signature (SAS) authentication"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No authentication"
           }
         ]
       }
@@ -9387,6 +9393,16 @@
         }
       ],
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "InternalConnectionPropertiesNoAuth": {
+      "type": "object",
+      "description": "Connection properties for connections with no authentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InternalConnectionProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
     },
     "InternalConnectionPropertiesSASAuth": {
       "type": "object",
