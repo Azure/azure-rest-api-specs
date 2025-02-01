@@ -1,7 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./AppAttachPackage.tsp";
-import "./PrivateEndpointConnectionWithSystemData.tsp";
+import "./PrivateEndpointConnection.tsp";
 import "./Workspace.tsp";
 
 using TypeSpec.Rest;

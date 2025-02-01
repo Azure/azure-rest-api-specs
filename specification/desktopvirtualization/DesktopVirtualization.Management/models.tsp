@@ -11,6 +11,83 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DesktopVirtualization;
 
 /**
+ * The security type used by virtual machine in hostpool session host. Default is Standard.
+ */
+union SecurityType {
+  string,
+
+  /**
+   * Standard security protocol. No additional parameters
+   */
+  Standard: "Standard",
+
+  /**
+   * TrustedLaunch allows for secure boot and vTPM
+   */
+  TrustedLaunch: "TrustedLaunch",
+
+  /**
+   * Confidential Virtual Machine security protocol
+   */
+  ConfidentialVM: "ConfidentialVM",
+}
+
+/**
+ * The type of domain join done by the virtual machine.
+ */
+union JoinType {
+  string,
+
+  /**
+   * Using microsoft active directory.
+   */
+  ActiveDirectory: "ActiveDirectory",
+
+  /**
+   * Using microsoft azure active directory.
+   */
+  AzureActiveDirectory: "AzureActiveDirectory",
+}
+
+/**
+ * The type of image session hosts use in the hostpool.
+ */
+union ImageType {
+  string,
+
+  /**
+   * Using default marketplace images offered by Azure Marketplace.
+   */
+  Marketplace: "Marketplace",
+
+  /**
+   * Using a custom image.
+   */
+  Custom: "Custom",
+}
+/**
+ * The disk type used by virtual machine in hostpool session host.
+ */
+union DiskType {
+  string,
+
+  /**
+   * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
+   */
+  Standard_LRS: "Standard_LRS",
+
+  /**
+   * Premium SSD locally redundant storage. Best for production and performance sensitive workloads.
+   */
+  Premium_LRS: "Premium_LRS",
+
+  /**
+   * Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test.
+   */
+  StandardSSD_LRS: "StandardSSD_LRS",
+}
+
+/**
  * The current provisioning state.
  */
 union ProvisioningState {
@@ -1229,6 +1306,421 @@ model Resource {
   systemData?: SystemData;
 }
 
+/**
+ * Network information.
+ */
+model NetworkInfoProperties {
+  //TODO: Add format armID?
+  /**
+   * The resource ID of the subnet.
+   */
+  subnetId: string;
+
+  /**
+   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
+   */
+  securityGroupId: string;
+}
+
+/**
+ * Network information.
+ */
+model NetworkInfoPatchProperties {
+  //TODO: Add format armID?
+  /**
+   * The resource ID of the subnet.
+   */
+  subnetId: string;
+
+  /**
+   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
+   */
+  securityGroupId: string;
+}
+
+/**
+ * Disk information.
+ */
+model DiskInfoProperties {
+  /**
+   * The disk type used by virtual machine in hostpool session host.
+   */
+  type: DiskType;
+}
+
+/**
+ * Disk information.
+ */
+model DiskInfoPatchProperties {
+  /**
+   * The disk type used by virtual machine in hostpool session host.
+   */
+  type: DiskType;
+}
+
+/**
+ * Marketplace image information.
+ */
+model MarketplaceInfoProperties {
+  /**
+   * The offer of the image.
+   */
+  offer: string;
+
+  /**
+   * The publisher of the image.
+   */
+  publisher: string;
+
+  /**
+   * The SKU of the image.
+   */
+  sku: string;
+
+  /**
+   * The version of the image.
+   */
+  exactVersion: string;
+}
+
+/**
+ * Marketplace image information.
+ */
+model MarketplaceInfoPatchProperties {
+  /**
+   * The offer of the image.
+   */
+  offer: string;
+
+  /**
+   * The publisher of the image.
+   */
+  publisher: string;
+
+  /**
+   * The SKU of the image.
+   */
+  sku: string;
+
+  /**
+   * The version of the image.
+   */
+  exactVersion: string;
+}
+
+/**
+ * Custom image information.
+ */
+model CustomInfoProperties {
+  /**
+   * The resource ID of the image.
+   */
+  //TODO: add format armID
+  imageResourceId: string;
+}
+
+/**
+ * Custom image information.
+ */
+model CustomInfoPatchProperties {
+  /**
+   * The resource ID of the image.
+   */
+  //TODO: add format armID
+  imageResourceId: string;
+}
+
+/**
+ * Credentials kept in the keyvault.
+ */
+model KeyVaultCredentialProperties {
+  /**
+   * The uri to access the secret that the username is stored in.
+   */
+  //TODO: add format uri
+  usernameKeyVaultSecretUri: string;
+
+  /**
+   * The uri to access the secret that the password is stored in.
+   */
+  //TODO: add format uri
+  passwordKeyVaultSecretUri: string;
+}
+
+/**
+ * Credentials kept in the keyvault.
+ */
+model KeyVaultCredentialPatchProperties {
+  /**
+   * The uri to access the secret that the username is stored in.
+   */
+  //TODO: add format uri
+  usernameKeyVaultSecretUri: string;
+
+  /**
+   * The uri to access the secret that the password is stored in.
+   */
+  //TODO: add format uri
+  passwordKeyVaultSecretUri: string;
+}
+
+/**
+ * Active directory info. Only one should be populated based on the join type.
+ */
+model ActiveDirectoryInfoProperties {
+  /**
+   * Credentials needed to create the virtual machine.
+   */
+  domainCredentials: KeyVaultCredentialProperties;
+
+  /**
+   * The organizational unit(OU) path.
+   */
+  ouPath: string;
+
+  /**
+   * The domain a virtual machine connected to a hostpool will join.
+   */
+  domainName: string;
+}
+
+/**
+ * Active directory info. Only one should be populated based on the join type
+ */
+model ActiveDirectoryInfoPatchProperties {
+  /**
+   * Credentials needed to create the virtual machine.
+   */
+  domainCredentials: KeyVaultCredentialPatchProperties;
+}
+
+/**
+ * Azure Active directory info. Only one should be populated based on the join type
+ */
+model AzureActiveDirectoryInfoProperties {
+  /**
+   * The Mobile Device Management(MDM) guid.
+   */
+  mdmProviderGuid: string;
+}
+
+/**
+ * Domain configurations of session hosts.
+ */
+model DomainInfoProperties {
+  /**
+   * The type of domain join done by the virtual machine.
+   */
+  joinType: JoinType;
+
+  /**
+   * Active directory info. Only one should be populated based on the join type.
+   */
+  activeDirectoryInfo: ActiveDirectoryInfoProperties;
+
+  /**
+   * Azure active directory info. Only one should be populated based on the join type.
+   */
+  azureActiveDirectoryInfo: AzureActiveDirectoryInfoProperties;
+}
+
+/**
+ * Domain configurations of session hosts.
+ */
+model DomainInfoPatchProperties {
+  /**
+   * Active directory info. Only one should be populated based on the join type.
+   */
+  activeDirectoryInfo: ActiveDirectoryInfoProperties;
+}
+
+/**
+ * Image configurations of session host in a HostPool
+ */
+model ImageInfoProperties {
+  /**
+   * The type of image session hosts use in the hostpool.
+   */
+  type: ImageType;
+
+  /**
+   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
+   */
+  marketplaceInfo: MarketplaceInfoProperties;
+
+  /**
+   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
+   */
+  customInfo: CustomInfoProperties;
+}
+
+/**
+ * Security Information.
+ */
+model SecurityInfoProperties {
+  /**
+   * The security type used by virtual machine in hostpool session host. Default is Standard.
+   */
+  type: SecurityType;
+
+  /**
+   * Whether to use secureBoot on the virtual machine.
+   */
+  secureBootEnabled: boolean;
+
+  /**
+   * Whether to use vTPM on the virtual machine.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is acronym in service"
+  vTPMEnabled: boolean;
+}
+
+/**
+ * Security Information.
+ */
+model SecurityInfoPatchProperties {
+  /**
+   * The security type used by virtual machine in hostpool session host. Default is Standard.
+   */
+  type: SecurityType;
+
+  /**
+   * Whether to use secureBoot on the virtual machine.
+   */
+  secureBootEnabled: boolean;
+
+  /**
+   * Whether to use vTPM on the virtual machine.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTPM is an acronym used by service"
+  vTPMEnabled: boolean;
+}
+
+/**
+ * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor
+ */
+model BootDiagnosticsInfoProperties {
+  /**
+   * Whether boot diagnostics should be enabled on the Virtual Machine.
+   */
+  enabled: boolean;
+
+  /**
+   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
+   */
+  //TODO: format Uri
+  storageUri: string;
+}
+
+/**
+ * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor
+ */
+model BootDiagnosticsInfoPatchProperties {
+  /**
+   * Whether boot diagnostics should be enabled on the Virtual Machine.
+   */
+  enabled: boolean;
+
+  /**
+   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
+   */
+  //TODO: format Uri
+  storageUri: string;
+}
+
+/**
+ * List of ActiveSessionHostConfiguration definitions.
+ */
+model ActiveSessionHostConfigurationList
+  is Azure.Core.Page<ActiveSessionHostConfiguration>;
+
+/**
+ * Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+model ActiveSessionHostConfigurationProperties {
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility("read")
+  version: utcDateTime;
+
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration
+   */
+  friendlyName?: string;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  vmTags: string[];
+
+  /**
+   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
+   */
+  vmLocation: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZone: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo: NetworkInfoProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId: string;
+
+  /**
+   * Disk information.
+   */
+  diskInfo: DiskInfoProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl: string;
+
+  /**
+   * Image configurations of the HostPool.
+   */
+  imageInfo: ImageInfoProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo: DomainInfoProperties;
+
+  /**
+   * Security information.
+   */
+  securityInfo: SecurityInfoProperties;
+
+  /**
+   * Local Admin credentials for session hosts.
+   */
+  vmAdminCredentials: KeyVaultCredentialProperties;
+
+  /**
+   * Boot Diagnostics information.
+   */
+  bootDiagnosticsInfo: BootDiagnosticsInfoProperties;
+}
 /**
  * List of ApplicationGroup definitions.
  */

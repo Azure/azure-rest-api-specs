@@ -92,6 +92,9 @@
     },
     {
       "name": "MSIXPackages"
+    },
+    {
+      "name": "ActiveSessionHostConfigurations"
     }
   ],
   "paths": {
@@ -1816,6 +1819,130 @@
         "x-ms-examples": {
           "HostPool_Delete": {
             "$ref": "./examples/HostPools_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations": {
+      "get": {
+        "operationId": "ActiveSessionHostConfigurations_ListByHostPool",
+        "tags": [
+          "ActiveSessionHostConfigurations"
+        ],
+        "description": "Operation to list the ActiveSessionHostConfigurations associated with the HostPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSessionHostConfigurationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/{activeSessionHostConfigurationName}": {
+      "get": {
+        "operationId": "ActiveSessionHostConfigurations_Get",
+        "tags": [
+          "ActiveSessionHostConfigurations"
+        ],
+        "description": "Get a ActiveSessionHostConfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "activeSessionHostConfigurationName",
+            "in": "path",
+            "description": "The name of the ActiveSessionHostConfiguration within the specified ActiveSessionHostConfiguration group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSessionHostConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -4993,6 +5120,193 @@
     }
   },
   "definitions": {
+    "ActiveDirectoryInfoProperties": {
+      "type": "object",
+      "description": "Active directory info. Only one should be populated based on the join type.",
+      "properties": {
+        "domainCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "description": "Credentials needed to create the virtual machine."
+        },
+        "ouPath": {
+          "type": "string",
+          "description": "The organizational unit(OU) path."
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The domain a virtual machine connected to a hostpool will join."
+        }
+      },
+      "required": [
+        "domainCredentials",
+        "ouPath",
+        "domainName"
+      ]
+    },
+    "ActiveSessionHostConfiguration": {
+      "type": "object",
+      "description": "Schema for ActiveSessionHostConfiguration properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActiveSessionHostConfigurationProperties",
+          "description": "Detailed properties for ActiveSessionHostConfiguration",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ActiveSessionHostConfigurationList": {
+      "type": "object",
+      "description": "List of ActiveSessionHostConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ActiveSessionHostConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/ActiveSessionHostConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ActiveSessionHostConfigurationProperties": {
+      "type": "object",
+      "description": "Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name to describe this version of the SessionHostConfiguration"
+        },
+        "vmTags": {
+          "type": "array",
+          "description": "Hashtable that lists key/value pair tags to apply to the VMs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The Location for the session host to be created in. It will default to the location of the hostpool if not provided."
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names",
+          "maxLength": 11
+        },
+        "availabilityZone": {
+          "type": "array",
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3].",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6"
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationScriptUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of the HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/SecurityInfoProperties",
+          "description": "Security information."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialProperties",
+          "description": "Local Admin credentials for session hosts."
+        },
+        "bootDiagnosticsInfo": {
+          "$ref": "#/definitions/BootDiagnosticsInfoProperties",
+          "description": "Boot Diagnostics information."
+        }
+      },
+      "required": [
+        "version",
+        "vmTags",
+        "vmLocation",
+        "vmResourceGroup",
+        "vmNamePrefix",
+        "availabilityZone",
+        "networkInfo",
+        "vmSizeId",
+        "diskInfo",
+        "customConfigurationScriptUrl",
+        "imageInfo",
+        "domainInfo",
+        "securityInfo",
+        "vmAdminCredentials",
+        "bootDiagnosticsInfo"
+      ]
+    },
     "AgentUpdatePatchProperties": {
       "type": "object",
       "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
@@ -5684,6 +5998,37 @@
         ]
       }
     },
+    "AzureActiveDirectoryInfoProperties": {
+      "type": "object",
+      "description": "Azure Active directory info. Only one should be populated based on the join type",
+      "properties": {
+        "mdmProviderGuid": {
+          "type": "string",
+          "description": "The Mobile Device Management(MDM) guid."
+        }
+      },
+      "required": [
+        "mdmProviderGuid"
+      ]
+    },
+    "BootDiagnosticsInfoProperties": {
+      "type": "object",
+      "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
+        },
+        "storageUri": {
+          "type": "string",
+          "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
+        }
+      },
+      "required": [
+        "enabled",
+        "storageUri"
+      ]
+    },
     "CommandLineSetting": {
       "type": "string",
       "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.",
@@ -5713,6 +6058,19 @@
           }
         ]
       }
+    },
+    "CustomInfoProperties": {
+      "type": "object",
+      "description": "Custom image information.",
+      "properties": {
+        "imageResourceId": {
+          "type": "string",
+          "description": "The resource ID of the image."
+        }
+      },
+      "required": [
+        "imageResourceId"
+      ]
     },
     "DayOfWeek": {
       "type": "string",
@@ -5881,6 +6239,72 @@
           }
         ]
       }
+    },
+    "DiskInfoProperties": {
+      "type": "object",
+      "description": "Disk information.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DiskType",
+          "description": "The disk type used by virtual machine in hostpool session host."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DiskType": {
+      "type": "string",
+      "description": "The disk type used by virtual machine in hostpool session host.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "DiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+          },
+          {
+            "name": "StandardSSD_LRS",
+            "value": "StandardSSD_LRS",
+            "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+          }
+        ]
+      }
+    },
+    "DomainInfoProperties": {
+      "type": "object",
+      "description": "Domain configurations of session hosts.",
+      "properties": {
+        "joinType": {
+          "$ref": "#/definitions/JoinType",
+          "description": "The type of domain join done by the virtual machine."
+        },
+        "activeDirectoryInfo": {
+          "$ref": "#/definitions/ActiveDirectoryInfoProperties",
+          "description": "Active directory info. Only one should be populated based on the join type."
+        },
+        "azureActiveDirectoryInfo": {
+          "$ref": "#/definitions/AzureActiveDirectoryInfoProperties",
+          "description": "Azure active directory info. Only one should be populated based on the join type."
+        }
+      },
+      "required": [
+        "joinType",
+        "activeDirectoryInfo",
+        "azureActiveDirectoryInfo"
+      ]
     },
     "ExpandMSIXImage": {
       "type": "object",
@@ -6535,6 +6959,53 @@
         ]
       }
     },
+    "ImageInfoProperties": {
+      "type": "object",
+      "description": "Image configurations of session host in a HostPool",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The type of image session hosts use in the hostpool."
+        },
+        "marketplaceInfo": {
+          "$ref": "#/definitions/MarketplaceInfoProperties",
+          "description": "The values to uniquely identify a marketplace image. Only one should be populated based on the image type."
+        },
+        "customInfo": {
+          "$ref": "#/definitions/CustomInfoProperties",
+          "description": "The values to uniquely identify a custom image. Only one should be populated based on the image type."
+        }
+      },
+      "required": [
+        "type",
+        "marketplaceInfo",
+        "customInfo"
+      ]
+    },
+    "ImageType": {
+      "type": "string",
+      "description": "The type of image session hosts use in the hostpool.",
+      "enum": [
+        "Marketplace",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "ImageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Marketplace",
+            "value": "Marketplace",
+            "description": "Using default marketplace images offered by Azure Marketplace."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Using a custom image."
+          }
+        ]
+      }
+    },
     "ImportPackageInfoRequest": {
       "type": "object",
       "description": "Information to import app attach package",
@@ -6548,6 +7019,48 @@
           "description": "Possible device architectures that an app attach package can be configured for"
         }
       }
+    },
+    "JoinType": {
+      "type": "string",
+      "description": "The type of domain join done by the virtual machine.",
+      "enum": [
+        "ActiveDirectory",
+        "AzureActiveDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "JoinType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveDirectory",
+            "value": "ActiveDirectory",
+            "description": "Using microsoft active directory."
+          },
+          {
+            "name": "AzureActiveDirectory",
+            "value": "AzureActiveDirectory",
+            "description": "Using microsoft azure active directory."
+          }
+        ]
+      }
+    },
+    "KeyVaultCredentialProperties": {
+      "type": "object",
+      "description": "Credentials kept in the keyvault.",
+      "properties": {
+        "usernameKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the username is stored in."
+        },
+        "passwordKeyVaultSecretUri": {
+          "type": "string",
+          "description": "The uri to access the secret that the password is stored in."
+        }
+      },
+      "required": [
+        "usernameKeyVaultSecretUri",
+        "passwordKeyVaultSecretUri"
+      ]
     },
     "LoadBalancerType": {
       "type": "string",
@@ -6868,6 +7381,52 @@
           }
         ]
       }
+    },
+    "MarketplaceInfoProperties": {
+      "type": "object",
+      "description": "Marketplace image information.",
+      "properties": {
+        "offer": {
+          "type": "string",
+          "description": "The offer of the image."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the image."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the image."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "The version of the image."
+        }
+      },
+      "required": [
+        "offer",
+        "publisher",
+        "sku",
+        "exactVersion"
+      ]
+    },
+    "NetworkInfoProperties": {
+      "type": "object",
+      "description": "Network information.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "The resource ID of the subnet."
+        },
+        "securityGroupId": {
+          "type": "string",
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
+        }
+      },
+      "required": [
+        "subnetId",
+        "securityGroupId"
+      ]
     },
     "PackageTimestamped": {
       "type": "string",
@@ -8347,6 +8906,59 @@
             "name": "Saturday",
             "value": "Saturday",
             "description": "Day of Week Saturday"
+          }
+        ]
+      }
+    },
+    "SecurityInfoProperties": {
+      "type": "object",
+      "description": "Security Information.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SecurityType",
+          "description": "The security type used by virtual machine in hostpool session host. Default is Standard."
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Whether to use secureBoot on the virtual machine."
+        },
+        "vTPMEnabled": {
+          "type": "boolean",
+          "description": "Whether to use vTPM on the virtual machine."
+        }
+      },
+      "required": [
+        "type",
+        "secureBootEnabled",
+        "vTPMEnabled"
+      ]
+    },
+    "SecurityType": {
+      "type": "string",
+      "description": "The security type used by virtual machine in hostpool session host. Default is Standard.",
+      "enum": [
+        "Standard",
+        "TrustedLaunch",
+        "ConfidentialVM"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard security protocol. No additional parameters"
+          },
+          {
+            "name": "TrustedLaunch",
+            "value": "TrustedLaunch",
+            "description": "TrustedLaunch allows for secure boot and vTPM"
+          },
+          {
+            "name": "ConfidentialVM",
+            "value": "ConfidentialVM",
+            "description": "Confidential Virtual Machine security protocol"
           }
         ]
       }
