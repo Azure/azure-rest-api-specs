@@ -1,49 +1,32 @@
 {
   "parameters": {
-    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
-    "resourceGroupName": "resourceGroup1",
     "api-version": "2024-08-08-preview",
-    "appAttachPackageName": "packagefullname"
+    "appAttachPackageName": "packagefullname",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa"
   },
   "responses": {
     "200": {
       "name": "packageName",
-      "id": "/subscriptions/d15725f7-6577-4a8c-95f1-3da903b42364/resourcegroups/charlesk-southcentralus/providers/Microsoft.DesktopVirtualization/appattachpackages/ModifierPackage",
       "type": "Microsoft.DesktopVirtualization/appattachpackages",
+      "id": "/subscriptions/d15725f7-6577-4a8c-95f1-3da903b42364/resourcegroups/charlesk-southcentralus/providers/Microsoft.DesktopVirtualization/appattachpackages/ModifierPackage",
       "location": "southcentralus",
-      "tags": {},
-      "systemData": {
-        "createdBy": "user1",
-        "createdByType": "User",
-        "createdAt": "2023-09-28T23:44:56.13Z",
-        "lastModifiedBy": "user1",
-        "lastModifiedByType": "User",
-        "lastModifiedAt": "2023-10-09T01:43:31.07Z"
-      },
       "properties": {
+        "failHealthCheckOnStagingFailure": "NeedsAssistance",
+        "hostPoolReferences": [],
         "image": {
-          "packageAlias": "msixpackagealias",
-          "imagePath": "imagepath",
-          "packageName": "MsixPackageName",
-          "packageFamilyName": "MsixPackage_FamilyName",
-          "packageFullName": "MsixPackage_FullName",
+          "certificateExpiry": "2023-01-02T17:18:19.1234567Z",
+          "certificateName": "certName",
           "displayName": "displayname",
-          "packageRelativePath": "packagerelativepath",
-          "isRegularRegistration": false,
+          "imagePath": "imagepath",
           "isActive": false,
-          "packageDependencies": [
-            {
-              "dependencyName": "MsixPackage_Dependency_Name",
-              "publisher": "MsixPackage_Dependency_Publisher",
-              "minVersion": "packageDep_version"
-            }
-          ],
-          "version": "packageversion",
+          "isRegularRegistration": false,
           "lastUpdated": "2008-09-22T14:01:54.9571247Z",
+          "packageAlias": "msixpackagealias",
           "packageApplications": [
             {
-              "appId": "AppId",
               "description": "PackageApplicationDescription",
+              "appId": "AppId",
               "appUserModelID": "AppUserModelId",
               "friendlyName": "FriendlyName",
               "iconImageName": "Iconimagename",
@@ -51,16 +34,33 @@
               "rawPng": "VGhpcyBpcyBhIHN0cmluZyB0byBoYXNo"
             }
           ],
-          "certificateName": "certName",
-          "certificateExpiry": "2023-01-02T17:18:19.1234567Z"
+          "packageDependencies": [
+            {
+              "dependencyName": "MsixPackage_Dependency_Name",
+              "minVersion": "packageDep_version",
+              "publisher": "MsixPackage_Dependency_Publisher"
+            }
+          ],
+          "packageFamilyName": "MsixPackage_FamilyName",
+          "packageFullName": "MsixPackage_FullName",
+          "packageName": "MsixPackageName",
+          "packageRelativePath": "packagerelativepath",
+          "version": "packageversion"
         },
-        "hostPoolReferences": [],
-        "failHealthCheckOnStagingFailure": "NeedsAssistance",
-        "keyVaultURL": "",
-        "customData": "",
-        "packageOwnerName": "App Attach"
-      }
+        "keyVaultURL": ""
+      },
+      "systemData": {
+        "createdAt": "2023-09-28T23:44:56.13Z",
+        "createdBy": "user1",
+        "createdByType": "User",
+        "lastModifiedAt": "2023-10-09T01:43:31.07Z",
+        "lastModifiedBy": "user1",
+        "lastModifiedByType": "User"
+      },
+      "tags": {}
     },
     "204": {}
-  }
+  },
+  "operationId": "AppAttachPackage_Delete",
+  "title": "AppAttachPackage_Delete"
 }
