@@ -5244,7 +5244,7 @@
           "description": "The prefix that should be associated with session host names",
           "maxLength": 11
         },
-        "availabilityZone": {
+        "availabilityZones": {
           "type": "array",
           "description": "Value for availability zones to be used by the session host. Should be from [1,2,3].",
           "items": {
@@ -5295,7 +5295,7 @@
         "vmLocation",
         "vmResourceGroup",
         "vmNamePrefix",
-        "availabilityZone",
+        "availabilityZones",
         "networkInfo",
         "vmSizeId",
         "diskInfo",
@@ -7068,7 +7068,8 @@
       "enum": [
         "BreadthFirst",
         "DepthFirst",
-        "Persistent"
+        "Persistent",
+        "MultiPersistent"
       ],
       "x-ms-enum": {
         "name": "LoadBalancerType",
@@ -7088,6 +7089,11 @@
             "name": "Persistent",
             "value": "Persistent",
             "description": "Maintains persistent connections."
+          },
+          {
+            "name": "MultiPersistent",
+            "value": "MultiPersistent",
+            "description": "Maintains multiple persistents connections."
           }
         ]
       }

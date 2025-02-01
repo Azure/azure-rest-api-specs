@@ -229,6 +229,11 @@ union LoadBalancerType {
    * Maintains persistent connections.
    */
   Persistent: "Persistent",
+
+  /**
+   * Maintains multiple persistents connections.
+   */
+  MultiPersistent: "MultiPersistent",
 }
 
 /**
@@ -1674,7 +1679,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Value for availability zones to be used by the session host. Should be from [1,2,3].
    */
-  availabilityZone: int32[];
+  availabilityZones: int32[];
 
   /**
    * Network information.
