@@ -19,7 +19,6 @@ model ActiveSessionHostConfiguration
   is Azure.ResourceManager.ProxyResource<ActiveSessionHostConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = ActiveSessionHostConfiguration,
-    KeyName = "activeSessionHostConfigurationName",
     SegmentName = "activeSessionHostConfigurations",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
@@ -36,6 +35,7 @@ interface ActiveSessionHostConfigurations {
   /**
    * Get a ActiveSessionHostConfiguration.
    */
+  @action("default")
   get is ArmResourceRead<ActiveSessionHostConfiguration>;
 
   /**
