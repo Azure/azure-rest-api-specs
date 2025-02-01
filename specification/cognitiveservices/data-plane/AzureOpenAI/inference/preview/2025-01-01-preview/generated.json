@@ -3462,8 +3462,35 @@
           }
         },
         "reasoning_effort": {
-          "$ref": "#/definitions/ReasoningEffortValue",
+          "type": "string",
           "description": "This option is only valid for o1 models,\n\nConstrains effort on reasoning for reasoning models (see https://platform.openai.com/docs/guides/reasoning).\n\nCurrently supported values are `low`, `medium`, and `high`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.",
+          "default": "medium",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "x-ms-enum": {
+            "name": "ReasoningEffortValue",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "low",
+                "value": "low",
+                "description": "The reasoning effort is low."
+              },
+              {
+                "name": "medium",
+                "value": "medium",
+                "description": "The reasoning effort is medium."
+              },
+              {
+                "name": "high",
+                "value": "high",
+                "description": "The reasoning effort is high."
+              }
+            ]
+          },
           "x-ms-client-name": "reasoningEffort"
         },
         "user_security_context": {
@@ -3474,6 +3501,9 @@
         "modalities": {
           "type": "array",
           "description": "Output types that you would like the model to generate for this request.\nMost models are capable of generating text, which is the default: `[\"text\"]`\nThe `gpt-4o-audio-preview` model can also be used to generate audio. To\nrequest that this model generate both text and audio responses, you can\nuse: `[\"text\", \"audio\"]`",
+          "default": [
+            "text"
+          ],
           "items": {
             "$ref": "#/definitions/ChatCompletionModality"
           }
@@ -6229,36 +6259,6 @@
         "type",
         "content"
       ]
-    },
-    "ReasoningEffortValue": {
-      "type": "string",
-      "description": "Values for the reasoning",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "x-ms-enum": {
-        "name": "ReasoningEffortValue",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "low",
-            "value": "low",
-            "description": "The reasoning effort is low."
-          },
-          {
-            "name": "medium",
-            "value": "medium",
-            "description": "The reasoning effort is medium."
-          },
-          {
-            "name": "high",
-            "value": "high",
-            "description": "The reasoning effort is high."
-          }
-        ]
-      }
     },
     "SpeechGenerationOptions": {
       "type": "object",
