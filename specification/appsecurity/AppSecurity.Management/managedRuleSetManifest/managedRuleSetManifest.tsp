@@ -57,9 +57,6 @@ model ManagedRuleSetDefinition {
   @doc("Define the supported actions for the rule set.")
   supportedActions: ManagedRuleActionType[];
 
-  @doc("Define the default action for the rule set.")
-  defaultAction: ManagedRuleActionType;
-
   @doc("Describes the anomaly scoring default configuration, where it is a supported action.")
   @visibility("read")
   anomalyScoring?: AnomalyScoringDefaultConfiguration;
