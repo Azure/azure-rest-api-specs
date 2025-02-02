@@ -121,21 +121,21 @@ model ManagedRuleDefinition {
   defaultAnomalyScoringSeverity?: AnomalyScoringSeverity;
 }
 
-@doc("The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match. Each level corresponds to a default anomaly score added when a rule matches.")
+@doc("The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match.")
 union AnomalyScoringSeverity {
-  int32,
+  string,
 
   @doc("Represents a critical severity level. Indicates severe anomalies that require immediate attention and contribute significantly to the anomaly score.")
-  CRITICAL: 5,
+  Critical: "Critical",
 
   @doc("Represents an error severity level. Indicates significant issues that need prompt resolution and contribute notably to the anomaly score.")
-  ERROR: 4,
+  Error: "Error",
 
   @doc("Represents a warning severity level. Indicates potential issues that should be monitored and contribute moderately to the anomaly score.")
-  WARNING: 3,
+  Warning: "Warning",
 
   @doc("Represents a notice severity level. Indicates minor issues or informational messages that contribute minimally to the anomaly score.")
-  NOTICE: 2,
+  Notice: "Notice",
 }
 
 @doc("Defines default configuration for anomaly scoring mode.")

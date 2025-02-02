@@ -616,36 +616,36 @@
       ]
     },
     "AnomalyScoringSeverity": {
-      "type": "number",
-      "description": "The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match. Each level corresponds to a default anomaly score added when a rule matches.",
+      "type": "string",
+      "description": "The set of supported severity levels for anomaly scoring, representing the importance and impact of a rule match.",
       "enum": [
-        5,
-        4,
-        3,
-        2
+        "Critical",
+        "Error",
+        "Warning",
+        "Notice"
       ],
       "x-ms-enum": {
         "name": "AnomalyScoringSeverity",
         "modelAsString": true,
         "values": [
           {
-            "name": "CRITICAL",
-            "value": 5,
+            "name": "Critical",
+            "value": "Critical",
             "description": "Represents a critical severity level. Indicates severe anomalies that require immediate attention and contribute significantly to the anomaly score."
           },
           {
-            "name": "ERROR",
-            "value": 4,
+            "name": "Error",
+            "value": "Error",
             "description": "Represents an error severity level. Indicates significant issues that need prompt resolution and contribute notably to the anomaly score."
           },
           {
-            "name": "WARNING",
-            "value": 3,
+            "name": "Warning",
+            "value": "Warning",
             "description": "Represents a warning severity level. Indicates potential issues that should be monitored and contribute moderately to the anomaly score."
           },
           {
-            "name": "NOTICE",
-            "value": 2,
+            "name": "Notice",
+            "value": "Notice",
             "description": "Represents a notice severity level. Indicates minor issues or informational messages that contribute minimally to the anomaly score."
           }
         ]
@@ -2044,12 +2044,6 @@
               }
             ]
           }
-        },
-        "redirectUrl": {
-          "type": "string",
-          "description": "If action type is redirect, this field represents redirect URL for the client",
-          "minLength": 3,
-          "maxLength": 2048
         },
         "customBlockResponse": {
           "$ref": "#/definitions/CustomBlockResponse",

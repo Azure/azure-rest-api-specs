@@ -35,7 +35,10 @@
                 "Log",
                 "AnomalyScoring"
               ],
-              "defaultAction": "AnomalyScoring",
+              "anomalyScoring": {
+                "defaultThreshold": 5,
+                "defaultAction": "Block"
+              },
               "ruleGroups": [
                 {
                   "ruleGroupName": "General",
@@ -46,21 +49,21 @@
                       "description": "Failed to Parse Request Body.",
                       "defaultAction": "AnomalyScoring",
                       "defaultState": "Enabled",
-                      "defaultAnomalyScoringSeverity": 2
+                      "defaultAnomalyScoringSeverity": "Notice"
                     },
                     {
                       "ruleId": "200003",
                       "description": "Multipart Request Body Strict Validation.",
                       "defaultAction": "AnomalyScoring",
                       "defaultState": "Enabled",
-                      "defaultAnomalyScoringSeverity": 2
+                      "defaultAnomalyScoringSeverity": "Notice"
                     },
                     {
                       "ruleId": "200004",
                       "description": "Possible Multipart Unmatched Boundary.",
                       "defaultAction": "AnomalyScoring",
                       "defaultState": "Enabled",
-                      "defaultAnomalyScoringSeverity": 2
+                      "defaultAnomalyScoringSeverity": "Notice"
                     }
                   ]
                 },
@@ -73,7 +76,7 @@
                       "description": "Method is not allowed by policy",
                       "defaultAction": "AnomalyScoring",
                       "defaultState": "Enabled",
-                      "defaultAnomalyScoringSeverity": 2
+                      "defaultAnomalyScoringSeverity": "Notice"
                     }
                   ]
                 }
