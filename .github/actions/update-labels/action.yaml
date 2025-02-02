@@ -20,7 +20,7 @@ runs:
   using: composite
 
   steps:
-    - name: Set Label
+    - name: Update Labels
       uses: actions/github-script@v7
       env:
         OWNER: ${{ inputs.owner }}
@@ -29,5 +29,6 @@ runs:
         RUN_ID: ${{ inputs.run_id }}
       with:
         script: |
-          const action = require('./.github/actions/update-labels/action.js')
-          await action({ github, context, core });
+          const { default: updateLabels } =
+            await import('${{ github.workspace }}/.github/actions/update-labels/src/update-labels.js');
+          await updateLabels({ github, context, core });
