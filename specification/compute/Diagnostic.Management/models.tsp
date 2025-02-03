@@ -292,18 +292,3 @@ model SpotPlacementScoresResponse {
   @OpenAPI.extension("x-ms-identifiers", [])
   placementScores?: PlacementScore[];
 }
-
-/**
- * Inner error details.
- */
-model InnerError {
-  /**
-   * The exception type.
-   */
-  exceptiontype?: string;
-
-  /**
-   * The internal error message or exception dump.
-   */
-  errordetail?: string;
-}

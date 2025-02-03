@@ -134,3 +134,104 @@ model CloudError {
    */
   error?: ApiError;
 }
+
+/**
+ * The Resource model definition with location property as optional.
+ */
+model ResourceWithOptionalLocation {
+  /**
+   * Resource location
+   */
+  location?: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * The Resource model definition.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility("read")
+  type?: string;
+
+  /**
+   * Resource location
+   */
+  location: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SubResourceReadOnly {
+  /**
+   * Resource Id
+   */
+  @visibility("read")
+  id?: string;
+}
+
+/**
+ * The complex type of the extended location.
+ */
+model ExtendedLocation {
+  /**
+   * The name of the extended location.
+   */
+  name?: string;
+
+  /**
+   * The type of the extended location.
+   */
+  type?: ExtendedLocationTypes;
+}
+
+/**
+ * The type of extendedLocation.
+ */
+union ExtendedLocationTypes {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EdgeZone: "EdgeZone",
+}

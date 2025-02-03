@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/lagacy.tsp";
 import "../Common/operations.tsp";
+import "../Common/models-ref.tsp";
 import "./models.tsp";
 import "./Disk.tsp";
 import "./DiskAccess.tsp";

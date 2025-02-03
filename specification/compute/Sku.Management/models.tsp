@@ -20,15 +20,6 @@ union ExtendedLocationType {
 }
 
 /**
- * The type of extendedLocation.
- */
-union ExtendedLocationTypes {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  EdgeZone: "EdgeZone",
-}
-
-/**
  * The scale type applicable to the sku.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -318,116 +309,6 @@ model ResourceSkuRestrictionInfo {
   zones?: string[];
 }
 
-/**
- * Api error base.
- */
-model ApiErrorBase {
-  /**
-   * The error code.
-   */
-  code?: string;
-
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-
-  /**
-   * The error message.
-   */
-  message?: string;
-}
-
-/**
- * Inner error details.
- */
-model InnerError {
-  /**
-   * The exception type.
-   */
-  exceptiontype?: string;
-
-  /**
-   * The internal error message or exception dump.
-   */
-  errordetail?: string;
-}
-
-/**
- * An error response from the Compute service.
- */
-model CloudError {
-  /**
-   * Api error.
-   */
-  error?: ApiError;
-}
-
-/**
- * Api error.
- */
-model ApiError {
-  /**
-   * The Api error details
-   */
-  @OpenAPI.extension("x-ms-identifiers", ["message", "target"])
-  details?: ApiErrorBase[];
-
-  /**
-   * The Api inner error
-   */
-  innererror?: InnerError;
-
-  /**
-   * The error code.
-   */
-  code?: string;
-
-  /**
-   * The target of the particular error.
-   */
-  target?: string;
-
-  /**
-   * The error message.
-   */
-  message?: string;
-}
-
-/**
- * The Resource model definition.
- */
-model Resource {
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource location
-   */
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-}
-
 // /**
 //  * The SubResource model definition.
 //  */
@@ -448,55 +329,6 @@ model Resource {
 //   @visibility("read")
 //   id?: string;
 // }
-
-/**
- * The Resource model definition with location property as optional.
- */
-model ResourceWithOptionalLocation {
-  /**
-   * Resource location
-   */
-  location?: string;
-
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-}
-
-/**
- * The complex type of the extended location.
- */
-model ExtendedLocation {
-  /**
-   * The name of the extended location.
-   */
-  name?: string;
-
-  /**
-   * The type of the extended location.
-   */
-  type?: ExtendedLocationTypes;
-}
 
 // model UserAssignedIdentitiesValue {
 //   /**

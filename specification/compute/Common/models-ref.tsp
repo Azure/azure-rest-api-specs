@@ -20,4 +20,26 @@ namespace Microsoft.Compute;
 @@externalTypeRef(Plan,
   "./../../../../Custom.Common.Types/commonTypes.json#/definitions/Plan"
 );
-@@externalTypeRef(Sku, "./../../../../Custom.Common.Types/commonTypes.json#");
+@@externalTypeRef(Sku,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/Sku"
+);
+
+@@externalTypeRef(ResourceWithOptionalLocation,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/ResourceWithOptionalLocation"
+);
+
+@@externalTypeRef(Resource,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/Resource"
+);
+
+@@externalTypeRef(SubResourceReadOnly,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/SubResourceReadOnly"
+);
+
+@@externalTypeRef(ExtendedLocation,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/ExtendedLocation"
+);
+
+@@externalTypeRef(ExtendedLocationTypes,
+  "./../../../../Custom.Common.Types/commonTypes.json#/definitions/ExtendedLocationTypes"
+);

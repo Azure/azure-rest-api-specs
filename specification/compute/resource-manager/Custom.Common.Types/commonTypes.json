@@ -82,6 +82,37 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationTypes",
+          "description": "The type of the extended location."
+        }
+      }
+    },
+    "ExtendedLocationTypes": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone"
+          }
+        ]
+      }
+    },
     "InnerError": {
       "type": "object",
       "description": "Inner error details.",
@@ -118,6 +149,73 @@
         }
       }
     },
+    "Resource": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "ResourceWithOptionalLocation": {
+      "type": "object",
+      "description": "The Resource model definition with location property as optional.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.",
@@ -134,6 +232,16 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the number of virtual machines in the scale set."
+        }
+      }
+    },
+    "SubResourceReadOnly": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
         }
       }
     }

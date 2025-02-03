@@ -371,15 +371,6 @@ union AllocationStrategy {
   CapacityOptimized: "CapacityOptimized",
 }
 
-/**
- * The type of extendedLocation.
- */
-union ExtendedLocationTypes {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  EdgeZone: "EdgeZone",
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -2968,15 +2959,6 @@ model KeyVaultSecretReference {
   sourceVault: SubResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model SubResourceReadOnly {
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-}
-
 /**
  * Specifies the billing related details of a Azure Spot VM or VMSS. Minimum api-version: 2019-03-01.
  */
@@ -3300,55 +3282,6 @@ model UserAssignedIdentitiesValue {
    */
   @visibility("read")
   clientId?: string;
-}
-
-/**
- * The complex type of the extended location.
- */
-model ExtendedLocation {
-  /**
-   * The name of the extended location.
-   */
-  name?: string;
-
-  /**
-   * The type of the extended location.
-   */
-  type?: ExtendedLocationTypes;
-}
-
-/**
- * The Resource model definition.
- */
-model Resource {
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource location
-   */
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
@@ -5481,40 +5414,6 @@ model VirtualMachineExtensionProperties {
    * Collection of extension names after which this extension needs to be provisioned.
    */
   provisionAfterExtensions?: string[];
-}
-
-/**
- * The Resource model definition with location property as optional.
- */
-model ResourceWithOptionalLocation {
-  /**
-   * Resource location
-   */
-  location?: string;
-
-  /**
-   * Resource Id
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
