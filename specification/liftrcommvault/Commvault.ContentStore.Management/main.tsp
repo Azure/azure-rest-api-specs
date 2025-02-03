@@ -266,6 +266,25 @@ model Schedule {
   @doc("Frequency of Retention")
   frequency?: Frequency;
 
+  @doc("Interval of Retention")
+  runsEvery?: int32;
+
+  @doc("Week of the month")
+  weekOfMonth?: WeekOfMonth;
+
+  @doc("Day of the week")
+  dayOfWeek?: DayOfWeek;
+
+  @doc("Month of the year")
+  monthOfYear?: MonthOfYear;
+
+  @doc("Day of the month")
+  dayOfMonth?: int32;
+
+  @doc("Weekly Days List")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  weeklyDays?: WeeklyDays[];
+
   @doc("Time of Retention")
   time?: string; //should have zone info as well
 
@@ -314,6 +333,128 @@ union Frequency {
 
   @doc("Minutes backups")
   Minutes: "minutes",
+
+  string,
+}
+
+@doc("The Week of Month Enum")
+union WeekOfMonth {
+  @doc("First Week")
+  First: "FIRST",
+
+  @doc("Second Week")
+  Second: "SECOND",
+
+  @doc("Third Week")
+  Third: "THIRD",
+
+  @doc("Fourth Week")
+  Fourth: "FOURTH",
+
+  @doc("LAST Week")
+  Last: "LAST",
+
+  string,
+}
+
+@doc("The Day of Week Enum")
+union DayOfWeek {
+  @doc("First Day of the Week")
+  Sunday: "SUNDAY",
+
+  @doc("Second Day of the Week")
+  Monday: "MONDAY",
+
+  @doc("Third Day of the Week")
+  Tuesday: "TUESDAY",
+
+  @doc("Fourth Day of the Week")
+  Wednesday: "WEDNESDAY",
+
+  @doc("Fifth Day of the Week")
+  Thursday: "THURSDAY",
+
+  @doc("Sixth Day of the Week")
+  Friday: "FRIDAY",
+
+  @doc("Seventh Day of the Week")
+  Saturday: "SATURDAY",
+
+  @doc("Any Day of the week")
+  Day: "DAY",
+
+  @doc("Weekday Identifier")
+  Weekday: "WEEKDAY",
+
+  @doc("Weekend Identifier")
+  WeekendDays: "WEEKEND_DAYS",
+
+  string,
+}
+
+@doc("The Month of Year Enum")
+union MonthOfYear {
+  @doc("First Month of the Year")
+  January: "JANUARY",
+
+  @doc("Second Month of the Year")
+  February: "FEBRUARY",
+
+  @doc("Third Month of the Year")
+  March: "MARCH",
+
+  @doc("Fourth Month of the Year")
+  April: "APRIL",
+
+  @doc("Fifth Month of the Year")
+  May: "MAY",
+
+  @doc("Sixth Month of the Year")
+  June: "JUNE",
+
+  @doc("Seventh Month of the Year")
+  July: "JULY",
+
+  @doc("Eighth Month of the Year")
+  August: "AUGUST",
+
+  @doc("Ninth Month of the Year")
+  September: "SEPTEMBER",
+
+  @doc("Tenth Month of the Year")
+  October: "OCTOBER",
+
+  @doc("Eleventh Month of the Year")
+  November: "NOVEMBER",
+
+  @doc("Twelfth Month of the Year")
+  December: "DECEMBER",
+
+  string,
+}
+
+@doc("To represent the days of the week in Weekly type")
+union WeeklyDays {
+  @doc("First Day of the Week")
+  Sunday: "SUNDAY",
+
+  @doc("Second Day of the Week")
+  Monday: "MONDAY",
+
+  @doc("Third Day of the Week")
+  Tuesday: "TUESDAY",
+
+  @doc("Fourth Day of the Week")
+  Wednesday: "WEDNESDAY",
+
+  @doc("Fifth Day of the Week")
+  Thursday: "THURSDAY",
+
+  @doc("Sixth Day of the Week")
+  Friday: "FRIDAY",
+
+  @doc("Seventh Day of the Week")
+  Saturday: "SATURDAY",
 
   string,
 }
