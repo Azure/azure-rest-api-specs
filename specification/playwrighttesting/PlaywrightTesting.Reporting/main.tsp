@@ -491,7 +491,7 @@ model TestResultDetails {
   @maxLength(200)
   accountId: string;
 
-  @doc("Identifier of the suite. This is SHA-1 hash")
+  @doc("Identifier of the suite.")
   @visibility("read", "create")
   @maxLength(200)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
@@ -742,13 +742,13 @@ interface TestRuns {
     QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get TestRun metadata for an Odata filter.")
+  @doc("Get TestRuns metadata for all runs in an account.")
   @action("metadata")
   computeMetadata is Operations.ResourceCollectionAction<
     TestRun,
     {},
     TestRunsMetadata,
-    QueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
+    {}
   >;
 }
 

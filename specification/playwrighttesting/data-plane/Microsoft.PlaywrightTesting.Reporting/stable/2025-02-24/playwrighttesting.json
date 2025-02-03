@@ -712,7 +712,7 @@
         "tags": [
           "test-run"
         ],
-        "description": "Get TestRun metadata for an Odata filter.",
+        "description": "Get TestRuns metadata for all runs in an account.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -725,18 +725,6 @@
             "type": "string",
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1545,7 +1533,7 @@
         },
         "suiteId": {
           "type": "string",
-          "description": "Identifier of the suite. This is SHA-1 hash",
+          "description": "Identifier of the suite.",
           "maxLength": 200,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "x-ms-mutability": [
