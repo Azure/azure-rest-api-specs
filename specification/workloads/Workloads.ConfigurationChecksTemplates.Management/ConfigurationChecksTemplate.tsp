@@ -14,18 +14,17 @@ using Azure.ResourceManager;
 namespace Microsoft.Workloads;
 
 @doc("Configuration checks template resource.")
-model ConfigurationChecksTemplates
-  is ExtensionResource<ConfigurationChecksTemplateProperties> {
+model ConfigurationChecksTemplate is ExtensionResource<ConfigurationChecksTemplateProperties> {
   @doc("The name of the configuration check template.")
-  @key("configurationCheckTemplates")
-  @segment("configurationCheckTemplates")
+  @key("configurationChecksTemplateName")
+  @segment("configurationChecksTemplates")
   @pattern("^[a-zA-Z0-9-]{3,63}$")
   @path
   name: string;
 }
 
 @armResourceOperations
-interface ConfigurationChecksTemplateOperations {
-  get is ArmResourceRead<ConfigurationChecksTemplates>;
-  listByResourceGroup is ArmResourceListByParent<ConfigurationChecksTemplates>;
+interface ConfigurationChecksTemplates {
+  get is ArmResourceRead<ConfigurationChecksTemplate>;
+  listByResourceGroup is ArmResourceListByParent<ConfigurationChecksTemplate>;
 }
