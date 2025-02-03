@@ -259,12 +259,12 @@ model ListTestProfileQueryParams {
   lastModifiedEndTime?: utcDateTime;
 
   @doc("Comma separated list of IDs of the test profiles to filter.")
-  @query
-  testProfileIds?: string;
+  @query(#{ explode: false })
+  testProfileIds?: string[];
 
   @doc("Comma separated list IDs of the tests which should be associated with the test profiles to fetch.")
-  @query
-  testIds?: string;
+  @query(#{ explode: false })
+  testIds?: string[];
 }
 
 @doc("Parameters for list test profile run operation")
@@ -311,14 +311,14 @@ model ListTestProfileRunQueryParams {
   createdDateEndTime?: utcDateTime;
 
   @doc("Comma separated list of IDs of the test profile runs to filter.")
-  @query
-  testProfileRunIds?: string;
+  @query(#{ explode: false })
+  testProfileRunIds?: string[];
 
   @doc("Comma separated IDs of the test profiles which should be associated with the test profile runs to fetch.")
-  @query
-  testProfileIds?: string;
+  @query(#{ explode: false })
+  testProfileIds?: string[];
 
   @doc("Comma separated list of Statuses of the test profile runs to filter.")
-  @query
-  statuses?: string;
+  @query(#{ explode: false })
+  statuses?: string[];
 }
