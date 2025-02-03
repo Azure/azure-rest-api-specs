@@ -74,10 +74,19 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageUrl, Access.public);
 @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
-@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatCompletionsUpdate,
+  Access.public,
+  "python,csharp"
+);
 @@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python,csharp");
-@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python,csharp");
-@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatResponseMessageUpdate,
+  Access.public,
+  "python,csharp"
+);
+@@access(AI.Model.StreamingChatResponseToolCallUpdate,
+  Access.public,
+  "python,csharp"
+);
 
 // Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
 @@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
@@ -98,6 +107,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestSystemMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
+
+// By making ChatMessageAudioContentItem abstract and the underlying methods internal, we'll
+// provide a single method for users to interact with similar to image, while providing the
+// backend with the structure it needs.
+@@access(AI.Model.ChatMessageAudioDataContentItem, Access.internal);
+@@access(AI.Model.ChatMessageAudioUrlContentItem, Access.internal);
 
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
