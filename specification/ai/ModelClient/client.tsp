@@ -74,6 +74,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageUrl, Access.public);
 @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
+@@access(AI.Model.ChatMessageAudioContentItem, Access.public);
 @@access(AI.Model.StreamingChatCompletionsUpdate,
   Access.public,
   "python,csharp"
