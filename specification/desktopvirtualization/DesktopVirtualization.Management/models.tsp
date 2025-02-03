@@ -1536,12 +1536,12 @@ model DomainInfoProperties {
   /**
    * Active directory info. Only one should be populated based on the join type.
    */
-  activeDirectoryInfo: ActiveDirectoryInfoProperties;
+  activeDirectoryInfo?: ActiveDirectoryInfoProperties;
 
   /**
    * Azure active directory info. Only one should be populated based on the join type.
    */
-  azureActiveDirectoryInfo: AzureActiveDirectoryInfoProperties;
+  azureActiveDirectoryInfo?: AzureActiveDirectoryInfoProperties;
 }
 
 /**
@@ -1551,7 +1551,7 @@ model DomainInfoPatchProperties {
   /**
    * Active directory info. Only one should be populated based on the join type.
    */
-  activeDirectoryInfo: ActiveDirectoryInfoProperties;
+  activeDirectoryInfo?: ActiveDirectoryInfoProperties;
 }
 
 /**
@@ -1566,12 +1566,12 @@ model ImageInfoProperties {
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
    */
-  marketplaceInfo: MarketplaceInfoProperties;
+  marketplaceInfo?: MarketplaceInfoProperties;
 
   /**
    * The values to uniquely identify a custom image. Only one should be populated based on the image type.
    */
-  customInfo: CustomInfoProperties;
+  customInfo?: CustomInfoProperties;
 }
 
 /**
