@@ -1319,13 +1319,21 @@
       "type": "object",
       "description": "Identity details to be used for source scan operation",
       "properties": {
-        "useSystemAssignedIdentity": {
-          "type": "boolean",
-          "description": "Indicates whether system assigned identity should be used for source scan operation."
+        "identityType": {
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          },
+          "description": "Identity type that should be used for source scan operation."
         },
         "userAssignedIdentity": {
           "type": "string",
-          "description": "User assigned identity to be used for source scan operation."
+          "description": "User assigned identity to be used for source scan operation if IdentityType is UserAssigned."
         }
       }
     },
