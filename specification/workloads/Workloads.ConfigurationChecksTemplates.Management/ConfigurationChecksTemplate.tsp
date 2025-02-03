@@ -14,7 +14,8 @@ using Azure.ResourceManager;
 namespace Microsoft.Workloads;
 
 @doc("Configuration checks template resource.")
-model ConfigurationChecksTemplate is ExtensionResource<ConfigurationChecksTemplateProperties> {
+model ConfigurationChecksTemplate
+  is ExtensionResource<ConfigurationChecksTemplateProperties> {
   @doc("The name of the configuration check template.")
   @key("configurationChecksTemplateName")
   @segment("configurationChecksTemplates")
