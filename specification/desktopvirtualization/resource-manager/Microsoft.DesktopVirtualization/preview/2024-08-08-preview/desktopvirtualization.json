@@ -95,6 +95,9 @@
     },
     {
       "name": "ActiveSessionHostConfigurations"
+    },
+    {
+      "name": "SessionHostManagements"
     }
   ],
   "paths": {
@@ -2872,6 +2875,193 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements": {
+      "get": {
+        "operationId": "SessionHostManagements_ListByHostPool",
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "description": "List SessionHostManagements.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "description": "Indicates whether the collection is descending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "description": "Initial number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/{sessionHostManagements}": {
+      "patch": {
+        "operationId": "SessionHostManagements_Update",
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "description": "Update a SessionHostManagement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "sessionHostManagements",
+            "in": "path",
+            "description": "The name of the sessionHostManagement",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/{sessionHostManagements}/default": {
+      "get": {
+        "operationId": "SessionHostManagements_Get",
+        "tags": [
+          "SessionHostManagements"
+        ],
+        "description": "Get a SessionHostManagement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "sessionHostManagements",
+            "in": "path",
+            "description": "The name of the sessionHostManagement",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -6923,6 +7113,38 @@
         ]
       }
     },
+    "HostPoolUpdateConfigurationProperties": {
+      "type": "object",
+      "description": "The configurations of a hostpool update.",
+      "properties": {
+        "deleteOriginalVm": {
+          "type": "boolean",
+          "description": "Whether not to save original disk. False by default."
+        },
+        "maxVmsRemoved": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
+        },
+        "logOffDelayMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before logging off users in minutes."
+        },
+        "logOffMessage": {
+          "type": "string",
+          "description": "Log off message sent to user for logoff. Default value is an empty string.",
+          "maxLength": 260
+        }
+      },
+      "required": [
+        "deleteOriginalVm",
+        "maxVmsRemoved",
+        "logOffDelayMinutes",
+        "logOffMessage"
+      ]
+    },
     "HostpoolPublicNetworkAccess": {
       "type": "string",
       "description": "Enabled to allow this resource to be access from the public network",
@@ -9171,6 +9393,117 @@
           }
         ]
       }
+    },
+    "SessionHostManagement": {
+      "type": "object",
+      "description": "Schema for SessionHostManagement properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SessionHostManagementProperties",
+          "description": "Detailed properties for SessionHostManagement",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SessionHostManagementList": {
+      "type": "object",
+      "description": "List of SessionHostManagement definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SessionHostManagement items on this page",
+          "items": {
+            "$ref": "#/definitions/SessionHostManagement"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SessionHostManagementPatch": {
+      "type": "object",
+      "description": "SessionHostManagement properties that can be patched.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SessionHostManagementPatchProperties",
+          "description": "Detailed properties for SessionHostManagement"
+        }
+      }
+    },
+    "SessionHostManagementPatchProperties": {
+      "type": "object",
+      "description": "Represents a SessionHostManagementPatch definition.",
+      "properties": {
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true."
+        },
+        "update": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
+          "description": "Parameters for a hostpool update."
+        }
+      },
+      "required": [
+        "update"
+      ]
+    },
+    "SessionHostManagementProperties": {
+      "type": "object",
+      "description": "Session Host Managements of HostPool.",
+      "properties": {
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true."
+        },
+        "update": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
+          "description": "Parameters for a hostpool update."
+        }
+      },
+      "required": [
+        "update"
+      ]
     },
     "SessionHostPatch": {
       "type": "object",

@@ -1726,6 +1726,91 @@ model ActiveSessionHostConfigurationProperties {
    */
   bootDiagnosticsInfo: BootDiagnosticsInfoProperties;
 }
+
+/**
+ * The configurations of a hostpool update.
+ */
+model HostPoolUpdateConfigurationProperties {
+  /**
+   * Whether not to save original disk. False by default.
+   */
+  deleteOriginalVm: boolean;
+
+  /**
+   * The maximum number of virtual machines to be removed during hostpool update.
+   */
+  @minValue(1)
+  maxVmsRemoved: int32;
+
+  /**
+   * Grace period before logging off users in minutes.
+   */
+  logOffDelayMinutes: int32;
+
+  /**
+   * Log off message sent to user for logoff. Default value is an empty string.
+   */
+  @maxLength(260)
+  logOffMessage: string;
+}
+
+/**
+ * The configurations of a hostpool update.
+ */
+model HostPoolUpdateConfigurationPatchProperties {
+  /**
+   * Whether not to save original disk. False by default.
+   */
+  deleteOriginalVm: boolean;
+
+  /**
+   * The maximum number of virtual machines to be removed during hostpool update.
+   */
+  @minValue(1)
+  maxVmsRemoved: int32;
+
+  /**
+   * Grace period before logging off users in minutes.
+   */
+  logOffDelayMinutes: int32;
+
+  /**
+   * Log off message sent to user for logoff. Default value is an empty string.
+   */
+  @maxLength(260)
+  logOffMessage: string;
+}
+
+/**
+ * Session Host Managements of HostPool.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
+model SessionHostManagementProperties {
+  /**
+   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
+   */
+  scheduledDateTimeZone?: string;
+
+  /**
+   * Parameters for a hostpool update.
+   */
+  update: HostPoolUpdateConfigurationProperties;
+}
+
+/**
+ * Represents a SessionHostManagementPatch definition.
+ */
+model SessionHostManagementPatchProperties {
+  /**
+   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
+   */
+  scheduledDateTimeZone?: string;
+
+  /**
+   * Parameters for a hostpool update.
+   */
+  update: HostPoolUpdateConfigurationProperties;
+}
 /**
  * List of ApplicationGroup definitions.
  */
@@ -2695,6 +2780,11 @@ model ApplicationPatchProperties {
 }
 
 /**
+ * List of SessionHostManagement definitions.
+ */
+model SessionHostManagementList is Azure.Core.Page<SessionHostManagement>;
+
+/**
  * List of Desktop definitions.
  */
 model DesktopList is Azure.Core.Page<Desktop>;
@@ -2731,6 +2821,16 @@ model DesktopProperties {
    */
   @visibility("read")
   iconContent?: bytes;
+}
+
+/**
+ * SessionHostManagement properties that can be patched.
+ */
+model SessionHostManagementPatch {
+  /**
+   * Detailed properties for SessionHostManagement
+   */
+  properties?: SessionHostManagementPatchProperties;
 }
 
 /**

@@ -23,6 +23,7 @@ import "./ScalingPlanPersonalSchedule.tsp";
 import "./ScalingPlanPooledSchedule.tsp";
 import "./MsixPackage.tsp";
 import "./ActiveSessionHostConfiguration.tsp";
+import "./SessionHostManagement.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
