@@ -49,13 +49,9 @@ interface StreamOperations {
 @added(Versions.c2025_03_01_Preview)
 interface ConversationManagementOperations {
   @tag("ConversationManagement")
-  @doc("Creates a new conversation.")
+  @doc("Creates a new conversation. This is only for create operation.")
   @added(Versions.c2025_03_01_Preview)
-  create is Operations.ResourceCollectionAction<
-    Conversation,
-    CreateConversationRequestBody,
-    CreatedResponse & CreateConversationResult
-  >;
+  create is Operations.ResourceCreateOrReplace<Conversation>;
 
   @tag("ConversationManagement")
   @doc("Gets the details of a specific conversation.")
