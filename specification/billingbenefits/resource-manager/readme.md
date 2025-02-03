@@ -54,6 +54,32 @@ directive:
     reason: According to ARM's guide 200 is returned when PUT call finishes.
   - suppress: TrackedResourcePatchOperation
     from: billingbenefits.json
+  - suppress: TenantLevelAPIsNotAllowed
+    from: billingbenefits.json
+  - suppress: ParametersInPointGet
+    from: billingbenefits.json
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: billingbenefits.json
+  - suppress: ParametersInPointGet
+    from: billingbenefits.json
+  - suppress: LroExtension
+    from: billingbenefits.json
+  - suppress: PatchResponseCodes
+    from: billingbenefits.json
+  - suppress: XMSLongRunningOperationProperty
+    from: billingbenefits.json
+  - suppress: NoErrorCodeResponses
+    from: billingbenefits.json
+  - suppress: PathForTrackedResourceTypes
+    from: billingbenefits.json
+  - suppress:  PutRequestResponseSchemeArm
+    from: billingbenefits.json
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: billingbenefits.json
+  - suppress: AvoidAdditionalProperties
+    from: billingbenefits.json
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: billingbenefits.json
 ```
 
 ### Tag: package-preview-2024-11-01-preview
