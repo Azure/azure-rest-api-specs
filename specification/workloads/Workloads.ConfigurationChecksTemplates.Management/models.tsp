@@ -117,7 +117,7 @@ union EnvironmentType {
    * Indicates that environment is non production environment.
    */
   @doc("Environment is non production.")
-  NonProduction: "Non-Production",
+  NonProduction: "NonProduction",
 
   string,
 }
