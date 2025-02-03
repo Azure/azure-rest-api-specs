@@ -67,40 +67,40 @@ union CheckOriginType {
 @doc("Condition to be used to evaluate the output and customize the check.")
 union CheckEvaluationCondition {
   @doc("Check output value must equal defined value.")
-  Equals: "-eq",
+  Equals: "eq",
 
   @doc("Check output value must not equal defined value.")
-  NotEquals: "-ne",
+  NotEquals: "ne",
 
   @doc("Check output value must be greater than defined value.")
-  GreaterThan: "-gt",
+  GreaterThan: "gt",
 
   @doc("Check output value must be less than defined value.")
-  LessThan: "-lt",
+  LessThan: "lt",
 
   @doc("Check output value must be greater than or equal to defined value.")
-  GreaterThanOrEqual: "-ge",
+  GreaterThanOrEqual: "ge",
 
   @doc("Check output value must be less than or equal to defined value.")
-  LessThanOrEqual: "-le",
+  LessThanOrEqual: "le",
 
   @doc("Check output value must contain defined value.")
-  Contains: "-contains",
+  Contains: "contains",
 
   @doc("Check output value must not contain defined value.")
-  NotContains: "-notcontains",
+  NotContains: "notcontains",
 
   @doc("Check output value must start with defined value.")
-  StartsWith: "-StartsWith",
+  StartsWith: "startsWith",
 
   @doc("Check output value must end with defined value.")
-  EndsWith: "-EndsWith",
+  EndsWith: "endsWith",
 
   @doc("Check output value must be in defined value.")
-  In: "-In",
+  In: "in",
 
   @doc("Check output value must not be in defined value.")
-  NotIn: "-NotIn",
+  NotIn: "notIn",
 
   string,
 }
@@ -241,12 +241,6 @@ model CheckConfiguration {
   originType?: CheckOriginType;
 
   /**
-   * The specific gallery location.
-   */
-  @doc("The specific gallery location.")
-  selectedGalleryName?: string;
-
-  /**
    * The flag to enable (or) disable the check execution.
    */
   @doc("The flag to enable (or) disable the check execution.")
@@ -257,7 +251,7 @@ model CheckConfiguration {
    */
   @doc("List of input parameters to be used in the check.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  inputParameters: SharedParameters[];
+  inputParameters?: SharedParameters[];
 
   /**
    * List of output parameters to be used in the check.
@@ -280,7 +274,7 @@ model RoleConfiguration {
    * List of checks to be executed for the role.
    */
   @doc("List of checks to be executed for the role.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
   checks: CheckConfiguration[];
 }
 
@@ -306,33 +300,35 @@ model Configuration {
    * The type of workload for which the checks are executed. Referenced from VI resource.
    */
   @doc("The type of workload for which the checks are executed. Referenced from VI resource.")
-  workloadType: string;
+  workloadType?: string;
 
   /**
    * The type of environment for which the checks are executed. Referenced from VI resource.
    */
   @doc("The type of environment for which the checks are executed. Referenced from VI resource.")
-  environmentType: EnvironmentType;
+  environmentType?: EnvironmentType;
 
   /**
    * List of components managed at the workload level.
    */
   @doc("List of components managed at the workload level.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  components: WorkloadComponents[];
+  components?: WorkloadComponents[];
 
   /**
    * List of common checks to be executed for all the components (or) at parent resource level.
    */
   @doc("List of common checks to be executed for all the components (or) at parent resource level.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  commonChecks: CheckConfiguration[];
+  @OpenAPI.extension("x-ms-identifiers", ["checkId"])
+  commonChecks?: CheckConfiguration[];
 }
 
 @doc("Defines the properties of the configuration checks template.")
 model ConfigurationChecksTemplateProperties {
   /**
-   * The interval at which the checks are executed. Supports from 1 hour to 24 hours.
+   * The interval at which the checks are executed. Supports intervals starting from 1 hour and is formatted based on the ISO 8601 duration standard.
+   * For example: PT60M (60 minutes), PT2H (2 hours).
+   * For more information, see https://en.wikipedia.org/wiki/ISO_8601#Durations.
    */
   @doc("The interval at which the checks are executed.")
   executionInterval: string;

@@ -25,7 +25,7 @@ model ConfigurationChecksTemplates
 }
 
 @armResourceOperations
-interface ConfigurationChecksTemplatesOperations {
+interface ConfigurationChecksTemplateOperations {
   get is ArmResourceRead<ConfigurationChecksTemplates>;
   listByResourceGroup is ArmResourceListByParent<ConfigurationChecksTemplates>;
 }
