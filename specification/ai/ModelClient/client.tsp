@@ -21,6 +21,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.EmbeddingsOptions, Usage.input);
 @@usage(AI.Model.ImageEmbeddingsOptions, Usage.input);
 
+@@usage(AI.Model.ChatMessageAudioContentItem, Usage.input);
+
 // The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
