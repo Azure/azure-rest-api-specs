@@ -233,7 +233,7 @@ union LoadBalancerType {
   /**
    * Maintains multiple persistents connections.
    */
-  MultiPersistent: "MultiPersistent",
+  MultiplePersistent: "MultiplePersistent",
 }
 
 /**

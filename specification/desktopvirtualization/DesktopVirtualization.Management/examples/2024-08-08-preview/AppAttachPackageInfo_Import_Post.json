@@ -2,8 +2,12 @@
   "parameters": {
     "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
     "resourceGroupName": "resourceGroup1",
+    "hostPoolName": "hostpool1",
     "api-version": "2024-04-08-preview",
-    "$filter": "HostPoolName eq 'hostpool1'"
+    "importPackageInfoRequest": {
+      "path": "imagepath",
+      "packageArchitecture": "x64"
+    }
   },
   "responses": {
     "200": {
@@ -59,9 +63,7 @@
               },
               "hostPoolReferences": [],
               "failHealthCheckOnStagingFailure": "NeedsAssistance",
-              "keyVaultURL": "",
-              "customData": "",
-              "packageOwnerName": "App Attach"
+              "keyVaultURL": ""
             }
           },
           {
@@ -114,9 +116,7 @@
               },
               "hostPoolReferences": [],
               "failHealthCheckOnStagingFailure": "NeedsAssistance",
-              "keyVaultURL": "",
-              "customData": "",
-              "packageOwnerName": "App Attach"
+              "keyVaultURL": ""
             }
           }
         ]
