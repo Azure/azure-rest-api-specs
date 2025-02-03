@@ -714,7 +714,7 @@ interface TestRuns {
   @doc("Gets a test run.")
   get is Operations.ResourceRead<TestRun>;
 
-  @doc("List test runs.")
+  @doc("List test runs. Supported filters are triggeredAt with operator ge, status and branch  with in operator, displayName with eq operator")
   list is Operations.ResourceList<
     TestRun,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
@@ -733,7 +733,7 @@ interface TestRuns {
     {}
   >;
 
-  @doc("Get TestRun summary for an Odata filter.")
+  @doc("Get TestRun summary for an Odata filter.Supported filters are triggeredAt with operator ge, status and branch  with in operator, displayName with eq operator")
   @action("accountRunStats")
   computeAccountRunStats is Operations.ResourceCollectionAction<
     TestRun,
@@ -771,13 +771,13 @@ interface TestResults {
     TestRunIdQueryParameter
   >;
 
-  @doc("List Test Results.")
+  @doc("List Test Results.Supported filters are Supported filters are runid,testTitle with eq operator , project, jobname  tag, status with in operator ")
   list is Operations.ResourceList<
     TestResultDetails,
     ListQueryParametersTrait<StandardListQueryParameters & FilterQueryParameter>
   >;
 
-  @doc("Get Test Results summary.")
+  @doc("Get Test Results summary.Supported filters are runid,testTitle with eq operator , project, jobname  tag, status with in operator ")
   @action("resultsStats")
   computeResultsStats is Operations.ResourceCollectionAction<
     TestResultDetails,
