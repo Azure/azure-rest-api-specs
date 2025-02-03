@@ -51,7 +51,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -61,21 +60,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_engagement_fabric']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.EngagementFabric
-  output-folder: $(csharp-sdks-folder)/engagementfabric/Microsoft.Azure.Management.EngagementFabric/src/Generated
-  clear-output-folder: true
 ```
 
 

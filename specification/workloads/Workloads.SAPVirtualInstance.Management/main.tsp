@@ -15,7 +15,6 @@ import "./SAPDatabaseInstance.tsp";
 import "./SAPApplicationServerInstance.tsp";
 import "./SAPVirtualInstanceMetadata.tsp";
 import "./custom.tsp";
-import "./operations.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -31,6 +30,8 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Workloads;
+
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
  * The available API versions.

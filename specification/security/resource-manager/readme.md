@@ -99,7 +99,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-preview-2024-10
+tag: package-composite-v3
 ```
 
 ### Composite packages
@@ -114,6 +114,15 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 input-file:
   - Microsoft.Security/preview/2024-10-01-preview/defenderForStorageSettings.json
   - Microsoft.Security/preview/2024-10-01-preview/operations.json
+```
+
+### Tag: package-preview-2024-08-01-preview
+
+These settings apply only when `--tag=package-preview-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-08-01-preview'
+input-file:
+  - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
 ```
 
 ### Tag: package-2024-08
@@ -514,7 +523,7 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2015-06-01-preview/operations.json
+- Microsoft.Security/preview/2024-10-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
@@ -531,7 +540,7 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
-- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2024-10-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
@@ -540,7 +549,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-- Microsoft.Security/preview/2024-07-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2024-05-15-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json

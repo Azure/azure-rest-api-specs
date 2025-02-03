@@ -95,9 +95,7 @@ model AutonomousDatabaseBackupProperties {
   @visibility("read")
   lifecycleState?: AutonomousDatabaseBackupLifecycleState;
 
-  @doc("Retention period, in days, for long-term backups.")
-  @minValue(60)
-  @maxValue(3650)
+  @doc("Retention period, in days")
   @visibility("read", "create", "update")
   retentionPeriodInDays?: int32;
 

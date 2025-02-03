@@ -131,7 +131,7 @@ model AbstractiveSummarizationLROResult extends AnalyzeDocumentsLROResult {
   kind: AnalyzeDocumentsLROResultsKind.AbstractiveSummarizationLROResults;
 
   /** Results of the task. */
-  results: AbstractiveSummarizationResult;
+  results: AnalyzeDocumentsResult;
 }
 
 /** An object representing the summarization results of each document. */
