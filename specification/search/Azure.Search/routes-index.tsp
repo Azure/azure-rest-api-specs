@@ -5,6 +5,7 @@ import "./models-index.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Search;
 
@@ -216,6 +217,9 @@ interface Documents {
        * confidence threshold can be configured by appending the pipe character `|`
        * followed by the `threshold-<confidence threshold>` option after the answers
        * parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.
+       * The maximum character length of answers can be configured by appending the pipe
+       * character '|' followed by the 'count-<number of maximum character length>',
+       * such as 'extractive|maxcharlength-600'.
        */
       @query
       answers?: QueryAnswerType;
@@ -226,7 +230,9 @@ interface Documents {
        * When Captions is set to `extractive`, highlighting is enabled by default, and
        * can be configured by appending the pipe character `|` followed by the
        * `highlight-<true/false>` option, such as `extractive|highlight-true`. Defaults
-       * to `None`.
+       * to `None`. The maximum character length of captions can be configured by
+       * appending the pipe character '|' followed by the 'count-<number of maximum
+       * character length>', such as 'extractive|maxcharlength-600'.
        */
       @query
       captions?: QueryCaptionType;
@@ -239,6 +245,47 @@ interface Documents {
        */
       @query
       semanticQuery?: string;
+
+      /**
+       * When QueryRewrites is set to `generative`, the query terms are sent to a
+       * generate model which will produce 10 (default) rewrites to help increase the
+       * recall of the request. The requested count can be configured by appending the
+       * pipe character `|` followed by the `count-<number of rewrites>` option, such as
+       * `generative|count-3`. Defaults to `None`. This parameter is only valid if the
+       * query type is `semantic`.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      queryRewrites?: QueryRewritesType;
+
+      /**
+       * Enables a debugging tool that can be used to further explore your search
+       * results.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      debug?: QueryDebugMode;
+
+      /**
+       * The language of the query.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      queryLanguage?: QueryLanguage;
+
+      /**
+       * Improve search recall by spell-correcting individual search query terms.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      speller?: QuerySpellerType;
+
+      /**
+       * The list of field names used for semantic ranking.
+       */
+      @added(Versions.v2024_11_01_preview)
+      @query
+      semanticFields?: string[];
     },
     SearchDocumentsResult
   >;
