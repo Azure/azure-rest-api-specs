@@ -1,0 +1,698 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Regulatory packages management",
+    "description": "Regulatory packages management API used for submitting package to gain eligibility to purchase phone numbers from certain geographic regions.",
+    "version": "2022-11-30-preview"
+  },
+  "paths": {
+    "/regulatoryPackages/{regulatoryPackageId}": {
+      "patch": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Creates a regulatory package.",
+        "operationId": "RegulatoryPackage_Upsert",
+        "consumes": [
+          "application/json-merge-patch"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "Regulatory Package ID. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The regulatory package creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageUpsertRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageUpsertResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create regulatory package": {
+            "$ref": "./examples/CreateRegulatoryPackage.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Gets a regulatory package by its ID.",
+        "operationId": "RegulatoryPackages_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackage"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get regulatory package by id": {
+            "$ref": "./examples/GetRegulatoryPackage.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Deletes a regulatory package by its ID.",
+        "operationId": "RegulatoryPackage_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete regulatory package": {
+            "$ref": "./examples/DeleteRegulatoryPackage.json"
+          }
+        }
+      }
+    },
+    "/regulatoryPackages": {
+      "get": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Gets a list of all regulatory packages.",
+        "operationId": "RegulatoryPackage_GetAll",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of entries to skip, for pagination purposes.",
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "name": "maxPageSize",
+            "description": "The maximum number of entries to fetch, for pagination purposes",
+            "type": "number"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackages"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all regulatory packages": {
+            "$ref": "./examples/GetAllRegulatoryPackages.json"
+          }
+        }
+      }
+    },
+    "/regulatoryPackages/{regulatoryPackageId}:submit": {
+      "post": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Submits a regulatory package by its ID, to be reviewed by the Service Desk.",
+        "operationId": "RegulatoryPackages_Submit",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get regulatory package by id": {
+            "$ref": "./examples/SubmitRegulatoryPackage.json"
+          }
+        }
+      }
+    },
+    "/regulatoryPackages/{regulatoryPackageId}/attachments/{attachmentId}": {
+      "put": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Upload a file attachment for a regulatory package.",
+        "operationId": "RegulatoryPackage_UploadAttachment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "The regulatory package attachment ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The regulatory package attachment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageAttachment"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageAttachment"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload attachment": {
+            "$ref": "./examples/UploadAttachmentRegulatoryPackage.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Gets a file attachment by its attachment ID for a regulatory package.",
+        "operationId": "RegulatoryPackage_GetAttachment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "The regulatory package attachment ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageAttachment"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload attachment": {
+            "$ref": "./examples/GetRegulatoryPackageAttachment.json"
+          }
+        }
+      }
+    },
+    "/regulatoryPackages/{regulatoryPackageId}/attachments": {
+      "get": {
+        "tags": [
+          "Regulatory Packages Management"
+        ],
+        "summary": "Gets metadata of file attachments for a regulatory package.",
+        "operationId": "RegulatoryPackage_GetAllAttachmentsForPackage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "regulatoryPackageId",
+            "description": "The regulatory package ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegulatoryPackageAttachments"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upload attachment": {
+            "$ref": "./examples/GetRegulatoryPackageAttachments.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegulatoryPackageUpsertRequest": {
+      "description": "Regulatory Package Upsert Request",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "The regulatory package's details",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackageDetails"
+        }
+      }
+    },
+    "RegulatoryPackageUpsertResponse": {
+      "description": "Regulatory package create response",
+      "type": "object",
+      "properties": {
+        "regulatoryPackage": {
+          "description": "The regulatory package's ID",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackage"
+        }
+      }
+    },
+    "RegulatoryPackageBusinessDetails": {
+      "description": "The business's information for the regulatory package.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The business' name.",
+          "type": "string"
+        },
+        "address": {
+          "description": "The business' address.",
+          "type": "string"
+        },
+        "addressCountry": {
+          "description": "The business' address' country/region.",
+          "type": "string"
+        },
+        "registrationNumber": {
+          "description": "The business' registration number.",
+          "type": "string"
+        },
+        "taxNumber": {
+          "description": "The business' tax number.",
+          "type": "string"
+        }
+      }
+    },
+    "RegulatoryPackageContactDetails": {
+      "description": "Contact of the authorized individual for the regulatory package.",
+      "type": "object",
+      "required": [
+        "name",
+        "email"
+      ],
+      "properties": {
+        "name": {
+          "description": "The contact individual's name.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email that will be contacted when the regulatory package status has changed.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The contact's phone number.",
+          "type": "string"
+        }
+      }
+    },
+    "RegulatoryPackageDetails": {
+      "description": "The regulatory package details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Friendly name of Regulatory Package",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country/region code of the phone numbers requested in this regulatory package, in ISO 3166-2 format, e.g. US.",
+          "type": "string"
+        },
+        "phoneNumberType": {
+          "description": "The phone number type.",
+          "type": "string",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "x-ms-enum": {
+            "name": "phoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "locality": {
+          "description": "The name of the geographic locality (city or town) of the regulatory package. This is only needed for geographic phone number type.",
+          "type": "string"
+        },
+        "businessDetails": {
+          "description": "The regulatory business details",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackageBusinessDetails"
+        },
+        "contactDetails": {
+          "description": "The regulatory package's contact details",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackageContactDetails"
+        }
+      }
+    },
+    "RegulatoryPackage": {
+      "description": "The regulatory package",
+      "required": [
+        "regulatoryPackageId",
+        "details"
+      ],
+      "type": "object",
+      "properties": {
+        "regulatoryPackageId": {
+          "description": "The ID of the regulatory package.",
+          "type": "string"
+        },
+        "details": {
+          "description": "The regulatory package details.",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackageDetails"
+        },
+        "notes": {
+          "description": "Notes sent by the Service Desk.",
+          "type": "object",
+          "$ref": "#/definitions/RegulatoryPackageNotes"
+        }
+      }
+    },
+    "RegulatoryPackages": {
+      "description": "The list of regulatory packages.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Represents a list of regulatory packages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegulatoryPackage"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of Regulatory Package results.",
+          "type": "string"
+        }
+      }
+    },
+    "RegulatoryPackageAttachment": {
+      "description": "The regulatory package attachment.",
+      "required": [
+        "fileName",
+        "fileType"
+      ],
+      "type": "object",
+      "properties": {
+        "attachmentId": {
+          "description": "The attachment ID",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Friendly name of Regulatory Package",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "The file name.",
+          "type": "string"
+        },
+        "fileType": {
+          "description": "The type of file being attached.",
+          "enum": [
+            "jpeg",
+            "jpg",
+            "pdf",
+            "png"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "fileType",
+            "modelAsString": true
+          }
+        },
+        "fileContent": {
+          "description": "The file contents of the attachment.",
+          "type": "string"
+        }
+      }
+    },
+    "RegulatoryPackageAttachments": {
+      "description": "The wrapper around the list of attachments.",
+      "type": "object",
+      "required": [
+        "values"
+      ],
+      "properties": {
+        "values": {
+          "description": "The underlying list of attachments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegulatoryPackageAttachment"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of Regulatory Package note results.",
+          "type": "string"
+        }
+      }
+    },
+    "RegulatoryPackageNote": {
+      "description": "A single note sent from Service Desk to the customer.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The message in the note.",
+          "type": "string"
+        },
+        "sentDate": {
+          "description": "The date time the message was sent.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "RegulatoryPackageNotes": {
+      "description": "The wrapper around the list of notes for the Regulatory Package",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "description": "The underlying list of notes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegulatoryPackageNote"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of Regulatory Package note results.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
