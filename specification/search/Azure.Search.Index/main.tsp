@@ -14,6 +14,15 @@ using TypeSpec.Versioning;
 /**
  * Client that can be used to query an index and upload, merge, or delete documents.
  */
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://search.azure.com/.default"],
+    }
+  ]>
+)
 @service({
   title: "Search Index Client",
 })
