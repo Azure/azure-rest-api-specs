@@ -16,3 +16,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/databasefleetmanager/azure-mgmt-databasefleetmanager/azure/mgmt/databasefleetmanager
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```

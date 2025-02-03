@@ -289,4 +289,23 @@ model CloudExadataInfrastructureProperties {
   @doc("Monthly Storage Server version")
   @visibility("read")
   monthlyStorageServerVersion?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The database server model type of the cloud Exadata infrastructure resource.")
+  @visibility("create", "read")
+  @minLength(1)
+  @maxLength(255)
+  databaseServerType?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The storage server model type of the cloud Exadata infrastructure resource.")
+  @visibility("create", "read")
+  @minLength(1)
+  @maxLength(255)
+  storageServerType?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The compute model of the Exadata Infrastructure")
+  @visibility("read")
+  computeModel?: ComputeModel;
 }

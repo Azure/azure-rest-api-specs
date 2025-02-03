@@ -56,20 +56,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -92,10 +92,10 @@
         "description": "Gets all experiment workspaces in the specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -108,7 +108,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,13 +131,13 @@
         "description": "Gets all experiment workspaces in a resource group.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -150,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,13 +173,13 @@
         "description": "Gets an experiment workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -200,7 +200,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -218,13 +218,13 @@
         "description": "Create an experiment workspace, or update an existing workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -271,11 +271,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Create or update an OnlineExperimentWorkspace with Free sku and customer managed key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdateWithEncryption.json"
+          },
           "Create or update an OnlineExperimentWorkspace with Free sku.": {
             "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdate.json"
           }
@@ -293,13 +296,13 @@
         "description": "Patch an experiment workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -343,11 +346,14 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
+          "Update an Online Experiment Workspace with customer managed encryption key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_UpdateWithEncryption.json"
+          },
           "Update an Online Experiment Workspace.": {
             "$ref": "./examples/OnlineExperimentWorkspaces_Update.json"
           }
@@ -365,13 +371,13 @@
         "description": "Deletes an experiment workspace",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "workspaceName",
@@ -403,7 +409,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -420,12 +426,17 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "properties": {
         "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
@@ -434,7 +445,7 @@
           "additionalProperties": {
             "allOf": [
               {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
               }
             ],
             "type": "object",
@@ -452,7 +463,7 @@
           "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/SkuTier",
           "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
         },
         "size": {
@@ -484,7 +495,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -519,6 +530,73 @@
       },
       "readOnly": true
     },
+    "CustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "federatedClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "application client identity to use for accessing key encryption key Url in a different tenant. Ex: f83c6b1b-4d34-47e4-bb34-9d83df58b540"
+        },
+        "delegatedIdentityClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "DelegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "Delegated identity"
+          }
+        ]
+      }
+    },
     "OnlineExperimentWorkspace": {
       "type": "object",
       "description": "An online experiment workspace resource.",
@@ -528,17 +606,17 @@
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -616,6 +694,10 @@
               }
             ]
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experiment workspace resource."
         }
       },
       "required": [
@@ -651,6 +733,10 @@
               }
             ]
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experiment workspace resource."
         }
       }
     },
@@ -676,6 +762,16 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "ResourceEncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the online experiment workspace resource.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/CustomerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        }
+      }
     }
   },
   "parameters": {}
