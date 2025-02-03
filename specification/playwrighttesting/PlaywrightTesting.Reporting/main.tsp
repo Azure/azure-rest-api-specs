@@ -122,11 +122,6 @@ model TestRunConfig {
   @maxValue(10000)
   repeatEach?: int32;
 
-  @doc("Number of worker instances.")
-  @visibility("read", "create")
-  @maxValue(1000)
-  workersCount?: int32;
-
   @doc("Details of the test framework used.")
   @visibility("read", "create")
   testFramework?: TestFramework;
@@ -216,23 +211,22 @@ union CiProviderName {
 @doc("Model representing continuous integration (CI) configuration. ")
 model CiConfig {
   @doc("Name of the CI provider.  GitHub | Azure DevOps | Default")
-  @maxLength(200)
   ciProviderName?: CiProviderName;
 
-  @maxLength(500)
-  @doc("Branch name in the source code repository.")
+  @maxLength(255)
+  @doc("Branch name in the source code repository. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   branch?: string;
 
-  @maxLength(500)
-  @doc("Author of the commit triggering the test run.")
+  @maxLength(255)
+  @doc("Author of the commit triggering the test run. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   author?: string;
 
-  @maxLength(500)
-  @doc("ID of the commit triggering the test run.")
+  @maxLength(40)
+  @doc("ID of the commit triggering the test run. This is the SHA-1 hash")
   commitId?: string;
 
   @maxLength(4096)
-  @doc("URL linking to the revision details.")
+  @doc("URL linking to the revision details. Should be a valid Url. Allowed characters- alphanumeric characters (A-Z, a-z, 0-9), hyphens (-), underscores (_), periods (.), tildes (~), and forward slashes (/) for hierarchy. Special characters must be URL-encoded.")
   revisionUrl?: url;
 }
 
@@ -282,6 +276,11 @@ model CloudReportingSummary {
   @doc("List of tags associated with the test run.")
   @visibility("read")
   tags?: string[];
+
+  @doc("Number of worker instances.")
+  @visibility("read", "create")
+  @maxValue(1000)
+  workersCount?: int32;
 }
 
 @doc("Model representing summary information about a test run.")
@@ -347,13 +346,13 @@ model TestResultsUrl {
 @resource("test-runs")
 @parentResource(Account)
 model TestRun {
-  @doc("Identifier of the test run.")
+  @doc("Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)")
   @key
   @visibility("read")
   @maxLength(200)
   testRunId: string;
 
-  @doc("Display name of the test run (unicode characters allowed).")
+  @doc("Display name of the test run All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @maxLength(200)
   @minLength(3)
   @visibility("read", "create")
@@ -459,18 +458,18 @@ model UploadTestResultsRequest {
 @resource("test-results")
 @parentResource(Account)
 model TestResultDetails {
-  @doc("Identifier of the test execution.")
+  @doc("Identifier of the test execution. Should be a guid")
   @key
   @visibility("read", "create")
   @maxLength(200)
   testExecutionId: string;
 
-  @doc("Identifier of the test.")
+  @doc("Identifier of the test. This is SHA-1 hash")
   @visibility("read", "create")
   @maxLength(200)
   testId: string;
 
-  @doc("Identifier of the test combination.")
+  @doc("Identifier of the test combination.This is SHA-1 hash")
   @visibility("read", "create")
   @maxLength(200)
   testCombinationId: string;
@@ -490,24 +489,24 @@ model TestResultDetails {
   @maxLength(200)
   accountId: string;
 
-  @doc("Identifier of the suite.")
+  @doc("Identifier of the suite. This is SHA-1 hash")
   @visibility("read", "create")
   @maxLength(200)
   suiteId: string;
 
-  @doc("Title of the test.")
+  @doc("Title of the test. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @visibility("read", "create")
-  @maxLength(500)
+  @maxLength(1000)
   testTitle: string;
 
-  @doc("Title of the suite.")
+  @doc("Title of the suite. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @visibility("read", "create")
   @maxLength(500)
   suiteTitle: string;
 
-  @doc("Name of the file.")
+  @doc("Name of the file- subject to constraints of OS and programming language")
   @visibility("read", "create")
-  @maxLength(300)
+  @maxLength(255)
   fileName: string;
 
   @doc("Line number.")
@@ -544,18 +543,20 @@ model TestResultDetails {
   @visibility("read")
   previousRetries?: PreviousRetrySummary[];
 
-  @doc("List of tags associated with the test result.")
+  @doc("List of tags associated with the test result. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @visibility("read", "create")
   @maxItems(100)
   tags?: string[];
 
-  @doc("List of annotations (https://playwright.dev/docs/test-annotations).")
+  @doc("List of annotations (https://playwright.dev/docs/test-annotations).All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @visibility("read", "create")
   @maxItems(100)
   annotations?: string[];
 
-  @doc("Relative path in storage for all the artifacts of this test")
+  @doc("Relative path in storage for all the artifacts of this test. contain only lowercase letters, numbers, and hyphens, and cannot start or end with a hyphen or contain consecutive hyphens")
   @visibility("read", "create")
+  @minLength(3)
+  @maxLength(63)
   artifactsPath?: string;
 }
 
@@ -604,11 +605,11 @@ union AttachmentKind {
 // Model representing web test configuration
 @doc("Configuration details for the web test.")
 model WebTestConfig {
-  @doc("Name of the CI job running the test.")
+  @doc("Name of the CI job running the test. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @maxLength(500)
   jobName: string;
 
-  @doc("Name of the Playwright project.")
+  @doc("Name of the Playwright project.All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   @maxLength(500)
   projectName: string;
 
@@ -686,7 +687,7 @@ model ResultsStats {
 // Model representing summary statistics of tests
 @doc("Metadata for  testruns/builds.")
 model TestRunsMetadata {
-  @doc("List of CI branches for a testrun")
+  @doc("List of CI branches for a testrun, All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   branches: string[];
 }
 
@@ -751,6 +752,7 @@ interface TestRuns {
 alias TestRunIdQueryParameter = QueryParametersTrait<{
   /** Mandatory runId for the test results. */
   @query
+  @doc("All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
   testRunId: string;
 }>;
 
