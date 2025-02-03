@@ -1,7 +1,12 @@
 {
   "parameters": {
-    "$filter": "HostPoolName eq 'hostpool1'",
     "api-version": "2024-08-08-preview",
+    "hostPoolName": "hostpool1",
+    "importPackageInfoRequest": {
+      "path": "imagepath",
+      "packageArchitecture": "x64"
+    },
+    "resourceGroupName": "resourceGroup1",
     "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa"
   },
   "responses": {
@@ -118,6 +123,6 @@
       }
     }
   },
-  "operationId": "AppAttachPackage_ListBySubscription",
-  "title": "AppAttachPackage_ListBySubscription"
+  "operationId": "AppAttachPackageInfo_Import",
+  "title": "AppAttachPackageInfo_Import"
 }
