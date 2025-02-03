@@ -2390,7 +2390,7 @@ model ScalingSchedule {
    * Capacity threshold for ramp up period.
    */
   @maxValue(100)
-  @minValue(0)
+  @minValue(1)
   rampUpCapacityThresholdPct?: int32;
 
   /**
@@ -2417,7 +2417,7 @@ model ScalingSchedule {
    * Minimum host percentage for ramp down period.
    */
   @maxValue(100)
-  @minValue(1)
+  @minValue(0)
   rampDownMinimumHostsPct?: int32;
 
   /**
@@ -3804,7 +3804,7 @@ model ScalingPlanPooledScheduleProperties {
    * Capacity threshold for ramp up period.
    */
   @maxValue(100)
-  @minValue(0)
+  @minValue(1)
   rampUpCapacityThresholdPct?: int32;
 
   /**
@@ -3831,7 +3831,7 @@ model ScalingPlanPooledScheduleProperties {
    * Minimum host percentage for ramp down period.
    */
   @maxValue(100)
-  @minValue(1)
+  @minValue(0)
   rampDownMinimumHostsPct?: int32;
 
   /**
