@@ -5137,7 +5137,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportImportedSqlInventoryAsync": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportImportedSqlInventory": {
       "post": {
         "operationId": "SqlSitesController_ExportImportedSqlInventoryAsync",
         "tags": [
@@ -6456,7 +6456,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "description": "Method to Triggers the import SQL inventory.",
+        "description": "Method to trigger the import SQL inventory.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -13291,7 +13291,9 @@
           "type": "array",
           "description": "List of subscription or resource group ARM IDs. Allowed only if scopeType is SubscriptionOrResourceGroupIds.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "An array of ARM resource IDs for subscriptions or resource groups."
           }
         }
       }
@@ -16499,11 +16501,12 @@
       "properties": {
         "blobName": {
           "type": "string",
-          "description": "Gets or sets the Blob name for the blob to fetch Import file from."
+          "description": "Gets the Blob name for the blob to fetch Import file from."
         },
         "blobSasUri": {
           "type": "string",
-          "description": "Gets or sets the blob SAS Uri of the input import file."
+          "description": "Gets or sets the blob SAS Uri of the input import file.",
+          "x-ms-secret": true
         },
         "jobResult": {
           "$ref": "#/definitions/ImportSqlInventoryJobResult",
@@ -17763,6 +17766,7 @@
       "properties": {
         "jobArmId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the job ARM ID."
         },
         "uri": {
@@ -18855,7 +18859,7 @@
         },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+          "description": "Gets or sets the service principal identity details used by agent for communication to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
@@ -18867,6 +18871,7 @@
         },
         "discoverySolutionId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
         "serviceEndpoint": {
@@ -19604,7 +19609,7 @@
         "warningCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of warnings while trying to import SQL Inventory from CSV."
+          "description": "Gets or sets the Number of warnings while trying to import SQL Inventory from CSV. Warnings are included in the 'errors' array."
         }
       }
     },
