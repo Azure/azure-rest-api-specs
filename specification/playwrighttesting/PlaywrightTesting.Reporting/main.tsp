@@ -464,16 +464,16 @@ model TestResultDetails {
   @maxLength(200)
   testExecutionId: string;
 
-  @doc("Identifier of the test. This is SHA-1 hash")
+  @doc("Identifier of the test.")
   @visibility("read", "create")
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)*")
   @maxLength(200)
   testId: string;
 
   @doc("Identifier of the test combination.This is SHA-1 hash")
   @visibility("read", "create")
   @maxLength(200)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)*")
   testCombinationId: string;
 
   @doc("Identifier of the test run.")
@@ -494,7 +494,7 @@ model TestResultDetails {
   @doc("Identifier of the suite.")
   @visibility("read", "create")
   @maxLength(200)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)*")
   suiteId: string;
 
   @doc("Title of the test. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).")
