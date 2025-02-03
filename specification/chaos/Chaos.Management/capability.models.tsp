@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -31,6 +32,7 @@ alias CapabilityParentResourceParameters = BaseParameters<Capability> &
 /**
  * Model that represents the Capability properties model.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 model CapabilityProperties {
   /**
    * String of the Publisher that this Capability extends.
@@ -67,6 +69,7 @@ model CapabilityProperties {
   /**
    * Resource provisioning state. Not currently in use because resource is created synchronously.
    */
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
