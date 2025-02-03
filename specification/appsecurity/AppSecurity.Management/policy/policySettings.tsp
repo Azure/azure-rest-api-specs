@@ -14,6 +14,11 @@ model PolicySettings {
   @doc("The mode of the policy. Default value is Detection")
   mode?: PolicyMode = PolicyMode.Detection;
 
+  @doc("If action type is redirect, this field represents redirect URL for the client")
+  @minLength(MinRedirectUrlLength)
+  @maxLength(MaxRedirectUrlLength)
+  redirectUrl?: string; // TODO - didn't find a url built-in type in src/API/node_modules/@typespec/compiler/lib/lib.tsp
+
   @doc("Custom block response configuration, if action type is block")
   customBlockResponse?: CustomBlockResponse;
 
