@@ -860,10 +860,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/VirtualMachineImage"
-              }
+              "$ref": "#/definitions/VirtualMachineImagesWithPropertiesListResult"
             }
           },
           "default": {
@@ -1137,6 +1134,23 @@
         }
       },
       "description": "The List VmImages in EdgeZone operation response."
+    },
+    "VirtualMachineImagesWithPropertiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineImage"
+          },
+          "description": "The list of virtual machine images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of virtual machine images. Call ListNext() with this URI to fetch the next page of virtual machine images."
+        }
+      },
+      "description": "The List Virtual Machine Images operation response."
     },
     "ArchitectureType": {
       "type": "string",
