@@ -1653,6 +1653,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Friendly name to describe this version of the SessionHostConfiguration
    */
+  @maxLength(260)
   friendlyName?: string;
 
   /**
