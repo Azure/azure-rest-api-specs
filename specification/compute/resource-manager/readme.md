@@ -294,7 +294,7 @@ These settings apply only when `--tag=package-2024-11-04` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-11-04'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
@@ -306,13 +306,23 @@ input-file:
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
+### Tag: package-2024-11-04-only
+
+These settings apply only when `--tag=package-2024-11-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-04-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
@@ -343,7 +353,7 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-07-01'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
@@ -358,7 +368,7 @@ These settings apply only when `--tag=package-2024-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-07-01-only'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
 ```
@@ -369,7 +379,7 @@ These settings apply only when `--tag=package-2024-03-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-03-02'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
@@ -397,7 +407,7 @@ These settings apply only when `--tag=package-2024-03-02-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-02-only'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
 ```
@@ -417,7 +427,7 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-03-01'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
@@ -450,6 +460,7 @@ These settings apply only when `--tag=package-2024-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2024-03-01-only'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json
@@ -491,7 +502,7 @@ These settings apply only when `--tag=package-2023-07-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-07-03'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
@@ -524,7 +535,7 @@ These settings apply only when `--tag=package-2023-07-03-only` is specified on t
 
 ```yaml $(tag) == 'package-2023-07-03-only'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/GalleryRP/stable/2023-07-03/GalleryRP.json
 ```
@@ -535,6 +546,7 @@ These settings apply only when `--tag=package-2023-10-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-10-02'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
@@ -585,6 +597,7 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
@@ -644,6 +657,7 @@ These settings apply only when `--tag=package-2022-08-03` is specified on the co
 ``` yaml $(tag) == 'package-2022-08-03'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json
   - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachine.json
@@ -691,6 +705,7 @@ These settings apply only when `--tag=package-2023-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-07-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-07-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-07-01/virtualMachineScaleSet.json
@@ -749,6 +764,7 @@ These settings apply only when `--tag=package-2023-04-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-02'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
@@ -799,6 +815,7 @@ These settings apply only when `--tag=package-2023-01-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-01-02'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
@@ -849,6 +866,7 @@ These settings apply only when `--tag=package-2023-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-03-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
@@ -909,6 +927,7 @@ These settings apply only when `--tag=package-2022-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-11-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-11-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineScaleSet.json
@@ -967,6 +986,7 @@ These settings apply only when `--tag=package-2022-09-04` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-09-04'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
@@ -1012,6 +1032,7 @@ These settings apply only when `--tag=package-2022-03-03` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-03-03'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
@@ -1060,6 +1081,7 @@ These settings apply only when `--tag=package-2022-08-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-01'
 input-file:
+- Microsoft.Compute/custom-common-types/commonTypes.json  
 - Microsoft.Compute/common-types/v1/common.json
 - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
 - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
@@ -1118,6 +1140,7 @@ These settings apply only when `--tag=package-2022-07-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-07-02'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
@@ -1168,6 +1191,7 @@ These settings apply only when `--tag=package-2022-04-04` is specified on the co
 
 ```yaml $(tag) == 'package-2022-04-04'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
@@ -1213,6 +1237,7 @@ These settings apply only when `--tag=package-2022-03-02` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-02'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/DiskRP/stable/2022-03-02/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
@@ -1263,6 +1288,7 @@ These settings apply only when `--tag=package-2022-01-03` is specified on the co
 
 ```yaml $(tag) == 'package-2022-01-03'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachine.json
@@ -1306,6 +1332,7 @@ These settings apply only when `--tag=package-2022-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-03-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/common.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2022-03-01/virtualMachineScaleSet.json
@@ -1358,6 +1385,7 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-12-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1383,6 +1411,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1418,6 +1447,7 @@ These settings apply only when `--tag=package-2021-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-08-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1434,6 +1464,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1459,7 +1490,7 @@ These settings apply only when `--tag=package-2021-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-07-01'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1476,7 +1507,7 @@ These settings apply only when `--tag=package-2021-07-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2021-07-01-only'
 input-file:
-  - Custom.Common.Types/commonTypes.json  
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-07-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -1491,6 +1522,7 @@ These settings apply only when `--tag=2021-06-01-preview` is specified on the co
 
 ```yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
+  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/compute.json
   - Microsoft.Compute/ComputeRP/stable/2021-11-01/runCommands.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
@@ -2149,7 +2181,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
