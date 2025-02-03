@@ -8,10 +8,12 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
 @armResourceOperations
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 interface PrivateAccesses {
   /**
    * Get a private access resource
