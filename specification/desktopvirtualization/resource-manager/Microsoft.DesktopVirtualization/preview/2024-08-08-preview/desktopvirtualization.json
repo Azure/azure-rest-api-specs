@@ -5770,6 +5770,14 @@
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "packageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, is null for native app attach packages"
+        },
+        "customData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -5800,6 +5808,18 @@
         "failHealthCheckOnStagingFailure": {
           "$ref": "#/definitions/FailHealthCheckOnStagingFailureEnum",
           "description": "Parameter indicating how the health check should behave if this package fails staging"
+        },
+        "packageOwnerName": {
+          "type": "string",
+          "description": "Specific name of package owner, is \\\"AppAttach\\\" for native app attach packages"
+        },
+        "packageLookbackUrl": {
+          "type": "string",
+          "description": "Lookback url to third party control plane, is null for native app attach packages"
+        },
+        "customData": {
+          "type": "string",
+          "description": "Field that can be populated with custom data and filtered on in list GET calls"
         }
       }
     },
@@ -7292,7 +7312,7 @@
         "BreadthFirst",
         "DepthFirst",
         "Persistent",
-        "MultiPersistent"
+        "MultiplePersistent"
       ],
       "x-ms-enum": {
         "name": "LoadBalancerType",
@@ -7314,8 +7334,8 @@
             "description": "Maintains persistent connections."
           },
           {
-            "name": "MultiPersistent",
-            "value": "MultiPersistent",
+            "name": "MultiplePersistent",
+            "value": "MultiplePersistent",
             "description": "Maintains multiple persistents connections."
           }
         ]

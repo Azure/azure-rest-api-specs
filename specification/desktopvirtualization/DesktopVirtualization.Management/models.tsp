@@ -233,7 +233,7 @@ union LoadBalancerType {
   /**
    * Maintains multiple persistents connections.
    */
-  MultiPersistent: "MultiPersistent",
+  MultiplePersistent: "MultiplePersistent",
 }
 
 /**
@@ -1129,6 +1129,21 @@ model AppAttachPackageProperties {
    * Parameter indicating how the health check should behave if this package fails staging
    */
   failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
+
+  /**
+   * Specific name of package owner, is "AppAttach" for native app attach packages
+   */
+  packageOwnerName?: string;
+
+  /**
+   * Lookback url to third party control plane, is null for native app attach packages
+   */
+  packageLookbackUrl?: string;
+
+  /**
+   * Field that can be populated with custom data and filtered on in list GET calls
+   */
+  customData?: string;
 }
 
 /**
@@ -2583,6 +2598,16 @@ model AppAttachPackagePatchProperties {
    * Parameter indicating how the health check should behave if this package fails staging
    */
   failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailureEnum;
+
+  /**
+   * Lookback url to third party control plane, is null for native app attach packages
+   */
+  packageLookbackUrl?: string;
+
+  /**
+   * Field that can be populated with custom data and filtered on in list GET calls
+   */
+  customData?: string;
 }
 
 /**
