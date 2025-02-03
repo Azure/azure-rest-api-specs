@@ -224,7 +224,7 @@
           {
             "name": "testRunId",
             "in": "query",
-            "description": "Mandatory runId for the test results.",
+            "description": "All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
             "required": true,
             "type": "string"
           },
@@ -367,7 +367,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Identifier of the test run.",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
             "required": true,
             "type": "string",
             "maxLength": 200
@@ -434,7 +434,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Identifier of the test run.",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
             "required": true,
             "type": "string",
             "maxLength": 200
@@ -522,7 +522,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Identifier of the test run.",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
             "required": true,
             "type": "string",
             "maxLength": 200
@@ -588,7 +588,7 @@
           {
             "name": "testRunId",
             "in": "path",
-            "description": "Identifier of the test run.",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
             "required": true,
             "type": "string",
             "maxLength": 200
@@ -983,23 +983,23 @@
         },
         "branch": {
           "type": "string",
-          "description": "Branch name in the source code repository.",
-          "maxLength": 500
+          "description": "Branch name in the source code repository. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 255
         },
         "author": {
           "type": "string",
-          "description": "Author of the commit triggering the test run.",
-          "maxLength": 500
+          "description": "Author of the commit triggering the test run. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 255
         },
         "commitId": {
           "type": "string",
-          "description": "ID of the commit triggering the test run.",
-          "maxLength": 500
+          "description": "ID of the commit triggering the test run. This is the SHA-1 hash",
+          "maxLength": 40
         },
         "revisionUrl": {
           "type": "string",
           "format": "uri",
-          "description": "URL linking to the revision details.",
+          "description": "URL linking to the revision details. Should be a valid Url. Allowed characters- alphanumeric characters (A-Z, a-z, 0-9), hyphens (-), underscores (_), periods (.), tildes (~), and forward slashes (/) for hierarchy. Special characters must be URL-encoded.",
           "maxLength": 4096
         }
       }
@@ -1110,6 +1110,16 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "workersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of worker instances.",
+          "maximum": 1000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -1484,7 +1494,7 @@
       "properties": {
         "testExecutionId": {
           "type": "string",
-          "description": "Identifier of the test execution.",
+          "description": "Identifier of the test execution. Should be a guid",
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1493,8 +1503,9 @@
         },
         "testId": {
           "type": "string",
-          "description": "Identifier of the test.",
+          "description": "Identifier of the test. This is SHA-1 hash",
           "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1502,8 +1513,9 @@
         },
         "testCombinationId": {
           "type": "string",
-          "description": "Identifier of the test combination.",
+          "description": "Identifier of the test combination.This is SHA-1 hash",
           "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1533,8 +1545,9 @@
         },
         "suiteId": {
           "type": "string",
-          "description": "Identifier of the suite.",
+          "description": "Identifier of the suite. This is SHA-1 hash",
           "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1542,8 +1555,8 @@
         },
         "testTitle": {
           "type": "string",
-          "description": "Title of the test.",
-          "maxLength": 500,
+          "description": "Title of the test. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 1000,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1551,7 +1564,7 @@
         },
         "suiteTitle": {
           "type": "string",
-          "description": "Title of the suite.",
+          "description": "Title of the suite. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "maxLength": 500,
           "x-ms-mutability": [
             "read",
@@ -1560,8 +1573,8 @@
         },
         "fileName": {
           "type": "string",
-          "description": "Name of the file.",
-          "maxLength": 300,
+          "description": "Name of the file- subject to constraints of OS and programming language",
+          "maxLength": 255,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1635,7 +1648,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "List of tags associated with the test result.",
+          "description": "List of tags associated with the test result. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "maxItems": 100,
           "items": {
             "type": "string"
@@ -1647,7 +1660,7 @@
         },
         "annotations": {
           "type": "array",
-          "description": "List of annotations (https://playwright.dev/docs/test-annotations).",
+          "description": "List of annotations (https://playwright.dev/docs/test-annotations).All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "maxItems": 100,
           "items": {
             "type": "string"
@@ -1659,7 +1672,9 @@
         },
         "artifactsPath": {
           "type": "string",
-          "description": "Relative path in storage for all the artifacts of this test",
+          "description": "Relative path in storage for all the artifacts of this test. contain only lowercase letters, numbers, and hyphens, and cannot start or end with a hyphen or contain consecutive hyphens",
+          "minLength": 3,
+          "maxLength": 63,
           "x-ms-mutability": [
             "read",
             "create"
@@ -1721,13 +1736,13 @@
       "properties": {
         "testRunId": {
           "type": "string",
-          "description": "Identifier of the test run.",
+          "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
           "maxLength": 200,
           "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run (unicode characters allowed).",
+          "description": "Display name of the test run All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "minLength": 3,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -1833,16 +1848,6 @@
             "create"
           ]
         },
-        "workersCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of worker instances.",
-          "maximum": 1000,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "testFramework": {
           "$ref": "#/definitions/TestFramework",
           "description": "Details of the test framework used.",
@@ -1924,16 +1929,6 @@
             "create"
           ]
         },
-        "workersCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of worker instances.",
-          "maximum": 1000,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "testFramework": {
           "$ref": "#/definitions/TestFrameworkCreateOrUpdate",
           "description": "Details of the test framework used.",
@@ -1993,7 +1988,7 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Display name of the test run (unicode characters allowed).",
+          "description": "Display name of the test run All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "minLength": 3,
           "maxLength": 200,
           "x-ms-mutability": [
@@ -2072,7 +2067,7 @@
       "properties": {
         "branches": {
           "type": "array",
-          "description": "List of CI branches for a testrun",
+          "description": "List of CI branches for a testrun, All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "items": {
             "type": "string"
           }
@@ -2236,12 +2231,12 @@
       "properties": {
         "jobName": {
           "type": "string",
-          "description": "Name of the CI job running the test.",
+          "description": "Name of the CI job running the test. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "maxLength": 500
         },
         "projectName": {
           "type": "string",
-          "description": "Name of the Playwright project.",
+          "description": "Name of the Playwright project.All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
           "maxLength": 500
         },
         "browserType": {
