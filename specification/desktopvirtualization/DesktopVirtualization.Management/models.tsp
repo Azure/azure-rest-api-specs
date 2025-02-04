@@ -1755,7 +1755,7 @@ model HostPoolUpdateConfigurationProperties {
   /**
    * Whether not to save original disk. False by default.
    */
-  deleteOriginalVm: boolean;
+  deleteOriginalVm: boolean = false;
 
   /**
    * The maximum number of virtual machines to be removed during hostpool update.
@@ -1772,7 +1772,7 @@ model HostPoolUpdateConfigurationProperties {
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage: string;
+  logOffMessage?: string;
 }
 
 /**
@@ -1788,12 +1788,12 @@ model HostPoolUpdateConfigurationPatchProperties {
    * The maximum number of virtual machines to be removed during hostpool update.
    */
   @minValue(1)
-  maxVmsRemoved: int32;
+  maxVmsRemoved?: int32;
 
   /**
    * Grace period before logging off users in minutes.
    */
-  logOffDelayMinutes: int32;
+  logOffDelayMinutes?: int32;
 
   /**
    * Log off message sent to user for logoff. Default value is an empty string.
@@ -3355,7 +3355,6 @@ model SessionHostProperties {
   /**
    * Last heart beat from SessionHost.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastHeartBeat?: utcDateTime;
 
   /**
@@ -3426,13 +3425,18 @@ model SessionHostProperties {
    * The timestamp of the last update.
    */
   @visibility("read")
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdateTime?: utcDateTime;
 
   /**
    * The error message.
    */
   updateErrorMessage?: string;
+
+  /**
+   * The last time update was completed.
+   */
+  @visibility("read")
+  lastSessionHostUpdateTime?: string;
 
   /**
    * List of SessionHostHealthCheckReports
@@ -3559,7 +3563,6 @@ model UserSessionProperties {
   /**
    * The timestamp of the user session create.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createTime?: utcDateTime;
 }
 

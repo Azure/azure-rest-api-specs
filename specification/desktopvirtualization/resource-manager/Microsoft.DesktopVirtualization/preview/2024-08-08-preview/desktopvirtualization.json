@@ -7138,7 +7138,8 @@
       "properties": {
         "deleteOriginalVm": {
           "type": "boolean",
-          "description": "Whether not to save original disk. False by default."
+          "description": "Whether not to save original disk. False by default.",
+          "default": false
         },
         "maxVmsRemoved": {
           "type": "integer",
@@ -7154,15 +7155,13 @@
         "logOffMessage": {
           "type": "string",
           "description": "Log off message sent to user for logoff. Default value is an empty string.",
-          "default": "",
           "maxLength": 260
         }
       },
       "required": [
         "deleteOriginalVm",
         "maxVmsRemoved",
-        "logOffDelayMinutes",
-        "logOffMessage"
+        "logOffDelayMinutes"
       ]
     },
     "HostpoolPublicNetworkAccess": {
@@ -9635,6 +9634,11 @@
         "updateErrorMessage": {
           "type": "string",
           "description": "The error message."
+        },
+        "lastSessionHostUpdateTime": {
+          "type": "string",
+          "description": "The last time update was completed.",
+          "readOnly": true
         },
         "sessionHostHealthCheckResults": {
           "type": "array",
