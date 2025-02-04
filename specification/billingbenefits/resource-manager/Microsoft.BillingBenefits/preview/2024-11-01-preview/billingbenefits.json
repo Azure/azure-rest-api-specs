@@ -752,7 +752,7 @@
         }
       },
       "delete": {
-        "description": "Delete discount.",
+        "description": "Delete discount. Clears the metadata from the user's view.",
         "operationId": "Discounts_Delete",
         "tags": [
           "Discounts"
@@ -1005,7 +1005,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}/cancel": {
       "post": {
-        "description": "Cancel discount",
+        "description": "Cancel discount. Stops applying the benefit.",
         "operationId": "Discounts_Cancel",
         "tags": [
           "Discounts"
@@ -1069,7 +1069,7 @@
     },
     "/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts": {
       "get": {
-        "description": "List discounts that are applicable for a given scope",
+        "description": "List discounts that are applicable for a given scope. Currently supported scopes: billing accounts",
         "operationId": "Discounts_ScopeList",
         "tags": [
           "Discounts"
@@ -1196,6 +1196,7 @@
     "CustomerId": {
       "type": "string",
       "readOnly": true,
+      "format": "arm-id",
       "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers."
     },
     "BillingAccountId": {
@@ -2350,10 +2351,6 @@
         "modelAsString": true
       }
     },
-    "ImpactedBillingPeriod": {
-      "type": "string",
-      "description": "The billing period of the impact for the resource."
-    },
     "DiscountList": {
       "type": "object",
       "description": "Discount list",
@@ -2407,7 +2404,7 @@
         },
         "startAt": {
           "$ref": "#/definitions/StartAt",
-          "description": "Start date of the discount. No duration will be supported. Future dates will be supported."
+          "description": "Start date of the discount. No duration will be supported. Any future date is supported."
         },
         "systemId": {
           "$ref": "#/definitions/DiscountSystemId",
@@ -2577,7 +2574,7 @@
     "DiscountTypeCustomPrice": {
       "type": "object",
       "x-ms-discriminator-value": "CustomPrice",
-      "description": "Discount type properties including product family name, product id, sku, and custom price properties.",
+      "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.",
       "allOf": [
         {
           "$ref": "#/definitions/DiscountTypeProperties"
@@ -2604,23 +2601,9 @@
       "description": "Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.",
       "allOf": [
         {
-          "$ref": "#/definitions/DiscountTypeProperties"
+          "$ref": "#/definitions/DiscountTypeCustomPrice"
         }
-      ],
-      "properties": {
-        "productFamilyName": {
-          "$ref": "#/definitions/ProductFamilyName"
-        },
-        "productId": {
-          "$ref": "#/definitions/ProductId"
-        },
-        "skuId": {
-          "$ref": "#/definitions/DiscountSku"
-        },
-        "customPriceProperties": {
-          "$ref": "#/definitions/CustomPriceProperties"
-        }
-      }
+      ]
     },
     "DiscountEntityType": {
       "type": "string",
@@ -2683,7 +2666,7 @@
       "type": "string"
     },
     "ProductId": {
-      "description": "Product ID for which the discount is given. Validation: Optional",
+      "description": "Product ID for which the discount is given. Validation: Optional. No specific format, example: DZH318Z09V6F",
       "type": "string"
     },
     "DiscountSku": {
@@ -2692,7 +2675,9 @@
     },
     "DiscountPercentage": {
       "description": "Discount percentage provided for the customer. Validation: Required unless this is a price rule.",
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
     },
     "PriceGuaranteeProperties": {
       "type": "object",
@@ -2738,11 +2723,12 @@
       "type": "object",
       "description": "Condition for a discount.",
       "properties": {
-        "name": {
+        "conditionName": {
           "type": "object"
         },
         "value": {
           "type": "array",
+          "description": "These items are open-ended strings.",
           "items": {
             "type": "string"
           }
@@ -2812,7 +2798,7 @@
     },
     "CatalogId": {
       "type": "string",
-      "description": "The catalog instance where the priceable node lives. Validation: Required."
+      "description": "The catalog instance where the priceable node lives. Validation: Required. No defined format, will vary per team."
     },
     "CatalogClaims": {
       "type": "array",
@@ -2825,7 +2811,7 @@
       "type": "object",
       "description": "Catalog claim for a discount.",
       "properties": {
-        "type": {
+        "catalogClaimsItemType": {
           "type": "string"
         },
         "value": {
@@ -2916,13 +2902,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "type": "object",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
