@@ -2629,9 +2629,12 @@
         "Primary",
         "Affiliate"
       ],
+      "x-enum-description": [
+        "Discount is not dependent on another discount.",
+        "Discount needs to be scoped to a primary discount."
+      ],
       "x-ms-enum": {
         "name": "DiscountEntityType",
-        "description": "This defines whether the entity being created is primary or affiliate. Supported values: primary, affiliate. Validation: Required, must match one of the 2 values.",
         "modelAsString": true
       }
     },
@@ -2645,9 +2648,15 @@
         "CustomPrice",
         "CustomPriceMultiCurrency"
       ],
+      "x-enum-description": [
+        "Product family for which the discount applies",
+        "Product for which the discount applies",
+        "Sku for which the discount applies",
+        "Custom price for the discount",
+        "Custom price across currencies for the discount"
+      ],
       "x-ms-enum": {
         "name": "DiscountType",
-        "description": "Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.",
         "modelAsString": true
       }
     },
@@ -2659,9 +2668,13 @@
         "Consume",
         "Renew"
       ],
+      "x-enum-description": [
+        "Apply discount to a new purchase",
+        "Apply discount to resource consumption",
+        "Apply discount to the renewal of an existing resource"
+      ],
       "x-ms-enum": {
         "name": "ApplyDiscountOn",
-        "description": "The customer action on which the discount is applied. Supported values are Purchase, Consume, and Renew. Validation: Required, one of supported values.",
         "modelAsString": true
       }
     },
@@ -2700,9 +2713,12 @@
         "Protected",
         "Locked"
       ],
+      "x-enum-descriptions": [
+        "Minimun of market rate and base price",
+        "Price locked"
+      ],
       "x-ms-enum": {
         "name": "PricingPolicy",
-        "description": "Supported values: Protected, Locked",
         "modelAsString": true
       }
     },
