@@ -482,9 +482,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getBillingUsageReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getBillingReport": {
       "post": {
-        "operationId": "Reservations_GetBillingUsageReport",
+        "operationId": "Reservations_GetBillingReport",
         "tags": [
           "Reservations"
         ],
@@ -525,8 +525,57 @@
           }
         },
         "x-ms-examples": {
-          "Reservations_GetBillingUsageReport_MaximumSet": {
-            "$ref": "./examples/Reservations_GetBillingUsageReport_MaximumSet_Gen.json"
+          "Reservations_GetBillingReport_MaximumSet": {
+            "$ref": "./examples/Reservations_GetBillingReport_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getBillingStatus": {
+      "post": {
+        "operationId": "Reservations_GetBillingStatus",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Provides various statistics about resources billed via given reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "Name of the reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationBillingStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_GetBillingStatus_MaximumSet": {
+            "$ref": "./examples/Reservations_GetBillingStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -576,55 +625,6 @@
         "x-ms-examples": {
           "Reservations_GetResourceLimits": {
             "$ref": "./examples/Reservations_GetResourceLimits_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/reservations/{reservationName}/getUsageDetails": {
-      "post": {
-        "operationId": "Reservations_GetUsageDetails",
-        "tags": [
-          "Reservations"
-        ],
-        "description": "Provides various statistics about resources billed via given reservation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "reservationName",
-            "in": "path",
-            "description": "Name of the reservation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReservationBillingStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reservations_GetUsageDetails_MaximumSet": {
-            "$ref": "./examples/Reservations_GetUsageDetails_MaximumSet_Gen.json"
           }
         }
       }
@@ -1487,7 +1487,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1542,7 +1542,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1624,7 +1624,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1696,7 +1696,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1756,7 +1756,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1819,7 +1819,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -1909,7 +1909,7 @@
           {
             "name": "avsVmId",
             "in": "path",
-            "description": "Id of AVS VM.",
+            "description": "ID of the AVS VM",
             "required": true,
             "type": "string",
             "pattern": "^[a-fA-F0-9\\-]{1,64}$"
@@ -2594,7 +2594,7 @@
         },
         "mounted": {
           "type": "boolean",
-          "description": "Whether the datastore is mounted in VMware or no",
+          "description": "Whether the datastore is mounted in VMware or not",
           "readOnly": true
         }
       },
@@ -2698,7 +2698,7 @@
         },
         "avsVmInternalId": {
           "type": "string",
-          "description": "Pure Storage's internal Id for this AVS VM"
+          "description": "Pure Storage's internal ID for this AVS VM"
         }
       },
       "required": [
@@ -2900,19 +2900,6 @@
         ]
       },
       "readOnly": true
-    },
-    "AzureProperties": {
-      "type": "object",
-      "description": "Azure Volume Group assigned to the volume.",
-      "properties": {
-        "volumeGroupInternalId": {
-          "type": "string",
-          "description": "Azure Volume Group ID assigned to the volume."
-        }
-      },
-      "required": [
-        "volumeGroupInternalId"
-      ]
     },
     "AzureVmwareService": {
       "type": "object",

@@ -96,18 +96,18 @@ interface Reservations
   @added(Versions.v5_preview)
   @doc("Provides various statistics about resources billed via given reservation.")
   @armResourceAction(Reservation)
-  @action("getUsageDetails")
+  @action("getBillingStatus")
   @post
-  getUsageDetails(
+  getBillingStatus(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
 
   @added(Versions.v5_preview)
   @doc("Provides a summarized report along with actions for resources billed via given reservation")
   @armResourceAction(Reservation)
-  @action("getBillingUsageReport")
+  @action("getBillingReport")
   @post
-  getBillingUsageReport(
+  getBillingReport(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
 }
@@ -921,7 +921,7 @@ model AvsStorageContainerProperties {
   datastore?: string;
 
   @added(Versions.v4_preview)
-  @doc("Whether the datastore is mounted in VMware or no")
+  @doc("Whether the datastore is mounted in VMware or not")
   @visibility("read")
   mounted?: boolean;
 }
@@ -1089,6 +1089,7 @@ model AvsDiskDetails {
   avsStorageContainerResourceId: string;
 }
 
+@removed(Versions.v5_preview)
 @doc("Azure Volume Group assigned to the volume.")
 model AzureProperties {
   @doc("Azure Volume Group ID assigned to the volume.")
@@ -1124,7 +1125,7 @@ model AvsVm is ProxyResource<AvsVmProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsVm.name, "Id of AVS VM.");
+@@doc(AvsVm.name, "ID of the AVS VM");
 
 @doc("AVS VM properties")
 model AvsVmProperties {
@@ -1191,7 +1192,7 @@ model AvsVmDetails {
   @doc("Type of the VMware VM using this set of volumes")
   vmType: VmType;
 
-  @doc("Pure Storage's internal Id for this AVS VM")
+  @doc("Pure Storage's internal ID for this AVS VM")
   avsVmInternalId: string;
 }
 
