@@ -21,112 +21,6 @@
   "tags": [],
   "paths": {},
   "definitions": {
-    "ApiError": {
-      "type": "object",
-      "description": "Api error.",
-      "properties": {
-        "details": {
-          "type": "array",
-          "description": "The Api error details",
-          "items": {
-            "$ref": "#/definitions/ApiErrorBase"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
-        },
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "ApiErrorBase": {
-      "type": "object",
-      "description": "Api error base.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
-    },
-    "CloudError": {
-      "type": "object",
-      "description": "An error response from the Compute service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ApiError",
-          "description": "Api error."
-        }
-      }
-    },
-    "ExtendedLocation": {
-      "type": "object",
-      "description": "The complex type of the extended location.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extended location."
-        },
-        "type": {
-          "$ref": "#/definitions/ExtendedLocationTypes",
-          "description": "The type of the extended location."
-        }
-      }
-    },
-    "ExtendedLocationTypes": {
-      "type": "string",
-      "description": "The type of extendedLocation.",
-      "enum": [
-        "EdgeZone"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EdgeZone",
-            "value": "EdgeZone"
-          }
-        ]
-      }
-    },
-    "InnerError": {
-      "type": "object",
-      "description": "Inner error details.",
-      "properties": {
-        "exceptiontype": {
-          "type": "string",
-          "description": "The exception type."
-        },
-        "errordetail": {
-          "type": "string",
-          "description": "The internal error message or exception dump."
-        }
-      }
-    },
     "Plan": {
       "type": "object",
       "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.",
@@ -149,73 +43,6 @@
         }
       }
     },
-    "Resource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
-    "ResourceWithOptionalLocation": {
-      "type": "object",
-      "description": "The Resource model definition with location property as optional.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Sku": {
       "type": "object",
       "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.",
@@ -232,16 +59,6 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the number of virtual machines in the scale set."
-        }
-      }
-    },
-    "SubResourceReadOnly": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
         }
       }
     }
