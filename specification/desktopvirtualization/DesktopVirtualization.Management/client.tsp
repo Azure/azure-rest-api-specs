@@ -14,3 +14,13 @@ using Microsoft.DesktopVirtualization;
 @@clientName(CustomPrivateEndpointConnection, "PrivateEndpointConnections");
 
 @@clientName(AppAttachPackages, "AppAttachPackage");
+
+@@clientName(AppAttachPackages.createOrUpdate::parameters.resource,
+  "appAttachPackage"
+);
+
+@@clientName(Applications.createOrUpdate::parameters.resource, "application");
+
+@@clientName(CustomPrivateEndpointConnection.updateByWorkspace::parameters.body,
+  "connection"
+);
