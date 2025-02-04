@@ -390,7 +390,7 @@
     },
     "/messages/conversations/{conversationId}:terminate": {
       "post": {
-        "operationId": "ConversationManagementOperations_DeleteConversation",
+        "operationId": "ConversationManagementOperations_TerminateConversation",
         "tags": [
           "ConversationManagement"
         ],
@@ -419,9 +419,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CreateConversationResult"
-            },
             "headers": {
               "Repeatability-Result": {
                 "type": "string",
@@ -1344,19 +1341,6 @@
         "message",
         "senderCommunicationIdentifier",
         "createdOn"
-      ]
-    },
-    "CreateConversationResult": {
-      "type": "object",
-      "description": "Response for the create conversation operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Server-generated conversation ID."
-        }
-      },
-      "required": [
-        "id"
       ]
     },
     "DocumentConversationMessageContent": {

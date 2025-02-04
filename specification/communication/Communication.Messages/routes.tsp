@@ -62,10 +62,10 @@ interface ConversationManagementOperations {
   @doc("Terminates a specific conversation.")
   @added(Versions.c2025_03_01_Preview)
   @action("terminate")
-  deleteConversation is Operations.ResourceAction<
+  terminateConversation is Operations.ResourceAction<
   Conversation,
   {},
-  OkResponse & CreateConversationResult
+  OkResponse
 >;
 }
 

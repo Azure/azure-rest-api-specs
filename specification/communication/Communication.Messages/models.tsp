@@ -565,20 +565,6 @@ model SendConversationMessageResult {
 
 @added(Versions.c2025_03_01_Preview)
 @resource("messages/conversations")
-@doc("Request payload for creating a conversation.")
-model CreateConversationRequest {
-  @key
-  @visibility("create")
-  @doc("The conversation details.")
-  conversation: Conversation;
-
-  @doc("An intial message within the conversation.")
-  initialMessage?: Message;
-}
-
-@clientName("ConversationItem", "csharp")
-@added(Versions.c2025_03_01_Preview)
-@resource("messages/conversations")
 @doc("A conversation.")
 model Conversation {
   @key
@@ -600,26 +586,11 @@ model Conversation {
 }
 
 @added(Versions.c2025_03_01_Preview)
-@doc("Response for the create conversation operation.")
-model CreateConversationResult {
-  @doc("Server-generated conversation ID.")
-  id: string;
-}
-
-@added(Versions.c2025_03_01_Preview)
 @doc("Conversation message send request body.")
 model ConversationMessagesSendRequestBody {
   @doc("Details of the conversation message to send.")
   @bodyRoot
   body: SendConversationMessageRequest;
-}
-
-@added(Versions.c2025_03_01_Preview)
-@doc("Create conversation message request body.")
-model CreateConversationRequestBody {
-  @doc("Details of the payload for creating a conversation.")
-  @bodyRoot
-  body: CreateConversationRequest;
 }
 
 @added(Versions.c2025_03_01_Preview)
