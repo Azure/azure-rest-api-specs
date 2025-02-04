@@ -34,16 +34,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AvailableQuotaArmPaginatedResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableQuotaArmPaginatedResult"
             }
           }
         },
@@ -79,16 +79,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AvailableQuota"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AvailableQuota"
             }
           }
         },
@@ -124,16 +124,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/UsageAndQuotaDetailsArmPaginatedResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageAndQuotaDetailsArmPaginatedResult"
             }
           }
         },
@@ -13908,21 +13908,9 @@
     "ActualCapacityInfo": {
       "type": "object",
       "properties": {
-        "failed": {
+        "total": {
           "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedFailed": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
-          "default": 0,
-          "type": "integer"
-        },
-        "outdatedSucceeded": {
-          "format": "int32",
-          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
           "default": 0,
           "type": "integer"
         },
@@ -13932,9 +13920,21 @@
           "default": 0,
           "type": "integer"
         },
-        "total": {
+        "failed": {
           "format": "int32",
-          "description": "Gets or sets the total number of instances (scale units) regardless of provisioning state or whether current group payload version matches the target group payload.",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state and have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedSucceeded": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Succeeded provisioning state but do not have target group payload.",
+          "default": 0,
+          "type": "integer"
+        },
+        "outdatedFailed": {
+          "format": "int32",
+          "description": "Gets or sets the number of instances (scale units) which have Failed provisioning state but do not have target group payload.",
           "default": 0,
           "type": "integer"
         }
@@ -16347,7 +16347,6 @@
     },
     "ContentSafety": {
       "required": [
-        "contentSafetyLevel",
         "contentSafetyStatus"
       ],
       "type": "object",
@@ -16984,19 +16983,24 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Conversation"
+            "value": "Conversation",
+            "description": "Generate conversational data (multi/single turn)"
           },
           {
-            "value": "Math"
+            "value": "Math",
+            "description": "Generate Math data for numerical responses"
           },
           {
-            "value": "Nli"
+            "value": "Nli",
+            "description": "Generate Natural Language Inference data"
           },
           {
-            "value": "NluQa"
+            "value": "NluQa",
+            "description": "Generate Natural Language Understanding data for Question Answering data"
           },
           {
-            "value": "Summarization"
+            "value": "Summarization",
+            "description": "Generate Key Summary for an Article"
           }
         ]
       },
@@ -17014,10 +17018,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "LabelGeneration"
+            "value": "LabelGeneration",
+            "description": "Label Generation by Teacher Model Inferencing"
           },
           {
-            "value": "DataGeneration"
+            "value": "DataGeneration",
+            "description": "Synthetic Data Generation"
           }
         ]
       },
@@ -17048,7 +17054,7 @@
           ]
         },
         "promptSettings": {
-          "description": "PromptSettings.",
+          "description": "Prompt Settings.",
           "$ref": "#/definitions/PromptSettings",
           "x-nullable": true
         },
@@ -18081,7 +18087,7 @@
       "type": "object",
       "properties": {
         "authMode": {
-          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication.\r\nUse 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
+          "description": "[Required] The authentication method for invoking the endpoint (data plane operation). Use 'Key' for key-based authentication. Use 'AMLToken' for Azure Machine Learning token-based authentication. Use 'AADToken' for Microsoft Entra token-based authentication.",
           "$ref": "#/definitions/EndpointAuthMode"
         },
         "description": {
