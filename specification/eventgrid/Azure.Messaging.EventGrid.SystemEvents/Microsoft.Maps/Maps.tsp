@@ -1,5 +1,3 @@
-import "@typespec/versioning";
-using TypeSpec.Versioning;
 /** Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -27,7 +25,6 @@ model MapsGeofenceEventProperties {
   invalidPeriodGeofenceGeometryId: string[];
 
   /** True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   isEventPublished: boolean;
 }
 
@@ -37,18 +34,15 @@ model MapsGeofenceGeometry {
   deviceId: string;
 
   /** Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   distance: float32;
 
   /** The unique ID for the geofence geometry. */
   geometryId: string;
 
   /** Latitude of the nearest point of the geometry. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   nearestLat: float32;
 
   /** Longitude of the nearest point of the geometry. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   nearestLon: float32;
 
   /** The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API. */
