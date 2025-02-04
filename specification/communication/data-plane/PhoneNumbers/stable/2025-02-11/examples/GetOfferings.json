@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2025-02-11",
+    "endpoint": "https://resourcename.communication.azure.com/",
+    "countryCode": "CA",
+    "header": {
+      "accept-language": "en-US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "phoneNumberOfferings": [
+          {
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "availableCapabilities": {
+              "calling": "outbound",
+              "sms": "outbound"
+            },
+            "cost": {
+              "amount": 1.0,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            }
+          },
+          {
+            "phoneNumberType": "geographic",
+            "assignmentType": "person",
+            "availableCapabilities": {
+              "calling": "inbound+outbound",
+              "sms": "outbound"
+            },
+            "cost": {
+              "amount": 1.0,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            }
+          },
+          {
+            "phoneNumberType": "tollFree",
+            "assignmentType": "application",
+            "availableCapabilities": {
+              "calling": "none",
+              "sms": "outbound"
+            },
+            "cost": {
+              "amount": 2.0,
+              "currencyCode": "USD",
+              "billingFrequency": "monthly"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
