@@ -427,9 +427,10 @@
     },
     "operation": {
       "type": "string",
-      "description": "The type of long running operation. Only PUT is supported as of now.",
+      "description": "The type of long-running operation the user wants to cancel, such as 'Put'.",
       "enum": [
-        "PUT"
+        "Unknown",
+        "Put"
       ],
       "x-ms-enum": {
         "name": "operation",
@@ -438,10 +439,10 @@
     },
     "CancelOperationType": {
       "type": "object",
-      "description": "Cancels an ongoing long-running operation, only PUT is supported now",
+      "description": "Cancels an ongoing long-running operation, only Put is supported now",
       "properties": {
         "operation": {
-          "description": "The type of operation, example PUT",
+          "description": "The type of long-running operation the user wants to cancel, such as 'Put'.",
           "$ref": "#/definitions/operation"
         }
       }
