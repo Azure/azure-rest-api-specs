@@ -368,11 +368,8 @@ alias AcceptDatetimeHeader = {
   acceptDatetime?: string;
 };
 
-alias SelectQueryParam<
-  TDoc extends valueof string,
-  Type extends TypeSpec.Reflection.Model | string
-> = {
-  @doc(TDoc)
+alias SelectQueryParam<Type extends TypeSpec.Reflection.Model | string> = {
+  @doc("Used to select what fields are present in the returned resource(s).")
   @query("$Select")
   select?: Type[];
 };

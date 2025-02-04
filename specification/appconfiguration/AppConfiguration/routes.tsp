@@ -69,10 +69,7 @@ alias KeyValuesRequestParams = {
   ...SyncTokenHeader;
   ...AfterHeader;
   ...AcceptDatetimeHeader;
-  ...SelectQueryParam<
-    "Used to select what fields are present in the returned resource(s).",
-    KeyValueFields
-  >;
+  ...SelectQueryParam<KeyValueFields>;
   ...SnapshotOptionalQueryParam<"""
     A filter used get key-values for a snapshot. The value should be the name of
     the snapshot. Not valid when used with 'key' and 'label' filters.
@@ -118,10 +115,7 @@ op getKeyValue is Foundations.ResourceOperation<
   KeyValue,
   {
     ...LabelQueryParam<"The label of the key-value to retrieve.">;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      KeyValueFields
-    >;
+    ...SelectQueryParam<KeyValueFields>;
     ...SyncTokenHeader;
     ...AcceptDatetimeHeader;
     ...IfMatchHeader;
@@ -205,10 +199,7 @@ op checkKeyValue is AppConfigOperation<
     ...AcceptDatetimeHeader;
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      KeyValueFields
-    >;
+    ...SelectQueryParam<KeyValueFields>;
   },
   OkResponse & AppConfigResponseHeaders
 >;
@@ -222,10 +213,7 @@ op getSnapshots is Foundations.ResourceList<
   {
     ...NameQueryParam<"A filter for the name of the returned snapshots.">;
     ...AfterHeader;
-    ...SelectQueryParam<
-      "Used to select what fields are present in the returned resource(s).",
-      SnapshotFields
-    >;
+    ...SelectQueryParam<SnapshotFields>;
 
     @doc("Used to filter returned snapshots by their status property.")
     @query("status")
@@ -254,10 +242,7 @@ op checkSnapshots is AppConfigOperation<
 @doc("Gets a single key-value snapshot.")
 op getSnapshot is StandardOps.ResourceRead<
   Snapshot,
-  QueryParametersTrait<SelectQueryParam<
-    "Used to select what fields are present in the returned resource(s).",
-    SnapshotFields
-  >> &
+  QueryParametersTrait<SelectQueryParam<SnapshotFields>> &
     RequestHeadersTrait<{
       ...SyncTokenHeader;
       ...IfMatchHeader;
@@ -347,10 +332,7 @@ alias LabelsRequestParams = {
   ...SyncTokenHeader;
   ...AfterHeader;
   ...AcceptDatetimeHeader;
-  ...SelectQueryParam<
-    "Used to select what fields are present in the returned resource(s).",
-    LabelFields
-  >;
+  ...SelectQueryParam<LabelFields>;
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
@@ -424,10 +406,7 @@ alias RevisionsRequestParams = {
   ...SyncTokenHeader;
   ...AfterHeader;
   ...AcceptDatetimeHeader;
-  ...SelectQueryParam<
-    "Used to select what fields are present in the returned resource(s).",
-    KeyValueFields
-  >;
+  ...SelectQueryParam<KeyValueFields>;
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
   ...TagsQueryParam<"""
     A filter used to query by tags. Syntax reference:
