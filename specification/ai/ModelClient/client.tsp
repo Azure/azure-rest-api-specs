@@ -112,9 +112,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
 
-// By making ChatMessageAudioContentItem abstract and the underlying methods internal, we'll
-// provide a single method for users to interact with similar to image, while providing the
-// backend with the structure it needs.
+// Make these internal, customize a third class for users to interact with
 @@access(AI.Model.ChatMessageAudioDataContentItem, Access.internal);
 @@access(AI.Model.ChatMessageAudioUrlContentItem, Access.internal);
 
@@ -135,8 +133,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "ImageDetailLevel",
   "python"
 );
-@@clientName(AI.Model.ChatMessageAudioContentItem,
-  "AudioContentItem",
+@@clientName(AI.Model.ChatMessageAudioUrlContentItem,
+  "AudioUrlContentItem",
   "python"
 );
 @@clientName(AI.Model.ChatMessageInputAudio, "InputAudio", "python");
