@@ -1772,7 +1772,7 @@ model HostPoolUpdateConfigurationProperties {
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage: string = "";
+  logOffMessage: string;
 }
 
 /**
