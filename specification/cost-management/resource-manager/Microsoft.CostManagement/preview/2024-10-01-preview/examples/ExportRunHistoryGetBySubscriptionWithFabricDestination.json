@@ -1,9 +1,8 @@
 {
   "parameters": {
     "api-version": "2024-10-01-preview",
-    "billingAccountId": "12",
-    "departmentId": "1234",
-    "scope": "providers/Microsoft.Billing/billingAccounts/12/departments/1234",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "exportName": "TestExport"
   },
   "responses": {
@@ -11,7 +10,7 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/12/departments/1234/providers/Microsoft.CostManagement/exports/JohnDoeSchedule/Run/1e25d58a-a3b0-4916-9542-6e04a89bc100",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/JohnDoeSchedule/Run/1e25d58a-a3b0-4916-9542-6e04a89bc100",
             "properties": {
               "executionType": "OnDemand",
               "status": "Completed",
@@ -24,13 +23,21 @@
               "manifestFile": "ScheduledTestsForJohnDoe/JohnDoeSchedule/20180729-20180804/manifestfile",
               "fileName": "ScheduledTestsForJohnDoe/JohnDoeSchedule/20180729-20180804/JohnDoeSchedule_1e25d58a-a3b0-4916-9542-6e04a89bc100.csv",
               "runSettings": {
-                "format": "Csv",
+                "format": "Delta",
                 "deliveryInfo": {
                   "destination": {
-                    "type": "AzureBlob",
-                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-                    "container": "exports",
-                    "rootFolderPath": "ScheduledTestsForJohnDoe"
+                    "type": "MicrosoftFabric",
+                    "microsoftFabricSettings": {
+                      "workspace": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "displayName": "MyWorkspace"
+                      },
+                      "lakehouse": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "displayName": "MyLakehouse"
+                      },
+                      "tableName": "testexport"
+                    }
                   }
                 },
                 "definition": {
@@ -56,13 +63,13 @@
                 },
                 "partitionData": true,
                 "dataOverwriteBehavior": "OverwritePreviousReport",
-                "compressionMode": "gzip",
+                "compressionMode": null,
                 "exportDescription": "This is a test export."
               }
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/12/departments/1234/providers/Microsoft.CostManagement/exports/JohnDoeSchedule/Run/11ac6811-dca3-46ad-b326-4704cf0c58ef",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/JohnDoeSchedule/Run/11ac6811-dca3-46ad-b326-4704cf0c58ef",
             "properties": {
               "executionType": "Scheduled",
               "status": "Completed",
@@ -75,13 +82,21 @@
               "manifestFile": "ScheduledTestsForJohnDoe/JohnDoeSchedule/20180729-20180804/manifestfile",
               "fileName": "ScheduledTestsForJohnDoe/JohnDoeSchedule/20180729-20180804/JohnDoeSchedule_11ac6811-dca3-46ad-b326-4704cf0c58ef.csv",
               "runSettings": {
-                "format": "Csv",
+                "format": "Delta",
                 "deliveryInfo": {
                   "destination": {
-                    "type": "AzureBlob",
-                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-                    "container": "exports",
-                    "rootFolderPath": "ScheduledTestsForJohnDoe"
+                    "type": "MicrosoftFabric",
+                    "microsoftFabricSettings": {
+                      "workspace": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "displayName": "MyWorkspace"
+                      },
+                      "lakehouse": {
+                        "id": "00000000-0000-0000-0000-000000000000",
+                        "displayName": "MyLakehouse"
+                      },
+                      "tableName": "testexport"
+                    }
                   }
                 },
                 "definition": {
@@ -107,7 +122,7 @@
                 },
                 "partitionData": true,
                 "dataOverwriteBehavior": "OverwritePreviousReport",
-                "compressionMode": "gzip",
+                "compressionMode": null,
                 "exportDescription": "This is a test export."
               }
             }

@@ -16,12 +16,13 @@
           "recurrence": "Weekly",
           "recurrencePeriod": {
             "from": "2020-06-01T00:00:00Z",
-            "to": "2020-10-31T00:00:00Z"
+            "to": "2020-06-3T00:00:00Z"
           }
         },
         "format": "Csv",
         "deliveryInfo": {
           "destination": {
+            "type": "AzureBlob",
             "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
             "container": "exports",
             "rootFolderPath": "ad-hoc"
@@ -33,6 +34,7 @@
           "dataSet": {
             "granularity": "Daily",
             "configuration": {
+              "dataVersion": "2023-05-01",
               "columns": [
                 "Date",
                 "MeterId",
@@ -42,7 +44,11 @@
               ]
             }
           }
-        }
+        },
+        "partitionData": true,
+        "dataOverwriteBehavior": "OverwritePreviousReport",
+        "compressionMode": "gzip",
+        "exportDescription": "This is a test export."
       }
     }
   },
@@ -64,12 +70,13 @@
             "recurrence": "Weekly",
             "recurrencePeriod": {
               "from": "2020-06-01T00:00:00Z",
-              "to": "2020-10-31T00:00:00Z"
+              "to": "2020-06-3T00:00:00Z"
             }
           },
           "format": "Csv",
           "deliveryInfo": {
             "destination": {
+              "type": "AzureBlob",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
               "container": "exports",
               "rootFolderPath": "ad-hoc"
@@ -81,6 +88,7 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
+                "dataVersion": "2023-05-01",
                 "columns": [
                   "Date",
                   "MeterId",
@@ -90,7 +98,11 @@
                 ]
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     },
@@ -111,12 +123,13 @@
             "recurrence": "Weekly",
             "recurrencePeriod": {
               "from": "2020-06-01T00:00:00Z",
-              "to": "2020-10-31T00:00:00Z"
+              "to": "2020-06-3T00:00:00Z"
             }
           },
           "format": "Csv",
           "deliveryInfo": {
             "destination": {
+              "type": "AzureBlob",
               "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
               "container": "exports",
               "rootFolderPath": "ad-hoc"
@@ -128,6 +141,7 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
+                "dataVersion": "2023-05-01",
                 "columns": [
                   "Date",
                   "MeterId",
@@ -137,7 +151,11 @@
                 ]
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }

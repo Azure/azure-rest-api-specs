@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2024-10-01-preview",
-    "managementGroupId": "TestMG",
-    "scope": "providers/Microsoft.Management/managementGroups/TestMG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "exportName": "TestExport",
     "parameters": {
       "identity": {
@@ -18,13 +18,21 @@
             "to": "2020-06-3T00:00:00Z"
           }
         },
-        "format": "Csv",
+        "format": "Delta",
         "deliveryInfo": {
           "destination": {
-            "type": "AzureBlob",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-            "container": "exports",
-            "rootFolderPath": "ad-hoc"
+            "type": "MicrosoftFabric",
+            "microsoftFabricSettings": {
+              "workspace": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "displayName": "MyWorkspace"
+              },
+              "lakehouse": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "displayName": "MyLakehouse"
+              },
+              "tableName": "testexport"
+            }
           }
         },
         "definition": {
@@ -46,7 +54,7 @@
         },
         "partitionData": true,
         "dataOverwriteBehavior": "OverwritePreviousReport",
-        "compressionMode": "gzip",
+        "compressionMode": null,
         "exportDescription": "This is a test export."
       }
     }
@@ -54,7 +62,7 @@
   "responses": {
     "201": {
       "body": {
-        "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "identity": {
@@ -72,13 +80,21 @@
               "to": "2020-06-3T00:00:00Z"
             }
           },
-          "format": "Csv",
+          "format": "Delta",
           "deliveryInfo": {
             "destination": {
-              "type": "AzureBlob",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-              "container": "exports",
-              "rootFolderPath": "ad-hoc"
+              "type": "MicrosoftFabric",
+              "microsoftFabricSettings": {
+                "workspace": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "displayName": "MyWorkspace"
+                },
+                "lakehouse": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "displayName": "MyLakehouse"
+                },
+                "tableName": "testexport"
+              }
             }
           },
           "definition": {
@@ -100,14 +116,14 @@
           },
           "partitionData": true,
           "dataOverwriteBehavior": "OverwritePreviousReport",
-          "compressionMode": "gzip",
+          "compressionMode": null,
           "exportDescription": "This is a test export."
         }
       }
     },
     "200": {
       "body": {
-        "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+        "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
         "identity": {
@@ -125,13 +141,21 @@
               "to": "2020-06-3T00:00:00Z"
             }
           },
-          "format": "Csv",
+          "format": "Delta",
           "deliveryInfo": {
             "destination": {
-              "type": "AzureBlob",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Storage/storageAccounts/ccmeastusdiag182",
-              "container": "exports",
-              "rootFolderPath": "ad-hoc"
+              "type": "MicrosoftFabric",
+              "microsoftFabricSettings": {
+                "workspace": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "displayName": "MyWorkspace"
+                },
+                "lakehouse": {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "displayName": "MyLakehouse"
+                },
+                "tableName": "testexport"
+              }
             }
           },
           "definition": {
@@ -153,7 +177,7 @@
           },
           "partitionData": true,
           "dataOverwriteBehavior": "OverwritePreviousReport",
-          "compressionMode": "gzip",
+          "compressionMode": null,
           "exportDescription": "This is a test export."
         }
       }
