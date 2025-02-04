@@ -195,11 +195,11 @@ union JsonWebKeyEncryptionAlgorithm {
   A256_CBCPAD: "A256CBCPAD",
 
   /** CKM AES key wrap. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
 
   /** CKM AES key wrap with padding. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
@@ -238,6 +238,24 @@ union JsonWebKeySignatureAlgorithm {
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in https://tools.ietf.org/html/rfc7518
    */
   RS512: "RS512",
+
+  /**
+   * HMAC using SHA-256, as described in  https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS256: "HS256",
+
+  /**
+   * HMAC using SHA-384, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS384: "HS384",
+
+  /**
+   * HMAC using SHA-512, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS512: "HS512",
 
   /**
    * Reserved
@@ -376,6 +394,41 @@ model KeyAttributes {
    */
   @visibility("read")
   hsmPlatform?: string;
+
+  /**
+   * The key or key version attestation information.
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  attestation?: KeyAttestation;
+}
+
+/**
+ * The key attestation information.
+ */
+@added(KeyVault.Versions.`v7.6_preview.2`)
+model KeyAttestation {
+  /**
+   * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
+   */
+  @encode("base64url")
+  certificatePemFile?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a private key.
+   */
+  @encode("base64url")
+  privateKeyAttestation?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a public key in case of asymmetric key.
+   */
+  @encode("base64url")
+  publicKeyAttestation?: bytes;
+
+  /**
+   * The version of the attestation.
+   */
+  version?: string;
 }
 
 /**

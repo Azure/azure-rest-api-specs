@@ -649,3 +649,33 @@ op getRandomBytes is KeyVaultOperation<
   },
   RandomBytes
 >;
+
+/**
+ * The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+@summary("Gets the public part of a stored key along with its attestation blob.")
+@route("/keys/{key-name}/{key-version}/attestation")
+@get
+op getKeyAttestation is KeyVaultOperation<
+  {
+    /**
+     * The name of the key to retrieve attestation for.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion: string;
+  },
+  /**
+   * A key bundle containing the key, its attributes and attestation blob.
+   */
+  KeyBundle
+>;
