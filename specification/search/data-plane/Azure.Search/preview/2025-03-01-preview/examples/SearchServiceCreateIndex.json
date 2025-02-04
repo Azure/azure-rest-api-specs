@@ -55,6 +55,14 @@
           "vectorSearchProfile": "config2"
         },
         {
+          "name": "vector4",
+          "type": "Collection(Edm.Single)",
+          "retrievable": true,
+          "searchable": true,
+          "dimensions": 32,
+          "vectorSearchProfile": "config4"
+        },
+        {
           "name": "name",
           "type": "Edm.String",
           "retrievable": true,
@@ -231,6 +239,12 @@
             "algorithm": "dotProduct",
             "vectorizer": "custom-web-api",
             "compression": "myBQC"
+          },
+          {
+            "name": "config4",
+            "algorithm": "dotProduct",
+            "vectorizer": "custom-web-api",
+            "compression": "myBQWithoutOriginals"
           }
         ],
         "algorithms": [
@@ -317,6 +331,16 @@
               "enableRescoring": true,
               "defaultOversampling": 10,
               "rescoreStorageMethod": "preserveOriginals"
+            },
+            "truncationDimension": 2
+          },
+          {
+            "name": "myBQWithoutOriginals",
+            "kind": "binaryQuantization",
+            "rescoringOptions": {
+              "enableRescoring": true,
+              "defaultOversampling": 10,
+              "rescoreStorageMethod": "discardOriginals"
             },
             "truncationDimension": 2
           }
@@ -412,6 +436,20 @@
             "key": false,
             "dimensions": 10,
             "vectorSearchProfile": "config2",
+            "synonymMaps": []
+          },
+          {
+            "name": "vector4",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "dimensions": 32,
+            "vectorSearchProfile": "config4",
             "synonymMaps": []
           },
           {
@@ -637,6 +675,12 @@
               "algorithm": "dotProduct",
               "vectorizer": "custom-web-api",
               "compression": "myBQC"
+            },
+            {
+              "name": "config4",
+              "algorithm": "dotProduct",
+              "vectorizer": "custom-web-api",
+              "compression": "myBQWithoutOriginals"
             }
           ],
           "vectorizers": [
@@ -683,8 +727,6 @@
             {
               "name": "mySQ8",
               "kind": "scalarQuantization",
-              "rerankWithOriginalVectors": true,
-              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
@@ -698,13 +740,21 @@
             {
               "name": "myBQC",
               "kind": "binaryQuantization",
-              "rerankWithOriginalVectors": true,
-              "defaultOversampling": 10.0,
               "truncationDimension": 2,
               "rescoringOptions": {
                 "enableRescoring": true,
                 "defaultOversampling": 10.0,
                 "rescoreStorageMethod": "preserveOriginals"
+              }
+            },
+            {
+              "name": "myBQWithoutOriginals",
+              "kind": "binaryQuantization",
+              "truncationDimension": 2,
+              "rescoringOptions": {
+                "enableRescoring": true,
+                "defaultOversampling": 10.0,
+                "rescoreStorageMethod": "discardOriginals"
               }
             }
           ]

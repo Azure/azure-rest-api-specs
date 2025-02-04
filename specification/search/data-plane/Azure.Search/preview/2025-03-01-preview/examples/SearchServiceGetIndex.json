@@ -97,6 +97,20 @@
             "synonymMaps": []
           },
           {
+            "name": "vector4",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "dimensions": 32,
+            "vectorSearchProfile": "config4",
+            "synonymMaps": []
+          },
+          {
             "name": "name",
             "type": "Edm.String",
             "searchable": true,
@@ -319,6 +333,12 @@
               "algorithm": "dotProduct",
               "vectorizer": "custom-web-api",
               "compression": "myBQC"
+            },
+            {
+              "name": "config4",
+              "algorithm": "dotProduct",
+              "vectorizer": "custom-web-api",
+              "compression": "myBQWithoutOriginals"
             }
           ],
           "vectorizers": [
@@ -383,6 +403,16 @@
                 "enableRescoring": true,
                 "defaultOversampling": 10.0,
                 "rescoreStorageMethod": "preserveOriginals"
+              }
+            },
+            {
+              "name": "myBQWithoutOriginals",
+              "kind": "binaryQuantization",
+              "truncationDimension": 2,
+              "rescoringOptions": {
+                "enableRescoring": true,
+                "defaultOversampling": 10.0,
+                "rescoreStorageMethod": "discardOriginals"
               }
             }
           ]
