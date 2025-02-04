@@ -790,6 +790,13 @@
             "create"
           ]
         },
+        "dataSourceType": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "The source of the backing data source.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
         "source": {
           "$ref": "#/definitions/Source",
           "description": "Information about how to communicate with and authenticate to the backing data store."
@@ -801,6 +808,7 @@
         }
       },
       "required": [
+        "dataSourceType",
         "source"
       ]
     },
@@ -858,6 +866,48 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "DataSourceType": {
+      "type": "string",
+      "description": "The type of the backing data source.",
+      "enum": [
+        "NetApp_ONTAP",
+        "Azure_NetApp_Files",
+        "Dell_OneFS",
+        "AWS_S3",
+        "S3_Compatible"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NetApp_ONTAP",
+            "value": "NetApp_ONTAP",
+            "description": "NetApp ONTAP data source type."
+          },
+          {
+            "name": "Azure_NetApp_Files",
+            "value": "Azure_NetApp_Files",
+            "description": "Azure NetApp Files data source type."
+          },
+          {
+            "name": "Dell_OneFS",
+            "value": "Dell_OneFS",
+            "description": "Dell OneFS data source type."
+          },
+          {
+            "name": "AWS_S3",
+            "value": "AWS_S3",
+            "description": "AWS S3 data source type."
+          },
+          {
+            "name": "S3_Compatible",
+            "value": "S3_Compatible",
+            "description": "S3 Compatible data source type."
+          }
+        ]
+      }
     },
     "EndpointConnection": {
       "type": "object",
