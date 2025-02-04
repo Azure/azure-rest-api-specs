@@ -10174,53 +10174,44 @@
       "default": "h6",
       "description": "The depth of headers in the markdown output. Default is h6."
     },
-    "GenAISkill": {
+    "ChatCompletionSkill": {
       "type": "object",
-      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.GenAISkill",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/SearchIndexerSkill"
+          "$ref": "#/definitions/WebApiSkill"
         }
       ],
       "properties": {
-        "uri": {
-          "type": "string",
-          "description": "The URI for the deployed model in Azure AI Foundry. Required; typically copy-pasted from the models + endpoints page."
-        },
         "apiKey": {
           "type": "string",
           "description": "API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time."
         },
-        "authIdentity": {
-          "type": "string",
-          "description": "User-assigned managed identity to use for authentication to Azure OpenAI models. Both apiKey and authIdentity cannot be specified at the same time. If neither is specified, the system-assigned managed identity is used (only supported for Azure OpenAI)."
-        },
         "commonModelParameters": {
-          "$ref": "#/definitions/GenAISkillCommonModelParameters",
+          "$ref": "#/definitions/ChatCompletionCommonModelParameters",
           "description": "Common language model parameters that customers can tweak. If omitted, reasonable defaults will be applied."
         },
         "extraParameters": {
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
+          "additionalProperties": true,
+          "x-nullable": true,
           "description": "Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry’s extensibility pattern."
         },
         "extraParametersBehavior": {
-          "$ref": "#/definitions/GenAISkillExtraParametersBehavior",
+          "$ref": "#/definitions/ChatCompletionExtraParametersBehavior",
           "description": "How extra parameters are handled by Azure AI Foundry. Default is 'error'."
         },
         "responseFormat": {
-          "$ref": "#/definitions/GenAISkillResponseFormat",
-          "description": "Determines how the LLM should format its response. Defaults to 'text'."
+          "$ref": "#/definitions/ChatCompletionResponseFormat",
+          "description": "Determines how the LLM should format its response. Defaults to 'text' response type."
         }
       },
       "description": "A skill that calls a language model via Azure AI Foundry's Chat Completions endpoint."
     },
-    "GenAISkillCommonModelParameters": {
+    "ChatCompletionCommonModelParameters": {
       "type": "object",
       "x-ms-client-name": "CommonModelParameters",
-      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.GenAICommonModelParameters",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionCommonModelParameters",
       "properties": {
         "model": {
           "type": "string",
@@ -10242,9 +10233,8 @@
         },
         "maxTokens": {
           "type": "integer",
-          "default": 1024,
           "x-nullable": true,
-          "description": "Maximum number of tokens to generate. Default is 1024."
+          "description": "Maximum number of tokens to generate."
         },
         "temperature": {
           "type": "number",
@@ -10268,7 +10258,7 @@
       },
       "description": "Common language model parameters for Chat Completions. If omitted, default values are used."
     },
-    "GenAISkillExtraParametersBehavior": {
+    "ChatCompletionExtraParametersBehavior": {
       "type": "string",
       "enum": [
         "pass-through",
@@ -10276,11 +10266,11 @@
         "error"
       ],
       "x-ms-enum": {
-        "name": "GenAISkillExtraParametersBehavior",
+        "name": "ChatCompletionExtraParametersBehavior",
         "modelAsString": true,
         "values": [
           {
-            "value": "pass-through",
+            "value": "passThrough",
             "name": "PassThrough",
             "description": "Passes any extra parameters directly to the model."
           },
@@ -10299,27 +10289,75 @@
       "default": "error",
       "description": "Specifies how 'extraParameters' should be handled by Azure AI Foundry. Defaults to 'error'."
     },
-    "GenAISkillResponseFormat": {
+    "ChatCompletionResponseFormat": {
       "type": "object",
-      "x-ms-client-name": "ResponseFormat",
-      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.GenAIResponseFormat",
+      "x-ms-client-name": "ChatCompletionResponseFormat",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionResponseFormat",
       "properties": {
         "type": {
           "type": "string",
           "enum": [
             "text",
-            "json_object",
-            "json_schema"
+            "jsonObject",
+            "jsonSchema"
           ],
           "description": "Specifies how the LLM should format the response. Possible values: 'text' (plain string), 'json_object' (arbitrary JSON), or 'json_schema' (adheres to provided schema).",
           "default": "text"
         },
         "jsonSchemaProperties": {
           "type": "object",
-          "description": "A subset of JSON Schema describing the allowed structure. Required if 'type' = 'json_schema'."
+          "x-ms-client-name": "ChatCompletionSchemaProperties",
+          "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionJsonSchemaProperties",
+          "description": "An open dictionary for extended properties. Required if 'type' == 'json_schema'",
+          "x-nullable": true,
+          "properties": {
+            "description": {
+              "type": "string",
+              "x-nullable": true,
+              "description": "Description of the json schema the model will adhere to."
+            },
+            "strict": {
+              "type": "boolean",
+              "default": true,
+              "description": "Whether or not the model's response should use structured outputs. Default is true"
+            },
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionSchema"
+            }
+          }
         }
       },
       "description": "Determines how the language model's response should be serialized. Defaults to 'text'."
+    },
+    "ChatCompletionSchema": {
+      "type": "object",
+      "x-ms-client-name": "ChatCompletionSchema",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionSchema",
+      "x-nullable": true,
+      "description": "Object defining the custom schema the model will use to structure its output.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "object",
+          "description": "Type of schema representation. Usually 'object'. Default is 'object'."
+        },
+        "properties": {
+          "type": "string",
+          "description": "A JSON-formatted string that defines the output schema's properties and constraints for the model."
+        },
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of the property names that are required to be part of the model's response. All properties must be included for structured outputs."
+        },
+        "additionalParameters": {
+          "type": "boolean",
+          "default": false,
+          "description": "Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false."
+        }
+      }
     },
     "WebApiSkill": {
       "type": "object",
