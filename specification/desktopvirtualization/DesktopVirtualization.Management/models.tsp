@@ -499,6 +499,11 @@ union ScalingHostPoolType {
    * Users get a new (random) SessionHost every time it connects to the HostPool.
    */
   Pooled: "Pooled",
+
+  /**
+   * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
+   */
+  Personal: "Personal",
 }
 
 /**
@@ -1581,7 +1586,7 @@ model SecurityInfoProperties {
   /**
    * The security type used by virtual machine in hostpool session host. Default is Standard.
    */
-  type: SecurityType;
+  type: SecurityType = SecurityType.Standard;
 
   /**
    * Whether to use secureBoot on the virtual machine.
@@ -1767,7 +1772,7 @@ model HostPoolUpdateConfigurationProperties {
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage: string;
+  logOffMessage: string = "";
 }
 
 /**
