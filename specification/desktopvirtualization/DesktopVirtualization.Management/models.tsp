@@ -1761,18 +1761,18 @@ model HostPoolUpdateConfigurationProperties {
    * The maximum number of virtual machines to be removed during hostpool update.
    */
   @minValue(1)
-  maxVmsRemoved: int32;
+  maxVmsRemoved?: int32;
 
   /**
    * Grace period before logging off users in minutes.
    */
-  logOffDelayMinutes: int32;
+  logOffDelayMinutes?: int32;
 
   /**
    * Log off message sent to user for logoff. Default value is an empty string.
    */
   @maxLength(260)
-  logOffMessage?: string;
+  logOffMessage: string = "";
 }
 
 /**
