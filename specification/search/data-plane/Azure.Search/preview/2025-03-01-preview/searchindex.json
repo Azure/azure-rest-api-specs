@@ -1275,6 +1275,12 @@
           "readOnly": true,
           "description": "The approximate count of documents falling within the bucket described by this facet; null if metric aggregation is being used. "
         },
+        "sum": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The resulting aggregated sum for the facet when a sum metric aggregation is requested; null otherwise."
+        },
         "@search.facets": {
           "$ref": "#/definitions/SearchFacetsResult",
           "readOnly": true,
@@ -2628,10 +2634,6 @@
         "hybridSearch": {
           "$ref": "#/definitions/HybridSearch",
           "description": "The query parameters to configure hybrid search behaviors."
-        },
-        "extendedFacets": {
-          "$ref": "#/definitions/ExtendedFacets",
-          "description": "A value that specifies how many aggregations and types of aggregations to execute on the documents."
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
@@ -3257,47 +3259,6 @@
       },
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
-    },
-    "ExtendedFacets": {
-      "type": "object",
-      "properties": {
-        "metrics": {
-          "$ref": "#/definitions/SearchMetric",
-          "description": "An optional type of facet aggregation that allows a search query to specify an aggregation on a target field on a set filtered documents, or all documents."
-        }
-      }
-    },
-    "SearchMetric": {
-      "type": "object",
-      "properties": {
-        "targetField": {
-          "type": "string",
-          "description": "The field that will be aggregated across documents."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "sum"
-          ],
-          "x-ms-enum": {
-            "name": "MetricType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "sum",
-                "name": "Sum",
-                "description": "Aggregates the 'targetField' value across documents using summation."
-              }
-            ]
-          }
-        },
-        "missing": {
-          "type":"number",
-          "format": "double",
-          "description": "When this value is specified, documents without a 'targetField' value will use this numeric value as its filler value."
-        }
-      },
-      "description": "Determines how to aggregate values from the 'targetField' of all documents."
     }
   },
   "parameters": {
