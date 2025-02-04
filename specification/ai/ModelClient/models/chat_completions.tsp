@@ -617,10 +617,7 @@ union ChatMessageImageDetailLevel {
 }
 
 @doc("A structured chat content item containing an audio content.")
-model ChatMessageAudioContentItem extends ChatMessageContentItem {}
-
-@doc("A structured chat content item containing an audio content.")
-model ChatMessageAudioUrlContentItem extends ChatMessageAudioContentItem {
+model ChatMessageAudioUrlContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'audio' for this type.")
   type: "audio_url";
 
@@ -630,7 +627,7 @@ model ChatMessageAudioUrlContentItem extends ChatMessageAudioContentItem {
 }
 
 @doc("A structured chat content item containing an audio content.")
-model ChatMessageAudioDataContentItem extends ChatMessageAudioContentItem {
+model ChatMessageAudioDataContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'input_audio' for this type.")
   type: "input_audio";
 
