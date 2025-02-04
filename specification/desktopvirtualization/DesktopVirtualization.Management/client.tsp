@@ -36,3 +36,9 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(MSIXImages.expand::parameters.body, "msixImageURI");
+
+@@clientName(ScalingPlans.create::parameters.resource, "scalingPlan");
+
+@@clientName(ScalingPlanPersonalSchedules.create::parameters.resource,
+  "scalingPlanSchedule"
+);
