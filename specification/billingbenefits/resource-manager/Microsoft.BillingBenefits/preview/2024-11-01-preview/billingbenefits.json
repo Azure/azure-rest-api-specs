@@ -1108,7 +1108,7 @@
     }
   },
   "definitions": {
-    "Sku": {
+    "ResourceSku": {
       "type": "object",
       "description": "The SKU to be applied for this resource",
       "properties": {
@@ -1132,7 +1132,7 @@
       "properties": {
         "sku": {
           "description": "Savings plan SKU",
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "kind": {
           "type": "string",
@@ -1526,7 +1526,7 @@
       "properties": {
         "sku": {
           "description": "Savings plan SKU",
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
           "description": "Savings plan properties",
@@ -1643,7 +1643,7 @@
       "properties": {
         "sku": {
           "description": "Savings plan SKU",
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
           "description": "Savings plan order properties",
@@ -1935,7 +1935,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2084,7 +2084,7 @@
       "properties": {
         "sku": {
           "description": "Reservation order SKU",
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "location": {
           "type": "string",
@@ -2163,7 +2163,7 @@
       "properties": {
         "sku": {
           "description": "Reservation order SKU",
-          "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/ResourceSku"
         },
         "location": {
           "type": "string",
@@ -2552,7 +2552,7 @@
     },
     "DiscountTypeProductSku": {
       "type": "object",
-      "x-ms-discriminator-value": "Sku",
+      "x-ms-discriminator-value": "ResourceSku",
       "description": "Discount type properties including product family name, product id, and sku id.",
       "allOf": [
         {
@@ -2623,18 +2623,18 @@
     },
     "DiscountType": {
       "type": "string",
-      "description": "Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.",
+      "description": "Defines the type of discount. Supported values are ProductFamily, Product, ResourceSku, CustomPrice, and CustomPriceMultiCurrency.",
       "enum": [
         "ProductFamily",
         "Product",
-        "Sku",
+        "ResourceSku",
         "CustomPrice",
         "CustomPriceMultiCurrency"
       ],
       "x-enum-description": [
         "Product family for which the discount applies",
         "Product for which the discount applies",
-        "Sku for which the discount applies",
+        "ResourceSku for which the discount applies",
         "Custom price for the discount",
         "Custom price across currencies for the discount"
       ],
@@ -2670,7 +2670,7 @@
       "type": "string"
     },
     "DiscountSku": {
-      "description": "Sku for the given discount. Validation: Optional.",
+      "description": "ResourceSku for the given discount. Validation: Optional.",
       "type": "string"
     },
     "DiscountPercentage": {
