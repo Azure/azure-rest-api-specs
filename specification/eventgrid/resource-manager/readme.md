@@ -38,7 +38,6 @@ input-file:
 - Microsoft.EventGrid/stable/2025-02-15/EventGrid.json
 
 
-LRO_RESPONSE_HEADER
 suppressions:
   - code: LRO_RESPONSE_HEADER
     reason: This is false positive as all the delete operations that were flagged are already part of previous GA version. When trying to add the header, it was flagged as breaking change. 
