@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -85,6 +86,13 @@ model CapabilityTypeProperties {
    */
   @visibility("read")
   azureRbacDataActions?: string[];
+
+  /**
+   * Required Azure Role Definition Ids to execute capability type.
+   */
+  @visibility("read")
+  @added(Microsoft.Chaos.Versions.v2025_01_01)
+  requiredAzureRoleDefinitionIds?: string[];
 
   /**
    * Runtime properties of this Capability Type.
