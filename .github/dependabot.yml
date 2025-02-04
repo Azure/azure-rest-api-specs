@@ -46,3 +46,5 @@ updates:
       - dependency-name: "prettier"
       # Points to "github:actions/github-script" since package isn't published to npmjs
       - dependency-name: "@types/github-script"
+    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
+    versioning-strategy: increase-if-necessary
