@@ -39,6 +39,17 @@ These settings apply only when `--tag=package-preview-2024-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2024-10-01-preview'
 input-file:
+  - Microsoft.CostManagement/preview/2024-10-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costallocation.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.budgets.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/settings.json
 ```
 
 ### Tag: package-2024-08
