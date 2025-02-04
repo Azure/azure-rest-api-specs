@@ -12895,30 +12895,6 @@
       ],
       "description": "Represents a synonym map definition."
     },
-    "SemanticModelFlighting": {
-      "type": "string",
-      "enum": [
-        "oldest",
-        "latest"
-      ],
-      "x-ms-enum": {
-        "name": "SemanticModelFlighting",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "oldest",
-            "name": "Oldest",
-            "description": "Use the oldest semantic model available in the service."
-          },
-          {
-            "value": "latest",
-            "name": "Latest",
-            "description": "Use the latest semantic model available in the service."
-          }
-        ]
-      },
-      "description": "Determines how which semantic models to use during model flighting/upgrades."
-    },
     "ListSynonymMapsResult": {
       "type": "object",
       "properties": {
@@ -13186,10 +13162,11 @@
           "x-nullable": false,
           "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
         },
-        "modelFlighting": {
-          "$ref": "#/definitions/SemanticModelFlighting",
-          "x-nullable": true,
-          "description": "Determines how which semantic models to use during model flighting/upgrades."
+        "flightingOptIn": {
+          "required": false,
+          "default": false,
+          "type": "boolean",
+          "description": "Determines how which semantic or query rewrite models to use during model flighting/upgrades."
         }
       },
       "required": [
