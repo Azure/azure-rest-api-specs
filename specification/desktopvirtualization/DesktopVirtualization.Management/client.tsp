@@ -42,3 +42,9 @@ using Microsoft.DesktopVirtualization;
 @@clientName(ScalingPlanPersonalSchedules.create::parameters.resource,
   "scalingPlanSchedule"
 );
+
+@@clientName(ScalingPlanPooledSchedules.create::parameters.resource,
+  "scalingPlanSchedule"
+);
+
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "workspace");
