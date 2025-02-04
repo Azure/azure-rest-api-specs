@@ -2026,15 +2026,15 @@
         }
       }
     },
-    "/indexesstats": {
+    "/indexstats": {
       "get": {
         "tags": [
           "Service"
         ],
-        "operationId": "GetIndexStatisticsSummaries",
+        "operationId": "GetIndexStatsSummary",
         "x-ms-examples": {
-          "SearchServiceIndexesStatsSummary": {
-            "$ref": "./examples/SearchServiceGetIndexStatisticsSummaries.json"
+          "SearchServiceIndexStatsSummary": {
+            "$ref": "./examples/SearchServiceGetIndexStatsSummary.json"
           }
         },
         "description": "Retrieves a summary of statistics for all indexes in the search service.",
@@ -2050,7 +2050,7 @@
           "200": {
             "description": "Statistics summary for all indexes.",
             "schema": {
-              "$ref": "#/definitions/ListIndexStatisticsSummaries"
+              "$ref": "#/definitions/ListIndexStatsSummary"
             }
           },
           "default": {
@@ -8852,7 +8852,7 @@
       ],
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
-    "ListIndexStatisticsSummaries": {
+    "ListIndexStatsSummary": {
       "properties": {
         "value": {
           "x-ms-client-name": "IndexesStatistics",
