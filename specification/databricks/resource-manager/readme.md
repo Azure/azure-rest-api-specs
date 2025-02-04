@@ -20,6 +20,17 @@ batch:
   - tag: package-2023-05-01
 ```
 
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.Databricks/preview/2025-03-01-preview/accessconnector.json
+  - Microsoft.Databricks/preview/2025-03-01-preview/databricks.json
+  - Microsoft.Databricks/preview/2025-03-01-preview/vnetpeering.json
+```
+
 ### Tag: package-2024-09-01-preview and java
 
 These settings apply only when `--tag=package-2024-09-01-preview --java` is specified on the command line.
@@ -146,7 +157,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-2024-09-01-preview
+tag: package-preview-2025-03-01
 ```
 
 ### Tag: package-2018-04-01
