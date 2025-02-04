@@ -8913,6 +8913,10 @@
           "description": "ID of the vault which protects this item",
           "type": "string",
           "readOnly": true
+        },
+        "sourceSideScanInfo": {
+          "$ref": "#/definitions/SourceSideScanInfo",
+          "description": "Source side threat information"
         }
       },
       "discriminator": "protectedItemType"
@@ -9161,6 +9165,29 @@
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
+        },
+        "threatStatus": {
+          "description": "Threat status of the recovery point",
+          "enum": [
+            "Unknown",
+            "Healthy",
+            "UnHealthy",
+            "Warning",
+            "NotAvailable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThreatStatus",
+            "modelAsString": true
+          }
+        },
+        "threatInfo": {
+          "description": "Recovery point threat information.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ThreatInfo"
+          },
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "objectType"
@@ -9600,6 +9627,39 @@
       },
       "x-ms-discriminator-value": "SimpleSchedulePolicyV2"
     },
+    "SourceSideScanInfo": {
+      "description": "Source side threat information",
+      "type": "object",
+      "properties": {
+        "sourceSideScanStatus": {
+          "description": "Threat status of the container",
+          "enum": [
+            "Configured",
+            "NotConfigured",
+            "NotApplicable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceSideScanStatus",
+            "modelAsString": true
+          }
+        },
+        "sourceSideScanSummary": {
+          "description": "Threat summary for the container",
+          "enum": [
+            "Unknown",
+            "NotApplicable",
+            "Suspicious",
+            "Healthy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceSideScanSummary",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "SubProtectionPolicy": {
       "description": "Sub-protection policy which includes schedule and retention",
       "type": "object",
@@ -9770,6 +9830,67 @@
         "targetDirectoryForFileRestore": {
           "description": "Target directory location for restore as files.",
           "type": "string"
+        }
+      }
+    },
+    "ThreatInfo": {
+      "description": "Recovery Point Threat information",
+      "type": "object",
+      "properties": {
+        "threatTitle": {
+          "description": "Threat Subject",
+          "type": "string"
+        },
+        "threatDescription": {
+          "description": "Threat Description",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Timestamp when the last (latest)theat information was sent",
+          "type": "string"
+        },
+        "threatState": {
+          "description": "Threat Status Types",
+          "enum": [
+            "Active",
+            "InProgress",
+            "Ignored",
+            "Resolved"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThreatState",
+            "modelAsString": true
+          }
+        },
+        "threatStartTime": {
+          "format": "date-time",
+          "description": "Start timestamp of the threat",
+          "type": "string"
+        },
+        "threatEndTime": {
+          "format": "date-time",
+          "description": "End timestamp of the threat",
+          "type": "string"
+        },
+        "threatURI": {
+          "description": "threat details link",
+          "type": "string"
+        },
+        "threatSeverity": {
+          "description": "Threat Severity Types",
+          "enum": [
+            "Critical",
+            "High",
+            "Warning",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThreatSeverity",
+            "modelAsString": true
+          }
         }
       }
     },
