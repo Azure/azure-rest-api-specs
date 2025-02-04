@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.LoadTestService
-  output-folder: $(csharp-sdks-folder)/loadtestservice/management/Microsoft.LoadTestService/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/loadtestservice/Azure.ResourceManager.LoadTesting/src/Generated
 ```
