@@ -24,3 +24,9 @@ using Microsoft.DesktopVirtualization;
 @@clientName(CustomPrivateEndpointConnection.updateByWorkspace::parameters.body,
   "connection"
 );
+
+@@clientName(CustomPrivateEndpointConnection.updateByHostPool::parameters.body,
+  "connection"
+);
+
+@@clientName(HostPools.createOrUpdate::parameters.resource, "hostPool");
