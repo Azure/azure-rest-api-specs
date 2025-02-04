@@ -80,6 +80,8 @@ directive:
     from: billingbenefits.json
   - suppress: AllTrackedResourcesMustHaveDelete
     from: billingbenefits.json
+  - suppress: PatchIdentityProperty
+    from : billingbenefits.json
 ```
 
 ### Tag: package-preview-2024-11-01-preview
