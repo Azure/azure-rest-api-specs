@@ -96,8 +96,37 @@ describe("extractInputs", () => {
             owner: {
               login: "TestRepoOwnerLogin",
             },
+            url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName",
           },
-          pull_requests: [{ number: 123 }],
+          pull_requests: [
+            {
+              url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName/pulls/123",
+              number: 123,
+              base: {
+                repo: {
+                  url: "https://api.github.com/repos/TestRepoOwnerLogin/TestRepoName",
+                },
+              },
+            },
+            {
+              url: "https://api.github.com/repos/TestRepoOwnerLoginFork1/TestRepoName/pulls/1231",
+              number: 1231,
+              base: {
+                repo: {
+                  url: "https://api.github.com/repos/TestRepoOwnerLoginFork1/TestRepoName",
+                },
+              },
+            },
+            {
+              url: "https://api.github.com/repos/TestRepoOwnerLoginFork2/TestRepoName/pulls/1232",
+              number: 1232,
+              base: {
+                repo: {
+                  url: "https://api.github.com/repos/TestRepoOwnerLoginFork2/TestRepoName",
+                },
+              },
+            },
+          ],
         },
       },
     };

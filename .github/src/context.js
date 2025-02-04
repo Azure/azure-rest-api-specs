@@ -53,37 +53,44 @@ export async function extractInputs(github, context, core) {
 
     let issue_number;
 
-    const pull_requests = payload.workflow_run.pull_requests;
-    if (pull_requests && pull_requests.length > 0) {
+    let pull_requests = payload.workflow_run.pull_requests;
+    const head_sha = payload.workflow_run.head_sha;
+
+    if (pull_requests.length > 0) {
       // For non-fork PRs, we should be able to extract the PR number from the payload, which avoids an
       // unnecessary API call.  The listPullRequestsAssociatedWithCommit() API also seems to return
       // empty for non-fork PRs.
-      issue_number = pull_requests[0].number;
+
+      // List may include PRs from forks.  Filter to only PRs in the main fork.
+      pull_requests = pull_requests.filter(
+        (pr) => pr.base.repo.url === payload.workflow_run.repository.url,
+      );
     } else {
       // For fork PRs, we must call an API in the head repository to get the PR number in the target repository
 
       // Owner and repo for the PR head (at least one should differ from target for fork PRs)
       const head_owner = payload.workflow_run.head_repository.owner.login;
       const head_repo = payload.workflow_run.head_repository.name;
-      const head_sha = payload.workflow_run.head_sha;
 
       core.info(
         `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
       );
-      const { data: pullRequests } =
+
+      pull_requests = (
         await github.rest.repos.listPullRequestsAssociatedWithCommit({
           owner: head_owner,
           repo: head_repo,
           commit_sha: head_sha,
-        });
+        })
+      ).data;
+    }
 
-      if (pullRequests.length === 1) {
-        issue_number = pullRequests[0].number;
-      } else {
-        throw new Error(
-          `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
-        );
-      }
+    if (pull_requests.length === 1) {
+      issue_number = pull_requests[0].number;
+    } else {
+      throw new Error(
+        `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pull_requests.length}'.`,
+      );
     }
 
     inputs = {
