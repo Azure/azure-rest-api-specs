@@ -30,3 +30,9 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(HostPools.createOrUpdate::parameters.resource, "hostPool");
+
+@@clientName(AppAttachPackageInfo.`import`::parameters.body,
+  "importPackageInfoRequest"
+);
+
+@@clientName(MSIXImages.expand::parameters.body, "msixImageURI");
