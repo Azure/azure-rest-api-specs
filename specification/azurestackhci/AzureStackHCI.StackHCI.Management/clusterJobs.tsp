@@ -151,8 +151,11 @@ model AddServerJobServerDetails {
   @doc("Ip address of server to be added to cluster.")
   hostIpv4Address: string;
 
-  @doc("Azure resource id of Arc machine part of cluster for which job will be triggered.")
-  serverResourceId?: Azure.Core.armResourceIdentifier;
+  @doc("Local availability zone name of server to be added to rack aware cluster.")
+  localAvailabilityZoneName?: string;
+
+  @doc("Azure resource id of machine part of cluster for which job will be triggered.")
+  serverResourceId: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Properties for adding a server in the cluster.")
