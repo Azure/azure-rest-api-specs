@@ -299,7 +299,10 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
@@ -324,7 +327,10 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/DiskRP.json
   - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
   - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
 ```
 
@@ -335,7 +341,10 @@ These settings apply only when `--tag=package-2024-03-03-only` is specified on t
 ```yaml $(tag) == 'package-2024-03-03-only'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
 ```
 
 ### Tag: package-2024-07-01
