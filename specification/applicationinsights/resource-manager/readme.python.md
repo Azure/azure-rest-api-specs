@@ -32,7 +32,7 @@ batch:
   - tag: package-2021-10
   - tag: package-2022-04-01-only
   - tag: package-2022-06-15-only
-  - tag: package-2023-06-01-only
+  - tag: package-2023-06-01-python-only
   - tag: package-2024-02-01-preview-only
   - multiapiscript: true
 ```
@@ -51,11 +51,11 @@ namespace: azure.mgmt.applicationinsights.v2024_02_01_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2024_02_01_preview
 ```
 
-### Tag: package-2023-06-01-only and python
+### Tag: package-2023-06-01-python-only and python
 
-These settings apply only when `--tag=package-2023-06-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-python-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-only' && $(python)
+``` yaml $(tag) == 'package-2023-06-01-python-only' && $(python)
 namespace: azure.mgmt.applicationinsights.v2023_06_01
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2023_06_01
 ```

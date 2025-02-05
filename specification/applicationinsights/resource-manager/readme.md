@@ -257,11 +257,11 @@ directive:
     reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
-### Tag: package-2024-08-01
+### Tag: package-2024-08-01-only
 
-These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-08-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-08-01'
+``` yaml $(tag) == 'package-2024-08-01-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -291,11 +291,11 @@ input-file:
   - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
-### Tag: package-2024-04-25
+### Tag: package-2024-04-25-only
 
-These settings apply only when `--tag=package-2024-04-25` is specified on the command line.
+These settings apply only when `--tag=package-2024-04-25-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-04-25'
+``` yaml $(tag) == 'package-2024-04-25-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -314,11 +314,11 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
-### Tag: package-2023-10-01
+### Tag: package-2023-10-01-only
 
-These settings apply only when `--tag=package-2023-10-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-10-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10-01'
+``` yaml $(tag) == 'package-2023-10-01-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -338,11 +338,11 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2023-06-01
+### Tag: package-2023-06-01-only
 
-These settings apply only when `--tag=package-2023-06-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01'
+``` yaml $(tag) == 'package-2023-06-01-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -363,20 +363,20 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2023-06-01-only
+### Tag: package-2023-06-01-python-only
 
-These settings apply only when `--tag=package-2023-06-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-python-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-only'
+``` yaml $(tag) == 'package-2023-06-01-python-only'
 input-file:
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
 ```
 
-### Tag: package-2022-12-09
+### Tag: package-2022-12-09-only
 
-These settings apply only when `--tag=package-2022-12-09` is specified on the command line.
+These settings apply only when `--tag=package-2022-12-09-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-12-09'
+``` yaml $(tag) == 'package-2022-12-09-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -397,11 +397,11 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2022-07-27
+### Tag: package-2022-07-27-only
 
-These settings apply only when `--tag=package-2022-07-27` is specified on the command line.
+These settings apply only when `--tag=package-2022-07-27-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-07-27'
+``` yaml $(tag) == 'package-2022-07-27-only'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
