@@ -10,21 +10,40 @@ words:
   - adou
   - armstackhcivm
   - azurestackhci
+  - capi
   - drtm
+  - gpup
   - hcivm
   - hvci
+  - igvm
   - imds
   - mitigations
   - rdma
   - sdkauto
-  - sevsnp
   - stackhcivm
   - uefi
+  - unattend
+  - unpurposed
+  - vhds
   - vhdx
   - wdac
 overrides:
   - filename: >-
+      **/specification/azurestackhci/AzureStackHCI.StackHCIVM.Management/models.tsp
+    words:
+      - sevsnp
+  - filename: >-
+      **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/readme.md
+    words:
+      - azurestackhci
+      - stackhcivm
+      - virtualmachineinstances
+  - filename: >-
       **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/**/*.json
     words:
       - sevsnp
+  - filename: >-
+      **/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/**/*.json
+    words:
+      - unpurposed
 
