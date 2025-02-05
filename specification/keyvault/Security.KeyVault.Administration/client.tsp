@@ -16,6 +16,8 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.SettingTypeEnum, "KeyVaultSettingType", "java");
 
 //C# customizations
+@@clientName(KeyVault.Setting.type, "SettingType", "csharp");
+
 //@@clientName(KeyVault.Setting, "KeyVaultSetting", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 // @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
