@@ -1,0 +1,2305 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Playwright Service Reporting Data Plane API",
+    "version": "2025-02-24",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.reporting.api.playwright.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://playwright.microsoft.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://playwright.microsoft.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+    }
+  },
+  "tags": [
+    {
+      "name": "test-run"
+    },
+    {
+      "name": "test-result"
+    }
+  ],
+  "paths": {
+    "/accounts/{accountId}/test-results": {
+      "get": {
+        "operationId": "TestResults_List",
+        "tags": [
+          "test-result"
+        ],
+        "description": "List Test Results.Supported filters are Supported filters are runid,testTitle with eq operator , project, jobname  tag, status with in operator ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestResultDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResults_ListTestResults": {
+            "$ref": "./examples/TestResults_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountId}/test-results:resultsStats": {
+      "post": {
+        "operationId": "TestResults_ComputeResultsStats",
+        "tags": [
+          "test-result"
+        ],
+        "description": "Get Test Results summary.Supported filters are runid,testTitle with eq operator , project, jobname  tag, status with in operator ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ResultsStats"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResults_GetTestResultsSummary": {
+            "$ref": "./examples/TestResults_ComputeResultsStats.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-results:uploadBatch": {
+      "post": {
+        "operationId": "TestResults_UploadBatch",
+        "tags": [
+          "test-result"
+        ],
+        "description": "Upload Test Results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "testRunId",
+            "in": "query",
+            "description": "All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadTestResultsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResults_UploadBatch": {
+            "$ref": "./examples/TestResults_UploadBatch.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs": {
+      "get": {
+        "operationId": "TestRuns_List",
+        "tags": [
+          "test-run"
+        ],
+        "description": "List test runs. Supported filters are triggeredAt with operator ge, status and branch  with in operator, displayName with eq operator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_ListTestRuns": {
+            "$ref": "./examples/TestRuns_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs/{testRunId}": {
+      "get": {
+        "operationId": "TestRuns_Get",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Gets a test run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
+            "required": true,
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_GetTestRun": {
+            "$ref": "./examples/TestRuns_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TestRuns_CreateOrUpdate",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Creates or updates a testrun.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
+            "required": true,
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateOrUpdateTestRun": {
+            "$ref": "./examples/TestRuns_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs/{testRunId}:createArtifactsUploadBaseUrl": {
+      "post": {
+        "operationId": "TestRuns_CreateArtifactsUploadBaseUrl",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Get TestResults Upload Url.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
+            "required": true,
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestResultsUrl"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateArtifactsUploadBaseUrl": {
+            "$ref": "./examples/TestRuns_CreateArtifactsUploadBaseUrl.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs/{testRunId}:updateShardExecutionStatus": {
+      "post": {
+        "operationId": "TestRuns_UpdateShardExecutionStatus",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Resource action operation template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
+            "required": true,
+            "type": "string",
+            "maxLength": 200
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShardExecutionDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_UpdateShardExecutionStatus": {
+            "$ref": "./examples/TestRuns_UpdateShardExecutionStatus.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs:accountRunStats": {
+      "post": {
+        "operationId": "TestRuns_ComputeAccountRunStats",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Get TestRun summary for an Odata filter.Supported filters are triggeredAt with operator ge, status and branch  with in operator, displayName with eq operator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccountTestRunStats"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_ComputeAccountRunStats": {
+            "$ref": "./examples/TestRuns_ComputeAccountRunStats.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/test-runs:metadata": {
+      "post": {
+        "operationId": "TestRuns_ComputeMetadata",
+        "tags": [
+          "test-run"
+        ],
+        "description": "Get TestRuns metadata for all runs in an account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRunsMetadata"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_ComputeTestRunMetadata": {
+            "$ref": "./examples/TestRuns_ComputeMetadata.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessLevel": {
+      "type": "string",
+      "description": "Access levels for test results URL.",
+      "enum": [
+        "Read",
+        "Write",
+        "ReadWrite",
+        "ReadAddCreateWrite"
+      ],
+      "x-ms-enum": {
+        "name": "AccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read access."
+          },
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "Write access."
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "Read and write access."
+          },
+          {
+            "name": "ReadAddCreateWrite",
+            "value": "ReadAddCreateWrite",
+            "description": "Read, add, create, and write access."
+          }
+        ]
+      }
+    },
+    "AccountTestRunStats": {
+      "type": "object",
+      "description": "Summary statistics of Testrun in an account.",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Passed  runs within an account"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed  runs within an account"
+        },
+        "flaky": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Flaky  runs within an account"
+        },
+        "all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total  runs within an account"
+        },
+        "cloudExecutionRuns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cloud Executed runs within an account"
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "flaky",
+        "all",
+        "cloudExecutionRuns"
+      ]
+    },
+    "AttachmentKind": {
+      "type": "string",
+      "description": "Attachment kinds uploaded for a test result",
+      "enum": [
+        "Image",
+        "Video",
+        "Trace"
+      ],
+      "x-ms-enum": {
+        "name": "AttachmentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Image",
+            "value": "Image",
+            "description": "Screenshot"
+          },
+          {
+            "name": "Video",
+            "value": "Video",
+            "description": "Video"
+          },
+          {
+            "name": "Trace",
+            "value": "Trace",
+            "description": "Trace"
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BrowserType": {
+      "type": "string",
+      "description": "Supported browser Types for tests",
+      "enum": [
+        "Chromium",
+        "Webkit",
+        "Firefox"
+      ],
+      "x-ms-enum": {
+        "name": "BrowserType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Chromium",
+            "value": "Chromium",
+            "description": "Chromium"
+          },
+          {
+            "name": "Webkit",
+            "value": "Webkit",
+            "description": "Webkit"
+          },
+          {
+            "name": "Firefox",
+            "value": "Firefox",
+            "description": "Firefox"
+          }
+        ]
+      }
+    },
+    "CiConfig": {
+      "type": "object",
+      "description": "Model representing continuous integration (CI) configuration. ",
+      "properties": {
+        "ciProviderName": {
+          "$ref": "#/definitions/CiProviderName",
+          "description": "Name of the CI provider.  GitHub | Azure DevOps | Default"
+        },
+        "branch": {
+          "type": "string",
+          "description": "Branch name in the source code repository. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 255
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of the commit triggering the test run. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 255
+        },
+        "commitId": {
+          "type": "string",
+          "description": "ID of the commit triggering the test run. This is the SHA-1 hash",
+          "maxLength": 40
+        },
+        "revisionUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL linking to the revision details. Should be a valid Url. Allowed characters- alphanumeric characters (A-Z, a-z, 0-9), hyphens (-), underscores (_), periods (.), tildes (~), and forward slashes (/) for hierarchy. Special characters must be URL-encoded.",
+          "maxLength": 4096
+        }
+      }
+    },
+    "CiProviderName": {
+      "type": "string",
+      "description": "Supported CI provider for tests",
+      "enum": [
+        "GitHub",
+        "Azure DevOps",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "CiProviderName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GitHub",
+            "value": "GitHub",
+            "description": "GitHub"
+          },
+          {
+            "name": "Azure DevOps",
+            "value": "Azure DevOps",
+            "description": "Azure DevOps"
+          },
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "default"
+          }
+        ]
+      }
+    },
+    "CloudReportingSummary": {
+      "type": "object",
+      "description": "Model representing summary of test run results.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the test run."
+        },
+        "serverStatus": {
+          "$ref": "#/definitions/TestRunStatus",
+          "description": "Processing Status of the testresults on the Server Side."
+        },
+        "totalTestsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tests executed",
+          "readOnly": true
+        },
+        "passedTestsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that passed.",
+          "readOnly": true
+        },
+        "failedTestsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that failed.",
+          "readOnly": true
+        },
+        "skippedTestsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were skipped.",
+          "readOnly": true
+        },
+        "flakyTestsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tests that were flaky (passed on retry).",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test run",
+          "readOnly": true
+        },
+        "jobs": {
+          "type": "array",
+          "description": "List of CI jobs associated with the test run.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "projects": {
+          "type": "array",
+          "description": "List of Playwright projects (https://playwright.dev/docs/test-projects) associated with the test run.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test run.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "workersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of worker instances.",
+          "maximum": 1000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "serverStatus",
+        "status"
+      ]
+    },
+    "CloudRunSummary": {
+      "type": "object",
+      "description": "Model representing summary information about a test run.",
+      "properties": {
+        "serverStatus": {
+          "$ref": "#/definitions/TestRunStatus",
+          "description": "Status of the test run. Allowed values: RUNNING  | CLIENT_COMPLETE | SERVER_COMPLETE"
+        },
+        "billableTimeInMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Billable time for the test run. Available after testRun Ends"
+        },
+        "totalTimeInMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total time taken for the test run."
+        },
+        "browserSessionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of browser sessions used in the test run."
+        },
+        "browserQuotaExceeded": {
+          "type": "boolean",
+          "description": "Flag indicating whether the test run was throttled due to reaching the maximum allowed parallel browser limit for the workspace."
+        }
+      },
+      "required": [
+        "serverStatus",
+        "browserQuotaExceeded"
+      ]
+    },
+    "OsType": {
+      "type": "string",
+      "description": "Supported OS  for tests",
+      "enum": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux"
+          },
+          {
+            "name": "Mac",
+            "value": "Mac",
+            "description": "Macintosh"
+          }
+        ]
+      }
+    },
+    "PagedTestResultDetails": {
+      "type": "object",
+      "description": "Paged collection of TestResultDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestResultDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/TestResultDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTestRun": {
+      "type": "object",
+      "description": "Paged collection of TestRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestRun items on this page",
+          "items": {
+            "$ref": "#/definitions/TestRun"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PreviousRetrySummary": {
+      "type": "object",
+      "description": "Summary of previous retries.",
+      "properties": {
+        "testExecutionId": {
+          "type": "string",
+          "description": "Identifier of the test execution."
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retryCount attempts.",
+          "maximum": 100
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test execution."
+        },
+        "durationInMs": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration of the test execution."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test execution- RFC 3339 literal format "
+        },
+        "attachmentsMetadata": {
+          "type": "array",
+          "description": "Metadata related to attachments.",
+          "items": {
+            "$ref": "#/definitions/AttachmentKind"
+          }
+        },
+        "artifactsPath": {
+          "type": "string",
+          "description": "List of artifacts paths.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "testExecutionId",
+        "retryCount",
+        "status",
+        "durationInMs",
+        "startTime",
+        "attachmentsMetadata"
+      ]
+    },
+    "ResultsStats": {
+      "type": "object",
+      "description": "Summary statistics of testresults in a run.",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Passed test-results within a run"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Failed tests within a run"
+        },
+        "flaky": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Flaky tests within a run"
+        },
+        "skipped": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Skipped tests within a run"
+        },
+        "all": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total tests within a run"
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "flaky",
+        "skipped",
+        "all"
+      ]
+    },
+    "RunnerType": {
+      "type": "string",
+      "description": "Supported Runner Types for tests",
+      "enum": [
+        "MsTest",
+        "Nunit",
+        "Playwright"
+      ],
+      "x-ms-enum": {
+        "name": "RunnerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MsTest",
+            "value": "MsTest",
+            "description": "MsTest"
+          },
+          {
+            "name": "Nunit",
+            "value": "Nunit",
+            "description": "Nunit"
+          },
+          {
+            "name": "Playwright",
+            "value": "Playwright",
+            "description": "Playwright"
+          }
+        ]
+      }
+    },
+    "ShardDetails": {
+      "type": "object",
+      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of shards.",
+          "maximum": 1000
+        }
+      },
+      "required": [
+        "total"
+      ]
+    },
+    "ShardDetailsCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing a shard. Learn about Playwright sharding here: https://playwright.dev/docs/test-sharding",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of shards.",
+          "maximum": 1000
+        }
+      }
+    },
+    "ShardExecutionDetails": {
+      "type": "object",
+      "description": "Execution details of a Shard.",
+      "properties": {
+        "shardId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Shard Id for the shard- indexed 1,2,3 etc.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "summary": {
+          "$ref": "#/definitions/UpdateShardExecutionSummary",
+          "description": "Summary of the test run shard.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of workers used by playwright client.",
+          "maximum": 1000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "uploadCompleted": {
+          "type": "boolean",
+          "description": "Flag indicating if upload is completed for the shard.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "shardId",
+        "summary",
+        "workersCount"
+      ]
+    },
+    "TestFramework": {
+      "type": "object",
+      "description": "Model representing a test framework.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/TestFrameworkName",
+          "description": "Name of the test framework. Supported Frameworks are Playwright"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the test framework.",
+          "maxLength": 20
+        },
+        "runnerType": {
+          "$ref": "#/definitions/RunnerType",
+          "description": "Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "runnerType"
+      ]
+    },
+    "TestFrameworkCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing a test framework.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/TestFrameworkName",
+          "description": "Name of the test framework. Supported Frameworks are Playwright"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the test framework.",
+          "maxLength": 20
+        },
+        "runnerType": {
+          "$ref": "#/definitions/RunnerType",
+          "description": "Name of the test runner.Supported Frameworks are MSTEST, Playwright, NUNIT"
+        }
+      }
+    },
+    "TestFrameworkName": {
+      "type": "string",
+      "description": "Supported Framework",
+      "enum": [
+        "Playwright"
+      ],
+      "x-ms-enum": {
+        "name": "TestFrameworkName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Playwright",
+            "value": "Playwright",
+            "description": "Playwright"
+          }
+        ]
+      }
+    },
+    "TestResultDetails": {
+      "type": "object",
+      "description": "Details of a single test result.",
+      "properties": {
+        "testExecutionId": {
+          "type": "string",
+          "description": "Identifier of the test execution. Should be a guid",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testId": {
+          "type": "string",
+          "description": "Identifier of the test.",
+          "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)*",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testCombinationId": {
+          "type": "string",
+          "description": "Identifier of the test combination.This is SHA-1 hash",
+          "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)*",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runId": {
+          "type": "string",
+          "description": "Identifier of the test run.",
+          "maxLength": 200,
+          "readOnly": true
+        },
+        "shardId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Identifier of the shard.",
+          "maximum": 1000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Identifier of the account.",
+          "maxLength": 200,
+          "readOnly": true
+        },
+        "suiteId": {
+          "type": "string",
+          "description": "Identifier of the suite.",
+          "maxLength": 200,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)*",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testTitle": {
+          "type": "string",
+          "description": "Title of the test. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 1000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "suiteTitle": {
+          "type": "string",
+          "description": "Title of the suite. All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 500,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of the file- subject to constraints of OS and programming language",
+          "maxLength": 255,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Line number.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retryCount attempts. Max retryCount is 100, after which testresults metadata will not be stored",
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TestStatus",
+          "description": "Status of the test result. While uploading results, a single test execution status can't be Flaky",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "webTestConfig": {
+          "$ref": "#/definitions/WebTestConfig",
+          "description": "Configuration for the web test.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "Continuous integration configuration.",
+          "readOnly": true
+        },
+        "durationInMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of the test execution in milliseconds."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test execution.- (RFC 3339 literal format)"
+        },
+        "attachmentsMetadata": {
+          "type": "array",
+          "description": "Metadata related to attachments- comma separated IMAGE, VIDEO, TRACE as applicable",
+          "items": {
+            "$ref": "#/definitions/AttachmentKind"
+          }
+        },
+        "previousRetries": {
+          "type": "array",
+          "description": "Previous retry summaries. While uploading results, each retry is uploaded separately.However, all the retries of a test gets grouped on the server side and can be retrieved as a single entity using GET API.",
+          "items": {
+            "$ref": "#/definitions/PreviousRetrySummary"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags associated with the test result. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of annotations (https://playwright.dev/docs/test-annotations).All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "artifactsPath": {
+          "type": "string",
+          "description": "Relative path in storage for all the artifacts of this test. contain only lowercase letters, numbers, and hyphens, and cannot start or end with a hyphen or contain consecutive hyphens",
+          "minLength": 3,
+          "maxLength": 63,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "testExecutionId",
+        "testId",
+        "testCombinationId",
+        "runId",
+        "shardId",
+        "accountId",
+        "suiteId",
+        "testTitle",
+        "suiteTitle",
+        "fileName",
+        "lineNumber",
+        "retryCount",
+        "status",
+        "durationInMs",
+        "startTime"
+      ]
+    },
+    "TestResultsUrl": {
+      "type": "object",
+      "description": "Model representing a test results URL.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for accessing test results."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp of the test results URL- RFC 3339 literal format"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration timestamp of the test results URL- RFC 3339 literal format"
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/AccessLevel",
+          "description": "Access level for the test results URL."
+        }
+      },
+      "required": [
+        "url",
+        "createdAt",
+        "expiresAt",
+        "accessLevel"
+      ]
+    },
+    "TestRun": {
+      "type": "object",
+      "description": "Model representing detailed information about a test run.",
+      "properties": {
+        "testRunId": {
+          "type": "string",
+          "description": "Identifier of the test run. All unicode characters except spaces, ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.)",
+          "maxLength": 200,
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the test run All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the test run -RFC 3339 literal format",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "Creator's identifier. It's the Id referred in the access/Entra token",
+          "readOnly": true
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "Creator's name.",
+          "readOnly": true
+        },
+        "cloudRunSummary": {
+          "$ref": "#/definitions/CloudRunSummary",
+          "description": "Summary of the Cloud executed run. Only available if cloud run is enabled ",
+          "readOnly": true
+        },
+        "cloudReportSummary": {
+          "$ref": "#/definitions/CloudReportingSummary",
+          "description": "Summary of reports uploaded on cloud. Only available if cloud reporting is enabled",
+          "readOnly": true
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "Continuous integration configuration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testRunConfig": {
+          "$ref": "#/definitions/TestRunConfig",
+          "description": "Client configuration for the test run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testResultsUrl": {
+          "$ref": "#/definitions/TestResultsUrl",
+          "description": "URL for accessing test results.",
+          "readOnly": true
+        },
+        "cloudRunEnabled": {
+          "type": "boolean",
+          "description": "Flag indicating if cloud run is enabled.",
+          "readOnly": true
+        },
+        "cloudReportingEnabled": {
+          "type": "boolean",
+          "description": "Must be set to true when users want to use Reporting Feature ",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "testRunId",
+        "displayName",
+        "creationTime",
+        "creatorId",
+        "creatorName",
+        "cloudRunEnabled",
+        "cloudReportingEnabled"
+      ]
+    },
+    "TestRunConfig": {
+      "type": "object",
+      "description": "Model representing client configuration.",
+      "properties": {
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retry attempts.",
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "repeatEach": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval between repeated test runs.",
+          "maximum": 10000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testFramework": {
+          "$ref": "#/definitions/TestFramework",
+          "description": "Details of the test framework used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "shardDetails": {
+          "$ref": "#/definitions/ShardDetails",
+          "description": "Details of the shards used in the test.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "timeoutInMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timeout duration for test execution.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testType": {
+          "type": "string",
+          "description": "Type of test being executed (default: WebTest).",
+          "default": "WebTest",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testSdkLanguage": {
+          "$ref": "#/definitions/TestSdkLanguage",
+          "description": "Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "servicePackageVersion": {
+          "type": "string",
+          "description": "Version of the reporter package.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "timeoutInMs",
+        "testSdkLanguage"
+      ]
+    },
+    "TestRunConfigCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing client configuration.",
+      "properties": {
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retry attempts.",
+          "maximum": 100,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "repeatEach": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval between repeated test runs.",
+          "maximum": 10000,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testFramework": {
+          "$ref": "#/definitions/TestFrameworkCreateOrUpdate",
+          "description": "Details of the test framework used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "shardDetails": {
+          "$ref": "#/definitions/ShardDetailsCreateOrUpdate",
+          "description": "Details of the shards used in the test.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "timeoutInMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timeout duration for test execution.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testType": {
+          "type": "string",
+          "description": "Type of test being executed (default: WebTest).",
+          "default": "WebTest",
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testSdkLanguage": {
+          "$ref": "#/definitions/TestSdkLanguage",
+          "description": "Programming language used for the test SDK. Supported languages are 'JavaScript', 'TypeScript', 'Csharp'",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "servicePackageVersion": {
+          "type": "string",
+          "description": "Version of the reporter package.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestRunCreateOrUpdate": {
+      "type": "object",
+      "description": "Model representing detailed information about a test run.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the test run All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "minLength": 3,
+          "maxLength": 200,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the test run -RFC 3339 literal format",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "Continuous integration configuration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "testRunConfig": {
+          "$ref": "#/definitions/TestRunConfigCreateOrUpdate",
+          "description": "Client configuration for the test run.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "cloudReportingEnabled": {
+          "type": "boolean",
+          "description": "Must be set to true when users want to use Reporting Feature ",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestRunStatus": {
+      "type": "string",
+      "description": "Status of the test run.",
+      "enum": [
+        "Running",
+        "ClientComplete",
+        "ServerComplete"
+      ],
+      "x-ms-enum": {
+        "name": "TestRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The test run is currently running."
+          },
+          {
+            "name": "ClientComplete",
+            "value": "ClientComplete",
+            "description": "The test run completed on the client side."
+          },
+          {
+            "name": "ServerComplete",
+            "value": "ServerComplete",
+            "description": "The test run completed on the server side."
+          }
+        ]
+      }
+    },
+    "TestRunsMetadata": {
+      "type": "object",
+      "description": "Metadata for  testruns/builds.",
+      "properties": {
+        "branches": {
+          "type": "array",
+          "description": "List of CI branches for a testrun, All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "branches"
+      ]
+    },
+    "TestSdkLanguage": {
+      "type": "string",
+      "description": "Supported Test SDK Language.",
+      "enum": [
+        "JavaScript",
+        "TypeScript",
+        "CSharp"
+      ],
+      "x-ms-enum": {
+        "name": "TestSdkLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JavaScript",
+            "value": "JavaScript",
+            "description": "JavaScript."
+          },
+          {
+            "name": "TypeScript",
+            "value": "TypeScript",
+            "description": "TypeScript"
+          },
+          {
+            "name": "CSharp",
+            "value": "CSharp",
+            "description": "Csharp"
+          }
+        ]
+      }
+    },
+    "TestStatus": {
+      "type": "string",
+      "description": "status of a test execution",
+      "enum": [
+        "Passed",
+        "Failed",
+        "Skipped",
+        "Flaky",
+        "Interrupted",
+        "TimedOut"
+      ],
+      "x-ms-enum": {
+        "name": "TestStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The test passed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The test failed."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The test was skipped."
+          },
+          {
+            "name": "Flaky",
+            "value": "Flaky",
+            "description": "The test was flaky."
+          },
+          {
+            "name": "Interrupted",
+            "value": "Interrupted",
+            "description": "The test was interrupted."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The test timed out."
+          }
+        ]
+      }
+    },
+    "UpdateShardExecutionSummary": {
+      "type": "object",
+      "description": "Model to update shard result.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the test run in datetime(RFC 3339 literal format)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the test run."
+        },
+        "uploadMetadata": {
+          "$ref": "#/definitions/UploadMetadata",
+          "description": "Metadata related to test run uploads."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "UploadMetadata": {
+      "type": "object",
+      "description": "Model representing upload metadata.",
+      "properties": {
+        "testResultsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of test results uploaded."
+        },
+        "totalAttachmentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of attachments uploaded.",
+          "maximum": 1000000
+        },
+        "totalAttachmentsSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of attachments uploaded in Bytes.",
+          "maximum": 1024000000
+        }
+      },
+      "required": [
+        "testResultsCount",
+        "totalAttachmentsCount",
+        "totalAttachmentsSize"
+      ]
+    },
+    "UploadTestResultsRequest": {
+      "type": "object",
+      "description": "Request object for uploading test results.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "List of test results.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/TestResultDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "WebTestConfig": {
+      "type": "object",
+      "description": "Configuration details for the web test.",
+      "properties": {
+        "jobName": {
+          "type": "string",
+          "description": "Name of the CI job running the test. All unicode characters except ASCII control characters, special  characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 500
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the Playwright project.All unicode characters except ASCII control characters, special Git characters (^, ~, :, ?, *, [, ]), double dots (..), multiple consecutive slashes (//), or start/end with a slash (/) or start with period (.).",
+          "maxLength": 500
+        },
+        "browserType": {
+          "$ref": "#/definitions/BrowserType",
+          "description": "Name of the browser."
+        },
+        "os": {
+          "$ref": "#/definitions/OsType",
+          "description": "Operating system where the browser is hosted."
+        }
+      },
+      "required": [
+        "jobName",
+        "projectName",
+        "browserType",
+        "os"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

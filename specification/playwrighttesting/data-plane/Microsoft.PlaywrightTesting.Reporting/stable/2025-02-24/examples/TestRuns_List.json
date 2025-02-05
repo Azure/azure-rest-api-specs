@@ -1,0 +1,142 @@
+{
+  "title": "TestRuns_ListTestRuns",
+  "operationId": "TestRuns_List",
+  "parameters": {
+    "api-version": "2025-02-24",
+    "accountId": "eastasia_a56bbc94-fbb7-4c20-9b17-981067e4580a",
+    "testRunId": "123e4567-e89b-12d3-a456-426614174000",
+    "top": 10,
+    "skip": 0,
+    "maxPageSize": 50,
+    "filter": "status eq 'Passed'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "testRunId": "2fd2f304-11f5-4102-af0d-e345b0c7a104",
+            "displayName": "updated and added test",
+            "creationTime": "2025-01-09T12:20:28Z",
+            "creatorId": "ed4e3751-16c1-4a2f-806a-1cb31096739e",
+            "creatorName": "John Doe",
+            "cloudRunSummary": {
+              "serverStatus": "ServerComplete",
+              "billableTimeInMs": 50,
+              "browserSessionsCount": 5,
+              "totalTimeInMs": 10000,
+              "browserQuotaExceeded": false
+            },
+            "cloudReportSummary": {
+              "startTime": "2025-01-09T10:34:37Z",
+              "endTime": "2025-01-09T10:34:46Z",
+              "totalTestsCount": 2,
+              "passedTestsCount": 2,
+              "failedTestsCount": 0,
+              "skippedTestsCount": 0,
+              "flakyTestsCount": 0,
+              "status": "Passed",
+              "serverStatus": "ServerComplete",
+              "tags": [],
+              "jobs": [],
+              "projects": [],
+              "workersCount": 1
+            },
+            "ciConfig": {
+              "ciProviderName": "Default",
+              "branch": null,
+              "author": null,
+              "commitId": null,
+              "revisionUrl": null
+            },
+            "testRunConfig": {
+              "retryCount": 0,
+              "repeatEach": 0,
+              "testFramework": {
+                "name": "Playwright",
+                "version": "3.1",
+                "runnerType": "Nunit"
+              },
+              "shardDetails": {
+                "total": 1
+              },
+              "timeoutInMs": 60000,
+              "testType": "WebTest",
+              "testSdkLanguage": "CSharp",
+              "servicePackageVersion": "1.0.0-beta.4"
+            },
+            "testResultsUrl": {
+              "url": "https://blob.storage.com/abc",
+              "createdAt": "2025-01-09T10:34:37Z",
+              "expiresAt": "2025-01-09T10:34:37Z",
+              "accessLevel": "Read"
+            },
+            "cloudRunEnabled": true,
+            "cloudReportingEnabled": true
+          },
+          {
+            "testRunId": "8391acf5-3454-4c0a-b319-ad2923f26adc",
+            "displayName": "feat(playwrighttesting): showing using warning message if access token will expire within 7 days.",
+            "creationTime": "2025-01-09T10:34:37Z",
+            "creatorId": "ed4e3751-16c1-4a2f-806a-1cb31096739e",
+            "creatorName": "John Doe",
+            "cloudRunSummary": {
+              "serverStatus": "ServerComplete",
+              "billableTimeInMs": 0,
+              "browserSessionsCount": 0,
+              "totalTimeInMs": 29373,
+              "browserQuotaExceeded": false
+            },
+            "cloudReportSummary": {
+              "startTime": "2025-01-09T10:34:37Z",
+              "endTime": "2025-01-09T10:34:46Z",
+              "totalTestsCount": 2,
+              "passedTestsCount": 2,
+              "failedTestsCount": 0,
+              "skippedTestsCount": 0,
+              "flakyTestsCount": 0,
+              "status": "Passed",
+              "serverStatus": "ServerComplete",
+              "tags": [],
+              "jobs": [],
+              "projects": [],
+              "workersCount": 1
+            },
+            "ciConfig": {
+              "ciProviderName": "Default",
+              "branch": null,
+              "author": null,
+              "commitId": null,
+              "revisionUrl": null
+            },
+            "testRunConfig": {
+              "retryCount": 0,
+              "repeatEach": 0,
+              "testFramework": {
+                "name": "Playwright",
+                "version": "3.1",
+                "runnerType": "Nunit"
+              },
+              "shardDetails": {
+                "total": 1
+              },
+              "timeoutInMs": 60000,
+              "testType": "WebTest",
+              "testSdkLanguage": "CSharp",
+              "servicePackageVersion": "1.0.0-beta.4"
+            },
+            "testResultsUrl": {
+              "url": "https://blob.storage.com/abc",
+              "createdAt": "2025-01-09T10:34:37Z",
+              "expiresAt": "2025-01-09T10:34:37Z",
+              "accessLevel": "Read"
+            },
+            "cloudRunEnabled": true,
+            "cloudReportingEnabled": true
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
