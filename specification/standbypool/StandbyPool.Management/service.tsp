@@ -42,6 +42,12 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-03-01`,
+
+  @doc("API Version 2025-03-01.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2025-03-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -64,4 +70,28 @@ model PoolResourceStateCount {
 
   @doc("The count of pooled resources in the given state.")
   count: int64;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("Displays StandbyPool status.")
+model PoolStatus {
+  @doc("Displays the healthy state of the StandbyPool.")
+  @visibility("read")
+  code: HealthStateCode;
+
+  @doc("Displays the StandbyPool health state details.")
+  @visibility("read")
+  message?: string;
+}
+
+@added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+@doc("StandbyPool health state.")
+union HealthStateCode {
+  string,
+
+  @doc("StandbyPool is in healthy state.")
+  healthy: "HealthState/healthy",
+
+  @doc("StandbyPool is in degraded state.")
+  degraded: "HealthState/degraded",
 }
