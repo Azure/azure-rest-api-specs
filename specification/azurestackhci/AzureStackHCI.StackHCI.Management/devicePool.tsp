@@ -100,8 +100,7 @@ model DevicePoolProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  @doc("List of NIC Details of edge machine.")
-  @visibility("read")
+  @doc("List of machines in device pool.")
   @OpenAPI.extension("x-ms-identifiers", [])
   devices?: DeviceDetail[];
 
