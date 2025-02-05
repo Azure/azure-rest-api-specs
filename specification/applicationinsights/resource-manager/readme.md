@@ -257,11 +257,11 @@ directive:
     reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
-### Tag: package-2024-08-01-only
+### Tag: package-2024-08-01
 
-These settings apply only when `--tag=package-2024-08-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-08-01-only'
+``` yaml $(tag) == 'package-2024-08-01'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -282,11 +282,20 @@ input-file:
   - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
-### Tag: package-2024-04-25-only
+### Tag: package-2024-02-01-preview-only
 
-These settings apply only when `--tag=package-2024-04-25-only` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-04-25-only'
+``` yaml $(tag) == 'package-2024-02-01-preview-only'
+input-file:
+  - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
+```
+
+### Tag: package-2024-04-25
+
+These settings apply only when `--tag=package-2024-04-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04-25'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -305,11 +314,11 @@ input-file:
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
 ```
 
-### Tag: package-2023-10-01-only
+### Tag: package-2023-10-01
 
-These settings apply only when `--tag=package-2023-10-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2023-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-10-01-only'
+``` yaml $(tag) == 'package-2023-10-01'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -329,11 +338,11 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2023-06-01-only
+### Tag: package-2023-06-01
 
-These settings apply only when `--tag=package-2023-06-01-only` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-06-01-only'
+``` yaml $(tag) == 'package-2023-06-01'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -354,11 +363,20 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2022-12-09-only
+### Tag: package-2023-06-01-only
 
-These settings apply only when `--tag=package-2022-12-09-only` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-12-09-only'
+``` yaml $(tag) == 'package-2023-06-01-only'
+input-file:
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+```
+
+### Tag: package-2022-12-09
+
+These settings apply only when `--tag=package-2022-12-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12-09'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
@@ -379,11 +397,11 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
-### Tag: package-2022-07-27-only
+### Tag: package-2022-07-27
 
-These settings apply only when `--tag=package-2022-07-27-only` is specified on the command line.
+These settings apply only when `--tag=package-2022-07-27` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-07-27-only'
+``` yaml $(tag) == 'package-2022-07-27'
 input-file:
   - Microsoft.Insights/stable/2020-02-02/components_API.json
   - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
