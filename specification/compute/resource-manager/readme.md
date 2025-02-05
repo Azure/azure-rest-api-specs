@@ -269,6 +269,12 @@ suppressions:
     from: diagnostic.json
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json  
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: The property name contains abbreviations and need to keep it as upper case.
+    from: diagnostic.json
+  - code: BodyTopLevelProperties
+    reason: The is the additional property bag to introduce new nonbreaking properties.
     from: diagnostic.json
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
@@ -286,6 +292,15 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: gallery.json
     reason: Existing issue from last version. 
+```
+
+### Tag: package-2025-02-01-preview
+
+These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2025-02-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2024-11-04
