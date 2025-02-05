@@ -2423,7 +2423,7 @@
           {
             "name": "Info",
             "value": "info",
-            "description": "Information"
+            "description": "Information level"
           },
           {
             "name": "Warning",
@@ -3446,11 +3446,11 @@
     },
     "ReservationBillingStatus": {
       "type": "object",
-      "description": "Various recent statistics for resources billed via a given reservation",
+      "description": "Latest billing status for this reservation",
       "properties": {
         "timestamp": {
           "type": "string",
-          "description": "The time this usage was updated, in RFC 3339 format"
+          "description": "Timestamp for the latest update of this billing status, in RFC 3339 format"
         },
         "totalUsedCapacityReported": {
           "type": "integer",
@@ -3460,12 +3460,12 @@
         "lowDrrPoolCount": {
           "type": "integer",
           "format": "int32",
-          "description": "How many associated storage pools have low DRR and thus cost more"
+          "description": "How many associated storage pools reported low data reduction ratio (DRR)"
         },
         "drrWeightedAverage": {
           "type": "number",
           "format": "double",
-          "description": "Average DRR for all pools"
+          "description": "Weighted average of the data-reduction ratio for all associated pools"
         },
         "totalNonReducibleReported": {
           "type": "integer",
@@ -3475,17 +3475,17 @@
         "extraUsedCapacityNonReducible": {
           "type": "integer",
           "format": "int64",
-          "description": "The extra base capacity accounted for low DRR storage pools; the total non-reducible, transformed into additional base bytes for billing. In bytes"
+          "description": "Extra capacity added because of low DRR storage pools; In bytes"
         },
         "extraUsedCapacityLowUsageRounding": {
           "type": "integer",
           "format": "int64",
-          "description": "Extra base capacity accounted for rounding up low-usage pools to 30TiB. In bytes"
+          "description": "Extra capacity added when rounding up low-usage pools to 30TiB. In bytes"
         },
         "extraUsedCapacityNonReduciblePlanDiscount": {
           "type": "integer",
           "format": "int64",
-          "description": "Extra base capacity discounted due to plan forgiving some low-DRR usage. In bytes"
+          "description": "Extra capacity discounted due to plan forgiving some low-DRR usage. In bytes"
         },
         "totalUsedCapacityBilled": {
           "type": "integer",
@@ -3500,12 +3500,12 @@
         "totalUsedCapacityOverage": {
           "type": "integer",
           "format": "int64",
-          "description": "Total used capacity reported as overage. In bytes"
+          "description": "Total used capacity reported at on-demand price. In bytes"
         },
         "totalPerformanceReported": {
           "type": "integer",
           "format": "int64",
-          "description": "The sum of all performance settings across the pools under this reservation. In bytes per second"
+          "description": "The sum of all performance settings across the pools under this reservation. In MB per second"
         },
         "totalPerformanceIncludedPlan": {
           "type": "integer",
@@ -3515,7 +3515,7 @@
         "totalPerformanceOverage": {
           "type": "integer",
           "format": "int64",
-          "description": "Total performance amount reported as overage. In bytes per second"
+          "description": "Total performance amount reported at on-demand price. In MB per second"
         }
       },
       "required": [
@@ -3539,6 +3539,10 @@
       "type": "object",
       "description": "Represents a billing usage report, including overall status and detailed properties",
       "properties": {
+        "timestamp": {
+          "type": "string",
+          "description": "Latest formatted billing report for this reservation"
+        },
         "billingUsageProperties": {
           "type": "array",
           "description": "A list of detailed billing usage properties",
@@ -3553,6 +3557,7 @@
         }
       },
       "required": [
+        "timestamp",
         "billingUsageProperties",
         "overallStatusMessage"
       ]
@@ -3646,7 +3651,7 @@
     },
     "SoftDeletion": {
       "type": "object",
-      "description": "Volume's soft-deletion state",
+      "description": "Soft-deletion state",
       "properties": {
         "destroyed": {
           "type": "boolean",
@@ -3668,7 +3673,7 @@
     },
     "SoftDeletionUpdate": {
       "type": "object",
-      "description": "Volume's soft-deletion state",
+      "description": "Soft-deletion state",
       "properties": {
         "destroyed": {
           "type": "boolean",

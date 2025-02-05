@@ -115,6 +115,9 @@ interface Reservations
 @added(Versions.v5_preview)
 @doc("Represents a billing usage report, including overall status and detailed properties")
 model ReservationBillingUsageReport {
+  @doc("Latest formatted billing report for this reservation")
+  timestamp: string;
+
   @doc("A list of detailed billing usage properties")
   @extension("x-ms-identifiers", [])
   billingUsageProperties: BillingUsageProperty[];
@@ -168,30 +171,30 @@ union UsageSeverity {
 }
 
 @added(Versions.v5_preview)
-@doc("Various recent statistics for resources billed via a given reservation")
+@doc("Latest billing status for this reservation")
 model ReservationBillingStatus {
-  @doc("The time this usage was updated, in RFC 3339 format")
+  @doc("Timestamp for the latest update of this billing status, in RFC 3339 format")
   timestamp: string;
 
   @doc("Total used capacity as reported by associated storage pools. In bytes")
   totalUsedCapacityReported: int64;
 
-  @doc("How many associated storage pools have low DRR and thus cost more")
+  @doc("How many associated storage pools reported low data reduction ratio (DRR)")
   lowDrrPoolCount: int32;
 
-  @doc("Average DRR for all pools")
+  @doc("Weighted average of the data-reduction ratio for all associated pools")
   drrWeightedAverage: float64;
 
   @doc("The sum of total used capacity for all pools with low DRR, if the DRR penalty applies. In bytes")
   totalNonReducibleReported: int64;
 
-  @doc("The extra base capacity accounted for low DRR storage pools; the total non-reducible, transformed into additional base bytes for billing. In bytes")
+  @doc("Extra capacity added because of low DRR storage pools; In bytes")
   extraUsedCapacityNonReducible: int64;
 
-  @doc("Extra base capacity accounted for rounding up low-usage pools to 30TiB. In bytes")
+  @doc("Extra capacity added when rounding up low-usage pools to 30TiB. In bytes")
   extraUsedCapacityLowUsageRounding: int64;
 
-  @doc("Extra base capacity discounted due to plan forgiving some low-DRR usage. In bytes")
+  @doc("Extra capacity discounted due to plan forgiving some low-DRR usage. In bytes")
   extraUsedCapacityNonReduciblePlanDiscount: int64;
 
   @doc("Total used capacity actually billed. In bytes")
@@ -200,16 +203,16 @@ model ReservationBillingStatus {
   @doc("Total used capacity included in plan. In bytes")
   totalUsedCapacityIncludedPlan: int64;
 
-  @doc("Total used capacity reported as overage. In bytes")
+  @doc("Total used capacity reported at on-demand price. In bytes")
   totalUsedCapacityOverage: int64;
 
-  @doc("The sum of all performance settings across the pools under this reservation. In bytes per second")
+  @doc("The sum of all performance settings across the pools under this reservation. In MB per second")
   totalPerformanceReported: int64;
 
   @doc("Total performance amount included in plan. In bytes per second")
   totalPerformanceIncludedPlan: int64;
 
-  @doc("Total performance amount reported as overage. In bytes per second")
+  @doc("Total performance amount reported at on-demand price. In MB per second")
   totalPerformanceOverage: int64;
 }
 
@@ -771,7 +774,7 @@ model Alert {
 
 @doc("Severity level of the alert")
 union AlertLevel {
-  /** Information */
+  /** Information level */
   Info: "info",
 
   /** Warning level */
@@ -1030,7 +1033,7 @@ model VolumePerformancePolicy {
   policyResourceId: string;
 }
 
-@doc("Volume's soft-deletion state")
+@doc("Soft-deletion state")
 model SoftDeletion {
   @doc("If false, the resource is active; if true, the resource has been destroyed; resources can be soft-deleted by setting destroyed to true, and recovered by setting it to false")
   @visibility("read", "update")
