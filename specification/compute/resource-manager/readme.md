@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-07-01
+tag: package-2024-11-04
 
 directive:
   - from: diskRPCommon.json
@@ -260,6 +260,7 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+    
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -2138,7 +2139,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js

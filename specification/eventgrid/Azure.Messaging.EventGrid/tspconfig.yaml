@@ -24,7 +24,6 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
-    examples-dir: "{project-root}/examples"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     package-dir: Azure.Messaging.EventGridV2
@@ -45,3 +44,16 @@ options:
     dev-options:
       loglevel: info
     flavor: azure
+  "@azure-tools/typespec-ts":
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    package-dir: "eventgrid"
+    packageDetails:
+      name: "@azure/eventgrid"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/aznamespaces"
+    module-version: "0.0.1"
+    emitter-output-dir: "{project-root}"
+    slice-elements-byval: true

@@ -221,7 +221,7 @@
         }
       },
       "put": {
-        "operationId": "TranslationOperations_CreateOrReplaceTranslation",
+        "operationId": "TranslationOperations_CreateTranslation",
         "tags": [
           "VideoTranslation"
         ],
@@ -295,7 +295,7 @@
         },
         "x-ms-examples": {
           "Create Translation": {
-            "$ref": "./examples/TranslationOperations_CreateOrReplaceTranslation.json"
+            "$ref": "./examples/TranslationOperations_CreateTranslation.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -468,7 +468,7 @@
         }
       },
       "put": {
-        "operationId": "IterationOperations_CreateOrReplaceIteration",
+        "operationId": "IterationOperations_CreateIteration",
         "tags": [
           "VideoTranslation"
         ],
@@ -552,7 +552,7 @@
         },
         "x-ms-examples": {
           "Create Iteration": {
-            "$ref": "./examples/IterationOperations_CreateOrReplaceIteration.json"
+            "$ref": "./examples/IterationOperations_CreateIteration.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -680,7 +680,7 @@
       "properties": {
         "webvttFile": {
           "$ref": "#/definitions/WebvttFile",
-          "description": "Webvtt file for content editing."
+          "description": "Webvtt file for content editing, this parameter is required from the second iteration creation request of the translation."
         },
         "speakerCount": {
           "type": "integer",

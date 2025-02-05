@@ -27,7 +27,16 @@ These are the global settings for the healthdataaiservices.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-02-28-preview
+tag: package-2024-09-20
+```
+
+### Tag: package-2024-09-20
+
+These settings apply only when `--tag=package-2024-09-20` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-20'
+input-file:
+  - Microsoft.HealthDataAIServices/stable/2024-09-20/openapi.json
 ```
 
 ### Tag: package-2024-02-28-preview
@@ -51,7 +60,7 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
