@@ -50,7 +50,7 @@ model JupyterKernel {
   version: string;
 
   @doc("Project URL of the kernel.")
-  projectUrl: string;
+  projectUrl: url;
 
   @doc("Description of the kernel.")
   description: string;

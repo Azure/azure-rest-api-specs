@@ -123,11 +123,7 @@ interface ListSessions {
     {
       @doc("The offset for pagination purpose.")
       @query
-      offset?: int32;
-
-      @doc("The page size - by default there is no paging.")
-      @query
-      limit?: int32;
+      skip?: int32;
     },
     SessionsListResponse
   >;

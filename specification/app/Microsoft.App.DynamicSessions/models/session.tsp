@@ -20,11 +20,14 @@ model Session {
   expireAt: utcDateTime;
 
   @doc("The ETag of the session, representing the underlying container ID.")
-  etag: string;
+  etag: eTag;
 }
 
 @doc("The sessions list response.")
 model SessionsListResponse {
   @doc("The list of sessions.")
   sessions: Session[];
+
+  @doc("The link to the next page of sessions.")
+  nextLink?: url;
 }
