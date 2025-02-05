@@ -298,6 +298,13 @@
           },
           "description": "Flag if global mesh is supported."
         },
+        "connectivityCapabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/connectivityCapabilitiesItem"
+          },
+          "description": ""
+        },
         "appliesToGroups": {
           "type": "array",
           "x-ms-identifiers": [
@@ -350,6 +357,51 @@
         }
       },
       "description": "Hub Item."
+    },
+    "connectivityCapabilitiesItem": {
+      "type": "object",
+      "properties": {
+        "connectedGroupPrivateEndpointScale ": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "HighScale"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectedGroupPrivateEndpointScale ",
+            "modelAsString": true
+          },
+          "description": "",
+          "default": "Standard"
+        },
+        "connectedGroupAddressOverlap": {
+          "type": "string",
+          "enum": [
+            "Allowed",
+            "Disallowed"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectedGroupAddressOverlap",
+            "modelAsString": true
+          },
+          "description": "",
+          "default": "Allowed"
+        },
+        "peeringEnforcement": {
+          "type": "string",
+          "enum": [
+            "Unenforced",
+            "Enforced"
+          ],
+          "x-ms-enum": {
+            "name": "PeeringEnforcement",
+            "modelAsString": true
+          },
+          "description": "",
+          "default": "Unenforced"
+        }
+      },
+      "description": "Connectivity capabilities item."
     },
     "connectivityGroupItem": {
       "type": "object",
