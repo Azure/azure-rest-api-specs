@@ -22,7 +22,7 @@ alias ServiceTraits = NoRepeatableRequests &
 alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
 
-interface ConversationAuthoringCopyProject {
+interface ConversationAuthoringCopiedProject {
      
 /**
    * Generates a copy project operation authorization to the current target Azure resource.
@@ -35,7 +35,7 @@ interface ConversationAuthoringCopyProject {
 op  copyProjectAuthorization is languageOperations.ResourceAction<
     AnalyzeConversationAuthoringProjectMetadata,
     AnalyzeConversationAuthoringCopyAuthorizationOptions,
-    AnalyzeConversationAuthoringCopyProjectOptions
+    AnalyzeConversationAuthoringCopiedProjectOptions
   >;
 
 /**
@@ -44,7 +44,7 @@ op  copyProjectAuthorization is languageOperations.ResourceAction<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
-  @pollingOperation(ConversationAuthoringCopyProject.getCopyProjectStatus)
+  @pollingOperation(ConversationAuthoringCopiedProject.getCopyProjectStatus)
   @added(Versions.v2023_04_15_preview)
 op  copyProject is Foundations.LongRunningOperation<
     {
@@ -59,7 +59,7 @@ op  copyProject is Foundations.LongRunningOperation<
        * The copy project info.
        */
       @body
-      body: AnalyzeConversationAuthoringCopyProjectOptions;
+      body: AnalyzeConversationAuthoringCopiedProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -70,7 +70,7 @@ op  copyProject is Foundations.LongRunningOperation<
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
-op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopyProjectJobState>;
+op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
     
 
 }

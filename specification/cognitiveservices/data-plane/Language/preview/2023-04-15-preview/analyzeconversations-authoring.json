@@ -241,7 +241,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
       "post": {
-        "operationId": "ConversationAuthoringCopyProject_CopyProjectAuthorization",
+        "operationId": "ConversationAuthoringCopiedProject_CopyProjectAuthorization",
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "parameters": [
           {
@@ -268,7 +268,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopyProjectOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectOptions"
             }
           },
           "default": {
@@ -288,7 +288,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:copy": {
       "post": {
-        "operationId": "ConversationAuthoringCopyProject_CopyProject",
+        "operationId": "ConversationAuthoringCopiedProject_CopyProject",
         "description": "Copies an existing project to another Azure resource.",
         "parameters": [
           {
@@ -308,7 +308,7 @@
             "description": "The copy project info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopyProjectOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectOptions"
             }
           }
         ],
@@ -592,7 +592,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringCopyProject_GetCopyProjectStatus",
+        "operationId": "ConversationAuthoringCopiedProject_GetCopyProjectStatus",
         "description": "Gets the status of an existing copy project job.",
         "parameters": [
           {
@@ -618,7 +618,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopyProjectJobState"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectJobState"
             }
           },
           "default": {
@@ -2645,28 +2645,7 @@
         "intent"
       ]
     },
-    "AnalyzeConversationAuthoringCopyAuthorizationOptions": {
-      "type": "object",
-      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The name of the storage container."
-        },
-        "allowOverwrite": {
-          "type": "boolean",
-          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization."
-        }
-      },
-      "required": [
-        "projectKind"
-      ]
-    },
-    "AnalyzeConversationAuthoringCopyProjectJobState": {
+    "AnalyzeConversationAuthoringCopiedProjectJobState": {
       "type": "object",
       "description": "Represents the state of a copy job.",
       "properties": {
@@ -2718,7 +2697,7 @@
         "status"
       ]
     },
-    "AnalyzeConversationAuthoringCopyProjectOptions": {
+    "AnalyzeConversationAuthoringCopiedProjectOptions": {
       "type": "object",
       "description": "Represents the options for copying an existing project to another Azure resource.",
       "properties": {
@@ -2755,6 +2734,27 @@
         "expiresAt",
         "targetResourceId",
         "targetResourceRegion"
+      ]
+    },
+    "AnalyzeConversationAuthoringCopyAuthorizationOptions": {
+      "type": "object",
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
+      "properties": {
+        "projectKind": {
+          "$ref": "#/definitions/ProjectKind",
+          "description": "Represents the project kind."
+        },
+        "storageInputContainerName": {
+          "type": "string",
+          "description": "The name of the storage container."
+        },
+        "allowOverwrite": {
+          "type": "boolean",
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization."
+        }
+      },
+      "required": [
+        "projectKind"
       ]
     },
     "AnalyzeConversationAuthoringCreateDeploymentOptions": {

@@ -214,7 +214,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("CopyProjectDetails", "csharp")
-model AnalyzeConversationAuthoringCopyProjectOptions {
+model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
    */
@@ -338,7 +338,7 @@ model AnalyzeConversationAuthoringEvaluationOptions {
 @clientName("CopyProjectOperationState", "csharp")
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringCopyProjectJobState {
+model AnalyzeConversationAuthoringCopiedProjectJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
 
