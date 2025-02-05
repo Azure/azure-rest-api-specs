@@ -374,7 +374,7 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 }
 
 @doc("""
-  A request chat message containing system instructions that influence how the model will generate a chat completions
+  A request chat message containing developer instructions that influence how the model will generate a chat completions
   response. Some AI models support a developer message instead of a system message.
   """)
 model ChatRequestDeveloperMessage extends ChatRequestMessage {
