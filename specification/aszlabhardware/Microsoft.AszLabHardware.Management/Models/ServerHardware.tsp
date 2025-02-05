@@ -58,19 +58,19 @@ model ServerHardware {
 
 @doc("The different power states of the server")
 union PowerState {
-  @doc("On")
+  @doc("Server is on")
   On: "On",
 
-  @doc("Off")
+  @doc("Server is Off")
   Off: "Off",
 
-  @doc("Powering on")
+  @doc("Server is powering on")
   PoweringOn: "PoweringOn",
 
-  @doc("Powering off")
+  @doc("Server is powering off")
   PoweringOff: "PoweringOff",
 
-  @doc("Paused")
+  @doc("Server is paused")
   Paused: "Paused",
 
   string,

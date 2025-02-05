@@ -1,6 +1,6 @@
 @doc("Inventory local account")
 model InventoryLocalAccount {
-  @doc("username")
+  @doc("Username of local account")
   @visibility("read")
   username: string;
 
@@ -32,10 +32,10 @@ union InventoryLocalAccountType {
 
 @doc("The status of the account")
 union AccountStatus {
-  @doc("Enabled")
+  @doc("Account is enabled")
   Enabled: "Enabled",
 
-  @doc("Disabled")
+  @doc("Account is disabled")
   Disabled: "Disabled",
 
   string,

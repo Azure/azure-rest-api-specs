@@ -49,10 +49,10 @@ model LabServerProperties {
 
 @doc("The reservation status of the server")
 union ReservationStatus {
-  @doc("Reserved")
+  @doc("Reserved status")
   Reserved: "Reserved",
 
-  @doc("Not Reserved")
+  @doc("Not Reserved status")
   NotReserved: "NotReserved",
 
   string,
