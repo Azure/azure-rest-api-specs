@@ -987,9 +987,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The user defined function is executed.",
+            "description": "The user defined function is executed. The response contains either the result of the execution (in case the function execution was successful) or an error object (in case the function execution returned an error).",
             "schema": {
-              "$ref": "#/definitions/UserDefinedFunctionExecutionResult"
+              "$ref": "#/definitions/UserDefinedFunctionExecutionResponse"
             }
           },
           "default": {
@@ -2014,19 +2014,37 @@
         "modelAsString": true
       }
     },
+    "UserDefinedFunctionExecutionError": {
+      "description": "The error object of a user defined function execution. This is returned only when the user defined function execution throws an exception.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Message indicating the error thrown when executing the function."
+        }
+      },
+      "type": "object"
+    },
     "UserDefinedFunctionExecutionResult": {
-      "description": "The result of executing a user defined function.",
+      "description": "The result object of a user defined function execution. This is returned only when the user defined function executes succeessfully.",
+      "properties": {
+        "returnValue": {
+          "type": "string",
+          "description": "String-encoded value returned by the user defined function execution. If the function does not return any value, this is set to an empty string."
+        }
+      },
+      "type": "object"
+    },
+    "UserDefinedFunctionExecutionResponse": {
+      "description": "The result of a user defined function execution.",
       "required": [
         "status"
       ],
       "properties": {
         "error": {
-          "type": "string",
-          "description": "Error returned when executing the user defined function in case of failure."
+          "$ref": "#/definitions/UserDefinedFunctionExecutionError"
         },
         "result": {
-          "type": "string",
-          "description": "Return value of the user defined function in case of success."
+          "$ref": "#/definitions/UserDefinedFunctionExecutionResult"
         },
         "status": {
           "$ref": "#/definitions/UserDefinedFunctionExecutionStatus"
