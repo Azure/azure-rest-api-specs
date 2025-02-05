@@ -21,6 +21,8 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Workloads;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /** The available API versions. */
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
