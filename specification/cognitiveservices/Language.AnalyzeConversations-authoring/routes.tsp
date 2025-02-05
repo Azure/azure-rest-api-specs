@@ -480,16 +480,14 @@ op  getSupportedLanguages is Azure.Core.Foundations.Operation<
     {},
     Foundations.ErrorResponse
   >;
-}
 
-interface ConversationAuthoringProjectFiles {
-    /**
+  /**
    * Triggers a job to export a project's data.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:export")
   @post
-  @pollingOperation(ConversationAuthoringProjectFiles.getExportStatus)
+  @pollingOperation(ConversationAuthoringProjects.getExportStatus)
 op  export is Foundations.LongRunningOperation<
     {
       /**
@@ -535,7 +533,7 @@ op  export is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:import")
   @post
-  @pollingOperation(ConversationAuthoringProjectFiles.getImportStatus)
+  @pollingOperation(ConversationAuthoringProjects.getImportStatus)
 op  `import` is Foundations.LongRunningOperation<
     {
       /**
@@ -572,7 +570,6 @@ op  `import` is Foundations.LongRunningOperation<
    * Gets the status for an import.
    */
 op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
-
 }
  
   
