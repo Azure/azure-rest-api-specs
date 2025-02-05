@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor
 ```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
