@@ -7890,6 +7890,10 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "authentication": {
+          "description": "Authentication method used for executing the notebook.",
+          "$ref": "#/definitions/SynapseActivityAuthentication"
         }
       },
       "required": [
@@ -8016,6 +8020,10 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "authentication": {
+          "description": "Authentication method used for executing the Spark job definition.",
+          "$ref": "#/definitions/SynapseActivityAuthentication"
         }
       },
       "required": [
@@ -8045,6 +8053,23 @@
       "required": [
         "type",
         "referenceName"
+      ]
+    },
+    "SynapseActivityAuthentication": {
+      "description": "Synapse activity authentication properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Synapse activity authentication (MSI/UserAssignedManagedIdentity)",
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "SqlPoolStoredProcedureActivity": {
