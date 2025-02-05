@@ -12083,7 +12083,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'."
         }
       },
@@ -12132,11 +12132,11 @@
           "type": "array",
           "description": "A list of references to all virtual machines in the availability set.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the availability set should be assigned to. Minimum api-version: 2018-04-01."
         },
         "statuses": {
@@ -12186,7 +12186,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "Sku of the availability set"
         }
       },
@@ -12315,7 +12315,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         },
         "zones": {
@@ -12545,7 +12545,7 @@
       "description": "The parameters of a capacity reservation Profile.",
       "properties": {
         "capacityReservationGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details."
         }
       }
@@ -12607,7 +12607,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         }
       },
@@ -12871,7 +12871,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values."
         }
       },
@@ -13198,7 +13198,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "[List all available dedicated host sizes for resizing] (https://docs.microsoft.com/rest/api/compute/dedicated-hosts/listavailablesizes). Resizing can be only used to scale up DedicatedHost. Only name is required to be set."
         }
       },
@@ -13411,7 +13411,7 @@
       "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. **Note:** The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.",
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -13864,11 +13864,11 @@
       "description": "Describes a image disk.",
       "properties": {
         "snapshot": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The snapshot."
         },
         "managedDisk": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The managedDisk."
         },
         "blobUri": {
@@ -13943,7 +13943,7 @@
       "description": "Describes the properties of an Image.",
       "properties": {
         "sourceVirtualMachine": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The source virtual machine from which Image is created."
         },
         "storageProfile": {
@@ -13997,7 +13997,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -14129,7 +14129,7 @@
           "description": "The URL referencing a key encryption key in Key Vault."
         },
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing the key."
         }
       },
@@ -14147,7 +14147,7 @@
           "description": "The URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing the secret."
         }
       },
@@ -14549,7 +14549,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -14668,7 +14668,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -15613,6 +15613,41 @@
         }
       }
     },
+    "Resource": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "ResourceIdOptionsForGetCapacityReservationGroups": {
       "type": "string",
       "enum": [
@@ -15660,7 +15695,39 @@
           "type": "array",
           "description": "Specifies an array of subscription resource IDs that capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "ResourceWithOptionalLocation": {
+      "type": "object",
+      "description": "The Resource model definition with location property as optional.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -16959,15 +17026,6 @@
         }
       }
     },
-    "SubResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id"
-        }
-      }
-    },
     "SubResourceWithColocationStatus": {
       "type": "object",
       "properties": {
@@ -16978,7 +17036,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -17528,7 +17586,7 @@
       "description": "Describes a set of certificates which are all in the same Key Vault.",
       "properties": {
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The relative URL of the Key Vault containing all of the certificates in VaultCertificates."
         },
         "vaultCertificates": {
@@ -17563,7 +17621,7 @@
           "x-ms-client-flatten": true
         },
         "plan": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Plan",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "resources": {
@@ -17739,7 +17797,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -18164,7 +18222,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
     },
@@ -18450,7 +18508,7 @@
           "description": "Whether IP forwarding enabled on this NIC."
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The network security group."
         },
         "dnsSettings": {
@@ -18468,7 +18526,7 @@
           ]
         },
         "dscpConfiguration": {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         },
         "auxiliaryMode": {
           "$ref": "#/definitions/NetworkInterfaceAuxiliaryMode",
@@ -18519,7 +18577,7 @@
       "description": "Describes a virtual machine network interface IP configuration properties.",
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies the identifier of the subnet."
         },
         "primary": {
@@ -18538,21 +18596,21 @@
           "type": "array",
           "description": "Specifies an array of references to application security group.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "description": "Specifies an array of references to backend address pools of application gateways. A virtual machine can reference backend address pools of multiple application gateways. Multiple virtual machines cannot use the same application gateway.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "description": "Specifies an array of references to backend address pools of load balancers. A virtual machine can reference backend address pools of one public and one internal load balancer. [Multiple virtual machines cannot use the same basic sku load balancer].",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         }
       }
@@ -18644,15 +18702,15 @@
           "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
         "availabilitySet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
         },
         "virtualMachineScaleSet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. This property cannot exist along with a non-null properties.availabilitySet reference. Minimum api‐version: 2019‐03‐01."
         },
         "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. Minimum api-version: 2018-04-01."
         },
         "priority": {
@@ -18668,11 +18726,11 @@
           "description": "Specifies the billing related details of a Azure Spot virtual machine. Minimum api-version: 2019-03-01."
         },
         "host": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the dedicated host that the virtual machine resides in. Minimum api-version: 2018-10-01."
         },
         "hostGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the dedicated host group that the virtual machine resides in. **Note:** User cannot specify both host and hostGroup properties. Minimum api-version: 2020-06-01."
         },
         "provisioningState": {
@@ -18775,7 +18833,7 @@
           "x-ms-identifiers": []
         },
         "publicIPPrefix": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The PublicIPPrefix from which to allocate publicIP addresses."
         },
         "publicIPAddressVersion": {
@@ -19030,11 +19088,11 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "The virtual machine scale set sku."
         },
         "plan": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Plan",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "identity": {
@@ -19307,28 +19365,28 @@
           "type": "array",
           "description": "Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "applicationSecurityGroups": {
           "type": "array",
           "description": "Specifies an array of references to application security group.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "description": "Specifies an array of references to backend address pools of load balancers. A scale set can reference backend address pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
           "description": "Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         }
       }
@@ -19586,7 +19644,7 @@
           "description": "Specifies whether the network interface is FPGA networking-enabled."
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The network security group."
         },
         "dnsSettings": {
@@ -19805,11 +19863,11 @@
           "description": "Fault Domain count for each placement group."
         },
         "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. Minimum api-version: 2018-04-01."
         },
         "hostGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. Minimum api-version: 2020-06-01."
         },
         "additionalCapabilities": {
@@ -19917,7 +19975,7 @@
           "x-ms-identifiers": []
         },
         "publicIPPrefix": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The PublicIPPrefix from which to allocate publicIP addresses."
         },
         "publicIPAddressVersion": {
@@ -19984,7 +20042,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "The Sku.",
           "readOnly": true
         },
@@ -20069,11 +20127,11 @@
       "description": "Describes a Virtual Machine Scale Set.",
       "properties": {
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "The virtual machine scale set sku."
         },
         "plan": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Plan",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
           "description": "The purchase plan when deploying a virtual machine scale set from VM Marketplace images."
         },
         "properties": {
@@ -20138,28 +20196,28 @@
           "type": "array",
           "description": "The application gateway backend address pools.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "applicationSecurityGroups": {
           "type": "array",
           "description": "Specifies an array of references to application security group.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "description": "The load balancer backend address pools.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         },
         "loadBalancerInboundNatPools": {
           "type": "array",
           "description": "The load balancer inbound nat pools.",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
           }
         }
       }
@@ -20200,7 +20258,7 @@
           "description": "Specifies whether the network interface is FPGA networking-enabled."
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The network security group."
         },
         "dnsSettings": {
@@ -20366,7 +20424,7 @@
           "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
         },
         "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         },
         "priorityMixPolicy": {
@@ -20420,7 +20478,7 @@
           "description": "The dns settings to be applied on the publicIP addresses ."
         },
         "publicIPPrefix": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "The PublicIPPrefix from which to allocate publicIP addresses."
         },
         "deleteOption": {
@@ -20526,12 +20584,12 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Sku",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
           "description": "The virtual machine SKU.",
           "readOnly": true
         },
         "plan": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Plan",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "resources": {
@@ -20938,7 +20996,7 @@
           "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
         "availabilitySet": {
-          "$ref": "#/definitions/SubResource",
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "provisioningState": {
@@ -21980,7 +22038,7 @@
       "description": "Describes a Virtual Machine Update.",
       "properties": {
         "plan": {
-          "$ref": "../../../common-types/v1/common.json#/definitions/Plan",
+          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "properties": {

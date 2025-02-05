@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Custom.Common.Types",
+    "version": "0000-00-00",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "Plan": {
+      "type": "object",
+      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the number of virtual machines in the scale set."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
