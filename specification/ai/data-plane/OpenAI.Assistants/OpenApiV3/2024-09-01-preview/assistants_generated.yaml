@@ -1,0 +1,4455 @@
+openapi: 3.0.0
+info:
+  title: Azure OpenAI
+  description: Azure OpenAI APIs for Assistants.
+  version: 2024-09-01-preview
+tags: []
+paths:
+  /assistants:
+    post:
+      operationId: createAssistant
+      description: Creates a new assistant.
+      parameters: []
+      responses:
+        '200':
+          description: The new assistant instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantCreationOptions'
+        description: The request details to use when creating a new assistant.
+    get:
+      operationId: listAssistants
+      description: Gets a list of assistants that were previously created.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The requested list of assistants.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Assistant'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /assistants/{assistantId}:
+    get:
+      operationId: getAssistant
+      description: Retrieves an existing assistant.
+      parameters:
+        - name: assistantId
+          in: path
+          required: true
+          description: The ID of the assistant to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested assistant instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+    post:
+      operationId: updateAssistant
+      description: Modifies an existing assistant.
+      parameters:
+        - name: assistantId
+          in: path
+          required: true
+          description: The ID of the assistant to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The updated assistant instance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAssistantOptions'
+        description: The request details to use when modifying an existing assistant.
+    delete:
+      operationId: deleteAssistant
+      description: Deletes an assistant.
+      parameters:
+        - name: assistantId
+          in: path
+          required: true
+          description: The ID of the assistant to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status information about the requested deletion operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantDeletionStatus'
+  /files:
+    get:
+      operationId: listFiles
+      description: Gets a list of previously uploaded files.
+      parameters:
+        - name: purpose
+          in: query
+          required: false
+          description: A value that, when provided, limits list results to files matching the corresponding purpose.
+          schema:
+            $ref: '#/components/schemas/FilePurpose'
+          explode: false
+      responses:
+        '200':
+          description: The requested list of files.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileListResponse'
+    post:
+      operationId: uploadFile
+      description: Uploads a file for use by other operations.
+      parameters: []
+      responses:
+        '200':
+          description: A representation of the uploaded file.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIFile'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                purpose:
+                  allOf:
+                    - $ref: '#/components/schemas/FilePurpose'
+                  description: The intended purpose of the file.
+                filename:
+                  type: string
+                  description: A filename to associate with the uploaded data.
+              required:
+                - file
+                - purpose
+  /files/{fileId}:
+    delete:
+      operationId: deleteFile
+      description: Delete a previously uploaded file.
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDeletionStatus'
+    get:
+      operationId: getFile
+      description: Returns information about a specific file. Does not retrieve file content.
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAIFile'
+  /files/{fileId}/content:
+    get:
+      operationId: getFileContent
+      description: Returns information about a specific file. Does not retrieve file content.
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: string
+                format: byte
+  /threads:
+    post:
+      operationId: createThread
+      description: Creates a new thread. Threads contain messages and can be run by assistants.
+      parameters: []
+      responses:
+        '200':
+          description: Information about the newly created thread.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantThread'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssistantThreadCreationOptions'
+        description: The details used to create a new assistant thread.
+  /threads/runs:
+    post:
+      operationId: createThreadAndRun
+      description: Creates a new assistant thread and immediately starts a run using that new thread.
+      parameters: []
+      responses:
+        '200':
+          description: Information about the newly created thread.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAndRunThreadOptions'
+        description: The details used when creating and immediately running a new assistant thread.
+  /threads/{threadId}:
+    get:
+      operationId: getThread
+      description: Gets information about an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to retrieve information about.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the requested thread.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantThread'
+    post:
+      operationId: updateThread
+      description: Modifies an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the modified thread.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantThread'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAssistantThreadOptions'
+        description: The details used to update an existing assistant thread.
+    delete:
+      operationId: deleteThread
+      description: Deletes an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status information about the requested thread deletion operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadDeletionStatus'
+  /threads/{threadId}/messages:
+    post:
+      operationId: createMessage
+      description: Creates a new message on a specified thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to create the new message on.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A representation of the new message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadMessage'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreadMessageOptions'
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
+    get:
+      operationId: listMessages
+      description: Gets a list of messages that exist on a thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to list messages from.
+          schema:
+            type: string
+        - name: runId
+          in: query
+          required: false
+          description: Filter messages by the run ID that generated them.
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The requested list of messages.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ThreadMessage'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /threads/{threadId}/messages/{messageId}:
+    get:
+      operationId: getMessage
+      description: Gets an existing message from an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to retrieve the specified message from.
+          schema:
+            type: string
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message to retrieve from the specified thread.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A representation of the requested message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadMessage'
+    post:
+      operationId: updateMessage
+      description: Modifies an existing message on an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread containing the specified message to modify.
+          schema:
+            type: string
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message to modify on the specified thread.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A representation of the modified message.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadMessage'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  nullable: true
+                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+  /threads/{threadId}/runs:
+    post:
+      operationId: createRun
+      description: Creates a new run for an assistant thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to run.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the new thread run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRunOptions'
+        description: The details used when creating a new run of an assistant thread.
+    get:
+      operationId: listRuns
+      description: Gets a list of runs for a specified thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to list runs from.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The requested list of thread runs.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ThreadRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /threads/{threadId}/runs/{runId}:
+    get:
+      operationId: getRun
+      description: Gets an existing run from an existing thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread to retrieve run information from.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the thread to retrieve information about.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested information about the specified thread run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+    post:
+      operationId: updateRun
+      description: Modifies an existing thread run.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread associated with the specified run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the run to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the modified run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  nullable: true
+                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+  /threads/{threadId}/runs/{runId}/cancel:
+    post:
+      operationId: cancelRun
+      description: Cancels a run of an in progress thread.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread being run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the run to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Updated information about the cancelled run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+  /threads/{threadId}/runs/{runId}/steps:
+    get:
+      operationId: listRunSteps
+      description: Gets a list of run steps from a thread run.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread that was run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the run to list steps from.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The requested list of run steps.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RunStep'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /threads/{threadId}/runs/{runId}/steps/{stepId}:
+    get:
+      operationId: getRunStep
+      description: Gets a single run step from a thread run.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread that was run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the specific run to retrieve the step from.
+          schema:
+            type: string
+        - name: stepId
+          in: path
+          required: true
+          description: The ID of the step to retrieve information about.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the requested run step.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunStep'
+  /threads/{threadId}/runs/{runId}/submit_tool_outputs:
+    post:
+      operationId: submitToolOutputsToRun
+      description: Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.
+      parameters:
+        - name: threadId
+          in: path
+          required: true
+          description: The ID of the thread that was run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the run that requires tool outputs.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Updated information about the run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadRun'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tool_outputs:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ToolOutput'
+                  description: A list of tools for which the outputs are being submitted.
+                stream:
+                  type: boolean
+                  nullable: true
+                  description: 'If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.'
+              required:
+                - tool_outputs
+  /vector_stores:
+    get:
+      operationId: listVectorStores
+      description: Returns a list of vector stores.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStore'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+    post:
+      operationId: createVectorStore
+      description: Creates a vector store.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreOptions'
+        description: Request object for creating a vector store.
+  /vector_stores/{vectorStoreId}:
+    get:
+      operationId: getVectorStore
+      description: Returns the vector store object matching the specified ID.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+    post:
+      operationId: modifyVectorStore
+      description: The ID of the vector store to modify.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to modify.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStore'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VectorStoreUpdateOptions'
+        description: Request object for updating a vector store.
+    delete:
+      operationId: deleteVectorStore
+      description: Deletes the vector store object matching the specified ID.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreDeletionStatus'
+  /vector_stores/{vectorStoreId}/file_batches:
+    post:
+      operationId: createVectorStoreFileBatch
+      description: Create a vector store file batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a File Batch.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_ids:
+                  type: array
+                  items:
+                    type: string
+                  minItems: 1
+                  maxItems: 500
+                  description: A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+                chunking_strategy:
+                  allOf:
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+                  description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
+              required:
+                - file_ids
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}:
+    get:
+      operationId: getVectorStoreFileBatch
+      description: Retrieve a vector store file batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel:
+    post:
+      operationId: cancelVectorStoreFileBatch
+      description: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch to cancel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileBatch'
+  /vector_stores/{vectorStoreId}/file_batches/{batchId}/files:
+    get:
+      operationId: listVectorStoreFileBatchFiles
+      description: Returns a list of vector store files in a batch.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file batch belongs to.
+          schema:
+            type: string
+        - name: batchId
+          in: path
+          required: true
+          description: The ID of the file batch that the files belong to.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+  /vector_stores/{vectorStoreId}/files:
+    get:
+      operationId: listVectorStoreFiles
+      description: Returns a list of vector store files.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the files belong to.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          description: Filter by file status.
+          schema:
+            $ref: '#/components/schemas/VectorStoreFileStatusFilter'
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
+          schema:
+            $ref: '#/components/schemas/ListSortOrder'
+            default: desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - object
+                  - data
+                  - first_id
+                  - last_id
+                  - has_more
+                properties:
+                  object:
+                    type: string
+                    enum:
+                      - list
+                    description: The object type, which is always list.
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VectorStoreFile'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+    post:
+      operationId: createVectorStoreFile
+      description: Create a vector store file by attaching a file to a vector store.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store for which to create a File.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFile'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_id:
+                  type: string
+                  description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
+                chunking_strategy:
+                  allOf:
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+                  description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
+              required:
+                - file_id
+  /vector_stores/{vectorStoreId}/files/{fileId}:
+    get:
+      operationId: getVectorStoreFile
+      description: Retrieves a vector store file.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file being retrieved.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFile'
+    delete:
+      operationId: deleteVectorStoreFile
+      description: |-
+        Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.
+        To delete the file, use the delete file endpoint.
+      parameters:
+        - name: vectorStoreId
+          in: path
+          required: true
+          description: The ID of the vector store that the file belongs to.
+          schema:
+            type: string
+        - name: fileId
+          in: path
+          required: true
+          description: The ID of the file to delete its relationship to the vector store.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VectorStoreFileDeletionStatus'
+security:
+  - ApiKeyAuth: []
+  - OAuth2Auth:
+      - https://cognitiveservices.azure.com/.default
+components:
+  schemas:
+    ApiResponseFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - json_object
+      description: Possible API response formats.
+    Assistant:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - name
+        - description
+        - model
+        - instructions
+        - tools
+        - tool_resources
+        - temperature
+        - top_p
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - assistant
+          description: The object type, which is always assistant.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        name:
+          type: string
+          nullable: true
+          description: The name of the assistant.
+        description:
+          type: string
+          nullable: true
+          description: The description of the assistant.
+        model:
+          type: string
+          description: The ID of the model to use.
+        instructions:
+          type: string
+          nullable: true
+          description: The system instructions for the assistant to use.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          description: The collection of tools enabled for the assistant.
+          default: []
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+            tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Represents an assistant that can call the model and use tools.
+    AssistantCreationOptions:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: The ID of the model to use.
+        name:
+          type: string
+          nullable: true
+          description: The name of the new assistant.
+        description:
+          type: string
+          nullable: true
+          description: The description of the new assistant.
+        instructions:
+          type: string
+          nullable: true
+          description: The system instructions for the new assistant to use.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          description: The collection of tools to enable for the new assistant.
+          default: []
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CreateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+            tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The request details to use when creating a new assistant.
+    AssistantDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - assistant.deleted
+          description: The object type, which is always 'assistant.deleted'.
+      description: The status of an assistant deletion operation.
+    AssistantStreamEvent:
+      anyOf:
+        - type: string
+        - anyOf:
+            - $ref: '#/components/schemas/ThreadStreamEvent'
+            - $ref: '#/components/schemas/RunStreamEvent'
+            - $ref: '#/components/schemas/RunStepStreamEvent'
+            - $ref: '#/components/schemas/MessageStreamEvent'
+            - $ref: '#/components/schemas/ErrorEvent'
+            - $ref: '#/components/schemas/DoneEvent'
+      description: |-
+        Each event in a server-sent events stream has an `event` and `data` property:
+
+        ```
+        event: thread.created
+        data: {"id": "thread_123", "object": "thread", ...}
+        ```
+
+        We emit events whenever a new object is created, transitions to a new state, or is being
+        streamed in parts (deltas). For example, we emit `thread.run.created` when a new run
+        is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses
+        to create a message during a run, we emit a `thread.message.created event`, a
+        `thread.message.in_progress` event, many `thread.message.delta` events, and finally a
+        `thread.message.completed` event.
+
+        We may add additional events over time, so we recommend handling unknown events gracefully
+        in your code.
+    AssistantThread:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - tool_resources
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread
+          description: The object type, which is always 'thread'.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ToolResources'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type
+            of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list
+            of vector store IDs.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Information about a single thread associated with an assistant.
+    AssistantThreadCreationOptions:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadMessageOptions'
+          description: The initial messages to associate with the new thread.
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CreateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+            a list of vector store IDs.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used to create a new assistant thread.
+    AssistantsApiResponseFormat:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ApiResponseFormat'
+          description: Must be one of `text` or `json_object`.
+          default: text
+      description: |-
+        An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
+        If `text` the model can return text or any value needed.
+    AssistantsApiResponseFormatMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - auto
+            - none
+      description: Represents the mode in which the model will handle the return format of a tool call.
+    AssistantsApiResponseFormatOption:
+      anyOf:
+        - type: string
+        - $ref: '#/components/schemas/AssistantsApiResponseFormatMode'
+        - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: |-
+        Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+
+        Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+
+        **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
+        Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
+        resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
+        if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+    AssistantsApiToolChoiceOption:
+      anyOf:
+        - type: string
+        - $ref: '#/components/schemas/AssistantsApiToolChoiceOptionMode'
+        - $ref: '#/components/schemas/AssistantsNamedToolChoice'
+      description: |-
+        Controls which (if any) tool is called by the model.
+        - `none` means the model will not call any tools and instead generates a message.
+        - `auto` is the default value and means the model can pick between generating a message or calling a tool.
+        Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
+        forces the model to call that tool.
+    AssistantsApiToolChoiceOptionMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - none
+            - auto
+      description: Specifies how the tool choice will be used
+    AssistantsNamedToolChoice:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsNamedToolChoiceType'
+          description: the type of tool. If type is `function`, the function name must be set.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+          description: The name of the function to call
+      description: Specifies a tool the model should use. Use to force the model to call a specific tool.
+    AssistantsNamedToolChoiceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - function
+            - code_interpreter
+            - file_search
+      description: Available tool types for assistants named tools.
+    CodeInterpreterToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+          description: The object type, which is always 'code_interpreter'.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a code interpreter tool as used to configure an assistant.
+    CodeInterpreterToolResource:
+      type: object
+      required:
+        - file_ids
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: |-
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+          default: []
+      description: A set of resources that are used by the `code_interpreter` tool.
+    CreateAndRunThreadOptions:
+      type: object
+      required:
+        - assistant_id
+      properties:
+        assistant_id:
+          type: string
+          description: The ID of the assistant for which the thread should be created.
+        thread:
+          allOf:
+            - $ref: '#/components/schemas/AssistantThreadCreationOptions'
+          description: The details used to create the new thread. If no thread is provided, an empty one will be created.
+        model:
+          type: string
+          nullable: true
+          description: The overridden model that the assistant should use to run the thread.
+        instructions:
+          type: string
+          nullable: true
+          description: The overridden system instructions the assistant should use to run the thread.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          nullable: true
+          description: The overridden list of enabled tools the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          nullable: true
+          description: Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.
+        stream:
+          type: boolean
+          description: |-
+            If `true`, returns a stream of events that happen during the Run as server-sent events,
+            terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens
+            specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used when creating and immediately running a new assistant thread.
+    CreateCodeInterpreterToolResourceOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: A list of file IDs made available to the `code_interpreter` tool.
+          default: []
+      description: A set of resources that will be used by the `code_interpreter` tool. Request object.
+    CreateFileSearchToolResourceOptions:
+      anyOf:
+        - type: array
+          items:
+            type: string
+        - type: array
+          items:
+            $ref: '#/components/schemas/CreateFileSearchToolResourceVectorStoreOptions'
+      description: |-
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+        a list of vector store IDs.
+    CreateFileSearchToolResourceVectorStoreOptions:
+      type: object
+      required:
+        - file_ids
+        - chunking_strategy
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 10000
+          description: A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: File IDs associated to the vector store to be passed to the helper.
+    CreateRunOptions:
+      type: object
+      required:
+        - assistant_id
+      properties:
+        assistant_id:
+          type: string
+          description: The ID of the assistant that should run the thread.
+        model:
+          type: string
+          nullable: true
+          description: The overridden model name that the assistant should use to run the thread.
+        instructions:
+          type: string
+          nullable: true
+          description: The overridden system instructions that the assistant should use to run the thread.
+        additional_instructions:
+          type: string
+          nullable: true
+          description: |-
+            Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
+            on a per-run basis without overriding other instructions.
+        additional_messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+          nullable: true
+          description: Adds additional messages to the thread before creating the run.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          nullable: true
+          description: The overridden list of enabled tools that the assistant should use to run the thread.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
+        stream:
+          type: boolean
+          description: |-
+            If `true`, returns a stream of events that happen during the Run as server-sent events,
+            terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+            more random, while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model
+            considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+            comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only
+            the number of prompt tokens specified, across multiple turns of the run. If the run exceeds the number of prompt tokens specified,
+            the run will end with status `incomplete`. See `incomplete_details` for more info.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: |-
+            The maximum number of completion tokens that may be used over the course of the run. The run will make a best effort
+            to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of
+            completion tokens specified, the run will end with status `incomplete`. See `incomplete_details` for more info.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: Specifies the format that the model must output.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used when creating a new run of an assistant thread.
+    CreateToolResourcesOptions:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/CreateCodeInterpreterToolResourceOptions'
+          description: |-
+            A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/CreateFileSearchToolResourceOptions'
+          description: A list of vector stores or their IDs made available to the `file_search` tool.
+      description: |-
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the
+        type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
+        tool requires a list of vector store IDs.
+    DoneEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - done
+      description: Terminal event indicating the successful end of a stream.
+    ErrorEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - error
+      description: Terminal event indicating a server side error while streaming.
+    FileDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - file
+          description: The object type, which is always 'file'.
+      description: A status response from a file deletion operation.
+    FileListResponse:
+      type: object
+      required:
+        - object
+        - data
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The object type, which is always 'list'.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAIFile'
+          description: The files returned for the request.
+      description: The response data from a file list operation.
+    FilePurpose:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - fine-tune
+            - fine-tune-results
+            - assistants
+            - assistants_output
+            - batch
+            - batch_output
+            - vision
+      description: The possible values denoting the intended usage of a file.
+    FileSearchToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always 'file_search'.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/FileSearchToolDefinitionDetails'
+          description: Options overrides for the file search tool.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a file search tool as used to configure an assistant.
+    FileSearchToolDefinitionDetails:
+      type: object
+      properties:
+        max_num_results:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 50
+          description: |-
+            The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.
+
+            Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
+      description: Options overrides for the file search tool.
+    FileSearchToolResource:
+      type: object
+      properties:
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          description: |-
+            The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+            store attached to the assistant.
+      description: A set of resources that are used by the `file_search` tool.
+    FileState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - uploaded
+            - pending
+            - running
+            - processed
+            - error
+            - deleting
+            - deleted
+      description: The state of the file.
+    FunctionDefinition:
+      type: object
+      required:
+        - name
+        - parameters
+      properties:
+        name:
+          type: string
+          description: The name of the function to be called.
+        description:
+          type: string
+          description: A description of what the function does, used by the model to choose when and how to call the function.
+        parameters:
+          description: The parameters the functions accepts, described as a JSON Schema object.
+      description: The input definition information for a function.
+    FunctionName:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to call
+      description: The function name that will be used, if using the `function` tool
+    FunctionToolDefinition:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type, which is always 'function'.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefinition'
+          description: The definition of the concrete function that the function tool should call.
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition information for a function tool as used to configure an assistant.
+    IncompleteRunDetails:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - max_completion_tokens
+            - max_prompt_tokens
+      description: The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.
+    ListSortOrder:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - asc
+            - desc
+      description: The available sorting options when requesting a list of response objects.
+    MessageAttachment:
+      type: object
+      required:
+        - file_id
+        - tools
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file to attach to the message.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachmentToolDefinition'
+          description: The tools to add to this file.
+      description: This describes to which tools a file has been attached.
+    MessageAttachmentToolDefinition:
+      anyOf:
+        - $ref: '#/components/schemas/CodeInterpreterToolDefinition'
+        - $ref: '#/components/schemas/FileSearchToolDefinition'
+      description: The possible tools to which files will be added by this message
+    MessageContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/MessageTextContent'
+          image_file: '#/components/schemas/MessageImageFileContent'
+      description: An abstract representation of a single item of thread message content.
+    MessageDelta:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: The entity that produced the message.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDeltaContent'
+          description: The content of the message as an array of text and/or images.
+      description: Represents the typed 'delta' payload within a streaming message delta chunk.
+    MessageDeltaChunk:
+      type: object
+      required:
+        - id
+        - object
+        - delta
+      properties:
+        id:
+          type: string
+          description: The identifier of the message, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread.message.delta
+          description: The object type, which is always `thread.message.delta`.
+        delta:
+          allOf:
+            - $ref: '#/components/schemas/MessageDelta'
+          description: The delta containing the fields that have changed on the Message.
+      description: Represents a message delta i.e. any changed fields on a message during streaming.
+    MessageDeltaContent:
+      type: object
+      required:
+        - index
+        - type
+      properties:
+        index:
+          type: integer
+          format: int32
+          description: The index of the content part of the message.
+        type:
+          type: string
+          description: The type of content for this content part.
+      discriminator:
+        propertyName: type
+        mapping:
+          image_file: '#/components/schemas/MessageDeltaImageFileContent'
+          text: '#/components/schemas/MessageDeltaTextContentObject'
+      description: The abstract base representation of a partial streamed message content payload.
+    MessageDeltaImageFileContent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - image_file
+          description: The type of content for this content part, which is always "image_file."
+        image_file:
+          allOf:
+            - $ref: '#/components/schemas/MessageDeltaImageFileContentObject'
+          description: The image_file data.
+      allOf:
+        - $ref: '#/components/schemas/MessageDeltaContent'
+      description: Represents a streamed image file content part within a streaming message delta chunk.
+    MessageDeltaImageFileContentObject:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: The file ID of the image in the message content.
+      description: Represents the 'image_file' payload within streaming image file content.
+    MessageDeltaTextAnnotation:
+      type: object
+      required:
+        - index
+        - type
+      properties:
+        index:
+          type: integer
+          format: int32
+          description: The index of the annotation within a text content part.
+        type:
+          type: string
+          description: The type of the text content annotation.
+      discriminator:
+        propertyName: type
+        mapping:
+          file_citation: '#/components/schemas/MessageDeltaTextFileCitationAnnotationObject'
+          file_path: '#/components/schemas/MessageDeltaTextFilePathAnnotationObject'
+      description: The abstract base representation of a streamed text content part's text annotation.
+    MessageDeltaTextContent:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The data that makes up the text.
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageDeltaTextAnnotation'
+          description: Annotations for the text.
+      description: Represents the data of a streamed text content part within a streaming message delta chunk.
+    MessageDeltaTextContentObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The type of content for this content part, which is always "text."
+        text:
+          allOf:
+            - $ref: '#/components/schemas/MessageDeltaTextContent'
+          description: The text content details.
+      allOf:
+        - $ref: '#/components/schemas/MessageDeltaContent'
+      description: Represents a streamed text content part within a streaming message delta chunk.
+    MessageDeltaTextFileCitationAnnotation:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: The ID of the specific file the citation is from.
+        quote:
+          type: string
+          description: The specific quote in the cited file.
+      description: Represents the data of a streamed file citation as applied to a streaming text content part.
+    MessageDeltaTextFileCitationAnnotationObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_citation
+          description: The type of the text content annotation, which is always "file_citation."
+        file_citation:
+          allOf:
+            - $ref: '#/components/schemas/MessageDeltaTextFileCitationAnnotation'
+          description: The file citation information.
+        text:
+          type: string
+          description: The text in the message content that needs to be replaced
+        start_index:
+          type: integer
+          format: int32
+          description: The start index of this annotation in the content text.
+        end_index:
+          type: integer
+          format: int32
+          description: The end index of this annotation in the content text.
+      allOf:
+        - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
+      description: Represents a streamed file citation applied to a streaming text content part.
+    MessageDeltaTextFilePathAnnotation:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: The file ID for the annotation.
+      description: Represents the data of a streamed file path annotation as applied to a streaming text content part.
+    MessageDeltaTextFilePathAnnotationObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_path
+          description: The type of the text content annotation, which is always "file_path."
+        file_path:
+          allOf:
+            - $ref: '#/components/schemas/MessageDeltaTextFilePathAnnotation'
+          description: The file path information.
+        start_index:
+          type: integer
+          format: int32
+          description: The start index of this annotation in the content text.
+        end_index:
+          type: integer
+          format: int32
+          description: The end index of this annotation in the content text.
+        text:
+          type: string
+          description: The text in the message content that needs to be replaced
+      allOf:
+        - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
+      description: Represents a streamed file path annotation applied to a streaming text content part.
+    MessageDeltaTextUrlCitationDetails:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL where the citation is from.
+        title:
+          type: string
+          description: The title of the URL.
+      description: A representation of the URL used for the text citation.
+    MessageImageFileContent:
+      type: object
+      required:
+        - type
+        - image_file
+      properties:
+        type:
+          type: string
+          enum:
+            - image_file
+          description: The object type, which is always 'image_file'.
+        image_file:
+          allOf:
+            - $ref: '#/components/schemas/MessageImageFileDetails'
+          description: The image file for this thread message content item.
+      allOf:
+        - $ref: '#/components/schemas/MessageContent'
+      description: A representation of image file content in a thread message.
+    MessageImageFileDetails:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: The ID for the file associated with this image.
+      description: An image reference, as represented in thread message content.
+    MessageIncompleteDetails:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          description: The provided reason describing why the message was marked as incomplete.
+      description: Information providing additional detail about a message entering an incomplete status.
+    MessageIncompleteDetailsReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - content_filter
+            - max_tokens
+            - run_cancelled
+            - run_failed
+            - run_expired
+      description: A set of reasons describing why a message is marked as incomplete.
+    MessageRole:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - user
+            - assistant
+      description: The possible values for roles attributed to messages in a thread.
+    MessageStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - incomplete
+            - completed
+      description: The possible execution status values for a thread message.
+    MessageStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.message.created
+            - thread.message.in_progress
+            - thread.message.delta
+            - thread.message.completed
+            - thread.message.incomplete
+      description: Message operation related streaming events
+    MessageTextAnnotation:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          description: The object type.
+        text:
+          type: string
+          description: The textual content associated with this text annotation item.
+      discriminator:
+        propertyName: type
+        mapping:
+          file_citation: '#/components/schemas/MessageTextFileCitationAnnotation'
+          file_path: '#/components/schemas/MessageTextFilePathAnnotation'
+      description: An abstract representation of an annotation to text thread message content.
+    MessageTextContent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The object type, which is always 'text'.
+        text:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextDetails'
+          description: The text and associated annotations for this thread message content item.
+      allOf:
+        - $ref: '#/components/schemas/MessageContent'
+      description: A representation of a textual item of thread message content.
+    MessageTextDetails:
+      type: object
+      required:
+        - value
+        - annotations
+      properties:
+        value:
+          type: string
+          description: The text data.
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageTextAnnotation'
+          description: A list of annotations associated with this text.
+      description: The text and associated annotations for a single item of assistant thread message content.
+    MessageTextFileCitationAnnotation:
+      type: object
+      required:
+        - type
+        - file_citation
+      properties:
+        type:
+          type: string
+          enum:
+            - file_citation
+          description: The object type, which is always 'file_citation'.
+        file_citation:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextFileCitationDetails'
+          description: |-
+            A citation within the message that points to a specific quote from a specific file.
+            Generated when the assistant uses the "file_search" tool to search files.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
+      allOf:
+        - $ref: '#/components/schemas/MessageTextAnnotation'
+      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.
+    MessageTextFileCitationDetails:
+      type: object
+      required:
+        - file_id
+        - quote
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file associated with this citation.
+        quote:
+          type: string
+          description: The specific quote cited in the associated file.
+      description: A representation of a file-based text citation, as used in a file-based annotation of text thread message content.
+    MessageTextFilePathAnnotation:
+      type: object
+      required:
+        - type
+        - file_path
+      properties:
+        type:
+          type: string
+          enum:
+            - file_path
+          description: The object type, which is always 'file_path'.
+        file_path:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextFilePathDetails'
+          description: A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
+      allOf:
+        - $ref: '#/components/schemas/MessageTextAnnotation'
+      description: A citation within the message that points to a file located at a specific path.
+    MessageTextFilePathDetails:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: The ID of the specific file that the citation is from.
+      description: An encapsulation of an image file ID, as used by message image content.
+    OpenAIFile:
+      type: object
+      required:
+        - object
+        - id
+        - bytes
+        - filename
+        - created_at
+        - purpose
+      properties:
+        object:
+          type: string
+          enum:
+            - file
+          description: The object type, which is always 'file'.
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        bytes:
+          type: integer
+          format: int32
+          description: The size of the file, in bytes.
+        filename:
+          type: string
+          description: The name of the file.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        purpose:
+          allOf:
+            - $ref: '#/components/schemas/FilePurpose'
+          description: The intended purpose of a file.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/FileState'
+          description: The state of the file. This field is available in Azure OpenAI only.
+        status_details:
+          type: string
+          description: The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.
+      description: Represents an assistant that can call the model and use tools.
+    RequiredAction:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          submit_tool_outputs: '#/components/schemas/SubmitToolOutputsAction'
+      description: An abstract representation of a required action for an assistant thread run to continue.
+    RequiredFunctionToolCall:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type of the required tool call. Always 'function' for function tools.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/RequiredFunctionToolCallDetails'
+          description: Detailed information about the function to be executed by the tool that includes name and arguments.
+      allOf:
+        - $ref: '#/components/schemas/RequiredToolCall'
+      description: A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.
+    RequiredFunctionToolCallDetails:
+      type: object
+      required:
+        - name
+        - arguments
+      properties:
+        name:
+          type: string
+          description: The name of the function.
+        arguments:
+          type: string
+          description: The arguments to use when invoking the named function, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.
+      description: The detailed information for a function invocation, as provided by a required action invoking a function tool, that includes the name of and arguments to the function.
+    RequiredToolCall:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          description: The object type for the required tool call.
+        id:
+          type: string
+          description: The ID of the tool call. This ID must be referenced when submitting tool outputs.
+      discriminator:
+        propertyName: type
+        mapping:
+          function: '#/components/schemas/RequiredFunctionToolCall'
+      description: An abstract representation a a tool invocation needed by the model to continue a run.
+    RunCompletionUsage:
+      type: object
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int64
+          description: Number of completion tokens used over the course of the run.
+        prompt_tokens:
+          type: integer
+          format: int64
+          description: Number of prompt tokens used over the course of the run.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total number of tokens used (prompt + completion).
+      description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+    RunError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: The status for the error.
+        message:
+          type: string
+          description: The human-readable text associated with the error.
+      description: The details of an error as encountered by an assistant thread run.
+    RunStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - in_progress
+            - requires_action
+            - cancelling
+            - cancelled
+            - failed
+            - completed
+            - expired
+      description: Possible values for the status of an assistant thread run.
+    RunStep:
+      type: object
+      required:
+        - id
+        - object
+        - type
+        - assistant_id
+        - thread_id
+        - run_id
+        - status
+        - step_details
+        - last_error
+        - created_at
+        - expired_at
+        - completed_at
+        - cancelled_at
+        - failed_at
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread.run.step
+          description: The object type, which is always 'thread.run.step'.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RunStepType'
+          description: The type of run step, which can be either message_creation or tool_calls.
+        assistant_id:
+          type: string
+          description: The ID of the assistant associated with the run step.
+        thread_id:
+          type: string
+          description: The ID of the thread that was run.
+        run_id:
+          type: string
+          description: The ID of the run that this run step is a part of.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/RunStepStatus'
+          description: The status of this run step.
+        step_details:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDetails'
+          description: The details for this run step.
+        last_error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunStepError'
+          nullable: true
+          description: If applicable, information about the last error encountered by this run step.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        expired_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this item expired.
+        completed_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this completed.
+        cancelled_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this was cancelled.
+        failed_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this failed.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunStepCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Detailed information about a single step of an assistant thread run.
+    RunStepCodeInterpreterImageOutput:
+      type: object
+      required:
+        - type
+        - image
+      properties:
+        type:
+          type: string
+          enum:
+            - image
+          description: The object type, which is always 'image'.
+        image:
+          allOf:
+            - $ref: '#/components/schemas/RunStepCodeInterpreterImageReference'
+          description: Referential information for the image associated with this output.
+      allOf:
+        - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+      description: A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterImageReference:
+      type: object
+      required:
+        - file_id
+      properties:
+        file_id:
+          type: string
+          description: The ID of the file associated with this image.
+      description: An image reference emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterLogOutput:
+      type: object
+      required:
+        - type
+        - logs
+      properties:
+        type:
+          type: string
+          enum:
+            - logs
+          description: The object type, which is always 'logs'.
+        logs:
+          type: string
+          description: The serialized log output emitted by the code interpreter.
+      allOf:
+        - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+      description: A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.
+    RunStepCodeInterpreterToolCall:
+      type: object
+      required:
+        - type
+        - code_interpreter
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+          description: The object type, which is always 'code_interpreter'.
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/RunStepCodeInterpreterToolCallDetails'
+          description: The details of the tool call to the code interpreter tool.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+        represents inputs and outputs consumed and emitted by the code interpreter.
+    RunStepCodeInterpreterToolCallDetails:
+      type: object
+      required:
+        - input
+        - outputs
+      properties:
+        input:
+          type: string
+          description: The input provided by the model to the code interpreter tool.
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunStepCodeInterpreterToolCallOutput'
+          description: The outputs produced by the code interpreter tool back to the model in response to the tool call.
+      description: The detailed information about a code interpreter invocation by the model.
+    RunStepCodeInterpreterToolCallOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          logs: '#/components/schemas/RunStepCodeInterpreterLogOutput'
+          image: '#/components/schemas/RunStepCodeInterpreterImageOutput'
+      description: An abstract representation of an emitted output from a code interpreter tool.
+    RunStepCompletionUsage:
+      type: object
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          type: integer
+          format: int64
+          description: Number of completion tokens used over the course of the run step.
+        prompt_tokens:
+          type: integer
+          format: int64
+          description: Number of prompt tokens used over the course of the run step.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total number of tokens used (prompt + completion).
+      description: Usage statistics related to the run step.
+    RunStepDelta:
+      type: object
+      properties:
+        step_details:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaDetail'
+          description: The details of the run step.
+      description: Represents the delta payload in a streaming run step delta chunk.
+    RunStepDeltaChunk:
+      type: object
+      required:
+        - id
+        - object
+        - delta
+      properties:
+        id:
+          type: string
+          description: The identifier of the run step, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread.run.step.delta
+          description: The object type, which is always `thread.run.step.delta`.
+        delta:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDelta'
+          description: The delta containing the fields that have changed on the run step.
+      description: Represents a run step delta i.e. any changed fields on a run step during streaming.
+    RunStepDeltaCodeInterpreterDetailItemObject:
+      type: object
+      properties:
+        input:
+          type: string
+          description: The input into the Code Interpreter tool call.
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunStepDeltaCodeInterpreterOutput'
+          description: |-
+            The outputs from the Code Interpreter tool call. Code Interpreter can output one or more
+            items, including text (`logs`) or images (`image`). Each of these are represented by a
+            different object type.
+      description: Represents the Code Interpreter tool call data in a streaming run step's tool calls.
+    RunStepDeltaCodeInterpreterImageOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - image
+          description: The object type, which is always "image."
+        image:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaCodeInterpreterImageOutputObject'
+          description: The image data for the Code Interpreter tool call output.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaCodeInterpreterOutput'
+      description: Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection.
+    RunStepDeltaCodeInterpreterImageOutputObject:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: The file ID for the image.
+      description: Represents the data for a streaming run step's Code Interpreter tool call image output.
+    RunStepDeltaCodeInterpreterLogOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - logs
+          description: The type of the object, which is always "logs."
+        logs:
+          type: string
+          description: The text output from the Code Interpreter tool call.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaCodeInterpreterOutput'
+      description: Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection.
+    RunStepDeltaCodeInterpreterOutput:
+      type: object
+      required:
+        - index
+        - type
+      properties:
+        index:
+          type: integer
+          format: int32
+          description: The index of the output in the streaming run step tool call's Code Interpreter outputs array.
+        type:
+          type: string
+          description: The type of the streaming run step tool call's Code Interpreter output.
+      discriminator:
+        propertyName: type
+        mapping:
+          logs: '#/components/schemas/RunStepDeltaCodeInterpreterLogOutput'
+          image: '#/components/schemas/RunStepDeltaCodeInterpreterImageOutput'
+      description: The abstract base representation of a streaming run step tool call's Code Interpreter tool output.
+    RunStepDeltaCodeInterpreterToolCall:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+          description: The object type, which is always "code_interpreter."
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaCodeInterpreterDetailItemObject'
+          description: The Code Interpreter data for the tool call.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaToolCall'
+      description: Represents a Code Interpreter tool call within a streaming run step's tool call details.
+    RunStepDeltaDetail:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type for the run step detail object.
+      discriminator:
+        propertyName: type
+        mapping:
+          message_creation: '#/components/schemas/RunStepDeltaMessageCreation'
+          tool_calls: '#/components/schemas/RunStepDeltaToolCallObject'
+      description: Represents a single run step detail item in a streaming run step's delta payload.
+    RunStepDeltaFileSearchToolCall:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always "file_search."
+        file_search:
+          type: object
+          additionalProperties:
+            type: string
+          description: Reserved for future use.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaToolCall'
+      description: Represents a file search tool call within a streaming run step's tool call details.
+    RunStepDeltaFunction:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the function.
+        arguments:
+          type: string
+          description: The arguments passed to the function as input.
+        output:
+          type: string
+          nullable: true
+          description: The output of the function, null if outputs have not yet been submitted.
+      description: Represents the function data in a streaming run step delta's function tool call.
+    RunStepDeltaFunctionToolCall:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type, which is always "function."
+        function:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaFunction'
+          description: The function data for the tool call.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaToolCall'
+      description: Represents a function tool call within a streaming run step's tool call details.
+    RunStepDeltaMessageCreation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - message_creation
+          description: The object type, which is always "message_creation."
+        message_creation:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaMessageCreationObject'
+          description: The message creation data.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaDetail'
+      description: Represents a message creation within a streaming run step delta.
+    RunStepDeltaMessageCreationObject:
+      type: object
+      properties:
+        message_id:
+          type: string
+          description: The ID of the newly-created message.
+      description: Represents the data within a streaming run step message creation response object.
+    RunStepDeltaToolCall:
+      type: object
+      required:
+        - index
+        - id
+        - type
+      properties:
+        index:
+          type: integer
+          format: int32
+          description: The index of the tool call detail in the run step's tool_calls array.
+        id:
+          type: string
+          description: The ID of the tool call, used when submitting outputs to the run.
+        type:
+          type: string
+          description: The type of the tool call detail item in a streaming run step's details.
+      discriminator:
+        propertyName: type
+        mapping:
+          function: '#/components/schemas/RunStepDeltaFunctionToolCall'
+          file_search: '#/components/schemas/RunStepDeltaFileSearchToolCall'
+          code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
+      description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
+    RunStepDeltaToolCallObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_calls
+          description: The object type, which is always "tool_calls."
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunStepDeltaToolCall'
+          description: The collection of tool calls for the tool call detail item.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaDetail'
+      description: Represents an invocation of tool calls as part of a streaming run step.
+    RunStepDetails:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RunStepType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          message_creation: '#/components/schemas/RunStepMessageCreationDetails'
+          tool_calls: '#/components/schemas/RunStepToolCallDetails'
+      description: An abstract representation of the details for a run step.
+    RunStepError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/RunStepErrorCode'
+          description: The error code for this error.
+        message:
+          type: string
+          description: The human-readable text associated with this error.
+      description: The error information associated with a failed run step.
+    RunStepErrorCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - server_error
+            - rate_limit_exceeded
+      description: Possible error code values attributable to a failed run step.
+    RunStepFileSearchToolCall:
+      type: object
+      required:
+        - type
+        - file_search
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+          description: The object type, which is always 'file_search'.
+        file_search:
+          type: object
+          additionalProperties:
+            type: string
+          description: Reserved for future use.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
+        executed file search.
+    RunStepFunctionToolCall:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: The object type, which is always 'function'.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/RunStepFunctionToolCallDetails'
+          description: The detailed information about the function called by the model.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: |-
+        A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+        and output consumed and emitted by the specified function.
+    RunStepFunctionToolCallDetails:
+      type: object
+      required:
+        - name
+        - arguments
+        - output
+      properties:
+        name:
+          type: string
+          description: The name of the function.
+        arguments:
+          type: string
+          description: The arguments that the model requires are provided to the named function.
+        output:
+          type: string
+          nullable: true
+          description: The output of the function, only populated for function calls that have already have had their outputs submitted.
+      description: The detailed information about the function called by the model.
+    RunStepMessageCreationDetails:
+      type: object
+      required:
+        - type
+        - message_creation
+      properties:
+        type:
+          type: string
+          enum:
+            - message_creation
+          description: The object type, which is always 'message_creation'.
+        message_creation:
+          allOf:
+            - $ref: '#/components/schemas/RunStepMessageCreationReference'
+          description: Information about the message creation associated with this run step.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDetails'
+      description: The detailed information associated with a message creation run step.
+    RunStepMessageCreationReference:
+      type: object
+      required:
+        - message_id
+      properties:
+        message_id:
+          type: string
+          description: The ID of the message created by this run step.
+      description: The details of a message created as a part of a run step.
+    RunStepStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - cancelled
+            - failed
+            - completed
+            - expired
+      description: Possible values for the status of a run step.
+    RunStepStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.step.created
+            - thread.run.step.in_progress
+            - thread.run.step.delta
+            - thread.run.step.completed
+            - thread.run.step.failed
+            - thread.run.step.cancelled
+            - thread.run.step.expired
+      description: Run step operation related streaming events
+    RunStepToolCall:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+          description: The object type.
+        id:
+          type: string
+          description: The ID of the tool call. This ID must be referenced when you submit tool outputs.
+      discriminator:
+        propertyName: type
+        mapping:
+          code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
+          file_search: '#/components/schemas/RunStepFileSearchToolCall'
+          function: '#/components/schemas/RunStepFunctionToolCall'
+      description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
+    RunStepToolCallDetails:
+      type: object
+      required:
+        - type
+        - tool_calls
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_calls
+          description: The object type, which is always 'tool_calls'.
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunStepToolCall'
+          description: A list of tool call details for this run step.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDetails'
+      description: The detailed information associated with a run step calling tools.
+    RunStepType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - message_creation
+            - tool_calls
+      description: The possible types of run steps.
+    RunStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.created
+            - thread.run.queued
+            - thread.run.in_progress
+            - thread.run.requires_action
+            - thread.run.completed
+            - thread.run.failed
+            - thread.run.cancelling
+            - thread.run.cancelled
+            - thread.run.expired
+      description: Run operation related streaming events
+    ServiceApiVersions:
+      type: string
+      enum:
+        - 2024-02-15-preview
+        - 2024-05-01-preview
+        - 2024-07-01-preview
+        - 2024-09-01-preview
+        - 2024-10-01-preview
+      description: The known set of supported API versions.
+    SubmitToolOutputsAction:
+      type: object
+      required:
+        - type
+        - submit_tool_outputs
+      properties:
+        type:
+          type: string
+          enum:
+            - submit_tool_outputs
+          description: The object type, which is always 'submit_tool_outputs'.
+        submit_tool_outputs:
+          allOf:
+            - $ref: '#/components/schemas/SubmitToolOutputsDetails'
+          description: The details describing tools that should be called to submit tool outputs.
+      allOf:
+        - $ref: '#/components/schemas/RequiredAction'
+      description: The details for required tool calls that must be submitted for an assistant thread run to continue.
+    SubmitToolOutputsDetails:
+      type: object
+      required:
+        - tool_calls
+      properties:
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequiredToolCall'
+          description: The list of tool calls that must be resolved for the assistant thread run to continue.
+      description: The details describing tools that should be called to submit tool outputs.
+    ThreadDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - thread.deleted
+          description: The object type, which is always 'thread.deleted'.
+      description: The status of a thread deletion operation.
+    ThreadMessage:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - thread_id
+        - status
+        - incomplete_details
+        - completed_at
+        - incomplete_at
+        - role
+        - content
+        - assistant_id
+        - run_id
+        - attachments
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread.message
+          description: The object type, which is always 'thread.message'.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        thread_id:
+          type: string
+          description: The ID of the thread that this message belongs to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MessageStatus'
+          description: The status of the message.
+        incomplete_details:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetails'
+          nullable: true
+          description: On an incomplete message, details about why the message is incomplete.
+        completed_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the message was completed.
+        incomplete_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the message was marked as incomplete.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: The role associated with the assistant thread message.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageContent'
+          description: The list of content items associated with the assistant thread message.
+        assistant_id:
+          type: string
+          nullable: true
+          description: If applicable, the ID of the assistant that authored this message.
+        run_id:
+          type: string
+          nullable: true
+          description: If applicable, the ID of the run associated with the authoring of this message.
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+          nullable: true
+          description: A list of files attached to the message, and the tools they were added to.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A single, existing message within an assistant thread.
+    ThreadMessageOptions:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/MessageRole'
+          description: |-
+            The role of the entity that is creating the message. Allowed values include:
+            - `user`: Indicates the message is sent by an actual user and should be used in most cases to represent user-generated messages.
+            - `assistant`: Indicates the message is generated by the assistant. Use this value to insert messages from the assistant into
+            the conversation.
+        content:
+          type: string
+          description: |-
+            The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via
+            a separate call to the create message API.
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageAttachment'
+          nullable: true
+          description: A list of files attached to the message, and the tools they should be added to.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
+    ThreadRun:
+      type: object
+      required:
+        - id
+        - object
+        - thread_id
+        - assistant_id
+        - status
+        - last_error
+        - model
+        - instructions
+        - tools
+        - created_at
+        - expires_at
+        - started_at
+        - completed_at
+        - cancelled_at
+        - failed_at
+        - incomplete_details
+        - usage
+        - max_prompt_tokens
+        - max_completion_tokens
+        - truncation_strategy
+        - tool_choice
+        - parallel_tool_calls
+        - response_format
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - thread.run
+          description: The object type, which is always 'thread.run'.
+        thread_id:
+          type: string
+          description: The ID of the thread associated with this run.
+        assistant_id:
+          type: string
+          description: The ID of the assistant associated with the thread this run was performed against.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/RunStatus'
+          description: The status of the assistant thread run.
+        required_action:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RequiredAction'
+          nullable: true
+          description: The details of the action required for the assistant thread run to continue.
+        last_error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunError'
+          nullable: true
+          description: The last error, if any, encountered by this assistant thread run.
+        model:
+          type: string
+          description: The ID of the model to use.
+        instructions:
+          type: string
+          description: The overridden system instructions used for this assistant thread run.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          description: The overridden enabled tools used for this assistant thread run.
+          default: []
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp, in seconds, representing when this object was created.
+        expires_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this item expires.
+        started_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this item was started.
+        completed_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this completed.
+        cancelled_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this was cancelled.
+        failed_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp, in seconds, representing when this failed.
+        incomplete_details:
+          allOf:
+            - $ref: '#/components/schemas/IncompleteRunDetails'
+          nullable: true
+          description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          description: The sampling temperature used for this run. If not set, defaults to 1.
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          description: The nucleus sampling value used for this run. If not set, defaults to 1.
+        max_prompt_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of prompt tokens specified to have been used over the course of the run.
+        max_completion_tokens:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 256
+          description: The maximum number of completion tokens specified to have been used over the course of the run.
+        truncation_strategy:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/TruncationObject'
+          nullable: true
+          description: The strategy to use for dropping messages as the context windows moves forward.
+        tool_choice:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiToolChoiceOption'
+          nullable: true
+          description: Controls whether or not and which tool is called by the model.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used in this run.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Data representing a single evaluation run of an assistant thread.
+    ThreadStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.created
+      description: Thread operation related streaming events
+    ToolDefinition:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
+          file_search: '#/components/schemas/FileSearchToolDefinition'
+          function: '#/components/schemas/FunctionToolDefinition'
+      description: An abstract representation of an input tool definition that an assistant can use.
+    ToolOutput:
+      type: object
+      properties:
+        tool_call_id:
+          type: string
+          description: The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.
+        output:
+          type: string
+          description: The output from the tool to be submitted.
+      description: The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.
+    ToolResources:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/CodeInterpreterToolResource'
+          description: Resources to be used by the `code_interpreter tool` consisting of file IDs.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/FileSearchToolResource'
+          description: Resources to be used by the `file_search` tool consisting of vector store IDs.
+      description: |-
+        A set of resources that are used by the assistant's tools. The resources are specific to the type of
+        tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
+        tool requires a list of vector store IDs.
+    TruncationObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/TruncationStrategy'
+          description: |-
+            The truncation strategy to use for the thread. The default is `auto`. If set to `last_messages`, the thread will
+            be truncated to the `lastMessages` count most recent messages in the thread. When set to `auto`, messages in the middle of the thread
+            will be dropped to fit the context length of the model, `max_prompt_tokens`.
+          default: auto
+        last_messages:
+          type: integer
+          format: int32
+          nullable: true
+          minimum: 1
+          description: The number of most recent messages from the thread when constructing the context for the run.
+      description: |-
+        Controls for how a thread will be truncated prior to the run. Use this to control the initial
+        context window of the run.
+    TruncationStrategy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - auto
+            - last_messages
+      description: Possible truncation strategies for the thread.
+    UpdateAssistantOptions:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The ID of the model to use.
+        name:
+          type: string
+          nullable: true
+          description: The modified name for the assistant to use.
+        description:
+          type: string
+          nullable: true
+          description: The modified description for the assistant to use.
+        instructions:
+          type: string
+          nullable: true
+          description: The modified system instructions for the new assistant to use.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDefinition'
+          description: The modified collection of tools to enable for the assistant.
+          default: []
+        tool_resources:
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          description: |-
+            A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
+            the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+        temperature:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 2
+          description: |-
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
+            while lower values like 0.2 will make it more focused and deterministic.
+          default: 1
+        top_p:
+          type: number
+          format: float
+          nullable: true
+          minimum: 0
+          maximum: 1
+          description: |-
+            An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+            So 0.1 means only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or temperature but not both.
+          default: 1
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
+          nullable: true
+          description: The response format of the tool calls used by this assistant.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The request details to use when modifying an existing assistant.
+    UpdateAssistantThreadOptions:
+      type: object
+      properties:
+        tool_resources:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/UpdateToolResourcesOptions'
+          nullable: true
+          description: |-
+            A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
+            type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
+            a list of vector store IDs
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used to update an existing assistant thread
+    UpdateCodeInterpreterToolResourceOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 20
+          description: A list of file IDs to override the current list of the assistant.
+      description: Request object to update `code_interpreted` tool resources.
+    UpdateFileSearchToolResourceOptions:
+      type: object
+      properties:
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 1
+          description: A list of vector store IDs to override the current list of the assistant.
+      description: Request object to update `file_search` tool resources.
+    UpdateToolResourcesOptions:
+      type: object
+      properties:
+        code_interpreter:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCodeInterpreterToolResourceOptions'
+          description: |-
+            Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files
+            associated with the tool.
+        file_search:
+          allOf:
+            - $ref: '#/components/schemas/UpdateFileSearchToolResourceOptions'
+          description: Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.
+      description: |-
+        Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
+        For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
+        vector store IDs.
+    VectorStore:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - name
+        - usage_bytes
+        - file_counts
+        - status
+        - last_active_at
+        - metadata
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store
+          description: The object type, which is always `vector_store`
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store was created.
+        name:
+          type: string
+          description: The name of the vector store.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: The total number of bytes used by the files in the vector store.
+        file_counts:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileCount'
+          description: Files count grouped by status processed or being processed by this vector store.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStatus'
+          description: The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        expires_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store will expire.
+        last_active_at:
+          type: integer
+          format: unixtime
+          nullable: true
+          description: The Unix timestamp (in seconds) for when the vector store was last active.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: A vector store is a collection of processed files can be used by the `file_search` tool.
+    VectorStoreAutoChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: The object type, which is always 'auto'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+      description: The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.
+    VectorStoreAutoChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - other
+          description: The object type, which is always 'other'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
+    VectorStoreChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequestType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          auto: '#/components/schemas/VectorStoreAutoChunkingStrategyRequest'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyRequest'
+      description: An abstract representation of a vector store chunking strategy configuration.
+    VectorStoreChunkingStrategyRequestType:
+      anyOf:
+        - type: string
+          enum:
+            - auto
+            - static
+        - type: string
+      description: Type of chunking strategy
+    VectorStoreChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponseType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          other: '#/components/schemas/VectorStoreAutoChunkingStrategyResponse'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyResponse'
+      description: An abstract representation of a vector store chunking strategy configuration.
+    VectorStoreChunkingStrategyResponseType:
+      anyOf:
+        - type: string
+          enum:
+            - other
+            - static
+        - type: string
+      description: Type of chunking strategy
+    VectorStoreDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store.
+    VectorStoreExpirationPolicy:
+      type: object
+      required:
+        - anchor
+        - days
+      properties:
+        anchor:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicyAnchor'
+          description: 'Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`.'
+        days:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 365
+          description: The anchor timestamp after which the expiration policy applies.
+      description: The expiration policy for a vector store.
+    VectorStoreExpirationPolicyAnchor:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - last_active_at
+      description: Describes the relationship between the days and the expiration of this vector store
+    VectorStoreFile:
+      type: object
+      required:
+        - id
+        - object
+        - usage_bytes
+        - created_at
+        - vector_store_id
+        - status
+        - last_error
+        - chunking_strategy
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.file
+          description: The object type, which is always `vector_store.file`.
+        usage_bytes:
+          type: integer
+          format: int32
+          description: |-
+            The total vector store usage in bytes. Note that this may be different from the original file
+            size.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store file was created.
+        vector_store_id:
+          type: string
+          description: The ID of the vector store that the file is attached to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileStatus'
+          description: The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use.
+        last_error:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileError'
+          nullable: true
+          description: The last error associated with this vector store file. Will be `null` if there are no errors.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+          description: The strategy used to chunk the file.
+      description: Description of a file attached to a vector store.
+    VectorStoreFileBatch:
+      type: object
+      required:
+        - id
+        - object
+        - created_at
+        - vector_store_id
+        - status
+        - file_counts
+      properties:
+        id:
+          type: string
+          description: The identifier, which can be referenced in API endpoints.
+        object:
+          type: string
+          enum:
+            - vector_store.files_batch
+          description: The object type, which is always `vector_store.file_batch`.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) for when the vector store files batch was created.
+        vector_store_id:
+          type: string
+          description: The ID of the vector store that the file is attached to.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileBatchStatus'
+          description: The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`.
+        file_counts:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileCount'
+          description: Files count grouped by status processed or being processed by this vector store.
+      description: A batch of files attached to a vector store.
+    VectorStoreFileBatchStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+      description: The status of the vector store file batch.
+    VectorStoreFileCount:
+      type: object
+      required:
+        - in_progress
+        - completed
+        - failed
+        - cancelled
+        - total
+      properties:
+        in_progress:
+          type: integer
+          format: int32
+          description: The number of files that are currently being processed.
+        completed:
+          type: integer
+          format: int32
+          description: The number of files that have been successfully processed.
+        failed:
+          type: integer
+          format: int32
+          description: The number of files that have failed to process.
+        cancelled:
+          type: integer
+          format: int32
+          description: The number of files that were cancelled.
+        total:
+          type: integer
+          format: int32
+          description: The total number of files.
+      description: Counts of files processed or being processed by this vector store grouped by status.
+    VectorStoreFileDeletionStatus:
+      type: object
+      required:
+        - id
+        - deleted
+        - object
+      properties:
+        id:
+          type: string
+          description: The ID of the resource specified for deletion.
+        deleted:
+          type: boolean
+          description: A value indicating whether deletion was successful.
+        object:
+          type: string
+          enum:
+            - vector_store.file.deleted
+          description: The object type, which is always 'vector_store.deleted'.
+      description: Response object for deleting a vector store file relationship.
+    VectorStoreFileError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreFileErrorCode'
+          description: One of `server_error` or `rate_limit_exceeded`.
+        message:
+          type: string
+          description: A human-readable description of the error.
+      description: Details on the error that may have ocurred while processing a file for this vector store
+    VectorStoreFileErrorCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - internal_error
+            - file_not_found
+            - parsing_error
+            - unhandled_mime_type
+      description: Error code variants for vector store file processing
+    VectorStoreFileStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Vector store file status
+    VectorStoreFileStatusFilter:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - failed
+            - cancelled
+      description: Query parameter filter for vector store file retrieval endpoint
+    VectorStoreOptions:
+      type: object
+      properties:
+        file_ids:
+          type: array
+          items:
+            type: string
+          maxItems: 500
+          description: A list of file IDs that the vector store should use. Useful for tools like `file_search` that can access files.
+        name:
+          type: string
+          description: The name of the vector store.
+        expires_after:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          description: Details on when this vector store expires
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for creating a vector store.
+    VectorStoreStaticChunkingStrategyOptions:
+      type: object
+      required:
+        - max_chunk_size_tokens
+        - chunk_overlap_tokens
+      properties:
+        max_chunk_size_tokens:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 4096
+          description: The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096.
+        chunk_overlap_tokens:
+          type: integer
+          format: int32
+          description: |-
+            The number of tokens that overlap between chunks. The default value is 400.
+            Note that the overlap must not exceed half of max_chunk_size_tokens.     *
+      description: Options to configure a vector store static chunking strategy.
+    VectorStoreStaticChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+      description: A statically configured chunking strategy.
+    VectorStoreStaticChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: A statically configured chunking strategy.
+    VectorStoreStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - expired
+            - in_progress
+            - completed
+      description: Vector store possible status
+    VectorStoreUpdateOptions:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the vector store.
+        expires_after:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreExpirationPolicy'
+          nullable: true
+          description: Details on when this vector store expires
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: Request object for updating a vector store.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          scopes:
+            https://cognitiveservices.azure.com/.default: ''
+servers:
+  - url: '{endpoint}'
+    description: Azure OpenAI APIs for Assistants.
+    variables:
+      endpoint:
+        default: ''
+        description: An OpenAI endpoint supporting assistants functionality.
