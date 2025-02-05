@@ -6769,22 +6769,22 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
-/**
- * Emits the entire input as a single token. This tokenizer is implemented using
- * Apache Lucene.
- */
-model KeywordTokenizer extends LexicalTokenizer {
-  /**
-   * The read buffer size in bytes. Default is 256.
-   */
-  bufferSize?: int32 = 256;
+// /**
+//  * Emits the entire input as a single token. This tokenizer is implemented using
+//  * Apache Lucene.
+//  */
+// model KeywordTokenizer extends LexicalTokenizer {
+//   /**
+//    * The read buffer size in bytes. Default is 256.
+//    */
+//   bufferSize?: int32 = 256;
 
-  /**
-   * A URI fragment specifying the type of tokenizer.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
-}
+//   /**
+//    * A URI fragment specifying the type of tokenizer.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+//   `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
+// }
 
 /**
  * Emits the entire input as a single token. This tokenizer is implemented using

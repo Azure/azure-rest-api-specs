@@ -120,7 +120,7 @@ namespace Customizations;
 @@clientName(StopAnalyzer.`@odata.type`, "odataType");
 @@clientName(ClassicTokenizer.`@odata.type`, "odataType");
 @@clientName(EdgeNGramTokenizer.`@odata.type`, "odataType");
-@@clientName(KeywordTokenizer.`@odata.type`, "odataType");
+// @@clientName(KeywordTokenizer.`@odata.type`, "odataType");
 @@clientName(KeywordTokenizerV2.`@odata.type`, "odataType");
 @@clientName(MicrosoftLanguageTokenizer.`@odata.type`, "odataType");
 @@clientName(MicrosoftLanguageStemmingTokenizer.`@odata.type`, "odataType");
