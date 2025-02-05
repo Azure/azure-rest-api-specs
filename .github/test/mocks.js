@@ -9,8 +9,12 @@ export function createMockGithub() {
           .fn()
           .mockResolvedValue({ data: { artifacts: [] } }),
       },
+      checks: {
+        listForRef: vi.fn().mockResolvedValue({ data: { check_runs: [] } }),
+      },
       issues: {
         addLabels: vi.fn(),
+        listLabelsOnIssue: vi.fn().mockRejectedValue({ data: [] }),
         removeLabel: vi.fn(),
       },
     },

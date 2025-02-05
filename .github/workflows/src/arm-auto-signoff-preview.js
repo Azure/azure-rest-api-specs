@@ -46,6 +46,14 @@ export async function armAutoSignoffPreviewImpl({
   github,
   core,
 }) {
+  /** @type {boolean?} */
+  // true: Add Label
+  // false: Remove Label
+  // null|undefined: No-op
+  var addArmAutoSignoffPreview = null;
+
+  // TODO: Get diff of files changed in PR, use to determine to "rp-service-existing" and "typespec-incremental"
+
   const labels = (
     await github.rest.issues.listLabelsOnIssue({
       owner: owner,
@@ -54,5 +62,44 @@ export async function armAutoSignoffPreviewImpl({
     })
   ).data.map((label) => label.name);
 
-  core.info(JSON.stringify(labels));
+  const allLabelsMatch =
+    labels.includes("ARMReview") &&
+    !labels.includes("NotReadyForARMReview") &&
+    labels.includes("ARMBestPractices") &&
+    (!labels.includes("SuppressionReviewRequired") ||
+      labels.includes("Suppression-Approved"));
+
+  if (allLabelsMatch) {
+    const checkRuns = (
+      await github.rest.checks.listForRef({
+        owner: owner,
+        repo: repo,
+        ref: head_sha,
+      })
+    ).data.check_runs;
+
+    const swaggerLintDiffs = checkRuns.filter(
+      (run) => run.name === "Swagger LintDiff",
+    );
+
+    if (swaggerLintDiffs.length > 1) {
+      throw new Error(
+        `Unexpected number of checks named 'Swagger LintDiff': ${swaggerLintDiffs.length}`,
+      );
+    }
+
+    const swaggerLintDiff =
+      swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
+
+    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
+    if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
+      addArmAutoSignoffPreview = swaggerLintDiff.conclusion === "success";
+    }
+  } else {
+    addArmAutoSignoffPreview = false;
+  }
+
+  // All values converted to string, so tri-state is preserved
+  // true / false / null|undefined -> "true" / "false" / ""
+  core.setOutput("addArmAutoSignoffPreview", addArmAutoSignoffPreview);
 }
