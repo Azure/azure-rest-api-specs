@@ -1454,15 +1454,20 @@
           "type": "string",
           "description": "Ip address of server to be added to cluster."
         },
+        "localAvailabilityZoneName": {
+          "type": "string",
+          "description": "Local availability zone name of server to be added to rack aware cluster."
+        },
         "serverResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure resource id of Arc machine part of cluster for which job will be triggered."
+          "description": "Azure resource id of machine part of cluster for which job will be triggered."
         }
       },
       "required": [
         "serverName",
-        "hostIpv4Address"
+        "hostIpv4Address",
+        "serverResourceId"
       ]
     },
     "AzureLinuxProvisioningRequest": {
