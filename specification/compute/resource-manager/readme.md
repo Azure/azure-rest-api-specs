@@ -546,7 +546,6 @@ These settings apply only when `--tag=package-2023-10-02` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-10-02'
 input-file:
-  - Microsoft.Compute/custom-common-types/commonTypes.json  
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json
