@@ -33,7 +33,7 @@ model StorageDiscoveryWorkspace
 
 @doc("Storage Discovery Workspace Properties.")
 model StorageDiscoveryWorkspaceProperties {
-  @doc("The storage discovery tier.")
+  @doc("The storage discovery sku.")
   @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
   sku: StorageDiscoverySku;
 
@@ -95,16 +95,16 @@ union DataExportState {
   string,
 }
 
-@doc("Storage Discovery Tier")
-@renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoverySku")
+@doc("Storage Discovery Sku")
+@renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryTier")
 union StorageDiscoverySku {
-  @doc("Standard Tier")
+  @doc("Standard Sku")
   Standard: "Standard",
 
-  @doc("Premium Tier")
+  @doc("Premium Sku")
   Premium: "Premium",
 
-  @doc("Basic Tier")
+  @doc("Basic Sku")
   Basic: "Basic",
 
   string,

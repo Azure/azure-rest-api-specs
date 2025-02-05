@@ -497,32 +497,32 @@
         ]
       }
     },
-    "StorageDiscoverySku": {
+    "StorageDiscoveryTier": {
       "type": "string",
-      "description": "Storage Discovery Tier",
+      "description": "Storage Discovery Sku",
       "enum": [
         "Standard",
         "Premium",
         "Basic"
       ],
       "x-ms-enum": {
-        "name": "StorageDiscoverySku",
+        "name": "StorageDiscoveryTier",
         "modelAsString": true,
         "values": [
           {
             "name": "Standard",
             "value": "Standard",
-            "description": "Standard Tier"
+            "description": "Standard Sku"
           },
           {
             "name": "Premium",
             "value": "Premium",
-            "description": "Premium Tier"
+            "description": "Premium Sku"
           },
           {
             "name": "Basic",
             "value": "Basic",
-            "description": "Basic Tier"
+            "description": "Basic Sku"
           }
         ]
       }
@@ -568,8 +568,8 @@
       "description": "Storage Discovery Workspace Properties.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/StorageDiscoverySku",
-          "description": "The storage discovery tier."
+          "$ref": "#/definitions/StorageDiscoveryTier",
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -612,8 +612,8 @@
       "description": "Storage Discovery Workspace Properties.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/StorageDiscoverySku",
-          "description": "The storage discovery tier."
+          "$ref": "#/definitions/StorageDiscoveryTier",
+          "description": "The storage discovery sku."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
