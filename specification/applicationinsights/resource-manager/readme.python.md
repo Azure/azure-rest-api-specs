@@ -14,7 +14,7 @@ no-namespace-folders: true
 
 ``` yaml $(python)
 multiapi: true
-default-api-version: "2022-06-15"
+default-api-version: "2024-08-01"
 clear-output-folder: true
 batch:
   - tag: package-2015-05
@@ -32,12 +32,22 @@ batch:
   - tag: package-2021-10
   - tag: package-2022-04-01-only
   - tag: package-2022-06-15-only
+  - tag: package-2024-08-01-only
   - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/
 perform-load: false
+```
+
+### Tag: package-2024-08-01-only and python
+
+These settings apply only when `--tag=package-2024-08-01-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-01-only' && $(python)
+namespace: azure.mgmt.applicationinsights.v2024_08_01
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2024_08_01
 ```
 
 ### Tag: package-2022-06-15-only and python
