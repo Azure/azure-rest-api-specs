@@ -7,8 +7,8 @@ using TypeSpec.Http;
 namespace AI.Model;
 
 @doc("""
-The configuration information for an image embeddings request.
-""")
+  The configuration information for an image embeddings request.
+  """)
 model ImageEmbeddingsOptions {
   @doc("""
     Input image to embed. To embed multiple inputs in a single request, pass an array.
@@ -42,7 +42,7 @@ model ImageEmbeddingsOptions {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}
 
 @doc("Represents an image with optional text.")
 model ImageEmbeddingInput {

@@ -20,20 +20,12 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
-    },
-    {
       "OAuth2Auth": [
         "https://ml.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header"
-    },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
@@ -48,7 +40,7 @@
     "/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
-        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route \non the given endpoint.",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route\non the given endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -92,98 +84,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "messages": {
-                  "type": "array",
-                  "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
-                  "minItems": 1,
-                  "items": {
-                    "$ref": "#/definitions/ChatRequestMessage"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "frequency_penalty": {
-                  "type": "number",
-                  "format": "float",
-                  "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.\nSupported range is [-2, 2].",
-                  "default": 0,
-                  "minimum": -2,
-                  "maximum": 2
-                },
-                "stream": {
-                  "type": "boolean",
-                  "description": "A value indicating whether chat completions should be streamed for this request."
-                },
-                "presence_penalty": {
-                  "type": "number",
-                  "format": "float",
-                  "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.\nSupported range is [-2, 2].",
-                  "default": 0,
-                  "minimum": -2,
-                  "maximum": 2
-                },
-                "temperature": {
-                  "type": "number",
-                  "format": "float",
-                  "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
-                  "default": 0.7,
-                  "minimum": 0,
-                  "maximum": 1
-                },
-                "top_p": {
-                  "type": "number",
-                  "format": "float",
-                  "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
-                  "default": 1,
-                  "minimum": 0,
-                  "maximum": 1
-                },
-                "max_tokens": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "The maximum number of tokens to generate.",
-                  "minimum": 0
-                },
-                "response_format": {
-                  "$ref": "#/definitions/ChatCompletionsResponseFormat",
-                  "description": "An object specifying the format that the model must output.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length."
-                },
-                "stop": {
-                  "type": "array",
-                  "description": "A collection of textual sequences that will end completions generation.",
-                  "minItems": 1,
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tools": {
-                  "type": "array",
-                  "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay response with a function call request and provide the input arguments in JSON format for that function.",
-                  "minItems": 1,
-                  "items": {
-                    "$ref": "#/definitions/ChatCompletionsToolDefinition"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "tool_choice": {
-                  "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
-                  "x-ms-client-name": "toolChoice"
-                },
-                "seed": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed."
-                },
-                "model": {
-                  "type": "string",
-                  "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
-                }
-              },
-              "required": [
-                "messages"
-              ],
-              "additionalProperties": {}
+              "$ref": "#/definitions/ChatCompletionsOptions"
             }
           }
         ],
@@ -264,37 +165,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "input": {
-                  "type": "array",
-                  "description": "Input text to embed, encoded as a string or array of tokens.\nTo embed multiple inputs in a single request, pass an array\nof strings or array of token arrays.",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "dimensions": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
-                },
-                "encoding_format": {
-                  "$ref": "#/definitions/EmbeddingEncodingFormat",
-                  "description": "Optional. The desired format for the returned embeddings."
-                },
-                "input_type": {
-                  "$ref": "#/definitions/EmbeddingInputType",
-                  "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
-                },
-                "model": {
-                  "type": "string",
-                  "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
-                }
-              },
-              "required": [
-                "input"
-              ],
-              "additionalProperties": {}
+              "$ref": "#/definitions/EmbeddingsOptions"
             }
           }
         ],
@@ -375,38 +246,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "input": {
-                  "type": "array",
-                  "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
-                  "items": {
-                    "$ref": "#/definitions/ImageEmbeddingInput"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "dimensions": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
-                },
-                "encoding_format": {
-                  "$ref": "#/definitions/EmbeddingEncodingFormat",
-                  "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
-                },
-                "input_type": {
-                  "$ref": "#/definitions/EmbeddingInputType",
-                  "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
-                },
-                "model": {
-                  "type": "string",
-                  "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
-                }
-              },
-              "required": [
-                "input"
-              ],
-              "additionalProperties": {}
+              "$ref": "#/definitions/ImageEmbeddingsOptions"
             }
           }
         ],
@@ -667,6 +507,101 @@
         "name"
       ]
     },
+    "ChatCompletionsOptions": {
+      "type": "object",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatRequestMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.\nSupported range is [-2, 2].",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request."
+        },
+        "presence_penalty": {
+          "type": "number",
+          "format": "float",
+          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.\nSupported range is [-2, 2].",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.\nSupported range is [0, 1].",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "minimum": 0
+        },
+        "response_format": {
+          "$ref": "#/definitions/ChatCompletionsResponseFormat",
+          "description": "An object specifying the format that the model must output.\n\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema.\n\nSetting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\n**Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if `finish_reason=\"length\"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length."
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay response with a function call request and provide the input arguments in JSON format for that function.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "messages"
+      ],
+      "additionalProperties": {}
+    },
     "ChatCompletionsResponseFormat": {
       "type": "object",
       "description": "Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.\nNote that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON\nvia a system or user message.",
@@ -831,13 +766,13 @@
         "function"
       ]
     },
-    "ChatMessageAudioContentItem": {
+    "ChatMessageAudioDataContentItem": {
       "type": "object",
-      "description": "A structured chat content item containing an audio content.",
+      "description": "A structured chat content item for audio content passed as base64 encoded data.",
       "properties": {
         "input_audio": {
           "$ref": "#/definitions/ChatMessageInputAudio",
-          "description": "The details of the input audio.",
+          "description": "The details of the input audio data.",
           "x-ms-client-name": "inputAudio"
         }
       },
@@ -850,6 +785,26 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio"
+    },
+    "ChatMessageAudioUrlContentItem": {
+      "type": "object",
+      "description": "A structured chat content item for audio content passed as a url pointer.",
+      "properties": {
+        "audio_url": {
+          "$ref": "#/definitions/ChatMessageInputAudioUrl",
+          "description": "The details of the audio url pointer.",
+          "x-ms-client-name": "audioUrl"
+        }
+      },
+      "required": [
+        "audio_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "audio_url"
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -934,7 +889,7 @@
     },
     "ChatMessageInputAudio": {
       "type": "object",
-      "description": "The details of an audio chat message content part.",
+      "description": "The details of the input audio data.",
       "properties": {
         "data": {
           "type": "string",
@@ -948,6 +903,19 @@
       "required": [
         "data",
         "format"
+      ]
+    },
+    "ChatMessageInputAudioUrl": {
+      "type": "object",
+      "description": "The details of the audio url pointer.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the audio content."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "ChatMessageTextContentItem": {
@@ -1289,6 +1257,40 @@
         "index"
       ]
     },
+    "EmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an embeddings request.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input text to embed, encoded as a string or array of tokens.\nTo embed multiple inputs in a single request, pass an array\nof strings or array of token arrays.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "Optional. The desired format for the returned embeddings."
+        },
+        "input_type": {
+          "$ref": "#/definitions/EmbeddingInputType",
+          "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": {}
+    },
     "EmbeddingsResult": {
       "type": "object",
       "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
@@ -1402,7 +1404,9 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the function accepts, described as a JSON Schema object."
+          "type": "object",
+          "description": "The parameters the function accepts, described as a JSON Schema object.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -1425,6 +1429,41 @@
       "required": [
         "image"
       ]
+    },
+    "ImageEmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an image embeddings request.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input image to embed. To embed multiple inputs in a single request, pass an array.\nThe input must not exceed the max input tokens for the model.",
+          "items": {
+            "$ref": "#/definitions/ImageEmbeddingInput"
+          },
+          "x-ms-identifiers": []
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "encoding_format": {
+          "$ref": "#/definitions/EmbeddingEncodingFormat",
+          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "input_type": {
+          "$ref": "#/definitions/EmbeddingInputType",
+          "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+        },
+        "model": {
+          "type": "string",
+          "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": {}
     },
     "ModelInfo": {
       "type": "object",

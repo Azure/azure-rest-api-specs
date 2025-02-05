@@ -7,8 +7,8 @@ using TypeSpec.Http;
 namespace AI.Model;
 
 @doc("""
-The configuration information for an embeddings request.
-""")
+  The configuration information for an embeddings request.
+  """)
 model EmbeddingsOptions {
   @doc("""
     Input text to embed, encoded as a string or array of tokens.
@@ -41,4 +41,4 @@ model EmbeddingsOptions {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}
