@@ -10,10 +10,10 @@ using Azure.ClientGenerator.Core;
 namespace AI.Model;
 
 @doc("""
-The configuration information for a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  The configuration information for a chat completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
@@ -616,17 +616,33 @@ union ChatMessageImageDetailLevel {
   high: "high",
 }
 
-@doc("A structured chat content item containing an audio content.")
-model ChatMessageAudioContentItem extends ChatMessageContentItem {
+@doc("A structured chat content item for audio content passed as a url pointer.")
+model ChatMessageAudioUrlContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'audio_url' for this type.")
+  type: "audio_url";
+
+  @doc("The details of the audio url pointer.")
+  @encodedName("application/json", "audio_url")
+  audioUrl: ChatMessageInputAudioUrl;
+}
+
+@doc("A structured chat content item for audio content passed as base64 encoded data.")
+model ChatMessageAudioDataContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'input_audio' for this type.")
   type: "input_audio";
 
-  @doc("The details of the input audio.")
+  @doc("The details of the input audio data.")
   @encodedName("application/json", "input_audio")
   inputAudio: ChatMessageInputAudio;
 }
 
-@doc("The details of an audio chat message content part.")
+@doc("The details of the audio url pointer.")
+model ChatMessageInputAudioUrl {
+  @doc("The URL of the audio content.")
+  url: string;
+}
+
+@doc("The details of the input audio data.")
 model ChatMessageInputAudio {
   @doc("Base64 encoded audio data")
   data: string;

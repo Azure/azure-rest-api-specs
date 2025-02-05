@@ -21,6 +21,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(AI.Model.EmbeddingsOptions, Usage.input);
 @@usage(AI.Model.ImageEmbeddingsOptions, Usage.input);
 
+// Necessary due to how we're forcing this abstraction
+@@usage(AI.Model.ChatMessageAudioDataContentItem, Usage.input);
+@@usage(AI.Model.ChatMessageAudioUrlContentItem, Usage.input);
+
 // The operators need to be hidden, since we hand-write the public versions of those
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
@@ -74,10 +78,19 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageImageContentItem, Access.public);
 @@access(AI.Model.ChatMessageImageUrl, Access.public);
 @@access(AI.Model.ChatMessageImageDetailLevel, Access.public);
-@@access(AI.Model.StreamingChatCompletionsUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatCompletionsUpdate,
+  Access.public,
+  "python,csharp"
+);
 @@access(AI.Model.StreamingChatChoiceUpdate, Access.public, "python,csharp");
-@@access(AI.Model.StreamingChatResponseMessageUpdate, Access.public, "python,csharp");
-@@access(AI.Model.StreamingChatResponseToolCallUpdate, Access.public, "python,csharp");
+@@access(AI.Model.StreamingChatResponseMessageUpdate,
+  Access.public,
+  "python,csharp"
+);
+@@access(AI.Model.StreamingChatResponseToolCallUpdate,
+  Access.public,
+  "python,csharp"
+);
 
 // Hide the JSON schema class in favor of a factory method on the ChatCompletionsResponseFormat class
 @@access(AI.Model.ChatCompletionsResponseFormatJsonSchema,
@@ -99,6 +112,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
 
+// Make these internal, customize a third class for users to interact with
+@@access(AI.Model.ChatMessageAudioDataContentItem, Access.internal);
+@@access(AI.Model.ChatMessageAudioUrlContentItem, Access.internal);
+
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
   "python"
@@ -116,8 +133,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   "ImageDetailLevel",
   "python"
 );
-@@clientName(AI.Model.ChatMessageAudioContentItem,
-  "AudioContentItem",
+@@clientName(AI.Model.ChatMessageAudioUrlContentItem,
+  "AudioUrlContentItem",
   "python"
 );
 @@clientName(AI.Model.ChatMessageInputAudio, "InputAudio", "python");
