@@ -12083,7 +12083,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'."
         }
       },
@@ -12186,7 +12186,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "Sku of the availability set"
         }
       },
@@ -12315,7 +12315,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         },
         "zones": {
@@ -12607,7 +12607,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values."
         }
       },
@@ -12871,7 +12871,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values."
         }
       },
@@ -13198,7 +13198,7 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "[List all available dedicated host sizes for resizing] (https://docs.microsoft.com/rest/api/compute/dedicated-hosts/listavailablesizes). Resizing can be only used to scale up DedicatedHost. Only name is required to be set."
         }
       },
@@ -15215,6 +15215,28 @@
         }
       }
     },
+    "Plan": {
+      "type": "object",
+      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        }
+      }
+    },
     "PriorityMixPolicy": {
       "type": "object",
       "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. With this property the customer is able to specify the base number of regular priority VMs created as the VMSS flex instance scales out and the split between Spot and Regular priority VMs after this base target has been reached.",
@@ -15390,27 +15412,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Increase the value of this property allows user to reset the key used for securing communication channel between guest and host."
-        }
-      }
-    },
-    "ProxyResource": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will not have tags and a location",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
         }
       }
     },
@@ -15612,41 +15613,6 @@
           "description": "Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false."
         }
       }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ]
     },
     "ResourceIdOptionsForGetCapacityReservationGroups": {
       "type": "string",
@@ -16746,6 +16712,25 @@
         "modelAsString": false
       }
     },
+    "Sku": {
+      "type": "object",
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The sku name."
+        },
+        "tier": {
+          "type": "string",
+          "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the number of virtual machines in the scale set."
+        }
+      }
+    },
     "SkuProfile": {
       "type": "object",
       "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy.",
@@ -17621,7 +17606,7 @@
           "x-ms-client-flatten": true
         },
         "plan": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
+          "$ref": "#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "resources": {
@@ -19088,11 +19073,11 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The virtual machine scale set sku."
         },
         "plan": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
+          "$ref": "#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "identity": {
@@ -20042,7 +20027,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The Sku.",
           "readOnly": true
         },
@@ -20127,11 +20112,11 @@
       "description": "Describes a Virtual Machine Scale Set.",
       "properties": {
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The virtual machine scale set sku."
         },
         "plan": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
+          "$ref": "#/definitions/Plan",
           "description": "The purchase plan when deploying a virtual machine scale set from VM Marketplace images."
         },
         "properties": {
@@ -20584,12 +20569,12 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Sku",
+          "$ref": "#/definitions/Sku",
           "description": "The virtual machine SKU.",
           "readOnly": true
         },
         "plan": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
+          "$ref": "#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "resources": {
@@ -22038,7 +22023,7 @@
       "description": "Describes a Virtual Machine Update.",
       "properties": {
         "plan": {
-          "$ref": "../../../custom-common-types/commonTypes.json#/definitions/Plan",
+          "$ref": "#/definitions/Plan",
           "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
         },
         "properties": {
