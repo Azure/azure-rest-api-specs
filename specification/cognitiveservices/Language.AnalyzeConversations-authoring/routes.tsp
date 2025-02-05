@@ -21,60 +21,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
-
-interface ConversationAuthoringCopiedProject {
-     
-/**
-   * Generates a copy project operation authorization to the current target Azure resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
-  @post
-  @added(Versions.v2023_04_15_preview)
-  @actionSeparator("/:")
-  @action("authorize-copy")
-op  copyProjectAuthorization is languageOperations.ResourceAction<
-    AnalyzeConversationAuthoringProjectMetadata,
-    AnalyzeConversationAuthoringCopyAuthorizationOptions,
-    AnalyzeConversationAuthoringCopiedProjectOptions
-  >;
-
-/**
-   * Copies an existing project to another Azure resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
-  @post
-  @pollingOperation(ConversationAuthoringCopiedProject.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
-op  copyProject is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The copy project info.
-       */
-      @body
-      body: AnalyzeConversationAuthoringCopiedProjectOptions;
-    },
-    AcceptedResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
-
-/**
-   * Gets the status of an existing copy project job.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
-    
-
-}
-
 interface ConversationAuthoringDeploymentResources {
     /**
    * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
@@ -570,6 +516,55 @@ op  `import` is Foundations.LongRunningOperation<
    * Gets the status for an import.
    */
 op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringImportProjectJobState>;
+
+  /**
+   * Generates a copy project operation authorization to the current target Azure resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style"
+  @post
+  @added(Versions.v2023_04_15_preview)
+  @actionSeparator("/:")
+  @action("authorize-copy")
+op  copyProjectAuthorization is languageOperations.ResourceAction<
+    AnalyzeConversationAuthoringProjectMetadata,
+    AnalyzeConversationAuthoringCopyAuthorizationOptions,
+    AnalyzeConversationAuthoringCopiedProjectOptions
+  >;
+
+/**
+   * Copies an existing project to another Azure resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
+  @post
+  @pollingOperation(ConversationAuthoringProjects.getCopyProjectStatus)
+  @added(Versions.v2023_04_15_preview)
+op  copyProject is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The copy project info.
+       */
+      @body
+      body: AnalyzeConversationAuthoringCopiedProjectOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Gets the status of an existing copy project job.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
+
 }
  
   
