@@ -260,7 +260,6 @@ input-file:
   - Microsoft.Databricks/preview/2025-03-01-preview/accessconnector.json
 ```
 
-
 ---
 
 # Suppressions
