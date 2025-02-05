@@ -33,7 +33,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A ManufacturingPlatformProviderHub resource")
 model MdsResource is TrackedResource<MdsResourceProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,23}$")
   @key("mdsResourceName")
   @segment("manufacturingDataServices")
   @doc("Name.")
@@ -196,7 +196,7 @@ model MdsResourceProperties {
   @visibility("read", "create")
   userManagedAdxProfile?: UserManagedAdxProfile;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of CMK Settings.")
   cmkProfile?: CmkProfile;
@@ -216,6 +216,16 @@ model MdsResourceProperties {
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @visibility("read", "update")
   denyAssignmentExclusions?: DenyAssignmentExclusion[];
+
+  @doc("State of the resource")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "update")
+  resourceState?: string;
+
+  @doc("Flag for toggling Zone redundancy for resources")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "create")
+  isZoneRedundant?: boolean;
 }
 
 @doc("The properties related to Aks Resource")
@@ -461,6 +471,10 @@ model CmkProfile {
   @doc("URI of Key in AKV")
   @visibility("read", "create")
   keyUri: string;
+
+  @doc("Key Version")
+  @visibility("read", "create", "update")
+  version: string;
 }
 
 @doc("The properties related to Fabric")

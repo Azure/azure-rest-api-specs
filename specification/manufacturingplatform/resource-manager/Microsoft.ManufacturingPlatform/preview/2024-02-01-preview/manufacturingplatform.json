@@ -72,16 +72,16 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -114,13 +114,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_ListBySubscription": {
-            "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -156,13 +156,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_ListByResourceGroup": {
-            "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -189,7 +189,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -207,7 +207,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_Get": {
+          "ManufacturingDataServices_Get_MaximumSet_Gen": {
             "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -234,7 +234,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
             "name": "resource",
@@ -277,15 +277,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_CreateOrUpdate": {
-            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "ManufacturingDataServices_Update",
@@ -309,7 +309,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
             "name": "properties",
@@ -349,15 +349,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_Update": {
-            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManufacturingDataServices_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "ManufacturingDataServices_Delete",
@@ -381,7 +381,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -409,15 +409,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ManufacturingDataServices_Delete": {
-            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ManufacturingDataServices_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}/listAvailableVersions": {
@@ -443,7 +443,7 @@
             "description": "Name.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
           }
         ],
         "responses": {
@@ -461,7 +461,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_ListAvailableVersions": {
+          "ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen": {
             "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen.json"
           }
         }
@@ -659,11 +659,36 @@
             "read",
             "create"
           ]
+        },
+        "version": {
+          "type": "string",
+          "description": "Key Version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
-        "keyUri"
+        "keyUri",
+        "version"
       ]
+    },
+    "CmkProfileUpdate": {
+      "type": "object",
+      "description": "The properties related to CMK",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Key Version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     },
     "DatabaseProfile": {
       "type": "object",
@@ -1047,6 +1072,7 @@
           "description": "Profile of CMK Settings.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -1077,6 +1103,22 @@
           "x-ms-mutability": [
             "read",
             "update"
+          ]
+        },
+        "resourceState": {
+          "type": "string",
+          "description": "State of the resource",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "isZoneRedundant": {
+          "type": "boolean",
+          "description": "Flag for toggling Zone redundancy for resources",
+          "x-ms-mutability": [
+            "read",
+            "create"
           ]
         }
       },
@@ -1167,6 +1209,15 @@
             "create"
           ]
         },
+        "cmkProfile": {
+          "$ref": "#/definitions/CmkProfileUpdate",
+          "description": "Profile of CMK Settings.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "fabricProfile": {
           "$ref": "#/definitions/FabricProfileUpdate",
           "description": "Profile of Fabric resources.",
@@ -1191,6 +1242,14 @@
           "items": {
             "$ref": "#/definitions/DenyAssignmentExclusion"
           },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "resourceState": {
+          "type": "string",
+          "description": "State of the resource",
           "x-ms-mutability": [
             "read",
             "update"
