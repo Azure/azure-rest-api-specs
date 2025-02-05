@@ -31,7 +31,7 @@ model StorageDiscoveryWorkspace
   >;
 }
 
-@doc("Storage Discovery Workspace Properties.")
+@doc("Storage Discovery Workspace Properties")
 model StorageDiscoveryWorkspaceProperties {
   @doc("The storage discovery sku.")
   @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
@@ -41,11 +41,11 @@ model StorageDiscoveryWorkspaceProperties {
   @added(ApiVersion.v2025_03_01_preview)
   enabled: boolean;
 
-  @doc("The state of storage discovery data export. Not supported right now")
+  @doc("The state of storage discovery data export")
   @madeOptional(ApiVersion.v2025_03_01_preview)
   exportState?: DataExportState;
 
-  @doc("The description of the storage discovery workspace.")
+  @doc("The description of the storage discovery workspace")
   description?: string;
 
   @doc("The view level storage discovery data estate")
@@ -67,13 +67,13 @@ model StorageDiscoveryWorkspaceProperties {
   @removed(ApiVersion.v2025_01_01_preview)
   scopes: StorageDiscoveryScopeV1[];
 
-  @doc("The storage discovery resource collections")
+  @doc("The storage discovery resource collections.")
   @extension("x-ms-identifiers", ["displayName"])
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageCollections")
   discoveryScopes: StorageDiscoveryScope[];
 
-  @doc("The destinations to which the storage workspace rule sends data. Not supported right now")
+  @doc("The destinations to which the storage workspace sends data")
   @removed(ApiVersion.v2025_01_01_preview)
   @added(ApiVersion.v2025_03_01_preview)
   @madeOptional(ApiVersion.v2025_03_01_preview)
@@ -89,7 +89,7 @@ union DataExportState {
   @doc("Data export is stopped.")
   Stopped: "Stopped",
 
-  @doc("Data export is running continuously.")
+  @doc("Data export is running continuously")
   Running: "Running",
 
   string,
@@ -134,7 +134,7 @@ model StorageDiscoveryScopeV1 {
 @doc("Storage resource filters for the scope")
 @removed(ApiVersion.v2025_01_01_preview)
 model StorageDiscoveryResourceFilter {
-  @doc("The storage account locations to filter.")
+  @doc("The storage account locations to filter")
   locations: string[];
 
   ...ArmTagsProperty;
@@ -165,7 +165,7 @@ union StorageDiscoveryResourceType {
   string,
 }
 
-@doc("Destinations for storage discovery data.")
+@doc("Destinations for storage discovery data")
 @removed(ApiVersion.v2025_01_01_preview)
 @added(ApiVersion.v2025_03_01_preview)
 model StorageDiscoveryDestination {
