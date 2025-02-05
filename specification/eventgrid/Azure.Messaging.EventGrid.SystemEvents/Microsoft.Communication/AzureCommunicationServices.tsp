@@ -1236,13 +1236,13 @@ model AcsMessageMediaContent {
   /** Optional. The caption for the media object, if supported and provided */
   caption?: string;
 
-  /** Optional. Set to  true  if the sticker is animated; false otherwise. */
+  /** Optional. Set to  true  if the sticker is animated;  false  otherwise. */
   animated?: boolean;
 }
 
 /** Message Reaction Content */
 model AcsMessageReactionContent {
-  /** Required. WhatsApp message ID of message you want to apply the emoji to. */
+  /** Required. WhatsApp message ID of the message that the emoji is applied to */
   messageId: string;
 
   /** Optional. Unicode escape sequence of the emoji. */
