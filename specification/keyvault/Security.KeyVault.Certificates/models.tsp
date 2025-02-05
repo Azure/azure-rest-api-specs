@@ -328,6 +328,12 @@ model CertificateBundle {
    * Application specific metadata in the form of key-value pairs
    */
   tags?: Record<string>;
+
+  /**
+   * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
+   */
+  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  preserveCertOrder?: boolean;
 }
 
 /**
@@ -813,6 +819,12 @@ model CertificateCreateParameters {
    * Application specific metadata in the form of key-value pairs.
    */
   tags?: Record<string>;
+
+  /**
+   * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
+   */
+  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  preserveCertOrder?: boolean;
 }
 
 /**
@@ -865,6 +877,12 @@ model CertificateOperation {
   target?: string;
 
   /**
+   * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
+   */
+  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  preserveCertOrder?: boolean;
+
+  /**
    * Identifier for the certificate operation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
@@ -903,6 +921,12 @@ model CertificateImportParameters {
    * Application specific metadata in the form of key-value pairs.
    */
   tags?: Record<string>;
+
+  /**
+   * Specifies whether the certificate chain preserves its original order. The default value is false, which sets the leaf certificate at index 0.
+   */
+  @Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+  preserveCertOrder?: boolean;
 }
 
 /**
