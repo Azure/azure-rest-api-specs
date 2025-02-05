@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { createMockCore } from "../../../test/mocks.js";
+import { createMockCore } from "../../test/mocks.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
 
 describe("updateLabels", () => {
