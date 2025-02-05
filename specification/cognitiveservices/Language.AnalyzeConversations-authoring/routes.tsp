@@ -127,34 +127,10 @@ op  listDeploymentResources is languageOperations.ResourceList<
 /**
    * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @route("/authoring/analyze-conversations/projects/global/deployments/resources")
-  @get
   @added(Versions.v2023_04_15_preview)
- op listAssignedResourceDeployments is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
-    {},
-    Foundations.ErrorResponse
+ op listAssignedResourceDeployments is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
 
@@ -392,39 +368,10 @@ op  getProjectDeletionStatus is Azure.Core.Foundations.Operation<
 /**
    * Lists the supported languages for the given project type.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/global/languages")
-  @get
-op  getSupportedLanguages is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: ProjectKind;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringSupportedLanguages,
-    {},
-    Foundations.ErrorResponse
+op  listSupportedLanguages is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringSupportedLanguage,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
   >;
 
   /**
@@ -639,40 +586,10 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
 /**
    * Lists the support training config version for a given project type.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-  @route("/authoring/analyze-conversations/projects/global/training-config-versions")
-  @get
- op listTrainingConfigVersions is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The project kind.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style"
-      @query("projectKind")
-      ProjectKind: ProjectKind;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringTrainingConfigVersions,
-    {},
-    Foundations.ErrorResponse
+ op listTrainingConfigVersions is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringTrainingConfigVersion,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      ProjectKindQueryParameter>
   >;
 
 }
@@ -808,53 +725,16 @@ op  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversation
   
 
 interface ConversationAuthoringPrebuilts { 
-    /**
+    
+/**
    * Lists the supported prebuilt entities that can be used while creating composed entities.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/global/prebuilt-entities")
-  @get
-op  getSupportedPrebuiltEntities is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
-       */
-      @query("language")
-      language?: string;
-
-      /**
-       * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
-       */
-      @query("multilingual")
-      multilingual?: string;
-
-      /**
-       * The maximum number of resources to return from the collection.
-       */
-      @query("top")
-      top?: int32;
-
-      /**
-       * An offset into the collection of the first resource to be returned.
-       */
-      @query("skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of resources to include in a single response.
-       */
-      @query("maxpagesize")
-      maxpagesize?: int32;
-    },
-    AnalyzeConversationAuthoringPrebuiltEntities,
-    {},
-    Foundations.ErrorResponse
+op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringPrebuiltEntity,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      SupportedPrebuiltEntitiesQueryParameter>
   >;
 }
-
-
-  
-
   
 interface ConversationAuthoringExportedModels { 
   

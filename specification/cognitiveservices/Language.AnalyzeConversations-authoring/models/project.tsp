@@ -687,6 +687,33 @@ model StringIndexTypeQueryParameter {
   stringIndexType: StringIndexType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model SupportedPrebuiltEntitiesQueryParameter {
+      
+      /**
+       * The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
+       */
+      @query("language")
+      language?: string;
+
+      /**
+       * Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.
+       */
+      @query("multilingual")
+      multilingual?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+model ProjectKindQueryParameter {
+      
+      /**
+       * The project kind.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style"
+      @query("projectKind")
+      ProjectKind: ProjectKind;
+}
+
 /**
  * Represents the evaluation result for an utterance.
  */
@@ -1208,10 +1235,13 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
  */
 @added(Versions.v2023_04_15_preview)
 @clientName("AssignedProjectDeploymentsMetadata", "csharp")
+@resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
   /**
    * Represents the project name.
    */
+  @key
+  @visibility("read")
   projectName: string;
 
   /**
@@ -1262,10 +1292,13 @@ model AnalyzeConversationAuthoringSupportedLanguages {
  * Represents a supported language.
  */
 @clientName("SupportedLanguage", "csharp")
+@resource("authoring/analyze-conversations/projects/global/languages")
 model AnalyzeConversationAuthoringSupportedLanguage {
   /**
    * The language name.
    */
+  @key
+  @visibility("read")
   languageName: string;
 
   /**
@@ -1294,10 +1327,13 @@ model AnalyzeConversationAuthoringPrebuiltEntities {
  * Represents a supported prebuilt entity.
  */
 @clientName("PrebuiltEntity", "csharp")
+@resource("authoring/analyze-conversations/projects/global/prebuilt-entities")
 model AnalyzeConversationAuthoringPrebuiltEntity {
   /**
    * The prebuilt entity category.
    */
+  @key
+  @visibility("read")
   category: string;
 
   /**
@@ -1331,10 +1367,13 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
  * Represents a training config version.
  */
 @clientName("TrainingConfigVersion", "csharp")
+@resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
   /**
    * Represents the version of the config.
    */
+  @key
+  @visibility("read")
   trainingConfigVersion: string;
 
   /**

@@ -1475,70 +1475,30 @@
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "ConversationAuthoringProjects_GetSupportedLanguages",
+        "operationId": "ConversationAuthoringProjects_ListSupportedLanguages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Orchestration"
-            ],
-            "x-ms-enum": {
-              "name": "ProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "A project to build natural language into apps, bots, and IoT devices."
-                },
-                {
-                  "name": "Orchestration",
-                  "value": "Orchestration",
-                  "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-                }
-              ]
-            },
-            "x-ms-client-name": "ProjectKind"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/ProjectKindQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringSupportedLanguages"
+              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringSupportedLanguage"
             }
           },
           "default": {
@@ -1553,61 +1513,41 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "ConversationAuthoringPrebuilts_GetSupportedPrebuiltEntities",
+        "operationId": "ConversationAuthoringPrebuilts_ListSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "multilingual",
-            "in": "query",
-            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/SupportedPrebuiltEntitiesQueryParameter.language"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/SupportedPrebuiltEntitiesQueryParameter.multilingual"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringPrebuiltEntities"
+              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringPrebuiltEntity"
             }
           },
           "default": {
@@ -1622,6 +1562,9 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1634,63 +1577,23 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "projectKind",
-            "in": "query",
-            "description": "The project kind.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Conversation",
-              "Orchestration"
-            ],
-            "x-ms-enum": {
-              "name": "ProjectKind",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Conversation",
-                  "value": "Conversation",
-                  "description": "A project to build natural language into apps, bots, and IoT devices."
-                },
-                {
-                  "name": "Orchestration",
-                  "value": "Orchestration",
-                  "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-                }
-              ]
-            },
-            "x-ms-client-name": "ProjectKind"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the collection.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "An offset into the collection of the first resource to be returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "The maximum number of resources to include in a single response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/ProjectKindQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringTrainingConfigVersions"
+              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringTrainingConfigVersion"
             }
           },
           "default": {
@@ -1705,6 +1608,9 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2734,34 +2640,14 @@
         "intent"
       ]
     },
-    "AnalyzeConversationAuthoringPrebuiltEntities": {
-      "type": "object",
-      "description": "Represents a list of the retrieved supported prebuilt entities.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The supported prebuilt entities.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringPrebuiltEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AnalyzeConversationAuthoringPrebuiltEntity": {
       "type": "object",
       "description": "Represents a supported prebuilt entity.",
       "properties": {
         "category": {
           "type": "string",
-          "description": "The prebuilt entity category."
+          "description": "The prebuilt entity category.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -3050,7 +2936,8 @@
       "properties": {
         "languageName": {
           "type": "string",
-          "description": "The language name."
+          "description": "The language name.",
+          "readOnly": true
         },
         "languageCode": {
           "type": "string",
@@ -3060,27 +2947,6 @@
       "required": [
         "languageName",
         "languageCode"
-      ]
-    },
-    "AnalyzeConversationAuthoringSupportedLanguages": {
-      "type": "object",
-      "description": "Represents a list of retrieved languages.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of the languages.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringSupportedLanguage"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "AnalyzeConversationAuthoringSwapDeploymentsJobState": {
@@ -3159,7 +3025,8 @@
       "properties": {
         "trainingConfigVersion": {
           "type": "string",
-          "description": "Represents the version of the config."
+          "description": "Represents the version of the config.",
+          "readOnly": true
         },
         "modelExpirationDate": {
           "type": "string",
@@ -3170,27 +3037,6 @@
       "required": [
         "trainingConfigVersion",
         "modelExpirationDate"
-      ]
-    },
-    "AnalyzeConversationAuthoringTrainingConfigVersions": {
-      "type": "object",
-      "description": "Represents a list of training config versions.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of the training config versions.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringTrainingConfigVersion"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The next page link."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "AnalyzeConversationAuthoringTrainingJobOptions": {
@@ -3606,6 +3452,28 @@
         ]
       }
     },
+    "PagedAnalyzeConversationAuthoringPrebuiltEntity": {
+      "type": "object",
+      "description": "Paged collection of AnalyzeConversationAuthoringPrebuiltEntity items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AnalyzeConversationAuthoringPrebuiltEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringPrebuiltEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedAnalyzeConversationAuthoringProjectDeployment": {
       "type": "object",
       "description": "Paged collection of AnalyzeConversationAuthoringProjectDeployment items",
@@ -3659,6 +3527,50 @@
           "description": "The AnalyzeConversationAuthoringProjectTrainedModel items on this page",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationAuthoringProjectTrainedModel"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedAnalyzeConversationAuthoringSupportedLanguage": {
+      "type": "object",
+      "description": "Paged collection of AnalyzeConversationAuthoringSupportedLanguage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AnalyzeConversationAuthoringSupportedLanguage items on this page",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringSupportedLanguage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedAnalyzeConversationAuthoringTrainingConfigVersion": {
+      "type": "object",
+      "description": "Paged collection of AnalyzeConversationAuthoringTrainingConfigVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AnalyzeConversationAuthoringTrainingConfigVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringTrainingConfigVersion"
           },
           "x-ms-identifiers": []
         },
@@ -3829,6 +3741,35 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
+    "ProjectKindQueryParameter": {
+      "name": "projectKind",
+      "in": "query",
+      "description": "The project kind.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Conversation",
+        "Orchestration"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Conversation",
+            "value": "Conversation",
+            "description": "A project to build natural language into apps, bots, and IoT devices."
+          },
+          {
+            "name": "Orchestration",
+            "value": "Orchestration",
+            "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ProjectKind"
+    },
     "StringIndexTypeQueryParameter": {
       "name": "stringIndexType",
       "in": "query",
@@ -3859,6 +3800,22 @@
           }
         ]
       },
+      "x-ms-parameter-location": "method"
+    },
+    "SupportedPrebuiltEntitiesQueryParameter.language": {
+      "name": "language",
+      "in": "query",
+      "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SupportedPrebuiltEntitiesQueryParameter.multilingual": {
+      "name": "multilingual",
+      "in": "query",
+      "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
