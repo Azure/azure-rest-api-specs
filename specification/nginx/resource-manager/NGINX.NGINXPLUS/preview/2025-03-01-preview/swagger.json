@@ -1053,6 +1053,425 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies/{wafPolicyName}": {
+      "get": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "Get the Nginx Waf Policy of given Nginx deployment",
+        "operationId": "WafPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "wafPolicyName",
+            "description": "The name of Waf Policy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WafPolicy_Get": {
+            "$ref": "./examples/WafPolicy_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "Create or update the Nginx Waf Policy for given Nginx deployment",
+        "operationId": "WafPolicy_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "wafPolicyName",
+            "description": "The name of Waf Policy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Nginx Deployment Waf Policy",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicy"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WafPolicy_Create": {
+            "$ref": "./examples/WafPolicy_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "Reset the Nginx Waf Policy of given Nginx deployment to default",
+        "operationId": "WafPolicy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "wafPolicyName",
+            "description": "The name of Waf Policy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "WafPolicy_Delete": {
+            "$ref": "./examples/WafPolicy_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/listDefaultWafPolicies": {
+      "post": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "Get the Nginx Waf Policy of given Nginx deployment",
+        "operationId": "DefaultWafPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultWafPolicy_Get": {
+            "$ref": "./examples/DefaultWafPolicy_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies": {
+      "get": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "List Waf Policies of given Nginx deployment",
+        "operationId": "WafPolicy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WafPolicy_List": {
+            "$ref": "./examples/WafPolicy_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/analyzeWafPolicy": {
+      "post": {
+        "tags": [
+          "NginxWafPolicy"
+        ],
+        "summary": "Analyze an NGINX Waf Policy without applying it to the NGINXaaS deployment.",
+        "operationId": "WafPolicy_Analysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "The Id of subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name of targeted Nginx deployment",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "wafPolicyName",
+            "description": "The name of Waf Policy",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Nginx Waf Policy",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WafPolicy_Analysis": {
+            "$ref": "./examples/WafPolicy_Analysis.json"
+          }
+        }
+      }
+    },
     "/providers/Nginx.NginxPlus/operations": {
       "get": {
         "tags": [
@@ -2196,6 +2615,168 @@
           "description": "The version of the NGINX App Protect Web Application Firewall (WAF) module for NGINX."
         }
       }
+    },
+    "NginxDeploymentWafPolicy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyAnalysisCreateRequest": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "format": "byte",
+          "type": "string",
+          "readOnly": true
+        },
+        "filepath": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyAnalysisData": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentWafPolicyError"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyAnalysisResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "data": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisData"
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyApplyingStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatusCode"
+        },
+        "displayStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "time": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyApplyingStatusCode": {
+      "type": "object"
+    },
+    "NginxDeploymentWafPolicyCompilingStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatusCode"
+        },
+        "displayStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "time": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyCompilingStatusCode": {
+      "type": "object"
+    },
+    "NginxDeploymentWafPolicyError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "field": {
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentWafPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "format": "byte",
+          "type": "string",
+          "readOnly": true
+        },
+        "filepath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyProvisioningState"
+        },
+        "compilingState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus"
+        },
+        "applyingState": {
+          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus"
+        }
+      }
+    },
+    "NginxDeploymentWafPolicyProvisioningState": {
+      "type": "object"
     }
   },
   "parameters": {
