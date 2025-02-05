@@ -62,3 +62,35 @@ using KeyVault;
 @@clientName(JsonWebKey.dp, "DP", "go");
 @@clientName(JsonWebKey.dq, "DQ", "go");
 @@clientName(JsonWebKey.qi, "QI", "go");
+
+// JS configuration
+@@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
+@@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
+@@clientName(JsonWebKeySignatureAlgorithm.ES256_K, "ES256K", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP, "RSAOaep", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP256,
+  "RSAOaep256",
+  "javascript"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "RSA15", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A128_GCM, "A128GCM", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A192_GCM, "A192GCM", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A256_GCM, "A256GCM", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A128_KW, "A128KW", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A192_KW, "A192KW", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A256_KW, "A256KW", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBC, "A128CBC", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBC, "A192CBC", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBC, "A256CBC", "javascript");
+@@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBCPAD,
+  "A128Cbcpad",
+  "javascript"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBCPAD,
+  "A192Cbcpad",
+  "javascript"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBCPAD,
+  "A256Cbcpad",
+  "javascript"
+);
