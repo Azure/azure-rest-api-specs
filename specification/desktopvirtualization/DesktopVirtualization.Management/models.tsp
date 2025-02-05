@@ -1335,11 +1335,10 @@ model Resource {
  * Network information.
  */
 model NetworkInfoProperties {
-  //TODO: Add format armID?
   /**
    * The resource ID of the subnet.
    */
-  subnetId: string;
+  subnetId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
@@ -1351,11 +1350,10 @@ model NetworkInfoProperties {
  * Network information.
  */
 model NetworkInfoPatchProperties {
-  //TODO: Add format armID?
   /**
    * The resource ID of the subnet.
    */
-  subnetId: string;
+  subnetId: Azure.Core.armResourceIdentifier;
 
   /**
    * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
@@ -1440,8 +1438,7 @@ model CustomInfoProperties {
   /**
    * The resource ID of the image.
    */
-  //TODO: add format armID
-  imageResourceId: string;
+  imageResourceId: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1462,14 +1459,12 @@ model KeyVaultCredentialProperties {
   /**
    * The uri to access the secret that the username is stored in.
    */
-  //TODO: add format uri
-  usernameKeyVaultSecretUri: string;
+  usernameKeyVaultSecretUri: Azure.ResourceManager.ResourceUriParameter;
 
   /**
    * The uri to access the secret that the password is stored in.
    */
-  //TODO: add format uri
-  passwordKeyVaultSecretUri: string;
+  passwordKeyVaultSecretUri: Azure.ResourceManager.ResourceUriParameter;
 }
 
 /**
@@ -1479,14 +1474,12 @@ model KeyVaultCredentialPatchProperties {
   /**
    * The uri to access the secret that the username is stored in.
    */
-  //TODO: add format uri
-  usernameKeyVaultSecretUri: string;
+  usernameKeyVaultSecretUri: Azure.ResourceManager.ResourceUriParameter;
 
   /**
    * The uri to access the secret that the password is stored in.
    */
-  //TODO: add format uri
-  passwordKeyVaultSecretUri: string;
+  passwordKeyVaultSecretUri: Azure.ResourceManager.ResourceUriParameter;
 }
 
 /**
@@ -1633,8 +1626,7 @@ model BootDiagnosticsInfoProperties {
   /**
    * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
    */
-  //TODO: format Uri
-  storageUri: string;
+  storageUri: Azure.ResourceManager.ResourceUriParameter;
 }
 
 /**
@@ -1649,8 +1641,7 @@ model BootDiagnosticsInfoPatchProperties {
   /**
    * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
    */
-  //TODO: format Uri
-  storageUri: string;
+  storageUri: Azure.ResourceManager.ResourceUriParameter;
 }
 
 /**

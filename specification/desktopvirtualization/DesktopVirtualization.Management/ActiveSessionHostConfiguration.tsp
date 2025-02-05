@@ -15,6 +15,7 @@ namespace Microsoft.DesktopVirtualization;
  * Schema for ActiveSessionHostConfiguration properties.
  */
 @parentResource(HostPool)
+@singleton("default")
 model ActiveSessionHostConfiguration
   is Azure.ResourceManager.ProxyResource<ActiveSessionHostConfigurationProperties> {
   ...ResourceNameParameter<
@@ -35,7 +36,6 @@ interface ActiveSessionHostConfigurations {
   /**
    * Get a ActiveSessionHostConfiguration.
    */
-  @action("default")
   get is ArmResourceRead<ActiveSessionHostConfiguration>;
 
   /**

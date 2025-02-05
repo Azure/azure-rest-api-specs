@@ -48,3 +48,7 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "workspace");
+
+@@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
+  "^[-\\w\\._,\\(\\)]+$"
+);

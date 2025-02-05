@@ -1896,7 +1896,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/{activeSessionHostConfigurationName}/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default": {
       "get": {
         "operationId": "ActiveSessionHostConfigurations_Get",
         "tags": [
@@ -1921,16 +1921,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
-          },
-          {
-            "name": "activeSessionHostConfigurationName",
-            "in": "path",
-            "description": "The name of the ActiveSessionHostConfiguration within the specified ActiveSessionHostConfiguration group",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 24,
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
           }
         ],
@@ -5354,7 +5344,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5863,7 +5853,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6209,6 +6199,19 @@
         ]
       }
     },
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "type": "object",
+      "description": "The default resourceUri parameter type.",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The fully qualified Azure Resource manager identifier of the resource."
+        }
+      },
+      "required": [
+        "resourceUri"
+      ]
+    },
     "AzureActiveDirectoryInfoProperties": {
       "type": "object",
       "description": "Azure Active directory info. Only one should be populated based on the join type",
@@ -6231,7 +6234,7 @@
           "description": "Whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceUriParameter",
           "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
         }
       },
@@ -6276,6 +6279,7 @@
       "properties": {
         "imageResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the image."
         }
       },
@@ -6321,7 +6325,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6796,7 +6800,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7288,11 +7292,11 @@
       "description": "Credentials kept in the keyvault.",
       "properties": {
         "usernameKeyVaultSecretUri": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceUriParameter",
           "description": "The uri to access the secret that the username is stored in."
         },
         "passwordKeyVaultSecretUri": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceUriParameter",
           "description": "The uri to access the secret that the password is stored in."
         }
       },
@@ -7368,7 +7372,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7661,6 +7665,7 @@
       "properties": {
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the subnet."
         },
         "securityGroupId": {
@@ -7669,7 +7674,6 @@
         }
       },
       "required": [
-        "subnetId",
         "securityGroupId"
       ]
     },
@@ -7865,7 +7869,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8362,7 +8366,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8491,7 +8495,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8784,7 +8788,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9276,7 +9280,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9435,7 +9439,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9990,7 +9994,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10089,7 +10093,7 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
