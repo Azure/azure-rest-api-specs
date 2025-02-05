@@ -50,6 +50,10 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   Access.public,
   "csharp,java,javascript"
 );
+@@access(AI.Model.ChatRequestDeveloperMessage,
+  Access.public,
+  "csharp,java,javascript"
+);
 @@access(AI.Model.ChatResponseMessage, Access.public);
 @@access(AI.Model.ChatRole, Access.public);
 @@access(AI.Model.CompletionsFinishReason, Access.public);
@@ -86,6 +90,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatRequestSystemMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestToolMessage, Access.internal, "python");
 @@access(AI.Model.ChatRequestUserMessage, Access.internal, "python");
+@@access(AI.Model.ChatRequestDeveloperMessage, Access.internal, "python");
 
 @@clientName(AI.Model.ChatCompletionsResponseFormatJsonSchemaDefinition,
   "JsonSchemaFormat",
