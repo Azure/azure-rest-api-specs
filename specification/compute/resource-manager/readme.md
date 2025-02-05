@@ -37,11 +37,6 @@ openapi-type: arm
 tag: package-2024-11-04
 
 directive:
-  - from: diskRPCommon.json
-    where: $.definitions
-    transform: >
-      $.PurchasePlan["x-ms-client-name"] = "DiskPurchasePlan";
-      $.GrantAccessData.properties.access.description = "The Access Level, accepted values include None, Read, Write.";
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
@@ -275,9 +270,115 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: diagnostic.json
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: PatchBodyParametersSchema
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: LroPatch202
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: AvoidAdditionalProperties
+    reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
+    from: gallery.json
+    where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: gallery.json
+    reason: Existing issue from last version. 
+```
 
-list-exception:
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}
+### Tag: package-2024-11-04
+
+These settings apply only when `--tag=package-2024-11-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-04'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
+### Tag: package-2024-11-04-only
+
+These settings apply only when `--tag=package-2024-11-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-04-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
+### Tag: package-2024-10-01
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/runCommand.json 
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2024-03-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
+  - Microsoft.Compute/CloudserviceRP/stable/2022-09-04/cloudService.json
+```
+
+### Tag: package-2024-03-03-only
+
+These settings apply only when `--tag=package-2024-03-03-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-03-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
 ```
 
 ### Tag: package-2024-07-01

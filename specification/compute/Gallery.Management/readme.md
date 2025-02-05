@@ -34,14 +34,9 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2024-07-01
+tag: package-2024-11-04
 
 directive:
-  - from: diskRPCommon.json
-    where: $.definitions
-    transform: >
-      $.PurchasePlan["x-ms-client-name"] = "DiskPurchasePlan";
-      $.GrantAccessData.properties.access.description = "The Access Level, accepted values include None, Read, Write.";
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
@@ -260,6 +255,7 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+    
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -274,9 +270,22 @@ suppressions:
   - code: XmsPageableForListCalls
     reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
     from: diagnostic.json
-
-list-exception:
-- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}
+  - code: PatchResponseCodes
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: PatchBodyParametersSchema
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: LroPatch202
+    reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
+    from: gallery.json
+  - code: AvoidAdditionalProperties
+    reason: The gallery backend service just treats this as a bag of properties to pass to downstream services.
+    from: gallery.json
+    where: $.definitions.AccessControlRulesPrivilege.properties.queryParameters
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: gallery.json
+    reason: Existing issue from last version. 
 ```
 
 ### Tag: package-2024-07-01
@@ -285,9 +294,23 @@ These settings apply only when `--tag=package-2024-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-07-01'
 input-file:
+  # - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
+  # - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  # - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  # - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  # - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/GalleryRP.json
+```
+
+### Tag: package-2024-11-04
+
+These settings apply only when `--tag=package-2024-11-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-11-04'
+input-file:
   - ../resource-manager/Microsoft.Compute/common-types/v1/common.json
-  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
-  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
-  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
-  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2024-03-03/galleryRPCommon.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2024-03-03/gallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2024-03-03/sharedGallery.json
+  - ../resource-manager/Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
 ```

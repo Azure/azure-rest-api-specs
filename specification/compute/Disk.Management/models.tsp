@@ -1811,14 +1811,6 @@ model SnapshotUpdateProperties {
   supportedCapabilities?: SupportedCapabilities;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model SubResource {
-  /**
-   * Resource Id
-   */
-  id?: string;
-}
-
 @@doc(SnapshotList.value, "A list of snapshots.");
 @@doc(ResourceUriList.nextLink,
   "The uri to fetch the next page of encrypted resources. Call ListNext() with this to fetch the next page of encrypted resources."

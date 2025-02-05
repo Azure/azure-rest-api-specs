@@ -2041,14 +2041,6 @@ model CommunityGalleryImageVersionProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model SubResource {
-  /**
-   * Resource Id
-   */
-  id?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.

@@ -13,13 +13,14 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ResourceSkus {
   /**
    * Gets the list of Microsoft.Compute SKUs available for your Subscription.
    */
   @get
   @action("skus")
+  @autoRoute
   list is ArmProviderActionAsync<
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,

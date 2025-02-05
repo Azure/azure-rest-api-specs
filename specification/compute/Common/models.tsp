@@ -14,51 +14,6 @@ model $ExpandQueryParameter<T = string> {
 }
 
 /**
- * Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.
- */
-model Sku {
-  /**
-   * The sku name.
-   */
-  name?: string;
-
-  /**
-   * Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**
-   */
-  tier?: string;
-
-  /**
-   * Specifies the number of virtual machines in the scale set.
-   */
-  capacity?: int64;
-}
-
-/**
- * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
- */
-model Plan {
-  /**
-   * The plan ID.
-   */
-  name?: string;
-
-  /**
-   * The publisher ID.
-   */
-  publisher?: string;
-
-  /**
-   * Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
-   */
-  product?: string;
-
-  /**
-   * The promotion code.
-   */
-  promotionCode?: string;
-}
-
-/**
  * Api error.
  */
 model ApiError {
@@ -169,38 +124,12 @@ model ResourceWithOptionalLocation {
   tags?: Record<string>;
 }
 
-/**
- * The Resource model definition.
- */
-model Resource {
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SubResource {
   /**
    * Resource Id
    */
-  @visibility("read")
   id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Resource location
-   */
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
