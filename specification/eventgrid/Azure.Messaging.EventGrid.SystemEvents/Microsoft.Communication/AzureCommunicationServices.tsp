@@ -1236,7 +1236,7 @@ model AcsMessageMediaContent {
   /** Optional. The caption for the media object, if supported and provided */
   caption?: string;
 
-  /** Optional. Set to  true  if the sticker is animated;  false  otherwise. */
+  /** Optional. Set to true if the sticket is animated; false otherwise.*/
   animated?: boolean;
 }
 
