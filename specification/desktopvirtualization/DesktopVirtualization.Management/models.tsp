@@ -11,6 +11,33 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DesktopVirtualization;
 
 /**
+ * Provisioning state of the Session Host Configuration.
+ */
+union ProvisioningStateSHC {
+  string,
+
+  /**
+   *  Provisioning Successful
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Provisioning Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Provisioning was Canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Provisioning in Progress
+   */
+  Provisioning: "Provisioning",
+}
+
+/**
  * The security type used by virtual machine in hostpool session host. Default is Standard.
  */
 union SecurityType {
@@ -1448,8 +1475,7 @@ model CustomInfoPatchProperties {
   /**
    * The resource ID of the image.
    */
-  //TODO: add format armID
-  imageResourceId: string;
+  imageResourceId: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -1736,7 +1762,7 @@ model ActiveSessionHostConfigurationProperties {
   /**
    * Boot Diagnostics information.
    */
-  bootDiagnosticsInfo: BootDiagnosticsInfoProperties;
+  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
 }
 
 /**
@@ -2807,6 +2833,11 @@ model ApplicationPatchProperties {
 model SessionHostManagementList is Azure.Core.Page<SessionHostManagement>;
 
 /**
+ * List of SessionHostConfiguration definitions.
+ */
+model SessionHostConfigurationList is Azure.Core.Page<SessionHostConfiguration>;
+
+/**
  * List of Desktop definitions.
  */
 model DesktopList is Azure.Core.Page<Desktop>;
@@ -2855,6 +2886,15 @@ model SessionHostManagementPatch {
   properties?: SessionHostManagementPatchProperties;
 }
 
+/**
+ * SessionHostConfiguration properties that can be patched.
+ */
+model SessionHostConfigurationPatch {
+  /**
+   * Detailed properties for SessionHostConfiguration
+   */
+  properties?: SessionHostConfigurationPatchProperties;
+}
 /**
  * Desktop properties that can be patched.
  */
@@ -3949,6 +3989,182 @@ model WorkspacePatchProperties {
    * Enabled to allow this resource to be access from the public network
    */
   publicNetworkAccess?: PublicNetworkAccess;
+}
+
+/**
+ * Session host configurations of HostPool.
+ */
+model SessionHostConfigurationProperties {
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility("read")
+  version?: utcDateTime;
+
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration.
+   */
+  @maxLength(260)
+  friendlyName?: string;
+
+  /**
+   * Provisioning state of the Session Host Configuration.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningStateSHC;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  vmTags?: string[];
+
+  /**
+   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
+   */
+  vmLocation?: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup?: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZones?: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo: NetworkInfoProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId: string;
+
+  /**
+   * Disk Information
+   */
+  diskInfo: DiskInfoProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl?: Azure.ResourceManager.ResourceUriParameter;
+
+  /**
+   * Image configurations of HostPool.
+   */
+  imageInfo: ImageInfoProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo: DomainInfoProperties;
+
+  /**
+   * Security Information
+   */
+  securityInfo?: SecurityInfoProperties;
+
+  /**
+   * Local Admin credentials for session hosts."
+   */
+  vmAdminCredentials: KeyVaultCredentialProperties;
+
+  /**
+   * Boot Diagnostics Information
+   */
+  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
+}
+
+/**
+ * Session host configurations of HostPool.
+ */
+model SessionHostConfigurationPatchProperties {
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration.
+   */
+  @maxLength(260)
+  friendlyName?: string;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  vmTags?: string[];
+
+  /**
+   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
+   */
+  vmLocation?: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup?: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZones?: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo: NetworkInfoProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId: string;
+
+  /**
+   * Disk Information
+   */
+  diskInfo: DiskInfoProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl?: Azure.ResourceManager.ResourceUriParameter;
+
+  /**
+   * Image configurations of HostPool.
+   */
+  imageInfo: ImageInfoProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo: DomainInfoProperties;
+
+  /**
+   * Security Information
+   */
+  securityInfo?: SecurityInfoProperties;
+
+  /**
+   * Local Admin credentials for session hosts."
+   */
+  vmAdminCredentials: KeyVaultCredentialProperties;
+
+  /**
+   * Boot Diagnostics Information
+   */
+  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
 }
 
 /**

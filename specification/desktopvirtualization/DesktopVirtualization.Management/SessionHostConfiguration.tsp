@@ -12,15 +12,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
- * Schema for SessionHostManagement properties.
+ * Schema for SessionHostConfiguration properties.
  */
 @parentResource(HostPool)
 @singleton("default")
-model SessionHostManagement
-  is Azure.ResourceManager.ProxyResource<SessionHostManagementProperties> {
+model SessionHostConfiguration
+  is Azure.ResourceManager.ProxyResource<SessionHostConfigurationProperties> {
   ...ResourceNameParameter<
-    Resource = SessionHostManagement,
-    KeyName = "sessionHostManagements",
+    Resource = SessionHostConfiguration,
+    KeyName = "SessionHostConfigurations",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
   ...ManagedServiceIdentityProperty;
@@ -32,26 +32,27 @@ model SessionHostManagement
 }
 
 @armResourceOperations
-interface SessionHostManagements {
+interface SessionHostConfigurations {
   /**
-   * Get a SessionHostManagement.
+   * Get a SessionHostConfiguration.
    */
-  get is ArmResourceRead<SessionHostManagement>;
+  @action("default")
+  get is ArmResourceRead<SessionHostConfiguration>;
 
   /**
-   * Update a SessionHostManagement.
+   * Update a SessionHostConfiguration.
    */
   @parameterVisibility
   update is ArmCustomPatchSync<
-    SessionHostManagement,
-    SessionHostManagementPatch
+    SessionHostConfiguration,
+    SessionHostConfigurationPatch
   >;
 
   /**
-   * List SessionHostManagements.
+   * List SessionHostConfigurations.
    */
   listByHostPool is ArmResourceListByParent<
-    SessionHostManagement,
+    SessionHostConfiguration,
     Parameters = {
       /**
        * Number of items per page.
@@ -71,13 +72,15 @@ interface SessionHostManagements {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = SessionHostManagementList
+    Response = SessionHostConfigurationList
   >;
 }
 
-@@maxLength(SessionHostManagement.name, 24);
-@@minLength(SessionHostManagement.name, 3);
-@@doc(SessionHostManagement.name, "The name of the sessionHostManagement");
-@@doc(SessionHostManagement.properties,
-  "Detailed properties for SessionHostManagement"
+@@maxLength(SessionHostConfiguration.name, 24);
+@@minLength(SessionHostConfiguration.name, 3);
+@@doc(SessionHostConfiguration.name,
+  "The name of the SessionHostConfiguration"
+);
+@@doc(SessionHostConfiguration.properties,
+  "Detailed properties for SessionHostConfiguration"
 );
