@@ -1,0 +1,579 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2024-07-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}/futureReservations/{futureReservationName}": {
+      "get": {
+        "tags": [
+          "FutureCapacityReservations"
+        ],
+        "operationId": "FutureCapacityReservations_Get",
+        "description": "Get the future capacity reservation",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the subscription."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "futureReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the future reservation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The future reservation information will be returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/FutureReservation"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "tags": [
+          "FutureCapacityReservations"
+        ],
+        "description": "Create a future capacity reservation",
+        "operationId": "FutureCapacityReservations_Put",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the subscription."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "futureReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the future reservation."
+          },
+          {
+            "name": "createFutureCapacityReservation",
+            "in": "body",
+            "description": "Future reservation payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FutureReservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The future reservation information will be returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/FutureReservation"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "patch": {
+        "tags": [
+          "FutureCapacityReservations"
+        ],
+        "description": "Patch a future capacity reservation",
+        "operationId": "FutureCapacityReservations_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the subscription."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "futureReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the future reservation."
+          },
+          {
+            "name": "patchFutureCapacityReservation",
+            "in": "body",
+            "description": "Future reservation payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FutureReservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The future reservation information will be returned in the response.",
+            "schema": {
+              "$ref": "#/definitions/FutureReservation"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "delete": {
+        "tags": [
+          "FutureCapacityReservations"
+        ],
+        "description": "Patch a future capacity reservation",
+        "operationId": "FutureCapacityReservations_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the subscription."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "capacityReservationGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the capacity reservation group."
+          },
+          {
+            "name": "futureReservationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the future reservation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The future reservation has been deleted.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExceptionResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ServiceError",
+          "description": "API error details."
+        }
+      },
+      "description": "Error."
+    },
+    "ServiceError": {
+      "description": "API error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceErrorDetail"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ],
+          "description": "List of error details.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceErrorDetail": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error message."
+        }
+      }
+    },
+    "FutureReservation": {
+      "type": "object",
+      "description": "FutureReservation.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The future reservation id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The future reservation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The reservation type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The reservation location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "The future reservation state.",
+          "$ref": "#/definitions/FutureReservationState"
+        },
+        "requests": {
+          "description": "The future reservation requests.",
+          "$ref": "#/definitions/FutureReservationRequests"
+        },
+        "capacityPlanning": {
+          "description": "The future reservation capacity planning.",
+          "$ref": "#/definitions/CapacityPlanning"
+        }
+      }
+    },
+    "FutureReservationState": {
+      "description": "Future Reservation state.",
+      "enum": [
+        "Accepted",
+        "Failed",
+        "InProgress",
+        "Partial",
+        "Fulfilled"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FutureReservationState",
+        "modelAsString": true
+      }
+    },
+    "FutureReservationRequests": {
+      "type": "object",
+      "description": "Future reservation requests.",
+      "properties": {
+        "value": {
+          "description": "List of future reservation request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FutureReservationRequest"
+          }
+        },
+        "nextLink": {
+          "description": "The URI used to fetch the next page of future reservation requests. When there are no more pages, this is null.",
+          "type": "string"
+        }
+      }
+    },
+    "FutureReservationRequest": {
+      "type": "object",
+      "description": "Future reservation request.",
+      "properties": {
+        "resources": {
+          "description": "List of future reservation resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FutureReservationResource"
+          }
+        }
+      }
+    },
+    "FutureReservationResource": {
+      "type": "object",
+      "description": "Future reservation resource.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "resourceName": {
+          "description": "The future reservation resource name .",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacity": {
+          "description": "The future reservation resource capacity limit.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "zones": {
+          "description": "List of logical zone.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Zone"
+          }
+        },
+        "state": {
+          "description": "The future reservation resource state.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservation": {
+          "$ref": "#/definitions/CapacityReservation"
+        }
+      }
+    },
+    "CapacityReservation": {
+      "type": "object",
+      "description": "Future reservation.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The future reservation ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The future reservation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The reservation type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Usage properties for the specified resource.",
+          "$ref": "#/definitions/CapacityReservationProperties"
+        }
+      }
+    },
+    "CapacityReservationProperties": {
+      "description": "Capacity reservation properties.",
+      "type": "object",
+      "properties": {
+        "virtualMachinesAssociated": {
+          "description": "List of virtual machine associated with capacity reservation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineAssociated"
+          }
+        },
+        "provisioningTime": {
+          "description": "The provision time.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "description": "The provision state.",
+          "$ref": "#/definitions/ProvisionState"
+        }
+      }
+    },
+    "VirtualMachineAssociated": {
+      "type": "object",
+      "description": "Virtual machine associated with capacity reservation.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The virtual machine id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisionState": {
+      "description": "Provision state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Failed"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisionState",
+        "modelAsString": true
+      }
+    },
+    "CapacityPlanning": {
+      "type": "object",
+      "description": "Capacity planning.",
+      "properties": {
+        "needByDate": {
+          "description": "The need by date.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "needByDateExtended": {
+          "description": "The extended need by date.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "minDurationDays": {
+          "description": "The minimum duration days.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "Zone": {
+      "description": "Logical zone.",
+      "type": "string",
+      "readOnly": true
+    }
+  }
+}
