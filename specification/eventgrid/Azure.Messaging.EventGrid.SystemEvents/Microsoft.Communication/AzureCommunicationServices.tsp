@@ -1201,6 +1201,7 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   messageId?: string;
 
   /** Required. The message channel type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   channelType: AcsMessageChannelKind;
 
   /** Required. Whatsapp message type */
