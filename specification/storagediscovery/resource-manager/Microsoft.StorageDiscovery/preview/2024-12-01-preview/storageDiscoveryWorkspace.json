@@ -528,7 +528,7 @@
         "storageAccountFilters"
       ]
     },
-    "StorageDiscoveryTier": {
+    "StorageDiscoverySku": {
       "type": "string",
       "description": "Storage Discovery Tier",
       "enum": [
@@ -537,7 +537,7 @@
         "Basic"
       ],
       "x-ms-enum": {
-        "name": "StorageDiscoveryTier",
+        "name": "StorageDiscoverySku",
         "modelAsString": true,
         "values": [
           {
@@ -599,12 +599,12 @@
       "description": "Storage Discovery Workspace Properties.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/StorageDiscoveryTier",
+          "$ref": "#/definitions/StorageDiscoverySku",
           "description": "The storage discovery tier."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
-          "description": "The state of storage discovery data export"
+          "description": "The state of storage discovery data export. Not supported right now"
         },
         "description": {
           "type": "string",
@@ -622,7 +622,7 @@
         },
         "destinations": {
           "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace rule sends data."
+          "description": "The destinations to which the storage workspace rule sends data. Not supported right now"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -642,12 +642,12 @@
       "description": "Storage Discovery Workspace Properties.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/StorageDiscoveryTier",
+          "$ref": "#/definitions/StorageDiscoverySku",
           "description": "The storage discovery tier."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
-          "description": "The state of storage discovery data export"
+          "description": "The state of storage discovery data export. Not supported right now"
         },
         "description": {
           "type": "string",
@@ -665,7 +665,7 @@
         },
         "destinations": {
           "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace rule sends data."
+          "description": "The destinations to which the storage workspace rule sends data. Not supported right now"
         }
       }
     },
