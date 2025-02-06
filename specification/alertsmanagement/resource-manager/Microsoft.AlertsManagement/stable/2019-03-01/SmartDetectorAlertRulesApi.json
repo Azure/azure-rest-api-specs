@@ -307,7 +307,18 @@
   },
   "definitions": {
     "SmartDetectorErrorResponse": {
-      "description": "Describe the format of an Error response.",
+      "description": "API error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/SmartDetectorErrorResponseBody",
+          "description": "The API error body.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SmartDetectorErrorResponseBody": {
+      "description": "API error body.",
       "type": "object",
       "properties": {
         "code": {
@@ -450,11 +461,13 @@
           }
         },
         "name": {
-          "description": "The Smart Detector name. By default this is not populated, unless it's specified in expandDetector",
-          "type": "string"
+          "type": "string",
+          "readOnly": true,
+          "description": "The Smart Detector name. By default this is not populated, unless it's specified in expandDetector"
         },
         "description": {
           "type": "string",
+          "readOnly": true,
           "description": "The Smart Detector description. By default this is not populated, unless it's specified in expandDetector"
         },
         "supportedResourceTypes": {
@@ -466,10 +479,29 @@
         },
         "imagePaths": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           },
           "description": "The Smart Detector image path. By default this is not populated, unless it's specified in expandDetector"
+        },
+        "parameterDefinitions": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The Smart Detector parameters definitions.'",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/DetectorParameterDefinition"
+          }
+        },
+        "supportedCadences": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The Smart Detector supported cadences.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       },
       "required": [
@@ -511,7 +543,7 @@
           }
         },
         "frequency": {
-          "description": "The alert rule frequency in ISO8601 format. The time granularity must be in minutes and minimum value is 5 minutes.",
+          "description": "The alert rule frequency in ISO8601 format. The time granularity must be in minutes and minimum value is 1 minute, depending on the detector.",
           "type": "string",
           "format": "duration"
         },
@@ -590,6 +622,64 @@
         "throttling": {
           "description": "The alert rule throttling information.",
           "$ref": "#/definitions/ThrottlingInformation"
+        }
+      },
+      "description": "The alert rule properties."
+    },
+    "DetectorParameterDefinition": {
+      "properties": {
+        "name": {
+          "description": "The detector parameter name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The detector parameter display name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The detector parameter description.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The alert rule type.",
+          "type": "string",
+          "enum": [
+            "String",
+            "Integer",
+            "Double",
+            "Boolean",
+            "DateTime"
+          ],
+          "x-ms-enum": {
+            "name": "DetectorParameterType",
+            "values": [
+              {
+                "value": "String",
+                "description": "Defines a string parameter."
+              },
+              {
+                "value": "Integer",
+                "description": "Defines an integer parameter."
+              },
+              {
+                "value": "Double",
+                "description": "Defines a double parameter."
+              },
+              {
+                "value": "Boolean",
+                "description": "Defines a boolean parameter."
+              },
+              {
+                "value": "DateTime",
+                "description": "Defines a DateTime parameter."
+              }
+            ],
+            "modelAsString": true
+          }
+        },
+        "isMandatory": {
+          "description": "A value indicating whether this detector parameter is mandatory.",
+          "type": "boolean"
         }
       },
       "description": "The alert rule properties."
