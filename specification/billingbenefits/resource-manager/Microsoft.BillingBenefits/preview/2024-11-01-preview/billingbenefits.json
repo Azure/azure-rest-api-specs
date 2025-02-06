@@ -1230,7 +1230,7 @@
       },
       "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
     },
-    "PrimaryResourceUri": {
+    "PrimaryResourceId": {
       "type": "string",
       "readOnly": true,
       "format": "arm-id",
@@ -1246,7 +1246,7 @@
       },
       "description": "This will be present in the response if the primary has a resource ID"
     },
-    "BenefitResourceUri": {
+    "BenefitResourceId": {
       "type": "string",
       "readOnly": true,
       "format": "arm-id",
@@ -2480,8 +2480,8 @@
         "status": {
           "$ref": "#/definitions/DiscountStatus"
         },
-        "benefitResourceUri": {
-          "$ref": "#/definitions/BenefitResourceUri"
+        "benefitResourceId": {
+          "$ref": "#/definitions/BenefitResourceId"
         },
         "appliedScopeType": {
           "$ref": "#/definitions/DiscountAppliedScopeType",
@@ -2503,8 +2503,8 @@
       ],
       "x-ms-discriminator-value": "Affiliate",
       "properties": {
-        "primaryResourceUri": {
-          "$ref": "#/definitions/PrimaryResourceUri"
+        "primaryResourceId": {
+          "$ref": "#/definitions/PrimaryResourceId"
         },
         "endAt": {
           "$ref": "#/definitions/AffiliateEndAt",
