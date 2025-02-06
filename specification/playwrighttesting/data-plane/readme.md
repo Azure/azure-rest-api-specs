@@ -32,6 +32,15 @@ security: AADToken
 #security-scopes: [[SecurityScopes]]
 ```
 
+### Tag: package-2025-02-24
+
+These settings apply only when `--tag=package-2025-02-24` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-24'
+input-file:
+  - Microsoft.PlaywrightTesting.Reporting\stable\2025-02-24\playwrighttesting.json
+```
+
 ### Tag: package-2024-12-01
 
 These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
