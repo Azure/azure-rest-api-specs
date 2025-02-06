@@ -1,0 +1,62 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - aadds
+  - abfs
+  - abfss
+  - adls
+  - ambari
+  - azurehdinsight
+  - cdbfac
+  - flink
+  - hdfs
+  - hdinsight
+  - hdinsightaks
+  - hdinsightcontainers
+  - hdinsightonaks
+  - jobid
+  - ldaps
+  - listafterid
+  - llap
+  - overriden
+  - pyspark
+  - saskey
+  - scaleup
+  - sparkr
+  - sqoop
+  - subid
+  - trino
+  - trinologs
+  - vmsize
+  - wasb
+  - wasbs
+overrides:
+  - filename: '**/specification/hdinsight/hdinsight-kafka-rest-proxy/proxy.json'
+    words:
+      - metada
+  - filename: >-
+      **/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
+    words:
+      - saskey
+  - filename: >-
+      **/specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
+    words:
+      - vmsize
+      - vmsizes
+  - filename: >-
+      **/specification/hdinsight/resource-manager/Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+    words:
+      - azureasyncoperations
+      - saskey
+  - filename: >-
+      **/specification/hdinsight/resource-manager/Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+    words:
+      - vmsize
+      - vmsizes
+
