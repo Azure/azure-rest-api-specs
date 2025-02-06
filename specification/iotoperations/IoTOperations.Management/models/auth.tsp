@@ -72,13 +72,13 @@ model DataflowEndpointAuthenticationX509 {
  * Broker Authentication Models
  */
 @doc("Service Account Token for BrokerAuthentication")
-model BrokerAuthenticatorMethodSat {
+model AuthenticatorMethodSat {
   @doc("List of allowed audience.")
   audiences: string[];
 }
 
 @doc("Custom method for BrokerAuthentication")
-model BrokerAuthenticatorMethodCustom {
+model AuthenticatorMethodCustom {
   @doc("Optional authentication needed for authenticating with the custom authentication server.")
   auth?: BrokerAuthenticatorCustomAuth;
 
@@ -107,7 +107,7 @@ model X509ManualCertificate {
 }
 
 @doc("X509 for BrokerAuthentication.")
-model BrokerAuthenticatorMethodX509 {
+model AuthenticatorMethodX509 {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("X509 authorization attributes properties.")
   authorizationAttributes?: Record<BrokerAuthenticatorMethodX509Attributes>;
