@@ -27,9 +27,20 @@ These are the global settings for devcenter.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-10
+tag: package-2025-02-01
 ```
 
+
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.DevCenter/stable/2025-02-01/commonDefinitions.json
+  - Microsoft.DevCenter/stable/2025-02-01/devcenter.json
+  - Microsoft.DevCenter/stable/2025-02-01/vdi.json
+```
 
 ### Tag: package-preview-2024-10
 
