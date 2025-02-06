@@ -35,6 +35,35 @@ union ProvisioningState {
   NotSpecified: "NotSpecified",
 }
 
+@doc("Enum for cloud")
+union Cloud {
+  string,
+
+  @doc("Public cloud")
+  Public: "Public",
+
+  @doc("USNat cloud")
+  USNat: "USNat",
+
+  @doc("Fairfax cloud")
+  Fairfax: "Fairfax",
+
+  @doc("Mooncake cloud")
+  Mooncake: "Mooncake",
+}
+
+@doc("Model that describes a generic ARM object")
+model ComplexArmObject {
+  @doc("The display name of the object")
+  displayName: string;
+
+  @doc("The id of the object")
+  id: string;
+
+  @doc("The ARM resource ID of the object")
+  resourceId: string;
+}
+
 scalar ClusterResourceId
   extends armResourceIdentifier<[
     {

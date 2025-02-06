@@ -1,0 +1,70 @@
+{
+  "title": "Locations_UpdateRoutesOnVirtualNetwork",
+  "operationId": "Locations_UpdateRoutesOnVirtualNetwork",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "westcentralus",
+    "updateRoutesOnVirtualNetworkObject": {
+      "properties": {
+        "routesToVirtualNetwork": [
+          {
+            "vnetId": "00000000-0000-0000-0000-000000000000",
+            "routeAddress": "10.0.0.0",
+            "nextHopNetworkInterfaceId": "00000000-0000-0000-0000-000000000000",
+            "logicalContainerId": "00000000-0000-0000-0000-000000000000",
+            "availabilityZone": "az01"
+          },
+          {
+            "vnetId": "00000000-0000-0000-0000-000000000000",
+            "routeAddress": "10.0.0.2",
+            "nextHopNetworkInterfaceId": "00000000-0000-0000-0000-000000000000",
+            "logicalContainerId": "00000000-0000-0000-0000-000000000000",
+            "availabilityZone": "az01"
+          }
+        ],
+        "operationType": "create"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Location": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/WCUS/operationStatuses/sample-op-status?api-version=2023-12-01"
+      },
+      "body": {
+        "properties": {
+          "routesToVirtualNetwork": [
+            {
+              "vnetId": "00000000-0000-0000-0000-000000000000",
+              "routeAddress": "10.0.0.0",
+              "nextHopNetworkInterfaceId": "00000000-0000-0000-0000-000000000000",
+              "logicalContainerId": "00000000-0000-0000-0000-000000000000",
+              "availabilityZone": "az01",
+              "status": "failed",
+              "error": {
+                "code": "502",
+                "message": "Internal Server Error"
+              }
+            },
+            {
+              "vnetId": "00000000-0000-0000-0000-000000000000",
+              "routeAddress": "10.0.0.2",
+              "nextHopNetworkInterfaceId": "00000000-0000-0000-0000-000000000000",
+              "logicalContainerId": "00000000-0000-0000-0000-000000000000",
+              "availabilityZone": "az01",
+              "status": "succeeded",
+              "error": {}
+            }
+          ],
+          "operationType": "create"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/WCUS/operationStatuses/sample-op-status?api-version=2023-12-01"
+      }
+    }
+  }
+}

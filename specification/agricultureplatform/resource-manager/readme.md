@@ -40,6 +40,10 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress PATCH rule as the required properties are defined during typespec generation. Also, empty object can still be passed, properties are not mandatory for the update schema.
+  - code: AvoidAnonymousTypes
+    where: 
+        - $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties["userAssignedIdentities"].additionalProperties
+    reason: Typespec generated definitions contain anonymous types.
 ```
 
 ---

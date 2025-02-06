@@ -1,0 +1,107 @@
+{
+  "title": "SignalDefinitions_Create",
+  "operationId": "SignalDefinitions_Create",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "BE81F0B2-B730-4978-96C8-296DA9532473",
+    "resourceGroupName": "rgobservability",
+    "instanceHealthDefinitionName": "prod-system-hd",
+    "signalDefinitionName": "vm-sd-1",
+    "resource": {
+      "properties": {
+        "signalKind": "AzureResourceMetric",
+        "refreshInterval": "PT1M",
+        "metricNamespace": "microsoft.compute/virtualMachines",
+        "metricName": "Percentage CPU",
+        "aggregationType": "Average",
+        "dataUnit": "Percent",
+        "timeGrain": "PT1M",
+        "evaluationRule": {
+          "degradedRule": {
+            "operator": "GreaterThan",
+            "value": "85"
+          },
+          "unhealthyRule": {
+            "operator": "GreaterThan",
+            "value": "90"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "signalKind": "AzureResourceMetric",
+          "refreshInterval": "PT1M",
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "Percentage CPU",
+          "dataUnit": "Percent",
+          "aggregationType": "Average",
+          "timeGrain": "PT1M",
+          "evaluationRule": {
+            "degradedRule": {
+              "operator": "GreaterThan",
+              "value": "85"
+            },
+            "unhealthyRule": {
+              "operator": "GreaterThan",
+              "value": "90"
+            }
+          }
+        },
+        "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1",
+        "name": "vm-sd-1",
+        "type": "Microsoft.Workloads/instanceHealthDefinitions/signalDefinitions",
+        "systemData": {
+          "createdBy": "nmpkfzbnpi",
+          "createdByType": "User",
+          "createdAt": "2024-11-25T12:50:45.659Z",
+          "lastModifiedBy": "sqbfzxgnpjgpphjkygoup",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-25T12:50:45.659Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "signalKind": "AzureResourceMetric",
+          "refreshInterval": "PT1M",
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "Percentage CPU",
+          "aggregationType": "Average",
+          "dataUnit": "Percent",
+          "timeGrain": "PT1M",
+          "evaluationRule": {
+            "degradedRule": {
+              "operator": "GreaterThan",
+              "value": "85"
+            },
+            "unhealthyRule": {
+              "operator": "GreaterThan",
+              "value": "90"
+            }
+          }
+        },
+        "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1",
+        "name": "vm-sd-1",
+        "type": "Microsoft.Workloads/instanceHealthDefinitions/signalDefinitions",
+        "systemData": {
+          "createdBy": "nmpkfzbnpi",
+          "createdByType": "User",
+          "createdAt": "2024-11-25T12:50:45.659Z",
+          "lastModifiedBy": "sqbfzxgnpjgpphjkygoup",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-25T12:50:45.659Z"
+        }
+      }
+    }
+  }
+}

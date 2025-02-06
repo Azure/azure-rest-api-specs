@@ -106,14 +106,6 @@ model InternalNetworkProperties {
   @minValue(100)
   vlanId: int32;
 
-  @added(Versions.v2024_06_15_preview)
-  @doc("V4 over V6 bgp session.")
-  v4overV6BgpSessionState?: V4OverV6BgpSessionState = V4OverV6BgpSessionState.Enabled;
-
-  @doc("v6 over v4 bgp session.")
-  @added(Versions.v2024_06_15_preview)
-  v6overV4BgpSessionState?: V6OverV4BgpSessionState = V6OverV4BgpSessionState.Enabled;
-
   @doc("BGP configuration properties.")
   bgpConfiguration?: BgpConfiguration;
 
@@ -127,6 +119,11 @@ model InternalNetworkProperties {
   @doc("Native IPv6 Prefix Limit Configuration properties.")
   @added(Versions.v2024_06_15_preview)
   nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitProperties;
+
+  @doc("Details of the last operation performed on the resource")
+  @visibility("read")
+  @added(Versions.v2024_06_15_preview)
+  lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
   @visibility("read")
@@ -143,9 +140,6 @@ model InternalNetworkProperties {
 
 @doc("BGP configuration properties")
 model BgpConfiguration {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("BFD configuration properties")
@@ -192,13 +186,18 @@ model BgpConfiguration {
   @doc("InternalNetwork BMP Configuration")
   @added(Versions.v2024_06_15_preview)
   bmpConfiguration?: InternalNetworkBmpProperties;
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("V4 over V6 bgp session.")
+  v4OverV6BgpSession?: V4OverV6BgpSessionState = V4OverV6BgpSessionState.Disabled;
+
+  @doc("v6 over v4 bgp session.")
+  @added(Versions.v2024_06_15_preview)
+  v6OverV4BgpSession?: V6OverV4BgpSessionState = V6OverV4BgpSessionState.Disabled;
 }
 
 @doc("BGP configuration properties.")
 model BgpPatchConfiguration {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("BFD configuration properties")
@@ -245,6 +244,14 @@ model BgpPatchConfiguration {
   @doc("InternalNetwork BMP Configuration")
   @added(Versions.v2024_06_15_preview)
   bmpConfiguration?: InternalNetworkBmpPatchProperties;
+
+  @added(Versions.v2024_06_15_preview)
+  @doc("V4 over V6 bgp session.")
+  v4OverV6BgpSession?: V4OverV6BgpSessionState;
+
+  @doc("v6 over v4 bgp session.")
+  @added(Versions.v2024_06_15_preview)
+  v6OverV4BgpSession?: V6OverV4BgpSessionState;
 }
 
 @doc("Neighbor Address properties.")
@@ -273,9 +280,6 @@ model NeighborAddressPatch is NeighborAddress;
 
 @doc("Connected Subnet properties.")
 model ConnectedSubnet {
-  /*
-   * @allof is currently not supported in Typespec. One wat to inherity all properties is using the spread operator.
-   */
   ...AnnotationResource;
 
   @doc("Prefix of the Connected Subnet.")
@@ -383,14 +387,6 @@ model InternalNetworkPatchProperties {
 
   @doc("To check whether monitoring of internal network is enabled or not.")
   isMonitoringEnabled?: IsMonitoringEnabled;
-
-  @added(Versions.v2024_06_15_preview)
-  @doc("V4 over V6 bgp session.")
-  v4overV6BgpSessionState?: V4OverV6BgpSessionState;
-
-  @doc("v6 over v4 bgp session.")
-  @added(Versions.v2024_06_15_preview)
-  v6overV4BgpSessionState?: V6OverV4BgpSessionState;
 
   @doc("BGP configuration properties.")
   bgpConfiguration?: BgpPatchConfiguration;
@@ -518,66 +514,6 @@ model InternalNetworkBmpProperties {
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBmpPatchProperties is InternalNetworkBmpProperties;
 
-@doc("Native IPv4 Prefix Limit Configuration properties")
-@added(Versions.v2024_06_15_preview)
-model NativeIpv4PrefixLimitProperties {
-  @doc("IPv4 Prefix Limit Configuration properties.")
-  ipv4AddrPrefixLimit?: PrefixLimitProperties;
-
-  @doc("IPv6 Prefix Limit Configuration properties.")
-  ipv6AddrPrefixLimit?: PrefixLimitProperties;
-}
-
-@doc("Native IPv4 Prefix Limit Configuration patch properties")
-@added(Versions.v2024_06_15_preview)
-model NativeIpv4PrefixLimitPatchProperties {
-  @doc("IPv4 Prefix Limit Configuration properties.")
-  ipv4AddrPrefixLimit?: PrefixLimitPatchProperties;
-
-  @doc("IPv6 Prefix Limit Configuration properties.")
-  ipv6AddrPrefixLimit?: PrefixLimitPatchProperties;
-}
-
-@doc("Native IPv6 Prefix Limit Configuration properties")
-@added(Versions.v2024_06_15_preview)
-model NativeIpv6PrefixLimitProperties {
-  @doc("IPv4 Prefix Limit Configuration properties.")
-  ipv4AddrPrefixLimit?: PrefixLimitProperties;
-
-  @doc("IPv6 Prefix Limit Configuration properties.")
-  ipv6AddrPrefixLimit?: PrefixLimitProperties;
-}
-
-@doc("Native IPv6 Prefix Limit Configuration patch properties")
-@added(Versions.v2024_06_15_preview)
-model NativeIpv6PrefixLimitPatchProperties {
-  @doc("IPv4 Prefix Limit Configuration properties.")
-  ipv4AddrPrefixLimit?: PrefixLimitPatchProperties;
-
-  @doc("IPv6 Prefix Limit Configuration properties.")
-  ipv6AddrPrefixLimit?: PrefixLimitPatchProperties;
-}
-
-@doc("Prefix Limit Configuration properties")
-@added(Versions.v2024_06_15_preview)
-model PrefixLimitProperties {
-  @doc("Limit at which route prefixes are deleted and recreated.")
-  hardLimit?: int32;
-
-  @doc("Limit at which route prefixes a warning is generate.")
-  softLimit?: int32;
-
-  @doc("Idle Time Expiry in seconds, default is 60.")
-  @maxValue(4294967295)
-  @minValue(60)
-  idleTimeExpiry?: int32 = 60;
-}
-
-@doc("Prefix Limit Configuration properties")
-@added(Versions.v2024_06_15_preview)
-@withoutDefaultValues
-model PrefixLimitPatchProperties is PrefixLimitProperties;
-
 @doc("Neighbor Address BGP Administrative Status")
 @added(Versions.v2024_06_15_preview)
 model NeighborAddressBgpAdministrativeStatus {
@@ -602,28 +538,4 @@ model NeighborAddressBfdAdministrativeStatus {
 
   @doc("Error message.")
   error?: string;
-}
-
-@doc("V4 over V6 BGP session state")
-@added(Versions.v2024_06_15_preview)
-union V4OverV6BgpSessionState {
-  @doc("V4OverV6BgpSessionState-Enabled")
-  Enabled: "Enabled",
-
-  @doc("V4OverV6BgpSessionState-Disabled")
-  Disabled: "Disabled",
-
-  string,
-}
-
-@doc("V6 over V4 BGP session state")
-@added(Versions.v2024_06_15_preview)
-union V6OverV4BgpSessionState {
-  @doc("V6OverV4BgpSessionState-Enabled")
-  Enabled: "Enabled",
-
-  @doc("V6OverV4BgpSessionState-Disabled")
-  Disabled: "Disabled",
-
-  string,
 }

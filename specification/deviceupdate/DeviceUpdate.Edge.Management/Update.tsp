@@ -85,3 +85,8 @@ interface Updates {
   "tagUpdatePayload"
 );
 @@clientName(Updates.modify::parameters.properties, "tagUpdatePayload");
+
+/**
+ * Java SDK does not like Update as model name.
+ */
+@@clientName(Update, "ResourceUpdate", "java");

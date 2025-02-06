@@ -65,7 +65,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 ## Az
 
