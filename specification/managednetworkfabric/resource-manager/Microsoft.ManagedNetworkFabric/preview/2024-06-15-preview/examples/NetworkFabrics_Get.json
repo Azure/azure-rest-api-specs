@@ -24,10 +24,16 @@
               "userAssignedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-id"
             }
           },
-          "nfLockConfiguration": "Enabled",
+          "fabricLocks": [
+            {
+              "lockState": "Enabled",
+              "lockType": "Configuration"
+            }
+          ],
           "networkFabricControllerId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-fabricController",
           "rackCount": 4,
           "serverCountPerRack": 8,
+          "storageArrayCount": 1,
           "ipv4Prefix": "10.18.0.0/19",
           "ipv6Prefix": "3FFE:FFFF:0:CD40::/59",
           "fabricASN": 29249,
@@ -137,9 +143,12 @@
           "controlPlaneAcls": [
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl"
           ],
-          "featureFlags": {
-            "uniqueRdConfigurationState": "Enabled"
-          },
+          "featureFlags": [
+            {
+              "featureFlagName": "uniqueRdConfiguration",
+              "featureFlagValue": "Enabled"
+            }
+          ],
           "trustedIpPrefixes": [
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/ipPrefixes/example-prefix"
           ],
@@ -153,6 +162,9 @@
           "activeCommitBatches": [
             "batch-id-1"
           ],
+          "lastOperation": {
+            "details": "Succeeded"
+          },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
           "administrativeState": "Enabled"

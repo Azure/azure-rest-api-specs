@@ -34,6 +34,7 @@ model SchemaVersion is ProxyResource<SchemaVersionProperties> {
     SchemaVersion,
     NamePattern = "^[0-9]+\\.[0-9]+\\.[0-9]+$"
   >;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -48,7 +49,7 @@ interface SchemaVersions {
   update is ArmResourcePatchSync<SchemaVersion, SchemaVersionProperties>;
 
   @doc("Delete a Schema Version Resource")
-  delete is ArmResourceDeleteSync<SchemaVersion>;
+  delete is ArmResourceDeleteWithoutOkAsync<SchemaVersion>;
 
   @doc("List by specified resource group")
   listBySchema is ArmResourceListByParent<SchemaVersion>;

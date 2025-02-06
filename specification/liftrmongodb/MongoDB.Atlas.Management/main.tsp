@@ -72,6 +72,9 @@ model PartnerProperties {
   @doc("Organization Id in partner's system")
   organizationId?: string;
 
+  @doc("Redirect URL for the partner")
+  redirectUrl?: string;
+
   @doc("Organization name in partner's system")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @minLength(1)

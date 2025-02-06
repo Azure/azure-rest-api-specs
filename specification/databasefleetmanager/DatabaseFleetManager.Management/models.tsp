@@ -42,6 +42,32 @@ union PrincipalType {
 }
 
 /**
+ * Resource type of the destination tier override.
+ */
+union ResourceType {
+  string,
+
+  /** Database resource type. */
+  Database: "Database",
+
+  /** Elastic pool resource type. */
+  ElasticPool: "ElasticPool",
+}
+
+/**
+ * Status of zone redundancy in a tier.
+ */
+union ZoneRedundancy {
+  string,
+
+  /** Zone redundancy enabled. */
+  Enabled: "Enabled",
+
+  /** Zone redundancy disabled. */
+  Disabled: "Disabled",
+}
+
+/**
  * SQL user type of the authorized principal. Extra: Database user, Sever: Server user, Default: Server admin
  */
 union SQLUserType {
@@ -227,17 +253,26 @@ model FleetDatabaseProperties {
    * Additional database properties to be applied as the underlying database resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
+  @visibility("read", "create", "update")
   resourceTags?: Record<string>;
 
   /**
    * Identity property.
    */
+  @visibility("read", "create", "update")
   identity?: Identity;
 
   /**
    * Transparent Data Encryption properties
    */
+  @visibility("read", "create", "update")
   transparentDataEncryption?: TransparentDataEncryption;
+
+  /**
+   * Database collation.
+   */
+  @visibility("read", "create")
+  collation?: string;
 }
 
 /**
@@ -247,20 +282,20 @@ model Identity {
   /**
    * Identity type of the main principal.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   identityType?: IdentityType;
 
   /**
    * User identity ids
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @OpenAPI.extension("x-ms-identifiers", [])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
    * The federated client id for the SQL Database. It is used for cross tenant CMK scenario.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   federatedClientId?: uuid;
 }
 
@@ -271,7 +306,7 @@ model DatabaseIdentity {
   /**
    * Resource Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -281,13 +316,13 @@ model DatabaseIdentity {
   /**
    * Principal Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   principalId?: uuid;
 
   /**
    * Client Id of the database identity.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   clientId?: uuid;
 }
 
@@ -298,19 +333,19 @@ model TransparentDataEncryption {
   /**
    * Customer Managed Key (CMK) Uri.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   keyUri?: url;
 
   /**
    * Additional Keys
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   keys?: string[];
 
   /**
    * Enable key auto rotation
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   enableAutoRotation?: boolean;
 }
 
@@ -366,6 +401,29 @@ model FleetProperties {
 }
 
 /**
+ * A destination tier override.
+ */
+model DestinationTierOverride {
+  /**
+   * Resource type.
+   */
+  @visibility("read", "create")
+  resourceType: ResourceType;
+
+  /**
+   * Destination tier.
+   */
+  @visibility("read", "create")
+  destinationTier: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility("read", "create")
+  resourceName: string;
+}
+
+/**
  * A main principal.
  */
 model MainPrincipal {
@@ -413,11 +471,11 @@ model FleetspaceProperties {
   /**
    * Maximum number of vCores database fleet manager is allowed to provision in the fleetspace.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   capacityMax?: int32;
 
   /**
-   * Main AAD principal that has admin access to all databases in the fleetspace.
+   * Main Microsoft Entra ID principal that has admin access to all databases in the fleetspace.
    */
   @visibility("read", "create")
   mainPrincipal?: MainPrincipal;
@@ -454,9 +512,9 @@ model RegisterServerDefinition {
   /**
    * Destination tier overrides.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Model properties or operation parameters should not be of type Record. ARM requires Resource provider teams to define types explicitly."
   @visibility("read", "create")
-  destinationTierOverrides?: Record<string>;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  destinationTierOverrides?: DestinationTierOverride[];
 }
 
 /**
@@ -482,7 +540,7 @@ model FleetTierProperties {
   pooled?: boolean;
 
   /**
-   * Service tier of provisioned resources, for example GeneralPurpose.
+   * Service tier of provisioned resources. Supported values: GeneralPurpose, Hyperscale.
    */
   @visibility("read", "create")
   serviceTier?: string;
@@ -502,14 +560,20 @@ model FleetTierProperties {
   /**
    * Maximum number of databases per pool.
    */
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   poolNumOfDatabasesMax?: int32;
 
   /**
-   * Number of empty preprovisioned databases for fast database provisioning.
+   * Number of high availability replicas for databases in this tier.
    */
   @visibility("read", "create")
-  numOfEmptyPreprovisionedDatabases?: int32;
+  highAvailabilityReplicaCount?: int32;
+
+  /**
+   * Enable zone redundancy for all databases in this tier.
+   */
+  @visibility("read", "create")
+  zoneRedundancy?: ZoneRedundancy;
 
   /**
    * Minimum allocated capacity per database, in units matching the specified service tier.

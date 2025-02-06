@@ -18,6 +18,17 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ---
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+  - from: configurationmanager.json
+    reason: RP depends on another service called k8s bridge which is facing issues during serialization of data. The changes required in that service will not be implemented before our public preview, so we need to go ahead with using Record which adds this. Check https://msazure.visualstudio.com/One/_workitems/edit/31068512
+```
+
+---
+
 ## Configuration
 
 ### Basic Information
@@ -27,7 +38,16 @@ These are the global settings for the configurationmanager.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-08-01-preview
+tag: package-2025-01-01-preview
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - preview/2025-01-01-preview/configurationmanager.json
 ```
 
 ### Tag: package-2024-08-01-preview

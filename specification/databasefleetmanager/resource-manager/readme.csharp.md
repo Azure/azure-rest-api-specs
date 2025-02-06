@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.DatabaseFleetManager
-  output-folder: $(csharp-sdks-folder)/db/management/Microsoft.DatabaseFleetManager/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/databasefleetmanager/management/Microsoft.DatabaseFleetManager/GeneratedProtocol
 ```

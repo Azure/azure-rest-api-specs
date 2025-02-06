@@ -1161,6 +1161,19 @@
           "type": "string",
           "readOnly": true
         },
+        "logCollectionJobType": {
+          "description": "LogCollection job type",
+          "type": "string",
+          "enum": [
+            "OnDemand",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionJobType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "endTimeCollected": {
           "description": "End Time of the logs when it was collected",
           "type": "string",
@@ -1386,6 +1399,11 @@
           "description": "Region specific endpoint for Microsoft Azure Attestation service for the cluster",
           "type": "string",
           "readOnly": true
+        },
+        "azureCertificateServiceEndpoint": {
+          "description": "Region specific endpoint for AzCS service for the cluster",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1533,7 +1551,7 @@
           },
           "readOnly": true
         },
-        "customLocationId": {
+        "customLocationResourceId": {
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
@@ -1732,6 +1750,56 @@
       },
       "additionalProperties": false
     },
+    "SecretsLocationDetails": {
+      "type": "object",
+      "description": "Secrets location details",
+      "properties": {
+        "secretsType": {
+          "$ref": "#/definitions/SecretsType",
+          "description": "Type of secrets to store"
+        },
+        "secretsLocation": {
+          "type": "string",
+          "description": "secrets location"
+        }
+      },
+      "required": [
+        "secretsType",
+        "secretsLocation"
+      ]
+    },
+    "SecretsLocationsChangeRequest": {
+      "description": "Update secrets locations change  Request",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "description": "List of secret locations",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SecretsType": {
+      "type": "string",
+      "description": "Type of secrets to store",
+      "enum": [
+        "BackupSecrets"
+      ],
+      "x-ms-enum": {
+        "name": "SecretsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BackupSecrets",
+            "value": "BackupSecrets",
+            "description": "Backup secrets type"
+          }
+        ]
+      }
+    },
     "SoftwareAssuranceChangeRequestProperties": {
       "type": "object",
       "properties": {
@@ -1764,20 +1832,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogCollectionRequestProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "SecretsLocationsChangeRequest": {
-      "description": "Update secrets locations change  Request",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "type": "array",
-          "description": "List of secret locations",
-          "items": {
-            "$ref": "#/definitions/SecretsLocationDetails"
-          }
         }
       },
       "additionalProperties": false
@@ -1821,42 +1875,6 @@
       },
       "additionalProperties": false,
       "readOnly": true
-    },
-    "SecretsLocationDetails": {
-      "type": "object",
-      "description": "Secrets location details",
-      "properties": {
-        "secretsType": {
-          "$ref": "#/definitions/SecretsType",
-          "description": "Type of secrets to store"
-        },
-        "secretsLocation": {
-          "type": "string",
-          "description": "secrets location"
-        }
-      },
-      "required": [
-        "secretsType",
-        "secretsLocation"
-      ]
-    },
-    "SecretsType": {
-      "type": "string",
-      "description": "Type of secrets to store",
-      "enum": [
-        "BackupSecrets"
-      ],
-      "x-ms-enum": {
-        "name": "SecretsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BackupSecrets",
-            "value": "BackupSecrets",
-            "description": "Backup secrets type"
-          }
-        ]
-      }
     },
     "ConfidentialVmProperties": {
       "type": "object",

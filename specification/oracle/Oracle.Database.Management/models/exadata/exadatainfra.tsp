@@ -2,6 +2,7 @@ import "../common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
@@ -54,6 +55,22 @@ union CloudExadataInfrastructureLifecycleState {
   Failed: "Failed",
 
   string,
+}
+
+@doc("Predefined configurations for the file system")
+@added(Versions.v20241201_preview)
+model DefinedFileSystemConfiguration {
+  @doc("Checks if the data can be backed up")
+  isBackupPartition?: boolean;
+
+  @doc("Checks if the mount path is resizable")
+  isResizable?: boolean;
+
+  @doc("Minimum size of mount path in Gb")
+  minSizeGb?: int32;
+
+  @doc("Mount path for the file system")
+  mountPoint?: string;
 }
 
 @doc("MaintenanceWindow resource properties")
@@ -140,6 +157,12 @@ model CloudExadataInfrastructure
 
 @doc("CloudExadataInfrastructure resource model")
 model CloudExadataInfrastructureProperties {
+  @doc("Defined file system configurations")
+  @added(Versions.v20241201_preview)
+  @visibility("read")
+  @extension("x-ms-identifiers", [])
+  definedFileSystemConfiguration?: DefinedFileSystemConfiguration[];
+
   @doc("Exadata infra ocid")
   @visibility("read")
   ocid?: Ocid;
@@ -266,4 +289,23 @@ model CloudExadataInfrastructureProperties {
   @doc("Monthly Storage Server version")
   @visibility("read")
   monthlyStorageServerVersion?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The database server model type of the cloud Exadata infrastructure resource.")
+  @visibility("create", "read")
+  @minLength(1)
+  @maxLength(255)
+  databaseServerType?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The storage server model type of the cloud Exadata infrastructure resource.")
+  @visibility("create", "read")
+  @minLength(1)
+  @maxLength(255)
+  storageServerType?: string;
+
+  @added(Versions.v20250101_preview)
+  @doc("The compute model of the Exadata Infrastructure")
+  @visibility("read")
+  computeModel?: ComputeModel;
 }

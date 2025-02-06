@@ -62,6 +62,9 @@
                       "dscpMarkings": [
                         "32"
                       ],
+                      "protocolNeighbors": [
+                        "example-neighbor"
+                      ],
                       "portCondition": {
                         "portType": "SourcePort",
                         "layer4Protocol": "TCP",
@@ -73,6 +76,11 @@
                         ],
                         "flags": [
                           "established"
+                        ]
+                      },
+                      "icmpConfiguration": {
+                        "icmpTypes": [
+                          "echo"
                         ]
                       }
                     }
@@ -131,10 +139,8 @@
               "globalAccessControlListActions": {
                 "enableCount": "True"
               },
-              "icmpConfiguration": {
-                "icmpTypes": [
-                  "echo"
-                ]
+              "lastOperation": {
+                "details": "Succeeded"
               },
               "configurationState": "Succeeded",
               "provisioningState": "Accepted",
