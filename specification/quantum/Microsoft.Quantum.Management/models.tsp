@@ -438,18 +438,6 @@ model Provider {
 }
 
 /**
- * Tags object for patch operations.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
-model TagsObject {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  tags?: Record<string>;
-}
-
-/**
  * Result of list Api keys and connection strings.
  */
 model ListKeysResult {
