@@ -1065,7 +1065,7 @@ model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
    */
-  resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
+  metadata: AnalyzeConversationAuthoringResourceMetadata[];
 }
 
 /**
