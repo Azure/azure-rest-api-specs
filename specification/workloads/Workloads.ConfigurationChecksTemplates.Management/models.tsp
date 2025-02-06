@@ -88,7 +88,7 @@ union CheckEvaluationCondition {
   Contains: "contains",
 
   @doc("Check output value must not contain defined value.")
-  NotContains: "notcontains",
+  NotContains: "notContains",
 
   @doc("Check output value must start with defined value.")
   StartsWith: "startsWith",
