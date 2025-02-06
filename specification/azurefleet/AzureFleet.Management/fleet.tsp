@@ -93,6 +93,7 @@ model FleetProperties {
   @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
   additionalLocationsProfile?: AdditionalLocationsProfile;
 
+  @removed(Versions.v2024_12_01)
   @doc("Compute Profile to use for running user's workloads.")
   computeProfile: ComputeProfile;
 
@@ -107,6 +108,7 @@ model FleetProperties {
 
 @doc("Compute Profile to use for running user's workloads.")
 model ComputeProfile {
+  @removed(Versions.v2024_12_01)
   @doc("""
     Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
     """)
