@@ -7,6 +7,7 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
+  generateMetadata: true    
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     azure-resource-provider-folder: "data-plane"
@@ -28,7 +29,6 @@ options:
     packageDetails:
       name: "@azure-rest/azure-ai-language-text-authoring-rest"
     flavor: azure
-    generateMetadata: true
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-language-text-authoring"
     namespace: com.azure.ai.language.text.authoring
