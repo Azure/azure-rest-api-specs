@@ -1,0 +1,31 @@
+{
+  "title": "Detect Protected Material For Code",
+  "operationId": "TextOperations_DetectCodeProtectedMaterial",
+  "parameters": {
+    "api-version": "2024-09-15-preview",
+    "body": {
+      "code": "python import pygame pygame.init() win = pygame.display.set_mode((500, 500)) pygame.display.set_caption(My Game) x = 50 y = 50 width = 40 height = 60 vel = 5 run = True while run: pygame.time.delay(100) for event in pygame.event.get(): if event.type == pygame.QUIT: run = False keys = pygame.key.get_pressed() if keys[pygame.K_LEFT] and x > vel: x -= vel if keys[pygame.K_RIGHT] and x < 500 - width - vel: x += vel if keys[pygame.K_UP] and y > vel: y -= vel if keys[pygame.K_DOWN] and y < 500 - height - vel: y += vel win.fill((0, 0, 0)) pygame.draw.rect(win, (255, 0, 0), (x, y, width, height)) pygame.display.update() pygame.quit()"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "protectedMaterialAnalysis": {
+          "detected": true,
+          "codeCitations": [
+            {
+              "license": "NO_ASSERTION",
+              "sourceUrls": [
+                "https://github.com/kolejny-projekt-z-kck/game-/tree/f134099ce970da951bac9baac83c7885e991c676/ganeee.py",
+                "https://github.com/Felipe-Velasco/Modulo-Pygame/tree/11490c44a951812dc0c6424b68b1e14fc5cc4c0b/pygame%20basics.py",
+                "https://github.com/bwootton/firstgame/tree/70d722a6b1ccb79bfa56d9cc69932051848c44bf/jump.py",
+                "https://github.com/Jason017/Pygame-Learning-Module/tree/17cd69f169d3759e00816ed4a3795dd6db7e157f/pygameModule02.py",
+                "https://github.com/Coders-Brothers/pygame-tutorial/tree/1b481f5687cdda7c0765089780ef451af6e175cd/lesson-2.py"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
