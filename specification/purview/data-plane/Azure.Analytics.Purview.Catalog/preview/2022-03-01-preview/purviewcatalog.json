@@ -6,15 +6,17 @@
     "version": "2022-03-01-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}",
+    "hostTemplate": "{Endpoint}/catalog/api/atlas/{serviceVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/serviceVersion"
       }
     ]
   },
-  "basePath": "/catalog/api",
   "schemes": [
     "https"
   ],
@@ -43,7 +45,7 @@
     }
   ],
   "paths": {
-    "/atlas/v2/entity": {
+    "/entity": {
       "post": {
         "tags": [
           "Entity"
@@ -88,7 +90,7 @@
         }
       }
     },
-    "/atlas/v2/entity/bulk": {
+    "/entity/bulk": {
       "get": {
         "tags": [
           "Entity"
@@ -216,7 +218,7 @@
         }
       }
     },
-    "/atlas/v2/entity/bulk/classification": {
+    "/entity/bulk/classification": {
       "post": {
         "tags": [
           "Entity"
@@ -252,7 +254,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}": {
+    "/entity/guid/{guid}": {
       "get": {
         "tags": [
           "Entity"
@@ -369,7 +371,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/classification/{classificationName}": {
+    "/entity/guid/{guid}/classification/{classificationName}": {
       "get": {
         "tags": [
           "Entity"
@@ -436,7 +438,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/classifications": {
+    "/entity/guid/{guid}/classifications": {
       "get": {
         "tags": [
           "Entity"
@@ -551,7 +553,7 @@
         }
       }
     },
-    "/atlas/v2/entity/uniqueAttribute/type/{typeName}": {
+    "/entity/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
           "Entity"
@@ -682,7 +684,7 @@
         }
       }
     },
-    "/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}": {
+    "/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}": {
       "delete": {
         "tags": [
           "Entity"
@@ -722,7 +724,7 @@
         }
       }
     },
-    "/atlas/v2/entity/uniqueAttribute/type/{typeName}/classifications": {
+    "/entity/uniqueAttribute/type/{typeName}/classifications": {
       "post": {
         "tags": [
           "Entity"
@@ -820,7 +822,7 @@
         }
       }
     },
-    "/atlas/v2/entity/bulk/setClassifications": {
+    "/entity/bulk/setClassifications": {
       "post": {
         "tags": [
           "Entity"
@@ -863,7 +865,7 @@
         }
       }
     },
-    "/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}": {
+    "/entity/bulk/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
           "Entity"
@@ -909,7 +911,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/header": {
+    "/entity/guid/{guid}/header": {
       "get": {
         "tags": [
           "Entity"
@@ -942,7 +944,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/businessmetadata": {
+    "/entity/guid/{guid}/businessmetadata": {
       "delete": {
         "tags": [
           "Entity"
@@ -1026,7 +1028,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/businessmetadata/{bmName}": {
+    "/entity/guid/{guid}/businessmetadata/{bmName}": {
       "delete": {
         "tags": [
           "Entity"
@@ -1118,7 +1120,7 @@
         }
       }
     },
-    "/atlas/v2/entity/businessmetadata/import/template": {
+    "/entity/businessmetadata/import/template": {
       "get": {
         "tags": [
           "Entity"
@@ -1144,7 +1146,7 @@
         }
       }
     },
-    "/atlas/v2/entity/businessmetadata/import": {
+    "/entity/businessmetadata/import": {
       "post": {
         "tags": [
           "Entity"
@@ -1280,7 +1282,7 @@
         }
       }
     },
-    "/atlas/v2/entity/guid/{guid}/labels": {
+    "/entity/guid/{guid}/labels": {
       "delete": {
         "tags": [
           "Entity"
@@ -1396,7 +1398,7 @@
         }
       }
     },
-    "/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels": {
+    "/entity/uniqueAttribute/type/{typeName}/labels": {
       "delete": {
         "tags": [
           "Entity"
@@ -1518,7 +1520,7 @@
         }
       }
     },
-    "/atlas/v2/glossary": {
+    "/glossary": {
       "get": {
         "tags": [
           "Glossary"
@@ -1600,7 +1602,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/categories": {
+    "/glossary/categories": {
       "post": {
         "tags": [
           "Glossary"
@@ -1647,7 +1649,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category": {
+    "/glossary/category": {
       "post": {
         "tags": [
           "Glossary"
@@ -1686,7 +1688,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}": {
+    "/glossary/category/{categoryGuid}": {
       "get": {
         "tags": [
           "Glossary"
@@ -1787,7 +1789,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/partial": {
+    "/glossary/category/{categoryGuid}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -1833,7 +1835,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/related": {
+    "/glossary/category/{categoryGuid}/related": {
       "get": {
         "tags": [
           "Glossary"
@@ -1882,7 +1884,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/category/{categoryGuid}/terms": {
+    "/glossary/category/{categoryGuid}/terms": {
       "get": {
         "tags": [
           "Glossary"
@@ -1928,7 +1930,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term": {
+    "/glossary/term": {
       "post": {
         "tags": [
           "Glossary"
@@ -1973,7 +1975,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}": {
+    "/glossary/term/{termGuid}": {
       "get": {
         "tags": [
           "Glossary"
@@ -2095,7 +2097,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/term/{termGuid}/partial": {
+    "/glossary/term/{termGuid}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -2144,7 +2146,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms": {
+    "/glossary/terms": {
       "post": {
         "tags": [
           "Glossary"
@@ -2194,7 +2196,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/assignedEntities": {
+    "/glossary/terms/{termGuid}/assignedEntities": {
       "get": {
         "tags": [
           "Glossary"
@@ -2363,7 +2365,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/terms/{termGuid}/related": {
+    "/glossary/terms/{termGuid}/related": {
       "get": {
         "tags": [
           "Glossary"
@@ -2412,7 +2414,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}": {
+    "/glossary/{glossaryGuid}": {
       "get": {
         "tags": [
           "Glossary"
@@ -2513,7 +2515,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories": {
+    "/glossary/{glossaryGuid}/categories": {
       "get": {
         "tags": [
           "Glossary"
@@ -2559,7 +2561,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/categories/headers": {
+    "/glossary/{glossaryGuid}/categories/headers": {
       "get": {
         "tags": [
           "Glossary"
@@ -2605,7 +2607,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/detailed": {
+    "/glossary/{glossaryGuid}/detailed": {
       "get": {
         "tags": [
           "Glossary"
@@ -2641,7 +2643,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/partial": {
+    "/glossary/{glossaryGuid}/partial": {
       "put": {
         "tags": [
           "Glossary"
@@ -2690,7 +2692,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms": {
+    "/glossary/{glossaryGuid}/terms": {
       "get": {
         "tags": [
           "Glossary"
@@ -2739,7 +2741,7 @@
         }
       }
     },
-    "/atlas/v2/glossary/{glossaryGuid}/terms/headers": {
+    "/glossary/{glossaryGuid}/terms/headers": {
       "get": {
         "tags": [
           "Glossary"
@@ -3250,7 +3252,7 @@
         }
       }
     },
-    "/atlas/v2/lineage/{guid}": {
+    "/lineage/{guid}": {
       "get": {
         "tags": [
           "Lineage"
@@ -3346,7 +3348,7 @@
         }
       }
     },
-    "/atlas/v2/lineage/uniqueAttribute/type/{typeName}": {
+    "/lineage/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
           "Lineage"
@@ -3920,7 +3922,7 @@
         }
       }
     },
-    "/atlas/v2/relationship": {
+    "/relationship": {
       "post": {
         "tags": [
           "Relationship"
@@ -3996,7 +3998,7 @@
         }
       }
     },
-    "/atlas/v2/relationship/guid/{guid}": {
+    "/relationship/guid/{guid}": {
       "get": {
         "tags": [
           "Relationship"
@@ -4060,7 +4062,7 @@
         }
       }
     },
-    "/atlas/v2/types/businessmetadatadef/guid/{guid}": {
+    "/types/businessmetadatadef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4094,7 +4096,7 @@
         }
       }
     },
-    "/atlas/v2/types/businessmetadatadef/name/{name}": {
+    "/types/businessmetadatadef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4128,7 +4130,7 @@
         }
       }
     },
-    "/atlas/v2/types/classificationdef/guid/{guid}": {
+    "/types/classificationdef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4161,7 +4163,7 @@
         }
       }
     },
-    "/atlas/v2/types/classificationdef/name/{name}": {
+    "/types/classificationdef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4194,7 +4196,7 @@
         }
       }
     },
-    "/atlas/v2/types/entitydef/guid/{guid}": {
+    "/types/entitydef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4227,7 +4229,7 @@
         }
       }
     },
-    "/atlas/v2/types/entitydef/name/{name}": {
+    "/types/entitydef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4260,7 +4262,7 @@
         }
       }
     },
-    "/atlas/v2/types/enumdef/guid/{guid}": {
+    "/types/enumdef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4293,7 +4295,7 @@
         }
       }
     },
-    "/atlas/v2/types/enumdef/name/{name}": {
+    "/types/enumdef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4326,7 +4328,7 @@
         }
       }
     },
-    "/atlas/v2/types/relationshipdef/guid/{guid}": {
+    "/types/relationshipdef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4359,7 +4361,7 @@
         }
       }
     },
-    "/atlas/v2/types/relationshipdef/name/{name}": {
+    "/types/relationshipdef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4392,7 +4394,7 @@
         }
       }
     },
-    "/atlas/v2/types/structdef/guid/{guid}": {
+    "/types/structdef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4425,7 +4427,7 @@
         }
       }
     },
-    "/atlas/v2/types/structdef/name/{name}": {
+    "/types/structdef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4458,7 +4460,7 @@
         }
       }
     },
-    "/atlas/v2/types/typedef/guid/{guid}": {
+    "/types/typedef/guid/{guid}": {
       "get": {
         "tags": [
           "Types"
@@ -4491,7 +4493,7 @@
         }
       }
     },
-    "/atlas/v2/types/typedef/name/{name}": {
+    "/types/typedef/name/{name}": {
       "get": {
         "tags": [
           "Types"
@@ -4552,7 +4554,7 @@
         }
       }
     },
-    "/atlas/v2/types/typedefs": {
+    "/types/typedefs": {
       "get": {
         "tags": [
           "Types"
@@ -4705,7 +4707,7 @@
         }
       }
     },
-    "/atlas/v2/types/typedefs/headers": {
+    "/types/typedefs/headers": {
       "get": {
         "tags": [
           "Types"
@@ -8373,6 +8375,20 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "serviceVersion": {
+      "name": "serviceVersion",
+      "description": "the version of api",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "v2"
+      ],
+      "x-ms-enum": {
+        "name": "serviceVersionEnum",
+        "modelAsString": true
+      }
     }
   }
 }
