@@ -472,6 +472,7 @@ op  getImportStatus is languageOperations.ResourceRead<AnalyzeConversationAuthor
   @added(Versions.v2023_04_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
+  @clientName("AuthorizeProjectCopy", "csharp")
 op  copyProjectAuthorization is languageOperations.ResourceAction<
     AnalyzeConversationAuthoringProjectMetadata,
     AnalyzeConversationAuthoringCopyAuthorizationOptions,
