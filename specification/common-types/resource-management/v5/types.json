@@ -626,6 +626,84 @@
           "type": "string"
         }
       }
+    },
+    "UsageName": {
+      "type": "object",
+      "description": "Name of the usage metrics",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the usage metric."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the usage metric."
+        }
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "description": "Resource usage and limit.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID.",
+          "type": "string"
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unit of usage measurement."
+        },
+        "currentValue": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        },
+        "nextResetTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional.The time that the metric's value will reset."
+        },
+        "quotaPeriod": {
+          "type": "string",
+          "description": "Optional. The quota period that determines the length of time between value resets."
+        }
+      }
+    },
+    "ListUsagesResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of results (if there are any).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Usages operation response."
     }
   },
   "parameters": {
