@@ -438,47 +438,6 @@ model Provider {
 }
 
 /**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility("read")
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
- * Tags object for patch operations.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
-model TagsObject {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  tags?: Record<string>;
-}
-
-/**
  * Result of list Api keys and connection strings.
  */
 model ListKeysResult {
