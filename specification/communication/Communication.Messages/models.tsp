@@ -403,7 +403,7 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("none") // this model is only used as a parameter
+  @invisible(Lifecycle) // this model is only used as a parameter
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
