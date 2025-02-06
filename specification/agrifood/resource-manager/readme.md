@@ -1,4 +1,4 @@
-# agfood
+# Agfood
 
 > see https://aka.ms/autorest
 
