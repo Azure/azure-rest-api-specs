@@ -800,13 +800,7 @@
             }
           },
           "204": {
-            "description": "The resource is already deleted.",
-            "headers": {
-              "Location": {
-                "description": "Location URI to poll for result.",
-                "type": "string"
-              }
-            }
+            "description": "The resource is already deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1188,32 +1182,84 @@
       "type": "string",
       "description": "Subscription that will be charged for purchasing the benefit"
     },
-    "BillingProfileId": {
+    "BillingProfileResourceId": {
       "type": "string",
       "readOnly": true,
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "Tenant"
+            ],
+            "type": "Microsoft.Billing/billingAccounts"
+          }
+        ]
+      },
       "description": "Fully-qualified identifier of the billing profile where the savings plan is applied. Present only for Field-led or Customer-led customers."
     },
-    "CustomerId": {
+    "CustomerResourceId": {
       "type": "string",
       "readOnly": true,
       "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "Tenant"
+            ],
+            "type": "Microsoft.Billing/billingAccounts/customers"
+          }
+        ]
+      },
       "description": "Fully-qualified identifier of the customer where the savings plan is applied. Present only for Partner-led customers."
     },
-    "BillingAccountId": {
-      "type": "string",
-      "readOnly": true,
-      "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
-    },
-    "PrimaryUri": {
+    "BillingAccountResourceId": {
       "type": "string",
       "readOnly": true,
       "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "Tenant"
+            ],
+            "type": "Microsoft.Billing/billingAccounts"
+          }
+        ]
+      },
+      "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
+    },
+    "PrimaryResourceUri": {
+      "type": "string",
+      "readOnly": true,
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "ResourceGroup"
+            ],
+            "type": "Microsoft.BillingBenefits/discounts"
+          }
+        ]
+      },
       "description": "This will be present in the response if the primary has a resource ID"
     },
     "BenefitResourceUri": {
       "type": "string",
       "readOnly": true,
       "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "scopes": [
+              "ResourceGroup"
+            ],
+            "type": "Microsoft.BillingBenefits/discounts"
+          }
+        ]
+      },
       "description": "Fully-qualified identifier of the benefit under applicable benefit list."
     },
     "ReservedResourceType": {
@@ -1554,13 +1600,13 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "billingProfileId": {
-          "$ref": "#/definitions/BillingProfileId"
+          "$ref": "#/definitions/BillingProfileResourceId"
         },
         "customerId": {
-          "$ref": "#/definitions/CustomerId"
+          "$ref": "#/definitions/CustomerResourceId"
         },
         "billingAccountId": {
-          "$ref": "#/definitions/BillingAccountId"
+          "$ref": "#/definitions/BillingAccountResourceId"
         },
         "term": {
           "$ref": "#/definitions/Term"
@@ -1666,13 +1712,13 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "billingProfileId": {
-          "$ref": "#/definitions/BillingProfileId"
+          "$ref": "#/definitions/BillingProfileResourceId"
         },
         "customerId": {
-          "$ref": "#/definitions/CustomerId"
+          "$ref": "#/definitions/CustomerResourceId"
         },
         "billingAccountId": {
-          "$ref": "#/definitions/BillingAccountId"
+          "$ref": "#/definitions/BillingAccountResourceId"
         },
         "term": {
           "$ref": "#/definitions/Term"
@@ -2404,7 +2450,7 @@
         },
         "startAt": {
           "$ref": "#/definitions/StartAt",
-          "description": "Start date of the discount. No duration will be supported. Any future date is supported."
+          "description": "Start date of the discount. Value is the date the discount started or will start in the future."
         },
         "systemId": {
           "$ref": "#/definitions/DiscountSystemId",
@@ -2415,17 +2461,17 @@
           "readOnly": true,
           "description": "The state of the resource. Supported values are Pending, Failed, Succeeded, Canceled."
         },
-        "billingAccountId": {
-          "$ref": "#/definitions/BillingAccountId",
-          "description": "Billing account id where the discount metadata is present."
+        "billingAccountResourceId": {
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "description": "Billing account resource id where the discount metadata is present."
         },
-        "billingProfileId": {
-          "$ref": "#/definitions/BillingProfileId",
-          "description": "Billing profile id where the discount is scoped to."
+        "billingProfileResourceId": {
+          "$ref": "#/definitions/BillingProfileResourceId",
+          "description": "Billing profile resource id where the discount is scoped to."
         },
-        "customerId": {
-          "$ref": "#/definitions/CustomerId",
-          "description": "Customer id where the discount is scoped to."
+        "customerResourceId": {
+          "$ref": "#/definitions/CustomerResourceId",
+          "description": "Customer resource id where the discount is scoped to."
         },
         "displayName": {
           "$ref": "#/definitions/DisplayName",
@@ -2434,7 +2480,7 @@
         "status": {
           "$ref": "#/definitions/DiscountStatus"
         },
-        "resourceUri": {
+        "benefitResourceUri": {
           "$ref": "#/definitions/BenefitResourceUri"
         },
         "appliedScopeType": {
@@ -2457,12 +2503,12 @@
       ],
       "x-ms-discriminator-value": "Affiliate",
       "properties": {
-        "primaryUri": {
-          "$ref": "#/definitions/PrimaryUri"
+        "primaryResourceUri": {
+          "$ref": "#/definitions/PrimaryResourceUri"
         },
         "endAt": {
           "$ref": "#/definitions/AffiliateEndAt",
-          "description": "End date of the discount. No duration will be supported."
+          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate."
         }
       }
     },
@@ -2484,7 +2530,7 @@
         },
         "endAt": {
           "$ref": "#/definitions/EndAt",
-          "description": "End date of the discount. No duration will be supported."
+          "description": "End date of the discount. No duration will be supported. Allowed value is any date greater than or equal to startDate."
         }
       }
     },
