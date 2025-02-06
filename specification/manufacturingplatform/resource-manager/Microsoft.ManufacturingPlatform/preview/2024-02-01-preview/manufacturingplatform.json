@@ -72,16 +72,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
+          "Operations_List": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
           },
-          "Operations_List_MinimumSet_Gen": {
+          "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -114,13 +114,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "ManufacturingDataServices_ListBySubscription_MaximumSet_Gen": {
+          "ManufacturingDataServices_ListBySubscription": {
             "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -156,13 +156,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen": {
+          "ManufacturingDataServices_ListByResourceGroup": {
             "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -207,7 +207,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_Get_MaximumSet_Gen": {
+          "ManufacturingDataServices_Get": {
             "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -277,15 +277,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ManufacturingDataServices_CreateOrUpdate": {
+            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ManufacturingDataServices_Update",
@@ -349,15 +349,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Update": {
+            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ManufacturingDataServices_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ManufacturingDataServices_Delete",
@@ -409,15 +409,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Delete": {
+            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ManufacturingDataServices_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}/listAvailableVersions": {
@@ -461,7 +461,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen": {
+          "ManufacturingDataServices_ListAvailableVersions": {
             "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen.json"
           }
         }
@@ -659,36 +659,11 @@
             "read",
             "create"
           ]
-        },
-        "version": {
-          "type": "string",
-          "description": "Key Version",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
-        "keyUri",
-        "version"
+        "keyUri"
       ]
-    },
-    "CmkProfileUpdate": {
-      "type": "object",
-      "description": "The properties related to CMK",
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "Key Version",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "DatabaseProfile": {
       "type": "object",
@@ -1072,7 +1047,6 @@
           "description": "Profile of CMK Settings.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1203,15 +1177,6 @@
         "amlProfile": {
           "$ref": "#/definitions/AmlProfileUpdate",
           "description": "Profile of Azure Machine Learning Resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "cmkProfile": {
-          "$ref": "#/definitions/CmkProfileUpdate",
-          "description": "Profile of CMK Settings.",
           "x-ms-mutability": [
             "read",
             "update",

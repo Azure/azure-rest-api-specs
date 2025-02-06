@@ -196,7 +196,7 @@ model MdsResourceProperties {
   @visibility("read", "create")
   userManagedAdxProfile?: UserManagedAdxProfile;
 
-  @visibility("read", "create", "update")
+  @visibility("read", "create")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of CMK Settings.")
   cmkProfile?: CmkProfile;
@@ -471,10 +471,6 @@ model CmkProfile {
   @doc("URI of Key in AKV")
   @visibility("read", "create")
   keyUri: string;
-
-  @doc("Key Version")
-  @visibility("read", "create", "update")
-  version: string;
 }
 
 @doc("The properties related to Fabric")
