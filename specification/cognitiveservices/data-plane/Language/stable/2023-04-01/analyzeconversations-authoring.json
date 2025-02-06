@@ -1750,7 +1750,7 @@
           "description": "The intent of the utterance."
         },
         "dataset": {
-          "type": "string",
+          "$ref": "#/definitions/DatasetType",
           "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'."
         }
       },
@@ -3353,6 +3353,30 @@
             "name": "combineComponents",
             "value": "combineComponents",
             "description": "When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them."
+          }
+        ]
+      }
+    },
+    "DatasetType": {
+      "type": "string",
+      "description": "The dataset for this utterance. Allowed values are 'Train' and 'Test'.",
+      "enum": [
+        "Train",
+        "Test"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Train",
+            "value": "Train",
+            "description": "Split the data into training and test sets according to user-defined percentages."
+          },
+          {
+            "name": "Test",
+            "value": "Test",
+            "description": "Split the data according to the chosen dataset for every example in the data."
           }
         ]
       }

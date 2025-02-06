@@ -1570,7 +1570,24 @@ model AnalyzeConversationAuthoringConversationExportedUtterance {
   /**
    * The dataset for this utterance. Allowed values are 'Train' and 'Test'.
    */
-  dataset?: string;
+  dataset?: DatasetType;
+}
+
+/**
+ * The dataset for this utterance. Allowed values are 'Train' and 'Test'.
+ */
+union DatasetType {
+  string,
+
+  /**
+   * Split the data into training and test sets according to user-defined percentages.
+   */
+  Train: "Train",
+
+  /**
+   * Split the data according to the chosen dataset for every example in the data.
+   */
+  Test: "Test",
 }
 
 /**
