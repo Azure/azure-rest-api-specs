@@ -437,7 +437,6 @@ model Provider {
   resourceUsageId?: string;
 }
 
-
 /**
  * Tags object for patch operations.
  */
