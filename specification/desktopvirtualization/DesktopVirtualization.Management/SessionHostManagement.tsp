@@ -31,12 +31,18 @@ model SessionHostManagement
   ...ResourceSkuProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostManagements {
   /**
    * Get a SessionHostManagement.
    */
   get is ArmResourceRead<SessionHostManagement>;
+
+  /**
+   * Create or update a SessionHostManagement.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<SessionHostManagement>;
 
   /**
    * Update a SessionHostManagement.

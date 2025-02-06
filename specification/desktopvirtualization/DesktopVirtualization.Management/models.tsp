@@ -2879,6 +2879,7 @@ model DesktopProperties {
 /**
  * SessionHostManagement properties that can be patched.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
 model SessionHostManagementPatch {
   /**
    * Detailed properties for SessionHostManagement
@@ -4168,6 +4169,111 @@ model SessionHostConfigurationPatchProperties {
 }
 
 /**
+ * The current status of the session host update async operation.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+model SessionHostManagementUpdateStatusProperties {
+  /**
+   * Fully qualified ID for the async operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
+  id?: string;
+
+  /**
+   * "Name of the async operation."
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
+  name?: string;
+
+  /**
+   * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
+   */
+  status: Status;
+
+  /**
+   * Percent of the operation that is complete.
+   */
+  @minValue(0)
+  @maxValue(100)
+  percentComplete?: int32;
+
+  /**
+   * "The start time of the operation.
+   */
+  startTime?: utcDateTime;
+
+  /**
+   * The end time of the operation.
+   */
+  endTime?: utcDateTime;
+
+  /**
+   * If present, details of the operation error.
+   */
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /**
+   * The custom properties of the SessionHost Update Status.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Not supported by service"
+  properties?: SessionHostManagementUpdateStatusCustomProperties;
+}
+
+/**
+ * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+ */
+model SessionHostManagementUpdateStatusCustomProperties {
+  /**
+   * The Log Analytics.
+   */
+  correlationId?: string;
+
+  /**
+   * Progress information on the sessionHostManagement operation.
+   */
+  progress?: SessionHostManagementOperationProgress;
+
+  /**
+   * The timestamp that the update is scheduled for.
+   */
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * SessionHostManagement properties used for the operation.
+   */
+  sessionHostManagement?: SessionHostManagementProperties;
+}
+
+/**
+ * SessionHostManagement Operation Progress information.
+ */
+model SessionHostManagementOperationProgress {
+  /**
+   * Time that the sessionHostManagement operation was created.
+   */
+  executionStartTime?: utcDateTime;
+
+  /**
+   * The number of sessionHosts to be started in the sessionHostManagement operation.
+   */
+  totalSessionHosts?: int32;
+
+  /**
+   * The number of sessionHosts in progress in the sessionHostManagement operation
+   */
+  sessionHostsInProgress?: int32;
+
+  /**
+   * The number of sessionHosts completed in the sessionHostManagement operation.
+   */
+  sessionHostsCompleted?: int32;
+
+  /**
+   * The number of sessionHosts rollback failed in the sessionHostManagement operation.
+   */
+  sessionHostsRollbackFailed?: int32;
+}
+/**
  * List of MSIX Package definitions.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
@@ -4228,7 +4334,6 @@ model MSIXPackageProperties {
   /**
    * Date Package was last updated, found in the appxmanifest.xml.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 
   /**

@@ -25,6 +25,7 @@ import "./MsixPackage.tsp";
 import "./ActiveSessionHostConfiguration.tsp";
 import "./SessionHostManagement.tsp";
 import "./SessionHostConfiguration.tsp";
+import "./SessionHostUpdateStatus.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
