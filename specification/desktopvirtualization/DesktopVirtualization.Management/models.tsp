@@ -2968,6 +2968,26 @@ model StartMenuItemProperties {
 }
 
 /**
+ * Object containing the definition for properties to be used for a sessionHostUpdate operation.
+ */
+model UpdateSessionHostsRequestBody {
+  /**
+   * The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately
+   */
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * The timeZone as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid.
+   */
+  scheduledDateTimeZone?: string;
+
+  /**
+   * settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.
+   */
+  update?: HostPoolUpdateConfigurationPatchProperties;
+}
+
+/**
  * HostPool properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"

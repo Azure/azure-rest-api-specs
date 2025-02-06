@@ -97,6 +97,9 @@
       "name": "ActiveSessionHostConfigurations"
     },
     {
+      "name": "InitiateSessionHostUpdate"
+    },
+    {
       "name": "SessionHostManagements"
     },
     {
@@ -3253,6 +3256,56 @@
             "schema": {
               "$ref": "#/definitions/SessionHostManagement"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/initiateSessionHostUpdate": {
+      "post": {
+        "operationId": "InitiateSessionHostUpdate_Post",
+        "tags": [
+          "InitiateSessionHostUpdate"
+        ],
+        "description": "Initiates a hostpool update or schedule an update for the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSessionHostsRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7375,6 +7428,36 @@
         ]
       }
     },
+    "HostPoolUpdateConfigurationPatchProperties": {
+      "type": "object",
+      "description": "The configurations of a hostpool update.",
+      "properties": {
+        "deleteOriginalVm": {
+          "type": "boolean",
+          "description": "Whether not to save original disk. False by default."
+        },
+        "maxVmsRemoved": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
+        },
+        "logOffDelayMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Grace period before logging off users in minutes."
+        },
+        "logOffMessage": {
+          "type": "string",
+          "description": "Log off message sent to user for logoff. Default value is an empty string.",
+          "maxLength": 260
+        }
+      },
+      "required": [
+        "deleteOriginalVm",
+        "logOffMessage"
+      ]
+    },
     "HostPoolUpdateConfigurationProperties": {
       "type": "object",
       "description": "The configurations of a hostpool update.",
@@ -10611,6 +10694,25 @@
         "hour",
         "minute"
       ]
+    },
+    "UpdateSessionHostsRequestBody": {
+      "type": "object",
+      "description": "Object containing the definition for properties to be used for a sessionHostUpdate operation.",
+      "properties": {
+        "scheduledDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately"
+        },
+        "scheduledDateTimeZone": {
+          "type": "string",
+          "description": "The timeZone as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid."
+        },
+        "update": {
+          "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
+          "description": "settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object."
+        }
+      }
     },
     "UpdateState": {
       "type": "string",

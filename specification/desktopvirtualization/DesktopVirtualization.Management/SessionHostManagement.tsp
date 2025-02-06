@@ -31,6 +31,20 @@ model SessionHostManagement
   ...ResourceSkuProperty;
 }
 
+@armResourceOperations
+interface InitiateSessionHostUpdate {
+  /**
+   * Initiates a hostpool update or schedule an update for the future.
+   */
+  @action("initiateSessionHostUpdate")
+  post is ArmResourceActionSync<
+    SessionHostManagement,
+    UpdateSessionHostsRequestBody,
+    {
+      @statusCode _: 204;
+    }
+  >;
+}
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostManagements {
