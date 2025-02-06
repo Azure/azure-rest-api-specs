@@ -749,7 +749,18 @@
         },
         "kind": {
           "type": "string",
-          "description": "The type of cluster."
+          "description": "The type of cluster.",
+          "enum": [
+            "HADOOP",
+            "HBASE",
+            "KAFKA",
+            "INTERACTIVEHIVE",
+            "SPARK"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterKind",
+            "modelAsString": true
+          }
         },
         "componentVersion": {
           "type": "object",
