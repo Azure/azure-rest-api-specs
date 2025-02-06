@@ -11,6 +11,38 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DesktopVirtualization;
 
 /**
+ * Action types for controlling hostpool update.
+ */
+union HostPoolUpdateAction {
+  string,
+
+  /**
+   * Start the hostpool update.
+   */
+  Start: "Start",
+
+  /**
+   * Pause the hostpool update.
+   */
+  Pause: "Pause",
+
+  /**
+   * Cancel the hostpool update.
+   */
+  Cancel: "Cancel",
+
+  /**
+   * Retry the hostpool update.
+   */
+  Retry: "Retry",
+
+  /**
+   * Resume the hostpool update
+   */
+  Resume: "Resume",
+}
+
+/**
  * Provisioning state of the Session Host Configuration.
  */
 union ProvisioningStateSHC {
@@ -2988,6 +3020,21 @@ model UpdateSessionHostsRequestBody {
 }
 
 /**
+ * Object containing control action for hostpool update.
+ */
+model HostPoolUpdateControlParameter {
+  /**
+   * Action types for controlling hostpool update.
+   */
+  action: HostPoolUpdateAction;
+
+  /**
+   * The cancel message sent to the user on the session host. This is can only be specified if the action is 'Cancel'.
+   */
+  @maxLength(260)
+  cancelMessage?: string;
+}
+/**
  * HostPool properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -3132,7 +3179,6 @@ model RegistrationInfoPatch {
   /**
    * Expiration time of registration token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**

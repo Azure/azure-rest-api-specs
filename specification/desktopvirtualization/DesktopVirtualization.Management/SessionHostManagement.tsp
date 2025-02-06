@@ -40,11 +40,23 @@ interface InitiateSessionHostUpdate {
   post is ArmResourceActionSync<
     SessionHostManagement,
     UpdateSessionHostsRequestBody,
-    {
-      @statusCode _: 204;
-    }
+    ArmNoContentResponse
   >;
 }
+
+@armResourceOperations
+interface ControlSessionHostUpdate {
+  /**
+   * Initiates a hostpool update or schedule an update for the future.
+   */
+  @action("controlSessionHostUpdate")
+  post is ArmResourceActionAsync<
+    SessionHostManagement,
+    HostPoolUpdateControlParameter,
+    ArmAcceptedLroResponse<"Successfully controlled hostpool update.">
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostManagements {

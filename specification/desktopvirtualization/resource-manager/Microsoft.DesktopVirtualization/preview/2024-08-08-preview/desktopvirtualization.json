@@ -100,6 +100,9 @@
       "name": "InitiateSessionHostUpdate"
     },
     {
+      "name": "ControlSessionHostUpdate"
+    },
+    {
       "name": "SessionHostManagements"
     },
     {
@@ -3266,6 +3269,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostUpdate": {
+      "post": {
+        "operationId": "ControlSessionHostUpdate_Post",
+        "tags": [
+          "ControlSessionHostUpdate"
+        ],
+        "description": "Initiates a hostpool update or schedule an update for the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolUpdateControlParameter"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/initiateSessionHostUpdate": {
       "post": {
         "operationId": "InitiateSessionHostUpdate_Post",
@@ -3305,7 +3358,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Azure operation completed successfully."
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7428,6 +7481,48 @@
         ]
       }
     },
+    "HostPoolUpdateAction": {
+      "type": "string",
+      "description": "Action types for controlling hostpool update.",
+      "enum": [
+        "Start",
+        "Pause",
+        "Cancel",
+        "Retry",
+        "Resume"
+      ],
+      "x-ms-enum": {
+        "name": "HostPoolUpdateAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Start the hostpool update."
+          },
+          {
+            "name": "Pause",
+            "value": "Pause",
+            "description": "Pause the hostpool update."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel the hostpool update."
+          },
+          {
+            "name": "Retry",
+            "value": "Retry",
+            "description": "Retry the hostpool update."
+          },
+          {
+            "name": "Resume",
+            "value": "Resume",
+            "description": "Resume the hostpool update"
+          }
+        ]
+      }
+    },
     "HostPoolUpdateConfigurationPatchProperties": {
       "type": "object",
       "description": "The configurations of a hostpool update.",
@@ -7488,6 +7583,24 @@
       "required": [
         "deleteOriginalVm",
         "logOffMessage"
+      ]
+    },
+    "HostPoolUpdateControlParameter": {
+      "type": "object",
+      "description": "Object containing control action for hostpool update.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/HostPoolUpdateAction",
+          "description": "Action types for controlling hostpool update."
+        },
+        "cancelMessage": {
+          "type": "string",
+          "description": "The cancel message sent to the user on the session host. This is can only be specified if the action is 'Cancel'.",
+          "maxLength": 260
+        }
+      },
+      "required": [
+        "action"
       ]
     },
     "HostpoolPublicNetworkAccess": {
