@@ -1925,6 +1925,78 @@
         "value"
       ]
     },
+    "DayOfWeek": {
+      "type": "string",
+      "description": "The Day of Week Enum",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "DAY",
+        "WEEKDAY",
+        "WEEKEND_DAYS"
+      ],
+      "x-ms-enum": {
+        "name": "DayOfWeek",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "SUNDAY",
+            "description": "First Day of the Week"
+          },
+          {
+            "name": "Monday",
+            "value": "MONDAY",
+            "description": "Second Day of the Week"
+          },
+          {
+            "name": "Tuesday",
+            "value": "TUESDAY",
+            "description": "Third Day of the Week"
+          },
+          {
+            "name": "Wednesday",
+            "value": "WEDNESDAY",
+            "description": "Fourth Day of the Week"
+          },
+          {
+            "name": "Thursday",
+            "value": "THURSDAY",
+            "description": "Fifth Day of the Week"
+          },
+          {
+            "name": "Friday",
+            "value": "FRIDAY",
+            "description": "Sixth Day of the Week"
+          },
+          {
+            "name": "Saturday",
+            "value": "SATURDAY",
+            "description": "Seventh Day of the Week"
+          },
+          {
+            "name": "Day",
+            "value": "DAY",
+            "description": "Any Day of the week"
+          },
+          {
+            "name": "Weekday",
+            "value": "WEEKDAY",
+            "description": "Weekday Identifier"
+          },
+          {
+            "name": "WeekendDays",
+            "value": "WEEKEND_DAYS",
+            "description": "Weekend Identifier"
+          }
+        ]
+      }
+    },
     "ExtendedRetentionTime": {
       "type": "object",
       "description": "Extended Retention Time",
@@ -2206,6 +2278,90 @@
             "name": "Any",
             "value": "any",
             "description": "Any rule should match"
+          }
+        ]
+      }
+    },
+    "MonthOfYear": {
+      "type": "string",
+      "description": "The Month of Year Enum",
+      "enum": [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER"
+      ],
+      "x-ms-enum": {
+        "name": "MonthOfYear",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "January",
+            "value": "JANUARY",
+            "description": "First Month of the Year"
+          },
+          {
+            "name": "February",
+            "value": "FEBRUARY",
+            "description": "Second Month of the Year"
+          },
+          {
+            "name": "March",
+            "value": "MARCH",
+            "description": "Third Month of the Year"
+          },
+          {
+            "name": "April",
+            "value": "APRIL",
+            "description": "Fourth Month of the Year"
+          },
+          {
+            "name": "May",
+            "value": "MAY",
+            "description": "Fifth Month of the Year"
+          },
+          {
+            "name": "June",
+            "value": "JUNE",
+            "description": "Sixth Month of the Year"
+          },
+          {
+            "name": "July",
+            "value": "JULY",
+            "description": "Seventh Month of the Year"
+          },
+          {
+            "name": "August",
+            "value": "AUGUST",
+            "description": "Eighth Month of the Year"
+          },
+          {
+            "name": "September",
+            "value": "SEPTEMBER",
+            "description": "Ninth Month of the Year"
+          },
+          {
+            "name": "October",
+            "value": "OCTOBER",
+            "description": "Tenth Month of the Year"
+          },
+          {
+            "name": "November",
+            "value": "NOVEMBER",
+            "description": "Eleventh Month of the Year"
+          },
+          {
+            "name": "December",
+            "value": "DECEMBER",
+            "description": "Twelfth Month of the Year"
           }
         ]
       }
@@ -2847,6 +3003,36 @@
           "$ref": "#/definitions/Frequency",
           "description": "Frequency of Retention"
         },
+        "runsEvery": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interval of Retention"
+        },
+        "weekOfMonth": {
+          "$ref": "#/definitions/WeekOfMonth",
+          "description": "Week of the month"
+        },
+        "dayOfWeek": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "Day of the week"
+        },
+        "monthOfYear": {
+          "$ref": "#/definitions/MonthOfYear",
+          "description": "Month of the year"
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Day of the month"
+        },
+        "weeklyDays": {
+          "type": "array",
+          "description": "Weekly Days List",
+          "items": {
+            "$ref": "#/definitions/WeeklyDays"
+          },
+          "x-ms-identifiers": []
+        },
         "time": {
           "type": "string",
           "description": "Time of Retention"
@@ -3235,6 +3421,102 @@
         "name",
         "value"
       ]
+    },
+    "WeekOfMonth": {
+      "type": "string",
+      "description": "The Week of Month Enum",
+      "enum": [
+        "FIRST",
+        "SECOND",
+        "THIRD",
+        "FOURTH",
+        "LAST"
+      ],
+      "x-ms-enum": {
+        "name": "WeekOfMonth",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "First",
+            "value": "FIRST",
+            "description": "First Week"
+          },
+          {
+            "name": "Second",
+            "value": "SECOND",
+            "description": "Second Week"
+          },
+          {
+            "name": "Third",
+            "value": "THIRD",
+            "description": "Third Week"
+          },
+          {
+            "name": "Fourth",
+            "value": "FOURTH",
+            "description": "Fourth Week"
+          },
+          {
+            "name": "Last",
+            "value": "LAST",
+            "description": "LAST Week"
+          }
+        ]
+      }
+    },
+    "WeeklyDays": {
+      "type": "string",
+      "description": "To represent the days of the week in Weekly type",
+      "enum": [
+        "SUNDAY",
+        "MONDAY",
+        "TUESDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY"
+      ],
+      "x-ms-enum": {
+        "name": "WeeklyDays",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "SUNDAY",
+            "description": "First Day of the Week"
+          },
+          {
+            "name": "Monday",
+            "value": "MONDAY",
+            "description": "Second Day of the Week"
+          },
+          {
+            "name": "Tuesday",
+            "value": "TUESDAY",
+            "description": "Third Day of the Week"
+          },
+          {
+            "name": "Wednesday",
+            "value": "WEDNESDAY",
+            "description": "Fourth Day of the Week"
+          },
+          {
+            "name": "Thursday",
+            "value": "THURSDAY",
+            "description": "Fifth Day of the Week"
+          },
+          {
+            "name": "Friday",
+            "value": "FRIDAY",
+            "description": "Sixth Day of the Week"
+          },
+          {
+            "name": "Saturday",
+            "value": "SATURDAY",
+            "description": "Seventh Day of the Week"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
