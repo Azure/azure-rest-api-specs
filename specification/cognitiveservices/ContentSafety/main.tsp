@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-  title: "ContentSafety Service",
+  title: "ContentSafety Service test",
 })
 @versioned(ContentSafety.Versions)
 @useAuth(
