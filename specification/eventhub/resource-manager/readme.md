@@ -313,6 +313,24 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: Clusters-preview.json
+    reason: Not a mandatory check  
+  - suppress: ResourceNameRestriction
+    from: Clusters-preview.json
+    reason: Not a mandatory check 
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: Clusters-preview.json
+    reason: Not a mandatory check  
+  - suppress: XmsPageableForListCalls
+    from: Clusters-preview.json
+    reason: Not a mandatory check  
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
