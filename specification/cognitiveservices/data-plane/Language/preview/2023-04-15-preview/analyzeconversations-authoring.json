@@ -539,7 +539,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/:train": {
       "post": {
-        "operationId": "ConversationAuthoringTraining_Train",
+        "operationId": "ConversationAuthoringProjects_Train",
         "description": "Triggers a training job for a project.",
         "parameters": [
           {
@@ -1661,7 +1661,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "ConversationAuthoringDeploymentResources_ListDeploymentResources",
+        "operationId": "ConversationAuthoringDeployments_ListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -1712,7 +1712,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:assign": {
       "post": {
-        "operationId": "ConversationAuthoringDeploymentResources_AssignDeploymentResources",
+        "operationId": "ConversationAuthoringDeployments_AssignDeploymentResources",
         "description": "Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory",
         "parameters": [
           {
@@ -1765,7 +1765,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/:unassign": {
       "post": {
-        "operationId": "ConversationAuthoringDeploymentResources_UnassignDeploymentResources",
+        "operationId": "ConversationAuthoringDeployments_UnassignDeploymentResources",
         "description": "Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.",
         "parameters": [
           {
@@ -1818,7 +1818,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/assign/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringDeploymentResources_GetAssignDeploymentResourcesStatus",
+        "operationId": "ConversationAuthoringDeployments_GetAssignDeploymentResourcesStatus",
         "description": "Gets the status of an existing assign deployment resources job.",
         "parameters": [
           {
@@ -1864,7 +1864,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringDeploymentResources_GetUnassignDeploymentResourcesStatus",
+        "operationId": "ConversationAuthoringDeployments_GetUnassignDeploymentResourcesStatus",
         "description": "Gets the status of an existing unassign deployment resources job.",
         "parameters": [
           {
@@ -1910,7 +1910,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "ConversationAuthoringTraining_ListTrainingJobs",
+        "operationId": "ConversationAuthoringProjects_ListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -1961,7 +1961,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}": {
       "get": {
-        "operationId": "ConversationAuthoringTraining_GetTrainingStatus",
+        "operationId": "ConversationAuthoringProjects_GetTrainingStatus",
         "description": "Gets the status for a training job.",
         "parameters": [
           {
@@ -2007,7 +2007,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel": {
       "post": {
-        "operationId": "ConversationAuthoringTraining_CancelTrainingJob",
+        "operationId": "ConversationAuthoringProjects_CancelTrainingJob",
         "description": "Triggers a cancellation for a running training job.",
         "parameters": [
           {
@@ -2096,7 +2096,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "ConversationAuthoringDeploymentResources_ListAssignedResourceDeployments",
+        "operationId": "ConversationAuthoringDeployments_ListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2185,7 +2185,7 @@
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "ConversationAuthoringPrebuilts_ListSupportedPrebuiltEntities",
+        "operationId": "ConversationAuthoringProjects_ListSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2234,7 +2234,7 @@
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "ConversationAuthoringTraining_ListTrainingConfigVersions",
+        "operationId": "ConversationAuthoringProjects_ListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {

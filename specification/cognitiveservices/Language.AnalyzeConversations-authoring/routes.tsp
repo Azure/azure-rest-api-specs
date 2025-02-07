@@ -21,119 +21,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, Foundations.ErrorResponse>;
 
-interface ConversationAuthoringDeploymentResources {
-    /**
-   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
-  @post
-  @pollingOperation(
-    ConversationAuthoringDeploymentResources.getAssignDeploymentResourcesStatus
-  )
-  @added(Versions.v2023_04_15_preview)
-op  assignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The new project resources info.
-       */
-      @body
-      details: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
-
-/**
-   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
-  @post
-  @pollingOperation(
-    ConversationAuthoringDeploymentResources.getUnassignDeploymentResourcesStatus
-  )
-  @added(Versions.v2023_04_15_preview)
-op  unassignDeploymentResources is Foundations.LongRunningOperation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The info for the deployment resources to be deleted.
-       */
-      @body
-      details: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
-    },
-    AcceptedResponse,
-    {},
-    Foundations.ErrorResponse
-  >;
-
-   /**
-   * Gets the status of an existing assign deployment resources job.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
-    
-/**
-   * Gets the status of an existing unassign deployment resources job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
-  @get
-  @added(Versions.v2023_04_15_preview)
-op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * The name of the project to use.
-       */
-      @maxLength(100)
-      @path
-      projectName: string;
-
-      /**
-       * The job ID.
-       */
-      @path
-      jobId: string;
-    },
-    AnalyzeConversationAuthoringDeploymentResourcesJobState,
-    {},
-    Foundations.ErrorResponse
-  >;
-
-/**
-   * Lists the deployments resources assigned to the project.
-   */
-  @added(Versions.v2023_04_15_preview)
-op  listDeploymentResources is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringAssignedDeploymentResource,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-/**
-   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
-   */
-  @added(Versions.v2023_04_15_preview)
- op listAssignedResourceDeployments is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-}
-
 interface ConversationAuthoringDeployments {
      /**
    * Lists the deployments belonging to a project.
@@ -287,6 +174,117 @@ op  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<An
    * Gets the status of an existing swap deployment job.
    */
 op  getSwapDeploymentsStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringSwapDeploymentsJobState>;
+
+/**
+   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
+  @post
+  @pollingOperation(
+    ConversationAuthoringDeployments.getAssignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+op  assignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The new project resources info.
+       */
+      @body
+      details: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
+  @post
+  @pollingOperation(
+    ConversationAuthoringDeployments.getUnassignDeploymentResourcesStatus
+  )
+  @added(Versions.v2023_04_15_preview)
+op  unassignDeploymentResources is Foundations.LongRunningOperation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The info for the deployment resources to be deleted.
+       */
+      @body
+      details: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+    },
+    AcceptedResponse,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+   /**
+   * Gets the status of an existing assign deployment resources job.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+    
+/**
+   * Gets the status of an existing unassign deployment resources job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
+  @get
+  @added(Versions.v2023_04_15_preview)
+op  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @path
+      projectName: string;
+
+      /**
+       * The job ID.
+       */
+      @path
+      jobId: string;
+    },
+    AnalyzeConversationAuthoringDeploymentResourcesJobState,
+    {},
+    Foundations.ErrorResponse
+  >;
+
+/**
+   * Lists the deployments resources assigned to the project.
+   */
+  @added(Versions.v2023_04_15_preview)
+op  listDeploymentResources is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedDeploymentResource,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+/**
+   * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
+   */
+  @added(Versions.v2023_04_15_preview)
+ op listAssignedResourceDeployments is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
 }
 
@@ -513,17 +511,13 @@ op  copyProject is Foundations.LongRunningOperation<
   @added(Versions.v2023_04_15_preview)
 op  getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
 
-}
- 
-  
-interface ConversationAuthoringTraining {
 /**
    * Triggers a training job for a project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/:train")
   @post
-  @pollingOperation(ConversationAuthoringTraining.getTrainingStatus)
+  @pollingOperation(ConversationAuthoringProjects.getTrainingStatus)
 op  train is Foundations.LongRunningOperation<
     {
       /**
@@ -563,7 +557,7 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/train/jobs/{jobId}/:cancel")
   @post
-  @pollingOperation(ConversationAuthoringTraining.getTrainingStatus)
+  @pollingOperation(ConversationAuthoringProjects.getTrainingStatus)
  op cancelTrainingJob is Foundations.LongRunningOperation<
     {
       /**
@@ -593,8 +587,15 @@ op  getTrainingStatus is languageOperations.ResourceRead<AnalyzeConversationAuth
       ProjectKindQueryParameter>
   >;
 
-}
-  
+/**
+   * Lists the supported prebuilt entities that can be used while creating composed entities.
+   */
+op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
+    AnalyzeConversationAuthoringPrebuiltEntity,
+    ListQueryParametersTrait<StandardListQueryParameters &
+      SupportedPrebuiltEntitiesQueryParameter>
+  >;
+} 
 
 interface ConversationAuthoringModels {
    /**
@@ -721,28 +722,8 @@ op  getModelEvaluationSummary is Foundations.Operation<
    * Gets the status for loading a snapshot.
    */
 op  getLoadSnapshotStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringLoadSnapshotJobState>;
-}
 
-  
-
-interface ConversationAuthoringPrebuilts { 
-    
 /**
-   * Lists the supported prebuilt entities that can be used while creating composed entities.
-   */
-op  listSupportedPrebuiltEntities is languageOperations.ResourceList<
-    AnalyzeConversationAuthoringPrebuiltEntity,
-    ListQueryParametersTrait<StandardListQueryParameters &
-      SupportedPrebuiltEntitiesQueryParameter>
-  >;
-}
-  
-interface ConversationAuthoringExportedModels { 
-  
-
-  
-
-  /**
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
@@ -761,7 +742,7 @@ interface ConversationAuthoringExportedModels {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @delete
-  @pollingOperation(ConversationAuthoringExportedModels.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringModels.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
 op  deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -787,7 +768,7 @@ op  deleteExportedModel is Foundations.LongRunningOperation<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}")
   @put
-  @pollingOperation(ConversationAuthoringExportedModels.getExportedModelJobStatus)
+  @pollingOperation(ConversationAuthoringModels.getExportedModelJobStatus)
   @added(Versions.v2024_11_15_preview)
 op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -819,3 +800,4 @@ op  createOrUpdateExportedModel is Foundations.LongRunningOperation<
   @added(Versions.v2024_11_15_preview)
 op  getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
 }
+
