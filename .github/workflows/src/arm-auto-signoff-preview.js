@@ -65,10 +65,10 @@ export async function getLabelActionImpl({
     })
   ).data.map((label) => label.name);
 
+  // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
     labels.includes("ARMReview") &&
     !labels.includes("NotReadyForARMReview") &&
-    labels.includes("ARMBestPractices") &&
     (!labels.includes("SuppressionReviewRequired") ||
       labels.includes("Suppression-Approved"));
 
