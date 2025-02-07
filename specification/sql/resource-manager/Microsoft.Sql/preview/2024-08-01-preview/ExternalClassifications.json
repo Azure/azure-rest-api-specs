@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/externalClassifications": {
+      "get": {
+        "tags": [
+          "ExternalClassifications"
+        ],
+        "description": "Gets the external classifications of the database.",
+        "operationId": "ExternalClassifications_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the external classifications.",
+            "schema": {
+              "$ref": "#/definitions/ExternalClassificationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalClassificationsBatch - \n\n * 400 InvalidExternalClassificationsBatch - ",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/ExternalClassificationsFilterParameters",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "ExternalClassifications"
+        ],
+        "description": "Creates or updates external classifications in batch.",
+        "operationId": "ExternalClassifications_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalClassificationUpdateList"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the external classifications."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidExternalClassificationsBatch - \n\n * 400 InvalidExternalClassificationsBatch - ",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExternalClassification": {
+      "description": "An external classification.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "managedBy": {
+          "description": "Resource that manages the external classification.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ExternalClassificationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExternalClassificationListResult": {
+      "description": "A list of external classifications.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalClassification"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExternalClassificationProperties": {
+      "description": "Properties of a external classification.",
+      "type": "object",
+      "properties": {
+        "objectName": {
+          "description": "The object identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "labelId": {
+          "description": "The label ID.",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalClassificationsFilterParameters": {
+      "description": "The properties that are supported in the $filter operation.",
+      "type": "object",
+      "properties": {
+        "schemaName": {
+          "description": "Get external classifications with this schema name.",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "Get external classifications with this table name.",
+          "type": "string"
+        },
+        "columnName": {
+          "description": "Get external classifications with this column name.",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalClassificationUpdate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalClassificationUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExternalClassificationUpdateList": {
+      "description": "A list of sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalClassificationUpdate"
+          }
+        }
+      }
+    },
+    "ExternalClassificationUpdateProperties": {
+      "description": "Properties of an operation executed on a external classification.",
+      "required": [
+        "op",
+        "externalClassification"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "SetExternalClassification",
+            "UpdateExternalClassification",
+            "RemoveExternalClassification"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExternalClassificationUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "externalClassification": {
+          "$ref": "#/definitions/ExternalClassification",
+          "description": "The external classification information to apply on a column."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
