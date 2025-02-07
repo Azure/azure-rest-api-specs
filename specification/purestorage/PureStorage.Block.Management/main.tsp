@@ -417,7 +417,7 @@ interface StoragePools {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @added(Versions.v3_preview)
-  @doc("Terminate an existing AVS connection")
+  @doc("Disable the existing AVS connection")
   @armResourceAction(StoragePool)
   @action("disableAvsConnection")
   @extension("x-ms-long-running-operation", true)
