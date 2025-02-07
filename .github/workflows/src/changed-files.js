@@ -35,7 +35,7 @@ export async function getChangedSwaggerFiles(
   diffFilter = "d",
 ) {
   return await getChangedFilesImpl(
-    `Get-ChangedSwaggerFiles(Get-ChangedFiles ${baseCommitish} ${targetCommitish} ${diffFilter}")`,
+    `Get-ChangedSwaggerFiles(Get-ChangedFiles ${baseCommitish} ${targetCommitish} ${diffFilter})`,
     core,
   );
 }
