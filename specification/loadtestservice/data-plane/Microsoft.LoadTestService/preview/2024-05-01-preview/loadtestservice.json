@@ -2231,6 +2231,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}",
           "readOnly": true
         },
@@ -2388,6 +2389,10 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "CertificateMetadata": {
       "type": "object",
@@ -3379,7 +3384,7 @@
           "description": "  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400."
         },
         "region": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure region name.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command."
         }
       },
@@ -3441,6 +3446,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Azure resource id."
         },
         "metricNamespace": {
@@ -3482,6 +3488,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Azure resource id."
         },
         "metricNamespace": {
@@ -4067,6 +4074,7 @@
         },
         "targetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.",
           "x-ms-mutability": [
             "read",
@@ -4130,6 +4138,7 @@
         },
         "targetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.",
           "x-ms-mutability": [
             "read",
@@ -4176,6 +4185,7 @@
         },
         "targetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Target resource ID on which the test profile run is created",
           "readOnly": true
         },

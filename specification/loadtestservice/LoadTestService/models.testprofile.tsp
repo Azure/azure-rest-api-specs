@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -160,7 +161,7 @@ model TestProfile {
 
   @doc("Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.")
   @visibility("create", "read")
-  targetResourceId?: string;
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which testing would be done.")
   targetResourceConfigurations?: TargetResourceConfigurations;
@@ -194,7 +195,7 @@ model TestProfileRun {
   // Begin section: Properties populated from Test Profile
   @doc("Target resource ID on which the test profile run is created")
   @visibility("read")
-  targetResourceId?: string;
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which the test profile ran.")
   @visibility("read")

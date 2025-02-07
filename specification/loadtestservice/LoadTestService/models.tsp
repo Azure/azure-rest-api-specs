@@ -410,7 +410,7 @@ model PassFailMetric {
 @doc("Pass fail server metric")
 model PassFailServerMetric {
   @doc("The resource id of the resource emitting the metric.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("The server metric namespace.")
   metricNamespace: string;
@@ -515,7 +515,7 @@ model RegionalConfiguration {
     The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
     The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
     """)
-  region: string;
+  region: azureLocation;
 }
 
 @doc("Configuration for quick load test")
@@ -617,7 +617,7 @@ model AppComponent {
     fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
     """)
   @visibility("read")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Azure resource name, required while creating the app component.")
   resourceName: string;
@@ -667,7 +667,7 @@ model ResourceMetric {
   id?: string;
 
   @doc("Azure resource id.")
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("Metric name space.")
   metricNamespace: string;
