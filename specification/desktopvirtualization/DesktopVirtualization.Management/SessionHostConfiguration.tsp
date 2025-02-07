@@ -37,7 +37,6 @@ interface SessionHostConfigurations {
   /**
    * Get a SessionHostConfiguration.
    */
-  @action("default")
   get is ArmResourceRead<SessionHostConfiguration>;
 
   /**

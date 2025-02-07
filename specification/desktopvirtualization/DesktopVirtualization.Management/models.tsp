@@ -1859,7 +1859,7 @@ model SessionHostManagementProperties {
   /**
    * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
    */
-  scheduledDateTimeZone?: string;
+  scheduledDateTimeZone: string;
 
   /**
    * Parameters for a hostpool update.
