@@ -47,7 +47,7 @@ interface InitiateSessionHostUpdate {
 @armResourceOperations
 interface ControlSessionHostUpdate {
   /**
-   * Initiates a hostpool update or schedule an update for the future.
+   * Control actions on a session host update.
    */
   @action("controlSessionHostUpdate")
   post is ArmResourceActionNoResponseContentAsync<
