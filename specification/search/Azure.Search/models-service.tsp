@@ -6968,23 +6968,23 @@ model PatternTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
-/**
- * Breaks text following the Unicode Text Segmentation rules. This tokenizer is
- * implemented using Apache Lucene.
- */
-model LuceneStandardTokenizer extends LexicalTokenizer {
-  /**
-   * The maximum token length. Default is 255. Tokens longer than the maximum length
-   * are split.
-   */
-  maxTokenLength?: int32 = 255;
+// /**
+//  * Breaks text following the Unicode Text Segmentation rules. This tokenizer is
+//  * implemented using Apache Lucene.
+//  */
+// model LuceneStandardTokenizer extends LexicalTokenizer {
+//   /**
+//    * The maximum token length. Default is 255. Tokens longer than the maximum length
+//    * are split.
+//    */
+//   maxTokenLength?: int32 = 255;
 
-  /**
-   * A URI fragment specifying the type of tokenizer.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
-}
+//   /**
+//    * A URI fragment specifying the type of tokenizer.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+//   `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
+// }
 
 /**
  * Breaks text following the Unicode Text Segmentation rules. This tokenizer is
@@ -7066,36 +7066,36 @@ model CjkBigramTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
-/**
- * Construct bigrams for frequently occurring terms while indexing. Single terms
- * are still indexed too, with bigrams overlaid. This token filter is implemented
- * using Apache Lucene.
- */
-model CommonGramTokenFilter extends TokenFilter {
-  /**
-   * The set of common words.
-   */
-  commonWords: string[];
+// /**
+//  * Construct bigrams for frequently occurring terms while indexing. Single terms
+//  * are still indexed too, with bigrams overlaid. This token filter is implemented
+//  * using Apache Lucene.
+//  */
+// model CommonGramTokenFilter extends TokenFilter {
+//   /**
+//    * The set of common words.
+//    */
+//   commonWords: string[];
 
-  /**
-   * A value indicating whether common words matching will be case insensitive.
-   * Default is false.
-   */
-  ignoreCase?: boolean;
+//   /**
+//    * A value indicating whether common words matching will be case insensitive.
+//    * Default is false.
+//    */
+//   ignoreCase?: boolean;
 
-  /**
-   * A value that indicates whether the token filter is in query mode. When in query
-   * mode, the token filter generates bigrams and then removes common words and
-   * single terms followed by a common word. Default is false.
-   */
-  queryMode?: boolean;
+//   /**
+//    * A value that indicates whether the token filter is in query mode. When in query
+//    * mode, the token filter generates bigrams and then removes common words and
+//    * single terms followed by a common word. Default is false.
+//    */
+//   queryMode?: boolean;
 
-  /**
-   * A URI fragment specifying the type of token filter.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
-}
+//   /**
+//    * A URI fragment specifying the type of token filter.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+//   `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
+// }
 
 /**
  * Decomposes compound words found in many Germanic languages. This token filter
@@ -7141,34 +7141,34 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
-/**
- * Generates n-grams of the given size(s) starting from the front or the back of
- * an input token. This token filter is implemented using Apache Lucene.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-model EdgeNGramTokenFilter extends TokenFilter {
-  /**
-   * The minimum n-gram length. Default is 1. Must be less than the value of maxGram.
-   */
-  minGram?: int32 = 1;
+// /**
+//  * Generates n-grams of the given size(s) starting from the front or the back of
+//  * an input token. This token filter is implemented using Apache Lucene.
+//  */
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+// model EdgeNGramTokenFilter extends TokenFilter {
+//   /**
+//    * The minimum n-gram length. Default is 1. Must be less than the value of maxGram.
+//    */
+//   minGram?: int32 = 1;
 
-  /**
-   * The maximum n-gram length. Default is 2.
-   */
-  maxGram?: int32 = 2;
+//   /**
+//    * The maximum n-gram length. Default is 2.
+//    */
+//   maxGram?: int32 = 2;
 
-  /**
-   * Specifies which side of the input the n-gram should be generated from. Default
-   * is "front".
-   */
-  side?: EdgeNGramTokenFilterSide;
+//   /**
+//    * Specifies which side of the input the n-gram should be generated from. Default
+//    * is "front".
+//    */
+//   side?: EdgeNGramTokenFilterSide;
 
-  /**
-   * A URI fragment specifying the type of token filter.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
-}
+//   /**
+//    * A URI fragment specifying the type of token filter.
+//    */
+//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+//   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
+// }
 
 /**
  * Generates n-grams of the given size(s) starting from the front or the back of

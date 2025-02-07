@@ -2129,36 +2129,6 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey"
     },
-    "CommonGramTokenFilter": {
-      "type": "object",
-      "description": "Construct bigrams for frequently occurring terms while indexing. Single terms\nare still indexed too, with bigrams overlaid. This token filter is implemented\nusing Apache Lucene.",
-      "properties": {
-        "commonWords": {
-          "type": "array",
-          "description": "The set of common words.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ignoreCase": {
-          "type": "boolean",
-          "description": "A value indicating whether common words matching will be case insensitive.\nDefault is false."
-        },
-        "queryMode": {
-          "type": "boolean",
-          "description": "A value that indicates whether the token filter is in query mode. When in query\nmode, the token filter generates bigrams and then removes common words and\nsingle terms followed by a common word. Default is false."
-        }
-      },
-      "required": [
-        "commonWords"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CommonGramTokenFilter"
-    },
     "ConditionalSkill": {
       "type": "object",
       "description": "A skill that enables scenarios that require a Boolean operation to determine\nthe data to assign to an output.",
@@ -2575,34 +2545,6 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill"
-    },
-    "EdgeNGramTokenFilter": {
-      "type": "object",
-      "description": "Generates n-grams of the given size(s) starting from the front or the back of\nan input token. This token filter is implemented using Apache Lucene.",
-      "properties": {
-        "minGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum n-gram length. Default is 1. Must be less than the value of maxGram.",
-          "default": 1
-        },
-        "maxGram": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum n-gram length. Default is 2.",
-          "default": 2
-        },
-        "side": {
-          "$ref": "#/definitions/EdgeNGramTokenFilterSide",
-          "description": "Specifies which side of the input the n-gram should be generated from. Default\nis \"front\"."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TokenFilter"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilter"
     },
     "EdgeNGramTokenFilterSide": {
       "type": "string",
@@ -5182,24 +5124,6 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAnalyzer"
-    },
-    "LuceneStandardTokenizer": {
-      "type": "object",
-      "description": "Breaks text following the Unicode Text Segmentation rules. This tokenizer is\nimplemented using Apache Lucene.",
-      "properties": {
-        "maxTokenLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum token length. Default is 255. Tokens longer than the maximum length\nare split.",
-          "default": 255
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/LexicalTokenizer"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizer"
     },
     "LuceneStandardTokenizerV2": {
       "type": "object",
