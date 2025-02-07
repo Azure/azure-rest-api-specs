@@ -72,7 +72,6 @@ input-file:
   - Microsoft.Network/stable/2024-05-01/ipGroups.json
   - Microsoft.Network/stable/2024-05-01/loadBalancer.json
   - Microsoft.Network/stable/2024-05-01/natGateway.json
-  - Microsoft.Network/stable/2024-05-01/network.json
   - Microsoft.Network/stable/2024-05-01/networkInterface.json
   - Microsoft.Network/stable/2024-05-01/networkManager.json
   - Microsoft.Network/stable/2024-05-01/networkManagerActiveConfiguration.json
