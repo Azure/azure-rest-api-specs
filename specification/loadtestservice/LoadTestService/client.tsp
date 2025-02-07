@@ -14,6 +14,13 @@ namespace Customizations;
 @@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
 @@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
 
+@@clientName(TestRunOperations.createOrUpdateTestRun,
+  "_begin_test_run",
+  "python");
+@@clientName(TestRunOperations.createOrUpdateTestProfileRun,
+    "_begin_test_profile_run",
+    "python");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
@@ -49,7 +56,6 @@ interface AdministrationOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
-  @clientName("_begin_test_run", "python")
   createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
   createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
