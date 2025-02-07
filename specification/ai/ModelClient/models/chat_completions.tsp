@@ -9,7 +9,12 @@ using Azure.ClientGenerator.Core;
 
 namespace AI.Model;
 
-alias ChatCompletionsOptions = {
+@doc("""
+  The configuration information for a chat completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
+model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
     Typical usage begins with a chat message for the System role that provides instructions for
@@ -120,7 +125,7 @@ alias ChatCompletionsOptions = {
   `model`?: string;
 
   ...Record<unknown>;
-};
+}
 
 alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
@@ -526,7 +531,7 @@ model FunctionDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 }
 
 @doc("""
