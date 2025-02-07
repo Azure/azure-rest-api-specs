@@ -14,13 +14,6 @@ namespace Customizations;
 @@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
 @@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
 
-@@clientName(TestRunOperations.createOrUpdateTestRun,
-  "_begin_test_run",
-  "python");
-@@clientName(TestRunOperations.createOrUpdateTestProfileRun,
-    "_begin_test_profile_run",
-    "python");
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @client({
@@ -76,7 +69,6 @@ interface TestRunOperations {
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
 
-  @clientName("_begin_test_profile_run", "python")
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
@@ -85,3 +77,10 @@ interface TestRunOperations {
   @action("stop")
   stopTestProfileRun is TestProfileRunAdministration.stop;
 }
+
+@@clientName(TestRunOperations.createOrUpdateTestRun,
+  "_begin_test_run",
+  "python");
+@@clientName(TestRunOperations.createOrUpdateTestProfileRun,
+    "_begin_test_profile_run",
+    "python");
